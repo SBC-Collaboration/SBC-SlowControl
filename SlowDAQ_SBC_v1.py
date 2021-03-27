@@ -16,10 +16,10 @@ import platform
 
 from PySide2 import QtWidgets, QtCore, QtGui
 
-from SlowDAQ import *
+from SlowDAQ_SBC_v1 import *
 from TPLC_v1 import TPLC
 from PPLC_v1 import PPLC
-from PICOPW import VerifyPW
+# from PICOPW import VerifyPW
 
 from SlowDAQWidgets_SBC_v1 import *
 # from SlowDAQ.SlowDAQ.SlowDAQWidgets import SingleButton
