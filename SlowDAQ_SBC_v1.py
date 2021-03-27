@@ -16,7 +16,7 @@ import platform
 
 from PySide2 import QtWidgets, QtCore, QtGui
 
-from SlowDAQ import *
+from SlowDAQ_SBC_v1 import *
 from TPLC_v1 import TPLC
 from PPLC_v1 import PPLC
 from PICOPW import VerifyPW
@@ -48,6 +48,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.resize(2400,1400) #Open at center using resized
         self.setMinimumSize(2400,1400)
         self.setWindowTitle("SlowDAQ " + VERSION)
+        self.setWindowIcon(QtGui.QIcon(os.path.join(self.ImagePath,"Logo white.png")))
 
         # Tabs, backgrounds & labels
         
@@ -738,7 +739,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.SaveSettings=CustomSave(self.DatanSignalTab)
         self.SaveSettings.move(700,50)
-        self.SaveSettings.SaveFileButton.clicked.connect(lambda x: self.Save(dic=self.SaveSettings.Head,project=self.SaveSettings.Tail))
+        self.SaveSettings.SaveFileButton.clicked.connect(lambda x: self.Save(dir=self.SaveSettings.Head,project=self.SaveSettings.Tail))
 
         #Alarm button
         self.AlarmButton = AlarmButton(self)
@@ -1081,9 +1082,9 @@ class MainWindow(QtWidgets.QMainWindow):
             print("Some problems with closing windows...")
             pass
 
-    def Save(self,dic=None, company="SBC", project="Slowcontrol"):
-        # dic is the path storing the ini setting file
-        if dic==None:
+    def Save(self,dir=None, company="SBC", project="Slowcontrol"):
+        # dir is the path storing the ini setting file
+        if dir==None:
             self.settings.setValue("MainWindow/SV4327/ActiveState/ColorNumber", self.SV4327.ActiveState.ColorNumber)
             self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",
                                    self.AlarmButton.StatusWindow.TT4330.AlarmMode.isChecked())
@@ -1126,7 +1127,14 @@ class MainWindow(QtWidgets.QMainWindow):
             print("saving data to Default path: C:\\Users\\ZRZ\\AppData\\Roaming\\SBC\\SlowControl.ini")
         else:
             try:
-                path = os.path.join(dic,company,project)
+                #modify the qtsetting default save settings. if the directory is inside a folder named sbc, then save
+                # the file into the folder. If not, create a folder named sbc and save the file in it.
+                (path_head,path_tail)=os.path.split(dir)
+                if path_tail==company:
+                    path = os.path.join(dir,project)
+                else:
+                    path= os.path.join(dir,company,project)
+                print(path)
                 self.customsettings = QtCore.QSettings(path, QtCore.QSettings.IniFormat)
                 self.customsettings.setValue("MainWindow/SV4327/ActiveState/ColorNumber",
                                              self.SV4327.ActiveState.ColorNumber)
@@ -1174,13 +1182,13 @@ class MainWindow(QtWidgets.QMainWindow):
                 print("Failed to custom save the settings.")
 
     def Recover(self, address="C:\\Users\\ZRZ\\AppData\\Roaming\\SBC\\SlowControl.ini"):
-        # address is the ini file 's dictionary you want to recover
+        # address is the ini file 's directory you want to recover
         #you will need to add condition make sure the first time the code runs successfully
         #Because the first time it runs, all value in the settings addresss are NULL/None
         if self.settings.value("MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox")==None:
             pass
         else:
-            # default recover. If no other address is claimed, then recover settings from default dictionary
+            # default recover. If no other address is claimed, then recover settings from default directory
             if address == "C:\\Users\\ZRZ\\AppData\\Roaming\\SBC\\SlowControl.ini":
                 # you need to uncomment the registry related to Colornumber. Colornumber should be read directly from PLC
                 print(self.settings.value("MainWindow/SV4327/ActiveState/ColorNumber"))
@@ -1240,84 +1248,84 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.AlarmButton.StatusWindow.PT4325.High_Limit.UpdateValue()
             else:
                 try:
-                    #else, recover from the claimed dictionary
+                    #else, recover from the claimed diretory
                     #address should be surfix with ini. Example:C:\\Users\\ZRZ\\AppData\\Roaming\\SBC\\SlowControl.ini
-                    dic = QtCore.QSettings(str(address), QtCore.QSettings.IniFormat)
+                    dir = QtCore.QSettings(str(address), QtCore.QSettings.IniFormat)
                     print("Recovering from "+ str(address))
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.TT4330,
-                                        subdic="MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",loadedsettings=dic)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",loadedsettings=dir)
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4306,
-                                        subdic="MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",loadedsettings=dic)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",loadedsettings=dir)
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4315,
-                                        subdic="MainWindow/AlarmButton/StatusWindow/PT4315/CheckBox",loadedsettings=dic)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4315/CheckBox",loadedsettings=dir)
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4319,
-                                        subdic="MainWindow/AlarmButton/StatusWindow/PT4319/CheckBox",loadedsettings=dic)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4319/CheckBox",loadedsettings=dir)
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4322,
-                                        subdic="MainWindow/AlarmButton/StatusWindow/PT4322/CheckBox",loadedsettings=dic)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4322/CheckBox",loadedsettings=dir)
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4325,
-                                        subdic="MainWindow/AlarmButton/StatusWindow/PT4325/CheckBox",loadedsettings=dic)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4325/CheckBox",loadedsettings=dir)
 
-                    self.AlarmButton.StatusWindow.TT4330.Low_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.TT4330.Low_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/TT4330/LowLimit"))
                     self.AlarmButton.StatusWindow.TT4330.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4306.Low_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.PT4306.Low_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4306/LowLimit"))
                     self.AlarmButton.StatusWindow.PT4306.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4315.Low_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.PT4315.Low_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4315/LowLimit"))
                     self.AlarmButton.StatusWindow.PT4315.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4319.Low_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.PT4319.Low_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4319/LowLimit"))
                     self.AlarmButton.StatusWindow.PT4319.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4322.Low_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.PT4322.Low_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4322/LowLimit"))
                     self.AlarmButton.StatusWindow.PT4322.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4325.Low_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.PT4325.Low_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4325/LowLimit"))
                     self.AlarmButton.StatusWindow.PT4325.Low_Limit.UpdateValue()
 
-                    self.AlarmButton.StatusWindow.TT4330.High_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.TT4330.High_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/TT4330/HighLimit"))
                     self.AlarmButton.StatusWindow.TT4330.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4306.High_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.PT4306.High_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4306/HighLimit"))
                     self.AlarmButton.StatusWindow.PT4306.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4315.High_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.PT4315.High_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4315/HighLimit"))
                     self.AlarmButton.StatusWindow.PT4315.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4319.High_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.PT4319.High_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4319/HighLimit"))
                     self.AlarmButton.StatusWindow.PT4319.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4322/HighLimit"))
                     self.AlarmButton.StatusWindow.PT4322.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.setText(dic.value(
+                    self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.setText(dir.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4325/HighLimit"))
                     self.AlarmButton.StatusWindow.PT4325.High_Limit.UpdateValue()
 
                 except:
                     print("Wrong Path to recover")
 
-    def RecoverChecked(self, GUIid, subdic, loadedsettings=None):
+    def RecoverChecked(self, GUIid, subdir, loadedsettings=None):
         # add a function because you can not directly set check status to checkbox
         # GUIid should be form of "self.AlarmButton.StatusWindow.PT4315", is the variable name in the Mainwindow
-        # subdic like ""MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox"", is the path file stored in the ini file
+        # subdir like ""MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox"", is the path file stored in the ini file
         # loadedsettings is the Qtsettings file the program is to load
         if loadedsettings == None:
             # It is weired here, when I save the data and close the program, the setting value
             # in the address is string true
             # while if you maintain the program, the setting value in the address is bool True
-            if self.settings.value(subdic)=="true" or self.settings.value(subdic) == True:
+            if self.settings.value(subdir)=="true" or self.settings.value(subdir) == True:
                 GUIid.AlarmMode.setChecked(True)
-            elif self.settings.value(subdic)=="false" or self.settings.value(subdic) == False:
+            elif self.settings.value(subdir)=="false" or self.settings.value(subdir) == False:
                 GUIid.AlarmMode.setChecked(False)
             else:
                 print("Checkbox's value is neither true nor false")
         else:
             try:
-                if loadedsettings.value(subdic) == "True" or loadedsettings.value(subdic) == True:
+                if loadedsettings.value(subdir) == "True" or loadedsettings.value(subdir) == True:
                     GUIid.AlarmMode.setChecked(True)
-                elif self.settings.value(subdic) == "false" or loadedsettings.value(subdic) == False:
+                elif self.settings.value(subdir) == "false" or loadedsettings.value(subdir) == False:
                     GUIid.AlarmMode.setChecked(False)
                 else:
                     print("Checkbox's value is neither true nor false")
@@ -1820,14 +1828,14 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.PT4325 = AlarmStatusWidget(self)
         self.PT4325.Label.setText("PT4325")
 
-        #make a dictionary for the alarm instrument and assign instrument to certain position
-        self.AlarmTTDic = {0: {0:self.TT4330}}
-        self.AlarmPTDic = {0:{0:self.PT4306,1:self.PT4315,2:self.PT4319},
+        #make a diretory for the alarm instrument and assign instrument to certain position
+        self.AlarmTTdir = {0: {0:self.TT4330}}
+        self.AlarmPTdir = {0:{0:self.PT4306,1:self.PT4315,2:self.PT4319},
                            1:{0:self.PT4322,1:self.PT4325}}
 
         for i in range(0, i_TT_max):
             for j in range(0, j_TT_max):
-                self.GLTT.addWidget(self.AlarmTTDic[i][j], i, j)
+                self.GLTT.addWidget(self.AlarmTTdir[i][j], i, j)
                 # end the position generator when i= last element's row number, j= last element's column number
                 if (i, j) == (i_TT_last, j_TT_last):
                     break
@@ -1836,7 +1844,7 @@ class StatusWindow(QtWidgets.QMainWindow):
 
         for i in range(0,i_PT_max):
             for j in range(0,j_PT_max):
-                self.GLPT.addWidget(self.AlarmPTDic[i][j],i,j)
+                self.GLPT.addWidget(self.AlarmPTdir[i][j],i,j)
                 #end the position generator when i= last element's row number -1, j= last element's column number
                 if (i,j) == (i_PT_last, j_PT_last):
                     break
@@ -1858,16 +1866,16 @@ class StatusWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def ReassignOrder(self):
-    #check the status of the Widget and reassign the dictionary
-    # establish 2 dictionary, reorder TempDic to reorder the widgets
+    #check the status of the Widget and reassign the diretory
+    # establish 2 diretory, reorder TempDic to reorder the widgets
     #k,l are pointers in the TempDic, ij are pointers in TempRefDic
     #i_max, j_max are max row and column number
     #l max are max column number+1
-    #i_last,j_last are last elements's dictionary coordinate
-        TempRefTTDic = {0: {0:self.TT4330}}
-        TempRefPTDic = {0:{0:self.PT4306,1:self.PT4315,2:self.PT4319},1:{0:self.PT4322,1:self.PT4325}}
-        TempTTDic = {0: {0: self.TT4330}}
-        TempPTDic = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319}, 1: {0: self.PT4322, 1: self.PT4325}}
+    #i_last,j_last are last elements's diretory coordinate
+        TempRefTTdir = {0: {0:self.TT4330}}
+        TempRefPTdir = {0:{0:self.PT4306,1:self.PT4315,2:self.PT4319},1:{0:self.PT4322,1:self.PT4325}}
+        TempTTdir = {0: {0: self.TT4330}}
+        TempPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319}, 1: {0: self.PT4322, 1: self.PT4325}}
         l_TT=0
         k_TT=0
         l_PT=0
@@ -1882,11 +1890,11 @@ class StatusWindow(QtWidgets.QMainWindow):
         j_TT_last = 0
         i_PT_last = 1
         j_PT_last = 1
-    #TT put alarm true widget to the begining of the dictionary
+    #TT put alarm true widget to the begining of the diretory
         for i in range(0, i_TT_max):
             for j in range(0, j_TT_max):
-                if TempRefTTDic[i][j].Alarm == True:
-                    TempTTDic[k_TT][l_TT] = TempRefTTDic[i][j]
+                if TempRefTTdir[i][j].Alarm == True:
+                    TempTTdir[k_TT][l_TT] = TempRefTTdir[i][j]
                     l_TT=l_TT+1
                     if l_TT==l_TT_max:
                         l_TT=0
@@ -1899,8 +1907,8 @@ class StatusWindow(QtWidgets.QMainWindow):
     # TT put alarm false widget after that
         for i in range(0, i_TT_max):
             for j in range(0, j_TT_max):
-                 if TempRefTTDic[i][j].Alarm == False:
-                    TempTTDic[k_TT][l_TT] = TempRefTTDic[i][j]
+                 if TempRefTTdir[i][j].Alarm == False:
+                    TempTTdir[k_TT][l_TT] = TempRefTTdir[i][j]
                     l_TT = l_TT + 1
                     if l_TT == l_TT_max:
                         l_TT = 0
@@ -1913,8 +1921,8 @@ class StatusWindow(QtWidgets.QMainWindow):
         #PT
         for i in range(0, i_PT_max):
             for j in range(0, j_PT_max):
-                if TempRefPTDic[i][j].Alarm == True:
-                    TempPTDic[k_PT][l_PT] = TempRefPTDic[i][j]
+                if TempRefPTdir[i][j].Alarm == True:
+                    TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
                     l_PT = l_PT + 1
                     if l_PT == l_PT_max:
                         l_PT = 0
@@ -1927,8 +1935,8 @@ class StatusWindow(QtWidgets.QMainWindow):
 
         for i in range(0, i_PT_max):
             for j in range(0, j_PT_max):
-                if TempRefPTDic[i][j].Alarm == False:
-                    TempPTDic[k_PT][l_PT] = TempRefPTDic[i][j]
+                if TempRefPTdir[i][j].Alarm == False:
+                    TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
                     l_PT = l_PT + 1
                     if l_PT == l_PT_max:
                         l_PT = 0
@@ -1942,7 +1950,7 @@ class StatusWindow(QtWidgets.QMainWindow):
     # end the position generator when i= last element's row number, j= last element's column number
         for i in range(0, i_TT_max):
             for j in range(0, j_TT_max):
-                self.GLTT.addWidget(TempTTDic[i][j], i, j)
+                self.GLTT.addWidget(TempTTdir[i][j], i, j)
                 if (i, j) == (i_TT_last, j_TT_last):
                     break
             if (i, j) == (i_TT_last, j_TT_last):
@@ -1950,7 +1958,7 @@ class StatusWindow(QtWidgets.QMainWindow):
     # end the position generator when i= last element's row number, j= last element's column number
         for i in range(0,i_PT_max):
             for j in range(0,j_PT_max):
-                self.GLPT.addWidget(TempPTDic[i][j],i,j)
+                self.GLPT.addWidget(TempPTdir[i][j],i,j)
                 if (i,j) == (i_PT_last,j_PT_last):
                     break
             if (i, j) == (i_PT_last,j_PT_last):
