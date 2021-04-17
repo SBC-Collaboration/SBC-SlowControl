@@ -332,3 +332,6 @@ class PPLC:
                 return 2
         else:
             return 1
+
+if __name__=="__main__":
+    PPLC=PPLC()

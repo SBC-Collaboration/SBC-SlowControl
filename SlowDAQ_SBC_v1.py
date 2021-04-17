@@ -15,11 +15,12 @@ import time
 import platform
 
 from PySide2 import QtWidgets, QtCore, QtGui
+#operate on linux system
 
 from SlowDAQ_SBC_v1 import *
 from TPLC_v1 import TPLC
 from PPLC_v1 import PPLC
-# from PICOPW import VerifyPW
+from PICOPW import VerifyPW
 
 from SlowDAQWidgets_SBC_v1 import *
 # from SlowDAQ.SlowDAQ.SlowDAQWidgets import SingleButton
@@ -29,6 +30,7 @@ SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; fo
 LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; font-size: 18px; font-weight: bold;"
 TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; font-size: 22px; font-weight: bold;"
 ADMIN_TIMER = 30000
+PLOTTING_SCALE = 0.66
 ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bdf133e9e2c98ad4eafc622f4f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f136766831c12bff0da3a2314ca2266"
 
 # Main class
@@ -48,10 +50,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.resize(2400,1400) #Open at center using resized
         self.setMinimumSize(2400,1400)
         self.setWindowTitle("SlowDAQ " + VERSION)
-        self.setWindowIcon(QtGui.QIcon(os.path.join(self.ImagePath,"Logo white.png")))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(self.ImagePath,"Logo white_resized.png")))
 
         # Tabs, backgrounds & labels
-        
+
         self.Tab = QtWidgets.QTabWidget(self)
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
@@ -114,7 +116,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HydraulicTab.Background = QtWidgets.QLabel(self.HydraulicTab)
         self.HydraulicTab.Background.setScaledContents(True)
         self.HydraulicTab.Background.setStyleSheet('background-color:black;')
-        pixmap_Hydraulic = QtGui.QPixmap(os.path.join(self.ImagePath, "Hydraulic_Apparatus.png"))
+        pixmap_Hydraulic = QtGui.QPixmap(os.path.join(self.ImagePath, "Hydraulic_apparatus.png"))
         pixmap_Hydraulic = pixmap_Hydraulic.scaledToWidth(2400)
         self.HydraulicTab.Background.setPixmap(QtGui.QPixmap(pixmap_Hydraulic))
         self.HydraulicTab.Background.move(0, 0)
@@ -141,7 +143,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Temperature tab buttons
 
         self.Tstatus = FunctionButton(self.ThermosyphonTab)
-        self.Tstatus.StatusWindow.resize(1000, 500)
+        self.Tstatus.StatusWindow.resize(1000, 1050)
         self.Tstatus.StatusWindow.thermosyphon()
         self.Tstatus.move(0,0)
         self.Tstatus.Button.setText("Thermosyphon status")
@@ -157,19 +159,19 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PRV4302 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4302.Label.setText("PRV4302")
-        self.PRV4302.move(300, 55)
+        self.PRV4302.move(150, 32)
 
         self.MCV4303 = PnID_Alone(self.ThermosyphonTab)
         self.MCV4303.Label.setText("MCV4303")
-        self.MCV4303.move(495, 110)
+        self.MCV4303.move(250, 4)
 
         self.RG4304 = PnID_Alone(self.ThermosyphonTab)
         self.RG4304.Label.setText("RG4304")
-        self.RG4304.move(695, 110)
+        self.RG4304.move(700, 110)
 
         self.MV4305 = PnID_Alone(self.ThermosyphonTab)
         self.MV4305.Label.setText("MV4305")
-        self.MV4305.move(875, 110)
+        self.MV4305.move(864, 110)
 
         self.PT4306 = Indicator(self.ThermosyphonTab)
         self.PT4306.Label.setText("PT4306")
@@ -178,7 +180,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV4307 = Valve(self.ThermosyphonTab)
         self.PV4307.Label.setText("PV4307")
-        self.PV4307.move(970, 190)
+        self.PV4307.move(925, 190)
 
         self.PV4308 = Valve(self.ThermosyphonTab)
         self.PV4308.Label.setText("PV4308")
@@ -1397,6 +1399,7 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.setMinimumSize(2000, 1000)
         self.setWindowTitle("Status Window")
 
+        # self.Widget = QtWidgets.QWidget()
         self.Widget = QtWidgets.QWidget(self)
         self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
 
@@ -1408,7 +1411,8 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
 
         #set gridlayout
-        self.GL = QtWidgets.QGridLayout(self)
+        self.GL = QtWidgets.QGridLayout()
+        # self.GL = QtWidgets.QGridLayout(self)
         self.GL.setContentsMargins(20, 20, 20, 20)
         self.GL.setSpacing(20)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
@@ -1447,7 +1451,8 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
 
         # set gridlayout
-        self.GL = QtWidgets.QGridLayout(self)
+        self.GL = QtWidgets.QGridLayout()
+        # self.GL = QtWidgets.QGridLayout(self)
         self.GL.setContentsMargins(20, 20, 20, 20)
         self.GL.setSpacing(20)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
@@ -1502,7 +1507,8 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
 
         # set gridlayout
-        self.GL = QtWidgets.QGridLayout(self)
+        self.GL = QtWidgets.QGridLayout()
+        # self.GL = QtWidgets.QGridLayout(self)
         self.GL.setContentsMargins(20, 20, 20, 20)
         self.GL.setSpacing(20)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
@@ -1649,7 +1655,8 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
 
         # set gridlayout
-        self.GL = QtWidgets.QGridLayout(self)
+        self.GL = QtWidgets.QGridLayout()
+        # self.GL = QtWidgets.QGridLayout(self)
         self.GL.setContentsMargins(20, 20, 20, 20)
         self.GL.setSpacing(20)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
@@ -1724,7 +1731,8 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
 
         # set gridlayout
-        self.GL = QtWidgets.QGridLayout(self)
+        self.GL = QtWidgets.QGridLayout()
+        # self.GL = QtWidgets.QGridLayout(self)
         self.GL.setContentsMargins(20, 20, 20, 20)
         self.GL.setSpacing(20)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
@@ -1789,8 +1797,8 @@ class StatusWindow(QtWidgets.QMainWindow):
         j_PT_last = 1
 
         #Groupboxs for alarm/PT/TT
-
-        self.GLTT = QtWidgets.QGridLayout(self)
+        self.GLTT = QtWidgets.QGridLayout()
+        # self.GLTT = QtWidgets.QGridLayout(self)
         self.GLTT.setContentsMargins(20, 20, 20, 20)
         self.GLTT.setSpacing(20)
         self.GLTT.setAlignment(QtCore.Qt.AlignCenter)
@@ -1800,7 +1808,8 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.GroupTT.setLayout(self.GLTT)
         self.GroupTT.move(0, 0)
 
-        self.GLPT = QtWidgets.QGridLayout(self)
+        self.GLPT = QtWidgets.QGridLayout()
+        # self.GLPT = QtWidgets.QGridLayout(self)
         self.GLPT.setContentsMargins(20, 20, 20, 20)
         self.GLPT.setSpacing(20)
         self.GLPT.setAlignment(QtCore.Qt.AlignCenter)
@@ -1975,13 +1984,15 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.Widget=QtWidgets.QWidget(self)
         self.Widget.setGeometry(QtCore.QRect(0,0,1100,120))
 
-        self.VL = QtWidgets.QVBoxLayout(self)
+        self.VL = QtWidgets.QVBoxLayout()
+        # self.VL = QtWidgets.QVBoxLayout(self)
         self.VL.setContentsMargins(0, 0, 0, 0)
         self.VL.setSpacing(3)
         self.VL.setAlignment(QtCore.Qt.AlignCenter)
         self.Widget.setLayout(self.VL)
 
-        self.HL = QtWidgets.QHBoxLayout(self)
+        self.HL = QtWidgets.QHBoxLayout()
+        # self.HL = QtWidgets.QHBoxLayout(self)
         self.HL.setContentsMargins(0, 0, 0, 0)
         self.HL.setSpacing(3)
         self.HL.setAlignment(QtCore.Qt.AlignCenter)
