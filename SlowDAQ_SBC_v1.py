@@ -139,7 +139,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #Data saving and recovery
         #Data setting form is ended with .ini and directory is https://doc.qt.io/archives/qtforpython-5.12/PySide2/QtCore/QSettings.html depending on the System
-        self.settings = QtCore.QSettings("C:\\Users\\ZRZ\\AppData\\Roaming\\SBC\\SlowControl.ini", QtCore.QSettings.IniFormat)
+        self.settings = QtCore.QSettings("$HOME/.config//SBC/SlowControl.ini", QtCore.QSettings.IniFormat)
 
         # Temperature tab buttons
 
@@ -1127,7 +1127,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                    self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4325/HighLimit",
                                    self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.text())
-            print("saving data to Default path: C:\\Users\\ZRZ\\AppData\\Roaming\\SBC\\SlowControl.ini")
+            print("saving data to Default path: $HOME/.config//SBC/SlowControl.ini")
         else:
             try:
                 #modify the qtsetting default save settings. if the directory is inside a folder named sbc, then save
@@ -1184,7 +1184,7 @@ class MainWindow(QtWidgets.QMainWindow):
             except:
                 print("Failed to custom save the settings.")
 
-    def Recover(self, address="C:\\Users\\ZRZ\\AppData\\Roaming\\SBC\\SlowControl.ini"):
+    def Recover(self, address="$HOME/.config//SBC/SlowControl.ini"):
         # address is the ini file 's directory you want to recover
         #you will need to add condition make sure the first time the code runs successfully
         #Because the first time it runs, all value in the settings addresss are NULL/None
@@ -1192,7 +1192,7 @@ class MainWindow(QtWidgets.QMainWindow):
             pass
         else:
             # default recover. If no other address is claimed, then recover settings from default directory
-            if address == "C:\\Users\\ZRZ\\AppData\\Roaming\\SBC\\SlowControl.ini":
+            if address == "$HOME/.config//SBC/SlowControl.ini":
                 # you need to uncomment the registry related to Colornumber. Colornumber should be read directly from PLC
                 print(self.settings.value("MainWindow/SV4327/ActiveState/ColorNumber"))
                 print("Recovering")
@@ -1252,7 +1252,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 try:
                     #else, recover from the claimed diretory
-                    #address should be surfix with ini. Example:C:\\Users\\ZRZ\\AppData\\Roaming\\SBC\\SlowControl.ini
+                    #address should be surfix with ini. Example:$HOME/.config//SBC/SlowControl.ini
                     dir = QtCore.QSettings(str(address), QtCore.QSettings.IniFormat)
                     print("Recovering from "+ str(address))
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.TT4330,
