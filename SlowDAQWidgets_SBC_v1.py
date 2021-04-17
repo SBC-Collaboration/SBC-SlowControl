@@ -221,7 +221,7 @@ class Loadfile(QtWidgets.QWidget):
 
     def LoadPath(self):
         #set default path to read
-        defaultpath="C:\\Users\\ZRZ\\AppData\\Roaming\\SBC"
+        defaultpath="$HOME/.config//SBC/SlowControl.ini"
         filterset="*.ini;;*.py;;*.*"
         name = QtWidgets.QFileDialog.getOpenFileName(self, 'Open File', dir=defaultpath, filter=filterset)
         self.FilePath.setText(name[0])
@@ -274,7 +274,7 @@ class CustomSave(QtWidgets.QWidget):
 
     def LoadPath(self):
         #set default path to save
-        defaultpath="C:\\Users\\ZRZ\\AppData\\Roaming"
+        defaultpath="$HOME/.config//SBC/"
         filterset = "*.ini"
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File', dir=defaultpath,filter=filterset)
         self.FilePath.setText(name[0])
