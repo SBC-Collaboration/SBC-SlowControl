@@ -15,7 +15,7 @@ import time
 import platform
 
 from PySide2 import QtWidgets, QtCore, QtGui
-#operate on linux system
+
 
 from SlowDAQ_SBC_v1 import *
 from TPLC_v1 import TPLC
@@ -34,6 +34,7 @@ PLOTTING_SCALE = 0.66
 ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bdf133e9e2c98ad4eafc622f4f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f136766831c12bff0da3a2314ca2266"
 
 # Main class
+#This is designed for linux system
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent = None):
         super().__init__(parent)
