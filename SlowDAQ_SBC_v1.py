@@ -2505,7 +2505,7 @@ class UpdateDisplay(QtCore.QObject):
         while self.Running:
             if self.MW.T.NewData:
                 print("TPLC updating",datetime.datetime.now())
-                print(self.MW.T.RTD[0])
+
                 self.MW.TT2111.SetValue(self.MW.T.RTD[0])
                 self.MW.TT2112.SetValue(self.MW.T.RTD[1])
                 self.MW.TT2113.SetValue(self.MW.T.RTD[2])
@@ -2513,6 +2513,8 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.TT2115.SetValue(self.MW.T.RTD[4])
                 self.MW.TT2116.SetValue(self.MW.T.RTD[5])
                 self.MW.TT2117.SetValue(self.MW.T.RTD[6])
+                for i in range(0.6):
+                    print(self.MW.T.RTD[i])
                 # self.MW.TT2118.SetValue(self.MW.T.RTD[0])
                 # self.MW.TT2119.SetValue(self.MW.T.RTD[0])
                 # self.MW.TT2120.SetValue(self.MW.T.RTD[0])
