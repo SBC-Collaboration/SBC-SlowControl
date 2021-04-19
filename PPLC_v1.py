@@ -346,3 +346,4 @@ class PPLC:
 
 if __name__=="__main__":
     PPLC=PPLC()
+    PPLC.ReadAll()
