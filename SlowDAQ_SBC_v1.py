@@ -2496,7 +2496,7 @@ class UpdateDisplay(QtCore.QObject):
         
         self.MW = MW
         self.Running = False
-        print("begin updating disokat")
+        print("begin updating PLC")
     
     @QtCore.Slot()
     def run(self):

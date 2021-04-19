@@ -184,8 +184,8 @@ class PPLC:
             # self.DetectorPressurized = Bits[0]
 
             # PLC
-            # Raw = self.Client.read_holding_registers(0x46A, count = 1, unit = 0x01)
-            # self.LiveCounter = Raw.getRegister(0)
+            Raw = self.Client.read_holding_registers(0x46A, count = 1, unit = 0x01)
+            self.LiveCounter = Raw.getRegister(0)
 
             self.NewData = True
 
