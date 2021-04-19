@@ -91,8 +91,12 @@ class TPLC:
             Raw = self.Client.read_holding_registers(38000, count = self.nRTD * 2, unit = 0x01)
                       
             for i in range(0, self.nRTD):
-                self.RTD[i] =  round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
+                # self.RTD[i] =  round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
+                self.RTD[i]=Raw[i]
+                print(len(self.RTD))
                 print(self.RTD[i])
+
+
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
