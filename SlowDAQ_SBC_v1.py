@@ -164,7 +164,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.MCV4303 = PnID_Alone(self.ThermosyphonTab)
         self.MCV4303.Label.setText("MCV4303")
-        self.MCV4303.move(500, 40)
+        self.MCV4303.move(500, 80)
 
         self.RG4304 = PnID_Alone(self.ThermosyphonTab)
         self.RG4304.Label.setText("RG4304")
