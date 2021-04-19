@@ -11,6 +11,8 @@ v1.1 Initialize values, flag when values are updated more modbus variables 04/03
 """
 
 import struct, time
+#delete this line when you read real data from PLC
+import random
 
 from pymodbus.client.sync import ModbusTcpClient
 
@@ -26,7 +28,7 @@ class PPLC:
         print("PPLC connected: " + str(self.Connected))
 
 
-        self.nPT=5
+        self.nPT=8
         self.PT = [0.] * self.nPT
 
         # self.LabAirPressureState = 0
@@ -84,8 +86,9 @@ class PPLC:
             for i in range(0, self.nPT):
                 self.PT[i] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
+                self.PT[i]=self.PT[i]+random.randint(0,10)
 
-                # print(i,self.PT[i])
+                print(i,self.PT[i])
             # print(Raw)
             # print(Raw.registers)
 
