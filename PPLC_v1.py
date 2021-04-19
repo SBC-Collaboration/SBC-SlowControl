@@ -79,16 +79,15 @@ class PPLC:
         if self.Connected:
             #somehow count maximam value=10, PTs number =5
 
-            Raw = self.Client.read_holding_registers(37000, count=10, unit=0x01)
+            Raw = self.Client.read_holding_registers(37000, count=2*self.nPT, unit=0x07)
 
-            for i in range(0, 5):
+            for i in range(0, self.nPT):
                 self.PT[i] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
 
-                print(i,self.PT[i])
-            print(Raw)
-            print(Raw.registers)
-            print(len(Raw.registers))
+                # print(i,self.PT[i])
+            # print(Raw)
+            # print(Raw.registers)
 
             # Man valves
             # Raw = self.Client.read_holding_registers(0x46E, count = 1, unit = 0x01)
