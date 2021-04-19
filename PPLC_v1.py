@@ -26,7 +26,7 @@ class PPLC:
         print("PPLC connected: " + str(self.Connected))
 
 
-        self.nPT=20
+        self.nPT=5
         self.PT = [0.] * self.nPT
 
         # self.LabAirPressureState = 0
@@ -77,14 +77,15 @@ class PPLC:
         
     def ReadAll(self):
         if self.Connected:
+            #somehow count maximam value=10, PTs number =5
 
-            Raw = self.Client.read_holding_registers(37000, count=self.nPT * 2, unit=0x01)
+            Raw = self.Client.read_holding_registers(37000, count=10, unit=0x01)
 
-            # for i in range(0, self.nPT):
-                # self.PT[i] = round(
-                #     struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
-                # self.PT[i]=Raw.registers[i]
-                # print(self.PT[i])
+            for i in range(0, 5):
+                self.PT[i] = round(
+                    struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
+
+                print(i,self.PT[i])
             print(Raw)
             print(Raw.registers)
             print(len(Raw.registers))
