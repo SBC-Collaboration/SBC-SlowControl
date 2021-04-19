@@ -13,6 +13,7 @@ import os
 import sys
 import time
 import platform
+import datetime
 
 from PySide2 import QtWidgets, QtCore, QtGui
 
@@ -2501,6 +2502,7 @@ class UpdateDisplay(QtCore.QObject):
         self.Running = True
         while self.Running:
             if self.MW.T.NewData:
+                print("TPLC updating",datetime.datetime.now())
                 self.MW.TT2111.SetValue(self.MW.T.RTD[0])
                 self.MW.TT2112.SetValue(self.MW.T.RTD[1])
                 self.MW.TT2113.SetValue(self.MW.T.RTD[2])
@@ -2612,6 +2614,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.T.NewData = False 
 
             if self.MW.P.NewData:
+                print("PPLC updating", datetime.datetime.now())
 
                 self.MW.PT4306.SetValue(self.MW.P.PT[0])
                 self.MW.PT4315.SetValue(self.MW.P.PT[1])
