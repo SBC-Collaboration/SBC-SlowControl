@@ -88,7 +88,7 @@ class PPLC:
                     struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
                 self.PT[i]=self.PT[i]+random.randint(0,10)
 
-                print("Updating PPLC",i,self.PT[i])
+                # print("Updating PPLC",i,self.PT[i])
             # print(Raw)
             # print(Raw.registers)
 
