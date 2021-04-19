@@ -11,7 +11,8 @@ v1.1 Initialize values, flag when values are updated more modbus variables 04/03
 """
 
 import struct, time
-
+#delte random number package when you read real data from PLC
+import random
 from pymodbus.client.sync import ModbusTcpClient
 
 
@@ -26,7 +27,7 @@ class TPLC:
         self.Connected = self.Client.connect()
         print("TPLC connected: " + str(self.Connected))
 
-        self.nRTD = 20
+        self.nRTD = 8
         self.RTD =  [0.] * self.nRTD 
         # self.PT80 = 0.
         # self.FlowValve = 0.
@@ -88,11 +89,12 @@ class TPLC:
     def ReadAll(self):
         if self.Connected:
             # Reading all the RTDs
-            Raw = self.Client.read_holding_registers(38000, count = self.nRTD * 2, unit = 0x01)
+            Raw = self.Client.read_holding_registers(38000, count = self.nRTD * 2, unit = 0x07)
                       
             for i in range(0, self.nRTD):
                 self.RTD[i] =  round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
-
+                self.RTD[i] = self.RTD[i] + random.randint(0, 10)
+            print("Updating TPLC", i, self.RTD[i])
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
