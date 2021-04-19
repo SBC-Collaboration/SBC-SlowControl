@@ -92,7 +92,6 @@ class TPLC:
                       
             for i in range(0, self.nRTD):
                 self.RTD[i] =  round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
-                self.RTD[i]=Raw[i]
 
 
             # PT80 (Cold Vacuum Conduit Pressure)
