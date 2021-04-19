@@ -1470,7 +1470,7 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.TT2111 = Indicator(self)
         self.TT2111.Label.setText("TT2111")
         self.GL.addWidget(self.TT2111, 0, 0)
-        self.TT2111.SetValue(850)
+
 
         self.TT2112 = Indicator(self)
         self.TT2112.Label.setText("TT2112")
@@ -2505,6 +2505,7 @@ class UpdateDisplay(QtCore.QObject):
         while self.Running:
             if self.MW.T.NewData:
                 print("TPLC updating",datetime.datetime.now())
+                print(self.MW.T.RTD[0])
                 self.MW.TT2111.SetValue(self.MW.T.RTD[0])
                 self.MW.TT2112.SetValue(self.MW.T.RTD[1])
                 self.MW.TT2113.SetValue(self.MW.T.RTD[2])
