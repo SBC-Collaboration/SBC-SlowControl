@@ -80,11 +80,13 @@ class PPLC:
 
             Raw = self.Client.read_holding_registers(37000, count=self.nPT * 2, unit=0x01)
 
-            for i in range(0, self.nPT):
+            # for i in range(0, self.nPT):
                 # self.PT[i] = round(
                 #     struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
-                self.PT[i]=Raw.registers[i]
-                print(self.PT[i])
+                # self.PT[i]=Raw.registers[i]
+                # print(self.PT[i])
+            print(Raw)
+            print(Raw.registers)
             print(len(Raw.registers))
 
             # Man valves
