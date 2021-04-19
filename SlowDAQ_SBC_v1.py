@@ -316,9 +316,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.TPLCOnline = State(self.ThermosyphonTab)
         self.TPLCOnline.move(200, 1200)
-        self.TPLCOnline.Label.setText("PLC link")
+        self.TPLCOnline.Label.setText("TPLC link")
         self.TPLCOnline.Field.setText("Offline")
         self.TPLCOnline.SetAlarm()
+
+        self.PPLCOnline = State(self.ThermosyphonTab)
+        self.PPLCOnline.move(60, 1200)
+        self.PPLCOnline.Label.setText("PPLC link")
+        self.PPLCOnline.Field.setText("Offline")
+        self.PPLCOnline.SetAlarm()
 
         # Chamber tab buttons
 
@@ -786,7 +792,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater;
-        # self.StartUpdater()
+        self.StartUpdater()
 
     def StartUpdater(self):
         # Open connection to both PLCs
@@ -2496,215 +2502,215 @@ class UpdateDisplay(QtCore.QObject):
         while self.Running:
             if self.MW.T.NewData:
                 self.MW.TT2111.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2112.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2113.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2114.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2115.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2116.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2117.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2118.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2119.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2120.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6220.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6222.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2401.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2402.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2403.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2404.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2405.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2406.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2407.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2408.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2409.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2410.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2411.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2412.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2413.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2414.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2415.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2416.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2417.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2418.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2419.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2420.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2421.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2422.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2423.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2424.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2425.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2426.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2427.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2428.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2429.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2430.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2431.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2432.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2435.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2436.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2437.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2438.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2439.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2440.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2441.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2442.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2443.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2444.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2445.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2446.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2447.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2448.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2449.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6313.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6315.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6213.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6401.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6315.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6402.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6217.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6403.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6204.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6207.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6405.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6211.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6406.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6207.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6410.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6208.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6411.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6209.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6412.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2101.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2102.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2103.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2104.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2105.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2106.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2107.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2108.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2109.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2110.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6414.SetValue(self.MW.T.RTD[0])
-                self.MW.TT6416.SetValue(self.MW.T.RTD[0])
-                self.MW.TT7202.SetValue(self.MW.T.RTD[0])
-                self.MW.TT7401.SetValue(self.MW.T.RTD[0])
-                self.MW.TT3402.SetValue(self.MW.T.RTD[0])
-                self.MW.TT3401.SetValue(self.MW.T.RTD[0])
+                self.MW.TT2112.SetValue(self.MW.T.RTD[1])
+                self.MW.TT2113.SetValue(self.MW.T.RTD[2])
+                self.MW.TT2114.SetValue(self.MW.T.RTD[3])
+                self.MW.TT2115.SetValue(self.MW.T.RTD[4])
+                self.MW.TT2116.SetValue(self.MW.T.RTD[5])
+                self.MW.TT2117.SetValue(self.MW.T.RTD[6])
+                # self.MW.TT2118.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2119.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2120.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6220.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6222.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2401.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2402.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2403.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2404.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2405.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2406.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2407.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2408.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2409.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2410.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2411.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2412.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2413.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2414.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2415.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2416.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2417.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2418.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2419.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2420.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2421.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2422.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2423.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2424.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2425.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2426.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2427.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2428.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2429.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2430.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2431.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2432.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2435.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2436.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2437.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2438.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2439.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2440.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2441.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2442.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2443.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2444.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2445.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2446.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2447.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2448.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2449.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6313.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6315.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6213.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6401.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6315.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6402.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6217.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6403.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6204.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6207.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6405.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6211.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6406.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6207.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6410.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6208.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6411.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6209.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6412.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2101.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2102.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2103.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2104.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2105.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2106.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2107.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2108.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2109.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2110.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6414.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT6416.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT7202.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT7401.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT3402.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT3401.SetValue(self.MW.T.RTD[0])
 
                 # Make sure the PLC is online
-                if self.MW.TPLCLiveCounter == self.MW.T.LiveCounter and not self.MW.TPLCOnline.Field.property("Alarm"):
-                    self.MW.TPLCOnline.Field.setText("Offline")
-                    self.MW.TPLCOnline.SetAlarm()
-                    self.MW.TPLCOnlineW.Field.setText("Offline")
-                    self.MW.TPLCOnlineW.SetAlarm()
-                elif self.MW.TPLCLiveCounter != self.MW.T.LiveCounter and self.MW.TPLCOnline.Field.property("Alarm"):
-                    self.MW.TPLCOnline.Field.setText("Online")
-                    self.MW.TPLCOnline.ResetAlarm()
-                    self.MW.TPLCOnlineW.Field.setText("Online")
-                    self.MW.TPLCOnlineW.ResetAlarm()
-                    self.MW.TPLCLiveCounter = self.MW.T.LiveCounter
+                # if self.MW.TPLCLiveCounter == self.MW.T.LiveCounter and not self.MW.TPLCOnline.Field.property("Alarm"):
+                #     self.MW.TPLCOnline.Field.setText("Offline")
+                #     self.MW.TPLCOnline.SetAlarm()
+                #     self.MW.TPLCOnlineW.Field.setText("Offline")
+                #     self.MW.TPLCOnlineW.SetAlarm()
+                # elif self.MW.TPLCLiveCounter != self.MW.T.LiveCounter and self.MW.TPLCOnline.Field.property("Alarm"):
+                #     self.MW.TPLCOnline.Field.setText("Online")
+                #     self.MW.TPLCOnline.ResetAlarm()
+                #     self.MW.TPLCOnlineW.Field.setText("Online")
+                #     self.MW.TPLCOnlineW.ResetAlarm()
+                #     self.MW.TPLCLiveCounter = self.MW.T.LiveCounter
                       
                 self.MW.T.NewData = False 
 
             if self.MW.P.NewData:
 
-                self.MW.PT4306.SetValue(self.MW.P.PT1)
-                self.MW.PT4315.SetValue(self.MW.P.PT1)
-                self.MW.PT4319.SetValue(self.MW.P.PT1)
-                self.MW.PT4322.SetValue(self.MW.P.PT1)
-                self.MW.PT4325.SetValue(self.MW.P.PT1)
-                self.MW.PT6302.SetValue(self.MW.P.PT1)
-                self.MW.PT4330.SetValue(self.MW.P.PT1)
-                self.MW.PT2316.SetValue(self.MW.P.PT1)
-                self.MW.PT2330.SetValue(self.MW.P.PT1)
-                self.MW.PT2335.SetValue(self.MW.P.PT1)
-                self.MW.PT1332.SetValue(self.MW.P.PT1)
-                self.MW.PT3414.SetValue(self.MW.P.PT1)
-                self.MW.PT3420.SetValue(self.MW.P.PT1)
-                self.MW.PT3308.SetValue(self.MW.P.PT1)
-                self.MW.PT3309.SetValue(self.MW.P.PT1)
-                self.MW.PT3311.SetValue(self.MW.P.PT1)
-                self.MW.PT3332.SetValue(self.MW.P.PT1)
-                self.MW.PT3333.SetValue(self.MW.P.PT1)
-
-                self.MW.BFM4313.SetValue(self.MW.P.PT1)
+                self.MW.PT4306.SetValue(self.MW.P.PT[0])
+                self.MW.PT4315.SetValue(self.MW.P.PT[1])
+                self.MW.PT4319.SetValue(self.MW.P.PT[2])
+                self.MW.PT4322.SetValue(self.MW.P.PT[3])
+                self.MW.PT4325.SetValue(self.MW.P.PT[4])
+                self.MW.PT6302.SetValue(self.MW.P.PT[5])
+                # self.MW.PT4330.SetValue(self.MW.P.PT1)
+                # self.MW.PT2316.SetValue(self.MW.P.PT1)
+                # self.MW.PT2330.SetValue(self.MW.P.PT1)
+                # self.MW.PT2335.SetValue(self.MW.P.PT1)
+                # self.MW.PT1332.SetValue(self.MW.P.PT1)
+                # self.MW.PT3414.SetValue(self.MW.P.PT1)
+                # self.MW.PT3420.SetValue(self.MW.P.PT1)
+                # self.MW.PT3308.SetValue(self.MW.P.PT1)
+                # self.MW.PT3309.SetValue(self.MW.P.PT1)
+                # self.MW.PT3311.SetValue(self.MW.P.PT1)
+                # self.MW.PT3332.SetValue(self.MW.P.PT1)
+                # self.MW.PT3333.SetValue(self.MW.P.PT1)
+                #
+                # self.MW.BFM4313.SetValue(self.MW.P.PT1)
 
                 # Make sure the PLC is online
-                if self.MW.PPLCLiveCounter == self.MW.P.LiveCounter and not self.MW.PPLCOnline.Field.property("Alarm"):
-                    self.MW.PPLCOnline.Field.setText("Offline")
-                    self.MW.PPLCOnline.SetAlarm()
-                elif self.MW.PPLCLiveCounter != self.MW.P.LiveCounter and self.MW.PPLCOnline.Field.property("Alarm"):
-                    self.MW.PPLCOnline.Field.setText("Online")
-                    self.MW.PPLCOnline.ResetAlarm()
-                    self.MW.PPLCLiveCounter = self.MW.P.LiveCounter
+                # if self.MW.PPLCLiveCounter == self.MW.P.LiveCounter and not self.MW.PPLCOnline.Field.property("Alarm"):
+                #     self.MW.PPLCOnline.Field.setText("Offline")
+                #     self.MW.PPLCOnline.SetAlarm()
+                # elif self.MW.PPLCLiveCounter != self.MW.P.LiveCounter and self.MW.PPLCOnline.Field.property("Alarm"):
+                #     self.MW.PPLCOnline.Field.setText("Online")
+                #     self.MW.PPLCOnline.ResetAlarm()
+                #     self.MW.PPLCLiveCounter = self.MW.P.LiveCounter
 
                 self.MW.P.NewData = False  
                 
             # Check if alarm values are met and set them
                 
-            if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
-                self.MW.PT1.SetAlarm()
-            elif self.MW.PT1.Value <= 220 and self.MW.PT1.Value >= 0 and self.MW.PT1.Field.property("Alarm"):
-                self.MW.PT1.ResetAlarm()
-                
-            if (self.MW.PT2.Value > 220 or self.MW.PT2.Value < 120) and not self.MW.PT2.Field.property("Alarm"):
-                self.MW.PT2.SetAlarm()
-            elif self.MW.PT2.Value <= 220 and self.MW.PT2.Value >= 120 and self.MW.PT2.Field.property("Alarm"):
-                self.MW.PT2.ResetAlarm()
-                
-            if (self.MW.PT4.Value > 220 or self.MW.PT4.Value < 0) and not self.MW.PT4.Field.property("Alarm"):
-                self.MW.PT4.SetAlarm()
-            elif self.MW.PT4.Value <= 220 and self.MW.PT4.Value >= 0 and self.MW.PT4.Field.property("Alarm"):
-                self.MW.PT4.ResetAlarm()
-                
-            if (self.MW.PT8.Value > 220 or self.MW.PT8.Value < 0) and not self.MW.PT8.Field.property("Alarm"):
-                self.MW.PT8.SetAlarm()
-            elif self.MW.PT8.Value <= 220 and self.MW.PT8.Value >= 0 and self.MW.PT8.Field.property("Alarm"):
-                self.MW.PT8.ResetAlarm()
-                
-            if (self.MW.PT10.Value > 220 or self.MW.PT10.Value < 0) and not self.MW.PT10.Field.property("Alarm"):
-                self.MW.PT10.SetAlarm()
-            elif self.MW.PT10.Value <= 220 and self.MW.PT10.Value >= 0 and self.MW.PT10.Field.property("Alarm"):
-                self.MW.PT10.ResetAlarm()
-                
-            if (self.MW.Bellows.Value > 2 or self.MW.Bellows.Value < -.5) and not self.MW.Bellows.Field.property("Alarm"):
-                self.MW.Bellows.SetAlarm()
-            elif self.MW.Bellows.Value <= 2 and self.MW.Bellows.Value >= -.5 and self.MW.Bellows.Field.property("Alarm"):
-                self.MW.Bellows.ResetAlarm()
-                
-            if (self.MW.IV.Value > .1 or self.MW.IV.Value < -.1) and not self.MW.IV.Field.property("Alarm"):
-                self.MW.IV.SetAlarm()
-            elif self.MW.IV.Value <= .1 and self.MW.IV.Value >= -.1 and self.MW.IV.Field.property("Alarm"):
-                self.MW.IV.ResetAlarm()
-                
-            if (self.MW.PDiff.Value > 10 or self.MW.PDiff.Value < -10) and not self.MW.PDiff.Field.property("Alarm"):
-                self.MW.PDiff.SetAlarm()
-            elif self.MW.PDiff.Value <= 10 and self.MW.PDiff.Value >= -10 and self.MW.PDiff.Field.property("Alarm"):
-                self.MW.PDiff.ResetAlarm()
-                
-            if (self.MW.RTD37.Value > -5 or self.MW.RTD37.Value < -50) and not self.MW.RTD37.Field.property("Alarm"):
-                self.MW.RTD37.SetAlarm()
-            elif self.MW.RTD37.Value <= -5 and self.MW.RTD37.Value >= -50 and self.MW.RTD37.Field.property("Alarm"):
-                self.MW.RTD37.ResetAlarm()
-                
-            if (self.MW.RTD38.Value > -5 or self.MW.RTD38.Value < -50) and not self.MW.RTD38.Field.property("Alarm"):
-                self.MW.RTD38.SetAlarm()
-            elif self.MW.RTD38.Value <= -5 and self.MW.RTD38.Value >= -50 and self.MW.RTD38.Field.property("Alarm"):
-                self.MW.RTD38.ResetAlarm()
-                
-            if (self.MW.RTD42.Value > 0 or self.MW.RTD42.Value < -100) and not self.MW.RTD42.Field.property("Alarm"):
-                self.MW.RTD42.SetAlarm()
-            elif self.MW.RTD42.Value <= 0 and self.MW.RTD42.Value >= -100 and self.MW.RTD42.Field.property("Alarm"):
-                self.MW.RTD42.ResetAlarm()
-                
-            if (self.MW.RTD43.Value > -5 or self.MW.RTD43.Value < -50) and not self.MW.RTD43.Field.property("Alarm"):
-                self.MW.RTD43.SetAlarm()
-            elif self.MW.RTD43.Value <= -5 and self.MW.RTD43.Value >= -50 and self.MW.RTD43.Field.property("Alarm"):
-                self.MW.RTD43.ResetAlarm()
-                
-            if (self.MW.RTD45.Value > -5 or self.MW.RTD45.Value < -50) and not self.MW.RTD45.Field.property("Alarm"):
-                self.MW.RTD45.SetAlarm()
-            elif self.MW.RTD45.Value <= -5 and self.MW.RTD45.Value >= -50 and self.MW.RTD45.Field.property("Alarm"):
-                self.MW.RTD45.ResetAlarm()
+            # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
+            #     self.MW.PT1.SetAlarm()
+            # elif self.MW.PT1.Value <= 220 and self.MW.PT1.Value >= 0 and self.MW.PT1.Field.property("Alarm"):
+            #     self.MW.PT1.ResetAlarm()
+            #
+            # if (self.MW.PT2.Value > 220 or self.MW.PT2.Value < 120) and not self.MW.PT2.Field.property("Alarm"):
+            #     self.MW.PT2.SetAlarm()
+            # elif self.MW.PT2.Value <= 220 and self.MW.PT2.Value >= 120 and self.MW.PT2.Field.property("Alarm"):
+            #     self.MW.PT2.ResetAlarm()
+            #
+            # if (self.MW.PT4.Value > 220 or self.MW.PT4.Value < 0) and not self.MW.PT4.Field.property("Alarm"):
+            #     self.MW.PT4.SetAlarm()
+            # elif self.MW.PT4.Value <= 220 and self.MW.PT4.Value >= 0 and self.MW.PT4.Field.property("Alarm"):
+            #     self.MW.PT4.ResetAlarm()
+            #
+            # if (self.MW.PT8.Value > 220 or self.MW.PT8.Value < 0) and not self.MW.PT8.Field.property("Alarm"):
+            #     self.MW.PT8.SetAlarm()
+            # elif self.MW.PT8.Value <= 220 and self.MW.PT8.Value >= 0 and self.MW.PT8.Field.property("Alarm"):
+            #     self.MW.PT8.ResetAlarm()
+            #
+            # if (self.MW.PT10.Value > 220 or self.MW.PT10.Value < 0) and not self.MW.PT10.Field.property("Alarm"):
+            #     self.MW.PT10.SetAlarm()
+            # elif self.MW.PT10.Value <= 220 and self.MW.PT10.Value >= 0 and self.MW.PT10.Field.property("Alarm"):
+            #     self.MW.PT10.ResetAlarm()
+            #
+            # if (self.MW.Bellows.Value > 2 or self.MW.Bellows.Value < -.5) and not self.MW.Bellows.Field.property("Alarm"):
+            #     self.MW.Bellows.SetAlarm()
+            # elif self.MW.Bellows.Value <= 2 and self.MW.Bellows.Value >= -.5 and self.MW.Bellows.Field.property("Alarm"):
+            #     self.MW.Bellows.ResetAlarm()
+            #
+            # if (self.MW.IV.Value > .1 or self.MW.IV.Value < -.1) and not self.MW.IV.Field.property("Alarm"):
+            #     self.MW.IV.SetAlarm()
+            # elif self.MW.IV.Value <= .1 and self.MW.IV.Value >= -.1 and self.MW.IV.Field.property("Alarm"):
+            #     self.MW.IV.ResetAlarm()
+            #
+            # if (self.MW.PDiff.Value > 10 or self.MW.PDiff.Value < -10) and not self.MW.PDiff.Field.property("Alarm"):
+            #     self.MW.PDiff.SetAlarm()
+            # elif self.MW.PDiff.Value <= 10 and self.MW.PDiff.Value >= -10 and self.MW.PDiff.Field.property("Alarm"):
+            #     self.MW.PDiff.ResetAlarm()
+            #
+            # if (self.MW.RTD37.Value > -5 or self.MW.RTD37.Value < -50) and not self.MW.RTD37.Field.property("Alarm"):
+            #     self.MW.RTD37.SetAlarm()
+            # elif self.MW.RTD37.Value <= -5 and self.MW.RTD37.Value >= -50 and self.MW.RTD37.Field.property("Alarm"):
+            #     self.MW.RTD37.ResetAlarm()
+            #
+            # if (self.MW.RTD38.Value > -5 or self.MW.RTD38.Value < -50) and not self.MW.RTD38.Field.property("Alarm"):
+            #     self.MW.RTD38.SetAlarm()
+            # elif self.MW.RTD38.Value <= -5 and self.MW.RTD38.Value >= -50 and self.MW.RTD38.Field.property("Alarm"):
+            #     self.MW.RTD38.ResetAlarm()
+            #
+            # if (self.MW.RTD42.Value > 0 or self.MW.RTD42.Value < -100) and not self.MW.RTD42.Field.property("Alarm"):
+            #     self.MW.RTD42.SetAlarm()
+            # elif self.MW.RTD42.Value <= 0 and self.MW.RTD42.Value >= -100 and self.MW.RTD42.Field.property("Alarm"):
+            #     self.MW.RTD42.ResetAlarm()
+            #
+            # if (self.MW.RTD43.Value > -5 or self.MW.RTD43.Value < -50) and not self.MW.RTD43.Field.property("Alarm"):
+            #     self.MW.RTD43.SetAlarm()
+            # elif self.MW.RTD43.Value <= -5 and self.MW.RTD43.Value >= -50 and self.MW.RTD43.Field.property("Alarm"):
+            #     self.MW.RTD43.ResetAlarm()
+            #
+            # if (self.MW.RTD45.Value > -5 or self.MW.RTD45.Value < -50) and not self.MW.RTD45.Field.property("Alarm"):
+            #     self.MW.RTD45.SetAlarm()
+            # elif self.MW.RTD45.Value <= -5 and self.MW.RTD45.Value >= -50 and self.MW.RTD45.Field.property("Alarm"):
+            #     self.MW.RTD45.ResetAlarm()
                 
             time.sleep(1)
             

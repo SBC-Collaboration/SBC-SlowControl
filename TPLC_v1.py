@@ -28,57 +28,57 @@ class TPLC:
 
         self.nRTD = 54
         self.RTD =  [0.] * self.nRTD 
-        self.PT80 = 0.
-        self.FlowValve = 0.
-        self.BottomChillerSetpoint = 0.
-        self.BottomChillerTemp = 0.
-        self.BottomChillerState = 0
-        self.BottomChillerPowerReset = 0
-        self.TopChillerSetpoint = 0.
-        self.TopChillerTemp = 0.
-        self.TopChillerState = 0
-        self.CameraChillerSetpoint = 0.
-        self.CameraChillerTemp = 0.
-        self.CameraChillerState = 0
-        self.WaterChillerSetpoint = 0.
-        self.WaterChillerTemp = 0.
-        self.WaterChillerPressure = 0.
-        self.WaterChillerState = 0
-        self.InnerPower = 0.
-        self.OuterClosePower = 0.
-        self.OuterFarPower = 0.
-        self.FreonPower = 0.
-        self.ColdRegionSetpoint = 0.
-        self.HotRegionSetpoint = 0.
-        self.HotRegionP = 0.
-        self.HotRegionI = 0.
-        self.HotRegionD = 0.
-        self.ColdRegionP = 0.
-        self.ColdRegionI = 0.
-        self.ColdRegionD = 0.
-        self.HotRegionPIDState = 0
-        self.ClodRegionPIDState = 0
-        self.Camera0Temp = 0.
-        self.Camera0Humidity = 0.
-        self.Camera0AirTemp = 0.
-        self.Camera1Temp = 0.
-        self.Camera1Humidity = 0.
-        self.Camera1AirTemp = 0.
-        self.Camera2Temp = 0.
-        self.Camera2Humidity = 0.
-        self.Camera2AirTemp = 0.
-        self.Camera3Temp = 0.
-        self.Camera3Humidity = 0.
-        self.Camera3AirTemp = 0.
-        self.WaterFlow = 0.
-        self.WaterTemp = 0.
-        self.WaterConductivityBefore = 0.
-        self.WaterConductivityAfter = 0.
-        self.WaterPressure = 0.
-        self.WaterLevel = 0.
-        self.WaterPrimingPower = 0
-        self.WaterPrimingStatus = 0 
-        self.BeetleStatus = 0           
+        # self.PT80 = 0.
+        # self.FlowValve = 0.
+        # self.BottomChillerSetpoint = 0.
+        # self.BottomChillerTemp = 0.
+        # self.BottomChillerState = 0
+        # self.BottomChillerPowerReset = 0
+        # self.TopChillerSetpoint = 0.
+        # self.TopChillerTemp = 0.
+        # self.TopChillerState = 0
+        # self.CameraChillerSetpoint = 0.
+        # self.CameraChillerTemp = 0.
+        # self.CameraChillerState = 0
+        # self.WaterChillerSetpoint = 0.
+        # self.WaterChillerTemp = 0.
+        # self.WaterChillerPressure = 0.
+        # self.WaterChillerState = 0
+        # self.InnerPower = 0.
+        # self.OuterClosePower = 0.
+        # self.OuterFarPower = 0.
+        # self.FreonPower = 0.
+        # self.ColdRegionSetpoint = 0.
+        # self.HotRegionSetpoint = 0.
+        # self.HotRegionP = 0.
+        # self.HotRegionI = 0.
+        # self.HotRegionD = 0.
+        # self.ColdRegionP = 0.
+        # self.ColdRegionI = 0.
+        # self.ColdRegionD = 0.
+        # self.HotRegionPIDState = 0
+        # self.ClodRegionPIDState = 0
+        # self.Camera0Temp = 0.
+        # self.Camera0Humidity = 0.
+        # self.Camera0AirTemp = 0.
+        # self.Camera1Temp = 0.
+        # self.Camera1Humidity = 0.
+        # self.Camera1AirTemp = 0.
+        # self.Camera2Temp = 0.
+        # self.Camera2Humidity = 0.
+        # self.Camera2AirTemp = 0.
+        # self.Camera3Temp = 0.
+        # self.Camera3Humidity = 0.
+        # self.Camera3AirTemp = 0.
+        # self.WaterFlow = 0.
+        # self.WaterTemp = 0.
+        # self.WaterConductivityBefore = 0.
+        # self.WaterConductivityAfter = 0.
+        # self.WaterPressure = 0.
+        # self.WaterLevel = 0.
+        # self.WaterPrimingPower = 0
+        # self.WaterPrimingStatus = 0
+        # self.BeetleStatus = 0
         self.LiveCounter = 0
         self.NewData = False
 
@@ -88,68 +88,68 @@ class TPLC:
     def ReadAll(self):
         if self.Connected:
             # Reading all the RTDs
-            Raw = self.Client.read_holding_registers(0x00, count = self.nRTD * 2, unit = 0x01)
+            Raw = self.Client.read_holding_registers(38000, count = self.nRTD * 2, unit = 0x01)
                       
-            for i in range(0, self.nRTD, 1):
+            for i in range(0, self.nRTD):
                 self.RTD[i] =  round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
 
             # PT80 (Cold Vacuum Conduit Pressure)
-            Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
-            self.PT80 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 7)
-            
+            # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
+            # self.PT80 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 7)
+            #
             # Flow valve
 #            Raw = self.Client.read_holding_registers(0x, count = 2, unit = 0x01)
 #            self.FlowValve = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 0)
 
             # Bottom chiller
-            Raw = self.Client.read_holding_registers(0xA8, count = 4, unit = 0x01)
-            self.BottomChillerSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            self.BottomChillerTemp = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            Raw = self.Client.read_coils(0x10, count = 1, unit = 0x01)
-            self.BottomChillerState = Raw.bits[0]
+            # Raw = self.Client.read_holding_registers(0xA8, count = 4, unit = 0x01)
+            # self.BottomChillerSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
+            # self.BottomChillerTemp = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
+            # Raw = self.Client.read_coils(0x10, count = 1, unit = 0x01)
+            # self.BottomChillerState = Raw.bits[0]
 #            self.BottomChillerPowerReset = Raw.bits[0]
 
             # Top chiller
-            Raw = self.Client.read_holding_registers(0xB0, count = 4, unit = 0x01)
-            self.TopChillerSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            self.TopChillerTemp = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            Raw = self.Client.read_coils(0x13, count = 1, unit = 0x01)
-            self.TopChillerState = Raw.bits[0]
+            # Raw = self.Client.read_holding_registers(0xB0, count = 4, unit = 0x01)
+            # self.TopChillerSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
+            # self.TopChillerTemp = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
+            # Raw = self.Client.read_coils(0x13, count = 1, unit = 0x01)
+            # self.TopChillerState = Raw.bits[0]
 
             # Camera chiller
-            Raw = self.Client.read_holding_registers(0xBA, count = 4, unit = 0x01)
-            self.CameraChillerSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            self.CameraChillerTemp = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            Raw = self.Client.read_coils(0x15, count = 1, unit = 0x01)
-            self.CameraChillerState = Raw.bits[0]
+            # Raw = self.Client.read_holding_registers(0xBA, count = 4, unit = 0x01)
+            # self.CameraChillerSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
+            # self.CameraChillerTemp = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
+            # Raw = self.Client.read_coils(0x15, count = 1, unit = 0x01)
+            # self.CameraChillerState = Raw.bits[0]
 
             # Water chiller
-            Raw = self.Client.read_holding_registers(0xC4, count = 4, unit = 0x01)
-            self.WaterChillerSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            self.WaterChillerTemp = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-#            self.WaterChillerPressure = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            Raw = self.Client.read_coils(0x17, count = 1, unit = 0x01)
-            self.WaterChillerState = Raw.bits[0]
+#             Raw = self.Client.read_holding_registers(0xC4, count = 4, unit = 0x01)
+#             self.WaterChillerSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
+#             self.WaterChillerTemp = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
+ #            self.WaterChillerPressure = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
+#             Raw = self.Client.read_coils(0x17, count = 1, unit = 0x01)
+#             self.WaterChillerState = Raw.bits[0]
 
             # Heaters
-            Raw = self.Client.read_holding_registers(0xC8, count = 8, unit = 0x01)
-            self.InnerPower = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            self.OuterClosePower = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 1)
-            self.OuterFarPower = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(5), Raw.getRegister(4)))[0], 1)
-            self.FreonPower = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(7), Raw.getRegister(6)))[0], 1)
+            # Raw = self.Client.read_holding_registers(0xC8, count = 8, unit = 0x01)
+            # self.InnerPower = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
+            # self.OuterClosePower = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 1)
+            # self.OuterFarPower = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(5), Raw.getRegister(4)))[0], 1)
+            # self.FreonPower = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(7), Raw.getRegister(6)))[0], 1)
 
             # Hot/cold region
-            Raw = self.Client.read_holding_registers(0xD0, count = 4, unit = 0x01)
-            self.ColdRegionSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            self.HotRegionSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 1)
-#            self.HotRegionP = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
+#             Raw = self.Client.read_holding_registers(0xD0, count = 4, unit = 0x01)
+#             self.ColdRegionSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
+#             self.HotRegionSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 1)
+#          self.HotRegionP = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
 #            self.HotRegionI = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
 #            self.HotRegionD = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
 #            self.ColdRegionP = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
 #            self.ColdRegionI = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
 #            self.ColdRegionD = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            Raw = self.Client.read_coils(0x19, count = 1, unit = 0x01)
-            self.HotRegionPIDState = Raw.bits[0]
+#             Raw = self.Client.read_coils(0x19, count = 1, unit = 0x01)
+#             self.HotRegionPIDState = Raw.bits[0]
 #            self.ClodRegionPIDState = Raw.bits[0]
 
             # Cameras

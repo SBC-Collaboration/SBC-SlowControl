@@ -25,46 +25,50 @@ class PPLC:
         self.Connected = self.Client.connect()
         print("PPLC connected: " + str(self.Connected))
 
-        self.LabAirPressureState = 0
-        self.ExpansionValve = 0
-        self.FastCompressValveCart = 0
-        self.SlowCompressValve = False
-        self.FastCompressValve1 = 0
-        self.FastCompressValve2 = 0
-        self.FastCompressValve3 = 0
-        self.PumpState = 0
-        self.OilReliefValve = 0
-        self.FreonOutValve = 0
-        self.FreonInValve = 0      
-        self.PT1 = 0.
-        self.PT2 = 0.
-        self.PT3 = 0.
-        self.PT4 = 0.
-        self.PT8 = 0.
-        self.PT9 = 0.
-        self.PT10 = 0.
-        self.PT11 = 0.
-        self.AirRegulator = 0.
-        self.PDiff = 0.
-        self.AirRegulatorSetpoint = 0.
-        self.PressureSetpoint = 0.
-        self.BellowsPosition = 0.
-        self.IVPosition = 0.
-        self.CurrentState = "Unknown"
-        self.FFCamera = 0
-        self.FFManual = 0
-        self.FFdP1 = 0
-        self.FFdP5 = 0
-        self.FFdP4 = 0
-        self.FFPDiff = 0
-        self.FFP1PSet = 0
-        self.FFP5PSet = 0
-        self.FFP4PSet = 0
-        self.FFP3Max = 0
-        self.FFP2Min = 0
-        self.FFTCPIP = 0
-        self.FFdBellows = 0
-        self.FFEmergency = 0
+
+        self.nPT=20
+        self.PT = [0.] * self.nPT
+
+        # self.LabAirPressureState = 0
+        # self.ExpansionValve = 0
+        # self.FastCompressValveCart = 0
+        # self.SlowCompressValve = False
+        # self.FastCompressValve1 = 0
+        # self.FastCompressValve2 = 0
+        # self.FastCompressValve3 = 0
+        # self.PumpState = 0
+        # self.OilReliefValve = 0
+        # self.FreonOutValve = 0
+        # self.FreonInValve = 0
+        # self.PT1 = 0.
+        # self.PT2 = 0.
+        # self.PT3 = 0.
+        # self.PT4 = 0.
+        # self.PT8 = 0.
+        # self.PT9 = 0.
+        # self.PT10 = 0.
+        # self.PT11 = 0.
+        # self.AirRegulator = 0.
+        # self.PDiff = 0.
+        # self.AirRegulatorSetpoint = 0.
+        # self.PressureSetpoint = 0.
+        # self.BellowsPosition = 0.
+        # self.IVPosition = 0.
+        # self.CurrentState = "Unknown"
+        # self.FFCamera = 0
+        # self.FFManual = 0
+        # self.FFdP1 = 0
+        # self.FFdP5 = 0
+        # self.FFdP4 = 0
+        # self.FFPDiff = 0
+        # self.FFP1PSet = 0
+        # self.FFP5PSet = 0
+        # self.FFP4PSet = 0
+        # self.FFP3Max = 0
+        # self.FFP2Min = 0
+        # self.FFTCPIP = 0
+        # self.FFdBellows = 0
+        # self.FFEmergency = 0
         self.LiveCounter = 0
         self.NewData = False
                     
@@ -73,24 +77,31 @@ class PPLC:
         
     def ReadAll(self):
         if self.Connected:
+
+            Raw = self.Client.read_holding_registers(37000, count=self.nPT * 2, unit=0x01)
+
+            for i in range(0, self.nPT):
+                self.PT[i] = round(
+                    struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
+
             # Man valves
-            Raw = self.Client.read_holding_registers(0x46E, count = 1, unit = 0x01)
-            Bits = [j for j in reversed([bool(int(i)) for i in format(Raw.getRegister(0), '016b')])]
-            self.LabAirPressureState = Bits[0]
-            self.ExpansionValve = Bits[1]
-            self.FastCompressValveCart = Bits[2]
-            if Bits[3] == True: # NO valve
-                self.SlowCompressValve = False
-            else:
-                self.SlowCompressValve = True
-            self.FastCompressValve1 = Bits[4]
-            self.FastCompressValve2 = Bits[5]
-            self.FastCompressValve3 = Bits[6]
-            self.PumpState = Bits[7]
-            self.OilReliefValve = Bits[8]
-            self.FreonOutValve = Bits[9]
-            self.FreonInValve = Bits[10]  
-            self.DetectorPressurized = Bits[0]
+            # Raw = self.Client.read_holding_registers(0x46E, count = 1, unit = 0x01)
+            # Bits = [j for j in reversed([bool(int(i)) for i in format(Raw.getRegister(0), '016b')])]
+            # self.LabAirPressureState = Bits[0]
+            # self.ExpansionValve = Bits[1]
+            # self.FastCompressValveCart = Bits[2]
+            # if Bits[3] == True: # NO valve
+            #     self.SlowCompressValve = False
+            # else:
+            #     self.SlowCompressValve = True
+            # self.FastCompressValve1 = Bits[4]
+            # self.FastCompressValve2 = Bits[5]
+            # self.FastCompressValve3 = Bits[6]
+            # self.PumpState = Bits[7]
+            # self.OilReliefValve = Bits[8]
+            # self.FreonOutValve = Bits[9]
+            # self.FreonInValve = Bits[10]
+            # self.DetectorPressurized = Bits[0]
             
             # PT
             Raw = self.Client.read_holding_registers(0x400, count = 6, unit = 0x01)
@@ -107,62 +118,62 @@ class PPLC:
             self.AirRegulator = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
             Raw = self.Client.read_holding_registers(0x460, count = 2, unit = 0x01)
             self.PDiff = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            
+
             # Setpoint
-            Raw = self.Client.read_holding_registers(0xB6, count = 2, unit = 0x01)
-            self.AirRegulatorSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            Raw = self.Client.read_holding_registers(0xC0, count = 2, unit = 0x01)
-            self.PressureSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            
+            # Raw = self.Client.read_holding_registers(0xB6, count = 2, unit = 0x01)
+            # self.AirRegulatorSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
+            # Raw = self.Client.read_holding_registers(0xC0, count = 2, unit = 0x01)
+            # self.PressureSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
+            #
             # Positions
-            Raw = self.Client.read_holding_registers(0xF4, count = 2, unit = 0x01)
-            self.BellowsPosition = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            Raw = self.Client.read_holding_registers(0xF6, count = 2, unit = 0x01)
-            self.IVPosition = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            
+            # Raw = self.Client.read_holding_registers(0xF4, count = 2, unit = 0x01)
+            # self.BellowsPosition = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
+            # Raw = self.Client.read_holding_registers(0xF6, count = 2, unit = 0x01)
+            # self.IVPosition = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
+            #
             # Current state
-            Raw = self.Client.read_holding_registers(0x454, count = 1, unit = 0x01)
-            if Raw.getRegister(0) == 0:
-                self.CurrentState = "Idle"
-            elif Raw.getRegister(0) == 1:
-                self.CurrentState = "Expanding"
-            elif Raw.getRegister(0) == 2:
-                self.CurrentState = "Expanded"
-            elif Raw.getRegister(0) == 3:
-                self.CurrentState = "Compressing"
-            elif Raw.getRegister(0) == 4:
-                self.CurrentState = "Compressed"
-            elif Raw.getRegister(0) == 5:
-                self.CurrentState = "Manual"
-            elif Raw.getRegister(0) == 6:
-                self.CurrentState = "Emergency"
-            else:
-                self.CurrentState = "Unknown"
+            # Raw = self.Client.read_holding_registers(0x454, count = 1, unit = 0x01)
+            # if Raw.getRegister(0) == 0:
+            #     self.CurrentState = "Idle"
+            # elif Raw.getRegister(0) == 1:
+            #     self.CurrentState = "Expanding"
+            # elif Raw.getRegister(0) == 2:
+            #     self.CurrentState = "Expanded"
+            # elif Raw.getRegister(0) == 3:
+            #     self.CurrentState = "Compressing"
+            # elif Raw.getRegister(0) == 4:
+            #     self.CurrentState = "Compressed"
+            # elif Raw.getRegister(0) == 5:
+            #     self.CurrentState = "Manual"
+            # elif Raw.getRegister(0) == 6:
+            #     self.CurrentState = "Emergency"
+            # else:
+            #     self.CurrentState = "Unknown"
                 
             # First fault
-            Raw = self.Client.read_holding_registers(0x455, count = 1, unit = 0x01)
-            Bits = [j for j in reversed([bool(int(i)) for i in format(Raw.getRegister(0), '016b')])]
-            self.FFCamera = Bits[1]
-            self.FFManual = Bits[2]
-            self.FFdP1 = Bits[8]
-            self.FFdP5 = Bits[9]
-            self.FFdP4 = Bits[10]
-            self.FFPDiff = Bits[11]
-            self.FFP1PSet = Bits[12]
-            self.FFP5PSet = Bits[13]
-            self.FFP4PSet = Bits[14]
-            self.FFP3Max = Bits[15]
-            Raw = self.Client.read_holding_registers(0x456, count = 1, unit = 0x01)
-            Bits = [j for j in reversed([bool(int(i)) for i in format(Raw.getRegister(0), '016b')])]
-            self.FFP2Min = Bits[0]
-            self.FFTCPIP = Bits[1]
-            self.FFdBellows = Bits[2]
-            self.FFEmergency = Bits[3]
+            # Raw = self.Client.read_holding_registers(0x455, count = 1, unit = 0x01)
+            # Bits = [j for j in reversed([bool(int(i)) for i in format(Raw.getRegister(0), '016b')])]
+            # self.FFCamera = Bits[1]
+            # self.FFManual = Bits[2]
+            # self.FFdP1 = Bits[8]
+            # self.FFdP5 = Bits[9]
+            # self.FFdP4 = Bits[10]
+            # self.FFPDiff = Bits[11]
+            # self.FFP1PSet = Bits[12]
+            # self.FFP5PSet = Bits[13]
+            # self.FFP4PSet = Bits[14]
+            # self.FFP3Max = Bits[15]
+            # Raw = self.Client.read_holding_registers(0x456, count = 1, unit = 0x01)
+            # Bits = [j for j in reversed([bool(int(i)) for i in format(Raw.getRegister(0), '016b')])]
+            # self.FFP2Min = Bits[0]
+            # self.FFTCPIP = Bits[1]
+            # self.FFdBellows = Bits[2]
+            # self.FFEmergency = Bits[3]
 
             # Detector state
-            Raw = self.Client.read_holding_registers(0x457, count = 1, unit = 0x01)
-            Bits = [j for j in reversed([bool(int(i)) for i in format(Raw.getRegister(0), '016b')])]
-            self.DetectorPressurized = Bits[0]
+            # Raw = self.Client.read_holding_registers(0x457, count = 1, unit = 0x01)
+            # Bits = [j for j in reversed([bool(int(i)) for i in format(Raw.getRegister(0), '016b')])]
+            # self.DetectorPressurized = Bits[0]
 
             # PLC
             Raw = self.Client.read_holding_registers(0x46A, count = 1, unit = 0x01)
