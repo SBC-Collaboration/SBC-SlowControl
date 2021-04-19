@@ -83,7 +83,7 @@ class PPLC:
             for i in range(0, self.nPT):
                 self.PT[i] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
-
+                    print(self.PT[i])
             # Man valves
             # Raw = self.Client.read_holding_registers(0x46E, count = 1, unit = 0x01)
             # Bits = [j for j in reversed([bool(int(i)) for i in format(Raw.getRegister(0), '016b')])]
@@ -104,20 +104,20 @@ class PPLC:
             # self.DetectorPressurized = Bits[0]
             
             # PT
-            Raw = self.Client.read_holding_registers(0x400, count = 6, unit = 0x01)
-            self.PT1 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            self.PT2 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            self.PT3 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(5), Raw.getRegister(4)))[0], 2)
-            Raw = self.Client.read_holding_registers(0x420, count = 10, unit = 0x01)
-            self.PT4 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            self.PT8 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            self.PT9 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(5), Raw.getRegister(4)))[0], 2)
-            self.PT10 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(7), Raw.getRegister(6)))[0], 2)
-            self.PT11 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(9), Raw.getRegister(8)))[0], 2)
-            Raw = self.Client.read_holding_registers(0x40E, count = 2, unit = 0x01)
-            self.AirRegulator = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            Raw = self.Client.read_holding_registers(0x460, count = 2, unit = 0x01)
-            self.PDiff = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
+            # Raw = self.Client.read_holding_registers(0x400, count = 6, unit = 0x01)
+            # self.PT1 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
+            # self.PT2 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
+            # self.PT3 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(5), Raw.getRegister(4)))[0], 2)
+            # Raw = self.Client.read_holding_registers(0x420, count = 10, unit = 0x01)
+            # self.PT4 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
+            # self.PT8 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
+            # self.PT9 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(5), Raw.getRegister(4)))[0], 2)
+            # self.PT10 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(7), Raw.getRegister(6)))[0], 2)
+            # self.PT11 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(9), Raw.getRegister(8)))[0], 2)
+            # Raw = self.Client.read_holding_registers(0x40E, count = 2, unit = 0x01)
+            # self.AirRegulator = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
+            # Raw = self.Client.read_holding_registers(0x460, count = 2, unit = 0x01)
+            # self.PDiff = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
 
             # Setpoint
             # Raw = self.Client.read_holding_registers(0xB6, count = 2, unit = 0x01)
