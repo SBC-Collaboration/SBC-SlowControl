@@ -1470,7 +1470,7 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.TT2111 = Indicator(self)
         self.TT2111.Label.setText("TT2111")
         self.GL.addWidget(self.TT2111, 0, 0)
-        self.TT2111.SetValue(20)
+        self.TT2111.SetValue(850)
 
         self.TT2112 = Indicator(self)
         self.TT2112.Label.setText("TT2112")
