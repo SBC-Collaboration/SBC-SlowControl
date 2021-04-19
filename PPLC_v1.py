@@ -81,9 +81,11 @@ class PPLC:
             Raw = self.Client.read_holding_registers(37000, count=self.nPT * 2, unit=0x01)
 
             for i in range(0, self.nPT):
-                self.PT[i] = round(
-                    struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
+                # self.PT[i] = round(
+                #     struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
                 print(self.PT[i])
+                print(len(self.PT))
+
             # Man valves
             # Raw = self.Client.read_holding_registers(0x46E, count = 1, unit = 0x01)
             # Bits = [j for j in reversed([bool(int(i)) for i in format(Raw.getRegister(0), '016b')])]
@@ -176,8 +178,8 @@ class PPLC:
             # self.DetectorPressurized = Bits[0]
 
             # PLC
-            Raw = self.Client.read_holding_registers(0x46A, count = 1, unit = 0x01)
-            self.LiveCounter = Raw.getRegister(0)
+            # Raw = self.Client.read_holding_registers(0x46A, count = 1, unit = 0x01)
+            # self.LiveCounter = Raw.getRegister(0)
 
             self.NewData = True
 
