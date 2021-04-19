@@ -26,7 +26,7 @@ class TPLC:
         self.Connected = self.Client.connect()
         print("TPLC connected: " + str(self.Connected))
 
-        self.nRTD = 54
+        self.nRTD = 20
         self.RTD =  [0.] * self.nRTD 
         # self.PT80 = 0.
         # self.FlowValve = 0.
@@ -92,6 +92,7 @@ class TPLC:
                       
             for i in range(0, self.nRTD):
                 self.RTD[i] =  round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
+                print(self.RTD[i])
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
