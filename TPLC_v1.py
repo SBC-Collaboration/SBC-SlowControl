@@ -186,8 +186,8 @@ class TPLC:
 #            self.BeetleStatus = Raw.bits[2]             
 
             # PLC
-            Raw = self.Client.read_holding_registers(0x3E9, count = 1, unit = 0x01)
-            self.LiveCounter = Raw.getRegister(0)
+            # Raw = self.Client.read_holding_registers(0x3E9, count = 1, unit = 0x01)
+            # self.LiveCounter = Raw.getRegister(0)
 
             self.NewData = True
 
