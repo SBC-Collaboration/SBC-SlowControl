@@ -2465,8 +2465,7 @@ class UpdatePPLC(QtCore.QObject):
     def run(self):
         self.Running = True
 
-        # while self.Running:
-        for i in range(4):
+        while self.Running:
             print("PPLC updating", datetime.datetime.now())
             self.PPLC.ReadAll()
             time.sleep(2)
