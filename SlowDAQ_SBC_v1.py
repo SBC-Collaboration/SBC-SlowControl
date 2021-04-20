@@ -2465,7 +2465,8 @@ class UpdatePPLC(QtCore.QObject):
     def run(self):
         self.Running = True
 
-        while self.Running:
+        # while self.Running:
+        for i in range(4):
             print("PPLC updating", datetime.datetime.now())
             self.PPLC.ReadAll()
             time.sleep(2)
@@ -2495,8 +2496,6 @@ class UpdateTPLC(QtCore.QObject):
     def stop(self):
         self.Running = False
 
-
-
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs           
 class UpdateDisplay(QtCore.QObject):
@@ -2511,11 +2510,15 @@ class UpdateDisplay(QtCore.QObject):
     def run(self):
         self.Running = True
         while self.Running:
+<<<<<<< Updated upstream
             print("TPLC updating", datetime.datetime.now())
             # print(self.MW.T.RTD)
             # print(2, self.MW.T.RTD[2])
             # for i in range(0.6):
             #     print(i, self.MW.T.RTD[i])
+=======
+
+>>>>>>> Stashed changes
             if self.MW.T.NewData:
 
                 self.MW.TT2111.SetValue(self.MW.T.RTD[0])
