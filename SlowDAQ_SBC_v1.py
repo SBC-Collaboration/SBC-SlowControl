@@ -797,8 +797,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def StartUpdater(self):
         # Open connection to both PLCs
-        self.T = TPLC()
         self.P = PPLC()
+        self.T = TPLC()
+
+
+        # Read PPLC value on another thread
+        self.PUpdateThread = QtCore.QThread()
+        self.UpPPLC = UpdatePPLC(self.P)
+        self.UpPPLC.moveToThread(self.PUpdateThread)
+        self.PUpdateThread.started.connect(self.UpPPLC.run)
+        self.PUpdateThread.start()
 
         # Read TPLC value on another thread
         self.TUpdateThread = QtCore.QThread()            
@@ -807,12 +815,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TUpdateThread.started.connect(self.UpTPLC.run)
         self.TUpdateThread.start()
 
-        # Read PPLC value on another thread
-        self.PUpdateThread = QtCore.QThread()            
-        self.UpPPLC = UpdatePPLC(self.P)
-        self.UpPPLC.moveToThread(self.PUpdateThread)
-        self.PUpdateThread.started.connect(self.UpPPLC.run)
-        self.PUpdateThread.start()
+
 
         # Make sure PLCs values are initialized before trying to access them with update function
         time.sleep(2)
@@ -2449,6 +2452,28 @@ class Camera(QtWidgets.QWidget):
         self.Air.Label.setText("Air")
         self.HL.addWidget(self.Air)
 
+
+# Class to read PPLC value every 2 sec
+class UpdatePPLC(QtCore.QObject):
+    def __init__(self, PPLC, parent=None):
+        super().__init__(parent)
+
+        self.PPLC = PPLC
+        self.Running = False
+
+    @QtCore.Slot()
+    def run(self):
+        self.Running = True
+
+        while self.Running:
+            print("PPLC updating", datetime.datetime.now())
+            self.PPLC.ReadAll()
+            time.sleep(2)
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
 # Class to read TPLC value every 2 sec
 class UpdateTPLC(QtCore.QObject):
     def __init__(self, TPLC, parent = None):
@@ -2462,6 +2487,7 @@ class UpdateTPLC(QtCore.QObject):
         self.Running = True
 
         while self.Running:
+            print("TPLC updating", datetime.datetime.now())
             self.TPLC.ReadAll()
             time.sleep(2)
     
@@ -2469,25 +2495,7 @@ class UpdateTPLC(QtCore.QObject):
     def stop(self):
         self.Running = False
 
-# Class to read PPLC value every 2 sec
-class UpdatePPLC(QtCore.QObject):
-    def __init__(self, PPLC, parent = None):
-        super().__init__(parent)
-        
-        self.PPLC = PPLC
-        self.Running = False
-    
-    @QtCore.Slot()
-    def run(self):
-        self.Running = True
 
-        while self.Running:
-            self.PPLC.ReadAll()
-            time.sleep(2)
-    
-    @QtCore.Slot()
-    def stop(self):
-        self.Running = False
 
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs           
@@ -2503,8 +2511,12 @@ class UpdateDisplay(QtCore.QObject):
     def run(self):
         self.Running = True
         while self.Running:
+            print("TPLC updating", datetime.datetime.now())
+            # print(self.MW.T.RTD)
+            # print(2, self.MW.T.RTD[2])
+            # for i in range(0.6):
+            #     print(i, self.MW.T.RTD[i])
             if self.MW.T.NewData:
-                print("TPLC updating",datetime.datetime.now())
 
                 self.MW.TT2111.SetValue(self.MW.T.RTD[0])
                 self.MW.TT2112.SetValue(self.MW.T.RTD[1])
@@ -2513,8 +2525,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.TT2115.SetValue(self.MW.T.RTD[4])
                 self.MW.TT2116.SetValue(self.MW.T.RTD[5])
                 self.MW.TT2117.SetValue(self.MW.T.RTD[6])
-                for i in range(0.6):
-                    print(self.MW.T.RTD[i])
+
                 # self.MW.TT2118.SetValue(self.MW.T.RTD[0])
                 # self.MW.TT2119.SetValue(self.MW.T.RTD[0])
                 # self.MW.TT2120.SetValue(self.MW.T.RTD[0])
