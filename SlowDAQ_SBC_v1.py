@@ -808,8 +808,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PUpdateThread.started.connect(self.UpPPLC.run)
         self.PUpdateThread.start()
 
+        # Read PPLC value on another thread
+        # self.PUpdateThread = QtCore.QThread()
+        # self.UpPPLC = UpdateTPLC(self.T)
+        # self.UpPPLC.moveToThread(self.PUpdateThread)
+        # self.PUpdateThread.started.connect(self.UpPPLC.run)
+        # self.PUpdateThread.start()
+
         # Read TPLC value on another thread
-        self.TUpdateThread = QtCore.QThread()            
+        self.TUpdateThread = QtCore.QThread()
         self.UpTPLC = UpdateTPLC(self.T)
         self.UpTPLC.moveToThread(self.TUpdateThread)
         self.TUpdateThread.started.connect(self.UpTPLC.run)
@@ -831,10 +838,11 @@ class MainWindow(QtWidgets.QMainWindow):
     # Stop all updater threads
     @QtCore.Slot()
     def StopUpdater(self):
+        self.UpPPLC.stop()
         self.UpTPLC.stop()
         self.TUpdateThread.quit()
         self.TUpdateThread.wait()
-        self.UpPPLC.stop()
+
         self.PUpdateThread.quit()
         self.PUpdateThread.wait()
         self.UpDisplay.stop()
@@ -2454,6 +2462,29 @@ class Camera(QtWidgets.QWidget):
 
 
 # Class to read PPLC value every 2 sec
+# class UpdatePPLC(QtCore.QObject):
+#     def __init__(self, PPLC, parent=None):
+#         super().__init__(parent)
+#
+#         self.PPLC = PPLC
+#         self.Running = False
+#
+#     @QtCore.Slot()
+#     def run(self):
+#         self.Running = True
+#
+#         while self.Running:
+#         # for i in range(4):
+#             print("PPLC updating", datetime.datetime.now())
+#             self.PPLC.ReadAll()
+#             time.sleep(2)
+#
+#     @QtCore.Slot()
+#     def stop(self):
+#         self.Running = False
+
+
+# Class to read PPLC value every 2 sec
 class UpdatePPLC(QtCore.QObject):
     def __init__(self, PPLC, parent=None):
         super().__init__(parent)
@@ -2465,8 +2496,7 @@ class UpdatePPLC(QtCore.QObject):
     def run(self):
         self.Running = True
 
-        # while self.Running:
-        for i in range(4):
+        while self.Running:
             print("PPLC updating", datetime.datetime.now())
             self.PPLC.ReadAll()
             time.sleep(2)
@@ -2510,15 +2540,15 @@ class UpdateDisplay(QtCore.QObject):
     def run(self):
         self.Running = True
         while self.Running:
-<<<<<<< Updated upstream
-            print("TPLC updating", datetime.datetime.now())
+
+            # print("TPLC updating", datetime.datetime.now())
             # print(self.MW.T.RTD)
             # print(2, self.MW.T.RTD[2])
             # for i in range(0.6):
             #     print(i, self.MW.T.RTD[i])
-=======
 
->>>>>>> Stashed changes
+
+
             if self.MW.T.NewData:
 
                 self.MW.TT2111.SetValue(self.MW.T.RTD[0])
