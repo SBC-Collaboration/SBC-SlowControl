@@ -2526,6 +2526,15 @@ class UpdateTPLC(QtCore.QObject):
     def stop(self):
         self.Running = False
 
+#Class to update myseeq database
+class UpdateDataBase(QtCore.QObject):
+    def __init__(self, MW, parent=None):
+        super().__init__(parent)
+
+        self.MW = MW
+        self.Running = False
+        print("begin updating Database")
+
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs           
 class UpdateDisplay(QtCore.QObject):
