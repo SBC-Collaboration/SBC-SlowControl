@@ -33,32 +33,30 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         # Read PPLC value on another thread
-        self.PUpdateThread = QtCore.QThread()
+        self.PUpdateThread = QtCore.QThread(parent=self)
         self.UpPPLC = UpdatePPLC(self.P)
         self.UpPPLC.moveToThread(self.PUpdateThread)
         self.PUpdateThread.started.connect(self.UpPPLC.run)
         self.PUpdateThread.start()
 
         # Read TPLC value on another thread
-        self.TUpdateThread = QtCore.QThread()
+        self.TUpdateThread = QtCore.QThread(parent=self)
         self.UpTPLC = UpdateTPLC(self.T)
         self.UpTPLC.moveToThread(self.TUpdateThread)
         self.TUpdateThread.started.connect(self.UpTPLC.run)
         self.TUpdateThread.start()
 
-        # Stop all updater threads
-        @QtCore.Slot()
-        def StopUpdater(self):
-            self.UpPPLC.stop()
-            self.UpTPLC.stop()
-            self.TUpdateThread.quit()
-            self.TUpdateThread.wait()
+    # Stop all updater threads
+    @QtCore.Slot()
+    def StopUpdater(self):
+        self.UpPPLC.stop()
+        self.UpTPLC.stop()
+        self.TUpdateThread.quit()
+        self.TUpdateThread.wait()
 
-            self.PUpdateThread.quit()
-            self.PUpdateThread.wait()
-            self.UpDisplay.stop()
-            self.DUpdateThread.quit()
-            self.DUpdateThread.wait()
+        self.PUpdateThread.quit()
+        self.PUpdateThread.wait()
+
 
 # Class to read PPLC value every 2 sec
 class UpdatePPLC(QtCore.QObject):
@@ -95,7 +93,8 @@ class UpdateTPLC(QtCore.QObject):
         self.Running = True
 
         while self.Running:
-            print("TPLC updating", datetime.datetime.now())
+            try:
+                print("TPLC updating", datetime.datetime.now())
             self.TPLC.ReadAll()
             time.sleep(2)
 
