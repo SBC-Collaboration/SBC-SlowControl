@@ -34,6 +34,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.T = TPLC()
 
 
+        # Read TPLC value on another thread
+        self.TUpdateThread = None
+        self.TUpdateThread = QtCore.QThread()
+        self.pTPLC = UpdateTPLC(self.T)
+        self.pTPLC.moveToThread(self.TUpdateThread)
+        self.TUpdateThread.started.connect(self.pTPLC.run)
+        self.TUpdateThread.start()
+
         # Read PPLC value on another thread
         self.PUpdateThread = None
         self.PUpdateThread = QtCore.QThread()
@@ -41,14 +49,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpPPLC.moveToThread(self.PUpdateThread)
         self.PUpdateThread.started.connect(self.UpPPLC.run)
         self.PUpdateThread.start()
-
-        # Read TPLC value on another thread
-        self.TUpdateThread = None
-        self.TUpdateThread = QtCore.QThread()
-        self.UpTPLC = UpdateTPLC(self.T)
-        self.UpTPLC.moveToThread(self.TUpdateThread)
-        self.TUpdateThread.started.connect(self.UpTPLC.run)
-        self.TUpdateThread.start()
 
     # Stop all updater threads
     @QtCore.Slot()
