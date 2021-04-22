@@ -3,6 +3,7 @@ import sys
 import time
 import platform
 import datetime
+from queue import Queue, Empty
 
 from PySide2 import QtWidgets, QtCore, QtGui
 
@@ -71,9 +72,12 @@ class UpdatePPLC(QtCore.QObject):
         self.Running = True
 
         while self.Running:
-            print("PPLC updating", datetime.datetime.now())
-            self.PPLC.ReadAll()
-            time.sleep(2)
+            try:
+                print("PPLC updating", datetime.datetime.now())
+                self.PPLC.ReadAll()
+                time.sleep(2)
+            except Empty:
+                continue
 
     @QtCore.Slot()
     def stop(self):
@@ -95,8 +99,10 @@ class UpdateTPLC(QtCore.QObject):
         while self.Running:
             try:
                 print("TPLC updating", datetime.datetime.now())
-            self.TPLC.ReadAll()
-            time.sleep(2)
+                self.TPLC.ReadAll()
+                time.sleep(2)
+            except Empty:
+                continue
 
     @QtCore.Slot()
     def stop(self):
