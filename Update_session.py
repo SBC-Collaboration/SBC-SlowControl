@@ -22,6 +22,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.resize(2400, 1400)  # Open at center using resized
         self.setMinimumSize(2400, 1400)
+        App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater;
         self.StartUpdater()
 
@@ -45,6 +46,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TUpdateThread.started.connect(self.UpTPLC.run)
         self.TUpdateThread.start()
 
+        # Stop all updater threads
+        @QtCore.Slot()
+        def StopUpdater(self):
+            self.UpPPLC.stop()
+            self.UpTPLC.stop()
+            self.TUpdateThread.quit()
+            self.TUpdateThread.wait()
+
+            self.PUpdateThread.quit()
+            self.PUpdateThread.wait()
+            self.UpDisplay.stop()
+            self.DUpdateThread.quit()
+            self.DUpdateThread.wait()
 
 # Class to read PPLC value every 2 sec
 class UpdatePPLC(QtCore.QObject):
