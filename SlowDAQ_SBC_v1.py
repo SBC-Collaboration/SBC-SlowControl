@@ -2461,30 +2461,6 @@ class Camera(QtWidgets.QWidget):
         self.Air.Label.setText("Air")
         self.HL.addWidget(self.Air)
 
-
-# Class to read PPLC value every 2 sec
-# class UpdatePPLC(QtCore.QObject):
-#     def __init__(self, PPLC, parent=None):
-#         super().__init__(parent)
-#
-#         self.PPLC = PPLC
-#         self.Running = False
-#
-#     @QtCore.Slot()
-#     def run(self):
-#         self.Running = True
-#
-#         while self.Running:
-#         # for i in range(4):
-#             print("PPLC updating", datetime.datetime.now())
-#             self.PPLC.ReadAll()
-#             time.sleep(2)
-#
-#     @QtCore.Slot()
-#     def stop(self):
-#         self.Running = False
-
-
 # Class to read PPLC value every 2 sec
 class UpdatePPLC(QtCore.QObject):
     def __init__(self, PPLC, parent=None):
@@ -2551,13 +2527,11 @@ class UpdateDisplay(QtCore.QObject):
         self.Running = True
         while self.Running:
 
-            # print("TPLC updating", datetime.datetime.now())
-            # print(self.MW.T.RTD)
-            # print(2, self.MW.T.RTD[2])
-            # for i in range(0.6):
-            #     print(i, self.MW.T.RTD[i])
-
-
+            print("TPLC updating", datetime.datetime.now())
+            print(self.MW.T.RTD)
+            print(2, self.MW.T.RTD[2])
+            for i in range(0.6):
+                print(i, self.MW.T.RTD[i])
 
             if self.MW.T.NewData:
 
