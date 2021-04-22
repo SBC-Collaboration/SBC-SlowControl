@@ -839,12 +839,13 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def StopUpdater(self):
         self.UpPPLC.stop()
+        self.PUpdateThread.quit()
+        self.PUpdateThread.wait()
         self.UpTPLC.stop()
         self.TUpdateThread.quit()
         self.TUpdateThread.wait()
 
-        self.PUpdateThread.quit()
-        self.PUpdateThread.wait()
+
         self.UpDisplay.stop()
         self.DUpdateThread.quit()
         self.DUpdateThread.wait()

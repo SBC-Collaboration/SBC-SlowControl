@@ -9,8 +9,9 @@ from PySide2 import QtWidgets, QtCore, QtGui
 
 
 from Update_session import *
-from TPLC_v1 import TPLC
+
 from PPLC_v1 import PPLC
+from TPLC_v1 import TPLC
 from PICOPW import VerifyPW
 
 from SlowDAQWidgets_SBC_v1 import *
@@ -34,14 +35,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         # Read PPLC value on another thread
-        self.PUpdateThread = QtCore.QThread(parent=self)
+        self.PUpdateThread = None
+        self.PUpdateThread = QtCore.QThread()
         self.UpPPLC = UpdatePPLC(self.P)
         self.UpPPLC.moveToThread(self.PUpdateThread)
         self.PUpdateThread.started.connect(self.UpPPLC.run)
         self.PUpdateThread.start()
 
         # Read TPLC value on another thread
-        self.TUpdateThread = QtCore.QThread(parent=self)
+        self.TUpdateThread = None
+        self.TUpdateThread = QtCore.QThread()
         self.UpTPLC = UpdateTPLC(self.T)
         self.UpTPLC.moveToThread(self.TUpdateThread)
         self.TUpdateThread.started.connect(self.UpTPLC.run)
@@ -120,3 +123,4 @@ if __name__ == "__main__":
     else:
         MW.show()
     MW.activateWindow()
+    sys.exit(App.exec_())
