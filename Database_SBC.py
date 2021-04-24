@@ -4,6 +4,12 @@ import random
 # import pandas as pds
 # import matplotlib as plot
 
+
+def datetime_in_s():
+    d=datetime.datetime.now()
+    x=d-datetime.timedelta(micorseconds=d.microsecond)
+    return x
+
 class mydatabase():
     def __init__(self):
         # db=mysql.connector.connect()
@@ -36,9 +42,9 @@ class mydatabase():
     def insert_data_into_datastorage(self,id, instrument, timestamp,value):
         #time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss) value is a decimal from -9999.999 to 9999.999
         #name must be consistent with P&ID
-        data=(id,instrument, timestamp,value)
+        data=(instrument, timestamp,value)
         self.mycursor.execute(
-            "INSERT INTO DataStorage VALUES(%s, %s, %s, %s);", data)
+            "INSERT INTO DataStorage VALUES(%s, %s, %s);", data)
         self.db.commit()
 
     def insert_data_into_metadata(self,instrument, Description,Unit):
@@ -85,11 +91,11 @@ class mydatabase():
 
 if __name__ == "__main__":
     db = mydatabase()
-    dt = datetime.datetime.now()
-    unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
+    dt = datetime_in_s()
+    # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
     print(dt)
-    print(unix_timestamp)
-    db.insert_data_into_datastorage(2,"test",unix_timestamp,500.55)
+    # print(unix_timestamp)
+    db.insert_data_into_datastorage("test",dt,500.55)
     db.show_data_datastorage()
 
     # db.create_table("PV1204")
