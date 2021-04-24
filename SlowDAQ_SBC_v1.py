@@ -2520,28 +2520,28 @@ class UpdateDisplay(QtCore.QObject):
         
         self.MW = MW
         self.Running = False
-        print("begin updating PLC")
     
     @QtCore.Slot()
     def run(self):
         self.Running = True
         while self.Running:
 
-            print("TPLC updating", datetime.datetime.now())
-            print(self.MW.T.RTD)
-            print(2, self.MW.T.RTD[2])
-            for i in range(0.6):
-                print(i, self.MW.T.RTD[i])
+            print("Display updating", datetime.datetime.now())
+            # print(self.MW.T.RTD)
+            # print(2, self.MW.T.RTD[2])
+            # for i in range(0,6):
+            #     print(i, self.MW.T.RTD[i])
+            print(self.MW.T.NewData)
 
-            if self.MW.T.NewData:
+            # if self.MW.T.NewData:
 
-                self.MW.TT2111.SetValue(self.MW.T.RTD[0])
-                self.MW.TT2112.SetValue(self.MW.T.RTD[1])
-                self.MW.TT2113.SetValue(self.MW.T.RTD[2])
-                self.MW.TT2114.SetValue(self.MW.T.RTD[3])
-                self.MW.TT2115.SetValue(self.MW.T.RTD[4])
-                self.MW.TT2116.SetValue(self.MW.T.RTD[5])
-                self.MW.TT2117.SetValue(self.MW.T.RTD[6])
+                # self.MW.TT2111.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2112.SetValue(self.MW.T.RTD[1])
+                # self.MW.TT2113.SetValue(self.MW.T.RTD[2])
+                # self.MW.TT2114.SetValue(self.MW.T.RTD[3])
+                # self.MW.TT2115.SetValue(self.MW.T.RTD[4])
+                # self.MW.TT2116.SetValue(self.MW.T.RTD[5])
+                # self.MW.TT2117.SetValue(self.MW.T.RTD[6])
 
                 # self.MW.TT2118.SetValue(self.MW.T.RTD[0])
                 # self.MW.TT2119.SetValue(self.MW.T.RTD[0])
@@ -2644,17 +2644,17 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.TPLCOnlineW.ResetAlarm()
                 #     self.MW.TPLCLiveCounter = self.MW.T.LiveCounter
                       
-                self.MW.T.NewData = False 
+                # self.MW.T.NewData = False
 
-            if self.MW.P.NewData:
-                print("PPLC updating", datetime.datetime.now())
+            # if self.MW.P.NewData:
+            #     print("PPLC updating", datetime.datetime.now())
 
-                self.MW.PT4306.SetValue(self.MW.P.PT[0])
-                self.MW.PT4315.SetValue(self.MW.P.PT[1])
-                self.MW.PT4319.SetValue(self.MW.P.PT[2])
-                self.MW.PT4322.SetValue(self.MW.P.PT[3])
-                self.MW.PT4325.SetValue(self.MW.P.PT[4])
-                self.MW.PT6302.SetValue(self.MW.P.PT[5])
+                # self.MW.PT4306.SetValue(self.MW.P.PT[0])
+                # self.MW.PT4315.SetValue(self.MW.P.PT[1])
+                # self.MW.PT4319.SetValue(self.MW.P.PT[2])
+                # self.MW.PT4322.SetValue(self.MW.P.PT[3])
+                # self.MW.PT4325.SetValue(self.MW.P.PT[4])
+                # self.MW.PT6302.SetValue(self.MW.P.PT[5])
                 # self.MW.PT4330.SetValue(self.MW.P.PT1)
                 # self.MW.PT2316.SetValue(self.MW.P.PT1)
                 # self.MW.PT2330.SetValue(self.MW.P.PT1)
@@ -2679,7 +2679,7 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.PPLCOnline.ResetAlarm()
                 #     self.MW.PPLCLiveCounter = self.MW.P.LiveCounter
 
-                self.MW.P.NewData = False  
+                # self.MW.P.NewData = False
                 
             # Check if alarm values are met and set them
                 
