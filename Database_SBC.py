@@ -7,7 +7,7 @@ import random
 
 def datetime_in_s():
     d=datetime.datetime.now()
-    x=d-datetime.timedelta(micorseconds=d.microsecond)
+    x=d-datetime.timedelta(microseconds=d.microsecond)
     return x
 
 class mydatabase():
@@ -39,12 +39,12 @@ class mydatabase():
         result = self.mycursor.fetchall()
         print(result)
 
-    def insert_data_into_datastorage(self,id, instrument, timestamp,value):
+    def insert_data_into_datastorage(self,instrument, time,value):
         #time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss) value is a decimal from -9999.999 to 9999.999
         #name must be consistent with P&ID
-        data=(instrument, timestamp,value)
+        data=(instrument, time,value)
         self.mycursor.execute(
-            "INSERT INTO DataStorage VALUES(%s, %s, %s);", data)
+            "INSERT INTO DataStorage (Instrument, Time, Value) VALUES(%s, %s, %s);", data)
         self.db.commit()
 
     def insert_data_into_metadata(self,instrument, Description,Unit):

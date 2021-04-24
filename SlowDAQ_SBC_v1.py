@@ -14,6 +14,7 @@ import sys
 import time
 import platform
 import datetime
+import random
 
 from PySide2 import QtWidgets, QtCore, QtGui
 
@@ -22,6 +23,7 @@ from SlowDAQ_SBC_v1 import *
 from TPLC_v1 import TPLC
 from PPLC_v1 import PPLC
 from PICOPW import VerifyPW
+from Database_SBC import *
 
 from SlowDAQWidgets_SBC_v1 import *
 # from SlowDAQ.SlowDAQ.SlowDAQWidgets import SingleButton
@@ -834,6 +836,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DUpdateThread.started.connect(self.UpDisplay.run)
         self.DUpdateThread.start()
 
+        #Update database on another thread
+        self.DataUpdateThread = QtCore.QThread()
+        self.UpDatabase= UpdateDataBase(self)
+        self.UpDatabase.moveToThread(self.DataUpdateThread)
+        self.DataUpdateThread.started.connect(self.UpDatabase.run)
+        self.DataUpdateThread .start()
 
     # Stop all updater threads
     @QtCore.Slot()
@@ -849,6 +857,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpDisplay.stop()
         self.DUpdateThread.quit()
         self.DUpdateThread.wait()
+
+        self.UpDatabase.stop()
+        self.DataUpdateThread.quit()
+        self.DataUpdateThread.wait()
 
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()
@@ -1482,7 +1494,6 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.TT2111 = Indicator(self)
         self.TT2111.Label.setText("TT2111")
         self.GL.addWidget(self.TT2111, 0, 0)
-
 
         self.TT2112 = Indicator(self)
         self.TT2112.Label.setText("TT2112")
@@ -2509,8 +2520,35 @@ class UpdateDataBase(QtCore.QObject):
         super().__init__(parent)
 
         self.MW = MW
+        self.db=mydatabase()
         self.Running = False
         print("begin updating Database")
+        self.dt=datetime_in_s()
+
+    @QtCore.Slot()
+    def run(self):
+        self.Running = True
+        while self.Running:
+
+            print("Database Updating", datetime.datetime.now())
+
+
+            if self.MW.T.NewData:
+                print("Wrting TPLC data...")
+                # self.db.insert_data_into_datastorage("TT2111",self.dt,self.MW.T.RTD[0])
+                self.MW.T.NewData = False
+
+            if self.MW.P.NewData:
+                print("Writing PPLC data...")
+                # self.db.insert_data_into_datastorage("PT4325", self.dt, self.MW.P.PT[4])
+                self.MW.P.NewData = False
+
+            time.sleep(4)
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
 
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs           
@@ -2520,7 +2558,7 @@ class UpdateDisplay(QtCore.QObject):
         
         self.MW = MW
         self.Running = False
-    
+
     @QtCore.Slot()
     def run(self):
         self.Running = True
@@ -2528,20 +2566,20 @@ class UpdateDisplay(QtCore.QObject):
 
             print("Display updating", datetime.datetime.now())
             # print(self.MW.T.RTD)
-            # print(2, self.MW.T.RTD[2])
+            # print(3, self.MW.T.RTD[3])
             # for i in range(0,6):
             #     print(i, self.MW.T.RTD[i])
-            print(self.MW.T.NewData)
+            # print(self.MW.T.NewData)
 
-            # if self.MW.T.NewData:
+            if self.MW.T.NewData:
 
-                # self.MW.TT2111.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2112.SetValue(self.MW.T.RTD[1])
-                # self.MW.TT2113.SetValue(self.MW.T.RTD[2])
-                # self.MW.TT2114.SetValue(self.MW.T.RTD[3])
-                # self.MW.TT2115.SetValue(self.MW.T.RTD[4])
-                # self.MW.TT2116.SetValue(self.MW.T.RTD[5])
-                # self.MW.TT2117.SetValue(self.MW.T.RTD[6])
+                self.MW.RTDSET1.StatusWindow.TT2111.SetValue(self.MW.T.RTD[0])
+                self.MW.RTDSET1.StatusWindow.TT2112.SetValue(self.MW.T.RTD[1])
+                self.MW.RTDSET1.StatusWindow.TT2113.SetValue(self.MW.T.RTD[2])
+                self.MW.RTDSET1.StatusWindow.TT2114.SetValue(self.MW.T.RTD[3])
+                self.MW.RTDSET1.StatusWindow.TT2115.SetValue(self.MW.T.RTD[4])
+                self.MW.RTDSET1.StatusWindow.TT2116.SetValue(self.MW.T.RTD[5])
+                self.MW.RTDSET1.StatusWindow.TT2117.SetValue(self.MW.T.RTD[6])
 
                 # self.MW.TT2118.SetValue(self.MW.T.RTD[0])
                 # self.MW.TT2119.SetValue(self.MW.T.RTD[0])
@@ -2644,16 +2682,16 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.TPLCOnlineW.ResetAlarm()
                 #     self.MW.TPLCLiveCounter = self.MW.T.LiveCounter
                       
-                # self.MW.T.NewData = False
+                self.MW.T.NewData = False
 
-            # if self.MW.P.NewData:
+            if self.MW.P.NewData:
             #     print("PPLC updating", datetime.datetime.now())
 
                 # self.MW.PT4306.SetValue(self.MW.P.PT[0])
                 # self.MW.PT4315.SetValue(self.MW.P.PT[1])
                 # self.MW.PT4319.SetValue(self.MW.P.PT[2])
                 # self.MW.PT4322.SetValue(self.MW.P.PT[3])
-                # self.MW.PT4325.SetValue(self.MW.P.PT[4])
+                self.MW.PT4325.SetValue(self.MW.P.PT[4])
                 # self.MW.PT6302.SetValue(self.MW.P.PT[5])
                 # self.MW.PT4330.SetValue(self.MW.P.PT1)
                 # self.MW.PT2316.SetValue(self.MW.P.PT1)
@@ -2679,7 +2717,7 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.PPLCOnline.ResetAlarm()
                 #     self.MW.PPLCLiveCounter = self.MW.P.LiveCounter
 
-                # self.MW.P.NewData = False
+                self.MW.P.NewData = False
                 
             # Check if alarm values are met and set them
                 
