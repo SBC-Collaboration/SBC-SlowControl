@@ -81,7 +81,8 @@ class TPLC:
         # self.WaterPrimingStatus = 0
         # self.BeetleStatus = 0
         self.LiveCounter = 0
-        self.NewData = False
+        self.NewData_Display = False
+        self.NewData_Database = False
 
     def __del__(self):
         self.Client.close()
@@ -187,7 +188,8 @@ class TPLC:
             Raw = self.Client.read_holding_registers(0x3E9, count = 1, unit = 0x01)
             self.LiveCounter = Raw.getRegister(0)
 
-            self.NewData = True
+            self.NewData_Display = True
+            self.NewData_Database = True
 
             return 0
         else:

@@ -2530,18 +2530,17 @@ class UpdateDataBase(QtCore.QObject):
         self.Running = True
         while self.Running:
 
-            print("Database Updating", datetime.datetime.now())
+            print("Database Updating", self.dt)
 
-
-            if self.MW.T.NewData:
+            if self.MW.T.NewData_Database:
                 print("Wrting TPLC data...")
                 # self.db.insert_data_into_datastorage("TT2111",self.dt,self.MW.T.RTD[0])
-                self.MW.T.NewData = False
+                self.MW.T.NewData_Database = False
 
-            if self.MW.P.NewData:
+            if self.MW.P.NewData_Database:
                 print("Writing PPLC data...")
                 # self.db.insert_data_into_datastorage("PT4325", self.dt, self.MW.P.PT[4])
-                self.MW.P.NewData = False
+                self.MW.P.NewData_Database = False
 
             time.sleep(4)
 
@@ -2569,9 +2568,9 @@ class UpdateDisplay(QtCore.QObject):
             # print(3, self.MW.T.RTD[3])
             # for i in range(0,6):
             #     print(i, self.MW.T.RTD[i])
-            # print(self.MW.T.NewData)
 
-            if self.MW.T.NewData:
+
+            if self.MW.T.NewData_Display:
 
                 self.MW.RTDSET1.StatusWindow.TT2111.SetValue(self.MW.T.RTD[0])
                 self.MW.RTDSET1.StatusWindow.TT2112.SetValue(self.MW.T.RTD[1])
@@ -2682,9 +2681,9 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.TPLCOnlineW.ResetAlarm()
                 #     self.MW.TPLCLiveCounter = self.MW.T.LiveCounter
                       
-                self.MW.T.NewData = False
+                self.MW.T.NewData_Display = False
 
-            if self.MW.P.NewData:
+            if self.MW.P.NewData_Display:
             #     print("PPLC updating", datetime.datetime.now())
 
                 # self.MW.PT4306.SetValue(self.MW.P.PT[0])
@@ -2717,7 +2716,7 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.PPLCOnline.ResetAlarm()
                 #     self.MW.PPLCLiveCounter = self.MW.P.LiveCounter
 
-                self.MW.P.NewData = False
+                self.MW.P.NewData_Display = False
                 
             # Check if alarm values are met and set them
                 

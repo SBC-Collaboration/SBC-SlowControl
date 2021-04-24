@@ -72,7 +72,9 @@ class PPLC:
         # self.FFdBellows = 0
         # self.FFEmergency = 0
         self.LiveCounter = 0
-        self.NewData = False
+
+        self.NewData_Display = False
+        self.NewData_Database = False
                     
     def __del__(self):
         self.Client.close()
@@ -188,8 +190,9 @@ class PPLC:
             self.LiveCounter = Raw.getRegister(0)
             # Raw = self.Client.read_holding_registers(0x46A, count = 1, unit = 0x01)
             # self.LiveCounter = Raw.getRegister(0)
+            self.NewData_Display = True
+            self.NewData_Database = True
 
-            self.NewData = True
 
             return 0
         else:
