@@ -28,7 +28,9 @@ class TPLC:
         print("TPLC connected: " + str(self.Connected))
 
         self.nRTD = 8
-        self.RTD =  [0.] * self.nRTD 
+        self.RTD =  [0.] * self.nRTD
+        self.RTD_setting=[0.] * self.nRTD
+        self.nAttribute= [0.] * self.nRTD
         # self.PT80 = 0.
         # self.FlowValve = 0.
         # self.BottomChillerSetpoint = 0.
@@ -91,11 +93,16 @@ class TPLC:
         if self.Connected:
             # Reading all the RTDs
             Raw = self.Client.read_holding_registers(38000, count = self.nRTD * 2, unit = 0x01)
-                      
+            # RTD_setting = self.Client.read_holding_registers(18002, count=1, unit=0x01)
             for i in range(0, self.nRTD):
                 self.RTD[i] = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
+                print("Updating TPLC", i, "RTD",self.RTD[i])
 
-                print("Updating TPLC", i, self.RTD[i])
+            Attribute = [0.] * self.nRTD
+            for i in range(0,self.nRTD):
+                Attribute[i]=self.Client.read_holding_registers(18000+i*8, count=1, unit=0x01)
+                self.nAttribute[i]=hex(Attribute[i].getRegister(0))
+            print("Attributes", self.nAttribute)
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
