@@ -2523,23 +2523,25 @@ class UpdateDataBase(QtCore.QObject):
         self.db=mydatabase()
         self.Running = False
         print("begin updating Database")
-        self.dt=datetime_in_s()
+
 
     @QtCore.Slot()
     def run(self):
         self.Running = True
         while self.Running:
 
+
+            self.dt = datetime_in_s()
             print("Database Updating", self.dt)
 
             if self.MW.T.NewData_Database:
                 print("Wrting TPLC data...")
-                # self.db.insert_data_into_datastorage("TT2111",self.dt,self.MW.T.RTD[0])
+                self.db.insert_data_into_datastorage("TT2111",self.dt,self.MW.T.RTD[0])
                 self.MW.T.NewData_Database = False
 
             if self.MW.P.NewData_Database:
                 print("Writing PPLC data...")
-                # self.db.insert_data_into_datastorage("PT4325", self.dt, self.MW.P.PT[4])
+                self.db.insert_data_into_datastorage("PT4325", self.dt, self.MW.P.PT[4])
                 self.MW.P.NewData_Database = False
 
             time.sleep(4)
