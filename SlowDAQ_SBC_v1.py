@@ -2734,12 +2734,12 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.P.NewData_Display = False
                 
             # Check if alarm values are met and set them
-            self.MW.AlarmButton.StatusWindow.TT4330.CheckAlarm
-            self.MW.AlarmButton.StatusWindow.PT4306.CheckAlarm
-            self.MW.AlarmButton.StatusWindow.PT4315.CheckAlarm
-            self.MW.AlarmButton.StatusWindow.PT4319.CheckAlarm
-            self.MW.AlarmButton.StatusWindow.PT4322.CheckAlarm
-            self.MW.AlarmButton.StatusWindow.PT4325.CheckAlarm
+            self.MW.AlarmButton.StatusWindow.TT4330.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT4306.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT4315.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT4319.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT4322.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT4325.CheckAlarm()
             # # rewrite collectalarm in updatedisplay
             self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.StatusWindow.TT4330, self.MW.AlarmButton.StatusWindow.PT4306,
                                              self.MW.AlarmButton.StatusWindow.PT4315, self.MW.AlarmButton.StatusWindow.PT4319,
