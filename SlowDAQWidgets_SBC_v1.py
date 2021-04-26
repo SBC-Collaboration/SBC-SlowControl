@@ -76,16 +76,16 @@ class ColoredStatus(QtWidgets.QWidget):
         self.Label.setStyleSheet(FONT)
 
 
-        self.Field = QtWidgets.QLineEdit(self)
+        self.Field = QtWidgets.QPushButton(self)
         self.Field.setObjectName("Value")
         self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
-        self.Field.setAlignment(QtCore.Qt.AlignCenter)
+
 
         self.Mode=mode
         if self.Mode == 0:
             # mode 0: color is green when active is false and red when active is true
             self.Field.setStyleSheet(
-                "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_RED + "} QWidget[Active = false]{" + C_RED + "}")
+                "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_RED + "} QWidget[Active = false]{" + C_GREEN + "}")
             # mode 1: color is grey when active is false and red when active is true
         elif self.Mode == 1:
             self.Field.setStyleSheet(
