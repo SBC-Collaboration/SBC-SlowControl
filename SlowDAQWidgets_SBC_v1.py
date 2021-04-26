@@ -50,6 +50,67 @@ class PnID_Alone(QtWidgets.QWidget):
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
+
+class ColoredStatus(QtWidgets.QWidget):
+    #Mode number should be set to 1, 2 and 3
+    def __init__(self, parent=None,mode=0):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("ColoredStatus")
+        self.setGeometry(QtCore.QRect(0, 0, 70, 40))
+        self.setMinimumSize(70, 40)
+        self.setSizePolicy(sizePolicy)
+
+        self.Background = QtWidgets.QLabel(self)
+        self.Background.setObjectName("Background")
+        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 40))
+        self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_RADIUS)
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Indicator")
+        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setStyleSheet(FONT)
+
+
+        self.Field = QtWidgets.QLineEdit(self)
+        self.Field.setObjectName("Value")
+        self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.Field.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.Mode=mode
+        if self.Mode == 0:
+            # mode 0: color is green when active is false and red when active is true
+            self.Field.setStyleSheet(
+                "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_RED + "} QWidget[Active = false]{" + C_RED + "}")
+            # mode 1: color is grey when active is false and red when active is true
+        elif self.Mode == 1:
+            self.Field.setStyleSheet(
+                "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_RED + "} QWidget[Active = false]{" + C_MEDIUM_GREY + "}")
+            # mode 1: color is grey when active is false and green when active is true
+        elif self.Mode == 2:
+            self.Field.setStyleSheet(
+                "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_GREEN + "} QWidget[Active = false]{" + C_MEDIUM_GREY + "}")
+        else:
+            print("Please set a mode number to class colorstatus widget!")
+        self.Field.setProperty("Active", False)
+
+    @QtCore.Slot()
+    def UpdateColor(self,active):
+        #active should true or false
+        if active in [True, "true", 1]:
+            self.Field.setProperty("Active", True)
+        elif active in [False, "false", 0]:
+            self.Field.setProperty("Active", False)
+        else:
+            print("variable'active' must be either True or False!")
+        self.Field.setStyle(self.Field.style())
+
+
+
 class ColorIndicator(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -349,8 +410,6 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         else:
             self.Indicator.ResetAlarm()
             self.Alarm = False
-
-
 
 
 class BoolIndicator(QtWidgets.QWidget):

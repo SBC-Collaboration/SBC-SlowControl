@@ -757,11 +757,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmButton = AlarmButton(self)
         self.AlarmButton.StatusWindow.resize(1000, 500)
         self.AlarmButton.StatusWindow.AlarmWindow()
-        # This line is to change the color of button when the subbutton's status changes
-        # self.AlarmButton.StatusWindow.CheckButton.CheckButton.clicked.connect(self.AlarmButton.ButtonAlarmSignal)
+
         self.AlarmButton.move(0, 1300)
         self.AlarmButton.Button.setText("Alarm Button")
-        # self.AlarmButton.StatusWindow.CheckButton.CheckButton.clicked.connect(self.Save)
+
 
         # Set user to guest by default
         self.User = "Guest"
@@ -1119,7 +1118,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def Save(self,dir=None, company="SBC", project="Slowcontrol"):
         # dir is the path storing the ini setting file
         if dir==None:
-            self.settings.setValue("MainWindow/SV4327/ActiveState/ColorNumber", self.SV4327.ActiveState.ColorNumber)
+
             self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",
                                    self.AlarmButton.StatusWindow.TT4330.AlarmMode.isChecked())
             self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",
@@ -1170,9 +1169,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     path= os.path.join(dir,company,project)
                 print(path)
                 self.customsettings = QtCore.QSettings(path, QtCore.QSettings.IniFormat)
-                self.customsettings.setValue("MainWindow/SV4327/ActiveState/ColorNumber",
-                                             self.SV4327.ActiveState.ColorNumber)
-                self.customsettings.setValue("MainWindow/SV4327/ActiveState/ColorNumber", self.SV4327.ActiveState.ColorNumber)
+
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",
                                    self.AlarmButton.StatusWindow.TT4330.AlarmMode.isChecked())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",
@@ -1217,19 +1214,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def Recover(self, address="$HOME/.config//SBC/SlowControl.ini"):
         # address is the ini file 's directory you want to recover
-        #you will need to add condition make sure the first time the code runs successfully
-        #Because the first time it runs, all value in the settings addresss are NULL/None
-        if self.settings.value("MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox")==None:
-            pass
-        else:
+
+        try:
             # default recover. If no other address is claimed, then recover settings from default directory
             if address == "$HOME/.config//SBC/SlowControl.ini":
-                # you need to uncomment the registry related to Colornumber. Colornumber should be read directly from PLC
-                print(self.settings.value("MainWindow/SV4327/ActiveState/ColorNumber"))
-                print("Recovering")
-                self.SV4327.ActiveState.setColorNumber(self.settings.value("MainWindow/SV4327/ActiveState/ColorNumber"))
-                self.SV4327.ActiveState.UpdateColor()
-                print(self.SV4327.ActiveState.ColorNumber)
                 self.RecoverChecked(self.AlarmButton.StatusWindow.TT4330,
                                     "MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox")
                 self.RecoverChecked(self.AlarmButton.StatusWindow.PT4306,
@@ -1339,6 +1327,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
                 except:
                     print("Wrong Path to recover")
+        except:
+            print("1st time run the code in this environment. "
+                  "Nothing to recover the settings. Please save the configuration to a ini file")
+            pass
 
     def RecoverChecked(self, GUIid, subdir, loadedsettings=None):
         # add a function because you can not directly set check status to checkbox
@@ -2061,15 +2053,15 @@ class MultiStatusIndicator(QtWidgets.QWidget):
         self.HL.setContentsMargins(0, 0, 0, 0)
         self.VL.addLayout(self.HL)
 
-        self.Interlock= ColorIndicator(self)
+        self.Interlock= ColoredStatus(self,2)
         self.Interlock.Label.setText("INTLKD")
         self.HL.addWidget(self.Interlock)
 
-        self.Manual = ColorIndicator(self)
+        self.Manual = ColoredStatus(self, 2)
         self.Manual.Label.setText("MAN")
         self.HL.addWidget(self.Manual)
 
-        self.Error = ColorIndicator(self)
+        self.Error = ColoredStatus(self,1)
         self.Error.Label.setText("ERR")
         self.HL.addWidget(self.Error)
 
@@ -2108,7 +2100,6 @@ class AlarmButton(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def ButtonAlarmSignal(self):
-        #check ? require another status recording the total status of alarm ie OR all alarm signals
         self.Button.setProperty("Alarm", self.Button.Alarm)
         self.Button.setStyle(self.Button.style())
 
@@ -2413,7 +2404,7 @@ class AOMutiLoopExpand(QtWidgets.QWidget):
 
 # Defines a reusable layout containing widget
 class Valve(QtWidgets.QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, mode=0):
         super().__init__(parent)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -2440,7 +2431,8 @@ class Valve(QtWidgets.QWidget):
         self.Set.RButton.setText("close")
         self.HL.addWidget(self.Set)
 
-        self.ActiveState = ColorIndicator(self)
+        self.ActiveState = ColoredStatus(self,mode)
+        # self.ActiveState = ColorIndicator(self) for test the function
         self.ActiveState.Label.setText("Active Status")
         self.HL.addWidget(self.ActiveState)
 
