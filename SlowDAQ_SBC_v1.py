@@ -758,10 +758,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmButton.StatusWindow.resize(1000, 500)
         self.AlarmButton.StatusWindow.AlarmWindow()
         # This line is to change the color of button when the subbutton's status changes
-        self.AlarmButton.StatusWindow.CheckButton.CheckButton.clicked.connect(self.AlarmButton.ButtonAlarmSignal)
+        # self.AlarmButton.StatusWindow.CheckButton.CheckButton.clicked.connect(self.AlarmButton.ButtonAlarmSignal)
         self.AlarmButton.move(0, 1300)
         self.AlarmButton.Button.setText("Alarm Button")
-        self.AlarmButton.StatusWindow.CheckButton.CheckButton.clicked.connect(self.Save)
+        # self.AlarmButton.StatusWindow.CheckButton.CheckButton.clicked.connect(self.Save)
 
         # Set user to guest by default
         self.User = "Guest"
@@ -1892,17 +1892,20 @@ class StatusWindow(QtWidgets.QMainWindow):
             if (i, j) == (i_PT_last, j_PT_last):
                 break
 
-        self.CheckButton = CheckButton(self)
-        self.CheckButton.move(1200, 100)
-        self.CheckButton.CheckButton.clicked.connect(self.TT4330.CheckAlarm)
-        self.CheckButton.CheckButton.clicked.connect(self.PT4306.CheckAlarm)
-        self.CheckButton.CheckButton.clicked.connect(self.PT4315.CheckAlarm)
-        self.CheckButton.CheckButton.clicked.connect(self.PT4319.CheckAlarm)
-        self.CheckButton.CheckButton.clicked.connect(self.PT4322.CheckAlarm)
-        self.CheckButton.CheckButton.clicked.connect(self.PT4325.CheckAlarm)
-        self.CheckButton.CheckButton.clicked.connect(lambda x:
-            self.CheckButton.CollectAlarm(self.TT4330, self.PT4306, self.PT4315, self.PT4319, self.PT4322, self.PT4325))
-        self.CheckButton.CheckButton.clicked.connect(self.ReassignOrder)
+        # self.CheckButton = CheckButton(self)
+        # self.CheckButton.move(1200, 100)
+        #change it to self.TT.checkalarm
+        # self.CheckButton.CheckButton.clicked.connect(self.TT4330.CheckAlarm)
+        # self.CheckButton.CheckButton.clicked.connect(self.PT4306.CheckAlarm)
+        # self.CheckButton.CheckButton.clicked.connect(self.PT4315.CheckAlarm)
+        # self.CheckButton.CheckButton.clicked.connect(self.PT4319.CheckAlarm)
+        # self.CheckButton.CheckButton.clicked.connect(self.PT4322.CheckAlarm)
+        # self.CheckButton.CheckButton.clicked.connect(self.PT4325.CheckAlarm)
+        #rewrite collectalarm in updatedisplay
+        # self.CheckButton.CheckButton.clicked.connect(lambda x:
+        #     self.CheckButton.CollectAlarm(self.TT4330, self.PT4306, self.PT4315, self.PT4319, self.PT4322, self.PT4325))
+        #generally checkbutton.clicked -> move to updatedisplay
+        # self.CheckButton.CheckButton.clicked.connect(self.ReassignOrder)
 
 
     @QtCore.Slot()
@@ -2095,6 +2098,7 @@ class AlarmButton(QtWidgets.QWidget):
             "QWidget{" + LABEL_STYLE + "} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} QWidget[Alarm = false]{ background-color: rgb(204,204,204);}")
 
         self.Button.setProperty("Alarm", False)
+        self.Button.Alarm=False
         self.Button.clicked.connect(self.ButtonClicked)
 
     @QtCore.Slot()
@@ -2104,8 +2108,17 @@ class AlarmButton(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def ButtonAlarmSignal(self):
-        self.Button.setProperty("Alarm", self.StatusWindow.CheckButton.CheckButton.Alarm)
+        #check ? require another status recording the total status of alarm ie OR all alarm signals
+        self.Button.setProperty("Alarm", self.Button.Alarm)
         self.Button.setStyle(self.Button.style())
+
+    @QtCore.Slot()
+    def CollectAlarm(self, *args):
+        self.Collected = False
+        for i in range(len(args)):
+            # calculate collected alarm status
+            self.Collected = self.Collected or args[i].Alarm
+        self.Button.Alarm = self.Collected
 
 #Define a function tab that shows the status of the widgets
 class FunctionButton(QtWidgets.QWidget):
@@ -2721,6 +2734,19 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.P.NewData_Display = False
                 
             # Check if alarm values are met and set them
+            self.MW.AlarmButton.StatusWindow.TT4330.CheckAlarm
+            self.MW.AlarmButton.StatusWindow.PT4306.CheckAlarm
+            self.MW.AlarmButton.StatusWindow.PT4315.CheckAlarm
+            self.MW.AlarmButton.StatusWindow.PT4319.CheckAlarm
+            self.MW.AlarmButton.StatusWindow.PT4322.CheckAlarm
+            self.MW.AlarmButton.StatusWindow.PT4325.CheckAlarm
+            # # rewrite collectalarm in updatedisplay
+            self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.StatusWindow.TT4330, self.MW.AlarmButton.StatusWindow.PT4306,
+                                             self.MW.AlarmButton.StatusWindow.PT4315, self.MW.AlarmButton.StatusWindow.PT4319,
+                                             self.MW.AlarmButton.StatusWindow.PT4322, self.MW.AlarmButton.StatusWindow.PT4325)
+            self.MW.AlarmButton.ButtonAlarmSignal()
+            # # generally checkbutton.clicked -> move to updatedisplay
+            self.MW.AlarmButton.StatusWindow.ReassignOrder()
                 
             # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
             #     self.MW.PT1.SetAlarm()

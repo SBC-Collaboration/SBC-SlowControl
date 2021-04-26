@@ -81,7 +81,7 @@ class PPLC:
         
     def ReadAll(self):
         if self.Connected:
-            #somehow count maximam value=10, PTs number =5
+            #somehow count maximam value=8, PTs number =8
 
             Raw = self.Client.read_holding_registers(37000, count=2*self.nPT, unit=0x01)
 
