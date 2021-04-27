@@ -35,7 +35,7 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-fam
 ADMIN_TIMER = 30000
 PLOTTING_SCALE = 0.66
 ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bdf133e9e2c98ad4eafc622f4f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f136766831c12bff0da3a2314ca2266"
-
+BORDER_STYLE ="border-style: outset; border-width: 2px; border-radius: 6px; border-color: black;"
 # Main class
 #This is designed for linux system
 class MainWindow(QtWidgets.QMainWindow):
@@ -1427,12 +1427,15 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.Widget = QtWidgets.QWidget(self)
         self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
 
+
+
     def thermosyphon(self):
         #reset the size of the window
         self.setMinimumSize(1000, 500)
         self.resize(1000, 500)
         self.setWindowTitle("Thermosyphon Status Window")
         self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
+
 
         #set gridlayout
         self.GL = QtWidgets.QGridLayout()
@@ -1529,6 +1532,7 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.resize(1000, 500)
         self.setWindowTitle("RTD SET 2")
         self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
+
 
         # set gridlayout
         self.GL = QtWidgets.QGridLayout()
@@ -1670,6 +1674,8 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.GroupBox = QtWidgets.QGroupBox(self.Widget)
         self.GroupBox.setTitle("RTD SET2")
         self.GroupBox.setLayout(self.GL)
+        self.GroupBox.setStyleSheet("background-color:transparent;")
+
 
     def RTDset3(self):
         # reset the size of the window
@@ -2044,7 +2050,7 @@ class MultiStatusIndicator(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(10, 10))
-        self.Label.setStyleSheet(TITLE_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -2229,7 +2235,7 @@ class HeaterExpand(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(30, 30))
-        self.Label.setStyleSheet(TITLE_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -2298,7 +2304,7 @@ class AOMultiLoop(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QPushButton(self)
         self.Label.setMinimumSize(QtCore.QSize(30, 30))
-        self.Label.setStyleSheet(TITLE_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
@@ -2344,7 +2350,7 @@ class AOMutiLoopExpand(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(30, 30))
-        self.Label.setStyleSheet(TITLE_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -2416,7 +2422,7 @@ class Valve(QtWidgets.QWidget):
         self.Label = QtWidgets.QLabel(self)
         # self.Label.setMinimumSize(QtCore.QSize(30, 30))
         self.Label.setMinimumSize(QtCore.QSize(10, 10))
-        self.Label.setStyleSheet(TITLE_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -2540,12 +2546,12 @@ class UpdateDataBase(QtCore.QObject):
             print("Database Updating", self.dt)
 
             if self.MW.T.NewData_Database:
-                print("Wrting TPLC data...")
+                print("Wrting TPLC data to database...")
                 self.db.insert_data_into_datastorage("TT2111",self.dt,self.MW.T.RTD[0])
                 self.MW.T.NewData_Database = False
 
             if self.MW.P.NewData_Database:
-                print("Writing PPLC data...")
+                print("Writing PPLC data to database...")
                 self.db.insert_data_into_datastorage("PT4325", self.dt, self.MW.P.PT[4])
                 self.MW.P.NewData_Database = False
 
