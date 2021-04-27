@@ -26,7 +26,7 @@ from PICOPW import VerifyPW
 from Database_SBC import *
 
 from SlowDAQWidgets_SBC_v1 import *
-# from SlowDAQ.SlowDAQ.SlowDAQWidgets import SingleButton
+
 
 VERSION = "v0.1.3"
 SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; font-size: 14px; font-weight: bold;"
