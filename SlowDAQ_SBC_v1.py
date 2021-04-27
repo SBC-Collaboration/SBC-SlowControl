@@ -753,6 +753,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SaveSettings.move(700,50)
         self.SaveSettings.SaveFileButton.clicked.connect(lambda x: self.Save(dir=self.SaveSettings.Head,project=self.SaveSettings.Tail))
 
+        self.Datacheck=QtWidgets.QCheckBox(self.DatanSignalTab)
+        self.Datacheck.move(800,50)
+        self.Datacheck.setText("Clone data into sbc slowcontrol database")
+
         #Alarm button
         self.AlarmButton = AlarmButton(self)
         self.AlarmButton.StatusWindow.resize(1000, 500)
@@ -1426,8 +1430,6 @@ class StatusWindow(QtWidgets.QMainWindow):
         # self.Widget = QtWidgets.QWidget()
         self.Widget = QtWidgets.QWidget(self)
         self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
-
-
 
     def thermosyphon(self):
         #reset the size of the window
@@ -2540,20 +2542,22 @@ class UpdateDataBase(QtCore.QObject):
     def run(self):
         self.Running = True
         while self.Running:
+            if self.MW.Datacheck.isChecked()==True:
+                self.dt = datetime_in_s()
+                print("Database Updating", self.dt)
 
+                if self.MW.T.NewData_Database:
+                    print("Wrting TPLC data to database...")
+                    self.db.insert_data_into_datastorage("TT2111",self.dt,self.MW.T.RTD[0])
+                    self.MW.T.NewData_Database = False
 
-            self.dt = datetime_in_s()
-            print("Database Updating", self.dt)
-
-            if self.MW.T.NewData_Database:
-                print("Wrting TPLC data to database...")
-                self.db.insert_data_into_datastorage("TT2111",self.dt,self.MW.T.RTD[0])
-                self.MW.T.NewData_Database = False
-
-            if self.MW.P.NewData_Database:
-                print("Writing PPLC data to database...")
-                self.db.insert_data_into_datastorage("PT4325", self.dt, self.MW.P.PT[4])
-                self.MW.P.NewData_Database = False
+                if self.MW.P.NewData_Database:
+                    print("Writing PPLC data to database...")
+                    self.db.insert_data_into_datastorage("PT4325", self.dt, self.MW.P.PT[4])
+                    self.MW.P.NewData_Database = False
+            else:
+                print("Database Updating stopps.")
+                pass
 
             time.sleep(4)
 
