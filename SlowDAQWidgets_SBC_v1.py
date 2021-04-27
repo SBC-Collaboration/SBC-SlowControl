@@ -76,16 +76,16 @@ class ColoredStatus(QtWidgets.QWidget):
         self.Label.setStyleSheet(FONT)
 
 
-        self.Field = QtWidgets.QLineEdit(self)
+        self.Field = QtWidgets.QPushButton(self)
         self.Field.setObjectName("Value")
         self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
-        self.Field.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Field.setAlignment(QtCore.Qt.AlignCenter)
 
         self.Mode=mode
         if self.Mode == 0:
             # mode 0: color is green when active is false and red when active is true
             self.Field.setStyleSheet(
-                "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_RED + "} QWidget[Active = false]{" + C_RED + "}")
+                "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_RED + "} QWidget[Active = false]{" + C_GREEN + "}")
             # mode 1: color is grey when active is false and red when active is true
         elif self.Mode == 1:
             self.Field.setStyleSheet(
@@ -206,8 +206,7 @@ class SetPoint(QtWidgets.QWidget):
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setObjectName("Value")
         self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
-        self.Field.setStyleSheet(
-            "QWidget{" + BORDER_RADIUS + C_BLACK + FONT + "} QWidget[Alarm = true]{" + C_ORANGE + "} QWidget[Alarm = false]{" + C_MEDIUM_GREY + "}")
+        self.Field.setStyleSheet(BORDER_RADIUS + C_BLACK + FONT)
         self.Field.editingFinished.connect(self.UpdateValue)
         self.Value = 0
         self.Field.setText(str(self.Value))
@@ -472,6 +471,7 @@ class Indicator(QtWidgets.QWidget):
         self.Background.setObjectName("Background")
         self.Background.setGeometry(QtCore.QRect(0, 0, 70, 40))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_RADIUS)
+
         
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")

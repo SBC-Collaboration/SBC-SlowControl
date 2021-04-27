@@ -89,7 +89,7 @@ class PPLC:
                 self.PT[i] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
 
-                print("Updating PPLC",i,self.PT[i])
+                # print("Updating PPLC",i,self.PT[i])
             # print(Raw)
             # print(Raw.registers)
 
