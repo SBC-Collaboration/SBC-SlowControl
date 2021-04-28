@@ -754,8 +754,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SaveSettings.SaveFileButton.clicked.connect(lambda x: self.Save(dir=self.SaveSettings.Head,project=self.SaveSettings.Tail))
 
         self.Datacheck=QtWidgets.QCheckBox(self.DatanSignalTab)
-        self.Datacheck.move(800,50)
+        self.Datacheck.move(800,150)
         self.Datacheck.setText("Clone data into sbc slowcontrol database")
+        self.Datacheck.setStyleSheet("color:white;")
 
         #Alarm button
         self.AlarmButton = AlarmButton(self)
@@ -764,7 +765,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.AlarmButton.move(0, 1300)
         self.AlarmButton.Button.setText("Alarm Button")
-
 
         # Set user to guest by default
         self.User = "Guest"
