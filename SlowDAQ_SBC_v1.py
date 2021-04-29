@@ -18,7 +18,6 @@ import random
 
 from PySide2 import QtWidgets, QtCore, QtGui
 
-
 from SlowDAQ_SBC_v1 import *
 from TPLC_v1 import TPLC
 from PPLC_v1 import PPLC
@@ -27,34 +26,41 @@ from Database_SBC import *
 
 from SlowDAQWidgets_SBC_v1 import *
 
-
 VERSION = "v0.1.3"
-SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; font-size: 14px; font-weight: bold;"
-LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; font-size: 18px; font-weight: bold;"
-TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; font-size: 22px; font-weight: bold;"
+SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
+                    " font-size: 14px;" \
+                    " font-weight: bold;"
+LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; " \
+              "font-size: 18px; font-weight: bold;"
+TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
+              " font-size: 22px; font-weight: bold;"
 ADMIN_TIMER = 30000
 PLOTTING_SCALE = 0.66
-ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bdf133e9e2c98ad4eafc622f4f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f136766831c12bff0da3a2314ca2266"
-BORDER_STYLE ="border-style: outset; border-width: 2px; border-radius: 6px; border-color: black;"
+ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bdf133e9e2c98ad4eafc622f4" \
+                 "f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f1367668" \
+                 "31c12bff0da3a2314ca2266"
+BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px; border-color: black;"
+
+
 # Main class
-#This is designed for linux system
+# This is designed for linux system
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        
+
         # Get background image path
         if '__file__' in globals():
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
         self.ImagePath = os.path.join(self.Path, "images")
-          
+
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        
-        self.resize(2400,1400) #Open at center using resized
-        self.setMinimumSize(2400,1400)
+
+        self.resize(2400, 1400)  # Open at center using resized
+        self.setMinimumSize(2400, 1400)
         self.setWindowTitle("SlowDAQ " + VERSION)
-        self.setWindowIcon(QtGui.QIcon(os.path.join(self.ImagePath,"Logo white_resized.png")))
+        self.setWindowIcon(QtGui.QIcon(os.path.join(self.ImagePath, "Logo white_resized.png")))
 
         # Tabs, backgrounds & labels
 
@@ -62,10 +68,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
         self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
-        self.Tab.setGeometry(QtCore.QRect(0, 0, 2400,1400))
-        
+        self.Tab.setGeometry(QtCore.QRect(0, 0, 2400, 1400))
+
         self.ThermosyphonTab = QtWidgets.QTabWidget(self.Tab)
-        self.Tab.addTab(self.ThermosyphonTab, "Thermosyphon Main Pannel")
+        self.Tab.addTab(self.ThermosyphonTab, "Thermosyphon Main Panel")
 
         self.ThermosyphonTab.Background = QtWidgets.QLabel(self.ThermosyphonTab)
         self.ThermosyphonTab.Background.setScaledContents(True)
@@ -78,7 +84,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ChamberTab = QtWidgets.QWidget()
         self.Tab.addTab(self.ChamberTab, "Inner Chamber Components")
-        
+
         self.ChamberTab.Background = QtWidgets.QLabel(self.ChamberTab)
         self.ChamberTab.Background.setScaledContents(True)
         self.ChamberTab.Background.setStyleSheet('background-color:black;')
@@ -90,7 +96,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.FluidTab = QtWidgets.QWidget()
         self.Tab.addTab(self.FluidTab, "Fluid System")
-        
+
         self.FluidTab.Background = QtWidgets.QLabel(self.FluidTab)
         self.FluidTab.Background.setScaledContents(True)
         self.FluidTab.Background.setStyleSheet('background-color:black;')
@@ -100,19 +106,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.FluidTab.Background.move(0, 0)
         self.FluidTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.FluidTab.Background.setObjectName("FluidBkg")
-
-        # self.XEARPanelTab = QtWidgets.QWidget()
-        # self.Tab.addTab(self.XEARPanelTab, "Xe/Argon Panel")
-        #
-        # self.XEARPanelTab.Background = QtWidgets.QLabel(self.XEARPanelTab)
-        # self.XEARPanelTab.Background.setScaledContents(True)
-        # self.XEARPanelTab.Background.setStyleSheet('background-color:black;')
-        # pixmap_XEAR = QtGui.QPixmap(os.path.join(self.ImagePath, "XeAr_Panel_cryogenic.png"))
-        # pixmap_XEAR = pixmap_XEAR.scaledToWidth(2400)
-        # self.XEARPanelTab.Background.setPixmap(QtGui.QPixmap(pixmap_XEAR))
-        # self.XEARPanelTab.Background.move(0, 0)
-        # self.XEARPanelTab.Background.setAlignment(QtCore.Qt.AlignCenter)
-        # self.XEARPanelTab.Background.setObjectName("XEARBkg")
 
         self.HydraulicTab = QtWidgets.QWidget()
         self.Tab.addTab(self.HydraulicTab, "Hydraulic Apparatus")
@@ -140,8 +133,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DatanSignalTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.DatanSignalTab.Background.setObjectName("DatanSignalBkg")
 
-        #Data saving and recovery
-        #Data setting form is ended with .ini and directory is https://doc.qt.io/archives/qtforpython-5.12/PySide2/QtCore/QSettings.html depending on the System
+        # Data saving and recovery
+        # Data setting form is ended with .ini and directory is https://doc.qt.io/archives/qtforpython-5.12/PySide2/QtCore/QSettings.html depending on the System
         self.settings = QtCore.QSettings("$HOME/.config//SBC/SlowControl.ini", QtCore.QSettings.IniFormat)
 
         # Temperature tab buttons
@@ -149,7 +142,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Tstatus = FunctionButton(self.ThermosyphonTab)
         self.Tstatus.StatusWindow.resize(1000, 1050)
         self.Tstatus.StatusWindow.thermosyphon()
-        self.Tstatus.move(0,0)
+        self.Tstatus.move(0, 0)
         self.Tstatus.Button.setText("Thermosyphon status")
 
         self.LoginT = SingleButton(self.ThermosyphonTab)
@@ -237,9 +230,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4319.move(570, 720)
         self.PT4319.SetUnit(" psi")
 
-        self.PRV4320=PnID_Alone(self.ThermosyphonTab)
+        self.PRV4320 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4320.Label.setText("PRV4320")
-        self.PRV4320.move(570,860)
+        self.PRV4320.move(570, 860)
 
         self.PV4321 = Valve(self.ThermosyphonTab)
         self.PV4321.Label.setText("PV4321")
@@ -362,7 +355,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HT6219.HeaterSubWindow.setWindowTitle("HT6219")
         self.HT6219SUB = HeaterExpand(self.HT6219.HeaterSubWindow)
         self.HT6219SUB.Label.setText("HT6219")
-        self.HT6219SUB.FBSwitch.Combobox.setItemText(0,"PT6220")
+        self.HT6219SUB.FBSwitch.Combobox.setItemText(0, "PT6220")
         self.HT6219SUB.FBSwitch.Combobox.setItemText(1, "EMPTY")
         self.HT6219.HeaterSubWindow.VL.addWidget(self.HT6219SUB)
         self.TT6220 = self.HT6219SUB.RTD1
@@ -488,7 +481,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6412 = self.HT6225SUB.RTD2
         self.TT6412.Label.setText("TT6412")
 
-
         self.HT2123 = Heater(self.ChamberTab)
         self.HT2123.move(670, 820)
         self.HT2123.Label.setText("HT2123")
@@ -579,8 +571,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT7202.Label.setText("TT7202")
 
         self.LI2340 = Indicator(self.FluidTab)
-        self.LI2340 .move(2250, 880)
-        self.LI2340 .Label.setText("LI2340 ")
+        self.LI2340.move(2250, 880)
+        self.LI2340.Label.setText("LI2340 ")
 
         self.PT1101Fluid = Indicator(self.FluidTab)
         self.PT1101Fluid.move(1030, 1300)
@@ -624,7 +616,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV5309.Label.setText("SV5309")
         self.SV5309.move(1130, 310)
 
-        #Hydraulic buttons
+        # Hydraulic buttons
         self.PU3305 = Valve(self.HydraulicTab)
         self.PU3305.Label.setText("PU3305")
         self.PU3305.move(365, 380)
@@ -662,7 +654,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT3311.Label.setText("PT3311")
         self.PT3311.SetUnit(" psi")
 
-        self.HFSV3312 =Valve(self.HydraulicTab)
+        self.HFSV3312 = Valve(self.HydraulicTab)
         self.HFSV3312.Label.setText("HFSV3312")
         self.HFSV3312.move(650, 1030)
 
@@ -744,21 +736,23 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121Hy.Label.setText("PT2121")
         self.PT2121Hy.SetUnit(" psi")
 
-        #Data and Signal Tab
-        self.ReadSettings=Loadfile(self.DatanSignalTab)
-        self.ReadSettings.move(50,50)
-        self.ReadSettings.LoadFileButton.clicked.connect(lambda x: self.Recover(address=self.ReadSettings.FilePath.text()))
+        # Data and Signal Tab
+        self.ReadSettings = Loadfile(self.DatanSignalTab)
+        self.ReadSettings.move(50, 50)
+        self.ReadSettings.LoadFileButton.clicked.connect(
+            lambda x: self.Recover(address=self.ReadSettings.FilePath.text()))
 
-        self.SaveSettings=CustomSave(self.DatanSignalTab)
-        self.SaveSettings.move(700,50)
-        self.SaveSettings.SaveFileButton.clicked.connect(lambda x: self.Save(dir=self.SaveSettings.Head,project=self.SaveSettings.Tail))
+        self.SaveSettings = CustomSave(self.DatanSignalTab)
+        self.SaveSettings.move(700, 50)
+        self.SaveSettings.SaveFileButton.clicked.connect(
+            lambda x: self.Save(directory=self.SaveSettings.Head, project=self.SaveSettings.Tail))
 
-        self.Datacheck=QtWidgets.QCheckBox(self.DatanSignalTab)
-        self.Datacheck.move(800,150)
+        self.Datacheck = QtWidgets.QCheckBox(self.DatanSignalTab)
+        self.Datacheck.move(800, 150)
         self.Datacheck.setText("Clone data into sbc slowcontrol database")
         self.Datacheck.setStyleSheet("color:white;")
 
-        #Alarm button
+        # Alarm button
         self.AlarmButton = AlarmButton(self)
         self.AlarmButton.StatusWindow.resize(1000, 500)
         self.AlarmButton.StatusWindow.AlarmWindow()
@@ -776,7 +770,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Initialize PLC live counters
         self.PPLCLiveCounter = 0
         self.TPLCLiveCounter = 0
-        
+
         # Link signals to slots (toggle type)
         # self.SV4327.Button.clicked.connect(self.SV4327.ButtonClicked)
         # self.SV4327.Signals.sSignal.connect(self.SetSVMode)
@@ -795,7 +789,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HFSV3331.Signals.sSignal.connect(self.SetSVMode)
         self.LoginT.Button.clicked.connect(self.ChangeUser)
         self.LoginP.Button.clicked.connect(self.ChangeUser)
-                
+
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater;
         self.StartUpdater()
@@ -804,7 +798,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # Open connection to both PLCs
         self.P = PPLC()
         self.T = TPLC()
-
 
         # Read PPLC value on another thread
         self.PUpdateThread = QtCore.QThread()
@@ -827,11 +820,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TUpdateThread.started.connect(self.UpTPLC.run)
         self.TUpdateThread.start()
 
-
-
         # Make sure PLCs values are initialized before trying to access them with update function
         time.sleep(2)
-   
+
         # Update display values on another thread
         self.DUpdateThread = QtCore.QThread()
         self.UpDisplay = UpdateDisplay(self)
@@ -839,12 +830,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DUpdateThread.started.connect(self.UpDisplay.run)
         self.DUpdateThread.start()
 
-        #Update database on another thread
+        # Update database on another thread
         self.DataUpdateThread = QtCore.QThread()
-        self.UpDatabase= UpdateDataBase(self)
+        self.UpDatabase = UpdateDataBase(self)
         self.UpDatabase.moveToThread(self.DataUpdateThread)
         self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        self.DataUpdateThread .start()
+        self.DataUpdateThread.start()
 
     # Stop all updater threads
     @QtCore.Slot()
@@ -855,7 +846,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpTPLC.stop()
         self.TUpdateThread.quit()
         self.TUpdateThread.wait()
-
 
         self.UpDisplay.stop()
         self.DUpdateThread.quit()
@@ -881,8 +871,8 @@ class MainWindow(QtWidgets.QMainWindow):
             Dialog.setInputMode(QtWidgets.QInputDialog.TextInput)
             Dialog.setLabelText("Please entre password")
             Dialog.setModal(True)
-            Dialog.setWindowTitle("Login")         
-            Dialog.exec()        
+            Dialog.setWindowTitle("Login")
+            Dialog.exec()
             if Dialog.result():
                 if VerifyPW(ADMIN_PASSWORD, Dialog.textValue()):
                     self.User = "Admin"
@@ -903,209 +893,210 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # Lock/unlock controls
     def ActivateControls(self, Activate):
-            # self.SV4327.Activate(Activate)
-            # self.SV4328.Activate(Activate)
-            # self.SV4329.Activate(Activate)
-            # self.SV4331.Activate(Activate)
-            # self.SV4332.Activate(Activate)
-            # self.SV3307.Activate(Activate)
-            # self.SV3310.Activate(Activate)
-            # self.HFSV3312.Activate(Activate)
-            # self.SV3322.Activate(Activate)
-            # self.HFSV3323.Activate(Activate)
-            # self.SV3325.Activate(Activate)
-            # self.SV3326.Activate(Activate)
-            # self.SV3329.Activate(Activate)
-            # self.HFSV3331.Activate(Activate)
-            return
+        # self.SV4327.Activate(Activate)
+        # self.SV4328.Activate(Activate)
+        # self.SV4329.Activate(Activate)
+        # self.SV4331.Activate(Activate)
+        # self.SV4332.Activate(Activate)
+        # self.SV3307.Activate(Activate)
+        # self.SV3310.Activate(Activate)
+        # self.HFSV3312.Activate(Activate)
+        # self.SV3322.Activate(Activate)
+        # self.HFSV3323.Activate(Activate)
+        # self.SV3325.Activate(Activate)
+        # self.SV3326.Activate(Activate)
+        # self.SV3329.Activate(Activate)
+        # self.HFSV3331.Activate(Activate)
+        return
 
     # This section call the right PLC function when you change a value on the display 
     @QtCore.Slot(str)
-    def SetSVMode(self, Value):
-        self.P.SetSValveMode(Value)
+    def SetSVMode(self, value):
+        self.P.SetSValveMode(value)
 
     @QtCore.Slot(str)
-    def SetHotRegionMode(self, Value):
-        self.T.SetHotRegionPIDMode(Value)
+    def SetHotRegionMode(self, value):
+        self.T.SetHotRegionPIDMode(value)
 
     @QtCore.Slot(float)
-    def SetHotRegionSetpoint(self, Value):
-        self.T.SetHotRegionSetpoint(Value)
+    def SetHotRegionSetpoint(self, value):
+        self.T.SetHotRegionSetpoint(value)
 
     @QtCore.Slot(float)
-    def SetHotRegionP(self, Value):
-        self.T.SetHotRegionP(Value)
+    def SetHotRegionP(self, value):
+        self.T.SetHotRegionP(value)
 
     @QtCore.Slot(float)
-    def SetHotRegionI(self, Value):
-        self.T.SetHotRegionI(Value)
+    def SetHotRegionI(self, value):
+        self.T.SetHotRegionI(value)
 
     @QtCore.Slot(float)
-    def SetHotRegionD(self, Value):
-        self.T.SetHotRegionD(Value)
+    def SetHotRegionD(self, value):
+        self.T.SetHotRegionD(value)
 
     @QtCore.Slot(str)
-    def SetColdRegionMode(self, Value):
-        self.T.SetColdRegionPIDMode(Value)
+    def SetColdRegionMode(self, value):
+        self.T.SetColdRegionPIDMode(value)
 
     @QtCore.Slot(float)
-    def SetColdRegionSetpoint(self, Value):
-        self.T.SetColdRegionSetpoint(Value)
+    def SetColdRegionSetpoint(self, value):
+        self.T.SetColdRegionSetpoint(value)
 
     @QtCore.Slot(float)
-    def SetColdRegionP(self, Value):
-        self.T.SetColdRegionP(Value)
+    def SetColdRegionP(self, value):
+        self.T.SetColdRegionP(value)
 
     @QtCore.Slot(float)
-    def SetColdRegionI(self, Value):
-        self.T.SetColdRegionI(Value)
+    def SetColdRegionI(self, value):
+        self.T.SetColdRegionI(value)
 
     @QtCore.Slot(float)
-    def SetColdRegionD(self, Value):
-        self.T.SetColdRegionD(Value)
+    def SetColdRegionD(self, value):
+        self.T.SetColdRegionD(value)
 
     @QtCore.Slot(float)
-    def SetBottomChillerSetpoint(self, Value):
-        self.T.SetColdRegionD(Value)
+    def SetBottomChillerSetpoint(self, value):
+        self.T.SetColdRegionD(value)
 
     @QtCore.Slot(str)
-    def SetBottomChillerState(self, Value):
-        self.T.SetBottomChillerState(Value)
+    def SetBottomChillerState(self, value):
+        self.T.SetBottomChillerState(value)
 
     @QtCore.Slot(float)
-    def SetTopChillerSetpoint(self, Value):
-        self.T.SetTopChillerSetpoint(Value)
+    def SetTopChillerSetpoint(self, value):
+        self.T.SetTopChillerSetpoint(value)
 
     @QtCore.Slot(str)
-    def SetTopChillerState(self, Value):
-        self.T.SetTopChillerState(Value)
+    def SetTopChillerState(self, value):
+        self.T.SetTopChillerState(value)
 
     @QtCore.Slot(float)
-    def SetCameraChillerSetpoint(self, Value):
-        self.T.SetCameraChillerSetpoint(Value)
+    def SetCameraChillerSetpoint(self, value):
+        self.T.SetCameraChillerSetpoint(value)
 
     @QtCore.Slot(str)
-    def SetCameraChillerState(self, Value):
-        self.T.SetCameraChillerState(Value)
+    def SetCameraChillerState(self, value):
+        self.T.SetCameraChillerState(value)
 
     @QtCore.Slot(str)
-    def SetInnerHeaterState(self, Value):
-        self.T.SetInnerPowerState(Value)
+    def SetInnerHeaterState(self, value):
+        self.T.SetInnerPowerState(value)
 
     @QtCore.Slot(float)
-    def SetInnerHeaterPower(self, Value):
-        self.T.SetInnerPower(Value)
+    def SetInnerHeaterPower(self, value):
+        self.T.SetInnerPower(value)
 
     @QtCore.Slot(str)
-    def SetFreonHeaterState(self, Value):
-        self.T.SetFreonPowerState(Value)
+    def SetFreonHeaterState(self, value):
+        self.T.SetFreonPowerState(value)
 
     @QtCore.Slot(float)
-    def SetFreonHeaterPower(self, Value):
-        self.T.SetFreonPower(Value)
+    def SetFreonHeaterPower(self, value):
+        self.T.SetFreonPower(value)
 
     @QtCore.Slot(str)
-    def SetOuterCloseHeaterState(self, Value):
-        self.T.SetOuterClosePowerState(Value)
+    def SetOuterCloseHeaterState(self, value):
+        self.T.SetOuterClosePowerState(value)
 
     @QtCore.Slot(float)
-    def SetOuterCloseHeaterPower(self, Value):
-        self.T.SetOuterClosePower(Value)
+    def SetOuterCloseHeaterPower(self, value):
+        self.T.SetOuterClosePower(value)
 
     @QtCore.Slot(str)
-    def SetOuterFarHeaterState(self, Value):
-        self.T.SetOuterFarPowerState(Value)
+    def SetOuterFarHeaterState(self, value):
+        self.T.SetOuterFarPowerState(value)
 
     @QtCore.Slot(float)
-    def SetOuterFarHeaterPower(self, Value):
-        self.T.SetOuterFarPower(Value)
+    def SetOuterFarHeaterPower(self, value):
+        self.T.SetOuterFarPower(value)
 
     @QtCore.Slot(float)
-    def SetCoolingFlow(self, Value):
-        self.T.SetFlowValve(Value)
+    def SetCoolingFlow(self, value):
+        self.T.SetFlowValve(value)
 
     @QtCore.Slot(str)
-    def setCartMode(self, Value):
-        if Value == "Auto":
+    def setCartMode(self, value):
+        if value == "Auto":
             self.P.GoIdle()
-        elif Value == "Manual":
+        elif value == "Manual":
             self.P.GoManual()
 
     @QtCore.Slot(float)
-    def SetCartSetpoint(self, Value):
-        self.P.SetPressureSetpoint(Value)
+    def SetCartSetpoint(self, value):
+        self.P.SetPressureSetpoint(value)
 
     @QtCore.Slot(str)
-    def SetCartState(self, Value):
-        if Value == "Compress":
+    def SetCartState(self, value):
+        if value == "Compress":
             self.P.Compress()
-        elif Value == "Expand":
+        elif value == "Expand":
             self.P.Expand()
 
     @QtCore.Slot(float)
-    def SetRegSetpoint(self, Value):
-        self.P.SetAirRegulatorSetpoint(Value)
+    def SetRegSetpoint(self, value):
+        self.P.SetAirRegulatorSetpoint(value)
 
     @QtCore.Slot(str)
-    def SetFast1(self, Value):
-        self.P.SetFastCompressValve1(Value)
+    def SetFast1(self, value):
+        self.P.SetFastCompressValve1(value)
 
     @QtCore.Slot(str)
-    def SetFast2(self, Value):
-        self.P.SetFastCompressValve2(Value)
+    def SetFast2(self, value):
+        self.P.SetFastCompressValve2(value)
 
     @QtCore.Slot(str)
-    def SetFast3(self, Value):
-        self.P.SetFastCompressValve3(Value)
+    def SetFast3(self, value):
+        self.P.SetFastCompressValve3(value)
 
     @QtCore.Slot(str)
-    def SetFreonIn(self, Value):
-        self.P.SetFreonInValve(Value)
+    def SetFreonIn(self, value):
+        self.P.SetFreonInValve(value)
 
     @QtCore.Slot(str)
-    def SetFreonOut(self, Value):
-        self.P.SetFreonOutValve(Value)
+    def SetFreonOut(self, value):
+        self.P.SetFreonOutValve(value)
 
     @QtCore.Slot(str)
-    def SetFast(self, Value):
-        self.P.SetFastCompressValveCart(Value)
+    def SetFast(self, value):
+        self.P.SetFastCompressValveCart(value)
 
     @QtCore.Slot(str)
-    def SetSlow(self, Value):
-        self.P.SetSlowCompressValve(Value)
+    def SetSlow(self, value):
+        self.P.SetSlowCompressValve(value)
 
     @QtCore.Slot(str)
-    def SetExpansion(self, Value):
-        self.P.SetExpansionValve(Value)
+    def SetExpansion(self, value):
+        self.P.SetExpansionValve(value)
 
     @QtCore.Slot(str)
-    def SetOil(self, Value):
-        self.P.SetOilReliefValve(Value)
+    def SetOil(self, value):
+        self.P.SetOilReliefValve(value)
 
     @QtCore.Slot(str)
-    def SetPump(self, Value):
-        self.P.SetPumpState(Value)
+    def SetPump(self, value):
+        self.P.SetPumpState(value)
 
     @QtCore.Slot(str)
-    def SetWaterChillerState(self, Value):
-        self.T.SetWaterChillerState(Value)
+    def SetWaterChillerState(self, value):
+        self.T.SetWaterChillerState(value)
 
     @QtCore.Slot(float)
-    def SetWaterChillerSetpoint(self, Value):
-        self.T.SetWaterChillerSetpoint(Value)
+    def SetWaterChillerSetpoint(self, value):
+        self.T.SetWaterChillerSetpoint(value)
 
     @QtCore.Slot(str)
-    def SetPrimingValve(self, Value):
-        if Value == "Open":
+    def SetPrimingValve(self, value):
+        if value == "Open":
             self.T.SetWaterPrimingPower("On")
-        elif Value == "Close":
+        elif value == "Close":
             self.T.SetWaterPrimingPower("Off")
 
     def closeEvent(self, event):
         self.CloseMessage = QtWidgets.QMessageBox()
         self.CloseMessage.setText("The program is to be closed")
         self.CloseMessage.setInformativeText("Do you want to save the settings?")
-        self.CloseMessage.setStandardButtons(QtWidgets.QMessageBox.Save | QtWidgets.QMessageBox.Discard | QtWidgets.QMessageBox.Cancel)
+        self.CloseMessage.setStandardButtons(
+            QtWidgets.QMessageBox.Save | QtWidgets.QMessageBox.Discard | QtWidgets.QMessageBox.Cancel)
         self.CloseMessage.setDefaultButton(QtWidgets.QMessageBox.Save)
         self.ret = self.CloseMessage.exec_()
         if self.ret == QtWidgets.QMessageBox.Save:
@@ -1119,9 +1110,9 @@ class MainWindow(QtWidgets.QMainWindow):
             print("Some problems with closing windows...")
             pass
 
-    def Save(self,dir=None, company="SBC", project="Slowcontrol"):
+    def Save(self, directory=None, company="SBC", project="Slowcontrol"):
         # dir is the path storing the ini setting file
-        if dir==None:
+        if directory is None:
 
             self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",
                                    self.AlarmButton.StatusWindow.TT4330.AlarmMode.isChecked())
@@ -1164,54 +1155,54 @@ class MainWindow(QtWidgets.QMainWindow):
             print("saving data to Default path: $HOME/.config//SBC/SlowControl.ini")
         else:
             try:
-                #modify the qtsetting default save settings. if the directory is inside a folder named sbc, then save
+                # modify the qtsetting default save settings. if the directory is inside a folder named sbc, then save
                 # the file into the folder. If not, create a folder named sbc and save the file in it.
-                (path_head,path_tail)=os.path.split(dir)
-                if path_tail==company:
-                    path = os.path.join(dir,project)
+                (path_head, path_tail) = os.path.split(directory)
+                if path_tail == company:
+                    path = os.path.join(directory, project)
                 else:
-                    path= os.path.join(dir,company,project)
+                    path = os.path.join(directory, company, project)
                 print(path)
                 self.customsettings = QtCore.QSettings(path, QtCore.QSettings.IniFormat)
 
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",
-                                   self.AlarmButton.StatusWindow.TT4330.AlarmMode.isChecked())
+                                             self.AlarmButton.StatusWindow.TT4330.AlarmMode.isChecked())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",
-                                   self.AlarmButton.StatusWindow.PT4306.AlarmMode.isChecked())
+                                             self.AlarmButton.StatusWindow.PT4306.AlarmMode.isChecked())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4315/CheckBox",
-                                   self.AlarmButton.StatusWindow.PT4315.AlarmMode.isChecked())
+                                             self.AlarmButton.StatusWindow.PT4315.AlarmMode.isChecked())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4319/CheckBox",
-                                   self.AlarmButton.StatusWindow.PT4319.AlarmMode.isChecked())
+                                             self.AlarmButton.StatusWindow.PT4319.AlarmMode.isChecked())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4322/CheckBox",
-                                   self.AlarmButton.StatusWindow.PT4322.AlarmMode.isChecked())
+                                             self.AlarmButton.StatusWindow.PT4322.AlarmMode.isChecked())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4325/CheckBox",
-                                   self.AlarmButton.StatusWindow.PT4325.AlarmMode.isChecked())
+                                             self.AlarmButton.StatusWindow.PT4325.AlarmMode.isChecked())
 
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/LowLimit",
-                                   self.AlarmButton.StatusWindow.TT4330.Low_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.TT4330.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/LowLimit",
-                                   self.AlarmButton.StatusWindow.PT4306.Low_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.PT4306.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4315/LowLimit",
-                                   self.AlarmButton.StatusWindow.PT4315.Low_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.PT4315.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4319/LowLimit",
-                                   self.AlarmButton.StatusWindow.PT4319.Low_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.PT4319.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4322/LowLimit",
-                                   self.AlarmButton.StatusWindow.PT4322.Low_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.PT4322.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4325/LowLimit",
-                                   self.AlarmButton.StatusWindow.PT4325.Low_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.PT4325.Low_Limit.Field.text())
 
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/HighLimit",
-                                   self.AlarmButton.StatusWindow.TT4330.High_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.TT4330.High_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/HighLimit",
-                                   self.AlarmButton.StatusWindow.PT4306.High_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.PT4306.High_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4315/HighLimit",
-                                   self.AlarmButton.StatusWindow.PT4315.High_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.PT4315.High_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4319/HighLimit",
-                                   self.AlarmButton.StatusWindow.PT4319.High_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.PT4319.High_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4322/HighLimit",
-                                   self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4325/HighLimit",
-                                   self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.text())
+                                             self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.text())
                 print("saving data to ", path)
             except:
                 print("Failed to custom save the settings.")
@@ -1274,58 +1265,64 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.AlarmButton.StatusWindow.PT4325.High_Limit.UpdateValue()
             else:
                 try:
-                    #else, recover from the claimed diretory
-                    #address should be surfix with ini. Example:$HOME/.config//SBC/SlowControl.ini
-                    dir = QtCore.QSettings(str(address), QtCore.QSettings.IniFormat)
-                    print("Recovering from "+ str(address))
+                    # else, recover from the claimed directory
+                    # address should be surfix with ini. Example:$HOME/.config//SBC/SlowControl.ini
+                    directory = QtCore.QSettings(str(address), QtCore.QSettings.IniFormat)
+                    print("Recovering from " + str(address))
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.TT4330,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",loadedsettings=dir)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",
+                                        loadedsettings=directory)
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4306,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",loadedsettings=dir)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",
+                                        loadedsettings=directory)
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4315,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4315/CheckBox",loadedsettings=dir)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4315/CheckBox",
+                                        loadedsettings=directory)
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4319,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4319/CheckBox",loadedsettings=dir)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4319/CheckBox",
+                                        loadedsettings=directory)
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4322,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4322/CheckBox",loadedsettings=dir)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4322/CheckBox",
+                                        loadedsettings=directory)
                     self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4325,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4325/CheckBox",loadedsettings=dir)
+                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4325/CheckBox",
+                                        loadedsettings=directory)
 
-                    self.AlarmButton.StatusWindow.TT4330.Low_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.TT4330.Low_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/TT4330/LowLimit"))
                     self.AlarmButton.StatusWindow.TT4330.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4306.Low_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.PT4306.Low_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4306/LowLimit"))
                     self.AlarmButton.StatusWindow.PT4306.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4315.Low_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.PT4315.Low_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4315/LowLimit"))
                     self.AlarmButton.StatusWindow.PT4315.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4319.Low_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.PT4319.Low_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4319/LowLimit"))
                     self.AlarmButton.StatusWindow.PT4319.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4322.Low_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.PT4322.Low_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4322/LowLimit"))
                     self.AlarmButton.StatusWindow.PT4322.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4325.Low_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.PT4325.Low_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4325/LowLimit"))
                     self.AlarmButton.StatusWindow.PT4325.Low_Limit.UpdateValue()
 
-                    self.AlarmButton.StatusWindow.TT4330.High_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.TT4330.High_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/TT4330/HighLimit"))
                     self.AlarmButton.StatusWindow.TT4330.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4306.High_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.PT4306.High_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4306/HighLimit"))
                     self.AlarmButton.StatusWindow.PT4306.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4315.High_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.PT4315.High_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4315/HighLimit"))
                     self.AlarmButton.StatusWindow.PT4315.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4319.High_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.PT4319.High_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4319/HighLimit"))
                     self.AlarmButton.StatusWindow.PT4319.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4322/HighLimit"))
                     self.AlarmButton.StatusWindow.PT4322.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.setText(dir.value(
+                    self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.setText(directory.value(
                         "MainWindow/AlarmButton/StatusWindow/PT4325/HighLimit"))
                     self.AlarmButton.StatusWindow.PT4325.High_Limit.UpdateValue()
 
@@ -1338,16 +1335,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def RecoverChecked(self, GUIid, subdir, loadedsettings=None):
         # add a function because you can not directly set check status to checkbox
-        # GUIid should be form of "self.AlarmButton.StatusWindow.PT4315", is the variable name in the Mainwindow
+        # GUIid should be form of "self.AlarmButton.StatusWindow.PT4315", is the variable name in the Main window
         # subdir like ""MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox"", is the path file stored in the ini file
         # loadedsettings is the Qtsettings file the program is to load
-        if loadedsettings == None:
+        if loadedsettings is None:
             # It is weired here, when I save the data and close the program, the setting value
             # in the address is string true
             # while if you maintain the program, the setting value in the address is bool True
-            if self.settings.value(subdir)=="true" or self.settings.value(subdir) == True:
+            if self.settings.value(subdir) == "true" or self.settings.value(subdir) == True:
                 GUIid.AlarmMode.setChecked(True)
-            elif self.settings.value(subdir)=="false" or self.settings.value(subdir) == False:
+            elif self.settings.value(subdir) == "false" or self.settings.value(subdir) == False:
                 GUIid.AlarmMode.setChecked(False)
             else:
                 print("Checkbox's value is neither true nor false")
@@ -1362,9 +1359,10 @@ class MainWindow(QtWidgets.QMainWindow):
             except:
                 print("Failed to load the status of checkboxs")
 
+
 # Defines a reusable layout containing widgets
 class RegionPID(QtWidgets.QWidget):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super().__init__(parent)
 
         self.VL = QtWidgets.QVBoxLayout(self)
@@ -1376,7 +1374,7 @@ class RegionPID(QtWidgets.QWidget):
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
-        
+
         self.HL = QtWidgets.QHBoxLayout()
         self.HL.setContentsMargins(0, 0, 0, 0)
         self.VL.addLayout(self.HL)
@@ -1386,7 +1384,7 @@ class RegionPID(QtWidgets.QWidget):
         self.Mode.SetToggleStateNames("Auto", "Manual")
         self.HL.addWidget(self.Mode)
 
-        self.Setpoint= Control(self)
+        self.Setpoint = Control(self)
         self.Setpoint.Label.setText("Setpoint")
         self.HL.addWidget(self.Setpoint)
 
@@ -1432,14 +1430,13 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
 
     def thermosyphon(self):
-        #reset the size of the window
+        # reset the size of the window
         self.setMinimumSize(1000, 500)
         self.resize(1000, 500)
         self.setWindowTitle("Thermosyphon Status Window")
         self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
 
-
-        #set gridlayout
+        # set gridlayout
         self.GL = QtWidgets.QGridLayout()
         # self.GL = QtWidgets.QGridLayout(self)
         self.GL.setContentsMargins(20, 20, 20, 20)
@@ -1494,7 +1491,7 @@ class StatusWindow(QtWidgets.QMainWindow):
 
         self.TT2112 = Indicator(self)
         self.TT2112.Label.setText("TT2112")
-        self.GL.addWidget(self.TT2112 , 0, 1)
+        self.GL.addWidget(self.TT2112, 0, 1)
 
         self.TT2113 = Indicator(self)
         self.TT2113.Label.setText("TT2113")
@@ -1518,7 +1515,7 @@ class StatusWindow(QtWidgets.QMainWindow):
 
         self.TT2118 = Indicator(self)
         self.TT2118.Label.setText("TT2118")
-        self.GL.addWidget(self.TT2118 , 1, 2)
+        self.GL.addWidget(self.TT2118, 1, 2)
 
         self.TT2119 = Indicator(self)
         self.TT2119.Label.setText("TT2119")
@@ -1534,7 +1531,6 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.resize(1000, 500)
         self.setWindowTitle("RTD SET 2")
         self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
-
 
         # set gridlayout
         self.GL = QtWidgets.QGridLayout()
@@ -1678,7 +1674,6 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.GroupBox.setLayout(self.GL)
         self.GroupBox.setStyleSheet("background-color:transparent;")
 
-
     def RTDset3(self):
         # reset the size of the window
         self.setMinimumSize(1000, 500)
@@ -1818,7 +1813,7 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("Alarm Window")
         self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
 
-        #variables usable for building widgets
+        # variables usable for building widgets
         i_TT_max = 1
         j_TT_max = 1
         i_PT_max = 2
@@ -1828,7 +1823,7 @@ class StatusWindow(QtWidgets.QMainWindow):
         i_PT_last = 1
         j_PT_last = 1
 
-        #Groupboxs for alarm/PT/TT
+        # Groupboxs for alarm/PT/TT
         self.GLTT = QtWidgets.QGridLayout()
         # self.GLTT = QtWidgets.QGridLayout(self)
         self.GLTT.setContentsMargins(20, 20, 20, 20)
@@ -1869,10 +1864,10 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.PT4325 = AlarmStatusWidget(self)
         self.PT4325.Label.setText("PT4325")
 
-        #make a diretory for the alarm instrument and assign instrument to certain position
-        self.AlarmTTdir = {0: {0:self.TT4330}}
-        self.AlarmPTdir = {0:{0:self.PT4306,1:self.PT4315,2:self.PT4319},
-                           1:{0:self.PT4322,1:self.PT4325}}
+        # make a diretory for the alarm instrument and assign instrument to certain position
+        self.AlarmTTdir = {0: {0: self.TT4330}}
+        self.AlarmPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319},
+                           1: {0: self.PT4322, 1: self.PT4325}}
 
         for i in range(0, i_TT_max):
             for j in range(0, j_TT_max):
@@ -1883,89 +1878,88 @@ class StatusWindow(QtWidgets.QMainWindow):
             if (i, j) == (i_TT_last, j_TT_last):
                 break
 
-        for i in range(0,i_PT_max):
-            for j in range(0,j_PT_max):
-                self.GLPT.addWidget(self.AlarmPTdir[i][j],i,j)
-                #end the position generator when i= last element's row number -1, j= last element's column number
-                if (i,j) == (i_PT_last, j_PT_last):
+        for i in range(0, i_PT_max):
+            for j in range(0, j_PT_max):
+                self.GLPT.addWidget(self.AlarmPTdir[i][j], i, j)
+                # end the position generator when i= last element's row number -1, j= last element's column number
+                if (i, j) == (i_PT_last, j_PT_last):
                     break
             if (i, j) == (i_PT_last, j_PT_last):
                 break
 
         # self.CheckButton = CheckButton(self)
         # self.CheckButton.move(1200, 100)
-        #change it to self.TT.checkalarm
+        # change it to self.TT.checkalarm
         # self.CheckButton.CheckButton.clicked.connect(self.TT4330.CheckAlarm)
         # self.CheckButton.CheckButton.clicked.connect(self.PT4306.CheckAlarm)
         # self.CheckButton.CheckButton.clicked.connect(self.PT4315.CheckAlarm)
         # self.CheckButton.CheckButton.clicked.connect(self.PT4319.CheckAlarm)
         # self.CheckButton.CheckButton.clicked.connect(self.PT4322.CheckAlarm)
         # self.CheckButton.CheckButton.clicked.connect(self.PT4325.CheckAlarm)
-        #rewrite collectalarm in updatedisplay
+        # rewrite collectalarm in updatedisplay
         # self.CheckButton.CheckButton.clicked.connect(lambda x:
-        #     self.CheckButton.CollectAlarm(self.TT4330, self.PT4306, self.PT4315, self.PT4319, self.PT4322, self.PT4325))
-        #generally checkbutton.clicked -> move to updatedisplay
+        # self.CheckButton.CollectAlarm(self.TT4330, self.PT4306, self.PT4315, self.PT4319, self.PT4322, self.PT4325))
+        # generally checkbutton.clicked -> move to updatedisplay
         # self.CheckButton.CheckButton.clicked.connect(self.ReassignOrder)
-
 
     @QtCore.Slot()
     def ReassignOrder(self):
-    #check the status of the Widget and reassign the diretory
-    # establish 2 diretory, reorder TempDic to reorder the widgets
-    #k,l are pointers in the TempDic, ij are pointers in TempRefDic
-    #i_max, j_max are max row and column number
-    #l max are max column number+1
-    #i_last,j_last are last elements's diretory coordinate
-        TempRefTTdir = {0: {0:self.TT4330}}
-        TempRefPTdir = {0:{0:self.PT4306,1:self.PT4315,2:self.PT4319},1:{0:self.PT4322,1:self.PT4325}}
+        # check the status of the Widget and reassign the diretory
+        # establish 2 diretory, reorder TempDic to reorder the widgets
+        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+        # i_max, j_max are max row and column number
+        # l max are max column number+1
+        # i_last,j_last are last elements's diretory coordinate
+        TempRefTTdir = {0: {0: self.TT4330}}
+        TempRefPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319}, 1: {0: self.PT4322, 1: self.PT4325}}
         TempTTdir = {0: {0: self.TT4330}}
         TempPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319}, 1: {0: self.PT4322, 1: self.PT4325}}
-        l_TT=0
-        k_TT=0
-        l_PT=0
-        k_PT=0
-        i_TT_max=1
-        j_TT_max=1
+        l_TT = 0
+        k_TT = 0
+        l_PT = 0
+        k_PT = 0
+        i_TT_max = 1
+        j_TT_max = 1
         i_PT_max = 2
         j_PT_max = 3
-        l_TT_max=3
-        l_PT_max=3
-        i_TT_last=0
+        l_TT_max = 3
+        l_PT_max = 3
+        i_TT_last = 0
         j_TT_last = 0
         i_PT_last = 1
         j_PT_last = 1
-    #TT put alarm true widget to the begining of the diretory
+        # TT put alarm true widget to the begining of the diretory
         for i in range(0, i_TT_max):
             for j in range(0, j_TT_max):
-                if TempRefTTdir[i][j].Alarm == True:
+                if TempRefTTdir[i][j].Alarm:
                     TempTTdir[k_TT][l_TT] = TempRefTTdir[i][j]
-                    l_TT=l_TT+1
-                    if l_TT==l_TT_max:
-                        l_TT=0
-                        k_TT=k_TT+1
+                    l_TT = l_TT + 1
+                    if l_TT == l_TT_max:
+                        l_TT = 0
+                        k_TT = k_TT + 1
                 if (i, j) == (i_TT_last, j_TT_last):
                     break
             if (i, j) == (i_TT_last, j_TT_last):
                 break
 
-    # TT put alarm false widget after that
+        # TT put alarm false widget after that
         for i in range(0, i_TT_max):
             for j in range(0, j_TT_max):
-                 if TempRefTTdir[i][j].Alarm == False:
+                if not TempRefTTdir[i][j].Alarm:
                     TempTTdir[k_TT][l_TT] = TempRefTTdir[i][j]
                     l_TT = l_TT + 1
                     if l_TT == l_TT_max:
                         l_TT = 0
-                        k_TT = k_TT +1
-                 if (i, j) == (i_TT_last, j_TT_last):
+                        k_TT = k_TT + 1
+                if (i, j) == (i_TT_last, j_TT_last):
                     break
             if (i, j) == (i_TT_last, j_TT_last):
                 break
 
-        #PT
+        # PT
         for i in range(0, i_PT_max):
             for j in range(0, j_PT_max):
-                if TempRefPTdir[i][j].Alarm == True:
+                if TempRefPTdir[i][j].Alarm:
                     TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
                     l_PT = l_PT + 1
                     if l_PT == l_PT_max:
@@ -1976,10 +1970,9 @@ class StatusWindow(QtWidgets.QMainWindow):
             if (i, j) == (i_PT_last, j_PT_last):
                 break
 
-
         for i in range(0, i_PT_max):
             for j in range(0, j_PT_max):
-                if TempRefPTdir[i][j].Alarm == False:
+                if not TempRefPTdir[i][j].Alarm:
                     TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
                     l_PT = l_PT + 1
                     if l_PT == l_PT_max:
@@ -1990,8 +1983,8 @@ class StatusWindow(QtWidgets.QMainWindow):
                 if (i, j) == (i_PT_last, j_PT_last):
                     break
 
-        #Reassign position
-    # end the position generator when i= last element's row number, j= last element's column number
+        # Reassign position
+        # end the position generator when i= last element's row number, j= last element's column number
         for i in range(0, i_TT_max):
             for j in range(0, j_TT_max):
                 self.GLTT.addWidget(TempTTdir[i][j], i, j)
@@ -1999,25 +1992,26 @@ class StatusWindow(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_TT_last, j_TT_last):
                 break
-    # end the position generator when i= last element's row number, j= last element's column number
-        for i in range(0,i_PT_max):
-            for j in range(0,j_PT_max):
-                self.GLPT.addWidget(TempPTdir[i][j],i,j)
-                if (i,j) == (i_PT_last,j_PT_last):
+        # end the position generator when i= last element's row number, j= last element's column number
+        for i in range(0, i_PT_max):
+            for j in range(0, j_PT_max):
+                self.GLPT.addWidget(TempPTdir[i][j], i, j)
+                if (i, j) == (i_PT_last, j_PT_last):
                     break
-            if (i, j) == (i_PT_last,j_PT_last):
+            if (i, j) == (i_PT_last, j_PT_last):
                 break
+
 
 class HeaterSubWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(HeaterSubWindow, self).__init__(parent)
 
-        self.resize(1100,90)
-        self.setMinimumSize(1100,120)
+        self.resize(1100, 90)
+        self.setMinimumSize(1100, 120)
         self.setWindowTitle("Detailed Information")
 
-        self.Widget=QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0,0,1100,120))
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0, 0, 1100, 120))
 
         self.VL = QtWidgets.QVBoxLayout()
         # self.VL = QtWidgets.QVBoxLayout(self)
@@ -2032,6 +2026,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.HL.setSpacing(3)
         self.HL.setAlignment(QtCore.Qt.AlignCenter)
         self.VL.addLayout(self.HL)
+
 
 # Define a function tab that shows the status of the widgets
 
@@ -2052,7 +2047,7 @@ class MultiStatusIndicator(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(10, 10))
-        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -2061,7 +2056,7 @@ class MultiStatusIndicator(QtWidgets.QWidget):
         self.HL.setContentsMargins(0, 0, 0, 0)
         self.VL.addLayout(self.HL)
 
-        self.Interlock= ColoredStatus(self,2)
+        self.Interlock = ColoredStatus(self, 2)
         self.Interlock.Label.setText("INTLKD")
         self.HL.addWidget(self.Interlock)
 
@@ -2069,11 +2064,12 @@ class MultiStatusIndicator(QtWidgets.QWidget):
         self.Manual.Label.setText("MAN")
         self.HL.addWidget(self.Manual)
 
-        self.Error = ColoredStatus(self,1)
+        self.Error = ColoredStatus(self, 1)
         self.Error.Label.setText("ERR")
         self.HL.addWidget(self.Error)
 
-#Define an alarm button
+
+# Define an alarm button
 class AlarmButton(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -2087,7 +2083,7 @@ class AlarmButton(QtWidgets.QWidget):
         self.setMinimumSize(250, 80)
         self.setSizePolicy(sizePolicy)
 
-        #link the button to a new window
+        # link the button to a new window
         self.StatusWindow = StatusWindow(self)
 
         self.Button = QtWidgets.QPushButton(self)
@@ -2095,10 +2091,11 @@ class AlarmButton(QtWidgets.QWidget):
         self.Button.setText("Button")
         self.Button.setGeometry(QtCore.QRect(5, 5, 250, 80))
         self.Button.setStyleSheet(
-            "QWidget{" + LABEL_STYLE + "} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} QWidget[Alarm = false]{ background-color: rgb(204,204,204);}")
+            "QWidget{" + LABEL_STYLE + "} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} "
+                                       "QWidget[Alarm = false]{ background-color: rgb(204,204,204);}")
 
         self.Button.setProperty("Alarm", False)
-        self.Button.Alarm=False
+        self.Button.Alarm = False
         self.Button.clicked.connect(self.ButtonClicked)
 
     @QtCore.Slot()
@@ -2119,7 +2116,8 @@ class AlarmButton(QtWidgets.QWidget):
             self.Collected = self.Collected or args[i].Alarm
         self.Button.Alarm = self.Collected
 
-#Define a function tab that shows the status of the widgets
+
+# Define a function tab that shows the status of the widgets
 class FunctionButton(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -2133,7 +2131,7 @@ class FunctionButton(QtWidgets.QWidget):
         self.setMinimumSize(250, 80)
         self.setSizePolicy(sizePolicy)
 
-        #link the button to a new window
+        # link the button to a new window
         self.StatusWindow = StatusWindow(self)
 
         self.Button = QtWidgets.QPushButton(self)
@@ -2147,10 +2145,11 @@ class FunctionButton(QtWidgets.QWidget):
         self.StatusWindow.show()
         self.Signals.sSignal.emit(self.Button.text())
 
+
 # Defines a reusable layout containing widgets
 
 class Chiller(QtWidgets.QWidget):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super().__init__(parent)
 
         self.VL = QtWidgets.QVBoxLayout(self)
@@ -2162,7 +2161,7 @@ class Chiller(QtWidgets.QWidget):
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
-        
+
         self.HL = QtWidgets.QHBoxLayout()
         self.HL.setContentsMargins(0, 0, 0, 0)
         self.VL.addLayout(self.HL)
@@ -2179,9 +2178,10 @@ class Chiller(QtWidgets.QWidget):
         self.Temp.Label.setText("Temp")
         self.HL.addWidget(self.Temp)
 
+
 # Defines a reusable layout containing widgets
 class Heater(QtWidgets.QWidget):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super().__init__(parent)
 
         self.VL = QtWidgets.QVBoxLayout(self)
@@ -2196,7 +2196,7 @@ class Heater(QtWidgets.QWidget):
         # Add a Sub window popped out when click the name
         self.HeaterSubWindow = HeaterSubWindow(self)
         self.Label.clicked.connect(self.PushButton)
-        
+
         self.HL = QtWidgets.QHBoxLayout()
         self.HL.setContentsMargins(0, 0, 0, 0)
         self.VL.addLayout(self.HL)
@@ -2219,6 +2219,7 @@ class Heater(QtWidgets.QWidget):
     def PushButton(self):
         self.HeaterSubWindow.show()
 
+
 # Defines a reusable layout containing widgets
 class HeaterExpand(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -2237,7 +2238,7 @@ class HeaterExpand(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(30, 30))
-        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -2271,7 +2272,7 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Power.Decimals = 1
         self.HL.addWidget(self.Power)
 
-        self.RTD1=Indicator(self)
+        self.RTD1 = Indicator(self)
         self.RTD1.Label.setText("RTD1")
         self.HL.addWidget(self.RTD1)
 
@@ -2306,7 +2307,7 @@ class AOMultiLoop(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QPushButton(self)
         self.Label.setMinimumSize(QtCore.QSize(30, 30))
-        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
@@ -2334,6 +2335,7 @@ class AOMultiLoop(QtWidgets.QWidget):
     def PushButton(self):
         self.HeaterSubWindow.show()
 
+
 # Defines a reusable layout containing widgets
 class AOMutiLoopExpand(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -2352,7 +2354,7 @@ class AOMutiLoopExpand(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(30, 30))
-        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -2386,7 +2388,7 @@ class AOMutiLoopExpand(QtWidgets.QWidget):
         self.Power.Decimals = 1
         self.HL.addWidget(self.Power)
 
-        self.RTD1=Indicator(self)
+        self.RTD1 = Indicator(self)
         self.RTD1.Label.setText("RTD1")
         self.HL.addWidget(self.RTD1)
 
@@ -2410,6 +2412,7 @@ class AOMutiLoopExpand(QtWidgets.QWidget):
         self.LOW.Label.setText("LOW")
         self.HL.addWidget(self.LOW)
 
+
 # Defines a reusable layout containing widget
 class Valve(QtWidgets.QWidget):
     def __init__(self, parent=None, mode=0):
@@ -2424,7 +2427,7 @@ class Valve(QtWidgets.QWidget):
         self.Label = QtWidgets.QLabel(self)
         # self.Label.setMinimumSize(QtCore.QSize(30, 30))
         self.Label.setMinimumSize(QtCore.QSize(10, 10))
-        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -2439,7 +2442,7 @@ class Valve(QtWidgets.QWidget):
         self.Set.RButton.setText("close")
         self.HL.addWidget(self.Set)
 
-        self.ActiveState = ColoredStatus(self,mode)
+        self.ActiveState = ColoredStatus(self, mode)
         # self.ActiveState = ColorIndicator(self) for test the function
         self.ActiveState.Label.setText("Active Status")
         self.HL.addWidget(self.ActiveState)
@@ -2447,7 +2450,7 @@ class Valve(QtWidgets.QWidget):
 
 # Defines a reusable layout containing widgets
 class Camera(QtWidgets.QWidget):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super().__init__(parent)
 
         self.VL = QtWidgets.QVBoxLayout(self)
@@ -2459,7 +2462,7 @@ class Camera(QtWidgets.QWidget):
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
-        
+
         self.HL = QtWidgets.QHBoxLayout()
         self.HL.setContentsMargins(0, 0, 0, 0)
         self.VL.addLayout(self.HL)
@@ -2485,6 +2488,7 @@ class Camera(QtWidgets.QWidget):
         self.Air.Label.setText("Air")
         self.HL.addWidget(self.Air)
 
+
 # Class to read PPLC value every 2 sec
 class UpdatePPLC(QtCore.QObject):
     def __init__(self, PPLC, parent=None):
@@ -2506,14 +2510,15 @@ class UpdatePPLC(QtCore.QObject):
     def stop(self):
         self.Running = False
 
+
 # Class to read TPLC value every 2 sec
 class UpdateTPLC(QtCore.QObject):
-    def __init__(self, TPLC, parent = None):
+    def __init__(self, TPLC, parent=None):
         super().__init__(parent)
-        
+
         self.TPLC = TPLC
         self.Running = False
-    
+
     @QtCore.Slot()
     def run(self):
         self.Running = True
@@ -2522,33 +2527,33 @@ class UpdateTPLC(QtCore.QObject):
             print("TPLC updating", datetime.datetime.now())
             self.TPLC.ReadAll()
             time.sleep(2)
-    
+
     @QtCore.Slot()
     def stop(self):
         self.Running = False
 
-#Class to update myseeq database
+
+# Class to update myseeq database
 class UpdateDataBase(QtCore.QObject):
     def __init__(self, MW, parent=None):
         super().__init__(parent)
 
         self.MW = MW
-        self.db=mydatabase()
+        self.db = mydatabase()
         self.Running = False
         print("begin updating Database")
-
 
     @QtCore.Slot()
     def run(self):
         self.Running = True
         while self.Running:
-            if self.MW.Datacheck.isChecked()==True:
+            if self.MW.Datacheck.isChecked():
                 self.dt = datetime_in_s()
                 print("Database Updating", self.dt)
 
                 if self.MW.T.NewData_Database:
                     print("Wrting TPLC data to database...")
-                    self.db.insert_data_into_datastorage("TT2111",self.dt,self.MW.T.RTD[0])
+                    self.db.insert_data_into_datastorage("TT2111", self.dt, self.MW.T.RTD[0])
                     self.MW.T.NewData_Database = False
 
                 if self.MW.P.NewData_Database:
@@ -2569,9 +2574,9 @@ class UpdateDataBase(QtCore.QObject):
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs           
 class UpdateDisplay(QtCore.QObject):
-    def __init__(self, MW, parent = None):
+    def __init__(self, MW, parent=None):
         super().__init__(parent)
-        
+
         self.MW = MW
         self.Running = False
 
@@ -2586,9 +2591,7 @@ class UpdateDisplay(QtCore.QObject):
             # for i in range(0,6):
             #     print(i, self.MW.T.RTD[i])
 
-
             if self.MW.T.NewData_Display:
-
                 self.MW.RTDSET1.StatusWindow.TT2111.SetValue(self.MW.T.RTD[0])
                 self.MW.RTDSET1.StatusWindow.TT2112.SetValue(self.MW.T.RTD[1])
                 self.MW.RTDSET1.StatusWindow.TT2113.SetValue(self.MW.T.RTD[2])
@@ -2686,7 +2689,8 @@ class UpdateDisplay(QtCore.QObject):
                 # self.MW.TT3401.SetValue(self.MW.T.RTD[0])
 
                 # Make sure the PLC is online
-                # if self.MW.TPLCLiveCounter == self.MW.T.LiveCounter and not self.MW.TPLCOnline.Field.property("Alarm"):
+                # if self.MW.TPLCLiveCounter == self.MW.T.LiveCounter
+                # and not self.MW.TPLCOnline.Field.property("Alarm"):
                 #     self.MW.TPLCOnline.Field.setText("Offline")
                 #     self.MW.TPLCOnline.SetAlarm()
                 #     self.MW.TPLCOnlineW.Field.setText("Offline")
@@ -2697,11 +2701,11 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.TPLCOnlineW.Field.setText("Online")
                 #     self.MW.TPLCOnlineW.ResetAlarm()
                 #     self.MW.TPLCLiveCounter = self.MW.T.LiveCounter
-                      
+
                 self.MW.T.NewData_Display = False
 
             if self.MW.P.NewData_Display:
-            #     print("PPLC updating", datetime.datetime.now())
+                #     print("PPLC updating", datetime.datetime.now())
 
                 # self.MW.PT4306.SetValue(self.MW.P.PT[0])
                 # self.MW.PT4315.SetValue(self.MW.P.PT[1])
@@ -2725,7 +2729,8 @@ class UpdateDisplay(QtCore.QObject):
                 # self.MW.BFM4313.SetValue(self.MW.P.PT1)
 
                 # Make sure the PLC is online
-                # if self.MW.PPLCLiveCounter == self.MW.P.LiveCounter and not self.MW.PPLCOnline.Field.property("Alarm"):
+                # if self.MW.PPLCLiveCounter == self.MW.P.LiveCounter
+                # and not self.MW.PPLCOnline.Field.property("Alarm"):
                 #     self.MW.PPLCOnline.Field.setText("Offline")
                 #     self.MW.PPLCOnline.SetAlarm()
                 # elif self.MW.PPLCLiveCounter != self.MW.P.LiveCounter and self.MW.PPLCOnline.Field.property("Alarm"):
@@ -2734,7 +2739,7 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.PPLCLiveCounter = self.MW.P.LiveCounter
 
                 self.MW.P.NewData_Display = False
-                
+
             # Check if alarm values are met and set them
             self.MW.AlarmButton.StatusWindow.TT4330.CheckAlarm()
             self.MW.AlarmButton.StatusWindow.PT4306.CheckAlarm()
@@ -2743,13 +2748,16 @@ class UpdateDisplay(QtCore.QObject):
             self.MW.AlarmButton.StatusWindow.PT4322.CheckAlarm()
             self.MW.AlarmButton.StatusWindow.PT4325.CheckAlarm()
             # # rewrite collectalarm in updatedisplay
-            self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.StatusWindow.TT4330, self.MW.AlarmButton.StatusWindow.PT4306,
-                                             self.MW.AlarmButton.StatusWindow.PT4315, self.MW.AlarmButton.StatusWindow.PT4319,
-                                             self.MW.AlarmButton.StatusWindow.PT4322, self.MW.AlarmButton.StatusWindow.PT4325)
+            self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.StatusWindow.TT4330,
+                                             self.MW.AlarmButton.StatusWindow.PT4306,
+                                             self.MW.AlarmButton.StatusWindow.PT4315,
+                                             self.MW.AlarmButton.StatusWindow.PT4319,
+                                             self.MW.AlarmButton.StatusWindow.PT4322,
+                                             self.MW.AlarmButton.StatusWindow.PT4325)
             self.MW.AlarmButton.ButtonAlarmSignal()
             # # generally checkbutton.clicked -> move to updatedisplay
             self.MW.AlarmButton.StatusWindow.ReassignOrder()
-                
+
             # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
             #     self.MW.PT1.SetAlarm()
             # elif self.MW.PT1.Value <= 220 and self.MW.PT1.Value >= 0 and self.MW.PT1.Field.property("Alarm"):
@@ -2814,9 +2822,9 @@ class UpdateDisplay(QtCore.QObject):
             #     self.MW.RTD45.SetAlarm()
             # elif self.MW.RTD45.Value <= -5 and self.MW.RTD45.Value >= -50 and self.MW.RTD45.Field.property("Alarm"):
             #     self.MW.RTD45.ResetAlarm()
-                
+
             time.sleep(1)
-            
+
     @QtCore.Slot()
     def stop(self):
         self.Running = False
@@ -2826,9 +2834,9 @@ class UpdateDisplay(QtCore.QObject):
 # Code entry point
 if __name__ == "__main__":
     App = QtWidgets.QApplication(sys.argv)
-             
+
     MW = MainWindow()
-    #recover data
+    # recover data
     MW.Recover()
     if platform.system() == "Linux":
         MW.show()
@@ -2836,7 +2844,7 @@ if __name__ == "__main__":
     else:
         MW.show()
     MW.activateWindow()
-    #save data
+    # save data
 
     sys.exit(App.exec_())
 
