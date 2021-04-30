@@ -10,6 +10,7 @@ def datetime_in_s():
     x=d-datetime.timedelta(microseconds=d.microsecond)
     return x
 
+
 class mydatabase():
     def __init__(self):
         # db=mysql.connector.connect()
@@ -28,7 +29,7 @@ class mydatabase():
     #     self.db.commit()
 
     def show_tables(self, key=None):
-        if key == None:
+        if key is None:
             self.mycursor.execute(
                 "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'SBCslowcontrol'"
             )
@@ -40,16 +41,18 @@ class mydatabase():
         print(result)
 
     def insert_data_into_datastorage(self,instrument, time,value):
-        #time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss) value is a decimal from -9999.999 to 9999.999
-        #name must be consistent with P&ID
+        # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
+        # value is a decimal from -9999.999 to 9999.999
+        # name must be consistent with P&ID
         data=(instrument, time,value)
         self.mycursor.execute(
             "INSERT INTO DataStorage (Instrument, Time, Value) VALUES(%s, %s, %s);", data)
         self.db.commit()
 
     def insert_data_into_metadata(self,instrument, Description,Unit):
-        #time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss) value is a decimal from -9999.999 to 9999.999
-        #name must be consistent with P&ID
+        # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
+        # value is a decimal from -9999.999 to 9999.999
+        # name must be consistent with P&ID
         data=(instrument, Description,Unit)
         self.mycursor.execute(
             "INSERT INTO MetaDataStorage VALUES(%s, %s, %s);", data)
@@ -78,7 +81,7 @@ class mydatabase():
         #     except:
         #         print("SHOW ERROR!")
 
-    #No permission on user sbcslowcontrol
+    # No permission on user sbcslowcontrol
     # def drop_table(self,table_name):
     #     self.mycursor.execute(
     #         "DROP TABLE {}".format(table_name))
