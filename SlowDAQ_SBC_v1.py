@@ -23,8 +23,9 @@ from TPLC_v1 import TPLC
 from PPLC_v1 import PPLC
 from PICOPW import VerifyPW
 from Database_SBC import *
-
 from SlowDAQWidgets_SBC_v1 import *
+from SlowDAQWidgets_SBC_v1 import ChangevalueSignal
+
 
 VERSION = "v0.1.3"
 SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
@@ -2082,7 +2083,7 @@ class AlarmButton(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.Signals = ChangeValueSignal()
+        # self.Signals = ChangeValueSignal()
 
         self.setObjectName("AlarmButton")
         self.setGeometry(QtCore.QRect(5, 5, 250, 80))
@@ -2107,7 +2108,7 @@ class AlarmButton(QtWidgets.QWidget):
     @QtCore.Slot()
     def ButtonClicked(self):
         self.StatusWindow.show()
-        self.Signals.sSignal.emit(self.Button.text())
+        # self.Signals.sSignal.emit(self.Button.text())
 
     @QtCore.Slot()
     def ButtonAlarmSignal(self):
@@ -2130,7 +2131,7 @@ class FunctionButton(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.Signals = ChangeValueSignal()
+        # self.Signals = ChangeValueSignal()
 
         self.setObjectName("FunctionButton")
         self.setGeometry(QtCore.QRect(5, 5, 250, 80))
@@ -2149,7 +2150,7 @@ class FunctionButton(QtWidgets.QWidget):
     @QtCore.Slot()
     def ButtonClicked(self):
         self.StatusWindow.show()
-        self.Signals.sSignal.emit(self.Button.text())
+        # self.Signals.sSignal.emit(self.Button.text())
 
 
 # Defines a reusable layout containing widgets
