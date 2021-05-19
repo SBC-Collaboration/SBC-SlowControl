@@ -2556,7 +2556,7 @@ class UpdateDataBase(QtCore.QObject):
                     self.db.insert_data_into_datastorage("PT4325", self.dt, self.MW.P.PT[4])
                     self.MW.P.NewData_Database = False
             else:
-                print("Database Updating stopps.")
+                print("Database Updating stops.")
                 pass
 
             time.sleep(4)
