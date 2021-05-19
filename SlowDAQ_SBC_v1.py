@@ -23,8 +23,8 @@ from TPLC_v1 import TPLC
 from PPLC_v1 import PPLC
 from PICOPW import VerifyPW
 from Database_SBC import *
-
 from SlowDAQWidgets_SBC_v1 import *
+
 
 VERSION = "v0.1.3"
 SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \

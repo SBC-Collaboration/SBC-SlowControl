@@ -982,7 +982,6 @@ class SingleButton(QtWidgets.QWidget):
             except:
                 pass
 
-
 class ChangevalueSignal(QtCore.QObject):
     fSignal = QtCore.Signal(float)
     bSignal = QtCore.Signal(bool)
