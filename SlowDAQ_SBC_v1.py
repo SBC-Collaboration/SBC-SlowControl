@@ -737,26 +737,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121Hy.SetUnit(" psi")
 
         # Data and Signal Tab
-        # self.DataL = QtWidgets.QHBoxLayout(self.DatanSignalTab)
-
         self.ReadSettings = Loadfile(self.DatanSignalTab)
-        # self.ReadSettings = Loadfile(self)
         self.ReadSettings.move(50, 50)
         self.ReadSettings.LoadFileButton.clicked.connect(
             lambda x: self.Recover(address=self.ReadSettings.FilePath.text()))
-        # self.DataL.addWidget(self.ReadSettings)
 
         self.SaveSettings = CustomSave(self.DatanSignalTab)
-        # self.SaveSettings = CustomSave(self)
         self.SaveSettings.move(700, 50)
         self.SaveSettings.SaveFileButton.clicked.connect(
             lambda x: self.Save(directory=self.SaveSettings.Head, project=self.SaveSettings.Tail))
-        # self.DataL.addWidget(self.SaveSettings)
 
         self.Datacheck = QtWidgets.QCheckBox(self.DatanSignalTab)
         self.Datacheck.move(800, 150)
         self.Datacheck.setText("Clone data into sbc slowcontrol database")
-        self.Datacheck.setStyleSheet("background-color: gray;")
+        self.Datacheck.setStyleSheet("color:white;")
 
         # Alarm button
         self.AlarmButton = AlarmButton(self)
