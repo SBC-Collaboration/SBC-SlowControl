@@ -392,7 +392,6 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         self.HL.addWidget(self.AlarmMode)
 
         self.Alarm = False
-
     @QtCore.Slot()
     def CheckAlarm(self):
         if self.AlarmMode.isChecked():
