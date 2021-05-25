@@ -1431,10 +1431,10 @@ class StatusWindow(QtWidgets.QMainWindow):
 
     def thermosyphon(self):
         # reset the size of the window
-        self.setMinimumSize(1000, 500)
+        self.setMinimumSize(2000, 500)
         self.resize(1000, 500)
         self.setWindowTitle("Thermosyphon Status Window")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
+        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 500))
 
         # set gridlayout
         self.GL = QtWidgets.QGridLayout()
@@ -1451,23 +1451,45 @@ class StatusWindow(QtWidgets.QMainWindow):
 
         self.PV4308 = MultiStatusIndicator(self)
         self.PV4308.Label.setText("PV4308")
-        self.GL.addWidget(self.PV4308, 1, 0)
+        self.GL.addWidget(self.PV4308, 0, 1)
 
         self.PV4317 = MultiStatusIndicator(self)
         self.PV4317.Label.setText("PV4317")
-        self.GL.addWidget(self.PV4317, 2, 0)
+        self.GL.addWidget(self.PV4317, 0, 2)
 
         self.PV4318 = MultiStatusIndicator(self)
         self.PV4318.Label.setText("PV4318")
-        self.GL.addWidget(self.PV4318, 0, 1)
+        self.GL.addWidget(self.PV4318, 0, 3)
 
         self.PV4321 = MultiStatusIndicator(self)
         self.PV4321.Label.setText("PV4321")
-        self.GL.addWidget(self.PV4321, 1, 1)
+        self.GL.addWidget(self.PV4321, 0, 4)
 
         self.PV4324 = MultiStatusIndicator(self)
         self.PV4324.Label.setText("PV4324")
-        self.GL.addWidget(self.PV4324, 2, 1)
+        self.GL.addWidget(self.PV4324, 0, 5)
+
+        self.SV4327 = MultiStatusIndicator(self)
+        self.SV4327.Label.setText("SV4327")
+        self.GL.addWidget(self.SV4327, 1, 0)
+
+        self.SV4328 = MultiStatusIndicator(self)
+        self.SV4328.Label.setText("SV4328.")
+        self.GL.addWidget(self.SV4328, 1, 1)
+
+        self.SV4329= MultiStatusIndicator(self)
+        self.SV4329.Label.setText("SV4329")
+        self.GL.addWidget(self.SV4329, 1, 2)
+
+        self.SV4331 = MultiStatusIndicator(self)
+        self.SV4331.Label.setText("SV4331")
+        self.GL.addWidget(self.SV4331, 1, 3)
+
+        self.SV4332 = MultiStatusIndicator(self)
+        self.SV4332 .Label.setText("SV4332")
+        self.GL.addWidget(self.SV4332, 1, 4)
+
+
 
     def RTDset1(self):
         # reset the size of the window
@@ -1815,7 +1837,7 @@ class StatusWindow(QtWidgets.QMainWindow):
 
         # variables usable for building widgets
         i_TT_max = 1
-        j_TT_max = 1
+        j_TT_max = 5
         i_PT_max = 2
         j_PT_max = 3
         i_TT_last = 0
@@ -1849,6 +1871,18 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.TT4330 = AlarmStatusWidget(self)
         self.TT4330.Label.setText("TT4330")
 
+        self.TT2111 = AlarmStatusWidget(self)
+        self.TT2111.Label.setText("TT2111")
+
+        self.TT2401= AlarmStatusWidget(self)
+        self.TT2401.Label.setText("TT2401")
+
+        self.TT2435 = AlarmStatusWidget(self)
+        self.TT2435.Label.setText("TT2435")
+
+        self.TT6220 = AlarmStatusWidget(self)
+        self.TT6220.Label.setText("TT6220")
+
         self.PT4306 = AlarmStatusWidget(self)
         self.PT4306.Label.setText("PT4306")
 
@@ -1865,7 +1899,7 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.PT4325.Label.setText("PT4325")
 
         # make a diretory for the alarm instrument and assign instrument to certain position
-        self.AlarmTTdir = {0: {0: self.TT4330}}
+        self.AlarmTTdir = {0: {0: self.TT4330,1:self.TT2111,2:self.TT2401,3:self.TT2435,4:self.TT6220}}
         self.AlarmPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319},
                            1: {0: self.PT4322, 1: self.PT4325}}
 
@@ -2101,7 +2135,7 @@ class AlarmButton(QtWidgets.QWidget):
     @QtCore.Slot()
     def ButtonClicked(self):
         self.StatusWindow.show()
-        self.Signals.sSignal.emit(self.Button.text())
+        # self.Signals.sSignal.emit(self.Button.text())
 
     @QtCore.Slot()
     def ButtonAlarmSignal(self):
@@ -2143,7 +2177,7 @@ class FunctionButton(QtWidgets.QWidget):
     @QtCore.Slot()
     def ButtonClicked(self):
         self.StatusWindow.show()
-        self.Signals.sSignal.emit(self.Button.text())
+        # self.Signals.sSignal.emit(self.Button.text())
 
 
 # Defines a reusable layout containing widgets
