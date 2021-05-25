@@ -527,7 +527,7 @@ class Control(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.Signals = ChangevalueSignal()
+        self.Signals = ChangeValueSignal()
 
         self.setObjectName("Control")
         self.setGeometry(QtCore.QRect(0, 0, 70, 40))
@@ -602,7 +602,7 @@ class Menu(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.Signals = ChangevalueSignal()
+        self.Signals = ChangeValueSignal()
 
         self.setObjectName("Menu")
         self.setGeometry(QtCore.QRect(0, 0, 140, 40))
@@ -635,7 +635,7 @@ class Toggle(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.Signals = ChangevalueSignal()
+        self.Signals = ChangeValueSignal()
 
         self.setObjectName("Toggle")
         self.setGeometry(QtCore.QRect(0, 0, 70, 40))
@@ -839,7 +839,7 @@ class DoubleButton(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.Signals = ChangevalueSignal()
+        self.Signals = ChangeValueSignal()
 
         self.setObjectName("DoubleButton")
         self.setGeometry(QtCore.QRect(0, 0, 140, 40))
@@ -941,7 +941,7 @@ class SingleButton(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.Signals = ChangevalueSignal()
+        self.Signals = ChangeValueSignal()
 
         self.setObjectName("SingleButton")
         self.setGeometry(QtCore.QRect(0, 0, 70, 40))
@@ -983,7 +983,7 @@ class SingleButton(QtWidgets.QWidget):
                 pass
 
 
-class ChangevalueSignal(QtCore.QObject):
+class ChangeValueSignal(QtCore.QObject):
     fSignal = QtCore.Signal(float)
     bSignal = QtCore.Signal(bool)
     sSignal = QtCore.Signal(str)
