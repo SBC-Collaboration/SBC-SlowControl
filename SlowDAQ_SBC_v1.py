@@ -831,11 +831,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DUpdateThread.start()
 
         # Update database on another thread
-        self.DataUpdateThread = QtCore.QThread()
-        self.UpDatabase = UpdateDataBase(self)
-        self.UpDatabase.moveToThread(self.DataUpdateThread)
-        self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        self.DataUpdateThread.start()
+        # self.DataUpdateThread = QtCore.QThread()
+        # self.UpDatabase = UpdateDataBase(self)
+        # self.UpDatabase.moveToThread(self.DataUpdateThread)
+        # self.DataUpdateThread.started.connect(self.UpDatabase.run)
+        # self.DataUpdateThread.start()
 
     # Stop all updater threads
     @QtCore.Slot()
@@ -1113,9 +1113,30 @@ class MainWindow(QtWidgets.QMainWindow):
     def Save(self, directory=None, company="SBC", project="Slowcontrol"):
         # dir is the path storing the ini setting file
         if directory is None:
-
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT2111/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT2111.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT2401/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT2401.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT2406/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT2406.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT2411/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT2411.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT2416/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT2416.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT2421/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT2421.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT2426/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT2426.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT2431/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT2431.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT2435/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT2435.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT2440/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT2440.AlarmMode.isChecked())
             self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",
                                    self.AlarmButton.StatusWindow.TT4330.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT6220/CheckBox",
+                                   self.AlarmButton.StatusWindow.TT6220.AlarmMode.isChecked())
             self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",
                                    self.AlarmButton.StatusWindow.PT4306.AlarmMode.isChecked())
             self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4315/CheckBox",
@@ -1830,19 +1851,23 @@ class StatusWindow(QtWidgets.QMainWindow):
 
     def AlarmWindow(self):
         # reset the size of the window
-        self.setMinimumSize(2000, 1000)
-        self.resize(2000, 1000)
+        self.setMinimumSize(2000, 1100)
+        self.resize(2000, 1100)
         self.setWindowTitle("Alarm Window")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1100))
 
         # variables usable for building widgets
-        i_TT_max = 1
+        # i is row number, j is column number
+        # TT is for temperature transducer while PT is for pressure transducer
+        # max is max row and column number
+        # last is the last widget's row and column index in gridbox
+        i_TT_max = 3
         j_TT_max = 5
-        i_PT_max = 2
-        j_PT_max = 3
-        i_TT_last = 0
-        j_TT_last = 0
-        i_PT_last = 1
+        i_PT_max = 4
+        j_PT_max = 5
+        i_TT_last = 2
+        j_TT_last = 4
+        i_PT_last = 3
         j_PT_last = 1
 
         # Groupboxs for alarm/PT/TT
@@ -1868,20 +1893,87 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.GroupPT.setLayout(self.GLPT)
         self.GroupPT.move(0, 500)
 
-        self.TT4330 = AlarmStatusWidget(self)
-        self.TT4330.Label.setText("TT4330")
-
         self.TT2111 = AlarmStatusWidget(self)
         self.TT2111.Label.setText("TT2111")
 
         self.TT2401= AlarmStatusWidget(self)
         self.TT2401.Label.setText("TT2401")
 
+        self.TT2406 = AlarmStatusWidget(self)
+        self.TT2406.Label.setText("TT2406")
+
+        self.TT2411 = AlarmStatusWidget(self)
+        self.TT2411.Label.setText("TT2411")
+
+        self.TT2416 = AlarmStatusWidget(self)
+        self.TT2416.Label.setText("TT2416")
+
+        self.TT2421 = AlarmStatusWidget(self)
+        self.TT2421.Label.setText("TT2421")
+
+        self.TT2426 = AlarmStatusWidget(self)
+        self.TT2426.Label.setText("TT2426")
+
+        self.TT2431 = AlarmStatusWidget(self)
+        self.TT2431.Label.setText("TT2431")
+
         self.TT2435 = AlarmStatusWidget(self)
         self.TT2435.Label.setText("TT2435")
 
+        self.TT2440 = AlarmStatusWidget(self)
+        self.TT2440.Label.setText("TT2440")
+
+        self.TT4330 = AlarmStatusWidget(self)
+        self.TT4330.Label.setText("TT4330")
+
         self.TT6220 = AlarmStatusWidget(self)
         self.TT6220.Label.setText("TT6220")
+
+        self.TT6221 = AlarmStatusWidget(self)
+        self.TT6221.Label.setText("TT6221")
+
+        self.TT6222 = AlarmStatusWidget(self)
+        self.TT6222.Label.setText("TT6222")
+
+        self.TT6223 = AlarmStatusWidget(self)
+        self.TT6223.Label.setText("TT6223")
+
+        #PT part
+        self.PT1101 = AlarmStatusWidget(self)
+        self.PT1101.Label.setText("PT1101")
+
+        self.PT2316 = AlarmStatusWidget(self)
+        self.PT2316.Label.setText("PT2316")
+
+        self.PT2321 = AlarmStatusWidget(self)
+        self.PT2321.Label.setText("PT2321")
+
+        self.PT2330 = AlarmStatusWidget(self)
+        self.PT2330.Label.setText("PT2330")
+
+        self.PT2335 = AlarmStatusWidget(self)
+        self.PT2335.Label.setText("PT2335")
+
+        self.PT3308 = AlarmStatusWidget(self)
+        self.PT3308.Label.setText("PT3308")
+
+        self.PT3309 = AlarmStatusWidget(self)
+        self.PT3309.Label.setText("PT3309")
+
+        self.PT3310 = AlarmStatusWidget(self)
+        self.PT3310.Label.setText("PT3310")
+
+        self.PT3311 = AlarmStatusWidget(self)
+        self.PT3311.Label.setText("PT3311")
+
+        self.PT3114 = AlarmStatusWidget(self)
+        self.PT3114.Label.setText("PT3114")
+
+        self.PT3320 = AlarmStatusWidget(self)
+        self.PT3320.Label.setText("PT3320")
+
+        self.PT3333 = AlarmStatusWidget(self)
+        self.PT3333.Label.setText("PT3333")
 
         self.PT4306 = AlarmStatusWidget(self)
         self.PT4306.Label.setText("PT4306")
@@ -1898,10 +1990,15 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.PT4325 = AlarmStatusWidget(self)
         self.PT4325.Label.setText("PT4325")
 
-        # make a diretory for the alarm instrument and assign instrument to certain position
-        self.AlarmTTdir = {0: {0: self.TT4330,1:self.TT2111,2:self.TT2401,3:self.TT2435,4:self.TT6220}}
-        self.AlarmPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319},
-                           1: {0: self.PT4322, 1: self.PT4325}}
+        # make a directory for the alarm instrument and assign instrument to certain position
+        self.AlarmTTdir = {0: {0: self.TT2111, 1: self.TT2401, 2: self.TT2406, 3: self.TT2411, 4: self.TT2416},
+                           1: {0: self.TT2421, 1: self.TT2426, 2: self.TT2431, 3: self.TT2435, 4: self.TT2440},
+                           2: {0: self.TT4330, 1: self.TT6220, 2: self.TT6221, 3: self.TT6222, 4: self.TT6223}}
+
+        self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
+                           1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3114},
+                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
+                           3: {0: self.PT4322, 1: self.PT4325}}
 
         for i in range(0, i_TT_max):
             for j in range(0, j_TT_max):
@@ -1944,23 +2041,34 @@ class StatusWindow(QtWidgets.QMainWindow):
         # i_max, j_max are max row and column number
         # l max are max column number+1
         # i_last,j_last are last elements's diretory coordinate
-        TempRefTTdir = {0: {0: self.TT4330}}
-        TempRefPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319}, 1: {0: self.PT4322, 1: self.PT4325}}
-        TempTTdir = {0: {0: self.TT4330}}
-        TempPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319}, 1: {0: self.PT4322, 1: self.PT4325}}
+        TempRefTTdir = {0: {0: self.TT2111, 1: self.TT2401, 2: self.TT2406, 3: self.TT2411, 4: self.TT2416},
+                           1: {0: self.TT2421, 1: self.TT2426, 2: self.TT2431, 3: self.TT2435, 4: self.TT2440},
+                           2: {0: self.TT4330, 1: self.TT6220, 2: self.TT6221, 3: self.TT6222, 4: self.TT6223}}
+        TempRefPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
+                           1: {0: self.PT3114, 1: self.PT3308, 2: self.PT3309, 3: self.PT3309, 4: self.PT3311},
+                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
+                           3: {0: self.PT4322, 1: self.PT4325}}
+        TempTTdir = {0: {0: self.TT2111, 1: self.TT2401, 2: self.TT2406, 3: self.TT2411, 4: self.TT2416},
+                           1: {0: self.TT2421, 1: self.TT2426, 2: self.TT2431, 3: self.TT2435, 4: self.TT2440},
+                           2: {0: self.TT4330, 1: self.TT6220, 2: self.TT6221, 3: self.TT6222, 4: self.TT6223}}
+        TempPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
+                           1: {0: self.PT3114, 1: self.PT3308, 2: self.PT3309, 3: self.PT3309, 4: self.PT3311},
+                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
+                           3: {0: self.PT4322, 1: self.PT4325}}
+        #l_TT_max is max number of column
         l_TT = 0
         k_TT = 0
         l_PT = 0
         k_PT = 0
-        i_TT_max = 1
-        j_TT_max = 1
-        i_PT_max = 2
-        j_PT_max = 3
-        l_TT_max = 3
-        l_PT_max = 3
-        i_TT_last = 0
-        j_TT_last = 0
-        i_PT_last = 1
+        i_TT_max = 3
+        j_TT_max = 5
+        i_PT_max = 4
+        j_PT_max = 5
+        l_TT_max = 4
+        l_PT_max = 4
+        i_TT_last = 2
+        j_TT_last = 4
+        i_PT_last = 3
         j_PT_last = 1
         # TT put alarm true widget to the begining of the diretory
         for i in range(0, i_TT_max):
@@ -2775,19 +2883,65 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.P.NewData_Display = False
 
             # Check if alarm values are met and set them
-            self.MW.AlarmButton.StatusWindow.TT4330.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT4306.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.TT2216.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.TT2401.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.TT2406.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.TT2411.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.TT2416.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.TT2421.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.TT2426.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.TT2431.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.TT2435.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.TT2440.CheckAlarm()
+
+            self.MW.AlarmButton.StatusWindow.PT1101.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT2121.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT2335.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT2330.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT2316.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT3308.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT3309.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT3310.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT3311.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT3314.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT3320.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT3332.CheckAlarm()
+            self.MW.AlarmButton.StatusWindow.PT3335.CheckAlarm()
             self.MW.AlarmButton.StatusWindow.PT4315.CheckAlarm()
             self.MW.AlarmButton.StatusWindow.PT4319.CheckAlarm()
             self.MW.AlarmButton.StatusWindow.PT4322.CheckAlarm()
             self.MW.AlarmButton.StatusWindow.PT4325.CheckAlarm()
+
             # # rewrite collectalarm in updatedisplay
-            self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.StatusWindow.TT4330,
-                                             self.MW.AlarmButton.StatusWindow.PT4306,
+            self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.StatusWindow.TT2216,
+                                             self.MW.AlarmButton.StatusWindow.TT2401,
+                                             self.MW.AlarmButton.StatusWindow.TT2406,
+                                             self.MW.AlarmButton.StatusWindow.TT2411,
+                                             self.MW.AlarmButton.StatusWindow.TT2416,
+                                             self.MW.AlarmButton.StatusWindow.TT2421,
+                                             self.MW.AlarmButton.StatusWindow.TT2426,
+                                             self.MW.AlarmButton.StatusWindow.TT2431,
+                                             self.MW.AlarmButton.StatusWindow.TT2435,
+                                             self.MW.AlarmButton.StatusWindow.TT2440,
+                                             self.MW.AlarmButton.StatusWindow.PT1101,
+                                             self.MW.AlarmButton.StatusWindow.PT2121,
+                                             self.MW.AlarmButton.StatusWindow.PT2335,
+                                             self.MW.AlarmButton.StatusWindow.PT2330,
+                                             self.MW.AlarmButton.StatusWindow.PT2316,
+                                             self.MW.AlarmButton.StatusWindow.PT3308,
+                                             self.MW.AlarmButton.StatusWindow.PT3309,
+                                             self.MW.AlarmButton.StatusWindow.PT3310,
+                                             self.MW.AlarmButton.StatusWindow.PT3311,
+                                             self.MW.AlarmButton.StatusWindow.PT3314,
+                                             self.MW.AlarmButton.StatusWindow.PT3320,
+                                             self.MW.AlarmButton.StatusWindow.PT3332,
+                                             self.MW.AlarmButton.StatusWindow.PT3335,
                                              self.MW.AlarmButton.StatusWindow.PT4315,
                                              self.MW.AlarmButton.StatusWindow.PT4319,
                                              self.MW.AlarmButton.StatusWindow.PT4322,
                                              self.MW.AlarmButton.StatusWindow.PT4325)
+
+
             self.MW.AlarmButton.ButtonAlarmSignal()
             # # generally checkbutton.clicked -> move to updatedisplay
             self.MW.AlarmButton.StatusWindow.ReassignOrder()
