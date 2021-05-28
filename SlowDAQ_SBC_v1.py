@@ -831,11 +831,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DUpdateThread.start()
 
         # Update database on another thread
-        # self.DataUpdateThread = QtCore.QThread()
-        # self.UpDatabase = UpdateDataBase(self)
-        # self.UpDatabase.moveToThread(self.DataUpdateThread)
-        # self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        # self.DataUpdateThread.start()
+        self.DataUpdateThread = QtCore.QThread()
+        self.UpDatabase = UpdateDataBase(self)
+        self.UpDatabase.moveToThread(self.DataUpdateThread)
+        self.DataUpdateThread.started.connect(self.UpDatabase.run)
+        self.DataUpdateThread.start()
 
     # Stop all updater threads
     @QtCore.Slot()
@@ -3009,7 +3009,7 @@ class UpdateDataBase(QtCore.QObject):
 
                 if self.MW.T.NewData_Database:
                     print("Wrting TPLC data to database...")
-                    self.db.insert_data_into_datastorage("TT2111", self.dt, self.MW.T.RTD[0])
+                    self.db.insert_data_into_datastorage("TT9999", self.dt, self.MW.T.RTD[0])
                     self.MW.T.NewData_Database = False
 
                 if self.MW.P.NewData_Database:
