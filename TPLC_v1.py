@@ -92,7 +92,7 @@ class TPLC:
     def ReadAll(self):
         if self.Connected:
             # Reading all the RTDs
-            Raw = self.Client.read_holding_registers(37048, count=self.nRTD * 2, unit=0x01)
+            Raw = self.Client.read_holding_registers(37000, count=self.nRTD * 2, unit=0x01)
             # RTD_setting = self.Client.read_holding_registers(18002, count=1, unit=0x01)
             for i in range(0, self.nRTD):
                 self.RTD[i] = round(
