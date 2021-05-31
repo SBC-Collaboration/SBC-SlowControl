@@ -2324,8 +2324,8 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PT3311 = AlarmStatusWidget(self)
         self.PT3311.Label.setText("PT3311")
 
-        self.PT3114 = AlarmStatusWidget(self)
-        self.PT3114.Label.setText("PT3114")
+        self.PT3314 = AlarmStatusWidget(self)
+        self.PT3314.Label.setText("PT3314")
 
         self.PT3320 = AlarmStatusWidget(self)
         self.PT3320.Label.setText("PT3320")
@@ -2354,7 +2354,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                            2: {0: self.TT4330, 1: self.TT6220, 2: self.TT6221, 3: self.TT6222, 4: self.TT6223}}
 
         self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
-                           1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3114},
+                           1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3314},
                            2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
                            3: {0: self.PT4322, 1: self.PT4325}}
 
@@ -2403,14 +2403,14 @@ class AlarmWin(QtWidgets.QMainWindow):
                         1: {0: self.TT2421, 1: self.TT2426, 2: self.TT2431, 3: self.TT2435, 4: self.TT2440},
                         2: {0: self.TT4330, 1: self.TT6220, 2: self.TT6221, 3: self.TT6222, 4: self.TT6223}}
         TempRefPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
-                        1: {0: self.PT3114, 1: self.PT3308, 2: self.PT3309, 3: self.PT3309, 4: self.PT3311},
+                        1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3314},
                         2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
                         3: {0: self.PT4322, 1: self.PT4325}}
         TempTTdir = {0: {0: self.TT2111, 1: self.TT2401, 2: self.TT2406, 3: self.TT2411, 4: self.TT2416},
                      1: {0: self.TT2421, 1: self.TT2426, 2: self.TT2431, 3: self.TT2435, 4: self.TT2440},
                      2: {0: self.TT4330, 1: self.TT6220, 2: self.TT6221, 3: self.TT6222, 4: self.TT6223}}
         TempPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
-                     1: {0: self.PT3114, 1: self.PT3308, 2: self.PT3309, 3: self.PT3309, 4: self.PT3311},
+                     1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3314},
                      2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
                      3: {0: self.PT4322, 1: self.PT4325}}
         # l_TT_max is max number of column
