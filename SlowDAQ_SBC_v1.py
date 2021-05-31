@@ -1182,7 +1182,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                    self.AlarmButton.SubWindow.PT4325.AlarmMode.isChecked())
 
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2111/LowLimit",
-                                   self.AlarmButton.SubWindow.TT2111.Low_Limit.Field.Text())
+                                   self.AlarmButton.SubWindow.TT2111.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2401/LowLimit",
                                    self.AlarmButton.SubWindow.TT2401.Low_limit.Field.Text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2406/LowLimit",
