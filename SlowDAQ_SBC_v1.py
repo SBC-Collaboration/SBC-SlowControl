@@ -750,7 +750,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Datacheck = QtWidgets.QCheckBox(self.DatanSignalTab)
         self.Datacheck.move(800, 150)
         self.Datacheck.setText("Clone data into sbc slowcontrol database")
-        self.Datacheck.setStyleSheet("color:white;")
+        self.Datacheck.setStyleSheet("background-color:gray;")
 
         # Alarm button
         self.AlarmButton = AlarmButton(self)
@@ -806,12 +806,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PUpdateThread.started.connect(self.UpPPLC.run)
         self.PUpdateThread.start()
 
-        # Read PPLC value on another thread
-        # self.PUpdateThread = QtCore.QThread()
-        # self.UpPPLC = UpdateTPLC(self.T)
-        # self.UpPPLC.moveToThread(self.PUpdateThread)
-        # self.PUpdateThread.started.connect(self.UpPPLC.run)
-        # self.PUpdateThread.start()
 
         # Read TPLC value on another thread
         self.TUpdateThread = QtCore.QThread()
@@ -831,11 +825,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DUpdateThread.start()
 
         # Update database on another thread
-        # self.DataUpdateThread = QtCore.QThread()
-        # self.UpDatabase = UpdateDataBase(self)
-        # self.UpDatabase.moveToThread(self.DataUpdateThread)
-        # self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        # self.DataUpdateThread.start()
+        self.DataUpdateThread = QtCore.QThread()
+        self.UpDatabase = UpdateDataBase(self)
+        self.UpDatabase.moveToThread(self.DataUpdateThread)
+        self.DataUpdateThread.started.connect(self.UpDatabase.run)
+        self.DataUpdateThread.start()
 
     # Stop all updater threads
     @QtCore.Slot()
@@ -3010,7 +3004,7 @@ class UpdateDataBase(QtCore.QObject):
 
                 if self.MW.T.NewData_Database:
                     print("Wrting TPLC data to database...")
-                    self.db.insert_data_into_datastorage("TT2111", self.dt, self.MW.T.RTD[0])
+                    self.db.insert_data_into_datastorage("TT9999", self.dt, self.MW.T.RTD[6])
                     self.MW.T.NewData_Database = False
 
                 if self.MW.P.NewData_Database:
@@ -3021,7 +3015,7 @@ class UpdateDataBase(QtCore.QObject):
                 print("Database Updating stopps.")
                 pass
 
-            time.sleep(4)
+            time.sleep(60)
 
     @QtCore.Slot()
     def stop(self):
@@ -3043,12 +3037,14 @@ class UpdateDisplay(QtCore.QObject):
         while self.Running:
 
             print("Display updating", datetime.datetime.now())
+
             # print(self.MW.T.RTD)
             # print(3, self.MW.T.RTD[3])
             # for i in range(0,6):
             #     print(i, self.MW.T.RTD[i])
 
             if self.MW.T.NewData_Display:
+                self.MW.TT4330.SetValue(self.MW.T.RTD[6])
                 self.MW.RTDSET1.StatusWindow.TT2111.SetValue(self.MW.T.RTD[0])
                 self.MW.RTDSET1.StatusWindow.TT2112.SetValue(self.MW.T.RTD[1])
                 self.MW.RTDSET1.StatusWindow.TT2113.SetValue(self.MW.T.RTD[2])
@@ -3198,68 +3194,68 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.P.NewData_Display = False
 
             # Check if alarm values are met and set them
-            self.MW.AlarmButton.StatusWindow.TT2216.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.TT2401.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.TT2406.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.TT2411.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.TT2416.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.TT2421.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.TT2426.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.TT2431.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.TT2435.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.TT2440.CheckAlarm()
-
-            self.MW.AlarmButton.StatusWindow.PT1101.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT2121.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT2335.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT2330.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT2316.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT3308.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT3309.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT3310.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT3311.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT3314.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT3320.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT3332.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT3335.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT4315.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT4319.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT4322.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT4325.CheckAlarm()
-
-            # # rewrite collectalarm in updatedisplay
-            self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.StatusWindow.TT2216,
-                                             self.MW.AlarmButton.StatusWindow.TT2401,
-                                             self.MW.AlarmButton.StatusWindow.TT2406,
-                                             self.MW.AlarmButton.StatusWindow.TT2411,
-                                             self.MW.AlarmButton.StatusWindow.TT2416,
-                                             self.MW.AlarmButton.StatusWindow.TT2421,
-                                             self.MW.AlarmButton.StatusWindow.TT2426,
-                                             self.MW.AlarmButton.StatusWindow.TT2431,
-                                             self.MW.AlarmButton.StatusWindow.TT2435,
-                                             self.MW.AlarmButton.StatusWindow.TT2440,
-                                             self.MW.AlarmButton.StatusWindow.PT1101,
-                                             self.MW.AlarmButton.StatusWindow.PT2121,
-                                             self.MW.AlarmButton.StatusWindow.PT2335,
-                                             self.MW.AlarmButton.StatusWindow.PT2330,
-                                             self.MW.AlarmButton.StatusWindow.PT2316,
-                                             self.MW.AlarmButton.StatusWindow.PT3308,
-                                             self.MW.AlarmButton.StatusWindow.PT3309,
-                                             self.MW.AlarmButton.StatusWindow.PT3310,
-                                             self.MW.AlarmButton.StatusWindow.PT3311,
-                                             self.MW.AlarmButton.StatusWindow.PT3314,
-                                             self.MW.AlarmButton.StatusWindow.PT3320,
-                                             self.MW.AlarmButton.StatusWindow.PT3332,
-                                             self.MW.AlarmButton.StatusWindow.PT3335,
-                                             self.MW.AlarmButton.StatusWindow.PT4315,
-                                             self.MW.AlarmButton.StatusWindow.PT4319,
-                                             self.MW.AlarmButton.StatusWindow.PT4322,
-                                             self.MW.AlarmButton.StatusWindow.PT4325)
-
-
-            self.MW.AlarmButton.ButtonAlarmSignal()
-            # # generally checkbutton.clicked -> move to updatedisplay
-            self.MW.AlarmButton.StatusWindow.ReassignOrder()
+            # self.MW.AlarmButton.StatusWindow.TT2216.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.TT2401.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.TT2406.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.TT2411.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.TT2416.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.TT2421.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.TT2426.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.TT2431.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.TT2435.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.TT2440.CheckAlarm()
+            #
+            # self.MW.AlarmButton.StatusWindow.PT1101.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT2121.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT2335.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT2330.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT2316.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT3308.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT3309.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT3310.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT3311.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT3314.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT3320.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT3332.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT3335.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT4315.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT4319.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT4322.CheckAlarm()
+            # self.MW.AlarmButton.StatusWindow.PT4325.CheckAlarm()
+            #
+            # # # rewrite collectalarm in updatedisplay
+            # self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.StatusWindow.TT2216,
+            #                                  self.MW.AlarmButton.StatusWindow.TT2401,
+            #                                  self.MW.AlarmButton.StatusWindow.TT2406,
+            #                                  self.MW.AlarmButton.StatusWindow.TT2411,
+            #                                  self.MW.AlarmButton.StatusWindow.TT2416,
+            #                                  self.MW.AlarmButton.StatusWindow.TT2421,
+            #                                  self.MW.AlarmButton.StatusWindow.TT2426,
+            #                                  self.MW.AlarmButton.StatusWindow.TT2431,
+            #                                  self.MW.AlarmButton.StatusWindow.TT2435,
+            #                                  self.MW.AlarmButton.StatusWindow.TT2440,
+            #                                  self.MW.AlarmButton.StatusWindow.PT1101,
+            #                                  self.MW.AlarmButton.StatusWindow.PT2121,
+            #                                  self.MW.AlarmButton.StatusWindow.PT2335,
+            #                                  self.MW.AlarmButton.StatusWindow.PT2330,
+            #                                  self.MW.AlarmButton.StatusWindow.PT2316,
+            #                                  self.MW.AlarmButton.StatusWindow.PT3308,
+            #                                  self.MW.AlarmButton.StatusWindow.PT3309,
+            #                                  self.MW.AlarmButton.StatusWindow.PT3310,
+            #                                  self.MW.AlarmButton.StatusWindow.PT3311,
+            #                                  self.MW.AlarmButton.StatusWindow.PT3314,
+            #                                  self.MW.AlarmButton.StatusWindow.PT3320,
+            #                                  self.MW.AlarmButton.StatusWindow.PT3332,
+            #                                  self.MW.AlarmButton.StatusWindow.PT3335,
+            #                                  self.MW.AlarmButton.StatusWindow.PT4315,
+            #                                  self.MW.AlarmButton.StatusWindow.PT4319,
+            #                                  self.MW.AlarmButton.StatusWindow.PT4322,
+            #                                  self.MW.AlarmButton.StatusWindow.PT4325)
+            #
+            #
+            # self.MW.AlarmButton.ButtonAlarmSignal()
+            # # # generally checkbutton.clicked -> move to updatedisplay
+            # self.MW.AlarmButton.StatusWindow.ReassignOrder()
 
             # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
             #     self.MW.PT1.SetAlarm()
