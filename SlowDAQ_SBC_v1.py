@@ -1184,70 +1184,70 @@ class MainWindow(QtWidgets.QMainWindow):
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2111/LowLimit",
                                    self.AlarmButton.SubWindow.TT2111.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2401/LowLimit",
-                                   self.AlarmButton.SubWindow.TT2401.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT2401.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2406/LowLimit",
-                                   self.AlarmButton.SubWindow.TT2406.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT2406.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2411/LowLimit",
-                                   self.AlarmButton.SubWindow.TT2411.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT2411.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2416/LowLimit",
-                                   self.AlarmButton.SubWindow.TT2416.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT2416.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2421/LowLimit",
-                                   self.AlarmButton.SubWindow.TT2421.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT2421.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2426/LowLimit",
-                                   self.AlarmButton.SubWindow.TT2426.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT2426.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2431/LowLimit",
-                                   self.AlarmButton.SubWindow.TT2431.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT2431.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2435/LowLimit",
-                                   self.AlarmButton.SubWindow.TT2435.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT2435.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2440/LowLimit",
-                                   self.AlarmButton.SubWindow.TT2440.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT2440.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT4330/LowLimit",
-                                   self.AlarmButton.SubWindow.TT4330.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT4330.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/LowLimit",
-                                   self.AlarmButton.SubWindow.TT6220.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT6220.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/LowLimit",
-                                   self.AlarmButton.SubWindow.TT6220.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT6220.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6221/LowLimit",
-                                   self.AlarmButton.SubWindow.TT6221.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT6221.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6222/LowLimit",
-                                   self.AlarmButton.SubWindow.TT6222.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT6222.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6223/LowLimit",
-                                   self.AlarmButton.SubWindow.TT6223.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.TT6223.Low_Limit.Field.text())
             # set PT value
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT1101/LowLimit",
-                                   self.AlarmButton.SubWindow.PT1101.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT1101.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2316/LowLimit",
-                                   self.AlarmButton.SubWindow.PT2316.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT2316.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2321/LowLimit",
-                                   self.AlarmButton.SubWindow.PT2321.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT2321.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2330/LowLimit",
-                                   self.AlarmButton.SubWindow.PT2330.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT2330.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2335/LowLimit",
-                                   self.AlarmButton.SubWindow.PT2335.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT2335.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3308/LowLimit",
-                                   self.AlarmButton.SubWindow.PT3308.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT3308.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3309/LowLimit",
-                                   self.AlarmButton.SubWindow.PT3309.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT3309.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3310/LowLimit",
-                                   self.AlarmButton.SubWindow.PT3310.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT3310.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3311/LowLimit",
-                                   self.AlarmButton.SubWindow.PT3311.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT3311.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3314/LowLimit",
-                                   self.AlarmButton.SubWindow.PT3314.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT3314.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3320/LowLimit",
-                                   self.AlarmButton.SubWindow.PT3320.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT3320.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3333/LowLimit",
-                                   self.AlarmButton.SubWindow.PT3333.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT3333.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4306/LowLimit",
-                                   self.AlarmButton.SubWindow.PT4306.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT4306.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4315/LowLimit",
-                                   self.AlarmButton.SubWindow.PT4315.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT4315.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4319/LowLimit",
-                                   self.AlarmButton.SubWindow.PT4319.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT4319.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4322/LowLimit",
-                                   self.AlarmButton.SubWindow.PT4322.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT4322.Low_Limit.Field.text())
             self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4325/LowLimit",
-                                   self.AlarmButton.SubWindow.PT4325.Low_limit.Field.text())
+                                   self.AlarmButton.SubWindow.PT4325.Low_Limit.Field.text())
 
             #high limit
 
@@ -1405,70 +1405,70 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2111/LowLimit",
                                        self.AlarmButton.SubWindow.TT2111.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2401/LowLimit",
-                                       self.AlarmButton.SubWindow.TT2401.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT2401.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2406/LowLimit",
-                                       self.AlarmButton.SubWindow.TT2406.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT2406.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2411/LowLimit",
-                                       self.AlarmButton.SubWindow.TT2411.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT2411.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2416/LowLimit",
-                                       self.AlarmButton.SubWindow.TT2416.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT2416.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2421/LowLimit",
-                                       self.AlarmButton.SubWindow.TT2421.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT2421.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2426/LowLimit",
-                                       self.AlarmButton.SubWindow.TT2426.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT2426.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2431/LowLimit",
-                                       self.AlarmButton.SubWindow.TT2431.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT2431.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2435/LowLimit",
-                                       self.AlarmButton.SubWindow.TT2435.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT2435.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2440/LowLimit",
-                                       self.AlarmButton.SubWindow.TT2440.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT2440.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT4330/LowLimit",
-                                       self.AlarmButton.SubWindow.TT4330.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT4330.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/LowLimit",
-                                       self.AlarmButton.SubWindow.TT6220.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT6220.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/LowLimit",
-                                       self.AlarmButton.SubWindow.TT6220.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT6220.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6221/LowLimit",
-                                       self.AlarmButton.SubWindow.TT6221.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT6221.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6222/LowLimit",
-                                       self.AlarmButton.SubWindow.TT6222.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT6222.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6223/LowLimit",
-                                       self.AlarmButton.SubWindow.TT6223.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.TT6223.Low_Limit.Field.text())
                 # set PT value
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT1101/LowLimit",
-                                       self.AlarmButton.SubWindow.PT1101.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT1101.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2316/LowLimit",
-                                       self.AlarmButton.SubWindow.PT2316.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT2316.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2321/LowLimit",
-                                       self.AlarmButton.SubWindow.PT2321.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT2321.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2330/LowLimit",
-                                       self.AlarmButton.SubWindow.PT2330.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT2330.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2335/LowLimit",
-                                       self.AlarmButton.SubWindow.PT2335.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT2335.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3308/LowLimit",
-                                       self.AlarmButton.SubWindow.PT3308.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT3308.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3309/LowLimit",
-                                       self.AlarmButton.SubWindow.PT3309.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT3309.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3310/LowLimit",
-                                       self.AlarmButton.SubWindow.PT3310.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT3310.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3311/LowLimit",
-                                       self.AlarmButton.SubWindow.PT3311.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT3311.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3314/LowLimit",
-                                       self.AlarmButton.SubWindow.PT3314.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT3314.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3320/LowLimit",
-                                       self.AlarmButton.SubWindow.PT3320.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT3320.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3333/LowLimit",
-                                       self.AlarmButton.SubWindow.PT3333.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT3333.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4306/LowLimit",
-                                       self.AlarmButton.SubWindow.PT4306.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT4306.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4315/LowLimit",
-                                       self.AlarmButton.SubWindow.PT4315.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT4315.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4319/LowLimit",
-                                       self.AlarmButton.SubWindow.PT4319.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT4319.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4322/LowLimit",
-                                       self.AlarmButton.SubWindow.PT4322.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT4322.Low_Limit.Field.text())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4325/LowLimit",
-                                       self.AlarmButton.SubWindow.PT4325.Low_limit.Field.text())
+                                       self.AlarmButton.SubWindow.PT4325.Low_Limit.Field.text())
 
                 # high limit
 
