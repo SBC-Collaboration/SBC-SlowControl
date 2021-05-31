@@ -3014,7 +3014,7 @@ class UpdateDataBase(QtCore.QObject):
                 print("Database Updating stopps.")
                 pass
 
-            time.sleep(4)
+            time.sleep(60)
 
     @QtCore.Slot()
     def stop(self):
