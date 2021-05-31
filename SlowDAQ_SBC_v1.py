@@ -1332,7 +1332,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 print(path)
                 self.customsettings = QtCore.QSettings(path, QtCore.QSettings.IniFormat)
 
-                
+
+
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/TT2111/CheckBox",
                                        self.AlarmButton.StatusWindow.TT2111.AlarmMode.isChecked())
                 self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/TT2401/CheckBox",
