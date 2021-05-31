@@ -209,15 +209,15 @@ class SetPoint(QtWidgets.QWidget):
         self.Field.setObjectName("value")
         self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
         self.Field.setStyleSheet(BORDER_STYLE + C_BLACK + FONT)
-        self.Field.editingFinished.connect(self.Updatevalue)
+        self.Field.editingFinished.connect(self.UpdateValue)
         self.value = 0
         self.Field.setText(str(self.value))
 
-    def Setvalue(self, value):
+    def SetValue(self, value):
         self.value = value
         self.Field.setText(format(value, '#.2f') + self.Unit)
 
-    def Updatevalue(self):
+    def UpdateValue(self):
         self.value = self.Field.text()
 
 
@@ -446,9 +446,9 @@ class BoolIndicator(QtWidgets.QWidget):
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Alarm = true]{" + C_ORANGE +
             "} QWidget[Alarm = false]{" + C_MEDIUM_GREY + "}")
         self.Field.setProperty("Alarm", False)
-        self.Setvalue("On")
+        self.SetValue("On")
 
-    def Setvalue(self, value):
+    def SetValue(self, value):
         self.value = value
         self.Field.setText(str(value))
 
@@ -496,9 +496,9 @@ class Indicator(QtWidgets.QWidget):
         self.Field.setProperty("Alarm", False)
 
         self.Unit = " °C"
-        self.Setvalue(0.)
+        self.SetValue(0.)
 
-    def Setvalue(self, value):
+    def SetValue(self, value):
         self.value = value
         self.Field.setText(format(value, '#.2f') + self.Unit)
 
@@ -552,14 +552,14 @@ class Control(QtWidgets.QWidget):
         self.Button.setStyleSheet(C_BLUE + C_WHITE + FONT + BORDER_RADIUS)
 
         self.Unit = " °C"
-        self.Setvalue(0.)
+        self.SetValue(0.)
 
         self.Max = 10.
         self.Min = -10.
         self.Step = 0.1
         self.Decimals = 1
 
-    def Setvalue(self, value):
+    def SetValue(self, value):
         self.value = value
         self.Button.setText(str(value) + self.Unit)
 
@@ -580,7 +580,7 @@ class Control(QtWidgets.QWidget):
         Dialog.setWindowTitle("Modify value")
         Dialog.exec()
         if Dialog.result():
-            self.Setvalue(Dialog.doublevalue())
+            self.SetValue(Dialog.doublevalue())
             self.Signals.fSignal.emit(self.value)
 
     def Activate(self, Activate):
@@ -766,9 +766,9 @@ class Position(QtWidgets.QWidget):
         self.Slider.setEnabled(False)
 
         self.SetLimits(-.88, 2.35)
-        self.Setvalue(0.)
+        self.SetValue(0.)
 
-    def Setvalue(self, value):
+    def SetValue(self, value):
         self.value = value
         self.Slider.setSliderPosition(value * 100)
         self.Field.setText(format(value, '#.2f') + "\"")
