@@ -151,6 +151,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LoginT.Label.setText("Login")
         self.LoginT.Button.setText("Guest")
 
+        #PLC test window
+        self.TT9998=Indicator(self.ThermosyphonTab)
+        self.TT9998.Label.setText("TT9998")
+        self.TT9998.move(0,900)
+
+        self.TT9999 = Indicator(self.ThermosyphonTab)
+        self.TT9999.Label.setText("TT9998")
+        self.TT9999.move(0, 950)
+
         self.GV4301 = PnID_Alone(self.ThermosyphonTab)
         self.GV4301.Label.setText("GV4301")
         self.GV4301.move(185, 110)
@@ -1333,7 +1342,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.customsettings = QtCore.QSettings(path, QtCore.QSettings.IniFormat)
 
 
-
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2111/CheckBox",
                                        self.AlarmButton.SubWindow.TT2111.AlarmMode.isChecked())
                 self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2401/CheckBox",
@@ -2201,6 +2209,7 @@ class RTDset4(QtWidgets.QMainWindow):
         self.TT2110.Label.setText("TT2110")
         self.GL.addWidget(self.TT2110, 1, 4)
 
+
 class AlarmWin(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -2213,6 +2222,16 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.resize(2000, 1100)
         self.setWindowTitle("Alarm Window")
         self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1100))
+
+
+        self.Tab=QtWidgets.QTabBar(self)
+
+        self.Tab.setShape(QtWidgets.QTabBar.RoundedWest)
+        self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
+        self.Tab.setGeometry(QtCore.QRect(0, 0, 2400, 1400))
+
+        self.PTTab=QtWidgets.QWidget()
+        self.Tab.addTab("Pressure Transducer Pannel")
 
         # variables usable for building widgets
         # i is row number, j is column number
@@ -2502,714 +2521,6 @@ class AlarmWin(QtWidgets.QMainWindow):
                 break
 
 
-# Defines a status subwindow
-class StatusWindow(QtWidgets.QMainWindow):
-    def __init__(self, parent=None):
-        super(StatusWindow, self).__init__(parent)
-
-        self.resize(2000, 1000)
-        self.setMinimumSize(2000, 1000)
-        self.setWindowTitle("Status Window")
-
-        # self.Widget = QtWidgets.QWidget()
-        self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
-
-
-    def thermosyphon(self):
-        # reset the size of the window
-        self.setMinimumSize(2000, 500)
-        self.resize(1000, 500)
-        self.setWindowTitle("Thermosyphon Status Window")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 500))
-
-        # set gridlayout
-        self.GL = QtWidgets.QGridLayout()
-        # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20, 20, 20, 20)
-        self.GL.setSpacing(20)
-        self.GL.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.Widget.setLayout(self.GL)
-
-        self.PV4307 = MultiStatusIndicator(self)
-        self.PV4307.Label.setText("PV4307")
-        self.GL.addWidget(self.PV4307, 0, 0)
-
-        self.PV4308 = MultiStatusIndicator(self)
-        self.PV4308.Label.setText("PV4308")
-        self.GL.addWidget(self.PV4308, 0, 1)
-
-        self.PV4317 = MultiStatusIndicator(self)
-        self.PV4317.Label.setText("PV4317")
-        self.GL.addWidget(self.PV4317, 0, 2)
-
-        self.PV4318 = MultiStatusIndicator(self)
-        self.PV4318.Label.setText("PV4318")
-        self.GL.addWidget(self.PV4318, 0, 3)
-
-        self.PV4321 = MultiStatusIndicator(self)
-        self.PV4321.Label.setText("PV4321")
-        self.GL.addWidget(self.PV4321, 0, 4)
-
-        self.PV4324 = MultiStatusIndicator(self)
-        self.PV4324.Label.setText("PV4324")
-        self.GL.addWidget(self.PV4324, 0, 5)
-
-        self.SV4327 = MultiStatusIndicator(self)
-        self.SV4327.Label.setText("SV4327")
-        self.GL.addWidget(self.SV4327, 1, 0)
-
-        self.SV4328 = MultiStatusIndicator(self)
-        self.SV4328.Label.setText("SV4328.")
-        self.GL.addWidget(self.SV4328, 1, 1)
-
-        self.SV4329= MultiStatusIndicator(self)
-        self.SV4329.Label.setText("SV4329")
-        self.GL.addWidget(self.SV4329, 1, 2)
-
-        self.SV4331 = MultiStatusIndicator(self)
-        self.SV4331.Label.setText("SV4331")
-        self.GL.addWidget(self.SV4331, 1, 3)
-
-        self.SV4332 = MultiStatusIndicator(self)
-        self.SV4332 .Label.setText("SV4332")
-        self.GL.addWidget(self.SV4332, 1, 4)
-
-
-
-    def RTDset1(self):
-        # reset the size of the window
-        self.setMinimumSize(1000, 500)
-        self.resize(1000, 500)
-        self.setWindowTitle("RTD SET 1")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
-
-        # set gridlayout
-        self.GL = QtWidgets.QGridLayout()
-        # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20, 20, 20, 20)
-        self.GL.setSpacing(20)
-        self.GL.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.Widget.setLayout(self.GL)
-
-        self.TT2111 = Indicator(self)
-        self.TT2111.Label.setText("TT2111")
-        self.GL.addWidget(self.TT2111, 0, 0)
-
-        self.TT2112 = Indicator(self)
-        self.TT2112.Label.setText("TT2112")
-        self.GL.addWidget(self.TT2112, 0, 1)
-
-        self.TT2113 = Indicator(self)
-        self.TT2113.Label.setText("TT2113")
-        self.GL.addWidget(self.TT2113, 0, 2)
-
-        self.TT2114 = Indicator(self)
-        self.TT2114.Label.setText("TT2114")
-        self.GL.addWidget(self.TT2114, 0, 3)
-
-        self.TT2115 = Indicator(self)
-        self.TT2115.Label.setText("TT2115")
-        self.GL.addWidget(self.TT2115, 0, 4)
-
-        self.TT2116 = Indicator(self)
-        self.TT2116.Label.setText("TT2116")
-        self.GL.addWidget(self.TT2116, 1, 0)
-
-        self.TT2117 = Indicator(self)
-        self.TT2117.Label.setText("TT2117")
-        self.GL.addWidget(self.TT2117, 1, 1)
-
-        self.TT2118 = Indicator(self)
-        self.TT2118.Label.setText("TT2118")
-        self.GL.addWidget(self.TT2118, 1, 2)
-
-        self.TT2119 = Indicator(self)
-        self.TT2119.Label.setText("TT2119")
-        self.GL.addWidget(self.TT2119, 1, 3)
-
-        self.TT2120 = Indicator(self)
-        self.TT2120.Label.setText("TT2120")
-        self.GL.addWidget(self.TT2120, 1, 4)
-
-    def RTDset2(self):
-        # reset the size of the window
-        self.setMinimumSize(1000, 500)
-        self.resize(1000, 500)
-        self.setWindowTitle("RTD SET 2")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
-
-        # set gridlayout
-        self.GL = QtWidgets.QGridLayout()
-        # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20, 20, 20, 20)
-        self.GL.setSpacing(20)
-        self.GL.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.Widget.setLayout(self.GL)
-
-        self.TT2401 = Indicator(self)
-        self.TT2401.Label.setText("TT2401")
-        self.GL.addWidget(self.TT2401, 0, 0)
-
-        self.TT2402 = Indicator(self)
-        self.TT2402.Label.setText("TT2402")
-        self.GL.addWidget(self.TT2402, 0, 1)
-
-        self.TT2403 = Indicator(self)
-        self.TT2403.Label.setText("TT2403")
-        self.GL.addWidget(self.TT2403, 0, 2)
-
-        self.TT2404 = Indicator(self)
-        self.TT2404.Label.setText("TT2404")
-        self.GL.addWidget(self.TT2404, 0, 3)
-
-        self.TT2405 = Indicator(self)
-        self.TT2405.Label.setText("TT2405")
-        self.GL.addWidget(self.TT2405, 0, 4)
-
-        self.TT2406 = Indicator(self)
-        self.TT2406.Label.setText("TT2406")
-        self.GL.addWidget(self.TT2406, 1, 0)
-
-        self.TT2407 = Indicator(self)
-        self.TT2407.Label.setText("TT2407")
-        self.GL.addWidget(self.TT2407, 1, 1)
-
-        self.TT2408 = Indicator(self)
-        self.TT2408.Label.setText("TT2408")
-        self.GL.addWidget(self.TT2408, 1, 2)
-
-        self.TT2409 = Indicator(self)
-        self.TT2409.Label.setText("TT2409")
-        self.GL.addWidget(self.TT2409, 1, 3)
-
-        self.TT2410 = Indicator(self)
-        self.TT2410.Label.setText("TT2410")
-        self.GL.addWidget(self.TT2410, 1, 4)
-
-        self.TT2411 = Indicator(self)
-        self.TT2411.Label.setText("TT2411")
-        self.GL.addWidget(self.TT2411, 2, 0)
-
-        self.TT2412 = Indicator(self)
-        self.TT2412.Label.setText("TT2412")
-        self.GL.addWidget(self.TT2412, 2, 1)
-
-        self.TT2413 = Indicator(self)
-        self.TT2413.Label.setText("TT2413")
-        self.GL.addWidget(self.TT2413, 2, 2)
-
-        self.TT2414 = Indicator(self)
-        self.TT2414.Label.setText("TT2414")
-        self.GL.addWidget(self.TT2414, 2, 3)
-
-        self.TT2415 = Indicator(self)
-        self.TT2415.Label.setText("TT2415")
-        self.GL.addWidget(self.TT2415, 2, 4)
-
-        self.TT2416 = Indicator(self)
-        self.TT2416.Label.setText("TT2416")
-        self.GL.addWidget(self.TT2416, 3, 0)
-
-        self.TT2417 = Indicator(self)
-        self.TT2417.Label.setText("TT2417")
-        self.GL.addWidget(self.TT2417, 3, 1)
-
-        self.TT2418 = Indicator(self)
-        self.TT2418.Label.setText("TT2418")
-        self.GL.addWidget(self.TT2418, 3, 2)
-
-        self.TT2419 = Indicator(self)
-        self.TT2419.Label.setText("TT2419")
-        self.GL.addWidget(self.TT2419, 3, 3)
-
-        self.TT2420 = Indicator(self)
-        self.TT2420.Label.setText("TT2420")
-        self.GL.addWidget(self.TT2420, 3, 4)
-
-        self.TT2421 = Indicator(self)
-        self.TT2421.Label.setText("TT2421")
-        self.GL.addWidget(self.TT2421, 4, 0)
-
-        self.TT2422 = Indicator(self)
-        self.TT2422.Label.setText("TT2422")
-        self.GL.addWidget(self.TT2422, 4, 1)
-
-        self.TT2423 = Indicator(self)
-        self.TT2423.Label.setText("TT2423")
-        self.GL.addWidget(self.TT2423, 4, 2)
-
-        self.TT2424 = Indicator(self)
-        self.TT2424.Label.setText("TT2424")
-        self.GL.addWidget(self.TT2424, 4, 3)
-
-        self.TT2425 = Indicator(self)
-        self.TT2425.Label.setText("TT2425")
-        self.GL.addWidget(self.TT2425, 4, 4)
-
-        self.TT2426 = Indicator(self)
-        self.TT2426.Label.setText("TT2426")
-        self.GL.addWidget(self.TT2426, 5, 0)
-
-        self.TT2427 = Indicator(self)
-        self.TT2427.Label.setText("TT2427")
-        self.GL.addWidget(self.TT2427, 5, 1)
-
-        self.TT2428 = Indicator(self)
-        self.TT2428.Label.setText("TT2428")
-        self.GL.addWidget(self.TT2428, 5, 2)
-
-        self.TT2429 = Indicator(self)
-        self.TT2429.Label.setText("TT2429")
-        self.GL.addWidget(self.TT2429, 5, 3)
-
-        self.TT2430 = Indicator(self)
-        self.TT2430.Label.setText("TT2430")
-        self.GL.addWidget(self.TT2430, 5, 4)
-
-        self.TT2431 = Indicator(self)
-        self.TT2431.Label.setText("TT2431")
-        self.GL.addWidget(self.TT2431, 6, 0)
-
-        self.TT2432 = Indicator(self)
-        self.TT2432.Label.setText("TT2432")
-        self.GL.addWidget(self.TT2432, 6, 1)
-
-        self.GroupBox = QtWidgets.QGroupBox(self.Widget)
-        self.GroupBox.setTitle("RTD SET2")
-        self.GroupBox.setLayout(self.GL)
-        self.GroupBox.setStyleSheet("background-color:transparent;")
-
-    def RTDset3(self):
-        # reset the size of the window
-        self.setMinimumSize(1000, 500)
-        self.resize(1000, 500)
-        self.setWindowTitle("RTD SET 3")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
-
-        # set gridlayout
-        self.GL = QtWidgets.QGridLayout()
-        # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20, 20, 20, 20)
-        self.GL.setSpacing(20)
-        self.GL.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.Widget.setLayout(self.GL)
-
-        self.TT2435 = Indicator(self)
-        self.TT2435.Label.setText("TT2435")
-        self.GL.addWidget(self.TT2435, 0, 0)
-
-        self.TT2436 = Indicator(self)
-        self.TT2436.Label.setText("TT2436")
-        self.GL.addWidget(self.TT2436, 0, 1)
-
-        self.TT2437 = Indicator(self)
-        self.TT2437.Label.setText("TT2437")
-        self.GL.addWidget(self.TT2437, 0, 2)
-
-        self.TT2438 = Indicator(self)
-        self.TT2438.Label.setText("TT2438")
-        self.GL.addWidget(self.TT2438, 0, 3)
-
-        self.TT2439 = Indicator(self)
-        self.TT2439.Label.setText("TT2439")
-        self.GL.addWidget(self.TT2439, 0, 4)
-
-        self.TT2440 = Indicator(self)
-        self.TT2440.Label.setText("TT2440")
-        self.GL.addWidget(self.TT2440, 1, 0)
-
-        self.TT2441 = Indicator(self)
-        self.TT2441.Label.setText("TT2441")
-        self.GL.addWidget(self.TT2441, 1, 1)
-
-        self.TT2442 = Indicator(self)
-        self.TT2442.Label.setText("TT2442")
-        self.GL.addWidget(self.TT2442, 1, 2)
-
-        self.TT2443 = Indicator(self)
-        self.TT2443.Label.setText("TT2443")
-        self.GL.addWidget(self.TT2443, 1, 3)
-
-        self.TT2444 = Indicator(self)
-        self.TT2444.Label.setText("TT2444")
-        self.GL.addWidget(self.TT2444, 1, 4)
-
-        self.TT2445 = Indicator(self)
-        self.TT2445.Label.setText("TT2445")
-        self.GL.addWidget(self.TT2445, 2, 0)
-
-        self.TT2446 = Indicator(self)
-        self.TT2446.Label.setText("TT2446")
-        self.GL.addWidget(self.TT2446, 2, 1)
-
-        self.TT2447 = Indicator(self)
-        self.TT2447.Label.setText("TT2447")
-        self.GL.addWidget(self.TT2447, 2, 2)
-
-        self.TT2448 = Indicator(self)
-        self.TT2448.Label.setText("TT2448")
-        self.GL.addWidget(self.TT2448, 2, 3)
-
-        self.TT2449 = Indicator(self)
-        self.TT2449.Label.setText("TT2449")
-        self.GL.addWidget(self.TT2449, 2, 4)
-
-    def RTDset4(self):
-        # reset the size of the window
-        self.setMinimumSize(1000, 500)
-        self.resize(1000, 500)
-        self.setWindowTitle("RTD SET 4")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
-
-        # set gridlayout
-        self.GL = QtWidgets.QGridLayout()
-        # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20, 20, 20, 20)
-        self.GL.setSpacing(20)
-        self.GL.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.Widget.setLayout(self.GL)
-
-        self.TT2101 = Indicator(self)
-        self.TT2101.Label.setText("TT2101")
-        self.GL.addWidget(self.TT2101, 0, 0)
-
-        self.TT2102 = Indicator(self)
-        self.TT2102.Label.setText("TT2102")
-        self.GL.addWidget(self.TT2102, 0, 1)
-
-        self.TT2103 = Indicator(self)
-        self.TT2103.Label.setText("TT2103")
-        self.GL.addWidget(self.TT2103, 0, 2)
-
-        self.TT2104 = Indicator(self)
-        self.TT2104.Label.setText("TT2104")
-        self.GL.addWidget(self.TT2104, 0, 3)
-
-        self.TT2105 = Indicator(self)
-        self.TT2105.Label.setText("TT2105")
-        self.GL.addWidget(self.TT2105, 0, 4)
-
-        self.TT2106 = Indicator(self)
-        self.TT2106.Label.setText("TT2106")
-        self.GL.addWidget(self.TT2106, 1, 0)
-
-        self.TT2107 = Indicator(self)
-        self.TT2107.Label.setText("TT2107")
-        self.GL.addWidget(self.TT2107, 1, 1)
-
-        self.TT2108 = Indicator(self)
-        self.TT2108.Label.setText("TT2108")
-        self.GL.addWidget(self.TT2108, 1, 2)
-
-        self.TT2109 = Indicator(self)
-        self.TT2109.Label.setText("TT2109")
-        self.GL.addWidget(self.TT2109, 1, 3)
-
-        self.TT2110 = Indicator(self)
-        self.TT2110.Label.setText("TT2110")
-        self.GL.addWidget(self.TT2110, 1, 4)
-
-    def AlarmWindow(self):
-        # reset the size of the window
-        self.setMinimumSize(2000, 1100)
-        self.resize(2000, 1100)
-        self.setWindowTitle("Alarm Window")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1100))
-
-        # variables usable for building widgets
-        # i is row number, j is column number
-        # TT is for temperature transducer while PT is for pressure transducer
-        # max is max row and column number
-        # last is the last widget's row and column index in gridbox
-        i_TT_max = 3
-        j_TT_max = 5
-        i_PT_max = 4
-        j_PT_max = 5
-        i_TT_last = 2
-        j_TT_last = 4
-        i_PT_last = 3
-        j_PT_last = 1
-
-        # Groupboxs for alarm/PT/TT
-        self.GLTT = QtWidgets.QGridLayout()
-        # self.GLTT = QtWidgets.QGridLayout(self)
-        self.GLTT.setContentsMargins(20, 20, 20, 20)
-        self.GLTT.setSpacing(20)
-        self.GLTT.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.GroupTT = QtWidgets.QGroupBox(self.Widget)
-        self.GroupTT.setTitle("Temperature Transducer")
-        self.GroupTT.setLayout(self.GLTT)
-        self.GroupTT.move(0, 0)
-
-        self.GLPT = QtWidgets.QGridLayout()
-        # self.GLPT = QtWidgets.QGridLayout(self)
-        self.GLPT.setContentsMargins(20, 20, 20, 20)
-        self.GLPT.setSpacing(20)
-        self.GLPT.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.GroupPT = QtWidgets.QGroupBox(self.Widget)
-        self.GroupPT.setTitle("Pressure Transducer")
-        self.GroupPT.setLayout(self.GLPT)
-        self.GroupPT.move(0, 500)
-
-        self.TT2111 = AlarmStatusWidget(self)
-        self.TT2111.Label.setText("TT2111")
-
-        self.TT2401= AlarmStatusWidget(self)
-        self.TT2401.Label.setText("TT2401")
-
-        self.TT2406 = AlarmStatusWidget(self)
-        self.TT2406.Label.setText("TT2406")
-
-        self.TT2411 = AlarmStatusWidget(self)
-        self.TT2411.Label.setText("TT2411")
-
-        self.TT2416 = AlarmStatusWidget(self)
-        self.TT2416.Label.setText("TT2416")
-
-        self.TT2421 = AlarmStatusWidget(self)
-        self.TT2421.Label.setText("TT2421")
-
-        self.TT2426 = AlarmStatusWidget(self)
-        self.TT2426.Label.setText("TT2426")
-
-        self.TT2431 = AlarmStatusWidget(self)
-        self.TT2431.Label.setText("TT2431")
-
-        self.TT2435 = AlarmStatusWidget(self)
-        self.TT2435.Label.setText("TT2435")
-
-        self.TT2440 = AlarmStatusWidget(self)
-        self.TT2440.Label.setText("TT2440")
-
-        self.TT4330 = AlarmStatusWidget(self)
-        self.TT4330.Label.setText("TT4330")
-
-        self.TT6220 = AlarmStatusWidget(self)
-        self.TT6220.Label.setText("TT6220")
-
-        self.TT6221 = AlarmStatusWidget(self)
-        self.TT6221.Label.setText("TT6221")
-
-        self.TT6222 = AlarmStatusWidget(self)
-        self.TT6222.Label.setText("TT6222")
-
-        self.TT6223 = AlarmStatusWidget(self)
-        self.TT6223.Label.setText("TT6223")
-
-        #PT part
-        self.PT1101 = AlarmStatusWidget(self)
-        self.PT1101.Label.setText("PT1101")
-
-        self.PT2316 = AlarmStatusWidget(self)
-        self.PT2316.Label.setText("PT2316")
-
-        self.PT2321 = AlarmStatusWidget(self)
-        self.PT2321.Label.setText("PT2321")
-
-        self.PT2330 = AlarmStatusWidget(self)
-        self.PT2330.Label.setText("PT2330")
-
-        self.PT2335 = AlarmStatusWidget(self)
-        self.PT2335.Label.setText("PT2335")
-
-        self.PT3308 = AlarmStatusWidget(self)
-        self.PT3308.Label.setText("PT3308")
-
-        self.PT3309 = AlarmStatusWidget(self)
-        self.PT3309.Label.setText("PT3309")
-
-        self.PT3310 = AlarmStatusWidget(self)
-        self.PT3310.Label.setText("PT3310")
-
-        self.PT3311 = AlarmStatusWidget(self)
-        self.PT3311.Label.setText("PT3311")
-
-        self.PT3114 = AlarmStatusWidget(self)
-        self.PT3114.Label.setText("PT3114")
-
-        self.PT3320 = AlarmStatusWidget(self)
-        self.PT3320.Label.setText("PT3320")
-
-        self.PT3333 = AlarmStatusWidget(self)
-        self.PT3333.Label.setText("PT3333")
-
-        self.PT4306 = AlarmStatusWidget(self)
-        self.PT4306.Label.setText("PT4306")
-
-        self.PT4315 = AlarmStatusWidget(self)
-        self.PT4315.Label.setText("PT4315")
-
-        self.PT4319 = AlarmStatusWidget(self)
-        self.PT4319.Label.setText("PT4319")
-
-        self.PT4322 = AlarmStatusWidget(self)
-        self.PT4322.Label.setText("PT4322")
-
-        self.PT4325 = AlarmStatusWidget(self)
-        self.PT4325.Label.setText("PT4325")
-
-        # make a directory for the alarm instrument and assign instrument to certain position
-        self.AlarmTTdir = {0: {0: self.TT2111, 1: self.TT2401, 2: self.TT2406, 3: self.TT2411, 4: self.TT2416},
-                           1: {0: self.TT2421, 1: self.TT2426, 2: self.TT2431, 3: self.TT2435, 4: self.TT2440},
-                           2: {0: self.TT4330, 1: self.TT6220, 2: self.TT6221, 3: self.TT6222, 4: self.TT6223}}
-
-        self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
-                           1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3114},
-                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
-                           3: {0: self.PT4322, 1: self.PT4325}}
-
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                self.GLTT.addWidget(self.AlarmTTdir[i][j], i, j)
-                # end the position generator when i= last element's row number, j= last element's column number
-                if (i, j) == (i_TT_last, j_TT_last):
-                    break
-            if (i, j) == (i_TT_last, j_TT_last):
-                break
-
-        for i in range(0, i_PT_max):
-            for j in range(0, j_PT_max):
-                self.GLPT.addWidget(self.AlarmPTdir[i][j], i, j)
-                # end the position generator when i= last element's row number -1, j= last element's column number
-                if (i, j) == (i_PT_last, j_PT_last):
-                    break
-            if (i, j) == (i_PT_last, j_PT_last):
-                break
-
-        # self.CheckButton = CheckButton(self)
-        # self.CheckButton.move(1200, 100)
-        # change it to self.TT.checkalarm
-        # self.CheckButton.CheckButton.clicked.connect(self.TT4330.CheckAlarm)
-        # self.CheckButton.CheckButton.clicked.connect(self.PT4306.CheckAlarm)
-        # self.CheckButton.CheckButton.clicked.connect(self.PT4315.CheckAlarm)
-        # self.CheckButton.CheckButton.clicked.connect(self.PT4319.CheckAlarm)
-        # self.CheckButton.CheckButton.clicked.connect(self.PT4322.CheckAlarm)
-        # self.CheckButton.CheckButton.clicked.connect(self.PT4325.CheckAlarm)
-        # rewrite collectalarm in updatedisplay
-        # self.CheckButton.CheckButton.clicked.connect(lambda x:
-        # self.CheckButton.CollectAlarm(self.TT4330, self.PT4306, self.PT4315, self.PT4319, self.PT4322, self.PT4325))
-        # generally checkbutton.clicked -> move to updatedisplay
-        # self.CheckButton.CheckButton.clicked.connect(self.ReassignOrder)
-
-    @QtCore.Slot()
-    def ReassignOrder(self):
-        # check the status of the Widget and reassign the diretory
-        # establish 2 diretory, reorder TempDic to reorder the widgets
-        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
-        # i_max, j_max are max row and column number
-        # l max are max column number+1
-        # i_last,j_last are last elements's diretory coordinate
-        TempRefTTdir = {0: {0: self.TT2111, 1: self.TT2401, 2: self.TT2406, 3: self.TT2411, 4: self.TT2416},
-                           1: {0: self.TT2421, 1: self.TT2426, 2: self.TT2431, 3: self.TT2435, 4: self.TT2440},
-                           2: {0: self.TT4330, 1: self.TT6220, 2: self.TT6221, 3: self.TT6222, 4: self.TT6223}}
-        TempRefPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
-                           1: {0: self.PT3114, 1: self.PT3308, 2: self.PT3309, 3: self.PT3309, 4: self.PT3311},
-                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
-                           3: {0: self.PT4322, 1: self.PT4325}}
-        TempTTdir = {0: {0: self.TT2111, 1: self.TT2401, 2: self.TT2406, 3: self.TT2411, 4: self.TT2416},
-                           1: {0: self.TT2421, 1: self.TT2426, 2: self.TT2431, 3: self.TT2435, 4: self.TT2440},
-                           2: {0: self.TT4330, 1: self.TT6220, 2: self.TT6221, 3: self.TT6222, 4: self.TT6223}}
-        TempPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
-                           1: {0: self.PT3114, 1: self.PT3308, 2: self.PT3309, 3: self.PT3309, 4: self.PT3311},
-                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
-                           3: {0: self.PT4322, 1: self.PT4325}}
-        #l_TT_max is max number of column
-        l_TT = 0
-        k_TT = 0
-        l_PT = 0
-        k_PT = 0
-        i_TT_max = 3
-        j_TT_max = 5
-        i_PT_max = 4
-        j_PT_max = 5
-        l_TT_max = 4
-        l_PT_max = 4
-        i_TT_last = 2
-        j_TT_last = 4
-        i_PT_last = 3
-        j_PT_last = 1
-        # TT put alarm true widget to the begining of the diretory
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                if TempRefTTdir[i][j].Alarm:
-                    TempTTdir[k_TT][l_TT] = TempRefTTdir[i][j]
-                    l_TT = l_TT + 1
-                    if l_TT == l_TT_max:
-                        l_TT = 0
-                        k_TT = k_TT + 1
-                if (i, j) == (i_TT_last, j_TT_last):
-                    break
-            if (i, j) == (i_TT_last, j_TT_last):
-                break
-
-        # TT put alarm false widget after that
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                if not TempRefTTdir[i][j].Alarm:
-                    TempTTdir[k_TT][l_TT] = TempRefTTdir[i][j]
-                    l_TT = l_TT + 1
-                    if l_TT == l_TT_max:
-                        l_TT = 0
-                        k_TT = k_TT + 1
-                if (i, j) == (i_TT_last, j_TT_last):
-                    break
-            if (i, j) == (i_TT_last, j_TT_last):
-                break
-
-        # PT
-        for i in range(0, i_PT_max):
-            for j in range(0, j_PT_max):
-                if TempRefPTdir[i][j].Alarm:
-                    TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
-                    l_PT = l_PT + 1
-                    if l_PT == l_PT_max:
-                        l_PT = 0
-                        k_PT = k_PT + 1
-                if (i, j) == (i_PT_last, j_PT_last):
-                    break
-            if (i, j) == (i_PT_last, j_PT_last):
-                break
-
-        for i in range(0, i_PT_max):
-            for j in range(0, j_PT_max):
-                if not TempRefPTdir[i][j].Alarm:
-                    TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
-                    l_PT = l_PT + 1
-                    if l_PT == l_PT_max:
-                        l_PT = 0
-                        k_PT = k_PT + 1
-                    if (i, j) == (i_PT_last, j_PT_last):
-                        break
-                if (i, j) == (i_PT_last, j_PT_last):
-                    break
-
-        # Reassign position
-        # end the position generator when i= last element's row number, j= last element's column number
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                self.GLTT.addWidget(TempTTdir[i][j], i, j)
-                if (i, j) == (i_TT_last, j_TT_last):
-                    break
-            if (i, j) == (i_TT_last, j_TT_last):
-                break
-        # end the position generator when i= last element's row number, j= last element's column number
-        for i in range(0, i_PT_max):
-            for j in range(0, j_PT_max):
-                self.GLPT.addWidget(TempPTdir[i][j], i, j)
-                if (i, j) == (i_PT_last, j_PT_last):
-                    break
-            if (i, j) == (i_PT_last, j_PT_last):
-                break
-
-
 class HeaterSubWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(HeaterSubWindow, self).__init__(parent)
@@ -3235,6 +2546,40 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.HL.setAlignment(QtCore.Qt.AlignCenter)
         self.VL.addLayout(self.HL)
 
+class TabBar(QtWidgets.QTabBar):
+    def tabSizeHint(self, index):
+        s = QtWidgets.QTabBar.tabSizeHint(self, index)
+        s.transpose()
+        return s
+
+    def paintEvent(self, event):
+        painter = QtWidgets.QStylePainter(self)
+        opt = QtWidgets.QStyleOptionTab()
+
+        for i in range(self.count()):
+            self.initStyleOption(opt, i)
+            painter.drawControl(QtWidgets.QStyle.CE_TabBarTabShape, opt)
+            painter.save()
+
+            s = opt.rect.size()
+            s.transpose()
+            r = QtCore.QRect(QtCore.QPoint(), s)
+            r.moveCenter(opt.rect.center())
+            opt.rect = r
+
+            c = self.tabRect(i).center()
+            painter.translate(c)
+            painter.rotate(90)
+            painter.translate(-c)
+            painter.drawControl(QtWidgets.QStyle.CE_TabBarTabLabel, opt);
+            painter.restore()
+
+
+class TabWidget(QtWidgets.QTabWidget):
+    def __init__(self, *args, **kwargs):
+        QtWidgets.QTabWidget.__init__(self, *args, **kwargs)
+        self.setTabBar(TabBar(self))
+        self.setTabPosition(QtWidgets.QTabWidget.West)
 
 # Define a function tab that shows the status of the widgets
 
@@ -3761,7 +3106,8 @@ class UpdateDataBase(QtCore.QObject):
 
                 if self.MW.T.NewData_Database:
                     print("Wrting TPLC data to database...")
-                    self.db.insert_data_into_datastorage("TT9999", self.dt, self.MW.T.RTD[6])
+                    self.db.insert_data_into_datastorage("TT9998", self.dt, self.MW.T.RTD[6])
+                    self.db.insert_data_into_datastorage("TT9999", self.dt, self.MW.T.RTD[7])
                     self.MW.T.NewData_Database = False
 
                 if self.MW.P.NewData_Database:
@@ -3801,7 +3147,8 @@ class UpdateDisplay(QtCore.QObject):
             #     print(i, self.MW.T.RTD[i])
 
             if self.MW.T.NewData_Display:
-                self.MW.TT4330.SetValue(self.MW.T.RTD[6])
+                self.MW.TT9998.SetValue(self.MW.T.RTD[6])
+                self.MW.TT9999.SetValue(self.MW.T.RTD[7])
                 self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.T.RTD[0])
                 self.MW.RTDSET1Button.SubWindow.TT2112.SetValue(self.MW.T.RTD[1])
                 self.MW.RTDSET1Button.SubWindow.TT2113.SetValue(self.MW.T.RTD[2])
