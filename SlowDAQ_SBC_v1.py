@@ -41,6 +41,13 @@ ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bd
                  "31c12bff0da3a2314ca2266"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px; border-color: black;"
 
+def TwoD_into_OneD(Twod_array):
+    Oned_array=[]
+    for i in range(0,len(Twod_array)):
+        for j in range(0,len(Twod_array[0])):
+            Oned_array.append(Twod_array[i][j])
+    return Oned_array
+
 
 # Main class
 # This is designed for linux system
@@ -2377,39 +2384,39 @@ class AlarmWin(QtWidgets.QMainWindow):
         # TT is for temperature transducer while PT is for pressure transducer
         # max is max row and column number
         # last is the last widget's row and column index in gridbox
-        i_TT_max = len(self.AlarmTTdir)
+        self.i_TT_max = len(self.AlarmTTdir)
         # which is 3
-        j_TT_max = len(self.AlarmTTdir[0])
+        self.j_TT_max = len(self.AlarmTTdir[0])
         # which is 5
-        i_PT_max = len(self.AlarmPTdir)
+        self.i_PT_max = len(self.AlarmPTdir)
         #which is 4
-        j_PT_max = len(self.AlarmPTdir[0])
+        self.j_PT_max = len(self.AlarmPTdir[0])
         #which is 5
-        i_TT_last = len(self.AlarmTTdir)-1
+        self.i_TT_last = len(self.AlarmTTdir)-1
         # which is 2
-        j_TT_last = len(self.AlarmTTdir[i_TT_last])-1
+        self.j_TT_last = len(self.AlarmTTdir[self.i_TT_last])-1
         #which is 4
-        i_PT_last = len(self.AlarmPTdir)-1
+        self.i_PT_last = len(self.AlarmPTdir)-1
         #which is 3
-        j_PT_last = len(self.AlarmPTdir[i_PT_last])-1
+        self.j_PT_last = len(self.AlarmPTdir[self.i_PT_last])-1
         #which is 1
 
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
+        for i in range(0, self.i_TT_max):
+            for j in range(0, self.j_TT_max):
                 self.GLTT.addWidget(self.AlarmTTdir[i][j], i, j)
                 # end the position generator when i= last element's row number, j= last element's column number
-                if (i, j) == (i_TT_last, j_TT_last):
+                if (i, j) == (self.i_TT_last, self.j_TT_last):
                     break
-            if (i, j) == (i_TT_last, j_TT_last):
+            if (i, j) == (self.i_TT_last, self.j_TT_last):
                 break
 
-        for i in range(0, i_PT_max):
-            for j in range(0, j_PT_max):
+        for i in range(0, self.i_PT_max):
+            for j in range(0, self.j_PT_max):
                 self.GLPT.addWidget(self.AlarmPTdir[i][j], i, j)
                 # end the position generator when i= last element's row number -1, j= last element's column number
-                if (i, j) == (i_PT_last, j_PT_last):
+                if (i, j) == (self.i_PT_last, self.j_PT_last):
                     break
-            if (i, j) == (i_PT_last, j_PT_last):
+            if (i, j) == (self.i_PT_last, self.j_PT_last):
                 break
 
 
@@ -2639,11 +2646,11 @@ class AlarmButton(QtWidgets.QWidget):
         self.Button.setStyle(self.Button.style())
 
     @QtCore.Slot()
-    def CollectAlarm(self, *args):
+    def CollectAlarm(self, list):
         self.Collected = False
-        for i in range(len(args)):
+        for i in range(len(list)):
             # calculate collected alarm status
-            self.Collected = self.Collected or args[i].Alarm
+            self.Collected = self.Collected or list[i].Alarm
         self.Button.Alarm = self.Collected
 
 
@@ -3275,7 +3282,15 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.P.NewData_Display = False
 
             # Check if alarm values are met and set them
-            self.MW.AlarmButton.SubWindow.TT2216.CheckAlarm()
+            # for i in range(0,self.MW.AlarmButton.SubWindow.i_TT_max):
+            #     for j in range(0,self.MW.AlarmButton.SubWindow.j_TT_max):
+            #         self.MW.AlarmButton.SubWindow.AlarmTTdir[i][j].CheckAlarm()
+            #
+            # for i in range(0,self.MW.AlarmButton.SubWindow.i_PT_max):
+            #     for j in range(0,self.MW.AlarmButton.SubWindow.j_PT_max):
+            #         self.MW.AlarmButton.SubWindow.AlarmPTdir[i][j].CheckAlarm()
+
+            self.MW.AlarmButton.SubWindow.TT2111.CheckAlarm()
             self.MW.AlarmButton.SubWindow.TT2401.CheckAlarm()
             self.MW.AlarmButton.SubWindow.TT2406.CheckAlarm()
             self.MW.AlarmButton.SubWindow.TT2411.CheckAlarm()
@@ -3285,58 +3300,68 @@ class UpdateDisplay(QtCore.QObject):
             self.MW.AlarmButton.SubWindow.TT2431.CheckAlarm()
             self.MW.AlarmButton.SubWindow.TT2435.CheckAlarm()
             self.MW.AlarmButton.SubWindow.TT2440.CheckAlarm()
+            self.MW.AlarmButton.SubWindow.TT4330.CheckAlarm()
+            self.MW.AlarmButton.SubWindow.TT6220.CheckAlarm()
+            self.MW.AlarmButton.SubWindow.TT6221.CheckAlarm()
+            self.MW.AlarmButton.SubWindow.TT6222.CheckAlarm()
+            self.MW.AlarmButton.SubWindow.TT6223.CheckAlarm()
 
             self.MW.AlarmButton.SubWindow.PT1101.CheckAlarm()
-            self.MW.AlarmButton.SubWindow.PT2121.CheckAlarm()
-            self.MW.AlarmButton.SubWindow.PT2335.CheckAlarm()
-            self.MW.AlarmButton.SubWindow.PT2330.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT2316.CheckAlarm()
+            self.MW.AlarmButton.SubWindow.PT2321.CheckAlarm()
+            self.MW.AlarmButton.SubWindow.PT2330.CheckAlarm()
+            self.MW.AlarmButton.SubWindow.PT2335.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT3308.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT3309.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT3310.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT3311.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT3314.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT3320.CheckAlarm()
-            self.MW.AlarmButton.SubWindow.PT3332.CheckAlarm()
-            self.MW.AlarmButton.SubWindow.PT3335.CheckAlarm()
+            self.MW.AlarmButton.SubWindow.PT3333.CheckAlarm()
+            self.MW.AlarmButton.SubWindow.PT4306.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT4315.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT4319.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT4322.CheckAlarm()
             self.MW.AlarmButton.SubWindow.PT4325.CheckAlarm()
-            #
+
             # # # rewrite collectalarm in updatedisplay
-            self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.SubWindow.TT2216,
-                                             self.MW.AlarmButton.SubWindow.TT2401,
-                                             self.MW.AlarmButton.SubWindow.TT2406,
-                                             self.MW.AlarmButton.SubWindow.TT2411,
-                                             self.MW.AlarmButton.SubWindow.TT2416,
-                                             self.MW.AlarmButton.SubWindow.TT2421,
-                                             self.MW.AlarmButton.SubWindow.TT2426,
-                                             self.MW.AlarmButton.SubWindow.TT2431,
-                                             self.MW.AlarmButton.SubWindow.TT2435,
-                                             self.MW.AlarmButton.SubWindow.TT2440,
-                                             self.MW.AlarmButton.SubWindow.PT1101,
-                                             self.MW.AlarmButton.SubWindow.PT2121,
-                                             self.MW.AlarmButton.SubWindow.PT2335,
-                                             self.MW.AlarmButton.SubWindow.PT2330,
-                                             self.MW.AlarmButton.SubWindow.PT2316,
-                                             self.MW.AlarmButton.SubWindow.PT3308,
-                                             self.MW.AlarmButton.SubWindow.PT3309,
-                                             self.MW.AlarmButton.SubWindow.PT3310,
-                                             self.MW.AlarmButton.SubWindow.PT3311,
-                                             self.MW.AlarmButton.SubWindow.PT3314,
-                                             self.MW.AlarmButton.SubWindow.PT3320,
-                                             self.MW.AlarmButton.SubWindow.PT3332,
-                                             self.MW.AlarmButton.SubWindow.PT3335,
-                                             self.MW.AlarmButton.SubWindow.PT4315,
-                                             self.MW.AlarmButton.SubWindow.PT4319,
-                                             self.MW.AlarmButton.SubWindow.PT4322,
-                                             self.MW.AlarmButton.SubWindow.PT4325)
+            # TT_array=TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmTTdir)
+            # PT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmPTdir)
+            # array=TT_array+PT_array
+            # self.MW.AlarmButton.CollectAlarm(array)
+
+            # self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.SubWindow.TT2111,
+            #                                  self.MW.AlarmButton.SubWindow.TT2401,
+            #                                  self.MW.AlarmButton.SubWindow.TT2406,
+            #                                  self.MW.AlarmButton.SubWindow.TT2411,
+            #                                  self.MW.AlarmButton.SubWindow.TT2416,
+            #                                  self.MW.AlarmButton.SubWindow.TT2421,
+            #                                  self.MW.AlarmButton.SubWindow.TT2426,
+            #                                  self.MW.AlarmButton.SubWindow.TT2431,
+            #                                  self.MW.AlarmButton.SubWindow.TT2435,
+            #                                  self.MW.AlarmButton.SubWindow.TT2440,
+            #                                  self.MW.AlarmButton.SubWindow.PT1101,
+            #                                  self.MW.AlarmButton.SubWindow.PT2121,
+            #                                  self.MW.AlarmButton.SubWindow.PT2335,
+            #                                  self.MW.AlarmButton.SubWindow.PT2330,
+            #                                  self.MW.AlarmButton.SubWindow.PT2316,
+            #                                  self.MW.AlarmButton.SubWindow.PT3308,
+            #                                  self.MW.AlarmButton.SubWindow.PT3309,
+            #                                  self.MW.AlarmButton.SubWindow.PT3310,
+            #                                  self.MW.AlarmButton.SubWindow.PT3311,
+            #                                  self.MW.AlarmButton.SubWindow.PT3314,
+            #                                  self.MW.AlarmButton.SubWindow.PT3320,
+            #                                  self.MW.AlarmButton.SubWindow.PT3332,
+            #                                  self.MW.AlarmButton.SubWindow.PT3335,
+            #                                  self.MW.AlarmButton.SubWindow.PT4315,
+            #                                  self.MW.AlarmButton.SubWindow.PT4319,
+            #                                  self.MW.AlarmButton.SubWindow.PT4322,
+            #                                  self.MW.AlarmButton.SubWindow.PT4325)
             #
             #
-            self.MW.AlarmButton.ButtonAlarmSignal()
+            # self.MW.AlarmButton.ButtonAlarmSignal()
             # # # generally checkbutton.clicked -> move to updatedisplay
-            self.MW.AlarmButton.SubWindow.ReassignOrder()
+            # self.MW.AlarmButton.SubWindow.ReassignOrder()
 
             # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
             #     self.MW.PT1.SetAlarm()
