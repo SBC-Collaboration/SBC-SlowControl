@@ -2238,36 +2238,26 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.setWindowTitle("Alarm Window")
         self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1100))
 
-        # self.Tab = QtWidgets.QTabWidget(self)
-        # self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
-        # self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
-        # self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
-        # self.Tab.setGeometry(QtCore.QRect(0, 0, 2400, 1400))
+        self.Tab = QtWidgets.QTabWidget(self)
+        self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
+        self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
+        self.Tab.setGeometry(QtCore.QRect(0, 0, 2400, 1400))
 
-        # self.PressureTab=QtWidgets.QTabWidget(self.Tab)
-        # self.Tab.addTab(self.PressureTab,"Pressure Transducers")
-        #
-        # self.RTDSET12Tab=QtWidgets.QTabWidget(self.Tab)
-        # self.Tab.addTab(self.RTDSET12Tab, "RTD SET 1&2")
-        #
-        # self.RTDSET34Tab = QtWidgets.QTabWidget(self.Tab)
-        # self.Tab.addTab(self.RTDSET34Tab, "RTD SET 3&4")
-        #
-        # self.RTDLEFTTab = QtWidgets.QTabWidget(self.Tab)
-        # self.Tab.addTab(self.RTDLEFTTab, "HEATER RTDs and ETC")
+        self.PressureTab=QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.PressureTab,"Pressure Transducers")
+
+        self.RTDSET12Tab=QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.RTDSET12Tab, "RTD SET 1&2")
+
+        self.RTDSET34Tab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.RTDSET34Tab, "RTD SET 3&4")
+
+        self.RTDLEFTTab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.RTDLEFTTab, "HEATER RTDs and ETC")
 
 
         # Groupboxs for alarm/PT/TT
-        self.GLTT = QtWidgets.QGridLayout()
-        # self.GLTT = QtWidgets.QGridLayout(self)
-        self.GLTT.setContentsMargins(20, 20, 20, 20)
-        self.GLTT.setSpacing(20)
-        self.GLTT.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.GroupTT = QtWidgets.QGroupBox(self.Widget)
-        self.GroupTT.setTitle("Temperature Transducer")
-        self.GroupTT.setLayout(self.GLTT)
-        self.GroupTT.move(0, 0)
 
         self.GLPT = QtWidgets.QGridLayout()
         # self.GLPT = QtWidgets.QGridLayout(self)
@@ -2275,147 +2265,509 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.GLPT.setSpacing(20)
         self.GLPT.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.GroupPT = QtWidgets.QGroupBox(self.Widget)
+        self.GroupPT = QtWidgets.QGroupBox(self.PressureTab)
         self.GroupPT.setTitle("Pressure Transducer")
         self.GroupPT.setLayout(self.GLPT)
-        self.GroupPT.move(0, 500)
+        self.GroupPT.move(0, 0)
 
-        self.TT2111 = AlarmStatusWidget(self)
+        self.GLRTD1 = QtWidgets.QGridLayout()
+        # self.GLRTD1 = QtWidgets.QGridLayout(self)
+        self.GLRTD1.setContentsMargins(20, 20, 20, 20)
+        self.GLRTD1.setSpacing(20)
+        self.GLRTD1.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRTD1 = QtWidgets.QGroupBox(self.RTDSET12Tab)
+        self.GroupRTD1.setTitle("RTD SET 1")
+        self.GroupRTD1.setLayout(self.GLRTD1)
+        self.GroupRTD1.move(0, 0)
+
+        self.GLRTD2 = QtWidgets.QGridLayout()
+        # self.GLRTD2 = QtWidgets.QGridLayout(self)
+        self.GLRTD2.setContentsMargins(20, 20, 20, 20)
+        self.GLRTD2.setSpacing(20)
+        self.GLRTD2.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRTD2 = QtWidgets.QGroupBox(self.RTDSET12Tab)
+        self.GroupRTD2.setTitle("RTD SET 2")
+        self.GroupRTD2.setLayout(self.GLRTD2)
+        self.GroupRTD2.move(0, 300)
+
+        self.GLRTD3 = QtWidgets.QGridLayout()
+        # self.GLRTD3 = QtWidgets.QGridLayout(self)
+        self.GLRTD3.setContentsMargins(20, 20, 20, 20)
+        self.GLRTD3.setSpacing(20)
+        self.GLRTD3.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRTD3 = QtWidgets.QGroupBox(self.RTDSET34Tab)
+        self.GroupRTD3.setTitle("RTD SET 3")
+        self.GroupRTD3.setLayout(self.GLRTD3)
+        self.GroupRTD3.move(0, 0)
+
+        self.GLRTD4 = QtWidgets.QGridLayout()
+        # self.GLRTD4 = QtWidgets.QGridLayout(self)
+        self.GLRTD4.setContentsMargins(20, 20, 20, 20)
+        self.GLRTD4.setSpacing(20)
+        self.GLRTD4.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRTD4 = QtWidgets.QGroupBox(self.RTDSET34Tab)
+        self.GroupRTD4.setTitle("RTD SET 4")
+        self.GroupRTD4.setLayout(self.GLRTD4)
+        self.GroupRTD4.move(0, 500)
+
+        self.GLRTDLEFT = QtWidgets.QGridLayout()
+        # self.GLRTDLEFT = QtWidgets.QGridLayout(self)
+        self.GLRTDLEFT.setContentsMargins(20, 20, 20, 20)
+        self.GLRTDLEFT.setSpacing(20)
+        self.GLRTDLEFT.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRTDLEFT = QtWidgets.QGroupBox(self.RTDLEFTTab)
+        self.GroupRTDLEFT.setTitle(" LEFT RTDs ")
+        self.GroupRTDLEFT.setLayout(self.GLRTDLEFT)
+        self.GroupRTDLEFT.move(0, 0)
+
+        self.TT2111 = AlarmStatusWidget(self.RTDSET12Tab)
         self.TT2111.Label.setText("TT2111")
 
-        self.TT2401 = AlarmStatusWidget(self)
+        self.TT2112 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2112.Label.setText("TT2112")
+
+        self.TT2113 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2113.Label.setText("TT2113")
+
+        self.TT2114 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2114.Label.setText("TT2114")
+
+        self.TT2115 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2115.Label.setText("TT2115")
+
+        self.TT2116 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2116.Label.setText("TT2116")
+
+        self.TT2117 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2117.Label.setText("TT2117")
+
+        self.TT2118 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2118.Label.setText("TT2118")
+
+        self.TT2119 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2119.Label.setText("TT2119")
+
+        self.TT2120 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2120.Label.setText("TT2120")
+
+        self.TT2401 = AlarmStatusWidget(self.RTDSET12Tab)
         self.TT2401.Label.setText("TT2401")
 
-        self.TT2406 = AlarmStatusWidget(self)
+        self.TT2402 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2402.Label.setText("TT2402")
+
+        self.TT2403 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2403.Label.setText("TT2403")
+
+        self.TT2404 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2404.Label.setText("TT2404")
+
+        self.TT2405 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2405.Label.setText("TT2405")
+
+        self.TT2406 = AlarmStatusWidget(self.RTDSET12Tab)
         self.TT2406.Label.setText("TT2406")
 
-        self.TT2411 = AlarmStatusWidget(self)
+        self.TT2407 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2407.Label.setText("TT2407")
+
+        self.TT2408 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2408.Label.setText("TT2408")
+
+        self.TT2409 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2409.Label.setText("TT2409")
+
+        self.TT2410 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2410.Label.setText("TT2410")
+
+        self.TT2411 = AlarmStatusWidget(self.RTDSET12Tab)
         self.TT2411.Label.setText("TT2411")
 
-        self.TT2416 = AlarmStatusWidget(self)
+        self.TT2412 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2412.Label.setText("TT2412")
+
+        self.TT2413 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2413.Label.setText("TT2413")
+
+        self.TT2414 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2414.Label.setText("TT2414")
+
+        self.TT2415 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2415.Label.setText("TT2415")
+
+        self.TT2416 = AlarmStatusWidget(self.RTDSET12Tab)
         self.TT2416.Label.setText("TT2416")
 
-        self.TT2421 = AlarmStatusWidget(self)
+        self.TT2417 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2417.Label.setText("TT2417")
+
+        self.TT2418 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2418.Label.setText("TT2418")
+
+        self.TT2419 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2419.Label.setText("TT2419")
+
+        self.TT2420 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2420.Label.setText("TT2420")
+
+        self.TT2421 = AlarmStatusWidget(self.RTDSET12Tab)
         self.TT2421.Label.setText("TT2421")
 
-        self.TT2426 = AlarmStatusWidget(self)
+        self.TT2422 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2422.Label.setText("TT2422")
+
+        self.TT2423 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2423.Label.setText("TT2423")
+
+        self.TT2424 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2424.Label.setText("TT2424")
+
+        self.TT2425 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2425.Label.setText("TT2425")
+
+        self.TT2426 = AlarmStatusWidget(self.RTDSET12Tab)
         self.TT2426.Label.setText("TT2426")
 
-        self.TT2431 = AlarmStatusWidget(self)
+        self.TT2427 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2427.Label.setText("TT2427")
+
+        self.TT2428 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2428.Label.setText("TT2428")
+
+        self.TT2429 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2429.Label.setText("TT2429")
+
+        self.TT2430 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2430.Label.setText("TT2430")
+
+        self.TT2431 = AlarmStatusWidget(self.RTDSET12Tab)
         self.TT2431.Label.setText("TT2431")
 
-        self.TT2435 = AlarmStatusWidget(self)
+        self.TT2432 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2432.Label.setText("TT2432")
+
+        #RTDSET34
+        self.TT2435 = AlarmStatusWidget(self.RTDSET34Tab)
         self.TT2435.Label.setText("TT2435")
 
-        self.TT2440 = AlarmStatusWidget(self)
+        self.TT2436 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2436.Label.setText("TT2436")
+
+        self.TT2437 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2437.Label.setText("TT2437")
+
+        self.TT2438 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2438.Label.setText("TT2438")
+
+        self.TT2439 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2439.Label.setText("TT2439")
+
+        self.TT2440 = AlarmStatusWidget(self.RTDSET34Tab)
         self.TT2440.Label.setText("TT2440")
 
-        self.TT4330 = AlarmStatusWidget(self)
+        self.TT2441 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2441.Label.setText("TT2441")
+
+        self.TT2442 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2442.Label.setText("TT2442")
+
+        self.TT2443 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2443.Label.setText("TT2443")
+
+        self.TT2444 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2444.Label.setText("TT2444")
+
+        self.TT2445 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2445.Label.setText("TT2445")
+
+        self.TT2446 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2446.Label.setText("TT2446")
+
+        self.TT2447 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2447.Label.setText("TT2447")
+
+        self.TT2448 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2448.Label.setText("TT2448")
+
+        self.TT2449 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2449.Label.setText("TT2449")
+
+        self.TT2101 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2101.Label.setText("TT2101")
+
+        self.TT2102 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2102.Label.setText("TT2102")
+
+        self.TT2103 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2103.Label.setText("TT2103")
+
+        self.TT2104 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2104.Label.setText("TT2104")
+
+        self.TT2105 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2105.Label.setText("TT2105")
+
+        self.TT2106 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2106.Label.setText("TT2106")
+
+        self.TT2107 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2107.Label.setText("TT2107")
+
+        self.TT2108 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2108.Label.setText("TT2108")
+
+        self.TT2109 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2109.Label.setText("TT2109")
+
+        self.TT2110 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2110.Label.setText("TT2110")
+
+
+        #RTDLEFT part
+
+        self.TT4330 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT4330.Label.setText("TT4330")
 
-        self.TT6220 = AlarmStatusWidget(self)
+        self.TT6220 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT6220.Label.setText("TT6220")
 
-        self.TT6221 = AlarmStatusWidget(self)
-        self.TT6221.Label.setText("TT6221")
+        self.TT6213 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6213.Label.setText("TT6213")
 
-        self.TT6222 = AlarmStatusWidget(self)
-        self.TT6222.Label.setText("TT6222")
+        self.TT6401 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6401.Label.setText("TT6401")
 
-        self.TT6223 = AlarmStatusWidget(self)
+        self.TT6215 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6215.Label.setText("TT6215")
+
+        self.TT6402 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6402.Label.setText("TT6402")
+
+        self.TT6217 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6217.Label.setText("TT6217")
+
+        self.TT6403 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6403.Label.setText("TT6403")
+
+        self.TT6203 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6203.Label.setText("TT6203")
+
+        self.TT6404 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6404.Label.setText("TT6404")
+
+        self.TT6207 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6207.Label.setText("TT6207")
+
+        self.TT6405 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6405.Label.setText("TT6405")
+
+        self.TT6211 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6211.Label.setText("TT6211")
+
+        self.TT6406 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6406.Label.setText("TT6406")
+
+        self.TT6223 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT6223.Label.setText("TT6223")
 
+        self.TT6410 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6410.Label.setText("TT6410")
+
+        self.TT6408 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6408.Label.setText("TT6408")
+
+        self.TT6409 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6409.Label.setText("TT6409")
+
+        self.TT6412 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6412.Label.setText("TT6412")
+
+        self.TT7202 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT7202.Label.setText("TT7202")
+
+        self.TT7401 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT7401.Label.setText("TT7401")
+
+        self.TT3402 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT3402.Label.setText("TT3402")
+
+        self.TT3401 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT3401.Label.setText("TT3401")
+
+        self.TT7403 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT7403.Label.setText("TT7403")
+
+
         # PT part
-        self.PT1101 = AlarmStatusWidget(self)
+        self.PT1101 = AlarmStatusWidget(self.PressureTab)
         self.PT1101.Label.setText("PT1101")
 
-        self.PT2316 = AlarmStatusWidget(self)
+        self.PT2316 = AlarmStatusWidget(self.PressureTab)
         self.PT2316.Label.setText("PT2316")
 
-        self.PT2321 = AlarmStatusWidget(self)
+        self.PT2321 = AlarmStatusWidget(self.PressureTab)
         self.PT2321.Label.setText("PT2321")
 
-        self.PT2330 = AlarmStatusWidget(self)
+        self.PT2330 = AlarmStatusWidget(self.PressureTab)
         self.PT2330.Label.setText("PT2330")
 
-        self.PT2335 = AlarmStatusWidget(self)
+        self.PT2335 = AlarmStatusWidget(self.PressureTab)
         self.PT2335.Label.setText("PT2335")
 
-        self.PT3308 = AlarmStatusWidget(self)
+        self.PT3308 = AlarmStatusWidget(self.PressureTab)
         self.PT3308.Label.setText("PT3308")
 
-        self.PT3309 = AlarmStatusWidget(self)
+        self.PT3309 = AlarmStatusWidget(self.PressureTab)
         self.PT3309.Label.setText("PT3309")
 
-        self.PT3310 = AlarmStatusWidget(self)
+        self.PT3310 = AlarmStatusWidget(self.PressureTab)
         self.PT3310.Label.setText("PT3310")
 
-        self.PT3311 = AlarmStatusWidget(self)
+        self.PT3311 = AlarmStatusWidget(self.PressureTab)
         self.PT3311.Label.setText("PT3311")
 
-        self.PT3314 = AlarmStatusWidget(self)
+        self.PT3314 = AlarmStatusWidget(self.PressureTab)
         self.PT3314.Label.setText("PT3314")
 
-        self.PT3320 = AlarmStatusWidget(self)
+        self.PT3320 = AlarmStatusWidget(self.PressureTab)
         self.PT3320.Label.setText("PT3320")
 
-        self.PT3333 = AlarmStatusWidget(self)
+        self.PT3333 = AlarmStatusWidget(self.PressureTab)
         self.PT3333.Label.setText("PT3333")
 
-        self.PT4306 = AlarmStatusWidget(self)
+        self.PT4306 = AlarmStatusWidget(self.PressureTab)
         self.PT4306.Label.setText("PT4306")
 
-        self.PT4315 = AlarmStatusWidget(self)
+        self.PT4315 = AlarmStatusWidget(self.PressureTab)
         self.PT4315.Label.setText("PT4315")
 
-        self.PT4319 = AlarmStatusWidget(self)
+        self.PT4319 = AlarmStatusWidget(self.PressureTab)
         self.PT4319.Label.setText("PT4319")
 
-        self.PT4322 = AlarmStatusWidget(self)
+        self.PT4322 = AlarmStatusWidget(self.PressureTab)
         self.PT4322.Label.setText("PT4322")
 
-        self.PT4325 = AlarmStatusWidget(self)
+        self.PT4325 = AlarmStatusWidget(self.PressureTab)
         self.PT4325.Label.setText("PT4325")
 
         # make a directory for the alarm instrument and assign instrument to certain position
-        self.AlarmTTdir = {0: {0: self.TT2111, 1: self.TT2401, 2: self.TT2406, 3: self.TT2411, 4: self.TT2416},
-                           1: {0: self.TT2421, 1: self.TT2426, 2: self.TT2431, 3: self.TT2435, 4: self.TT2440},
-                           2: {0: self.TT4330, 1: self.TT6220, 2: self.TT6221, 3: self.TT6222, 4: self.TT6223}}
+        self.AlarmRTD1dir = {0: {0: self.TT2111, 1: self.TT2112, 2: self.TT2113, 3: self.TT2114, 4: self.TT2115},
+                           1: {0: self.TT2116, 1: self.TT2117, 2: self.TT2118, 3: self.TT2119, 4: self.TT2120}}
+
+        self.AlarmRTD2dir = {0: {0: self.TT2401, 1: self.TT2402, 2: self.TT2403, 3: self.TT2404, 4: self.TT2405},
+                             1: {0: self.TT2406, 1: self.TT2407, 2: self.TT2408, 3: self.TT2409, 4: self.TT2410},
+                             2: {0: self.TT2411, 1: self.TT2412, 2: self.TT2413, 3: self.TT2414, 4: self.TT2415},
+                             3: {0: self.TT2416, 1: self.TT2417, 2: self.TT2418, 3: self.TT2419, 4: self.TT2420},
+                             4: {0: self.TT2421, 1: self.TT2422, 2: self.TT2423, 3: self.TT2424, 4: self.TT2425},
+                             5: {0: self.TT2426, 1: self.TT2427, 2: self.TT2428, 3: self.TT2429, 4: self.TT2430},
+                             6: {0: self.TT2431, 1: self.TT2432}}
+
+        self.AlarmRTD3dir = {0: {0: self.TT2435, 1: self.TT2436, 2: self.TT2437, 3: self.TT2438, 4: self.TT2439},
+                             1: {0: self.TT2440, 1: self.TT2441, 2: self.TT2442, 3: self.TT2443, 4: self.TT2444},
+                             2: {0: self.TT2445, 1: self.TT2446, 2: self.TT2447, 3: self.TT2448, 4: self.TT2449}}
+
+        self.AlarmRTD4dir = {0: {0: self.TT2101, 1: self.TT2102, 2: self.TT2103, 3: self.TT2104, 4: self.TT2105},
+                             1: {0: self.TT2106, 1: self.TT2107, 2: self.TT2108, 3: self.TT2109, 4: self.TT2110}}
 
         self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
                            1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3314},
                            2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
                            3: {0: self.PT4322, 1: self.PT4325}}
 
+        self.AlarmRTDLEFTdir = {0: {0: self.TT4330, 1: self.TT6220, 2: self.TT6213, 3: self.TT6401, 4: self.TT6215},
+                                1: {0: self.TT6402, 1: self.TT6217, 2: self.TT6403, 3: self.TT6203, 4: self.TT6404},
+                                2: {0: self.TT6207, 1: self.TT6405, 2: self.TT6211, 3: self.TT6406, 4: self.TT6223},
+                                3: {0: self.TT6410, 1: self.TT6408, 2: self.TT6409, 3: self.TT6412, 4: self.TT7202},
+                                4: {0: self.TT7401, 1: self.TT3402, 2: self.TT3401, 3: self.TT7403}}
+
+
         # variables usable for building widgets
         # i is row number, j is column number
-        # TT is for temperature transducer while PT is for pressure transducer
+        # RTD1 is for temperature transducer while PT is for pressure transducer
         # max is max row and column number
         # last is the last widget's row and column index in gridbox
-        self.i_TT_max = len(self.AlarmTTdir)
-        # which is 3
-        self.j_TT_max = len(self.AlarmTTdir[0])
+        self.i_RTD1_max = len(self.AlarmRTD1dir)
+        # which is 2
+        self.j_RTD1_max = len(self.AlarmRTD1dir[0])
         # which is 5
+        self.i_RTD2_max = len(self.AlarmRTD2dir)
+        self.j_RTD2_max = len(self.AlarmRTD2dir[0])
+        self.i_RTD3_max = len(self.AlarmRTD3dir)
+        self.j_RTD3_max = len(self.AlarmRTD3dir[0])
+        self.i_RTD4_max = len(self.AlarmRTD4dir)
+        self.j_RTD4_max = len(self.AlarmRTD4dir[0])
+        self.i_RTDLEFT_max = len(self.AlarmRTDLEFTdir)
+        self.j_RTDLEFT_max = len(self.AlarmRTDLEFTdir[0])
+
         self.i_PT_max = len(self.AlarmPTdir)
         #which is 4
         self.j_PT_max = len(self.AlarmPTdir[0])
         #which is 5
-        self.i_TT_last = len(self.AlarmTTdir)-1
-        # which is 2
-        self.j_TT_last = len(self.AlarmTTdir[self.i_TT_last])-1
+        self.i_RTD1_last = len(self.AlarmRTD1dir)-1
+        # which is 1
+        self.j_RTD1_last = len(self.AlarmRTD1dir[self.i_RTD1_last])-1
         #which is 4
+        self.i_RTD2_last = len(self.AlarmRTD2dir) - 1
+        self.j_RTD2_last = len(self.AlarmRTD2dir[self.i_RTD2_last]) - 1
+        self.i_RTD3_last = len(self.AlarmRTD3dir) - 1
+        self.j_RTD3_last = len(self.AlarmRTD3dir[self.i_RTD3_last]) - 1
+        self.i_RTD4_last = len(self.AlarmRTD4dir) - 1
+        self.j_RTD4_last = len(self.AlarmRTD4dir[self.i_RTD4_last]) - 1
+        self.i_RTDLEFT_last = len(self.AlarmRTDLEFTdir) - 1
+        self.j_RTDLEFT_last = len(self.AlarmRTDLEFTdir[self.i_RTDLEFT_last]) - 1
         self.i_PT_last = len(self.AlarmPTdir)-1
         #which is 3
         self.j_PT_last = len(self.AlarmPTdir[self.i_PT_last])-1
         #which is 1
 
-        for i in range(0, self.i_TT_max):
-            for j in range(0, self.j_TT_max):
-                self.GLTT.addWidget(self.AlarmTTdir[i][j], i, j)
+        for i in range(0, self.i_RTD1_max):
+            for j in range(0, self.j_RTD1_max):
+                self.GLRTD1.addWidget(self.AlarmRTD1dir[i][j], i, j)
                 # end the position generator when i= last element's row number, j= last element's column number
-                if (i, j) == (self.i_TT_last, self.j_TT_last):
+                if (i, j) == (self.i_RTD1_last, self.j_RTD1_last):
                     break
-            if (i, j) == (self.i_TT_last, self.j_TT_last):
+            if (i, j) == (self.i_RTD1_last, self.j_RTD1_last):
+                break
+
+        for i in range(0, self.i_RTD2_max):
+            for j in range(0, self.j_RTD2_max):
+                self.GLRTD2.addWidget(self.AlarmRTD2dir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_RTD2_last, self.j_RTD2_last):
+                    break
+            if (i, j) == (self.i_RTD2_last, self.j_RTD2_last):
+                break
+
+        for i in range(0, self.i_RTD3_max):
+            for j in range(0, self.j_RTD3_max):
+                self.GLRTD3.addWidget(self.AlarmRTD3dir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_RTD3_last, self.j_RTD3_last):
+                    break
+            if (i, j) == (self.i_RTD3_last, self.j_RTD3_last):
+                break
+
+        for i in range(0, self.i_RTD4_max):
+            for j in range(0, self.j_RTD4_max):
+                self.GLRTD4.addWidget(self.AlarmRTD4dir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_RTD4_last, self.j_RTD4_last):
+                    break
+            if (i, j) == (self.i_RTD4_last, self.j_RTD4_last):
+                break
+
+        for i in range(0, self.i_RTDLEFT_max):
+            for j in range(0, self.j_RTDLEFT_max):
+                self.GLRTDLEFT.addWidget(self.AlarmRTDLEFTdir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_RTDLEFT_last, self.j_RTDLEFT_last):
+                    break
+            if (i, j) == (self.i_RTDLEFT_last, self.j_RTDLEFT_last):
                 break
 
         for i in range(0, self.i_PT_max):
@@ -2436,70 +2788,217 @@ class AlarmWin(QtWidgets.QMainWindow):
         # i_max, j_max are max row and column number
         # l max are max column number+1
         # i_last,j_last are last elements's diretory coordinate
-        TempRefTTdir = self.AlarmTTdir
+        TempRefRTD1dir = self.AlarmRTD1dir
+        TempRefRTD2dir = self.AlarmRTD2dir
+        TempRefRTD3dir = self.AlarmRTD3dir
+        TempRefRTD4dir = self.AlarmRTD4dir
+        TempRefRTDLEFTdir = self.AlarmRTDLEFTdir
         TempRefPTdir = self.AlarmPTdir
-        TempTTdir = self.AlarmTTdir
+        
+        TempRTD1dir = self.AlarmRTD1dir
+        TempRTD2dir = self.AlarmRTD2dir
+        TempRTD3dir = self.AlarmRTD3dir
+        TempRTD4dir = self.AlarmRTD4dir
+        TempRTDLEFTdir = self.AlarmRTDLEFTdir
         TempPTdir = self.AlarmPTdir
-        # l_TT_max is max number of column
-        l_TT = 0
-        k_TT = 0
+        # l_RTD1_max is max number of column
+        l_RTD1 = 0
+        k_RTD1 = 0
+        l_RTD2 = 0
+        k_RTD2 = 0
+        l_RTD3 = 0
+        k_RTD3 = 0
+        l_RTD4 = 0
+        k_RTD4 = 0
+        l_RTDLEFT = 0
+        k_RTDLEFT = 0
+        
         l_PT = 0
         k_PT = 0
-        # i_TT_max = 3
-        # j_TT_max = 5
+        # i_RTD1_max = 3
+        # j_RTD1_max = 5
         # i_PT_max = 4
         # j_PT_max = 5
-        # l_TT_max = 4
+        # l_RTD1_max = 4
         # l_PT_max = 4
-        # i_TT_last = 2
-        # j_TT_last = 4
+        # i_RTD1_last = 2
+        # j_RTD1_last = 4
         # i_PT_last = 3
         # j_PT_last = 1
-        i_TT_max = len(self.AlarmTTdir)
+        i_RTD1_max = len(self.AlarmRTD1dir)
         # which is 3
-        j_TT_max = len(self.AlarmTTdir[0])
+        j_RTD1_max = len(self.AlarmRTD1dir[0])
         # which is 5
+        i_RTD2_max = len(self.AlarmRTD2dir)
+        j_RTD2_max = len(self.AlarmRTD2dir[0])
+        i_RTD3_max = len(self.AlarmRTD3dir)
+        j_RTD3_max = len(self.AlarmRTD3dir[0])
+        i_RTD4_max = len(self.AlarmRTD4dir)
+        j_RTD4_max = len(self.AlarmRTD4dir[0])
+        i_RTDLEFT_max = len(self.AlarmRTDLEFTdir)
+        j_RTDLEFT_max = len(self.AlarmRTDLEFTdir[0])
         i_PT_max = len(self.AlarmPTdir)
         # which is 4
         j_PT_max = len(self.AlarmPTdir[0])
         # which is 5
-        i_TT_last = len(self.AlarmTTdir) - 1
+        i_RTD1_last = len(self.AlarmRTD1dir) - 1
         # which is 2
-        j_TT_last = len(self.AlarmTTdir[i_TT_last]) - 1
+        j_RTD1_last = len(self.AlarmRTD1dir[i_RTD1_last]) - 1
         # which is 4
+        i_RTD2_last = len(self.AlarmRTD2dir) - 1
+        j_RTD2_last = len(self.AlarmRTD2dir[i_RTD2_last]) - 1
+        i_RTD3_last = len(self.AlarmRTD3dir) - 1
+        j_RTD3_last = len(self.AlarmRTD3dir[i_RTD3_last]) - 1
+        i_RTD4_last = len(self.AlarmRTD4dir) - 1
+        j_RTD4_last = len(self.AlarmRTD4dir[i_RTD4_last]) - 1
+        i_RTDLEFT_last = len(self.AlarmRTDLEFTdir) - 1
+        j_RTDLEFT_last = len(self.AlarmRTDLEFTdir[i_RTDLEFT_last]) - 1
         i_PT_last = len(self.AlarmPTdir) - 1
         # which is 3
         j_PT_last = len(self.AlarmPTdir[i_PT_last]) - 1
         # which is 1
-        l_TT_max = j_TT_max-1
+        l_RTD1_max = j_RTD1_max-1
+        l_RTD2_max = j_RTD2_max - 1
+        l_RTD3_max = j_RTD3_max - 1
+        l_RTD4_max = j_RTD4_max - 1
+        l_RTDLEFT_max = j_RTDLEFT_max - 1
         l_PT_max = j_PT_max-1
-        # TT put alarm true widget to the begining of the diretory
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                if TempRefTTdir[i][j].Alarm:
-                    TempTTdir[k_TT][l_TT] = TempRefTTdir[i][j]
-                    l_TT = l_TT + 1
-                    if l_TT == l_TT_max:
-                        l_TT = 0
-                        k_TT = k_TT + 1
-                if (i, j) == (i_TT_last, j_TT_last):
+        # RTD1 put alarm true widget to the begining of the diretory
+        for i in range(0, i_RTD1_max):
+            for j in range(0, j_RTD1_max):
+                if TempRefRTD1dir[i][j].Alarm:
+                    TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
+                    l_RTD1 = l_RTD1 + 1
+                    if l_RTD1 == l_RTD1_max:
+                        l_RTD1 = 0
+                        k_RTD1 = k_RTD1 + 1
+                if (i, j) == (i_RTD1_last, j_RTD1_last):
                     break
-            if (i, j) == (i_TT_last, j_TT_last):
+            if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
 
-        # TT put alarm false widget after that
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                if not TempRefTTdir[i][j].Alarm:
-                    TempTTdir[k_TT][l_TT] = TempRefTTdir[i][j]
-                    l_TT = l_TT + 1
-                    if l_TT == l_TT_max:
-                        l_TT = 0
-                        k_TT = k_TT + 1
-                if (i, j) == (i_TT_last, j_TT_last):
+        # RTD1 put alarm false widget after that
+        for i in range(0, i_RTD1_max):
+            for j in range(0, j_RTD1_max):
+                if not TempRefRTD1dir[i][j].Alarm:
+                    TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
+                    l_RTD1 = l_RTD1 + 1
+                    if l_RTD1 == l_RTD1_max:
+                        l_RTD1 = 0
+                        k_RTD1 = k_RTD1 + 1
+                if (i, j) == (i_RTD1_last, j_RTD1_last):
                     break
-            if (i, j) == (i_TT_last, j_TT_last):
+            if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
+
+        for i in range(0, i_RTD2_max):
+            for j in range(0, j_RTD2_max):
+                if TempRefRTD2dir[i][j].Alarm:
+                    TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
+                    l_RTD2 = l_RTD2 + 1
+                    if l_RTD2 == l_RTD2_max:
+                        l_RTD2 = 0
+                        k_RTD2 = k_RTD2 + 1
+                if (i, j) == (i_RTD2_last, j_RTD2_last):
+                    break
+            if (i, j) == (i_RTD2_last, j_RTD2_last):
+                break
+
+        # RTD2 put alarm false widget after that
+        for i in range(0, i_RTD2_max):
+            for j in range(0, j_RTD2_max):
+                if not TempRefRTD2dir[i][j].Alarm:
+                    TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
+                    l_RTD2 = l_RTD2 + 1
+                    if l_RTD2 == l_RTD2_max:
+                        l_RTD2 = 0
+                        k_RTD2 = k_RTD2 + 1
+                if (i, j) == (i_RTD2_last, j_RTD2_last):
+                    break
+            if (i, j) == (i_RTD2_last, j_RTD2_last):
+                break
+
+        for i in range(0, i_RTD3_max):
+            for j in range(0, j_RTD3_max):
+                if TempRefRTD3dir[i][j].Alarm:
+                    TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
+                    l_RTD3 = l_RTD3 + 1
+                    if l_RTD3 == l_RTD3_max:
+                        l_RTD3 = 0
+                        k_RTD3 = k_RTD3 + 1
+                if (i, j) == (i_RTD3_last, j_RTD3_last):
+                    break
+            if (i, j) == (i_RTD3_last, j_RTD3_last):
+                break
+
+        # RTD3 put alarm false widget after that
+        for i in range(0, i_RTD3_max):
+            for j in range(0, j_RTD3_max):
+                if not TempRefRTD3dir[i][j].Alarm:
+                    TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
+                    l_RTD3 = l_RTD3 + 1
+                    if l_RTD3 == l_RTD3_max:
+                        l_RTD3 = 0
+                        k_RTD3 = k_RTD3 + 1
+                if (i, j) == (i_RTD3_last, j_RTD3_last):
+                    break
+            if (i, j) == (i_RTD3_last, j_RTD3_last):
+                break
+
+        for i in range(0, i_RTD4_max):
+            for j in range(0, j_RTD4_max):
+                if TempRefRTD4dir[i][j].Alarm:
+                    TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
+                    l_RTD4 = l_RTD4 + 1
+                    if l_RTD4 == l_RTD4_max:
+                        l_RTD4 = 0
+                        k_RTD4 = k_RTD4 + 1
+                if (i, j) == (i_RTD4_last, j_RTD4_last):
+                    break
+            if (i, j) == (i_RTD4_last, j_RTD4_last):
+                break
+
+        # RTD4 put alarm false widget after that
+        for i in range(0, i_RTD4_max):
+            for j in range(0, j_RTD4_max):
+                if not TempRefRTD4dir[i][j].Alarm:
+                    TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
+                    l_RTD4 = l_RTD4 + 1
+                    if l_RTD4 == l_RTD4_max:
+                        l_RTD4 = 0
+                        k_RTD4 = k_RTD4 + 1
+                if (i, j) == (i_RTD4_last, j_RTD4_last):
+                    break
+            if (i, j) == (i_RTD4_last, j_RTD4_last):
+                break
+
+        for i in range(0, i_RTDLEFT_max):
+            for j in range(0, j_RTDLEFT_max):
+                if TempRefRTDLEFTdir[i][j].Alarm:
+                    TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
+                    l_RTDLEFT = l_RTDLEFT + 1
+                    if l_RTDLEFT == l_RTDLEFT_max:
+                        l_RTDLEFT = 0
+                        k_RTDLEFT = k_RTDLEFT + 1
+                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                    break
+            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                break
+
+        # RTDLEFT put alarm false widget after that
+        for i in range(0, i_RTDLEFT_max):
+            for j in range(0, j_RTDLEFT_max):
+                if not TempRefRTDLEFTdir[i][j].Alarm:
+                    TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
+                    l_RTDLEFT = l_RTDLEFT + 1
+                    if l_RTDLEFT == l_RTDLEFT_max:
+                        l_RTDLEFT = 0
+                        k_RTDLEFT = k_RTDLEFT + 1
+                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                    break
+            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                break
+
 
         # PT
         for i in range(0, i_PT_max):
@@ -2530,13 +3029,46 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         # Reassign position
         # end the position generator when i= last element's row number, j= last element's column number
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                self.GLTT.addWidget(TempTTdir[i][j], i, j)
-                if (i, j) == (i_TT_last, j_TT_last):
+        for i in range(0, i_RTD1_max):
+            for j in range(0, j_RTD1_max):
+                self.GLRTD1.addWidget(TempRTD1dir[i][j], i, j)
+                if (i, j) == (i_RTD1_last, j_RTD1_last):
                     break
-            if (i, j) == (i_TT_last, j_TT_last):
+            if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
+
+        for i in range(0, i_RTD2_max):
+            for j in range(0, j_RTD2_max):
+                self.GLRTD2.addWidget(TempRTD2dir[i][j], i, j)
+                if (i, j) == (i_RTD2_last, j_RTD2_last):
+                    break
+            if (i, j) == (i_RTD2_last, j_RTD2_last):
+                break
+
+        for i in range(0, i_RTD3_max):
+            for j in range(0, j_RTD3_max):
+                self.GLRTD3.addWidget(TempRTD3dir[i][j], i, j)
+                if (i, j) == (i_RTD3_last, j_RTD3_last):
+                    break
+            if (i, j) == (i_RTD3_last, j_RTD3_last):
+                break
+
+        for i in range(0, i_RTD4_max):
+            for j in range(0, j_RTD4_max):
+                self.GLRTD4.addWidget(TempRTD4dir[i][j], i, j)
+                if (i, j) == (i_RTD4_last, j_RTD4_last):
+                    break
+            if (i, j) == (i_RTD4_last, j_RTD4_last):
+                break
+
+        for i in range(0, i_RTDLEFT_max):
+            for j in range(0, j_RTDLEFT_max):
+                self.GLRTDLEFT.addWidget(TempRTDLEFTdir[i][j], i, j)
+                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                    break
+            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                break
+                
         # end the position generator when i= last element's row number, j= last element's column number
         for i in range(0, i_PT_max):
             for j in range(0, j_PT_max):
@@ -3126,6 +3658,15 @@ class UpdateDisplay(QtCore.QObject):
         self.MW = MW
         self.Running = False
 
+        self.RTD1_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD1dir)
+        self.RTD2_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD2dir)
+        self.RTD3_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD3dir)
+        self.RTD4_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD4dir)
+        self.RTDLEFT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTDLEFTdir)
+        self.PT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmPTdir)
+        self.array = self.RTD1_array + self.RTD2_array + self.RTD3_array + self.RTD4_array + self.RTDLEFT_array + self.PT_array
+
+
     @QtCore.Slot()
     def run(self):
         self.Running = True
@@ -3290,30 +3831,55 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.P.NewData_Display = False
 
             # Check if alarm values are met and set them
-            self.MW.AlarmButton.SubWindow.TT2111.CheckAlarm()
-            # for i in range(0,self.MW.AlarmButton.SubWindow.i_TT_max):
-            #     for j in range(0,self.MW.AlarmButton.SubWindow.j_TT_max):
-            #         self.MW.AlarmButton.SubWindow.AlarmTTdir[i][j].CheckAlarm()
-            #         if (i,j) ==(self.MW.AlarmButton.SubWindow.i_TT_last,self.MW.AlarmButton.SubWindow.j_TT_last):
-            #             break
-            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_TT_last, self.MW.AlarmButton.SubWindow.j_TT_last):
-            #         break
-            #
-            # for i in range(0,self.MW.AlarmButton.SubWindow.i_PT_max):
-            #     for j in range(0,self.MW.AlarmButton.SubWindow.j_PT_max):
-            #         self.MW.AlarmButton.SubWindow.AlarmPTdir[i][j].CheckAlarm()
-            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
-            #             break
-            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
-            #         break
+            # self.MW.AlarmButton.SubWindow.TT2111.CheckAlarm()
+            # self.MW.AlarmButton.SubWindow.PT1101.CheckAlarm()
+            # self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0].CheckAlarm()
+            # print(self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0]==self.MW.AlarmButton.SubWindow.PT1101)
+            for i in range(0,self.MW.AlarmButton.SubWindow.i_RTD1_max):
+                for j in range(0,self.MW.AlarmButton.SubWindow.j_RTD1_max):
+                    self.MW.AlarmButton.SubWindow.AlarmRTD1dir[i][j].CheckAlarm()
+                    if (i,j) ==(self.MW.AlarmButton.SubWindow.i_RTD1_last,self.MW.AlarmButton.SubWindow.j_RTD1_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
+                    break
 
+            for i in range(0,self.MW.AlarmButton.SubWindow.i_RTD2_max):
+                for j in range(0,self.MW.AlarmButton.SubWindow.j_RTD2_max):
+                    self.MW.AlarmButton.SubWindow.AlarmRTD2dir[i][j].CheckAlarm()
+                    if (i,j) ==(self.MW.AlarmButton.SubWindow.i_RTD2_last,self.MW.AlarmButton.SubWindow.j_RTD2_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD2_last, self.MW.AlarmButton.SubWindow.j_RTD2_last):
+                    break
+
+            for i in range(0,self.MW.AlarmButton.SubWindow.i_RTD3_max):
+                for j in range(0,self.MW.AlarmButton.SubWindow.j_RTD3_max):
+                    self.MW.AlarmButton.SubWindow.AlarmRTD3dir[i][j].CheckAlarm()
+                    if (i,j) ==(self.MW.AlarmButton.SubWindow.i_RTD3_last,self.MW.AlarmButton.SubWindow.j_RTD3_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD3_last, self.MW.AlarmButton.SubWindow.j_RTD3_last):
+                    break
+
+            for i in range(0,self.MW.AlarmButton.SubWindow.i_RTD4_max):
+                for j in range(0,self.MW.AlarmButton.SubWindow.j_RTD4_max):
+                    self.MW.AlarmButton.SubWindow.AlarmRTD4dir[i][j].CheckAlarm()
+                    if (i,j) ==(self.MW.AlarmButton.SubWindow.i_RTD4_last,self.MW.AlarmButton.SubWindow.j_RTD4_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD4_last, self.MW.AlarmButton.SubWindow.j_RTD4_last):
+                    break
+
+            for i in range(0,self.MW.AlarmButton.SubWindow.i_PT_max):
+                for j in range(0,self.MW.AlarmButton.SubWindow.j_PT_max):
+                    self.MW.AlarmButton.SubWindow.AlarmPTdir[i][j].CheckAlarm()
+                    if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
+                    break
 
             # # # rewrite collectalarm in updatedisplay
-            # TT_array=TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmTTdir)
-            #
-            # PT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmPTdir)
-            # array=TT_array+PT_array
-            # self.MW.AlarmButton.CollectAlarm(array)
+
+            # self.MW.AlarmButton.CollectAlarm(self.array)
+
+            self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111,self.MW.AlarmButton.SubWindow.TT2401])
 
             # self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111,
             #                                  self.MW.AlarmButton.SubWindow.TT2401,
@@ -3343,8 +3909,7 @@ class UpdateDisplay(QtCore.QObject):
             #                                  self.MW.AlarmButton.SubWindow.PT4322,
             #                                  self.MW.AlarmButton.SubWindow.PT4325])
 
-            #
-            # self.MW.AlarmButton.ButtonAlarmSignal()
+            self.MW.AlarmButton.ButtonAlarmSignal()
             # # # generally checkbutton.clicked -> move to updatedisplay
             # if self.MW.AlarmButton.Button.Alarm:
             #     self.MW.AlarmButton.SubWindow.ReassignOrder()
