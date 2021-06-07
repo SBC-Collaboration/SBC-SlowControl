@@ -558,6 +558,7 @@ class UpdateServer(QtCore.QObject):
 
                 #  Send reply back to client
                 self.socket.send(b"World")
+                self.PLC.NewData_ZMQ = False
             else:
                 print("PLC server stops")
                 pass
@@ -566,7 +567,6 @@ class UpdateServer(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
-
 
 
 class Update(QtCore.QObject):
