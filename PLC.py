@@ -89,6 +89,7 @@ class PLC:
         self.LiveCounter = 0
         self.NewData_Display = False
         self.NewData_Database = False
+        self.NewData_ZMQ=False
 
     def __del__(self):
         self.Client.close()
@@ -242,6 +243,7 @@ class PLC:
 
             self.NewData_Display = True
             self.NewData_Database = True
+            self.NewData_ZMQ = True
 
             return 0
         else:
@@ -545,6 +547,37 @@ class UpdatePLC(QtCore.QObject):
     def stop(self):
         self.Running = False
 
+class UpdateServer(QtCore.QObject):
+    def __init__(self, PLC, parent=None):
+        super().__init__(parent)
+        self.PLC=PLC
+        self.context = zmq.Context()
+        self.socket = self.context.socket(zmq.REP)
+        self.socket.bind("tcp://*:5555")
+        self.Running=False
+        self.period=2
+        print("connect to the PLC server")
+
+    @QtCore.Slot()
+    def run(self):
+        self.Running=True
+        while self.Running:
+            if self.PLC.NewData_ZMQ:
+                message = self.socket.recv()
+                print(f"Received request: {message}")
+
+                #  Send reply back to client
+                self.socket.send(b"World")
+            else:
+                print("PLC server stops")
+                pass
+            time.sleep(self.period)
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
+
 
 class Update(QtCore.QObject):
     def __init__(self, parent=None):
@@ -569,6 +602,13 @@ class Update(QtCore.QObject):
         self.DataUpdateThread.started.connect(self.UpDatabase.run)
         self.DataUpdateThread.start()
 
+        # Update database on another thread
+        self.ServerUpdateThread = QtCore.QThread()
+        self.UpServer = UpdateServer(self.PLC)
+        self.UpServer.moveToThread(self.ServerUpdateThread)
+        self.ServerUpdateThread.started.connect(self.UpServer.run)
+        self.ServerUpdateThread.start()
+
         # Stop all updater threads
 
     @QtCore.Slot()
@@ -580,6 +620,10 @@ class Update(QtCore.QObject):
         self.UpDatabase.stop()
         self.DataUpdateThread.quit()
         self.DataUpdateThread.wait()
+
+        self.UpServer.stop()
+        self.ServerUpdateThread.quit()
+        self.ServerUpdateThread.wait()
 
 
 if __name__ == "__main__":
