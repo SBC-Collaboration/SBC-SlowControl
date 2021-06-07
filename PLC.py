@@ -520,6 +520,9 @@ class UpdatePLC(QtCore.QObject):
 
         self.PLC = PLC
         self.Running = False
+        self.context = zmq.Context()
+        self.socket = self.context.socket(zmq.REP)
+        self.socket.bind("tcp://*:5555")
         self.period=2
 
     @QtCore.Slot()
@@ -529,6 +532,13 @@ class UpdatePLC(QtCore.QObject):
         while self.Running:
             print("PLC updating", datetime.datetime.now())
             self.PLC.ReadAll()
+
+            print("receiving message")
+            message = self.socket.recv()
+            print(f"Received request: {message}")
+
+            #  Send reply back to client
+            self.socket.send(b"World")
             time.sleep(self.period)
 
     @QtCore.Slot()
