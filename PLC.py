@@ -502,11 +502,11 @@ class UpdateDataBase(QtCore.QObject):
                 self.db.insert_data_into_datastorage("TT9999", self.dt, self.PLC.RTD[7])
                 self.PLC.NewData_Database = False
 
-        else:
-            print("Database Updating stops.")
-            pass
+            else:
+                print("Database Updating stops.")
+                pass
 
-        time.sleep(self.period)
+            time.sleep(self.period)
 
 
     @QtCore.Slot()
