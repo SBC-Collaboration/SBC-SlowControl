@@ -818,7 +818,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # Open connection to both PLCs
         self.PLC = PLC()
 
-
         # Read PLC value on another thread
         self.PLCUpdateThread = QtCore.QThread()
         self.UpPLC = UpdatePLC(self.PLC)
@@ -3536,8 +3535,11 @@ class Camera(QtWidgets.QWidget):
 class UpdatePLC(QtCore.QObject):
     def __init__(self, PLC, parent=None):
         super().__init__(parent)
-
         self.PLC = PLC
+        self.context = zmq.Context()
+        self.socket = self.context.socket(zmq.REP)
+        # socket.bind("tcp://*:5555")
+        self.socket.bind("tcp://*:5555")
         self.Running = False
 
     @QtCore.Slot()
@@ -3547,6 +3549,14 @@ class UpdatePLC(QtCore.QObject):
         while self.Running:
             print("PLC updating", datetime.datetime.now())
             self.PLC.ReadAll()
+
+            print("receiving message")
+            message = self.socket.recv()
+            print(f"Received request: {message}")
+
+            #  Send reply back to client
+            self.socket.send(b"World")
+
             time.sleep(2)
 
     @QtCore.Slot()
