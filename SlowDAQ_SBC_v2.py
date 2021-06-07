@@ -21,8 +21,8 @@ from PySide2 import QtWidgets, QtCore, QtGui
 from SlowDAQ_SBC_v2 import *
 from PLC import *
 from PICOPW import VerifyPW
-from Database_SBC import *
 from SlowDAQWidgets_SBC_v1 import *
+import zmq
 
 VERSION = "v2.1.3"
 SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
@@ -770,10 +770,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SaveSettings.SaveFileButton.clicked.connect(
             lambda x: self.Save(directory=self.SaveSettings.Head, project=self.SaveSettings.Tail))
 
-        self.Datacheck = QtWidgets.QCheckBox(self.DatanSignalTab)
-        self.Datacheck.move(800, 150)
-        self.Datacheck.setText("Clone data into sbc slowcontrol database")
-        self.Datacheck.setStyleSheet("background-color:gray;")
 
         # Alarm button
         self.AlarmWindow = AlarmWin()
@@ -840,12 +836,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DUpdateThread.started.connect(self.UpDisplay.run)
         self.DUpdateThread.start()
 
-        # Update database on another thread
-        # self.DataUpdateThread = QtCore.QThread()
-        # self.UpDatabase = UpdateDataBase(self)
-        # self.UpDatabase.moveToThread(self.DataUpdateThread)
-        # self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        # self.DataUpdateThread.start()
 
     # Stop all updater threads
     @QtCore.Slot()
@@ -857,10 +847,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpDisplay.stop()
         self.DUpdateThread.quit()
         self.DUpdateThread.wait()
-
-        self.UpDatabase.stop()
-        self.DataUpdateThread.quit()
-        self.DataUpdateThread.wait()
 
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()
@@ -3545,27 +3531,6 @@ class Camera(QtWidgets.QWidget):
         self.HL.addWidget(self.Air)
 
 
-# Class to read PPLC value every 2 sec
-class UpdatePPLC(QtCore.QObject):
-    def __init__(self, PPLC, parent=None):
-        super().__init__(parent)
-
-        self.PPLC = PPLC
-        self.Running = False
-
-    @QtCore.Slot()
-    def run(self):
-        self.Running = True
-
-        while self.Running:
-            print("PPLC updating", datetime.datetime.now())
-            self.PPLC.ReadAll()
-            time.sleep(2)
-
-    @QtCore.Slot()
-    def stop(self):
-        self.Running = False
-
 
 # Class to read PLC value every 2 sec
 class UpdatePLC(QtCore.QObject):
@@ -3587,42 +3552,6 @@ class UpdatePLC(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
-
-
-# Class to update myseeq database
-class UpdateDataBase(QtCore.QObject):
-    def __init__(self, MW, parent=None):
-        super().__init__(parent)
-
-        self.MW = MW
-        self.db = mydatabase()
-        self.Running = False
-        print("begin updating Database")
-
-    @QtCore.Slot()
-    def run(self):
-        self.Running = True
-        while self.Running:
-            if self.MW.Datacheck.isChecked():
-                self.dt = datetime_in_s()
-                print("Database Updating", self.dt)
-
-                if self.MW.PLC.NewData_Database:
-                    print("Wrting PLC data to database...")
-                    self.db.insert_data_into_datastorage("TT9998", self.dt, self.MW.PLC.RTD[6])
-                    self.db.insert_data_into_datastorage("TT9999", self.dt, self.MW.PLC.RTD[7])
-                    self.MW.PLC.NewData_Database = False
-
-            else:
-                print("Database Updating stopps.")
-                pass
-
-            time.sleep(60)
-
-    @QtCore.Slot()
-    def stop(self):
-        self.Running = False
-
 
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs

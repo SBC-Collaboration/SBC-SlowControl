@@ -10,7 +10,10 @@ v1.0 Initial code 25/11/19 ML
 v1.1 Initialize values, flag when values are updated more modbus variables 04/03/20 ML
 """
 
-import struct, time
+import struct, time, zmq ,sys
+
+from PySide2 import QtWidgets, QtCore, QtGui
+from Database_SBC import *
 
 # delete random number package when you read real data from PLC
 import random
@@ -475,6 +478,101 @@ class PLC:
             return 1
 
 
+# Class to update myseeq database
+class UpdateDataBase(QtCore.QObject):
+    def __init__(self, PLC, parent=None):
+        super().__init__(parent)
+
+        self.PLC = PLC
+        self.db = mydatabase()
+        self.Running = False
+        self.period=60
+        print("begin updating Database")
+
+    @QtCore.Slot()
+    def run(self):
+        self.Running = True
+        while self.Running:
+            self.dt = datetime_in_s()
+            print("Database Updating", self.dt)
+
+            if self.PLC.NewData_Database:
+                print("Wrting PLC data to database...")
+                self.db.insert_data_into_datastorage("TT9998", self.dt, self.PLC.RTD[6])
+                self.db.insert_data_into_datastorage("TT9999", self.dt, self.PLC.RTD[7])
+                self.PLC.NewData_Database = False
+
+        else:
+            print("Database Updating stops.")
+            pass
+
+        time.sleep(self.period)
+
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
+# Class to read PLC value every 2 sec
+class UpdatePLC(QtCore.QObject):
+    def __init__(self, PLC, parent=None):
+        super().__init__(parent)
+
+        self.PLC = PLC
+        self.Running = False
+        self.period=2
+
+    @QtCore.Slot()
+    def run(self):
+        self.Running = True
+
+        while self.Running:
+            print("PLC updating", datetime.datetime.now())
+            self.PLC.ReadAll()
+            time.sleep(self.period)
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
+
+class Update(QtCore.QObject):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        App.aboutToQuit.connect(self.StopUpdater)
+        self.StartUpdater()
+
+    def StartUpdater(self):
+        self.PLC = PLC()
+
+        # Read PLC value on another thread
+        self.PLCUpdateThread = QtCore.QThread()
+        self.UpPLC = UpdatePLC(self.PLC)
+        self.UpPLC.moveToThread(self.PLCUpdateThread)
+        self.PLCUpdateThread.started.connect(self.UpPLC.run)
+        self.PLCUpdateThread.start()
+
+        # Update database on another thread
+        self.DataUpdateThread = QtCore.QThread()
+        self.UpDatabase = UpdateDataBase(self.PLC)
+        self.UpDatabase.moveToThread(self.DataUpdateThread)
+        self.DataUpdateThread.started.connect(self.UpDatabase.run)
+        self.DataUpdateThread.start()
+
+        # Stop all updater threads
+
+    @QtCore.Slot()
+    def StopUpdater(self):
+        self.UpPLC.stop()
+        self.PLCUpdateThread.quit()
+        self.PLCUpdateThread.wait()
+
+        self.UpDatabase.stop()
+        self.DataUpdateThread.quit()
+        self.DataUpdateThread.wait()
+
+
 if __name__ == "__main__":
-    PLC = PLC()
-    PLC.ReadAll()
+    App = QtWidgets.QApplication(sys.argv)
+    Update=Update()
+    sys.exit(App.exec_())
