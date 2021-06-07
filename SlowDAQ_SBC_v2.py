@@ -816,14 +816,20 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def StartUpdater(self):
         # Open connection to both PLCs
-        self.PLC = PLC()
+        # self.PLC = PLC()
 
         # Read PLC value on another thread
-        self.PLCUpdateThread = QtCore.QThread()
-        self.UpPLC = UpdatePLC(self.PLC)
-        self.UpPLC.moveToThread(self.PLCUpdateThread)
-        self.PLCUpdateThread.started.connect(self.UpPLC.run)
-        self.PLCUpdateThread.start()
+        # self.PLCUpdateThread = QtCore.QThread()
+        # self.UpPLC = UpdatePLC(self.PLC)
+        # self.UpPLC.moveToThread(self.PLCUpdateThread)
+        # self.PLCUpdateThread.started.connect(self.UpPLC.run)
+        # self.PLCUpdateThread.start()
+
+        self.ClientUpdateThread = QtCore.QThread()
+        self.UpClient = UpdateClient(self)
+        self.UpClient.moveToThread(self.ClientUpdateThread)
+        self.ClientUpdateThread.started.connect(self.UpClient.run)
+        self.ClientUpdateThread.start()
 
         # Make sure PLCs values are initialized before trying to access them with update function
         time.sleep(2)
@@ -839,9 +845,13 @@ class MainWindow(QtWidgets.QMainWindow):
     # Stop all updater threads
     @QtCore.Slot()
     def StopUpdater(self):
-        self.UpPLC.stop()
-        self.PLCUpdateThread.quit()
-        self.PLCUpdateThread.wait()
+        # self.UpPLC.stop()
+        # self.PLCUpdateThread.quit()
+        # self.PLCUpdateThread.wait()
+        self.UpClient.stop()
+        self.ClientUpdateThread.quit()
+        self.ClientUpdateThread.wait()
+
 
         self.UpDisplay.stop()
         self.DUpdateThread.quit()
@@ -3529,8 +3539,6 @@ class Camera(QtWidgets.QWidget):
         self.Air.Label.setText("Air")
         self.HL.addWidget(self.Air)
 
-
-
 # Class to read PLC value every 2 sec
 class UpdatePLC(QtCore.QObject):
     def __init__(self, PLC, parent=None):
@@ -3551,6 +3559,35 @@ class UpdatePLC(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+
+
+class UpdateClient(QtCore.QObject):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.context = zmq.Context()
+        self.socket = self.context.socket(zmq.REP)
+        self.socket.connect("tcp://*:5555")
+        self.Running=False
+        self.period=2
+        print("client are conecting to the ZMQ server")
+
+    @QtCore.Slot()
+    def run(self):
+        self.Running = True
+        while self.Running:
+            message = self.socket.recv()
+            print(f"Received request: {message}")
+
+            #  Send reply back to client
+            self.socket.send(b"World")
+            self.PLC.NewData_ZMQ = False
+
+            time.sleep(self.period)
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
 
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs
