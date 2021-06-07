@@ -18,14 +18,13 @@ import random
 
 from PySide2 import QtWidgets, QtCore, QtGui
 
-from SlowDAQ_SBC_v1 import *
-from TPLC_v1 import TPLC
-from PPLC_v1 import PPLC
+from SlowDAQ_SBC_v2 import *
+from PLC import *
 from PICOPW import VerifyPW
 from Database_SBC import *
 from SlowDAQWidgets_SBC_v1 import *
 
-VERSION = "v0.1.3"
+VERSION = "v2.1.3"
 SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
                     " font-size: 14px;" \
                     " font-weight: bold;"
@@ -335,17 +334,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.EV6204.Label.setText("EV6204")
         self.EV6204.move(930, 1100)
 
-        self.TPLCOnline = State(self.ThermosyphonTab)
-        self.TPLCOnline.move(200, 1200)
-        self.TPLCOnline.Label.setText("TPLC link")
-        self.TPLCOnline.Field.setText("Offline")
-        self.TPLCOnline.SetAlarm()
+        self.PLCOnline = State(self.ThermosyphonTab)
+        self.PLCOnline.move(200, 1200)
+        self.PLCOnline.Label.setText("PLC link")
+        self.PLCOnline.Field.setText("Offline")
+        self.PLCOnline.SetAlarm()
 
-        self.PPLCOnline = State(self.ThermosyphonTab)
-        self.PPLCOnline.move(60, 1200)
-        self.PPLCOnline.Label.setText("PPLC link")
-        self.PPLCOnline.Field.setText("Offline")
-        self.PPLCOnline.SetAlarm()
 
         # Chamber tab buttons
 
@@ -798,8 +792,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ActivateControls(False)
 
         # Initialize PLC live counters
-        self.PPLCLiveCounter = 0
-        self.TPLCLiveCounter = 0
+
+        self.PLCLiveCounter = 0
 
         # Link signals to slots (toggle type)
         # self.SV4327.Button.clicked.connect(self.SV4327.ButtonClicked)
@@ -826,22 +820,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def StartUpdater(self):
         # Open connection to both PLCs
-        self.P = PPLC()
-        self.T = TPLC()
+        self.PLC = PLC()
 
-        # Read PPLC value on another thread
-        self.PUpdateThread = QtCore.QThread()
-        self.UpPPLC = UpdatePPLC(self.P)
-        self.UpPPLC.moveToThread(self.PUpdateThread)
-        self.PUpdateThread.started.connect(self.UpPPLC.run)
-        self.PUpdateThread.start()
 
-        # Read TPLC value on another thread
-        self.TUpdateThread = QtCore.QThread()
-        self.UpTPLC = UpdateTPLC(self.T)
-        self.UpTPLC.moveToThread(self.TUpdateThread)
-        self.TUpdateThread.started.connect(self.UpTPLC.run)
-        self.TUpdateThread.start()
+        # Read PLC value on another thread
+        self.PLCUpdateThread = QtCore.QThread()
+        self.UpPLC = UpdatePLC(self.PLC)
+        self.UpPLC.moveToThread(self.PLCUpdateThread)
+        self.PLCUpdateThread.started.connect(self.UpPLC.run)
+        self.PLCUpdateThread.start()
 
         # Make sure PLCs values are initialized before trying to access them with update function
         time.sleep(2)
@@ -863,12 +850,9 @@ class MainWindow(QtWidgets.QMainWindow):
     # Stop all updater threads
     @QtCore.Slot()
     def StopUpdater(self):
-        self.UpPPLC.stop()
-        self.PUpdateThread.quit()
-        self.PUpdateThread.wait()
-        self.UpTPLC.stop()
-        self.TUpdateThread.quit()
-        self.TUpdateThread.wait()
+        self.UpPLC.stop()
+        self.PLCUpdateThread.quit()
+        self.PLCUpdateThread.wait()
 
         self.UpDisplay.stop()
         self.DUpdateThread.quit()
@@ -939,103 +923,103 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot(str)
     def SetHotRegionMode(self, value):
-        self.T.SetHotRegionPIDMode(value)
+        self.PLC.SetHotRegionPIDMode(value)
 
     @QtCore.Slot(float)
     def SetHotRegionSetpoint(self, value):
-        self.T.SetHotRegionSetpoint(value)
+        self.PLC.SetHotRegionSetpoint(value)
 
     @QtCore.Slot(float)
     def SetHotRegionP(self, value):
-        self.T.SetHotRegionP(value)
+        self.PLC.SetHotRegionP(value)
 
     @QtCore.Slot(float)
     def SetHotRegionI(self, value):
-        self.T.SetHotRegionI(value)
+        self.PLC.SetHotRegionI(value)
 
     @QtCore.Slot(float)
     def SetHotRegionD(self, value):
-        self.T.SetHotRegionD(value)
+        self.PLC.SetHotRegionD(value)
 
     @QtCore.Slot(str)
     def SetColdRegionMode(self, value):
-        self.T.SetColdRegionPIDMode(value)
+        self.PLC.SetColdRegionPIDMode(value)
 
     @QtCore.Slot(float)
     def SetColdRegionSetpoint(self, value):
-        self.T.SetColdRegionSetpoint(value)
+        self.PLC.SetColdRegionSetpoint(value)
 
     @QtCore.Slot(float)
     def SetColdRegionP(self, value):
-        self.T.SetColdRegionP(value)
+        self.PLC.SetColdRegionP(value)
 
     @QtCore.Slot(float)
     def SetColdRegionI(self, value):
-        self.T.SetColdRegionI(value)
+        self.PLC.SetColdRegionI(value)
 
     @QtCore.Slot(float)
     def SetColdRegionD(self, value):
-        self.T.SetColdRegionD(value)
+        self.PLC.SetColdRegionD(value)
 
     @QtCore.Slot(float)
     def SetBottomChillerSetpoint(self, value):
-        self.T.SetColdRegionD(value)
+        self.PLC.SetColdRegionD(value)
 
     @QtCore.Slot(str)
     def SetBottomChillerState(self, value):
-        self.T.SetBottomChillerState(value)
+        self.PLC.SetBottomChillerState(value)
 
     @QtCore.Slot(float)
     def SetTopChillerSetpoint(self, value):
-        self.T.SetTopChillerSetpoint(value)
+        self.PLC.SetTopChillerSetpoint(value)
 
     @QtCore.Slot(str)
     def SetTopChillerState(self, value):
-        self.T.SetTopChillerState(value)
+        self.PLC.SetTopChillerState(value)
 
     @QtCore.Slot(float)
     def SetCameraChillerSetpoint(self, value):
-        self.T.SetCameraChillerSetpoint(value)
+        self.PLC.SetCameraChillerSetpoint(value)
 
     @QtCore.Slot(str)
     def SetCameraChillerState(self, value):
-        self.T.SetCameraChillerState(value)
+        self.PLC.SetCameraChillerState(value)
 
     @QtCore.Slot(str)
     def SetInnerHeaterState(self, value):
-        self.T.SetInnerPowerState(value)
+        self.PLC.SetInnerPowerState(value)
 
     @QtCore.Slot(float)
     def SetInnerHeaterPower(self, value):
-        self.T.SetInnerPower(value)
+        self.PLC.SetInnerPower(value)
 
     @QtCore.Slot(str)
     def SetFreonHeaterState(self, value):
-        self.T.SetFreonPowerState(value)
+        self.PLC.SetFreonPowerState(value)
 
     @QtCore.Slot(float)
     def SetFreonHeaterPower(self, value):
-        self.T.SetFreonPower(value)
+        self.PLC.SetFreonPower(value)
 
     @QtCore.Slot(str)
     def SetOuterCloseHeaterState(self, value):
-        self.T.SetOuterClosePowerState(value)
+        self.PLC.SetOuterClosePowerState(value)
 
     @QtCore.Slot(float)
     def SetOuterCloseHeaterPower(self, value):
-        self.T.SetOuterClosePower(value)
+        self.PLC.SetOuterClosePower(value)
 
     @QtCore.Slot(str)
     def SetOuterFarHeaterState(self, value):
-        self.T.SetOuterFarPowerState(value)
+        self.PLC.SetOuterFarPowerState(value)
 
     @QtCore.Slot(float)
     def SetOuterFarHeaterPower(self, value):
-        self.T.SetOuterFarPower(value)
+        self.PLC.SetOuterFarPower(value)
 
     @QtCore.Slot(float)
     def SetCoolingFlow(self, value):
-        self.T.SetFlowValve(value)
+        self.PLC.SetFlowValve(value)
 
     @QtCore.Slot(str)
     def setCartMode(self, value):
@@ -1101,18 +1085,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot(str)
     def SetWaterChillerState(self, value):
-        self.T.SetWaterChillerState(value)
+        self.PLC.SetWaterChillerState(value)
 
     @QtCore.Slot(float)
     def SetWaterChillerSetpoint(self, value):
-        self.T.SetWaterChillerSetpoint(value)
+        self.PLC.SetWaterChillerSetpoint(value)
 
     @QtCore.Slot(str)
     def SetPrimingValve(self, value):
         if value == "Open":
-            self.T.SetWaterPrimingPower("On")
+            self.PLC.SetWaterPrimingPower("On")
         elif value == "Close":
-            self.T.SetWaterPrimingPower("Off")
+            self.PLC.SetWaterPrimingPower("Off")
 
     def closeEvent(self, event):
         self.CloseMessage = QtWidgets.QMessageBox()
@@ -3583,12 +3567,12 @@ class UpdatePPLC(QtCore.QObject):
         self.Running = False
 
 
-# Class to read TPLC value every 2 sec
-class UpdateTPLC(QtCore.QObject):
-    def __init__(self, TPLC, parent=None):
+# Class to read PLC value every 2 sec
+class UpdatePLC(QtCore.QObject):
+    def __init__(self, PLC, parent=None):
         super().__init__(parent)
 
-        self.TPLC = TPLC
+        self.PLC = PLC
         self.Running = False
 
     @QtCore.Slot()
@@ -3596,8 +3580,8 @@ class UpdateTPLC(QtCore.QObject):
         self.Running = True
 
         while self.Running:
-            print("TPLC updating", datetime.datetime.now())
-            self.TPLC.ReadAll()
+            print("PLC updating", datetime.datetime.now())
+            self.PLC.ReadAll()
             time.sleep(2)
 
     @QtCore.Slot()
@@ -3623,16 +3607,12 @@ class UpdateDataBase(QtCore.QObject):
                 self.dt = datetime_in_s()
                 print("Database Updating", self.dt)
 
-                if self.MW.T.NewData_Database:
-                    print("Wrting TPLC data to database...")
-                    self.db.insert_data_into_datastorage("TT9998", self.dt, self.MW.T.RTD[6])
-                    self.db.insert_data_into_datastorage("TT9999", self.dt, self.MW.T.RTD[7])
-                    self.MW.T.NewData_Database = False
+                if self.MW.PLC.NewData_Database:
+                    print("Wrting PLC data to database...")
+                    self.db.insert_data_into_datastorage("TT9998", self.dt, self.MW.PLC.RTD[6])
+                    self.db.insert_data_into_datastorage("TT9999", self.dt, self.MW.PLC.RTD[7])
+                    self.MW.PLC.NewData_Database = False
 
-                if self.MW.P.NewData_Database:
-                    print("Writing PPLC data to database...")
-                    self.db.insert_data_into_datastorage("PT4325", self.dt, self.MW.P.PT[4])
-                    self.MW.P.NewData_Database = False
             else:
                 print("Database Updating stopps.")
                 pass
@@ -3668,127 +3648,127 @@ class UpdateDisplay(QtCore.QObject):
 
             print("Display updating", datetime.datetime.now())
 
-            # print(self.MW.T.RTD)
-            # print(3, self.MW.T.RTD[3])
+            # print(self.MW.PLC.RTD)
+            # print(3, self.MW.PLC.RTD[3])
             # for i in range(0,6):
-            #     print(i, self.MW.T.RTD[i])
+            #     print(i, self.MW.PLC.RTD[i])
 
-            if self.MW.T.NewData_Display:
-                self.MW.TT9998.SetValue(self.MW.T.RTD[6])
-                self.MW.TT9999.SetValue(self.MW.T.RTD[7])
-                self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.T.RTD[0])
-                self.MW.RTDSET1Button.SubWindow.TT2112.SetValue(self.MW.T.RTD[1])
-                self.MW.RTDSET1Button.SubWindow.TT2113.SetValue(self.MW.T.RTD[2])
-                self.MW.RTDSET1Button.SubWindow.TT2114.SetValue(self.MW.T.RTD[3])
-                self.MW.RTDSET1Button.SubWindow.TT2115.SetValue(self.MW.T.RTD[4])
-                self.MW.RTDSET1Button.SubWindow.TT2116.SetValue(self.MW.T.RTD[5])
-                self.MW.RTDSET1Button.SubWindow.TT2117.SetValue(self.MW.T.RTD[6])
+            if self.MW.PLC.NewData_Display:
+                self.MW.TT9998.SetValue(self.MW.PLC.RTD[6])
+                self.MW.TT9999.SetValue(self.MW.PLC.RTD[7])
+                self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.PLC.RTD[0])
+                self.MW.RTDSET1Button.SubWindow.TT2112.SetValue(self.MW.PLC.RTD[1])
+                self.MW.RTDSET1Button.SubWindow.TT2113.SetValue(self.MW.PLC.RTD[2])
+                self.MW.RTDSET1Button.SubWindow.TT2114.SetValue(self.MW.PLC.RTD[3])
+                self.MW.RTDSET1Button.SubWindow.TT2115.SetValue(self.MW.PLC.RTD[4])
+                self.MW.RTDSET1Button.SubWindow.TT2116.SetValue(self.MW.PLC.RTD[5])
+                self.MW.RTDSET1Button.SubWindow.TT2117.SetValue(self.MW.PLC.RTD[6])
 
-                # self.MW.TT2118.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2119.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2120.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6220.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6222.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2401.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2402.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2403.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2404.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2405.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2406.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2407.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2408.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2409.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2410.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2411.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2412.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2413.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2414.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2415.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2416.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2417.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2418.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2419.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2420.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2421.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2422.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2423.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2424.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2425.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2426.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2427.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2428.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2429.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2430.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2431.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2432.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2435.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2436.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2437.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2438.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2439.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2440.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2441.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2442.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2443.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2444.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2445.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2446.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2447.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2448.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2449.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6313.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6315.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6213.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6401.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6315.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6402.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6217.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6403.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6204.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6207.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6405.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6211.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6406.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6207.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6410.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6208.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6411.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6209.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6412.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2101.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2102.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2103.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2104.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2105.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2106.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2107.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2108.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2109.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT2110.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6414.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT6416.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT7202.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT7401.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT3402.SetValue(self.MW.T.RTD[0])
-                # self.MW.TT3401.SetValue(self.MW.T.RTD[0])
+                # self.MW.TT2118.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2119.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2120.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6220.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6222.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2401.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2402.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2403.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2404.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2405.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2406.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2407.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2408.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2409.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2410.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2411.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2412.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2413.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2414.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2415.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2416.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2417.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2418.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2419.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2420.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2421.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2422.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2423.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2424.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2425.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2426.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2427.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2428.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2429.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2430.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2431.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2432.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2435.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2436.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2437.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2438.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2439.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2440.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2441.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2442.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2443.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2444.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2445.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2446.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2447.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2448.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2449.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6313.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6315.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6213.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6401.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6315.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6402.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6217.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6403.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6204.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6207.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6405.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6211.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6406.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6207.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6410.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6208.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6411.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6209.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6412.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2101.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2102.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2103.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2104.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2105.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2106.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2107.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2108.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2109.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT2110.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6414.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT6416.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT7202.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT7401.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT3402.SetValue(self.MW.PLC.RTD[0])
+                # self.MW.TT3401.SetValue(self.MW.PLC.RTD[0])
 
                 # Make sure the PLC is online
-                # if self.MW.TPLCLiveCounter == self.MW.T.LiveCounter
-                # and not self.MW.TPLCOnline.Field.property("Alarm"):
-                #     self.MW.TPLCOnline.Field.setText("Offline")
-                #     self.MW.TPLCOnline.SetAlarm()
-                #     self.MW.TPLCOnlineW.Field.setText("Offline")
-                #     self.MW.TPLCOnlineW.SetAlarm()
-                # elif self.MW.TPLCLiveCounter != self.MW.T.LiveCounter and self.MW.TPLCOnline.Field.property("Alarm"):
-                #     self.MW.TPLCOnline.Field.setText("Online")
-                #     self.MW.TPLCOnline.ResetAlarm()
-                #     self.MW.TPLCOnlineW.Field.setText("Online")
-                #     self.MW.TPLCOnlineW.ResetAlarm()
-                #     self.MW.TPLCLiveCounter = self.MW.T.LiveCounter
+                # if self.MW.PLCLiveCounter == self.MW.PLC.LiveCounter
+                # and not self.MW.PLCOnline.Field.property("Alarm"):
+                #     self.MW.PLCOnline.Field.setText("Offline")
+                #     self.MW.PLCOnline.SetAlarm()
+                #     self.MW.PLCOnlineW.Field.setText("Offline")
+                #     self.MW.PLCOnlineW.SetAlarm()
+                # elif self.MW.PLCLiveCounter != self.MW.PLC.LiveCounter and self.MW.PLCOnline.Field.property("Alarm"):
+                #     self.MW.PLCOnline.Field.setText("Online")
+                #     self.MW.PLCOnline.ResetAlarm()
+                #     self.MW.PLCOnlineW.Field.setText("Online")
+                #     self.MW.PLCOnlineW.ResetAlarm()
+                #     self.MW.PLCLiveCounter = self.MW.PLC.LiveCounter
 
-                self.MW.T.NewData_Display = False
+                self.MW.PLC.NewData_Display = False
 
-            if self.MW.P.NewData_Display:
+
                 #     print("PPLC updating", datetime.datetime.now())
 
                 # self.MW.PT4306.SetValue(self.MW.P.PT[0])
@@ -3812,15 +3792,7 @@ class UpdateDisplay(QtCore.QObject):
                 #
                 # self.MW.BFM4313.SetValue(self.MW.P.PT1)
 
-                # Make sure the PLC is online
-                # if self.MW.PPLCLiveCounter == self.MW.P.LiveCounter
-                # and not self.MW.PPLCOnline.Field.property("Alarm"):
-                #     self.MW.PPLCOnline.Field.setText("Offline")
-                #     self.MW.PPLCOnline.SetAlarm()
-                # elif self.MW.PPLCLiveCounter != self.MW.P.LiveCounter and self.MW.PPLCOnline.Field.property("Alarm"):
-                #     self.MW.PPLCOnline.Field.setText("Online")
-                #     self.MW.PPLCOnline.ResetAlarm()
-                #     self.MW.PPLCLiveCounter = self.MW.P.LiveCounter
+
 
                 self.MW.P.NewData_Display = False
 

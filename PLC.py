@@ -1,5 +1,5 @@
 """
-Class TPLC is used to read/write via modbus to the temperature PLC
+Class PLC is used to read/write via modbus to the temperature PLC
 
 To read the variable, just call the ReadAll() method
 To write to a variable, call the proper setXXX() method
@@ -17,7 +17,7 @@ import random
 from pymodbus.client.sync import ModbusTcpClient
 
 
-class TPLC:
+class PLC:
     def __init__(self):
         super().__init__()
 
@@ -26,7 +26,7 @@ class TPLC:
 
         self.Client = ModbusTcpClient(IP, port=PORT)
         self.Connected = self.Client.connect()
-        print("TPLC connected: " + str(self.Connected))
+        print("PLC connected: " + str(self.Connected))
 
         self.nRTD = 8
         self.RTD = [0.] * self.nRTD
@@ -98,7 +98,7 @@ class TPLC:
             for i in range(0, self.nRTD):
                 self.RTD[i] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
-                # print("Updating TPLC", i, "RTD",self.RTD[i])
+                # print("Updating PLC", i, "RTD",self.RTD[i])
 
             Attribute = [0.] * self.nRTD
             for i in range(0, self.nRTD):
@@ -476,5 +476,5 @@ class TPLC:
 
 
 if __name__ == "__main__":
-    TPLC = TPLC()
-    TPLC.ReadAll()
+    PLC = PLC()
+    PLC.ReadAll()
