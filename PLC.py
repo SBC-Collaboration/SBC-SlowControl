@@ -4,7 +4,7 @@ Class TPLC is used to read/write via modbus to the temperature PLC
 To read the variable, just call the ReadAll() method
 To write to a variable, call the proper setXXX() method
 
-By: Mathieu Laurin														
+By: Mathieu Laurin
 
 v1.0 Initial code 25/11/19 ML
 v1.1 Initialize values, flag when values are updated more modbus variables 04/03/20 ML
