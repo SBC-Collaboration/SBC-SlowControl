@@ -580,21 +580,21 @@ class Update(QtCore.QObject):
         self.PLC = PLC()
 
         # Read PLC value on another thread
-        self.PLCUpdateThread = QtCore.QThread()
+        self.PLCUpdateThread = QtCore.QThread(parent=self)
         self.UpPLC = UpdatePLC(self.PLC)
         self.UpPLC.moveToThread(self.PLCUpdateThread)
         self.PLCUpdateThread.started.connect(self.UpPLC.run)
         self.PLCUpdateThread.start()
 
         # Update database on another thread
-        self.DataUpdateThread = QtCore.QThread()
+        self.DataUpdateThread = QtCore.QThread(parent=self)
         self.UpDatabase = UpdateDataBase(self.PLC)
         self.UpDatabase.moveToThread(self.DataUpdateThread)
         self.DataUpdateThread.started.connect(self.UpDatabase.run)
         self.DataUpdateThread.start()
 
         # Update database on another thread
-        self.ServerUpdateThread = QtCore.QThread()
+        self.ServerUpdateThread = QtCore.QThread(parent=self)
         self.UpServer = UpdateServer(self.PLC)
         self.UpServer.moveToThread(self.ServerUpdateThread)
         self.ServerUpdateThread.started.connect(self.UpServer.run)
