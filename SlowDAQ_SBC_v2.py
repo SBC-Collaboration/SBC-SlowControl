@@ -3575,13 +3575,13 @@ class UpdateClient(QtCore.QObject):
     def run(self):
         self.Running = True
         while self.Running:
-            message = self.socket.recv()
-            print(f"Received request: {message}")
+
+            print(f"Sending request...)
 
             #  Send reply back to client
-            self.socket.send(b"World")
-            self.PLC.NewData_ZMQ = False
+            self.socket.send(b"Hello")
 
+            self.PLC.NewData_ZMQ = False
             time.sleep(self.period)
 
     @QtCore.Slot()
