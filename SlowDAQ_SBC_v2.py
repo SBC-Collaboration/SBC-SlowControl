@@ -3566,7 +3566,7 @@ class UpdateClient(QtCore.QObject):
         super().__init__(parent)
         self.context = zmq.Context()
         self.socket = self.context.socket(zmq.REP)
-        self.socket.connect("tcp://*:5555")
+        self.socket.connect("tcp://localhost:5555")
         self.Running=False
         self.period=2
         print("client are conecting to the ZMQ server")
