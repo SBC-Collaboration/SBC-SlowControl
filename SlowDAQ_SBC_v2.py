@@ -826,7 +826,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.PLCUpdateThread.start()
 
         self.ClientUpdateThread = QtCore.QThread()
-        self.UpClient = UpdateClient(self)
+        self.UpClient = UpdateClient()
         self.UpClient.moveToThread(self.ClientUpdateThread)
         self.ClientUpdateThread.started.connect(self.UpClient.run)
         self.ClientUpdateThread.start()
