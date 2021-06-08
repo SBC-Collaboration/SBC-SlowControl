@@ -3576,7 +3576,7 @@ class UpdateClient(QtCore.QObject):
         self.Running = True
         while self.Running:
 
-            print(f"Sending request...)
+            print(f"Sending request...")
 
             #  Send reply back to client
             self.socket.send(b"Hello")
