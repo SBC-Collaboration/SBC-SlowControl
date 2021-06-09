@@ -3579,7 +3579,9 @@ class UpdateClient(QtCore.QObject):
             print(f"Sending request...")
 
             #  Send reply back to client
-            # self.socket.send(b"Hello")
+            self.socket.send(b"Hello")
+            message = self.socket.recv()
+            print(f"Received reply [ {message} ]")
             time.sleep(self.period)
 
     @QtCore.Slot()

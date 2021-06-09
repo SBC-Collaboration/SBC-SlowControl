@@ -554,12 +554,12 @@ class UpdateServer(QtCore.QObject):
         while self.Running:
             print("refreshing the server")
             if self.PLC.NewData_ZMQ:
-                # message = self.socket.recv()
+                message = self.socket.recv()
                 print("refreshing")
-                # print(f"Received request: {message}")
+                print(f"Received request: {message}")
 
                 #  Send reply back to client
-                # self.socket.send(b"World")
+                self.socket.send(b"World")
                 self.PLC.NewData_ZMQ = False
             else:
                 print("PLC server stops")
