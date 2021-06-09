@@ -3616,16 +3616,18 @@ class UpdateDisplay(QtCore.QObject):
             # for i in range(0,6):
             #     print(i, self.MW.PLC.RTD[i])
 
-            if self.MW.PLC.NewData_Display:
-                self.MW.TT9998.SetValue(self.MW.PLC.RTD[6])
-                self.MW.TT9999.SetValue(self.MW.PLC.RTD[7])
-                self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.PLC.RTD[0])
-                self.MW.RTDSET1Button.SubWindow.TT2112.SetValue(self.MW.PLC.RTD[1])
-                self.MW.RTDSET1Button.SubWindow.TT2113.SetValue(self.MW.PLC.RTD[2])
-                self.MW.RTDSET1Button.SubWindow.TT2114.SetValue(self.MW.PLC.RTD[3])
-                self.MW.RTDSET1Button.SubWindow.TT2115.SetValue(self.MW.PLC.RTD[4])
-                self.MW.RTDSET1Button.SubWindow.TT2116.SetValue(self.MW.PLC.RTD[5])
-                self.MW.RTDSET1Button.SubWindow.TT2117.SetValue(self.MW.PLC.RTD[6])
+            # if self.MW.PLC.NewData_Display:
+            #     self.MW.TT9998.SetValue(self.MW.PLC.RTD[6])
+            #     self.MW.TT9999.SetValue(self.MW.PLC.RTD[7])
+            #     self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.PLC.RTD[0])
+            #     self.MW.RTDSET1Button.SubWindow.TT2112.SetValue(self.MW.PLC.RTD[1])
+            #     self.MW.RTDSET1Button.SubWindow.TT2113.SetValue(self.MW.PLC.RTD[2])
+            #     self.MW.RTDSET1Button.SubWindow.TT2114.SetValue(self.MW.PLC.RTD[3])
+            #     self.MW.RTDSET1Button.SubWindow.TT2115.SetValue(self.MW.PLC.RTD[4])
+            #     self.MW.RTDSET1Button.SubWindow.TT2116.SetValue(self.MW.PLC.RTD[5])
+            #     self.MW.RTDSET1Button.SubWindow.TT2117.SetValue(self.MW.PLC.RTD[6])
+
+                # self.MW.PLC.NewData_Display = False
 
                 # self.MW.TT2118.SetValue(self.MW.PLC.RTD[0])
                 # self.MW.TT2119.SetValue(self.MW.PLC.RTD[0])
@@ -3729,7 +3731,7 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.PLCOnlineW.ResetAlarm()
                 #     self.MW.PLCLiveCounter = self.MW.PLC.LiveCounter
 
-                self.MW.PLC.NewData_Display = False
+
 
 
                 #     print("PPLC updating", datetime.datetime.now())
@@ -3738,7 +3740,7 @@ class UpdateDisplay(QtCore.QObject):
                 # self.MW.PT4315.SetValue(self.MW.P.PT[1])
                 # self.MW.PT4319.SetValue(self.MW.P.PT[2])
                 # self.MW.PT4322.SetValue(self.MW.P.PT[3])
-                self.MW.PT4325.SetValue(self.MW.P.PT[4])
+                # self.MW.PT4325.SetValue(self.MW.P.PT[4])
                 # self.MW.PT6302.SetValue(self.MW.P.PT[5])
                 # self.MW.PT4330.SetValue(self.MW.P.PT1)
                 # self.MW.PT2316.SetValue(self.MW.P.PT1)
@@ -3757,7 +3759,7 @@ class UpdateDisplay(QtCore.QObject):
 
 
 
-                self.MW.P.NewData_Display = False
+                # self.MW.P.NewData_Display = False
 
             # Check if alarm values are met and set them
             # self.MW.AlarmButton.SubWindow.TT2111.CheckAlarm()

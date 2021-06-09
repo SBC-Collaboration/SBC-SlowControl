@@ -568,7 +568,6 @@ class UpdateServer(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
-        self.destroy=zmq.zmq_ctx_destroy()
 
 
 class Update(QtCore.QObject):
