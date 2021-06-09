@@ -3569,7 +3569,7 @@ class UpdateClient(QtCore.QObject):
         self.socket.connect("tcp://localhost:5555")
         self.Running=False
         self.period=2
-        print("client are conecting to the ZMQ server")
+        print("client is connecting to the ZMQ server")
 
     @QtCore.Slot()
     def run(self):
@@ -3580,8 +3580,6 @@ class UpdateClient(QtCore.QObject):
 
             #  Send reply back to client
             self.socket.send(b"Hello")
-
-            self.PLC.NewData_ZMQ = False
             time.sleep(self.period)
 
     @QtCore.Slot()
