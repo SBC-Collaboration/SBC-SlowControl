@@ -3845,7 +3845,7 @@ class UpdateDisplay(QtCore.QObject):
             self.MW.AlarmButton.ButtonAlarmSignal()
             # # # generally checkbutton.clicked -> move to updatedisplay
             # if self.MW.AlarmButton.Button.Alarm:
-            #     self.MW.AlarmButton.SubWindow.ReassignOrder()
+                # self.MW.AlarmButton.SubWindow.ReassignOrder()
 
             # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
             #     self.MW.PT1.SetAlarm()

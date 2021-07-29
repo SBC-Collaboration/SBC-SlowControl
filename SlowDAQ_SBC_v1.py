@@ -169,11 +169,11 @@ class MainWindow(QtWidgets.QMainWindow):
         #PLC test window
         self.TT9998=Indicator(self.ThermosyphonTab)
         self.TT9998.Label.setText("TT9998")
-        self.TT9998.move(0,900)
+        self.TT9998.move(300,1100)
 
         self.TT9999 = Indicator(self.ThermosyphonTab)
         self.TT9999.Label.setText("TT9998")
-        self.TT9999.move(0, 950)
+        self.TT9999.move(300, 1150)
 
         self.GV4301 = PnID_Alone(self.ThermosyphonTab)
         self.GV4301.Label.setText("GV4301")
