@@ -2756,6 +2756,53 @@ class AlarmWin(QtWidgets.QMainWindow):
                 break
 
     @QtCore.Slot()
+    def ResetOrder(self):
+        self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
+                           1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3314},
+                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
+                           3: {0: self.PT4322, 1: self.PT4325}}
+
+        self.i_PT_max = len(self.AlarmPTdir)
+        # which is 4
+        self.j_PT_max = len(self.AlarmPTdir[0])
+        self.i_PT_last = len(self.AlarmPTdir) - 1
+        # which is 3
+        self.j_PT_last = len(self.AlarmPTdir[self.i_PT_last]) - 1
+        # which is 1
+        for i in range(0, self.i_PT_max):
+            for j in range(0, self.j_PT_max):
+                self.GLPT.addWidget(self.AlarmPTdir[i][j], i, j)
+                # end the position generator when i= last element's row number -1, j= last element's column number
+                if (i, j) == (self.i_PT_last, self.j_PT_last):
+                    break
+            if (i, j) == (self.i_PT_last, self.j_PT_last):
+                break
+
+    @QtCore.Slot()
+    def ReassignOrder_test(self):
+        self.AlarmPTdir = {0: {0: self.PT3309, 1: self.PT1101, 2: self.PT2316, 3: self.PT2321, 4: self.PT2330},
+                           1: {0: self.PT2335, 1: self.PT3308, 2: self.PT3310, 3: self.PT3311, 4: self.PT3314},
+                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
+                           3: {0: self.PT4322, 1: self.PT4325}}
+
+        self.i_PT_max = len(self.AlarmPTdir)
+        # which is 4
+        self.j_PT_max = len(self.AlarmPTdir[0])
+        self.i_PT_last = len(self.AlarmPTdir) - 1
+        # which is 3
+        self.j_PT_last = len(self.AlarmPTdir[self.i_PT_last]) - 1
+        # which is 1
+        for i in range(0, self.i_PT_max):
+            for j in range(0, self.j_PT_max):
+                self.GLPT.addWidget(self.AlarmPTdir[i][j], i, j)
+                # end the position generator when i= last element's row number -1, j= last element's column number
+                if (i, j) == (self.i_PT_last, self.j_PT_last):
+                    break
+            if (i, j) == (self.i_PT_last, self.j_PT_last):
+                break
+
+
+    @QtCore.Slot()
     def ReassignOrder(self):
         # check the status of the Widget and reassign the diretory
         # establish 2 diretory, reorder TempDic to reorder the widgets
@@ -2763,11 +2810,13 @@ class AlarmWin(QtWidgets.QMainWindow):
         # i_max, j_max are max row and column number
         # l max are max column number+1
         # i_last,j_last are last elements's diretory coordinate
+
         TempRefRTD1dir = self.AlarmRTD1dir
         TempRefRTD2dir = self.AlarmRTD2dir
         TempRefRTD3dir = self.AlarmRTD3dir
         TempRefRTD4dir = self.AlarmRTD4dir
         TempRefRTDLEFTdir = self.AlarmRTDLEFTdir
+
         TempRefPTdir = self.AlarmPTdir
 
         TempRTD1dir = self.AlarmRTD1dir
@@ -2839,141 +2888,141 @@ class AlarmWin(QtWidgets.QMainWindow):
         l_RTDLEFT_max = j_RTDLEFT_max - 1
         l_PT_max = j_PT_max - 1
         # RTD1 put alarm true widget to the begining of the diretory
-        for i in range(0, i_RTD1_max):
-            for j in range(0, j_RTD1_max):
-                if TempRefRTD1dir[i][j].Alarm:
-                    TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
-                    l_RTD1 = l_RTD1 + 1
-                    if l_RTD1 == l_RTD1_max:
-                        l_RTD1 = 0
-                        k_RTD1 = k_RTD1 + 1
-                if (i, j) == (i_RTD1_last, j_RTD1_last):
-                    break
-            if (i, j) == (i_RTD1_last, j_RTD1_last):
-                break
-
-        # RTD1 put alarm false widget after that
-        for i in range(0, i_RTD1_max):
-            for j in range(0, j_RTD1_max):
-                if not TempRefRTD1dir[i][j].Alarm:
-                    TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
-                    l_RTD1 = l_RTD1 + 1
-                    if l_RTD1 == l_RTD1_max:
-                        l_RTD1 = 0
-                        k_RTD1 = k_RTD1 + 1
-                if (i, j) == (i_RTD1_last, j_RTD1_last):
-                    break
-            if (i, j) == (i_RTD1_last, j_RTD1_last):
-                break
-
-        for i in range(0, i_RTD2_max):
-            for j in range(0, j_RTD2_max):
-                if TempRefRTD2dir[i][j].Alarm:
-                    TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
-                    l_RTD2 = l_RTD2 + 1
-                    if l_RTD2 == l_RTD2_max:
-                        l_RTD2 = 0
-                        k_RTD2 = k_RTD2 + 1
-                if (i, j) == (i_RTD2_last, j_RTD2_last):
-                    break
-            if (i, j) == (i_RTD2_last, j_RTD2_last):
-                break
+        # for i in range(0, i_RTD1_max):
+        #     for j in range(0, j_RTD1_max):
+        #         if TempRefRTD1dir[i][j].Alarm:
+        #             TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
+        #             l_RTD1 = l_RTD1 + 1
+        #             if l_RTD1 == l_RTD1_max:
+        #                 l_RTD1 = 0
+        #                 k_RTD1 = k_RTD1 + 1
+        #         if (i, j) == (i_RTD1_last, j_RTD1_last):
+        #             break
+        #     if (i, j) == (i_RTD1_last, j_RTD1_last):
+        #         break
+        #
+        # # RTD1 put alarm false widget after that
+        # for i in range(0, i_RTD1_max):
+        #     for j in range(0, j_RTD1_max):
+        #         if not TempRefRTD1dir[i][j].Alarm:
+        #             TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
+        #             l_RTD1 = l_RTD1 + 1
+        #             if l_RTD1 == l_RTD1_max:
+        #                 l_RTD1 = 0
+        #                 k_RTD1 = k_RTD1 + 1
+        #         if (i, j) == (i_RTD1_last, j_RTD1_last):
+        #             break
+        #     if (i, j) == (i_RTD1_last, j_RTD1_last):
+        #         break
+        #
+        # for i in range(0, i_RTD2_max):
+        #     for j in range(0, j_RTD2_max):
+        #         if TempRefRTD2dir[i][j].Alarm:
+        #             TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
+        #             l_RTD2 = l_RTD2 + 1
+        #             if l_RTD2 == l_RTD2_max:
+        #                 l_RTD2 = 0
+        #                 k_RTD2 = k_RTD2 + 1
+        #         if (i, j) == (i_RTD2_last, j_RTD2_last):
+        #             break
+        #     if (i, j) == (i_RTD2_last, j_RTD2_last):
+        #         break
 
         # RTD2 put alarm false widget after that
-        for i in range(0, i_RTD2_max):
-            for j in range(0, j_RTD2_max):
-                if not TempRefRTD2dir[i][j].Alarm:
-                    TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
-                    l_RTD2 = l_RTD2 + 1
-                    if l_RTD2 == l_RTD2_max:
-                        l_RTD2 = 0
-                        k_RTD2 = k_RTD2 + 1
-                if (i, j) == (i_RTD2_last, j_RTD2_last):
-                    break
-            if (i, j) == (i_RTD2_last, j_RTD2_last):
-                break
-
-        for i in range(0, i_RTD3_max):
-            for j in range(0, j_RTD3_max):
-                if TempRefRTD3dir[i][j].Alarm:
-                    TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
-                    l_RTD3 = l_RTD3 + 1
-                    if l_RTD3 == l_RTD3_max:
-                        l_RTD3 = 0
-                        k_RTD3 = k_RTD3 + 1
-                if (i, j) == (i_RTD3_last, j_RTD3_last):
-                    break
-            if (i, j) == (i_RTD3_last, j_RTD3_last):
-                break
+        # for i in range(0, i_RTD2_max):
+        #     for j in range(0, j_RTD2_max):
+        #         if not TempRefRTD2dir[i][j].Alarm:
+        #             TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
+        #             l_RTD2 = l_RTD2 + 1
+        #             if l_RTD2 == l_RTD2_max:
+        #                 l_RTD2 = 0
+        #                 k_RTD2 = k_RTD2 + 1
+        #         if (i, j) == (i_RTD2_last, j_RTD2_last):
+        #             break
+        #     if (i, j) == (i_RTD2_last, j_RTD2_last):
+        #         break
+        #
+        # for i in range(0, i_RTD3_max):
+        #     for j in range(0, j_RTD3_max):
+        #         if TempRefRTD3dir[i][j].Alarm:
+        #             TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
+        #             l_RTD3 = l_RTD3 + 1
+        #             if l_RTD3 == l_RTD3_max:
+        #                 l_RTD3 = 0
+        #                 k_RTD3 = k_RTD3 + 1
+        #         if (i, j) == (i_RTD3_last, j_RTD3_last):
+        #             break
+        #     if (i, j) == (i_RTD3_last, j_RTD3_last):
+        #         break
 
         # RTD3 put alarm false widget after that
-        for i in range(0, i_RTD3_max):
-            for j in range(0, j_RTD3_max):
-                if not TempRefRTD3dir[i][j].Alarm:
-                    TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
-                    l_RTD3 = l_RTD3 + 1
-                    if l_RTD3 == l_RTD3_max:
-                        l_RTD3 = 0
-                        k_RTD3 = k_RTD3 + 1
-                if (i, j) == (i_RTD3_last, j_RTD3_last):
-                    break
-            if (i, j) == (i_RTD3_last, j_RTD3_last):
-                break
-
-        for i in range(0, i_RTD4_max):
-            for j in range(0, j_RTD4_max):
-                if TempRefRTD4dir[i][j].Alarm:
-                    TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
-                    l_RTD4 = l_RTD4 + 1
-                    if l_RTD4 == l_RTD4_max:
-                        l_RTD4 = 0
-                        k_RTD4 = k_RTD4 + 1
-                if (i, j) == (i_RTD4_last, j_RTD4_last):
-                    break
-            if (i, j) == (i_RTD4_last, j_RTD4_last):
-                break
+        # for i in range(0, i_RTD3_max):
+        #     for j in range(0, j_RTD3_max):
+        #         if not TempRefRTD3dir[i][j].Alarm:
+        #             TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
+        #             l_RTD3 = l_RTD3 + 1
+        #             if l_RTD3 == l_RTD3_max:
+        #                 l_RTD3 = 0
+        #                 k_RTD3 = k_RTD3 + 1
+        #         if (i, j) == (i_RTD3_last, j_RTD3_last):
+        #             break
+        #     if (i, j) == (i_RTD3_last, j_RTD3_last):
+        #         break
+        #
+        # for i in range(0, i_RTD4_max):
+        #     for j in range(0, j_RTD4_max):
+        #         if TempRefRTD4dir[i][j].Alarm:
+        #             TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
+        #             l_RTD4 = l_RTD4 + 1
+        #             if l_RTD4 == l_RTD4_max:
+        #                 l_RTD4 = 0
+        #                 k_RTD4 = k_RTD4 + 1
+        #         if (i, j) == (i_RTD4_last, j_RTD4_last):
+        #             break
+        #     if (i, j) == (i_RTD4_last, j_RTD4_last):
+        #         break
 
         # RTD4 put alarm false widget after that
-        for i in range(0, i_RTD4_max):
-            for j in range(0, j_RTD4_max):
-                if not TempRefRTD4dir[i][j].Alarm:
-                    TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
-                    l_RTD4 = l_RTD4 + 1
-                    if l_RTD4 == l_RTD4_max:
-                        l_RTD4 = 0
-                        k_RTD4 = k_RTD4 + 1
-                if (i, j) == (i_RTD4_last, j_RTD4_last):
-                    break
-            if (i, j) == (i_RTD4_last, j_RTD4_last):
-                break
-
-        for i in range(0, i_RTDLEFT_max):
-            for j in range(0, j_RTDLEFT_max):
-                if TempRefRTDLEFTdir[i][j].Alarm:
-                    TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
-                    l_RTDLEFT = l_RTDLEFT + 1
-                    if l_RTDLEFT == l_RTDLEFT_max:
-                        l_RTDLEFT = 0
-                        k_RTDLEFT = k_RTDLEFT + 1
-                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                    break
-            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                break
+        # for i in range(0, i_RTD4_max):
+        #     for j in range(0, j_RTD4_max):
+        #         if not TempRefRTD4dir[i][j].Alarm:
+        #             TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
+        #             l_RTD4 = l_RTD4 + 1
+        #             if l_RTD4 == l_RTD4_max:
+        #                 l_RTD4 = 0
+        #                 k_RTD4 = k_RTD4 + 1
+        #         if (i, j) == (i_RTD4_last, j_RTD4_last):
+        #             break
+        #     if (i, j) == (i_RTD4_last, j_RTD4_last):
+        #         break
+        #
+        # for i in range(0, i_RTDLEFT_max):
+        #     for j in range(0, j_RTDLEFT_max):
+        #         if TempRefRTDLEFTdir[i][j].Alarm:
+        #             TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
+        #             l_RTDLEFT = l_RTDLEFT + 1
+        #             if l_RTDLEFT == l_RTDLEFT_max:
+        #                 l_RTDLEFT = 0
+        #                 k_RTDLEFT = k_RTDLEFT + 1
+        #         if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+        #             break
+        #     if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+        #         break
 
         # RTDLEFT put alarm false widget after that
-        for i in range(0, i_RTDLEFT_max):
-            for j in range(0, j_RTDLEFT_max):
-                if not TempRefRTDLEFTdir[i][j].Alarm:
-                    TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
-                    l_RTDLEFT = l_RTDLEFT + 1
-                    if l_RTDLEFT == l_RTDLEFT_max:
-                        l_RTDLEFT = 0
-                        k_RTDLEFT = k_RTDLEFT + 1
-                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                    break
-            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                break
-
+        # for i in range(0, i_RTDLEFT_max):
+        #     for j in range(0, j_RTDLEFT_max):
+        #         if not TempRefRTDLEFTdir[i][j].Alarm:
+        #             TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
+        #             l_RTDLEFT = l_RTDLEFT + 1
+        #             if l_RTDLEFT == l_RTDLEFT_max:
+        #                 l_RTDLEFT = 0
+        #                 k_RTDLEFT = k_RTDLEFT + 1
+        #         if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+        #             break
+        #     if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+        #         break
+        #
         # PT
         for i in range(0, i_PT_max):
             for j in range(0, j_PT_max):
@@ -3003,45 +3052,45 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         # Reassign position
         # end the position generator when i= last element's row number, j= last element's column number
-        for i in range(0, i_RTD1_max):
-            for j in range(0, j_RTD1_max):
-                self.GLRTD1.addWidget(TempRTD1dir[i][j], i, j)
-                if (i, j) == (i_RTD1_last, j_RTD1_last):
-                    break
-            if (i, j) == (i_RTD1_last, j_RTD1_last):
-                break
-
-        for i in range(0, i_RTD2_max):
-            for j in range(0, j_RTD2_max):
-                self.GLRTD2.addWidget(TempRTD2dir[i][j], i, j)
-                if (i, j) == (i_RTD2_last, j_RTD2_last):
-                    break
-            if (i, j) == (i_RTD2_last, j_RTD2_last):
-                break
-
-        for i in range(0, i_RTD3_max):
-            for j in range(0, j_RTD3_max):
-                self.GLRTD3.addWidget(TempRTD3dir[i][j], i, j)
-                if (i, j) == (i_RTD3_last, j_RTD3_last):
-                    break
-            if (i, j) == (i_RTD3_last, j_RTD3_last):
-                break
-
-        for i in range(0, i_RTD4_max):
-            for j in range(0, j_RTD4_max):
-                self.GLRTD4.addWidget(TempRTD4dir[i][j], i, j)
-                if (i, j) == (i_RTD4_last, j_RTD4_last):
-                    break
-            if (i, j) == (i_RTD4_last, j_RTD4_last):
-                break
-
-        for i in range(0, i_RTDLEFT_max):
-            for j in range(0, j_RTDLEFT_max):
-                self.GLRTDLEFT.addWidget(TempRTDLEFTdir[i][j], i, j)
-                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                    break
-            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                break
+        # for i in range(0, i_RTD1_max):
+        #     for j in range(0, j_RTD1_max):
+        #         self.GLRTD1.addWidget(TempRTD1dir[i][j], i, j)
+        #         if (i, j) == (i_RTD1_last, j_RTD1_last):
+        #             break
+        #     if (i, j) == (i_RTD1_last, j_RTD1_last):
+        #         break
+        #
+        # for i in range(0, i_RTD2_max):
+        #     for j in range(0, j_RTD2_max):
+        #         self.GLRTD2.addWidget(TempRTD2dir[i][j], i, j)
+        #         if (i, j) == (i_RTD2_last, j_RTD2_last):
+        #             break
+        #     if (i, j) == (i_RTD2_last, j_RTD2_last):
+        #         break
+        #
+        # for i in range(0, i_RTD3_max):
+        #     for j in range(0, j_RTD3_max):
+        #         self.GLRTD3.addWidget(TempRTD3dir[i][j], i, j)
+        #         if (i, j) == (i_RTD3_last, j_RTD3_last):
+        #             break
+        #     if (i, j) == (i_RTD3_last, j_RTD3_last):
+        #         break
+        #
+        # for i in range(0, i_RTD4_max):
+        #     for j in range(0, j_RTD4_max):
+        #         self.GLRTD4.addWidget(TempRTD4dir[i][j], i, j)
+        #         if (i, j) == (i_RTD4_last, j_RTD4_last):
+        #             break
+        #     if (i, j) == (i_RTD4_last, j_RTD4_last):
+        #         break
+        #
+        # for i in range(0, i_RTDLEFT_max):
+        #     for j in range(0, j_RTDLEFT_max):
+        #         self.GLRTDLEFT.addWidget(TempRTDLEFTdir[i][j], i, j)
+        #         if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+        #             break
+        #     if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+        #         break
 
         # end the position generator when i= last element's row number, j= last element's column number
         for i in range(0, i_PT_max):
@@ -3156,12 +3205,19 @@ class AlarmButton(QtWidgets.QWidget):
         # self.Signals.sSignal.emit(self.Button.text())
 
     @QtCore.Slot()
-    def ButtonAlarmSignal(self):
-        self.Button.setProperty("Alarm", self.Button.Alarm)
+    def ButtonAlarmSetSignal(self):
+        self.Button.setProperty("Alarm", True)
         self.Button.setStyle(self.Button.style())
 
     @QtCore.Slot()
+    def ButtonAlarmResetSignal(self):
+        self.Button.setProperty("Alarm", False)
+        self.Button.setStyle(self.Button.style())
+
+
+    @QtCore.Slot()
     def CollectAlarm(self, list):
+        self.Collected=False
         for i in range(len(list)):
             # calculate collected alarm status
             self.Collected = self.Collected or list[i].Alarm
@@ -3763,56 +3819,60 @@ class UpdateDisplay(QtCore.QObject):
                 # self.MW.P.NewData_Display = False
 
             # Check if alarm values are met and set them
+            self.MW.AlarmButton.SubWindow.PT3309.CheckAlarm()
+            # print(self.MW.AlarmButton.SubWindow.PT3309.AlarmMode.isChecked())
+            # print(self.MW.AlarmButton.SubWIndow.PT3309.Alarm)
             # self.MW.AlarmButton.SubWindow.TT2111.CheckAlarm()
             # self.MW.AlarmButton.SubWindow.PT1101.CheckAlarm()
             # self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0].CheckAlarm()
             # print(self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0]==self.MW.AlarmButton.SubWindow.PT1101)
-            for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD1_max):
-                for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD1_max):
-                    self.MW.AlarmButton.SubWindow.AlarmRTD1dir[i][j].CheckAlarm()
-                    if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
-                        break
-                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
-                    break
-
-            for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD2_max):
-                for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD2_max):
-                    self.MW.AlarmButton.SubWindow.AlarmRTD2dir[i][j].CheckAlarm()
-                    if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD2_last, self.MW.AlarmButton.SubWindow.j_RTD2_last):
-                        break
-                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD2_last, self.MW.AlarmButton.SubWindow.j_RTD2_last):
-                    break
-
-            for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD3_max):
-                for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD3_max):
-                    self.MW.AlarmButton.SubWindow.AlarmRTD3dir[i][j].CheckAlarm()
-                    if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD3_last, self.MW.AlarmButton.SubWindow.j_RTD3_last):
-                        break
-                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD3_last, self.MW.AlarmButton.SubWindow.j_RTD3_last):
-                    break
-
-            for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD4_max):
-                for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD4_max):
-                    self.MW.AlarmButton.SubWindow.AlarmRTD4dir[i][j].CheckAlarm()
-                    if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD4_last, self.MW.AlarmButton.SubWindow.j_RTD4_last):
-                        break
-                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD4_last, self.MW.AlarmButton.SubWindow.j_RTD4_last):
-                    break
-
-            for i in range(0, self.MW.AlarmButton.SubWindow.i_PT_max):
-                for j in range(0, self.MW.AlarmButton.SubWindow.j_PT_max):
-                    self.MW.AlarmButton.SubWindow.AlarmPTdir[i][j].CheckAlarm()
-                    if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
-                        break
-                if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
-                    break
+            # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD1_max):
+            #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD1_max):
+            #         self.MW.AlarmButton.SubWindow.AlarmRTD1dir[i][j].CheckAlarm()
+            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
+            #             break
+            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
+            #         break
+            #
+            # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD2_max):
+            #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD2_max):
+            #         self.MW.AlarmButton.SubWindow.AlarmRTD2dir[i][j].CheckAlarm()
+            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD2_last, self.MW.AlarmButton.SubWindow.j_RTD2_last):
+            #             break
+            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD2_last, self.MW.AlarmButton.SubWindow.j_RTD2_last):
+            #         break
+            #
+            # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD3_max):
+            #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD3_max):
+            #         self.MW.AlarmButton.SubWindow.AlarmRTD3dir[i][j].CheckAlarm()
+            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD3_last, self.MW.AlarmButton.SubWindow.j_RTD3_last):
+            #             break
+            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD3_last, self.MW.AlarmButton.SubWindow.j_RTD3_last):
+            #         break
+            #
+            # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD4_max):
+            #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD4_max):
+            #         self.MW.AlarmButton.SubWindow.AlarmRTD4dir[i][j].CheckAlarm()
+            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD4_last, self.MW.AlarmButton.SubWindow.j_RTD4_last):
+            #             break
+            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD4_last, self.MW.AlarmButton.SubWindow.j_RTD4_last):
+            #         break
+            #
+            # for i in range(0, self.MW.AlarmButton.SubWindow.i_PT_max):
+            #     for j in range(0, self.MW.AlarmButton.SubWindow.j_PT_max):
+            #         self.MW.AlarmButton.SubWindow.AlarmPTdir[i][j].CheckAlarm()
+            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
+            #             break
+            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
+            #         break
 
             # # # rewrite collectalarm in updatedisplay
 
             # self.MW.AlarmButton.CollectAlarm(self.array)
-
             self.MW.AlarmButton.CollectAlarm(
-                [self.MW.AlarmButton.SubWindow.TT2111, self.MW.AlarmButton.SubWindow.TT2401])
+                    [self.MW.AlarmButton.SubWindow.PT3309])
+            # self.MW.AlarmButton.CollectAlarm(
+            #     [self.MW.AlarmButton.SubWindow.PT3309,self.MW.AlarmButton.SubWindow.TT2111, self.MW.AlarmButton.SubWindow.TT2115])
 
             # self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111,
             #                                  self.MW.AlarmButton.SubWindow.TT2401,
@@ -3841,11 +3901,17 @@ class UpdateDisplay(QtCore.QObject):
             #                                  self.MW.AlarmButton.SubWindow.PT4319,
             #                                  self.MW.AlarmButton.SubWindow.PT4322,
             #                                  self.MW.AlarmButton.SubWindow.PT4325])
+            print(self.MW.AlarmButton.Button.Alarm)
 
-            self.MW.AlarmButton.ButtonAlarmSignal()
+            if self.MW.AlarmButton.Button.Alarm:
+                self.MW.AlarmButton.ButtonAlarmSetSignal()
+            else:
+                self.MW.AlarmButton.ButtonAlarmResetSignal()
             # # # generally checkbutton.clicked -> move to updatedisplay
-            # if self.MW.AlarmButton.Button.Alarm:
-            #     self.MW.AlarmButton.SubWindow.ReassignOrder()
+            if self.MW.AlarmButton.Button.Alarm:
+                self.MW.AlarmButton.SubWindow.ReassignOrder_test()
+            else:
+                self.MW.AlarmButton.SubWindow.ResetOrder()
 
             # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
             #     self.MW.PT1.SetAlarm()

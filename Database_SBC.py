@@ -22,7 +22,7 @@ class mydatabase():
             self.mycursor.execute(statement)
         except:
             print("Statement formal is wrong, please check it")
-    # user slowcontrol doesn't have permission to create tables. Besides, table column name should be different
+    # user slowcontrol doesn't have permission to create tables. Besides, table columVn name should be different
     # def create_table(self, table_name):
     #     self.mycursor.execute(
     #         "CREATE TABLE {}(Time DATETIME, Value DECIMAL(7,3), PRIMARY KEY(Time));".format(table_name))

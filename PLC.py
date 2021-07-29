@@ -10,7 +10,7 @@ v1.0 Initial code 25/11/19 ML
 v1.1 Initialize values, flag when values are updated more modbus variables 04/03/20 ML
 """
 
-import struct, time, zmq ,sys
+import struct, time, zmq, sys
 
 from PySide2 import QtWidgets, QtCore, QtGui
 from Database_SBC import *
