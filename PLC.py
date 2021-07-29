@@ -97,7 +97,7 @@ class PLC:
     def ReadAll(self):
         if self.Connected:
             # Reading all the RTDs
-            Raw = self.Client.read_holding_registers(37000, count=self.nRTD * 2, unit=0x01)
+            Raw = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
             # RTD_setting = self.Client.read_holding_registers(18002, count=1, unit=0x01)
             for i in range(0, self.nRTD):
                 self.RTD[i] = round(
@@ -547,6 +547,7 @@ class UpdateServer(QtCore.QObject):
         self.Running=False
         self.period=2
         print("connect to the PLC server")
+        self.data_package={"PT9998":None,"PT9999":None}
 
     @QtCore.Slot()
     def run(self):
@@ -554,12 +555,14 @@ class UpdateServer(QtCore.QObject):
         while self.Running:
             print("refreshing the server")
             if self.PLC.NewData_ZMQ:
+
                 message = self.socket.recv()
                 print("refreshing")
                 print(f"Received request: {message}")
 
                 #  Send reply back to client
-                self.socket.send(b"World")
+                self.pack_data()
+                self.socket.sendall(self.data_package)
                 self.PLC.NewData_ZMQ = False
             else:
                 print("PLC server stops")
@@ -569,6 +572,10 @@ class UpdateServer(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+
+    def pack_data(self):
+        self.data_package["PT9998"] = self.PLC.RTD[6]
+        self.data_package["PT9999"] = self.PLC.RTD[7]
 
 
 class Update(QtCore.QObject):
