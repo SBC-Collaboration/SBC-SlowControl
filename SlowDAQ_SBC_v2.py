@@ -3902,7 +3902,7 @@ class UpdateDisplay(QtCore.QObject):
             #                                  self.MW.AlarmButton.SubWindow.PT4319,
             #                                  self.MW.AlarmButton.SubWindow.PT4322,
             #                                  self.MW.AlarmButton.SubWindow.PT4325])
-            print(self.MW.AlarmButton.Button.Alarm)
+            print("Alarm Status="+self.MW.AlarmButton.Button.Alarm)
 
             if self.MW.AlarmButton.Button.Alarm:
                 self.MW.AlarmButton.ButtonAlarmSetSignal()
