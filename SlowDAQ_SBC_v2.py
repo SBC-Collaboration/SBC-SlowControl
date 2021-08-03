@@ -3621,7 +3621,7 @@ class UpdateClient(QtCore.QObject):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.context = zmq.Context()
-        self.socket = self.context.socket(zmq.REP)
+        self.socket = self.context.socket(zmq.REQ)
         self.socket.connect("tcp://localhost:5555")
         self.Running=False
         self.period=2

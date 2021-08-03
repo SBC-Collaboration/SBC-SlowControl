@@ -561,9 +561,9 @@ class UpdateServer(QtCore.QObject):
                 print(f"Received request: {message}")
 
                 #  Send reply back to client
-                self.socket.send(b"World")
-                # self.pack_data()
-                # self.socket.sendall(self.data_package)
+                # self.socket.send(b"World")
+                self.pack_data()
+                self.socket.sendall(self.data_package)
                 self.PLC.NewData_ZMQ = False
             else:
                 print("PLC server stops")
