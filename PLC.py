@@ -530,9 +530,9 @@ class UpdatePLC(QtCore.QObject):
         super().__init__(parent)
 
         self.PLC = PLC
-        self.message_manager = message_manager
+        self.message_manager = message_manager()
         self.Running = False
-        self.period=2
+        self.period=30
         self.LowLimit = {"PT9998": 0,"PT9999": 0}
         self.HighLimit = {"PT9998": 0, "PT9999": 0}
         self.Activated = {"PT9998": True, "PT9999": True}
@@ -578,8 +578,8 @@ class UpdatePLC(QtCore.QObject):
         self.Alarm[pid] = True
         # and send email or slack messages
         msg = "SBC alarm: {pid} is out of range".format(pid=pid)
-        # self.message_manager.tencent_alarm(msg)
-        self.message_manager.slack_alarm(msg)
+        self.message_manager.tencent_alarm(msg)
+        # self.message_manager.slack_alarm(msg)
 
     def resetalarm(self, RTDNum, pid):
         self.Alarm[pid] = False
@@ -777,6 +777,8 @@ class message_manager():
 
 
 if __name__ == "__main__":
-    App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
-    sys.exit(App.exec_())
+    msg_mana=message_manager()
+    msg_mana.tencent_alarm("this is a test message")
+    # App = QtWidgets.QApplication(sys.argv)
+    # Update=Update()
+    # sys.exit(App.exec_())
