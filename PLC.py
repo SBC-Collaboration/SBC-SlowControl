@@ -545,7 +545,7 @@ class UpdatePLC(QtCore.QObject):
         while self.Running:
             print("PLC updating", datetime.datetime.now())
             self.PLC.ReadAll()
-            self.check_alarm(6, "PT9998")
+            self.check_alarm(RTDNum=6, pid="PT9998")
             self.check_alarm(7, "PT9999")
             time.sleep(self.period)
 
@@ -553,30 +553,32 @@ class UpdatePLC(QtCore.QObject):
     def stop(self):
         self.Running = False
 
-    def chceck_alarm(self, RTDNum, pid):
+    def check_alarm(self, RTDNum, pid):
+
         if self.Activated[pid]:
-            if int(self.LowLimit[pid]) > int(self.LowLimit[pid]):
+            if int(self.LowLimit[pid]) > int(self.HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
                 if int(self.PLC.RTD[RTDNum]) < int(self.LowLimit[pid]):
                     self.setalarm(RTDNum,pid)
-                    self.Alarm = True
+                    self.Alarm[pid] = True
                     print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.RTD[RTDNum]) > int(self.HighLimit[pid]):
                     self.setalarm(RTDNum, pid)
-                    print(str(pid, + " reading is higher than the high limit"))
+                    print(pid,  " reading is higher than the high limit")
                 else:
                     self.resetalarm(RTDNum, pid)
                     print("PT is in normal range")
 
         else:
             self.resetalarm(RTDNum, pid)
+            pass
 
     def setalarm(self, RTDNum, pid):
         self.Alarm[pid] = True
         # and send email or slack messages
         msg = "SBC alarm: {pid} is out of range".format(pid=pid)
-        self.message_manager.tencent_alarm(msg)
+        # self.message_manager.tencent_alarm(msg)
         self.message_manager.slack_alarm(msg)
 
     def resetalarm(self, RTDNum, pid):
