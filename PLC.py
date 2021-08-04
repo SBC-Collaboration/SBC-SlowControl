@@ -42,11 +42,6 @@ class PLC:
         self.RTD = [0.] * self.nRTD
         self.RTD_setting = [0.] * self.nRTD
         self.nAttribute = [0.] * self.nRTD
-        self.LowLimit = {"PT9998": 0, "PT9999": 0}
-        self.HighLimit = {"PT9998": 0, "PT9999": 0}
-        self.Activated = {"PT9998": True, "PT9999": True}
-        self.Alarm = {"PT9998": False, "PT9999": False}
-        self.MainAlarm = False
         # self.PT80 = 0.
         # self.FlowValve = 0.
         # self.BottomChillerSetpoint = 0.
@@ -492,6 +487,8 @@ class PLC:
             return 1
 
 
+
+
 # Class to update myseeq database
 class UpdateDataBase(QtCore.QObject):
     def __init__(self, PLC, parent=None):
@@ -535,7 +532,11 @@ class UpdatePLC(QtCore.QObject):
         self.PLC = PLC
         self.message_manager = message_manager()
         self.Running = False
-        self.period=2
+        self.period=30
+        self.LowLimit = {"PT9998": 0,"PT9999": 0}
+        self.HighLimit = {"PT9998": 0, "PT9999": 0}
+        self.Activated = {"PT9998": True, "PT9999": True}
+        self.Alarm = {"PT9998": False, "PT9999": False}
 
     @QtCore.Slot()
     def run(self):
@@ -544,9 +545,8 @@ class UpdatePLC(QtCore.QObject):
         while self.Running:
             print("PLC updating", datetime.datetime.now())
             self.PLC.ReadAll()
-            self.check_alarm(6, "PT9998")
+            self.check_alarm(RTDNum=6, pid="PT9998")
             self.check_alarm(7, "PT9999")
-            self.or_alarm_signal()
             time.sleep(self.period)
 
     @QtCore.Slot()
@@ -556,14 +556,14 @@ class UpdatePLC(QtCore.QObject):
     def check_alarm(self, RTDNum, pid):
 
         if self.Activated[pid]:
-            if int(self.PLC.LowLimit[pid]) > int(self.PLC.HighLimit[pid]):
+            if int(self.LowLimit[pid]) > int(self.HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if int(self.PLC.RTD[RTDNum]) < int(self.PLC.LowLimit[pid]):
+                if int(self.PLC.RTD[RTDNum]) < int(self.LowLimit[pid]):
                     self.setalarm(RTDNum,pid)
-                    self.PLC.Alarm[pid] = True
+                    self.Alarm[pid] = True
                     print(pid , " reading is lower than the low limit")
-                elif int(self.PLC.RTD[RTDNum]) > int(self.PLC.HighLimit[pid]):
+                elif int(self.PLC.RTD[RTDNum]) > int(self.HighLimit[pid]):
                     self.setalarm(RTDNum, pid)
                     print(pid,  " reading is higher than the high limit")
                 else:
@@ -575,21 +575,15 @@ class UpdatePLC(QtCore.QObject):
             pass
 
     def setalarm(self, RTDNum, pid):
-        self.PLC.Alarm[pid] = True
+        self.Alarm[pid] = True
         # and send email or slack messages
         msg = "SBC alarm: {pid} is out of range".format(pid=pid)
-        # self.message_manager.tencent_alarm(msg)
+        self.message_manager.tencent_alarm(msg)
         # self.message_manager.slack_alarm(msg)
 
     def resetalarm(self, RTDNum, pid):
-        self.PLC.Alarm[pid] = False
+        self.Alarm[pid] = False
         # and send email or slack messages
-
-    def or_alarm_signal(self):
-        if True in self.PLC.Alarm:
-            self.PLC.MainAlarm = True
-        else:
-            self.PLC.MainAlarm = False
 
 
 class UpdateServer(QtCore.QObject):
@@ -602,8 +596,9 @@ class UpdateServer(QtCore.QObject):
         self.Running=False
         self.period=2
         print("connect to the PLC server")
-        self.data_dic={"data":{"PT9998":None,"PT9999":None},"Alarm":self.PLC.Alarm, "MainAlarm":self.PLC.MainAlarm}
+        self.data_dic={"PT9998":None,"PT9999":None}
         self.data_package=pickle.dumps(self.data_dic)
+        self.data_package={"PT9998":None,"PT9999":None}
 
     @QtCore.Slot()
     def run(self):
@@ -623,7 +618,7 @@ class UpdateServer(QtCore.QObject):
                 # data=pickle.dumps([0,0])
                 # self.socket.send(data)
                 self.socket.send(self.data_package)
-                # self.socket.sendall(self.data_package)
+                self.socket.sendall(self.data_package)
                 self.PLC.NewData_ZMQ = False
             else:
                 print("PLC server stops")
@@ -635,9 +630,11 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
-        self.data_dic["data"]["PT9998"] = self.PLC.RTD[6]
-        self.data_dic["data"]["PT9999"] = self.PLC.RTD[7]
+        self.data_dic["PT9998"] = self.PLC.RTD[6]
+        self.data_dic["PT9999"] = self.PLC.RTD[7]
         self.data_package=pickle.dumps(self.data_dic)
+        self.data_package["PT9998"] = self.PLC.RTD[6]
+        self.data_package["PT9999"] = self.PLC.RTD[7]
 
 
 class Update(QtCore.QObject):
@@ -698,7 +695,7 @@ class message_manager():
         self.mail_title = "Alarm from SBC"
 
         #info about slack settings
-        self.slack_webhook_url = 'https://hooks.slack.com/services/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'
+        self.slack_webhook_url = 'https://hooks.slack.com/services/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'
         self.slack_channel = None
         self.alert_map = {
             "emoji": {
