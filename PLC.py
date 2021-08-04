@@ -14,6 +14,12 @@ import struct, time, zmq, sys
 
 from PySide2 import QtWidgets, QtCore, QtGui
 from Database_SBC import *
+from email.mime.text import MIMEText
+from email.header import Header
+from smtplib import SMTP_SSL
+import requests
+import sys
+import os
 
 # delete random number package when you read real data from PLC
 import random
@@ -480,6 +486,8 @@ class PLC:
             return 1
 
 
+
+
 # Class to update myseeq database
 class UpdateDataBase(QtCore.QObject):
     def __init__(self, PLC, parent=None):
@@ -521,8 +529,13 @@ class UpdatePLC(QtCore.QObject):
         super().__init__(parent)
 
         self.PLC = PLC
+        self.message_manager = message_manager
         self.Running = False
         self.period=2
+        self.LowLimit = {"PT9998": 0,"PT9999": 0}
+        self.HighLimit = {"PT9998": 0, "PT9999": 0}
+        self.Activated = {"PT9998": True, "PT9999": True}
+        self.Alarm = {"PT9998": False, "PT9999": False}
 
     @QtCore.Slot()
     def run(self):
@@ -531,11 +544,44 @@ class UpdatePLC(QtCore.QObject):
         while self.Running:
             print("PLC updating", datetime.datetime.now())
             self.PLC.ReadAll()
+            self.check_alarm(6, "PT9998")
+            self.check_alarm(7, "PT9999")
             time.sleep(self.period)
 
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+
+    def chceck_alarm(self, RTDNum, pid):
+        if self.Activated[pid]:
+            if int(self.LowLimit[pid]) > int(self.LowLimit[pid]):
+                print("Low limit should be less than high limit!")
+            else:
+                if int(self.PLC.RTD[RTDNum]) < int(self.LowLimit[pid]):
+                    self.setalarm(RTDNum,pid)
+                    self.Alarm = True
+                    print(pid , " reading is lower than the low limit")
+                elif int(self.PLC.RTD[RTDNum]) > int(self.HighLimit[pid]):
+                    self.setalarm(RTDNum, pid)
+                    print(str(pid, + " reading is higher than the high limit"))
+                else:
+                    self.resetalarm(RTDNum, pid)
+                    print("PT is in normal range")
+
+        else:
+            self.resetalarm(RTDNum, pid)
+
+    def setalarm(self, RTDNum, pid):
+        self.Alarm[pid] = True
+        # and send email or slack messages
+        msg = "SBC alarm: {pid} is out of range".format(pid=pid)
+        self.message_manager.tencent_alarm(msg)
+        self.message_manager.slack_alarm(msg)
+
+    def resetalarm(self, RTDNum, pid):
+        self.Alarm[pid] = False
+        # and send email or slack messages
+
 
 class UpdateServer(QtCore.QObject):
     def __init__(self, PLC, parent=None):
@@ -624,6 +670,98 @@ class Update(QtCore.QObject):
         self.UpServer.stop()
         self.ServerUpdateThread.quit()
         self.ServerUpdateThread.wait()
+
+class message_manager():
+    def __init__(self):
+        # info about tencent mail settings
+        self.host_server = "smtp.qq.com"
+        self.sender_qq = "390282332"
+        self.pwd = "bngozrzmzsbocafa"
+        self.sender_mail = "390282332@qq.com"
+        # self.receiver1_mail = "cdahl@northwestern.edu"
+        self.receiver1_mail = "runzezhang@foxmail.com"
+        self.mail_title = "Alarm from SBC"
+
+        #info about slack settings
+        self.slack_webhook_url = 'https://hooks.slack.com/services/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'
+        self.slack_channel = None
+        self.alert_map = {
+            "emoji": {
+                "up": ":white_check_mark:",
+                "down": ":fire:"
+            },
+            "text": {
+                "up": "RESOLVED",
+                "down": "FIRING"
+            },
+            "message": {
+                "up": "Everything is good!",
+                "down": "Stuff is burning!"
+            },
+            "color": {
+                "up": "#32a852",
+                "down": "#ad1721"
+            }
+        }
+
+    def tencent_alarm(self, message):
+        try:
+            # The body content of the mail
+            mail_content = " Alarm from SBC slowcontrol: " + message
+            # sslLogin
+            smtp = SMTP_SSL(self.host_server)
+            # set_debuglevel() is used for debugging. The parameter value is 1 to enable debug mode and 0 to disable debug mode.
+            smtp.set_debuglevel(1)
+            smtp.ehlo(self.host_server)
+            smtp.login(self.sender_qq, self.pwd)
+            # Define mail content
+            msg = MIMEText(mail_content, "plain", "utf-8")
+            msg["Subject"] = Header(self.mail_title, "utf-8")
+            msg["From"] = self.sender_mail
+            msg["To"] = self.receiver1_mail
+            # send email
+            smtp.sendmail(self.sender_mail, self.receiver1_mail, msg.as_string())
+            smtp.quit()
+            print("mail sent successfully")
+        except Exception as e:
+            print("mail failed to send")
+            print(e)
+
+    def slack_alarm(self, message, status=None):
+        data = {
+            "text": "AlertManager",
+            "username": "Notifications",
+            "channel": self.slack_channel,
+            "attachments": [{"text": message}]
+        #     "attachments": [
+        #         {
+        #             "text": "{emoji} [*{state}*] Status Checker\n {message}".format(
+        #                 emoji=self.alert_map["emoji"][status],
+        #                 state=self.alert_map["text"][status],
+        #                 message=self.alert_map["message"][status]
+        #             ),
+        #             "color": self.alert_map["color"][status],
+        #             "attachment_type": "default",
+        #             "actions": [
+        #                 {
+        #                     "name": "Logs",
+        #                     "text": "Logs",
+        #                     "type": "button",
+        #                     "style": "primary",
+        #                     "url": "https://grafana-logs.dashboard.local"
+        #                 },
+        #                 {
+        #                     "name": "Metrics",
+        #                     "text": "Metrics",
+        #                     "type": "button",
+        #                     "style": "primary",
+        #                     "url": "https://grafana-metrics.dashboard.local"
+        #                 }
+        #             ]
+        #         }]
+        }
+        r = requests.post(self.slack_webhook_url, json=data)
+        return r.status_code
 
 
 if __name__ == "__main__":
