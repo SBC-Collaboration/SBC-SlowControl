@@ -15,6 +15,7 @@ import time
 import platform
 import datetime
 import random
+import pickle
 
 from PySide2 import QtWidgets, QtCore, QtGui
 
@@ -836,7 +837,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Update display values on another thread
         self.DUpdateThread = QtCore.QThread()
-        self.UpDisplay = UpdateDisplay(self)
+        self.UpDisplay = UpdateDisplay(self,self.UpClient)
         self.UpDisplay.moveToThread(self.DUpdateThread)
         self.DUpdateThread.started.connect(self.UpDisplay.run)
         self.DUpdateThread.start()
@@ -3626,6 +3627,7 @@ class UpdateClient(QtCore.QObject):
         self.Running=False
         self.period=2
         print("client is connecting to the ZMQ server")
+        self.receive_dic={"PT9998":0, "PT9999":0}
 
     @QtCore.Slot()
     def run(self):
@@ -3636,22 +3638,26 @@ class UpdateClient(QtCore.QObject):
 
             #  Send reply back to client
             self.socket.send(b"Hello")
-            message = self.socket.recv()
+            message = pickle.loads(self.socket.recv())
             print(f"Received reply [ {message} ]")
+            self.update_data(message)
             time.sleep(self.period)
 
     @QtCore.Slot()
     def stop(self):
         self.Running = False
-
+    def update_data(self,message):
+        #message mush be a dictionary
+        self.receive_dic=message
 
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs
 class UpdateDisplay(QtCore.QObject):
-    def __init__(self, MW, parent=None):
+    def __init__(self, MW, Client,parent=None):
         super().__init__(parent)
 
         self.MW = MW
+        self.Client = Client
         self.Running = False
 
         self.RTD1_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD1dir)
@@ -3675,8 +3681,9 @@ class UpdateDisplay(QtCore.QObject):
             #     print(i, self.MW.PLC.RTD[i])
 
             # if self.MW.PLC.NewData_Display:
-            #     self.MW.TT9998.SetValue(self.MW.PLC.RTD[6])
-            #     self.MW.TT9999.SetValue(self.MW.PLC.RTD[7])
+            print(self.Client.receive_dic)
+            self.MW.TT9998.SetValue(self.Client.receive_dic["PT9998"])
+            self.MW.TT9999.SetValue(self.Client.receive_dic["PT9999"])
             #     self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.PLC.RTD[0])
             #     self.MW.RTDSET1Button.SubWindow.TT2112.SetValue(self.MW.PLC.RTD[1])
             #     self.MW.RTDSET1Button.SubWindow.TT2113.SetValue(self.MW.PLC.RTD[2])

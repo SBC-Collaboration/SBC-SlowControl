@@ -10,6 +10,7 @@ v1.0 Initial code 25/11/19 ML
 v1.1 Initialize values, flag when values are updated more modbus variables 04/03/20 ML
 """
 
+import struct, time, zmq, sys, pickle
 import struct, time, zmq, sys
 
 from PySide2 import QtWidgets, QtCore, QtGui
@@ -547,6 +548,8 @@ class UpdateServer(QtCore.QObject):
         self.Running=False
         self.period=2
         print("connect to the PLC server")
+        self.data_dic={"PT9998":None,"PT9999":None}
+        self.data_package=pickle.dumps(self.data_dic)
         self.data_package={"PT9998":None,"PT9999":None}
 
     @QtCore.Slot()
@@ -563,6 +566,10 @@ class UpdateServer(QtCore.QObject):
                 #  Send reply back to client
                 # self.socket.send(b"World")
                 self.pack_data()
+                # print(self.data_package)
+                # data=pickle.dumps([0,0])
+                # self.socket.send(data)
+                self.socket.send(self.data_package)
                 self.socket.sendall(self.data_package)
                 self.PLC.NewData_ZMQ = False
             else:
@@ -575,6 +582,9 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
+        self.data_dic["PT9998"] = self.PLC.RTD[6]
+        self.data_dic["PT9999"] = self.PLC.RTD[7]
+        self.data_package=pickle.dumps(self.data_dic)
         self.data_package["PT9998"] = self.PLC.RTD[6]
         self.data_package["PT9999"] = self.PLC.RTD[7]
 
