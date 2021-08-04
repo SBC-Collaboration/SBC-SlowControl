@@ -695,7 +695,7 @@ class message_manager():
         self.mail_title = "Alarm from SBC"
 
         #info about slack settings
-        self.slack_webhook_url = 'https://hooks.slack.com/services/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'
+        self.slack_webhook_url = 'https://hooks.slack.com/services/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'
         self.slack_channel = None
         self.alert_map = {
             "emoji": {
