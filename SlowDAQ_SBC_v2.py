@@ -4053,19 +4053,36 @@ class UpdateDisplay(QtCore.QObject):
             # self.MW.AlarmButton.CollectAlarm(self.array)
             # self.MW.AlarmButton.CollectAlarm(
                     # [self.MW.AlarmButton.SubWindow.PT3309])
-            # self.MW.AlarmButton.CollectAlarm(
-            #     [self.MW.AlarmButton.SubWindow.TT2111.Alarm, self.MW.AlarmButton.SubWindow.TT2115.Alarm])
+            self.MW.AlarmButton.CollectAlarm(
+                [self.MW.AlarmButton.SubWindow.TT2111.Alarm, self.MW.AlarmButton.SubWindow.TT2115.Alarm])
 
-            self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2112.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2113.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2114.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2115.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2116.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2117.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2118.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2119.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2120.Alarm])
+            # self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111,
+            #                                  self.MW.AlarmButton.SubWindow.TT2401,
+            #                                  self.MW.AlarmButton.SubWindow.TT2406,
+            #                                  self.MW.AlarmButton.SubWindow.TT2411,
+            #                                  self.MW.AlarmButton.SubWindow.TT2416,
+            #                                  self.MW.AlarmButton.SubWindow.TT2421,
+            #                                  self.MW.AlarmButton.SubWindow.TT2426,
+            #                                  self.MW.AlarmButton.SubWindow.TT2431,
+            #                                  self.MW.AlarmButton.SubWindow.TT2435,
+            #                                  self.MW.AlarmButton.SubWindow.TT2440,
+            #                                  self.MW.AlarmButton.SubWindow.PT1101,
+            #                                  self.MW.AlarmButton.SubWindow.PT2316,
+            #                                  self.MW.AlarmButton.SubWindow.PT2321,
+            #                                  self.MW.AlarmButton.SubWindow.PT2330,
+            #                                  self.MW.AlarmButton.SubWindow.PT2335,
+            #                                  self.MW.AlarmButton.SubWindow.PT3308,
+            #                                  self.MW.AlarmButton.SubWindow.PT3309,
+            #                                  self.MW.AlarmButton.SubWindow.PT3310,
+            #                                  self.MW.AlarmButton.SubWindow.PT3311,
+            #                                  self.MW.AlarmButton.SubWindow.PT3314,
+            #                                  self.MW.AlarmButton.SubWindow.PT3320,
+            #                                  self.MW.AlarmButton.SubWindow.PT3333,
+            #                                  self.MW.AlarmButton.SubWindow.PT4306,
+            #                                  self.MW.AlarmButton.SubWindow.PT4315,
+            #                                  self.MW.AlarmButton.SubWindow.PT4319,
+            #                                  self.MW.AlarmButton.SubWindow.PT4322,
+            #                                  self.MW.AlarmButton.SubWindow.PT4325])
             print("Alarm Status=",self.MW.AlarmButton.Button.Alarm)
 
             # if self.Client.receive_dic["MainAlarm"]:
