@@ -537,6 +537,7 @@ class UpdatePLC(QtCore.QObject):
         self.HighLimit = {"PT9998": 0, "PT9999": 0}
         self.Activated = {"PT9998": True, "PT9999": True}
         self.Alarm = {"PT9998": False, "PT9999": False}
+        self.MainAlarm = False
 
     @QtCore.Slot()
     def run(self):
@@ -547,6 +548,7 @@ class UpdatePLC(QtCore.QObject):
             self.PLC.ReadAll()
             self.check_alarm(RTDNum=6, pid="PT9998")
             self.check_alarm(7, "PT9999")
+            self.or_alarm_signal()
             time.sleep(self.period)
 
     @QtCore.Slot()
@@ -584,6 +586,12 @@ class UpdatePLC(QtCore.QObject):
     def resetalarm(self, RTDNum, pid):
         self.Alarm[pid] = False
         # and send email or slack messages
+
+    def or_alarm_signal(self):
+        if True in self.Alarm:
+            self.MainAlarm = True
+        else:
+            self.MainAlarm = False
 
 
 class UpdateServer(QtCore.QObject):
