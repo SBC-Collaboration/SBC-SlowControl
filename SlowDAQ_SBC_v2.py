@@ -2795,68 +2795,22 @@ class AlarmWin(QtWidgets.QMainWindow):
             if (i, j) == (self.i_PT_last, self.j_PT_last):
                 break
 
-
     @QtCore.Slot()
-    def ReassignOrder_test(self):
-        self.AlarmPTdir = {0: {0: self.PT3309, 1: self.PT1101, 2: self.PT2316, 3: self.PT2321, 4: self.PT2330},
-                           1: {0: self.PT2335, 1: self.PT3308, 2: self.PT3310, 3: self.PT3311, 4: self.PT3314},
-                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
-                           3: {0: self.PT4322, 1: self.PT4325}}
-
-        self.i_PT_max = len(self.AlarmPTdir)
-        # which is 4
-        self.j_PT_max = len(self.AlarmPTdir[0])
-        self.i_PT_last = len(self.AlarmPTdir) - 1
-        # which is 3
-        self.j_PT_last = len(self.AlarmPTdir[self.i_PT_last]) - 1
-        # which is 1
-        for i in range(0, self.i_PT_max):
-            for j in range(0, self.j_PT_max):
-                self.GLPT.addWidget(self.AlarmPTdir[i][j], i, j)
-                # end the position generator when i= last element's row number -1, j= last element's column number
-                if (i, j) == (self.i_PT_last, self.j_PT_last):
-                    break
-            if (i, j) == (self.i_PT_last, self.j_PT_last):
-                break
-
-
-    @QtCore.Slot()
-    def ReassignOrder(self):
+    def ReassignRTD1Order(self):
         # check the status of the Widget and reassign the diretory
         # establish 2 diretory, reorder TempDic to reorder the widgets
         # k,l are pointers in the TempDic, ij are pointers in TempRefDic
         # i_max, j_max are max row and column number
         # l max are max column number+1
         # i_last,j_last are last elements's diretory coordinate
-
         TempRefRTD1dir = self.AlarmRTD1dir
-        TempRefRTD2dir = self.AlarmRTD2dir
-        TempRefRTD3dir = self.AlarmRTD3dir
-        TempRefRTD4dir = self.AlarmRTD4dir
-        TempRefRTDLEFTdir = self.AlarmRTDLEFTdir
+        TempRTD1dir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
+                       1: {0: None, 1: None, 2: None, 3: None, 4: None}}
 
-        TempRefPTdir = self.AlarmPTdir
-
-        TempRTD1dir = self.AlarmRTD1dir
-        TempRTD2dir = self.AlarmRTD2dir
-        TempRTD3dir = self.AlarmRTD3dir
-        TempRTD4dir = self.AlarmRTD4dir
-        TempRTDLEFTdir = self.AlarmRTDLEFTdir
-        TempPTdir = self.AlarmPTdir
         # l_RTD1_max is max number of column
         l_RTD1 = 0
         k_RTD1 = 0
-        l_RTD2 = 0
-        k_RTD2 = 0
-        l_RTD3 = 0
-        k_RTD3 = 0
-        l_RTD4 = 0
-        k_RTD4 = 0
-        l_RTDLEFT = 0
-        k_RTDLEFT = 0
 
-        l_PT = 0
-        k_PT = 0
         # i_RTD1_max = 3
         # j_RTD1_max = 5
         # i_PT_max = 4
@@ -2871,53 +2825,30 @@ class AlarmWin(QtWidgets.QMainWindow):
         # which is 3
         j_RTD1_max = len(self.AlarmRTD1dir[0])
         # which is 5
-        i_RTD2_max = len(self.AlarmRTD2dir)
-        j_RTD2_max = len(self.AlarmRTD2dir[0])
-        i_RTD3_max = len(self.AlarmRTD3dir)
-        j_RTD3_max = len(self.AlarmRTD3dir[0])
-        i_RTD4_max = len(self.AlarmRTD4dir)
-        j_RTD4_max = len(self.AlarmRTD4dir[0])
-        i_RTDLEFT_max = len(self.AlarmRTDLEFTdir)
-        j_RTDLEFT_max = len(self.AlarmRTDLEFTdir[0])
-        i_PT_max = len(self.AlarmPTdir)
-        # which is 4
-        j_PT_max = len(self.AlarmPTdir[0])
-        # which is 5
+
         i_RTD1_last = len(self.AlarmRTD1dir) - 1
         # which is 2
         j_RTD1_last = len(self.AlarmRTD1dir[i_RTD1_last]) - 1
         # which is 4
-        i_RTD2_last = len(self.AlarmRTD2dir) - 1
-        j_RTD2_last = len(self.AlarmRTD2dir[i_RTD2_last]) - 1
-        i_RTD3_last = len(self.AlarmRTD3dir) - 1
-        j_RTD3_last = len(self.AlarmRTD3dir[i_RTD3_last]) - 1
-        i_RTD4_last = len(self.AlarmRTD4dir) - 1
-        j_RTD4_last = len(self.AlarmRTD4dir[i_RTD4_last]) - 1
-        i_RTDLEFT_last = len(self.AlarmRTDLEFTdir) - 1
-        j_RTDLEFT_last = len(self.AlarmRTDLEFTdir[i_RTDLEFT_last]) - 1
-        i_PT_last = len(self.AlarmPTdir) - 1
-        # which is 3
-        j_PT_last = len(self.AlarmPTdir[i_PT_last]) - 1
-        # which is 1
+        print(i_RTD1_max,j_RTD1_max,i_RTD1_last, j_RTD1_last)
+
         l_RTD1_max = j_RTD1_max - 1
-        l_RTD2_max = j_RTD2_max - 1
-        l_RTD3_max = j_RTD3_max - 1
-        l_RTD4_max = j_RTD4_max - 1
-        l_RTDLEFT_max = j_RTDLEFT_max - 1
-        l_PT_max = j_PT_max - 1
+
         # RTD1 put alarm true widget to the begining of the diretory
         for i in range(0, i_RTD1_max):
             for j in range(0, j_RTD1_max):
                 if TempRefRTD1dir[i][j].Alarm:
                     TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
                     l_RTD1 = l_RTD1 + 1
-                    if l_RTD1 == l_RTD1_max:
+                    if l_RTD1 == l_RTD1_max + 1:
                         l_RTD1 = 0
                         k_RTD1 = k_RTD1 + 1
                 if (i, j) == (i_RTD1_last, j_RTD1_last):
                     break
             if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
+        # print("1st part")
+        #
         #
         # # RTD1 put alarm false widget after that
         for i in range(0, i_RTD1_max):
@@ -2925,15 +2856,66 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if not TempRefRTD1dir[i][j].Alarm:
                     TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
                     l_RTD1 = l_RTD1 + 1
-                    if l_RTD1 == l_RTD1_max:
+                    if l_RTD1 == l_RTD1_max + 1:
                         l_RTD1 = 0
                         k_RTD1 = k_RTD1 + 1
                 if (i, j) == (i_RTD1_last, j_RTD1_last):
                     break
             if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
+        # print("2nd part")
+        # Reassign position
+        # end the position generator when i= last element's row number, j= last element's column number
+        for i in range(0, i_RTD1_max):
+            for j in range(0, j_RTD1_max):
+                self.GLRTD1.addWidget(TempRTD1dir[i][j], i, j)
+                if (i, j) == (i_RTD1_last, j_RTD1_last):
+                    break
+            if (i, j) == (i_RTD1_last, j_RTD1_last):
+                break
+        # print("3rd part")
 
-        # for i in range(0, i_RTD2_max):
+    @QtCore.Slot()
+    def ReassignRTD2Order(self):
+        # check the status of the Widget and reassign the diretory
+        # establish 2 diretory, reorder TempDic to reorder the widgets
+        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+        # i_max, j_max are max row and column number
+        # l max are max column number+1
+        # i_last,j_last are last elements's diretory coordinate
+
+        TempRefRTD2dir = self.AlarmRTD2dir
+
+        TempRTD2dir = self.AlarmRTD2dir
+
+        # l_RTD1_max is max number of column
+
+        l_RTD2 = 0
+        k_RTD2 = 0
+
+        # i_RTD1_max = 3
+        # j_RTD1_max = 5
+        # i_PT_max = 4
+        # j_PT_max = 5
+        # l_RTD1_max = 4
+        # l_PT_max = 4
+        # i_RTD1_last = 2
+        # j_RTD1_last = 4
+        # i_PT_last = 3
+        # j_PT_last = 1
+
+        i_RTD2_max = len(self.AlarmRTD2dir)
+        j_RTD2_max = len(self.AlarmRTD2dir[0])
+
+        i_RTD2_last = len(self.AlarmRTD2dir) - 1
+        j_RTD2_last = len(self.AlarmRTD2dir[i_RTD2_last]) - 1
+
+
+        l_RTD2_max = j_RTD2_max - 1
+
+        # RTD1 put alarm true widget to the begining of the diretory
+
+        for i in range(0, i_RTD2_max):
             for j in range(0, j_RTD2_max):
                 if TempRefRTD2dir[i][j].Alarm:
                     TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
@@ -2959,6 +2941,55 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_RTD2_last, j_RTD2_last):
                 break
+
+
+        # Reassign position
+        # end the position generator when i= last element's row number, j= last element's column number
+
+        for i in range(0, i_RTD2_max):
+            for j in range(0, j_RTD2_max):
+                self.GLRTD2.addWidget(TempRTD2dir[i][j], i, j)
+                if (i, j) == (i_RTD2_last, j_RTD2_last):
+                    break
+            if (i, j) == (i_RTD2_last, j_RTD2_last):
+                break
+
+
+    @QtCore.Slot()
+    def ReassignRTD3Order(self):
+        # check the status of the Widget and reassign the diretory
+        # establish 2 diretory, reorder TempDic to reorder the widgets
+        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+        # i_max, j_max are max row and column number
+        # l max are max column number+1
+        # i_last,j_last are last elements's diretory coordinate
+
+        TempRefRTD3dir = self.AlarmRTD3dir
+
+        TempRTD3dir = self.AlarmRTD3dir
+
+        # l_RTD1_max is max number of column
+
+        l_RTD3 = 0
+        k_RTD3 = 0
+
+        # i_RTD1_max = 3
+        # j_RTD1_max = 5
+        # i_PT_max = 4
+        # j_PT_max = 5
+        # l_RTD1_max = 4
+        # l_PT_max = 4
+        # i_RTD1_last = 2
+        # j_RTD1_last = 4
+        # i_PT_last = 3
+        # j_PT_last = 1
+        i_RTD3_max = len(self.AlarmRTD3dir)
+        j_RTD3_max = len(self.AlarmRTD3dir[0])
+
+        i_RTD3_last = len(self.AlarmRTD3dir) - 1
+        j_RTD3_last = len(self.AlarmRTD3dir[i_RTD3_last]) - 1
+
+        l_RTD3_max = j_RTD3_max - 1
 
         for i in range(0, i_RTD3_max):
             for j in range(0, j_RTD3_max):
@@ -2987,6 +3018,56 @@ class AlarmWin(QtWidgets.QMainWindow):
             if (i, j) == (i_RTD3_last, j_RTD3_last):
                 break
 
+
+        # Reassign position
+        # end the position generator when i= last element's row number, j= last element's column number
+
+
+        for i in range(0, i_RTD3_max):
+            for j in range(0, j_RTD3_max):
+                self.GLRTD3.addWidget(TempRTD3dir[i][j], i, j)
+                if (i, j) == (i_RTD3_last, j_RTD3_last):
+                    break
+            if (i, j) == (i_RTD3_last, j_RTD3_last):
+                break
+
+    @QtCore.Slot()
+    def ReassignRTD4Order(self):
+        # check the status of the Widget and reassign the diretory
+        # establish 2 diretory, reorder TempDic to reorder the widgets
+        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+        # i_max, j_max are max row and column number
+        # l max are max column number+1
+        # i_last,j_last are last elements's diretory coordinate
+
+        TempRefRTD4dir = self.AlarmRTD4dir
+
+        TempRTD4dir = self.AlarmRTD4dir
+
+        # l_RTD1_max is max number of column
+
+        l_RTD4 = 0
+        k_RTD4 = 0
+
+        # i_RTD1_max = 3
+        # j_RTD1_max = 5
+        # i_PT_max = 4
+        # j_PT_max = 5
+        # l_RTD1_max = 4
+        # l_PT_max = 4
+        # i_RTD1_last = 2
+        # j_RTD1_last = 4
+        # i_PT_last = 3
+        # j_PT_last = 1
+
+        i_RTD4_max = len(self.AlarmRTD4dir)
+        j_RTD4_max = len(self.AlarmRTD4dir[0])
+
+        i_RTD4_last = len(self.AlarmRTD4dir) - 1
+        j_RTD4_last = len(self.AlarmRTD4dir[i_RTD4_last]) - 1
+
+        l_RTD4_max = j_RTD4_max - 1
+
         for i in range(0, i_RTD4_max):
             for j in range(0, j_RTD4_max):
                 if TempRefRTD4dir[i][j].Alarm:
@@ -3014,6 +3095,60 @@ class AlarmWin(QtWidgets.QMainWindow):
             if (i, j) == (i_RTD4_last, j_RTD4_last):
                 break
 
+
+        # Reassign position
+        # end the position generator when i= last element's row number, j= last element's column number
+
+            # for i in range(0, i_RTD4_max):
+            for j in range(0, j_RTD4_max):
+                self.GLRTD4.addWidget(TempRTD4dir[i][j], i, j)
+                if (i, j) == (i_RTD4_last, j_RTD4_last):
+                    break
+            if (i, j) == (i_RTD4_last, j_RTD4_last):
+                break
+        # end the position generator when i= last element's row number, j= last element's column number
+
+
+    @QtCore.Slot()
+    def ReassignRTDLEFTOrder(self):
+        # check the status of the Widget and reassign the diretory
+        # establish 2 diretory, reorder TempDic to reorder the widgets
+        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+        # i_max, j_max are max row and column number
+        # l max are max column number+1
+        # i_last,j_last are last elements's diretory coordinate
+
+
+        TempRefRTDLEFTdir = self.AlarmRTDLEFTdir
+
+
+        TempRTDLEFTdir = self.AlarmRTDLEFTdir
+
+        # l_RTD1_max is max number of column
+
+        l_RTDLEFT = 0
+        k_RTDLEFT = 0
+
+
+        # i_RTD1_max = 3
+        # j_RTD1_max = 5
+        # i_PT_max = 4
+        # j_PT_max = 5
+        # l_RTD1_max = 4
+        # l_PT_max = 4
+        # i_RTD1_last = 2
+        # j_RTD1_last = 4
+        # i_PT_last = 3
+        # j_PT_last = 1
+
+        i_RTDLEFT_max = len(self.AlarmRTDLEFTdir)
+        j_RTDLEFT_max = len(self.AlarmRTDLEFTdir[0])
+
+        i_RTDLEFT_last = len(self.AlarmRTDLEFTdir) - 1
+        j_RTDLEFT_last = len(self.AlarmRTDLEFTdir[i_RTDLEFT_last]) - 1
+
+        l_RTDLEFT_max = j_RTDLEFT_max - 1
+
         for i in range(0, i_RTDLEFT_max):
             for j in range(0, j_RTDLEFT_max):
                 if TempRefRTDLEFTdir[i][j].Alarm:
@@ -3040,7 +3175,59 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
                 break
-        #
+
+        # Reassign position
+        # end the position generator when i= last element's row number, j= last element's column number
+        for i in range(0, i_RTDLEFT_max):
+            for j in range(0, j_RTDLEFT_max):
+                self.GLRTDLEFT.addWidget(TempRTDLEFTdir[i][j], i, j)
+                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                    break
+            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                break
+
+        # end the position generator when i= last element's row number, j= last element's column number
+
+    @QtCore.Slot()
+    def ReassignPTOrder(self):
+        # check the status of the Widget and reassign the diretory
+        # establish 2 diretory, reorder TempDic to reorder the widgets
+        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+        # i_max, j_max are max row and column number
+        # l max are max column number+1
+        # i_last,j_last are last elements's diretory coordinate
+
+
+        TempRefPTdir = self.AlarmPTdir
+
+        TempPTdir = self.AlarmPTdir
+        # l_RTD1_max is max number of column
+
+        l_PT = 0
+        k_PT = 0
+        # i_RTD1_max = 3
+        # j_RTD1_max = 5
+        # i_PT_max = 4
+        # j_PT_max = 5
+        # l_RTD1_max = 4
+        # l_PT_max = 4
+        # i_RTD1_last = 2
+        # j_RTD1_last = 4
+        # i_PT_last = 3
+        # j_PT_last = 1
+
+        i_PT_max = len(self.AlarmPTdir)
+        # which is 4
+        j_PT_max = len(self.AlarmPTdir[0])
+        # which is 5
+
+        i_PT_last = len(self.AlarmPTdir) - 1
+        # which is 3
+        j_PT_last = len(self.AlarmPTdir[i_PT_last]) - 1
+        # which is 1
+
+        l_PT_max = j_PT_max - 1
+
         # PT
         for i in range(0, i_PT_max):
             for j in range(0, j_PT_max):
@@ -3070,45 +3257,6 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         # Reassign position
         # end the position generator when i= last element's row number, j= last element's column number
-        for i in range(0, i_RTD1_max):
-            for j in range(0, j_RTD1_max):
-                self.GLRTD1.addWidget(TempRTD1dir[i][j], i, j)
-                if (i, j) == (i_RTD1_last, j_RTD1_last):
-                    break
-            if (i, j) == (i_RTD1_last, j_RTD1_last):
-                break
-        #
-        # for i in range(0, i_RTD2_max):
-            for j in range(0, j_RTD2_max):
-                self.GLRTD2.addWidget(TempRTD2dir[i][j], i, j)
-                if (i, j) == (i_RTD2_last, j_RTD2_last):
-                    break
-            if (i, j) == (i_RTD2_last, j_RTD2_last):
-                break
-
-        # for i in range(0, i_RTD3_max):
-            for j in range(0, j_RTD3_max):
-                self.GLRTD3.addWidget(TempRTD3dir[i][j], i, j)
-                if (i, j) == (i_RTD3_last, j_RTD3_last):
-                    break
-            if (i, j) == (i_RTD3_last, j_RTD3_last):
-                break
-
-        # for i in range(0, i_RTD4_max):
-            for j in range(0, j_RTD4_max):
-                self.GLRTD4.addWidget(TempRTD4dir[i][j], i, j)
-                if (i, j) == (i_RTD4_last, j_RTD4_last):
-                    break
-            if (i, j) == (i_RTD4_last, j_RTD4_last):
-                break
-
-        # for i in range(0, i_RTDLEFT_max):
-            for j in range(0, j_RTDLEFT_max):
-                self.GLRTDLEFT.addWidget(TempRTDLEFTdir[i][j], i, j)
-                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                    break
-            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
-                break
 
         # end the position generator when i= last element's row number, j= last element's column number
         for i in range(0, i_PT_max):
@@ -3235,11 +3383,16 @@ class AlarmButton(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def CollectAlarm(self, list):
-        self.Collected=False
-        for i in range(len(list)):
-            # calculate collected alarm status
-            self.Collected = self.Collected or list[i].Alarm
-        self.Button.Alarm = self.Collected
+        # self.Collected=False
+        # for i in range(len(list)):
+        #     # calculate collected alarm status
+        #     self.Collected = self.Collected or list[i].Alarm
+        # self.Button.Alarm = self.Collected
+        if True in list:
+            self.Button.Alarm = True
+        else:
+            self.Button.Alarm = False
+
 
 
 # Define a function tab that shows the status of the widgets
@@ -3699,8 +3852,9 @@ class UpdateDisplay(QtCore.QObject):
 
             # if self.MW.PLC.NewData_Display:
             print(self.Client.receive_dic)
-            self.MW.TT9998.SetValue(self.Client.receive_dic["PT9998"])
-            self.MW.TT9999.SetValue(self.Client.receive_dic["PT9999"])
+            # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
+            # self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
+
             #self.MW.subwindow.Lowlimit.SetValue(self.Client.receive_dic["PT99998"])
             #self.MW.subwindow.alarmbutton(self.Client.receive_dic)
             #reorfer
@@ -3847,20 +4001,20 @@ class UpdateDisplay(QtCore.QObject):
                 # self.MW.P.NewData_Display = False
 
             # Check if alarm values are met and set them
-            self.MW.AlarmButton.SubWindow.PT3309.CheckAlarm()
+            # self.MW.AlarmButton.SubWindow.PT3309.CheckAlarm()
             # print(self.MW.AlarmButton.SubWindow.PT3309.AlarmMode.isChecked())
             # print(self.MW.AlarmButton.SubWIndow.PT3309.Alarm)
             # self.MW.AlarmButton.SubWindow.TT2111.CheckAlarm()
             # self.MW.AlarmButton.SubWindow.PT1101.CheckAlarm()
             # self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0].CheckAlarm()
             # print(self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0]==self.MW.AlarmButton.SubWindow.PT1101)
-            # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD1_max):
-            #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD1_max):
-            #         self.MW.AlarmButton.SubWindow.AlarmRTD1dir[i][j].CheckAlarm()
-            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
-            #             break
-            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
-            #         break
+            for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD1_max):
+                for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD1_max):
+                    self.MW.AlarmButton.SubWindow.AlarmRTD1dir[i][j].CheckAlarm()
+                    if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
+                    break
             #
             # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD2_max):
             #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD2_max):
@@ -3897,10 +4051,10 @@ class UpdateDisplay(QtCore.QObject):
             # # # rewrite collectalarm in updatedisplay
 
             # self.MW.AlarmButton.CollectAlarm(self.array)
-            self.MW.AlarmButton.CollectAlarm(
-                    [self.MW.AlarmButton.SubWindow.PT3309])
             # self.MW.AlarmButton.CollectAlarm(
-            #     [self.MW.AlarmButton.SubWindow.PT3309,self.MW.AlarmButton.SubWindow.TT2111, self.MW.AlarmButton.SubWindow.TT2115])
+                    # [self.MW.AlarmButton.SubWindow.PT3309])
+            self.MW.AlarmButton.CollectAlarm(
+                [self.MW.AlarmButton.SubWindow.TT2111.Alarm, self.MW.AlarmButton.SubWindow.TT2115.Alarm])
 
             # self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111,
             #                                  self.MW.AlarmButton.SubWindow.TT2401,
@@ -3931,14 +4085,18 @@ class UpdateDisplay(QtCore.QObject):
             #                                  self.MW.AlarmButton.SubWindow.PT4325])
             print("Alarm Status=",self.MW.AlarmButton.Button.Alarm)
 
-            if self.MW.AlarmButton.Button.Alarm:
-                self.MW.AlarmButton.ButtonAlarmSetSignal()
-            else:
-                self.MW.AlarmButton.ButtonAlarmResetSignal()
+            # if self.Client.receive_dic["MainAlarm"]:
+            #     self.MW.AlarmButton.ButtonAlarmSetSignal()
+            # else:
+            #     self.MW.AlarmButton.ButtonAlarmResetSignal()
             # # # generally checkbutton.clicked -> move to updatedisplay
             if self.MW.AlarmButton.Button.Alarm:
-                self.MW.AlarmButton.SubWindow.ReassignOrder_test()
+                self.MW.AlarmButton.ButtonAlarmSetSignal()
+                self.MW.AlarmButton.SubWindow.ReassignRTD1Order()
+                # self.MW.AlarmButton.SubWindow.ResetOrder()
+
             else:
+                self.MW.AlarmButton.ButtonAlarmResetSignal()
                 self.MW.AlarmButton.SubWindow.ResetOrder()
 
             # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
