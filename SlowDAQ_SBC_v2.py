@@ -9,13 +9,8 @@ v0.1.2 Alarm implemented 07/01/20 ML
 v0.1.3 PLC online detection, poll PLCs only when values are updated, fix Centos window size bug 04/03/20 ML
 """
 
-import os
-import sys
-import time
-import platform
-import datetime
-import random
-import pickle
+import os, sys, time, platform, datetime, random, pickle, cgitb
+
 
 from PySide2 import QtWidgets, QtCore, QtGui
 
@@ -39,6 +34,13 @@ ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bd
                  "f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f1367668" \
                  "31c12bff0da3a2314ca2266"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px; border-color: black;"
+
+sys._excepthook = sys.excepthook
+def exception_hook(exctype, value, traceback):
+    print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
+    # sys._excepthook(exctype, value, traceback)
+    sys.exit(1)
+sys.excepthook = exception_hook
 
 
 def TwoD_into_OneD(Twod_array):
@@ -2637,6 +2639,9 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.AlarmRTD1dir = {0: {0: self.TT2111, 1: self.TT2112, 2: self.TT2113, 3: self.TT2114, 4: self.TT2115},
                              1: {0: self.TT2116, 1: self.TT2117, 2: self.TT2118, 3: self.TT2119, 4: self.TT2120}}
 
+        self.AlarmRTD1list1D = [self.TT2111, self.TT2112, self.TT2113,  self.TT2114,  self.TT2115, self.TT2116,
+                               self.TT2117, self.TT2118, self.TT2119,  self.TT2120]
+
         self.AlarmRTD2dir = {0: {0: self.TT2401, 1: self.TT2402, 2: self.TT2403, 3: self.TT2404, 4: self.TT2405},
                              1: {0: self.TT2406, 1: self.TT2407, 2: self.TT2408, 3: self.TT2409, 4: self.TT2410},
                              2: {0: self.TT2411, 1: self.TT2412, 2: self.TT2413, 3: self.TT2414, 4: self.TT2415},
@@ -2847,7 +2852,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
-        # print("1st part")
+        print("1st part")
         #
         #
         # # RTD1 put alarm false widget after that
@@ -2863,7 +2868,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
-        # print("2nd part")
+        print("2nd part")
         # Reassign position
         # end the position generator when i= last element's row number, j= last element's column number
         for i in range(0, i_RTD1_max):
@@ -2873,7 +2878,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
-        # print("3rd part")
+        print("3rd part")
 
     @QtCore.Slot()
     def ReassignRTD2Order(self):
@@ -2920,7 +2925,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if TempRefRTD2dir[i][j].Alarm:
                     TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
                     l_RTD2 = l_RTD2 + 1
-                    if l_RTD2 == l_RTD2_max:
+                    if l_RTD2 == l_RTD2_max+1:
                         l_RTD2 = 0
                         k_RTD2 = k_RTD2 + 1
                 if (i, j) == (i_RTD2_last, j_RTD2_last):
@@ -2934,7 +2939,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if not TempRefRTD2dir[i][j].Alarm:
                     TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
                     l_RTD2 = l_RTD2 + 1
-                    if l_RTD2 == l_RTD2_max:
+                    if l_RTD2 == l_RTD2_max+1:
                         l_RTD2 = 0
                         k_RTD2 = k_RTD2 + 1
                 if (i, j) == (i_RTD2_last, j_RTD2_last):
@@ -2996,7 +3001,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if TempRefRTD3dir[i][j].Alarm:
                     TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
                     l_RTD3 = l_RTD3 + 1
-                    if l_RTD3 == l_RTD3_max:
+                    if l_RTD3 == l_RTD3_max+1:
                         l_RTD3 = 0
                         k_RTD3 = k_RTD3 + 1
                 if (i, j) == (i_RTD3_last, j_RTD3_last):
@@ -3010,7 +3015,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if not TempRefRTD3dir[i][j].Alarm:
                     TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
                     l_RTD3 = l_RTD3 + 1
-                    if l_RTD3 == l_RTD3_max:
+                    if l_RTD3 == l_RTD3_max+1:
                         l_RTD3 = 0
                         k_RTD3 = k_RTD3 + 1
                 if (i, j) == (i_RTD3_last, j_RTD3_last):
@@ -3073,7 +3078,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if TempRefRTD4dir[i][j].Alarm:
                     TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
                     l_RTD4 = l_RTD4 + 1
-                    if l_RTD4 == l_RTD4_max:
+                    if l_RTD4 == l_RTD4_max+1:
                         l_RTD4 = 0
                         k_RTD4 = k_RTD4 + 1
                 if (i, j) == (i_RTD4_last, j_RTD4_last):
@@ -3087,7 +3092,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if not TempRefRTD4dir[i][j].Alarm:
                     TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
                     l_RTD4 = l_RTD4 + 1
-                    if l_RTD4 == l_RTD4_max:
+                    if l_RTD4 == l_RTD4_max+1:
                         l_RTD4 = 0
                         k_RTD4 = k_RTD4 + 1
                 if (i, j) == (i_RTD4_last, j_RTD4_last):
@@ -3154,7 +3159,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if TempRefRTDLEFTdir[i][j].Alarm:
                     TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
                     l_RTDLEFT = l_RTDLEFT + 1
-                    if l_RTDLEFT == l_RTDLEFT_max:
+                    if l_RTDLEFT == l_RTDLEFT_max+1:
                         l_RTDLEFT = 0
                         k_RTDLEFT = k_RTDLEFT + 1
                 if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
@@ -3168,7 +3173,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if not TempRefRTDLEFTdir[i][j].Alarm:
                     TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
                     l_RTDLEFT = l_RTDLEFT + 1
-                    if l_RTDLEFT == l_RTDLEFT_max:
+                    if l_RTDLEFT == l_RTDLEFT_max+1:
                         l_RTDLEFT = 0
                         k_RTDLEFT = k_RTDLEFT + 1
                 if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
@@ -3234,7 +3239,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if TempRefPTdir[i][j].Alarm:
                     TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
                     l_PT = l_PT + 1
-                    if l_PT == l_PT_max:
+                    if l_PT == l_PT_max+1:
                         l_PT = 0
                         k_PT = k_PT + 1
                 if (i, j) == (i_PT_last, j_PT_last):
@@ -3247,7 +3252,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if not TempRefPTdir[i][j].Alarm:
                     TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
                     l_PT = l_PT + 1
-                    if l_PT == l_PT_max:
+                    if l_PT == l_PT_max+1:
                         l_PT = 0
                         k_PT = k_PT + 1
                     if (i, j) == (i_PT_last, j_PT_last):
@@ -3838,33 +3843,38 @@ class UpdateDisplay(QtCore.QObject):
         self.PT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmPTdir)
         self.array = self.RTD1_array + self.RTD2_array + self.RTD3_array + self.RTD4_array + self.RTDLEFT_array + self.PT_array
 
+
+
+
+
     @QtCore.Slot()
     def run(self):
-        self.Running = True
-        while self.Running:
+        try:
+            self.Running = True
+            while self.Running:
 
-            print("Display updating", datetime.datetime.now())
+                print("Display updating", datetime.datetime.now())
 
-            # print(self.MW.PLC.RTD)
-            # print(3, self.MW.PLC.RTD[3])
-            # for i in range(0,6):
-            #     print(i, self.MW.PLC.RTD[i])
+                # print(self.MW.PLC.RTD)
+                # print(3, self.MW.PLC.RTD[3])
+                # for i in range(0,6):
+                #     print(i, self.MW.PLC.RTD[i])
 
-            # if self.MW.PLC.NewData_Display:
-            print(self.Client.receive_dic)
-            # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
-            # self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
+                # if self.MW.PLC.NewData_Display:
+                print(self.Client.receive_dic)
+                # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
+                # self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
 
-            #self.MW.subwindow.Lowlimit.SetValue(self.Client.receive_dic["PT99998"])
-            #self.MW.subwindow.alarmbutton(self.Client.receive_dic)
-            #reorfer
-            #     self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.PLC.RTD[0])
-            #     self.MW.RTDSET1Button.SubWindow.TT2112.SetValue(self.MW.PLC.RTD[1])
-            #     self.MW.RTDSET1Button.SubWindow.TT2113.SetValue(self.MW.PLC.RTD[2])
-            #     self.MW.RTDSET1Button.SubWindow.TT2114.SetValue(self.MW.PLC.RTD[3])
-            #     self.MW.RTDSET1Button.SubWindow.TT2115.SetValue(self.MW.PLC.RTD[4])
-            #     self.MW.RTDSET1Button.SubWindow.TT2116.SetValue(self.MW.PLC.RTD[5])
-            #     self.MW.RTDSET1Button.SubWindow.TT2117.SetValue(self.MW.PLC.RTD[6])
+                # self.MW.subwindow.Lowlimit.SetValue(self.Client.receive_dic["PT99998"])
+                # self.MW.subwindow.alarmbutton(self.Client.receive_dic)
+                # reorfer
+                #     self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.PLC.RTD[0])
+                #     self.MW.RTDSET1Button.SubWindow.TT2112.SetValue(self.MW.PLC.RTD[1])
+                #     self.MW.RTDSET1Button.SubWindow.TT2113.SetValue(self.MW.PLC.RTD[2])
+                #     self.MW.RTDSET1Button.SubWindow.TT2114.SetValue(self.MW.PLC.RTD[3])
+                #     self.MW.RTDSET1Button.SubWindow.TT2115.SetValue(self.MW.PLC.RTD[4])
+                #     self.MW.RTDSET1Button.SubWindow.TT2116.SetValue(self.MW.PLC.RTD[5])
+                #     self.MW.RTDSET1Button.SubWindow.TT2117.SetValue(self.MW.PLC.RTD[6])
 
                 # self.MW.PLC.NewData_Display = False
 
@@ -3970,9 +3980,6 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.PLCOnlineW.ResetAlarm()
                 #     self.MW.PLCLiveCounter = self.MW.PLC.LiveCounter
 
-
-
-
                 #     print("PPLC updating", datetime.datetime.now())
 
                 # self.MW.PT4306.SetValue(self.MW.P.PT[0])
@@ -3996,158 +4003,172 @@ class UpdateDisplay(QtCore.QObject):
                 #
                 # self.MW.BFM4313.SetValue(self.MW.P.PT1)
 
-
-
                 # self.MW.P.NewData_Display = False
 
-            # Check if alarm values are met and set them
-            # self.MW.AlarmButton.SubWindow.PT3309.CheckAlarm()
-            # print(self.MW.AlarmButton.SubWindow.PT3309.AlarmMode.isChecked())
-            # print(self.MW.AlarmButton.SubWIndow.PT3309.Alarm)
-            # self.MW.AlarmButton.SubWindow.TT2111.CheckAlarm()
-            # self.MW.AlarmButton.SubWindow.PT1101.CheckAlarm()
-            # self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0].CheckAlarm()
-            # print(self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0]==self.MW.AlarmButton.SubWindow.PT1101)
-            for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD1_max):
-                for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD1_max):
-                    self.MW.AlarmButton.SubWindow.AlarmRTD1dir[i][j].CheckAlarm()
-                    if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
-                        break
-                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
-                    break
-            #
-            # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD2_max):
-            #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD2_max):
-            #         self.MW.AlarmButton.SubWindow.AlarmRTD2dir[i][j].CheckAlarm()
-            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD2_last, self.MW.AlarmButton.SubWindow.j_RTD2_last):
-            #             break
-            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD2_last, self.MW.AlarmButton.SubWindow.j_RTD2_last):
-            #         break
-            #
-            # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD3_max):
-            #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD3_max):
-            #         self.MW.AlarmButton.SubWindow.AlarmRTD3dir[i][j].CheckAlarm()
-            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD3_last, self.MW.AlarmButton.SubWindow.j_RTD3_last):
-            #             break
-            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD3_last, self.MW.AlarmButton.SubWindow.j_RTD3_last):
-            #         break
-            #
-            # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD4_max):
-            #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD4_max):
-            #         self.MW.AlarmButton.SubWindow.AlarmRTD4dir[i][j].CheckAlarm()
-            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD4_last, self.MW.AlarmButton.SubWindow.j_RTD4_last):
-            #             break
-            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD4_last, self.MW.AlarmButton.SubWindow.j_RTD4_last):
-            #         break
-            #
-            # for i in range(0, self.MW.AlarmButton.SubWindow.i_PT_max):
-            #     for j in range(0, self.MW.AlarmButton.SubWindow.j_PT_max):
-            #         self.MW.AlarmButton.SubWindow.AlarmPTdir[i][j].CheckAlarm()
-            #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
-            #             break
-            #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
-            #         break
+                # Check if alarm values are met and set them
+                # self.MW.AlarmButton.SubWindow.PT3309.CheckAlarm()
+                # print(self.MW.AlarmButton.SubWindow.PT3309.AlarmMode.isChecked())
+                # print(self.MW.AlarmButton.SubWIndow.PT3309.Alarm)
+                # self.MW.AlarmButton.SubWindow.TT2111.CheckAlarm()
+                # self.MW.AlarmButton.SubWindow.PT1101.CheckAlarm()
+                # self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0].CheckAlarm()
+                # print(self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0]==self.MW.AlarmButton.SubWindow.PT1101)
 
-            # # # rewrite collectalarm in updatedisplay
+                # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD1_max):
+                #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD1_max):
+                #         self.MW.AlarmButton.SubWindow.AlarmRTD1dir[i][j].CheckAlarm()
+                #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
+                #             break
+                #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
 
-            # self.MW.AlarmButton.CollectAlarm(self.array)
-            # self.MW.AlarmButton.CollectAlarm(
-                    # [self.MW.AlarmButton.SubWindow.PT3309])
-            # self.MW.AlarmButton.CollectAlarm(
-            #     [self.MW.AlarmButton.SubWindow.TT2111.Alarm, self.MW.AlarmButton.SubWindow.TT2115.Alarm])
+                #         break
 
-            self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2112.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2113.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2114.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2115.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2116.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2117.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2118.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2119.Alarm,
-                                             self.MW.AlarmButton.SubWindow.TT2120.Alarm])
-            print("Alarm Status=",self.MW.AlarmButton.Button.Alarm)
+                for i in range(0, len(self.MW.AlarmButton.SubWindow.AlarmRTD1list1D)):
+                    self.MW.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
+                #
+                # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD2_max):
+                #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD2_max):
+                #         self.MW.AlarmButton.SubWindow.AlarmRTD2dir[i][j].CheckAlarm()
+                #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD2_last, self.MW.AlarmButton.SubWindow.j_RTD2_last):
+                #             break
+                #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD2_last, self.MW.AlarmButton.SubWindow.j_RTD2_last):
+                #         break
+                #
+                # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD3_max):
+                #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD3_max):
+                #         self.MW.AlarmButton.SubWindow.AlarmRTD3dir[i][j].CheckAlarm()
+                #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD3_last, self.MW.AlarmButton.SubWindow.j_RTD3_last):
+                #             break
+                #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD3_last, self.MW.AlarmButton.SubWindow.j_RTD3_last):
+                #         break
+                #
+                # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD4_max):
+                #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD4_max):
+                #         self.MW.AlarmButton.SubWindow.AlarmRTD4dir[i][j].CheckAlarm()
+                #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD4_last, self.MW.AlarmButton.SubWindow.j_RTD4_last):
+                #             break
+                #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD4_last, self.MW.AlarmButton.SubWindow.j_RTD4_last):
+                #         break
+                #
+                # for i in range(0, self.MW.AlarmButton.SubWindow.i_PT_max):
+                #     for j in range(0, self.MW.AlarmButton.SubWindow.j_PT_max):
+                #         self.MW.AlarmButton.SubWindow.AlarmPTdir[i][j].CheckAlarm()
+                #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
+                #             break
+                #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
+                #         break
 
-            # if self.Client.receive_dic["MainAlarm"]:
-            #     self.MW.AlarmButton.ButtonAlarmSetSignal()
-            # else:
-            #     self.MW.AlarmButton.ButtonAlarmResetSignal()
-            # # # generally checkbutton.clicked -> move to updatedisplay
-            if self.MW.AlarmButton.Button.Alarm:
-                self.MW.AlarmButton.ButtonAlarmSetSignal()
-                self.MW.AlarmButton.SubWindow.ReassignRTD1Order()
-                # self.MW.AlarmButton.SubWindow.ResetOrder()
+                # # # rewrite collectalarm in updatedisplay
 
-            else:
-                self.MW.AlarmButton.ButtonAlarmResetSignal()
-                self.MW.AlarmButton.SubWindow.ResetOrder()
+                # self.MW.AlarmButton.CollectAlarm(self.array)
+                # self.MW.AlarmButton.CollectAlarm(
+                # [self.MW.AlarmButton.SubWindow.PT3309])
+                # self.MW.AlarmButton.CollectAlarm(
+                #     [self.MW.AlarmButton.SubWindow.TT2111.Alarm, self.MW.AlarmButton.SubWindow.TT2115.Alarm])
 
-            # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
-            #     self.MW.PT1.SetAlarm()
-            # elif self.MW.PT1.Value <= 220 and self.MW.PT1.Value >= 0 and self.MW.PT1.Field.property("Alarm"):
-            #     self.MW.PT1.ResetAlarm()
-            #
-            # if (self.MW.PT2.Value > 220 or self.MW.PT2.Value < 120) and not self.MW.PT2.Field.property("Alarm"):
-            #     self.MW.PT2.SetAlarm()
-            # elif self.MW.PT2.Value <= 220 and self.MW.PT2.Value >= 120 and self.MW.PT2.Field.property("Alarm"):
-            #     self.MW.PT2.ResetAlarm()
-            #
-            # if (self.MW.PT4.Value > 220 or self.MW.PT4.Value < 0) and not self.MW.PT4.Field.property("Alarm"):
-            #     self.MW.PT4.SetAlarm()
-            # elif self.MW.PT4.Value <= 220 and self.MW.PT4.Value >= 0 and self.MW.PT4.Field.property("Alarm"):
-            #     self.MW.PT4.ResetAlarm()
-            #
-            # if (self.MW.PT8.Value > 220 or self.MW.PT8.Value < 0) and not self.MW.PT8.Field.property("Alarm"):
-            #     self.MW.PT8.SetAlarm()
-            # elif self.MW.PT8.Value <= 220 and self.MW.PT8.Value >= 0 and self.MW.PT8.Field.property("Alarm"):
-            #     self.MW.PT8.ResetAlarm()
-            #
-            # if (self.MW.PT10.Value > 220 or self.MW.PT10.Value < 0) and not self.MW.PT10.Field.property("Alarm"):
-            #     self.MW.PT10.SetAlarm()
-            # elif self.MW.PT10.Value <= 220 and self.MW.PT10.Value >= 0 and self.MW.PT10.Field.property("Alarm"):
-            #     self.MW.PT10.ResetAlarm()
-            #
-            # if (self.MW.Bellows.Value > 2 or self.MW.Bellows.Value < -.5) and not self.MW.Bellows.Field.property("Alarm"):
-            #     self.MW.Bellows.SetAlarm()
-            # elif self.MW.Bellows.Value <= 2 and self.MW.Bellows.Value >= -.5 and self.MW.Bellows.Field.property("Alarm"):
-            #     self.MW.Bellows.ResetAlarm()
-            #
-            # if (self.MW.IV.Value > .1 or self.MW.IV.Value < -.1) and not self.MW.IV.Field.property("Alarm"):
-            #     self.MW.IV.SetAlarm()
-            # elif self.MW.IV.Value <= .1 and self.MW.IV.Value >= -.1 and self.MW.IV.Field.property("Alarm"):
-            #     self.MW.IV.ResetAlarm()
-            #
-            # if (self.MW.PDiff.Value > 10 or self.MW.PDiff.Value < -10) and not self.MW.PDiff.Field.property("Alarm"):
-            #     self.MW.PDiff.SetAlarm()
-            # elif self.MW.PDiff.Value <= 10 and self.MW.PDiff.Value >= -10 and self.MW.PDiff.Field.property("Alarm"):
-            #     self.MW.PDiff.ResetAlarm()
-            #
-            # if (self.MW.RTD37.Value > -5 or self.MW.RTD37.Value < -50) and not self.MW.RTD37.Field.property("Alarm"):
-            #     self.MW.RTD37.SetAlarm()
-            # elif self.MW.RTD37.Value <= -5 and self.MW.RTD37.Value >= -50 and self.MW.RTD37.Field.property("Alarm"):
-            #     self.MW.RTD37.ResetAlarm()
-            #
-            # if (self.MW.RTD38.Value > -5 or self.MW.RTD38.Value < -50) and not self.MW.RTD38.Field.property("Alarm"):
-            #     self.MW.RTD38.SetAlarm()
-            # elif self.MW.RTD38.Value <= -5 and self.MW.RTD38.Value >= -50 and self.MW.RTD38.Field.property("Alarm"):
-            #     self.MW.RTD38.ResetAlarm()
-            #
-            # if (self.MW.RTD42.Value > 0 or self.MW.RTD42.Value < -100) and not self.MW.RTD42.Field.property("Alarm"):
-            #     self.MW.RTD42.SetAlarm()
-            # elif self.MW.RTD42.Value <= 0 and self.MW.RTD42.Value >= -100 and self.MW.RTD42.Field.property("Alarm"):
-            #     self.MW.RTD42.ResetAlarm()
-            #
-            # if (self.MW.RTD43.Value > -5 or self.MW.RTD43.Value < -50) and not self.MW.RTD43.Field.property("Alarm"):
-            #     self.MW.RTD43.SetAlarm()
-            # elif self.MW.RTD43.Value <= -5 and self.MW.RTD43.Value >= -50 and self.MW.RTD43.Field.property("Alarm"):
-            #     self.MW.RTD43.ResetAlarm()
-            #
-            # if (self.MW.RTD45.Value > -5 or self.MW.RTD45.Value < -50) and not self.MW.RTD45.Field.property("Alarm"):
-            #     self.MW.RTD45.SetAlarm()
-            # elif self.MW.RTD45.Value <= -5 and self.MW.RTD45.Value >= -50 and self.MW.RTD45.Field.property("Alarm"):
-            #     self.MW.RTD45.ResetAlarm()
+                self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111.Alarm,
+                                                  self.MW.AlarmButton.SubWindow.TT2112.Alarm,
+                                                  self.MW.AlarmButton.SubWindow.TT2113.Alarm,
+                                                  self.MW.AlarmButton.SubWindow.TT2114.Alarm,
+                                                  self.MW.AlarmButton.SubWindow.TT2115.Alarm,
+                                                  self.MW.AlarmButton.SubWindow.TT2116.Alarm,
+                                                  self.MW.AlarmButton.SubWindow.TT2117.Alarm,
+                                                  self.MW.AlarmButton.SubWindow.TT2118.Alarm,
+                                                  self.MW.AlarmButton.SubWindow.TT2119.Alarm,
+                                                  self.MW.AlarmButton.SubWindow.TT2120.Alarm])
+                print("Alarm Status=", self.MW.AlarmButton.Button.Alarm)
 
-            time.sleep(1)
+
+                # try:
+                #     raise RuntimeError("Test unhandlesd")
+                # except:
+                #     (type, value, traceback) = sys.exc_info()
+                #     exception_hook(type, value, traceback)
+
+                # if self.Client.receive_dic["MainAlarm"]:
+                #     self.MW.AlarmButton.ButtonAlarmSetSignal()
+                # else:
+                #     self.MW.AlarmButton.ButtonAlarmResetSignal()
+                # # # generally checkbutton.clicked -> move to updatedisplay
+
+                if self.MW.AlarmButton.Button.Alarm:
+                    self.MW.AlarmButton.ButtonAlarmSetSignal()
+                    self.MW.AlarmButton.SubWindow.ReassignRTD1Order()
+                    # self.MW.AlarmButton.SubWindow.ResetOrder()
+
+                else:
+                    self.MW.AlarmButton.ButtonAlarmResetSignal()
+                    self.MW.AlarmButton.SubWindow.ResetOrder()
+
+                # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
+                #     self.MW.PT1.SetAlarm()
+                # elif self.MW.PT1.Value <= 220 and self.MW.PT1.Value >= 0 and self.MW.PT1.Field.property("Alarm"):
+                #     self.MW.PT1.ResetAlarm()
+                #
+                # if (self.MW.PT2.Value > 220 or self.MW.PT2.Value < 120) and not self.MW.PT2.Field.property("Alarm"):
+                #     self.MW.PT2.SetAlarm()
+                # elif self.MW.PT2.Value <= 220 and self.MW.PT2.Value >= 120 and self.MW.PT2.Field.property("Alarm"):
+                #     self.MW.PT2.ResetAlarm()
+                #
+                # if (self.MW.PT4.Value > 220 or self.MW.PT4.Value < 0) and not self.MW.PT4.Field.property("Alarm"):
+                #     self.MW.PT4.SetAlarm()
+                # elif self.MW.PT4.Value <= 220 and self.MW.PT4.Value >= 0 and self.MW.PT4.Field.property("Alarm"):
+                #     self.MW.PT4.ResetAlarm()
+                #
+                # if (self.MW.PT8.Value > 220 or self.MW.PT8.Value < 0) and not self.MW.PT8.Field.property("Alarm"):
+                #     self.MW.PT8.SetAlarm()
+                # elif self.MW.PT8.Value <= 220 and self.MW.PT8.Value >= 0 and self.MW.PT8.Field.property("Alarm"):
+                #     self.MW.PT8.ResetAlarm()
+                #
+                # if (self.MW.PT10.Value > 220 or self.MW.PT10.Value < 0) and not self.MW.PT10.Field.property("Alarm"):
+                #     self.MW.PT10.SetAlarm()
+                # elif self.MW.PT10.Value <= 220 and self.MW.PT10.Value >= 0 and self.MW.PT10.Field.property("Alarm"):
+                #     self.MW.PT10.ResetAlarm()
+                #
+                # if (self.MW.Bellows.Value > 2 or self.MW.Bellows.Value < -.5) and not self.MW.Bellows.Field.property("Alarm"):
+                #     self.MW.Bellows.SetAlarm()
+                # elif self.MW.Bellows.Value <= 2 and self.MW.Bellows.Value >= -.5 and self.MW.Bellows.Field.property("Alarm"):
+                #     self.MW.Bellows.ResetAlarm()
+                #
+                # if (self.MW.IV.Value > .1 or self.MW.IV.Value < -.1) and not self.MW.IV.Field.property("Alarm"):
+                #     self.MW.IV.SetAlarm()
+                # elif self.MW.IV.Value <= .1 and self.MW.IV.Value >= -.1 and self.MW.IV.Field.property("Alarm"):
+                #     self.MW.IV.ResetAlarm()
+                #
+                # if (self.MW.PDiff.Value > 10 or self.MW.PDiff.Value < -10) and not self.MW.PDiff.Field.property("Alarm"):
+                #     self.MW.PDiff.SetAlarm()
+                # elif self.MW.PDiff.Value <= 10 and self.MW.PDiff.Value >= -10 and self.MW.PDiff.Field.property("Alarm"):
+                #     self.MW.PDiff.ResetAlarm()
+                #
+                # if (self.MW.RTD37.Value > -5 or self.MW.RTD37.Value < -50) and not self.MW.RTD37.Field.property("Alarm"):
+                #     self.MW.RTD37.SetAlarm()
+                # elif self.MW.RTD37.Value <= -5 and self.MW.RTD37.Value >= -50 and self.MW.RTD37.Field.property("Alarm"):
+                #     self.MW.RTD37.ResetAlarm()
+                #
+                # if (self.MW.RTD38.Value > -5 or self.MW.RTD38.Value < -50) and not self.MW.RTD38.Field.property("Alarm"):
+                #     self.MW.RTD38.SetAlarm()
+                # elif self.MW.RTD38.Value <= -5 and self.MW.RTD38.Value >= -50 and self.MW.RTD38.Field.property("Alarm"):
+                #     self.MW.RTD38.ResetAlarm()
+                #
+                # if (self.MW.RTD42.Value > 0 or self.MW.RTD42.Value < -100) and not self.MW.RTD42.Field.property("Alarm"):
+                #     self.MW.RTD42.SetAlarm()
+                # elif self.MW.RTD42.Value <= 0 and self.MW.RTD42.Value >= -100 and self.MW.RTD42.Field.property("Alarm"):
+                #     self.MW.RTD42.ResetAlarm()
+                #
+                # if (self.MW.RTD43.Value > -5 or self.MW.RTD43.Value < -50) and not self.MW.RTD43.Field.property("Alarm"):
+                #     self.MW.RTD43.SetAlarm()
+                # elif self.MW.RTD43.Value <= -5 and self.MW.RTD43.Value >= -50 and self.MW.RTD43.Field.property("Alarm"):
+                #     self.MW.RTD43.ResetAlarm()
+                #
+                # if (self.MW.RTD45.Value > -5 or self.MW.RTD45.Value < -50) and not self.MW.RTD45.Field.property("Alarm"):
+                #     self.MW.RTD45.SetAlarm()
+                # elif self.MW.RTD45.Value <= -5 and self.MW.RTD45.Value >= -50 and self.MW.RTD45.Field.property("Alarm"):
+                #     self.MW.RTD45.ResetAlarm()
+
+                time.sleep(1)
+        except:
+            (type, value, traceback) = sys.exc_info()
+            exception_hook(type, value, traceback)
 
     @QtCore.Slot()
     def stop(self):
@@ -4155,8 +4176,11 @@ class UpdateDisplay(QtCore.QObject):
 
 
 # Code entry point
-# Code entry point
+
 if __name__ == "__main__":
+
+
+
     App = QtWidgets.QApplication(sys.argv)
 
     MW = MainWindow()
@@ -4171,6 +4195,17 @@ if __name__ == "__main__":
     # save data
 
     sys.exit(App.exec_())
+
+    # AW = AlarmWin()
+    # if platform.system() == "Linux":
+    #     AW.show()
+    #     AW.showMinimized()
+    # else:
+    #     AW.show()
+    # AW.activateWindow()
+    # sys.exit(App.exec_())
+
+
 
 """
 Note to run on VS on my computer...
