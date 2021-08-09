@@ -813,6 +813,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LoginT.Button.clicked.connect(self.ChangeUser)
         self.LoginP.Button.clicked.connect(self.ChangeUser)
 
+
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater;
         self.StartUpdater()
@@ -895,6 +896,29 @@ class MainWindow(QtWidgets.QMainWindow):
             self.LoginW.Button.setText("Guest")
 
             self.ActivateControls(False)
+
+    @QtCore.Slot()
+    def update_alarmwindow(self):
+        for i in range(0, len(self.AlarmButton.SubWindow.AlarmRTD1list1D)):
+            self.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
+        self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
+                                          self.AlarmButton.SubWindow.TT2112.Alarm,
+                                          self.AlarmButton.SubWindow.TT2113.Alarm,
+                                          self.AlarmButton.SubWindow.TT2114.Alarm,
+                                          self.AlarmButton.SubWindow.TT2115.Alarm,
+                                          self.AlarmButton.SubWindow.TT2116.Alarm,
+                                          self.AlarmButton.SubWindow.TT2117.Alarm,
+                                          self.AlarmButton.SubWindow.TT2118.Alarm,
+                                          self.AlarmButton.SubWindow.TT2119.Alarm,
+                                          self.AlarmButton.SubWindow.TT2120.Alarm])
+        print("Alarm Status=", self.AlarmButton.Button.Alarm)
+        if self.AlarmButton.Button.Alarm:
+            self.AlarmButton.ButtonAlarmSetSignal()
+            self.AlarmButton.SubWindow.ReassignRTD1Order()
+
+        else:
+            self.AlarmButton.ButtonAlarmResetSignal()
+            self.AlarmButton.SubWindow.ResetOrder()
 
     # Lock/unlock controls
     def ActivateControls(self, Activate):
@@ -3828,6 +3852,7 @@ class UpdateClient(QtCore.QObject):
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs
 class UpdateDisplay(QtCore.QObject):
+    display_update = QtCore.Signal()
     def __init__(self, MW, Client,parent=None):
         super().__init__(parent)
 
@@ -3842,9 +3867,7 @@ class UpdateDisplay(QtCore.QObject):
         self.RTDLEFT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTDLEFTdir)
         self.PT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmPTdir)
         self.array = self.RTD1_array + self.RTD2_array + self.RTD3_array + self.RTD4_array + self.RTDLEFT_array + self.PT_array
-
-
-
+        self.display_update.connect(self.MW.update_alarmwindow)
 
 
     @QtCore.Slot()
@@ -3862,6 +3885,7 @@ class UpdateDisplay(QtCore.QObject):
 
                 # if self.MW.PLC.NewData_Display:
                 print(self.Client.receive_dic)
+                self.display_update.emit()
                 # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
                 # self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
 
@@ -4023,8 +4047,8 @@ class UpdateDisplay(QtCore.QObject):
 
                 #         break
 
-                for i in range(0, len(self.MW.AlarmButton.SubWindow.AlarmRTD1list1D)):
-                    self.MW.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
+                # for i in range(0, len(self.MW.AlarmButton.SubWindow.AlarmRTD1list1D)):
+                #     self.MW.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
                 #
                 # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD2_max):
                 #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD2_max):
@@ -4066,17 +4090,17 @@ class UpdateDisplay(QtCore.QObject):
                 # self.MW.AlarmButton.CollectAlarm(
                 #     [self.MW.AlarmButton.SubWindow.TT2111.Alarm, self.MW.AlarmButton.SubWindow.TT2115.Alarm])
 
-                self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111.Alarm,
-                                                  self.MW.AlarmButton.SubWindow.TT2112.Alarm,
-                                                  self.MW.AlarmButton.SubWindow.TT2113.Alarm,
-                                                  self.MW.AlarmButton.SubWindow.TT2114.Alarm,
-                                                  self.MW.AlarmButton.SubWindow.TT2115.Alarm,
-                                                  self.MW.AlarmButton.SubWindow.TT2116.Alarm,
-                                                  self.MW.AlarmButton.SubWindow.TT2117.Alarm,
-                                                  self.MW.AlarmButton.SubWindow.TT2118.Alarm,
-                                                  self.MW.AlarmButton.SubWindow.TT2119.Alarm,
-                                                  self.MW.AlarmButton.SubWindow.TT2120.Alarm])
-                print("Alarm Status=", self.MW.AlarmButton.Button.Alarm)
+                # self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111.Alarm,
+                #                                   self.MW.AlarmButton.SubWindow.TT2112.Alarm,
+                #                                   self.MW.AlarmButton.SubWindow.TT2113.Alarm,
+                #                                   self.MW.AlarmButton.SubWindow.TT2114.Alarm,
+                #                                   self.MW.AlarmButton.SubWindow.TT2115.Alarm,
+                #                                   self.MW.AlarmButton.SubWindow.TT2116.Alarm,
+                #                                   self.MW.AlarmButton.SubWindow.TT2117.Alarm,
+                #                                   self.MW.AlarmButton.SubWindow.TT2118.Alarm,
+                #                                   self.MW.AlarmButton.SubWindow.TT2119.Alarm,
+                #                                   self.MW.AlarmButton.SubWindow.TT2120.Alarm])
+                # print("Alarm Status=", self.MW.AlarmButton.Button.Alarm)
 
 
                 # try:
@@ -4091,14 +4115,14 @@ class UpdateDisplay(QtCore.QObject):
                 #     self.MW.AlarmButton.ButtonAlarmResetSignal()
                 # # # generally checkbutton.clicked -> move to updatedisplay
 
-                if self.MW.AlarmButton.Button.Alarm:
-                    self.MW.AlarmButton.ButtonAlarmSetSignal()
-                    self.MW.AlarmButton.SubWindow.ReassignRTD1Order()
-                    # self.MW.AlarmButton.SubWindow.ResetOrder()
-
-                else:
-                    self.MW.AlarmButton.ButtonAlarmResetSignal()
-                    self.MW.AlarmButton.SubWindow.ResetOrder()
+                # if self.MW.AlarmButton.Button.Alarm:
+                #     self.MW.AlarmButton.ButtonAlarmSetSignal()
+                #     # self.MW.AlarmButton.SubWindow.ReassignRTD1Order()
+                #     # self.MW.AlarmButton.SubWindow.ResetOrder()
+                #
+                # else:
+                #     self.MW.AlarmButton.ButtonAlarmResetSignal()
+                #     self.MW.AlarmButton.SubWindow.ResetOrder()
 
                 # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
                 #     self.MW.PT1.SetAlarm()
@@ -4173,6 +4197,9 @@ class UpdateDisplay(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+
+
+
 
 
 # Code entry point
