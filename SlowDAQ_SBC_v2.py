@@ -898,8 +898,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ActivateControls(False)
 
     @QtCore.Slot()
-    def update_alarmwindow(self, dic):
-        # print(dic)
+    def update_alarmwindow(self):
         for i in range(0, len(self.AlarmButton.SubWindow.AlarmRTD1list1D)):
             self.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
         self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
@@ -3853,7 +3852,7 @@ class UpdateClient(QtCore.QObject):
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs
 class UpdateDisplay(QtCore.QObject):
-    display_update = QtCore.Signal(str)
+    display_update = QtCore.Signal()
     def __init__(self, MW, Client,parent=None):
         super().__init__(parent)
 
@@ -3877,8 +3876,9 @@ class UpdateDisplay(QtCore.QObject):
                 #     print(i, self.MW.PLC.RTD[i])
 
                 # if self.MW.PLC.NewData_Display:
-                print(self.Client.receive_dic)
-                self.display_update.emit(self.Client.receive_dic)
+                # print(self.Client.receive_dic)
+
+                self.display_update.emit()
                 # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
                 # self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
 
