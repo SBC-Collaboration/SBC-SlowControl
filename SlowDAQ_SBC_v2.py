@@ -899,7 +899,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def update_alarmwindow(self, dic):
-        print(dic)
+        # print(dic)
         for i in range(0, len(self.AlarmButton.SubWindow.AlarmRTD1list1D)):
             self.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
         self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
