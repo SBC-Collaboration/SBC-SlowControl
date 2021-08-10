@@ -780,8 +780,8 @@ class message_manager():
 
 
 if __name__ == "__main__":
-    msg_mana=message_manager()
-    msg_mana.tencent_alarm("this is a test message")
-    # App = QtWidgets.QApplication(sys.argv)
-    # Update=Update()
-    # sys.exit(App.exec_())
+    # msg_mana=message_manager()
+    # msg_mana.tencent_alarm("this is a test message")
+    App = QtWidgets.QApplication(sys.argv)
+    Update=Update()
+    sys.exit(App.exec_())
