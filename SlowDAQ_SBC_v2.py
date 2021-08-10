@@ -3853,7 +3853,7 @@ class UpdateClient(QtCore.QObject):
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs
 class UpdateDisplay(QtCore.QObject):
-    display_update = QtCore.Signal()
+    display_update = QtCore.Signal(str)
     def __init__(self, MW, Client,parent=None):
         super().__init__(parent)
 
