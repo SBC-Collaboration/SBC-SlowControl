@@ -566,7 +566,7 @@ class UpdatePLC(QtCore.QObject):
 
     def check_alarm(self, RTDNum, pid):
 
-        if self.Activated[pid]:
+        if self.PLC.Activated[pid]:
             if int(self.PLC.LowLimit[pid]) > int(self.PLC.HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
