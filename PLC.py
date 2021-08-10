@@ -500,7 +500,7 @@ class UpdateDataBase(QtCore.QObject):
         self.PLC = PLC
         self.db = mydatabase()
         self.Running = False
-        self.period=60
+        self.period=2
         print("begin updating Database")
 
     @QtCore.Slot()
