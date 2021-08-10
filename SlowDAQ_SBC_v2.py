@@ -898,7 +898,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ActivateControls(False)
 
     @QtCore.Slot()
-    def update_alarmwindow(self):
+    def update_alarmwindow(self, dic):
+        print(dic)
         for i in range(0, len(self.AlarmButton.SubWindow.AlarmRTD1list1D)):
             self.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
         self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
@@ -3860,15 +3861,7 @@ class UpdateDisplay(QtCore.QObject):
         self.Client = Client
         self.Running = False
 
-        self.RTD1_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD1dir)
-        self.RTD2_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD2dir)
-        self.RTD3_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD3dir)
-        self.RTD4_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD4dir)
-        self.RTDLEFT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTDLEFTdir)
-        self.PT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmPTdir)
-        self.array = self.RTD1_array + self.RTD2_array + self.RTD3_array + self.RTD4_array + self.RTDLEFT_array + self.PT_array
         self.display_update.connect(self.MW.update_alarmwindow)
-
 
     @QtCore.Slot()
     def run(self):
@@ -3885,7 +3878,7 @@ class UpdateDisplay(QtCore.QObject):
 
                 # if self.MW.PLC.NewData_Display:
                 print(self.Client.receive_dic)
-                self.display_update.emit()
+                self.display_update.emit(self.Client.receive_dic)
                 # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
                 # self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
 
