@@ -26,6 +26,13 @@ import os
 import random
 from pymodbus.client.sync import ModbusTcpClient
 
+sys._excepthook = sys.excepthook
+def exception_hook(exctype, value, traceback):
+    print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
+    # sys._excepthook(exctype, value, traceback)
+    sys.exit(1)
+sys.excepthook = exception_hook
+
 
 class PLC:
     def __init__(self):
@@ -539,15 +546,19 @@ class UpdatePLC(QtCore.QObject):
 
     @QtCore.Slot()
     def run(self):
-        self.Running = True
+        try:
+            self.Running = True
 
-        while self.Running:
-            print("PLC updating", datetime.datetime.now())
-            self.PLC.ReadAll()
-            self.check_alarm(6, "PT9998")
-            self.check_alarm(7, "PT9999")
-            self.or_alarm_signal()
-            time.sleep(self.period)
+            while self.Running:
+                print("PLC updating", datetime.datetime.now())
+                self.PLC.ReadAll()
+                self.check_alarm(6, "PT9998")
+                self.check_alarm(7, "PT9999")
+                self.or_alarm_signal()
+                time.sleep(self.period)
+        except:
+            (type, value, traceback) = sys.exc_info()
+            exception_hook(type, value, traceback)
 
     @QtCore.Slot()
     def stop(self):
