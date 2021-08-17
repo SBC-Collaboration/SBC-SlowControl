@@ -835,6 +835,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpClient = UpdateClient()
         self.UpClient.moveToThread(self.ClientUpdateThread)
         self.ClientUpdateThread.started.connect(self.UpClient.run)
+        self.signal_connection()
         self.ClientUpdateThread.start()
 
         # Make sure PLCs values are initialized before trying to access them with update function
@@ -862,6 +863,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpDisplay.stop()
         self.DUpdateThread.quit()
         self.DUpdateThread.wait()
+    # signal connections to write settings to PLC codes
+    def signal_connection(self):
+        self.SV4327.Set.LButton.clicked.connect(self.UpClient.LButtonConnect)
+
 
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()
@@ -3830,7 +3835,7 @@ class UpdateClient(QtCore.QObject):
         self.Running=False
         self.period=2
         print("client is connecting to the ZMQ server")
-        self.receive_dic={"PT9998":0, "PT9999":0}
+        self.receive_dic = {"data":{"PT9998":0, "PT9999":0},"Alarm":{"PT9998": False, "PT9999": False}, "MainAlarm":False}
 
     @QtCore.Slot()
     def run(self):
@@ -3852,6 +3857,9 @@ class UpdateClient(QtCore.QObject):
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic=message
+    def LButtonConnect(self):
+        self.soket.send(b"please set SV4327 to open")
+
 
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs
