@@ -906,7 +906,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def update_alarmwindow(self,dic):
-        print("dict:",dic)
+        # print("dict:",dic)
 
         for i in range(0, len(self.AlarmButton.SubWindow.AlarmRTD1list1D)):
             self.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
@@ -920,7 +920,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                           self.AlarmButton.SubWindow.TT2118.Alarm,
                                           self.AlarmButton.SubWindow.TT2119.Alarm,
                                           self.AlarmButton.SubWindow.TT2120.Alarm])
-        print("Alarm Status=", self.AlarmButton.Button.Alarm)
+        # print("Alarm Status=", self.AlarmButton.Button.Alarm)
         if self.AlarmButton.Button.Alarm:
             self.AlarmButton.ButtonAlarmSetSignal()
             self.AlarmButton.SubWindow.ReassignRTD1Order()
@@ -3858,7 +3858,8 @@ class UpdateClient(QtCore.QObject):
         #message mush be a dictionary
         self.receive_dic=message
     def LButtonConnect(self):
-        self.soket.send(b"please set SV4327 to open")
+        self.socket.send(b"please set SV4327 to open")
+        print("please set SV4327 to open")
 
 
 # Class to update display with PLC values every time PLC values ave been updated
@@ -3880,7 +3881,7 @@ class UpdateDisplay(QtCore.QObject):
             self.Running = True
             while self.Running:
 
-                print("Display updating", datetime.datetime.now())
+                # print("Display updating", datetime.datetime.now())
 
                 # print(self.MW.PLC.RTD)
                 # print(3, self.MW.PLC.RTD[3])
@@ -3890,7 +3891,7 @@ class UpdateDisplay(QtCore.QObject):
                 # if self.MW.PLC.NewData_Display:
 
                 dic=self.Client.receive_dic
-                print(dic)
+                # print(dic)
                 # print(type(dic))
 
                 self.display_update.emit(dic)
