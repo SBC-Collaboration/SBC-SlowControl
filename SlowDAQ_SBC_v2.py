@@ -35,6 +35,8 @@ ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bd
                  "31c12bff0da3a2314ca2266"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px; border-color: black;"
 
+
+
 sys._excepthook = sys.excepthook
 def exception_hook(exctype, value, traceback):
     print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
@@ -898,7 +900,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ActivateControls(False)
 
     @QtCore.Slot()
-    def update_alarmwindow(self):
+    def update_alarmwindow(self,dic):
+        print("dict:",dic)
+
         for i in range(0, len(self.AlarmButton.SubWindow.AlarmRTD1list1D)):
             self.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
         self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
@@ -3852,7 +3856,7 @@ class UpdateClient(QtCore.QObject):
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs
 class UpdateDisplay(QtCore.QObject):
-    display_update = QtCore.Signal()
+    display_update = QtCore.Signal(dict)
     def __init__(self, MW, Client,parent=None):
         super().__init__(parent)
 
@@ -3876,11 +3880,14 @@ class UpdateDisplay(QtCore.QObject):
                 #     print(i, self.MW.PLC.RTD[i])
 
                 # if self.MW.PLC.NewData_Display:
-                # print(self.Client.receive_dic)
 
-                self.display_update.emit()
-                # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
-                # self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
+                dic=self.Client.receive_dic
+                print(dic)
+                # print(type(dic))
+
+                self.display_update.emit(dic)
+                self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
+                self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
 
                 # self.MW.subwindow.Lowlimit.SetValue(self.Client.receive_dic["PT99998"])
                 # self.MW.subwindow.alarmbutton(self.Client.receive_dic)
