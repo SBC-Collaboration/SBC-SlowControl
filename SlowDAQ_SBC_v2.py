@@ -835,8 +835,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpClient = UpdateClient()
         self.UpClient.moveToThread(self.ClientUpdateThread)
         self.ClientUpdateThread.started.connect(self.UpClient.run)
-        self.signal_connection()
         self.ClientUpdateThread.start()
+        # self.signal_connection()
+        self.SV4327.Set.LButton.clicked.connect(self.UpClient.LButtonConnect)
 
         # Make sure PLCs values are initialized before trying to access them with update function
         time.sleep(2)
@@ -3842,12 +3843,12 @@ class UpdateClient(QtCore.QObject):
         self.Running = True
         while self.Running:
 
-            print(f"Sending request...")
+            # print(f"Sending request...")
 
             #  Send reply back to client
             self.socket.send(b"Hello")
             message = pickle.loads(self.socket.recv())
-            print(f"Received reply [ {message} ]")
+            # print(f"Received reply [ {message} ]")
             self.update_data(message)
             time.sleep(self.period)
 
@@ -3858,7 +3859,7 @@ class UpdateClient(QtCore.QObject):
         #message mush be a dictionary
         self.receive_dic=message
     def LButtonConnect(self):
-        self.socket.send(b"please set SV4327 to open")
+        # self.socket.send(b"please set SV4327 to open")
         print("please set SV4327 to open")
 
 
