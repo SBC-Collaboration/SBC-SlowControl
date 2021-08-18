@@ -842,7 +842,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ClientUpdateThread.started.connect(self.UpClient.run)
         self.ClientUpdateThread.start()
         # self.signal_connection()
-        self.SV4327.Set.LButton.clicked.connect(self.UpClient.LButtonConnect)
+        # self.SV4327.Set.LButton.clicked.connect(self.UpClient.LButtonConnect)
 
         # Make sure PLCs values are initialized before trying to access them with update function
         time.sleep(2)
@@ -875,6 +875,7 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LButtonClicked(self):
         self.commands.append("1")
+        print("Button is clicked")
 
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()
@@ -3854,9 +3855,10 @@ class UpdateClient(QtCore.QObject):
             # print(f"Sending request...")
 
             #  Send reply back to client
-            self.socket.send(b"Hello")
-            message = pickle.loads(self.socket.recv())
+            # self.socket.send(b"Hello")
             self.LButtonConnect()
+            message = pickle.loads(self.socket.recv())
+
             # print(f"Received reply [ {message} ]")
             self.update_data(message)
             time.sleep(self.period)
@@ -3870,9 +3872,13 @@ class UpdateClient(QtCore.QObject):
     def LButtonConnect(self):
         print("I am here",datetime.datetime.now())
         print(self.MW.commands)
-        if not self.MW.commands:
+        if len(self.MW.commands) != 0:
             print(self.MW.commands[0])
+            self.socket.send(b'this is a command')
             self.MW.commands=[]
+        else:
+            self.socket.send(b'no command')
+
         # print("please set SV4327 to open")
 
 
