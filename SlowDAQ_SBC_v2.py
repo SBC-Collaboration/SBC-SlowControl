@@ -785,6 +785,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmButton.move(0, 1300)
         self.AlarmButton.Button.setText("Alarm Button")
 
+
+        #commands stack
+        self.commands = [None]
+
         # Set user to guest by default
         self.User = "Guest"
         self.UserTimer = QtCore.QTimer(self)
@@ -832,7 +836,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.PLCUpdateThread.start()
 
         self.ClientUpdateThread = QtCore.QThread()
-        self.UpClient = UpdateClient()
+        self.UpClient = UpdateClient(self)
         self.UpClient.moveToThread(self.ClientUpdateThread)
         self.ClientUpdateThread.started.connect(self.UpClient.run)
         self.ClientUpdateThread.start()
@@ -866,8 +870,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DUpdateThread.wait()
     # signal connections to write settings to PLC codes
     def signal_connection(self):
-        self.SV4327.Set.LButton.clicked.connect(self.UpClient.LButtonConnect)
-
+        self.SV4327.Set.LButton.clicked.connect(self.LButtonClicked)
+    @QtCore.Slot()
+    def LButtonClicked(self):
+        self.commands.append("1")
 
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()
@@ -3828,8 +3834,9 @@ class UpdatePLC(QtCore.QObject):
 
 
 class UpdateClient(QtCore.QObject):
-    def __init__(self, parent=None):
+    def __init__(self, MW, parent=None):
         super().__init__(parent)
+        self.MW = MW
         self.context = zmq.Context()
         self.socket = self.context.socket(zmq.REQ)
         self.socket.connect("tcp://localhost:5555")
@@ -3857,10 +3864,12 @@ class UpdateClient(QtCore.QObject):
         self.Running = False
     def update_data(self,message):
         #message mush be a dictionary
-        self.receive_dic=message
+        self.receive_dic = message
     def LButtonConnect(self):
-        # self.socket.send(b"please set SV4327 to open")
-        print("please set SV4327 to open")
+        if not self.MW.commands:
+            print(self.MW.commands[0])
+            self.MW.commands=[None]
+        # print("please set SV4327 to open")
 
 
 # Class to update display with PLC values every time PLC values ave been updated
