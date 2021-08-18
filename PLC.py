@@ -650,6 +650,18 @@ class UpdateServer(QtCore.QObject):
         self.data_dic["data"]["PT9999"] = self.PLC.RTD[7]
         self.data_package=pickle.dumps(self.data_dic)
 
+    def write_data(self):
+        message = self.socket.recv()
+        print(message)
+        if message == "this is a command":
+            #self.PLC.
+            print("I will set valve")
+        elif message == "no command":
+            print("I will stay here")
+        else:
+            pass
+
+
 
 class Update(QtCore.QObject):
     def __init__(self, parent=None):
