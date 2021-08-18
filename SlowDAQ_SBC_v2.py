@@ -787,7 +787,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #commands stack
-        self.commands = [None]
+        self.commands = []
+        self.signal_connection()
 
         # Set user to guest by default
         self.User = "Guest"
@@ -3855,6 +3856,7 @@ class UpdateClient(QtCore.QObject):
             #  Send reply back to client
             self.socket.send(b"Hello")
             message = pickle.loads(self.socket.recv())
+            self.LButtonConnect()
             # print(f"Received reply [ {message} ]")
             self.update_data(message)
             time.sleep(self.period)
@@ -3866,9 +3868,11 @@ class UpdateClient(QtCore.QObject):
         #message mush be a dictionary
         self.receive_dic = message
     def LButtonConnect(self):
+        print("I am here",datetime.datetime.now())
+        print(self.MW.commands)
         if not self.MW.commands:
             print(self.MW.commands[0])
-            self.MW.commands=[None]
+            self.MW.commands=[]
         # print("please set SV4327 to open")
 
 
