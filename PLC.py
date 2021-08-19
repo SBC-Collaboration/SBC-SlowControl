@@ -123,10 +123,13 @@ class PLC:
                     struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
                 # print("Updating PLC", i, "RTD",self.RTD[i])
 
-            RawRTD = self.Client.read_holding_registers(38012, count=2, unit=0x01)
-            RTD7 = round(
-                struct.unpack("<f", struct.pack("<HH", RawRTD.getRegister(1), RawRTD.getRegister(0)))[0], 3)
-            print("RTD7", RTD7)
+            Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x02)
+            for i in range(0, self.nRTD):
+                self.RTD[i] = round(
+                    Raw2.getRegister(i), 3)
+                print("Updating PLC", i, "RTD",self.RTD[i])
+
+
 
             Attribute = [0.] * self.nRTD
             for i in range(0, self.nRTD):
