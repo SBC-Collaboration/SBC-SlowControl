@@ -279,6 +279,16 @@ class PLC:
         else:
             return 1
 
+    def setValve(self):
+        Raw = self.Client.read_holding_registers(12289, count=2, unit=0x01)
+
+        output = round(
+                    struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
+        print("valve value is ", output)
+
+
+
+
     def SaveSetting(self):
         self.WriteBool(0x0, 0, 1)
 
