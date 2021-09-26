@@ -829,6 +829,6 @@ if __name__ == "__main__":
     App = QtWidgets.QApplication(sys.argv)
     # Update=Update()
     PLC=PLC()
-    PLC.ReadAll()
+    # PLC.ReadAll()
     PLC.setValve()
     sys.exit(App.exec_())
