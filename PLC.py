@@ -138,7 +138,7 @@ class PLC:
             for i in range(0, self.nRTD):
                 Attribute[i] = self.Client.read_holding_registers(18000 + i * 8, count=1, unit=0x01)
                 self.nAttribute[i] = hex(Attribute[i].getRegister(0))
-            # print("Attributes", self.nAttribute)
+            print("Attributes", self.nAttribute)
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -280,11 +280,19 @@ class PLC:
             return 1
 
     def setValve(self):
-        Raw = self.Client.read_holding_registers(12289, count=2, unit=0x01)
+        for i in range(0,22):
+            try:
+                # Raw = self.Client.read_holding_registers(18000, count=1, unit=0x01)
+                # Raw = self.Client.read_holding_registers(12288+ i * 2, count=1, unit=0x01)
+                # output=hex(Raw.getRegister(0))
+                # output = round(
+                # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
+                Raw = self.Client.read_holding_registers(12288+i, count=1, unit=0x01)
+                output = Raw
+                print(i,"valve value is ", output)
+            except:
+                pass
 
-        output = round(
-                    struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
-        print("valve value is ", output)
 
 
 
