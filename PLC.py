@@ -826,24 +826,28 @@ class Beckoff:
         self.Connected = self.Client.connect()
         print(" Beckoff connected: " + str(self.Connected))
     def ReadValve(self):
-        Raw = self.Client.read_holding_registers(12289, count=2, unit=0x01)
-        # output=Raw.getRegister(0)
+        Raw = self.Client.read_holding_registers(12290, count=1, unit=0x01)
+        output=struct.pack("H",Raw.getRegister(0))
         # output = round(
         # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
-        output = struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0))
+        # output = struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0))
+
 
         print("valve value is ", output)
 
     def WriteOpen(self):
-        Raw = self.Client.write_register(12289, value= b'\x00\x00\x00\x02', unit=0x01)
+        # Raw = self.Client.write_register(12289, value= b'\x00\x00\x00\x02', unit=0x01)
+        Raw = self.Client.write_register(12290, value=0x0002, unit=0x01)
         print("write open result=", Raw)
 
     def WriteClose(self):
-        Raw = self.Client.write_register(12289, value= b'\x00\x00\x00\x04', unit=0x01)
+        # Raw = self.Client.write_register(12289, value=b'\x00\x00\x00\x04', unit=0x01)
+        Raw = self.Client.write_register(12290, value= 0x0004, unit=0x01)
         print("write close result=", Raw)
 
-
-
+    def Reset(self):
+        Raw = self.Client.write_register(12290, value=0x0000, unit=0x01)
+        print("write close result=", Raw)
 
 
 
@@ -857,11 +861,25 @@ if __name__ == "__main__":
 
     # Test the writing functions
     Beckoff=Beckoff()
+    print("Read the 2-word address")
     Beckoff.ReadValve()
+    print("Open the valve")
     Beckoff.WriteOpen()
+    print("immediately read the valve value")
     Beckoff.ReadValve()
+    print("sleep 2 seconds")
+    time.sleep(2)
+    print("Read again")
+    Beckoff.ReadValve()
+    print("Close")
     Beckoff.WriteClose()
+    print("Read the value immediately after close the valve")
     Beckoff.ReadValve()
+    print("sleep 2 seconds")
+    time.sleep(2)
+    Beckoff.ReadValve()
+    Beckoff.Reset()
+
 
     sys.exit(App.exec_())
 
