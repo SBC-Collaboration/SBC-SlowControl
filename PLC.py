@@ -825,19 +825,16 @@ class Beckoff:
         self.Client = ModbusTcpClient(IP, port=PORT)
         self.Connected = self.Client.connect()
         print(" Beckoff connected: " + str(self.Connected))
-    def setValve(self):
-        for i in range(0,22):
-            try:
-                # Raw = self.Client.read_holding_registers(18000, count=1, unit=0x01)
-                # Raw = self.Client.read_holding_registers(12288+ i * 2, count=1, unit=0x01)
-                # output=hex(Raw.getRegister(0))
-                # output = round(
-                # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
-                Raw = self.Client.read_holding_registers(12288+i, count=1, unit=0x01)
-                output = Raw.getRegister(0)
-                print(i,"valve value is ", output)
-            except:
-                pass
+    def ReadValve(self):
+
+
+            Raw = self.Client.read_holding_registers(12289, count=2, unit=0x01)
+            # output=Raw.getRegister(0)
+            # output = round(
+            # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
+            output = struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0))
+
+            print("valve value is ", output)
 
 
 if __name__ == "__main__":
@@ -848,6 +845,6 @@ if __name__ == "__main__":
     # PLC=PLC()
     # PLC.ReadAll()
     Beckoff=Beckoff()
-    Beckoff.setValve()
+    Beckoff.ReadValve()
     sys.exit(App.exec_())
 
