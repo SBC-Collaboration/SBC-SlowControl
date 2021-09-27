@@ -826,7 +826,7 @@ class Beckoff:
         self.Connected = self.Client.connect()
         print(" Beckoff connected: " + str(self.Connected))
     def ReadValve(self):
-        Raw = self.Client.read_holding_registers(12290, count=1, unit=0x01)
+        Raw = self.Client.read_holding_registers(12296, count=1, unit=0x01)
         output=struct.pack("H",Raw.getRegister(0))
         # output = round(
         # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
@@ -837,16 +837,16 @@ class Beckoff:
 
     def WriteOpen(self):
         # Raw = self.Client.write_register(12289, value= b'\x00\x00\x00\x02', unit=0x01)
-        Raw = self.Client.write_register(12290, value=0x0002, unit=0x01)
+        Raw = self.Client.write_register(12296, value=0x0002, unit=0x01)
         print("write open result=", Raw)
 
     def WriteClose(self):
         # Raw = self.Client.write_register(12289, value=b'\x00\x00\x00\x04', unit=0x01)
-        Raw = self.Client.write_register(12290, value= 0x0004, unit=0x01)
+        Raw = self.Client.write_register(12296, value= 0x0004, unit=0x01)
         print("write close result=", Raw)
 
     def Reset(self):
-        Raw = self.Client.write_register(12290, value=0x0000, unit=0x01)
+        Raw = self.Client.write_register(12296, value=0x0000, unit=0x01)
         print("write close result=", Raw)
 
 
