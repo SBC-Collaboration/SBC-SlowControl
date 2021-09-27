@@ -826,15 +826,25 @@ class Beckoff:
         self.Connected = self.Client.connect()
         print(" Beckoff connected: " + str(self.Connected))
     def ReadValve(self):
+        Raw = self.Client.read_holding_registers(12289, count=2, unit=0x01)
+        # output=Raw.getRegister(0)
+        # output = round(
+        # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
+        output = struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0))
+
+        print("valve value is ", output)
+
+    def WriteOpen(self):
+        Raw = self.Client.write_register(12289, value= b'\x00\x00\x00\x02', unit=0x01)
+        print("write open result=", Raw)
+
+    def WriteClose(self):
+        Raw = self.Client.write_register(12289, value= b'\x00\x00\x00\x04', unit=0x01)
+        print("write close result=", Raw)
 
 
-            Raw = self.Client.read_holding_registers(12289, count=2, unit=0x01)
-            # output=Raw.getRegister(0)
-            # output = round(
-            # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
-            output = struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0))
 
-            print("valve value is ", output)
+
 
 
 if __name__ == "__main__":
@@ -844,7 +854,14 @@ if __name__ == "__main__":
     # Update=Update()
     # PLC=PLC()
     # PLC.ReadAll()
+
+    # Test the writing functions
     Beckoff=Beckoff()
     Beckoff.ReadValve()
+    Beckoff.WriteOpen()
+    Beckoff.ReadValve()
+    Beckoff.WriteClose()
+    Beckoff.ReadValve()
+
     sys.exit(App.exec_())
 
