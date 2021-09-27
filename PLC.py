@@ -834,7 +834,7 @@ class Beckoff:
                 # output = round(
                 # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
                 Raw = self.Client.read_holding_registers(12288+i, count=1, unit=0x01)
-                output = Raw
+                output = Raw.getRegister(0)
                 print(i,"valve value is ", output)
             except:
                 pass
