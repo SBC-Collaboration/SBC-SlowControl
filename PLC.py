@@ -43,7 +43,7 @@ class PLC:
 
         self.Client = ModbusTcpClient(IP, port=PORT)
         self.Connected = self.Client.connect()
-        print("PLC connected: " + str(self.Connected))
+        print("NI connected: " + str(self.Connected))
 
         self.nRTD = 8
         self.RTD = [0.] * self.nRTD
@@ -278,22 +278,6 @@ class PLC:
             return 0
         else:
             return 1
-
-    def setValve(self):
-        for i in range(0,22):
-            try:
-                # Raw = self.Client.read_holding_registers(18000, count=1, unit=0x01)
-                # Raw = self.Client.read_holding_registers(12288+ i * 2, count=1, unit=0x01)
-                # output=hex(Raw.getRegister(0))
-                # output = round(
-                # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
-                Raw = self.Client.read_holding_registers(12288+i, count=1, unit=0x01)
-                output = Raw
-                print(i,"valve value is ", output)
-            except:
-                pass
-
-
 
 
 
@@ -831,12 +815,39 @@ class message_manager():
         return r.status_code
 
 
+class Beckoff:
+    def __init__(self):
+        super().__init__()
+        #Beckoff address
+        IP = "192.168.137.11"
+        PORT = 502
+
+        self.Client = ModbusTcpClient(IP, port=PORT)
+        self.Connected = self.Client.connect()
+        print(" Beckoff connected: " + str(self.Connected))
+    def setValve(self):
+        for i in range(0,22):
+            try:
+                # Raw = self.Client.read_holding_registers(18000, count=1, unit=0x01)
+                # Raw = self.Client.read_holding_registers(12288+ i * 2, count=1, unit=0x01)
+                # output=hex(Raw.getRegister(0))
+                # output = round(
+                # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
+                Raw = self.Client.read_holding_registers(12288+i, count=1, unit=0x01)
+                output = Raw
+                print(i,"valve value is ", output)
+            except:
+                pass
+
+
 if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
     App = QtWidgets.QApplication(sys.argv)
     # Update=Update()
-    PLC=PLC()
+    # PLC=PLC()
     # PLC.ReadAll()
-    PLC.setValve()
+    Beckoff=Beckoff()
+    Beckoff.setValve()
     sys.exit(App.exec_())
+
