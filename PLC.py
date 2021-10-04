@@ -305,19 +305,17 @@ class PLC:
         print("valve value is", output_BO)
 
     def WriteOpen(self):
-        # Raw = self.Client_BO.write_register(12289, value= b'\x00\x00\x00\x02', unit=0x01)
         Raw = self.Client_BO.write_register(12296, value=0x0012, unit=0x01)
         print("write open result=", Raw)
 
     def ReadCoil(self):
         # Raw_BO = self.Client_BO.read_coils(12296, count=1, unit=0x01)
-        Raw_BO = self.Client_BO.read_coils(1, count=1, unit=0x01)
-        print("Raw coil",Raw_BO)
+        Raw_BO = self.Client_BO.read_coils(12296, count=1, unit=0x01)
+        # print("Raw coil",Raw_BO)
         # output_BO = struct.pack("H", Raw_BO.bits[0])
         # print("Coil: valve value is", output_BO)
 
     def WriteClose(self):
-        # Raw = self.Client_BO.write_register(12289, value=b'\x00\x00\x00\x04', unit=0x01)
         Raw = self.Client_BO.write_register(12296, value= 0x0014, unit=0x01)
         print("write close result=", Raw)
 
