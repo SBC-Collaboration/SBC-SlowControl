@@ -698,10 +698,11 @@ class UpdateServer(QtCore.QObject):
             self.PLC.ReadValve()
             print("I will set valve")
         elif message == b'no command':
-            print("I will stay here")
-        elif message == b'this an anti_conmmand':
             self.PLC.WriteClose()
             self.PLC.ReadValve()
+            print("I will stay here")
+        elif message == b'this an anti_conmmand':
+
             print("reset the valve")
         else:
             print("I didn't see any command")
