@@ -148,7 +148,7 @@ class PLC:
             # print("Attributes", self.nAttribute)
 
         if self.Connected_BO:
-            Raw_BO = self.Client.read_holding_registers(12296, count=1, unit=0x01)
+            Raw_BO = self.Client_BO.read_holding_registers(12296, count=1, unit=0x01)
             output_BO = struct.pack("H", Raw_BO.getRegister(0))
             print("valve value is",output_BO)
 
