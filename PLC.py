@@ -149,6 +149,15 @@ class PLC:
 
         if self.Connected_BO:
             self.ReadValve()
+            self.WriteOpen()
+            time.sleep(2)
+            print("2s...")
+            print("value after open")
+            self.ReadValve()
+            self.WriteClose()
+            time.sleep(2)
+            print("2s..")
+            self.ReadValve()
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -855,7 +864,7 @@ if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
     App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
+    # Update=Update()
     PLC=PLC()
     PLC.ReadAll()
 
