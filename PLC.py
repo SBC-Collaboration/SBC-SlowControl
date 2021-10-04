@@ -310,7 +310,8 @@ class PLC:
         print("write open result=", Raw)
 
     def ReadCoil(self):
-        Raw_BO = self.Client_BO.read_coils(12296, count=1, unit=0x01)
+        # Raw_BO = self.Client_BO.read_coils(12296, count=1, unit=0x01)
+        Raw_BO = self.Client_BO.read_coils(1, count=1, unit=0x01)
         print("Raw coil",Raw_BO)
         # output_BO = struct.pack("H", Raw_BO.bits[0])
         # print("Coil: valve value is", output_BO)
