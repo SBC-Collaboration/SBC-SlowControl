@@ -54,7 +54,7 @@ class PLC:
 
         self.nRTD = 8
         self.RTD = [0.] * self.nRTD
-        self.RTD_setting s= [0.] * self.nRTD
+        self.RTD_setting = [0.] * self.nRTD
         self.nAttribute = [0.] * self.nRTD
         self.LowLimit = {"PT9998": 0, "PT9999": 0}
         self.HighLimit = {"PT9998": 0, "PT9999": 0}
@@ -145,7 +145,14 @@ class PLC:
             for i in range(0, self.nRTD):
                 Attribute[i] = self.Client.read_holding_registers(18000 + i * 8, count=1, unit=0x01)
                 self.nAttribute[i] = hex(Attribute[i].getRegister(0))
-            print("Attributes", self.nAttribute)
+            # print("Attributes", self.nAttribute)
+
+        if self.Connected_BO:
+            Raw_BO = self.Client.read_holding_registers(12296, count=1, unit=0x01)
+            output_BO = struct.pack("H", Raw_BO.getRegister(0))
+            print("valve value is",output_BO)
+
+
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -792,7 +799,7 @@ class message_manager():
             "username": "Notifications",
             "channel": self.slack_channel,
             "attachments": [{"text": message}]
-        #     "attachments": [
+        #     "attachments": [g
         #         {
         #             "text": "{emoji} [*{state}*] Status Checker\n {message}".format(
         #                 emoji=self.alert_map["emoji"][status],
@@ -803,7 +810,7 @@ class message_manager():
         #             "attachment_type": "default",
         #             "actions": [
         #                 {
-        #                     "name": "Logs",
+        #                     "name": "Logs",f
         #                     "text": "Logs",
         #                     "type": "button",
         #                     "style": "primary",
@@ -863,30 +870,30 @@ if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
     App = QtWidgets.QApplication(sys.argv)
-    # Update=Update()
-    # PLC=PLC()
-    # PLC.ReadAll()
+    Update=Update()
+    PLC=PLC()
+    PLC.ReadAll()
 
     # Test the writing functions
-    Beckoff=Beckoff()
-    print("Read the 1-word address")
-    Beckoff.ReadValve()
-    print("Open the valve")
-    Beckoff.WriteOpen()
-    print("immediately read the valve value")
-    Beckoff.ReadValve()
-    print("sleep 5 seconds")
-    time.sleep(5)
-    print("Read again")
-    Beckoff.ReadValve()
-    print("Close")
-    Beckoff.WriteClose()
-    print("Read the value immediately after close the valve")
-    Beckoff.ReadValve()
-    print("sleep 2 seconds")
-    time.sleep(2)
-    Beckoff.ReadValve()
-    Beckoff.Reset()
+    # Beckoff=Beckoff()
+    # print("Read the 1-word address")
+    # Beckoff.ReadValve()
+    # print("Open the valve")
+    # Beckoff.WriteOpen()
+    # print("immediately read the valve value")
+    # Beckoff.ReadValve()
+    # print("sleep 5 seconds")
+    # time.sleep(5)
+    # print("Read again")
+    # Beckoff.ReadValve()
+    # print("Close")
+    # Beckoff.WriteClose()
+    # print("Read the value immediately after close the valve")
+    # Beckoff.ReadValve()
+    # print("sleep 2 seconds")
+    # time.sleep(2)
+    # Beckoff.ReadValve()
+    # Beckoff.Reset()
 
 
     sys.exit(App.exec_())
