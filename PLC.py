@@ -137,7 +137,7 @@ class PLC:
                 # self.RTD[i] = round(
                 #     struct.unpack("<f", Raw2.getRegister(i))[0], 3)
                 # self.RTD[i] = round(Raw2.getRegister(i), 3)
-                print("Updating PLC", i, "RTD",self.RTD[i])
+                # print("Updating PLC", i, "RTD",self.RTD[i])
 
 
 
@@ -151,8 +151,6 @@ class PLC:
             Raw_BO = self.Client_BO.read_holding_registers(12296, count=1, unit=0x01)
             output_BO = struct.pack("H", Raw_BO.getRegister(0))
             print("valve value is",output_BO)
-
-
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -293,7 +291,19 @@ class PLC:
         else:
             return 1
 
+    def WriteOpen(self):
+        # Raw = self.Client_BO.write_register(12289, value= b'\x00\x00\x00\x02', unit=0x01)
+        Raw = self.Client_BO.write_register(12296, value=0x0012, unit=0x01)
+        print("write open result=", Raw)
 
+    def WriteClose(self):
+        # Raw = self.Client_BO.write_register(12289, value=b'\x00\x00\x00\x04', unit=0x01)
+        Raw = self.Client_BO.write_register(12296, value= 0x0014, unit=0x01)
+        print("write close result=", Raw)
+
+    def Reset(self):
+        Raw = self.Client_BO.write_register(12296, value=0x0010, unit=0x01)
+        print("write close result=", Raw)
 
     def SaveSetting(self):
         self.WriteBool(0x0, 0, 1)
@@ -681,10 +691,13 @@ class UpdateServer(QtCore.QObject):
         message = self.socket.recv()
         print(message)
         if message == "this is a command":
-            #self.PLC.
+            self.PLC.WriteOpen()
             print("I will set valve")
         elif message == "no command":
             print("I will stay here")
+        elif message == "this an anti_conmmand":
+            self.PLC.WriteClose()
+            print("reset the valve")
         else:
             pass
 
@@ -720,7 +733,6 @@ class Update(QtCore.QObject):
         self.ServerUpdateThread.started.connect(self.UpServer.run)
         self.ServerUpdateThread.start()
 
-        # Update Beckoff on another thread
 
         # Stop all updater threads
     @QtCore.Slot()
@@ -830,40 +842,6 @@ class message_manager():
         return r.status_code
 
 
-class Beckoff:
-    def __init__(self):
-        super().__init__()
-        #Beckoff address
-        IP = "192.168.137.11"
-        PORT = 502
-
-        self.Client = ModbusTcpClient(IP, port=PORT)
-        self.Connected = self.Client.connect()
-        print(" Beckoff connected: " + str(self.Connected))
-    def ReadValve(self):
-        Raw = self.Client.read_holding_registers(12296, count=1, unit=0x01)
-        output=struct.pack("H",Raw.getRegister(0))
-        # output = round(
-        # struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
-        # output = struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0))
-
-
-        print("valve value is ", output)
-
-    def WriteOpen(self):
-        # Raw = self.Client.write_register(12289, value= b'\x00\x00\x00\x02', unit=0x01)
-        Raw = self.Client.write_register(12296, value=0x0012, unit=0x01)
-        print("write open result=", Raw)
-
-    def WriteClose(self):
-        # Raw = self.Client.write_register(12289, value=b'\x00\x00\x00\x04', unit=0x01)
-        Raw = self.Client.write_register(12296, value= 0x0014, unit=0x01)
-        print("write close result=", Raw)
-
-    def Reset(self):
-        Raw = self.Client.write_register(12296, value=0x0010, unit=0x01)
-        print("write close result=", Raw)
-
 
 
 if __name__ == "__main__":
@@ -874,26 +852,6 @@ if __name__ == "__main__":
     PLC=PLC()
     PLC.ReadAll()
 
-    # Test the writing functions
-    # Beckoff=Beckoff()
-    # print("Read the 1-word address")
-    # Beckoff.ReadValve()
-    # print("Open the valve")
-    # Beckoff.WriteOpen()
-    # print("immediately read the valve value")
-    # Beckoff.ReadValve()
-    # print("sleep 5 seconds")
-    # time.sleep(5)
-    # print("Read again")
-    # Beckoff.ReadValve()
-    # print("Close")
-    # Beckoff.WriteClose()
-    # print("Read the value immediately after close the valve")
-    # Beckoff.ReadValve()
-    # print("sleep 2 seconds")
-    # time.sleep(2)
-    # Beckoff.ReadValve()
-    # Beckoff.Reset()
 
 
     sys.exit(App.exec_())
