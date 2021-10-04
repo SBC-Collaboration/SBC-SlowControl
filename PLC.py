@@ -150,16 +150,16 @@ class PLC:
         if self.Connected_BO:
             print("read coil")
             self.ReadCoil()
-            self.ReadValve()
-            self.WriteOpen()
-            time.sleep(2)
-            print("2s...")
-            print("value after open")
-            self.ReadValve()
-            self.WriteClose()
-            time.sleep(2)
-            print("2s..")
-            self.ReadValve()
+            # self.ReadValve()
+            # self.WriteOpen()
+            # time.sleep(2)
+            # print("2s...")
+            # print("value after open")
+            # self.ReadValve()
+            # self.WriteClose()
+            # time.sleep(2)
+            # print("2s..")
+            # self.ReadValve()
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -311,7 +311,7 @@ class PLC:
 
     def ReadCoil(self):
         Raw_BO = self.Client_BO.read_coils(12296, count=1, unit=0x01)
-        print("Raw coil",Raw_BO.bits[0])
+        print("Raw coil",Raw_BO)
         # output_BO = struct.pack("H", Raw_BO.bits[0])
         # print("Coil: valve value is", output_BO)
 
