@@ -663,6 +663,7 @@ class UpdateServer(QtCore.QObject):
                 message = self.socket.recv()
                 print("refreshing")
                 print(f"Received request: {message}")
+                self.write_data()
 
                 #  Send reply back to client
                 # self.socket.send(b"World")
