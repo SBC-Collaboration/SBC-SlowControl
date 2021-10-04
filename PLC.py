@@ -38,16 +38,23 @@ class PLC:
     def __init__(self):
         super().__init__()
 
-        IP = "192.168.137.62"
-        PORT = 502
+        IP_NI = "192.168.137.62"
+        PORT_NI = 502
 
-        self.Client = ModbusTcpClient(IP, port=PORT)
+        self.Client = ModbusTcpClient(IP_NI, port=PORT_NI)
         self.Connected = self.Client.connect()
         print("NI connected: " + str(self.Connected))
 
+        IP_BO = "192.168.137.11"
+        PORT_BO = 502
+
+        self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
+        self.Connected_BO = self.Client_BO.connect()
+        print(" Beckoff connected: " + str(self.Connected_BO))
+
         self.nRTD = 8
         self.RTD = [0.] * self.nRTD
-        self.RTD_setting = [0.] * self.nRTD
+        self.RTD_setting s= [0.] * self.nRTD
         self.nAttribute = [0.] * self.nRTD
         self.LowLimit = {"PT9998": 0, "PT9999": 0}
         self.HighLimit = {"PT9998": 0, "PT9999": 0}
@@ -706,8 +713,9 @@ class Update(QtCore.QObject):
         self.ServerUpdateThread.started.connect(self.UpServer.run)
         self.ServerUpdateThread.start()
 
-        # Stop all updater threads
+        # Update Beckoff on another thread
 
+        # Stop all updater threads
     @QtCore.Slot()
     def StopUpdater(self):
         self.UpPLC.stop()
