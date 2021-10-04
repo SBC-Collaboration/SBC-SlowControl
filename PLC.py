@@ -837,16 +837,16 @@ class Beckoff:
 
     def WriteOpen(self):
         # Raw = self.Client.write_register(12289, value= b'\x00\x00\x00\x02', unit=0x01)
-        Raw = self.Client.write_register(12296, value=0x0002, unit=0x01)
+        Raw = self.Client.write_register(12296, value=0x0012, unit=0x01)
         print("write open result=", Raw)
 
     def WriteClose(self):
         # Raw = self.Client.write_register(12289, value=b'\x00\x00\x00\x04', unit=0x01)
-        Raw = self.Client.write_register(12296, value= 0x0004, unit=0x01)
+        Raw = self.Client.write_register(12296, value= 0x0014, unit=0x01)
         print("write close result=", Raw)
 
     def Reset(self):
-        Raw = self.Client.write_register(12296, value=0x0000, unit=0x01)
+        Raw = self.Client.write_register(12296, value=0x0010, unit=0x01)
         print("write close result=", Raw)
 
 
@@ -861,14 +861,14 @@ if __name__ == "__main__":
 
     # Test the writing functions
     Beckoff=Beckoff()
-    print("Read the 2-word address")
+    print("Read the 1-word address")
     Beckoff.ReadValve()
     print("Open the valve")
     Beckoff.WriteOpen()
     print("immediately read the valve value")
     Beckoff.ReadValve()
-    print("sleep 2 seconds")
-    time.sleep(2)
+    print("sleep 5 seconds")
+    time.sleep(5)
     print("Read again")
     Beckoff.ReadValve()
     print("Close")
