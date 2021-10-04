@@ -148,9 +148,7 @@ class PLC:
             # print("Attributes", self.nAttribute)
 
         if self.Connected_BO:
-            Raw_BO = self.Client_BO.read_holding_registers(12296, count=1, unit=0x01)
-            output_BO = struct.pack("H", Raw_BO.getRegister(0))
-            print("valve value is",output_BO)
+            self.ReadValve()
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -290,6 +288,10 @@ class PLC:
             return 0
         else:
             return 1
+    def ReadValve(self):
+        Raw_BO = self.Client_BO.read_holding_registers(12296, count=1, unit=0x01)
+        output_BO = struct.pack("H", Raw_BO.getRegister(0))
+        print("valve value is", output_BO)
 
     def WriteOpen(self):
         # Raw = self.Client_BO.write_register(12289, value= b'\x00\x00\x00\x02', unit=0x01)
@@ -693,11 +695,13 @@ class UpdateServer(QtCore.QObject):
         print(message)
         if message == "this is a command":
             self.PLC.WriteOpen()
+            self.PLC.ReadValve()
             print("I will set valve")
         elif message == "no command":
             print("I will stay here")
         elif message == "this an anti_conmmand":
             self.PLC.WriteClose()
+            self.PLC.ReadValve()
             print("reset the valve")
         else:
             pass
