@@ -148,6 +148,14 @@ class PLC:
             # print("Attributes", self.nAttribute)
 
         if self.Connected_BO:
+            for i in range(12296):
+                try:
+                    rr =self.Client_BO.read_coils(i,count=1,unit=0x01)
+                    print(i,"succeed")
+                    print(rr.bits)
+                except:
+                    "error"
+                    pass
             print("read coil")
             self.ReadCoil()
             # self.ReadValve()
@@ -310,8 +318,8 @@ class PLC:
 
     def ReadCoil(self):
         # Raw_BO = self.Client_BO.read_coils(12296, count=1, unit=0x01)
-        Raw_BO = self.Client_BO.read_coils(12296, count=1, unit=0x01)
-        # print("Raw coil",Raw_BO)
+        Raw_BO = self.Client_BO.read_coils(12296, count=8, unit=0x01)
+        print("Raw coil",Raw_BO)
         # output_BO = struct.pack("H", Raw_BO.bits[0])
         # print("Coil: valve value is", output_BO)
 
