@@ -148,6 +148,8 @@ class PLC:
             # print("Attributes", self.nAttribute)
 
         if self.Connected_BO:
+            print("read coil")
+            self.ReadCoil()
             self.ReadValve()
             self.WriteOpen()
             time.sleep(2)
