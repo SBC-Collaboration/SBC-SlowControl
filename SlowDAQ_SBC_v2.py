@@ -3905,6 +3905,7 @@ class UpdateClient(QtCore.QObject):
         print("Commands are here",datetime.datetime.now())
         print("commands",self.MW.commands)
         # self.commands_package= pickle.dumps(self.MW.commands)
+        print("commands len",len(self.MW.commands))
         if len(self.MW.commands) != 0:
             print(self.MW.commands[0])
             self.socket.send(self.commands_package)
