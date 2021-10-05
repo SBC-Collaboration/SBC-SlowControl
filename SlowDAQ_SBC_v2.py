@@ -628,21 +628,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1332.Label.setText("PT1332")
         self.PT1332.SetUnit(" psi")
 
-        self.SV5305 = Valve(self.FluidTab)
-        self.SV5305.Label.setText("SV5305")
-        self.SV5305.move(1200, 530)
+        self.PV5305 = Valve(self.FluidTab)
+        self.PV5305.Label.setText("PV5305")
+        self.PV5305.move(1200, 530)
 
-        self.SV5306 = Valve(self.FluidTab)
-        self.SV5306.Label.setText("SV5306")
-        self.SV5306.move(1150, 800)
+        self.PV5306 = Valve(self.FluidTab)
+        self.PV5306.Label.setText("PV5306")
+        self.PV5306.move(1150, 800)
 
-        self.SV5307 = Valve(self.FluidTab)
-        self.SV5307.Label.setText("SV5307")
-        self.SV5307.move(1030, 620)
+        self.PV5307 = Valve(self.FluidTab)
+        self.PV5307.Label.setText("PV5307")
+        self.PV5307.move(1030, 620)
 
-        self.SV5309 = Valve(self.FluidTab)
-        self.SV5309.Label.setText("SV5309")
-        self.SV5309.move(1130, 310)
+        self.PV5309 = Valve(self.FluidTab)
+        self.PV5309.Label.setText("PV5309")
+        self.PV5309.move(1130, 310)
 
         # Hydraulic buttons
         self.PU3305 = Valve(self.HydraulicTab)
@@ -787,8 +787,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #commands stack
-        self.address ={"PV4307":12288,"PV4308":12289,"PV4317":12290,"PV4321":12291,"PV4324":12292,"PV5305":12293,"PV5306":12294,
-                       "PV5307":12295,"PV5309":12296}
+        self.address ={"PV4307":12288,"PV4308":12289,"PV4317":12290,"PV4317":12291,"PV4321":12292,"PV4324":12293,"PV5305":12294,"PV5306":12295,
+                       "PV5307":12296,"PV5309":12297}
         self.commands = {}
         self.signal_connection()
 
@@ -881,15 +881,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV4317.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4317.Label.text()))
         self.PV4317.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4317.Label.text()))
         self.PV4318.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4318.Label.text()))
-        self.PV4321.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4321.Label.text()))
+        self.PV4318.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4318.Label.text()))
         self.PV4321.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4321.Label.text()))
-        self.PV4324.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4324.Label.text()))
+        self.PV4321.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4321.Label.text()))
         self.PV4324.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4324.Label.text()))
-        # self.PV5305.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5305.Label.text()))
-        # self.PV5305.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5305.Label.text()))
-        # self.PV5306.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5306.Label.text()))
-        # self.PV5307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5307.Label.text()))
-        # self.PV5309.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5309.Label.text()))
+        self.PV4324.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4324.Label.text()))
+        self.PV5305.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5305.Label.text()))
+        self.PV5305.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5305.Label.text()))
+        self.PV5306.Set.RButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5306.Label.text()))
+        self.PV5306.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5306.Label.text()))
+        self.PV5307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5307.Label.text()))
+        self.PV5307.Set.LButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5307.Label.text()))
+        self.PV5309.Set.RButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5309.Label.text()))
+        self.PV5309.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5309.Label.text()))
 
     @QtCore.Slot()
     def LButtonClicked(self,pid):
