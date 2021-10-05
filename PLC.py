@@ -153,7 +153,9 @@ class PLC:
         if self.Connected_BO:
             Raw_BO = [0]*self.nValve
             for j in range(0,15):
-                print(j,"th digit is ", self.ReadCoil(mask=bin(pow(2,j))))
+                mask=struct.pack((pow(2,j)))
+                print(mask)
+                print(j,"th digit is ", self.ReadCoil(mask=mask))
             for i in range(0, self.nValve):
                 Raw_BO[i] = self.Client_BO.read_holding_registers(12296+i, count=1, unit=0x01)
                 self.Valve[i] = struct.pack("H", Raw_BO.getRegister(0))
