@@ -152,13 +152,13 @@ class PLC:
 
         if self.Connected_BO:
             Raw_BO = [0]*self.nValve
-            for j in range(0,15):
-                mask=pow(2,j)
-                print(mask)
-                print(j,"th digit is ", self.ReadCoil(mask=mask))
+            # for j in range(0,15):
+            #     mask=pow(2,j)
+            #     print(mask)
+            #     print(j,"th digit is ", self.ReadCoil(mask=mask))
             for i in range(0, self.nValve):
                 Raw_BO[i] = self.Client_BO.read_holding_registers(12296+i, count=1, unit=0x01)
-                self.Valve[i] = struct.pack("H", Raw_BO.getRegister(0))
+                self.Valve[i] = struct.pack("H", Raw_BO[i].getRegister(0))
                 print("Address with ",12296+i,"valve value is", self.Valve[i])
                 # for i in range(12296):
                 #     try:
@@ -330,13 +330,13 @@ class PLC:
 
     def WriteOpen(self,address=12296):
         output_BO = self.ReadValve(address)
-        input_BO= output_BO | 0x0002
+        input_BO= struct.unpack("H",output_BO)[0] | 0x0002
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write open result=", Raw)
 
     def WriteClose(self,address=12296):
         output_BO = self.ReadValve(address)
-        input_BO = output_BO | 0x0004
+        input_BO = struct.unpack("H",output_BO)[0] | 0x0004
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write close result=", Raw)
 
@@ -347,9 +347,7 @@ class PLC:
     # mask is a number to read a particular digit. for example, if you want to read 3rd digit, the mask is 0100(binary)
     def ReadCoil(self, mask,address=12296):
         output_BO = self.ReadValve(address)
-        print("output",output_BO)
         masked_output= struct.unpack("H",output_BO)[0] & mask
-        print("masked = ",masked_output)
         if masked_output == 0:
             return False
         else:
