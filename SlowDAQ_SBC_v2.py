@@ -3878,7 +3878,7 @@ class UpdateClient(QtCore.QObject):
         self.period=2
         print("client is connecting to the ZMQ server")
         self.receive_dic = {"data":{"PT9998":0, "PT9999":0},"Alarm":{"PT9998": False, "PT9999": False}, "MainAlarm":False}
-
+        self.commands_package= pickle.dumps({})
     @QtCore.Slot()
     def run(self):
         self.Running = True
@@ -3888,7 +3888,7 @@ class UpdateClient(QtCore.QObject):
 
             #  Send reply back to client
             # self.socket.send(b"Hello")
-            self.LButtonConnect()
+            self.commands()
             message = pickle.loads(self.socket.recv())
 
             # print(f"Received reply [ {message} ]")
@@ -3901,17 +3901,16 @@ class UpdateClient(QtCore.QObject):
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic = message
-    def LButtonConnect(self):
-        print("I am here",datetime.datetime.now())
+    def commands(self):
+        print("Commands are here",datetime.datetime.now())
         print(self.MW.commands)
+        self.commands_package= pickle.dumps(self.MW.commands)
         if len(self.MW.commands) != 0:
             print(self.MW.commands[0])
-            self.socket.send(b'this is a command')
-            self.MW.commands=[]
+            self.socket.send(self.commands_package)
+            self.MW.commands={}
         else:
-            self.socket.send(b'no command')
-
-        # print("please set SV4327 to open")
+            self.socket.send(pickle.dumps({}))
 
 
 # Class to update display with PLC values every time PLC values ave been updated

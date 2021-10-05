@@ -748,20 +748,20 @@ class UpdateServer(QtCore.QObject):
     def write_data(self):
         message = self.socket.recv()
         print(message)
-        if message == b'this is a command':
-            self.PLC.WriteOpen()
-            self.PLC.ReadValve()
-            print("I will set valve")
-        elif message == b'no command':
-            self.PLC.WriteClose()
-            self.PLC.ReadValve()
-            print("I will stay here")
-        elif message == b'this an anti_conmmand':
-
-            print("reset the valve")
-        else:
-            print("I didn't see any command")
-            pass
+        # if message == b'this is a command':
+        #     self.PLC.WriteOpen()
+        #     self.PLC.ReadValve()
+        #     print("I will set valve")
+        # elif message == b'no command':
+        #     self.PLC.WriteClose()
+        #     self.PLC.ReadValve()
+        #     print("I will stay here")
+        # elif message == b'this an anti_conmmand':
+        #
+        #     print("reset the valve")
+        # else:
+        #     print("I didn't see any command")
+        #     pass
 
 
 
