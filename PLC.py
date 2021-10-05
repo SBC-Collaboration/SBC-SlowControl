@@ -343,7 +343,7 @@ class PLC:
         print("write reset result=", Raw)
 
     # mask is a number to read a particular digit. for example, if you want to read 3rd digit, the mask is 0100(binary)
-    def ReadCoil(self,address, mask):
+    def ReadCoil(self, mask,address=12296):
         output_BO = self.ReadValve(address)
         masked_output= output_BO and mask
         if masked_output == 0:
