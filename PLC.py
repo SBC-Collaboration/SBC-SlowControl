@@ -61,6 +61,8 @@ class PLC:
         self.Activated = {"PT9998": True, "PT9999": True}
         self.Alarm = {"PT9998": False, "PT9999": False}
         self.MainAlarm = False
+        self.nValve = 6
+        self.Valve = [0]*self.nValve
         # self.PT80 = 0.
         # self.FlowValve = 0.
         # self.BottomChillerSetpoint = 0.
@@ -119,6 +121,7 @@ class PLC:
 
     def __del__(self):
         self.Client.close()
+        self.Client_BO.close()
 
     def ReadAll(self):
         if self.Connected:
@@ -148,26 +151,35 @@ class PLC:
             # print("Attributes", self.nAttribute)
 
         if self.Connected_BO:
-            for i in range(12296):
-                try:
-                    rr =self.Client_BO.read_coils(i,count=1,unit=0x01)
-                    print(i,"succeed")
-                    print(rr.getBit(0))
-                except:
-                    print("error")
-                    pass
-            print("read coil")
-            self.ReadCoil()
-            # self.ReadValve()
-            # self.WriteOpen()
-            # time.sleep(2)
-            # print("2s...")
-            # print("value after open")
-            # self.ReadValve()
-            # self.WriteClose()
-            # time.sleep(2)
-            # print("2s..")
-            # self.ReadValve()
+            Raw_BO = [0]*self.nValve
+            for j in range(0,15):
+                print(i,"th digit is ", self.ReadCoil(mask=pow(2,i)))
+            for i in range(0, self.nValve):
+                Raw_BO[i] = self.Client_BO.read_holding_registers(12296+i, count=1, unit=0x01)
+                self.Valve[i] = struct.pack("H", Raw_BO.getRegister(0))
+                print("Address with ",12296+i,"valve value is", self.Valve[i])
+                # for i in range(12296):
+                #     try:
+                #         rr =self.Client_BO.read_coils(i,count=1,unit=0x01)
+                #         print(i,"succeed")
+                #         print(rr.getBit(0))
+                #     except:
+                #         print("error")
+                #         pass
+                # print("read coil")
+                # self.ReadCoil()
+                # self.ReadValve()
+                # self.WriteOpen()
+                # time.sleep(2)
+                # print("2s...")
+                # print("value after open")
+                # self.ReadValve()
+                # self.WriteClose()
+                # time.sleep(2)
+                # print("2s..")
+                # self.ReadValve()
+
+
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -307,29 +319,37 @@ class PLC:
             return 0
         else:
             return 1
-    def ReadValve(self):
-        Raw_BO = self.Client_BO.read_holding_registers(12296, count=1, unit=0x01)
+
+    def ReadValve(self,address=12296):
+        Raw_BO = self.Client_BO.read_holding_registers(address, count=1, unit=0x01)
         output_BO = struct.pack("H", Raw_BO.getRegister(0))
         print("valve value is", output_BO)
+        return output_BO
 
-    def WriteOpen(self):
-        Raw = self.Client_BO.write_register(12296, value=0x0012, unit=0x01)
+    def WriteOpen(self,address=12296):
+        output_BO = self.ReadValve(address)
+        input_BO= output_BO or 0x0002
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write open result=", Raw)
 
-    def ReadCoil(self):
-        # Raw_BO = self.Client_BO.read_coils(12296, count=1, unit=0x01)
-        Raw_BO = self.Client_BO.read_holding_registers(12296, count=1, unit=0x01)
-        print("Raw coil",Raw_BO.getBit(0))
-        # output_BO = struct.pack("H", Raw_BO.bits[0])
-        # print("Coil: valve value is", output_BO)
-
-    def WriteClose(self):
-        Raw = self.Client_BO.write_register(12296, value= 0x0014, unit=0x01)
+    def WriteClose(self,address=12296):
+        output_BO = self.ReadValve(address)
+        input_BO = output_BO or 0x0004
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write close result=", Raw)
 
-    def Reset(self):
-        Raw = self.Client_BO.write_register(12296, value=0x0010, unit=0x01)
-        print("write close result=", Raw)
+    def Reset(self,address):
+        Raw = self.Client_BO.write_register(address, value=0x0010, unit=0x01)
+        print("write reset result=", Raw)
+
+    # mask is a number to read a particular digit. for example, if you want to read 3rd digit, the mask is 0100(binary)
+    def ReadCoil(self,address, mask):
+        output_BO = self.ReadValve(address)
+        masked_output= output_BO and mask
+        if masked_output == 0:
+            return False
+        else:
+            return True
 
     def SaveSetting(self):
         self.WriteBool(0x0, 0, 1)
