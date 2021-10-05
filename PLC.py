@@ -152,7 +152,7 @@ class PLC:
                 try:
                     rr =self.Client_BO.read_coils(i,count=1,unit=0x01)
                     print(i,"succeed")
-                    print(rr.bits[0])
+                    assert(rr.bits[0]==True)
                 except:
                     print("error")
                     pass
