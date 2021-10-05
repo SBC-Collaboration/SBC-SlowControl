@@ -348,7 +348,7 @@ class PLC:
     def ReadCoil(self, mask,address=12296):
         output_BO = self.ReadValve(address)
         print("output",output_BO)
-        masked_output= struct.unpack("H",output_BO) & mask
+        masked_output= struct.unpack("H",output_BO)[0] & mask
         print("masked = ",masked_output)
         if masked_output == 0:
             return False
