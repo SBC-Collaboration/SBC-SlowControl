@@ -330,13 +330,13 @@ class PLC:
 
     def WriteOpen(self,address=12296):
         output_BO = self.ReadValve(address)
-        input_BO= output_BO or 0x0002
+        input_BO= output_BO | 0x0002
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write open result=", Raw)
 
     def WriteClose(self,address=12296):
         output_BO = self.ReadValve(address)
-        input_BO = output_BO or 0x0004
+        input_BO = output_BO | 0x0004
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write close result=", Raw)
 
@@ -348,7 +348,7 @@ class PLC:
     def ReadCoil(self, mask,address=12296):
         output_BO = self.ReadValve(address)
         print("output",output_BO)
-        masked_output= output_BO and mask
+        masked_output= output_BO & mask
         print("masked = ",masked_output)
         if masked_output == 0:
             return False
