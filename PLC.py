@@ -746,8 +746,24 @@ class UpdateServer(QtCore.QObject):
         self.data_package=pickle.dumps(self.data_dic)
 
     def write_data(self):
-        message = self.socket.recv()
+        message = pickle.loads(self.socket.recv())
         print(message)
+        if message == {}:
+            pass
+        else:
+            for key in message:
+                if message[key]["type"]=="valve":
+                    if message[key]["operation"]=="OPEN":
+                        self.PLC.WriteOpen(address= message[key]["address"])
+                    elif message[key]["operation"]=="CLOSE":
+                        self.PLC.WriteClose(address= message[key]["address"])
+                    else:
+                        pass
+                else:
+                    pass
+
+
+
         # if message == b'this is a command':
         #     self.PLC.WriteOpen()
         #     self.PLC.ReadValve()
