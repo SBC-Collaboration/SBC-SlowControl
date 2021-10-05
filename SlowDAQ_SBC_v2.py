@@ -871,8 +871,8 @@ class MainWindow(QtWidgets.QMainWindow):
     # signal connections to write settings to PLC codes
 
     def signal_connection(self):
-        self.PV4307.Set.LButton.clicked.connect(self.LButtonClicked(self.PV4307.Label.text()))
-        self.PV4307.Set.RButton.clicked.connect(self.RButtonClicked(self.PV4307.Label.text()))
+        self.PV4307.Set.LButton.clicked.connect(self.LButtonClicked(self.PV4307.Label.text))
+        self.PV4307.Set.RButton.clicked.connect(self.RButtonClicked(self.PV4307.Label.text))
 
     @QtCore.Slot()
     def LButtonClicked(self,pid):
