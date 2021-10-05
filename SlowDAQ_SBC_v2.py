@@ -841,8 +841,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpClient.moveToThread(self.ClientUpdateThread)
         self.ClientUpdateThread.started.connect(self.UpClient.run)
         self.ClientUpdateThread.start()
-        # self.signal_connection()
-        # self.SV4327.Set.LButton.clicked.connect(self.UpClient.LButtonConnect)
+
 
         # Make sure PLCs values are initialized before trying to access them with update function
         time.sleep(2)
@@ -870,12 +869,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DUpdateThread.quit()
         self.DUpdateThread.wait()
     # signal connections to write settings to PLC codes
+
     def signal_connection(self):
-        self.SV4327.Set.LButton.clicked.connect(self.LButtonClicked)
+        self.PV4307.Set.LButton.clicked.connect(self.LButtonClicked(self.PV4307.Label.text()))
+        self.PV4307.Set.RButton.clicked.connect(self.RButtonClicked(self.PV4307.Label.text()))
+
     @QtCore.Slot()
-    def LButtonClicked(self):
-        self.commands.append("1")
-        print("Button is clicked")
+    def LButtonClicked(self,pid):
+        self.commands.append(pid)
+        print(pid,"LButton is clicked")
+
+    @QtCore.Slot()
+    def RButtonClicked(self, pid):
+        self.commands.append(pid)
+        print(pid, "R Button is clicked")
+
 
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()
