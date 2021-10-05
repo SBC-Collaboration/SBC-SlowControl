@@ -153,7 +153,7 @@ class PLC:
         if self.Connected_BO:
             Raw_BO = [0]*self.nValve
             for j in range(0,15):
-                mask=struct.pack("H", pow(2,j))
+                mask=pow(2,j)
                 print(mask)
                 print(j,"th digit is ", self.ReadCoil(mask=mask))
             for i in range(0, self.nValve):
@@ -348,7 +348,7 @@ class PLC:
     def ReadCoil(self, mask,address=12296):
         output_BO = self.ReadValve(address)
         print("output",output_BO)
-        masked_output= output_BO & mask
+        masked_output= struct.unpack("H",output_BO) & mask
         print("masked = ",masked_output)
         if masked_output == 0:
             return False
