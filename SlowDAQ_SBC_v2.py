@@ -877,13 +877,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def LButtonClicked(self,pid):
-        self.commands.append(pid,"L")
+        self.commands.append(str(pid)+"L")
         print(self.commands)
         print(pid,"LButton is clicked")
 
     @QtCore.Slot()
     def RButtonClicked(self, pid):
-        self.commands.append(pid,"R")
+        self.commands.append(str(pid)+"R")
         print(pid, "R Button is clicked")
 
 
