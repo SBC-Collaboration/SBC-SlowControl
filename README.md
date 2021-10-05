@@ -16,6 +16,6 @@ If this introduce some trouble in the future, we may change it. But for now, it 
 
 
 2.b from GUI to PLC
-{pid:{$"server"$:modbus server name,$"address"$: address in modbus, $"operation"$:write true or else, $"value"$: True, false or float}}
+{pid:{$"server"$:modbus server name,$"address"$: address in modbus,$"type"$:pid's instrument type $"operation"$:write true or else, $"value"$: True, false or float}}
 
 we may need to create another file to describe the two info flows in more detailed.

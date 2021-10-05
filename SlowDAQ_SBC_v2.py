@@ -787,7 +787,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #commands stack
-        self.commands = []
+        self.address ={"PV4307":12288,"PV4308":12289,"PV4317":12290,"PV4321":12291,"PV4324":12292,"PV5305":12293,"PV5306":12294,
+                       "PV5307":12295,"PV5309":12296}
+        self.commands = {}
         self.signal_connection()
 
         # Set user to guest by default
@@ -874,16 +876,32 @@ class MainWindow(QtWidgets.QMainWindow):
         print(self.PV4307.Label.text())
         self.PV4307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4307.Label.text()))
         self.PV4307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4307.Label.text()))
+        # self.PV4308.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4308.Label.text()))
+        # self.PV4308.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4308.Label.text()))
+        # self.PV4317.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4317.Label.text()))
+        # self.PV4317.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4317.Label.text()))
+        # self.PV4318.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4318.Label.text()))
+        # self.PV4321.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4321.Label.text()))
+        # self.PV4321.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4321.Label.text()))
+        # self.PV4324.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4324.Label.text()))
+        # self.PV4324.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4324.Label.text()))
+        # self.PV5305.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5305.Label.text()))
+        # self.PV5305.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5305.Label.text()))
+        # self.PV5306.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5306.Label.text()))
+        # self.PV5307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5307.Label.text()))
+        # self.PV5309.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5309.Label.text()))
 
     @QtCore.Slot()
     def LButtonClicked(self,pid):
-        self.commands.append(str(pid)+"L")
+        self.commands[pid]={"server":"BO","address": self.address[pid], "type":"valve","operation":"OPEN", "value":1}
         print(self.commands)
         print(pid,"LButton is clicked")
 
     @QtCore.Slot()
     def RButtonClicked(self, pid):
-        self.commands.append(str(pid)+"R")
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "valve", "operation": "ClOSE",
+                              "value": 1}
+        print(self.commands)
         print(pid, "R Button is clicked")
 
 
