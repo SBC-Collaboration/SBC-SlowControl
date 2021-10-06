@@ -159,6 +159,7 @@ class PLC:
             for i in range(0, self.nValve):
                 Raw_BO[i] = self.Client_BO.read_holding_registers(12288+i, count=1, unit=0x01)
                 self.Valve[i] = struct.pack("H", Raw_BO[i].getRegister(0))
+                print("Address with ", 12288 + i, "valve value is", self.Valve[i])
                 # print("open")
                 # self.WriteOpen(12296+i)
                 # time.sleep(2)
@@ -168,7 +169,7 @@ class PLC:
                 # self.WriteClose(12296+i)
                 # time.sleep(2)
                 # self.ReadValve(12296+i)
-                print("Address with ",12288+i,"valve value is", self.Valve[i])
+                # print("Address with ", 12288 + i, "valve value is", self.Valve[i])
                 # for i in range(12296):
                 #     try:
                 #         rr =self.Client_BO.read_coils(i,count=1,unit=0x01)
