@@ -52,15 +52,67 @@ class PLC:
         self.Connected_BO = self.Client_BO.connect()
         print(" Beckoff connected: " + str(self.Connected_BO))
 
-        self.nRTD = 8
-        self.RTD = [0.] * self.nRTD
-        self.RTD_setting = [0.] * self.nRTD
-        self.nAttribute = [0.] * self.nRTD
-        self.LowLimit = {"PT9998": 0, "PT9999": 0}
-        self.HighLimit = {"PT9998": 0, "PT9999": 0}
-        self.Activated = {"PT9998": True, "PT9999": True}
-        self.Alarm = {"PT9998": False, "PT9999": False}
+        self.TT_address = {"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
+                           "TT4330": 12998, "TT6203": 13000, "TT6207": 13002, "TT6211": 13004, "TT6213": 13006,
+                           "TT6222": 13008, "TT6407": 13010, "TT6408": 13012, "TT6409": 13014, "TT6415": 13016,
+                           "TT6416": 13018}
+
+        self.PT_address={"PT1325": 12794, "PT2121": 12796, "PT2316": 12798, "PT2330": 12800, "PT2335": 12802,
+                         "PT3308": 12804, "PT3309": 12806, "PT3311": 12808, "PT3314": 12810, "PT3320": 12812,
+                         "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820," PT4319": 12822,
+                         "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
+
+        self.TT_dic={"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+                     "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
+                     "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
+
+        self.PT_dic = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
+                       "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
+                       "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, " PT4319": 0,
+                       "PT4322": 0, "PT4325": 0, "PT6302": 0}
+
+        self.TT_LowLimit = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+                            "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
+                            "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
+        self.TT_HighLimit = {"TT2101": 30, "TT2111": 30, "TT2113": 30, "TT2118": 30, "TT2119": 30, "TT4330": 30,
+                            "TT6203": 30, "TT6207": 30, "TT6211": 30, "TT6213": 30, "TT6222": 30,
+                            "TT6407": 30, "TT6408": 30, "TT6409": 30, "TT6415": 30, "TT6416": 30}
+
+        self.PT_LowLimit = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
+                            "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
+                            "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, " PT4319": 0,
+                            "PT4322": 0, "PT4325": 0, "PT6302": 0}
+        self.PT_HighLimit = {"PT1325": 300, "PT2121": 300, "PT2316": 300, "PT2330": 300, "PT2335": 300,
+                            "PT3308": 300, "PT3309": 300, "PT3311": 300, "PT3314": 300, "PT3320": 300,
+                            "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, " PT4319": 300,
+                            "PT4322": 300, "PT4325": 300, "PT6302": 300}
+
+        self.TT_Activated = {"TT2101": True, "TT2111": True, "TT2113": True, "TT2118": True, "TT2119": True, "TT4330": True,
+                             "TT6203": True, "TT6207": True, "TT6211": True, "TT6213": True, "TT6222": True,
+                             "TT6407": True, "TT6408": True, "TT6409": True, "TT6415": True, "TT6416": True}
+
+        self.PT_Activated = {"PT1325": True, "PT2121": True, "PT2316": True, "PT2330": True, "PT2335": True,
+                             "PT3308": True, "PT3309": True, "PT3311": True, "PT3314": True, "PT3320": True,
+                             "PT3332": True, "PT3333": True, "PT4306": True, "PT4315": True, " PT4319": True,
+                             "PT4322": True, "PT4325": True, "PT6302": True}
+
+        self.TT_Alarm = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
+                         "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
+                         "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
+
+        self.PT_Alarm = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
+                         "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
+                         "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, " PT4319": False,
+                         "PT4322": False, "PT4325": False, "PT6302": False}
         self.MainAlarm = False
+        self.nTT = len(self.TT_address)
+        self.TT = [0.] * self.nTT
+        self.nPT = len(self.PT_address)
+        self.PT = [0.] * self.nPT
+        self.TT_setting = [0.] * self.nTT
+        self.nTT_Attribute = [0.] * self.nTT
+        self.PT_setting = [0.] * self.nPT
+        self.nPT_Attribute = [0.] * self.nPT
         self.nValve = 9
         self.Valve = [0]*self.nValve
         # self.PT80 = 0.
@@ -126,6 +178,9 @@ class PLC:
     def ReadAll(self):
         if self.Connected:
             # Reading all the RTDs
+            Raw_RTDs=[0]*self.nRTD
+            # for key in self.address:
+            #     Raw_RTDs[i]
             Raw = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
             # RTD_setting = self.Client.read_holding_registers(18002, count=1, unit=0x01)
             for i in range(0, self.nRTD):
@@ -151,45 +206,28 @@ class PLC:
             # print("Attributes", self.nAttribute)
 
         if self.Connected_BO:
-            Raw_BO = [0]*self.nValve
-            # for j in range(0,15):
-            #     mask=pow(2,j)
-            #     print(mask)
-            #     print(j,"th digit is ", self.ReadCoil(mask=mask))
+            Raw_BO_TT = {}
+            for key in self.TT:
+                Raw_BO_TT[key] = self.Client_BO.read_holding_registers(self.TT_address[key], count=2, unit=0x01)
+                self.TT_dic[key] = round(
+                    struct.unpack("<f", struct.pack("<HH", Raw_BO_TT[key].getRegister((2 * i) + 1), Raw_BO_TT[key].getRegister(2 * i)))[0], 3)
+                print(key, "'s' value is", self.TT_dic[key])
+
+            Raw_BO_PT = {}
+            for key in self.PT:
+                Raw_BO_PT[key] = self.Client_BO.read_holding_registers(self.PT_address[key], count=2, unit=0x01)
+                self.PT_dic[key] = round(
+                    struct.unpack("<f", struct.pack("<HH", Raw_BO_PT[key].getRegister((2 * i) + 1),
+                                                    Raw_BO_PT[key].getRegister(2 * i)))[0], 3)
+                print(key, "'s' value is", self.PT_dic[key])
+
+
+            Raw_BO_Valve = [0]*self.nValve
             for i in range(0, self.nValve+1):
-                Raw_BO[i] = self.Client_BO.read_holding_registers(12288+i, count=1, unit=0x01)
-                self.Valve[i] = struct.pack("H", Raw_BO[i].getRegister(0))
+                Raw_BO_Valve[i] = self.Client_BO.read_holding_registers(12288+i, count=1, unit=0x01)
+                self.Valve[i] = struct.pack("H", Raw_BO_Valve[i].getRegister(0))
                 print("Address with ", 12288 + i, "valve value is", self.Valve[i])
-                # print("open")
-                # self.WriteOpen(12296+i)
-                # time.sleep(2)
-                # print("read again")
-                # self.ReadValve(12296+i)
-                # print("close")
-                # self.WriteClose(12296+i)
-                # time.sleep(2)
-                # self.ReadValve(12296+i)
-                # print("Address with ", 12288 + i, "valve value is", self.Valve[i])
-                # for i in range(12296):
-                #     try:
-                #         rr =self.Client_BO.read_coils(i,count=1,unit=0x01)
-                #         print(i,"succeed")
-                #         print(rr.getBit(0))
-                #     except:
-                #         print("error")
-                #         pass
-                # print("read coil")
-                # self.ReadCoil()
-                # self.ReadValve()
-                # self.WriteOpen()
-                # time.sleep(2)
-                # print("2s...")
-                # print("value after open")
-                # self.ReadValve()
-                # self.WriteClose()
-                # time.sleep(2)
-                # print("2s..")
-                # self.ReadValve()
+
 
 
 
@@ -614,8 +652,10 @@ class UpdateDataBase(QtCore.QObject):
 
             if self.PLC.NewData_Database:
                 print("Wrting PLC data to database...")
-                self.db.insert_data_into_datastorage("TT9998", self.dt, self.PLC.RTD[6])
-                self.db.insert_data_into_datastorage("TT9999", self.dt, self.PLC.RTD[7])
+                for key in self.PLC.TT_dic:
+                    self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_dic[key])
+                for key in self.PLC.PT_dic:
+                    self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
                 self.PLC.NewData_Database = False
 
             else:
@@ -647,8 +687,10 @@ class UpdatePLC(QtCore.QObject):
             while self.Running:
                 print("PLC updating", datetime.datetime.now())
                 self.PLC.ReadAll()
-                self.check_alarm(6, "PT9998")
-                self.check_alarm(7, "PT9999")
+                for keyTT in self.PLC.TT_dic:
+                    self.check_TT_alarm(keyTT)
+                for keyPT in self.PLC.PT_dic:
+                    self.check_PT_alarm(keyPT)
                 self.or_alarm_signal()
                 time.sleep(self.period)
         except:
@@ -659,40 +701,72 @@ class UpdatePLC(QtCore.QObject):
     def stop(self):
         self.Running = False
 
-    def check_alarm(self, RTDNum, pid):
+    def check_TT_alarm(self, pid):
 
-        if self.PLC.Activated[pid]:
-            if int(self.PLC.LowLimit[pid]) > int(self.PLC.HighLimit[pid]):
+        if self.PLC.TT_Activated[pid]:
+            if int(self.PLC.TT_LowLimit[pid]) > int(self.PLC.TT_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if int(self.PLC.RTD[RTDNum]) < int(self.PLC.LowLimit[pid]):
-                    self.setalarm(RTDNum,pid)
+                if int(self.PLC.TT_dic[pid]) < int(self.PLC.TT_LowLimit[pid]):
+                    self.setTTalarm(pid)
                     self.PLC.Alarm[pid] = True
                     print(pid , " reading is lower than the low limit")
-                elif int(self.PLC.RTD[RTDNum]) > int(self.PLC.HighLimit[pid]):
-                    self.setalarm(RTDNum, pid)
+                elif int(self.PLC.TT_dic[pid]) > int(self.PLC.TT_HighLimit[pid]):
+                    self.setTTalarm(pid)
                     print(pid,  " reading is higher than the high limit")
                 else:
-                    self.resetalarm(RTDNum, pid)
+                    self.resetTTalarm(pid)
+                    print("TT is in normal range")
+
+        else:
+            self.resetTTalarm(pid)
+            pass
+
+    def check_PT_alarm(self, pid):
+
+        if self.PLC.PT_Activated[pid]:
+            if int(self.PLC.PT_LowLimit[pid]) > int(self.PLC.PT_HighLimit[pid]):
+                print("Low limit should be less than high limit!")
+            else:
+                if int(self.PLC.PT_dic[pid]) < int(self.PLC.PT_LowLimit[pid]):
+                    self.setPTalarm(pid)
+                    self.PLC.Alarm[pid] = True
+                    print(pid , " reading is lower than the low limit")
+                elif int(self.PLC.PT_dic[pid]) > int(self.PLC.PT_HighLimit[pid]):
+                    self.setPTalarm(pid)
+                    print(pid,  " reading is higher than the high limit")
+                else:
+                    self.resetPTalarm(pid)
                     print("PT is in normal range")
 
         else:
-            self.resetalarm(RTDNum, pid)
+            self.resetPTalarm(pid)
             pass
 
-    def setalarm(self, RTDNum, pid):
-        self.PLC.Alarm[pid] = True
+    def setTTalarm(self, pid):
+        self.PLC.TT_Alarm[pid] = True
         # and send email or slack messages
         msg = "SBC alarm: {pid} is out of range".format(pid=pid)
         # self.message_manager.tencent_alarm(msg)
         # self.message_manager.slack_alarm(msg)
 
-    def resetalarm(self, RTDNum, pid):
-        self.PLC.Alarm[pid] = False
+    def resetTTalarm(self, pid):
+        self.PLC.TT_Alarm[pid] = False
+        # and send email or slack messages
+
+    def setPTalarm(self, pid):
+        self.PLC.PT_Alarm[pid] = True
+        # and send email or slack messages
+        msg = "SBC alarm: {pid} is out of range".format(pid=pid)
+        # self.message_manager.tencent_alarm(msg)
+        # self.message_manager.slack_alarm(msg)
+
+    def resetPTalarm(self, pid):
+        self.PLC.PT_Alarm[pid] = False
         # and send email or slack messages
 
     def or_alarm_signal(self):
-        if True in self.PLC.Alarm:
+        if (True in self.PLC.TT_Alarm) or (True in self.PLC.PT_Alarm):
             self.PLC.MainAlarm = True
         else:
             self.PLC.MainAlarm = False
@@ -708,8 +782,25 @@ class UpdateServer(QtCore.QObject):
         self.Running=False
         self.period=2
         print("connect to the PLC server")
-        self.data_dic={"data":{"PT9998":None,"PT9999":None},"Alarm":self.PLC.Alarm, "MainAlarm":self.PLC.MainAlarm}
+        self.data_dic={"data":{"TT":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+                                     "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
+                                     "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
+                               "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
+                                     "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
+                                     "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, " PT4319": 0,
+                                     "PT4322": 0, "PT4325": 0, "PT6302": 0}},
+                       "Alarm":{"TT":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
+                                      "TT4330": False,
+                                      "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
+                                      "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
+                                "PT":{"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
+                                      "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
+                                      "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, " PT4319": False,
+                                      "PT4322": False, "PT4325": False, "PT6302": False}},
+                       "MainAlarm":False}
         self.data_package=pickle.dumps(self.data_dic)
+
+
 
     @QtCore.Slot()
     def run(self):
@@ -742,8 +833,15 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
-        self.data_dic["data"]["PT9998"] = self.PLC.RTD[6]
-        self.data_dic["data"]["PT9999"] = self.PLC.RTD[7]
+        for key in self.PLC.TT_dic:
+            self.data_dic["data"]["TT"][key]=self.PLC.TT_dic[key]
+        for key in self.PLC.PT_dic:
+            self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
+        for key in self.PLC.TT_Alarm:
+            self.data_dic["Alarm"]["TT"][key] = self.PLC.TT_Alarm[key]
+        for key in self.PLC.PT_dic:
+            self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
+        self.data_dic["MainAlarm"]=self.PLC.MainAlarm
         self.data_package=pickle.dumps(self.data_dic)
 
     def write_data(self):

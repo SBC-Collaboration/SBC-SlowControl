@@ -3876,7 +3876,22 @@ class UpdateClient(QtCore.QObject):
         self.Running=False
         self.period=2
         print("client is connecting to the ZMQ server")
-        self.receive_dic = {"data":{"PT9998":0, "PT9999":0},"Alarm":{"PT9998": False, "PT9999": False}, "MainAlarm":False}
+        self.receive_dic = {"data":{"TT":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+                                     "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
+                                     "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
+                               "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
+                                     "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
+                                     "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, " PT4319": 0,
+                                     "PT4322": 0, "PT4325": 0, "PT6302": 0}},
+                       "Alarm":{"TT":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
+                                      "TT4330": False,
+                                      "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
+                                      "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
+                                "PT":{"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
+                                      "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
+                                      "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, " PT4319": False,
+                                      "PT4322": False, "PT4325": False, "PT6302": False}},
+                       "MainAlarm":False}
         self.commands_package= pickle.dumps({})
     @QtCore.Slot()
     def run(self):
@@ -3945,8 +3960,49 @@ class UpdateDisplay(QtCore.QObject):
                 # print(type(dic))
 
                 self.display_update.emit(dic)
-                self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
-                self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
+                # PT1325 not found
+                self.MW.PT2121.SetValue(self.Client.receive_dic["data"]["PT"]["PT2121"])
+                self.MW.PT2316.SetValue(self.Client.receive_dic["data"]["PT"]["PT2316"])
+                self.MW.PT2330.SetValue(self.Client.receive_dic["data"]["PT"]["PT2330"])
+                self.MW.PT2335.SetValue(self.Client.receive_dic["data"]["PT"]["PT2335"])
+                self.MW.PT3308.SetValue(self.Client.receive_dic["data"]["PT"]["PT3308"])
+                self.MW.PT3309.SetValue(self.Client.receive_dic["data"]["PT"]["PT3309"])
+                self.MW.PT3311.SetValue(self.Client.receive_dic["data"]["PT"]["PT3311"])
+                self.MW.PT3314.SetValue(self.Client.receive_dic["data"]["PT"]["PT3314"])
+                self.MW.PT3320.SetValue(self.Client.receive_dic["data"]["PT"]["PT3320"])
+                self.MW.PT3332.SetValue(self.Client.receive_dic["data"]["PT"]["PT3332"])
+                self.MW.PT3333.SetValue(self.Client.receive_dic["data"]["PT"]["PT3333"])
+                self.MW.PT4306.SetValue(self.Client.receive_dic["data"]["PT"]["PT4306"])
+                self.MW.PT4315.SetValue(self.Client.receive_dic["data"]["PT"]["PT4315"])
+                self.MW.PT4319.SetValue(self.Client.receive_dic["data"]["PT"]["PT4319"])
+                self.MW.PT4322.SetValue(self.Client.receive_dic["data"]["PT"]["PT4322"])
+                self.MW.PT4325.SetValue(self.Client.receive_dic["data"]["PT"]["PT4325"])
+                self.MW.PT6302.SetValue(self.Client.receive_dic["data"]["PT"]["PT6302"])
+
+                self.MW.TT2101.SetValue(self.Client.receive_dic["data"]["TT"]["TT2101"])
+                self.MW.TT2111.SetValue(self.Client.receive_dic["data"]["TT"]["TT2111"])
+                self.MW.TT2113.SetValue(self.Client.receive_dic["data"]["TT"]["TT2113"])
+                self.MW.TT2118.SetValue(self.Client.receive_dic["data"]["TT"]["TT2118"])
+                self.MW.TT2119.SetValue(self.Client.receive_dic["data"]["TT"]["TT2119"])
+                self.MW.TT4330.SetValue(self.Client.receive_dic["data"]["TT"]["TT4330"])
+                self.MW.TT6203.SetValue(self.Client.receive_dic["data"]["TT"]["TT6203"])
+                self.MW.TT6207.SetValue(self.Client.receive_dic["data"]["TT"]["TT6207"])
+                self.MW.TT6211.SetValue(self.Client.receive_dic["data"]["TT"]["TT6211"])
+                self.MW.TT6213.SetValue(self.Client.receive_dic["data"]["TT"]["TT6213"])
+                self.MW.TT6222.SetValue(self.Client.receive_dic["data"]["TT"]["TT6222"])
+                self.MW.TT6407.SetValue(self.Client.receive_dic["data"]["TT"]["TT6407"])
+                self.MW.TT6408.SetValue(self.Client.receive_dic["data"]["TT"]["TT6408"])
+                self.MW.TT6409.SetValue(self.Client.receive_dic["data"]["TT"]["TT6409"])
+                self.MW.TT6415.SetValue(self.Client.receive_dic["data"]["TT"]["TT6415"])
+                self.MW.TT6416.SetValue(self.Client.receive_dic["data"]["TT"]["TT6416"])
+
+
+
+
+
+
+                # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
+                # self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
 
                 # self.MW.subwindow.Lowlimit.SetValue(self.Client.receive_dic["PT99998"])
                 # self.MW.subwindow.alarmbutton(self.Client.receive_dic)
