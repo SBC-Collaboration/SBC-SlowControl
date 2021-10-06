@@ -156,7 +156,7 @@ class PLC:
             #     mask=pow(2,j)
             #     print(mask)
             #     print(j,"th digit is ", self.ReadCoil(mask=mask))
-            for i in range(0, self.nValve):
+            for i in range(0, self.nValve+1):
                 Raw_BO[i] = self.Client_BO.read_holding_registers(12288+i, count=1, unit=0x01)
                 self.Valve[i] = struct.pack("H", Raw_BO[i].getRegister(0))
                 print("Address with ", 12288 + i, "valve value is", self.Valve[i])
