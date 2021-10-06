@@ -168,7 +168,7 @@ class PLC:
                 # self.WriteClose(12296+i)
                 # time.sleep(2)
                 # self.ReadValve(12296+i)
-                print("Address with ",12296+i,"valve value is", self.Valve[i])
+                print("Address with ",12288+i,"valve value is", self.Valve[i])
                 # for i in range(12296):
                 #     try:
                 #         rr =self.Client_BO.read_coils(i,count=1,unit=0x01)
