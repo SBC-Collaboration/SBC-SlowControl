@@ -223,7 +223,7 @@ class PLC:
 
 
             Raw_BO_Valve = [0]*self.nValve
-            for i in range(0, self.nValve+1):
+            for i in range(0, self.nValve):
                 Raw_BO_Valve[i] = self.Client_BO.read_holding_registers(12288+i, count=1, unit=0x01)
                 self.Valve[i] = struct.pack("H", Raw_BO_Valve[i].getRegister(0))
                 print("Address with ", 12288 + i, "valve value is", self.Valve[i])
