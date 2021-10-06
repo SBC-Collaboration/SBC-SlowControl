@@ -787,8 +787,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #commands stack
-        self.address ={"PV4307":12288,"PV4308":12289,"PV4317":12290,"PV4318":12291,"PV4321":12292,"PV4324":12293,"PV5305":12294,"PV5306":12295,
-                       "PV5307":12296,"PV5309":12297}
+        self.address ={"PV4307":12289,"PV4308":12290,"PV4317":12291,"PV4318":12292,"PV4321":12293,"PV4324":12294,"PV5305":12295,"PV5306":12296,
+                       "PV5307":12297,"PV5309":12298}
         self.commands = {}
         self.signal_connection()
 
