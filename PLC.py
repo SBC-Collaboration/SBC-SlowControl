@@ -211,7 +211,7 @@ class PLC:
                 Raw_BO_TT[key] = self.Client_BO.read_holding_registers(self.TT_address[key], count=2, unit=0x01)
                 self.TT_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_BO_TT[key].getRegister(0 + 1), Raw_BO_TT[key].getRegister(0)))[0], 3)
-                print(key, "'s' value is", self.TT_dic[key])
+                # print(key, "'s' value is", self.TT_dic[key])
 
             Raw_BO_PT = {}
             for key in self.PT_address:
@@ -226,7 +226,7 @@ class PLC:
             for i in range(0, self.nValve):
                 Raw_BO_Valve[i] = self.Client_BO.read_holding_registers(12288+i, count=1, unit=0x01)
                 self.Valve[i] = struct.pack("H", Raw_BO_Valve[i].getRegister(0))
-                # print("Address with ", 12288 + i, "valve value is", self.Valve[i])
+                print("Address with ", 12288 + i, "valve value is", self.Valve[i])
 
 
 
