@@ -61,7 +61,7 @@ class PLC:
         self.Activated = {"PT9998": True, "PT9999": True}
         self.Alarm = {"PT9998": False, "PT9999": False}
         self.MainAlarm = False
-        self.nValve = 6
+        self.nValve = 9
         self.Valve = [0]*self.nValve
         # self.PT80 = 0.
         # self.FlowValve = 0.
@@ -157,7 +157,7 @@ class PLC:
             #     print(mask)
             #     print(j,"th digit is ", self.ReadCoil(mask=mask))
             for i in range(0, self.nValve):
-                Raw_BO[i] = self.Client_BO.read_holding_registers(12296+i, count=1, unit=0x01)
+                Raw_BO[i] = self.Client_BO.read_holding_registers(12288+i, count=1, unit=0x01)
                 self.Valve[i] = struct.pack("H", Raw_BO[i].getRegister(0))
                 # print("open")
                 # self.WriteOpen(12296+i)
