@@ -833,14 +833,14 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
-        for key in self.PLC.TT_dic:
-            self.data_dic["data"]["TT"][key]=self.PLC.TT_dic[key]
-        for key in self.PLC.PT_dic:
-            self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
-        for key in self.PLC.TT_Alarm:
-            self.data_dic["Alarm"]["TT"][key] = self.PLC.TT_Alarm[key]
-        for key in self.PLC.PT_dic:
-            self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
+        # for key in self.PLC.TT_dic:
+        #     self.data_dic["data"]["TT"][key]=self.PLC.TT_dic[key]
+        # for key in self.PLC.PT_dic:
+        #     self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
+        # for key in self.PLC.TT_Alarm:
+        #     self.data_dic["Alarm"]["TT"][key] = self.PLC.TT_Alarm[key]
+        # for key in self.PLC.PT_dic:
+        #     self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
         self.data_package=pickle.dumps(self.data_dic)
 
