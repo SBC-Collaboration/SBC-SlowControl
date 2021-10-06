@@ -59,7 +59,7 @@ class PLC:
 
         self.PT_address={"PT1325": 12794, "PT2121": 12796, "PT2316": 12798, "PT2330": 12800, "PT2335": 12802,
                          "PT3308": 12804, "PT3309": 12806, "PT3311": 12808, "PT3314": 12810, "PT3320": 12812,
-                         "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820," PT4319": 12822,
+                         "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820,"PT4319": 12822,
                          "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
 
         self.TT_dic={"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
@@ -68,7 +68,7 @@ class PLC:
 
         self.PT_dic = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                        "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-                       "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, " PT4319": 0,
+                       "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
 
         self.TT_LowLimit = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
@@ -80,11 +80,11 @@ class PLC:
 
         self.PT_LowLimit = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                             "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-                            "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, " PT4319": 0,
+                            "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                             "PT4322": 0, "PT4325": 0, "PT6302": 0}
         self.PT_HighLimit = {"PT1325": 300, "PT2121": 300, "PT2316": 300, "PT2330": 300, "PT2335": 300,
                             "PT3308": 300, "PT3309": 300, "PT3311": 300, "PT3314": 300, "PT3320": 300,
-                            "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, " PT4319": 300,
+                            "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
                             "PT4322": 300, "PT4325": 300, "PT6302": 300}
 
         self.TT_Activated = {"TT2101": True, "TT2111": True, "TT2113": True, "TT2118": True, "TT2119": True, "TT4330": True,
@@ -93,7 +93,7 @@ class PLC:
 
         self.PT_Activated = {"PT1325": True, "PT2121": True, "PT2316": True, "PT2330": True, "PT2335": True,
                              "PT3308": True, "PT3309": True, "PT3311": True, "PT3314": True, "PT3320": True,
-                             "PT3332": True, "PT3333": True, "PT4306": True, "PT4315": True, " PT4319": True,
+                             "PT3332": True, "PT3333": True, "PT4306": True, "PT4315": True, "PT4319": True,
                              "PT4322": True, "PT4325": True, "PT6302": True}
 
         self.TT_Alarm = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
@@ -102,7 +102,7 @@ class PLC:
 
         self.PT_Alarm = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
                          "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
-                         "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, " PT4319": False,
+                         "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
                          "PT4322": False, "PT4325": False, "PT6302": False}
         self.MainAlarm = False
         self.nTT = len(self.TT_address)
@@ -787,7 +787,7 @@ class UpdateServer(QtCore.QObject):
                                      "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0},
                                "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                                      "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-                                     "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, " PT4319": 0,
+                                     "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                                      "PT4322": 0, "PT4325": 0, "PT6302": 0}},
                        "Alarm":{"TT":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
                                       "TT4330": False,
@@ -795,7 +795,7 @@ class UpdateServer(QtCore.QObject):
                                       "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False},
                                 "PT":{"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
                                       "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
-                                      "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, " PT4319": False,
+                                      "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
                                       "PT4322": False, "PT4325": False, "PT6302": False}},
                        "MainAlarm":False}
         self.data_package=pickle.dumps(self.data_dic)

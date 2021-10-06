@@ -3881,7 +3881,7 @@ class UpdateClient(QtCore.QObject):
                                      "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0},
                                "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                                      "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-                                     "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, " PT4319": 0,
+                                     "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                                      "PT4322": 0, "PT4325": 0, "PT6302": 0}},
                        "Alarm":{"TT":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
                                       "TT4330": False,
@@ -3889,7 +3889,7 @@ class UpdateClient(QtCore.QObject):
                                       "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False},
                                 "PT":{"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
                                       "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
-                                      "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, " PT4319": False,
+                                      "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
                                       "PT4322": False, "PT4325": False, "PT6302": False}},
                        "MainAlarm":False}
         self.commands_package= pickle.dumps({})
@@ -3945,8 +3945,7 @@ class UpdateDisplay(QtCore.QObject):
         try:
             self.Running = True
             while self.Running:
-
-                # print("Display updating", datetime.datetime.now())
+                print("Display updating", datetime.datetime.now())
 
                 # print(self.MW.PLC.RTD)
                 # print(3, self.MW.PLC.RTD[3])
