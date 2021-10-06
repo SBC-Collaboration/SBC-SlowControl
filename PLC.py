@@ -207,14 +207,14 @@ class PLC:
 
         if self.Connected_BO:
             Raw_BO_TT = {}
-            for key in self.TT:
+            for key in self.TT_address:
                 Raw_BO_TT[key] = self.Client_BO.read_holding_registers(self.TT_address[key], count=2, unit=0x01)
                 self.TT_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_BO_TT[key].getRegister((2 * i) + 1), Raw_BO_TT[key].getRegister(2 * i)))[0], 3)
                 print(key, "'s' value is", self.TT_dic[key])
 
             Raw_BO_PT = {}
-            for key in self.PT:
+            for key in self.PT_address:
                 Raw_BO_PT[key] = self.Client_BO.read_holding_registers(self.PT_address[key], count=2, unit=0x01)
                 self.PT_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_BO_PT[key].getRegister((2 * i) + 1),
