@@ -903,7 +903,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def RButtonClicked(self, pid):
-        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "valve", "operation": "ClOSE",
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "valve", "operation": "CLOSE",
                               "value": 1}
         print(self.commands)
         print(pid, "R Button is clicked")
