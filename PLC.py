@@ -211,7 +211,7 @@ class PLC:
                 Raw_BO_TT[key] = self.Client_BO.read_holding_registers(self.TT_address[key], count=2, unit=0x01)
                 self.TT_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_BO_TT[key].getRegister(0 + 1), Raw_BO_TT[key].getRegister(0)))[0], 3)
-                print(key, "'s' value is", self.TT_dic[key])
+                # print(key, "'s' value is", self.TT_dic[key])
 
             Raw_BO_PT = {}
             for key in self.PT_address:
@@ -219,14 +219,14 @@ class PLC:
                 self.PT_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_BO_PT[key].getRegister(0 + 1),
                                                     Raw_BO_PT[key].getRegister(0)))[0], 3)
-                print(key, "'s' value is", self.PT_dic[key])
+                # print(key, "'s' value is", self.PT_dic[key])
 
 
             Raw_BO_Valve = [0]*self.nValve
             for i in range(0, self.nValve):
                 Raw_BO_Valve[i] = self.Client_BO.read_holding_registers(12288+i, count=1, unit=0x01)
                 self.Valve[i] = struct.pack("H", Raw_BO_Valve[i].getRegister(0))
-                print("Address with ", 12288 + i, "valve value is", self.Valve[i])
+                # print("Address with ", 12288 + i, "valve value is", self.Valve[i])
 
 
 
@@ -710,13 +710,13 @@ class UpdatePLC(QtCore.QObject):
                 if int(self.PLC.TT_dic[pid]) < int(self.PLC.TT_LowLimit[pid]):
                     self.setTTalarm(pid)
                     self.PLC.TT_Alarm[pid] = True
-                    print(pid , " reading is lower than the low limit")
+                    # print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.TT_dic[pid]) > int(self.PLC.TT_HighLimit[pid]):
                     self.setTTalarm(pid)
-                    print(pid,  " reading is higher than the high limit")
+                    # print(pid,  " reading is higher than the high limit")
                 else:
                     self.resetTTalarm(pid)
-                    print("TT is in normal range")
+                    # print(pid, " is in normal range")
 
         else:
             self.resetTTalarm(pid)
@@ -731,13 +731,13 @@ class UpdatePLC(QtCore.QObject):
                 if int(self.PLC.PT_dic[pid]) < int(self.PLC.PT_LowLimit[pid]):
                     self.setPTalarm(pid)
                     self.PLC.PT_Alarm[pid] = True
-                    print(pid , " reading is lower than the low limit")
+                    # print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.PT_dic[pid]) > int(self.PLC.PT_HighLimit[pid]):
                     self.setPTalarm(pid)
-                    print(pid,  " reading is higher than the high limit")
+                    # print(pid,  " reading is higher than the high limit")
                 else:
                     self.resetPTalarm(pid)
-                    print("PT is in normal range")
+                    # print(pid, " is in normal range")
 
         else:
             self.resetPTalarm(pid)
