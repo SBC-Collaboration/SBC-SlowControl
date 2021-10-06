@@ -792,7 +792,7 @@ class UpdateServer(QtCore.QObject):
                        "Alarm":{"TT":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
                                       "TT4330": False,
                                       "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
-                                      "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
+                                      "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False},
                                 "PT":{"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
                                       "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                                       "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, " PT4319": False,
