@@ -709,7 +709,7 @@ class UpdatePLC(QtCore.QObject):
             else:
                 if int(self.PLC.TT_dic[pid]) < int(self.PLC.TT_LowLimit[pid]):
                     self.setTTalarm(pid)
-                    self.PLC.Alarm[pid] = True
+                    self.PLC.TT_Alarm[pid] = True
                     print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.TT_dic[pid]) > int(self.PLC.TT_HighLimit[pid]):
                     self.setTTalarm(pid)
@@ -730,7 +730,7 @@ class UpdatePLC(QtCore.QObject):
             else:
                 if int(self.PLC.PT_dic[pid]) < int(self.PLC.PT_LowLimit[pid]):
                     self.setPTalarm(pid)
-                    self.PLC.Alarm[pid] = True
+                    self.PLC.PT_Alarm[pid] = True
                     print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.PT_dic[pid]) > int(self.PLC.PT_HighLimit[pid]):
                     self.setPTalarm(pid)
