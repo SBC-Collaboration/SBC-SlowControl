@@ -753,6 +753,8 @@ class UpdateServer(QtCore.QObject):
             pass
         else:
             for key in message:
+                print(message[key]["type"])
+                print(message[key]["type"]=="valve")
                 if message[key]["type"]=="valve":
                     if message[key]["operation"]=="OPEN":
                         self.PLC.WriteOpen(address= message[key]["address"])
