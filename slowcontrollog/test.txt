@@ -1,0 +1,683 @@
+client is connecting to the ZMQ server
+Sending request...
+Display updating 2021-08-09 02:00:23.809601
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:24.815270
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:25.823352
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:26.835007
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:27.845411
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:28.857737
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:29.869046
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:30.879361
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:31.893967
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:32.908179
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:33.920406
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:34.932938
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:35.946834
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:36.962242
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:37.976794
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:00:38.991464
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:40.002634
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:41.016016
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:42.028320
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:43.039602
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:44.053385
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:45.066363
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:46.079020
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Low limit should be less than high limit!
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:47.091237
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Low limit should be less than high limit!
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:48.103473
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Low limit should be less than high limit!
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:49.115500
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Low limit should be less than high limit!
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:50.127202
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:51.140090
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:52.153055
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:53.167021
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:54.180409
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:55.193197
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:56.204410
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:57.216653
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:58.229546
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:00:59.242128
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:00.254153
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:01.266286
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:02.279387
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:03.293558
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:04.306768
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:05.319558
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:06.331882
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:07.344870
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:08.357104
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:09.370019
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:10.381411
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:11.394998
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:01:12.410317
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:01:13.424164
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:01:14.436150
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:01:15.450704
+{'PT9998': 0, 'PT9999': 0}
+Alarm Status= False
+Display updating 2021-08-09 02:01:16.466243
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:17.478740
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:18.491300
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:19.504086
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:20.516615
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:21.530731
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:22.542900
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:23.553816
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:24.564430
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:25.575804
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:26.587689
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:27.598730
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:28.609893
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:29.620208
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:30.630801
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:31.642393
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:32.653535
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:33.664571
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:34.675464
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:35.687110
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:36.698173
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:37.709852
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:38.720726
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:39.732126
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:40.743130
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:41.754864
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:42.765858
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:43.778030
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:44.789005
+{'PT9998': 0, 'PT9999': 0}
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:45.800821
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:46.813660
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:47.825319
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:48.836811
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:49.848966
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:50.858659
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:51.868455
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating 2021-08-09 02:01:52.878764
+{'PT9998': 0, 'PT9999': 0}
+TT2117 reading is lower than the low limit
+TT2118 reading is lower than the low limit
+TT2119 reading is lower than the low limit
+Alarm Status= True
+2 5 1 4
+1st part
+2nd part
+3rd part
+Display updating
