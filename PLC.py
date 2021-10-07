@@ -113,8 +113,14 @@ class PLC:
         self.nTT_Attribute = [0.] * self.nTT
         self.PT_setting = [0.] * self.nPT
         self.nPT_Attribute = [0.] * self.nPT
-        self.nValve = 9
-        self.Valve = [0]*self.nValve
+
+        self.valve_address = {"PV4307": 12289, "PV4308": 12290, "PV4317": 12291, "PV4318": 12292, "PV4321": 12293,
+                        "PV4324": 12294, "PV5305": 12295, "PV5306": 12296,
+                        "PV5307": 12297, "PV5309": 12298, "SV3307": 12299, "SV3310": 12300, "SV3322": 12301,
+                        "SV3325": 12302, "SV3326": 12303, "SV3329": 12304,
+                        "SV4327": 12305, "SV4328": 12306, "SV4329": 12307, "SV4331": 12308, "SV4332": 12309}
+        self.nValve = len(self.valve_address)
+        self.Valve = {}
         # self.PT80 = 0.
         # self.FlowValve = 0.
         # self.BottomChillerSetpoint = 0.
@@ -222,14 +228,11 @@ class PLC:
                 # print(key, "'s' value is", self.PT_dic[key])
 
 
-            Raw_BO_Valve = [0]*self.nValve
-            for i in range(0, self.nValve):
-                Raw_BO_Valve[i] = self.Client_BO.read_holding_registers(12288+i, count=1, unit=0x01)
-                self.Valve[i] = struct.pack("H", Raw_BO_Valve[i].getRegister(0))
-                print("Address with ", 12288 + i, "valve value is", self.Valve[i])
-
-
-
+            Raw_BO_Valve = {}
+            for key in self.valve_address:
+                Raw_BO_Valve[key] = self.Client_BO.read_holding_registers(self.valve_address[key], count=1, unit=0x01)
+                self.Valve[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
+                print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve[key])
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)

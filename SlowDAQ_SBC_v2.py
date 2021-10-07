@@ -788,7 +788,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #commands stack
         self.address ={"PV4307":12289,"PV4308":12290,"PV4317":12291,"PV4318":12292,"PV4321":12293,"PV4324":12294,"PV5305":12295,"PV5306":12296,
-                       "PV5307":12297,"PV5309":12298}
+                       "PV5307":12297,"PV5309":12298,"SV3307":12299,"SV3310":12300,"SV3322":12301,"SV3325":12302,"SV3326":12303,"SV3329":12304,
+                       "SV4327":12305,"SV4328":12306,"SV4329":12307,"SV4331":12308,"SV4332":12309}
         self.commands = {}
         self.signal_connection()
 
@@ -893,6 +894,28 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV5307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5307.Label.text()))
         self.PV5309.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5309.Label.text()))
         self.PV5309.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5309.Label.text()))
+        self.SV3307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3307.Label.text()))
+        self.SV3307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3307.Label.text()))
+        self.SV3310.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3310.Label.text()))
+        self.SV3310.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3310.Label.text()))
+        self.SV3322.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3322.Label.text()))
+        self.SV3322.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3322.Label.text()))
+        self.SV3325.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3325.Label.text()))
+        self.SV3325.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3325.Label.text()))
+        self.SV3326.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3326.Label.text()))
+        self.SV3326.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3326.Label.text()))
+        self.SV3329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3329.Label.text()))
+        self.SV3329.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3329.Label.text()))
+        self.SV4327.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4327.Label.text()))
+        self.SV4327.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4327.Label.text()))
+        self.SV4328.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4328.Label.text()))
+        self.SV4328.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4328.Label.text()))
+        self.SV4329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4329.Label.text()))
+        self.SV4329.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4329.Label.text()))
+        self.SV4331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4331.Label.text()))
+        self.SV4331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4331.Label.text()))
+        self.SV4332.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4332.Label.text()))
+        self.SV4332.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4332.Label.text()))
 
     @QtCore.Slot()
     def LButtonClicked(self,pid):
@@ -3985,6 +4008,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.RTDset1Win.TT2119.SetValue(self.Client.receive_dic["data"]["TT"]["TT2119"])
                 self.MW.TT4330.SetValue(self.Client.receive_dic["data"]["TT"]["TT4330"])
                 # self.MW.TT6203.SetValue(self.Client.receive_dic["data"]["TT"]["TT6203"])
+                # self.MW.HT6202SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["TT6203"])
                 # self.MW.TT6207.SetValue(self.Client.receive_dic["data"]["TT"]["TT6207"])
                 # self.MW.TT6211.SetValue(self.Client.receive_dic["data"]["TT"]["TT6211"])
                 # self.MW.TT6213.SetValue(self.Client.receive_dic["data"]["TT"]["TT6213"])
