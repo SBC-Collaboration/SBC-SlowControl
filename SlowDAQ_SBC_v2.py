@@ -4007,7 +4007,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.RTDset1Win.TT2118.SetValue(self.Client.receive_dic["data"]["TT"]["TT2118"])
                 self.MW.RTDset1Win.TT2119.SetValue(self.Client.receive_dic["data"]["TT"]["TT2119"])
                 self.MW.TT4330.SetValue(self.Client.receive_dic["data"]["TT"]["TT4330"])
-                # self.MW.TT6203.SetValue(self.Client.receive_dic["data"]["TT"]["TT6203"])
+                self.MW.TT6203.SetValue(self.Client.receive_dic["data"]["TT"]["TT6203"])
                 # self.MW.HT6202SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["TT6203"])
                 # self.MW.TT6207.SetValue(self.Client.receive_dic["data"]["TT"]["TT6207"])
                 # self.MW.TT6211.SetValue(self.Client.receive_dic["data"]["TT"]["TT6211"])
