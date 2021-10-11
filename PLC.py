@@ -65,6 +65,9 @@ class PLC:
                          "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820,"PT4319": 12822,
                          "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
 
+        self.TT_FP_address = {"TT2120": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
+                              "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0}
+
         self.TT_BO_dic={"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                      "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
                      "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
@@ -109,11 +112,8 @@ class PLC:
                          "PT4322": False, "PT4325": False, "PT6302": False}
         self.MainAlarm = False
         self.nTT_BO = len(self.TT_BO_address)
-        self.TT_BO = [0.] * self.nTT_BO
         self.nTT_FP = len(self.TT_FP_address)
-        self.TT_FP = [0.] * self.nTT_FP
         self.nPT = len(self.PT_address)
-        self.PT = [0.] * self.nPT
         self.TT_BO_setting = [0.] * self.nTT_BO
         self.nTT_BO_Attribute = [0.] * self.nTT_BO
         self.PT_setting = [0.] * self.nPT
@@ -192,9 +192,9 @@ class PLC:
             Raw_RTDs_FP={}
             for key in self.TT_FP_address:
                 Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
-                self.TT_FP[key] = round(
+                self.TT_FP_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
-                print(key,self.TT_FP_address[key], "RTD",self.TT_FP[key])
+                print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
         #
         #     Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
         #     for i in range(0, self.nRTD):
