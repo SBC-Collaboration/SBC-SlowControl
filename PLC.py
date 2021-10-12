@@ -747,9 +747,7 @@ class UpdateDataBase(QtCore.QObject):
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
                     print("write pressure transducer")
                     self.para_b=0
-                self.para_a += 1
-                self.para_b += 1
-                time.sleep(self.base_period)
+                
                 print("Wrting PLC data to database...")
                 # for key in self.PLC.TT_FP_dic:
                 #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.FP_BO_dic[key])
@@ -762,6 +760,9 @@ class UpdateDataBase(QtCore.QObject):
             else:
                 print("Database Updating stops.")
                 pass
+            self.para_a += 1
+            self.para_b += 1
+            time.sleep(self.base_period)
 
             # time.sleep(self.period)
 
