@@ -848,10 +848,12 @@ class UpdateServer(QtCore.QObject):
                                      "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                                      "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                                      "PT4322": 0, "PT4325": 0, "PT6302": 0}},
-                       "Alarm":{"TT":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
+                       "Alarm":{"TT":{"FP":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2403": False,
+                                            "TT2418": False, "TT2427": False, "TT2429": False},
+                                      "BO":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
                                       "TT4330": False,
                                       "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
-                                      "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False},
+                                      "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}},
                                 "PT":{"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
                                       "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                                       "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
@@ -898,10 +900,10 @@ class UpdateServer(QtCore.QObject):
             self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
             self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
-        # for key in self.PLC.TT_FP_Alarm:
-        #     self.data_dic["Alarm"]["TT"]["FP"][key] = self.PLC.TT_FP_Alarm[key]
-        # for key in self.PLC.TT_BO_Alarm:
-        #     self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
+        for key in self.PLC.TT_FP_Alarm:
+            self.data_dic["Alarm"]["TT"]["FP"][key] = self.PLC.TT_FP_Alarm[key]
+        for key in self.PLC.TT_BO_Alarm:
+            self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
         for key in self.PLC.PT_dic:
             self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
