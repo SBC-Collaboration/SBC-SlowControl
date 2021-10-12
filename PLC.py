@@ -52,10 +52,18 @@ class PLC:
         self.Connected_BO = self.Client_BO.connect()
         print(" Beckoff connected: " + str(self.Connected_BO))
 
-        # self.TT_FP_address = {"TT2420":31000, "TT2422":31008, "TT2424":31016, "TT2425":31024, "TT2403":31032,
-        #                       "TT2418":31040, "TT2427":31048, "TT2429":31056, "TT2431":31064}
-        self.TT_FP_address = {"TT2420": 37000, "TT2422": 37002, "TT2424": 37004, "TT2425": 37006, "TT2403": 37008,
-                              "TT2418": 37010, "TT2427": 37012, "TT2429": 37014}
+        self.TT_FP_address = {"TT2420": 31000, "TT2422": 31002, "TT2424": 37004, "TT2425": 37006, "TT2442": 36000,
+                              "TT2403": 31008, "TT2418": 31010, "TT2427": 31012, "TT2429": 31014, "TT2431": 32000,
+                              "TT2441": 36002, "TT2414": 32002, "TT2413": 32004, "TT2412": 32006, "TT2415": 32008,
+                              "TT2409": 36004, "TT2436": 32010, "TT2438": 32012, "TT2440": 32014, "TT2402": 33000,
+                              "TT2411": 38004, "TT2443": 36006, "TT2417": 33004, "TT2404": 33006, "TT2408": 33008,
+                              "TT2407": 33010, "TT2406": 36008, "TT2428": 33012, "TT2432": 33014, "TT2421": 34000,
+                              "TT2416": 38006, "TT2439": 36016, "TT2419": 34004, "TT2423": 34006, "TT2426": 34008,
+                              "TT2430": 34010, "TT2450": 36012, "TT2401": 34012, "TT2449": 34014, "TT2445": 35000,
+                              "TT2444": 35002, "TT2435": 35004, "TT2437": 36014, "TT2446": 35006, "TT2447": 35008,
+                              "TT2448": 35010, "TT2410": 35012, "TT2405": 35014, "TT6220": 37000, "TT6401": 37002,
+                              "TT6404": 37004, "TT6405": 37006, "TT6406": 37008, "TT6410": 37010, "TT6411": 37012,
+                              "TT6412": 37014, "TT6413": 38000, "TT6414": 38002}
 
         self.TT_BO_address = {"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
                            "TT4330": 12998, "TT6203": 13000, "TT6207": 13002, "TT6211": 13004, "TT6213": 13006,
@@ -67,8 +75,18 @@ class PLC:
                          "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820,"PT4319": 12822,
                          "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
 
-        self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
-                              "TT2418": 0, "TT2427": 0, "TT2429": 0}
+        self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
+                              "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
+                              "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
+                              "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
+                              "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
+                              "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
+                              "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
+                              "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
+                              "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
+                              "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
+                              "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
+                              "TT6412": 0, "TT6413": 0, "TT6414": 0}
 
         self.TT_BO_dic={"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                      "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
@@ -79,11 +97,31 @@ class PLC:
                        "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
 
-        self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
-                          "TT2418": 0, "TT2427": 0, "TT2429": 0}
+        self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
+                              "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
+                              "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
+                              "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
+                              "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
+                              "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
+                              "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
+                              "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
+                              "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
+                              "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
+                              "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
+                              "TT6412": 0, "TT6413": 0, "TT6414": 0}
 
-        self.TT_FP_HighLimit = {"TT2420": 30, "TT2422": 30, "TT2424": 30, "TT2425": 30, "TT2403": 30,
-                               "TT2418": 30, "TT2427": 30, "TT2429": 30}
+        self.TT_FP_HighLimit = {"TT2420": 30, "TT2422": 30, "TT2424": 30, "TT2425": 30, "TT2442": 30,
+                              "TT2403": 30, "TT2418": 30, "TT2427": 30, "TT2429": 30, "TT2431": 30,
+                              "TT2441": 30, "TT2414": 30, "TT2413": 30, "TT2412": 30, "TT2415": 30,
+                              "TT2409": 30, "TT2436": 30, "TT2438": 30, "TT2440": 30, "TT2402": 30,
+                              "TT2411": 30, "TT2443": 30, "TT2417": 30, "TT2404": 30, "TT2408": 30,
+                              "TT2407": 30, "TT2406": 30, "TT2428": 30, "TT2432": 30, "TT2421": 30,
+                              "TT2416": 30, "TT2439": 30, "TT2419": 30, "TT2423": 30, "TT2426": 30,
+                              "TT2430": 30, "TT2450": 30, "TT2401": 30, "TT2449": 30, "TT2445": 30,
+                              "TT2444": 30, "TT2435": 30, "TT2437": 30, "TT2446": 30, "TT2447": 30,
+                              "TT2448": 30, "TT2410": 30, "TT2405": 30, "TT6220": 30, "TT6401": 30,
+                              "TT6404": 30, "TT6405": 30, "TT6406": 30, "TT6410": 30, "TT6411": 30,
+                              "TT6412": 30, "TT6413": 30, "TT6414": 30}
 
         self.TT_BO_LowLimit = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                             "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
@@ -103,8 +141,18 @@ class PLC:
                             "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
                             "PT4322": 300, "PT4325": 300, "PT6302": 300}
 
-        self.TT_FP_Activated = {"TT2420": True, "TT2422": True, "TT2424": True, "TT2425": True, "TT2403": True,
-                               "TT2418": True, "TT2427": True, "TT2429": True}
+        self.TT_FP_Activated = {"TT2420": True, "TT2422": True, "TT2424": True, "TT2425": True, "TT2442": True,
+                              "TT2403": True, "TT2418": True, "TT2427": True, "TT2429": True, "TT2431": True,
+                              "TT2441": True, "TT2414": True, "TT2413": True, "TT2412": True, "TT2415": True,
+                              "TT2409": True, "TT2436": True, "TT2438": True, "TT2440": True, "TT2402": True,
+                              "TT2411": True, "TT2443": True, "TT2417": True, "TT2404": True, "TT2408": True,
+                              "TT2407": True, "TT2406": True, "TT2428": True, "TT2432": True, "TT2421": True,
+                              "TT2416": True, "TT2439": True, "TT2419": True, "TT2423": True, "TT2426": True,
+                              "TT2430": True, "TT2450": True, "TT2401": True, "TT2449": True, "TT2445": True,
+                              "TT2444": True, "TT2435": True, "TT2437": True, "TT2446": True, "TT2447": True,
+                              "TT2448": True, "TT2410": True, "TT2405": True, "TT6220": True, "TT6401": True,
+                              "TT6404": True, "TT6405": True, "TT6406": True, "TT6410": True, "TT6411": True,
+                              "TT6412": True, "TT6413": True, "TT6414": True}
 
         self.TT_BO_Activated = {"TT2101": True, "TT2111": True, "TT2113": True, "TT2118": True, "TT2119": True, "TT4330": True,
                              "TT6203": True, "TT6207": True, "TT6211": True, "TT6213": True, "TT6222": True,
@@ -115,8 +163,18 @@ class PLC:
                              "PT3332": True, "PT3333": True, "PT4306": True, "PT4315": True, "PT4319": True,
                              "PT4322": True, "PT4325": True, "PT6302": True}
 
-        self.TT_FP_Alarm = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2403": False,
-                               "TT2418": False, "TT2427": False, "TT2429": False}
+        self.TT_FP_Alarm = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
+                              "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
+                              "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
+                              "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
+                              "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
+                              "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
+                              "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
+                              "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
+                              "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
+                              "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
+                              "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
+                              "TT6412": False, "TT6413": False, "TT6414": False}
 
         self.TT_BO_Alarm = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
                          "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
@@ -853,17 +911,37 @@ class UpdateServer(QtCore.QObject):
         self.Running=False
         self.period=2
         print("connect to the PLC server")
-        self.data_dic={"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
-                              "TT2418": 0, "TT2427": 0, "TT2429": 0},
-            "BO":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+        self.data_dic={"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
+                                           "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
+                                           "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
+                                           "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
+                                           "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
+                                           "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
+                                           "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
+                                           "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
+                                           "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
+                                           "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
+                                           "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
+                                           "TT6412": 0, "TT6413": 0, "TT6414": 0},
+                                      "BO":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                                            "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
                                            "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}},
                                "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                                      "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                                      "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                                      "PT4322": 0, "PT4325": 0, "PT6302": 0}},
-                       "Alarm":{"TT":{"FP":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2403": False,
-                                            "TT2418": False, "TT2427": False, "TT2429": False},
+                       "Alarm":{"TT":{"FP":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
+                                            "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
+                                            "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
+                                            "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
+                                            "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
+                                            "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
+                                            "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
+                                            "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
+                                            "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
+                                            "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
+                                            "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
+                                            "TT6412": False, "TT6413": False, "TT6414": False},
                                       "BO":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
                                       "TT4330": False,
                                       "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
