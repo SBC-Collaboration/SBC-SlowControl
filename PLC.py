@@ -898,10 +898,10 @@ class UpdateServer(QtCore.QObject):
             self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
             self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
-        for key in self.PLC.TT_FP_Alarm:
-            self.data_dic["Alarm"]["TT"]["FP"][key] = self.PLC.TT_FP_Alarm[key]
-        for key in self.PLC.TT_BO_Alarm:
-            self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
+        # for key in self.PLC.TT_FP_Alarm:
+        #     self.data_dic["Alarm"]["TT"]["FP"][key] = self.PLC.TT_FP_Alarm[key]
+        # for key in self.PLC.TT_BO_Alarm:
+        #     self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
         for key in self.PLC.PT_dic:
             self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
