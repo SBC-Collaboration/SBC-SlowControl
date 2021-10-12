@@ -268,7 +268,7 @@ class PLC:
                 Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
                 self.TT_FP_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
-                print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
+                # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
         #
         #     Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
         #     for i in range(0, self.nRTD):
@@ -308,7 +308,7 @@ class PLC:
             for key in self.valve_address:
                 Raw_BO_Valve[key] = self.Client_BO.read_holding_registers(self.valve_address[key], count=1, unit=0x01)
                 self.Valve[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
-                print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve[key])
+                # print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve[key])
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -721,9 +721,9 @@ class UpdateDataBase(QtCore.QObject):
         self.Running = False
         self.base_period=1
         self.para_a=0
-        self.rate_a=60
+        self.rate_a=2
         self.para_b=0
-        self.rate_b=80
+        self.rate_b=4
         self.period = 60
         print("begin updating Database")
 
@@ -735,23 +735,29 @@ class UpdateDataBase(QtCore.QObject):
             print("Database Updating", self.dt)
 
             if self.PLC.NewData_Database:
-                # if self.para_a==self.rate_a:
-                    #for loop write database
-                    # self.para_a=0
-                # if self.para_b == self.rate_b:
-                     # for loop write data base
-                    # self.para_b=0
-                #self.para_a ++
-                #self.para_b ++
+                if self.para_a==self.rate_a:
+                    for key in self.PLC.TT_FP_dic:
+                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
+                    for key in self.PLC.TT_BO_dic:
+                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
+                    print("write RTDS")
+                    self.para_a=0
+                if self.para_b == self.rate_b:
+                    for key in self.PLC.PT_dic:
+                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
+                    print("write pressure transducer")
+                    self.para_b=0
+                self.para_a += 1
+                self.para_b += 1
                 # time.sleep(self.base_period)
                 print("Wrting PLC data to database...")
-                for key in self.PLC.TT_FP_dic:
-                    self.db.insert_data_into_datastorage(key, self.dt, self.PLC.FP_BO_dic[key])
-                for key in self.PLC.TT_BO_dic:
-                    self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
-                for key in self.PLC.PT_dic:
-                    self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
-                self.PLC.NewData_Database = False
+                # for key in self.PLC.TT_FP_dic:
+                #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.FP_BO_dic[key])
+                # for key in self.PLC.TT_BO_dic:
+                #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
+                # for key in self.PLC.PT_dic:
+                #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
+                # self.PLC.NewData_Database = False
 
             else:
                 print("Database Updating stops.")
