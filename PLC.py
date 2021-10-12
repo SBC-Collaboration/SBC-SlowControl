@@ -661,6 +661,11 @@ class UpdateDataBase(QtCore.QObject):
         self.PLC = PLC
         self.db = mydatabase()
         self.Running = False
+        self.base_period=1
+        self.para_a=0
+        self.rate_a=60
+        self.para_b=0
+        self.rate_b=80
         self.period = 60
         print("begin updating Database")
 
@@ -672,6 +677,15 @@ class UpdateDataBase(QtCore.QObject):
             print("Database Updating", self.dt)
 
             if self.PLC.NewData_Database:
+                # if self.para_a==self.rate_a:
+                    #for loop write database
+                    # self.para_a=0
+                # if self.para_b == self.rate_b:
+                     # for loop write data base
+                    # self.para_b=0
+                #self.para_a ++
+                #self.para_b ++
+                # time.sleep(self.base_period)
                 print("Wrting PLC data to database...")
                 for key in self.PLC.TT_FP_dic:
                     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.FP_BO_dic[key])
