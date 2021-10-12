@@ -55,7 +55,7 @@ class PLC:
         # self.TT_FP_address = {"TT2420":31000, "TT2422":31008, "TT2424":31016, "TT2425":31024, "TT2403":31032,
         #                       "TT2418":31040, "TT2427":31048, "TT2429":31056, "TT2431":31064}
         self.TT_FP_address = {"TT2420": 37000, "TT2422": 37002, "TT2424": 37004, "TT2425": 37006, "TT2403": 37008,
-                              "TT2418": 37010, "TT2427": 37012, "TT2429": 37014, "TT2431": 37016}
+                              "TT2418": 37010, "TT2427": 37012, "TT2429": 37014}
 
         self.TT_BO_address = {"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
                            "TT4330": 12998, "TT6203": 13000, "TT6207": 13002, "TT6211": 13004, "TT6213": 13006,
@@ -68,7 +68,7 @@ class PLC:
                          "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
 
         self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
-                              "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0}
+                              "TT2418": 0, "TT2427": 0, "TT2429": 0}
 
         self.TT_BO_dic={"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                      "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
@@ -80,10 +80,10 @@ class PLC:
                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
 
         self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
-                          "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0}
+                          "TT2418": 0, "TT2427": 0, "TT2429": 0}
 
         self.TT_FP_HighLimit = {"TT2420": 30, "TT2422": 30, "TT2424": 30, "TT2425": 30, "TT2403": 30,
-                               "TT2418": 30, "TT2427": 30, "TT2429": 30, "TT2431": 30}
+                               "TT2418": 30, "TT2427": 30, "TT2429": 30}
 
         self.TT_BO_LowLimit = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                             "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
@@ -104,7 +104,7 @@ class PLC:
                             "PT4322": 300, "PT4325": 300, "PT6302": 300}
 
         self.TT_FP_Activated = {"TT2420": True, "TT2422": True, "TT2424": True, "TT2425": True, "TT2403": True,
-                               "TT2418": True, "TT2427": True, "TT2429": True, "TT2431": True}
+                               "TT2418": True, "TT2427": True, "TT2429": True}
 
         self.TT_BO_Activated = {"TT2101": True, "TT2111": True, "TT2113": True, "TT2118": True, "TT2119": True, "TT4330": True,
                              "TT6203": True, "TT6207": True, "TT6211": True, "TT6213": True, "TT6222": True,
@@ -116,7 +116,7 @@ class PLC:
                              "PT4322": True, "PT4325": True, "PT6302": True}
 
         self.TT_FP_Alarm = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2403": False,
-                               "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False}
+                               "TT2418": False, "TT2427": False, "TT2429": False}
 
         self.TT_BO_Alarm = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
                          "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
@@ -840,7 +840,7 @@ class UpdateServer(QtCore.QObject):
         self.period=2
         print("connect to the PLC server")
         self.data_dic={"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
-                              "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0},
+                              "TT2418": 0, "TT2427": 0, "TT2429": 0},
             "BO":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                                            "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
                                            "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}},

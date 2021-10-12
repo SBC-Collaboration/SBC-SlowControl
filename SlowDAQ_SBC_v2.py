@@ -3900,7 +3900,7 @@ class UpdateClient(QtCore.QObject):
         self.period=2
         print("client is connecting to the ZMQ server")
         self.receive_dic = {"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
-                                                "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0},
+                                                "TT2418": 0, "TT2427": 0, "TT2429": 0},
                                           "BO":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                                                 "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
                                                  "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}},
@@ -4029,7 +4029,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.RTDset2Win.TT2418.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2418"])
                 self.MW.RTDset2Win.TT2427.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2427"])
                 self.MW.RTDset2Win.TT2429.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2429"])
-                self.MW.RTDset2Win.TT2431.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2431"])
+                # self.MW.RTDset2Win.TT2431.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2431"])
 
 
                 # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
