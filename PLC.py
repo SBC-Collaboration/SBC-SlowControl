@@ -52,10 +52,10 @@ class PLC:
         self.Connected_BO = self.Client_BO.connect()
         print(" Beckoff connected: " + str(self.Connected_BO))
 
-        # self.TT_FP_address = {"TT2120":31000, "TT2422":31008, "TT2424":31016, "TT2425":31024, "TT2403":31032,
+        # self.TT_FP_address = {"TT2420":31000, "TT2422":31008, "TT2424":31016, "TT2425":31024, "TT2403":31032,
         #                       "TT2418":31040, "TT2427":31048, "TT2429":31056, "TT2431":31064}
-        self.TT_FP_address = {"TT2120": 36000, "TT2422": 36002, "TT2424": 36004, "TT2425": 36006, "TT2403": 36008,
-                              "TT2418": 36010, "TT2427": 36012, "TT2429": 36014, "TT2431": 36016}
+        self.TT_FP_address = {"TT2420": 37000, "TT2422": 37002, "TT2424": 37004, "TT2425": 37006, "TT2403": 37008,
+                              "TT2418": 37010, "TT2427": 37012, "TT2429": 37014, "TT2431": 37016}
 
         self.TT_BO_address = {"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
                            "TT4330": 12998, "TT6203": 13000, "TT6207": 13002, "TT6211": 13004, "TT6213": 13006,
@@ -67,7 +67,7 @@ class PLC:
                          "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820,"PT4319": 12822,
                          "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
 
-        self.TT_FP_dic = {"TT2120": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
+        self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
                               "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0}
 
         self.TT_BO_dic={"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
@@ -79,9 +79,17 @@ class PLC:
                        "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
 
+        self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
+                          "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0}
+
+        self.TT_FP_HighLimit = {"TT2420": 30, "TT2422": 30, "TT2424": 30, "TT2425": 30, "TT2403": 30,
+                               "TT2418": 30, "TT2427": 30, "TT2429": 30, "TT2431": 30}
+
         self.TT_BO_LowLimit = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                             "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
                             "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
+
+
         self.TT_BO_HighLimit = {"TT2101": 30, "TT2111": 30, "TT2113": 30, "TT2118": 30, "TT2119": 30, "TT4330": 30,
                             "TT6203": 30, "TT6207": 30, "TT6211": 30, "TT6213": 30, "TT6222": 30,
                             "TT6407": 30, "TT6408": 30, "TT6409": 30, "TT6415": 30, "TT6416": 30}
@@ -95,6 +103,9 @@ class PLC:
                             "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
                             "PT4322": 300, "PT4325": 300, "PT6302": 300}
 
+        self.TT_FP_Activated = {"TT2420": True, "TT2422": True, "TT2424": True, "TT2425": True, "TT2403": True,
+                               "TT2418": True, "TT2427": True, "TT2429": True, "TT2431": True}
+
         self.TT_BO_Activated = {"TT2101": True, "TT2111": True, "TT2113": True, "TT2118": True, "TT2119": True, "TT4330": True,
                              "TT6203": True, "TT6207": True, "TT6211": True, "TT6213": True, "TT6222": True,
                              "TT6407": True, "TT6408": True, "TT6409": True, "TT6415": True, "TT6416": True}
@@ -103,6 +114,9 @@ class PLC:
                              "PT3308": True, "PT3309": True, "PT3311": True, "PT3314": True, "PT3320": True,
                              "PT3332": True, "PT3333": True, "PT4306": True, "PT4315": True, "PT4319": True,
                              "PT4322": True, "PT4325": True, "PT6302": True}
+
+        self.TT_FP_Alarm = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2403": False,
+                               "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False}
 
         self.TT_BO_Alarm = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
                          "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
@@ -659,6 +673,8 @@ class UpdateDataBase(QtCore.QObject):
 
             if self.PLC.NewData_Database:
                 print("Wrting PLC data to database...")
+                for key in self.PLC.TT_FP_dic:
+                    self.db.insert_data_into_datastorage(key, self.dt, self.PLC.FP_BO_dic[key])
                 for key in self.PLC.TT_BO_dic:
                     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
                 for key in self.PLC.PT_dic:
@@ -694,6 +710,8 @@ class UpdatePLC(QtCore.QObject):
             while self.Running:
                 print("PLC updating", datetime.datetime.now())
                 self.PLC.ReadAll()
+                for keyTT_FP in self.PLC.TT_FP_dic:
+                    self.check_TT_FP_alarm(keyTT_FP)
                 for keyTT_BO in self.PLC.TT_BO_dic:
                     self.check_TT_BO_alarm(keyTT_BO)
                 for keyPT in self.PLC.PT_dic:
@@ -707,6 +725,27 @@ class UpdatePLC(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+
+    def check_TT_FP_alarm(self, pid):
+
+        if self.PLC.TT_FP_Activated[pid]:
+            if int(self.PLC.TT_FP_LowLimit[pid]) > int(self.PLC.TT_FP_HighLimit[pid]):
+                print("Low limit should be less than high limit!")
+            else:
+                if int(self.PLC.TT_FP_dic[pid]) < int(self.PLC.TT_FP_LowLimit[pid]):
+                    self.setTTFPalarm(pid)
+                    self.PLC.TT_FP_Alarm[pid] = True
+                    # print(pid , " reading is lower than the low limit")
+                elif int(self.PLC.TT_FP_dic[pid]) > int(self.PLC.TT_FP_HighLimit[pid]):
+                    self.setTTFPalarm(pid)
+                    # print(pid,  " reading is higher than the high limit")
+                else:
+                    self.resetTTFPalarm(pid)
+                    # print(pid, " is in normal range")
+
+        else:
+            self.resetTTFPalarm(pid)
+            pass
 
     def check_TT_BO_alarm(self, pid):
 
@@ -726,7 +765,7 @@ class UpdatePLC(QtCore.QObject):
                     # print(pid, " is in normal range")
 
         else:
-            self.resetTTalarm(pid)
+            self.resetTTBOalarm(pid)
             pass
 
     def check_PT_alarm(self, pid):
@@ -749,6 +788,17 @@ class UpdatePLC(QtCore.QObject):
         else:
             self.resetPTalarm(pid)
             pass
+
+    def setTTFPalarm(self, pid):
+        self.PLC.TT_FP_Alarm[pid] = True
+        # and send email or slack messages
+        msg = "SBC alarm: {pid} is out of range".format(pid=pid)
+        # self.message_manager.tencent_alarm(msg)
+        # self.message_manager.slack_alarm(msg)
+
+    def resetTTFPalarm(self, pid):
+        self.PLC.TT_FP_Alarm[pid] = False
+        # and send email or slack messages
 
     def setTTBOalarm(self, pid):
         self.PLC.TT_BO_Alarm[pid] = True
@@ -789,7 +839,8 @@ class UpdateServer(QtCore.QObject):
         self.Running=False
         self.period=2
         print("connect to the PLC server")
-        self.data_dic={"data":{"TT":{"FP":{},
+        self.data_dic={"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
+                              "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0},
             "BO":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                                            "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
                                            "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}},
@@ -841,10 +892,14 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
+        for key in self.PLC.TT_FP_dic:
+            self.data_dic["data"]["TT"]["FP"][key]=self.PLC.TT_FP_dic[key]
         for key in self.PLC.TT_BO_dic:
             self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
             self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
+        for key in self.PLC.TT_FP_Alarm:
+            self.data_dic["Alarm"]["TT"]["FP"][key] = self.PLC.TT_FP_Alarm[key]
         for key in self.PLC.TT_BO_Alarm:
             self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
         for key in self.PLC.PT_dic:

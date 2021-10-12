@@ -3899,9 +3899,11 @@ class UpdateClient(QtCore.QObject):
         self.Running=False
         self.period=2
         print("client is connecting to the ZMQ server")
-        self.receive_dic = {"data":{"TT":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
-                                     "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
-                                     "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0},
+        self.receive_dic = {"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2403": 0,
+                                                "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0},
+                                          "BO":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+                                                "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
+                                                 "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}},
                                "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                                      "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                                      "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
@@ -4001,27 +4003,33 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.PT4325.SetValue(self.Client.receive_dic["data"]["PT"]["PT4325"])
                 self.MW.PT6302.SetValue(self.Client.receive_dic["data"]["PT"]["PT6302"])
 
-                self.MW.RTDset4Win.TT2101.SetValue(self.Client.receive_dic["data"]["TT"]["TT2101"])
-                self.MW.RTDset1Win.TT2111.SetValue(self.Client.receive_dic["data"]["TT"]["TT2111"])
-                self.MW.RTDset1Win.TT2113.SetValue(self.Client.receive_dic["data"]["TT"]["TT2113"])
-                self.MW.RTDset1Win.TT2118.SetValue(self.Client.receive_dic["data"]["TT"]["TT2118"])
-                self.MW.RTDset1Win.TT2119.SetValue(self.Client.receive_dic["data"]["TT"]["TT2119"])
-                self.MW.TT4330.SetValue(self.Client.receive_dic["data"]["TT"]["TT4330"])
-                self.MW.TT6203.SetValue(self.Client.receive_dic["data"]["TT"]["TT6203"])
+                self.MW.RTDset4Win.TT2101.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2101"])
+                self.MW.RTDset1Win.TT2111.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2111"])
+                self.MW.RTDset1Win.TT2113.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2113"])
+                self.MW.RTDset1Win.TT2118.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2118"])
+                self.MW.RTDset1Win.TT2119.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2119"])
+                self.MW.TT4330.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT4330"])
+                self.MW.TT6203.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6203"])
 
-                self.MW.TT6207.SetValue(self.Client.receive_dic["data"]["TT"]["TT6207"])
-                self.MW.TT6211.SetValue(self.Client.receive_dic["data"]["TT"]["TT6211"])
-                self.MW.TT6213.SetValue(self.Client.receive_dic["data"]["TT"]["TT6213"])
-                self.MW.TT6222.SetValue(self.Client.receive_dic["data"]["TT"]["TT6222"])
-                self.MW.TT6407.SetValue(self.Client.receive_dic["data"]["TT"]["TT6407"])
-                self.MW.TT6408.SetValue(self.Client.receive_dic["data"]["TT"]["TT6408"])
-                self.MW.TT6409.SetValue(self.Client.receive_dic["data"]["TT"]["TT6409"])
-                self.MW.TT6415.SetValue(self.Client.receive_dic["data"]["TT"]["TT6415"])
-                self.MW.TT6416.SetValue(self.Client.receive_dic["data"]["TT"]["TT6416"])
+                self.MW.TT6207.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6207"])
+                self.MW.TT6211.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6211"])
+                self.MW.TT6213.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6213"])
+                self.MW.TT6222.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6222"])
+                self.MW.TT6407.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6407"])
+                self.MW.TT6408.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6408"])
+                self.MW.TT6409.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6409"])
+                self.MW.TT6415.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6415"])
+                self.MW.TT6416.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6416"])
 
-
-
-
+                self.MW.RTDset2Win.TT2420.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2420"])
+                self.MW.RTDset2Win.TT2422.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2422"])
+                self.MW.RTDset2Win.TT2424.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2424"])
+                self.MW.RTDset2Win.TT2425.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2425"])
+                self.MW.RTDset2Win.TT2403.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2403"])
+                self.MW.RTDset2Win.TT2418.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2418"])
+                self.MW.RTDset2Win.TT2427.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2427"])
+                self.MW.RTDset2Win.TT2429.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2429"])
+                self.MW.RTDset2Win.TT2431.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2431"])
 
 
                 # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
