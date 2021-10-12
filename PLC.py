@@ -763,7 +763,7 @@ class UpdateDataBase(QtCore.QObject):
                 print("Database Updating stops.")
                 pass
 
-            time.sleep(self.period)
+            # time.sleep(self.period)
 
 
     @QtCore.Slot()
