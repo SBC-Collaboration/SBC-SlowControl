@@ -747,7 +747,9 @@ class UpdateDataBase(QtCore.QObject):
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
                     print("write pressure transducer")
                     self.para_b=0
-                
+
+                print("a",self.para_a,"b",self.para_b)
+
                 print("Wrting PLC data to database...")
                 # for key in self.PLC.TT_FP_dic:
                 #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.FP_BO_dic[key])
