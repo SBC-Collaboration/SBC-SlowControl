@@ -757,7 +757,7 @@ class UpdateDataBase(QtCore.QObject):
                 #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
                 # for key in self.PLC.PT_dic:
                 #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
-                # self.PLC.NewData_Database = False
+                self.PLC.NewData_Database = False
 
             else:
                 print("Database Updating stops.")
