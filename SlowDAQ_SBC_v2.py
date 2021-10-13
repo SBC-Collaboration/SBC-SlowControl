@@ -4039,6 +4039,8 @@ class UpdateDisplay(QtCore.QObject):
                 print("SV3307_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"])
                 print("SV3307_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
 
+                self.MW.PV4307.Set.LButton.clicked.disconnect(self.MW.PV4307.Set.ButtonLClicked)
+                self.MW.PV4307.Set.RButton.clicked.disconnect(self.MW.PV4307.Set.ButtonRClicked)
                 self.MW.PV4307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
                 # if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"]:
                 #     self.MW.PV4307.Set.ButtonLClicked()
