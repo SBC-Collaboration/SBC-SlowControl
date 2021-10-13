@@ -4042,8 +4042,26 @@ class UpdateDisplay(QtCore.QObject):
                 print("SV3307_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
 
                 self.MW.PV4307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
+                self.MW.PV4308.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4308"])
+                self.MW.PV4317.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4317"])
+                self.MW.PV4318.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4318"])
+                self.MW.PV4321.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4321"])
+                self.MW.PV4324.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4324"])
                 self.MW.PV5305.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5305"])
+                self.MW.PV5306.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5306"])
+                self.MW.PV5307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5307"])
+                self.MW.PV5309.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5309"])
                 self.MW.SV3307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
+                self.MW.SV3310.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3310"])
+                self.MW.SV3322.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3322"])
+                self.MW.SV3325.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3325"])
+                self.MW.SV3326.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3326"])
+                self.MW.SV3329.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3329"])
+                self.MW.SV4327.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4327"])
+                self.MW.SV4328.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4328"])
+                self.MW.SV4329.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4329"])
+                self.MW.SV4331.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4331"])
+                self.MW.SV4332.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4332"])
 
                 # refreshing the valve status from PLC every 30s
                 if self.count >= self.button_refreshing_count:
@@ -4052,20 +4070,112 @@ class UpdateDisplay(QtCore.QObject):
                     else:
                         self.MW.PV4307.Set.ButtonRClicked()
 
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4308"]:
+                        self.MW.PV4308.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV4308.Set.ButtonRClicked()
+                    self.count = 0
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4317"]:
+                        self.MW.PV4317.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV4317.Set.ButtonRClicked()
+                    self.count = 0
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4318"]:
+                        self.MW.PV4318.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV4318.Set.ButtonRClicked()
+                    self.count = 0
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4321"]:
+                        self.MW.PV4321.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV4321.Set.ButtonRClicked()
+                    self.count = 0
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4324"]:
+                        self.MW.PV4324.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV4324.Set.ButtonRClicked()
+
                     if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5305"]:
                         self.MW.PV5305.Set.ButtonLClicked()
                     else:
                         self.MW.PV5305.Set.ButtonRClicked()
 
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5306"]:
+                        self.MW.PV5306.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV5306.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5307"]:
+                        self.MW.PV5307.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV5307.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5309"]:
+                        self.MW.PV5309.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV5309.Set.ButtonRClicked()
+
                     if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"]:
                         self.MW.SV3307.Set.ButtonLClicked()
                     else:
                         self.MW.SV3307.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3310"]:
+                        self.MW.SV3310.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV3310.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3322"]:
+                        self.MW.SV3322.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV3322.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3325"]:
+                        self.MW.SV3325.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV3325.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3326"]:
+                        self.MW.SV3326.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV3326.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3329"]:
+                        self.MW.SV3329.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV3329.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV4327"]:
+                        self.MW.SV4327.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV3307.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV4328"]:
+                        self.MW.SV4328.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV4328.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV4329"]:
+                        self.MW.SV4329.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV4329.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV4331"]:
+                        self.MW.SV4331.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV4331.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV4332"]:
+                        self.MW.SV4332.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV4332.Set.ButtonRClicked()
+
                     self.count = 0
                 self.count += 1
-
-
-
 
                 self.MW.PT2121.SetValue(self.Client.receive_dic["data"]["PT"]["PT2121"])
                 self.MW.PT2316.SetValue(self.Client.receive_dic["data"]["PT"]["PT2316"])
