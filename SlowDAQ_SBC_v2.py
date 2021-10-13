@@ -4010,6 +4010,8 @@ class UpdateDisplay(QtCore.QObject):
         self.Running = False
 
         self.display_update.connect(self.MW.update_alarmwindow)
+        self.button_refreshing_count = 15
+        self.count = 0
 
     @QtCore.Slot()
     def run(self):
@@ -4040,22 +4042,29 @@ class UpdateDisplay(QtCore.QObject):
                 print("SV3307_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
 
                 self.MW.PV4307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
-                if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"]:
-                    self.MW.PV4307.Set.ButtonLClicked()
-                else:
-                    self.MW.PV4307.Set.ButtonRClicked()
-                #
                 self.MW.PV5305.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5305"])
-                if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5305"]:
-                    self.MW.PV5305.Set.ButtonLClicked()
-                else:
-                    self.MW.PV5305.Set.ButtonRClicked()
-
                 self.MW.SV3307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
-                if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"]:
-                    self.MW.SV3307.Set.ButtonLClicked()
-                else:
-                    self.MW.SV3307.Set.ButtonRClicked()
+
+                # refreshing the valve status from PLC every 30s
+                if self.count >= self.button_refreshing_count:
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"]:
+                        self.MW.PV4307.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV4307.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5305"]:
+                        self.MW.PV5305.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV5305.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"]:
+                        self.MW.SV3307.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV3307.Set.ButtonRClicked()
+                    self.count = 0
+                self.count += 1
+
+
 
 
                 self.MW.PT2121.SetValue(self.Client.receive_dic["data"]["PT"]["PT2121"])
