@@ -4032,24 +4032,24 @@ class UpdateDisplay(QtCore.QObject):
                 self.display_update.emit(dic)
                 # PT1325 not found
 
-                print(self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"])
+                # print(self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"])
                 # # self.MW.PV4307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
-                # if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"]:
-                #     self.MW.PV4307.Set.ButtonLClicked()
-                # else:
-                #     self.MW.PV4307.Set.BUttonRClicked()
+                if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"]:
+                    self.MW.PV4307.Set.ButtonLClicked()
+                else:
+                    self.MW.PV4307.Set.ButtonRClicked()
                 #
                 # # self.MW.PV5305.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5305"])
-                # if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5305"]:
-                #     self.MW.PV5305.Set.ButtonLClicked()
-                # else:
-                #     self.MW.PV5305.Set.BUttonRClicked()
+                if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5305"]:
+                    self.MW.PV5305.Set.ButtonLClicked()
+                else:
+                    self.MW.PV5305.Set.ButtonRClicked()
                 #
                 # # self.MW.SV3307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
-                # if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"]:
-                #     self.MW.SV3307.Set.ButtonLClicked()
-                # else:
-                #     self.MW.SV3307.Set.BUttonRClicked()
+                if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"]:
+                    self.MW.SV3307.Set.ButtonLClicked()
+                else:
+                    self.MW.SV3307.Set.ButtonRClicked()
 
 
                 self.MW.PT2121.SetValue(self.Client.receive_dic["data"]["PT"]["PT2121"])
