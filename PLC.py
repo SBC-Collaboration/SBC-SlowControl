@@ -202,6 +202,9 @@ class PLC:
         self.nValve = len(self.valve_address)
         self.Valve = {}
         self.Valve_OUT = {}
+        self.Valve_MAN = {}
+        self.Valve_INTLKD = {}
+        self.Valve_ERR = {}
         # self.PT80 = 0.
         # self.FlowValve = 0.
         # self.BottomChillerSetpoint = 0.
@@ -311,10 +314,16 @@ class PLC:
             for key in self.valve_address:
                 Raw_BO_Valve[key] = self.Client_BO.read_holding_registers(self.valve_address[key], count=1, unit=0x01)
                 self.Valve[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
-                Raw_BO_Valve_OUT[key]=self.ReadCoil(1,self.valve_address[key])
-                self.Valve_OUT[key]= Raw_BO_Valve_OUT[key]
+
+                self.Valve_OUT[key]= self.ReadCoil(1,self.valve_address[key])
+                self.Valve_INTLKD[key] = self.ReadCoil(8, self.valve_address[key])
+                self.Valve_MAN[key] = self.ReadCoil(16, self.valve_address[key])
+                self.Valve_ERR[key] = self.ReadCoil(32, self.valve_address[key])
                 # print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve[key])
                 print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve_OUT[key])
+                print(key, "Address with ", self.valve_address[key], "INTLKD is", self.Valve_INTLKD[key])
+                print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
+                print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
