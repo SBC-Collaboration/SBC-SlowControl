@@ -751,9 +751,9 @@ class UpdateDataBase(QtCore.QObject):
         self.Running = False
         self.base_period=1
         self.para_a=0
-        self.rate_a=2
+        self.rate_a=60
         self.para_b=0
-        self.rate_b=4
+        self.rate_b=120
         print("begin updating Database")
 
     @QtCore.Slot()

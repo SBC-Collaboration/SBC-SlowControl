@@ -913,13 +913,13 @@ class DoubleButton(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def ButtonLClicked(self):
-        time.sleep(1)
+        # time.sleep(1)
         self.ButtonLState()
         self.Signals.sSignal.emit(self.LButton.text())
 
     @QtCore.Slot()
     def ButtonRClicked(self):
-        time.sleep(1)
+        # time.sleep(1)
         self.ButtonRState()
         self.Signals.sSignal.emit(self.RButton.text())
 
