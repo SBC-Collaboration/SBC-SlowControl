@@ -201,10 +201,26 @@ class PLC:
                         "SV4327": 12305, "SV4328": 12306, "SV4329": 12307, "SV4331": 12308, "SV4332": 12309}
         self.nValve = len(self.valve_address)
         self.Valve = {}
-        self.Valve_OUT = {}
-        self.Valve_MAN = {}
-        self.Valve_INTLKD = {}
-        self.Valve_ERR = {}
+        self.Valve_OUT = {"PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
+                          "PV4324": 0, "PV5305": 0, "PV5306": 0,
+                          "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
+                          "SV3325": 0, "SV3326": 0, "SV3329": 0,
+                          "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0}
+        self.Valve_MAN = {"PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+                          "PV4324": False, "PV5305": True, "PV5306": True,
+                          "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
+                          "SV3325": True, "SV3326": True, "SV3329": True,
+                          "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False}
+        self.Valve_INTLKD = {"PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+                          "PV4324": False, "PV5305": False, "PV5306": False,
+                          "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+                          "SV3325": False, "SV3326": False, "SV3329": False,
+                          "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False}
+        self.Valve_ERR = {"PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+                          "PV4324": False, "PV5305": False, "PV5306": False,
+                          "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+                          "SV3325": False, "SV3326": False, "SV3329": False,
+                          "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False}
         # self.PT80 = 0.
         # self.FlowValve = 0.
         # self.BottomChillerSetpoint = 0.
@@ -319,11 +335,10 @@ class PLC:
                 self.Valve_INTLKD[key] = self.ReadCoil(8, self.valve_address[key])
                 self.Valve_MAN[key] = self.ReadCoil(16, self.valve_address[key])
                 self.Valve_ERR[key] = self.ReadCoil(32, self.valve_address[key])
-                # print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve[key])
-                print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve_OUT[key])
-                print(key, "Address with ", self.valve_address[key], "INTLKD is", self.Valve_INTLKD[key])
-                print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
-                print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
+                # print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve_OUT[key])
+                # print(key, "Address with ", self.valve_address[key], "INTLKD is", self.Valve_INTLKD[key])
+                # print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
+                # print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -467,7 +482,7 @@ class PLC:
     def ReadValve(self,address=12296):
         Raw_BO = self.Client_BO.read_holding_registers(address, count=1, unit=0x01)
         output_BO = struct.pack("H", Raw_BO.getRegister(0))
-        print("valve value is", output_BO)
+        # print("valve value is", output_BO)
         return output_BO
 
     def WriteOpen(self,address=12296):
@@ -754,15 +769,15 @@ class UpdateDataBase(QtCore.QObject):
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
                     for key in self.PLC.TT_BO_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
-                    print("write RTDS")
+                    # print("write RTDS")
                     self.para_a=0
                 if self.para_b >= self.rate_b:
                     for key in self.PLC.PT_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
-                    print("write pressure transducer")
+                    # print("write pressure transducer")
                     self.para_b=0
 
-                print("a",self.para_a,"b",self.para_b )
+                # print("a",self.para_a,"b",self.para_b )
 
                 print("Wrting PLC data to database...")
                 self.para_a += 1
@@ -946,7 +961,27 @@ class UpdateServer(QtCore.QObject):
                                "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                                      "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                                      "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
-                                     "PT4322": 0, "PT4325": 0, "PT6302": 0}},
+                                     "PT4322": 0, "PT4325": 0, "PT6302": 0}
+                               "Valve":{"OUT":{"PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
+                                               "PV4324": 0, "PV5305": 0, "PV5306": 0,
+                                               "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
+                                               "SV3325": 0, "SV3326": 0, "SV3329": 0,
+                                               "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0},
+                                        "INTLKD":{"PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+                                                  "PV4324": False, "PV5305": False, "PV5306": False,
+                                                  "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+                                                  "SV3325": False, "SV3326": False, "SV3329": False,
+                                                  "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False},
+                                        "MAN":{"PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+                                               "PV4324": False, "PV5305": True, "PV5306": True,
+                                               "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
+                                               "SV3325": True, "SV3326": True, "SV3329": True,
+                                               "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False},
+                                        "ERR":{"PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+                                               "PV4324": False, "PV5305": False, "PV5306": False,
+                                               "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+                                               "SV3325": False, "SV3326": False, "SV3329": False,
+                                               "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False}}},
                        "Alarm":{"TT":{"FP":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
                                             "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
                                             "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
@@ -1009,12 +1044,15 @@ class UpdateServer(QtCore.QObject):
             self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
             self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
+        for key in self.PLC.Valve_OUT:
+            self.data_dic["data"]["Valve"]["OUT"][key]=self.PLC.Valve_OUT[key]
         for key in self.PLC.TT_FP_Alarm:
             self.data_dic["Alarm"]["TT"]["FP"][key] = self.PLC.TT_FP_Alarm[key]
         for key in self.PLC.TT_BO_Alarm:
             self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
         for key in self.PLC.PT_dic:
             self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
+
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
         self.data_package=pickle.dumps(self.data_dic)
 

@@ -3917,7 +3917,35 @@ class UpdateClient(QtCore.QObject):
                                "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                                      "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                                      "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
-                                     "PT4322": 0, "PT4325": 0, "PT6302": 0}},
+                                     "PT4322": 0, "PT4325": 0, "PT6302": 0},
+                               "Valve":{"OUT": {"PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
+                                                      "PV4324": 0, "PV5305": 0, "PV5306": 0,
+                                                      "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
+                                                      "SV3325": 0, "SV3326": 0, "SV3329": 0,
+                                                      "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0},
+                                        "INTLKD": {"PV4307": False, "PV4308": False, "PV4317": False,
+                                                         "PV4318": False, "PV4321": False,
+                                                         "PV4324": False, "PV5305": False, "PV5306": False,
+                                                         "PV5307": False, "PV5309": False, "SV3307": False,
+                                                         "SV3310": False, "SV3322": False,
+                                                         "SV3325": False, "SV3326": False, "SV3329": False,
+                                                         "SV4327": False, "SV4328": False, "SV4329": False,
+                                                         "SV4331": False, "SV4332": False},
+                                        "MAN": {"PV4307": False, "PV4308": False, "PV4317": False,
+                                                      "PV4318": False, "PV4321": False,
+                                                      "PV4324": False, "PV5305": True, "PV5306": True,
+                                                      "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
+                                                      "SV3325": True, "SV3326": True, "SV3329": True,
+                                                      "SV4327": False, "SV4328": False, "SV4329": False,
+                                                      "SV4331": False, "SV4332": False},
+                                        "ERR": {"PV4307": False, "PV4308": False, "PV4317": False,
+                                                      "PV4318": False, "PV4321": False,
+                                                      "PV4324": False, "PV5305": False, "PV5306": False,
+                                                      "PV5307": False, "PV5309": False, "SV3307": False,
+                                                      "SV3310": False, "SV3322": False,
+                                                      "SV3325": False, "SV3326": False, "SV3329": False,
+                                                      "SV4327": False, "SV4328": False, "SV4329": False,
+                                                      "SV4331": False, "SV4332": False}}},
                        "Alarm":{"TT":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
                                       "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
                                       "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
@@ -4003,6 +4031,26 @@ class UpdateDisplay(QtCore.QObject):
 
                 self.display_update.emit(dic)
                 # PT1325 not found
+
+                self.MW.PV4307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
+                if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"]:
+                    self.MW.PV4307.Set.ButtonLClicked()
+                else:
+                    self.MW.PV4307.Set.BUttonRClicked()
+
+                self.MW.PV5305.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5305"])
+                if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5305"]:
+                    self.MW.PV5305.Set.ButtonLClicked()
+                else:
+                    self.MW.PV5305.Set.BUttonRClicked()
+
+                self.MW.SV3307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
+                if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"]:
+                    self.MW.SV3307.Set.ButtonLClicked()
+                else:
+                    self.MW.SV3307.Set.BUttonRClicked()
+
+
                 self.MW.PT2121.SetValue(self.Client.receive_dic["data"]["PT"]["PT2121"])
                 self.MW.PT2316.SetValue(self.Client.receive_dic["data"]["PT"]["PT2316"])
                 self.MW.PT2330.SetValue(self.Client.receive_dic["data"]["PT"]["PT2330"])
