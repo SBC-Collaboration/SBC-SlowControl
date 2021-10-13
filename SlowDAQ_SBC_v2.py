@@ -4032,9 +4032,12 @@ class UpdateDisplay(QtCore.QObject):
                 self.display_update.emit(dic)
                 # PT1325 not found
 
-                print("PV4307", self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"])
-                print("PV5305", self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5305"])
-                print("SV3307", self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"])
+                print("PV4307_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"])
+                print("PV4307_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
+                print("PV5305_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5305"])
+                print("PV5305_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5305"])
+                print("SV3307_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"])
+                print("SV3307_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
                 # # self.MW.PV4307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
                 if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"]:
                     self.MW.PV4307.Set.ButtonLClicked()
