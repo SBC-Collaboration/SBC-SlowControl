@@ -735,20 +735,20 @@ class UpdateDataBase(QtCore.QObject):
             print("Database Updating", self.dt)
 
             if self.PLC.NewData_Database:
-                if self.para_a==self.rate_a:
+                if self.para_a>= self.rate_a:
                     for key in self.PLC.TT_FP_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
                     for key in self.PLC.TT_BO_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
                     print("write RTDS")
                     self.para_a=0
-                if self.para_b == self.rate_b:
+                if self.para_b >= self.rate_b:
                     for key in self.PLC.PT_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
                     print("write pressure transducer")
                     self.para_b=0
 
-                print("a",self.para_a,"b",self.para_b)
+                print("a",self.para_a,"b",self.para_b )
 
                 print("Wrting PLC data to database...")
                 # for key in self.PLC.TT_FP_dic:
@@ -757,13 +757,14 @@ class UpdateDataBase(QtCore.QObject):
                 #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
                 # for key in self.PLC.PT_dic:
                 #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
+                self.para_a += 1
+                self.para_b += 1
                 self.PLC.NewData_Database = False
 
             else:
-                print("Database Updating stops.")
+                print("No new data from PLC")
                 pass
-            self.para_a += 1
-            self.para_b += 1
+
             time.sleep(self.base_period)
 
             # time.sleep(self.period)
