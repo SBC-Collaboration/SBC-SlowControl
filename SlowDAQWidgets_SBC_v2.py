@@ -882,6 +882,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.RState = "Inactive"
         self.SetButtonStateNames("Active", "Inactive")
         self.ButtonRState()
+        self.Activate(True)
 
     def SetButtonStateNames(self, Active, Inactive):
         self.ActiveName = Active
