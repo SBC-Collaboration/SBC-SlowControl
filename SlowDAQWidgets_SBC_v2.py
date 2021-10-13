@@ -866,7 +866,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.LButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
             + "} QWidget[State = false]{" + C_RED + "}")
-        self.LButton.clicked.connect(self.ButtonLClicked)
+        # self.LButton.clicked.connect(self.ButtonLClicked)
 
         self.RButton = QtWidgets.QPushButton(self)
         self.RButton.setObjectName("RButton")
@@ -876,7 +876,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.RButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
             + C_GREEN + "} QWidget[State = false]{" + C_RED + "}")
-        self.RButton.clicked.connect(self.ButtonRClicked)
+        # self.RButton.clicked.connect(self.ButtonRClicked)
 
         self.LState = "Active"
         self.RState = "Inactive"
