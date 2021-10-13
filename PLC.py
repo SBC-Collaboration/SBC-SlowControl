@@ -52,6 +52,7 @@ class PLC:
         self.Connected_BO = self.Client_BO.connect()
         print(" Beckoff connected: " + str(self.Connected_BO))
 
+
         self.TT_FP_address = {"TT2420": 31000, "TT2422": 31002, "TT2424": 37004, "TT2425": 37006, "TT2442": 36000,
                               "TT2403": 31008, "TT2418": 31010, "TT2427": 31012, "TT2429": 31014, "TT2431": 32000,
                               "TT2441": 36002, "TT2414": 32002, "TT2413": 32004, "TT2412": 32006, "TT2415": 32008,
@@ -200,6 +201,7 @@ class PLC:
                         "SV4327": 12305, "SV4328": 12306, "SV4329": 12307, "SV4331": 12308, "SV4332": 12309}
         self.nValve = len(self.valve_address)
         self.Valve = {}
+        self.Valve_OUT = {}
         # self.PT80 = 0.
         # self.FlowValve = 0.
         # self.BottomChillerSetpoint = 0.
@@ -305,10 +307,14 @@ class PLC:
 
 
             Raw_BO_Valve = {}
+            Raw_BO_Valve_OUT = {}
             for key in self.valve_address:
                 Raw_BO_Valve[key] = self.Client_BO.read_holding_registers(self.valve_address[key], count=1, unit=0x01)
                 self.Valve[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
+                Raw_BO_Valve_OUT[key]=self.ReadCoil(1,self.valve_address[key])
+                self.Valve_OUT[key]= Raw_BO_Valve_OUT[key]
                 # print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve[key])
+                print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve_OUT[key])
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -724,7 +730,6 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_a=2
         self.para_b=0
         self.rate_b=4
-        self.period = 60
         print("begin updating Database")
 
     @QtCore.Slot()
@@ -751,12 +756,6 @@ class UpdateDataBase(QtCore.QObject):
                 print("a",self.para_a,"b",self.para_b )
 
                 print("Wrting PLC data to database...")
-                # for key in self.PLC.TT_FP_dic:
-                #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.FP_BO_dic[key])
-                # for key in self.PLC.TT_BO_dic:
-                #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
-                # for key in self.PLC.PT_dic:
-                #     self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
                 self.para_a += 1
                 self.para_b += 1
                 self.PLC.NewData_Database = False
@@ -767,7 +766,6 @@ class UpdateDataBase(QtCore.QObject):
 
             time.sleep(self.base_period)
 
-            # time.sleep(self.period)
 
 
     @QtCore.Slot()
