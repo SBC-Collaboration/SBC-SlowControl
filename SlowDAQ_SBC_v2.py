@@ -4200,10 +4200,10 @@ class UpdateDisplay(QtCore.QObject):
                     else:
                         self.MW.SV4332.Set.ButtonRClicked()
 
-                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV4337"]:
-                        self.MW.SV4337.Set.ButtonLClicked()
-                    else:
-                        self.MW.SV4337.Set.ButtonRClicked()
+                    # if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV4337"]:
+                    #     self.MW.SV4337.Set.ButtonLClicked()
+                    # else:
+                    #     self.MW.SV4337.Set.ButtonRClicked()
 
                     if self.Client.receive_dic["data"]["Valve"]["OUT"]["HFSV3312"]:
                         self.MW.HFSV3312.Set.ButtonLClicked()
