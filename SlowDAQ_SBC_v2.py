@@ -787,9 +787,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #commands stack
-        self.address ={"PV4307":12289,"PV4308":12290,"PV4317":12291,"PV4318":12292,"PV4321":12293,"PV4324":12294,"PV5305":12295,"PV5306":12296,
+        self.address ={"PV1344":12288, "PV4307":12289,"PV4308":12290,"PV4317":12291,"PV4318":12292,"PV4321":12293,"PV4324":12294,"PV5305":12295,"PV5306":12296,
                        "PV5307":12297,"PV5309":12298,"SV3307":12299,"SV3310":12300,"SV3322":12301,"SV3325":12302,"SV3326":12303,"SV3329":12304,
-                       "SV4327":12305,"SV4328":12306,"SV4329":12307,"SV4331":12308,"SV4332":12309}
+                       "SV4327":12305,"SV4328":12306,"SV4329":12307,"SV4331":12308,"SV4332":12309, "SV4337": 12310, "HFSV3312": 12311,
+                       "HFSV3323":12312, "HFSV3331":12313}
         self.commands = {}
         self.signal_connection()
 
@@ -874,6 +875,8 @@ class MainWindow(QtWidgets.QMainWindow):
     # signal connections to write settings to PLC codes
 
     def signal_connection(self):
+        # self.PV1344.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1344.Label.text()))
+        # self.PV1344.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1344.Label.text()))
         self.PV4307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4307.Label.text()))
         self.PV4307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4307.Label.text()))
         self.PV4308.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4308.Label.text()))
@@ -916,6 +919,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV4331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4331.Label.text()))
         self.SV4332.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4332.Label.text()))
         self.SV4332.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4332.Label.text()))
+        # self.SV4337.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4337.Label.text()))
+        # self.SV4337.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4337.Label.text()))
+        self.HFSV3312.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3312.Label.text()))
+        self.HFSV3312.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3312.Label.text()))
+        self.HFSV3323.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3323.Label.text()))
+        self.HFSV3323.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3323.Label.text()))
+        self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
+        self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
 
     @QtCore.Slot()
     def LButtonClicked(self,pid):
@@ -3922,7 +3933,8 @@ class UpdateClient(QtCore.QObject):
                                                       "PV4324": 0, "PV5305": 0, "PV5306": 0,
                                                       "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
                                                       "SV3325": 0, "SV3326": 0, "SV3329": 0,
-                                                      "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0},
+                                                      "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
+                                                      "SV4337": 0, "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0},
                                         "INTLKD": {"PV4307": False, "PV4308": False, "PV4317": False,
                                                          "PV4318": False, "PV4321": False,
                                                          "PV4324": False, "PV5305": False, "PV5306": False,
@@ -3930,14 +3942,16 @@ class UpdateClient(QtCore.QObject):
                                                          "SV3310": False, "SV3322": False,
                                                          "SV3325": False, "SV3326": False, "SV3329": False,
                                                          "SV4327": False, "SV4328": False, "SV4329": False,
-                                                         "SV4331": False, "SV4332": False},
+                                                         "SV4331": False, "SV4332": False,
+                                                         "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False},
                                         "MAN": {"PV4307": False, "PV4308": False, "PV4317": False,
                                                       "PV4318": False, "PV4321": False,
                                                       "PV4324": False, "PV5305": True, "PV5306": True,
                                                       "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
                                                       "SV3325": True, "SV3326": True, "SV3329": True,
                                                       "SV4327": False, "SV4328": False, "SV4329": False,
-                                                      "SV4331": False, "SV4332": False},
+                                                      "SV4331": False, "SV4332": False,
+                                                      "SV4337": False, "HFSV3312": True, "HFSV3323": True, "HFSV3331": True},
                                         "ERR": {"PV4307": False, "PV4308": False, "PV4317": False,
                                                       "PV4318": False, "PV4321": False,
                                                       "PV4324": False, "PV5305": False, "PV5306": False,
@@ -3945,7 +3959,8 @@ class UpdateClient(QtCore.QObject):
                                                       "SV3310": False, "SV3322": False,
                                                       "SV3325": False, "SV3326": False, "SV3329": False,
                                                       "SV4327": False, "SV4328": False, "SV4329": False,
-                                                      "SV4331": False, "SV4332": False}}},
+                                                      "SV4331": False, "SV4332": False,
+                                                      "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}}},
                        "Alarm":{"TT":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
                                       "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
                                       "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
@@ -4034,13 +4049,15 @@ class UpdateDisplay(QtCore.QObject):
                 self.display_update.emit(dic)
                 # PT1325 not found
 
-                print("PV4307_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"])
-                print("PV4307_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
-                print("PV5305_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5305"])
-                print("PV5305_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5305"])
-                print("SV3307_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"])
-                print("SV3307_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
 
+                # print("PV4307_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"])
+                # print("PV4307_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
+                # print("PV5305_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["PV5305"])
+                # print("PV5305_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5305"])
+                # print("SV3307_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"])
+                # print("SV3307_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
+
+                # self.MW.PV1344.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV1344"])
                 self.MW.PV4307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
                 self.MW.PV4308.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4308"])
                 self.MW.PV4317.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4317"])
@@ -4062,9 +4079,18 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.SV4329.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4329"])
                 self.MW.SV4331.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4331"])
                 self.MW.SV4332.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4332"])
+                # self.MW.SV4337.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4337"])
+                self.MW.HFSV3312.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3312"])
+                self.MW.HFSV3323.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3323"])
+                self.MW.HFSV3331.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3331"])
 
                 # refreshing the valve status from PLC every 30s
                 if self.count >= self.button_refreshing_count:
+                    # if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1344"]:
+                    #     self.MW.PV1344.Set.ButtonLClicked()
+                    # else:
+                    #     self.MW.PV1344.Set.ButtonRClicked()
+
                     if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"]:
                         self.MW.PV4307.Set.ButtonLClicked()
                     else:
@@ -4173,6 +4199,26 @@ class UpdateDisplay(QtCore.QObject):
                         self.MW.SV4332.Set.ButtonLClicked()
                     else:
                         self.MW.SV4332.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV4337"]:
+                        self.MW.SV4337.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV4337.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["HFSV3312"]:
+                        self.MW.HFSV3312.Set.ButtonLClicked()
+                    else:
+                        self.MW.HFSV3312.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["HFSV3323"]:
+                        self.MW.HFSV3323.Set.ButtonLClicked()
+                    else:
+                        self.MW.HFSV3323.Set.ButtonRClicked()
+
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["HFSV3331"]:
+                        self.MW.HFSV3331.Set.ButtonLClicked()
+                    else:
+                        self.MW.HFSV3331.Set.ButtonRClicked()
 
                     self.count = 0
                 self.count += 1
