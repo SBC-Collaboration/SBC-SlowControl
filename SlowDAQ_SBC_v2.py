@@ -2181,7 +2181,7 @@ class RTDset3(QtWidgets.QMainWindow):
         # set gridlayout
         self.GL = QtWidgets.QGridLayout()
         # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20*R, 20*R, 20R, 20*R)
+        self.GL.setContentsMargins(20*R, 20*R, 20*R, 20*R)
         self.GL.setSpacing(20*R)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
 
