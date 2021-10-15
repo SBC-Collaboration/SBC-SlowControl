@@ -34,7 +34,7 @@ ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bd
                  "f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f1367668" \
                  "31c12bff0da3a2314ca2266"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px; border-color: black;"
-R=0.6 # Resolution settings
+R=1 # Resolution settings
 
 
 
