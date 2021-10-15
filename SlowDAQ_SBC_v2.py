@@ -34,6 +34,7 @@ ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bd
                  "f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f1367668" \
                  "31c12bff0da3a2314ca2266"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px; border-color: black;"
+R=1 # Resolution settings
 
 
 
@@ -76,8 +77,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.resize(2400, 1400)  # Open at center using resized
-        self.setMinimumSize(2400, 1400)
+        self.resize(2400*R, 1400*R)  # Open at center using resized
+        self.setMinimumSize(2400*R, 1400*R)
         self.setWindowTitle("SlowDAQ " + VERSION)
         self.setWindowIcon(QtGui.QIcon(os.path.join(self.ImagePath, "Logo white_resized.png")))
 
@@ -87,7 +88,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
         self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
-        self.Tab.setGeometry(QtCore.QRect(0, 0, 2400, 1400))
+        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2400*R, 1400*R))
 
         self.ThermosyphonTab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.ThermosyphonTab, "Thermosyphon Main Panel")
@@ -96,9 +97,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ThermosyphonTab.Background.setScaledContents(True)
         self.ThermosyphonTab.Background.setStyleSheet('background-color:black;')
         pixmap_thermalsyphon = QtGui.QPixmap(os.path.join(self.ImagePath, "Thermosyphon.png"))
-        pixmap_thermalsyphon = pixmap_thermalsyphon.scaledToWidth(2400)
+        pixmap_thermalsyphon = pixmap_thermalsyphon.scaledToWidth(2400*R)
         self.ThermosyphonTab.Background.setPixmap(QtGui.QPixmap(pixmap_thermalsyphon))
-        self.ThermosyphonTab.Background.move(0, 0)
+        self.ThermosyphonTab.Background.move(0*R, 0*R)
         self.ThermosyphonTab.Background.setAlignment(QtCore.Qt.AlignCenter)
 
         self.ChamberTab = QtWidgets.QWidget()
@@ -108,9 +109,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ChamberTab.Background.setScaledContents(True)
         self.ChamberTab.Background.setStyleSheet('background-color:black;')
         pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "Chamber_simplified.png"))
-        pixmap_chamber = pixmap_chamber.scaledToWidth(2400)
+        pixmap_chamber = pixmap_chamber.scaledToWidth(2400*R)
         self.ChamberTab.Background.setPixmap(QtGui.QPixmap(pixmap_chamber))
-        self.ChamberTab.Background.move(0, 0)
+        self.ChamberTab.Background.move(0*R, 0*R)
         self.ChamberTab.Background.setObjectName("ChamberBkg")
 
         self.FluidTab = QtWidgets.QWidget()
@@ -120,9 +121,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.FluidTab.Background.setScaledContents(True)
         self.FluidTab.Background.setStyleSheet('background-color:black;')
         pixmap_Fluid = QtGui.QPixmap(os.path.join(self.ImagePath, "CF4_XeAr_Panel_cryogenic.png"))
-        pixmap_Fluid = pixmap_Fluid.scaledToWidth(2400)
+        pixmap_Fluid = pixmap_Fluid.scaledToWidth(2400*R)
         self.FluidTab.Background.setPixmap(QtGui.QPixmap(pixmap_Fluid))
-        self.FluidTab.Background.move(0, 0)
+        self.FluidTab.Background.move(0*R, 0*R)
         self.FluidTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.FluidTab.Background.setObjectName("FluidBkg")
 
@@ -133,9 +134,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HydraulicTab.Background.setScaledContents(True)
         self.HydraulicTab.Background.setStyleSheet('background-color:black;')
         pixmap_Hydraulic = QtGui.QPixmap(os.path.join(self.ImagePath, "Hydraulic_apparatus.png"))
-        pixmap_Hydraulic = pixmap_Hydraulic.scaledToWidth(2400)
+        pixmap_Hydraulic = pixmap_Hydraulic.scaledToWidth(2400*R)
         self.HydraulicTab.Background.setPixmap(QtGui.QPixmap(pixmap_Hydraulic))
-        self.HydraulicTab.Background.move(0, 0)
+        self.HydraulicTab.Background.move(0*R, 0*R)
         self.HydraulicTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.HydraulicTab.Background.setObjectName("HydraulicBkg")
 
@@ -146,9 +147,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DatanSignalTab.Background.setScaledContents(True)
         self.DatanSignalTab.Background.setStyleSheet('background-color:black;')
         pixmap_DatanSignal = QtGui.QPixmap(os.path.join(self.ImagePath, "Default_Background.png"))
-        pixmap_DatanSignal = pixmap_DatanSignal.scaledToWidth(2400)
+        pixmap_DatanSignal = pixmap_DatanSignal.scaledToWidth(2400*R)
         self.DatanSignalTab.Background.setPixmap(QtGui.QPixmap(pixmap_DatanSignal))
-        self.DatanSignalTab.Background.move(0, 0)
+        self.DatanSignalTab.Background.move(0*R, 0*R)
         self.DatanSignalTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.DatanSignalTab.Background.setObjectName("DatanSignalBkg")
 
@@ -160,187 +161,187 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ThermosyphonWin = ThermosyphonWindow()
         self.Tstatus = FunctionButton(self.ThermosyphonWin, self.ThermosyphonTab)
-        self.Tstatus.SubWindow.resize(1000, 1050)
+        self.Tstatus.SubWindow.resize(1000*R, 1050*R)
         # self.Tstatus.StatusWindow.thermosyphon()
-        self.Tstatus.move(0, 0)
+        self.Tstatus.move(0*R, 0*R)
         self.Tstatus.Button.setText("Thermosyphon status")
 
         self.LoginT = SingleButton(self.ThermosyphonTab)
-        self.LoginT.move(340, 1200)
+        self.LoginT.move(340*R, 1200*R)
         self.LoginT.Label.setText("Login")
         self.LoginT.Button.setText("Guest")
 
         # PLC test window
         self.TT9998 = Indicator(self.ThermosyphonTab)
         self.TT9998.Label.setText("TT9998")
-        self.TT9998.move(0, 900)
+        self.TT9998.move(0*R, 900*R)
 
         self.TT9999 = Indicator(self.ThermosyphonTab)
         self.TT9999.Label.setText("TT9998")
-        self.TT9999.move(0, 950)
+        self.TT9999.move(0*R, 950*R)
 
         self.GV4301 = PnID_Alone(self.ThermosyphonTab)
         self.GV4301.Label.setText("GV4301")
-        self.GV4301.move(185, 110)
+        self.GV4301.move(185*R, 110*R)
 
         self.PRV4302 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4302.Label.setText("PRV4302")
-        self.PRV4302.move(300, 32)
+        self.PRV4302.move(300*R, 32)
 
         self.MCV4303 = PnID_Alone(self.ThermosyphonTab)
         self.MCV4303.Label.setText("MCV4303")
-        self.MCV4303.move(500, 80)
+        self.MCV4303.move(500*R, 80*R)
 
         self.RG4304 = PnID_Alone(self.ThermosyphonTab)
         self.RG4304.Label.setText("RG4304")
-        self.RG4304.move(700, 110)
+        self.RG4304.move(700*R, 110*R)
 
         self.MV4305 = PnID_Alone(self.ThermosyphonTab)
         self.MV4305.Label.setText("MV4305")
-        self.MV4305.move(864, 110)
+        self.MV4305.move(864*R, 110*R)
 
         self.PT4306 = Indicator(self.ThermosyphonTab)
         self.PT4306.Label.setText("PT4306")
-        self.PT4306.move(1020, 60)
+        self.PT4306.move(1020*R, 60*R)
         self.PT4306.SetUnit(" psi")
 
         self.PV4307 = Valve(self.ThermosyphonTab)
         self.PV4307.Label.setText("PV4307")
-        self.PV4307.move(925, 190)
+        self.PV4307.move(925*R, 190*R)
 
         self.PV4308 = Valve(self.ThermosyphonTab)
         self.PV4308.Label.setText("PV4308")
-        self.PV4308.move(850, 320)
+        self.PV4308.move(850*R, 320*R)
 
         self.MV4309 = PnID_Alone(self.ThermosyphonTab)
         self.MV4309.Label.setText("MV4309")
-        self.MV4309.move(390, 260)
+        self.MV4309.move(390*R, 260*R)
 
         self.PG4310 = PnID_Alone(self.ThermosyphonTab)
         self.PG4310.Label.setText("PG4310")
-        self.PG4310.move(225, 220)
+        self.PG4310.move(225*R, 220*R)
 
         self.PRV4311 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4311.Label.setText("PRV4311")
-        self.PRV4311.move(305, 190)
+        self.PRV4311.move(305*R, 190*R)
 
         self.VP4312 = PnID_Alone(self.ThermosyphonTab)
         self.VP4312.Label.setText("VP4312")
-        self.VP4312.move(75, 260)
+        self.VP4312.move(75*R, 260*R)
 
         self.BFM4313 = Indicator(self.ThermosyphonTab)
         self.BFM4313.Label.setText("BFM4313")
-        self.BFM4313.move(1250, 340)
+        self.BFM4313.move(1250*R, 340*R)
         self.BFM4313.SetUnit(" bfm")
 
         self.MCV4314 = PnID_Alone(self.ThermosyphonTab)
         self.MCV4314.Label.setText("MCV4314")
-        self.MCV4314.move(1230, 470)
+        self.MCV4314.move(1230*R, 470*R)
 
         self.PT4315 = Indicator(self.ThermosyphonTab)
         self.PT4315.Label.setText("PT4315")
-        self.PT4315.move(950, 440)
+        self.PT4315.move(950*R, 440*R)
         self.PT4315.SetUnit(" psi")
 
         self.PG4316 = PnID_Alone(self.ThermosyphonTab)
         self.PG4316.Label.setText("PG4316")
-        self.PG4316.move(820, 470)
+        self.PG4316.move(820*R, 470*R)
 
         self.PV4317 = Valve(self.ThermosyphonTab)
         self.PV4317.Label.setText("PV4317")
-        self.PV4317.move(520, 380)
+        self.PV4317.move(520*R, 380*R)
 
         self.PV4318 = Valve(self.ThermosyphonTab)
         self.PV4318.Label.setText("PV4318")
-        self.PV4318.move(250, 580)
+        self.PV4318.move(250*R, 580*R)
 
         self.PT4319 = Indicator(self.ThermosyphonTab)
         self.PT4319.Label.setText("PT4319")
-        self.PT4319.move(570, 720)
+        self.PT4319.move(570*R, 720*R)
         self.PT4319.SetUnit(" psi")
 
         self.PRV4320 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4320.Label.setText("PRV4320")
-        self.PRV4320.move(570, 860)
+        self.PRV4320.move(570*R, 860*R)
 
         self.PV4321 = Valve(self.ThermosyphonTab)
         self.PV4321.Label.setText("PV4321")
-        self.PV4321.move(530, 580)
+        self.PV4321.move(530*R, 580*R)
 
         self.PT4322 = Indicator(self.ThermosyphonTab)
         self.PT4322.Label.setText("PT4322")
-        self.PT4322.move(850, 720)
+        self.PT4322.move(850*R, 720*R)
         self.PT4322.SetUnit(" psi")
 
         self.PRV4323 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4323.Label.setText("PRV4323")
-        self.PRV4323.move(850, 860)
+        self.PRV4323.move(850*R, 860*R)
 
         self.PV4324 = Valve(self.ThermosyphonTab)
         self.PV4324.Label.setText("PV4324")
-        self.PV4324.move(1100, 580)
+        self.PV4324.move(1100*R, 580*R)
 
         self.PT4325 = Indicator(self.ThermosyphonTab)
         self.PT4325.Label.setText("PT4325")
-        self.PT4325.move(1150, 720)
+        self.PT4325.move(1150*R, 720*R)
         self.PT4325.SetUnit(" psi")
 
         self.PRV4326 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4326.Label.setText("PRV4326")
-        self.PRV4326.move(1150, 860)
+        self.PRV4326.move(1150*R, 860*R)
 
         self.SV4327 = Valve(self.ThermosyphonTab)
         self.SV4327.Label.setText("SV4327")
-        self.SV4327.move(120, 330)
+        self.SV4327.move(120*R, 330*R)
 
         self.SV4328 = Valve(self.ThermosyphonTab)
         self.SV4328.Label.setText("SV4328")
 
-        self.SV4328.move(1350, 60)
+        self.SV4328.move(1350*R, 60*R)
 
         self.SV4329 = Valve(self.ThermosyphonTab)
         self.SV4329.Label.setText("SV4329")
-        self.SV4329.move(1700, 60)
+        self.SV4329.move(1700*R, 60*R)
 
         self.TT4330 = Indicator(self.ThermosyphonTab)
         self.TT4330.Label.setText("TT4330")
-        self.TT4330.move(1915, 55)
+        self.TT4330.move(1915*R, 55*R)
 
         self.SV4331 = Valve(self.ThermosyphonTab)
         self.SV4331.Label.setText("SV4331")
-        self.SV4331.move(1340, 200)
+        self.SV4331.move(1340*R, 200*R)
 
         self.SV4332 = Valve(self.ThermosyphonTab)
         self.SV4332.Label.setText("SV4332")
-        self.SV4332.move(1450, 300)
+        self.SV4332.move(1450*R, 300*R)
 
         self.PRV4333 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4333.Label.setText("PRV4333")
-        self.PRV4333.move(900, 650)
+        self.PRV4333.move(900*R, 650*R)
 
         self.PT6302 = Indicator(self.ThermosyphonTab)
         self.PT6302.Label.setText("PT6302")
-        self.PT6302.move(2030, 690)
+        self.PT6302.move(2030*R, 690*R)
         self.PT6302.SetUnit(" psi")
 
         self.PRV6303 = PnID_Alone(self.ThermosyphonTab)
         self.PRV6303.Label.setText("PRV6303")
-        self.PRV6303.move(1700, 700)
+        self.PRV6303.move(1700*R, 700*R)
 
         self.MV6304 = PnID_Alone(self.ThermosyphonTab)
         self.MV6304.Label.setText("MV6304")
-        self.MV6304.move(1810, 650)
+        self.MV6304.move(1810*R, 650*R)
 
         self.HE6201 = PnID_Alone(self.ThermosyphonTab)
         self.HE6201.Label.setText("HE6201")
-        self.HE6201.move(1410, 1100)
+        self.HE6201.move(1410*R, 1100*R)
 
         self.EV6204 = PnID_Alone(self.ThermosyphonTab)
         self.EV6204.Label.setText("EV6204")
-        self.EV6204.move(930, 1100)
+        self.EV6204.move(930*R, 1100*R)
 
         self.PLCOnline = State(self.ThermosyphonTab)
-        self.PLCOnline.move(200, 1200)
+        self.PLCOnline.move(200*R, 1200*R)
         self.PLCOnline.Label.setText("PLC link")
         self.PLCOnline.Field.setText("Offline")
         self.PLCOnline.SetAlarm()
@@ -349,36 +350,36 @@ class MainWindow(QtWidgets.QMainWindow):
         # Chamber tab buttons
 
         self.LoginP = SingleButton(self.ChamberTab)
-        self.LoginP.move(140, 1200)
+        self.LoginP.move(140*R, 1200*R)
         self.LoginP.Label.setText("Login")
         self.LoginP.Button.setText("Guest")
 
         self.RTDset1Win = RTDset1()
         self.RTDSET1Button = FunctionButton(self.RTDset1Win, self.ChamberTab)
         # self.RTDSET1.StatusWindow.RTDset1()
-        self.RTDSET1Button.move(300, 330)
+        self.RTDSET1Button.move(300*R, 330*R)
         self.RTDSET1Button.Button.setText("RTDSET1")
 
         self.RTDset2Win = RTDset2()
         self.RTDSET2Button = FunctionButton(self.RTDset2Win, self.ChamberTab)
         # self.RTDSET2.StatusWindow.RTDset2()
-        self.RTDSET2Button.move(300, 510)
+        self.RTDSET2Button.move(300*R, 510*R)
         self.RTDSET2Button.Button.setText("RTDSET2")
 
         self.RTDset3Win = RTDset3()
         self.RTDSET3Button = FunctionButton(self.RTDset3Win, self.ChamberTab)
         # self.RTDSET3.StatusWindow.RTDset3()
-        self.RTDSET3Button.move(300, 610)
+        self.RTDSET3Button.move(300*R, 610*R)
         self.RTDSET3Button.Button.setText("RTDSET3")
 
         self.RTDset4Win = RTDset4()
         self.RTDSET4Button = FunctionButton(self.RTDset4Win, self.ChamberTab)
         # self.RTDSET4.StatusWindow.RTDset4()
-        self.RTDSET4Button.move(1780, 1150)
+        self.RTDSET4Button.move(1780*R, 1150*R)
         self.RTDSET4Button.Button.setText("RTDSET4")
 
         self.HT6219 = Heater(self.ChamberTab)
-        self.HT6219.move(820, 120)
+        self.HT6219.move(820*R, 120*R)
         self.HT6219.Label.setText("HT6219")
         self.HT6219.HeaterSubWindow.setWindowTitle("HT6219")
         self.HT6219SUB = HeaterExpand(self.HT6219.HeaterSubWindow)
@@ -391,7 +392,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HT6219SUB.RTD2.Label.setText("EMPTY")
 
         self.HT6221 = Heater(self.ChamberTab)
-        self.HT6221.move(1250, 120)
+        self.HT6221.move(1250*R, 120*R)
         self.HT6221.Label.setText("HT6221")
         self.HT6221.HeaterSubWindow.setWindowTitle("HT6221")
         self.HT6221SUB = HeaterExpand(self.HT6221.HeaterSubWindow)
@@ -402,7 +403,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HT6221SUB.RTD2.Label.setText("EMPTY")
 
         self.HT6214 = Heater(self.ChamberTab)
-        self.HT6214.move(1780, 145)
+        self.HT6214.move(1780*R, 145*R)
         self.HT6214.Label.setText("HT6214")
         self.HT6214.HeaterSubWindow.setWindowTitle("HT6214")
         self.HT6214SUB = HeaterExpand(self.HT6214.HeaterSubWindow)
@@ -414,7 +415,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6401.Label.setText("TT6401")
 
         self.HT6216 = Heater(self.ChamberTab)
-        self.HT6216.move(1780, 245)
+        self.HT6216.move(1780*R, 245*R)
         self.HT6216.Label.setText("HT6216")
         self.HT6216.HeaterSubWindow.setWindowTitle("HT6216")
         self.HT6216SUB = HeaterExpand(self.HT6216.HeaterSubWindow)
@@ -426,7 +427,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6402.Label.setText("TT6402")
 
         self.HT6218 = Heater(self.ChamberTab)
-        self.HT6218.move(1780, 345)
+        self.HT6218.move(1780*R, 345*R)
         self.HT6218.Label.setText("HT6218")
         self.HT6218.HeaterSubWindow.setWindowTitle("HT6218")
         self.HT6218SUB = HeaterExpand(self.HT6218.HeaterSubWindow)
@@ -438,7 +439,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6403.Label.setText("TT6403")
 
         self.HT6202 = Heater(self.ChamberTab)
-        self.HT6202.move(1780, 485)
+        self.HT6202.move(1780*R, 485*R)
         self.HT6202.Label.setText("HT6202")
         self.HT6202.HeaterSubWindow.setWindowTitle("HT6202")
         self.HT6202SUB = HeaterExpand(self.HT6202.HeaterSubWindow)
@@ -450,7 +451,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6404.Label.setText("TT6404")
 
         self.HT6206 = Heater(self.ChamberTab)
-        self.HT6206.move(1780, 585)
+        self.HT6206.move(1780*R, 585*R)
         self.HT6206.Label.setText("HT6206")
         self.HT6206.HeaterSubWindow.setWindowTitle("HT6206")
         self.HT6206SUB = HeaterExpand(self.HT6206.HeaterSubWindow)
@@ -462,7 +463,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6405.Label.setText("TT6405")
 
         self.HT6210 = Heater(self.ChamberTab)
-        self.HT6210.move(1780, 685)
+        self.HT6210.move(1780*R, 685*R)
         self.HT6210.Label.setText("HT6210")
         self.HT6210.HeaterSubWindow.setWindowTitle("HT6210")
         self.HT6210SUB = HeaterExpand(self.HT6210.HeaterSubWindow)
@@ -474,7 +475,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6406.Label.setText("TT6406")
 
         self.HT6223 = Heater(self.ChamberTab)
-        self.HT6223.move(1780, 785)
+        self.HT6223.move(1780*R, 785*R)
         self.HT6223.Label.setText("HT6223")
         self.HT6223.HeaterSubWindow.setWindowTitle("HT6223")
         self.HT6223SUB = HeaterExpand(self.HT6223.HeaterSubWindow)
@@ -486,7 +487,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6410.Label.setText("TT6410")
 
         self.HT6224 = Heater(self.ChamberTab)
-        self.HT6224.move(1780, 885)
+        self.HT6224.move(1780*R, 885*R)
         self.HT6224.Label.setText("HT6224")
         self.HT6224.HeaterSubWindow.setWindowTitle("HT6224")
         self.HT6224SUB = HeaterExpand(self.HT6224.HeaterSubWindow)
@@ -498,7 +499,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6411.Label.setText("TT6411")
 
         self.HT6225 = Heater(self.ChamberTab)
-        self.HT6225.move(1780, 985)
+        self.HT6225.move(1780*R, 985*R)
         self.HT6225.Label.setText("HT6225")
         self.HT6225.HeaterSubWindow.setWindowTitle("HT6225")
         self.HT6225SUB = HeaterExpand(self.HT6225.HeaterSubWindow)
@@ -510,7 +511,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6412.Label.setText("TT6412")
 
         self.HT2123 = Heater(self.ChamberTab)
-        self.HT2123.move(670, 820)
+        self.HT2123.move(670*R, 820*R)
         self.HT2123.Label.setText("HT2123")
         self.HT2123.HeaterSubWindow.setWindowTitle("HT2123")
         self.HT2123SUB = HeaterExpand(self.HT2123.HeaterSubWindow)
@@ -520,7 +521,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HT2123SUB.RTD2.Label.setText("EMPTY")
 
         self.HT2124 = Heater(self.ChamberTab)
-        self.HT2124.move(670, 820)
+        self.HT2124.move(670*R, 820*R)
         self.HT2124.Label.setText("HT2124")
         self.HT2124.HeaterSubWindow.setWindowTitle("HT2124")
         self.HT2124SUB = HeaterExpand(self.HT2124.HeaterSubWindow)
@@ -530,7 +531,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HT2124SUB.RTD2.Label.setText("EMPTY")
 
         self.HT2125 = Heater(self.ChamberTab)
-        self.HT2125.move(1030, 730)
+        self.HT2125.move(1030*R, 730*R)
         self.HT2125.Label.setText("HT2125")
         self.HT2125.HeaterSubWindow.setWindowTitle("HT2125")
         self.HT2125SUB = HeaterExpand(self.HT2125.HeaterSubWindow)
@@ -540,17 +541,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HT2125SUB.RTD2.Label.setText("EMPTY")
 
         self.PT1101 = Indicator(self.ChamberTab)
-        self.PT1101.move(940, 990)
+        self.PT1101.move(940*R, 990*R)
         self.PT1101.Label.setText("PT1101")
         self.PT1101.SetUnit(" psi")
 
         self.PT2121 = Indicator(self.ChamberTab)
-        self.PT2121.move(1210, 990)
+        self.PT2121.move(1210*R, 990*R)
         self.PT2121.Label.setText("PT2121")
         self.PT2121.SetUnit(" psi")
 
         self.HT1202 = Heater(self.ChamberTab)
-        self.HT1202.move(840, 1250)
+        self.HT1202.move(840*R, 1250*R)
         self.HT1202.Label.setText("HT1202")
         self.HT1202.HeaterSubWindow.setWindowTitle("HT1202")
         self.HT1202SUB = HeaterExpand(self.HT1202.HeaterSubWindow)
@@ -562,7 +563,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6415.Label.setText("TT6415")
 
         self.HT2203 = Heater(self.ChamberTab)
-        self.HT2203.move(1260, 1215)
+        self.HT2203.move(1260*R, 1215*R)
         self.HT2203.Label.setText("HT2203")
         self.HT2203.HeaterSubWindow.setWindowTitle("HT2203")
         self.HT2203SUB = HeaterExpand(self.HT2203.HeaterSubWindow)
@@ -576,44 +577,44 @@ class MainWindow(QtWidgets.QMainWindow):
         # Fluid tab buttons
 
         self.PT2316 = Indicator(self.FluidTab)
-        self.PT2316.move(1900, 360)
+        self.PT2316.move(1900*R, 360*R)
         self.PT2316.Label.setText("PT2316")
         self.PT2316.SetUnit(" psi")
 
         self.PT2330 = Indicator(self.FluidTab)
-        self.PT2330.move(1780, 360)
+        self.PT2330.move(1780*R, 360*R)
         self.PT2330.Label.setText("PT2330")
         self.PT2330.SetUnit(" psi")
 
         self.PT2335 = Indicator(self.FluidTab)
-        self.PT2335.move(1590, 420)
+        self.PT2335.move(1590*R, 420*R)
         self.PT2335.Label.setText("PT2335")
         self.PT2335.SetUnit(" psi")
 
         self.TT7401 = Indicator(self.FluidTab)
-        self.TT7401.move(1985, 250)
+        self.TT7401.move(1985*R, 250*R)
         self.TT7401.Label.setText("TT7401")
 
         self.TT7202 = Indicator(self.FluidTab)
-        self.TT7202.move(910, 530)
+        self.TT7202.move(910*R, 530*R)
         self.TT7202.Label.setText("TT7202")
 
         self.LI2340 = Indicator(self.FluidTab)
-        self.LI2340.move(2250, 880)
+        self.LI2340.move(2250*R, 880*R)
         self.LI2340.Label.setText("LI2340 ")
 
         self.PT1101Fluid = Indicator(self.FluidTab)
-        self.PT1101Fluid.move(1030, 1300)
+        self.PT1101Fluid.move(1030*R, 1300*R)
         self.PT1101Fluid.Label.setText("PT1101")
         self.PT1101Fluid.SetUnit(" psi")
 
         self.PT2121Fluid = Indicator(self.FluidTab)
-        self.PT2121Fluid.move(1260, 1300)
+        self.PT2121Fluid.move(1260*R, 1300*R)
         self.PT2121Fluid.Label.setText("PT2121")
         self.PT2121Fluid.SetUnit(" psi")
 
         self.MFC1316 = Heater(self.FluidTab)
-        self.MFC1316.move(400, 800)
+        self.MFC1316.move(400*R, 800*R)
         self.MFC1316.Label.setText("MFC1316")
         self.MFC1316.HeaterSubWindow.setWindowTitle("MFC1316")
         self.MFC1316SUB = HeaterExpand(self.MFC1316.HeaterSubWindow)
@@ -624,100 +625,100 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC1316SUB.RTD2.Label.setText("EMPTY")
 
         self.PT1332 = Indicator(self.FluidTab)
-        self.PT1332.move(630, 900)
+        self.PT1332.move(630*R, 900*R)
         self.PT1332.Label.setText("PT1332")
         self.PT1332.SetUnit(" psi")
 
         self.PV5305 = Valve(self.FluidTab)
         self.PV5305.Label.setText("PV5305")
-        self.PV5305.move(1200, 530)
+        self.PV5305.move(1200*R, 530*R)
 
         self.PV5306 = Valve(self.FluidTab)
         self.PV5306.Label.setText("PV5306")
-        self.PV5306.move(1150, 800)
+        self.PV5306.move(1150*R, 800*R)
 
         self.PV5307 = Valve(self.FluidTab)
         self.PV5307.Label.setText("PV5307")
-        self.PV5307.move(1030, 620)
+        self.PV5307.move(1030*R, 620*R)
 
         self.PV5309 = Valve(self.FluidTab)
         self.PV5309.Label.setText("PV5309")
-        self.PV5309.move(1130, 310)
+        self.PV5309.move(1130*R, 310*R)
 
         # Hydraulic buttons
         self.PU3305 = Valve(self.HydraulicTab)
         self.PU3305.Label.setText("PU3305")
-        self.PU3305.move(365, 380)
+        self.PU3305.move(365*R, 380*R)
 
         self.TT3401 = Indicator(self.HydraulicTab)
-        self.TT3401.move(385, 500)
+        self.TT3401.move(385*R, 500*R)
         self.TT3401.Label.setText("TT3401")
 
         self.TT3402 = Indicator(self.HydraulicTab)
-        self.TT3402.move(90, 53)
+        self.TT3402.move(90*R, 53)
         self.TT3402.Label.setText("TT3402")
 
         self.PT3314 = Indicator(self.HydraulicTab)
-        self.PT3314.move(700, 450)
+        self.PT3314.move(700*R, 450*R)
         self.PT3314.Label.setText("PT3314")
         self.PT3314.SetUnit(" psi")
 
         self.PT3320 = Indicator(self.HydraulicTab)
-        self.PT3320.move(880, 530)
+        self.PT3320.move(880*R, 530*R)
         self.PT3320.Label.setText("PT3320")
         self.PT3320.SetUnit(" psi")
 
         self.PT3308 = Indicator(self.HydraulicTab)
-        self.PT3308.move(440, 1080)
+        self.PT3308.move(440*R, 1080*R)
         self.PT3308.Label.setText("PT3308")
         self.PT3308.SetUnit(" psi")
 
         self.PT3309 = Indicator(self.HydraulicTab)
-        self.PT3309.move(665, 1140)
+        self.PT3309.move(665*R, 1140*R)
         self.PT3309.Label.setText("PT3309")
         self.PT3309.SetUnit(" psi")
 
         self.PT3311 = Indicator(self.HydraulicTab)
-        self.PT3311.move(750, 1110)
+        self.PT3311.move(750*R, 1110*R)
         self.PT3311.Label.setText("PT3311")
         self.PT3311.SetUnit(" psi")
 
         self.HFSV3312 = Valve(self.HydraulicTab)
         self.HFSV3312.Label.setText("HFSV3312")
-        self.HFSV3312.move(650, 1030)
+        self.HFSV3312.move(650*R, 1030*R)
 
         self.HFSV3323 = Valve(self.HydraulicTab)
         self.HFSV3323.Label.setText("HFSV3323")
-        self.HFSV3323.move(1050, 1080)
+        self.HFSV3323.move(1050*R, 1080*R)
 
         self.HFSV3331 = Valve(self.HydraulicTab)
         self.HFSV3331.Label.setText("HFSV3331")
-        self.HFSV3331.move(1100, 320)
+        self.HFSV3331.move(1100*R, 320*R)
 
         self.PT3332 = Indicator(self.HydraulicTab)
-        self.PT3332.move(1570, 1125)
+        self.PT3332.move(1570*R, 1125*R)
         self.PT3332.Label.setText("PT3332")
         self.PT3332.SetUnit(" psi")
 
         self.PT3333 = Indicator(self.HydraulicTab)
-        self.PT3333.move(1570, 1250)
+        self.PT3333.move(1570*R, 1250*R)
         self.PT3333.Label.setText("PT3333")
         self.PT3333.SetUnit(" psi")
 
         self.SV3326 = Valve(self.HydraulicTab)
         self.SV3326.Label.setText("SV3326")
-        self.SV3326.move(1200, 400)
+        self.SV3326.move(1200*R, 400*R)
 
         self.SV3329 = Valve(self.HydraulicTab)
         self.SV3329.Label.setText("SV3329")
-        self.SV3329.move(1570, 470)
+        self.SV3329.move(1570*R, 470*R)
 
         self.SV3322 = Valve(self.HydraulicTab)
         self.SV3322.Label.setText("SV3322")
-        self.SV3322.move(1000, 780)
+        self.SV3322.move(1000*R, 780*R)
 
         self.SERVO3321 = AOMultiLoop(self.HydraulicTab)
-        self.SERVO3321.move(1200, 550)
+        self.SERVO3321.move(1200*R, 550*R)
         self.SERVO3321.Label.setText("SERVO3321")
         self.SERVO3321.HeaterSubWindow.setWindowTitle("SERVO3321")
         self.SERVO3321SUB = AOMutiLoopExpand(self.SERVO3321.HeaterSubWindow)
@@ -728,50 +729,50 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.SV3325 = Valve(self.HydraulicTab)
         self.SV3325.Label.setText("SV3325")
-        self.SV3325.move(1200, 1000)
+        self.SV3325.move(1200*R, 1000*R)
 
         self.SV3307 = Valve(self.HydraulicTab)
         self.SV3307.Label.setText("SV3307")
-        self.SV3307.move(200, 1030)
+        self.SV3307.move(200*R, 1030*R)
 
         self.SV3310 = Valve(self.HydraulicTab)
         self.SV3310.Label.setText("SV3310")
-        self.SV3310.move(800, 1240)
+        self.SV3310.move(800*R, 1240*R)
 
         self.TT7403 = Indicator(self.HydraulicTab)
-        self.TT7403.move(1880, 950)
+        self.TT7403.move(1880*R, 950*R)
         self.TT7403.Label.setText("TT7403")
 
         self.LI3335 = Indicator(self.HydraulicTab)
-        self.LI3335.move(2100, 950)
+        self.LI3335.move(2100*R, 950*R)
         self.LI3335.Label.setText("LI3335 ")
 
         self.LT3338 = Indicator(self.HydraulicTab)
-        self.LT3338.move(2100, 990)
+        self.LT3338.move(2100*R, 990*R)
         self.LT3338.Label.setText("LT3338 ")
 
         self.LT3339 = Indicator(self.HydraulicTab)
-        self.LT3339.move(2100, 1030)
+        self.LT3339.move(2100*R, 1030*R)
         self.LT3339.Label.setText("LT3339 ")
 
         self.PT1101Hy = Indicator(self.HydraulicTab)
-        self.PT1101Hy.move(1900, 800)
+        self.PT1101Hy.move(1900*R, 800*R)
         self.PT1101Hy.Label.setText("PT1101")
         self.PT1101Hy.SetUnit(" psi")
 
         self.PT2121Hy = Indicator(self.HydraulicTab)
-        self.PT2121Hy.move(2100, 800)
+        self.PT2121Hy.move(2100*R, 800*R)
         self.PT2121Hy.Label.setText("PT2121")
         self.PT2121Hy.SetUnit(" psi")
 
         # Data and Signal Tab
         self.ReadSettings = Loadfile(self.DatanSignalTab)
-        self.ReadSettings.move(50, 50)
+        self.ReadSettings.move(50*R, 50*R)
         self.ReadSettings.LoadFileButton.clicked.connect(
             lambda x: self.Recover(address=self.ReadSettings.FilePath.text()))
 
         self.SaveSettings = CustomSave(self.DatanSignalTab)
-        self.SaveSettings.move(700, 50)
+        self.SaveSettings.move(700*R, 50*R)
         self.SaveSettings.SaveFileButton.clicked.connect(
             lambda x: self.Save(directory=self.SaveSettings.Head, project=self.SaveSettings.Tail))
 
@@ -779,10 +780,10 @@ class MainWindow(QtWidgets.QMainWindow):
         # Alarm button
         self.AlarmWindow = AlarmWin()
         self.AlarmButton = AlarmButton(self.AlarmWindow, self)
-        self.AlarmButton.SubWindow.resize(1000, 500)
+        self.AlarmButton.SubWindow.resize(1000*R, 500*R)
         # self.AlarmButton.StatusWindow.AlarmWindow()
 
-        self.AlarmButton.move(0, 1300)
+        self.AlarmButton.move(0*R, 1300*R)
         self.AlarmButton.Button.setText("Alarm Button")
 
 
@@ -1866,25 +1867,25 @@ class ThermosyphonWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.resize(2000, 1000)
-        self.setMinimumSize(2000, 1000)
+        self.resize(2000*R, 1000*R)
+        self.setMinimumSize(2000*R, 1000*R)
         self.setWindowTitle("Thermosyphon")
 
         # self.Widget = QtWidgets.QWidget()
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1000*R))
 
         # reset the size of the window
-        self.setMinimumSize(2000, 500)
-        self.resize(1000, 500)
+        self.setMinimumSize(2000*R, 500*R)
+        self.resize(1000*R, 500*R)
         self.setWindowTitle("Thermosyphon Status Window")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 500))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 500*R))
 
         # set gridlayout
         self.GL = QtWidgets.QGridLayout()
         # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20, 20, 20, 20)
-        self.GL.setSpacing(20)
+        self.GL.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GL.setSpacing(20*R)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
 
         self.Widget.setLayout(self.GL)
@@ -1938,25 +1939,25 @@ class RTDset1(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.resize(2000, 1000)
-        self.setMinimumSize(2000, 1000)
+        self.resize(2000*R, 1000*R)
+        self.setMinimumSize(2000*R, 1000*R)
         self.setWindowTitle("Status Window")
 
         # self.Widget = QtWidgets.QWidget()
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1000*R))
 
         # reset the size of the window
-        self.setMinimumSize(1000, 500)
-        self.resize(1000, 500)
+        self.setMinimumSize(1000*R, 500*R)
+        self.resize(1000*R, 500*R)
         self.setWindowTitle("RTD SET 1")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1000*R, 500*R))
 
         # set gridlayout
         self.GL = QtWidgets.QGridLayout()
         # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20, 20, 20, 20)
-        self.GL.setSpacing(20)
+        self.GL.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GL.setSpacing(20*R)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
 
         self.Widget.setLayout(self.GL)
@@ -2008,19 +2009,19 @@ class RTDset2(QtWidgets.QMainWindow):
 
         # self.Widget = QtWidgets.QWidget()
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1000*R))
 
         # reset the size of the window
-        self.setMinimumSize(1000, 500)
-        self.resize(1000, 500)
+        self.setMinimumSize(1000*R, 500*R)
+        self.resize(1000*R, 500*R)
         self.setWindowTitle("RTD SET 2")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1000*R, 500*R))
 
         # set gridlayout
         self.GL = QtWidgets.QGridLayout()
         # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20, 20, 20, 20)
-        self.GL.setSpacing(20)
+        self.GL.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GL.setSpacing(20*R)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
 
         self.Widget.setLayout(self.GL)
@@ -2163,25 +2164,25 @@ class RTDset3(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.resize(2000, 1000)
-        self.setMinimumSize(2000, 1000)
+        self.resize(2000*R, 1000*R)
+        self.setMinimumSize(2000*R, 1000*R)
         self.setWindowTitle("Status Window")
 
         # self.Widget = QtWidgets.QWidget()
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1000*R))
 
         # reset the size of the window
-        self.setMinimumSize(1000, 500)
-        self.resize(1000, 500)
+        self.setMinimumSize(1000*R, 500*R)
+        self.resize(1000*R, 500*R)
         self.setWindowTitle("RTD SET 3")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1000*R, 500*R))
 
         # set gridlayout
         self.GL = QtWidgets.QGridLayout()
         # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20, 20, 20, 20)
-        self.GL.setSpacing(20)
+        self.GL.setContentsMargins(20*R, 20*R, 20R, 20*R)
+        self.GL.setSpacing(20*R)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
 
         self.Widget.setLayout(self.GL)
@@ -2251,25 +2252,25 @@ class RTDset4(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.resize(2000, 1000)
-        self.setMinimumSize(2000, 1000)
+        self.resize(2000*R, 1000*R)
+        self.setMinimumSize(2000*R, 1000*R)
         self.setWindowTitle("Status Window")
 
         # self.Widget = QtWidgets.QWidget()
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1000*R))
 
         # reset the size of the window
-        self.setMinimumSize(1000, 500)
-        self.resize(1000, 500)
+        self.setMinimumSize(1000*R, 500*R)
+        self.resize(1000*R, 500*R)
         self.setWindowTitle("RTD SET 4")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1000*R, 500*R))
 
         # set gridlayout
         self.GL = QtWidgets.QGridLayout()
         # self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(20, 20, 20, 20)
-        self.GL.setSpacing(20)
+        self.GL.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GL.setSpacing(20*R)
         self.GL.setAlignment(QtCore.Qt.AlignCenter)
 
         self.Widget.setLayout(self.GL)
@@ -2320,19 +2321,19 @@ class AlarmWin(QtWidgets.QMainWindow):
         super().__init__(parent)
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1000*R))
 
         # reset the size of the window
-        self.setMinimumSize(2000, 1100)
-        self.resize(2000, 1100)
+        self.setMinimumSize(2000*R, 1100*R)
+        self.resize(2000*R, 1100*R)
         self.setWindowTitle("Alarm Window")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1100))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1100*R))
 
         self.Tab = QtWidgets.QTabWidget(self)
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
         self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
-        self.Tab.setGeometry(QtCore.QRect(0, 0, 2400, 1400))
+        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2400*R, 1400*R))
 
         self.PressureTab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.PressureTab, "Pressure Transducers")
@@ -2350,69 +2351,69 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.GLPT = QtWidgets.QGridLayout()
         # self.GLPT = QtWidgets.QGridLayout(self)
-        self.GLPT.setContentsMargins(20, 20, 20, 20)
-        self.GLPT.setSpacing(20)
+        self.GLPT.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GLPT.setSpacing(20*R)
         self.GLPT.setAlignment(QtCore.Qt.AlignCenter)
 
         self.GroupPT = QtWidgets.QGroupBox(self.PressureTab)
         self.GroupPT.setTitle("Pressure Transducer")
         self.GroupPT.setLayout(self.GLPT)
-        self.GroupPT.move(0, 0)
+        self.GroupPT.move(0*R, 0*R)
 
         self.GLRTD1 = QtWidgets.QGridLayout()
         # self.GLRTD1 = QtWidgets.QGridLayout(self)
-        self.GLRTD1.setContentsMargins(20, 20, 20, 20)
-        self.GLRTD1.setSpacing(20)
+        self.GLRTD1.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GLRTD1.setSpacing(20*R)
         self.GLRTD1.setAlignment(QtCore.Qt.AlignCenter)
 
         self.GroupRTD1 = QtWidgets.QGroupBox(self.RTDSET12Tab)
         self.GroupRTD1.setTitle("RTD SET 1")
         self.GroupRTD1.setLayout(self.GLRTD1)
-        self.GroupRTD1.move(0, 0)
+        self.GroupRTD1.move(0*R, 0*R)
 
         self.GLRTD2 = QtWidgets.QGridLayout()
         # self.GLRTD2 = QtWidgets.QGridLayout(self)
-        self.GLRTD2.setContentsMargins(20, 20, 20, 20)
-        self.GLRTD2.setSpacing(20)
+        self.GLRTD2.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GLRTD2.setSpacing(20*R)
         self.GLRTD2.setAlignment(QtCore.Qt.AlignCenter)
 
         self.GroupRTD2 = QtWidgets.QGroupBox(self.RTDSET12Tab)
         self.GroupRTD2.setTitle("RTD SET 2")
         self.GroupRTD2.setLayout(self.GLRTD2)
-        self.GroupRTD2.move(0, 300)
+        self.GroupRTD2.move(0*R, 300*R)
 
         self.GLRTD3 = QtWidgets.QGridLayout()
         # self.GLRTD3 = QtWidgets.QGridLayout(self)
-        self.GLRTD3.setContentsMargins(20, 20, 20, 20)
-        self.GLRTD3.setSpacing(20)
+        self.GLRTD3.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GLRTD3.setSpacing(20*R)
         self.GLRTD3.setAlignment(QtCore.Qt.AlignCenter)
 
         self.GroupRTD3 = QtWidgets.QGroupBox(self.RTDSET34Tab)
         self.GroupRTD3.setTitle("RTD SET 3")
         self.GroupRTD3.setLayout(self.GLRTD3)
-        self.GroupRTD3.move(0, 0)
+        self.GroupRTD3.move(0*R, 0*R)
 
         self.GLRTD4 = QtWidgets.QGridLayout()
         # self.GLRTD4 = QtWidgets.QGridLayout(self)
-        self.GLRTD4.setContentsMargins(20, 20, 20, 20)
-        self.GLRTD4.setSpacing(20)
+        self.GLRTD4.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GLRTD4.setSpacing(20*R)
         self.GLRTD4.setAlignment(QtCore.Qt.AlignCenter)
 
         self.GroupRTD4 = QtWidgets.QGroupBox(self.RTDSET34Tab)
         self.GroupRTD4.setTitle("RTD SET 4")
         self.GroupRTD4.setLayout(self.GLRTD4)
-        self.GroupRTD4.move(0, 500)
+        self.GroupRTD4.move(0*R, 500*R)
 
         self.GLRTDLEFT = QtWidgets.QGridLayout()
         # self.GLRTDLEFT = QtWidgets.QGridLayout(self)
-        self.GLRTDLEFT.setContentsMargins(20, 20, 20, 20)
-        self.GLRTDLEFT.setSpacing(20)
+        self.GLRTDLEFT.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GLRTDLEFT.setSpacing(20*R)
         self.GLRTDLEFT.setAlignment(QtCore.Qt.AlignCenter)
 
         self.GroupRTDLEFT = QtWidgets.QGroupBox(self.RTDLEFTTab)
         self.GroupRTDLEFT.setTitle(" LEFT RTDs ")
         self.GroupRTDLEFT.setLayout(self.GLRTDLEFT)
-        self.GroupRTDLEFT.move(0, 0)
+        self.GroupRTDLEFT.move(0*R, 0*R)
 
         self.TT2111 = AlarmStatusWidget(self.RTDSET12Tab)
         self.TT2111.Label.setText("TT2111")
