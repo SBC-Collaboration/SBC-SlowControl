@@ -320,7 +320,7 @@ class PLC:
                 self.TT_BO_dic[key] = round(
                     struct.unpack("<f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(0 + 1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
                 print(key, "little endian", Raw_BO_TT_BO[key].getRegister(1),"big endian",Raw_BO_TT_BO[key].getRegister(0))
-                # print(key, "'s' value is", self.TT_BO_dic[key])
+                print(key, "'s' value is", self.TT_BO_dic[key])
 
             Raw_BO_PT = {}
             for key in self.PT_address:
