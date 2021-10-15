@@ -319,6 +319,7 @@ class PLC:
                 Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=2, unit=0x01)
                 self.TT_BO_dic[key] = round(
                     struct.unpack("<f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(0 + 1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
+                print(key, "little endian", Raw_BO_TT_BO[key].getRegister(1),"big endian",Raw_BO_TT_BO(0))
                 # print(key, "'s' value is", self.TT_BO_dic[key])
 
             Raw_BO_PT = {}
@@ -327,6 +328,7 @@ class PLC:
                 self.PT_dic[key] = round(
                     struct.unpack("<f", struct.pack(">HH", Raw_BO_PT[key].getRegister(0 + 1),
                                                     Raw_BO_PT[key].getRegister(0)))[0], 3)
+
                 # print(key, "'s' value is", self.PT_dic[key])
 
 
@@ -1248,9 +1250,9 @@ if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
     App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
-    # PLC=PLC()
-    # PLC.ReadAll()
+    # Update=Update()
+    PLC=PLC()
+    PLC.ReadAll()
 
     sys.exit(App.exec_())
 
