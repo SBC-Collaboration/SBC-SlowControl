@@ -1813,17 +1813,17 @@ class RegionPID(QtWidgets.QWidget):
         super().__init__(parent)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
 
         self.Label = QtWidgets.QLabel(self)
-        self.Label.setMinimumSize(QtCore.QSize(30, 30))
+        self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setStyleSheet(TITLE_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.Mode = Toggle(self)
@@ -3385,23 +3385,23 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super(HeaterSubWindow, self).__init__(parent)
 
-        self.resize(1100, 90)
-        self.setMinimumSize(1100, 120)
+        self.resize(1100*R, 90*R)
+        self.setMinimumSize(1100*R, 120*R)
         self.setWindowTitle("Detailed Information")
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1100, 120))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1100*R, 120*R))
 
         self.VL = QtWidgets.QVBoxLayout()
         # self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.setSpacing(3)
         self.VL.setAlignment(QtCore.Qt.AlignCenter)
         self.Widget.setLayout(self.VL)
 
         self.HL = QtWidgets.QHBoxLayout()
         # self.HL = QtWidgets.QHBoxLayout(self)
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.HL.setSpacing(3)
         self.HL.setAlignment(QtCore.Qt.AlignCenter)
         self.VL.addLayout(self.HL)
@@ -3416,23 +3416,23 @@ class MultiStatusIndicator(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("MutiStatusIndicator")
-        self.setGeometry(QtCore.QRect(0, 0, 200, 100))
-        self.setMinimumSize(200, 100)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 200*R, 100*R))
+        self.setMinimumSize(200*R, 100*R)
         self.setSizePolicy(sizePolicy)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.setSpacing(3)
 
         self.Label = QtWidgets.QLabel(self)
-        self.Label.setMinimumSize(QtCore.QSize(10, 10))
+        self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
         self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.Interlock = ColoredStatus(self, 2)
@@ -3458,8 +3458,8 @@ class AlarmButton(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("AlarmButton")
-        self.setGeometry(QtCore.QRect(5, 5, 250, 80))
-        self.setMinimumSize(250, 80)
+        self.setGeometry(QtCore.QRect(5*R, 5*R, 250*R, 80*R))
+        self.setMinimumSize(250*R, 80*R)
         self.setSizePolicy(sizePolicy)
 
         # link the button to a new window
@@ -3468,7 +3468,7 @@ class AlarmButton(QtWidgets.QWidget):
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
         self.Button.setText("Button")
-        self.Button.setGeometry(QtCore.QRect(5, 5, 250, 80))
+        self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 250*R, 80*R))
         self.Button.setStyleSheet(
             "QWidget{" + LABEL_STYLE + "} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} "
                                        "QWidget[Alarm = false]{ background-color: rgb(204,204,204);}")
@@ -3518,8 +3518,8 @@ class FunctionButton(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("FunctionButton")
-        self.setGeometry(QtCore.QRect(5, 5, 250, 80))
-        self.setMinimumSize(250, 80)
+        self.setGeometry(QtCore.QRect(5*R, 5*R, 250*R, 80*R))
+        self.setMinimumSize(250*R, 80*R)
         self.setSizePolicy(sizePolicy)
 
         # link the button to a new window
@@ -3528,7 +3528,7 @@ class FunctionButton(QtWidgets.QWidget):
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
         self.Button.setText("Button")
-        self.Button.setGeometry(QtCore.QRect(5, 5, 250, 80))
+        self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 250*R, 80*R))
         self.Button.clicked.connect(self.ButtonClicked)
 
     @QtCore.Slot()
@@ -3544,17 +3544,17 @@ class Chiller(QtWidgets.QWidget):
         super().__init__(parent)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
 
         self.Label = QtWidgets.QLabel(self)
-        self.Label.setMinimumSize(QtCore.QSize(30, 30))
+        self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setStyleSheet(TITLE_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.State = Toggle(self)
@@ -3576,10 +3576,10 @@ class Heater(QtWidgets.QWidget):
         super().__init__(parent)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
 
         self.Label = QtWidgets.QPushButton(self)
-        self.Label.setMinimumSize(QtCore.QSize(30, 30))
+        self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setStyleSheet(TITLE_STYLE)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -3589,7 +3589,7 @@ class Heater(QtWidgets.QWidget):
         self.Label.clicked.connect(self.PushButton)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.State = DoubleButton(self)
@@ -3619,23 +3619,23 @@ class HeaterExpand(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("HeaterExpand")
-        self.setGeometry(QtCore.QRect(0, 0, 1050, 80))
-        self.setMinimumSize(1050, 80)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 1050*R, 80*R))
+        self.setMinimumSize(1050*R, 80*R)
         self.setSizePolicy(sizePolicy)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
-        self.VL.setSpacing(5)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        self.VL.setSpacing(5*R)
 
         self.Label = QtWidgets.QLabel(self)
-        self.Label.setMinimumSize(QtCore.QSize(30, 30))
+        self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.Mode = DoubleButton(self)
@@ -3694,10 +3694,10 @@ class AOMultiLoop(QtWidgets.QWidget):
         super().__init__(parent)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
 
         self.Label = QtWidgets.QPushButton(self)
-        self.Label.setMinimumSize(QtCore.QSize(30, 30))
+        self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -3707,7 +3707,7 @@ class AOMultiLoop(QtWidgets.QWidget):
         self.Label.clicked.connect(self.PushButton)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.Mode = Menu(self)
@@ -3735,23 +3735,23 @@ class AOMutiLoopExpand(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("AOMutiLoop")
-        self.setGeometry(QtCore.QRect(0, 0, 1050, 80))
-        self.setMinimumSize(1050, 80)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 1050*R, 80*R))
+        self.setMinimumSize(1050*R, 80*R)
         self.setSizePolicy(sizePolicy)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
-        self.VL.setSpacing(5)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        self.VL.setSpacing(5*R)
 
         self.Label = QtWidgets.QLabel(self)
-        self.Label.setMinimumSize(QtCore.QSize(30, 30))
+        self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.Mode = DoubleButton(self)
@@ -3812,19 +3812,19 @@ class Valve(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.setSpacing(3)
 
         self.Label = QtWidgets.QLabel(self)
-        # self.Label.setMinimumSize(QtCore.QSize(30, 30))
-        self.Label.setMinimumSize(QtCore.QSize(10, 10))
+        # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
+        self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
         self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.Set = DoubleButton(self)
@@ -3845,17 +3845,17 @@ class Camera(QtWidgets.QWidget):
         super().__init__(parent)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
 
         self.Label = QtWidgets.QLabel(self)
-        self.Label.setMinimumSize(QtCore.QSize(30, 30))
+        self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setStyleSheet(TITLE_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.Temp = Indicator(self)
