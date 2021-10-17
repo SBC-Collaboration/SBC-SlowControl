@@ -25,6 +25,7 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-fam
               "\"Calibri\"; font-size: 22px; font-weight: bold;"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px;" \
                " border-color: black;"
+R=1 #Resolution rate
 
 
 class PnID_Alone(QtWidgets.QWidget):
@@ -34,19 +35,19 @@ class PnID_Alone(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("PnID_Alone")
-        self.setGeometry(QtCore.QRect(0, 0, 70, 20))
-        self.setMinimumSize(70, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
+        self.setMinimumSize(70*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_RADIUS)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("PnID_Alone")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
@@ -59,25 +60,25 @@ class ColoredStatus(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("ColoredStatus")
-        self.setGeometry(QtCore.QRect(0, 0, 70, 40))
-        self.setMinimumSize(70, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.setMinimumSize(70*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_STYLE)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Indicator")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.Field = QtWidgets.QPushButton(self)
         self.Field.setObjectName("value")
-        self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         # self.Field.setAlignment(QtCore.Qt.AlignCenter)
 
         self.Mode = mode
@@ -118,26 +119,26 @@ class ColorIndicator(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("ColorIndicator")
-        self.setGeometry(QtCore.QRect(0, 0, 70, 40))
-        self.setMinimumSize(70, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.setMinimumSize(70*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_RADIUS)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Indicator")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         # unfinished part of the function, should change color when the reading changes
         # self.Field = QtWidgets.QLineEdit(self)
         # self.Field.setObjectName("value")
-        # self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        # self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         # self.Field.setAlignment(QtCore.Qt.AlignCenter)
         # self.Field.setStyleSheet(
         # "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Alarm = true]{" + C_ORANGE + "}
@@ -147,7 +148,7 @@ class ColorIndicator(QtWidgets.QWidget):
         # test part.
         self.ColorButton = QtWidgets.QPushButton(self)
         self.ColorButton.setObjectName("ColorButton")
-        self.ColorButton.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.ColorButton.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.ColorButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[ColorStyle='0']{" + C_ORANGE +
             "} QWidget[ColorStyle = '1']{" + C_RED + "} QWidget[ColorStyle = '2']{" + C_BLUE + "}")
@@ -187,27 +188,27 @@ class SetPoint(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("SetPoint")
-        self.setGeometry(QtCore.QRect(0, 0, 70, 40))
-        self.setMinimumSize(70, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.setMinimumSize(70*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_STYLE)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("SetPoint")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.Field = QtWidgets.QLineEdit(self)
-        self.Field.setValidator(QtGui.QIntValidator(0, 1000, self))
+        self.Field.setValidator(QtGui.QIntValidator(0*R, 1000*R, self))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setObjectName("value")
-        self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Field.setStyleSheet(BORDER_STYLE + C_BLACK + FONT)
         self.Field.editingFinished.connect(self.UpdateValue)
         self.value = 0
@@ -228,8 +229,8 @@ class CheckButton(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("CheckButton")
-        self.setGeometry(QtCore.QRect(0, 0, 200, 100))
-        self.setMinimumSize(200, 100)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 200*R, 100*R))
+        self.setMinimumSize(200*R, 100*R)
         self.setSizePolicy(sizePolicy)
 
         self.CheckButton = QtWidgets.QPushButton(self)
@@ -252,30 +253,30 @@ class Loadfile(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("LoadFile")
-        self.setGeometry(QtCore.QRect(0, 0, 600, 1000))
-        self.setMinimumSize(600, 1000)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 600*R, 1000*R))
+        self.setMinimumSize(600*R, 1000*R)
         self.setSizePolicy(sizePolicy)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.setSpacing(3)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.FilePath = QtWidgets.QLineEdit(self)
-        self.FilePath.setGeometry(QtCore.QRect(0, 0, 400, 50))
+        self.FilePath.setGeometry(QtCore.QRect(0*R, 0*R, 400*R, 50*R))
         self.HL.addWidget(self.FilePath)
 
         self.LoadPathButton = QtWidgets.QPushButton(self)
         self.LoadPathButton.clicked.connect(self.LoadPath)
         self.LoadPathButton.setText("LoadPath")
-        self.LoadPathButton.setFixedSize(100, 50)
+        self.LoadPathButton.setFixedSize(100*R, 50*R)
         self.HL.addWidget(self.LoadPathButton)
 
         self.LoadFileButton = QtWidgets.QPushButton(self)
-        self.LoadFileButton.setFixedSize(100, 50)
+        self.LoadFileButton.setFixedSize(100*R, 50*R)
         self.LoadFileButton.setText("ReadFile")
         self.HL.addWidget(self.LoadFileButton)
 
@@ -308,28 +309,28 @@ class CustomSave(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("CustomSave")
-        self.setGeometry(QtCore.QRect(0, 0, 600, 1000))
-        self.setMinimumSize(600, 1000)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 600*R, 1000*R))
+        self.setMinimumSize(600*R, 1000*R)
         self.setSizePolicy(sizePolicy)
 
         self.VL = QtWidgets.QHBoxLayout()
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.setSpacing(3)
 
         self.FilePath = QtWidgets.QLineEdit(self)
-        self.FilePath.setGeometry(QtCore.QRect(0, 0, 400, 50))
+        self.FilePath.setGeometry(QtCore.QRect(0*R, 0*R, 400*R, 50*R))
         self.VL.addWidget(self.FilePath)
 
         self.LoadPathButton = QtWidgets.QPushButton(self)
         self.LoadPathButton.clicked.connect(self.LoadPath)
         self.LoadPathButton.setText("ChoosePath")
-        self.LoadPathButton.setFixedSize(100, 50)
-        self.LoadPathButton.move(400, 0)
+        self.LoadPathButton.setFixedSize(100*R, 50*R)
+        self.LoadPathButton.move(400*R, 0*R)
         self.VL.addWidget(self.LoadPathButton)
 
         self.SaveFileButton = QtWidgets.QPushButton(self)
-        self.SaveFileButton.setFixedSize(100, 50)
-        self.SaveFileButton.move(500, 0)
+        self.SaveFileButton.setFixedSize(100*R, 50*R)
+        self.SaveFileButton.move(500*R, 0*R)
         self.SaveFileButton.setText("SaveFile")
         self.VL.addWidget(self.SaveFileButton)
 
@@ -355,23 +356,23 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("AlarmStatusWidget")
-        self.setGeometry(QtCore.QRect(0, 0, 200, 100))
-        self.setMinimumSize(200, 100)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 200*R, 100*R))
+        self.setMinimumSize(200*R, 100*R)
         self.setSizePolicy(sizePolicy)
 
         self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0, 0, 0, 0)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.setSpacing(3)
 
         self.Label = QtWidgets.QLabel(self)
-        self.Label.setMinimumSize(QtCore.QSize(10, 10))
+        self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
         self.Label.setStyleSheet(TITLE_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0, 0, 0, 0)
+        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
 
         self.Indicator = Indicator(self)
@@ -421,25 +422,25 @@ class BoolIndicator(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("BoolIndicator")
-        self.setGeometry(QtCore.QRect(0, 0, 70, 40))
-        self.setMinimumSize(70, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.setMinimumSize(70*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_RADIUS)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Indicator")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.Field = QtWidgets.QLineEdit(self)
         self.Field.setObjectName("value")
-        self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
         self.Field.setStyleSheet(
@@ -468,25 +469,25 @@ class Indicator(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("Indicator")
-        self.setGeometry(QtCore.QRect(0, 0, 70, 40))
-        self.setMinimumSize(70, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.setMinimumSize(70*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_STYLE)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Indicator")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.Field = QtWidgets.QLineEdit(self)
         self.Field.setObjectName("value")
-        self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
         self.Field.setStyleSheet(
@@ -530,25 +531,25 @@ class Control(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("Control")
-        self.setGeometry(QtCore.QRect(0, 0, 70, 40))
-        self.setMinimumSize(70, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.setMinimumSize(70*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_STYLE)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Control")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
-        self.Button.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.Button.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Button.setStyleSheet(C_BLUE + C_WHITE + FONT + BORDER_RADIUS)
 
         self.Unit = " °C"
@@ -605,25 +606,25 @@ class Menu(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("Menu")
-        self.setGeometry(QtCore.QRect(0, 0, 140, 40))
-        self.setMinimumSize(140, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
+        self.setMinimumSize(140*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 140, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_STYLE)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Menu")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 140, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.Combobox = QtWidgets.QComboBox(self)
         self.Combobox.setObjectName("Menu")
-        self.Combobox.setGeometry(QtCore.QRect(0, 20, 140, 20))
+        self.Combobox.setGeometry(QtCore.QRect(0*R, 20*R, 140*R, 20*R))
         self.Combobox.addItem("0")
         self.Combobox.addItem("1")
         self.Combobox.addItem("2")
@@ -638,25 +639,25 @@ class Toggle(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("Toggle")
-        self.setGeometry(QtCore.QRect(0, 0, 70, 40))
-        self.setMinimumSize(70, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.setMinimumSize(70*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_STYLE)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Toggle")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
-        self.Button.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.Button.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Button.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
             + "} QWidget[State = false]{" + C_RED + "}")
@@ -714,25 +715,25 @@ class Position(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("Position")
-        self.setGeometry(QtCore.QRect(0, 0, 70, 250))
-        self.setMinimumSize(70, 250)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 250*R))
+        self.setMinimumSize(70*R, 250*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 250))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 250*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_STYLE)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Position")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.Field = QtWidgets.QLineEdit(self)
         self.Field.setObjectName("value")
-        self.Field.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
         self.Field.setStyleSheet(
@@ -742,7 +743,7 @@ class Position(QtWidgets.QWidget):
 
         self.Max = QtWidgets.QLabel(self)
         self.Max.setObjectName("Max")
-        self.Max.setGeometry(QtCore.QRect(0, 43, 40, 20))
+        self.Max.setGeometry(QtCore.QRect(0*R, 43, 40*R, 20*R))
         self.Max.setAlignment(QtCore.Qt.AlignRight)
         self.Max.setStyleSheet(FONT)
 
@@ -754,14 +755,14 @@ class Position(QtWidgets.QWidget):
 
         self.Min = QtWidgets.QLabel(self)
         self.Min.setObjectName("Min")
-        self.Min.setGeometry(QtCore.QRect(0, 230, 40, 20))
+        self.Min.setGeometry(QtCore.QRect(0*R, 230*R, 40*R, 20*R))
         self.Min.setAlignment(QtCore.Qt.AlignRight)
         self.Min.setStyleSheet(FONT)
 
         self.Slider = QtWidgets.QSlider(self)
         self.Slider.setObjectName("Slider")
         self.Slider.setTickPosition(QtWidgets.QSlider.TicksLeft)
-        self.Slider.setGeometry(QtCore.QRect(40, 45, 25, 200))
+        self.Slider.setGeometry(QtCore.QRect(40*R, 45*R, 25*R, 200*R))
         self.Slider.setStyleSheet("QSlider::handle:vertical{background: white; border-radius: 5px;}")
         self.Slider.setEnabled(False)
 
@@ -770,16 +771,16 @@ class Position(QtWidgets.QWidget):
 
     def SetValue(self, value):
         self.value = value
-        self.Slider.setSliderPosition(value * 100)
+        self.Slider.setSliderPosition(value * 100*R)
         self.Field.setText(format(value, '#.2f') + "\"")
 
     def SetLimits(self, Min, Max):
-        self.Slider.setMaximum(Max * 100)
-        self.Slider.setMinimum(Min * 100)
+        self.Slider.setMaximum(Max * 100*R)
+        self.Slider.setMinimum(Min * 100*R)
         self.Max.setText(format(Max, '#.2f') + "\"")
         self.Min.setText(format(Min, '#.2f') + "\"")
         Offset = 43 - ((43 - 230) / (Max - Min)) * Max
-        self.Zero.setGeometry(QtCore.QRect(0, Offset, 40, 20))
+        self.Zero.setGeometry(QtCore.QRect(0*R, Offset, 40*R, 20*R))
 
     def SetAlarm(self):
         self.Field.setProperty("Alarm", True)
@@ -797,25 +798,25 @@ class State(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("State")
-        self.setGeometry(QtCore.QRect(0, 0, 140, 40))
-        self.setMinimumSize(140, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
+        self.setMinimumSize(140*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 140, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_STYLE)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("State")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 140, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.Field = QtWidgets.QLineEdit(self)
         self.Field.setObjectName("value")
-        self.Field.setGeometry(QtCore.QRect(0, 20, 140, 20))
+        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 140*R, 20*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
         self.Field.setStyleSheet(
@@ -842,26 +843,26 @@ class DoubleButton(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("DoubleButton")
-        self.setGeometry(QtCore.QRect(0, 0, 140, 40))
-        self.setMinimumSize(140, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
+        self.setMinimumSize(140*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 140, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_STYLE)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Double button")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 140, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.LButton = QtWidgets.QPushButton(self)
         self.LButton.setObjectName("LButton")
         self.LButton.setText("On")
-        self.LButton.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.LButton.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.LButton.setProperty("State", True)
         self.LButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
@@ -871,7 +872,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.RButton = QtWidgets.QPushButton(self)
         self.RButton.setObjectName("RButton")
         self.RButton.setText("Off")
-        self.RButton.setGeometry(QtCore.QRect(70, 20, 70, 20))
+        self.RButton.setGeometry(QtCore.QRect(70*R, 20*R, 70*R, 20*R))
         self.RButton.setProperty("State", False)
         self.RButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
@@ -947,26 +948,26 @@ class SingleButton(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("SingleButton")
-        self.setGeometry(QtCore.QRect(0, 0, 70, 40))
-        self.setMinimumSize(70, 40)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.setMinimumSize(70*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0, 0, 70, 40))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
         self.Background.setStyleSheet(C_LIGHT_GREY + BORDER_STYLE)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Button")
-        self.Label.setGeometry(QtCore.QRect(0, 0, 70, 20))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
         self.Button.setText("Button")
-        self.Button.setGeometry(QtCore.QRect(0, 20, 70, 20))
+        self.Button.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Button.setStyleSheet(C_BLUE + C_WHITE + FONT + BORDER_RADIUS)
 
     @QtCore.Slot()
