@@ -318,7 +318,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.SV4337 = Valve(self.ThermosyphonTab)
         self.SV4337.Label.setText("SV4337")
-        self.SV4337.move(0*R,300*R)
+        self.SV4337.move(0*R,250*R)
 
         self.PRV4333 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4333.Label.setText("PRV4333")
@@ -636,7 +636,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV1344=Valve(self.FluidTab)
         self.PV1344.Label.setText("PV1344")
-        self.PV1344.move(1300*R,560*R)
+        self.PV1344.move(1400*R,600*R)
 
         self.PV5305 = Valve(self.FluidTab)
         self.PV5305.Label.setText("PV5305")
