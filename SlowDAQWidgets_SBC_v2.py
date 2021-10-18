@@ -82,8 +82,8 @@ class ColoredStatus(QtWidgets.QWidget):
 
         self.Field = QtWidgets.QPushButton(self)
         self.Field.setObjectName("value")
-        self.Field.setGeometry(QtCore.QRect(5*R, 20*R, 65*R, 15*R))
-        
+        self.Field.setGeometry(QtCore.QRect(2.5*R, 20*R, 65*R, 15*R))
+
 
         self.Mode = mode
         if self.Mode == 0:
@@ -866,7 +866,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.LButton = QtWidgets.QPushButton(self)
         self.LButton.setObjectName("LButton")
         self.LButton.setText("On")
-        self.LButton.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
+        self.LButton.setGeometry(QtCore.QRect(2.5*R, 20*R, 65*R, 15*R))
         self.LButton.setProperty("State", True)
         self.LButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
@@ -876,7 +876,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.RButton = QtWidgets.QPushButton(self)
         self.RButton.setObjectName("RButton")
         self.RButton.setText("Off")
-        self.RButton.setGeometry(QtCore.QRect(70*R, 20*R, 70*R, 20*R))
+        self.RButton.setGeometry(QtCore.QRect(72.5*R, 20*R, 65*R, 15*R))
         self.RButton.setProperty("State", False)
         self.RButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
