@@ -318,7 +318,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.SV4337 = Valve(self.ThermosyphonTab)
         self.SV4337.Label.setText("SV4337")
-        self.SV4337.move(0*R,250*R)
+        self.SV4337.move(0*R,220*R)
 
         self.PRV4333 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4333.Label.setText("PRV4333")
