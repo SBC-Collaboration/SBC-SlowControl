@@ -419,30 +419,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT6401 = self.HT6214SUB.RTD2
         self.TT6401.Label.setText("TT6401")
 
-        self.HT6216 = Heater(self.ChamberTab)
-        self.HT6216.move(1780*R, 245*R)
-        self.HT6216.Label.setText("HT6216")
-        self.HT6216.HeaterSubWindow.setWindowTitle("HT6216")
-        self.HT6216SUB = HeaterExpand(self.HT6216.HeaterSubWindow)
-        self.HT6216SUB.Label.setText("HT6216")
-        self.HT6216.HeaterSubWindow.VL.addWidget(self.HT6216SUB)
-        self.TT6215 = self.HT6216SUB.RTD1
-        self.TT6215.Label.setText("TT6215")
-        self.TT6402 = self.HT6216SUB.RTD2
-        self.TT6402.Label.setText("TT6402")
-
-        self.HT6218 = Heater(self.ChamberTab)
-        self.HT6218.move(1780*R, 345*R)
-        self.HT6218.Label.setText("HT6218")
-        self.HT6218.HeaterSubWindow.setWindowTitle("HT6218")
-        self.HT6218SUB = HeaterExpand(self.HT6218.HeaterSubWindow)
-        self.HT6218SUB.Label.setText("HT6218")
-        self.HT6218.HeaterSubWindow.VL.addWidget(self.HT6218SUB)
-        self.TT6217 = self.HT6218SUB.RTD1
-        self.TT6217.Label.setText("TT6217")
-        self.TT6403 = self.HT6218SUB.RTD2
-        self.TT6403.Label.setText("TT6403")
-
         self.HT6202 = Heater(self.ChamberTab)
         self.HT6202.move(1780*R, 485*R)
         self.HT6202.Label.setText("HT6202")
@@ -2640,18 +2616,6 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.TT6401 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT6401.Label.setText("TT6401")
 
-        self.TT6215 = AlarmStatusWidget(self.RTDLEFTTab)
-        self.TT6215.Label.setText("TT6215")
-
-        self.TT6402 = AlarmStatusWidget(self.RTDLEFTTab)
-        self.TT6402.Label.setText("TT6402")
-
-        self.TT6217 = AlarmStatusWidget(self.RTDLEFTTab)
-        self.TT6217.Label.setText("TT6217")
-
-        self.TT6403 = AlarmStatusWidget(self.RTDLEFTTab)
-        self.TT6403.Label.setText("TT6403")
-
         self.TT6203 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT6203.Label.setText("TT6203")
 
@@ -2780,11 +2744,10 @@ class AlarmWin(QtWidgets.QMainWindow):
                            2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
                            3: {0: self.PT4322, 1: self.PT4325}}
 
-        self.AlarmRTDLEFTdir = {0: {0: self.TT4330, 1: self.TT6220, 2: self.TT6213, 3: self.TT6401, 4: self.TT6215},
-                                1: {0: self.TT6402, 1: self.TT6217, 2: self.TT6403, 3: self.TT6203, 4: self.TT6404},
-                                2: {0: self.TT6207, 1: self.TT6405, 2: self.TT6211, 3: self.TT6406, 4: self.TT6223},
-                                3: {0: self.TT6410, 1: self.TT6408, 2: self.TT6409, 3: self.TT6412, 4: self.TT7202},
-                                4: {0: self.TT7401, 1: self.TT3402, 2: self.TT3401, 3: self.TT7403}}
+        self.AlarmRTDLEFTdir = {0: {0: self.TT4330, 1: self.TT6220, 2: self.TT6213, 3: self.TT6401, 4: self.TT6203},
+                                1: {0: self.TT6404, 1: self.TT6207, 2: self.TT6405, 3: self.TT6211, 4: self.TT6406},
+                                2: {0: self.TT6223, 1: self.TT6410, 2: self.TT6408, 3: self.TT6409, 4: self.TT6412},
+                                3: {0: self.TT3402, 1: self.TT3401, 2: self.TT7401, 3: self.TT7202, 4: self.TT7403}}
 
         # self.AlarmRTD1dir = {0: {0: "self.TT2111", 1: "self.TT2112", 2: "self.TT2113", 3: "self.TT2114", 4: "self.TT2115"},
         #                      1: {0: "self.TT2116", 1: "self.TT2117", 2: "self.TT2118", 3: "self.TT2119", 4: "self.TT2120"}}
