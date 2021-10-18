@@ -25,7 +25,7 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-fam
               "\"Calibri\"; font-size: 22px; font-weight: bold;"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px;" \
                " border-color: black;"
-R=1 #Resolution rate
+R=0.6 #Resolution rate
 
 
 class PnID_Alone(QtWidgets.QWidget):
