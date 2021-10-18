@@ -29,10 +29,10 @@ VERSION = "v2.1.3"
 #               "font-size: 18px; font-weight: bold;"
 # TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
 #               " font-size: 22px; font-weight: bold;"
-SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
+SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\";" \
                     " font-size: 10px;" \
                     " font-weight: bold;"
-LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; " \
+LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\"; " \
               "font-size: 12px; font-weight: bold;"
 TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
               " font-size: 14px; font-weight: bold;"
@@ -3845,7 +3845,7 @@ class Valve(QtWidgets.QWidget):
 
         self.ActiveState = ColoredStatus(self, mode)
         # self.ActiveState = ColorIndicator(self) for test the function
-        self.ActiveState.Label.setText("Active Status")
+        self.ActiveState.Label.setText("Status")
         self.HL.addWidget(self.ActiveState)
 
 
