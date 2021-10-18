@@ -80,7 +80,7 @@ class ColoredStatus(QtWidgets.QWidget):
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet(FONT)
 
-        self.Field = QtWidgets.QPushButton(self)
+        self.Field = QtWidgets.QLineEdit(self)
         self.Field.setObjectName("value")
         self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 65*R, 15*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
