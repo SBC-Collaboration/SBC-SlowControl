@@ -3538,6 +3538,7 @@ class FunctionButton(QtWidgets.QWidget):
         self.Button.setText("Button")
         self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 250*R, 80*R))
         self.Button.clicked.connect(self.ButtonClicked)
+        self.Button.setStyleSheet(LABEL_STYLE)
 
     @QtCore.Slot()
     def ButtonClicked(self):
