@@ -11,7 +11,8 @@ from PySide2 import QtCore, QtWidgets, QtGui
 import time
 import os
 
-FONT = "font-family: \"Calibri\"; font-size: 14px;"
+# FONT = "font-family: \"Calibri\"; font-size: 14px;"
+FONT = "font-family: \"Calibri\"; font-size: 10px;"
 BORDER_RADIUS = "border-radius: 6px;"
 C_LIGHT_GREY = "background-color: rgb(204,204,204);"
 C_MEDIUM_GREY = "background-color: rgb(167,167,167);"
@@ -21,8 +22,10 @@ C_GREEN = "background-color: rgb(0,217,0);"
 C_RED = "background-color: rgb(255,25,25);"
 C_BLUE = "background-color: rgb(34,48,171);"
 C_ORANGE = "background-color: rgb(255,132,27);"
+# TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
+#               "\"Calibri\"; font-size: 22px; font-weight: bold;"
 TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
-              "\"Calibri\"; font-size: 22px; font-weight: bold;"
+              "\"Calibri\"; font-size: 14px; font-weight: bold;"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px;" \
                " border-color: black;"
 R=0.6 #Resolution rate

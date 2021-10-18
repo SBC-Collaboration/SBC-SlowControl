@@ -21,13 +21,21 @@ from SlowDAQWidgets_SBC_v2 import *
 import zmq
 
 VERSION = "v2.1.3"
+# SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
+#                     " font-size: 14px;" \
+#                     " font-weight: bold;"
+
+# LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; " \
+#               "font-size: 18px; font-weight: bold;"
+# TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
+#               " font-size: 22px; font-weight: bold;"
 SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
-                    " font-size: 14px;" \
+                    " font-size: 10px;" \
                     " font-weight: bold;"
 LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; " \
-              "font-size: 18px; font-weight: bold;"
+              "font-size: 12px; font-weight: bold;"
 TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
-              " font-size: 22px; font-weight: bold;"
+              " font-size: 14px; font-weight: bold;"
 ADMIN_TIMER = 30000
 PLOTTING_SCALE = 0.66
 ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bdf133e9e2c98ad4eafc622f4" \
