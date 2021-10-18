@@ -3590,7 +3590,7 @@ class Heater(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QPushButton(self)
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setStyleSheet(TITLE_STYLE)
+        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
