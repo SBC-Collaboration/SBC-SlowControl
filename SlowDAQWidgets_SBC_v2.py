@@ -13,7 +13,7 @@ import os
 
 # FONT = "font-family: \"Calibri\"; font-size: 14px;"
 FONT = "font-family: \"Calibri\"; font-size: 14px;"
-BORDER_RADIUS = "border-radius: 6px;"
+BORDER_RADIUS = "border-radius: 20px;"
 C_LIGHT_GREY = "background-color: rgb(204,204,204);"
 C_MEDIUM_GREY = "background-color: rgb(167,167,167);"
 C_WHITE = "color: white;"
