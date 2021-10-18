@@ -180,13 +180,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LoginT.Button.setText("Guest")
 
         # PLC test window
-        self.TT9998 = Indicator(self.ThermosyphonTab)
-        self.TT9998.Label.setText("TT9998")
-        self.TT9998.move(0*R, 900*R)
-
-        self.TT9999 = Indicator(self.ThermosyphonTab)
-        self.TT9999.Label.setText("TT9998")
-        self.TT9999.move(0*R, 950*R)
 
         self.GV4301 = PnID_Alone(self.ThermosyphonTab)
         self.GV4301.Label.setText("GV4301")
@@ -322,6 +315,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV4332 = Valve(self.ThermosyphonTab)
         self.SV4332.Label.setText("SV4332")
         self.SV4332.move(1450*R, 300*R)
+
+        self.SV4337 = Valve(self.ThermosyphonTab)
+        self.SV4337.Label.setText("SV4337")
+        self.SV4337.move(0*R,0*R)
 
         self.PRV4333 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4333.Label.setText("PRV4333")
@@ -637,6 +634,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1332.Label.setText("PT1332")
         self.PT1332.SetUnit(" psi")
 
+        self.PV1344=Valve(self.FluidTab)
+        self.PV1344.Label.setText("PV1344")
+        self.PV1344.move(0*R,0*R)
+
         self.PV5305 = Valve(self.FluidTab)
         self.PV5305.Label.setText("PV5305")
         self.PV5305.move(1200*R, 530*R)
@@ -884,8 +885,8 @@ class MainWindow(QtWidgets.QMainWindow):
     # signal connections to write settings to PLC codes
 
     def signal_connection(self):
-        # self.PV1344.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1344.Label.text()))
-        # self.PV1344.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1344.Label.text()))
+        self.PV1344.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1344.Label.text()))
+        self.PV1344.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1344.Label.text()))
         self.PV4307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4307.Label.text()))
         self.PV4307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4307.Label.text()))
         self.PV4308.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4308.Label.text()))
@@ -4067,7 +4068,7 @@ class UpdateDisplay(QtCore.QObject):
                 # print("SV3307_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3307"])
                 # print("SV3307_MAN", self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"])
 
-                # self.MW.PV1344.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV1344"])
+                self.MW.PV1344.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV1344"])
                 self.MW.PV4307.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"])
                 self.MW.PV4308.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4308"])
                 self.MW.PV4317.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4317"])
@@ -4089,17 +4090,17 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.SV4329.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4329"])
                 self.MW.SV4331.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4331"])
                 self.MW.SV4332.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4332"])
-                # self.MW.SV4337.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4337"])
+                self.MW.SV4337.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4337"])
                 self.MW.HFSV3312.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3312"])
                 self.MW.HFSV3323.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3323"])
                 self.MW.HFSV3331.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3331"])
 
                 # refreshing the valve status from PLC every 30s
                 if self.count >= self.button_refreshing_count:
-                    # if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1344"]:
-                    #     self.MW.PV1344.Set.ButtonLClicked()
-                    # else:
-                    #     self.MW.PV1344.Set.ButtonRClicked()
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1344"]:
+                        self.MW.PV1344.Set.ButtonLClicked()
+                    else:
+                        self.MW.PV1344.Set.ButtonRClicked()
 
                     if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"]:
                         self.MW.PV4307.Set.ButtonLClicked()
@@ -4210,10 +4211,10 @@ class UpdateDisplay(QtCore.QObject):
                     else:
                         self.MW.SV4332.Set.ButtonRClicked()
 
-                    # if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV4337"]:
-                    #     self.MW.SV4337.Set.ButtonLClicked()
-                    # else:
-                    #     self.MW.SV4337.Set.ButtonRClicked()
+                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV4337"]:
+                        self.MW.SV4337.Set.ButtonLClicked()
+                    else:
+                        self.MW.SV4337.Set.ButtonRClicked()
 
                     if self.Client.receive_dic["data"]["Valve"]["OUT"]["HFSV3312"]:
                         self.MW.HFSV3312.Set.ButtonLClicked()
@@ -4329,10 +4330,6 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.TT6414.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6414"])
 
 
-                # self.MW.TT9998.SetValue(self.Client.receive_dic["data"]["PT9998"])
-                # self.MW.TT9999.SetValue(self.Client.receive_dic["data"]["PT9999"])
-
-                # self.MW.subwindow.Lowlimit.SetValue(self.Client.receive_dic["PT99998"])
                 # self.MW.subwindow.alarmbutton(self.Client.receive_dic)
                 # reorfer
                 #     self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.PLC.RTD[0])
