@@ -12,7 +12,7 @@ import time
 import os
 
 # FONT = "font-family: \"Calibri\"; font-size: 14px;"
-FONT = "font-family: \"Calibri\"; font-size: 6px;"
+FONT = "font-family: \"Calibri\"; font-size: 14px;"
 BORDER_RADIUS = "border-radius: 6px;"
 C_LIGHT_GREY = "background-color: rgb(204,204,204);"
 C_MEDIUM_GREY = "background-color: rgb(167,167,167);"
