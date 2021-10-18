@@ -28,6 +28,7 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-fam
               "\"Calibri\"; font-size: 14px; font-weight: bold;"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px;" \
                " border-color: black;"
+
 R=0.6 #Resolution rate
 
 
@@ -151,7 +152,7 @@ class ColorIndicator(QtWidgets.QWidget):
         # test part.
         self.ColorButton = QtWidgets.QPushButton(self)
         self.ColorButton.setObjectName("ColorButton")
-        self.ColorButton.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
+        self.ColorButton.setGeometry(QtCore.QRect(0*R, 20*R, 65*R, 15*R))
         self.ColorButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[ColorStyle='0']{" + C_ORANGE +
             "} QWidget[ColorStyle = '1']{" + C_RED + "} QWidget[ColorStyle = '2']{" + C_BLUE + "}")

@@ -3477,7 +3477,7 @@ class AlarmButton(QtWidgets.QWidget):
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
         self.Button.setText("Button")
-        self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 250*R, 80*R))
+        self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 245*R, 75*R))
         self.Button.setStyleSheet(
             "QWidget{" + LABEL_STYLE + "} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} "
                                        "QWidget[Alarm = false]{ background-color: rgb(204,204,204);}")
