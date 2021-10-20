@@ -2232,6 +2232,10 @@ class RTDset3(QtWidgets.QMainWindow):
         self.TT2449.Label.setText("TT2449")
         self.GL.addWidget(self.TT2449, 2, 4)
 
+        self.TT2450 = Indicator(self)
+        self.TT2450.Label.setText("TT2450")
+        self.GL.addWidget(self.TT2450, 3, 0)
+
 
 class RTDset4(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -4013,7 +4017,7 @@ class UpdateDisplay(QtCore.QObject):
                 # print(type(dic))
 
                 # self.MW.AlarmButton.SubWindow.TT2120.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"][pid])
-                
+
 
                 self.display_update.emit(dic)
                 # PT1325 not found
@@ -4264,7 +4268,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.RTDset2Win.TT2423.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2423"])
                 self.MW.RTDset2Win.TT2426.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2426"])
                 self.MW.RTDset2Win.TT2430.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2430"])
-                # self.MW.RTDset2Win.TT2450.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2450"])
+                self.MW.RTDset2Win.TT2450.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2450"])
                 self.MW.RTDset2Win.TT2401.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2401"])
                 self.MW.RTDset3Win.TT2449.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2449"])
                 self.MW.RTDset3Win.TT2445.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2445"])
