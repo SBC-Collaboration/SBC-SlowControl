@@ -4012,6 +4012,9 @@ class UpdateDisplay(QtCore.QObject):
                 # print(dic)
                 # print(type(dic))
 
+                # self.MW.AlarmButton.SubWindow.TT2120.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"][pid])
+                
+
                 self.display_update.emit(dic)
                 # PT1325 not found
 
@@ -4433,14 +4436,7 @@ class UpdateDisplay(QtCore.QObject):
                 # self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0].CheckAlarm()
                 # print(self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0]==self.MW.AlarmButton.SubWindow.PT1101)
 
-                # for i in range(0, self.MW.AlarmButton.SubWindow.i_RTD1_max):
-                #     for j in range(0, self.MW.AlarmButton.SubWindow.j_RTD1_max):
-                #         self.MW.AlarmButton.SubWindow.AlarmRTD1dir[i][j].CheckAlarm()
-                #         if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
-                #             break
-                #     if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
 
-                #         break
 
                 # for i in range(0, len(self.MW.AlarmButton.SubWindow.AlarmRTD1list1D)):
                 #     self.MW.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()

@@ -418,6 +418,22 @@ class AlarmStatusWidget(QtWidgets.QWidget):
             self.Indicator.ResetAlarm()
             self.Alarm = False
 
+    @QtCore.Slot()
+    def UpdateAlarm(self,Value):
+        if self.AlarmMode.isChecked():
+            if Value:
+                self.Indicator.SetAlarm()
+                self.Alarm = True
+            if not Value:
+                self.Indicator.ResetAlarm()
+                self.Alarm = False
+            else:
+                print("Alarm Info Error")
+
+        else:
+            self.Indicator.ResetAlarm()
+            self.Alarm = False
+
 
 class BoolIndicator(QtWidgets.QWidget):
     def __init__(self, parent=None):
