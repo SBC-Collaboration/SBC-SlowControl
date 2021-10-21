@@ -884,7 +884,7 @@ class UpdatePLC(QtCore.QObject):
                     # print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.TT_BO_dic[pid]) > int(self.PLC.TT_BO_HighLimit[pid]):
                     self.setTTBOalarm(pid)
-                    # print(pid,  " reading is higher than the high limit")
+                    print(pid,  " reading is higher than the high limit")
                 else:
                     self.resetTTBOalarm(pid)
                     # print(pid, " is in normal range")

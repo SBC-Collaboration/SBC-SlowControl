@@ -933,7 +933,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def BOTTBoxChecked(self,pid, state):
         self.commands[pid]={"server": "BO", "address": self.address[pid], "type": "TT", "operation": "Act",
                               "value": state}
-        print("ischecked?",state)
+        # print("ischecked?",state)
 
 
     # Ask if staying in admin mode after timeout
