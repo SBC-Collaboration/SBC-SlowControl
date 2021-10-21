@@ -3931,18 +3931,22 @@ class UpdateClient(QtCore.QObject):
                                                "SV3325": False, "SV3326": False, "SV3329": False,
                                                "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
                                                "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}}},
-                       "Alarm":{"TT":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
-                                      "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
-                                      "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
-                                      "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
-                                      "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
-                                      "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
-                                      "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
-                                      "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
-                                      "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
-                                      "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
-                                      "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
-                                      "TT6412": False, "TT6413": False, "TT6414": False},
+                       "Alarm":{"TT":{"FP":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
+                                            "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
+                                            "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
+                                            "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
+                                            "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
+                                            "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
+                                            "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
+                                            "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
+                                            "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
+                                            "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
+                                            "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
+                                            "TT6412": False, "TT6413": False, "TT6414": False},
+                                      "BO":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
+                                      "TT4330": False,
+                                      "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
+                                      "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}},
                                 "PT":{"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
                                       "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                                       "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
@@ -4016,7 +4020,7 @@ class UpdateDisplay(QtCore.QObject):
                 # print(dic)
                 # print(type(dic))
 
-                # self.MW.AlarmButton.SubWindow.TT2120.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"][pid])
+                # self.MW.AlarmButton.SubWindow.TT2119.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
 
 
                 self.display_update.emit(dic)
