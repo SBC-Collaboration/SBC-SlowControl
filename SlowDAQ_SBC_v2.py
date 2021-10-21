@@ -916,6 +916,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmButton.SubWindow.TT2119.AlarmMode.stateChanged.connect(
             lambda x:self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
                                          LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+        self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.editingFinished.connect(
+            lambda x: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
+                                         Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+                                         LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
+                                         HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+        self.AlarmButton.SubWindow.TT2119.High_Limit.Field.editingFinished.connect(
+            lambda x: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
+                                         Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+                                         LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
+                                         HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+
         # self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.editingFinished.connect(
         #     lambda x: self.BOTTBoxChecked(self.AlarmButton.SubWindow.TT2119.Label.text(),
         #                                   self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text()))
@@ -981,7 +992,7 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def update_alarmwindow(self,dic):
         # print("dict:",dic)
-        # 
+        #
         # for i in range(0, len(self.AlarmButton.SubWindow.AlarmRTD1list1D)):
         #     self.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
         self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
