@@ -914,7 +914,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
         self.AlarmButton.SubWindow.TT2119.AlarmMode.stateChanged.connect(
-            lambda x: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+            lambda : self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
                                          LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(), HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
 
         self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(
@@ -922,6 +922,12 @@ class MainWindow(QtWidgets.QMainWindow):
                                          Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
                                          LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
                                          HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2119.High_Limit.Field.returnPressed.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
 
         # self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(
         #     lambda x: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(), Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
