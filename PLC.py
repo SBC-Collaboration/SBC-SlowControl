@@ -884,7 +884,7 @@ class UpdatePLC(QtCore.QObject):
                     # print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.TT_BO_dic[pid]) > int(self.PLC.TT_BO_HighLimit[pid]):
                     self.setTTBOalarm(pid)
-                    print(pid,  " reading is higher than the high limit")
+                    # print(pid,  " reading is higher than the high limit")
                 else:
                     self.resetTTBOalarm(pid)
                     # print(pid, " is in normal range")
@@ -1101,17 +1101,29 @@ class UpdateServer(QtCore.QObject):
                     if message[key]["server"] == "BO":
                         if message[key]["operation"] == "Act":
                             self.PLC.TT_BO_Activated[key] = message[key]["value"]
+                        elif message[key]["operation"] == "LowLimit":
+                            self.PLC.TT_BO_LowLimit[key] = message[key]["value"]
+                        elif message[key]["operation"] == "HighLimit":
+                            self.PLC.TT_BO_HighLimit[key] = message[key]["value"]
                         else:
                             pass
                     elif message[key]["server"] == "FP":
                         if message[key]["operation"] == "Act":
                             self.PLC.TT_FP_Activated[key] = message[key]["value"]
+                        elif message[key]["operation"] == "LowLimit":
+                            self.PLC.TT_FP_LowLimit[key] = message[key]["value"]
+                        elif message[key]["operation"] == "HighLimit":
+                            self.PLC.TT_FP_HighLimit[key] = message[key]["value"]
                         else:
                             pass
                 elif message[key]["type"] == "PT":
                     if message[key]["server"] == "BO":
                         if message[key]["operation"] == "Act":
-                            self.PLC.TT_BO_Activated[key] = message[key]["value"]
+                            self.PLC.PT_Activated[key] = message[key]["value"]
+                        elif message[key]["operation"] == "LowLimit":
+                            self.PLC.PT_LowLimit[key] = message[key]["value"]
+                        elif message[key]["operation"] == "HighLimit":
+                            self.PLC.PT_HighLimit[key] = message[key]["value"]
                         else:
                             pass
                     else:
