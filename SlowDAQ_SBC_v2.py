@@ -4020,8 +4020,8 @@ class UpdateDisplay(QtCore.QObject):
                 # print(dic)
                 # print(type(dic))
 
-                # self.MW.AlarmButton.SubWindow.TT2119.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
-
+                self.MW.AlarmButton.SubWindow.TT2119.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
+                self.MW.AlarmButton.SubWindow.TT2119.Indicator.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2119"])
 
                 self.display_update.emit(dic)
                 # PT1325 not found
