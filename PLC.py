@@ -1097,6 +1097,26 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.WriteClose(address= message[key]["address"])
                     else:
                         pass
+                elif message[key]["type"] == "TT":
+                    if message[key]["server"] == "BO":
+                        if message[key]["operation"] == "Act":
+                            self.PLC.TT_BO_Activated[key] = message[key]["value"]
+                        else:
+                            pass
+                    elif message[key]["server"] == "FP":
+                        if message[key]["operation"] == "Act":
+                            self.PLC.TT_FP_Activated[key] = message[key]["value"]
+                        else:
+                            pass
+                elif message[key]["type"] == "PT":
+                    if message[key]["server"] == "BO":
+                        if message[key]["operation"] == "Act":
+                            self.PLC.TT_BO_Activated[key] = message[key]["value"]
+                        else:
+                            pass
+                    else:
+                        pass
+
                 else:
                     pass
 

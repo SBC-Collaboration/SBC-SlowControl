@@ -776,7 +776,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.address ={"PV1344":12288, "PV4307":12289,"PV4308":12290,"PV4317":12291,"PV4318":12292,"PV4321":12293,"PV4324":12294,"PV5305":12295,"PV5306":12296,
                        "PV5307":12297,"PV5309":12298,"SV3307":12299,"SV3310":12300,"SV3322":12301,"SV3325":12302,"SV3326":12303,"SV3329":12304,
                        "SV4327":12305,"SV4328":12306,"SV4329":12307,"SV4331":12308,"SV4332":12309, "SV4337": 12310, "HFSV3312": 12311,
-                       "HFSV3323":12312, "HFSV3331":12313}
+                       "HFSV3323":12312, "HFSV3331":12313,"TT2119":12296}
         self.commands = {}
         self.signal_connection()
 
@@ -905,14 +905,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV4331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4331.Label.text()))
         self.SV4332.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4332.Label.text()))
         self.SV4332.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4332.Label.text()))
-        # self.SV4337.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4337.Label.text()))
-        # self.SV4337.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4337.Label.text()))
+        self.SV4337.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4337.Label.text()))
+        self.SV4337.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4337.Label.text()))
         self.HFSV3312.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3312.Label.text()))
         self.HFSV3312.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3312.Label.text()))
         self.HFSV3323.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3323.Label.text()))
         self.HFSV3323.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3323.Label.text()))
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
+        self.AlarmButton.SubWindow.TT2119.AlarmMode.stateChanged.connect(
+            lambda x:self.BOTTBoxChecked(self.AlarmButton.SubWindow.TT2119.Label.text(),self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked()))
 
     @QtCore.Slot()
     def LButtonClicked(self,pid):
@@ -926,6 +928,12 @@ class MainWindow(QtWidgets.QMainWindow):
                               "value": 1}
         print(self.commands)
         print(pid, "R Button is clicked")
+
+    @QtCore.Slot()
+    def BOTTBoxChecked(self,pid, state):
+        self.commands[pid]={"server": "BO", "address": self.address[pid], "type": "TT", "operation": "Act",
+                              "value": state}
+        print("ischecked?",state)
 
 
     # Ask if staying in admin mode after timeout
@@ -4024,7 +4032,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.AlarmButton.SubWindow.TT2119.Indicator.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2119"])
 
                 self.display_update.emit(dic)
-                # PT1325 not found
+
 
 
                 # print("PV4307_OUT", self.Client.receive_dic["data"]["Valve"]["OUT"]["PV4307"])
