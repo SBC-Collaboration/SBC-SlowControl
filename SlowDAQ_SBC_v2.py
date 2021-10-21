@@ -2933,7 +2933,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         # which is 2
         j_RTD1_last = len(self.AlarmRTD1dir[i_RTD1_last]) - 1
         # which is 4
-        print(i_RTD1_max,j_RTD1_max,i_RTD1_last, j_RTD1_last)
+        # print(i_RTD1_max,j_RTD1_max,i_RTD1_last, j_RTD1_last)
 
         l_RTD1_max = j_RTD1_max - 1
 
@@ -2950,7 +2950,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
-        print("1st part")
+        # print("1st part")
         #
         #
         # # RTD1 put alarm false widget after that
@@ -2966,7 +2966,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
-        print("2nd part")
+        # print("2nd part")
         # Reassign position
         # end the position generator when i= last element's row number, j= last element's column number
         for i in range(0, i_RTD1_max):
@@ -2976,7 +2976,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
-        print("3rd part")
+        # print("3rd part")
 
     @QtCore.Slot()
     def ReassignRTD2Order(self):
@@ -4035,7 +4035,7 @@ class UpdateDisplay(QtCore.QObject):
                 # print(type(dic))
 
                 self.MW.AlarmButton.SubWindow.TT2119.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
-                print("alarmbutton",self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
+                # print("alarmbutton",self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
                 self.MW.AlarmButton.SubWindow.TT2119.Indicator.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2119"])
 
                 self.display_update.emit(dic)
