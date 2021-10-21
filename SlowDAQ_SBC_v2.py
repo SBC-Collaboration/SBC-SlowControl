@@ -981,9 +981,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def update_alarmwindow(self,dic):
         # print("dict:",dic)
-
-        for i in range(0, len(self.AlarmButton.SubWindow.AlarmRTD1list1D)):
-            self.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
+        # 
+        # for i in range(0, len(self.AlarmButton.SubWindow.AlarmRTD1list1D)):
+        #     self.AlarmButton.SubWindow.AlarmRTD1list1D[i].CheckAlarm()
         self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
                                           self.AlarmButton.SubWindow.TT2112.Alarm,
                                           self.AlarmButton.SubWindow.TT2113.Alarm,
@@ -4035,7 +4035,7 @@ class UpdateDisplay(QtCore.QObject):
                 # print(type(dic))
 
                 self.MW.AlarmButton.SubWindow.TT2119.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
-                # print("alarmbutton",self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
+                print("alarmbutton",self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
                 self.MW.AlarmButton.SubWindow.TT2119.Indicator.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2119"])
 
                 self.display_update.emit(dic)
