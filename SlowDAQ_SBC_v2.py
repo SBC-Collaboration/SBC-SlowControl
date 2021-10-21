@@ -914,13 +914,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
         self.AlarmButton.SubWindow.TT2119.AlarmMode.stateChanged.connect(
-            lambda x:self.BOTTBoxChecked(self.AlarmButton.SubWindow.TT2119.Label.text(),self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked()))
-        self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.editingFinished.connect(
-            lambda x: self.BOTTBoxChecked(self.AlarmButton.SubWindow.TT2119.Label.text(),
-                                          self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text()))
-        self.AlarmButton.SubWindow.TT2119.High_Limit.Field.editingFinished.connect(
-            lambda x: self.BOTTBoxChecked(self.AlarmButton.SubWindow.TT2119.Label.text(),
-                                          self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+            lambda x:self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+                                         LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+        # self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.editingFinished.connect(
+        #     lambda x: self.BOTTBoxChecked(self.AlarmButton.SubWindow.TT2119.Label.text(),
+        #                                   self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text()))
+        # self.AlarmButton.SubWindow.TT2119.High_Limit.Field.editingFinished.connect(
+        #     lambda x: self.BOTTBoxChecked(self.AlarmButton.SubWindow.TT2119.Label.text(),
+        #                                   self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
 
     @QtCore.Slot()
     def LButtonClicked(self,pid):
@@ -936,23 +937,10 @@ class MainWindow(QtWidgets.QMainWindow):
         print(pid, "R Button is clicked")
 
     @QtCore.Slot()
-    def BOTTBoxChecked(self,pid, state):
-        self.commands[pid]={"server": "BO", "address": self.address[pid], "type": "TT", "operation": "Act",
-                              "value": state}
+    def BOTTBoxUpdate(self,pid, Act,LowLimit, HighLimit):
+        self.commands[pid]={"server": "BO", "address": self.address[pid], "type": "TT", "operation": {"Act":Act,
+                                "LowLimit":LowLimit,"HighLimit":HighLimit}}
         # print("ischecked?",state)
-
-    @QtCore.Slot()
-    def BOTTBoxLLimit(self,pid, value):
-        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "TT", "operation": "LowLimit",
-                              "value": value}
-        print("lowlimit",value)
-
-    @QtCore.Slot()
-    def BOTTBoxHLimit(self, pid, value):
-        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "TT", "operation": "HighLimit",
-                              "value": value}
-        print("highlimit", value)
-
 
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()

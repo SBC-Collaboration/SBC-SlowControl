@@ -424,7 +424,7 @@ class AlarmStatusWidget(QtWidgets.QWidget):
             if Value:
                 self.Indicator.SetAlarm()
                 self.Alarm = True
-            if not Value:
+            elif not Value:
                 self.Indicator.ResetAlarm()
                 self.Alarm = False
             else:
