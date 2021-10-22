@@ -917,19 +917,19 @@ class MainWindow(QtWidgets.QMainWindow):
             lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
                                          LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(), HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
 
-        self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(
-            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
-                                         Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
-                                         LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
-                                         HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+        # self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(
+        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
+        #                                  Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+        #                                  LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
+        #                                  HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.TT2119.High_Limit.Field.returnPressed.connect(
+        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
 
-        self.AlarmButton.SubWindow.TT2119.High_Limit.Field.returnPressed.connect(
-            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
-
-        # self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(lambda: print("I am pressed"))
+        self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(lambda: print("I am pressed"))
 
         # self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(
         #     lambda x: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(), Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
