@@ -214,7 +214,7 @@ class SetPoint(QtWidgets.QWidget):
         self.Field.setObjectName("value")
         self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Field.setStyleSheet(BORDER_STYLE + C_BLACK + FONT)
-        # self.Field.editingFinished.connect(self.UpdateValue)
+        self.Field.editingFinished.connect(self.UpdateValue)
         self.value = 0
         self.Field.setText(str(self.value))
 
