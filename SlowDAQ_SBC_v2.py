@@ -935,11 +935,12 @@ class MainWindow(QtWidgets.QMainWindow):
                                 self.AlarmButton.SubWindow.TT6416]
         BORTD_Alarmlen=len(BORTD_AlarmMatrix)
         for i in range(BORTD_Alarmlen):
-            BORTD_AlarmMatrix[i].AlarmMode.stateChanged.connect(
-                lambda: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[i].Label.text(),
-                                           Act=self.BORTD_AlarmMatrix[i].AlarmMode.isChecked(),
-                                           LowLimit=BORTD_AlarmMatrix[i].Low_Limit.Field.text(),
-                                           HighLimit=BORTD_AlarmMatrix[i].High_Limit.Field.text()))
+            print(BORTD_AlarmMatrix[i].Label.text())
+            # BORTD_AlarmMatrix[i].AlarmMode.stateChanged.connect(
+            #     lambda: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[i].Label.text(),
+            #                                Act=self.BORTD_AlarmMatrix[i].AlarmMode.isChecked(),
+            #                                LowLimit=BORTD_AlarmMatrix[i].Low_Limit.Field.text(),
+            #                                HighLimit=BORTD_AlarmMatrix[i].High_Limit.Field.text()))
 
         # self.AlarmButton.SubWindow.TT2101.AlarmMode.stateChanged.connect(
         #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2101.Label.text(),
