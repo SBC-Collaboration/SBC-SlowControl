@@ -2841,6 +2841,9 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.TT6406 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT6406.Label.setText("TT6406")
 
+        self.TT6222 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6223.Label.setText("TT6222")
+
         self.TT6223 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT6223.Label.setText("TT6223")
 
