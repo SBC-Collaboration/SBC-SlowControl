@@ -4238,82 +4238,82 @@ class UpdateDisplay(QtCore.QObject):
                 # print(type(dic))
 
                 self.MW.AlarmButton.SubWindow.TT2101.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2101"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2101"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2101"])
                 self.MW.AlarmButton.SubWindow.TT2101.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT2101"])
 
                 self.MW.AlarmButton.SubWindow.TT2111.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2111"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2111"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2111"])
                 self.MW.AlarmButton.SubWindow.TT2111.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT2111"])
 
                 self.MW.AlarmButton.SubWindow.TT2113.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2113"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2113"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2113"])
                 self.MW.AlarmButton.SubWindow.TT2113.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT2113"])
 
                 self.MW.AlarmButton.SubWindow.TT2118.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2118"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2118"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2118"])
                 self.MW.AlarmButton.SubWindow.TT2118.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT2118"])
 
                 self.MW.AlarmButton.SubWindow.TT2119.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT2119"])
                 self.MW.AlarmButton.SubWindow.TT2119.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT2119"])
 
                 self.MW.AlarmButton.SubWindow.TT4330.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT4330"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT4330"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT4330"])
                 self.MW.AlarmButton.SubWindow.TT4330.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT4330"])
 
                 self.MW.AlarmButton.SubWindow.TT6203.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6203"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6203"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6203"])
                 self.MW.AlarmButton.SubWindow.TT6203.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT6203"])
 
                 self.MW.AlarmButton.SubWindow.TT6207.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6207"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6207"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6207"])
                 self.MW.AlarmButton.SubWindow.TT6207.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT6207"])
 
                 self.MW.AlarmButton.SubWindow.TT6211.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6211"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6211"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6211"])
                 self.MW.AlarmButton.SubWindow.TT6211.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT6211"])
 
                 self.MW.AlarmButton.SubWindow.TT6213.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6213"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6213"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6213"])
                 self.MW.AlarmButton.SubWindow.TT6213.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT6213"])
 
                 self.MW.AlarmButton.SubWindow.TT6222.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6222"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6222"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6222"])
                 self.MW.AlarmButton.SubWindow.TT6222.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT6222"])
 
                 self.MW.AlarmButton.SubWindow.TT6407.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6407"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6407"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6407"])
                 self.MW.AlarmButton.SubWindow.TT6407.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT6407"])
 
                 self.MW.AlarmButton.SubWindow.TT6408.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6408"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6408"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6408"])
                 self.MW.AlarmButton.SubWindow.TT6408.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT6408"])
 
                 self.MW.AlarmButton.SubWindow.TT6409.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6409"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6409"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6409"])
                 self.MW.AlarmButton.SubWindow.TT6409.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT6409"])
 
                 self.MW.AlarmButton.SubWindow.TT6415.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6415"])
-                print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6415"])
+                # print("alarmbutton", self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6415"])
                 self.MW.AlarmButton.SubWindow.TT6415.Indicator.SetValue(
                     self.Client.receive_dic["data"]["TT"]["BO"]["TT6415"])
 
                 self.MW.AlarmButton.SubWindow.TT6416.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6416"])
-                print("alarmbutton",self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6416"])
+                # print("alarmbutton",self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6416"])
                 self.MW.AlarmButton.SubWindow.TT6416.Indicator.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6416"])
 
                 self.display_update.emit(dic)
