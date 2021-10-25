@@ -400,8 +400,8 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("AlarmStatusWidget")
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 200 * R, 200 * R))
-        self.setMinimumSize(200 * R, 200 * R)
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 200 * R, 100 * R))
+        self.setMinimumSize(200 * R, 100 * R)
         self.setSizePolicy(sizePolicy)
 
         self.GL = QtWidgets.QGridLayout(self)
@@ -414,7 +414,6 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.GL.addWidget(self.Label,0,1)
-
 
         self.Indicator = Indicator(self)
         self.Indicator.Label.setText("Indicator")
