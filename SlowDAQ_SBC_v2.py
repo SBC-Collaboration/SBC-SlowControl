@@ -942,6 +942,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Beckoff RTDs
 
         for i in range(self.BORTD_Alarmlen):
+            print(self.BORTD_AlarmMatrix[i].Label.text())
             self.BORTD_AlarmMatrix[i].AlarmMode.stateChanged.connect(
                 lambda: self.BOTTBoxUpdate(pid=self.BORTD_AlarmMatrix[i].Label.text(),
                                            Act=self.self.BORTD_AlarmMatrix[i].AlarmMode.isChecked(),
