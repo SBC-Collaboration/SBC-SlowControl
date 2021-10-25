@@ -948,8 +948,9 @@ class MainWindow(QtWidgets.QMainWindow):
                                            Act=element.AlarmMode.isChecked(),
                                            LowLimit=element.Low_Limit.Field.text(),
                                            HighLimit=element.High_Limit.Field.text()))
+        for element in BORTD_AlarmMatrix:
             element.updatebutton.clicked.connect(
-                lambda: self.BOTTBoxUpdate(pid=element.Label.text(),
+                lambda x: self.BOTTBoxUpdate(pid=element.Label.text(),
                                            Act=element.AlarmMode.isChecked(),
                                            LowLimit=element.Low_Limit.Field.text(),
                                            HighLimit=element.High_Limit.Field.text()))
