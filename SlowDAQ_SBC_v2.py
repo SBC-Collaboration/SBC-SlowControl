@@ -917,19 +917,21 @@ class MainWindow(QtWidgets.QMainWindow):
             lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
                                          LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(), HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
 
-        self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(
-            lambda : self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
-                                         Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
-                                         LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
-                                         HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+        # self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(
+        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
+        #                                  Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+        #                                  LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
+        #                                  HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.TT2119.High_Limit.Field.returnPressed.connect(
+        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
 
-        self.AlarmButton.SubWindow.TT2119.High_Limit.Field.returnPressed.connect(
-            lambda : self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
 
-        # self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(lambda : print("I am pressed"))
+
+        self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(lambda : self.test_pressed(pid=self.AlarmButton.SubWindow.TT2119.Label.text()))
 
         # self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(
         #     lambda x: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(), Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
@@ -957,6 +959,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.commands[pid]={"server": "BO", "address": self.address[pid], "type": "TT", "operation": {"Act":Act,
                                 "LowLimit":LowLimit,"HighLimit":HighLimit}}
         # print("ischecked?",state)
+
+    @QtCore.Slot()
+    def test_pressed(self,pid):
+        print(pid,"is PRESSED!")
 
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()
