@@ -360,8 +360,8 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("AlarmStatusWidget")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 200*R, 100*R))
-        self.setMinimumSize(200*R, 100*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 200*R, 200*R))
+        self.setMinimumSize(200*R, 200*R)
         self.setSizePolicy(sizePolicy)
 
         self.VL = QtWidgets.QVBoxLayout(self)
@@ -391,10 +391,23 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         self.High_Limit.Label.setText("HIGH")
         self.HL.addWidget(self.High_Limit)
 
+        self.VL2 = QtWidgets.QVBoxLayout(self)
+        self.VL2.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        self.VL2.setSpacing(3)
+        self.HL.addLayout(self.VL2)
+
         # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        # self.AlarmMode = QtWidgets.QCheckBox(self)
+        # self.AlarmMode.setText("Active")
+        # self.HL.addWidget(self.AlarmMode)
+
+        self.UpdateButton = QtWidgets.QPushButton(self)
+        self.UpdateAlarm.setText("Update")
+        self.VL2.addWidget(self.UpdateAlarm)
+
         self.AlarmMode = QtWidgets.QCheckBox(self)
         self.AlarmMode.setText("Active")
-        self.HL.addWidget(self.AlarmMode)
+        self.VL2.addWidget(self.AlarmMode)
 
         self.Alarm = False
     @QtCore.Slot()
