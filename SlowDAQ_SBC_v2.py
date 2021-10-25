@@ -941,19 +941,20 @@ class MainWindow(QtWidgets.QMainWindow):
                                   self.AlarmButton.SubWindow.TT6408, self.AlarmButton.SubWindow.TT6409,
                                   self.AlarmButton.SubWindow.TT6415,
                                   self.AlarmButton.SubWindow.TT6416]
+        BORTD_AlarmLen=len(BORTD_AlarmMatrix)
 
-        for element in BORTD_AlarmMatrix:
-            print(element.Label.text())
-            element.AlarmMode.stateChanged.connect(
-                lambda: self.BOTTBoxUpdate(pid=element.Label.text(),
-                                           Act=element.AlarmMode.isChecked(),
-                                           LowLimit=element.Low_Limit.Field.text(),
-                                           HighLimit=element.High_Limit.Field.text()))
-            element.updatebutton.clicked.connect(
-                lambda x: self.BOTTBoxUpdate(pid=element.Label.text(),
-                                           Act=element.AlarmMode.isChecked(),
-                                           LowLimit=element.Low_Limit.Field.text(),
-                                           HighLimit=element.High_Limit.Field.text()))
+        for i in range(BORTD_AlarmLen):
+            print(BORTD_AlarmMatrix[i].Label.text())
+            BORTD_AlarmMatrix[i].AlarmMode.stateChanged.connect(
+                lambda: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[i].Label.text(),
+                                           Act=BORTD_AlarmMatrix[i].AlarmMode.isChecked(),
+                                           LowLimit=BORTD_AlarmMatrix[i].Low_Limit.Field.text(),
+                                           HighLimit=BORTD_AlarmMatrix[i].High_Limit.Field.text()))
+            BORTD_AlarmMatrix[i].updatebutton.clicked.connect(
+                lambda x: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[i].Label.text(),
+                                           Act=BORTD_AlarmMatrix[i].AlarmMode.isChecked(),
+                                           LowLimit=BORTD_AlarmMatrix[i].Low_Limit.Field.text(),
+                                           HighLimit=BORTD_AlarmMatrix[i].High_Limit.Field.text()))
 
         # self.AlarmButton.SubWindow.TT2101.AlarmMode.stateChanged.connect(
         #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2101.Label.text(),
