@@ -432,7 +432,7 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
         self.AlarmMode = QtWidgets.QCheckBox(self)
         self.AlarmMode.setText("Active")
-        self.GL.addWidget(self.AlarmMode,1,3)
+        self.GL.addWidget(self.AlarmMode,2,3)
         self.Alarm = False
 
     @QtCore.Slot()
