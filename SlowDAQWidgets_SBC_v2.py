@@ -402,7 +402,7 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         # self.HL.addWidget(self.AlarmMode)
 
         self.UpdateButton = QtWidgets.QPushButton(self)
-        self.UpdateAlarm.setText("Update")
+        # self.UpdateAlarm.setText("Update")
         self.VL2.addWidget(self.UpdateAlarm)
 
         self.AlarmMode = QtWidgets.QCheckBox(self)
