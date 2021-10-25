@@ -802,7 +802,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                   self.AlarmButton.SubWindow.TT6408, self.AlarmButton.SubWindow.TT6409,
                                   self.AlarmButton.SubWindow.TT6415,
                                   self.AlarmButton.SubWindow.TT6416]
-        self.BORTD_Alarmlen = len(BORTD_AlarmMatrix)
+        self.BORTD_Alarmlen = len(self.BORTD_AlarmMatrix)
         self.signal_connection()
 
         # Set user to guest by default
@@ -940,7 +940,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
 
         # Beckoff RTDs
-        
+
         for i in range(self.BORTD_Alarmlen):
             self.BORTD_AlarmMatrix[i].AlarmMode.stateChanged.connect(
                 lambda: self.BOTTBoxUpdate(pid=self.BORTD_AlarmMatrix[i].Label.text(),
