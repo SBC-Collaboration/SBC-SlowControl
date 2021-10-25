@@ -946,15 +946,15 @@ class MainWindow(QtWidgets.QMainWindow):
         for i in range(BORTD_AlarmLen):
             print(BORTD_AlarmMatrix[i].Label.text())
             BORTD_AlarmMatrix[i].AlarmMode.stateChanged.connect(
-                lambda x=i: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[i].Label.text(),
-                                           Act=BORTD_AlarmMatrix[i].AlarmMode.isChecked(),
-                                           LowLimit=BORTD_AlarmMatrix[i].Low_Limit.Field.text(),
-                                           HighLimit=BORTD_AlarmMatrix[i].High_Limit.Field.text()))
+                lambda x=i: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[x].Label.text(),
+                                           Act=BORTD_AlarmMatrix[x].AlarmMode.isChecked(),
+                                           LowLimit=BORTD_AlarmMatrix[x].Low_Limit.Field.text(),
+                                           HighLimit=BORTD_AlarmMatrix[x].High_Limit.Field.text()))
             BORTD_AlarmMatrix[i].updatebutton.clicked.connect(
-                lambda x=i: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[i].Label.text(),
-                                           Act=BORTD_AlarmMatrix[i].AlarmMode.isChecked(),
-                                           LowLimit=BORTD_AlarmMatrix[i].Low_Limit.Field.text(),
-                                           HighLimit=BORTD_AlarmMatrix[i].High_Limit.Field.text()))
+                lambda x=i: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[x].Label.text(),
+                                           Act=BORTD_AlarmMatrix[x].AlarmMode.isChecked(),
+                                           LowLimit=BORTD_AlarmMatrix[x].Low_Limit.Field.text(),
+                                           HighLimit=BORTD_AlarmMatrix[x].High_Limit.Field.text()))
 
         # self.AlarmButton.SubWindow.TT2101.AlarmMode.stateChanged.connect(
         #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2101.Label.text(),
