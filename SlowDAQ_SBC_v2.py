@@ -950,6 +950,11 @@ class MainWindow(QtWidgets.QMainWindow):
                                            Act=element.AlarmMode.isChecked(),
                                            LowLimit=element.Low_Limit.Field.text(),
                                            HighLimit=element.High_Limit.Field.text()))
+            element.AlarmMode.stateChanged.connect(
+                lambda: self.BOTTBoxUpdate(pid=element.Label.text(),
+                                           Act=element.AlarmMode.isChecked(),
+                                           LowLimit=element.Low_Limit.Field.text(),
+                                           HighLimit=element.High_Limit.Field.text()))
 
         # self.AlarmButton.SubWindow.TT2101.AlarmMode.stateChanged.connect(
         #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2101.Label.text(),
