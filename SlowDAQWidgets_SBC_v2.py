@@ -418,7 +418,7 @@ class AlarmStatusWidget(QtWidgets.QWidget):
 
         self.Indicator = Indicator(self)
         self.Indicator.Label.setText("Indicator")
-        self.HL.addWidget(self.Indicator,1,0)
+        self.GL.addWidget(self.Indicator,1,0)
 
         self.Low_Limit = SetPoint(self)
         self.Low_Limit.Label.setText("LOW")
@@ -428,7 +428,7 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         self.High_Limit.Label.setText("HIGH")
         self.GL.addWidget(self.High_Limit,1,2)
 
-               
+
 
         # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
         self.AlarmMode = QtWidgets.QCheckBox(self)
