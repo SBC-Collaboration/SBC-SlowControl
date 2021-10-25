@@ -950,7 +950,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                            Act=element.AlarmMode.isChecked(),
                                            LowLimit=element.Low_Limit.Field.text(),
                                            HighLimit=element.High_Limit.Field.text()))
-            element.AlarmMode.updatebutton.clicked.connect(
+            element.updatebutton.clicked.connect(
                 lambda: self.BOTTBoxUpdate(pid=element.Label.text(),
                                            Act=element.AlarmMode.isChecked(),
                                            LowLimit=element.Low_Limit.Field.text(),
