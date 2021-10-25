@@ -2847,8 +2847,12 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.TT6223 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT6223.Label.setText("TT6223")
 
+
         self.TT6410 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT6410.Label.setText("TT6410")
+
+        self.TT6407 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6407.Label.setText("TT6407")
 
         self.TT6408 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT6408.Label.setText("TT6408")
@@ -2958,7 +2962,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                                 1: {0: self.TT6404, 1: self.TT6207, 2: self.TT6405, 3: self.TT6211, 4: self.TT6406},
                                 2: {0: self.TT6223, 1: self.TT6410, 2: self.TT6408, 3: self.TT6409, 4: self.TT6412},
                                 3: {0: self.TT3402, 1: self.TT3401, 2: self.TT7401, 3: self.TT7202, 4: self.TT7403},
-                                4: {0: self.TT6222}}
+                                4: {0: self.TT6222, 1: self.TT6407}}
 
         # self.AlarmRTD1dir = {0: {0: "self.TT2111", 1: "self.TT2112", 2: "self.TT2113", 3: "self.TT2114", 4: "self.TT2115"},
         #                      1: {0: "self.TT2116", 1: "self.TT2117", 2: "self.TT2118", 3: "self.TT2119", 4: "self.TT2120"}}
