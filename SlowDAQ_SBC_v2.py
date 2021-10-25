@@ -929,16 +929,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
 
         # Beckoff RTDs
-        self.BORTD_AlarmMatrix=[self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111, self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118, self.AlarmButton.SubWindow.TT2119,
+        BORTD_AlarmMatrix=[self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111, self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118, self.AlarmButton.SubWindow.TT2119,
                                 self.AlarmButton.SubWindow.TT4330, self.AlarmButton.SubWindow.TT6203, self.AlarmButton.SubWindow.TT6207, self.AlarmButton.SubWindow.TT6211, self.AlarmButton.SubWindow.TT6213,
                                 self.AlarmButton.SubWindow.TT6222, self.AlarmButton.SubWindow.TT6407, self.AlarmButton.SubWindow.TT6408, self.AlarmButton.SubWindow.TT6409, self.AlarmButton.SubWindow.TT6415,
                                 self.AlarmButton.SubWindow.TT6416]
-        for element in self.BORTD_AlarmMatrix:
-            element.AlarmMode.stateChanged.connect(
-                lambda: self.BOTTBoxUpdate(pid=element.Label.text(),
-                                           Act=self.element.AlarmMode.isChecked(),
-                                           LowLimit=element.Low_Limit.Field.text(),
-                                           HighLimit=element.High_Limit.Field.text()))
+        BORTD_Alarmlen=len(BORTD_AlarmMatrix)
+        for i in range(BORTD_Alarmlen):
+            BORTD_AlarmMatrix[i].AlarmMode.stateChanged.connect(
+                lambda: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[i].Label.text(),
+                                           Act=self.BORTD_AlarmMatrix[i].AlarmMode.isChecked(),
+                                           LowLimit=BORTD_AlarmMatrix[i].Low_Limit.Field.text(),
+                                           HighLimit=BORTD_AlarmMatrix[i].High_Limit.Field.text()))
 
         # self.AlarmButton.SubWindow.TT2101.AlarmMode.stateChanged.connect(
         #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2101.Label.text(),
