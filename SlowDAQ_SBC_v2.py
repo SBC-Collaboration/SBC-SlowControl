@@ -943,7 +943,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.textEdited.connect(lambda : self.test_pressed(pid=self.AlarmButton.SubWindow.TT2119.Label.text()))
+        self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.editingFinished.connect(lambda : self.test_pressed(pid=self.AlarmButton.SubWindow.TT2119.Label.text()))
 
         # self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.returnPressed.connect(
         #     lambda x: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(), Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
