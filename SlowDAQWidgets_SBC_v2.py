@@ -357,59 +357,85 @@ class AlarmStatusWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        #
+        # self.setObjectName("AlarmStatusWidget")
+        # self.setGeometry(QtCore.QRect(0*R, 0*R, 200*R, 200*R))
+        # self.setMinimumSize(200*R, 200*R)
+        # self.setSizePolicy(sizePolicy)
+        #
+        # self.VL = QtWidgets.QVBoxLayout(self)
+        # self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        # self.VL.setSpacing(3)
+        #
+        # self.Label = QtWidgets.QLabel(self)
+        # self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
+        # self.Label.setStyleSheet(TITLE_STYLE)
+        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setText("Label")
+        # self.VL.addWidget(self.Label)
+        #
+        # self.HL = QtWidgets.QHBoxLayout()
+        # self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        # self.VL.addLayout(self.HL)
+        #
+        # self.Indicator = Indicator(self)
+        # self.Indicator.Label.setText("Indicator")
+        # self.HL.addWidget(self.Indicator)
+        #
+        # self.Low_Limit = SetPoint(self)
+        # self.Low_Limit.Label.setText("LOW")
+        # self.HL.addWidget(self.Low_Limit)
+        #
+        # self.High_Limit = SetPoint(self)
+        # self.High_Limit.Label.setText("HIGH")
+        # self.HL.addWidget(self.High_Limit)
+        #
+        # # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        # # self.AlarmMode = QtWidgets.QCheckBox(self)
+        # # self.AlarmMode.setText("Active")
+        # # self.HL.addWidget(self.AlarmMode)
+        # self.Alarm = False
+
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("AlarmStatusWidget")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 200*R, 200*R))
-        self.setMinimumSize(200*R, 200*R)
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 200 * R, 200 * R))
+        self.setMinimumSize(200 * R, 200 * R)
         self.setSizePolicy(sizePolicy)
 
-        self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
-        self.VL.setSpacing(3)
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.GL.setSpacing(3)
 
         self.Label = QtWidgets.QLabel(self)
-        self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
+        self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
         self.Label.setStyleSheet(TITLE_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
-        self.VL.addWidget(self.Label)
+        self.GL.addWidget(self.Label,0,1)
 
-        self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
-        self.VL.addLayout(self.HL)
 
         self.Indicator = Indicator(self)
         self.Indicator.Label.setText("Indicator")
-        self.HL.addWidget(self.Indicator)
+        self.HL.addWidget(self.Indicator,1,0)
 
         self.Low_Limit = SetPoint(self)
         self.Low_Limit.Label.setText("LOW")
-        self.HL.addWidget(self.Low_Limit)
+        self.GL.addWidget(self.Low_Limit,1,1)
 
         self.High_Limit = SetPoint(self)
         self.High_Limit.Label.setText("HIGH")
-        self.HL.addWidget(self.High_Limit)
+        self.GL.addWidget(self.High_Limit,1,2)
 
-        self.VL2 = QtWidgets.QVBoxLayout(self)
-        self.VL2.setContentsMargins(0*R, 0*R, 0*R, 0*R)
-        self.VL2.setSpacing(3)
-        self.HL.addLayout(self.VL2)
+               
 
         # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
-        # self.AlarmMode = QtWidgets.QCheckBox(self)
-        # self.AlarmMode.setText("Active")
-        # self.HL.addWidget(self.AlarmMode)
-
-        self.UpdateButton = QtWidgets.QPushButton(self)
-        # self.UpdateAlarm.setText("Update")
-        self.VL2.addWidget(self.UpdateAlarm)
-
         self.AlarmMode = QtWidgets.QCheckBox(self)
         self.AlarmMode.setText("Active")
-        self.VL2.addWidget(self.AlarmMode)
-
+        self.GL.addWidget(self.AlarmMode,1,3)
         self.Alarm = False
+
     @QtCore.Slot()
     def CheckAlarm(self):
         if self.AlarmMode.isChecked():
