@@ -3155,6 +3155,9 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.TT2449 = AlarmStatusWidget(self.RTDSET34Tab)
         self.TT2449.Label.setText("TT2449")
 
+        self.TT2450 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2450.Label.setText("TT2450")
+
         self.TT2101 = AlarmStatusWidget(self.RTDSET34Tab)
         self.TT2101.Label.setText("TT2101")
 
@@ -3330,7 +3333,8 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.AlarmRTD3dir = {0: {0: self.TT2435, 1: self.TT2436, 2: self.TT2437, 3: self.TT2438, 4: self.TT2439},
                              1: {0: self.TT2440, 1: self.TT2441, 2: self.TT2442, 3: self.TT2443, 4: self.TT2444},
-                             2: {0: self.TT2445, 1: self.TT2446, 2: self.TT2447, 3: self.TT2448, 4: self.TT2449}}
+                             2: {0: self.TT2445, 1: self.TT2446, 2: self.TT2447, 3: self.TT2448, 4: self.TT2449},
+                             3: {0: self.TT2450}}
 
         self.AlarmRTD4dir = {0: {0: self.TT2101, 1: self.TT2102, 2: self.TT2103, 3: self.TT2104, 4: self.TT2105},
                              1: {0: self.TT2106, 1: self.TT2107, 2: self.TT2108, 3: self.TT2109, 4: self.TT2110}}
