@@ -5035,24 +5035,24 @@ class UpdateDisplay(QtCore.QObject):
 
                 # FP TTs
 
-                FPRTDAlarmMatrix=[self.MW.AlarmButton.SubWindow.TT2420, self.MW.AlarmButton.SubWindow.TT2422, self.MW.AlarmButton.SubWindow.TT2424, self.MW.AlarmButton.SubWindow.TT2425, self.MW.AlarmButton.SubWindow.TT2442,
-                              self.MW.AlarmButton.SubWindow.TT2403, self.MW.AlarmButton.SubWindow.TT2418, self.MW.AlarmButton.SubWindow.TT2427, self.MW.AlarmButton.SubWindow.TT2429, self.MW.AlarmButton.SubWindow.TT2431,
-                              self.MW.AlarmButton.SubWindow.TT2441, self.MW.AlarmButton.SubWindow.TT2414, self.MW.AlarmButton.SubWindow.TT2413, self.MW.AlarmButton.SubWindow.TT2412, self.MW.AlarmButton.SubWindow.TT2415,
-                              self.MW.AlarmButton.SubWindow.TT2409, self.MW.AlarmButton.SubWindow.TT2436, self.MW.AlarmButton.SubWindow.TT2438, self.MW.AlarmButton.SubWindow.TT2440, self.MW.AlarmButton.SubWindow.TT2402,
-                              self.MW.AlarmButton.SubWindow.TT2411, self.MW.AlarmButton.SubWindow.TT2443, self.MW.AlarmButton.SubWindow.TT2417, self.MW.AlarmButton.SubWindow.TT2404, self.MW.AlarmButton.SubWindow.TT2408,
-                              self.MW.AlarmButton.SubWindow.TT2407, self.MW.AlarmButton.SubWindow.TT2406, self.MW.AlarmButton.SubWindow.TT2428, self.MW.AlarmButton.SubWindow.TT2432, self.MW.AlarmButton.SubWindow.TT2421,
-                              self.MW.AlarmButton.SubWindow.TT2416, self.MW.AlarmButton.SubWindow.TT2439, self.MW.AlarmButton.SubWindow.TT2419, self.MW.AlarmButton.SubWindow.TT2423, self.MW.AlarmButton.SubWindow.TT2426,
-                              self.MW.AlarmButton.SubWindow.TT2430, self.MW.AlarmButton.SubWindow.TT2450, self.MW.AlarmButton.SubWindow.TT2401, self.MW.AlarmButton.SubWindow.TT2449, self.MW.AlarmButton.SubWindow.TT2445,
-                              self.MW.AlarmButton.SubWindow.TT2444, self.MW.AlarmButton.SubWindow.TT2435, self.MW.AlarmButton.SubWindow.TT2437, self.MW.AlarmButton.SubWindow.TT2446, self.MW.AlarmButton.SubWindow.TT2447,
-                              self.MW.AlarmButton.SubWindow.TT2448, self.MW.AlarmButton.SubWindow.TT2410, self.MW.AlarmButton.SubWindow.TT2405, self.MW.AlarmButton.SubWindow.TT6220, self.MW.AlarmButton.SubWindow.TT6401,
-                              self.MW.AlarmButton.SubWindow.TT6404, self.MW.AlarmButton.SubWindow.TT6405, self.MW.AlarmButton.SubWindow.TT6406, self.MW.AlarmButton.SubWindow.TT6410, self.MW.AlarmButton.SubWindow.TT6411,
-                              self.MW.AlarmButton.SubWindow.TT6412, self.MW.AlarmButton.SubWindow.TT6413, self.MW.AlarmButton.SubWindow.TT6414]
-
-                for element in FPRTDAlarmMatrix:
-                    element.UpdateAlarm(
-                        self.Client.receive_dic["Alarm"]["TT"]["FP"][element.Label.text()])
-                    element.Indicator.SetValue(
-                        self.Client.receive_dic["data"]["TT"]["FP"][element.Label.text()])
+                # FPRTDAlarmMatrix=[self.MW.AlarmButton.SubWindow.TT2420, self.MW.AlarmButton.SubWindow.TT2422, self.MW.AlarmButton.SubWindow.TT2424, self.MW.AlarmButton.SubWindow.TT2425, self.MW.AlarmButton.SubWindow.TT2442,
+                #               self.MW.AlarmButton.SubWindow.TT2403, self.MW.AlarmButton.SubWindow.TT2418, self.MW.AlarmButton.SubWindow.TT2427, self.MW.AlarmButton.SubWindow.TT2429, self.MW.AlarmButton.SubWindow.TT2431,
+                #               self.MW.AlarmButton.SubWindow.TT2441, self.MW.AlarmButton.SubWindow.TT2414, self.MW.AlarmButton.SubWindow.TT2413, self.MW.AlarmButton.SubWindow.TT2412, self.MW.AlarmButton.SubWindow.TT2415,
+                #               self.MW.AlarmButton.SubWindow.TT2409, self.MW.AlarmButton.SubWindow.TT2436, self.MW.AlarmButton.SubWindow.TT2438, self.MW.AlarmButton.SubWindow.TT2440, self.MW.AlarmButton.SubWindow.TT2402,
+                #               self.MW.AlarmButton.SubWindow.TT2411, self.MW.AlarmButton.SubWindow.TT2443, self.MW.AlarmButton.SubWindow.TT2417, self.MW.AlarmButton.SubWindow.TT2404, self.MW.AlarmButton.SubWindow.TT2408,
+                #               self.MW.AlarmButton.SubWindow.TT2407, self.MW.AlarmButton.SubWindow.TT2406, self.MW.AlarmButton.SubWindow.TT2428, self.MW.AlarmButton.SubWindow.TT2432, self.MW.AlarmButton.SubWindow.TT2421,
+                #               self.MW.AlarmButton.SubWindow.TT2416, self.MW.AlarmButton.SubWindow.TT2439, self.MW.AlarmButton.SubWindow.TT2419, self.MW.AlarmButton.SubWindow.TT2423, self.MW.AlarmButton.SubWindow.TT2426,
+                #               self.MW.AlarmButton.SubWindow.TT2430, self.MW.AlarmButton.SubWindow.TT2450, self.MW.AlarmButton.SubWindow.TT2401, self.MW.AlarmButton.SubWindow.TT2449, self.MW.AlarmButton.SubWindow.TT2445,
+                #               self.MW.AlarmButton.SubWindow.TT2444, self.MW.AlarmButton.SubWindow.TT2435, self.MW.AlarmButton.SubWindow.TT2437, self.MW.AlarmButton.SubWindow.TT2446, self.MW.AlarmButton.SubWindow.TT2447,
+                #               self.MW.AlarmButton.SubWindow.TT2448, self.MW.AlarmButton.SubWindow.TT2410, self.MW.AlarmButton.SubWindow.TT2405, self.MW.AlarmButton.SubWindow.TT6220, self.MW.AlarmButton.SubWindow.TT6401,
+                #               self.MW.AlarmButton.SubWindow.TT6404, self.MW.AlarmButton.SubWindow.TT6405, self.MW.AlarmButton.SubWindow.TT6406, self.MW.AlarmButton.SubWindow.TT6410, self.MW.AlarmButton.SubWindow.TT6411,
+                #               self.MW.AlarmButton.SubWindow.TT6412, self.MW.AlarmButton.SubWindow.TT6413, self.MW.AlarmButton.SubWindow.TT6414]
+                #
+                # for element in FPRTDAlarmMatrix:
+                #     element.UpdateAlarm(
+                #         self.Client.receive_dic["Alarm"]["TT"]["FP"][element.Label.text()])
+                #     element.Indicator.SetValue(
+                #         self.Client.receive_dic["data"]["TT"]["FP"][element.Label.text()])
 
 
                 self.display_update.emit(dic)
