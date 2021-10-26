@@ -931,557 +931,552 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Beckoff RTDs
 
-        BORTD_AlarmMatrix = [self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111,
-                                  self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118,
-                                  self.AlarmButton.SubWindow.TT2119,
-                                  self.AlarmButton.SubWindow.TT4330, self.AlarmButton.SubWindow.TT6203,
-                                  self.AlarmButton.SubWindow.TT6207, self.AlarmButton.SubWindow.TT6211,
-                                  self.AlarmButton.SubWindow.TT6213,
-                                  self.AlarmButton.SubWindow.TT6222, self.AlarmButton.SubWindow.TT6407,
-                                  self.AlarmButton.SubWindow.TT6408, self.AlarmButton.SubWindow.TT6409,
-                                  self.AlarmButton.SubWindow.TT6415,
-                                  self.AlarmButton.SubWindow.TT6416]
-        BORTD_AlarmLen=len(BORTD_AlarmMatrix)
+        self.AlarmButton.SubWindow.TT2101.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2101.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2101.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2101.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2101.High_Limit.Field.text()))
 
-        for i in range(BORTD_AlarmLen):
-            print(BORTD_AlarmMatrix[i].Label.text())
-            BORTD_AlarmMatrix[i].AlarmMode.stateChanged.connect(
-                lambda i=i: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[i].Label.text(),
-                                           Act=BORTD_AlarmMatrix[i].AlarmMode.isChecked(),
-                                           LowLimit=BORTD_AlarmMatrix[i].Low_Limit.Field.text(),
-                                           HighLimit=BORTD_AlarmMatrix[i].High_Limit.Field.text()))
-            BORTD_AlarmMatrix[i].updatebutton.clicked.connect(
-                lambda i=i: self.BOTTBoxUpdate(pid=BORTD_AlarmMatrix[i].Label.text(),
-                                           Act=BORTD_AlarmMatrix[i].AlarmMode.isChecked(),
-                                           LowLimit=BORTD_AlarmMatrix[i].Low_Limit.Field.text(),
-                                           HighLimit=BORTD_AlarmMatrix[i].High_Limit.Field.text()))
+        self.AlarmButton.SubWindow.TT2101.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2101.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2101.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2101.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2101.High_Limit.Field.text()))
 
-        # self.AlarmButton.SubWindow.TT2101.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2101.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2101.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2101.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2101.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2101.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2101.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2101.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2101.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2101.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2111.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2111.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2111.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2111.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2111.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2111.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2111.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2111.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2111.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2111.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2113.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2113.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2113.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2113.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2113.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2113.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2113.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2113.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2113.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2113.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2118.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2118.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2118.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2118.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2118.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2118.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2118.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2118.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2118.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2118.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2119.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
-        #                                  LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(), HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2119.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT4330.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT4330.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT4330.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT4330.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT4330.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT4330.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT4330.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT4330.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT4330.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT4330.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6203.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6203.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6203.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6203.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6203.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6203.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6203.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6203.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6203.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6203.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6207.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6207.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6207.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6207.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6207.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6207.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6207.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6207.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6207.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6207.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6211.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6211.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6211.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6211.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6211.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6211.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6211.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6211.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6211.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6211.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6213.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6213.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6213.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6213.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6213.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6213.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6213.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6213.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6213.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6213.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6222.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6222.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6222.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6222.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6222.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6222.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6222.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6222.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6222.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6222.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6407.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6407.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6407.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6407.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6407.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6407.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6407.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6407.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6407.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6407.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6408.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6408.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6408.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6408.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6408.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6408.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6408.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6408.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6408.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6408.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6409.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6409.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6409.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6409.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6409.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6409.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6409.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6409.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6409.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6409.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6415.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6415.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6415.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6415.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6415.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6415.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6415.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6415.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6415.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6415.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6416.AlarmMode.stateChanged.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6416.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6416.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6416.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6416.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6416.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6416.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6416.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6416.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6416.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT6416.updatebutton.clicked.connect(
-        #     lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6416.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT6416.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT6416.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT6416.High_Limit.Field.text()))
-        #Field Point RTDs
+        self.AlarmButton.SubWindow.TT2111.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2111.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2111.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2111.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2111.High_Limit.Field.text()))
 
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2422.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2422.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2422.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2422.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2422.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2424.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2424.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2424.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2424.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2424.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2425.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2425.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2425.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2425.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2425.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2442.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2442.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2442.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2442.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2442.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2403.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2403.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2403.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2403.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2403.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2418.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2418.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2418.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2418.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2418.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2427.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2427.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2427.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2427.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2427.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2429.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2429.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2429.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2429.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2429.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2431.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2431.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2431.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2431.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2431.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2441.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2441.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2441.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2441.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2441.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2414.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2414.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2414.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2414.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2414.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2413.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2413.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2413.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2413.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2413.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2412.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2412.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2412.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2412.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2412.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2415.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2415.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2415.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2415.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2415.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2409.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2409.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2409.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2409.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2409.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2436.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2436.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2436.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2436.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2436.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2438.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2438.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2438.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2438.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2438.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2440.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2440.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2440.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2440.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2440.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2402.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2402.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2402.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2402.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2402.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
-        #
-        # self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
-        #     lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
-        #                                Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
-        #                                LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
-        #                                HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
+        self.AlarmButton.SubWindow.TT2111.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2111.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2111.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2111.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2111.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2113.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2113.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2113.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2113.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2113.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2113.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2113.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2113.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2113.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2113.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2118.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2118.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2118.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2118.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2118.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2118.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2118.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2118.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2118.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2118.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2119.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+                                         LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(), HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2119.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2119.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2119.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2119.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2119.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT4330.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT4330.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT4330.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT4330.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT4330.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT4330.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT4330.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT4330.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT4330.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT4330.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6203.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6203.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6203.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6203.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6203.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6203.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6203.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6203.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6203.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6203.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6207.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6207.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6207.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6207.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6207.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6207.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6207.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6207.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6207.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6207.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6211.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6211.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6211.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6211.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6211.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6211.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6211.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6211.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6211.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6211.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6213.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6213.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6213.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6213.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6213.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6213.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6213.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6213.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6213.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6213.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6222.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6222.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6222.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6222.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6222.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6222.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6222.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6222.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6222.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6222.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6407.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6407.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6407.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6407.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6407.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6407.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6407.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6407.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6407.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6407.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6408.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6408.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6408.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6408.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6408.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6408.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6408.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6408.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6408.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6408.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6409.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6409.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6409.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6409.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6409.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6409.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6409.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6409.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6409.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6409.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6415.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6415.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6415.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6415.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6415.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6415.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6415.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6415.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6415.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6415.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6416.AlarmMode.stateChanged.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6416.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6416.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6416.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6416.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6416.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6416.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6416.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6416.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6416.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6416.updatebutton.clicked.connect(
+            lambda: self.BOTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6416.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6416.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6416.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6416.High_Limit.Field.text()))
+        # Field Point RTDs
+
+        self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2420.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2420.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2422.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2422.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2422.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2422.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2422.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2424.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2424.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2424.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2424.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2424.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2425.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2425.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2425.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2425.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2425.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2442.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2442.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2442.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2442.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2442.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2403.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2403.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2403.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2403.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2403.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2418.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2418.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2418.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2418.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2418.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2427.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2427.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2427.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2427.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2427.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2429.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2429.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2429.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2429.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2429.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2431.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2431.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2431.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2431.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2431.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2441.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2441.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2441.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2441.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2441.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2414.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2414.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2414.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2414.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2414.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2413.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2413.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2413.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2413.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2413.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2412.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2412.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2412.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2412.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2412.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2415.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2415.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2415.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2415.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2415.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2409.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2409.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2409.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2409.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2409.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2436.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2436.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2436.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2436.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2436.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2438.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2438.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2438.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2438.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2438.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2440.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2440.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2440.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2440.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2440.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2402.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2402.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2402.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2402.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2402.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2411.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2411.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2411.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2411.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2411.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2443.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2443.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2443.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2443.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2443.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2417.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2417.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2417.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2417.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2417.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2404.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2404.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2404.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2404.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2404.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2408.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2408.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2408.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2408.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2408.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2407.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2407.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2407.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2407.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2407.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2406.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2406.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2406.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2406.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2406.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2428.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2428.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2428.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2428.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2428.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2432.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2432.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2432.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2432.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2432.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2421.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2421.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2421.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2421.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2421.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2416.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2416.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2416.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2416.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2416.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2439.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2439.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2439.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2439.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2439.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2419.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2419.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2419.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2419.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2419.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2423.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2423.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2423.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2423.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2423.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2426.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2426.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2426.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2426.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2426.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2430.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2430.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2430.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2430.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2430.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2450.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2450.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2450.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2450.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2450.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2401.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2401.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2401.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2401.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2401.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2449.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2449.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2449.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2449.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2449.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2445.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2445.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2445.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2445.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2445.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2444.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2444.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2444.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2444.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2444.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2435.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2435.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2435.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2435.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2435.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2437.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2437.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2437.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2437.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2437.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2446.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2446.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2446.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2446.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2446.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2447.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2447.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2447.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2447.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2447.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2448.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2448.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2448.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2448.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2448.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2410.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2410.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2410.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2410.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2410.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT2405.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2405.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT2405.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT2405.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT2405.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6220.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6220.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6220.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6220.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6220.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6401.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6401.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6401.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6401.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6401.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6404.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6404.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6404.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6404.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6404.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6405.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6405.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6405.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6405.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6405.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6406.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6406.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6406.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6406.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6406.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6410.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6410.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6410.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6410.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6410.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6411.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6411.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6411.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6411.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6411.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6412.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6412.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6412.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6412.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6412.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6413.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6413.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6413.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6413.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6413.High_Limit.Field.text()))
+
+        self.AlarmButton.SubWindow.TT6414.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT6414.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT6414.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT6414.Low_Limit.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT6414.High_Limit.Field.text()))
+
+
 
 
 
@@ -4680,6 +4675,28 @@ class UpdateDisplay(QtCore.QObject):
 
                 self.MW.AlarmButton.SubWindow.TT6416.UpdateAlarm(self.Client.receive_dic["Alarm"]["TT"]["BO"]["TT6416"])
                 self.MW.AlarmButton.SubWindow.TT6416.Indicator.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6416"])
+
+
+                # FP TTs
+
+                FPRTDAlarmMatrix=[self.MW.AlarmButton.SubWindow.TT2420, self.MW.AlarmButton.SubWindow.TT2422, self.MW.AlarmButton.SubWindow.TT2424, self.MW.AlarmButton.SubWindow.TT2425, self.MW.AlarmButton.SubWindow.TT2442,
+                              self.MW.AlarmButton.SubWindow.TT2403, self.MW.AlarmButton.SubWindow.TT2418, self.MW.AlarmButton.SubWindow.TT2427, self.MW.AlarmButton.SubWindow.TT2429, self.MW.AlarmButton.SubWindow.TT2431,
+                              self.MW.AlarmButton.SubWindow.TT2441, self.MW.AlarmButton.SubWindow.TT2414, self.MW.AlarmButton.SubWindow.TT2413, self.MW.AlarmButton.SubWindow.TT2412, self.MW.AlarmButton.SubWindow.TT2415,
+                              self.MW.AlarmButton.SubWindow.TT2409, self.MW.AlarmButton.SubWindow.TT2436, self.MW.AlarmButton.SubWindow.TT2438, self.MW.AlarmButton.SubWindow.TT2440, self.MW.AlarmButton.SubWindow.TT2402,
+                              self.MW.AlarmButton.SubWindow.TT2411, self.MW.AlarmButton.SubWindow.TT2443, self.MW.AlarmButton.SubWindow.TT2417, self.MW.AlarmButton.SubWindow.TT2404, self.MW.AlarmButton.SubWindow.TT2408,
+                              self.MW.AlarmButton.SubWindow.TT2407, self.MW.AlarmButton.SubWindow.TT2406, self.MW.AlarmButton.SubWindow.TT2428, self.MW.AlarmButton.SubWindow.TT2432, self.MW.AlarmButton.SubWindow.TT2421,
+                              self.MW.AlarmButton.SubWindow.TT2416, self.MW.AlarmButton.SubWindow.TT2439, self.MW.AlarmButton.SubWindow.TT2419, self.MW.AlarmButton.SubWindow.TT2423, self.MW.AlarmButton.SubWindow.TT2426,
+                              self.MW.AlarmButton.SubWindow.TT2430, self.MW.AlarmButton.SubWindow.TT2450, self.MW.AlarmButton.SubWindow.TT2401, self.MW.AlarmButton.SubWindow.TT2449, self.MW.AlarmButton.SubWindow.TT2445,
+                              self.MW.AlarmButton.SubWindow.TT2444, self.MW.AlarmButton.SubWindow.TT2435, self.MW.AlarmButton.SubWindow.TT2437, self.MW.AlarmButton.SubWindow.TT2446, self.MW.AlarmButton.SubWindow.TT2447,
+                              self.MW.AlarmButton.SubWindow.TT2448, self.MW.AlarmButton.SubWindow.TT2410, self.MW.AlarmButton.SubWindow.TT2405, self.MW.AlarmButton.SubWindow.TT6220, self.MW.AlarmButton.SubWindow.TT6401,
+                              self.MW.AlarmButton.SubWindow.TT6404, self.MW.AlarmButton.SubWindow.TT6405, self.MW.AlarmButton.SubWindow.TT6406, self.MW.AlarmButton.SubWindow.TT6410, self.MW.AlarmButton.SubWindow.TT6411,
+                              self.MW.AlarmButton.SubWindow.TT6412, self.MW.AlarmButton.SubWindow.TT6413, self.MW.AlarmButton.SubWindow.TT6414]
+
+                for element in FPRTDAlarmMatrix:
+                    element.UpdateAlarm(
+                        self.Client.receive_dic["Alarm"]["TT"]["FP"][element.Label.text()])
+                    element.Indicator.SetValue(
+                        self.Client.receive_dic["data"]["FP"]["BO"][element.Label.text()])
 
 
                 self.display_update.emit(dic)
