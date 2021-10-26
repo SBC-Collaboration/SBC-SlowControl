@@ -5050,8 +5050,8 @@ class UpdateDisplay(QtCore.QObject):
 
                 for element in FPRTDAlarmMatrix:
                     print(element.Label.text())
-                    # element.UpdateAlarm(
-                    #     self.Client.receive_dic["Alarm"]["TT"]["FP"][element.Label.text()])
+                    element.UpdateAlarm(
+                        self.Client.receive_dic["Alarm"]["TT"]["FP"][element.Label.text()])
                 #     element.Indicator.SetValue(
                 #         self.Client.receive_dic["data"]["TT"]["FP"][element.Label.text()])
 
