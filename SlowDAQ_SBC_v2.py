@@ -4710,7 +4710,7 @@ class UpdateDisplay(QtCore.QObject):
                     element.UpdateAlarm(
                         self.Client.receive_dic["Alarm"]["TT"]["FP"][element.Label.text()])
                     element.Indicator.SetValue(
-                        self.Client.receive_dic["data"]["FP"]["BO"][element.Label.text()])
+                        self.Client.receive_dic["data"]["TT"]["FP"][element.Label.text()])
 
 
                 self.display_update.emit(dic)
