@@ -845,6 +845,9 @@ class UpdatePLC(QtCore.QObject):
                     self.check_PT_alarm(keyPT)
                 self.or_alarm_signal()
                 time.sleep(self.period)
+        except KeyboardInterrupt:
+            print("PLC is interrupted by keyboard[Ctrl-C]")
+            self.stop()
         except:
             (type, value, traceback) = sys.exc_info()
             exception_hook(type, value, traceback)
