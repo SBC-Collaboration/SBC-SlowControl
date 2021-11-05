@@ -321,7 +321,7 @@ class PLC:
             print(Attribute_TTFP_address)
             for key in Attribute_TTFP_address:
                 Raw_TT_FP_Attribute[key] = self.Client.read_holding_registers(Attribute_TTFP_address[key], count=1, unit=0x01)
-                print(key,Raw_TT_FP_Attribute[key].getRegister(0))
+                print(key,Raw_TT_FP_Attribute[key].getRegister(1))
         #
         #     Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
         #     for i in range(0, self.nRTD):
