@@ -557,13 +557,21 @@ class PLC:
             return False
         else:
             return True
+
+
+    def ReadFPAttribute(self,address=12296):
+        Raw = self.Client.read_holding_registers(address, count=1, unit=0x01)
+        output = struct.pack("H", Raw.getRegister(0))
+        # print( output)
+        return output
+
     def SetFPRTDAttri(self,mode,address):
         # Highly suggested firstly read the value and then set as the FP menu suggests
         # mode should be wrtten in 0x
         # we use readvalve function because it can be used here, i.e read 2 word at a certain address
-        output_BO = self.ReadValve(address)
-        print("output", address, output_BO)
-        Raw = self.Client_BO.write_register(address, value=mode, unit=0x01)
+        output = self.ReadFPAttribute(address)
+        print("output", address, output)
+        Raw = self.Client.write_register(address, value=mode, unit=0x01)
         print("write open result=", Raw)
         return 0
 
