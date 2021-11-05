@@ -320,8 +320,7 @@ class PLC:
                 Attribute_TTFP_address[key] = FPADS_OUT_AT(self.TT_FP_address[key])
             print(Attribute_TTFP_address)
             for key in Attribute_TTFP_address:
-                Raw_TT_FP_Attribute[key] = self.Client.read_holding_registers(Attribute_TTFP_address[key], count=1, unit=0x01)
-                print(key,Raw_TT_FP_Attribute[key].getRegister(0))
+                self.SetFPRTDAttri(mode = 0x2601, address = Attribute_TTFP_address[key])
         #
         #     Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
         #     for i in range(0, self.nRTD):
@@ -558,6 +557,13 @@ class PLC:
         else:
             return True
     def SetFPRTDAttri(self,mode,address):
+        # Highly suggested firstly read the value and then set as the FP menu suggests
+        # mode should be wrtten in 0x
+        # we use readvalve function because it can be used here, i.e read 2 word at a certain address
+        output_BO = self.ReadValve(address)
+        print("output", address, output_BO)
+        Raw = self.Client_BO.write_register(address, value=mode, unit=0x01)
+        print("write open result=", Raw)
         return 0
 
     def SaveSetting(self):
