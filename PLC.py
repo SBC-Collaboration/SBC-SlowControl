@@ -324,6 +324,8 @@ class PLC:
                 print(self.ReadFPAttribute(address = Attribute_TTFP_address[key]))
 
                 # self.SetFPRTDAttri(mode = 0x2601, address = Attribute_TTFP_address[key])
+
+                ####################################################################################
         #
         #     Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
         #     for i in range(0, self.nRTD):
@@ -564,7 +566,7 @@ class PLC:
     def ReadFPAttribute(self,address=12296):
         Raw = self.Client.read_holding_registers(address, count=1, unit=0x01)
         output = struct.pack("H", Raw.getRegister(0))
-        # print( output)
+        print( Raw.getRegister(0))
         return output
 
     def SetFPRTDAttri(self,mode,address):
