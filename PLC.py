@@ -314,16 +314,16 @@ class PLC:
                     struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
                 # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
 
-            # Set Attributes could be commented(disabled) after it is done
-            Attribute_TTFP_address = {}
-            Raw_TT_FP_Attribute = {}
-            for key in self.TT_FP_address:
-                Attribute_TTFP_address[key] = FPADS_OUT_AT(self.TT_FP_address[key])
-            print(Attribute_TTFP_address)
-            for key in Attribute_TTFP_address:
-                print(self.ReadFPAttribute(address = Attribute_TTFP_address[key]))
-
-                # self.SetFPRTDAttri(mode = 0x2601, address = Attribute_TTFP_address[key])
+            # # Set Attributes could be commented(disabled) after it is done
+            # Attribute_TTFP_address = {}
+            # Raw_TT_FP_Attribute = {}
+            # for key in self.TT_FP_address:
+            #     Attribute_TTFP_address[key] = FPADS_OUT_AT(self.TT_FP_address[key])
+            # print(Attribute_TTFP_address)
+            # for key in Attribute_TTFP_address:
+            #     print(self.ReadFPAttribute(address = Attribute_TTFP_address[key]))
+            #
+            #     # self.SetFPRTDAttri(mode = 0x2601, address = Attribute_TTFP_address[key])
 
                 ####################################################################################
         #
@@ -565,7 +565,7 @@ class PLC:
 
     def ReadFPAttribute(self,address=12296):
         Raw = self.Client.read_holding_registers(address, count=1, unit=0x01)
-        output = struct.pack("HH", Raw.getRegister(0))
+        output = struct.pack("H", Raw.getRegister(0))
         print(Raw.getRegister(0))
         return output
 
@@ -1336,11 +1336,11 @@ if __name__ == "__main__":
     # msg_mana.tencent_alarm("this is a test message")
 
     App = QtWidgets.QApplication(sys.argv)
-    # Update=Update()
+    Update=Update()
 
 
-    PLC=PLC()
-    PLC.ReadAll()
+    # PLC=PLC()
+    # PLC.ReadAll()
 
     sys.exit(App.exec_())
 
