@@ -33,6 +33,22 @@ def exception_hook(exctype, value, traceback):
     sys.exit(1)
 sys.excepthook = exception_hook
 
+#output address to attribute function in FP ()
+def FPADS_OUT_AT(outaddress):
+    # 1e5 digit
+    e5 = outaddress // 10000
+    e4 = (outaddress % 10000) // 1000
+    e3 = (outaddress % 1000) // 100
+    e2 = (outaddress % 100) // 10
+    e1 = (outaddress % 10) // 1
+    new_e5 = e5-1
+    new_e4 = e4
+    new_e321=(e3*100+e2*10+e1)*4
+    new_address=new_e5*10000+new_e4*1000+new_e321
+    print(e5,e4,e3,e2,e1)
+    print(new_address)
+    return new_address
+
 
 class PLC:
     def __init__(self):
@@ -297,6 +313,15 @@ class PLC:
                 self.TT_FP_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
                 # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
+
+            Attribute_TTFP_address = {}
+            Raw_TT_FP_Attribute = {}
+            for key in self.TT_FP_address:
+                Attribute_TTFP_address[key] = FPADS_OUT_AT(self.TT_FP_address[key])
+            print(Attribute_TTFP_address)
+            for key in Attribute_TTFP_address:
+                Raw_TT_FP_Attribute[key] = self.Client.read_holding_registers(Attribute_TTFP_address[key], count=2, unit=0x01)
+                print(key,Raw_TT_FP_Attribute[key])
         #
         #     Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
         #     for i in range(0, self.nRTD):
@@ -532,6 +557,8 @@ class PLC:
             return False
         else:
             return True
+    def SetFPRTDAttri(self,mode,address):
+        return 0
 
     def SaveSetting(self):
         self.WriteBool(0x0, 0, 1)
@@ -1288,10 +1315,13 @@ class message_manager():
 if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
+
     App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
-    # PLC=PLC()
-    # PLC.ReadAll()
+    # Update=Update()
+
+
+    PLC=PLC()
+    PLC.ReadAll()
 
     sys.exit(App.exec_())
 
