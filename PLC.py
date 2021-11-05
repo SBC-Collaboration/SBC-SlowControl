@@ -321,7 +321,9 @@ class PLC:
                 Attribute_TTFP_address[key] = FPADS_OUT_AT(self.TT_FP_address[key])
             print(Attribute_TTFP_address)
             for key in Attribute_TTFP_address:
-                self.SetFPRTDAttri(mode = 0x2601, address = Attribute_TTFP_address[key])
+                print(self.ReadFPAttribute(address = Attribute_TTFP_address[key]))
+
+                # self.SetFPRTDAttri(mode = 0x2601, address = Attribute_TTFP_address[key])
         #
         #     Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
         #     for i in range(0, self.nRTD):
