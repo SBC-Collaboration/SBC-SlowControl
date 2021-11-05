@@ -312,7 +312,7 @@ class PLC:
                 Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
                 self.TT_FP_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
-                # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
+                print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
 
             # # Set Attributes could be commented(disabled) after it is done
             # Attribute_TTFP_address = {}
@@ -1336,11 +1336,11 @@ if __name__ == "__main__":
     # msg_mana.tencent_alarm("this is a test message")
 
     App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
+    # Update=Update()
 
 
-    # PLC=PLC()
-    # PLC.ReadAll()
+    PLC=PLC()
+    PLC.ReadAll()
 
     sys.exit(App.exec_())
 
