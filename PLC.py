@@ -565,8 +565,8 @@ class PLC:
 
     def ReadFPAttribute(self,address=12296):
         Raw = self.Client.read_holding_registers(address, count=1, unit=0x01)
-        output = struct.pack("H", Raw.getRegister(0))
-        print( Raw.getRegister(0))
+        output = struct.pack("HH", Raw.getRegister(0))
+        print(Raw.getRegister(0))
         return output
 
     def SetFPRTDAttri(self,mode,address):
