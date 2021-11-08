@@ -4820,7 +4820,7 @@ class UpdatePLC(QtCore.QObject):
         while self.Running:
             print("PLC updating", datetime.datetime.now())
             self.PLC.ReadAll()
-            time.sleep(2)
+            time.sleep(0.5)
 
     @QtCore.Slot()
     def stop(self):
@@ -4835,7 +4835,7 @@ class UpdateClient(QtCore.QObject):
         self.socket = self.context.socket(zmq.REQ)
         self.socket.connect("tcp://localhost:5555")
         self.Running=False
-        self.period=2
+        self.period=1
         print("client is connecting to the ZMQ server")
         self.receive_dic = {"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                                                 "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
@@ -4948,7 +4948,7 @@ class UpdateDisplay(QtCore.QObject):
         self.Running = False
 
         self.display_update.connect(self.MW.update_alarmwindow)
-        self.button_refreshing_count = 15
+        self.button_refreshing_count = 0
         self.count = 0
 
     @QtCore.Slot()
@@ -5621,7 +5621,7 @@ class UpdateDisplay(QtCore.QObject):
                 # elif self.MW.RTD45.Value <= -5 and self.MW.RTD45.Value >= -50 and self.MW.RTD45.Field.property("Alarm"):
                 #     self.MW.RTD45.ResetAlarm()
 
-                time.sleep(1)
+                time.sleep(0.5)
         except:
             (type, value, traceback) = sys.exc_info()
             exception_hook(type, value, traceback)

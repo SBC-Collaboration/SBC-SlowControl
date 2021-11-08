@@ -82,7 +82,7 @@ class PLC:
                               "TT6404": 37004, "TT6405": 37006, "TT6406": 37008, "TT6410": 37010, "TT6411": 37012,
                               "TT6412": 37014, "TT6413": 38000, "TT6414": 38002}
 
-        self.TT_BO_address = {"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
+        self.TT_BO_address_ini=self.TT_BO_address = {"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
                            "TT4330": 12998, "TT6203": 13000, "TT6207": 13002, "TT6211": 13004, "TT6213": 13006,
                            "TT6222": 13008, "TT6407": 13010, "TT6408": 13012, "TT6409": 13014, "TT6415": 13016,
                            "TT6416": 13018}
@@ -92,7 +92,7 @@ class PLC:
                          "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820,"PT4319": 12822,
                          "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
 
-        self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
+        self.TT_FP_dic_ini = self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                               "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
                               "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
                               "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
@@ -105,16 +105,16 @@ class PLC:
                               "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
                               "TT6412": 0, "TT6413": 0, "TT6414": 0}
 
-        self.TT_BO_dic={"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+        self.TT_BO_dic_ini = self.TT_BO_dic = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                      "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
                      "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
 
-        self.PT_dic = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
+        self.PT_dic_ini = self.PT_dic = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                        "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                        "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
 
-        self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
+        self.TT_FP_LowLimit_ini = self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                               "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
                               "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
                               "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
@@ -127,7 +127,7 @@ class PLC:
                               "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
                               "TT6412": 0, "TT6413": 0, "TT6414": 0}
 
-        self.TT_FP_HighLimit = {"TT2420": 30, "TT2422": 30, "TT2424": 30, "TT2425": 30, "TT2442": 30,
+        self.TT_FP_HighLimit_ini = self.TT_FP_HighLimit = {"TT2420": 30, "TT2422": 30, "TT2424": 30, "TT2425": 30, "TT2442": 30,
                               "TT2403": 30, "TT2418": 30, "TT2427": 30, "TT2429": 30, "TT2431": 30,
                               "TT2441": 30, "TT2414": 30, "TT2413": 30, "TT2412": 30, "TT2415": 30,
                               "TT2409": 30, "TT2436": 30, "TT2438": 30, "TT2440": 30, "TT2402": 30,
@@ -140,25 +140,25 @@ class PLC:
                               "TT6404": 30, "TT6405": 30, "TT6406": 30, "TT6410": 30, "TT6411": 30,
                               "TT6412": 30, "TT6413": 30, "TT6414": 30}
 
-        self.TT_BO_LowLimit = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+        self.TT_BO_LowLimit_ini = self.TT_BO_LowLimit = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
                             "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
                             "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
 
 
-        self.TT_BO_HighLimit = {"TT2101": 30, "TT2111": 30, "TT2113": 30, "TT2118": 30, "TT2119": 30, "TT4330": 30,
+        self.TT_BO_HighLimit_ini = self.TT_BO_HighLimit = {"TT2101": 30, "TT2111": 30, "TT2113": 30, "TT2118": 30, "TT2119": 30, "TT4330": 30,
                             "TT6203": 30, "TT6207": 30, "TT6211": 30, "TT6213": 30, "TT6222": 30,
                             "TT6407": 30, "TT6408": 30, "TT6409": 30, "TT6415": 30, "TT6416": 30}
 
-        self.PT_LowLimit = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
+        self.PT_LowLimit_ini = self.PT_LowLimit = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                             "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                             "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                             "PT4322": 0, "PT4325": 0, "PT6302": 0}
-        self.PT_HighLimit = {"PT1325": 300, "PT2121": 300, "PT2316": 300, "PT2330": 300, "PT2335": 300,
+        self.PT_HighLimit_ini = self.PT_HighLimit = {"PT1325": 300, "PT2121": 300, "PT2316": 300, "PT2330": 300, "PT2335": 300,
                             "PT3308": 300, "PT3309": 300, "PT3311": 300, "PT3314": 300, "PT3320": 300,
                             "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
                             "PT4322": 300, "PT4325": 300, "PT6302": 300}
 
-        self.TT_FP_Activated = {"TT2420": True, "TT2422": True, "TT2424": True, "TT2425": True, "TT2442": True,
+        self.TT_FP_Activated = self.TT_FP_Activated = {"TT2420": True, "TT2422": True, "TT2424": True, "TT2425": True, "TT2442": True,
                               "TT2403": True, "TT2418": True, "TT2427": True, "TT2429": True, "TT2431": True,
                               "TT2441": True, "TT2414": True, "TT2413": True, "TT2412": True, "TT2415": True,
                               "TT2409": True, "TT2436": True, "TT2438": True, "TT2440": True, "TT2402": True,
@@ -171,16 +171,16 @@ class PLC:
                               "TT6404": True, "TT6405": True, "TT6406": True, "TT6410": True, "TT6411": True,
                               "TT6412": True, "TT6413": True, "TT6414": True}
 
-        self.TT_BO_Activated = {"TT2101": True, "TT2111": True, "TT2113": True, "TT2118": True, "TT2119": True, "TT4330": True,
+        self.TT_BO_Activated_ini = self.TT_BO_Activated = {"TT2101": True, "TT2111": True, "TT2113": True, "TT2118": True, "TT2119": True, "TT4330": True,
                              "TT6203": True, "TT6207": True, "TT6211": True, "TT6213": True, "TT6222": True,
                              "TT6407": True, "TT6408": True, "TT6409": True, "TT6415": True, "TT6416": True}
 
-        self.PT_Activated = {"PT1325": True, "PT2121": True, "PT2316": True, "PT2330": True, "PT2335": True,
+        self.PT_Activated_ini = self.PT_Activated = {"PT1325": True, "PT2121": True, "PT2316": True, "PT2330": True, "PT2335": True,
                              "PT3308": True, "PT3309": True, "PT3311": True, "PT3314": True, "PT3320": True,
                              "PT3332": True, "PT3333": True, "PT4306": True, "PT4315": True, "PT4319": True,
                              "PT4322": True, "PT4325": True, "PT6302": True}
 
-        self.TT_FP_Alarm = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
+        self.TT_FP_Alarm_ini = self.TT_FP_Alarm = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
                               "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
                               "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
                               "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
@@ -193,15 +193,15 @@ class PLC:
                               "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
                               "TT6412": False, "TT6413": False, "TT6414": False}
 
-        self.TT_BO_Alarm = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
+        self.TT_BO_Alarm_ini = self.TT_BO_Alarm = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
                          "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
                          "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
 
-        self.PT_Alarm = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
+        self.PT_Alarm_ini = self.PT_Alarm = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
                          "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                          "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
                          "PT4322": False, "PT4325": False, "PT6302": False}
-        self.MainAlarm = False
+        self.MainAlarm_ini = self.MainAlarm = False
         self.nTT_BO = len(self.TT_BO_address)
         self.nTT_FP = len(self.TT_FP_address)
         self.nPT = len(self.PT_address)
@@ -218,30 +218,152 @@ class PLC:
                         "SV4337": 12310, "HFSV3312":12311, "HFSV3323": 12312, "HFSV3331": 12313}
         self.nValve = len(self.valve_address)
         self.Valve = {}
-        self.Valve_OUT = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
+        self.Valve_OUT_ini = self.Valve_OUT = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
                           "PV4324": 0, "PV5305": 0, "PV5306": 0,
                           "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
                           "SV3325": 0, "SV3326": 0, "SV3329": 0,
                           "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
                           "SV4337": 0, "HFSV3312":0, "HFSV3323": 0, "HFSV3331": 0}
-        self.Valve_MAN = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+        self.Valve_MAN_ini = self.Valve_MAN = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
                           "PV4324": False, "PV5305": True, "PV5306": True,
                           "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
                           "SV3325": True, "SV3326": True, "SV3329": True,
                           "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
                           "SV4337": False, "HFSV3312": True, "HFSV3323": True, "HFSV3331": True}
-        self.Valve_INTLKD = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+        self.Valve_INTLKD_ini = self.Valve_INTLKD = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
                           "PV4324": False, "PV5305": False, "PV5306": False,
                           "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
                           "SV3325": False, "SV3326": False, "SV3329": False,
                           "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
                           "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
-        self.Valve_ERR = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+        self.Valve_ERR_ini = self.Valve_ERR = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
                           "PV4324": False, "PV5305": False, "PV5306": False,
                           "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
                           "SV3325": False, "SV3326": False, "SV3329": False,
                           "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
                           "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
+
+        self.LOOPPID_ADR_BASE = {'SERVO3321': 14288, 'HTR6225': 14306, 'HTR2123': 14324, 'HTR2124': 14342, 'HTR2125': 14360,
+                              'HTR1202': 14378, 'HTR2203': 14396, 'HTR6202': 14414, 'HTR6206': 14432, 'HTR6210': 14450,
+                              'HTR6223': 14468, 'HTR6224': 14486, 'HTR6219': 14504, 'HTR6221': 14522, 'HTR6214': 14540}
+
+        self.LOOPPID_MODE0_ini = self.LOOPPID_MODE0 = {'SERVO3321': True, 'HTR6225': True, 'HTR2123': True, 'HTR2124': True, 'HTR2125': True,
+                             'HTR1202': True, 'HTR2203': True, 'HTR6202': True, 'HTR6206': True, 'HTR6210': True,
+                             'HTR6223': True, 'HTR6224': True, 'HTR6219': True, 'HTR6221': True, 'HTR6214': True}
+
+        self.LOOPPID_MODE1_ini = self.LOOPPID_MODE1 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
+                                                'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_MODE2_ini = self.LOOPPID_MODE2 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
+                                                'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_MODE3_ini = self.LOOPPID_MODE3 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
+                                                'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_SETMODE0_ini = self.LOOPPID_SETMODE0 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                   'HTR2125': False,
+                                                   'HTR12False2': False, 'HTR22False3': False, 'HTR62False2': False, 'HTR62False6': False, 'HTR621False': False,
+                                                   'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_SETMODE1_ini = self.LOOPPID_SETMODE1 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                  'HTR2125': False,
+                                                  'HTR12False2': False, 'HTR22False3': False, 'HTR62False2': False, 'HTR62False6': False, 'HTR621False': False,
+                                                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_SETMMODE2_ini = self.LOOPPID_SETMODE2 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                   'HTR2125': False,
+                                                   'HTR12False2': False, 'HTR22False3': False, 'HTR62False2': False, 'HTR62False6': False, 'HTR621False': False,
+                                                   'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_SETMODE3_ini = self.LOOPPID_SETMODE3 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                  'HTR2125': False,
+                                                  'HTR12False2': False, 'HTR22False3': False, 'HTR62False2': False, 'HTR62False6': False, 'HTR621False': False,
+                                                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_INTLKD_ini = self.LOOPPID_INTLKD = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                'HTR2125': False,
+                                                'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_MAN_ini = self.LOOPPID_MAN = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                             'HTR2125': False,
+                                             'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                             'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_ERR_ini = self.LOOPPID_ERR = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                'HTR2125': False,
+                                                'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_SATHI_ini = self.LOOPPID_SATHI = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                              'HTR2125': False,
+                                              'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_SATLO_ini = self.LOOPPID_SATLO = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                               'HTR2125': False,
+                                               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                               'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_OUT_ENA_ini = self.LOOPPID_OUT_ENA = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                               'HTR2125': False,
+                                               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                               'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_OUT_DIS_ini = self.LOOPPID_OUT_DIS = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                'HTR2125': False,
+                                                'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_EN_ini = self.LOOPPID_EN = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                              'HTR2125': False,
+                                              'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_OUT_ini = self.LOOPPID_OUT = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                               'HTR2125': 0,
+                                               'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                               'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+        self.LOOPPID_IN_ini = self.LOOPPID_IN = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                                'HTR2125': 0,
+                                                'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+        self.LOOPPID_HI_LIM_ini = self.LOOPPID_HI_LIM = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                              'HTR2125': 0,
+                                              'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                              'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+        self.LOOPPID_LO_LIM_ini = self.LOOPPID_LO_LIM = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                             'HTR2125': 0,
+                                             'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                             'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+        self.LOOPPID_SET0_ini = self.LOOPPID_SET0 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                              'HTR2125': 0,
+                                              'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                              'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+        self.LOOPPID_SET1_ini = self.LOOPPID_SET1 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                           'HTR2125': 0,
+                                           'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                           'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+        self.LOOPPID_SET2_ini = self.LOOPPID_SET2 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                         'HTR2125': 0,
+                                         'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                         'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+        self.LOOPPID_SET3_ini = self.LOOPPID_SET3 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                           'HTR2125': 0,
+                           'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                           'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+
         # self.PT80 = 0.
         # self.FlowValve = 0.
         # self.BottomChillerSetpoint = 0.
@@ -873,7 +995,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC = PLC
         self.message_manager = message_manager()
         self.Running = False
-        self.period=2
+        self.period=0.5
 
     @QtCore.Slot()
     def run(self):
@@ -1013,51 +1135,89 @@ class UpdateServer(QtCore.QObject):
         self.socket = self.context.socket(zmq.REP)
         self.socket.bind("tcp://*:5555")
         self.Running=False
-        self.period=2
+        self.period=0.5
         print("connect to the PLC server")
-        self.data_dic={"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
-                                           "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
-                                           "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
-                                           "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
-                                           "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
-                                           "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
-                                           "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
-                                           "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
-                                           "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
-                                           "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
-                                           "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
-                                           "TT6412": 0, "TT6413": 0, "TT6414": 0},
-                                      "BO":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
-                                           "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
-                                           "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}},
-                               "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
-                                     "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-                                     "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
-                                     "PT4322": 0, "PT4325": 0, "PT6302": 0},
-                               "Valve":{"OUT":{"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
-                                               "PV4324": 0, "PV5305": 0, "PV5306": 0,
-                                               "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
-                                               "SV3325": 0, "SV3326": 0, "SV3329": 0,
-                                               "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
-                                               "SV4337": 0, "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0},
-                                        "INTLKD":{"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
-                                                  "PV4324": False, "PV5305": False, "PV5306": False,
-                                                  "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-                                                  "SV3325": False, "SV3326": False, "SV3329": False,
-                                                  "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
-                                                  "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False},
-                                        "MAN":{"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
-                                               "PV4324": False, "PV5305": True, "PV5306": True,
-                                               "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
-                                               "SV3325": True, "SV3326": True, "SV3329": True,
-                                               "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
-                                               "SV4337": False, "HFSV3312": True, "HFSV3323": True, "HFSV3331": True},
-                                        "ERR":{"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
-                                               "PV4324": False, "PV5305": False, "PV5306": False,
-                                               "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-                                               "SV3325": False, "SV3326": False, "SV3329": False,
-                                               "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
-                                               "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}}},
+        self.data_dic={"data":{"TT":{"FP":self.PLC.TT_FP_dic_ini,
+                                     "BO":self.PLC.TT_BO_dic_ini},
+                               "PT":self.PLC.PT_dic_ini,
+                               "Valve":{"OUT":self.PLC.Valve_OUT_ini,
+                                        "INTLKD":self.PLC.Valve_INTLKD_ini,
+                                        "MAN":self.PLC.Valve_MAN_ini,
+                                        "ERR":self.PLC.Valve_ERR_ini},
+                               "LOOPPID":{"LOOPPID_MODE0" : self.PLC.Valve_INTLKD_ini,
+                                          "LOOPPID_MODE1": {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
+                                                            'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                            'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                          "LOOPPID_MODE2" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
+                                                             'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                          "LOOPPID_MODE3" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
+                                                             'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                             'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                          "LOOPPID_INTLKD" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                              'HTR2125': False,
+                                                              'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                          "LOOPPID_MAN" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                           'HTR2125': False,
+                                                           'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                           'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                         "LOOPPID_ERR" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                          'HTR2125': False,
+                                                          'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                          'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                         "LOOPPID_SATHI" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                            'HTR2125': False,
+                                                            'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                            'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                        "LOOPPID_SATLO" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                           'HTR2125': False,
+                                                           'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                           'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                        "LOOPPID_OUT_ENA" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                             'HTR2125': False,
+                                                             'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                             'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                        "LOOPPID_OUT_DIS" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                             'HTR2125': False,
+                                                             'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                             'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                        "LOOPPID_EN" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                                        'HTR2125': False,
+                                                        'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                                        'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
+                                        "LOOPPID_OUT" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                                         'HTR2125': 0,
+                                                         'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                                         'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
+                                        "LOOPPID_IN" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                                        'HTR2125': 0,
+                                                        'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                                        'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
+                                        "LOOPPID_HI_LIM" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                                            'HTR2125': 0,
+                                                            'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                                            'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
+                                        "LOOPPID_LO_LIM" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                                            'HTR2125': 0,
+                                                            'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                                            'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
+                                        "LOOPPID_SET0" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                                          'HTR2125': 0,
+                                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
+                                        "LOOPPID_SET1" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                                          'HTR2125': 0,
+                                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
+                                        "LOOPPID_SET2" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                                          'HTR2125': 0,
+                                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
+                                        "LOOPPID_SET3" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                                          'HTR2125': 0,
+                                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}}},
                        "Alarm":{"TT":{"FP":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
                                             "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
                                             "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
