@@ -263,26 +263,6 @@ class PLC:
                                                 'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
                                                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
 
-        self.LOOPPID_SETMODE0_ini = self.LOOPPID_SETMODE0 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                   'HTR2125': False,
-                                                   'HTR12False2': False, 'HTR22False3': False, 'HTR62False2': False, 'HTR62False6': False, 'HTR621False': False,
-                                                   'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
-
-        self.LOOPPID_SETMODE1_ini = self.LOOPPID_SETMODE1 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                  'HTR2125': False,
-                                                  'HTR12False2': False, 'HTR22False3': False, 'HTR62False2': False, 'HTR62False6': False, 'HTR621False': False,
-                                                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
-
-        self.LOOPPID_SETMMODE2_ini = self.LOOPPID_SETMODE2 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                   'HTR2125': False,
-                                                   'HTR12False2': False, 'HTR22False3': False, 'HTR62False2': False, 'HTR62False6': False, 'HTR621False': False,
-                                                   'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
-
-        self.LOOPPID_SETMODE3_ini = self.LOOPPID_SETMODE3 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                  'HTR2125': False,
-                                                  'HTR12False2': False, 'HTR22False3': False, 'HTR62False2': False, 'HTR62False6': False, 'HTR621False': False,
-                                                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
-
         self.LOOPPID_INTLKD_ini = self.LOOPPID_INTLKD = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                                                 'HTR2125': False,
                                                 'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
@@ -307,16 +287,6 @@ class PLC:
                                                'HTR2125': False,
                                                'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
                                                'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
-
-        self.LOOPPID_OUT_ENA_ini = self.LOOPPID_OUT_ENA = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                               'HTR2125': False,
-                                               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                               'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
-
-        self.LOOPPID_OUT_DIS_ini = self.LOOPPID_OUT_DIS = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                'HTR2125': False,
-                                                'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
 
         self.LOOPPID_EN_ini = self.LOOPPID_EN = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                                               'HTR2125': False,
@@ -513,6 +483,66 @@ class PLC:
                 # print(key, "Address with ", self.valve_address[key], "INTLKD is", self.Valve_INTLKD[key])
                 # print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
                 # print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
+
+            Raw_LOOPPID_2 = Raw_LOOPPID_4 = Raw_LOOPPID_6 = Raw_LOOPPID_8 = Raw_LOOPPID_10 = Raw_LOOPPID_12 = Raw_LOOPPID_14 = Raw_LOOPPID_16 ={}
+            for key in self.LOOPPID_ADR_BASE:
+                self.LOOPPID_MODE0 = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE1 = self.ReadCoil(2, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE2 = self.ReadCoil(2**2, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE3 = self.ReadCoil(2**3, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_INTLKD = self.ReadCoil(2**8, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MAN = self.ReadCoil(2 ** 9, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_ERR = self.ReadCoil(2 ** 10, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_SATHI = self.ReadCoil(2 ** 11, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_SATLO = self.ReadCoil(2 ** 12, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_EN = self.ReadCoil(2 ** 15, self.LOOPPID_ADR_BASE[key])
+                Raw_LOOPPID_2[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key]+2, count=2, unit=0x01)
+                Raw_LOOPPID_4[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 4, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_6[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 6, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_8[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 8, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_10[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 10, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_12[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 12, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_14[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 14, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_16[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 16, count=2,
+                                                                           unit=0x01)
+
+                self.LOOPPID_OUT[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_2[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_2[key].getRegister(0)))[0], 3)
+                self.LOOPPID_IN[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_4[key].getRegister(0)))[0], 3)
+                self.LOOPPID_HI_LIM[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_6[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_6[key].getRegister(0)))[0], 3)
+                self.LOOPPID_LO_LIM[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_8[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_8[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET0[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_10[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET1[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_12[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_12[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET2[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET3[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
+
+                print(self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
+                print(self.LOOPPID_HI_LIM, "\n", self.LOOPPID_LO_LIM, "\n", self.LOOPPID_SET0, "\n", self.LOOPPID_SET1,
+                      "\n")
+
+
+
 
             # PT80 (Cold Vacuum Conduit Pressure)
             # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
@@ -1144,101 +1174,28 @@ class UpdateServer(QtCore.QObject):
                                         "INTLKD":self.PLC.Valve_INTLKD_ini,
                                         "MAN":self.PLC.Valve_MAN_ini,
                                         "ERR":self.PLC.Valve_ERR_ini},
-                               "LOOPPID":{"LOOPPID_MODE0" : self.PLC.Valve_INTLKD_ini,
-                                          "LOOPPID_MODE1": {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
-                                                            'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                            'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                          "LOOPPID_MODE2" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
-                                                             'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                          "LOOPPID_MODE3" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
-                                                             'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                             'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                          "LOOPPID_INTLKD" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                              'HTR2125': False,
-                                                              'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                          "LOOPPID_MAN" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                           'HTR2125': False,
-                                                           'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                           'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                         "LOOPPID_ERR" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                          'HTR2125': False,
-                                                          'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                          'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                         "LOOPPID_SATHI" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                            'HTR2125': False,
-                                                            'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                            'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                        "LOOPPID_SATLO" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                           'HTR2125': False,
-                                                           'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                           'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                        "LOOPPID_OUT_ENA" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                             'HTR2125': False,
-                                                             'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                             'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                        "LOOPPID_OUT_DIS" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                             'HTR2125': False,
-                                                             'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                             'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                        "LOOPPID_EN" : {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                                        'HTR2125': False,
-                                                        'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                                        'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False},
-                                        "LOOPPID_OUT" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-                                                         'HTR2125': 0,
-                                                         'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                                                         'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
-                                        "LOOPPID_IN" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-                                                        'HTR2125': 0,
-                                                        'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                                                        'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
-                                        "LOOPPID_HI_LIM" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-                                                            'HTR2125': 0,
-                                                            'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                                                            'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
-                                        "LOOPPID_LO_LIM" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-                                                            'HTR2125': 0,
-                                                            'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                                                            'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
-                                        "LOOPPID_SET0" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-                                                          'HTR2125': 0,
-                                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
-                                        "LOOPPID_SET1" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-                                                          'HTR2125': 0,
-                                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
-                                        "LOOPPID_SET2" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-                                                          'HTR2125': 0,
-                                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0},
-                                        "LOOPPID_SET3" : {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-                                                          'HTR2125': 0,
-                                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}}},
-                       "Alarm":{"TT":{"FP":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
-                                            "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
-                                            "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
-                                            "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
-                                            "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
-                                            "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
-                                            "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
-                                            "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
-                                            "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
-                                            "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
-                                            "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
-                                            "TT6412": False, "TT6413": False, "TT6414": False},
-                                      "BO":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
-                                      "TT4330": False,
-                                      "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
-                                      "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}},
-                                "PT":{"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
-                                      "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
-                                      "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
-                                      "PT4322": False, "PT4325": False, "PT6302": False}},
-                       "MainAlarm":False}
+                               "LOOPPID":{"MODE0" : self.PLC.LOOPPID_MODE0_ini,
+                                          "MODE1": self.PLC.LOOPPID_MODE1_ini,
+                                          "MODE2" : self.PLC.LOOPPID_MODE2_ini,
+                                          "MODE3" : self.PLC.LOOPPID_MODE3_ini,
+                                          "INTLKD" : self.PLC.LOOPPID_INTLKD_ini,
+                                          "MAN" : self.PLC.LOOPPID_MAN_ini,
+                                         "ERR" : self.PLC.LOOPPID_ERR_ini,
+                                         "SATHI" : self.PLC.LOOPPID_SATHI_ini,
+                                        "SATLO" : self.PLC.LOOPPID_SATLO_ini,
+                                        "EN" : self.PLC.LOOPPID_EN_ini,
+                                        "OUT" : self.PLC.LOOPPID_OUT_ini,
+                                        "IN" : self.PLC.LOOPPID_IN_ini,
+                                        "HI_LIM" : self.PLC.LOOPPID_HI_LIM_ini,
+                                        "LO_LIM" : self.PLC.LOOPPID_LO_LIM_ini,
+                                        "SET0" : self.PLC.LOOPPID_SET0_ini,
+                                        "SET1" : self.PLC.LOOPPID_SET1_ini,
+                                        "SET2" : self.PLC.LOOPPID_SET2_ini,
+                                        "SET3" : self.PLC.LOOPPID_SET3_ini}},
+                       "Alarm":{"TT" : {"FP":self.PLC.TT_FP_ini,
+                                      "BO":self.PLC.TT_BO_ini},
+                                "PT" : self.PLC.PT_Alarm_ini},
+                       "MainAlarm" : self.PLC.MainAlarm_ini}
         self.data_package=pickle.dumps(self.data_dic)
 
 
@@ -1288,6 +1245,45 @@ class UpdateServer(QtCore.QObject):
             self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
         for key in self.PLC.PT_dic:
             self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
+        for key in self.PLC.LOOPMODE0:
+            self.data.dic["data"]["LOOPPID"]["MODE0"][key] = self.PLC.LOOPPID_MODE0[key]
+        for key in self.PLC.LOOPMODE1:
+            self.data.dic["data"]["LOOPPID"]["MODE1"][key] = self.PLC.LOOPPID_MODE1[key]
+        for key in self.PLC.LOOPMODE2:
+            self.data.dic["data"]["LOOPPID"]["MODE2"][key] = self.PLC.LOOPPID_MODE2[key]
+        for key in self.PLC.LOOPMODE3:
+            self.data.dic["data"]["LOOPPID"]["MODE3"][key] = self.PLC.LOOPPID_MODE3[key]
+        for key in self.PLC.LOOPPID_INTLKD:
+            self.data.dic["data"]["LOOPPID"]["INTLKD"][key] = self.PLC.LOOPPID_INTLKD[key]
+        for key in self.PLC.LOOPPID_MAN:
+            self.data.dic["data"]["LOOPPID"]["MAN"][key] = self.PLC.LOOPPID_MAN[key]
+        for key in self.PLC.LOOPPID_ERR:
+            self.data.dic["data"]["LOOPPID"]["ERR"][key] = self.PLC.LOOPPID_ERR[key]
+        for key in self.PLC.LOOPPID_SATHI:
+            self.data.dic["data"]["LOOPPID"]["SATHI"][key] = self.PLC.LOOPPID_SATHI[key]
+        for key in self.PLC.LOOPPID_SATLO:
+            self.data.dic["data"]["LOOPPID"]["SATLO"][key] = self.PLC.LOOPPID_SATLO[key]
+        for key in self.PLC.LOOPPID_EN:
+            self.data.dic["data"]["LOOPPID"]["EN"][key] = self.PLC.LOOPPID_EN[key]
+        for key in self.PLC.LOOPPID_OUT:
+            self.data.dic["data"]["LOOPPID"]["OUT"][key] = self.PLC.LOOPPID_OUT[key]
+        for key in self.PLC.LOOPPID_IN:
+            self.data.dic["data"]["LOOPPID"]["IN"][key] = self.PLC.LOOPPID_IN[key]
+        for key in self.PLC.LOOPPID_HI_LIM:
+            self.data.dic["data"]["LOOPPID"]["HI_LIM"][key] = self.PLC.LOOPPID_HI_LIM[key]
+        for key in self.PLC.LOOPPID_LO_LIM:
+            self.data.dic["data"]["LOOPPID"]["LO_LIM"][key] = self.PLC.LOOPPID_LO_LIM[key]
+        for key in self.PLC.LOOPPID_SET0:
+            self.data.dic["data"]["LOOPPID"]["SET0"][key] = self.PLC.LOOPPID_SET0[key]
+        for key in self.PLC.LOOPPID_SET1:
+            self.data.dic["data"]["LOOPPID"]["SET1"][key] = self.PLC.LOOPPID_SET1[key]
+        for key in self.PLC.LOOPPID_SET2:
+            self.data.dic["data"]["LOOPPID"]["SET2"][key] = self.PLC.LOOPPID_SET2[key]
+        for key in self.PLC.LOOPPID_SET3:
+            self.data.dic["data"]["LOOPPID"]["SET3"][key] = self.PLC.LOOPPID_SET3[key]
+
+
+
 
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
         self.data_package=pickle.dumps(self.data_dic)
@@ -1496,11 +1492,11 @@ if __name__ == "__main__":
     # msg_mana.tencent_alarm("this is a test message")
 
     App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
+    # Update=Update()
 
 
-    # PLC=PLC()
-    # PLC.ReadAll()
+    PLC=PLC()
+    PLC.ReadAll()
 
     sys.exit(App.exec_())
 
