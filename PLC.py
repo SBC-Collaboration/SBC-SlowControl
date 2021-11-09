@@ -704,18 +704,19 @@ class PLC:
         fl = float(value)
         x = np.arange(fl, fl+1, dtype='<f4')
         if len(x) == 1:
-            byte = x.tobytes()
+            word = x.tobytes()
+            piece1,piece2 = struct.unpack('<HH',word)
         else:
             print("ERROR in float to words")
-        return byte
+        return piece1,piece2
 
     def Write_BO_2(self,address, value):
-        byte = self.float_to_2words(value)
-        print('byte',byte)
-        test = 0x00010001
-        Raw = self.Client_BO.write_register(address, value=test, unit=0x01)
+        word1, word2 = self.float_to_2words(value)
+        print('words',word1,word2)
+        Raw1 = self.Client_BO.write_register(address, value=word1, unit=0x01)
+        Raw2 = self.Client_BO.write_register(address+2, value=word2, unit=0x01)
         # Raw = self.Client_BO.write_register(address, value=byte, unit=0x01)
-        print("write result = ", Raw)
+        print("write result = ", Raw1, Raw2)
 
 
     def WriteOpen(self,address):
