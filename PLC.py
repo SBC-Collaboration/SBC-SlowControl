@@ -479,7 +479,7 @@ class PLC:
                 self.Valve_INTLKD[key] = self.ReadCoil(8, self.valve_address[key])
                 self.Valve_MAN[key] = self.ReadCoil(16, self.valve_address[key])
                 self.Valve_ERR[key] = self.ReadCoil(32, self.valve_address[key])
-                # print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve_OUT[key])
+                print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve_OUT[key])
                 # print(key, "Address with ", self.valve_address[key], "INTLKD is", self.Valve_INTLKD[key])
                 # print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
                 # print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
