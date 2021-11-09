@@ -535,6 +535,8 @@ class PLC:
                     struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
 
+
+            #test the writing function
             print(self.Read_BO_2(14308))
             Raw_BO = self.Client_BO.read_holding_registers(14308, count=2, unit=0x01)
             print('Raw0',Raw_BO.getRegister(0))
@@ -718,9 +720,9 @@ class PLC:
     def Write_BO_2(self,address, value):
         word1, word2 = self.float_to_2words(value)
         print('words',word1,word2)
+        # pay attention to endian relationship
         Raw1 = self.Client_BO.write_register(address, value=word1, unit=0x01)
         Raw2 = self.Client_BO.write_register(address+1, value=word2, unit=0x01)
-        # Raw = self.Client_BO.write_register(address, value=byte, unit=0x01)
 
         print("write result = ", Raw1, Raw2)
 
