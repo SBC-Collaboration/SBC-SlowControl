@@ -537,8 +537,8 @@ class PLC:
                     struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
 
-                print(self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
-                print(self.LOOPPID_HI_LIM, "\n", self.LOOPPID_LO_LIM, "\n", self.LOOPPID_SET0, "\n", self.LOOPPID_SET1,
+            print("base",self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
+            print("other",self.LOOPPID_HI_LIM, "\n", self.LOOPPID_LO_LIM, "\n", self.LOOPPID_SET0, "\n", self.LOOPPID_SET1,
                       "\n")
 
 
