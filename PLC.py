@@ -712,7 +712,7 @@ class PLC:
     def Write_BO_2(self,address, value):
         byte = self.float_to_2words(value)
         print('byte',byte)
-        test = 0x00000001
+        test = 0x00010001
         Raw = self.Client_BO.write_register(address, value=test, unit=0x01)
         # Raw = self.Client_BO.write_register(address, value=byte, unit=0x01)
         print("write result = ", Raw)
