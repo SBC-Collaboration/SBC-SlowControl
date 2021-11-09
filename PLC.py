@@ -536,7 +536,7 @@ class PLC:
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
 
             print(self.Read_BO_2(14308))
-            self.Write_BO_2(14308,0)
+            self.Write_BO_2(14308,2.0)
             print(self.Read_BO_2(14308))
 
 
@@ -700,8 +700,9 @@ class PLC:
         # print("valve value is", output_BO)
         return output_BO
 
-    def float_to_2words(self,float):
-        x =  np.arange(float, float+1, dtype='<f4')
+    def float_to_2words(self,value):
+        fl = float(value)
+        x = np.arange(fl, fl+1, dtype='<f4')
         if len(x) == 1:
             byte = x.tobytes()
         else:
