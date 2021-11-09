@@ -11,15 +11,13 @@ v1.1 Initialize values, flag when values are updated more modbus variables 04/03
 """
 
 import struct, time, zmq, sys, pickle
-import struct, time, zmq, sys
-
+import numpy as np
 from PySide2 import QtWidgets, QtCore, QtGui
 from Database_SBC import *
 from email.mime.text import MIMEText
 from email.header import Header
 from smtplib import SMTP_SSL
 import requests
-import sys
 import os
 
 # delete random number package when you read real data from PLC
@@ -537,14 +535,13 @@ class PLC:
                     struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
 
+            print(self.Read_BO_2(14308))
 
-            print(self.LOOPPID_MODE0)
-            try:
-                print("base",self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
-            except:
-                print("error in base")
-            print("other",self.LOOPPID_HI_LIM, "\n", self.LOOPPID_LO_LIM, "\n", self.LOOPPID_SET0, "\n", self.LOOPPID_SET1,
-                      "\n")
+
+            # print("base",self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
+            #
+            # print("other",self.LOOPPID_HI_LIM, "\n", self.LOOPPID_LO_LIM, "\n", self.LOOPPID_SET0, "\n", self.LOOPPID_SET1,
+            #           "\n")
 
 
 
@@ -688,20 +685,41 @@ class PLC:
         else:
             return 1
 
-    def ReadValve(self,address=12296):
+    def Read_BO_1(self,address):
         Raw_BO = self.Client_BO.read_holding_registers(address, count=1, unit=0x01)
         output_BO = struct.pack("H", Raw_BO.getRegister(0))
         # print("valve value is", output_BO)
         return output_BO
 
-    def WriteOpen(self,address=12296):
-        output_BO = self.ReadValve(address)
+    def Read_BO_2(self,address):
+        Raw_BO = self.Client_BO.read_holding_registers(address, count=2, unit=0x01)
+        output_BO = round(struct.unpack(">f", struct.pack(">HH", Raw_BO.getRegister(1), Raw_BO.getRegister(0)))[
+                0], 3)
+        # print("valve value is", output_BO)
+        return output_BO
+
+    def float_to_2words(self,float):
+        x =  np.arange(float, float+1, dtype='<f4')
+        if len(x) == 1:
+            byte = x.tobytes()
+        else:
+            print("ERROR in float to words")
+        return byte
+
+    def Write_BO_2(self,address, value):
+        byte =  self.float_to_2words(value)
+        Raw = self.Client_BO.write_register(address, value=byte, unit=0x01)
+        print("write result = ", Raw)
+
+
+    def WriteOpen(self,address):
+        output_BO = self.Read_BO_1(address)
         input_BO= struct.unpack("H",output_BO)[0] | 0x0002
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write open result=", Raw)
 
-    def WriteClose(self,address=12296):
-        output_BO = self.ReadValve(address)
+    def WriteClose(self,address):
+        output_BO = self.Read_BO_1(address)
         input_BO = struct.unpack("H",output_BO)[0] | 0x0004
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write close result=", Raw)
@@ -711,8 +729,8 @@ class PLC:
         print("write reset result=", Raw)
 
     # mask is a number to read a particular digit. for example, if you want to read 3rd digit, the mask is 0100(binary)
-    def ReadCoil(self, mask,address=12296):
-        output_BO = self.ReadValve(address)
+    def ReadCoil(self, mask,address):
+        output_BO = self.Read_BO_1(address)
         masked_output = struct.unpack("H",output_BO)[0] & mask
         if masked_output == 0:
             return False
@@ -720,7 +738,7 @@ class PLC:
             return True
 
 
-    def ReadFPAttribute(self,address=12296):
+    def ReadFPAttribute(self,address):
         Raw = self.Client.read_holding_registers(address, count=1, unit=0x01)
         output = struct.pack("H", Raw.getRegister(0))
         print(Raw.getRegister(0))
@@ -729,12 +747,48 @@ class PLC:
     def SetFPRTDAttri(self,mode,address):
         # Highly suggested firstly read the value and then set as the FP menu suggests
         # mode should be wrtten in 0x
-        # we use readvalve function because it can be used here, i.e read 2 word at a certain address
+        # we use Read_BO_1 function because it can be used here, i.e read 2 word at a certain address
         output = self.ReadFPAttribute(address)
         print("output", address, output)
         Raw = self.Client.write_register(address, value=mode, unit=0x01)
         print("write open result=", Raw)
         return 0
+
+    def LOOPPID_SET_MODE(self, address, mode=0):
+        output_BO = self.Read_BO_1(address)
+        if mode == 0:
+            input_BO = struct.unpack("H", output_BO)[0] | 0x0010
+            Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        elif mode == 1:
+            input_BO = struct.unpack("H", output_BO)[0] | 0x0020
+            Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        elif mode == 2:
+            input_BO = struct.unpack("H", output_BO)[0] | 0x0040
+            Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        elif mode == 3:
+            input_BO = struct.unpack("H", output_BO)[0] | 0x0080
+            Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        else:
+            Raw = "ERROR in LOOPPID SET MODE"
+
+        print("write result:", "mode=",  Raw)
+
+    def LOOPPID_OUT_ENA(self,address):
+        output_BO = self.Read_BO_1(address)
+        input_BO = struct.unpack("H", output_BO)[0] | 0x2000
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        print("write OUT result=", Raw)
+
+    def LOOPPID_OUT_DIS(self,address):
+        output_BO = self.Read_BO_1(address)
+        input_BO = struct.unpack("H", output_BO)[0] | 0x4000
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        print("write OUT result=", Raw)
+
+
+        
+    
+
 
     def SaveSetting(self):
         self.WriteBool(0x0, 0, 1)
@@ -1336,11 +1390,11 @@ class UpdateServer(QtCore.QObject):
 
         # if message == b'this is a command':
         #     self.PLC.WriteOpen()
-        #     self.PLC.ReadValve()
+        #     self.PLC.Read_BO_1()
         #     print("I will set valve")
         # elif message == b'no command':
         #     self.PLC.WriteClose()
-        #     self.PLC.ReadValve()
+        #     self.PLC.Read_BO_1()
         #     print("I will stay here")
         # elif message == b'this an anti_conmmand':
         #
