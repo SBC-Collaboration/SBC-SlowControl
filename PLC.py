@@ -536,6 +536,8 @@ class PLC:
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
 
             print(self.Read_BO_2(14308))
+            self.Write_BO_2(14308,2.0)
+            print(self.Read_BO_2(14308))
 
 
             # print("base",self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
