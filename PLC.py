@@ -479,7 +479,7 @@ class PLC:
                 self.Valve_INTLKD[key] = self.ReadCoil(8, self.valve_address[key])
                 self.Valve_MAN[key] = self.ReadCoil(16, self.valve_address[key])
                 self.Valve_ERR[key] = self.ReadCoil(32, self.valve_address[key])
-                print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve_OUT[key])
+                # print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve_OUT[key])
                 # print(key, "Address with ", self.valve_address[key], "INTLKD is", self.Valve_INTLKD[key])
                 # print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
                 # print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
@@ -537,7 +537,12 @@ class PLC:
                     struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
 
-            print("base",self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
+
+            print(self.LOOPPID_MODE0)
+            try:
+                print("base",self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
+            except:
+                print("error in base")
             print("other",self.LOOPPID_HI_LIM, "\n", self.LOOPPID_LO_LIM, "\n", self.LOOPPID_SET0, "\n", self.LOOPPID_SET1,
                       "\n")
 
@@ -708,7 +713,7 @@ class PLC:
     # mask is a number to read a particular digit. for example, if you want to read 3rd digit, the mask is 0100(binary)
     def ReadCoil(self, mask,address=12296):
         output_BO = self.ReadValve(address)
-        masked_output= struct.unpack("H",output_BO)[0] & mask
+        masked_output = struct.unpack("H",output_BO)[0] & mask
         if masked_output == 0:
             return False
         else:
