@@ -536,7 +536,7 @@ class PLC:
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
 
             print(self.Read_BO_2(14308))
-            self.Write_BO_2(14308,2.0)
+            self.Write_BO_2(14308,0)
             print(self.Read_BO_2(14308))
 
 
