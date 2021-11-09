@@ -486,16 +486,16 @@ class PLC:
 
             Raw_LOOPPID_2 = Raw_LOOPPID_4 = Raw_LOOPPID_6 = Raw_LOOPPID_8 = Raw_LOOPPID_10 = Raw_LOOPPID_12 = Raw_LOOPPID_14 = Raw_LOOPPID_16 ={}
             for key in self.LOOPPID_ADR_BASE:
-                self.LOOPPID_MODE0 = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
-                self.LOOPPID_MODE1 = self.ReadCoil(2, self.LOOPPID_ADR_BASE[key])
-                self.LOOPPID_MODE2 = self.ReadCoil(2**2, self.LOOPPID_ADR_BASE[key])
-                self.LOOPPID_MODE3 = self.ReadCoil(2**3, self.LOOPPID_ADR_BASE[key])
-                self.LOOPPID_INTLKD = self.ReadCoil(2**8, self.LOOPPID_ADR_BASE[key])
-                self.LOOPPID_MAN = self.ReadCoil(2 ** 9, self.LOOPPID_ADR_BASE[key])
-                self.LOOPPID_ERR = self.ReadCoil(2 ** 10, self.LOOPPID_ADR_BASE[key])
-                self.LOOPPID_SATHI = self.ReadCoil(2 ** 11, self.LOOPPID_ADR_BASE[key])
-                self.LOOPPID_SATLO = self.ReadCoil(2 ** 12, self.LOOPPID_ADR_BASE[key])
-                self.LOOPPID_EN = self.ReadCoil(2 ** 15, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE0[key] = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE1[key] = self.ReadCoil(2, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE2[key] = self.ReadCoil(2**2, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE3[key] = self.ReadCoil(2**3, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_INTLKD[key] = self.ReadCoil(2**8, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MAN[key] = self.ReadCoil(2 ** 9, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_ERR[key] = self.ReadCoil(2 ** 10, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_SATHI[key] = self.ReadCoil(2 ** 11, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_SATLO[key] = self.ReadCoil(2 ** 12, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_EN[key] = self.ReadCoil(2 ** 15, self.LOOPPID_ADR_BASE[key])
                 Raw_LOOPPID_2[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key]+2, count=2, unit=0x01)
                 Raw_LOOPPID_4[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 4, count=2,
                                                                            unit=0x01)
