@@ -536,7 +536,7 @@ class PLC:
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
 
             print(self.Read_BO_2(14308))
-            # self.Write_BO_2(14308,2.0)
+            self.Write_BO_2(14308,2.0)
             print(self.Read_BO_2(14308))
 
 
@@ -711,6 +711,7 @@ class PLC:
 
     def Write_BO_2(self,address, value):
         byte = self.float_to_2words(value)
+        print('byte',byte)
         Raw = self.Client_BO.write_register(address, value=byte, unit=0x01)
         print("write result = ", Raw)
 
