@@ -536,6 +536,11 @@ class PLC:
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
 
             print(self.Read_BO_2(14308))
+            Raw_BO = self.Client_BO.read_holding_registers(14308, count=2, unit=0x01)
+            print('Raw0',Raw_BO.getRegister(0))
+            print('Raw1', Raw_BO.getRegister(1))
+            output_BO = round(struct.unpack(">f", struct.pack(">HH", Raw_BO.getRegister(1), Raw_BO.getRegister(0)))[
+                                  0], 3)
             self.Write_BO_2(14308,2.0)
             print(self.Read_BO_2(14308))
 
@@ -714,8 +719,9 @@ class PLC:
         word1, word2 = self.float_to_2words(value)
         print('words',word1,word2)
         Raw1 = self.Client_BO.write_register(address, value=word1, unit=0x01)
-        Raw2 = self.Client_BO.write_register(address+2, value=word2, unit=0x01)
+        Raw2 = self.Client_BO.write_register(address+1, value=word2, unit=0x01)
         # Raw = self.Client_BO.write_register(address, value=byte, unit=0x01)
+
         print("write result = ", Raw1, Raw2)
 
 
