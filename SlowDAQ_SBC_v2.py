@@ -4654,7 +4654,7 @@ class HeaterExpand(QtWidgets.QWidget):
         self.HIID.Label.setText('HIGH')
         self.GL.addWidget(self.HIID, 1, 8)
 
-        self.SETSP = Inidicator(self)
+        self.SETSP = Indicator(self)
         self.SETSP.Label.setText("SP")
         self.GL.addWidget(self.SETSP,1 , 9)
 
