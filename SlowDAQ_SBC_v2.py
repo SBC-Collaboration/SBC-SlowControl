@@ -4562,7 +4562,7 @@ class HeaterExpand(QtWidgets.QWidget):
 
         self.updatebutton=QtWidgets.QPushButton(self)
         self.updatebutton.setText("Update")
-        self.VL.addWidge(self.updatebutton)
+        self.VL.addWidget(self.updatebutton)
 
         self.HL = QtWidgets.QHBoxLayout()
         self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
