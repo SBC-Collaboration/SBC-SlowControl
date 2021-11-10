@@ -4629,28 +4629,38 @@ class HeaterExpand(QtWidgets.QWidget):
         self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
         self.GL.setSpacing(3*R)
 
-        # self.VL = QtWidgets.QVBoxLayout(self)
-        # self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
-        # self.VL.setSpacing(5*R)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
-        self.GL.addWidget(self.Label,0,0,1,9)
-
-        # self.HL = QtWidgets.QHBoxLayout()
-        # self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
-        # self.VL.addLayout(self.HL)
+        self.GL.addWidget(self.Label,0,0,1,2)
 
         self.Mode = DoubleButton(self)
         self.Mode.Label.setText("Mode")
-        self.GL.addWidget(self.Mode,1,0)
+        self.GL.addWidget(self.Mode,1,3)
 
         self.FBSwitch = Menu(self)
         self.FBSwitch.Label.setText("FBSWITCH")
-        self.GL.addWidget(self.FBSwitch,1,1)
+        self.GL.addWidget(self.FBSwitch,1,5)
+
+
+        self.LOID = Indicator(self)
+        self.LOID.Label.SetText('LOW')
+        self.GL.addWidget(self.LOID, 1, 7)
+
+        self.HIID = Indicator(self)
+        self.HIID.Label.SetText('HIGH')
+        self.GL.addWidget(self.HIID, 1, 8)
+
+        self.SETSP = Inidicator(self)
+        self.SETSP.Label.SetText("SP")
+        self.GL.addWidget(self.SETSP,1 , 9)
+
+        self.updatebutton= QtWidgets.QPushButton(self)
+        self.updatebutton.setText("Update")
+        self.GL.addWidget(self.updatebutton,1,10,1,12)
 
         self.SP = SetPoint(self)
         self.SP.Label.setText("SetPoint")
