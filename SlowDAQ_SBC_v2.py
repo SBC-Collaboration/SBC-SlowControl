@@ -4638,7 +4638,7 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
-        self.GL.addWidget(self.Label,0,0,1,0)
+        self.GL.addWidget(self.Label,0,0)
 
         # self.HL = QtWidgets.QHBoxLayout()
         # self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
@@ -4646,19 +4646,19 @@ class HeaterExpand(QtWidgets.QWidget):
 
         self.Mode = DoubleButton(self)
         self.Mode.Label.setText("Mode")
-        self.GL.addWidget(self.Mode,2,0)
+        self.GL.addWidget(self.Mode,1,0)
 
         self.FBSwitch = Menu(self)
         self.FBSwitch.Label.setText("FBSWITCH")
-        self.GL.addWidget(self.FBSwitch,2,1)
+        self.GL.addWidget(self.FBSwitch,1,1)
 
         self.SP = SetPoint(self)
         self.SP.Label.setText("SetPoint")
-        self.GL.addWidget(self.SP,2,2)
+        self.GL.addWidget(self.SP,1,2)
 
         self.MANSP = SetPoint(self)
         self.MANSP.Label.setText("Manual SetPoint")
-        self.GL.addWidget(self.MANSP,2,3)
+        self.GL.addWidget(self.MANSP,1,3)
 
         self.Power = Control(self)
         self.Power.Label.setText("Power")
@@ -4667,31 +4667,31 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Power.Min = 0.
         self.Power.Step = 0.1
         self.Power.Decimals = 1
-        self.GL.addWidget(self.Power,2,4)
+        self.GL.addWidget(self.Power,1,4)
 
         self.RTD1 = Indicator(self)
         self.RTD1.Label.setText("RTD1")
-        self.GL.addWidget(self.RTD1,2,5)
+        self.GL.addWidget(self.RTD1,1,5)
 
         self.RTD2 = Indicator(self)
         self.RTD2.Label.setText("RTD2")
-        self.GL.addWidget(self.RTD2,2,6)
+        self.GL.addWidget(self.RTD2,1,6)
 
         self.Interlock = ColorIndicator(self)
         self.Interlock.Label.setText("INTLCK")
-        self.GL.addWidget(self.Interlock,2,7)
+        self.GL.addWidget(self.Interlock,1,7)
 
         self.Error = ColorIndicator(self)
         self.Error.Label.setText("ERR")
-        self.GL.addWidget(self.Error,2,8)
+        self.GL.addWidget(self.Error,1,8)
 
         self.HIGH = SetPoint(self)
         self.HIGH.Label.setText("HIGH")
-        self.GL.addWidget(self.HIGH,2,9)
+        self.GL.addWidget(self.HIGH,1,9)
 
         self.LOW = SetPoint(self)
         self.LOW.Label.setText("LOW")
-        self.GL.addWidget(self.LOW,2,10)
+        self.GL.addWidget(self.LOW,1,10)
 
 
 # Defines a reusable layout containing widgets
