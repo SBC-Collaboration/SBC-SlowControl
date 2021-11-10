@@ -4647,15 +4647,15 @@ class HeaterExpand(QtWidgets.QWidget):
 
 
         self.LOID = Indicator(self)
-        self.LOID.Label.SetText('LOW')
+        self.LOID.Label.setText('LOW')
         self.GL.addWidget(self.LOID, 1, 7)
 
         self.HIID = Indicator(self)
-        self.HIID.Label.SetText('HIGH')
+        self.HIID.Label.setText('HIGH')
         self.GL.addWidget(self.HIID, 1, 8)
 
         self.SETSP = Inidicator(self)
-        self.SETSP.Label.SetText("SP")
+        self.SETSP.Label.setText("SP")
         self.GL.addWidget(self.SETSP,1 , 9)
 
         self.updatebutton= QtWidgets.QPushButton(self)
