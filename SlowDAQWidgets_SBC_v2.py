@@ -456,7 +456,7 @@ class HeaterExpand(QtWidgets.QWidget):
         # self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         # self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
-        self.GL.addWidget(self.Label,0,0)
+        self.GL.addWidget(self.Label,0,1)
 
         self.SP = SetPoint(self)
         self.SP.Label.setText("SetPoint")
