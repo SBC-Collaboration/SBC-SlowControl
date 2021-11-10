@@ -4626,8 +4626,8 @@ class HeaterExpand(QtWidgets.QWidget):
         self.setSizePolicy(sizePolicy)
 
         self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        self.GL.setSpacing(3*R)
+        self.GL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        self.GL.setSpacing(3)
 
 
         self.Label = QtWidgets.QLabel(self)
