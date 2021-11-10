@@ -4538,86 +4538,6 @@ class Heater(QtWidgets.QWidget):
 
 
 # Defines a reusable layout containing widgets
-class HeaterExpand(QtWidgets.QWidget):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-
-        self.setObjectName("HeaterExpand")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 1050*R, 80*R))
-        self.setMinimumSize(1050*R, 80*R)
-        self.setSizePolicy(sizePolicy)
-
-        self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
-        self.VL.setSpacing(5*R)
-
-        self.Label = QtWidgets.QLabel(self)
-        self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
-        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
-        self.Label.setText("Label")
-        self.VL.addWidget(self.Label)
-
-        self.updatebutton=QtWidgets.QPushButton(self)
-        self.updatebutton.setText("Update")
-        self.VL.addWidget(self.updatebutton)
-
-        self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
-        self.VL.addLayout(self.HL)
-
-        self.Mode = DoubleButton(self)
-        self.Mode.Label.setText("Mode")
-        self.HL.addWidget(self.Mode)
-
-        self.FBSwitch = Menu(self)
-        self.FBSwitch.Label.setText("FBSWITCH")
-        self.HL.addWidget(self.FBSwitch)
-
-        self.SP = SetPoint(self)
-        self.SP.Label.setText("SetPoint")
-        self.HL.addWidget(self.SP)
-
-        self.MANSP = SetPoint(self)
-        self.MANSP.Label.setText("Manual SetPoint")
-        self.HL.addWidget(self.MANSP)
-
-        self.Power = Control(self)
-        self.Power.Label.setText("Power")
-        self.Power.SetUnit(" %")
-        self.Power.Max = 100.
-        self.Power.Min = 0.
-        self.Power.Step = 0.1
-        self.Power.Decimals = 1
-        self.HL.addWidget(self.Power)
-
-        self.RTD1 = Indicator(self)
-        self.RTD1.Label.setText("RTD1")
-        self.HL.addWidget(self.RTD1)
-
-        self.RTD2 = Indicator(self)
-        self.RTD2.Label.setText("RTD2")
-        self.HL.addWidget(self.RTD2)
-
-        self.Interlock = ColorIndicator(self)
-        self.Interlock.Label.setText("INTLCK")
-        self.HL.addWidget(self.Interlock)
-
-        self.Error = ColorIndicator(self)
-        self.Error.Label.setText("ERR")
-        self.HL.addWidget(self.Error)
-
-        self.HIGH = SetPoint(self)
-        self.HIGH.Label.setText("HIGH")
-        self.HL.addWidget(self.HIGH)
-
-        self.LOW = SetPoint(self)
-        self.LOW.Label.setText("LOW")
-        self.HL.addWidget(self.LOW)
-
-
 # class HeaterExpand(QtWidgets.QWidget):
 #     def __init__(self, parent=None):
 #         super().__init__(parent)
@@ -4625,54 +4545,42 @@ class HeaterExpand(QtWidgets.QWidget):
 #         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 #
 #         self.setObjectName("HeaterExpand")
-#         self.setGeometry(QtCore.QRect(0*R, 0*R, 1050*R, 100*R))
-#         self.setMinimumSize(1050*R, 100*R)
+#         self.setGeometry(QtCore.QRect(0*R, 0*R, 1050*R, 80*R))
+#         self.setMinimumSize(1050*R, 80*R)
 #         self.setSizePolicy(sizePolicy)
 #
-#         self.GL = QtWidgets.QGridLayout(self)
-#         self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-#         self.GL.setSpacing(3*R)
+#         self.VL = QtWidgets.QVBoxLayout(self)
+#         self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+#         self.VL.setSpacing(5*R)
 #
 #         self.Label = QtWidgets.QLabel(self)
-#         self.Label.setObjectName("Label")
 #         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-#         # self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
-#         self.Label.setAlignment(QtCore.Qt.AlignCenter)
+#         self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
+#         # self.Label.setAlignment(QtCore.Qt.AlignCenter)
 #         self.Label.setText("Label")
-#         self.GL.addWidget(self.Label,0,0)
+#         self.VL.addWidget(self.Label)
+#
+#
+#
+#         self.HL = QtWidgets.QHBoxLayout()
+#         self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+#         self.VL.addLayout(self.HL)
 #
 #         self.Mode = DoubleButton(self)
 #         self.Mode.Label.setText("Mode")
-#         self.GL.addWidget(self.Mode,0,3)
+#         self.HL.addWidget(self.Mode)
 #
 #         self.FBSwitch = Menu(self)
 #         self.FBSwitch.Label.setText("FBSWITCH")
-#         self.GL.addWidget(self.FBSwitch,0,4)
-#
-#
-#         self.LOID = Indicator(self)
-#         self.LOID.Label.setText('LOW')
-#         self.GL.addWidget(self.LOID, 0, 5)
-#
-#         self.HIID = Indicator(self)
-#         self.HIID.Label.setText('HIGH')
-#         self.GL.addWidget(self.HIID, 0, 6)
-#
-#         self.SETSP = Indicator(self)
-#         self.SETSP.Label.setText("SP")
-#         self.GL.addWidget(self.SETSP,0, 7)
-#
-#         self.updatebutton= QtWidgets.QPushButton(self)
-#         self.updatebutton.setText("Update")
-#         self.GL.addWidget(self.updatebutton,0,8)
+#         self.HL.addWidget(self.FBSwitch)
 #
 #         self.SP = SetPoint(self)
 #         self.SP.Label.setText("SetPoint")
-#         self.GL.addWidget(self.SP,2,0)
+#         self.HL.addWidget(self.SP)
 #
 #         self.MANSP = SetPoint(self)
 #         self.MANSP.Label.setText("Manual SetPoint")
-#         self.GL.addWidget(self.MANSP,2,1)
+#         self.HL.addWidget(self.MANSP)
 #
 #         self.Power = Control(self)
 #         self.Power.Label.setText("Power")
@@ -4681,31 +4589,34 @@ class HeaterExpand(QtWidgets.QWidget):
 #         self.Power.Min = 0.
 #         self.Power.Step = 0.1
 #         self.Power.Decimals = 1
-#         self.GL.addWidget(self.Power,2,2)
+#         self.HL.addWidget(self.Power)
 #
 #         self.RTD1 = Indicator(self)
 #         self.RTD1.Label.setText("RTD1")
-#         self.GL.addWidget(self.RTD1,2,3)
+#         self.HL.addWidget(self.RTD1)
 #
 #         self.RTD2 = Indicator(self)
 #         self.RTD2.Label.setText("RTD2")
-#         self.GL.addWidget(self.RTD2,2,4)
+#         self.HL.addWidget(self.RTD2)
 #
 #         self.Interlock = ColorIndicator(self)
 #         self.Interlock.Label.setText("INTLCK")
-#         self.GL.addWidget(self.Interlock,2,5)
+#         self.HL.addWidget(self.Interlock)
 #
 #         self.Error = ColorIndicator(self)
 #         self.Error.Label.setText("ERR")
-#         self.GL.addWidget(self.Error,2,6)
+#         self.HL.addWidget(self.Error)
 #
 #         self.HIGH = SetPoint(self)
 #         self.HIGH.Label.setText("HIGH")
-#         self.GL.addWidget(self.HIGH,2,7)
+#         self.HL.addWidget(self.HIGH)
 #
 #         self.LOW = SetPoint(self)
 #         self.LOW.Label.setText("LOW")
-#         self.GL.addWidget(self.LOW,2,8)
+#         self.HL.addWidget(self.LOW)
+
+
+
 
 
 # Defines a reusable layout containing widgets
