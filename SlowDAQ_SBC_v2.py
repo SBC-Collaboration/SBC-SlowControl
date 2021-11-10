@@ -4621,8 +4621,8 @@ class HeaterExpand(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("HeaterExpand")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 1050*R, 180*R))
-        self.setMinimumSize(1050*R, 180*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 1050*R, 100*R))
+        self.setMinimumSize(1050*R, 100*R)
         self.setSizePolicy(sizePolicy)
 
         self.GL = QtWidgets.QGridLayout(self)
