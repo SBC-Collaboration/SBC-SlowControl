@@ -442,8 +442,8 @@ class HeaterExpand(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("HeaterExpand")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 1050*R, 100*R))
-        self.setMinimumSize(1050*R, 100*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 200*R))
+        self.setMinimumSize(1200*R, 200*R)
         self.setSizePolicy(sizePolicy)
 
         self.GL = QtWidgets.QGridLayout(self)
@@ -454,9 +454,50 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Label.setObjectName("Label")
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         # self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
-        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.GL.addWidget(self.Label,0,0)
+
+        self.SP = SetPoint(self)
+        self.SP.Label.setText("SetPoint")
+        self.GL.addWidget(self.SP, 1, 0)
+
+        self.MANSP = SetPoint(self)
+        self.MANSP.Label.setText("Manual SetPoint")
+        self.GL.addWidget(self.MANSP, 1, 1)
+
+        self.Power = Control(self)
+        self.Power.Label.setText("Power")
+        self.Power.SetUnit(" %")
+        self.Power.Max = 100.
+        self.Power.Min = 0.
+        self.Power.Step = 0.1
+        self.Power.Decimals = 1
+        self.GL.addWidget(self.Power, 1, 2)
+
+        self.RTD1 = Indicator(self)
+        self.RTD1.Label.setText("RTD1")
+        self.GL.addWidget(self.RTD1, 1, 3)
+
+        self.RTD2 = Indicator(self)
+        self.RTD2.Label.setText("RTD2")
+        self.GL.addWidget(self.RTD2, 1, 4)
+
+        self.Interlock = ColorIndicator(self)
+        self.Interlock.Label.setText("INTLCK")
+        self.GL.addWidget(self.Interlock, 1, 5)
+
+        self.Error = ColorIndicator(self)
+        self.Error.Label.setText("ERR")
+        self.GL.addWidget(self.Error, 1, 6)
+
+        self.HIGH = SetPoint(self)
+        self.HIGH.Label.setText("HIGH")
+        self.GL.addWidget(self.HIGH, 1, 7)
+
+        self.LOW = SetPoint(self)
+        self.LOW.Label.setText("LOW")
+        self.GL.addWidget(self.LOW, 1, 8)
 
         self.Mode = DoubleButton(self)
         self.Mode.Label.setText("Mode")
@@ -483,46 +524,7 @@ class HeaterExpand(QtWidgets.QWidget):
         self.updatebutton.setText("Update")
         self.GL.addWidget(self.updatebutton,0,8)
 
-        self.SP = SetPoint(self)
-        self.SP.Label.setText("SetPoint")
-        self.GL.addWidget(self.SP,2,0)
 
-        self.MANSP = SetPoint(self)
-        self.MANSP.Label.setText("Manual SetPoint")
-        self.GL.addWidget(self.MANSP,2,1)
-
-        self.Power = Control(self)
-        self.Power.Label.setText("Power")
-        self.Power.SetUnit(" %")
-        self.Power.Max = 100.
-        self.Power.Min = 0.
-        self.Power.Step = 0.1
-        self.Power.Decimals = 1
-        self.GL.addWidget(self.Power,2,2)
-
-        self.RTD1 = Indicator(self)
-        self.RTD1.Label.setText("RTD1")
-        self.GL.addWidget(self.RTD1,2,3)
-
-        self.RTD2 = Indicator(self)
-        self.RTD2.Label.setText("RTD2")
-        self.GL.addWidget(self.RTD2,2,4)
-
-        self.Interlock = ColorIndicator(self)
-        self.Interlock.Label.setText("INTLCK")
-        self.GL.addWidget(self.Interlock,2,5)
-
-        self.Error = ColorIndicator(self)
-        self.Error.Label.setText("ERR")
-        self.GL.addWidget(self.Error,2,6)
-
-        self.HIGH = SetPoint(self)
-        self.HIGH.Label.setText("HIGH")
-        self.GL.addWidget(self.HIGH,2,7)
-
-        self.LOW = SetPoint(self)
-        self.LOW.Label.setText("LOW")
-        self.GL.addWidget(self.LOW,2,8)
 
 
 class BoolIndicator(QtWidgets.QWidget):
