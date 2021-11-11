@@ -4553,18 +4553,25 @@ class HeaterExpand(QtWidgets.QWidget):
         self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.setSpacing(5*R)
 
+        self.HL2 = QtWidgets.QHBoxLayout()
+        self.HL2.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.VL.addLayout(self.HL2)
+
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         # self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
-        self.VL.addWidget(self.Label)
+        # self.VL.addWidget(self.Label)
+        self.HL2.addWidget(self.Label)
 
 
 
         self.HL = QtWidgets.QHBoxLayout()
         self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.addLayout(self.HL)
+
+
 
         self.Mode = DoubleButton(self)
         self.Mode.Label.setText("Mode")
@@ -4615,9 +4622,7 @@ class HeaterExpand(QtWidgets.QWidget):
         self.LOW.Label.setText("LOW")
         self.HL.addWidget(self.LOW)
 
-        # self.HL2 = QtWidgets.QHBoxLayout()
-        # self.HL2.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        # self.VL.addLayout(self.HL2)
+
         #
         self.updatebutton =  QtWidgets.QPushButton(self)
         self.HL.addWidget(self.updatebutton)
