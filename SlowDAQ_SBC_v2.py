@@ -4623,9 +4623,10 @@ class HeaterExpand(QtWidgets.QWidget):
         self.HL.addWidget(self.LOW)
 
 
-        #
+
         self.updatebutton =  QtWidgets.QPushButton(self)
-        self.HL.addWidget(self.updatebutton)
+        # self.HL.addWidget(self.updatebutton)
+        self.HL2.addWidget(self.updatebutton)
 
 
 
