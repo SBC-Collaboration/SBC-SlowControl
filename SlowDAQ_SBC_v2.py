@@ -4615,12 +4615,12 @@ class HeaterExpand(QtWidgets.QWidget):
         self.LOW.Label.setText("LOW")
         self.HL.addWidget(self.LOW)
 
-        self.HL2 = QtWidgets.QHBoxLayout()
-        self.HL2.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        self.VL.addLayout(self.HL2)
-
-        self.updatebutton =  QtWidgets.QPushButton(self)
-        self.HL2.addWidget(self.updatebutton)
+        # self.HL2 = QtWidgets.QHBoxLayout()
+        # self.HL2.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        # self.VL.addLayout(self.HL2)
+        #
+        # self.updatebutton =  QtWidgets.QPushButton(self)
+        # self.HL2.addWidget(self.updatebutton)
 
 
 
