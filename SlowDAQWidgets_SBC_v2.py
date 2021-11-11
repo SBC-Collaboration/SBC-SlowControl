@@ -81,7 +81,7 @@ class ColoredStatus(QtWidgets.QWidget):
         self.Label.setStyleSheet(FONT)
 
         self.Field = QtWidgets.QPushButton(self)
-        self.Field.setObjectName("value")
+        self.Field.setObjectName("color status value")
         self.Field.setGeometry(QtCore.QRect(2.5*R, 20*R, 65*R, 15*R))
 
 
@@ -211,7 +211,7 @@ class SetPoint(QtWidgets.QWidget):
         self.Field = QtWidgets.QLineEdit(self)
         self.Field.setValidator(QtGui.QIntValidator(0*R, 1000*R, self))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
-        self.Field.setObjectName("value")
+        self.Field.setObjectName("setpoint value")
         self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Field.setStyleSheet(BORDER_STYLE + C_BLACK + FONT)
         self.Field.editingFinished.connect(self.UpdateValue)
@@ -597,7 +597,7 @@ class Indicator(QtWidgets.QWidget):
         self.Label.setStyleSheet(FONT)
 
         self.Field = QtWidgets.QLineEdit(self)
-        self.Field.setObjectName("value")
+        self.Field.setObjectName("indicator value")
         self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
@@ -926,7 +926,7 @@ class State(QtWidgets.QWidget):
         self.Label.setStyleSheet(FONT)
 
         self.Field = QtWidgets.QLineEdit(self)
-        self.Field.setObjectName("value")
+        self.Field.setObjectName("state value")
         self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 140*R, 20*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
