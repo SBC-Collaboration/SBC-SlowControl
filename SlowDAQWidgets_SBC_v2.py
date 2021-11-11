@@ -24,10 +24,13 @@ C_BLUE = "background-color: rgb(34,48,171);"
 C_ORANGE = "background-color: rgb(255,132,27);"
 # TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
 #               "\"Calibri\"; font-size: 22px; font-weight: bold;"
-TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
-              "\"Calibri\"; font-size: 14px; font-weight: bold;"
-BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px;" \
-               " border-color: black;"
+# TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
+#               "\"Calibri\"; font-size: 14px; font-weight: bold;"
+# BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px;" \
+#                " border-color: black;"
+
+TITLE_STYLE = " "
+BORDER_STYLE = " "
 
 R=0.6 #Resolution rate
 
@@ -435,90 +438,90 @@ class AlarmStatusWidget(QtWidgets.QWidget):
             self.Alarm = False
 
 
-# class HeaterExpand(QtWidgets.QWidget):
-#     def __init__(self, parent=None):
-#         super().__init__(parent)
-#
-#         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-#
-#         self.setObjectName("HeaterExpand")
-#         self.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 200*R))
-#         self.setMinimumSize(1200*R, 200*R)
-#         self.setSizePolicy(sizePolicy)
-#
-#         self.GL = QtWidgets.QGridLayout(self)
-#         self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-#         self.GL.setSpacing(3*R)
-#
-#         self.Label = QtWidgets.QLabel(self)
-#         self.Label.setObjectName("Label")
-#         self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
-#         # self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
-#         # self.Label.setAlignment(QtCore.Qt.AlignCenter)
-#         self.Label.setText("Label")
-#         self.GL.addWidget(self.Label,0,0)
-#
-#         self.SP = SetPoint(self)
-#         self.SP.Label.setText("SetPoint")
-#
-#         self.GL.addWidget(self.SP, 1, 0)
-#
-#         self.MANSP = SetPoint(self)
-#         self.MANSP.Label.setText("Manual SetPoint")
-#         self.GL.addWidget(self.MANSP, 1, 1)
-#
-#         self.Power = Control(self)
-#         self.Power.Label.setText("Power")
-#         self.Power.SetUnit(" %")
-#         self.Power.Max = 100.
-#         self.Power.Min = 0.
-#         self.Power.Step = 0.1
-#         self.Power.Decimals = 1
-#         self.GL.addWidget(self.Power, 1, 2)
-#
-#         self.RTD1 = Indicator(self)
-#         self.RTD1.Label.setText("RTD1")
-#         self.GL.addWidget(self.RTD1, 1, 3)
-#
-#         self.RTD2 = Indicator(self)
-#         self.RTD2.Label.setText("RTD2")
-#         self.GL.addWidget(self.RTD2, 1, 4)
-#
-#         self.Interlock = ColorIndicator(self)
-#         self.Interlock.Label.setText("INTLCK")
-#         self.GL.addWidget(self.Interlock, 1, 5)
-#
-#         self.Error = ColorIndicator(self)
-#         self.Error.Label.setText("ERR")
-#         self.GL.addWidget(self.Error, 1, 6)
-#
-#         self.HIGH = SetPoint(self)
-#         self.HIGH.Label.setText("HIGH")
-#         self.GL.addWidget(self.HIGH, 1, 7)
-#
-#         self.LOW = SetPoint(self)
-#         self.LOW.Label.setText("LOW")
-#         self.GL.addWidget(self.LOW, 1, 8)
-#
-#         self.Mode = DoubleButton(self)
-#         self.Mode.Label.setText("Mode")
-#         self.GL.addWidget(self.Mode,1,9)
-#
-#         self.FBSwitch = Menu(self)
-#         self.FBSwitch.Label.setText("FBSWITCH")
-#         self.GL.addWidget(self.FBSwitch,1,10)
-#
-#         self.LOID = Indicator(self)
-#         self.LOID.Label.setText('LOW')
-#         self.GL.addWidget(self.LOID, 1,11)
-#
-#         self.HIID = Indicator(self)
-#         self.HIID.Label.setText('HIGH')
-#         self.GL.addWidget(self.HIID, 1,12)
-#
-#         self.SETSP = Indicator(self)
-#         self.SETSP.Label.setText("SP")
-#         self.GL.addWidget(self.SETSP,1,13)
+class HeaterExpand(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("HeaterExpand")
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 200*R))
+        self.setMinimumSize(1200*R, 200*R)
+        self.setSizePolicy(sizePolicy)
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.GL.setSpacing(3*R)
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setObjectName("Label")
+        self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
+        # self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
+        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setText("Label")
+        self.GL.addWidget(self.Label,0,0)
+
+        self.SP = SetPoint(self)
+        self.SP.Label.setText("SetPoint")
+
+        self.GL.addWidget(self.SP, 1, 0)
+
+        self.MANSP = SetPoint(self)
+        self.MANSP.Label.setText("Manual SetPoint")
+        self.GL.addWidget(self.MANSP, 1, 1)
+
+        self.Power = Control(self)
+        self.Power.Label.setText("Power")
+        self.Power.SetUnit(" %")
+        self.Power.Max = 100.
+        self.Power.Min = 0.
+        self.Power.Step = 0.1
+        self.Power.Decimals = 1
+        self.GL.addWidget(self.Power, 1, 2)
+
+        self.RTD1 = Indicator(self)
+        self.RTD1.Label.setText("RTD1")
+        self.GL.addWidget(self.RTD1, 1, 3)
+
+        self.RTD2 = Indicator(self)
+        self.RTD2.Label.setText("RTD2")
+        self.GL.addWidget(self.RTD2, 1, 4)
+
+        self.Interlock = ColorIndicator(self)
+        self.Interlock.Label.setText("INTLCK")
+        self.GL.addWidget(self.Interlock, 1, 5)
+
+        self.Error = ColorIndicator(self)
+        self.Error.Label.setText("ERR")
+        self.GL.addWidget(self.Error, 1, 6)
+
+        self.HIGH = SetPoint(self)
+        self.HIGH.Label.setText("HIGH")
+        self.GL.addWidget(self.HIGH, 1, 7)
+
+        self.LOW = SetPoint(self)
+        self.LOW.Label.setText("LOW")
+        self.GL.addWidget(self.LOW, 1, 8)
+
+        self.Mode = DoubleButton(self)
+        self.Mode.Label.setText("Mode")
+        self.GL.addWidget(self.Mode,1,9)
+
+        self.FBSwitch = Menu(self)
+        self.FBSwitch.Label.setText("FBSWITCH")
+        self.GL.addWidget(self.FBSwitch,1,10)
+
+        self.LOID = Indicator(self)
+        self.LOID.Label.setText('LOW')
+        self.GL.addWidget(self.LOID, 1,11)
+
+        self.HIID = Indicator(self)
+        self.HIID.Label.setText('HIGH')
+        self.GL.addWidget(self.HIID, 1,12)
+
+        self.SETSP = Indicator(self)
+        self.SETSP.Label.setText("SP")
+        self.GL.addWidget(self.SETSP,1,13)
 
         # self.updatebutton= QtWidgets.QPushButton(self)
         # self.updatebutton.setText("Update")

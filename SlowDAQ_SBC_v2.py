@@ -4538,88 +4538,81 @@ class Heater(QtWidgets.QWidget):
 
 
 # Defines a reusable layout containing widgets
-class HeaterExpand(QtWidgets.QWidget):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-
-        self.setObjectName("HeaterExpand")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 1050*R, 80*R))
-        self.setMinimumSize(1050*R, 80*R)
-        self.setSizePolicy(sizePolicy)
-
-        self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
-        self.VL.setSpacing(5*R)
-
-        self.Label = QtWidgets.QLabel(self)
-        self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
-        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
-        self.Label.setText("Label")
-        self.VL.addWidget(self.Label)
-
-
-        self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
-        self.VL.addLayout(self.HL)
-
-        self.Mode = DoubleButton(self)
-        self.Mode.Label.setText("Mode")
-        self.HL.addWidget(self.Mode)
-
-        self.FBSwitch = Menu(self)
-        self.FBSwitch.Label.setText("FBSWITCH")
-        self.HL.addWidget(self.FBSwitch)
-
-        self.SP = SetPoint(self)
-        self.SP.Label.setText("SetPoint")
-        self.HL.addWidget(self.SP)
-
-        self.MANSP = SetPoint(self)
-        self.MANSP.Label.setText("Manual SetPoint")
-        self.HL.addWidget(self.MANSP)
-
-        self.Power = Control(self)
-        self.Power.Label.setText("Power")
-        self.Power.SetUnit(" %")
-        self.Power.Max = 100.
-        self.Power.Min = 0.
-        self.Power.Step = 0.1
-        self.Power.Decimals = 1
-        self.HL.addWidget(self.Power)
-
-        self.RTD1 = Indicator(self)
-        self.RTD1.Label.setText("RTD1")
-        self.HL.addWidget(self.RTD1)
-
-        self.RTD2 = Indicator(self)
-        self.RTD2.Label.setText("RTD2")
-        self.HL.addWidget(self.RTD2)
-
-        self.Interlock = ColorIndicator(self)
-        self.Interlock.Label.setText("INTLCK")
-        self.HL.addWidget(self.Interlock)
-
-        self.Error = ColorIndicator(self)
-        self.Error.Label.setText("ERR")
-        self.HL.addWidget(self.Error)
-
-        self.HIGH = SetPoint(self)
-        self.HIGH.Label.setText("HIGH")
-        self.HL.addWidget(self.HIGH)
-
-        self.LOW = SetPoint(self)
-        self.LOW.Label.setText("LOW")
-        self.HL.addWidget(self.LOW)
-
-
-
-        self.updatebutton =  QtWidgets.QPushButton(self)
-        self.HL.addWidget(self.updatebutton)
-
-
+# class HeaterExpand(QtWidgets.QWidget):
+#     def __init__(self, parent=None):
+#         super().__init__(parent)
+#
+#         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+#
+#         self.setObjectName("HeaterExpand")
+#         self.setGeometry(QtCore.QRect(0*R, 0*R, 1050*R, 80*R))
+#         self.setMinimumSize(1050*R, 80*R)
+#         self.setSizePolicy(sizePolicy)
+#
+#         self.VL = QtWidgets.QVBoxLayout(self)
+#         self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+#         self.VL.setSpacing(5*R)
+#
+#         self.Label = QtWidgets.QLabel(self)
+#         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
+#         self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
+#         # self.Label.setAlignment(QtCore.Qt.AlignCenter)
+#         self.Label.setText("Label")
+#         self.VL.addWidget(self.Label)
+#
+#
+#         self.HL = QtWidgets.QHBoxLayout()
+#         self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+#         self.VL.addLayout(self.HL)
+#
+#         self.Mode = DoubleButton(self)
+#         self.Mode.Label.setText("Mode")
+#         self.HL.addWidget(self.Mode)
+#
+#         self.FBSwitch = Menu(self)
+#         self.FBSwitch.Label.setText("FBSWITCH")
+#         self.HL.addWidget(self.FBSwitch)
+#
+#         self.SP = SetPoint(self)
+#         self.SP.Label.setText("SetPoint")
+#         self.HL.addWidget(self.SP)
+#
+#         self.MANSP = SetPoint(self)
+#         self.MANSP.Label.setText("Manual SetPoint")
+#         self.HL.addWidget(self.MANSP)
+#
+#         self.Power = Control(self)
+#         self.Power.Label.setText("Power")
+#         self.Power.SetUnit(" %")
+#         self.Power.Max = 100.
+#         self.Power.Min = 0.
+#         self.Power.Step = 0.1
+#         self.Power.Decimals = 1
+#         self.HL.addWidget(self.Power)
+#
+#         self.RTD1 = Indicator(self)
+#         self.RTD1.Label.setText("RTD1")
+#         self.HL.addWidget(self.RTD1)
+#
+#         self.RTD2 = Indicator(self)
+#         self.RTD2.Label.setText("RTD2")
+#         self.HL.addWidget(self.RTD2)
+#
+#         self.Interlock = ColorIndicator(self)
+#         self.Interlock.Label.setText("INTLCK")
+#         self.HL.addWidget(self.Interlock)
+#
+#         self.Error = ColorIndicator(self)
+#         self.Error.Label.setText("ERR")
+#         self.HL.addWidget(self.Error)
+#
+#         self.HIGH = SetPoint(self)
+#         self.HIGH.Label.setText("HIGH")
+#         self.HL.addWidget(self.HIGH)
+#
+#         self.LOW = SetPoint(self)
+#         self.LOW.Label.setText("LOW")
+#         self.HL.addWidget(self.LOW)
 
 
 
