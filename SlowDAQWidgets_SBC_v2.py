@@ -501,27 +501,27 @@ class HeaterExpand(QtWidgets.QWidget):
 
         self.Mode = DoubleButton(self)
         self.Mode.Label.setText("Mode")
-        self.GL.addWidget(self.Mode,2,3)
+        self.GL.addWidget(self.Mode,1,9)
 
         self.FBSwitch = Menu(self)
         self.FBSwitch.Label.setText("FBSWITCH")
-        self.GL.addWidget(self.FBSwitch,2,4)
+        self.GL.addWidget(self.FBSwitch,1,10)
 
         self.LOID = Indicator(self)
         self.LOID.Label.setText('LOW')
-        self.GL.addWidget(self.LOID, 2, 5)
+        self.GL.addWidget(self.LOID, 1,11)
 
         self.HIID = Indicator(self)
         self.HIID.Label.setText('HIGH')
-        self.GL.addWidget(self.HIID, 2, 6)
+        self.GL.addWidget(self.HIID, 1,12)
 
         self.SETSP = Indicator(self)
         self.SETSP.Label.setText("SP")
-        self.GL.addWidget(self.SETSP,2, 7)
+        self.GL.addWidget(self.SETSP,1,13)
 
         self.updatebutton= QtWidgets.QPushButton(self)
         self.updatebutton.setText("Update")
-        self.GL.addWidget(self.updatebutton,2,8)
+        self.GL.addWidget(self.updatebutton,1,14)
 
 
 
