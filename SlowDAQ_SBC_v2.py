@@ -527,7 +527,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.TT6415 = self.HT1202SUB.RTD2
         self.HT1202SUB.RTD2.Label.setText("TT6415")
 
-        self.HT2203 = Heater(self.ChamberTab)
+        self.HT2203 = Heater(self.FluidTab)
+        # self.HT2203 = Heater(self.ChamberTab)
         self.HT2203.move(1260*R, 1215*R)
         self.HT2203.Label.setText("HT2203")
         self.HT2203.HeaterSubWindow.setWindowTitle("HT2203")
@@ -590,17 +591,17 @@ class MainWindow(QtWidgets.QMainWindow):
         # # self.MFC1316SUB.RTD1.Label.setText("TT1332")
         # # self.MFC1316SUB.RTD2.Label.setText("EMPTY")
 
-        self.HT1316 = Heater(self.FluidTab)
-        # self.MFC1316 = Heater(self.ChamberTab)
-        self.HT1316.move(400 * R, 800 * R)
-        self.HT1316.Label.setText("MFC1316")
-        self.HT1316.HeaterSubWindow.setWindowTitle("MFC1316")
-        self.HT1316SUB = HeaterExpand(self.HT1316.HeaterSubWindow)
-        # self.MFC1316SUB.Label.setText("MFC1316")
-        # # self.MFC1316.HeaterSubWindow.VL.addWidget(self.MFC1316SUB)
-        # # self.PT1332SUB = self.MFC1316SUB.RTD1
-        # self.MFC1316SUB.RTD1.Label.setText("TT1332")
-        # self.MFC1316SUB.RTD2.Label.setText("EMPTY")
+        # self.HT1316 = Heater(self.FluidTab)
+        # # self.MFC1316 = Heater(self.ChamberTab)
+        # self.HT1316.move(400 * R, 800 * R)
+        # self.HT1316.Label.setText("MFC1316")
+        # self.HT1316.HeaterSubWindow.setWindowTitle("MFC1316")
+        # self.HT1316SUB = HeaterExpand(self.HT1316.HeaterSubWindow)
+        # # self.MFC1316SUB.Label.setText("MFC1316")
+        # # # self.MFC1316.HeaterSubWindow.VL.addWidget(self.MFC1316SUB)
+        # # # self.PT1332SUB = self.MFC1316SUB.RTD1
+        # # self.MFC1316SUB.RTD1.Label.setText("TT1332")
+        # # self.MFC1316SUB.RTD2.Label.setText("EMPTY")
 
         self.PT1332 = Indicator(self.FluidTab)
         self.PT1332.move(630*R, 900*R)
