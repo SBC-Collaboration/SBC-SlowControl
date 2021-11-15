@@ -592,7 +592,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # # self.MFC1316SUB.RTD2.Label.setText("EMPTY")
 
         self.HT2203x = Heater(self.FluidTab)
-        self.HT2203x.move(1260 * R, 1215 * R)
+        self.HT2203x.move(400*R, 800*R)
         self.HT2203x.Label.setText("HT2203x")
         self.HT2203x.HeaterSubWindow.setWindowTitle("HT2203x")
         self.HT2203xSUB = HeaterExpand(self.HT2203x.HeaterSubWindow)
