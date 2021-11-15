@@ -4558,7 +4558,7 @@ class HeaterExpand(QtWidgets.QWidget):
         # self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
         # self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
-        self.GL.addWidget(self.Label,0,1)
+        self.GL.addWidget(self.Label,0,1,0,4)
 
         self.SP = SetPoint(self)
         self.SP.Label.setText("SetPoint")
@@ -4622,9 +4622,9 @@ class HeaterExpand(QtWidgets.QWidget):
         self.SETSP.Label.setText("SP")
         self.GL.addWidget(self.SETSP,1,13)
 
-        # self.updatebutton= QtWidgets.QPushButton(self)
-        # self.updatebutton.setText("Update")
-        # self.GL.addWidget(self.updatebutton,1,14)
+        self.updatebutton= QtWidgets.QPushButton(self)
+        self.updatebutton.setText("Update")
+        self.GL.addWidget(self.updatebutton,1,14)
 
 # Defines a reusable layout containing widgets
 # class HeaterExpand(QtWidgets.QWidget):
