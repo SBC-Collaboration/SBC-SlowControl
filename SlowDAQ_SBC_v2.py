@@ -4624,7 +4624,7 @@ class HeaterExpand(QtWidgets.QWidget):
 
         self.updatebutton= QtWidgets.QPushButton(self)
         self.updatebutton.setText("Update")
-        self.GL.addWidget(self.updatebutton,0,14)
+        self.GL.addWidget(self.updatebutton,0,13)
 
 # Defines a reusable layout containing widgets
 # class HeaterExpand(QtWidgets.QWidget):
