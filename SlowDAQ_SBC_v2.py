@@ -5332,10 +5332,10 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.RTDset1Win.TT2118.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2118"])
                 self.MW.RTDset1Win.TT2119.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2119"])
                 self.MW.TT4330.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT4330"])
-                # self.MW.TT6203.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6203"])
+                self.MW.HT6202SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6203"])
 
-                # self.MW.TT6207.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6207"])
-                self.MW.TT6211.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6211"])
+                self.HT6206SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6207"])
+                self.HT6210SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6211"])
                 self.MW.TT6213.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6213"])
                 self.MW.TT6222.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6222"])
                 self.MW.TT6407.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6407"])
