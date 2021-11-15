@@ -515,29 +515,29 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121.Label.setText("PT2121")
         self.PT2121.SetUnit(" psi")
 
-        self.HT1202 = Heater(self.ChamberTab)
-        self.HT1202.move(840*R, 1250*R)
-        self.HT1202.Label.setText("HT1202")
-        self.HT1202.HeaterSubWindow.setWindowTitle("HT1202")
-        self.HT1202SUB = HeaterExpand(self.HT1202.HeaterSubWindow)
-        self.HT1202SUB.Label.setText("HT1202")
-        # self.HT1202.HeaterSubWindow.VL.addWidget(self.HT1202SUB)
-        # self.TT6413 = self.HT1202SUB.RTD1
-        self.HT1202SUB.RTD1.Label.setText("TT6413")
-        # self.TT6415 = self.HT1202SUB.RTD2
-        self.HT1202SUB.RTD2.Label.setText("TT6415")
-
-        self.HT2203 = Heater(self.ChamberTab)
-        self.HT2203.move(1260*R, 1215*R)
-        self.HT2203.Label.setText("HT2203")
-        self.HT2203.HeaterSubWindow.setWindowTitle("HT2203")
-        self.HT2203SUB = HeaterExpand(self.HT2203.HeaterSubWindow)
-        self.HT2203SUB.Label.setText("HT2203")
-        # self.HT2203.HeaterSubWindow.VL.addWidget(self.HT2203SUB)
-        # self.TT6414 = self.HT2203SUB.RTD1
-        self.HT2203SUB.RTD1.Label.setText("TT6414")
-        # self.TT6416 = self.HT2203SUB.RTD2
-        self.HT2203SUB.RTD2.Label.setText("TT6416")
+        # self.HT1202 = Heater(self.ChamberTab)
+        # self.HT1202.move(840*R, 1250*R)
+        # self.HT1202.Label.setText("HT1202")
+        # self.HT1202.HeaterSubWindow.setWindowTitle("HT1202")
+        # self.HT1202SUB = HeaterExpand(self.HT1202.HeaterSubWindow)
+        # self.HT1202SUB.Label.setText("HT1202")
+        # # self.HT1202.HeaterSubWindow.VL.addWidget(self.HT1202SUB)
+        # # self.TT6413 = self.HT1202SUB.RTD1
+        # self.HT1202SUB.RTD1.Label.setText("TT6413")
+        # # self.TT6415 = self.HT1202SUB.RTD2
+        # self.HT1202SUB.RTD2.Label.setText("TT6415")
+        #
+        # self.HT2203 = Heater(self.ChamberTab)
+        # self.HT2203.move(1260*R, 1215*R)
+        # self.HT2203.Label.setText("HT2203")
+        # self.HT2203.HeaterSubWindow.setWindowTitle("HT2203")
+        # self.HT2203SUB = HeaterExpand(self.HT2203.HeaterSubWindow)
+        # self.HT2203SUB.Label.setText("HT2203")
+        # # self.HT2203.HeaterSubWindow.VL.addWidget(self.HT2203SUB)
+        # # self.TT6414 = self.HT2203SUB.RTD1
+        # self.HT2203SUB.RTD1.Label.setText("TT6414")
+        # # self.TT6416 = self.HT2203SUB.RTD2
+        # self.HT2203SUB.RTD2.Label.setText("TT6416")
 
         # Fluid tab buttons
 
@@ -578,16 +578,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121Fluid.Label.setText("PT2121")
         self.PT2121Fluid.SetUnit(" psi")
 
-        self.MFC1316 = Heater(self.FluidTab)
-        self.MFC1316.move(400*R, 800*R)
-        self.MFC1316.Label.setText("MFC1316")
-        self.MFC1316.HeaterSubWindow.setWindowTitle("MFC1316")
-        self.MFC1316SUB = HeaterExpand(self.MFC1316.HeaterSubWindow)
-        self.MFC1316SUB.Label.setText("MFC1316")
-        # self.MFC1316.HeaterSubWindow.VL.addWidget(self.MFC1316SUB)
-        # self.PT1332SUB = self.MFC1316SUB.RTD1
-        self.MFC1316SUB.RTD1.Label.setText("TT6220")
-        self.MFC1316SUB.RTD2.Label.setText("EMPTY")
+        # self.MFC1316 = Heater(self.FluidTab)
+        # self.MFC1316.move(400*R, 800*R)
+        # self.MFC1316.Label.setText("MFC1316")
+        # self.MFC1316.HeaterSubWindow.setWindowTitle("MFC1316")
+        # self.MFC1316SUB = HeaterExpand(self.MFC1316.HeaterSubWindow)
+        # self.MFC1316SUB.Label.setText("MFC1316")
+        # # self.MFC1316.HeaterSubWindow.VL.addWidget(self.MFC1316SUB)
+        # # self.PT1332SUB = self.MFC1316SUB.RTD1
+        # self.MFC1316SUB.RTD1.Label.setText("TT6220")
+        # self.MFC1316SUB.RTD2.Label.setText("EMPTY")
 
         self.PT1332 = Indicator(self.FluidTab)
         self.PT1332.move(630*R, 900*R)
