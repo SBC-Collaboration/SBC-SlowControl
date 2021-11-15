@@ -5334,7 +5334,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.TT4330.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT4330"])
                 # self.MW.TT6203.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6203"])
 
-                self.MW.TT6207.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6207"])
+                # self.MW.TT6207.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6207"])
                 self.MW.TT6211.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6211"])
                 self.MW.TT6213.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6213"])
                 self.MW.TT6222.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6222"])
