@@ -422,7 +422,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HT6202SUB.Label.setText("HT6202")
         # self.HT6202.HeaterSubWindow.VL.addWidget(self.HT6202SUB)
         self.HT6202SUB.RTD1.Label.setText("TT6203")
-        self.HT6202SUB.RTD1.Label.setText("TT6404")
+        self.HT6202SUB.RTD2.Label.setText("TT6404")
 
         self.HT6206 = Heater(self.ChamberTab)
         self.HT6206.move(1780*R, 585*R)
