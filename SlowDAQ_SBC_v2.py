@@ -603,6 +603,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # # self.TT6416 = self.HT2203SUB.RTD2
         # self.HT2203xSUB.RTD2.Label.setText("TT6416")
 
+        # I really don't understand this, when change the variable from self.MF1316 into self.MFC1316 the code crashes...
         self.MF1316 = Heater(self.FluidTab)
         self.MF1316.move(400 * R, 800 * R)
         self.MF1316.Label.setText("MFC1316")
@@ -610,10 +611,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MF1316SUB = HeaterExpand(self.MF1316.HeaterSubWindow)
         self.MF1316SUB.Label.setText("MFC1316")
         # self.HT2203.HeaterSubWindow.VL.addWidget(self.HT2203SUB)
-        # self.TT6414 = self.HT2203SUB.RTD1
-        self.MF1316SUB.RTD1.Label.setText("TT6414")
-        # self.TT6416 = self.HT2203SUB.RTD2
-        self.MF1316SUB.RTD2.Label.setText("TT6416")
+
+        self.MF1316SUB.RTD1.Label.setText("TT1332")
+        self.MF1316SUB.RTD2.Label.setText("EMPTY")
 
 
         self.PT1332 = Indicator(self.FluidTab)
