@@ -586,8 +586,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC1316SUB.Label.setText("MFC1316")
         # self.MFC1316.HeaterSubWindow.VL.addWidget(self.MFC1316SUB)
         # self.PT1332SUB = self.MFC1316SUB.RTD1
-        self.MFC1316SUB.RTD1.Label.setText("TT6220")
-        self.MFC1316SUB.RTD2.Label.setText("EMPTY")
+        # self.MFC1316SUB.RTD1.Label.setText("TT6220")
+        # self.MFC1316SUB.RTD2.Label.setText("EMPTY")
 
         self.PT1332 = Indicator(self.FluidTab)
         self.PT1332.move(630*R, 900*R)
