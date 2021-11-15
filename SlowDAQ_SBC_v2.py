@@ -132,7 +132,7 @@ class MainWindow(QtWidgets.QMainWindow):
         pixmap_Fluid = pixmap_Fluid.scaledToWidth(2400*R)
         self.FluidTab.Background.setPixmap(QtGui.QPixmap(pixmap_Fluid))
         self.FluidTab.Background.move(0*R, 0*R)
-        self.FluidTab.Background.setAlignment(QtCore.Qt.AlignCenter)
+        # self.FluidTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.FluidTab.Background.setObjectName("FluidBkg")
 
         self.HydraulicTab = QtWidgets.QWidget()
@@ -145,7 +145,7 @@ class MainWindow(QtWidgets.QMainWindow):
         pixmap_Hydraulic = pixmap_Hydraulic.scaledToWidth(2400*R)
         self.HydraulicTab.Background.setPixmap(QtGui.QPixmap(pixmap_Hydraulic))
         self.HydraulicTab.Background.move(0*R, 0*R)
-        self.HydraulicTab.Background.setAlignment(QtCore.Qt.AlignCenter)
+        # self.HydraulicTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.HydraulicTab.Background.setObjectName("HydraulicBkg")
 
         self.DatanSignalTab = QtWidgets.QWidget()
@@ -158,7 +158,7 @@ class MainWindow(QtWidgets.QMainWindow):
         pixmap_DatanSignal = pixmap_DatanSignal.scaledToWidth(2400*R)
         self.DatanSignalTab.Background.setPixmap(QtGui.QPixmap(pixmap_DatanSignal))
         self.DatanSignalTab.Background.move(0*R, 0*R)
-        self.DatanSignalTab.Background.setAlignment(QtCore.Qt.AlignCenter)
+        # self.DatanSignalTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.DatanSignalTab.Background.setObjectName("DatanSignalBkg")
 
         # Data saving and recovery
@@ -578,7 +578,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121Fluid.Label.setText("PT2121")
         self.PT2121Fluid.SetUnit(" psi")
 
-        self.MFC1316 = Heater(self.HydraulicTab)
+        self.MFC1316 = Heater(self.FluidTab)
         # self.MFC1316 = Heater(self.ChamberTab)
         self.MFC1316.move(400*R, 800*R)
         self.MFC1316.Label.setText("MFC1316")
