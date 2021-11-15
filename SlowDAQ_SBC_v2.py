@@ -392,9 +392,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HT6219SUB.FBSwitch.Combobox.setItemText(0, "PT6220")
         self.HT6219SUB.FBSwitch.Combobox.setItemText(1, "EMPTY")
         # self.HT6219.HeaterSubWindow.VL.addWidget(self.HT6219SUB)
-        # self.TT6220 = self.HT6219SUB.RTD1
-        # self.TT6220.Label.setText("TT6220")
-        # self.HT6219SUB.RTD2.Label.setText("EMPTY")
+        self.TT6220 = self.HT6219SUB.RTD1
+        self.TT6220.Label.setText("TT6220")
+        self.HT6219SUB.RTD2.Label.setText("EMPTY")
 
         # self.HT6221 = Heater(self.ChamberTab)
         # self.HT6221.move(1250*R, 120*R)
