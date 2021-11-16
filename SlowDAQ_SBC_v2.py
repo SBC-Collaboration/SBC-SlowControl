@@ -4553,10 +4553,10 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
         self.Label.setStyleSheet("QLabel {" +TITLE_STYLE + BORDER_STYLE+"}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
-        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 40*R, 140*R))
         self.Label.setText("Write")
 
-        self.GL.addWidget(self.Label,0,0,)
+        self.GL.addWidget(self.Label,0,1)
 
         self.SP = SetPoint(self)
         self.SP.Label.setText("SetPoint")
