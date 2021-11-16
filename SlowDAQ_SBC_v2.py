@@ -579,19 +579,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121Fluid.Label.setText("PT2121")
         self.PT2121Fluid.SetUnit(" psi")
 
-        # self.MFC1316 = Indicator(self.FluidTab)
-        # self.MFC1316.move(400 * R, 800 * R)
-        # self.MFC1316 = Heater(self.FluidTab)
-        # self.MFC1316 = Heater(self.ChamberTab)
-        # self.MFC1316.move(400*R, 800*R)
-        # self.MFC1316.Label.setText("MFC1316")
-        # self.MFC1316.HeaterSubWindow.setWindowTitle("MFC1316")
-        # self.MFC1316SUB = HeaterExpand(self.MFC1316.HeaterSubWindow)
-        # self.MFC1316SUB.Label.setText("MFC1316")
-        # # self.MFC1316.HeaterSubWindow.VL.addWidget(self.MFC1316SUB)
-        # # self.PT1332SUB = self.MFC1316SUB.RTD1
-        # self.MFC1316SUB.RTD1.Label.setText("TT1332")
-        # self.MFC1316SUB.RTD2.Label.setText("EMPTY")
+        self.MFC1316 = Indicator(self.FluidTab)
+        self.MFC1316.move(400 * R, 800 * R)
+        self.MFC1316 = Heater(self.FluidTab)
+        self.MFC1316 = Heater(self.ChamberTab)
+        self.MFC1316.move(400*R, 800*R)
+        self.MFC1316.Label.setText("MFC1316")
+        self.MFC1316.HeaterSubWindow.setWindowTitle("MFC1316")
+        self.MFC1316SUB = HeaterExpand(self.MFC1316.HeaterSubWindow)
+        self.MFC1316SUB.Label.setText("MFC1316")
+        # self.MFC1316.HeaterSubWindow.VL.addWidget(self.MFC1316SUB)
+        # self.PT1332SUB = self.MFC1316SUB.RTD1
+        self.MFC1316SUB.RTD1.Label.setText("TT1332")
+        self.MFC1316SUB.RTD2.Label.setText("EMPTY")
 
 
         # # self.MF1316 = Heater(self.ChamberTab)
@@ -5144,7 +5144,7 @@ class UpdateDisplay(QtCore.QObject):
 
                 for element in FPRTDAlarmMatrix:
                     print(element.Label.text())
-                    print("hello")
+                    # print("hello")
                     element.UpdateAlarm(
                         self.Client.receive_dic["Alarm"]["TT"]["FP"][element.Label.text()])
                 #     element.Indicator.SetValue(
