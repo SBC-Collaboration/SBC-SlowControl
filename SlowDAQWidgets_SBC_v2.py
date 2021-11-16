@@ -612,7 +612,7 @@ class Indicator(QtWidgets.QWidget):
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
         self.Field.setStyleSheet(
-            "QWLineEdit{" + BORDER_STYLE + C_WHITE + FONT + "} QWidget[Alarm = true]{" + C_ORANGE +
+            "QLineEdit{" + BORDER_STYLE + C_WHITE + FONT + "} QWidget[Alarm = true]{" + C_ORANGE +
             "} QWidget[Alarm = false]{" + C_MEDIUM_GREY + "}")
         self.Field.Property = False
         self.Field.setProperty("Alarm", False)
