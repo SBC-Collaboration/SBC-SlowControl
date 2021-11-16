@@ -38,7 +38,7 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-fam
               " font-size: 14px; font-weight: bold;"
 
 # SMALL_LABEL_STYLE = " "
-# LABEL_STYLE = " "
+LABEL_STYLE = " "
 # TITLE_STYLE = " "
 
 
