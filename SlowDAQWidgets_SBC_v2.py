@@ -24,11 +24,15 @@ C_BLUE = "background-color: rgb(34,48,171);"
 C_ORANGE = "background-color: rgb(255,132,27);"
 # TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
 #               "\"Calibri\"; font-size: 22px; font-weight: bold;"
-TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
-              "\"Calibri\"; font-size: 14px; font-weight: bold;"
-BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px;" \
-               " border-color: black;"
+
+# TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
+#               "\"Calibri\"; font-size: 14px; font-weight: bold;"
+# BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px;" \
+#                " border-color: black;"
 #
+
+TITLE_STYLE = ""
+BORDER_STYLE = " "
 
 R=0.6 #Resolution rate
 
