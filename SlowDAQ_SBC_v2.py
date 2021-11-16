@@ -50,8 +50,8 @@ PLOTTING_SCALE = 0.66
 ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bdf133e9e2c98ad4eafc622f4" \
                  "f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f1367668" \
                  "31c12bff0da3a2314ca2266"
-BORDER_STYLE = " border-radius: 2px; border-color: black;"
-# BORDER_STYLE = " "
+# BORDER_STYLE = " border-radius: 2px; border-color: black;"
+BORDER_STYLE = " "
 R=0.6 # Resolution settings
 
 
@@ -4622,7 +4622,6 @@ class HeaterExpand(QtWidgets.QWidget):
         self.HIGH.Label.setText("HIGH")
         self.GL.addWidget(self.HIGH, 1, 10)
 
-
         self.LOW = SetPoint(self)
         self.LOW.Label.setText("LOW")
         self.GL.addWidget(self.LOW, 1, 11)
@@ -4639,12 +4638,6 @@ class HeaterExpand(QtWidgets.QWidget):
         self.RTD2 = Indicator(self)
         self.RTD2.Label.setText("RTD2")
         self.GL.addWidget(self.RTD2, 2, 2)
-
-
-
-
-
-
 
 
 # Defines a reusable layout containing widgets

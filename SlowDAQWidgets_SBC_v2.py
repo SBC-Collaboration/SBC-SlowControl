@@ -35,7 +35,7 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-fam
 # BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
 #                " border-color: black;"
 
-BORDER_STYLE = "  border-radius: 4px; border-color: black;"
+# BORDER_STYLE = "  border-radius: 4px; border-color: black;"
 
 BORDER_STYLE = " "
 
@@ -614,8 +614,8 @@ class Indicator(QtWidgets.QWidget):
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
         self.Field.setStyleSheet(
-            "QLineEdit{" + BORDER_STYLE + C_WHITE + FONT + "} QWidget[Alarm = true]{" + C_ORANGE +
-            "} QWidget[Alarm = false]{" + C_MEDIUM_GREY + "}")
+            "QLineEdit{" + BORDER_STYLE + C_WHITE + FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
+            "} QLineEdit[Alarm = false]{" + C_MEDIUM_GREY + "}")
         self.Field.Property = False
         self.Field.setProperty("Alarm", False)
 
