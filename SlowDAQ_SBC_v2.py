@@ -2719,7 +2719,7 @@ class RegionPID(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setStyleSheet(TITLE_STYLE)
+        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE+"}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -4347,7 +4347,7 @@ class MultiStatusIndicator(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
-        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
+        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE + BORDER_STYLE+"}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -4451,7 +4451,7 @@ class FunctionButton(QtWidgets.QWidget):
         self.Button.setText("Button")
         self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 245*R, 75*R))
         self.Button.clicked.connect(self.ButtonClicked)
-        self.Button.setStyleSheet(LABEL_STYLE)
+        self.Button.setStyleSheet("QPushButton {" +LABEL_STYLE+"}")
 
     @QtCore.Slot()
     def ButtonClicked(self):
@@ -4470,7 +4470,7 @@ class Chiller(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setStyleSheet(TITLE_STYLE)
+        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE+"}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -4502,7 +4502,7 @@ class Heater(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QPushButton(self)
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setStyleSheet(TITLE_STYLE+BORDER_STYLE)
+        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE+BORDER_STYLE+"}")
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
@@ -4551,7 +4551,7 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
-        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
+        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE + BORDER_STYLE+"}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
 
@@ -4712,7 +4712,7 @@ class AOMultiLoop(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QPushButton(self)
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
+        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE + BORDER_STYLE+"}")
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
@@ -4759,7 +4759,7 @@ class AOMutiLoopExpand(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
+        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE + BORDER_STYLE+"}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -4832,7 +4832,7 @@ class Valve(QtWidgets.QWidget):
         self.Label = QtWidgets.QLabel(self)
         # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
-        self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
+        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE + BORDER_STYLE+"}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
@@ -4863,7 +4863,7 @@ class Camera(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setStyleSheet(TITLE_STYLE)
+        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE+"}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
