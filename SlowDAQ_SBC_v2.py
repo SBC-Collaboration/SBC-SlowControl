@@ -132,7 +132,7 @@ class MainWindow(QtWidgets.QMainWindow):
         pixmap_Fluid = pixmap_Fluid.scaledToWidth(2400*R)
         self.FluidTab.Background.setPixmap(QtGui.QPixmap(pixmap_Fluid))
         self.FluidTab.Background.move(0*R, 0*R)
-        self.FluidTab.Background.setAlignment(QtCore.Qt.AlignCenter)
+        # self.FluidTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.FluidTab.Background.setObjectName("FluidBkg")
 
         self.HydraulicTab = QtWidgets.QWidget()
@@ -605,7 +605,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         # self.MF1316 = Heater(self.ChamberTab)
-        self.MF1316 = Heater(self.ThermosyphonTab)
+        self.MF1316 = Heater(self.FluidTab)
         self.MF1316.move(400 * R, 800 * R)
         self.MF1316.Label.setText("MFC1316")
         self.MF1316.HeaterSubWindow.setWindowTitle("MFC1316")
