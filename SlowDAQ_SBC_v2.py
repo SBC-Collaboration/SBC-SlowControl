@@ -5144,7 +5144,6 @@ class UpdateDisplay(QtCore.QObject):
 
                 for element in FPRTDAlarmMatrix:
                     print(element.Label.text())
-                    print('hello')
 
                     element.UpdateAlarm(
                         self.Client.receive_dic["Alarm"]["TT"]["FP"][element.Label.text()])
@@ -5413,7 +5412,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.RTDset3Win.TT2448.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2448"])
                 self.MW.RTDset2Win.TT2410.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2410"])
                 self.MW.RTDset2Win.TT2405.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2405"])
-                # self.MW.MF1316SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6220"])
+                self.MW.MF1316SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6220"])
                 self.MW.HT6214SUB.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6401"])
                 self.MW.HT6202SUB.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6404"])
                 self.MW.HT6206SUB.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6405"])
