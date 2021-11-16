@@ -219,7 +219,7 @@ class SetPoint(QtWidgets.QWidget):
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setObjectName("setpoint value")
         self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
-        # self.Field.setStyleSheet(BORDER_STYLE + C_BLACK + FONT)
+        self.Field.setStyleSheet("QLineEdit "+BORDER_STYLE + C_BLACK + FONT)
         self.Field.editingFinished.connect(self.UpdateValue)
         self.value = 0
         self.Field.setText(str(self.value))
@@ -608,9 +608,9 @@ class Indicator(QtWidgets.QWidget):
         self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
-        # self.Field.setStyleSheet(
-        #     "QWidget{" + BORDER_STYLE + C_WHITE + FONT + "} QWidget[Alarm = true]{" + C_ORANGE +
-        #     "} QWidget[Alarm = false]{" + C_MEDIUM_GREY + "}")
+        self.Field.setStyleSheet(
+            "QWidget{" + BORDER_STYLE + C_WHITE + FONT + "} QWidget[Alarm = true]{" + C_ORANGE +
+            "} QWidget[Alarm = false]{" + C_MEDIUM_GREY + "}")
         self.Field.Property = False
         self.Field.setProperty("Alarm", False)
 
