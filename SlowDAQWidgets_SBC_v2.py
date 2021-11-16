@@ -31,7 +31,8 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-fam
 # BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
 #                " border-color: black;"
 
-BORDER_STYLE = " "
+BORDER_STYLE = " border-style: outset; " \
+               " border-color: black;"
 
 
 R=0.6 #Resolution rate
