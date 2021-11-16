@@ -32,7 +32,7 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-fam
 #
 
 # TITLE_STYLE = ""
-# BORDER_STYLE = " "
+BORDER_STYLE = " "
 
 R=0.6 #Resolution rate
 
