@@ -4555,17 +4555,55 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 40*R, 140*R))
         self.Label.setText("Write")
-
         self.GL.addWidget(self.Label,0,1)
+
+        self.FBSwitch = Menu(self)
+        self.FBSwitch.Label.setText("FBSWITCH")
+        self.GL.addWidget(self.FBSwitch, 0, 5)
+
+        self.Mode = DoubleButton(self)
+        self.Mode.Label.setText("Mode")
+        self.GL.addWidget(self.Mode, 0, 7)
+
+        self.HISP= SetPoint(self)
+        self.HISP.Label.setText("HI SET")
+        self.GL.addWidget(self.HISP, 0,9)
+
+        self.LOSP = SetPoint(self)
+        self.LOSP.Label.setText("LO SET")
+        self.GL.addWidget(self.LOSP, 0, 10)
 
         self.SP = SetPoint(self)
         self.SP.Label.setText("SetPoint")
+        self.GL.addWidget(self.SP, 0, 11)
 
-        self.GL.addWidget(self.SP, 1, 0)
+        self.updatebutton = QtWidgets.QPushButton(self)
+        self.updatebutton.setText("Update")
+        self.GL.addWidget(self.updatebutton, 0, 13)
 
-        self.MANSP = SetPoint(self)
-        self.MANSP.Label.setText("Manual SetPoint")
-        self.GL.addWidget(self.MANSP, 1, 1)
+        self.Interlock = ColorIndicator(self)
+        self.Interlock.Label.setText("INTLCK")
+        self.GL.addWidget(self.Interlock, 1, 1)
+
+        self.Error = ColorIndicator(self)
+        self.Error.Label.setText("ERR")
+        self.GL.addWidget(self.Error, 1, 2)
+
+        self.MANSP = ColorIndicator(self)
+        self.MANSP.Label.setText("MAN")
+        self.GL.addWidget(self.MANSP, 1, 3)
+
+        self.SAT = ColorIndicator(self)
+        self.SAT.Label.setText("SAT")
+        self.GL.addWidget(self.SAT,1,4)
+
+        self.ModeREAD = Indicator(self)
+        self.ModeREAD.Label.setText("Mode")
+        self.GL.addWidget(self.ModeREAD, 1, 5)
+
+        self.EN = Indicator(self)
+        self.EN.Label.setText("ENABLE")
+        self.GL.addWidget(self.EN, 1, 7)
 
         self.Power = Control(self)
         self.Power.Label.setText("Power")
@@ -4574,55 +4612,40 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Power.Min = 0.
         self.Power.Step = 0.1
         self.Power.Decimals = 1
-        self.GL.addWidget(self.Power, 1, 2)
+        self.GL.addWidget(self.Power, 1, 8)
 
-        self.RTD1 = Indicator(self)
-        self.RTD1.Label.setText("RTD1")
-        self.GL.addWidget(self.RTD1, 1, 3)
+        self.IN = Indicator(self)
+        self.IN.Label.setText("IN")
+        self.GL.addWidget(self.IN, 1, 9)
 
-        self.RTD2 = Indicator(self)
-        self.RTD2.Label.setText("RTD2")
-        self.GL.addWidget(self.RTD2, 1, 4)
-
-        self.Interlock = ColorIndicator(self)
-        self.Interlock.Label.setText("INTLCK")
-        self.GL.addWidget(self.Interlock, 1, 5)
-
-        self.Error = ColorIndicator(self)
-        self.Error.Label.setText("ERR")
-        self.GL.addWidget(self.Error, 1, 6)
-
-        self.HIGH = SetPoint(self)
+        self.HIGH = Indicator(self)
         self.HIGH.Label.setText("HIGH")
-        self.GL.addWidget(self.HIGH, 1, 7)
+        self.GL.addWidget(self.HIGH, 1, 10)
+
 
         self.LOW = SetPoint(self)
         self.LOW.Label.setText("LOW")
-        self.GL.addWidget(self.LOW, 1, 8)
-
-        self.Mode = DoubleButton(self)
-        self.Mode.Label.setText("Mode")
-        self.GL.addWidget(self.Mode,1,9)
-
-        self.FBSwitch = Menu(self)
-        self.FBSwitch.Label.setText("FBSWITCH")
-        self.GL.addWidget(self.FBSwitch,1,10)
-
-        self.LOID = Indicator(self)
-        self.LOID.Label.setText('LOW')
-        self.GL.addWidget(self.LOID, 1,11)
-
-        self.HIID = Indicator(self)
-        self.HIID.Label.setText('HIGH')
-        self.GL.addWidget(self.HIID, 1,12)
+        self.GL.addWidget(self.LOW, 1, 11)
 
         self.SETSP = Indicator(self)
         self.SETSP.Label.setText("SP")
-        self.GL.addWidget(self.SETSP,1,13)
+        self.GL.addWidget(self.SETSP, 1, 12)
 
-        self.updatebutton= QtWidgets.QPushButton(self)
-        self.updatebutton.setText("Update")
-        self.GL.addWidget(self.updatebutton,0,13)
+
+        self.RTD1 = Indicator(self)
+        self.RTD1.Label.setText("RTD1")
+        self.GL.addWidget(self.RTD1, 2, 1)
+
+        self.RTD2 = Indicator(self)
+        self.RTD2.Label.setText("RTD2")
+        self.GL.addWidget(self.RTD2, 2, 2)
+
+
+
+
+
+
+
 
 # Defines a reusable layout containing widgets
 # class HeaterExpand(QtWidgets.QWidget):
