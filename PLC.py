@@ -1266,8 +1266,8 @@ class UpdateServer(QtCore.QObject):
                                         "SET1" : self.PLC.LOOPPID_SET1_ini,
                                         "SET2" : self.PLC.LOOPPID_SET2_ini,
                                         "SET3" : self.PLC.LOOPPID_SET3_ini}},
-                       "Alarm":{"TT" : {"FP":self.PLC.TT_FP_ini,
-                                      "BO":self.PLC.TT_BO_ini},
+                       "Alarm":{"TT" : {"FP":self.PLC.TT_FP_dic_ini,
+                                      "BO":self.PLC.TT_BO_dic_ini},
                                 "PT" : self.PLC.PT_Alarm_ini},
                        "MainAlarm" : self.PLC.MainAlarm_ini}
         self.data_package=pickle.dumps(self.data_dic)
