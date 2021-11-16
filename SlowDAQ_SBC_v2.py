@@ -604,8 +604,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT2203xSUB.RTD2.Label.setText("TT6416")
 
 
-        self.MF1316 = Heater(self.ChamberTab)
-        # self.MF1316 = Heater(self.FluidTab)
+        # self.MF1316 = Heater(self.ChamberTab)
+        self.MF1316 = Heater(self.ThermosyphonTab)
         self.MF1316.move(400 * R, 800 * R)
         self.MF1316.Label.setText("MFC1316")
         self.MF1316.HeaterSubWindow.setWindowTitle("MFC1316")
