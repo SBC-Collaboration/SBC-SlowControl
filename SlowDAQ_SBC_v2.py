@@ -27,8 +27,8 @@ VERSION = "v2.1.3"
 
 # LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; " \
 #               "font-size: 18px; font-weight: bold;"
-# TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
-#               " font-size: 22px; font-weight: bold;"
+TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
+              " font-size: 22px; font-weight: bold;"
 # SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\";" \
 #                     " font-size: 10px;" \
 #                     " font-weight: bold;"
@@ -39,7 +39,7 @@ VERSION = "v2.1.3"
 
 SMALL_LABEL_STYLE = " "
 LABEL_STYLE = " "
-TITLE_STYLE = " "
+# TITLE_STYLE = " "
 
 
 ADMIN_TIMER = 30000
