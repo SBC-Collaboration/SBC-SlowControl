@@ -37,9 +37,7 @@ LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-fami
 TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
               " font-size: 14px; font-weight: bold;"
 
-# SMALL_LABEL_STYLE = " "
-# LABEL_STYLE = " "
-# TITLE_STYLE = " "
+
 
 
 ADMIN_TIMER = 30000
