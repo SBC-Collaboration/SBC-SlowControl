@@ -603,7 +603,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # # self.TT6416 = self.HT2203SUB.RTD2
         # self.HT2203xSUB.RTD2.Label.setText("TT6416")
 
-        # I really don't understand this, when change the variable from self.MF1316 into self.MFC1316 the code crashes...
+
         self.MF1316 = Heater(self.FluidTab)
         self.MF1316.move(400 * R, 800 * R)
         self.MF1316.Label.setText("MFC1316")
@@ -5420,7 +5420,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.RTDset3Win.TT2448.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2448"])
                 self.MW.RTDset2Win.TT2410.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2410"])
                 self.MW.RTDset2Win.TT2405.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2405"])
-                self.MW.MF1316SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6220"])
+                # self.MW.MF1316SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6220"])
                 self.MW.HT6214SUB.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6401"])
                 self.MW.HT6202SUB.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6404"])
                 self.MW.HT6206SUB.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6405"])
