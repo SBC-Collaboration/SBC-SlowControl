@@ -579,8 +579,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121Fluid.Label.setText("PT2121")
         self.PT2121Fluid.SetUnit(" psi")
 
-        self.MFC1316 = Indicator(self.FluidTab)
-        self.MFC1316.move(400 * R, 800 * R)
+        # self.MFC1316 = Indicator(self.FluidTab)
+        # self.MFC1316.move(400 * R, 800 * R)
         # self.MFC1316 = Heater(self.FluidTab)
         # self.MFC1316 = Heater(self.ChamberTab)
         # self.MFC1316.move(400*R, 800*R)
