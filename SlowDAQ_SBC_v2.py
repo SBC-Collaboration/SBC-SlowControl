@@ -29,15 +29,15 @@ VERSION = "v2.1.3"
 #               "font-size: 18px; font-weight: bold;"
 # TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
 #               " font-size: 22px; font-weight: bold;"
-# SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\";" \
-#                     " font-size: 10px;" \
-#                     " font-weight: bold;"
-LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\"; " \
-              "font-size: 12px; font-weight: bold;"
+SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\";" \
+                    " font-size: 10px;" \
+                    " font-weight: bold;"
+# LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\"; " \
+#               "font-size: 12px; font-weight: bold;"
 TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
               " font-size: 14px; font-weight: bold;"
 
-SMALL_LABEL_STYLE = " "
+# SMALL_LABEL_STYLE = " "
 # LABEL_STYLE = " "
 # TITLE_STYLE = " "
 
@@ -596,19 +596,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.PT1332SUB = self.MFC1316SUB.RTD1
         self.MFC1316SUB.RTD1.Label.setText("TT1332")
         self.MFC1316SUB.RTD2.Label.setText("EMPTY")
-
-
-        # # self.MF1316 = Heater(self.ChamberTab)
-        # self.MF1316 = Heater(self.FluidTab)
-        # self.MF1316.move(400 * R, 800 * R)
-        # self.MF1316.Label.setText("MFC1316")
-        # self.MF1316.HeaterSubWindow.setWindowTitle("MFC1316")
-        # self.MF1316SUB = HeaterExpand(self.MF1316.HeaterSubWindow)
-        # self.MF1316SUB.Label.setText("MFC1316")
-        # # self.HT2203.HeaterSubWindow.VL.addWidget(self.HT2203SUB)
-        #
-        # self.MF1316SUB.RTD1.Label.setText("TT1332")
-        # self.MF1316SUB.RTD2.Label.setText("EMPTY")
 
 
         self.PT1332 = Indicator(self.FluidTab)
@@ -5416,7 +5403,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.RTDset3Win.TT2448.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2448"])
                 self.MW.RTDset2Win.TT2410.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2410"])
                 self.MW.RTDset2Win.TT2405.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2405"])
-                # self.MW.MF1316SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6220"])
+                self.MW.MFC1316SUB.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6220"])
                 self.MW.HT6214SUB.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6401"])
                 self.MW.HT6202SUB.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6404"])
                 self.MW.HT6206SUB.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6405"])
