@@ -583,7 +583,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.MFC1316 = Heater(self.ChamberTab)
         self.MFC1316.move(400*R, 800*R)
         self.MFC1316.Label.setText("MFC1316")
-        self.MFC1316.HeaterSubWindow.setWindowTitle("MFC1316")
+        # self.MFC1316.HeaterSubWindow.setWindowTitle("MFC1316")
         # self.MFC1316SUB = HeaterExpand(self.MFC1316.HeaterSubWindow)
         # self.MFC1316SUB.Label.setText("MFC1316")
         # # self.MFC1316.HeaterSubWindow.VL.addWidget(self.MFC1316SUB)
