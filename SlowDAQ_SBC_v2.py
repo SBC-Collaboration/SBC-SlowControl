@@ -390,8 +390,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.RTDSET4Button.move(1780*R, 1150*R)
         self.RTDSET4Button.Button.setText("RTDSET4")
 
-        self.HT6219 = Heater(self.ChamberTab)
-        # self.HT6219 = HeaterExpand(self.ChamberTab)
+        # self.HT6219 = Heater(self.ChamberTab)
+        self.HT6219 = HeaterExpand(self.ChamberTab)
         self.HT6219.move(820*R, 120*R)
         self.HT6219.Label.setText("HT6219")
         # self.HT6219.HeaterSubWindow.setWindowTitle("HT6219")
@@ -402,8 +402,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6219SUB.RTD1.Label.setText("TT6220")
         # self.HT6219SUB.RTD2.Label.setText("EMPTY")
 
-        self.HT6221 = Heater(self.ChamberTab)
-        # self.HT6221 = HeaterExpand(self.ChamberTab)
+        # self.HT6221 = Heater(self.ChamberTab)
+        self.HT6221 = HeaterExpand(self.ChamberTab)
         self.HT6221.move(1250*R, 120*R)
         self.HT6221.Label.setText("HT6221")
         # self.HT6221.HeaterSubWindow.setWindowTitle("HT6221")
@@ -413,8 +413,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6221SUB.RTD1.Label.setText("TT6222")
         # self.HT6221SUB.RTD2.Label.setText("EMPTY")
 
-        self.HT6214 = Heater(self.ChamberTab)
-        # self.HT6214 = HeaterExpand(self.ChamberTab)
+        # self.HT6214 = Heater(self.ChamberTab)
+        self.HT6214 = HeaterExpand(self.ChamberTab)
         self.HT6214.move(1780*R, 145*R)
         self.HT6214.Label.setText("HT6214")
         # self.HT6214.HeaterSubWindow.setWindowTitle("HT6214")
@@ -424,8 +424,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6214SUB.RTD1.Label.setText("TT6213")
         # self.HT6214SUB.RTD2.Label.setText("TT6401")
 
-        self.HT6202 = Heater(self.ChamberTab)
-        # self.HT6202 = HeaterExpand(self.ChamberTab)
+        # self.HT6202 = Heater(self.ChamberTab)
+        self.HT6202 = HeaterExpand(self.ChamberTab)
         self.HT6202.move(1780*R, 485*R)
         self.HT6202.Label.setText("HT6202")
         # self.HT6202.HeaterSubWindow.setWindowTitle("HT6202")
@@ -435,8 +435,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6202SUB.RTD1.Label.setText("TT6203")
         # self.HT6202SUB.RTD2.Label.setText("TT6404")
 
-        self.HT6206 = Heater(self.ChamberTab)
-        # self.HT6206 = HeaterExpand(self.ChamberTab)
+        # self.HT6206 = Heater(self.ChamberTab)
+        self.HT6206 = HeaterExpand(self.ChamberTab)
         self.HT6206.move(1780*R, 585*R)
         self.HT6206.Label.setText("HT6206")
         # self.HT6206.HeaterSubWindow.setWindowTitle("HT6206")
@@ -446,8 +446,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6206SUB.RTD1.Label.setText("TT6207")
         # self.HT6206SUB.RTD2.Label.setText("TT6405")
 
-        self.HT6210 = Heater(self.ChamberTab)
-        # self.HT6210 = HeaterExpand(self.ChamberTab)
+        # self.HT6210 = Heater(self.ChamberTab)
+        self.HT6210 = HeaterExpand(self.ChamberTab)
         self.HT6210.move(1780*R, 685*R)
         self.HT6210.Label.setText("HT6210")
         # self.HT6210.HeaterSubWindow.setWindowTitle("HT6210")
@@ -457,8 +457,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6210SUB.RTD1.Label.setText("TT6211")
         # self.HT6210SUB.RTD2.Label.setText("TT6406")
 
-        self.HT6223 = Heater(self.ChamberTab)
-        # self.HT6223 = HeaterExpand(self.ChamberTab)
+        # self.HT6223 = Heater(self.ChamberTab)
+        self.HT6223 = HeaterExpand(self.ChamberTab)
         self.HT6223.move(1780*R, 785*R)
         self.HT6223.Label.setText("HT6223")
         # self.HT6223.HeaterSubWindow.setWindowTitle("HT6223")
@@ -468,8 +468,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6223SUB.RTD1.Label.setText("TT6407")
         # self.HT6223SUB.RTD2.Label.setText("TT6410")
 
-        self.HT6224 = Heater(self.ChamberTab)
-        # self.HT6224 = HeaterExpand(self.ChamberTab)
+        # self.HT6224 = Heater(self.ChamberTab)
+        self.HT6224 = HeaterExpand(self.ChamberTab)
         self.HT6224.move(1780*R, 885*R)
         self.HT6224.Label.setText("HT6224")
         # self.HT6224.HeaterSubWindow.setWindowTitle("HT6224")
@@ -479,8 +479,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6224SUB.RTD1.Label.setText("TT6408")
         # self.HT6224SUB.RTD2.Label.setText("TT6411")
 
-        self.HT6225 = Heater(self.ChamberTab)
-        # self.HT6225 = HeaterExpand(self.ChamberTab)
+        # self.HT6225 = Heater(self.ChamberTab)
+        self.HT6225 = HeaterExpand(self.ChamberTab)
         self.HT6225.move(1780*R, 985*R)
         self.HT6225.Label.setText("HT6225")
         # self.HT6225.HeaterSubWindow.setWindowTitle("HT6225")
@@ -491,8 +491,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # # self.TT6412 = self.HT6225SUB.RTD2
         # self.HT6225SUB.RTD2.Label.setText("TT6412")
 
-        self.HT2123 = Heater(self.ChamberTab)
-        # self.HT2123 = HeaterExpand(self.ChamberTab)
+        # self.HT2123 = Heater(self.ChamberTab)
+        self.HT2123 = HeaterExpand(self.ChamberTab)
         self.HT2123.move(670*R, 820*R)
         self.HT2123.Label.setText("HT2123")
         # self.HT2123.HeaterSubWindow.setWindowTitle("HT2123")
@@ -502,8 +502,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT2123SUB.RTD1.Label.setText("EMPTY")
         # self.HT2123SUB.RTD2.Label.setText("EMPTY")
 
-        self.HT2124 = Heater(self.ChamberTab)
-        # self.HT2124 = HeaterExpand(self.ChamberTab)
+        # self.HT2124 = Heater(self.ChamberTab)
+        self.HT2124 = HeaterExpand(self.ChamberTab)
         self.HT2124.move(670*R, 820*R)
         self.HT2124.Label.setText("HT2124")
         # self.HT2124.HeaterSubWindow.setWindowTitle("HT2124")
@@ -513,8 +513,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT2124SUB.RTD1.Label.setText("EMPTY")
         # self.HT2124SUB.RTD2.Label.setText("EMPTY")
 
-        self.HT2125 = Heater(self.ChamberTab)
-        # self.HT2125 = HeaterExpand(self.ChamberTab)
+        # self.HT2125 = Heater(self.ChamberTab)
+        self.HT2125 = HeaterExpand(self.ChamberTab)
         self.HT2125.move(1030*R, 730*R)
         self.HT2125.Label.setText("HT2125")
         # self.HT2125.HeaterSubWindow.setWindowTitle("HT2125")
@@ -4553,9 +4553,25 @@ class HeaterExpand(QtWidgets.QWidget):
         self.setMinimumSize(900*R, 500*R)
         self.setSizePolicy(sizePolicy)
 
-        self.GL = QtWidgets.QGridLayout(self)
-        self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        self.GL.setSpacing(3*R)
+        self.VL = QtWidgets.QVBoxLayout(self)
+        self.VL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.VL.setSpacing(5*R)
+
+        self.HL1 = QtWidgets.QHBoxLayout(self)
+        self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.HL1.setSpacing(5*R)
+
+        self.HL2 = QtWidgets.QHBoxLayout(self)
+        self.HL2.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.HL2.setSpacing(5 * R)
+
+        self.HL3 = QtWidgets.QHBoxLayout(self)
+        self.HL3.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.HL3.setSpacing(5 * R)
+
+        self.VL.addLayout(self.HL1)
+        self.VL.addLayout(self.HL2)
+        self.VL.addLayout(self.HL3)
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
@@ -4564,56 +4580,56 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 40*R, 140*R))
         self.Label.setText("Write")
-        self.GL.addWidget(self.Label,0,1)
+        self.HL1.addWidget(self.Label)
 
         self.FBSwitch = Menu(self)
         self.FBSwitch.Label.setText("FBSWITCH")
-        self.GL.addWidget(self.FBSwitch, 0, 3)
+        self.HL1.addWidget(self.FBSwitch)
 
         self.Mode = DoubleButton(self)
         self.Mode.Label.setText("Mode")
-        self.GL.addWidget(self.Mode, 0, 5)
+        self.HL1.addWidget(self.Mode)
 
         self.HISP= SetPoint(self)
         self.HISP.Label.setText("HI SET")
-        self.GL.addWidget(self.HISP, 0,9)
+        self.HL1.addWidget(self.HISP)
 
         self.LOSP = SetPoint(self)
         self.LOSP.Label.setText("LO SET")
-        self.GL.addWidget(self.LOSP, 0, 10)
+        self.HL1.addWidget(self.LOSP)
 
         self.SP = SetPoint(self)
         self.SP.Label.setText("SetPoint")
-        self.GL.addWidget(self.SP, 0, 11)
+        self.HL1.addWidget(self.SP)
 
         self.updatebutton = QtWidgets.QPushButton(self)
         self.updatebutton.setText("Update")
         self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
-        self.GL.addWidget(self.updatebutton, 0, 12)
+        self.HL1.addWidget(self.updatebutton)
 
         self.Interlock = ColorIndicator(self)
         self.Interlock.Label.setText("INTLCK")
-        self.GL.addWidget(self.Interlock, 1, 1)
+        self.HL2.addWidget(self.Interlock)
 
         self.Error = ColorIndicator(self)
         self.Error.Label.setText("ERR")
-        self.GL.addWidget(self.Error, 1, 2)
+        self.HL2.addWidget(self.Error)
 
         self.MANSP = ColorIndicator(self)
         self.MANSP.Label.setText("MAN")
-        self.GL.addWidget(self.MANSP, 1, 3)
+        self.HL2.addWidget(self.MANSP)
 
         self.SAT = ColorIndicator(self)
         self.SAT.Label.setText("SAT")
-        self.GL.addWidget(self.SAT,1,4)
+        self.HL2.addWidget(self.SAT)
 
         self.ModeREAD = Indicator(self)
         self.ModeREAD.Label.setText("Mode")
-        self.GL.addWidget(self.ModeREAD, 1, 5)
+        self.HL2.addWidget(self.ModeREAD)
 
         self.EN = Indicator(self)
         self.EN.Label.setText("ENABLE")
-        self.GL.addWidget(self.EN, 1, 6)
+        self.HL2.addWidget(self.EN)
 
         self.Power = Control(self)
         self.Power.Label.setText("Power")
@@ -4622,32 +4638,128 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Power.Min = 0.
         self.Power.Step = 0.1
         self.Power.Decimals = 1
-        self.GL.addWidget(self.Power, 1, 7)
+        self.HL2.addWidget(self.Power)
 
         self.IN = Indicator(self)
         self.IN.Label.setText("IN")
-        self.GL.addWidget(self.IN, 1, 8)
+        self.HL2.addWidget(self.IN)
 
         self.HIGH = Indicator(self)
         self.HIGH.Label.setText("HIGH")
-        self.GL.addWidget(self.HIGH, 1, 9)
+        self.HL2.addWidget(self.HIGH)
 
         self.LOW = SetPoint(self)
         self.LOW.Label.setText("LOW")
-        self.GL.addWidget(self.LOW, 1, 10)
+        self.HL2.addWidget(self.LOW)
 
         self.SETSP = Indicator(self)
         self.SETSP.Label.setText("SP")
-        self.GL.addWidget(self.SETSP, 1, 11)
+        self.HL2.addWidget(self.SETSP)
 
 
         self.RTD1 = Indicator(self)
         self.RTD1.Label.setText("RTD1")
-        self.GL.addWidget(self.RTD1, 2, 1)
+        self.HL3.addWidget(self.RTD1)
 
         self.RTD2 = Indicator(self)
         self.RTD2.Label.setText("RTD2")
-        self.GL.addWidget(self.RTD2, 2, 2)
+        self.HL3.addWidget(self.RTD2)
+
+        # self.GL = QtWidgets.QGridLayout(self)
+        # self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        # self.GL.setSpacing(3*R)
+        #
+        # self.Label = QtWidgets.QLabel(self)
+        # self.Label.setObjectName("Label")
+        # self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
+        # self.Label.setStyleSheet("QLabel {" +TITLE_STYLE + BORDER_STYLE+"}")
+        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 40*R, 140*R))
+        # self.Label.setText("Write")
+        # self.GL.addWidget(self.Label,0,1)
+        #
+        # self.FBSwitch = Menu(self)
+        # self.FBSwitch.Label.setText("FBSWITCH")
+        # self.GL.addWidget(self.FBSwitch, 0, 3)
+        #
+        # self.Mode = DoubleButton(self)
+        # self.Mode.Label.setText("Mode")
+        # self.GL.addWidget(self.Mode, 0, 5)
+        #
+        # self.HISP= SetPoint(self)
+        # self.HISP.Label.setText("HI SET")
+        # self.GL.addWidget(self.HISP, 0,9)
+        #
+        # self.LOSP = SetPoint(self)
+        # self.LOSP.Label.setText("LO SET")
+        # self.GL.addWidget(self.LOSP, 0, 10)
+        #
+        # self.SP = SetPoint(self)
+        # self.SP.Label.setText("SetPoint")
+        # self.GL.addWidget(self.SP, 0, 11)
+        #
+        # self.updatebutton = QtWidgets.QPushButton(self)
+        # self.updatebutton.setText("Update")
+        # self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        # self.GL.addWidget(self.updatebutton, 0, 12)
+        #
+        # self.Interlock = ColorIndicator(self)
+        # self.Interlock.Label.setText("INTLCK")
+        # self.GL.addWidget(self.Interlock, 1, 1)
+        #
+        # self.Error = ColorIndicator(self)
+        # self.Error.Label.setText("ERR")
+        # self.GL.addWidget(self.Error, 1, 2)
+        #
+        # self.MANSP = ColorIndicator(self)
+        # self.MANSP.Label.setText("MAN")
+        # self.GL.addWidget(self.MANSP, 1, 3)
+        #
+        # self.SAT = ColorIndicator(self)
+        # self.SAT.Label.setText("SAT")
+        # self.GL.addWidget(self.SAT,1,4)
+        #
+        # self.ModeREAD = Indicator(self)
+        # self.ModeREAD.Label.setText("Mode")
+        # self.GL.addWidget(self.ModeREAD, 1, 5)
+        #
+        # self.EN = Indicator(self)
+        # self.EN.Label.setText("ENABLE")
+        # self.GL.addWidget(self.EN, 1, 6)
+        #
+        # self.Power = Control(self)
+        # self.Power.Label.setText("Power")
+        # self.Power.SetUnit(" %")
+        # self.Power.Max = 100.
+        # self.Power.Min = 0.
+        # self.Power.Step = 0.1
+        # self.Power.Decimals = 1
+        # self.GL.addWidget(self.Power, 1, 7)
+        #
+        # self.IN = Indicator(self)
+        # self.IN.Label.setText("IN")
+        # self.GL.addWidget(self.IN, 1, 8)
+        #
+        # self.HIGH = Indicator(self)
+        # self.HIGH.Label.setText("HIGH")
+        # self.GL.addWidget(self.HIGH, 1, 9)
+        #
+        # self.LOW = SetPoint(self)
+        # self.LOW.Label.setText("LOW")
+        # self.GL.addWidget(self.LOW, 1, 10)
+        #
+        # self.SETSP = Indicator(self)
+        # self.SETSP.Label.setText("SP")
+        # self.GL.addWidget(self.SETSP, 1, 11)
+        #
+        #
+        # self.RTD1 = Indicator(self)
+        # self.RTD1.Label.setText("RTD1")
+        # self.GL.addWidget(self.RTD1, 2, 1)
+        #
+        # self.RTD2 = Indicator(self)
+        # self.RTD2.Label.setText("RTD2")
+        # self.GL.addWidget(self.RTD2, 2, 2)
 
 
 # Defines a reusable layout containing widgets
