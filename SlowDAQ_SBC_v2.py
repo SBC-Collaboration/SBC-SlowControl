@@ -4361,7 +4361,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.VL.addLayout(self.HL2)
         self.VL.addLayout(self.HL3)
 
-        self.Label = QtWidgets.QLabel(self)
+        self.Label = QtWidgets.QLabel()
         self.Label.setObjectName("Label")
         self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
         self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
@@ -4370,7 +4370,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.Label.setText("Write")
         self.HL1.addWidget(self.Label)
 
-        self.FBSwitch = Menu(self)
+        self.FBSwitch = Menu()
         self.FBSwitch.Label.setText("FBSWITCH")
         self.HL1.addWidget(self.FBSwitch)
 
