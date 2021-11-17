@@ -4576,6 +4576,7 @@ class HeaterExpand(QtWidgets.QWidget):
 
         self.updatebutton = QtWidgets.QPushButton(self)
         self.updatebutton.setText("Update")
+        self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 140 * R))
         self.GL.addWidget(self.updatebutton, 0, 12)
 
         self.Interlock = ColorIndicator(self)
