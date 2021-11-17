@@ -40,7 +40,7 @@ LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-fami
 TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
               " font-size: 14px; font-weight: bold;"
 
-# LABEL_STYLE = " "
+
 
 
 ADMIN_TIMER = 30000
@@ -49,7 +49,7 @@ ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bd
                  "f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f1367668" \
                  "31c12bff0da3a2314ca2266"
 BORDER_STYLE = " border-radius: 2px; border-color: black;"
-# BORDER_STYLE = " "
+
 R=0.6 # Resolution settings
 
 
@@ -390,7 +390,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.RTDSET4Button.move(1780*R, 1150*R)
         self.RTDSET4Button.Button.setText("RTDSET4")
 
-        self.HT6219 = Heater(self.ChamberTab)
+        # self.HT6219 = Heater(self.ChamberTab)
+        self.HT6219 = HeaterExpand(self.ChamberTab)
         self.HT6219.move(820*R, 120*R)
         self.HT6219.Label.setText("HT6219")
         self.HT6219.HeaterSubWindow.setWindowTitle("HT6219")
@@ -401,7 +402,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6219SUB.RTD1.Label.setText("TT6220")
         # self.HT6219SUB.RTD2.Label.setText("EMPTY")
 
-        self.HT6221 = Heater(self.ChamberTab)
+        # self.HT6221 = Heater(self.ChamberTab)
+        self.HT6221 = HeaterExpand(self.ChamberTab)
         self.HT6221.move(1250*R, 120*R)
         self.HT6221.Label.setText("HT6221")
         self.HT6221.HeaterSubWindow.setWindowTitle("HT6221")
@@ -411,7 +413,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6221SUB.RTD1.Label.setText("TT6222")
         # self.HT6221SUB.RTD2.Label.setText("EMPTY")
 
-        self.HT6214 = Heater(self.ChamberTab)
+        # self.HT6214 = Heater(self.ChamberTab)
+        self.HT6214 = HeaterExpand(self.ChamberTab)
         self.HT6214.move(1780*R, 145*R)
         self.HT6214.Label.setText("HT6214")
         self.HT6214.HeaterSubWindow.setWindowTitle("HT6214")
@@ -421,7 +424,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6214SUB.RTD1.Label.setText("TT6213")
         # self.HT6214SUB.RTD2.Label.setText("TT6401")
 
-        self.HT6202 = Heater(self.ChamberTab)
+        # self.HT6202 = Heater(self.ChamberTab)
+        self.HT6202 = HeaterExpand(self.ChamberTab)
         self.HT6202.move(1780*R, 485*R)
         self.HT6202.Label.setText("HT6202")
         self.HT6202.HeaterSubWindow.setWindowTitle("HT6202")
@@ -431,7 +435,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6202SUB.RTD1.Label.setText("TT6203")
         # self.HT6202SUB.RTD2.Label.setText("TT6404")
 
-        self.HT6206 = Heater(self.ChamberTab)
+        # self.HT6206 = Heater(self.ChamberTab)
+        self.HT6206 = HeaterExpand(self.ChamberTab)
         self.HT6206.move(1780*R, 585*R)
         self.HT6206.Label.setText("HT6206")
         self.HT6206.HeaterSubWindow.setWindowTitle("HT6206")
@@ -441,7 +446,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6206SUB.RTD1.Label.setText("TT6207")
         # self.HT6206SUB.RTD2.Label.setText("TT6405")
 
-        self.HT6210 = Heater(self.ChamberTab)
+        # self.HT6210 = Heater(self.ChamberTab)
+        self.HT6210 = HeaterExpand(self.ChamberTab)
         self.HT6210.move(1780*R, 685*R)
         self.HT6210.Label.setText("HT6210")
         self.HT6210.HeaterSubWindow.setWindowTitle("HT6210")
@@ -451,7 +457,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6210SUB.RTD1.Label.setText("TT6211")
         # self.HT6210SUB.RTD2.Label.setText("TT6406")
 
-        self.HT6223 = Heater(self.ChamberTab)
+        # self.HT6223 = Heater(self.ChamberTab)
+        self.HT6223 = HeaterExpand(self.ChamberTab)
         self.HT6223.move(1780*R, 785*R)
         self.HT6223.Label.setText("HT6223")
         self.HT6223.HeaterSubWindow.setWindowTitle("HT6223")
@@ -461,7 +468,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6223SUB.RTD1.Label.setText("TT6407")
         # self.HT6223SUB.RTD2.Label.setText("TT6410")
 
-        self.HT6224 = Heater(self.ChamberTab)
+        # self.HT6224 = Heater(self.ChamberTab)
+        self.HT6224 = HeaterExpand(self.ChamberTab)
         self.HT6224.move(1780*R, 885*R)
         self.HT6224.Label.setText("HT6224")
         # self.HT6224.HeaterSubWindow.setWindowTitle("HT6224")
@@ -471,7 +479,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT6224SUB.RTD1.Label.setText("TT6408")
         # self.HT6224SUB.RTD2.Label.setText("TT6411")
 
-        self.HT6225 = Heater(self.ChamberTab)
+        # self.HT6225 = Heater(self.ChamberTab)
+        self.HT6225 = HeaterExpand(self.ChamberTab)
         self.HT6225.move(1780*R, 985*R)
         self.HT6225.Label.setText("HT6225")
         self.HT6225.HeaterSubWindow.setWindowTitle("HT6225")
@@ -482,7 +491,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # # self.TT6412 = self.HT6225SUB.RTD2
         # self.HT6225SUB.RTD2.Label.setText("TT6412")
 
-        self.HT2123 = Heater(self.ChamberTab)
+        # self.HT2123 = Heater(self.ChamberTab)
+        self.HT2123 = HeaterExpand(self.ChamberTab)
         self.HT2123.move(670*R, 820*R)
         self.HT2123.Label.setText("HT2123")
         self.HT2123.HeaterSubWindow.setWindowTitle("HT2123")
@@ -492,7 +502,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT2123SUB.RTD1.Label.setText("EMPTY")
         # self.HT2123SUB.RTD2.Label.setText("EMPTY")
 
-        self.HT2124 = Heater(self.ChamberTab)
+        # self.HT2124 = Heater(self.ChamberTab)
+        self.HT2124 = HeaterExpand(self.ChamberTab)
         self.HT2124.move(670*R, 820*R)
         self.HT2124.Label.setText("HT2124")
         self.HT2124.HeaterSubWindow.setWindowTitle("HT2124")
@@ -502,7 +513,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT2124SUB.RTD1.Label.setText("EMPTY")
         # self.HT2124SUB.RTD2.Label.setText("EMPTY")
 
-        self.HT2125 = Heater(self.ChamberTab)
+        # self.HT2125 = Heater(self.ChamberTab)
+        self.HT2125 = HeaterExpand(self.ChamberTab)
         self.HT2125.move(1030*R, 730*R)
         self.HT2125.Label.setText("HT2125")
         self.HT2125.HeaterSubWindow.setWindowTitle("HT2125")
