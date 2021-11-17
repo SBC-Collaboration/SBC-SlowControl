@@ -1049,6 +1049,10 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_a=10
         self.para_b=0
         self.rate_b=10
+        # c is for valve status
+        # self.para_c = 0
+        # self.rate_c = 10
+        self.Valve_buffer=self.PLC.Valve_OUT_ini
         print("begin updating Database")
 
     @QtCore.Slot()
@@ -1071,6 +1075,20 @@ class UpdateDataBase(QtCore.QObject):
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
                     # print("write pressure transducer")
                     self.para_b=0
+
+                # for key in self.PLC.Valve_OUT:
+                #     if self.PLC.Valve_OUT[key] != self.Valve_buffer[key]:
+                #         self.db.insert_data_into_datastorage(key, self.dt, self.Valve_buffer[key])
+                #         self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
+                #     else:
+                #         if self.para_c >= self.rate_c:
+                #             self.db.insert_data_into_datastorage(key, self.dt, self.Valve_buffer[key])
+                #             self.para_c = 0
+                #         else:
+                #             pass
+
+
+
 
                 # print("a",self.para_a,"b",self.para_b )
 
@@ -1435,6 +1453,9 @@ class Update(QtCore.QObject):
         self.UpPLC.moveToThread(self.PLCUpdateThread)
         self.PLCUpdateThread.started.connect(self.UpPLC.run)
         self.PLCUpdateThread.start()
+
+        # wait for PLC initialization finished
+        time.sleep(2)
 
         # Update database on another thread
         self.DataUpdateThread = QtCore.QThread()
