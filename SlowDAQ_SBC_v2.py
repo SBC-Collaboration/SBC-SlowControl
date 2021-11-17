@@ -4304,11 +4304,11 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         super(HeaterSubWindow, self).__init__(parent)
 
         self.resize(1100*R, 90*R)
-        self.setMinimumSize(1600*R, 400*R)
+        self.setMinimumSize(1600*R, 600*R)
         self.setWindowTitle("Detailed Information")
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1600*R, 400*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1600*R, 600*R))
 
         self.VL = QtWidgets.QVBoxLayout()
         # self.VL = QtWidgets.QVBoxLayout(self)
