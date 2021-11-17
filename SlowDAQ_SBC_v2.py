@@ -4319,7 +4319,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.setMinimumSize(1200*R, 600*R)
         self.setWindowTitle("Detailed Information")
 
-        self.Widget = QtWidgets.QWidget(self)
+        self.Widget = QtWidgets.QWidget()
         self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 600*R))
 
         # self.VL = QtWidgets.QVBoxLayout()
@@ -4336,23 +4336,23 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         # self.HL.setAlignment(QtCore.Qt.AlignCenter)
         # self.VL.addLayout(self.HL)
 
-        self.VL = QtWidgets.QVBoxLayout(self)
+        self.VL = QtWidgets.QVBoxLayout()
         self.VL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
         self.VL.setAlignment(QtCore.Qt.AlignCenter)
         self.VL.setSpacing(5 * R)
         self.Widget.setLayout(self.VL)
 
-        self.HL1 = QtWidgets.QHBoxLayout(self)
+        self.HL1 = QtWidgets.QHBoxLayout()
         self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
         self.HL1.setAlignment(QtCore.Qt.AlignCenter)
         self.HL1.setSpacing(5 * R)
 
-        self.HL2 = QtWidgets.QHBoxLayout(self)
+        self.HL2 = QtWidgets.QHBoxLayout()
         self.HL2.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
         self.HL2.setAlignment(QtCore.Qt.AlignCenter)
         self.HL2.setSpacing(5 * R)
 
-        self.HL3 = QtWidgets.QHBoxLayout(self)
+        self.HL3 = QtWidgets.QHBoxLayout()
         self.HL3.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
         self.HL3.setAlignment(QtCore.Qt.AlignCenter)
         self.HL3.setSpacing(5 * R)
