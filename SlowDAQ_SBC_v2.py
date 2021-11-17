@@ -43,17 +43,14 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-fam
 # LABEL_STYLE = " "
 
 
-
-
 ADMIN_TIMER = 30000
 PLOTTING_SCALE = 0.66
 ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bdf133e9e2c98ad4eafc622f4" \
                  "f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f1367668" \
                  "31c12bff0da3a2314ca2266"
-# BORDER_STYLE = " border-radius: 2px; border-color: black;"
-BORDER_STYLE = " "
+BORDER_STYLE = " border-radius: 2px; border-color: black;"
+# BORDER_STYLE = " "
 R=0.6 # Resolution settings
-
 
 
 sys._excepthook = sys.excepthook
@@ -4559,51 +4556,51 @@ class HeaterExpand(QtWidgets.QWidget):
 
         self.FBSwitch = Menu(self)
         self.FBSwitch.Label.setText("FBSWITCH")
-        self.GL.addWidget(self.FBSwitch, 0, 7)
+        self.GL.addWidget(self.FBSwitch, 0, 3)
 
         self.Mode = DoubleButton(self)
         self.Mode.Label.setText("Mode")
-        self.GL.addWidget(self.Mode, 0, 11)
+        self.GL.addWidget(self.Mode, 0, 5)
 
         self.HISP= SetPoint(self)
         self.HISP.Label.setText("HI SET")
-        self.GL.addWidget(self.HISP, 0,14)
+        self.GL.addWidget(self.HISP, 0,8)
 
         self.LOSP = SetPoint(self)
         self.LOSP.Label.setText("LO SET")
-        self.GL.addWidget(self.LOSP, 0, 16)
+        self.GL.addWidget(self.LOSP, 0, 10)
 
         self.SP = SetPoint(self)
         self.SP.Label.setText("SetPoint")
-        self.GL.addWidget(self.SP, 0, 18)
+        self.GL.addWidget(self.SP, 0, 11)
 
         self.updatebutton = QtWidgets.QPushButton(self)
         self.updatebutton.setText("Update")
-        self.GL.addWidget(self.updatebutton, 0, 20)
+        self.GL.addWidget(self.updatebutton, 0, 12)
 
         self.Interlock = ColorIndicator(self)
         self.Interlock.Label.setText("INTLCK")
-        self.GL.addWidget(self.Interlock, 2, 1)
+        self.GL.addWidget(self.Interlock, 1, 1)
 
         self.Error = ColorIndicator(self)
         self.Error.Label.setText("ERR")
-        self.GL.addWidget(self.Error, 2, 4)
+        self.GL.addWidget(self.Error, 1, 2)
 
         self.MANSP = ColorIndicator(self)
         self.MANSP.Label.setText("MAN")
-        self.GL.addWidget(self.MANSP, 2, 6)
+        self.GL.addWidget(self.MANSP, 1, 3)
 
         self.SAT = ColorIndicator(self)
         self.SAT.Label.setText("SAT")
-        self.GL.addWidget(self.SAT,2,8)
+        self.GL.addWidget(self.SAT,1,4)
 
         self.ModeREAD = Indicator(self)
         self.ModeREAD.Label.setText("Mode")
-        self.GL.addWidget(self.ModeREAD, 2, 10)
+        self.GL.addWidget(self.ModeREAD, 1, 5)
 
         self.EN = Indicator(self)
         self.EN.Label.setText("ENABLE")
-        self.GL.addWidget(self.EN, 2, 12)
+        self.GL.addWidget(self.EN, 1, 6)
 
         self.Power = Control(self)
         self.Power.Label.setText("Power")
@@ -4612,32 +4609,32 @@ class HeaterExpand(QtWidgets.QWidget):
         self.Power.Min = 0.
         self.Power.Step = 0.1
         self.Power.Decimals = 1
-        self.GL.addWidget(self.Power, 2, 14)
+        self.GL.addWidget(self.Power, 1, 7)
 
         self.IN = Indicator(self)
         self.IN.Label.setText("IN")
-        self.GL.addWidget(self.IN, 2, 16)
+        self.GL.addWidget(self.IN, 1, 8)
 
         self.HIGH = Indicator(self)
         self.HIGH.Label.setText("HIGH")
-        self.GL.addWidget(self.HIGH, 2, 18)
+        self.GL.addWidget(self.HIGH, 1, 9)
 
         self.LOW = SetPoint(self)
         self.LOW.Label.setText("LOW")
-        self.GL.addWidget(self.LOW, 2, 20)
+        self.GL.addWidget(self.LOW, 1, 10)
 
         self.SETSP = Indicator(self)
         self.SETSP.Label.setText("SP")
-        self.GL.addWidget(self.SETSP, 2, 22)
+        self.GL.addWidget(self.SETSP, 1, 11)
 
 
         self.RTD1 = Indicator(self)
         self.RTD1.Label.setText("RTD1")
-        self.GL.addWidget(self.RTD1, 4, 2)
+        self.GL.addWidget(self.RTD1, 2, 1)
 
         self.RTD2 = Indicator(self)
         self.RTD2.Label.setText("RTD2")
-        self.GL.addWidget(self.RTD2, 4, 4)
+        self.GL.addWidget(self.RTD2, 2, 2)
 
 
 # Defines a reusable layout containing widgets
