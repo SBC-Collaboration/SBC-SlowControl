@@ -4304,7 +4304,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         super(HeaterSubWindow, self).__init__(parent)
 
         self.resize(1100*R, 90*R)
-        self.setMinimumSize(1100*R, 120*R)
+        self.setMinimumSize(1400*R, 400*R)
         self.setWindowTitle("Detailed Information")
 
         self.Widget = QtWidgets.QWidget(self)
