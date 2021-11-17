@@ -4537,8 +4537,8 @@ class HeaterExpand(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("HeaterExpand")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 1400*R, 400*R))
-        self.setMinimumSize(1200*R, 200*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 500*R))
+        self.setMinimumSize(1500*R, 500*R)
         self.setSizePolicy(sizePolicy)
 
         self.GL = QtWidgets.QGridLayout(self)
@@ -4576,7 +4576,7 @@ class HeaterExpand(QtWidgets.QWidget):
 
         self.updatebutton = QtWidgets.QPushButton(self)
         self.updatebutton.setText("Update")
-        self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 140 * R))
+        self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
         self.GL.addWidget(self.updatebutton, 0, 12)
 
         self.Interlock = ColorIndicator(self)
