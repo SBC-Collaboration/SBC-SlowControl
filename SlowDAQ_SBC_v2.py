@@ -4308,7 +4308,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("Detailed Information")
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1100*R, 120*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1400*R, 400*R))
 
         self.VL = QtWidgets.QVBoxLayout()
         # self.VL = QtWidgets.QVBoxLayout(self)
@@ -4537,8 +4537,8 @@ class HeaterExpand(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("HeaterExpand")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 500*R))
-        self.setMinimumSize(1500*R, 500*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 900*R, 500*R))
+        self.setMinimumSize(900*R, 500*R)
         self.setSizePolicy(sizePolicy)
 
         self.GL = QtWidgets.QGridLayout(self)
