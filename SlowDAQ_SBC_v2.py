@@ -4319,8 +4319,8 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.setMinimumSize(1200*R, 600*R)
         self.setWindowTitle("Detailed Information")
 
-        # self.Widget = QtWidgets.QWidget()
-        # self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 600*R))
+        self.Widget = QtWidgets.QWidget()
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 600*R))
 
         # self.VL = QtWidgets.QVBoxLayout()
         # # self.VL = QtWidgets.QVBoxLayout(self)
@@ -4336,11 +4336,11 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         # self.HL.setAlignment(QtCore.Qt.AlignCenter)
         # self.VL.addLayout(self.HL)
 
-        self.VL = QtWidgets.QVBoxLayout(self)
+        self.VL = QtWidgets.QVBoxLayout()
         self.VL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
         self.VL.setAlignment(QtCore.Qt.AlignCenter)
         self.VL.setSpacing(5 * R)
-        # self.Widget.setLayout(self.VL)
+        self.Widget.setLayout(self.VL)
 
         self.HL1 = QtWidgets.QHBoxLayout()
         self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
@@ -4357,9 +4357,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.HL3.setAlignment(QtCore.Qt.AlignCenter)
         self.HL3.setSpacing(5 * R)
 
-        self.VL.addLayout(self.HL1)
-        self.VL.addLayout(self.HL2)
-        self.VL.addLayout(self.HL3)
+
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
@@ -4451,6 +4449,10 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.RTD2 = Indicator(self)
         self.RTD2.Label.setText("RTD2")
         self.HL3.addWidget(self.RTD2)
+
+        self.VL.addLayout(self.HL1)
+        self.VL.addLayout(self.HL2)
+        self.VL.addLayout(self.HL3)
 
 
 # Define a function tab that shows the status of the widgets
