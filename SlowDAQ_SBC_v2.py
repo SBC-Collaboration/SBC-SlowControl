@@ -4564,7 +4564,7 @@ class HeaterExpand(QtWidgets.QWidget):
 
         self.HISP= SetPoint(self)
         self.HISP.Label.setText("HI SET")
-        self.GL.addWidget(self.HISP, 0,8)
+        self.GL.addWidget(self.HISP, 0,9)
 
         self.LOSP = SetPoint(self)
         self.LOSP.Label.setText("LO SET")
