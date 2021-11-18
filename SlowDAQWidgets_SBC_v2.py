@@ -30,10 +30,12 @@ C_ORANGE = "background-color: rgb(255,132,27);"
 #               "\"Calibri\"; font-size: 22px; font-weight: bold;"
 
 #this title style is for SBC slowcontrol machine
-TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
-              "\"Calibri\"; font-size: 14px; font-weight: bold;"
-BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
-               " border-color: black;"
+# TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
+#               "\"Calibri\"; font-size: 14px; font-weight: bold;"
+# BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
+#                " border-color: black;"
+TITLE_STYLE =  " "
+BORDER_STYLE = " "
 
 
 

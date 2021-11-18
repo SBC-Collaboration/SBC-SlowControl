@@ -32,13 +32,22 @@ VERSION = "v2.1.3"
 #               " font-size: 22px; font-weight: bold;"
 
 # Settings adapted to sbc slowcontrol machine
-SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\";" \
-                    " font-size: 10px;" \
-                    " font-weight: bold;"
-LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\"; " \
-              "font-size: 12px; font-weight: bold;"
-TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
-              " font-size: 14px; font-weight: bold;"
+# SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\";" \
+#                     " font-size: 10px;" \
+#                     " font-weight: bold;"
+# LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\"; " \
+#               "font-size: 12px; font-weight: bold;"
+# TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
+#               " font-size: 14px; font-weight: bold;"
+#
+# BORDER_STYLE = " border-radius: 2px; border-color: black;"
+
+SMALL_LABEL_STYLE = " "
+
+LABEL_STYLE = " "
+TITLE_STYLE = " "
+
+BORDER_STYLE = "  "
 
 
 
@@ -48,7 +57,7 @@ PLOTTING_SCALE = 0.66
 ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bdf133e9e2c98ad4eafc622f4" \
                  "f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f1367668" \
                  "31c12bff0da3a2314ca2266"
-BORDER_STYLE = " border-radius: 2px; border-color: black;"
+
 
 R=0.6 # Resolution settings
 
