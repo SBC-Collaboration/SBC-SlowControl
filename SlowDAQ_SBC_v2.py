@@ -5866,7 +5866,7 @@ if __name__ == "__main__":
     # MW = MainWindow()
     MW = HeaterSubWindow()
     # recover data
-    MW.Recover()
+    # MW.Recover()
     if platform.system() == "Linux":
         MW.show()
         MW.showMinimized()
