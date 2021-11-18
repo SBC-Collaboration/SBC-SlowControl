@@ -5915,9 +5915,9 @@ if __name__ == "__main__":
 
     App = QtWidgets.QApplication(sys.argv)
 
-    # MW = MainWindow()
+    MW = MainWindow()
 
-    MW = HeaterSubWindow()
+    # MW = HeaterSubWindow()
     # recover data
     # MW.Recover()
     if platform.system() == "Linux":
