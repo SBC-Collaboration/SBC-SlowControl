@@ -707,15 +707,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV3322.Label.setText("SV3322")
         self.SV3322.move(1000*R, 780*R)
 
-        self.SERVO3321 = AOMultiLoop(self.HydraulicTab)
-        self.SERVO3321.move(1200*R, 550*R)
-        self.SERVO3321.Label.setText("SERVO3321")
-        self.SERVO3321.HeaterSubWindow.setWindowTitle("SERVO3321")
-        self.SERVO3321SUB = AOMutiLoopExpand(self.SERVO3321.HeaterSubWindow)
-        self.SERVO3321SUB.Label.setText("SERVO3321")
-        self.SERVO3321.HeaterSubWindow.VL.addWidget(self.SERVO3321SUB)
-        self.SERVO3321SUB.RTD1.Label.setText("EMPTY")
-        self.SERVO3321SUB.RTD2.Label.setText("EMPTY")
+        # self.SERVO3321 = AOMultiLoop(self.HydraulicTab)
+        # self.SERVO3321.move(1200*R, 550*R)
+        # self.SERVO3321.Label.setText("SERVO3321")
+        # self.SERVO3321.HeaterSubWindow.setWindowTitle("SERVO3321")
+        # self.SERVO3321SUB = AOMutiLoopExpand(self.SERVO3321.HeaterSubWindow)
+        # self.SERVO3321SUB.Label.setText("SERVO3321")
+        # self.SERVO3321.HeaterSubWindow.VL.addWidget(self.SERVO3321SUB)
+        # self.SERVO3321SUB.RTD1.Label.setText("EMPTY")
+        # self.SERVO3321SUB.RTD2.Label.setText("EMPTY")
 
         self.SV3325 = Valve(self.HydraulicTab)
         self.SV3325.Label.setText("SV3325")
@@ -4319,125 +4319,168 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.setMinimumSize(1200*R, 600*R)
         self.setWindowTitle("Detailed Information")
 
-        # self.Widget = QtWidgets.QWidget()
-        # self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 600*R))
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 600*R))
 
-        self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        self.VL.setAlignment(QtCore.Qt.AlignCenter)
-        self.VL.setSpacing(5 * R)
-        # self.Widget.setLayout(self.VL)
+        # Groupboxs for alarm/PT/TT
 
-        self.HL1 = QtWidgets.QHBoxLayout()
-        self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        self.HL1.setAlignment(QtCore.Qt.AlignCenter)
-        self.HL1.setSpacing(5 * R)
+        self.GLWR = QtWidgets.QHBoxLayout()
+        self.GLWR.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLWR.setSpacing(20 * R)
+        self.GLWR.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.HL2 = QtWidgets.QHBoxLayout()
-        self.HL2.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        self.HL2.setAlignment(QtCore.Qt.AlignCenter)
-        self.HL2.setSpacing(5 * R)
+        self.GroupWR = QtWidgets.QGroupBox(self.Widget)
+        self.GroupWR.setTitle("Write")
+        self.GroupWR.setLayout(self.GLWR)
+        self.GroupWR.move(0 * R, 0 * R)
 
-        self.HL3 = QtWidgets.QHBoxLayout()
-        self.HL3.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        self.HL3.setAlignment(QtCore.Qt.AlignCenter)
-        self.HL3.setSpacing(5 * R)
+        self.GLRD = QtWidgets.QHBoxLayout()
+        self.GLRD.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLRD.setSpacing(20 * R)
+        self.GLRD.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.VL.addLayout(self.HL1)
-        self.VL.addLayout(self.HL2)
-        self.VL.addLayout(self.HL3)
+        self.GroupRD = QtWidgets.QGroupBox(self.Widget)
+        self.GroupRD.setTitle("Read")
+        self.GroupRD.setLayout(self.GLRD)
+        self.GroupRD.move(0 * R, 150 * R)
 
-        self.Label = QtWidgets.QLabel(self)
-        self.Label.setObjectName("Label")
-        self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
-        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
-        self.Label.setAlignment(QtCore.Qt.AlignCenter)
-        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 140 * R))
-        self.Label.setText("Write")
-        self.HL1.addWidget(self.Label)
+        # self.Label = QtWidgets.QLabel(self.GroupWR)
+        # self.Label.setObjectName("Label")
+        # self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
+        # self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
+        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 140 * R))
+        # self.Label.setText("Write")
+        # self.GLWR.addWidget(self.Label)
 
-        self.FBSwitch = Menu(self)
+
+
+
+
+
+
+        # self.resize(1200*R, 600*R)
+        # self.setMinimumSize(1200*R, 600*R)
+        # self.setWindowTitle("Detailed Information")
+        #
+        # # self.Widget = QtWidgets.QWidget(self)
+        # # self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 600*R))
+        #
+        # self.VL = QtWidgets.QVBoxLayout(self)
+        # self.VL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        # self.VL.setAlignment(QtCore.Qt.AlignCenter)
+        # self.VL.setSpacing(5 * R)
+        # # self.Widget.setLayout(self.VL)
+        #
+        # self.HL1 = QtWidgets.QHBoxLayout()
+        # self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        # self.HL1.setAlignment(QtCore.Qt.AlignCenter)
+        # self.HL1.setSpacing(5 * R)
+        #
+        # self.HL2 = QtWidgets.QHBoxLayout()
+        # self.HL2.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        # self.HL2.setAlignment(QtCore.Qt.AlignCenter)
+        # self.HL2.setSpacing(5 * R)
+        #
+        # self.HL3 = QtWidgets.QHBoxLayout()
+        # self.HL3.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        # self.HL3.setAlignment(QtCore.Qt.AlignCenter)
+        # self.HL3.setSpacing(5 * R)
+        #
+        # self.VL.addLayout(self.HL1)
+        # self.VL.addLayout(self.HL2)
+        # self.VL.addLayout(self.HL3)
+        #
+        # self.Label = QtWidgets.QLabel(self)
+        # self.Label.setObjectName("Label")
+        # self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
+        # self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
+        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 140 * R))
+        # self.Label.setText("Write")
+        # self.HL1.addWidget(self.Label)
+        #
+        self.FBSwitch = Menu(self.GroupWR)
         self.FBSwitch.Label.setText("FBSWITCH")
-        self.HL1.addWidget(self.FBSwitch)
+        self.GLWR.addWidget(self.FBSwitch)
 
-        self.Mode = DoubleButton(self)
+        self.Mode = DoubleButton(self.GroupWR)
         self.Mode.Label.setText("Mode")
-        self.HL1.addWidget(self.Mode)
+        self.GLWR.addWidget(self.Mode)
 
-        self.HISP = SetPoint(self)
+        self.HISP = SetPoint(self.GroupWR)
         self.HISP.Label.setText("HI SET")
-        self.HL1.addWidget(self.HISP)
+        self.GLWR.addWidget(self.HISP)
 
-        self.LOSP = SetPoint(self)
+        self.LOSP = SetPoint(self.GroupWR)
         self.LOSP.Label.setText("LO SET")
-        self.HL1.addWidget(self.LOSP)
+        self.GLWR.addWidget(self.LOSP)
 
-        self.SP = SetPoint(self)
+        self.SP = SetPoint(self.GroupWR)
         self.SP.Label.setText("SetPoint")
-        self.HL1.addWidget(self.SP)
+        self.GLWR.addWidget(self.SP)
 
-        self.updatebutton = QtWidgets.QPushButton(self)
+        self.updatebutton = QtWidgets.QPushButton(self.GroupWR)
         self.updatebutton.setText("Update")
         self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
-        self.HL1.addWidget(self.updatebutton)
+        self.GLWR.addWidget(self.updatebutton)
 
-        self.Interlock = ColorIndicator(self)
+        self.Interlock = ColorIndicator(self.GroupRD)
         self.Interlock.Label.setText("INTLCK")
-        self.HL2.addWidget(self.Interlock)
+        self.GLRD.addWidget(self.Interlock)
 
-        self.Error = ColorIndicator(self)
+        self.Error = ColorIndicator(self.GroupRD)
         self.Error.Label.setText("ERR")
-        self.HL2.addWidget(self.Error)
+        self.GLRD.addWidget(self.Error)
 
-        self.MANSP = ColorIndicator(self)
+        self.MANSP = ColorIndicator(self.GroupRD)
         self.MANSP.Label.setText("MAN")
-        self.HL2.addWidget(self.MANSP)
+        self.GLRD.addWidget(self.MANSP)
 
-        self.SAT = ColorIndicator(self)
+        self.SAT = ColorIndicator(self.GroupRD)
         self.SAT.Label.setText("SAT")
-        self.HL2.addWidget(self.SAT)
+        self.GLRD.addWidget(self.SAT)
 
-        self.ModeREAD = Indicator(self)
+        self.ModeREAD = Indicator(self.GroupRD)
         self.ModeREAD.Label.setText("Mode")
-        self.HL2.addWidget(self.ModeREAD)
+        self.GLRD.addWidget(self.ModeREAD)
 
-        self.EN = Indicator(self)
+        self.EN = Indicator(self.GroupRD)
         self.EN.Label.setText("ENABLE")
-        self.HL2.addWidget(self.EN)
+        self.GLRD.addWidget(self.EN)
 
-        self.Power = Control(self)
+        self.Power = Control(self.GroupRD)
         self.Power.Label.setText("Power")
         self.Power.SetUnit(" %")
         self.Power.Max = 100.
         self.Power.Min = 0.
         self.Power.Step = 0.1
         self.Power.Decimals = 1
-        self.HL2.addWidget(self.Power)
+        self.GLRD.addWidget(self.Power)
 
-        self.IN = Indicator(self)
+        self.IN = Indicator(self.GroupRD)
         self.IN.Label.setText("IN")
-        self.HL2.addWidget(self.IN)
+        self.GLRD.addWidget(self.IN)
 
-        self.HIGH = Indicator(self)
+        self.HIGH = Indicator(self.GroupRD)
         self.HIGH.Label.setText("HIGH")
-        self.HL2.addWidget(self.HIGH)
+        self.GLRD.addWidget(self.HIGH)
 
-        self.LOW = SetPoint(self)
+        self.LOW = SetPoint(self.GroupRD)
         self.LOW.Label.setText("LOW")
-        self.HL2.addWidget(self.LOW)
+        self.GLRD.addWidget(self.LOW)
 
-        self.SETSP = Indicator(self)
+        self.SETSP = Indicator(self.GroupRD)
         self.SETSP.Label.setText("SP")
-        self.HL2.addWidget(self.SETSP)
+        self.GLRD.addWidget(self.SETSP)
 
-        self.RTD1 = Indicator(self)
+        self.RTD1 = Indicator(self.GroupRD)
         self.RTD1.Label.setText("RTD1")
-        self.HL3.addWidget(self.RTD1)
+        self.GLRD.addWidget(self.RTD1)
 
-        self.RTD2 = Indicator(self)
+        self.RTD2 = Indicator(self.GroupRD)
         self.RTD2.Label.setText("RTD2")
-        self.HL3.addWidget(self.RTD2)
-
+        self.GLRD.addWidget(self.RTD2)
 
 
 # Define a function tab that shows the status of the widgets
@@ -4614,7 +4657,7 @@ class Heater(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QPushButton(self)
         self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE+BORDER_STYLE+"}")
+        self.Label.setStyleSheet("QPushButton {" +TITLE_STYLE+BORDER_STYLE+"}")
         self.Label.setText("Label")
         self.VL.addWidget(self.Label)
 
@@ -5863,8 +5906,8 @@ if __name__ == "__main__":
 
     App = QtWidgets.QApplication(sys.argv)
 
-    # MW = MainWindow()
-    MW = HeaterSubWindow()
+    MW = MainWindow()
+
     # recover data
     # MW.Recover()
     if platform.system() == "Linux":
