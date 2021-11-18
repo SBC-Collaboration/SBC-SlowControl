@@ -42,10 +42,10 @@ VERSION = "v2.1.3"
 #
 # BORDER_STYLE = " border-radius: 2px; border-color: black;"
 
-SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); "
+SMALL_LABEL_STYLE = " "
 
-LABEL_STYLE = "background-color: rgb(204,204,204); "
-TITLE_STYLE = " background-color: rgb(204,204,204);"
+LABEL_STYLE = " "
+TITLE_STYLE = " "
 
 BORDER_STYLE = "  "
 
