@@ -4370,11 +4370,11 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.Label.setText("Write")
         self.HL1.addWidget(self.Label)
 
-        self.FBSwitch = Menu(self)
+        self.FBSwitch = Menu()
         self.FBSwitch.Label.setText("FBSWITCH")
         self.HL1.addWidget(self.FBSwitch)
 
-        self.Mode = DoubleButton(self)
+        self.Mode = DoubleButton()
         self.Mode.Label.setText("Mode")
         self.HL1.addWidget(self.Mode)
 
