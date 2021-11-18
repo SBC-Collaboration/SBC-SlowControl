@@ -552,7 +552,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.HT1202.HeaterSubWindow.VL.addWidget(self.HT1202SUB)
         # self.TT6413 = self.HT1202SUB.RTD1
         # self.HT1202SUB.RTD1.Label.setText("TT6413")
-        self.TT6415 = self.HT1202SUB.RTD2
+        # self.TT6415 = self.HT1202SUB.RTD2
         # self.HT1202SUB.RTD2.Label.setText("TT6415")
 
 
