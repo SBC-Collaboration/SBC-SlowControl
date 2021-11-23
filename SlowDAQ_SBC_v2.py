@@ -5109,7 +5109,7 @@ class UpdatePLC(QtCore.QObject):
         while self.Running:
             print("PLC updating", datetime.datetime.now())
             self.PLC.ReadAll()
-            time.sleep(0.5)
+            time.sleep(1)
 
     @QtCore.Slot()
     def stop(self):
@@ -5911,7 +5911,7 @@ class UpdateDisplay(QtCore.QObject):
                 # elif self.MW.RTD45.Value <= -5 and self.MW.RTD45.Value >= -50 and self.MW.RTD45.Field.property("Alarm"):
                 #     self.MW.RTD45.ResetAlarm()
 
-                time.sleep(0.5)
+                time.sleep(1)
         except:
             (type, value, traceback) = sys.exc_info()
             exception_hook(type, value, traceback)
