@@ -49,7 +49,6 @@ LABEL_STYLE = " background-color: rgb(204,204,204); font-family: \"Calibri\"; " 
               "font-size: 12px; font-weight: bold;"
 TITLE_STYLE = " background-color: rgb(204,204,204); font-family: \"Calibri\";" \
               " font-size: 14px; font-weight: bold;"
-#
 BORDER_STYLE = "  "
 
 
