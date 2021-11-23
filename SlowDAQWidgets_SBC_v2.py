@@ -45,9 +45,9 @@ C_ORANGE = "background-color: rgb(255,132,27);"
 #                " border-color: black;"
 # TITLE_STYLE = "background-color: rgb(204,204,204); "
 BORDER_STYLE = " "
-FONT = " "
+FONT = " font-size: 14px;"
 TITLE_STYLE = "background-color: rgb(204,204,204);  " \
-                  "  "
+                  " font-size: 14px; "
 
 
 
