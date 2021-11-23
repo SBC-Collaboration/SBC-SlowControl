@@ -12,7 +12,7 @@ import time
 import os
 
 # FONT = "font-family: \"Calibri\"; font-size: 14px;"
-# FONT = "font-family: \"Calibri\"; font-size: 8px;"
+FONT = "font-family: \"Calibri\"; font-size: 8px;"
 FONT = " "
 
 BORDER_RADIUS = "border-radius: 2px;"
@@ -35,7 +35,8 @@ C_ORANGE = "background-color: rgb(255,132,27);"
 #               "\"Calibri\"; font-size: 14px; font-weight: bold;"
 # BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
 #                " border-color: black;"
-TITLE_STYLE = "background-color: rgb(204,204,204);  "
+TITLE_STYLE = "background-color: rgb(204,204,204);  font-family: " \
+              "\"Calibri\"; font-size: 14px; font-weight: bold;"
 BORDER_STYLE = ""
 
 
