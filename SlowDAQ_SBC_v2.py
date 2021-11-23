@@ -55,7 +55,7 @@ BORDER_STYLE = " border-radius: 2px; border-color: black;"
 # #
 # LABEL_STYLE = " background-color: rgb(204,204,204); "
 # TITLE_STYLE = " background-color: rgb(204,204,204); "
-BORDER_STYLE = "  "
+# BORDER_STYLE = "  "
 
 
 # SMALL_LABEL_STYLE = "background-color: rgb(204,204,204);  " \
