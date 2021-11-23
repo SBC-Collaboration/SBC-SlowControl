@@ -30,12 +30,12 @@ C_ORANGE = "background-color: rgb(255,132,27);"
 #               "\"Calibri\"; font-size: 22px; font-weight: bold;"
 
 #this title style is for SBC slowcontrol machine
-# TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
-#               "\"Calibri\"; font-size: 14px; font-weight: bold;"
-# BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
-#                " border-color: black;"
-TITLE_STYLE = " "
-BORDER_STYLE = " "
+TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
+              "\"Calibri\"; font-size: 14px; font-weight: bold;"
+BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
+               " border-color: black;"
+# TITLE_STYLE = " "
+# BORDER_STYLE = " "
 
 
 R=0.6 #Resolution rate
@@ -611,6 +611,9 @@ class Indicator(QtWidgets.QWidget):
         self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
+
+
+
         self.Field.setStyleSheet(
             "QLineEdit{" + BORDER_STYLE + C_WHITE + FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
             "} QLineEdit[Alarm = false]{" + C_MEDIUM_GREY + "}")
