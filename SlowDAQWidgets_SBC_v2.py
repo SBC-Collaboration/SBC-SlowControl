@@ -15,7 +15,9 @@ import os
 FONT = "font-family: \"Calibri\"; font-size: 8px;"
 
 
-BORDER_RADIUS = "border-radius: 2px;"
+# BORDER_RADIUS = "border-radius: 2px;"
+BORDER_RADIUS = " "
+
 C_LIGHT_GREY = "background-color: rgb(204,204,204);"
 C_MEDIUM_GREY = "background-color: rgb(167,167,167);"
 C_WHITE = "color: white;"
