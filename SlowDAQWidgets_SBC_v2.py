@@ -29,11 +29,11 @@ C_RED = "background-color: rgb(255,25,25);"
 C_BLUE = "background-color: rgb(34,48,171);"
 C_ORANGE = "background-color: rgb(255,132,27);"
 
-if platform.system() == "Linux":
-    QtGui.QFontDatabase.addApplicationFont("/usr/share/fonts/truetype/vista/calibrib.ttf")
-    FONT = "font-family: calibrib; font-size: 8px;"
-    TITLE_STYLE = "background-color: rgb(204,204,204);  font-family: calibrib;" \
-                  " font-size: 14px; "
+# if platform.system() == "Linux":
+#     QtGui.QFontDatabase.addApplicationFont("/usr/share/fonts/truetype/vista/calibrib.ttf")
+#     FONT = "font-family: calibrib; font-size: 8px;"
+#     TITLE_STYLE = "background-color: rgb(204,204,204);  font-family: calibrib;" \
+#                   " font-size: 14px; "
 
 # TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
 #               "\"Calibri\"; font-size: 22px; font-weight: bold;"
@@ -45,6 +45,9 @@ if platform.system() == "Linux":
 #                " border-color: black;"
 # TITLE_STYLE = "background-color: rgb(204,204,204); "
 BORDER_STYLE = " "
+FONT = "font-family: calibrib; font-size: 8px;"
+TITLE_STYLE = "background-color: rgb(204,204,204);  font-family: calibrib;" \
+                  " font-size: 14px; "
 
 
 
