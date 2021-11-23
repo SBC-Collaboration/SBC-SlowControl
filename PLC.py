@@ -1117,7 +1117,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC = PLC
         self.message_manager = message_manager()
         self.Running = False
-        self.period=0.5
+        self.period=1
 
     @QtCore.Slot()
     def run(self):
@@ -1257,7 +1257,7 @@ class UpdateServer(QtCore.QObject):
         self.socket = self.context.socket(zmq.REP)
         self.socket.bind("tcp://*:5555")
         self.Running=False
-        self.period=0.5
+        self.period=1
         print("connect to the PLC server")
         self.data_dic={"data":{"TT":{"FP":self.PLC.TT_FP_dic_ini,
                                      "BO":self.PLC.TT_BO_dic_ini},
