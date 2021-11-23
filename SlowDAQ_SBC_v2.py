@@ -60,7 +60,7 @@ BORDER_STYLE = "  "
 
 SMALL_LABEL_STYLE = "background-color: rgb(204,204,204);  " \
                         " font-size: 10px;" \
-                        " font-weight: bold;"
+                        " "
 LABEL_STYLE = "background-color: rgb(204,204,204);  " \
                   "font-size: 12px; "
 TITLE_STYLE = "background-color: rgb(204,204,204);  " \
