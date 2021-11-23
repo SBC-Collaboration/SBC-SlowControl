@@ -32,23 +32,23 @@ VERSION = "v2.1.3"
 #               " font-size: 22px; font-weight: bold;"
 
 # Settings adapted to sbc slowcontrol machine
-# SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\";" \
-#                     " font-size: 10px;" \
-#                     " font-weight: bold;"
-# LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 6px; font-family: \"Calibri\"; " \
-#               "font-size: 12px; font-weight: bold;"
-# TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
-#               " font-size: 14px; font-weight: bold;"
+SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Calibri\";" \
+                    " font-size: 10px;" \
+                    " font-weight: bold;"
+LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Calibri\"; " \
+              "font-size: 12px; font-weight: bold;"
+TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Calibri\";" \
+              " font-size: 14px; font-weight: bold;"
 
 # BORDER_STYLE = " border-radius: 2px; border-color: black;"
 
-SMALL_LABEL_STYLE = " background-color: rgb(204,204,204); font-family: \"Calibri\";" \
-                    " font-size: 10px; font-weight: bold;"
-#
-LABEL_STYLE = " background-color: rgb(204,204,204); font-family: \"Calibri\"; " \
-              "font-size: 12px; font-weight: bold;"
-TITLE_STYLE = " background-color: rgb(204,204,204); font-family: \"Calibri\";" \
-              " font-size: 14px; font-weight: bold;"
+# SMALL_LABEL_STYLE = " background-color: rgb(204,204,204); font-family: \"Calibri\";" \
+#                     " font-size: 10px; font-weight: bold;"
+# #
+# LABEL_STYLE = " background-color: rgb(204,204,204); font-family: \"Calibri\"; " \
+#               "font-size: 12px; font-weight: bold;"
+# TITLE_STYLE = " background-color: rgb(204,204,204); font-family: \"Calibri\";" \
+#               " font-size: 14px; font-weight: bold;"
 #
 BORDER_STYLE = "  "
 
