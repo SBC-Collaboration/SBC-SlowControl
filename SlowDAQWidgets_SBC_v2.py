@@ -8,12 +8,13 @@ v1.1 Alarm on state widget 04/03/20 ML
 """
 
 from PySide2 import QtCore, QtWidgets, QtGui
-import time
+import time, platform
 import os
 
 # FONT = "font-family: \"Calibri\"; font-size: 14px;"
 # FONT = "font-family: \"Calibri\"; font-size: 8px;"
-FONT = " "
+
+# FONT = " "
 
 
 # BORDER_RADIUS = "border-radius: 2px;"
@@ -28,7 +29,11 @@ C_RED = "background-color: rgb(255,25,25);"
 C_BLUE = "background-color: rgb(34,48,171);"
 C_ORANGE = "background-color: rgb(255,132,27);"
 
-
+if platform.system() == "Linux":
+    QtGui.QFontDatabase.addApplicationFont("/usr/share/fonts/truetype/vista/calibrib.ttf")
+    FONT = "font-family: calibrib; font-size: 8px;"
+    TITLE_STYLE = "background-color: rgb(204,204,204);  font-family: calibrib;" \
+                  " font-size: 14px; "
 
 # TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: " \
 #               "\"Calibri\"; font-size: 22px; font-weight: bold;"
@@ -38,10 +43,10 @@ C_ORANGE = "background-color: rgb(255,132,27);"
 #               "\"Calibri\"; font-size: 14px; font-weight: bold;"
 # BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
 #                " border-color: black;"
-TITLE_STYLE = "background-color: rgb(204,204,204); "
+# TITLE_STYLE = "background-color: rgb(204,204,204); "
 BORDER_STYLE = " "
 
-# all blank sttings
+
 
 
 R=0.6 #Resolution rate
