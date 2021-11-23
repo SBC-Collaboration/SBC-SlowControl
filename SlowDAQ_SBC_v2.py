@@ -42,10 +42,10 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-fam
 
 BORDER_STYLE = " border-radius: 2px; border-color: black;"
 
-# SMALL_LABEL_STYLE = " "
+SMALL_LABEL_STYLE = " background-color: rgb(204,204,204); border-radius: 6px;"
 #
-# LABEL_STYLE = " "
-# TITLE_STYLE = " "
+LABEL_STYLE = " background-color: rgb(204,204,204); border-radius: 6px;"
+TITLE_STYLE = " background-color: rgb(204,204,204); border-radius: 10px;"
 #
 # BORDER_STYLE = "  "
 
