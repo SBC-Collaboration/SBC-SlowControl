@@ -35,8 +35,8 @@ C_ORANGE = "background-color: rgb(255,132,27);"
 #               "\"Calibri\"; font-size: 14px; font-weight: bold;"
 # BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
 #                " border-color: black;"
-TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; "
-BORDER_STYLE = "border-style: outset; border-width: 2px; "
+TITLE_STYLE = "background-color: rgb(204,204,204);  "
+BORDER_STYLE = ""
 
 
 R=0.6 #Resolution rate

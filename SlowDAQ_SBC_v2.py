@@ -40,14 +40,14 @@ VERSION = "v2.1.3"
 # TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
 #               " font-size: 14px; font-weight: bold;"
 
-BORDER_STYLE = " border-radius: 2px; border-color: black;"
+# BORDER_STYLE = " border-radius: 2px; border-color: black;"
 
-SMALL_LABEL_STYLE = " background-color: rgb(204,204,204); border-radius: 6px;"
+SMALL_LABEL_STYLE = " background-color: rgb(204,204,204); "
 #
-LABEL_STYLE = " background-color: rgb(204,204,204); border-radius: 6px;"
-TITLE_STYLE = " background-color: rgb(204,204,204); border-radius: 10px;"
+LABEL_STYLE = " background-color: rgb(204,204,204); "
+TITLE_STYLE = " background-color: rgb(204,204,204); "
 #
-# BORDER_STYLE = "  "
+BORDER_STYLE = "  "
 
 
 
