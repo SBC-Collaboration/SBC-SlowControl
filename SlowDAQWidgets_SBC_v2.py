@@ -39,7 +39,7 @@ C_ORANGE = "background-color: rgb(255,132,27);"
 #                " border-color: black;"
 TITLE_STYLE = "background-color: rgb(204,204,204);  font-family: " \
               "\"Calibri\"; font-size: 14px; font-weight: bold;"
-BORDER_STYLE = ""
+BORDER_STYLE = " "
 
 
 R=0.6 #Resolution rate
@@ -615,9 +615,6 @@ class Indicator(QtWidgets.QWidget):
         self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
-
-
-
         self.Field.setStyleSheet(
             "QLineEdit{" + BORDER_STYLE + C_WHITE + FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
             "} QLineEdit[Alarm = false]{" + C_MEDIUM_GREY + "}")
