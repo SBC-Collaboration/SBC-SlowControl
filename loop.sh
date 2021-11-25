@@ -1,6 +1,6 @@
 #!/bin/bash
 i=0
-while true; do
+while [$n -le 5]; do
 echo "I am here"
 sleep 2
 echo "I am there" 
