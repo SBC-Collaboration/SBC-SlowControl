@@ -1259,8 +1259,7 @@ class UpdateServer(QtCore.QObject):
         self.Running=False
         self.period=1
         print("connect to the PLC server")
-
-        self.data_dic={"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
+        self.test_dic={"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                               "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
                               "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
                               "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
@@ -1271,7 +1270,9 @@ class UpdateServer(QtCore.QObject):
                               "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
                               "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
                               "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
-                              "TT6412": 0, "TT6413": 0, "TT6414": 0},
+                              "TT6412": 0, "TT6413": 0, "TT6414": 0}
+
+        self.data_dic={"data":{"TT":{"FP":self.test_dic,
                                      "BO":self.PLC.TT_BO_dic_ini},
                                "PT":self.PLC.PT_dic_ini,
                                "Valve":{"OUT":self.PLC.Valve_OUT_ini,
@@ -1364,9 +1365,14 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
+        # for key in self.PLC.TT_FP_dic:
+        #     self.data_dic["data"]["TT"]["FP"][key]=self.PLC.TT_FP_dic[key]
+        #     print(key, self.data_dic["data"]["TT"]["FP"][key])
+
         for key in self.PLC.TT_FP_dic:
-            self.data_dic["data"]["TT"]["FP"][key]=self.PLC.TT_FP_dic[key]
-            print(key, self.data_dic["data"]["TT"]["FP"][key])
+            self.test_dic[key] = self.PLC.TT_FP_dic[key]
+            print(key, self.test_dic[key])
+
         for key in self.PLC.TT_BO_dic:
             self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
