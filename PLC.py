@@ -1355,6 +1355,7 @@ class UpdateServer(QtCore.QObject):
     def pack_data(self):
         for key in self.PLC.TT_FP_dic:
             self.data_dic["data"]["TT"]["FP"][key]=self.PLC.TT_FP_dic[key]
+            print(key, self.PLC.TT_FP_dic[key])
         for key in self.PLC.TT_BO_dic:
             self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
