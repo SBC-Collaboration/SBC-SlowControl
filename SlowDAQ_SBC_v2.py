@@ -5105,13 +5105,50 @@ class UpdateClient(QtCore.QObject):
                                                "SV3325": False, "SV3326": False, "SV3329": False,
                                                "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
                                                "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
-        self.receive_dic = {"data":{"TT":{"FP": self.DATA_TT_FP_ini,
-                                          "BO": self.DATA_TT_BO_ini},
-                               "PT": self.DATA_PT_ini,
-                               "Valve":{"OUT": self.DATA_VALVE_OUT_ini,
-                                        "INTLKD": self.DATA_VALVE_INTLKD_ini,
-                                        "MAN":self.DATA_VALVE_MAN_ini,
-                                        "ERR": self.DATA_VALVE_ERR_ini}},
+
+        self.receive_dic = {"data":{"TT":{"FP": {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
+                                                "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
+                                                 "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
+                                                 "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
+                                                 "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
+                                                 "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
+                                                 "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
+                                                 "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
+                                                 "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
+                                                 "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
+                                                 "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
+                                                 "TT6412": 0, "TT6413": 0, "TT6414": 0},
+                                          "BO": {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+                                                "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
+                                                 "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}},
+                               "PT":  {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
+                                     "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
+                                     "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
+                                     "PT4322": 0, "PT4325": 0, "PT6302": 0},
+                               "Valve":{"OUT":  {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
+                                               "PV4324": 0, "PV5305": 0, "PV5306": 0,
+                                               "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
+                                               "SV3325": 0, "SV3326": 0, "SV3329": 0,
+                                               "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
+                                               "SV4337": 0, "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0},
+                                        "INTLKD":  {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+                                                  "PV4324": False, "PV5305": False, "PV5306": False,
+                                                  "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+                                                  "SV3325": False, "SV3326": False, "SV3329": False,
+                                                  "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+                                                  "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False},
+                                        "MAN":{"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+                                               "PV4324": False, "PV5305": True, "PV5306": True,
+                                               "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
+                                               "SV3325": True, "SV3326": True, "SV3329": True,
+                                               "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+                                               "SV4337": False, "HFSV3312": True, "HFSV3323": True, "HFSV3331": True},
+                                        "ERR": {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+                                               "PV4324": False, "PV5305": False, "PV5306": False,
+                                               "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+                                               "SV3325": False, "SV3326": False, "SV3329": False,
+                                               "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+                                               "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}}},
                        "Alarm":{"TT":{"FP":{"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
                                             "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
                                             "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
@@ -5144,7 +5181,9 @@ class UpdateClient(QtCore.QObject):
             #  Send reply back to client
             # self.socket.send(b"Hello")
             self.commands()
+            print(self.receive_dic)
             message = pickle.loads(self.socket.recv())
+
 
             # print(f"Received reply [ {message} ]")
             self.update_data(message)
@@ -5281,7 +5320,7 @@ class UpdateDisplay(QtCore.QObject):
                               self.MW.AlarmButton.SubWindow.TT6412, self.MW.AlarmButton.SubWindow.TT6413, self.MW.AlarmButton.SubWindow.TT6414]
 
                 for element in FPRTDAlarmMatrix:
-                    print(element.Label.text())
+                    # print(element.Label.text())
 
                     element.UpdateAlarm(
                         self.Client.receive_dic["Alarm"]["TT"]["FP"][element.Label.text()])

@@ -1259,6 +1259,7 @@ class UpdateServer(QtCore.QObject):
         self.Running=False
         self.period=1
         print("connect to the PLC server")
+
         self.data_dic={"data":{"TT":{"FP":self.PLC.TT_FP_dic_ini,
                                      "BO":self.PLC.TT_BO_dic_ini},
                                "PT":self.PLC.PT_dic_ini,
@@ -1288,6 +1289,35 @@ class UpdateServer(QtCore.QObject):
                                       "BO":self.PLC.TT_BO_dic_ini},
                                 "PT" : self.PLC.PT_Alarm_ini},
                        "MainAlarm" : self.PLC.MainAlarm_ini}
+        # self.data_dic = {"data": {"TT": {"FP": self.PLC.TT_FP_dic_ini,
+        #                                  "BO": self.PLC.TT_BO_dic_ini},
+        #                           "PT": self.PLC.PT_dic_ini,
+        #                           "Valve": {"OUT": self.PLC.Valve_OUT_ini,
+        #                                     "INTLKD": self.PLC.Valve_INTLKD_ini,
+        #                                     "MAN": self.PLC.Valve_MAN_ini,
+        #                                     "ERR": self.PLC.Valve_ERR_ini},
+        #                           "LOOPPID": {"MODE0": self.PLC.LOOPPID_MODE0_ini,
+        #                                       "MODE1": self.PLC.LOOPPID_MODE1_ini,
+        #                                       "MODE2": self.PLC.LOOPPID_MODE2_ini,
+        #                                       "MODE3": self.PLC.LOOPPID_MODE3_ini,
+        #                                       "INTLKD": self.PLC.LOOPPID_INTLKD_ini,
+        #                                       "MAN": self.PLC.LOOPPID_MAN_ini,
+        #                                       "ERR": self.PLC.LOOPPID_ERR_ini,
+        #                                       "SATHI": self.PLC.LOOPPID_SATHI_ini,
+        #                                       "SATLO": self.PLC.LOOPPID_SATLO_ini,
+        #                                       "EN": self.PLC.LOOPPID_EN_ini,
+        #                                       "OUT": self.PLC.LOOPPID_OUT_ini,
+        #                                       "IN": self.PLC.LOOPPID_IN_ini,
+        #                                       "HI_LIM": self.PLC.LOOPPID_HI_LIM_ini,
+        #                                       "LO_LIM": self.PLC.LOOPPID_LO_LIM_ini,
+        #                                       "SET0": self.PLC.LOOPPID_SET0_ini,
+        #                                       "SET1": self.PLC.LOOPPID_SET1_ini,
+        #                                       "SET2": self.PLC.LOOPPID_SET2_ini,
+        #                                       "SET3": self.PLC.LOOPPID_SET3_ini}},
+        #                  "Alarm": {"TT": {"FP": self.PLC.TT_FP_dic_ini,
+        #                                   "BO": self.PLC.TT_BO_dic_ini},
+        #                            "PT": self.PLC.PT_Alarm_ini},
+        #                  "MainAlarm": self.PLC.MainAlarm_ini}
         self.data_package=pickle.dumps(self.data_dic)
 
 
@@ -1302,7 +1332,7 @@ class UpdateServer(QtCore.QObject):
                 # message = self.socket.recv()
                 # print("refreshing")
                 # print(f"Received request: {message}")
-                self.write_data()
+                # self.write_data()
 
                 #  Send reply back to client
                 # self.socket.send(b"World")
