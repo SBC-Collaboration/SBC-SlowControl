@@ -763,6 +763,7 @@ class Menu(QtWidgets.QWidget):
         self.Combobox.addItem("0")
         self.Combobox.addItem("1")
         self.Combobox.addItem("2")
+        self.Combobox.setStyleSheet("QWidget {" + FONT + "}")
 
 
 class Toggle(QtWidgets.QWidget):
