@@ -537,14 +537,14 @@ class PLC:
 
 
             #test the writing function
-            print(self.Read_BO_2(14308))
-            Raw_BO = self.Client_BO.read_holding_registers(14308, count=2, unit=0x01)
-            print('Raw0',Raw_BO.getRegister(0))
-            print('Raw1', Raw_BO.getRegister(1))
-            output_BO = round(struct.unpack(">f", struct.pack(">HH", Raw_BO.getRegister(1), Raw_BO.getRegister(0)))[
-                                  0], 3)
-            self.Write_BO_2(14308,2.0)
-            print(self.Read_BO_2(14308))
+            # print(self.Read_BO_2(14308))
+            # Raw_BO = self.Client_BO.read_holding_registers(14308, count=2, unit=0x01)
+            # print('Raw0',Raw_BO.getRegister(0))
+            # print('Raw1', Raw_BO.getRegister(1))
+            # output_BO = round(struct.unpack(">f", struct.pack(">HH", Raw_BO.getRegister(1), Raw_BO.getRegister(0)))[
+            #                       0], 3)
+            # self.Write_BO_2(14308,2.0)
+            # print(self.Read_BO_2(14308))
 
 
             # print("base",self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
