@@ -441,7 +441,7 @@ class PLC:
                 self.TT_BO_dic[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
                 # print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
-                # print(key, "'s' value is", self.TT_BO_dic[key])
+                print(key, "'s' value is", self.TT_BO_dic[key])
 
             # for key in self.TT_BO_address:
             #     Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=4, unit=0x01)
@@ -1367,42 +1367,42 @@ class UpdateServer(QtCore.QObject):
             self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
         for key in self.PLC.PT_dic:
             self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
-        for key in self.PLC.LOOPMODE0:
-            self.data.dic["data"]["LOOPPID"]["MODE0"][key] = self.PLC.LOOPPID_MODE0[key]
-        for key in self.PLC.LOOPMODE1:
-            self.data.dic["data"]["LOOPPID"]["MODE1"][key] = self.PLC.LOOPPID_MODE1[key]
-        for key in self.PLC.LOOPMODE2:
-            self.data.dic["data"]["LOOPPID"]["MODE2"][key] = self.PLC.LOOPPID_MODE2[key]
-        for key in self.PLC.LOOPMODE3:
-            self.data.dic["data"]["LOOPPID"]["MODE3"][key] = self.PLC.LOOPPID_MODE3[key]
-        for key in self.PLC.LOOPPID_INTLKD:
-            self.data.dic["data"]["LOOPPID"]["INTLKD"][key] = self.PLC.LOOPPID_INTLKD[key]
-        for key in self.PLC.LOOPPID_MAN:
-            self.data.dic["data"]["LOOPPID"]["MAN"][key] = self.PLC.LOOPPID_MAN[key]
-        for key in self.PLC.LOOPPID_ERR:
-            self.data.dic["data"]["LOOPPID"]["ERR"][key] = self.PLC.LOOPPID_ERR[key]
-        for key in self.PLC.LOOPPID_SATHI:
-            self.data.dic["data"]["LOOPPID"]["SATHI"][key] = self.PLC.LOOPPID_SATHI[key]
-        for key in self.PLC.LOOPPID_SATLO:
-            self.data.dic["data"]["LOOPPID"]["SATLO"][key] = self.PLC.LOOPPID_SATLO[key]
-        for key in self.PLC.LOOPPID_EN:
-            self.data.dic["data"]["LOOPPID"]["EN"][key] = self.PLC.LOOPPID_EN[key]
-        for key in self.PLC.LOOPPID_OUT:
-            self.data.dic["data"]["LOOPPID"]["OUT"][key] = self.PLC.LOOPPID_OUT[key]
-        for key in self.PLC.LOOPPID_IN:
-            self.data.dic["data"]["LOOPPID"]["IN"][key] = self.PLC.LOOPPID_IN[key]
-        for key in self.PLC.LOOPPID_HI_LIM:
-            self.data.dic["data"]["LOOPPID"]["HI_LIM"][key] = self.PLC.LOOPPID_HI_LIM[key]
-        for key in self.PLC.LOOPPID_LO_LIM:
-            self.data.dic["data"]["LOOPPID"]["LO_LIM"][key] = self.PLC.LOOPPID_LO_LIM[key]
-        for key in self.PLC.LOOPPID_SET0:
-            self.data.dic["data"]["LOOPPID"]["SET0"][key] = self.PLC.LOOPPID_SET0[key]
-        for key in self.PLC.LOOPPID_SET1:
-            self.data.dic["data"]["LOOPPID"]["SET1"][key] = self.PLC.LOOPPID_SET1[key]
-        for key in self.PLC.LOOPPID_SET2:
-            self.data.dic["data"]["LOOPPID"]["SET2"][key] = self.PLC.LOOPPID_SET2[key]
-        for key in self.PLC.LOOPPID_SET3:
-            self.data.dic["data"]["LOOPPID"]["SET3"][key] = self.PLC.LOOPPID_SET3[key]
+        # for key in self.PLC.LOOPMODE0:
+        #     self.data.dic["data"]["LOOPPID"]["MODE0"][key] = self.PLC.LOOPPID_MODE0[key]
+        # for key in self.PLC.LOOPMODE1:
+        #     self.data.dic["data"]["LOOPPID"]["MODE1"][key] = self.PLC.LOOPPID_MODE1[key]
+        # for key in self.PLC.LOOPMODE2:
+        #     self.data.dic["data"]["LOOPPID"]["MODE2"][key] = self.PLC.LOOPPID_MODE2[key]
+        # for key in self.PLC.LOOPMODE3:
+        #     self.data.dic["data"]["LOOPPID"]["MODE3"][key] = self.PLC.LOOPPID_MODE3[key]
+        # for key in self.PLC.LOOPPID_INTLKD:
+        #     self.data.dic["data"]["LOOPPID"]["INTLKD"][key] = self.PLC.LOOPPID_INTLKD[key]
+        # for key in self.PLC.LOOPPID_MAN:
+        #     self.data.dic["data"]["LOOPPID"]["MAN"][key] = self.PLC.LOOPPID_MAN[key]
+        # for key in self.PLC.LOOPPID_ERR:
+        #     self.data.dic["data"]["LOOPPID"]["ERR"][key] = self.PLC.LOOPPID_ERR[key]
+        # for key in self.PLC.LOOPPID_SATHI:
+        #     self.data.dic["data"]["LOOPPID"]["SATHI"][key] = self.PLC.LOOPPID_SATHI[key]
+        # for key in self.PLC.LOOPPID_SATLO:
+        #     self.data.dic["data"]["LOOPPID"]["SATLO"][key] = self.PLC.LOOPPID_SATLO[key]
+        # for key in self.PLC.LOOPPID_EN:
+        #     self.data.dic["data"]["LOOPPID"]["EN"][key] = self.PLC.LOOPPID_EN[key]
+        # for key in self.PLC.LOOPPID_OUT:
+        #     self.data.dic["data"]["LOOPPID"]["OUT"][key] = self.PLC.LOOPPID_OUT[key]
+        # for key in self.PLC.LOOPPID_IN:
+        #     self.data.dic["data"]["LOOPPID"]["IN"][key] = self.PLC.LOOPPID_IN[key]
+        # for key in self.PLC.LOOPPID_HI_LIM:
+        #     self.data.dic["data"]["LOOPPID"]["HI_LIM"][key] = self.PLC.LOOPPID_HI_LIM[key]
+        # for key in self.PLC.LOOPPID_LO_LIM:
+        #     self.data.dic["data"]["LOOPPID"]["LO_LIM"][key] = self.PLC.LOOPPID_LO_LIM[key]
+        # for key in self.PLC.LOOPPID_SET0:
+        #     self.data.dic["data"]["LOOPPID"]["SET0"][key] = self.PLC.LOOPPID_SET0[key]
+        # for key in self.PLC.LOOPPID_SET1:
+        #     self.data.dic["data"]["LOOPPID"]["SET1"][key] = self.PLC.LOOPPID_SET1[key]
+        # for key in self.PLC.LOOPPID_SET2:
+        #     self.data.dic["data"]["LOOPPID"]["SET2"][key] = self.PLC.LOOPPID_SET2[key]
+        # for key in self.PLC.LOOPPID_SET3:
+        #     self.data.dic["data"]["LOOPPID"]["SET3"][key] = self.PLC.LOOPPID_SET3[key]
 
 
 
