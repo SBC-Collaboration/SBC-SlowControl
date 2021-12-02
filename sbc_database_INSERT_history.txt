@@ -1,0 +1,20 @@
+INSERT INTO MetaDataStorage VALUES ("TT2420", "Thermometer", "K" ), ( "TT2422", "Thermometer", "K" ), ( "TT2424", "Thermometer", "K" ), ( "TT2425", "Thermometer", "K" ), ( "TT2442", "Thermometer", "K" ),
+INSERT INTO MetaDataStorage VALUES ("TT2403", "Thermometer", "K" ), ( "TT2418", "Thermometer", "K" ), ( "TT2427", "Thermometer", "K" ), ( "TT2429", "Thermometer", "K" ), ( "TT2431", "Thermometer", "K" ),("TT2441", "Thermometer", "K" ), ( "TT2414", "Thermometer", "K" ), ( "TT2413", "Thermometer", "K" ), ( "TT2412", "Thermometer", "K" ), ( "TT2415", "Thermometer", "K" );
+INSERT INTO MetaDataStorage VALUES ("TT2409", "Thermometer", "K" ), ( "TT2436", "Thermometer", "K" ), ( "TT2438", "Thermometer", "K" ), ( "TT2440", "Thermometer", "K" ), ( "TT2402", "Thermometer", "K" ),
+INSERT INTO MetaDataStorage VALUES ("TT2411", "Thermometer", "K" ), ( "TT2443", "Thermometer", "K" ), ( "TT2417", "Thermometer", "K" ), ( "TT2404", "Thermometer", "K" ), ( "TT2408", "Thermometer", "K" ),
+INSERT INTO MetaDataStorage VALUES ("TT2407", "Thermometer", "K" ), ( "TT2406", "Thermometer", "K" ), ( "TT2428", "Thermometer", "K" ), ( "TT2432", "Thermometer", "K" ), ( "TT2421", "Thermometer", "K" ),
+INSERT INTO MetaDataStorage VALUES ("TT2416", "Thermometer", "K" ), ( "TT2439", "Thermometer", "K" ), ( "TT2419", "Thermometer", "K" ), ( "TT2423", "Thermometer", "K" ), ( "TT2426", "Thermometer", "K" ),
+INSERT INTO MetaDataStorage VALUES ("TT2430", "Thermometer", "K" ), ( "TT2450", "Thermometer", "K" ), ( "TT2401", "Thermometer", "K" ), ( "TT2449", "Thermometer", "K" ), ( "TT2445", "Thermometer", "K" ),
+INSERT INTO MetaDataStorage VALUES ("TT2444", "Thermometer", "K" ), ( "TT2435", "Thermometer", "K" ), ( "TT2437", "Thermometer", "K" ), ( "TT2446", "Thermometer", "K" ), ( "TT2447", "Thermometer", "K" ),
+INSERT INTO MetaDataStorage VALUES ("TT2448", "Thermometer", "K" ), ( "TT2410", "Thermometer", "K" ), ( "TT2405", "Thermometer", "K" ), ( "TT6220", "Thermometer", "K" ), ( "TT6401", "Thermometer", "K" ),
+INSERT INTO MetaDataStorage VALUES ("TT6404", "Thermometer", "K" ), ( "TT6405", "Thermometer", "K" ), ( "TT6406", "Thermometer", "K" ), ( "TT6410", "Thermometer", "K" ), ( "TT6411", "Thermometer", "K" ),
+INSERT INTO MetaDataStorage VALUES ("TT6412", "Thermometer", "K" ), ( "TT6413", "Thermometer", "K" ), ( "TT6414": "Thermometer", "K");
+
+INSERT INTO MetaDataStorage VALUES ("TT2101", "Thermometer", "K" ), ( "TT2111", "Thermometer", "K" ), ( "TT2113", "Thermometer", "K" ), ( "TT2118", "Thermometer", "K" ), ( "TT2119", "Thermometer", "K" ), ( "TT4330", "Thermometer", "K" ), (
+                             "TT6203", "Thermometer", "K" ), ( "TT6207", "Thermometer", "K" ), ( "TT6211", "Thermometer", "K" ), ( "TT6213", "Thermometer", "K" ), ( "TT6222", "Thermometer", "K" ), (
+                             "TT6407", "Thermometer", "K" ), ( "TT6408", "Thermometer", "K" ), ( "TT6409", "Thermometer", "K" ), ( "TT6415", "Thermometer", "K" ), ( "TT6416", "Pressure Transducer", "bara" ), ( "Thermometer", "K" );
+
+INSERT INTO MetaDataStorage VALUES ("PT1325", "Pressure Transducer", "bara" ), ( "PT2121", "Pressure Transducer", "bara" ), ( "PT2316", "Pressure Transducer", "bara" ), ( "PT2330", "Pressure Transducer", "bara" ), ( "PT2335", "Pressure Transducer", "bara" ), (
+                             "PT3308", "Pressure Transducer", "bara" ), ( "PT3309", "Pressure Transducer", "bara" ), ( "PT3311", "Pressure Transducer", "bara" ), ( "PT3314", "Pressure Transducer", "bara" ), ( "PT3320", "Pressure Transducer", "bara" ), (
+                             "PT3332", "Pressure Transducer", "bara" ), ( "PT3333", "Pressure Transducer", "bara" ), ( "PT4306", "Pressure Transducer", "bara" ), ( "PT4315", "Pressure Transducer", "bara" ), ( "PT4319", "Pressure Transducer", "bara" ), (
+                             "PT4322", "Pressure Transducer", "bara" ), ( "PT4325", "Pressure Transducer", "bara" ), ( "PT6302": True, "Pressure Transducer", "bara" );
