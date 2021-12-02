@@ -1409,7 +1409,7 @@ class UpdateServer(QtCore.QObject):
 
 
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
-        print("pack", self.data_dic["data"])
+        print("pack", self.data_dic["data"]["TT"]["FP"])
         self.data_package=pickle.dumps(self.data_dic)
 
     def write_data(self):
