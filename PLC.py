@@ -1260,7 +1260,18 @@ class UpdateServer(QtCore.QObject):
         self.period=1
         print("connect to the PLC server")
 
-        self.data_dic={"data":{"TT":{"FP":self.PLC.TT_FP_dic_ini,
+        self.data_dic={"data":{"TT":{"FP":{"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
+                              "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
+                              "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
+                              "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
+                              "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
+                              "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
+                              "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
+                              "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
+                              "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
+                              "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
+                              "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
+                              "TT6412": 0, "TT6413": 0, "TT6414": 0},
                                      "BO":self.PLC.TT_BO_dic_ini},
                                "PT":self.PLC.PT_dic_ini,
                                "Valve":{"OUT":self.PLC.Valve_OUT_ini,
