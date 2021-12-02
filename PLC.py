@@ -1353,20 +1353,20 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
-        # for key in self.PLC.TT_FP_dic:
-        #     self.data_dic["data"]["TT"]["FP"][key]=self.PLC.TT_FP_dic[key]
-        # for key in self.PLC.TT_BO_dic:
-        #     self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
-        # for key in self.PLC.PT_dic:
-        #     self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
-        # for key in self.PLC.Valve_OUT:
-        #     self.data_dic["data"]["Valve"]["OUT"][key]=self.PLC.Valve_OUT[key]
-        # for key in self.PLC.TT_FP_Alarm:
-        #     self.data_dic["Alarm"]["TT"]["FP"][key] = self.PLC.TT_FP_Alarm[key]
-        # for key in self.PLC.TT_BO_Alarm:
-        #     self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
-        # for key in self.PLC.PT_dic:
-        #     self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
+        for key in self.PLC.TT_FP_dic:
+            self.data_dic["data"]["TT"]["FP"][key]=self.PLC.TT_FP_dic[key]
+        for key in self.PLC.TT_BO_dic:
+            self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
+        for key in self.PLC.PT_dic:
+            self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
+        for key in self.PLC.Valve_OUT:
+            self.data_dic["data"]["Valve"]["OUT"][key]=self.PLC.Valve_OUT[key]
+        for key in self.PLC.TT_FP_Alarm:
+            self.data_dic["Alarm"]["TT"]["FP"][key] = self.PLC.TT_FP_Alarm[key]
+        for key in self.PLC.TT_BO_Alarm:
+            self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
+        for key in self.PLC.PT_dic:
+            self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
         # for key in self.PLC.LOOPMODE0:
         #     self.data.dic["data"]["LOOPPID"]["MODE0"][key] = self.PLC.LOOPPID_MODE0[key]
         # for key in self.PLC.LOOPMODE1:
@@ -1407,7 +1407,7 @@ class UpdateServer(QtCore.QObject):
 
 
 
-        # self.data_dic["MainAlarm"]=self.PLC.MainAlarm
+        self.data_dic["MainAlarm"]=self.PLC.MainAlarm
         print("pack", self.data_dic)
         self.data_package=pickle.dumps(self.data_dic)
 
