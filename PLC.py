@@ -402,7 +402,7 @@ class PLC:
                 Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
                 self.TT_FP_dic[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
-                print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
+                # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
 
             # # Set Attributes could be commented(disabled) after it is done
             # Attribute_TTFP_address = {}
@@ -441,7 +441,7 @@ class PLC:
                 self.TT_BO_dic[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
                 # print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
-                print(key, "'s' value is", self.TT_BO_dic[key])
+                # print(key, "'s' value is", self.TT_BO_dic[key])
 
             # for key in self.TT_BO_address:
             #     Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=4, unit=0x01)
@@ -1178,10 +1178,10 @@ class UpdateServer(QtCore.QObject):
                                         "INTLKD":self.Valve_INTLKD_ini,
                                         "MAN":self.Valve_MAN_ini,
                                         "ERR":self.Valve_ERR_ini},
-                               "LOOPPID":{"MODE0" : self.LOOPPID_MODE0_ini,
+                               "LOOPPID":{"MODE0": self.LOOPPID_MODE0_ini,
                                           "MODE1": self.LOOPPID_MODE1_ini,
-                                          "MODE2" : self.LOOPPID_MODE2_ini,
-                                          "MODE3" : self.LOOPPID_MODE3_ini,
+                                          "MODE2": self.LOOPPID_MODE2_ini,
+                                          "MODE3": self.LOOPPID_MODE3_ini,
                                           "INTLKD" : self.LOOPPID_INTLKD_ini,
                                           "MAN" : self.LOOPPID_MAN_ini,
                                          "ERR" : self.LOOPPID_ERR_ini,
@@ -1242,7 +1242,7 @@ class UpdateServer(QtCore.QObject):
             self.TT_FP_dic_ini[key] = self.PLC.TT_FP_dic[key]
 
         for key in self.PLC.TT_BO_dic:
-            self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
+            self.TT_BO_dic_ini[key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
             self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
         for key in self.PLC.Valve_OUT:
@@ -1294,7 +1294,7 @@ class UpdateServer(QtCore.QObject):
 
 
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
-        print("pack", self.data_dic["data"]["TT"]["FP"])
+
         self.data_package=pickle.dumps(self.data_dic)
 
     def write_data(self):
