@@ -687,7 +687,7 @@ class Control(QtWidgets.QWidget):
         self.Button.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Button.setStyleSheet("QPushButton {" +C_BLUE + C_WHITE + FONT + BORDER_RADIUS+"}")
 
-        self.Unit = " °C"
+        self.Unit = " W"
         self.SetValue(0.)
 
         self.Max = 10.

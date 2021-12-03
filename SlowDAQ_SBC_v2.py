@@ -5517,8 +5517,30 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HT1202.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6413"])
                 self.MW.HT2203.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6414"])
 
-                print("HTR6214 INTLKD", self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
                 self.MW.HT6214.HeaterSubWindow.Interlock.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
+                self.MW.HT6214.HeaterSubWindow.Error.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6214"])
+                self.MW.HT6214.HeaterSubWindow.MANSP.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
+                self.MW.HT6214.HeaterSubWindow.SAT.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["SAT"]["HTR6214"])
+                self.MW.HT6214.HeaterSubWindow.ModeREAD.Field.setText(self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
+                                                                                            self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"]))
+                self.MW.HT6214.HeaterSubWindow.EN.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6214"])
+                self.MW.HT2203.HeaterSubWindow.Power.SetValue(self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6214"])
+                self.MW.HT2203.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6214"])
+                self.MW.HT2203.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6214"])
+                self.MW.HT2203.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR6214"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6214"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6214"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6214"]))
+
+
+
 
 
                 # self.MW.subwindow.alarmbutton(self.Client.receive_dic)
@@ -5821,6 +5843,61 @@ class UpdateDisplay(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+
+    def FindDistinctTrue(self,v0, v1, v2, v3):
+        if v0 == True:
+            if True in [v1, v2, v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return "MODE0"
+        elif v1 == True:
+            if True in [ v2, v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return "MODE1"
+        elif v2 == True:
+            if True in [v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return "MODE2"
+        else:
+            if v3:
+                return "MODE3"
+            else:
+                print("No True Value")
+                return "False"
+
+    def FetchSetPoint(self, v0, v1, v2, v3, w0, w1, w2, w3):
+        # v0-3 must corresponds to w0-3 in order
+        if v0 == True:
+            if True in [v1, v2, v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return w0
+        elif v1 == True:
+            if True in [ v2, v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return w1
+        elif v2 == True:
+            if True in [v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return w2
+        else:
+            if v3:
+                return w3
+            else:
+                print("No True Value")
+                return "False"
+
+
 
 
 
