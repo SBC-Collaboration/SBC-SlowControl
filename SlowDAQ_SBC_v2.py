@@ -5058,34 +5058,34 @@ class UpdateClient(QtCore.QObject):
                              'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
 
         self.receive_dic = {"data":{"TT":{"FP":self.TT_FP_dic,
-                                     "BO":self.TT_BO_dic},
-                               "PT":self.PT_dic,
-                               "Valve":{"OUT":self.Valve_OUT,
-                                        "INTLKD":self.Valve_INTLKD,
-                                        "MAN":self.Valve_MAN,
-                                        "ERR":self.Valve_ERR},
-                               "LOOPPID":{"MODE0": self.LOOPPID_MODE0,
-                                          "MODE1": self.LOOPPID_MODE1,
-                                          "MODE2": self.LOOPPID_MODE2,
-                                          "MODE3": self.LOOPPID_MODE3,
-                                          "INTLKD" : self.LOOPPID_INTLKD,
-                                          "MAN" : self.LOOPPID_MAN,
-                                         "ERR" : self.LOOPPID_ERR,
-                                         "SATHI" : self.LOOPPID_SATHI,
-                                        "SATLO" : self.LOOPPID_SATLO,
-                                        "EN" : self.LOOPPID_EN,
-                                        "OUT" : self.LOOPPID_OUT,
-                                        "IN" : self.LOOPPID_IN,
-                                        "HI_LIM" : self.LOOPPID_HI_LIM,
-                                        "LO_LIM" : self.LOOPPID_LO_LIM,
-                                        "SET0" : self.LOOPPID_SET0,
-                                        "SET1" : self.LOOPPID_SET1,
-                                        "SET2" : self.LOOPPID_SET2,
-                                        "SET3" : self.LOOPPID_SET3}},
-                       "Alarm":{"TT" : {"FP":self.TT_FP_Alarm,
-                                      "BO":self.TT_BO_Alarm},
-                                "PT" : self.PT_Alarm},
-                       "MainAlarm" : self.MainAlarm}
+                                          "BO":self.TT_BO_dic},
+                                    "PT":self.PT_dic,
+                                    "Valve":{"OUT":self.Valve_OUT,
+                                             "INTLKD":self.Valve_INTLKD,
+                                             "MAN":self.Valve_MAN,
+                                             "ERR":self.Valve_ERR},
+                                    "LOOPPID":{"MODE0": self.LOOPPID_MODE0,
+                                               "MODE1": self.LOOPPID_MODE1,
+                                               "MODE2": self.LOOPPID_MODE2,
+                                               "MODE3": self.LOOPPID_MODE3,
+                                               "INTLKD" : self.LOOPPID_INTLKD,
+                                               "MAN" : self.LOOPPID_MAN,
+                                               "ERR" : self.LOOPPID_ERR,
+                                               "SATHI" : self.LOOPPID_SATHI,
+                                               "SATLO" : self.LOOPPID_SATLO,
+                                               "EN" : self.LOOPPID_EN,
+                                               "OUT" : self.LOOPPID_OUT,
+                                               "IN" : self.LOOPPID_IN,
+                                               "HI_LIM" : self.LOOPPID_HI_LIM,
+                                               "LO_LIM" : self.LOOPPID_LO_LIM,
+                                               "SET0" : self.LOOPPID_SET0,
+                                               "SET1" : self.LOOPPID_SET1,
+                                               "SET2" : self.LOOPPID_SET2,
+                                               "SET3" : self.LOOPPID_SET3}},
+                             "Alarm":{"TT" : {"FP":self.TT_FP_Alarm,
+                                              "BO":self.TT_BO_Alarm},
+                                      "PT" : self.PT_Alarm},
+                             "MainAlarm" : self.MainAlarm}
         self.commands_package= pickle.dumps({})
     @QtCore.Slot()
     def run(self):
@@ -5517,7 +5517,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HT1202.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6413"])
                 self.MW.HT2203.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6414"])
 
-                self.MW.HT6214.HeaterSubWindow.Interlock.UpdateColor(True)
+                self.MW.HT6214.HeaterSubWindow.Interlock.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
 
 
                 # self.MW.subwindow.alarmbutton(self.Client.receive_dic)
