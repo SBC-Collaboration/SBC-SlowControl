@@ -80,7 +80,7 @@ class PnID_Alone(QtWidgets.QWidget):
 
 
 class ColoredStatus(QtWidgets.QWidget):
-    # Mode number should be set to 1, 2 and 3
+    # Mode number should be set to 0, 1 and 2
     def __init__(self, parent=None, mode=0):
         super().__init__(parent)
 

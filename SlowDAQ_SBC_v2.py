@@ -4306,62 +4306,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.GroupRD.setLayout(self.GLRD)
         self.GroupRD.move(0 * R, 150 * R)
 
-        # self.Label = QtWidgets.QLabel(self.GroupWR)
-        # self.Label.setObjectName("Label")
-        # self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
-        # self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
-        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
-        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 140 * R))
-        # self.Label.setText("Write")
-        # self.GLWR.addWidget(self.Label)
-
-
-
-
-
-
-
-        # self.resize(1200*R, 600*R)
-        # self.setMinimumSize(1200*R, 600*R)
-        # self.setWindowTitle("Detailed Information")
-        #
-        # # self.Widget = QtWidgets.QWidget(self)
-        # # self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 600*R))
-        #
-        # self.VL = QtWidgets.QVBoxLayout(self)
-        # self.VL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        # self.VL.setAlignment(QtCore.Qt.AlignCenter)
-        # self.VL.setSpacing(5 * R)
-        # # self.Widget.setLayout(self.VL)
-        #
-        # self.HL1 = QtWidgets.QHBoxLayout()
-        # self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        # self.HL1.setAlignment(QtCore.Qt.AlignCenter)
-        # self.HL1.setSpacing(5 * R)
-        #
-        # self.HL2 = QtWidgets.QHBoxLayout()
-        # self.HL2.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        # self.HL2.setAlignment(QtCore.Qt.AlignCenter)
-        # self.HL2.setSpacing(5 * R)
-        #
-        # self.HL3 = QtWidgets.QHBoxLayout()
-        # self.HL3.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        # self.HL3.setAlignment(QtCore.Qt.AlignCenter)
-        # self.HL3.setSpacing(5 * R)
-        #
-        # self.VL.addLayout(self.HL1)
-        # self.VL.addLayout(self.HL2)
-        # self.VL.addLayout(self.HL3)
-        #
-        # self.Label = QtWidgets.QLabel(self)
-        # self.Label.setObjectName("Label")
-        # self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
-        # self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
-        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
-        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 140 * R))
-        # self.Label.setText("Write")
-        # self.HL1.addWidget(self.Label)
-        #
+        
         self.FBSwitch = Menu(self.GroupWR)
         self.FBSwitch.Label.setText("FBSWITCH")
         self.GLWR.addWidget(self.FBSwitch)
@@ -4387,19 +4332,19 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
         self.GLWR.addWidget(self.updatebutton)
 
-        self.Interlock = ColorIndicator(self.GroupRD)
+        self.Interlock = ColoredStatus(self.GroupRD)
         self.Interlock.Label.setText("INTLCK")
         self.GLRD.addWidget(self.Interlock)
 
-        self.Error = ColorIndicator(self.GroupRD)
+        self.Error = ColoredStatus(self.GroupRD)
         self.Error.Label.setText("ERR")
         self.GLRD.addWidget(self.Error)
 
-        self.MANSP = ColorIndicator(self.GroupRD)
+        self.MANSP = ColoredStatus(self.GroupRD)
         self.MANSP.Label.setText("MAN")
         self.GLRD.addWidget(self.MANSP)
 
-        self.SAT = ColorIndicator(self.GroupRD)
+        self.SAT = ColoredStatus(self.GroupRD)
         self.SAT.Label.setText("SAT")
         self.GLRD.addWidget(self.SAT)
 
@@ -4749,11 +4694,11 @@ class AOMutiLoopExpand(QtWidgets.QWidget):
         self.RTD2.Label.setText("RTD2")
         self.HL.addWidget(self.RTD2)
 
-        self.Interlock = ColorIndicator(self)
+        self.Interlock = ColoredStatus(self)
         self.Interlock.Label.setText("INTLCK")
         self.HL.addWidget(self.Interlock)
 
-        self.Error = ColorIndicator(self)
+        self.Error = ColoredStatus(self)
         self.Error.Label.setText("ERR")
         self.HL.addWidget(self.Error)
 
