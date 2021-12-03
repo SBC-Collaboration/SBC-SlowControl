@@ -482,58 +482,58 @@ class PLC:
                 # print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
                 # print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
 
-            # Raw_LOOPPID_2 = Raw_LOOPPID_4 = Raw_LOOPPID_6 = Raw_LOOPPID_8 = Raw_LOOPPID_10 = Raw_LOOPPID_12 = Raw_LOOPPID_14 = Raw_LOOPPID_16 ={}
-            # for key in self.LOOPPID_ADR_BASE:
-            #     self.LOOPPID_MODE0[key] = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
-            #     self.LOOPPID_MODE1[key] = self.ReadCoil(2, self.LOOPPID_ADR_BASE[key])
-            #     self.LOOPPID_MODE2[key] = self.ReadCoil(2**2, self.LOOPPID_ADR_BASE[key])
-            #     self.LOOPPID_MODE3[key] = self.ReadCoil(2**3, self.LOOPPID_ADR_BASE[key])
-            #     self.LOOPPID_INTLKD[key] = self.ReadCoil(2**8, self.LOOPPID_ADR_BASE[key])
-            #     self.LOOPPID_MAN[key] = self.ReadCoil(2 ** 9, self.LOOPPID_ADR_BASE[key])
-            #     self.LOOPPID_ERR[key] = self.ReadCoil(2 ** 10, self.LOOPPID_ADR_BASE[key])
-            #     self.LOOPPID_SATHI[key] = self.ReadCoil(2 ** 11, self.LOOPPID_ADR_BASE[key])
-            #     self.LOOPPID_SATLO[key] = self.ReadCoil(2 ** 12, self.LOOPPID_ADR_BASE[key])
-            #     self.LOOPPID_EN[key] = self.ReadCoil(2 ** 15, self.LOOPPID_ADR_BASE[key])
-            #     Raw_LOOPPID_2[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key]+2, count=2, unit=0x01)
-            #     Raw_LOOPPID_4[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 4, count=2,
-            #                                                                unit=0x01)
-            #     Raw_LOOPPID_6[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 6, count=2,
-            #                                                                unit=0x01)
-            #     Raw_LOOPPID_8[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 8, count=2,
-            #                                                                unit=0x01)
-            #     Raw_LOOPPID_10[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 10, count=2,
-            #                                                                unit=0x01)
-            #     Raw_LOOPPID_12[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 12, count=2,
-            #                                                                unit=0x01)
-            #     Raw_LOOPPID_14[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 14, count=2,
-            #                                                                unit=0x01)
-            #     Raw_LOOPPID_16[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 16, count=2,
-            #                                                                unit=0x01)
-            #
-            #     self.LOOPPID_OUT[key] = round(
-            #         struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_2[key].getRegister(0 + 1),
-            #                                         Raw_LOOPPID_2[key].getRegister(0)))[0], 3)
-            #     self.LOOPPID_IN[key] = round(
-            #         struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
-            #                                         Raw_LOOPPID_4[key].getRegister(0)))[0], 3)
-            #     self.LOOPPID_HI_LIM[key] = round(
-            #         struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_6[key].getRegister(0 + 1),
-            #                                         Raw_LOOPPID_6[key].getRegister(0)))[0], 3)
-            #     self.LOOPPID_LO_LIM[key] = round(
-            #         struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_8[key].getRegister(0 + 1),
-            #                                         Raw_LOOPPID_8[key].getRegister(0)))[0], 3)
-            #     self.LOOPPID_SET0[key] = round(
-            #         struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_10[key].getRegister(0 + 1),
-            #                                         Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
-            #     self.LOOPPID_SET1[key] = round(
-            #         struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_12[key].getRegister(0 + 1),
-            #                                         Raw_LOOPPID_12[key].getRegister(0)))[0], 3)
-            #     self.LOOPPID_SET2[key] = round(
-            #         struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
-            #                                         Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
-            #     self.LOOPPID_SET3[key] = round(
-            #         struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
-            #                                         Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
+            Raw_LOOPPID_2 = Raw_LOOPPID_4 = Raw_LOOPPID_6 = Raw_LOOPPID_8 = Raw_LOOPPID_10 = Raw_LOOPPID_12 = Raw_LOOPPID_14 = Raw_LOOPPID_16 ={}
+            for key in self.LOOPPID_ADR_BASE:
+                self.LOOPPID_MODE0[key] = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE1[key] = self.ReadCoil(2, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE2[key] = self.ReadCoil(2**2, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE3[key] = self.ReadCoil(2**3, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_INTLKD[key] = self.ReadCoil(2**8, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MAN[key] = self.ReadCoil(2 ** 9, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_ERR[key] = self.ReadCoil(2 ** 10, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_SATHI[key] = self.ReadCoil(2 ** 11, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_SATLO[key] = self.ReadCoil(2 ** 12, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_EN[key] = self.ReadCoil(2 ** 15, self.LOOPPID_ADR_BASE[key])
+                Raw_LOOPPID_2[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key]+2, count=2, unit=0x01)
+                Raw_LOOPPID_4[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 4, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_6[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 6, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_8[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 8, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_10[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 10, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_12[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 12, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_14[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 14, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_16[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 16, count=2,
+                                                                           unit=0x01)
+
+                self.LOOPPID_OUT[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_2[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_2[key].getRegister(0)))[0], 3)
+                self.LOOPPID_IN[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_4[key].getRegister(0)))[0], 3)
+                self.LOOPPID_HI_LIM[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_6[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_6[key].getRegister(0)))[0], 3)
+                self.LOOPPID_LO_LIM[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_8[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_8[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET0[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_10[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET1[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_12[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_12[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET2[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET3[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
 
 
             #test the writing function
@@ -552,135 +552,6 @@ class PLC:
             # print("other",self.LOOPPID_HI_LIM, "\n", self.LOOPPID_LO_LIM, "\n", self.LOOPPID_SET0, "\n", self.LOOPPID_SET1,
             #           "\n")
 
-
-
-
-            # PT80 (Cold Vacuum Conduit Pressure)
-            # Raw = self.Client.read_holding_registers(0xA0, count = 2, unit = 0x01)
-            # self.PT80 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 7)
-            #
-            # Flow valve
-            #            Raw = self.Client.read_holding_registers(0x, count = 2, unit = 0x01)
-            #            self.FlowValve = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1),
-            #            Raw.getRegister(0)))[0], 0)
-
-            # Bottom chiller
-            # Raw = self.Client.read_holding_registers(0xA8, count = 4, unit = 0x01)
-            # self.BottomChillerSetpoint = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            # self.BottomChillerTemp = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            # Raw = self.Client.read_coils(0x10, count = 1, unit = 0x01)
-            # self.BottomChillerState = Raw.bits[0]
-            #            self.BottomChillerPowerReset = Raw.bits[0]
-
-            # Top chiller
-            # Raw = self.Client.read_holding_registers(0xB0, count = 4, unit = 0x01)
-            # self.TopChillerSetpoint = round(struct.unpack
-            # ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            # self.TopChillerTemp = round(struct.unpack
-            # ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            # Raw = self.Client.read_coils(0x13, count = 1, unit = 0x01)
-            # self.TopChillerState = Raw.bits[0]
-
-            # Camera chiller
-            # Raw = self.Client.read_holding_registers(0xBA, count = 4, unit = 0x01)
-            # self.CameraChillerSetpoint = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            # self.CameraChillerTemp = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            # Raw = self.Client.read_coils(0x15, count = 1, unit = 0x01)
-            # self.CameraChillerState = Raw.bits[0]
-
-            # Water chiller
-            #             Raw = self.Client.read_holding_registers(0xC4, count = 4, unit = 0x01)
-            #             self.WaterChillerSetpoint = round(struct.unpack("<f", struct.pack
-            #             ("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #             self.WaterChillerTemp = round(struct.unpack("<f", struct.pack
-            #             ("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.WaterChillerPressure = round(struct.unpack("<f", struct.pack
-            #            ("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #             Raw = self.Client.read_coils(0x17, count = 1, unit = 0x01)
-            #             self.WaterChillerState = Raw.bits[0]
-
-            # Heaters
-            # Raw = self.Client.read_holding_registers(0xC8, count = 8, unit = 0x01)
-            # self.InnerPower = round(struct.unpack
-            # ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            # self.OuterClosePower = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 1)
-            # self.OuterFarPower = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(5), Raw.getRegister(4)))[0], 1)
-            # self.FreonPower = round(struct.unpack("<f", struct.pack
-            # ("<HH", Raw.getRegister(7), Raw.getRegister(6)))[0], 1)
-
-            # Hot/cold region
-            #             Raw = self.Client.read_holding_registers(0xD0, count = 4, unit = 0x01)
-            #             self.ColdRegionSetpoint = round(struct.unpack
-            #             ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #             self.HotRegionSetpoint = round(struct.unpack
-            #             ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 1)
-            #          self.HotRegionP = round(struct.unpack
-            #          ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.HotRegionI = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.HotRegionD = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.ColdRegionP = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.ColdRegionI = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #            self.ColdRegionD = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(3), Raw.getRegister(2)))[0], 2)
-            #             Raw = self.Client.read_coils(0x19, count = 1, unit = 0x01)
-            #             self.HotRegionPIDState = Raw.bits[0]
-            #            self.ClodRegionPIDState = Raw.bits[0]
-
-            # Cameras
-            #            Raw = self.Client.read_holding_registers(0x, count = 24, unit = 0x01)
-            #            self.Camera0Temp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera0Humidity = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #            self.Camera0AirTemp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera1Temp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera1Humidity = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #            self.Camera1AirTemp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera2Temp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera2Humidity = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #            self.Camera2AirTemp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera3Temp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.Camera3Humidity = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
-            #            self.Camera3AirTemp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-
-            # Water system
-            #            Raw = self.Client.read_holding_registers(0x, count = 12, unit = 0x01)
-            #            self.WaterFlow = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.WaterTemp = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.WaterConductivityBefore = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.WaterConductivityAfter = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.WaterPressure = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            self.WaterLevel = round(struct.unpack
-            #            ("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
-            #            Raw = self.Client.read_coils(0x, count = 1, unit = 0x01)
-            #            self.WaterPrimingPower = Raw.bits[0]
-            #            self.WaterPrimingStatus = Raw.bits[1]
-            #            self.BeetleStatus = Raw.bits[2]
 
             # PLC
             Raw = self.Client.read_holding_registers(0x3E9, count=1, unit=0x01)
@@ -1262,386 +1133,43 @@ class UpdateServer(QtCore.QObject):
 
 
         self.TT_FP_dic_ini = self.PLC.TT_FP_dic
-        # {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
-        #                                        "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
-        #                                        "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
-        #                                        "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
-        #                                        "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
-        #                                        "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
-        #                                        "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
-        #                                        "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
-        #                                        "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
-        #                                        "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
-        #                                        "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
-        #                                        "TT6412": 0, "TT6413": 0, "TT6414": 0}
-
         self.TT_BO_dic_ini = self.PLC.TT_BO_dic
-            # {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0,
-            #                                    "TT4330": 0,
-            #                                    "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
-            #                                    "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
-
         self.PT_dic_ini = self.PLC.PT_dic
-            # {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
-            #                              "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-            #                              "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
-            #                              "PT4322": 0, "PT4325": 0, "PT6302": 0}
-
         self.TT_FP_LowLimit_ini = self.PLC.TT_FP_LowLimit
-            # {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0,
-            #                                              "TT2442": 0,
-            #                                              "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0,
-            #                                              "TT2431": 0,
-            #                                              "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0,
-            #                                              "TT2415": 0,
-            #                                              "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0,
-            #                                              "TT2402": 0,
-            #                                              "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0,
-            #                                              "TT2408": 0,
-            #                                              "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0,
-            #                                              "TT2421": 0,
-            #                                              "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0,
-            #                                              "TT2426": 0,
-            #                                              "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0,
-            #                                              "TT2445": 0,
-            #                                              "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0,
-            #                                              "TT2447": 0,
-            #                                              "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0,
-            #                                              "TT6401": 0,
-            #                                              "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0,
-            #                                              "TT6411": 0,
-            #                                              "TT6412": 0, "TT6413": 0, "TT6414": 0}
-
         self.TT_FP_HighLimit_ini = self.PLC.TT_FP_HighLimit
-            # {"TT2420": 30, "TT2422": 30, "TT2424": 30, "TT2425": 30,
-            #                                                "TT2442": 30,
-            #                                                "TT2403": 30, "TT2418": 30, "TT2427": 30, "TT2429": 30,
-            #                                                "TT2431": 30,
-            #                                                "TT2441": 30, "TT2414": 30, "TT2413": 30, "TT2412": 30,
-            #                                                "TT2415": 30,
-            #                                                "TT2409": 30, "TT2436": 30, "TT2438": 30, "TT2440": 30,
-            #                                                "TT2402": 30,
-            #                                                "TT2411": 30, "TT2443": 30, "TT2417": 30, "TT2404": 30,
-            #                                                "TT2408": 30,
-            #                                                "TT2407": 30, "TT2406": 30, "TT2428": 30, "TT2432": 30,
-            #                                                "TT2421": 30,
-            #                                                "TT2416": 30, "TT2439": 30, "TT2419": 30, "TT2423": 30,
-            #                                                "TT2426": 30,
-            #                                                "TT2430": 30, "TT2450": 30, "TT2401": 30, "TT2449": 30,
-            #                                                "TT2445": 30,
-            #                                                "TT2444": 30, "TT2435": 30, "TT2437": 30, "TT2446": 30,
-            #                                                "TT2447": 30,
-            #                                                "TT2448": 30, "TT2410": 30, "TT2405": 30, "TT6220": 30,
-            #                                                "TT6401": 30,
-            #                                                "TT6404": 30, "TT6405": 30, "TT6406": 30, "TT6410": 30,
-            #                                                "TT6411": 30,
-            #                                                "TT6412": 30, "TT6413": 30, "TT6414": 30}
-
         self.TT_BO_LowLimit_ini = self.PLC.TT_BO_LowLimit
-            # = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0,
-            #                                              "TT2119": 0, "TT4330": 0,
-            #                                              "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0,
-            #                                              "TT6222": 0,
-            #                                              "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0,
-            #                                              "TT6416": 0}
-
         self.TT_BO_HighLimit_ini = self.PLC.TT_BO_HighLimit
-            # = {"TT2101": 30, "TT2111": 30, "TT2113": 30, "TT2118": 30,
-            #                                                "TT2119": 30, "TT4330": 30,
-            #                                                "TT6203": 30, "TT6207": 30, "TT6211": 30, "TT6213": 30,
-            #                                                "TT6222": 30,
-            #                                                "TT6407": 30, "TT6408": 30, "TT6409": 30, "TT6415": 30,
-            #                                                "TT6416": 30}
-
         self.PT_LowLimit_ini = self.PLC.PT_LowLimit
-            # {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
-            #                                        "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-            #                                        "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
-            #                                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
         self.PT_HighLimit_ini = self.PLC.PT_HighLimit
-            # = {"PT1325": 300, "PT2121": 300, "PT2316": 300, "PT2330": 300,
-            #                                          "PT2335": 300,
-            #                                          "PT3308": 300, "PT3309": 300, "PT3311": 300, "PT3314": 300,
-            #                                          "PT3320": 300,
-            #                                          "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300,
-            #                                          "PT4319": 300,
-            #                                          "PT4322": 300, "PT4325": 300, "PT6302": 300}
-
         self.TT_FP_Activated = self.PLC.TT_FP_Activated
-            # = {"TT2420": True, "TT2422": True, "TT2424": True, "TT2425": True,
-            #                                            "TT2442": True,
-            #                                            "TT2403": True, "TT2418": True, "TT2427": True, "TT2429": True,
-            #                                            "TT2431": True,
-            #                                            "TT2441": True, "TT2414": True, "TT2413": True, "TT2412": True,
-            #                                            "TT2415": True,
-            #                                            "TT2409": True, "TT2436": True, "TT2438": True, "TT2440": True,
-            #                                            "TT2402": True,
-            #                                            "TT2411": True, "TT2443": True, "TT2417": True, "TT2404": True,
-            #                                            "TT2408": True,
-            #                                            "TT2407": True, "TT2406": True, "TT2428": True, "TT2432": True,
-            #                                            "TT2421": True,
-            #                                            "TT2416": True, "TT2439": True, "TT2419": True, "TT2423": True,
-            #                                            "TT2426": True,
-            #                                            "TT2430": True, "TT2450": True, "TT2401": True, "TT2449": True,
-            #                                            "TT2445": True,
-            #                                            "TT2444": True, "TT2435": True, "TT2437": True, "TT2446": True,
-            #                                            "TT2447": True,
-            #                                            "TT2448": True, "TT2410": True, "TT2405": True, "TT6220": True,
-            #                                            "TT6401": True,
-            #                                            "TT6404": True, "TT6405": True, "TT6406": True, "TT6410": True,
-            #                                            "TT6411": True,
-            #                                            "TT6412": True, "TT6413": True, "TT6414": True}
-
         self.TT_BO_Activated_ini = self.PLC.TT_BO_Activated
-            # = {"TT2101": True, "TT2111": True, "TT2113": True,
-            #                                                "TT2118": True, "TT2119": True, "TT4330": True,
-            #                                                "TT6203": True, "TT6207": True, "TT6211": True,
-            #                                                "TT6213": True, "TT6222": True,
-            #                                                "TT6407": True, "TT6408": True, "TT6409": True,
-            #                                                "TT6415": True, "TT6416": True}
-
         self.PT_Activated_ini = self.PLC.PT_Activated
-            # = {"PT1325": True, "PT2121": True, "PT2316": True, "PT2330": True,
-            #                                          "PT2335": True,
-            #                                          "PT3308": True, "PT3309": True, "PT3311": True, "PT3314": True,
-            #                                          "PT3320": True,
-            #                                          "PT3332": True, "PT3333": True, "PT4306": True, "PT4315": True,
-            #                                          "PT4319": True,
-            #                                          "PT4322": True, "PT4325": True, "PT6302": True}
-
         self.TT_FP_Alarm_ini = self.PLC.TT_FP_Alarm
-            # = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False,
-            #                                        "TT2442": False,
-            #                                        "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False,
-            #                                        "TT2431": False,
-            #                                        "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False,
-            #                                        "TT2415": False,
-            #                                        "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False,
-            #                                        "TT2402": False,
-            #                                        "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False,
-            #                                        "TT2408": False,
-            #                                        "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False,
-            #                                        "TT2421": False,
-            #                                        "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False,
-            #                                        "TT2426": False,
-            #                                        "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False,
-            #                                        "TT2445": False,
-            #                                        "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False,
-            #                                        "TT2447": False,
-            #                                        "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False,
-            #                                        "TT6401": False,
-            #                                        "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False,
-            #                                        "TT6411": False,
-            #                                        "TT6412": False, "TT6413": False, "TT6414": False}
-
         self.TT_BO_Alarm_ini = self.PLC.TT_BO_Alarm
-            # = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False,
-            #                                        "TT2119": False, "TT4330": False,
-            #                                        "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False,
-            #                                        "TT6222": False,
-            #                                        "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False,
-            #                                        "TT6416": False}
-
         self.PT_Alarm_ini = self.PLC.PT_Alarm
-            # = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False,
-            #                                  "PT2335": False,
-            #                                  "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False,
-            #                                  "PT3320": False,
-            #                                  "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False,
-            #                                  "PT4319": False,
-            #                                  "PT4322": False, "PT4325": False, "PT6302": False}
-
         self.MainAlarm_ini = self.PLC.MainAlarm
-
-
-
         self.Valve_OUT_ini = self.PLC.Valve_OUT
-            # = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0,
-            #                                    "PV4321": 0,
-            #                                    "PV4324": 0, "PV5305": 0, "PV5306": 0,
-            #                                    "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
-            #                                    "SV3325": 0, "SV3326": 0, "SV3329": 0,
-            #                                    "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
-            #                                    "SV4337": 0, "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0}
         self.Valve_MAN_ini = self.PLC.Valve_MAN
-            # = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False,
-            #                                    "PV4318": False, "PV4321": False,
-            #                                    "PV4324": False, "PV5305": True, "PV5306": True,
-            #                                    "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True,
-            #                                    "SV3322": True,
-            #                                    "SV3325": True, "SV3326": True, "SV3329": True,
-            #                                    "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False,
-            #                                    "SV4332": False,
-            #                                    "SV4337": False, "HFSV3312": True, "HFSV3323": True, "HFSV3331": True}
         self.Valve_INTLKD_ini = self.PLC.Valve_INTLKD
-            # = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False,
-            #                                          "PV4318": False, "PV4321": False,
-            #                                          "PV4324": False, "PV5305": False, "PV5306": False,
-            #                                          "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False,
-            #                                          "SV3322": False,
-            #                                          "SV3325": False, "SV3326": False, "SV3329": False,
-            #                                          "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False,
-            #                                          "SV4332": False,
-            #                                          "SV4337": False, "HFSV3312": False, "HFSV3323": False,
-            #                                          "HFSV3331": False}
         self.Valve_ERR_ini = self.PLC.Valve_ERR
-            # = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False,
-            #                                    "PV4318": False, "PV4321": False,
-            #                                    "PV4324": False, "PV5305": False, "PV5306": False,
-            #                                    "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False,
-            #                                    "SV3322": False,
-            #                                    "SV3325": False, "SV3326": False, "SV3329": False,
-            #                                    "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False,
-            #                                    "SV4332": False,
-            #                                    "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
-
-
-
         self.LOOPPID_MODE0_ini = self.PLC.LOOPPID_MODE0
-            # = {'SERVO3321': True, 'HTR6225': True, 'HTR2123': True,
-            #                                            'HTR2124': True, 'HTR2125': True,
-            #                                            'HTR1202': True, 'HTR2203': True, 'HTR6202': True,
-            #                                            'HTR6206': True, 'HTR6210': True,
-            #                                            'HTR6223': True, 'HTR6224': True, 'HTR6219': True,
-            #                                            'HTR6221': True, 'HTR6214': True}
-
         self.LOOPPID_MODE1_ini = self.PLC.LOOPPID_MODE1
-            # = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False,
-            #                                            'HTR2124': False, 'HTR2125': False,
-            #                                            'HTR1202': False, 'HTR2203': False, 'HTR6202': False,
-            #                                            'HTR6206': False, 'HTR6210': False,
-            #                                            'HTR6223': False, 'HTR6224': False, 'HTR6219': False,
-            #                                            'HTR6221': False, 'HTR6214': False}
-
         self.LOOPPID_MODE2_ini = self.PLC.LOOPPID_MODE2
-            # = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False,
-            #                                            'HTR2124': False, 'HTR2125': False,
-            #                                            'HTR1202': False, 'HTR2203': False, 'HTR6202': False,
-            #                                            'HTR6206': False, 'HTR6210': False,
-            #                                            'HTR6223': False, 'HTR6224': False, 'HTR6219': False,
-            #                                            'HTR6221': False, 'HTR6214': False}
-
         self.LOOPPID_MODE3_ini = self.PLC.LOOPPID_MODE3
-            # = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False,
-            #                                            'HTR2124': False, 'HTR2125': False,
-            #                                            'HTR1202': False, 'HTR2203': False, 'HTR6202': False,
-            #                                            'HTR6206': False, 'HTR6210': False,
-            #                                            'HTR6223': False, 'HTR6224': False, 'HTR6219': False,
-            #                                            'HTR6221': False, 'HTR6214': False}
-
         self.LOOPPID_INTLKD_ini = self.PLC.LOOPPID_INTLKD
-            # = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False,
-            #                                              'HTR2124': False,
-            #                                              'HTR2125': False,
-            #                                              'HTR1202': False, 'HTR2203': False, 'HTR6202': False,
-            #                                              'HTR6206': False, 'HTR6210': False,
-            #                                              'HTR6223': False, 'HTR6224': False, 'HTR6219': False,
-            #                                              'HTR6221': False, 'HTR6214': False}
-
         self.LOOPPID_MAN_ini = self.PLC.LOOPPID_MAN
-            # = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False,
-            #                                        'HTR2124': False,
-            #                                        'HTR2125': False,
-            #                                        'HTR1202': False, 'HTR2203': False, 'HTR6202': False,
-            #                                        'HTR6206': False, 'HTR6210': False,
-            #                                        'HTR6223': False, 'HTR6224': False, 'HTR6219': False,
-            #                                        'HTR6221': False, 'HTR6214': False}
-
         self.LOOPPID_ERR_ini = self.PLC.LOOPPID_ERR
-            # = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False,
-            #                                        'HTR2124': False,
-            #                                        'HTR2125': False,
-            #                                        'HTR1202': False, 'HTR2203': False, 'HTR6202': False,
-            #                                        'HTR6206': False, 'HTR6210': False,
-            #                                        'HTR6223': False, 'HTR6224': False, 'HTR6219': False,
-            #                                        'HTR6221': False, 'HTR6214': False}
-
         self.LOOPPID_SATHI_ini = self.PLC.LOOPPID_SATHI
-            # = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False,
-            #                                            'HTR2124': False,
-            #                                            'HTR2125': False,
-            #                                            'HTR1202': False, 'HTR2203': False, 'HTR6202': False,
-            #                                            'HTR6206': False, 'HTR6210': False,
-            #                                            'HTR6223': False, 'HTR6224': False, 'HTR6219': False,
-            #                                            'HTR6221': False, 'HTR6214': False}
-
         self.LOOPPID_SATLO_ini = self.PLC.LOOPPID_SATLO
-            # = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False,
-            #                                            'HTR2124': False,
-            #                                            'HTR2125': False,
-            #                                            'HTR1202': False, 'HTR2203': False, 'HTR6202': False,
-            #                                            'HTR6206': False, 'HTR6210': False,
-            #                                            'HTR6223': False, 'HTR6224': False, 'HTR6219': False,
-            #                                            'HTR6221': False, 'HTR6214': False}
-
         self.LOOPPID_EN_ini = self.PLC.LOOPPID_EN
-            # = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False,
-            #                                      'HTR2124': False,
-            #                                      'HTR2125': False,
-            #                                      'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False,
-            #                                      'HTR6210': False,
-            #                                      'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False,
-            #                                      'HTR6214': False}
-
         self.LOOPPID_OUT_ini = self.PLC.LOOPPID_OUT
-            # = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-            #                                        'HTR2125': 0,
-            #                                        'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-            #                                        'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
-
         self.LOOPPID_IN_ini = self.PLC.LOOPPID_IN
-            # = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-            #                                      'HTR2125': 0,
-            #                                      'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-            #                                      'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
-
         self.LOOPPID_HI_LIM_ini = self.PLC.LOOPPID_HI_LIM
-            # = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-            #                                              'HTR2125': 0,
-            #                                              'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0,
-            #                                              'HTR6210': 0,
-            #                                              'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0,
-            #                                              'HTR6214': 0}
-
         self.LOOPPID_LO_LIM_ini = self.PLC.LOOPPID_LO_LIM
-            # = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-            #                                              'HTR2125': 0,
-            #                                              'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0,
-            #                                              'HTR6210': 0,
-            #                                              'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0,
-            #                                              'HTR6214': 0}
-
         self.LOOPPID_SET0_ini = self.PLC.LOOPPID_SET0
-            # = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-            #                                          'HTR2125': 0,
-            #                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0,
-            #                                          'HTR6210': 0,
-            #                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0,
-            #                                          'HTR6214': 0}
-
         self.LOOPPID_SET1_ini = self.PLC.LOOPPID_SET1
-            # = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-            #                                          'HTR2125': 0,
-            #                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0,
-            #                                          'HTR6210': 0,
-            #                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0,
-            #                                          'HTR6214': 0}
-
         self.LOOPPID_SET2_ini = self.PLC.LOOPPID_SET2
-            # = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-            #                                          'HTR2125': 0,
-            #                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0,
-            #                                          'HTR6210': 0,
-            #                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0,
-            #                                          'HTR6214': 0}
-
         self.LOOPPID_SET3_ini = self.PLC.LOOPPID_SET3
-            # = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
-            #                                          'HTR2125': 0,
-            #                                          'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0,
-            #                                          'HTR6210': 0,
-            #                                          'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0,
-            #                                          'HTR6214': 0}
 
         self.data_dic={"data":{"TT":{"FP":self.TT_FP_dic_ini,
                                      "BO":self.TT_BO_dic_ini},
@@ -1672,35 +1200,7 @@ class UpdateServer(QtCore.QObject):
                                       "BO":self.TT_BO_Alarm_ini},
                                 "PT" : self.PT_Alarm_ini},
                        "MainAlarm" : self.MainAlarm_ini}
-        # self.data_dic = {"data": {"TT": {"FP": self.PLC.TT_FP_dic_ini,
-        #                                  "BO": self.PLC.TT_BO_dic_ini},
-        #                           "PT": self.PLC.PT_dic_ini,
-        #                           "Valve": {"OUT": self.PLC.Valve_OUT_ini,
-        #                                     "INTLKD": self.PLC.Valve_INTLKD_ini,
-        #                                     "MAN": self.PLC.Valve_MAN_ini,
-        #                                     "ERR": self.PLC.Valve_ERR_ini},
-        #                           "LOOPPID": {"MODE0": self.PLC.LOOPPID_MODE0_ini,
-        #                                       "MODE1": self.PLC.LOOPPID_MODE1_ini,
-        #                                       "MODE2": self.PLC.LOOPPID_MODE2_ini,
-        #                                       "MODE3": self.PLC.LOOPPID_MODE3_ini,
-        #                                       "INTLKD": self.PLC.LOOPPID_INTLKD_ini,
-        #                                       "MAN": self.PLC.LOOPPID_MAN_ini,
-        #                                       "ERR": self.PLC.LOOPPID_ERR_ini,
-        #                                       "SATHI": self.PLC.LOOPPID_SATHI_ini,
-        #                                       "SATLO": self.PLC.LOOPPID_SATLO_ini,
-        #                                       "EN": self.PLC.LOOPPID_EN_ini,
-        #                                       "OUT": self.PLC.LOOPPID_OUT_ini,
-        #                                       "IN": self.PLC.LOOPPID_IN_ini,
-        #                                       "HI_LIM": self.PLC.LOOPPID_HI_LIM_ini,
-        #                                       "LO_LIM": self.PLC.LOOPPID_LO_LIM_ini,
-        #                                       "SET0": self.PLC.LOOPPID_SET0_ini,
-        #                                       "SET1": self.PLC.LOOPPID_SET1_ini,
-        #                                       "SET2": self.PLC.LOOPPID_SET2_ini,
-        #                                       "SET3": self.PLC.LOOPPID_SET3_ini}},
-        #                  "Alarm": {"TT": {"FP": self.PLC.TT_FP_dic_ini,
-        #                                   "BO": self.PLC.TT_BO_dic_ini},
-        #                            "PT": self.PLC.PT_Alarm_ini},
-        #                  "MainAlarm": self.PLC.MainAlarm_ini}
+
         self.data_package=pickle.dumps(self.data_dic)
 
 
@@ -1736,13 +1236,10 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
-        # for key in self.PLC.TT_FP_dic:
-        #     self.data_dic["data"]["TT"]["FP"][key]=self.PLC.TT_FP_dic[key]
-        #     print(key, self.data_dic["data"]["TT"]["FP"][key])
+
 
         for key in self.PLC.TT_FP_dic:
             self.TT_FP_dic_ini[key] = self.PLC.TT_FP_dic[key]
-            print(key, self.TT_FP_dic_ini[key])
 
         for key in self.PLC.TT_BO_dic:
             self.data_dic["data"]["TT"]["BO"][key]=self.PLC.TT_BO_dic[key]
