@@ -631,7 +631,7 @@ class Indicator(QtWidgets.QWidget):
         self.Field.Property = False
         self.Field.setProperty("Alarm", False)
 
-        self.Unit = " °C"
+        self.Unit = " K"
         self.SetValue(0.)
 
     def SetValue(self, value):
