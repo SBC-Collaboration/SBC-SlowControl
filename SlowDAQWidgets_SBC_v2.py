@@ -119,7 +119,7 @@ class ColoredStatus(QtWidgets.QWidget):
             self.Field.setStyleSheet(
                 "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_RED +
                 "} QWidget[Active = false]{" + C_MEDIUM_GREY + "}")
-            # mode 1: color is grey when active is false and green when active is true
+            # mode 2: color is grey when active is false and green when active is true
         elif self.Mode == 2:
             self.Field.setStyleSheet(
                 "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_GREEN +
