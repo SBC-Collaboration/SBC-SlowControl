@@ -1253,14 +1253,14 @@ class UpdateServer(QtCore.QObject):
             self.TT_BO_Alarm_ini[key] = self.PLC.TT_BO_Alarm[key]
         for key in self.PLC.PT_dic:
             self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
-        # for key in self.PLC.LOOPMODE0:
-        #     self.data.dic["data"]["LOOPPID"]["MODE0"][key] = self.PLC.LOOPPID_MODE0[key]
-        # for key in self.PLC.LOOPMODE1:
-        #     self.data.dic["data"]["LOOPPID"]["MODE1"][key] = self.PLC.LOOPPID_MODE1[key]
-        # for key in self.PLC.LOOPMODE2:
-        #     self.data.dic["data"]["LOOPPID"]["MODE2"][key] = self.PLC.LOOPPID_MODE2[key]
-        # for key in self.PLC.LOOPMODE3:
-        #     self.data.dic["data"]["LOOPPID"]["MODE3"][key] = self.PLC.LOOPPID_MODE3[key]
+        for key in self.PLC.LOOPPID_MODE0:
+            self.LOOPPID_MODE0_ini[key] = self.PLC.LOOPPID_MODE0[key]
+        for key in self.PLC.LOOPPID_MODE1:
+            self.LOOPPID_MODE1_ini[key] = self.PLC.LOOPPID_MODE1[key]
+        for key in self.PLC.LOOPPID_MODE2:
+            self.LOOPPID_MODE2_ini[key] = self.PLC.LOOPPID_MODE2[key]
+        for key in self.PLC.LOOPPID_MODE3:
+            self.LOOPPID_MODE3_ini[key] = self.PLC.LOOPPID_MODE3[key]
         for key in self.PLC.LOOPPID_INTLKD:
             self.LOOPPID_INTLKD_ini[key] = self.PLC.LOOPPID_INTLKD[key]
         for key in self.PLC.LOOPPID_MAN:
