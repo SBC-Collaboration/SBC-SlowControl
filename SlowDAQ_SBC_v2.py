@@ -4332,19 +4332,19 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
         self.GLWR.addWidget(self.updatebutton)
 
-        self.Interlock = ColoredStatus(self.GroupRD, mode = 2)
+        self.Interlock = ColoredStatus(self.GroupRD, mode = 1)
         self.Interlock.Label.setText("INTLCK")
         self.GLRD.addWidget(self.Interlock)
 
-        self.Error = ColoredStatus(self.GroupRD, mode = 2)
+        self.Error = ColoredStatus(self.GroupRD, mode = 1)
         self.Error.Label.setText("ERR")
         self.GLRD.addWidget(self.Error)
 
-        self.MANSP = ColoredStatus(self.GroupRD, mode = 1)
+        self.MANSP = ColoredStatus(self.GroupRD, mode = 2)
         self.MANSP.Label.setText("MAN")
         self.GLRD.addWidget(self.MANSP)
 
-        self.SAT = ColoredStatus(self.GroupRD, mode = 2)
+        self.SAT = ColoredStatus(self.GroupRD, mode = 1)
         self.SAT.Label.setText("SAT")
         self.GLRD.addWidget(self.SAT)
 

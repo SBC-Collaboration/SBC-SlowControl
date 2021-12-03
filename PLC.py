@@ -917,9 +917,9 @@ class UpdateDataBase(QtCore.QObject):
         self.Running = False
         self.base_period=1
         self.para_a=0
-        self.rate_a=10
+        self.rate_a=100
         self.para_b=0
-        self.rate_b=10
+        self.rate_b=100
         # c is for valve status
         # self.para_c = 0
         # self.rate_c = 10
