@@ -4373,7 +4373,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.HIGH.Label.setText("HIGH")
         self.GLRD.addWidget(self.HIGH)
 
-        self.LOW = SetPoint(self.GroupRD)
+        self.LOW = Indicator(self.GroupRD)
         self.LOW.Label.setText("LOW")
         self.GLRD.addWidget(self.LOW)
 
@@ -5520,7 +5520,10 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HT6214.HeaterSubWindow.Interlock.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
                 self.MW.HT6214.HeaterSubWindow.Error.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6214"])
                 self.MW.HT6214.HeaterSubWindow.MANSP.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
-                self.MW.HT6214.HeaterSubWindow.SAT.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["SAT"]["HTR6214"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR6214"]]:
+                    self.MW.HT6214.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HT6214.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HT6214.HeaterSubWindow.ModeREAD.Field.setText(self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
                                                                                             self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"]))
                 self.MW.HT6214.HeaterSubWindow.EN.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6214"])
