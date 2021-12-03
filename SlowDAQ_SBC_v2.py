@@ -4337,7 +4337,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.Interlock.Mode = 2
         self.GLRD.addWidget(self.Interlock)
 
-        self.Error = ColoredStatus(self.GroupRD)
+        self.Error = ColoredStatus(self.GroupRD, mode = 2)
         self.Error.Label.setText("ERR")
         self.Error.Mode = 2
         self.GLRD.addWidget(self.Error)
