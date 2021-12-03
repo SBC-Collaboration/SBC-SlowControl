@@ -199,7 +199,7 @@ class PLC:
                          "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                          "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
                          "PT4322": False, "PT4325": False, "PT6302": False}
-        self.MainAlarm_ini = self.MainAlarm = False
+        self.MainAlarm = False
         self.nTT_BO = len(self.TT_BO_address)
         self.nTT_FP = len(self.TT_FP_address)
         self.nPT = len(self.PT_address)
@@ -1450,6 +1450,8 @@ class UpdateServer(QtCore.QObject):
             #                                  "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False,
             #                                  "PT4319": False,
             #                                  "PT4322": False, "PT4325": False, "PT6302": False}
+
+        self.MainAlarm_ini = self.PLC.MainAlarm
 
 
 
