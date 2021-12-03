@@ -4306,7 +4306,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.GroupRD.setLayout(self.GLRD)
         self.GroupRD.move(0 * R, 150 * R)
 
-        
+
         self.FBSwitch = Menu(self.GroupWR)
         self.FBSwitch.Label.setText("FBSWITCH")
         self.GLWR.addWidget(self.FBSwitch)
@@ -4334,14 +4334,17 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
 
         self.Interlock = ColoredStatus(self.GroupRD)
         self.Interlock.Label.setText("INTLCK")
+        self.Interlock.Mode = 2
         self.GLRD.addWidget(self.Interlock)
 
         self.Error = ColoredStatus(self.GroupRD)
         self.Error.Label.setText("ERR")
+        self.Interlock.Mode = 2
         self.GLRD.addWidget(self.Error)
 
         self.MANSP = ColoredStatus(self.GroupRD)
         self.MANSP.Label.setText("MAN")
+        self.Interlock.Mode = 1
         self.GLRD.addWidget(self.MANSP)
 
         self.SAT = ColoredStatus(self.GroupRD)
