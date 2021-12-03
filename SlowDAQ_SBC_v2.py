@@ -5517,6 +5517,8 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HT1202.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6413"])
                 self.MW.HT2203.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6414"])
 
+                self.MW.HT6214.HeaterSubWindow.Interlock.UpdateColor(True)
+
 
                 # self.MW.subwindow.alarmbutton(self.Client.receive_dic)
                 # reorfer
