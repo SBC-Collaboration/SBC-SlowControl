@@ -1290,9 +1290,6 @@ class UpdateServer(QtCore.QObject):
         for key in self.PLC.LOOPPID_SET3:
             self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
 
-
-
-
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
         print("pack",self.data_dic)
 
