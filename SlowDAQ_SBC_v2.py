@@ -5517,6 +5517,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HT1202.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6413"])
                 self.MW.HT2203.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6414"])
 
+                print("HTR6214 INTLKD", self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
                 self.MW.HT6214.HeaterSubWindow.Interlock.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
 
 
