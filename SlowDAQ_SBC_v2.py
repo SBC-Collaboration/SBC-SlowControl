@@ -5283,7 +5283,8 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HFSV3331.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3331"])
 
                 # refreshing the valve status from PLC every 30s
-                if self.count >= self.button_refreshing_count:
+                # if self.count >= self.button_refreshing_count:
+                if self.count > 0:
                     if self.Client.receive_dic["data"]["Valve"]["OUT"]["PV1344"]:
                         self.MW.PV1344.Set.ButtonLClicked()
                     else:
