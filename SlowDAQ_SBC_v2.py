@@ -4339,16 +4339,17 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
 
         self.Error = ColoredStatus(self.GroupRD)
         self.Error.Label.setText("ERR")
-        self.Interlock.Mode = 2
+        self.Error.Mode = 2
         self.GLRD.addWidget(self.Error)
 
         self.MANSP = ColoredStatus(self.GroupRD)
         self.MANSP.Label.setText("MAN")
-        self.Interlock.Mode = 1
+        self.MANSP.Mode = 1
         self.GLRD.addWidget(self.MANSP)
 
         self.SAT = ColoredStatus(self.GroupRD)
         self.SAT.Label.setText("SAT")
+        self.SAT.Mode = 2
         self.GLRD.addWidget(self.SAT)
 
         self.ModeREAD = Indicator(self.GroupRD)
