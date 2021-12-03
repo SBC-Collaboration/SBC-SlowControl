@@ -1244,15 +1244,15 @@ class UpdateServer(QtCore.QObject):
         for key in self.PLC.TT_BO_dic:
             self.TT_BO_dic_ini[key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
-            self.data_dic["data"]["PT"][key]=self.PLC.PT_dic[key]
+            self.PT_dic_ini[key]=self.PLC.PT_dic[key]
         for key in self.PLC.Valve_OUT:
-            self.data_dic["data"]["Valve"]["OUT"][key]=self.PLC.Valve_OUT[key]
+            self.Valve_OUT_ini[key]=self.PLC.Valve_OUT[key]
         for key in self.PLC.TT_FP_Alarm:
-            self.data_dic["Alarm"]["TT"]["FP"][key] = self.PLC.TT_FP_Alarm[key]
+            self.TT_FP_Alarm_ini[key] = self.PLC.TT_FP_Alarm[key]
         for key in self.PLC.TT_BO_Alarm:
-            self.data_dic["Alarm"]["TT"]["BO"][key] = self.PLC.TT_BO_Alarm[key]
+            self.TT_BO_Alarm_ini[key] = self.PLC.TT_BO_Alarm[key]
         for key in self.PLC.PT_dic:
-            self.data_dic["Alarm"]["PT"][key] = self.PLC.PT_Alarm[key]
+            self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
         # for key in self.PLC.LOOPMODE0:
         #     self.data.dic["data"]["LOOPPID"]["MODE0"][key] = self.PLC.LOOPPID_MODE0[key]
         # for key in self.PLC.LOOPMODE1:
