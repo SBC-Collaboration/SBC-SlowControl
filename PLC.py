@@ -1389,6 +1389,8 @@ class UpdateServer(QtCore.QObject):
                     if message[key]["operation"] == "SET0":
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
                         self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 0)
+                        self.PLC.LOOPPID_HI_LIM(address=message[key]["address"], value=message[key]["value"]["HI_LIM"])
+                        self.PLC.LOOPPID_LO_LIM(address=message[key]["address"], value=message[key]["value"]["LO_LIM"])
                     elif message[key]["operation"] == "SET1":
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=1)
                         self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 1)
@@ -1401,8 +1403,7 @@ class UpdateServer(QtCore.QObject):
 
                     else:
                         pass
-                    self.PLC.LOOPPID_HI_LIM(message[key]["address"], message[key]["value"]["HI_LIM"])
-                    self.PLC.LOOPPID_LO_LIM(message[key]["address"], message[key]["value"]["LO_LIM"])
+
 
                     # if message[key]["operation"] == "HI_LIM":
                     #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
