@@ -5195,7 +5195,7 @@ class UpdateClient(QtCore.QObject):
             #  Send reply back to client
             # self.socket.send(b"Hello")
             self.commands()
-            print(self.receive_dic)
+            # print(self.receive_dic)
             message = pickle.loads(self.socket.recv())
 
 
