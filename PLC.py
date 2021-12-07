@@ -266,10 +266,10 @@ class PLC:
                                                 'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
                                                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
 
-        self.LOOPPID_MAN = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                                             'HTR2125': False,
-                                             'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                                             'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+        self.LOOPPID_MAN = {'SERVO3321': True, 'HTR6225': True, 'HTR2123': True, 'HTR2124': True,
+                                             'HTR2125': True,
+                                             'HTR1202': True, 'HTR2203': True, 'HTR6202': True, 'HTR6206': True, 'HTR6210': True,
+                                             'HTR6223': True, 'HTR6224': True, 'HTR6219': True, 'HTR6221': True, 'HTR6214': True}
 
         self.LOOPPID_ERR = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                                                 'HTR2125': False,
@@ -1330,6 +1330,7 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
                     else:
                         pass
+                # elif message[key]["type"] == "PT":
 
                 else:
                     pass

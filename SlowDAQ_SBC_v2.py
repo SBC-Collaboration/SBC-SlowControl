@@ -420,8 +420,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HT6219.move(820*R, 120*R)
         self.HT6219.Label.setText("HT6219")
         self.HT6219.HeaterSubWindow.setWindowTitle("HT6219")
-        self.HT6219.HeaterSubWindow.FBSwitch.Combobox.setItemText(0, "PT6220")
-        self.HT6219.HeaterSubWindow.FBSwitch.Combobox.setItemText(1, "EMPTY")
+        # self.HT6219.HeaterSubWindow.FBSwitch.Combobox.setItemText(0, "PT6220")
+        # self.HT6219.HeaterSubWindow.FBSwitch.Combobox.setItemText(1, "EMPTY")
         self.HT6219.HeaterSubWindow.RTD1.Label.setText("TT6220")
         self.HT6219.HeaterSubWindow.RTD2.Label.setText("EMPTY")
 
@@ -895,6 +895,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3323.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3323.Label.text()))
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
+
+        self.HT6214.HeaterSubWindow.Mode.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
+        self.HT6214.HeaterSubWindow.Mode.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
+        self.HT6214.State.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
+        self.HT6214.State.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
+        # self.HT6214.HeaterSubWindow.updatebutton.clicked.connect()
 
         # Beckoff RTDs
 
@@ -1805,6 +1811,63 @@ class MainWindow(QtWidgets.QMainWindow):
                               "value": 1}
         print(self.commands)
         print(pid, "R Button is clicked")
+
+    @QtCore.Slot()
+    def HTLButtonClicked(self, pid):
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater", "operation": "EN",
+                              "value": 1}
+        print(self.commands)
+        print(pid, "LButton is clicked")
+
+    @QtCore.Slot()
+    def HTRButtonClicked(self, pid):
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater", "operation": "DISEN",
+                              "value": 1}
+        print(self.commands)
+        print(pid, "R Button is clicked")
+
+    @QtCore.Slot()
+    def HTSwitchSet(self, pid, value):
+        if value in [0,1,2,3]:
+            self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater", "operation": "SETMODE", "value": value}
+        else:
+        print("value should be 0, 1, 2, 3")
+        print(self.commands)
+
+    @QtCore.Slot()
+    def HTHISet(self, pid, value):
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater",
+                                  "operation": "HI_LIM", "value": value}
+
+        print(self.commands)
+
+    @QtCore.Slot()
+    def HTLOSet(self, pid, value):
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater",
+                              "operation": "LO_LIM", "value": value}
+
+        print(self.commands)
+
+    @QtCore.Slot()
+    def HTHISet(self, pid, value1, value2):
+        if value1 == 0:
+            self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater",
+                              "operation": "SET0", "value": value2}
+        elif value1 == 1:
+            self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater",
+                                  "operation": "SET1", "value": value2}
+        elif value1 == 2:
+            self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater",
+                                  "operation": "SET2", "value": value2}
+        elif value1 == 3:
+            self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater",
+                                  "operation": "SET3", "value": value2}
+        else:
+            print("MODE number should be in 0-3")
+
+        print(self.commands)
+
+
 
     @QtCore.Slot()
     def BOTTBoxUpdate(self,pid, Act,LowLimit, HighLimit):
@@ -4992,10 +5055,10 @@ class UpdateClient(QtCore.QObject):
                                'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
                                'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
 
-        self.LOOPPID_MAN = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
-                            'HTR2125': False,
-                            'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                            'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+        self.LOOPPID_MAN = {'SERVO3321': True, 'HTR6225': True, 'HTR2123': True, 'HTR2124': True,
+                                             'HTR2125': True,
+                                             'HTR1202': True, 'HTR2203': True, 'HTR6202': True, 'HTR6206': True, 'HTR6210': True,
+                                             'HTR6223': True, 'HTR6224': True, 'HTR6219': True, 'HTR6221': True, 'HTR6214': True}
 
         self.LOOPPID_ERR = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                             'HTR2125': False,
@@ -5282,6 +5345,12 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HFSV3323.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3323"])
                 self.MW.HFSV3331.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3331"])
 
+                self.MW.HT6214.HeaterSubWindow.Mode.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
+                self.MW.HT6214.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
+
+
+
+
                 # refreshing the valve status from PLC every 30s
                 # if self.count >= self.button_refreshing_count:
                 if self.count > 0:
@@ -5422,6 +5491,14 @@ class UpdateDisplay(QtCore.QObject):
                     self.count = 0
                 self.count += 1
 
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6214"]:
+                    self.MW.HT6214.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HT6214.State.ButtonLClicked()
+
+                else:
+                    self.MW.HT6214.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HT6214.State.ButtonRClicked()
+
                 self.MW.PT2121.SetValue(self.Client.receive_dic["data"]["PT"]["PT2121"])
                 self.MW.PT2316.SetValue(self.Client.receive_dic["data"]["PT"]["PT2316"])
                 self.MW.PT2330.SetValue(self.Client.receive_dic["data"]["PT"]["PT2330"])
@@ -5528,12 +5605,12 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HT6214.HeaterSubWindow.ModeREAD.Field.setText(self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
                                                                                             self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"]))
                 self.MW.HT6214.HeaterSubWindow.EN.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6214"])
-                self.MW.HT2203.HeaterSubWindow.Power.SetValue(self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6214"])
-                self.MW.HT2203.HeaterSubWindow.HIGH.SetValue(
+                self.MW.HT6214.HeaterSubWindow.Power.SetValue(self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6214"])
+                self.MW.HT6214.HeaterSubWindow.HIGH.SetValue(
                     self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6214"])
-                self.MW.HT2203.HeaterSubWindow.LOW.SetValue(
+                self.MW.HT6214.HeaterSubWindow.LOW.SetValue(
                     self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6214"])
-                self.MW.HT2203.HeaterSubWindow.SETSP.SetValue(
+                self.MW.HT6214.HeaterSubWindow.SETSP.SetValue(
                     self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],
                                           self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
                                           self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],
@@ -5542,6 +5619,8 @@ class UpdateDisplay(QtCore.QObject):
                                           self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6214"],
                                           self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6214"],
                                           self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6214"]))
+                self.MW.HT6214.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6214"])
 
 
 
