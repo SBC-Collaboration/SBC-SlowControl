@@ -687,11 +687,11 @@ class PLC:
         print("LOOPPID_SETPOINT")
 
     def LOOPPID_HI_LIM(self,address, value):
-        self.Write_BO_2(address + 6, value)
+        # self.Write_BO_2(address + 6, value)
         print("LOOPPID_HI")
 
     def LOOPPID_LO_LIM(self,address, value):
-        self.Write_BO_2(address + 8, value)
+        # self.Write_BO_2(address + 8, value)
         print("LOOPPID_LO")
 
 
@@ -1405,12 +1405,12 @@ class UpdateServer(QtCore.QObject):
                     self.PLC.LOOPPID_LO_LIM(address=message[key]["address"], value=message[key]["value"]["LO_LIM"])
 
                     # if message[key]["operation"] == "HI_LIM":
-                    #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], setpoint = message[key]["value"])
+                    #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
                     # else:
                     #     pass
                     #
                     # if message[key]["operation"] == "LO_LIM":
-                    #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], setpoint = message[key]["value"])
+                    #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
 
 
 
