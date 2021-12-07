@@ -1401,8 +1401,8 @@ class UpdateServer(QtCore.QObject):
 
                     else:
                         pass
-                    # self.PLC.LOOPPID_HI_LIM(address=message[key]["address"], setpoint=message[key]["value"]["HI_LIM"])
-                    # self.PLC.LOOPPID_LO_LIM(address=message[key]["address"], setpoint=message[key]["value"]["LO_LIM"])
+                    self.PLC.LOOPPID_HI_LIM(address=message[key]["address"], value=message[key]["value"]["HI_LIM"])
+                    self.PLC.LOOPPID_LO_LIM(address=message[key]["address"], value=message[key]["value"]["LO_LIM"])
 
                     # if message[key]["operation"] == "HI_LIM":
                     #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], setpoint = message[key]["value"])
