@@ -1317,7 +1317,7 @@ class UpdateServer(QtCore.QObject):
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
         # print("pack",self.data_dic)
         print("HTR6214 \n", "MODE0", self.data_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],
-                    "\n","MODE2", self.data_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
+                    "\n","MODE1", self.data_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
                     "\n","MODE2", self.data_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],
                     "\n","MODE3", self.data_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"],
                     "\n","INTLKD", self.data_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"],
@@ -1388,16 +1388,16 @@ class UpdateServer(QtCore.QObject):
                 elif message[key]["type"] == "heater_para":
                     if message[key]["operation"] == "SET0":
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
-                        # self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 0)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 0)
                     elif message[key]["operation"] == "SET1":
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=1)
-                        # self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 1)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 1)
                     elif message[key]["operation"] == "SET2":
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
-                        # self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 2)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 2)
                     elif message[key]["operation"] == "SET3":
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
-                        # self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 3)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 3)
 
                     else:
                         pass
