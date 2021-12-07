@@ -918,7 +918,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.HeaterSubWindow.Mode.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
         self.HTR6214.State.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
         self.HTR6214.State.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
-        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect()
+        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(lambda x: self.HTSwitchSet(self.HTR6214.HeaterSubWindow.Label.text(), int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText())))
+        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTHISet(self.HTR6214.HeaterSubWindow.Label.text(),
+                                       self.HTR6214.HeaterSubWindow.HISP.Field.text()))
+        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTLOSet(self.HTR6214.HeaterSubWindow.Label.text(),
+                                   self.HTR6214.HeaterSubWindow.LOSP.Field.text()))
+        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTSETPOINTSet(self.HTR6214.HeaterSubWindow.Label.text(),
+                                   int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText()),self.HTR6214.HeaterSubWindow.SP.Field.text()))
 
         # Beckoff RTDs
 
@@ -4402,13 +4411,14 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.Mode.Label.setText("Mode")
         self.GLWR.addWidget(self.Mode)
 
+        self.LOSP = SetPoint(self.GroupWR)
+        self.LOSP.Label.setText("LO SET")
+        self.GLWR.addWidget(self.LOSP)
+
         self.HISP = SetPoint(self.GroupWR)
         self.HISP.Label.setText("HI SET")
         self.GLWR.addWidget(self.HISP)
 
-        self.LOSP = SetPoint(self.GroupWR)
-        self.LOSP.Label.setText("LO SET")
-        self.GLWR.addWidget(self.LOSP)
 
         self.SP = SetPoint(self.GroupWR)
         self.SP.Label.setText("SetPoint")
@@ -4456,13 +4466,14 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.IN.Label.setText("IN")
         self.GLRD.addWidget(self.IN)
 
+        self.LOW = Indicator(self.GroupRD)
+        self.LOW.Label.setText("LOW")
+        self.GLRD.addWidget(self.LOW)
+
         self.HIGH = Indicator(self.GroupRD)
         self.HIGH.Label.setText("HIGH")
         self.GLRD.addWidget(self.HIGH)
 
-        self.LOW = Indicator(self.GroupRD)
-        self.LOW.Label.setText("LOW")
-        self.GLRD.addWidget(self.LOW)
 
         self.SETSP = Indicator(self.GroupRD)
         self.SETSP.Label.setText("SP")
