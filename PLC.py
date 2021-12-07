@@ -1388,16 +1388,16 @@ class UpdateServer(QtCore.QObject):
                 elif message[key]["type"] == "heater_para":
                     if message[key]["operation"] == "SET0":
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
-                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 0)
+                        # self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 0)
                     elif message[key]["operation"] == "SET1":
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=1)
-                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 1)
+                        # self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 1)
                     elif message[key]["operation"] == "SET2":
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
-                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 2)
+                        # self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 2)
                     elif message[key]["operation"] == "SET3":
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
-                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 3)
+                        # self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 3)
 
                     else:
                         pass
