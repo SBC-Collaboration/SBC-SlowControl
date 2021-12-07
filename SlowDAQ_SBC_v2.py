@@ -416,92 +416,104 @@ class MainWindow(QtWidgets.QMainWindow):
         self.RTDSET4Button.move(1780*R, 1150*R)
         self.RTDSET4Button.Button.setText("RTDSET4")
 
-        self.HT6219 = Heater(self.ChamberTab)
-        self.HT6219.move(820*R, 120*R)
-        self.HT6219.Label.setText("HT6219")
-        self.HT6219.HeaterSubWindow.setWindowTitle("HT6219")
-        # self.HT6219.HeaterSubWindow.FBSwitch.Combobox.setItemText(0, "PT6220")
-        # self.HT6219.HeaterSubWindow.FBSwitch.Combobox.setItemText(1, "EMPTY")
-        self.HT6219.HeaterSubWindow.RTD1.Label.setText("TT6220")
-        self.HT6219.HeaterSubWindow.RTD2.Label.setText("EMPTY")
+        self.HTR6219 = Heater(self.ChamberTab)
+        self.HTR6219.move(820*R, 120*R)
+        self.HTR6219.Label.setText("HTR6219")
+        self.HTR6219.HeaterSubWindow.setWindowTitle("HTR6219")
+        self.HTR6219.HeaterSubWindow.Label.setText("HTR6219")
+        # self.HTR6219.HeaterSubWindow.FBSwitch.Combobox.setItemText(0, "PT6220")
+        # self.HTR6219.HeaterSubWindow.FBSwitch.Combobox.setItemText(1, "EMPTY")
+        self.HTR6219.HeaterSubWindow.RTD1.Label.setText("TT6220")
+        self.HTR6219.HeaterSubWindow.RTD2.Label.setText("EMPTY")
 
-        self.HT6221 = Heater(self.ChamberTab)
-        self.HT6221.move(1250*R, 120*R)
-        self.HT6221.Label.setText("HT6221")
-        self.HT6221.HeaterSubWindow.setWindowTitle("HT6221")
-        self.HT6221.HeaterSubWindow.RTD1.Label.setText("TT6222")
-        self.HT6221.HeaterSubWindow.RTD2.Label.setText("EMPTY")
+        self.HTR6221 = Heater(self.ChamberTab)
+        self.HTR6221.move(1250*R, 120*R)
+        self.HTR6221.Label.setText("HTR6221")
+        self.HTR6221.HeaterSubWindow.setWindowTitle("HTR6221")
+        self.HTR6221.HeaterSubWindow.Label.setText("HTR6221")
+        self.HTR6221.HeaterSubWindow.RTD1.Label.setText("TT6222")
+        self.HTR6221.HeaterSubWindow.RTD2.Label.setText("EMPTY")
 
-        self.HT6214 = Heater(self.ChamberTab)
-        self.HT6214.move(1780*R, 145*R)
-        self.HT6214.Label.setText("HT6214")
-        self.HT6214.HeaterSubWindow.setWindowTitle("HT6214")
-        self.HT6214.HeaterSubWindow.RTD1.Label.setText("TT6213")
-        self.HT6214.HeaterSubWindow.RTD2.Label.setText("TT6401")
+        self.HTR6214 = Heater(self.ChamberTab)
+        self.HTR6214.move(1780*R, 145*R)
+        self.HTR6214.Label.setText("HTR6214")
+        self.HTR6214.HeaterSubWindow.setWindowTitle("HTR6214")
+        self.HTR6214.HeaterSubWindow.Label.setText("HTR6214")
+        self.HTR6214.HeaterSubWindow.RTD1.Label.setText("TT6213")
+        self.HTR6214.HeaterSubWindow.RTD2.Label.setText("TT6401")
 
-        self.HT6202 = Heater(self.ChamberTab)
-        self.HT6202.move(1780*R, 485*R)
-        self.HT6202.Label.setText("HT6202")
-        self.HT6202.HeaterSubWindow.setWindowTitle("HT6202")
-        self.HT6202.HeaterSubWindow.RTD1.Label.setText("TT6203")
-        self.HT6202.HeaterSubWindow.RTD2.Label.setText("TT6404")
+        self.HTR6202 = Heater(self.ChamberTab)
+        self.HTR6202.move(1780*R, 485*R)
+        self.HTR6202.Label.setText("HTR6202")
+        self.HTR6202.HeaterSubWindow.setWindowTitle("HTR6202")
+        self.HTR6202.HeaterSubWindow.Label.setText("HTR6202")
+        self.HTR6202.HeaterSubWindow.RTD1.Label.setText("TT6203")
+        self.HTR6202.HeaterSubWindow.RTD2.Label.setText("TT6404")
 
-        self.HT6206 = Heater(self.ChamberTab)
-        self.HT6206.move(1780*R, 585*R)
-        self.HT6206.Label.setText("HT6206")
-        self.HT6206.HeaterSubWindow.setWindowTitle("HT6206")
-        self.HT6206.HeaterSubWindow.RTD1.Label.setText("TT6207")
-        self.HT6206.HeaterSubWindow.RTD2.Label.setText("TT6405")
+        self.HTR6206 = Heater(self.ChamberTab)
+        self.HTR6206.move(1780*R, 585*R)
+        self.HTR6206.Label.setText("HTR6206")
+        self.HTR6206.HeaterSubWindow.setWindowTitle("HTR6206")
+        self.HTR6206.HeaterSubWindow.Label.setText("HTR6206")
+        self.HTR6206.HeaterSubWindow.RTD1.Label.setText("TT6207")
+        self.HTR6206.HeaterSubWindow.RTD2.Label.setText("TT6405")
 
-        self.HT6210 = Heater(self.ChamberTab)
-        self.HT6210.move(1780*R, 685*R)
-        self.HT6210.Label.setText("HT6210")
-        self.HT6210.HeaterSubWindow.setWindowTitle("HT6210")
-        self.HT6210.HeaterSubWindow.RTD1.Label.setText("TT6211")
-        self.HT6210.HeaterSubWindow.RTD2.Label.setText("TT6406")
+        self.HTR6210 = Heater(self.ChamberTab)
+        self.HTR6210.move(1780*R, 685*R)
+        self.HTR6210.Label.setText("HTR6210")
+        self.HTR6210.HeaterSubWindow.setWindowTitle("HTR6210")
+        self.HTR6210.HeaterSubWindow.Label.setText("HTR6210")
+        self.HTR6210.HeaterSubWindow.RTD1.Label.setText("TT6211")
+        self.HTR6210.HeaterSubWindow.RTD2.Label.setText("TT6406")
 
-        self.HT6223 = Heater(self.ChamberTab)
-        self.HT6223.move(1780*R, 785*R)
-        self.HT6223.Label.setText("HT6223")
-        self.HT6223.HeaterSubWindow.setWindowTitle("HT6223")
-        self.HT6223.HeaterSubWindow.RTD1.Label.setText("TT6407")
-        self.HT6223.HeaterSubWindow.RTD2.Label.setText("TT6410")
+        self.HTR6223 = Heater(self.ChamberTab)
+        self.HTR6223.move(1780*R, 785*R)
+        self.HTR6223.Label.setText("HTR6223")
+        self.HTR6223.HeaterSubWindow.setWindowTitle("HTR6223")
+        self.HTR6223.HeaterSubWindow.Label.setText("HTR6223")
+        self.HTR6223.HeaterSubWindow.RTD1.Label.setText("TT6407")
+        self.HTR6223.HeaterSubWindow.RTD2.Label.setText("TT6410")
 
-        self.HT6224 = Heater(self.ChamberTab)
-        self.HT6224.move(1780*R, 885*R)
-        self.HT6224.Label.setText("HT6224")
-        self.HT6224.HeaterSubWindow.setWindowTitle("HT6224")
-        self.HT6224.HeaterSubWindow.RTD1.Label.setText("TT6408")
-        self.HT6224.HeaterSubWindow.RTD2.Label.setText("TT6411")
+        self.HTR6224 = Heater(self.ChamberTab)
+        self.HTR6224.move(1780*R, 885*R)
+        self.HTR6224.Label.setText("HTR6224")
+        self.HTR6224.HeaterSubWindow.setWindowTitle("HTR6224")
+        self.HTR6224.HeaterSubWindow.Label.setText("HTR6224")
+        self.HTR6224.HeaterSubWindow.RTD1.Label.setText("TT6408")
+        self.HTR6224.HeaterSubWindow.RTD2.Label.setText("TT6411")
 
-        self.HT6225 = Heater(self.ChamberTab)
+        self.HTR6225 = Heater(self.ChamberTab)
 
-        self.HT6225.move(1780*R, 985*R)
-        self.HT6225.Label.setText("HT6225")
-        self.HT6225.HeaterSubWindow.setWindowTitle("HT6225")
-        self.HT6225.HeaterSubWindow.RTD1.Label.setText("TT6409")
-        self.HT6225.HeaterSubWindow.RTD2.Label.setText("TT6412")
+        self.HTR6225.move(1780*R, 985*R)
+        self.HTR6225.Label.setText("HTR6225")
+        self.HTR6225.HeaterSubWindow.setWindowTitle("HTR6225")
+        self.HTR6225.HeaterSubWindow.Label.setText("HTR6225")
+        self.HTR6225.HeaterSubWindow.RTD1.Label.setText("TT6409")
+        self.HTR6225.HeaterSubWindow.RTD2.Label.setText("TT6412")
 
-        self.HT2123 = Heater(self.ChamberTab)
-        self.HT2123.move(670*R, 820*R)
-        self.HT2123.Label.setText("HT2123")
-        self.HT2123.HeaterSubWindow.setWindowTitle("HT2123")
-        self.HT2123.HeaterSubWindow.RTD1.Label.setText("EMPTY")
-        self.HT2123.HeaterSubWindow.RTD2.Label.setText("EMPTY")
+        self.HTR2123 = Heater(self.ChamberTab)
+        self.HTR2123.move(670*R, 820*R)
+        self.HTR2123.Label.setText("HTR2123")
+        self.HTR2123.HeaterSubWindow.setWindowTitle("HTR2123")
+        self.HTR2123.HeaterSubWindow.Label.setText("HTR2123")
+        self.HTR2123.HeaterSubWindow.RTD1.Label.setText("EMPTY")
+        self.HTR2123.HeaterSubWindow.RTD2.Label.setText("EMPTY")
 
-        self.HT2124 = Heater(self.ChamberTab)
-        self.HT2124.move(670*R, 820*R)
-        self.HT2124.Label.setText("HT2124")
-        self.HT2124.HeaterSubWindow.setWindowTitle("HT2124")
-        self.HT2124.HeaterSubWindow.RTD1.Label.setText("EMPTY")
-        self.HT2124.HeaterSubWindow.RTD2.Label.setText("EMPTY")
+        self.HTR2124 = Heater(self.ChamberTab)
+        self.HTR2124.move(670*R, 820*R)
+        self.HTR2124.Label.setText("HTR2124")
+        self.HTR2124.HeaterSubWindow.setWindowTitle("HTR2124")
+        self.HTR2124.HeaterSubWindow.Label.setText("HTR2124")
+        self.HTR2124.HeaterSubWindow.RTD1.Label.setText("EMPTY")
+        self.HTR2124.HeaterSubWindow.RTD2.Label.setText("EMPTY")
 
-        self.HT2125 = Heater(self.ChamberTab)
-        self.HT2125.move(1030*R, 730*R)
-        self.HT2125.Label.setText("HT2125")
-        self.HT2125.HeaterSubWindow.setWindowTitle("HT2125")
-        self.HT2125.HeaterSubWindow.RTD1.Label.setText("EMPTY")
-        self.HT2125.HeaterSubWindow.RTD2.Label.setText("EMPTY")
+        self.HTR2125 = Heater(self.ChamberTab)
+        self.HTR2125.move(1030*R, 730*R)
+        self.HTR2125.Label.setText("HTR2125")
+        self.HTR2125.HeaterSubWindow.setWindowTitle("HTR2125")
+        self.HTR2125.HeaterSubWindow.Label.setText("HTR2125")
+        self.HTR2125.HeaterSubWindow.RTD1.Label.setText("EMPTY")
+        self.HTR2125.HeaterSubWindow.RTD2.Label.setText("EMPTY")
 
         self.PT1101 = Indicator(self.ChamberTab)
         self.PT1101.move(940*R, 990*R)
@@ -513,20 +525,22 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121.Label.setText("PT2121")
         self.PT2121.SetUnit(" psi")
 
-        self.HT1202 = Heater(self.ChamberTab)
-        self.HT1202.move(840*R, 1250*R)
-        self.HT1202.Label.setText("HT1202")
-        self.HT1202.HeaterSubWindow.setWindowTitle("HT1202")
-        self.HT1202.HeaterSubWindow.RTD1.Label.setText("TT6413")
-        self.HT1202.HeaterSubWindow.RTD2.Label.setText("TT6415")
+        self.HTR1202 = Heater(self.ChamberTab)
+        self.HTR1202.move(840*R, 1250*R)
+        self.HTR1202.Label.setText("HTR1202")
+        self.HTR1202.HeaterSubWindow.setWindowTitle("HTR1202")
+        self.HTR1202.HeaterSubWindow.Label.setText("HTR1202")
+        self.HTR1202.HeaterSubWindow.RTD1.Label.setText("TT6413")
+        self.HTR1202.HeaterSubWindow.RTD2.Label.setText("TT6415")
 
 
-        self.HT2203 = Heater(self.ChamberTab)
-        self.HT2203.move(1260*R, 1215*R)
-        self.HT2203.Label.setText("HT2203")
-        self.HT2203.HeaterSubWindow.setWindowTitle("HT2203")
-        self.HT2203.HeaterSubWindow.RTD1.Label.setText("TT6414")
-        self.HT2203.HeaterSubWindow.RTD2.Label.setText("TT6416")
+        self.HTR2203 = Heater(self.ChamberTab)
+        self.HTR2203.move(1260*R, 1215*R)
+        self.HTR2203.Label.setText("HTR2203")
+        self.HTR2203.HeaterSubWindow.setWindowTitle("HTR2203")
+        self.HTR2203.HeaterSubWindow.Label.setText("HTR2203")
+        self.HTR2203.HeaterSubWindow.RTD1.Label.setText("TT6414")
+        self.HTR2203.HeaterSubWindow.RTD2.Label.setText("TT6416")
 
         # Fluid tab buttons
 
@@ -571,6 +585,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC1316.move(400*R, 800*R)
         self.MFC1316.Label.setText("MFC1316")
         self.MFC1316.HeaterSubWindow.setWindowTitle("MFC1316")
+        self.MFC1316.HeaterSubWindow.Label.setText("MFC1316")
         self.MFC1316.HeaterSubWindow.RTD1.Label.setText("TT1332")
         self.MFC1316.HeaterSubWindow.RTD2.Label.setText("EMPTY")
 
@@ -676,6 +691,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SERVO3321.move(1200*R, 550*R)
         self.SERVO3321.Label.setText("SERVO3321")
         self.SERVO3321.HeaterSubWindow.setWindowTitle("SERVO3321")
+        self.SERVO3321.HeaterSubWindow.Label.setText("SERVO3321")
         self.SERVO3321.HeaterSubWindow.RTD1.Label.setText("EMPTY")
         self.SERVO3321.HeaterSubWindow.RTD2.Label.setText("EMPTY")
 
@@ -740,7 +756,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #commands stack
-        self.address ={"PV1344":12288, "PV4307":12289,"PV4308":12290,"PV4317":12291,"PV4318":12292,"PV4321":12293,"PV4324":12294,"PV5305":12295,"PV5306":12296,
+        self.address ={'SERVO3321': 14288, 'HTR6225': 14306, 'HTR2123': 14324, 'HTR2124': 14342, 'HTR2125': 14360,
+                              'HTR1202': 14378, 'HTR2203': 14396, 'HTR6202': 14414, 'HTR6206': 14432, 'HTR6210': 14450,
+                              'HTR6223': 14468, 'HTR6224': 14486, 'HTR6219': 14504, 'HTR6221': 14522, 'HTR6214': 14540, "PV1344":12288, "PV4307":12289,"PV4308":12290,"PV4317":12291,"PV4318":12292,"PV4321":12293,"PV4324":12294,"PV5305":12295,"PV5306":12296,
                        "PV5307":12297,"PV5309":12298,"SV3307":12299,"SV3310":12300,"SV3322":12301,"SV3325":12302,"SV3326":12303,"SV3329":12304,
                        "SV4327":12305,"SV4328":12306,"SV4329":12307,"SV4331":12308,"SV4332":12309, "SV4337": 12310, "HFSV3312": 12311,
                        "HFSV3323":12312, "HFSV3331":12313,"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
@@ -896,11 +914,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
 
-        # self.HT6214.HeaterSubWindow.Mode.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
-        # self.HT6214.HeaterSubWindow.Mode.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
-        self.HT6214.State.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HT6214.HeaterSubWindow.title()))
-        self.HT6214.State.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HT6214.HeaterSubWindow.title()))
-        # self.HT6214.HeaterSubWindow.updatebutton.clicked.connect()
+        self.HTR6214.HeaterSubWindow.Mode.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
+        self.HTR6214.HeaterSubWindow.Mode.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
+        self.HTR6214.State.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
+        self.HTR6214.State.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
+        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect()
 
         # Beckoff RTDs
 
@@ -4369,6 +4387,12 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.GroupRD.setLayout(self.GLRD)
         self.GroupRD.move(0 * R, 150 * R)
 
+        self.Label = QtWidgets.QPushButton(self.GroupWR)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Indicator")
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        # self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
+        self.GLWR.addWidget(self.Label)
 
         self.FBSwitch = Menu(self.GroupWR)
         self.FBSwitch.Label.setText("FBSWITCH")
@@ -5345,8 +5369,8 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HFSV3323.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3323"])
                 self.MW.HFSV3331.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3331"])
 
-                self.MW.HT6214.HeaterSubWindow.Mode.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
-                self.MW.HT6214.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
+                self.MW.HTR6214.HeaterSubWindow.Mode.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
+                self.MW.HTR6214.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
 
 
 
@@ -5492,12 +5516,12 @@ class UpdateDisplay(QtCore.QObject):
                 self.count += 1
 
                 if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6214"]:
-                    self.MW.HT6214.HeaterSubWindow.Mode.ButtonLClicked()
-                    self.MW.HT6214.State.ButtonLClicked()
+                    self.MW.HTR6214.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR6214.State.ButtonLClicked()
 
                 else:
-                    self.MW.HT6214.HeaterSubWindow.Mode.ButtonRClicked()
-                    self.MW.HT6214.State.ButtonRClicked()
+                    self.MW.HTR6214.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR6214.State.ButtonRClicked()
 
                 self.MW.PT2121.SetValue(self.Client.receive_dic["data"]["PT"]["PT2121"])
                 self.MW.PT2316.SetValue(self.Client.receive_dic["data"]["PT"]["PT2316"])
@@ -5524,16 +5548,16 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.RTDset1Win.TT2119.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT2119"])
                 self.MW.TT4330.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT4330"])
 
-                self.MW.HT6202.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6203"])
-                self.MW.HT6206.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6207"])
-                self.MW.HT6210.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6211"])
-                self.MW.HT6214.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6213"])
-                self.MW.HT6221.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6222"])
-                self.MW.HT6223.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6407"])
-                self.MW.HT6224.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6408"])
-                self.MW.HT6225.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6409"])
-                self.MW.HT1202.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6415"])
-                self.MW.HT2203.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6416"])
+                self.MW.HTR6202.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6203"])
+                self.MW.HTR6206.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6207"])
+                self.MW.HTR6210.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6211"])
+                self.MW.HTR6214.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6213"])
+                self.MW.HTR6221.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6222"])
+                self.MW.HTR6223.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6407"])
+                self.MW.HTR6224.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6408"])
+                self.MW.HTR6225.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6409"])
+                self.MW.HTR1202.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6415"])
+                self.MW.HTR2203.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["BO"]["TT6416"])
 
                 self.MW.RTDset2Win.TT2420.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2420"])
                 self.MW.RTDset2Win.TT2422.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2422"])
@@ -5585,32 +5609,32 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.RTDset2Win.TT2405.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT2405"])
 
                 self.MW.MFC1316.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6220"])
-                self.MW.HT6214.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6401"])
-                self.MW.HT6202.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6404"])
-                self.MW.HT6206.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6405"])
-                self.MW.HT6210.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6406"])
-                self.MW.HT6223.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6410"])
-                self.MW.HT6224.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6411"])
-                self.MW.HT6225.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6412"])
-                self.MW.HT1202.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6413"])
-                self.MW.HT2203.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6414"])
+                self.MW.HTR6214.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6401"])
+                self.MW.HTR6202.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6404"])
+                self.MW.HTR6206.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6405"])
+                self.MW.HTR6210.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6406"])
+                self.MW.HTR6223.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6410"])
+                self.MW.HTR6224.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6411"])
+                self.MW.HTR6225.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6412"])
+                self.MW.HTR1202.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6413"])
+                self.MW.HTR2203.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6414"])
 
-                self.MW.HT6214.HeaterSubWindow.Interlock.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
-                self.MW.HT6214.HeaterSubWindow.Error.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6214"])
-                self.MW.HT6214.HeaterSubWindow.MANSP.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
+                self.MW.HTR6214.HeaterSubWindow.Interlock.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
+                self.MW.HTR6214.HeaterSubWindow.Error.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6214"])
+                self.MW.HTR6214.HeaterSubWindow.MANSP.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
                 if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR6214"]]:
-                    self.MW.HT6214.HeaterSubWindow.SAT.UpdateColor(True)
+                    self.MW.HTR6214.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
-                    self.MW.HT6214.HeaterSubWindow.SAT.UpdateColor(False)
-                self.MW.HT6214.HeaterSubWindow.ModeREAD.Field.setText(self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
+                    self.MW.HTR6214.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR6214.HeaterSubWindow.ModeREAD.Field.setText(self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
                                                                                             self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"]))
-                self.MW.HT6214.HeaterSubWindow.EN.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6214"])
-                self.MW.HT6214.HeaterSubWindow.Power.SetValue(self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6214"])
-                self.MW.HT6214.HeaterSubWindow.HIGH.SetValue(
+                self.MW.HTR6214.HeaterSubWindow.EN.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6214"])
+                self.MW.HTR6214.HeaterSubWindow.Power.SetValue(self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6214"])
+                self.MW.HTR6214.HeaterSubWindow.HIGH.SetValue(
                     self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6214"])
-                self.MW.HT6214.HeaterSubWindow.LOW.SetValue(
+                self.MW.HTR6214.HeaterSubWindow.LOW.SetValue(
                     self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6214"])
-                self.MW.HT6214.HeaterSubWindow.SETSP.SetValue(
+                self.MW.HTR6214.HeaterSubWindow.SETSP.SetValue(
                     self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],
                                           self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
                                           self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],
@@ -5619,7 +5643,7 @@ class UpdateDisplay(QtCore.QObject):
                                           self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6214"],
                                           self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6214"],
                                           self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6214"]))
-                self.MW.HT6214.Power.SetValue(
+                self.MW.HTR6214.Power.SetValue(
                     self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6214"])
 
 
