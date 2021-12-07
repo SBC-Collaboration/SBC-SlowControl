@@ -440,7 +440,7 @@ class PLC:
                 Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=2, unit=0x01)
                 self.TT_BO_dic[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
-                # print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
+                print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
                 # print(key, "'s' value is", self.TT_BO_dic[key])
 
             # for key in self.TT_BO_address:
@@ -514,7 +514,7 @@ class PLC:
                     struct.unpack("<f", struct.pack("<HH", Raw_LOOPPID_2[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_2[key].getRegister(0)))[0], 3)
 
-                print("low",hex(Raw_LOOPPID_2[key].getRegister(0)),"high",hex(Raw_LOOPPID_2[key].getRegister(0+1)))
+                print(key,"low",hex(Raw_LOOPPID_2[key].getRegister(0)),"high",hex(Raw_LOOPPID_2[key].getRegister(0+1)))
 
                 self.LOOPPID_IN[key] = round(
                     struct.unpack("<f", struct.pack("<HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
