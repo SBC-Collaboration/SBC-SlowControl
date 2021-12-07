@@ -514,8 +514,8 @@ class PLC:
                     struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_2[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_2[key].getRegister(0)))[0], 3)
 
-                print("low",Raw_LOOPPID_2[key].getRegister(0),"high",Raw_LOOPPID_2[key].getRegister(0+1))
-                
+                print("low",hex(Raw_LOOPPID_2[key].getRegister(0)),"high",hex(Raw_LOOPPID_2[key].getRegister(0+1)))
+
                 self.LOOPPID_IN[key] = round(
                     struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_4[key].getRegister(0)))[0], 3)
