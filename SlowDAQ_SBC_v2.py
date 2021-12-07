@@ -1831,7 +1831,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if value in [0,1,2,3]:
             self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater", "operation": "SETMODE", "value": value}
         else:
-        print("value should be 0, 1, 2, 3")
+            print("value should be 0, 1, 2, 3")
         print(self.commands)
 
     @QtCore.Slot()
