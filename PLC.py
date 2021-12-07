@@ -687,11 +687,11 @@ class PLC:
         print("LOOPPID_SETPOINT")
 
     def LOOPPID_HI_LIM(self,address, value):
-        # self.Write_BO_2(address + 6, value)
+        self.Write_BO_2(address + 6, value)
         print("LOOPPID_HI")
 
     def LOOPPID_LO_LIM(self,address, value):
-        # self.Write_BO_2(address + 8, value)
+        self.Write_BO_2(address + 8, value)
         print("LOOPPID_LO")
 
 

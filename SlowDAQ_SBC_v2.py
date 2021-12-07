@@ -930,7 +930,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #                            int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText()),self.HTR6214.HeaterSubWindow.SP.Field.text()))
 
         self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(lambda x: self.HTRupdate(self.HTR6214.HeaterSubWindow.Label.text(),
-                                   int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText()),int(self.HTR6214.HeaterSubWindow.SP.Field.text()),int(self.HTR6214.HeaterSubWindow.HISP.Field.text()),self.HTR6214.HeaterSubWindow.LOSP.Field.text()))
+                                   int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText()),int(self.HTR6214.HeaterSubWindow.SP.Field.text()),int(self.HTR6214.HeaterSubWindow.HISP.Field.text()),int(self.HTR6214.HeaterSubWindow.LOSP.Field.text())))
 
         # Beckoff RTDs
 
