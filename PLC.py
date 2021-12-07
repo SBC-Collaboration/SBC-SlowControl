@@ -517,25 +517,25 @@ class PLC:
                 print("low",hex(Raw_LOOPPID_2[key].getRegister(0)),"high",hex(Raw_LOOPPID_2[key].getRegister(0+1)))
 
                 self.LOOPPID_IN[key] = round(
-                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
+                    struct.unpack("<f", struct.pack("<HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_4[key].getRegister(0)))[0], 3)
                 self.LOOPPID_HI_LIM[key] = round(
-                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_6[key].getRegister(0 + 1),
+                    struct.unpack("<f", struct.pack("<HH", Raw_LOOPPID_6[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_6[key].getRegister(0)))[0], 3)
                 self.LOOPPID_LO_LIM[key] = round(
-                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_8[key].getRegister(0 + 1),
+                    struct.unpack("<f", struct.pack("<HH", Raw_LOOPPID_8[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_8[key].getRegister(0)))[0], 3)
                 self.LOOPPID_SET0[key] = round(
-                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_10[key].getRegister(0 + 1),
+                    struct.unpack("<f", struct.pack("<HH", Raw_LOOPPID_10[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
                 self.LOOPPID_SET1[key] = round(
-                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_12[key].getRegister(0 + 1),
+                    struct.unpack("<f", struct.pack("<HH", Raw_LOOPPID_12[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_12[key].getRegister(0)))[0], 3)
                 self.LOOPPID_SET2[key] = round(
-                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
+                    struct.unpack("<f", struct.pack("<HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
                 self.LOOPPID_SET3[key] = round(
-                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
+                    struct.unpack("<f", struct.pack("<HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
 
 
