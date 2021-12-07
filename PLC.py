@@ -1373,36 +1373,44 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
                     else:
                         pass
-                elif message[key]["type"] == "heater":
+                elif message[key]["type"] == "heater_power":
                     if message[key]["operation"] == "EN":
                         self.PLC.LOOPPID_OUT_ENA(address = message[key]["address"])
                     elif message[key]["operation"] == "DISEN":
                         self.PLC.LOOPPID_OUT_DIS(address=message[key]["address"])
                     else:
                         pass
-
-                    if message[key]["operation"] == "SETMODE":
-                        self.PLC.LOOPPID_SET_MODE(address = message[key]["address"], mode = message[key]["value"])
-                    else:
-                        pass
+                    #
+                    # if message[key]["operation"] == "SETMODE":
+                    #     self.PLC.LOOPPID_SET_MODE(address = message[key]["address"], mode = message[key]["value"])
+                    # else:
+                    #     pass
+                elif message[key]["type"] == "heater_para":
                     if message[key]["operation"] == "SET0":
-                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"], mode = 0)
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 0)
                     elif message[key]["operation"] == "SET1":
-                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"], mode = 1)
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=1)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 1)
                     elif message[key]["operation"] == "SET2":
-                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"], mode = 2)
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 2)
                     elif message[key]["operation"] == "SET3":
-                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"], mode = 3)
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 3)
+
                     else:
                         pass
+                    self.PLC.LOOPPID_HI_LIM(address=message[key]["address"], setpoint=message[key]["value"]["HI_LIM"])
+                    self.PLC.LOOPPID_LO_LIM(address=message[key]["address"], setpoint=message[key]["value"]["LO_LIM"])
 
-                    if message[key]["operation"] == "HI_LIM":
-                        self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], setpoint = message[key]["value"])
-                    else:
-                        pass
-
-                    if message[key]["operation"] == "LO_LIM":
-                        self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], setpoint = message[key]["value"])
+                    # if message[key]["operation"] == "HI_LIM":
+                    #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], setpoint = message[key]["value"])
+                    # else:
+                    #     pass
+                    #
+                    # if message[key]["operation"] == "LO_LIM":
+                    #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], setpoint = message[key]["value"])
 
 
 

@@ -918,16 +918,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.HeaterSubWindow.Mode.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
         self.HTR6214.State.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
         self.HTR6214.State.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
-        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(lambda x: self.HTSwitchSet(self.HTR6214.HeaterSubWindow.Label.text(), int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText())))
-        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
-            lambda x: self.HTHISet(self.HTR6214.HeaterSubWindow.Label.text(),
-                                       self.HTR6214.HeaterSubWindow.HISP.Field.text()))
-        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
-            lambda x: self.HTLOSet(self.HTR6214.HeaterSubWindow.Label.text(),
-                                   self.HTR6214.HeaterSubWindow.LOSP.Field.text()))
-        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
-            lambda x: self.HTSETPOINTSet(self.HTR6214.HeaterSubWindow.Label.text(),
-                                   int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText()),self.HTR6214.HeaterSubWindow.SP.Field.text()))
+        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(lambda x: self.HTSwitchSet(self.HTR6214.HeaterSubWindow.Label.text(), int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText())))
+        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
+        #     lambda x: self.HTHISet(self.HTR6214.HeaterSubWindow.Label.text(),
+        #                                self.HTR6214.HeaterSubWindow.HISP.Field.text()))
+        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
+        #     lambda x: self.HTLOSet(self.HTR6214.HeaterSubWindow.Label.text(),
+        #                            self.HTR6214.HeaterSubWindow.LOSP.Field.text()))
+        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
+        #     lambda x: self.HTSETPOINTSet(self.HTR6214.HeaterSubWindow.Label.text(),
+        #                            int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText()),self.HTR6214.HeaterSubWindow.SP.Field.text()))
+
+        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(lambda x: self.HTRupdate(self.HTR6214.HeaterSubWindow.Label.text(),
+                                   int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText()),self.HTR6214.HeaterSubWindow.SP.Field.text(),self.HTR6214.HeaterSubWindow.HISP.Field.text(),self.HTR6214.HeaterSubWindow.LOSP.Field.text()))
 
         # Beckoff RTDs
 
@@ -1841,14 +1844,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def HTLButtonClicked(self, pid):
-        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater", "operation": "EN",
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater_power", "operation": "EN",
                               "value": 1}
         print(self.commands)
         print(pid, "LButton is clicked")
 
     @QtCore.Slot()
     def HTRButtonClicked(self, pid):
-        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater", "operation": "DISEN",
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater_power", "operation": "DISEN",
                               "value": 1}
         print(self.commands)
         print(pid, "R Button is clicked")
@@ -1893,6 +1896,27 @@ class MainWindow(QtWidgets.QMainWindow):
             print("MODE number should be in 0-3")
 
         print(self.commands)
+
+    @QtCore.Slot()
+    def HTRupdate(self,pid, modeN, setpoint, HI, LO):
+        if modeN == 0:
+            self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater_para",
+                              "operation": "SET0", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+        elif modeN == 1:
+            self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater_para",
+                                  "operation": "SET1", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+        elif modeN == 2:
+            self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater_para",
+                                  "operation": "SET2", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+        elif modeN == 3:
+            self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater_para",
+                                  "operation": "SET3", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+        else:
+            print("MODE number should be in 0-3")
+
+        print(self.commands)
+
+
 
 
 
