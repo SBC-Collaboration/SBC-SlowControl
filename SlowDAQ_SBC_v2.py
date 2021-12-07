@@ -898,8 +898,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # self.HT6214.HeaterSubWindow.Mode.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
         # self.HT6214.HeaterSubWindow.Mode.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
-        self.HT6214.State.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
-        self.HT6214.State.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
+        self.HT6214.State.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HT6214.HeaterSubWindow.title()))
+        self.HT6214.State.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HT6214.HeaterSubWindow.title()))
         # self.HT6214.HeaterSubWindow.updatebutton.clicked.connect()
 
         # Beckoff RTDs
