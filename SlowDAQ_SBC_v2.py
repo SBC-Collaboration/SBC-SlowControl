@@ -896,8 +896,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
 
-        self.HT6214.HeaterSubWindow.Mode.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
-        self.HT6214.HeaterSubWindow.Mode.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
+        # self.HT6214.HeaterSubWindow.Mode.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
+        # self.HT6214.HeaterSubWindow.Mode.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
         self.HT6214.State.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
         self.HT6214.State.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HT6214.HeaterSubWindow.windowTitle()))
         # self.HT6214.HeaterSubWindow.updatebutton.clicked.connect()
