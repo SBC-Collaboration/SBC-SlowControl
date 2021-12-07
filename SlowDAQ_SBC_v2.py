@@ -4439,7 +4439,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.ModeREAD.Label.setText("Mode")
         self.GLRD.addWidget(self.ModeREAD)
 
-        self.EN = ColoredStatus(self.GroupRD, mode = 0)
+        self.EN = ColoredStatus(self.GroupRD, mode = 4)
         self.EN.Label.setText("ENABLE")
         self.GLRD.addWidget(self.EN)
 
