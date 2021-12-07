@@ -530,10 +530,10 @@ class PLC:
                                                     Raw_LOOPPID_12[key].getRegister(0)))[0], 3)
                 self.LOOPPID_SET2[key] = round(
                     struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
-                                                    Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
-                self.LOOPPID_SET3[key] = round(
-                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET3[key] = round(
+                    struct.unpack("<f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
 
 
             #test the writing function
@@ -670,6 +670,29 @@ class PLC:
         input_BO = struct.unpack("H", output_BO)[0] | 0x4000
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write OUT result=", Raw)
+
+    def LOOPPID_SETPOINT(self, address, setpoint, mode = 0):
+        if mode == 0:
+            self.Write_BO_2(address+10, setpoint)
+        elif mode == 1:
+            self.Write_BO_2(address+12, setpoint)
+        elif mode == 2:
+            self.Write_BO_2(address+14, setpoint)
+        elif mode == 3:
+            self.Write_BO_2(address+16, setpoint)
+        else:
+            pass
+
+        print("LOOPPID_SETPOINT")
+
+    def LOOPPID_HI_LIM(self,address, value):
+        self.Write_BO_2(address + 6, value)
+        print("LOOPPID_HI")
+
+    def LOOPPID_LO_LIM(self,address, value):
+        self.Write_BO_2(address + 8, value)
+        print("LOOPPID_LO")
+
 
 
         
@@ -1330,7 +1353,38 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
                     else:
                         pass
-                # elif message[key]["type"] == "PT":
+                elif message[key]["type"] == "heater":
+                    if message[key]["operation"] == "EN":
+                        self.PLC.LOOPPID_OUT_ENA(address = message[key]["address"])
+                    elif message[key]["operation"] == "DISEN":
+                        self.PLC.LOOPPID_OUT_DIS(address=message[key]["address"])
+                    else:
+                        pass
+
+                    if message[key]["operation"] == "SETMODE":
+                        self.PLC.LOOPPID_SET_MODE(address = message[key]["address"], mode = message[key]["value"])
+                    else:
+                        pass
+                    if message[key]["operation"] == "SET0":
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"], mode = 0)
+                    elif message[key]["operation"] == "SET1":
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"], mode = 1)
+                    elif message[key]["operation"] == "SET2":
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"], mode = 2)
+                    elif message[key]["operation"] == "SET3":
+                        self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"], mode = 3)
+                    else:
+                        pass
+
+                    if message[key]["operation"] == "HI_LIM":
+                        self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], setpoint = message[key]["value"])
+                    else:
+                        pass
+
+                    if message[key]["operation"] == "LO_LIM":
+                        self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], setpoint = message[key]["value"])
+
+
 
                 else:
                     pass

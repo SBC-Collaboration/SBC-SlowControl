@@ -1849,7 +1849,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print(self.commands)
 
     @QtCore.Slot()
-    def HTHISet(self, pid, value1, value2):
+    def HTSETPOINTSet(self, pid, value1, value2):
         if value1 == 0:
             self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater",
                               "operation": "SET0", "value": value2}
