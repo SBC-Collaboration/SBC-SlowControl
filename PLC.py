@@ -947,7 +947,12 @@ class UpdateDataBase(QtCore.QObject):
         # c is for valve status
         self.para_c = 0
         self.rate_c = 100
-        self.Valve_buffer=self.PLC.Valve_OUT
+        self.Valve_buffer = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
+                          "PV4324": 0, "PV5305": 0, "PV5306": 0,
+                          "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
+                          "SV3325": 0, "SV3326": 0, "SV3329": 0,
+                          "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
+                          "SV4337": 0, "HFSV3312":0, "HFSV3323": 0, "HFSV3331": 0}
         print("begin updating Database")
 
     @QtCore.Slot()
