@@ -687,7 +687,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV3322.Label.setText("SV3322")
         self.SV3322.move(1000*R, 780*R)
 
-        self.SERVO3321 = AOMultiLoop(self.HydraulicTab)
+        self.SERVO3321 = Heater(self.HydraulicTab)
         self.SERVO3321.move(1200*R, 550*R)
         self.SERVO3321.Label.setText("SERVO3321")
         self.SERVO3321.HeaterSubWindow.setWindowTitle("SERVO3321")
