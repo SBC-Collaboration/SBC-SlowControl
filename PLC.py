@@ -976,12 +976,15 @@ class UpdateDataBase(QtCore.QObject):
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Valve_OUT[key])
                         self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
                     else:
-                        if self.para_c >= self.rate_c:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Valve_OUT[key])
-                            self.para_c = 0
-                        else:
-                            pass
+                        pass
+
+                if self.para_c >= self.rate_c:
+                    for key in self.PLC.Valve_OUT:
+                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Valve_OUT[key])
                         self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
+                    self.para_c = 0
+
+
                 print(self.PLC.Valve_OUT)
 
 
