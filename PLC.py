@@ -978,6 +978,7 @@ class UpdateDataBase(QtCore.QObject):
                         print(self.PLC.Valve_OUT[key])
                     else:
                         pass
+                print("I am here")
 
                 if self.para_c >= self.rate_c:
                     for key in self.PLC.Valve_OUT:
