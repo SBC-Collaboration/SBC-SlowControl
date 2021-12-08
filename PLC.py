@@ -940,15 +940,15 @@ class UpdateDataBase(QtCore.QObject):
         self.db = mydatabase()
         self.Running = False
         self.base_period=1
-        self.para_a=0
-        self.rate_a=100
-        self.para_b=0
-        self.rate_b=100
+        self.para_TT=0
+        self.rate_TT=100
+        self.para_PT=0
+        self.rate_PT=100
         # c is for valve status
-        self.para_c = 0
-        self.rate_c = 100
-        self.para_d = 0
-        self.rate_d = 100
+        self.para_Valve = 0
+        self.rate_Valve = 100
+        self.para_LOOPPID = 0
+        self.rate_LOOPPID = 100
         self.Valve_buffer = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
                           "PV4324": 0, "PV5305": 0, "PV5306": 0,
                           "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
@@ -969,18 +969,18 @@ class UpdateDataBase(QtCore.QObject):
             print("Database Updating", self.dt)
 
             if self.PLC.NewData_Database:
-                if self.para_a>= self.rate_a:
+                if self.para_TT>= self.rate_TT:
                     for key in self.PLC.TT_FP_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
                     for key in self.PLC.TT_BO_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
                     # print("write RTDS")
-                    self.para_a=0
-                if self.para_b >= self.rate_b:
+                    self.para_TT=0
+                if self.para_PT >= self.rate_PT:
                     for key in self.PLC.PT_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
                     # print("write pressure transducer")
-                    self.para_b=0
+                    self.para_PT=0
 
                 for key in self.PLC.Valve_OUT:
                     # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
@@ -992,11 +992,11 @@ class UpdateDataBase(QtCore.QObject):
                         pass
 
 
-                if self.para_c >= self.rate_c:
+                if self.para_Valve >= self.rate_Valve:
                     for key in self.PLC.Valve_OUT:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Valve_OUT[key])
                         self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
-                    self.para_c = 0
+                    self.para_Valve = 0
 
 
                 for key in self.PLC.LOOPPID_EN:
@@ -1009,11 +1009,11 @@ class UpdateDataBase(QtCore.QObject):
                         pass
 
 
-                if self.para_d >= self.rate_d:
+                if self.para_LOOPPID >= self.rate_LOOPPID:
                     for key in self.PLC.LOOPPID_EN:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.LOOPPID_EN[key])
                         self.LOOPPID_buffer[key] = self.PLC.LOOPPID_EN[key]
-                    self.para_d = 0
+                    self.para_LOOPPID = 0
 
 
 
@@ -1021,13 +1021,13 @@ class UpdateDataBase(QtCore.QObject):
 
 
 
-                # print("a",self.para_a,"b",self.para_b )
+                # print("a",self.para_TT,"b",self.para_PT )
 
                 print("Wrting PLC data to database...")
-                self.para_a += 1
-                self.para_b += 1
-                self.para_c += 1
-                self.para_d += 1
+                self.para_TT += 1
+                self.para_PT += 1
+                self.para_Valve += 1
+                self.para_LOOPPID += 1
                 self.PLC.NewData_Database = False
 
             else:
