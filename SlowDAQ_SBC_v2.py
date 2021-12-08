@@ -914,23 +914,232 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
 
-        self.HTR6214.HeaterSubWindow.Mode.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
-        self.HTR6214.HeaterSubWindow.Mode.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
-        self.HTR6214.State.LButton.clicked.connect(lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
-        self.HTR6214.State.RButton.clicked.connect(lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
-        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(lambda x: self.HTSwitchSet(self.HTR6214.HeaterSubWindow.Label.text(), int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText())))
-        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTHISet(self.HTR6214.HeaterSubWindow.Label.text(),
-        #                                self.HTR6214.HeaterSubWindow.HISP.Field.text()))
-        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTLOSet(self.HTR6214.HeaterSubWindow.Label.text(),
-        #                            self.HTR6214.HeaterSubWindow.LOSP.Field.text()))
-        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTSETPOINTSet(self.HTR6214.HeaterSubWindow.Label.text(),
-        #                            int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText()),self.HTR6214.HeaterSubWindow.SP.Field.text()))
 
-        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(lambda x: self.HTRupdate(self.HTR6214.HeaterSubWindow.Label.text(),
-                                   int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText()),int(self.HTR6214.HeaterSubWindow.SP.Field.text()),int(self.HTR6214.HeaterSubWindow.HISP.Field.text()),int(self.HTR6214.HeaterSubWindow.LOSP.Field.text())))
+        self.SERVO3321.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text()))
+        self.SERVO3321.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text()))
+        self.SERVO3321.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text()))
+        self.SERVO3321.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text()))
+        self.SERVO3321.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.SERVO3321.HeaterSubWindow.Label.text(),
+                                     int(self.SERVO3321.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.SERVO3321.HeaterSubWindow.SP.Field.text()),
+                                     int(self.SERVO3321.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.SERVO3321.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR6225.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6225.HeaterSubWindow.Label.text()))
+        self.HTR6225.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6225.HeaterSubWindow.Label.text()))
+        self.HTR6225.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6225.HeaterSubWindow.Label.text()))
+        self.HTR6225.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6225.HeaterSubWindow.Label.text()))
+        self.HTR6225.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR6225.HeaterSubWindow.Label.text(),
+                                     int(self.HTR6225.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR6225.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR6225.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR6225.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR2123.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR2123.HeaterSubWindow.Label.text()))
+        self.HTR2123.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR2123.HeaterSubWindow.Label.text()))
+        self.HTR2123.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR2123.HeaterSubWindow.Label.text()))
+        self.HTR2123.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR2123.HeaterSubWindow.Label.text()))
+        self.HTR2123.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR2123.HeaterSubWindow.Label.text(),
+                                     int(self.HTR2123.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR2123.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR2123.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR2123.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR2124.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR2124.HeaterSubWindow.Label.text()))
+        self.HTR2124.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR2124.HeaterSubWindow.Label.text()))
+        self.HTR2124.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR2124.HeaterSubWindow.Label.text()))
+        self.HTR2124.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR2124.HeaterSubWindow.Label.text()))
+        self.HTR2124.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR2124.HeaterSubWindow.Label.text(),
+                                     int(self.HTR2124.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR2124.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR2124.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR2124.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR2125.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR2125.HeaterSubWindow.Label.text()))
+        self.HTR2125.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR2125.HeaterSubWindow.Label.text()))
+        self.HTR2125.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR2125.HeaterSubWindow.Label.text()))
+        self.HTR2125.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR2125.HeaterSubWindow.Label.text()))
+        self.HTR2125.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR2125.HeaterSubWindow.Label.text(),
+                                     int(self.HTR2125.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR2125.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR2125.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR2125.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR1202.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR1202.HeaterSubWindow.Label.text()))
+        self.HTR1202.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR1202.HeaterSubWindow.Label.text()))
+        self.HTR1202.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR1202.HeaterSubWindow.Label.text()))
+        self.HTR1202.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR1202.HeaterSubWindow.Label.text()))
+        self.HTR1202.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR1202.HeaterSubWindow.Label.text(),
+                                     int(self.HTR1202.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR1202.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR1202.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR1202.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR2203.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR2203.HeaterSubWindow.Label.text()))
+        self.HTR2203.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR2203.HeaterSubWindow.Label.text()))
+        self.HTR2203.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR2203.HeaterSubWindow.Label.text()))
+        self.HTR2203.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR2203.HeaterSubWindow.Label.text()))
+        self.HTR2203.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR2203.HeaterSubWindow.Label.text(),
+                                     int(self.HTR2203.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR2203.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR2203.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR2203.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR6202.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6202.HeaterSubWindow.Label.text()))
+        self.HTR6202.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6202.HeaterSubWindow.Label.text()))
+        self.HTR6202.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6202.HeaterSubWindow.Label.text()))
+        self.HTR6202.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6202.HeaterSubWindow.Label.text()))
+        self.HTR6202.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR6202.HeaterSubWindow.Label.text(),
+                                     int(self.HTR6202.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR6202.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR6202.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR6202.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR6206.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6206.HeaterSubWindow.Label.text()))
+        self.HTR6206.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6206.HeaterSubWindow.Label.text()))
+        self.HTR6206.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6206.HeaterSubWindow.Label.text()))
+        self.HTR6206.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6206.HeaterSubWindow.Label.text()))
+        self.HTR6206.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR6206.HeaterSubWindow.Label.text(),
+                                     int(self.HTR6206.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR6206.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR6206.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR6206.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR6210.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6210.HeaterSubWindow.Label.text()))
+        self.HTR6210.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6210.HeaterSubWindow.Label.text()))
+        self.HTR6210.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6210.HeaterSubWindow.Label.text()))
+        self.HTR6210.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6210.HeaterSubWindow.Label.text()))
+        self.HTR6210.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR6210.HeaterSubWindow.Label.text(),
+                                     int(self.HTR6210.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR6210.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR6210.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR6210.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR6223.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6223.HeaterSubWindow.Label.text()))
+        self.HTR6223.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6223.HeaterSubWindow.Label.text()))
+        self.HTR6223.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6223.HeaterSubWindow.Label.text()))
+        self.HTR6223.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6223.HeaterSubWindow.Label.text()))
+        self.HTR6223.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR6223.HeaterSubWindow.Label.text(),
+                                     int(self.HTR6223.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR6223.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR6223.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR6223.HeaterSubWindow.LOSP.Field.text())))
+
+
+        self.HTR6224.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6224.HeaterSubWindow.Label.text()))
+        self.HTR6224.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6224.HeaterSubWindow.Label.text()))
+        self.HTR6224.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6224.HeaterSubWindow.Label.text()))
+        self.HTR6224.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6224.HeaterSubWindow.Label.text()))
+        self.HTR6224.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR6224.HeaterSubWindow.Label.text(),
+                                     int(self.HTR6224.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR6224.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR6224.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR6224.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR6219.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6219.HeaterSubWindow.Label.text()))
+        self.HTR6219.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6219.HeaterSubWindow.Label.text()))
+        self.HTR6219.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6219.HeaterSubWindow.Label.text()))
+        self.HTR6219.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6219.HeaterSubWindow.Label.text()))
+        self.HTR6219.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR6219.HeaterSubWindow.Label.text(),
+                                     int(self.HTR6219.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR6219.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR6219.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR6219.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR6221.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6221.HeaterSubWindow.Label.text()))
+        self.HTR6221.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6221.HeaterSubWindow.Label.text()))
+        self.HTR6221.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6221.HeaterSubWindow.Label.text()))
+        self.HTR6221.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6221.HeaterSubWindow.Label.text()))
+        self.HTR6221.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR6221.HeaterSubWindow.Label.text(),
+                                     int(self.HTR6221.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR6221.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR6221.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR6221.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR6214.HeaterSubWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
+        self.HTR6214.HeaterSubWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
+        self.HTR6214.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
+        self.HTR6214.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
+        self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR6214.HeaterSubWindow.Label.text(),
+                                     int(self.HTR6214.HeaterSubWindow.FBSwitch.Combobox.currentText()),
+                                     int(self.HTR6214.HeaterSubWindow.SP.Field.text()),
+                                     int(self.HTR6214.HeaterSubWindow.HISP.Field.text()),
+                                     int(self.HTR6214.HeaterSubWindow.LOSP.Field.text())))
 
         # Beckoff RTDs
 
@@ -5404,6 +5613,62 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HFSV3323.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3323"])
                 self.MW.HFSV3331.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3331"])
 
+                self.MW.SERVO3321.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["SERVO3321"])
+                self.MW.SERVO3321.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["SERVO3321"])
+
+                self.MW.HTR6225.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6225"])
+                self.MW.HTR6225.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6225"])
+
+                self.MW.HTR2123.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2123"])
+                self.MW.HTR2123.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2123"])
+
+                self.MW.HTR2124.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2124"])
+                self.MW.HTR2124.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2124"])
+
+                self.MW.HTR2125.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2125"])
+                self.MW.HTR2125.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2125"])
+
+                self.MW.HTR1202.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR1202"])
+                self.MW.HTR1202.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR1202"])
+
+                self.MW.HTR2203.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2203"])
+                self.MW.HTR2203.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2203"])
+
+                self.MW.HTR6202.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6202"])
+                self.MW.HTR6202.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6202"])
+
+                self.MW.HTR6206.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6206"])
+                self.MW.HTR6206.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6206"])
+
+                self.MW.HTR6210.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6210"])
+                self.MW.HTR6210.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6210"])
+
+                self.MW.HTR6223.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6223"])
+                self.MW.HTR6223.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6223"])
+
+                self.MW.HTR6224.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6224"])
+                self.MW.HTR6224.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6224"])
+
+                self.MW.HTR6219.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6219"])
+                self.MW.HTR6219.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6219"])
+
+                self.MW.HTR6221.HeaterSubWindow.Mode.Activate(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6221"])
+                self.MW.HTR6221.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6221"])
+
                 self.MW.HTR6214.HeaterSubWindow.Mode.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
                 self.MW.HTR6214.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
 
@@ -5550,6 +5815,118 @@ class UpdateDisplay(QtCore.QObject):
                     self.count = 0
                 self.count += 1
 
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["SERVO3321"]:
+                    self.MW.SERVO3321.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.SERVO3321.State.ButtonLClicked()
+
+                else:
+                    self.MW.SERVO3321.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.SERVO3321.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6225"]:
+                    self.MW.HTR6225.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR6225.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR6225.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR6225.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR2123"]:
+                    self.MW.HTR2123.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR2123.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR2123.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR2123.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR2124"]:
+                    self.MW.HTR2124.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR2124.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR2124.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR2124.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR2125"]:
+                    self.MW.HTR2125.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR2125.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR2125.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR2125.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR1202"]:
+                    self.MW.HTR1202.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR1202.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR1202.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR1202.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR2203"]:
+                    self.MW.HTR2203.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR2203.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR2203.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR2203.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6202"]:
+                    self.MW.HTR6202.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR6202.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR6202.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR6202.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6206"]:
+                    self.MW.HTR6206.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR6206.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR6206.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR6206.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6210"]:
+                    self.MW.HTR6210.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR6210.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR6210.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR6210.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6223"]:
+                    self.MW.HTR6223.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR6223.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR6223.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR6223.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6224"]:
+                    self.MW.HTR6224.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR6224.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR6224.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR6224.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6219"]:
+                    self.MW.HTR6219.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR6219.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR6219.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR6219.State.ButtonRClicked()
+
+                if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6221"]:
+                    self.MW.HTR6221.HeaterSubWindow.Mode.ButtonLClicked()
+                    self.MW.HTR6221.State.ButtonLClicked()
+
+                else:
+                    self.MW.HTR6221.HeaterSubWindow.Mode.ButtonRClicked()
+                    self.MW.HTR6221.State.ButtonRClicked()
+
                 if self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6214"]:
                     self.MW.HTR6214.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR6214.State.ButtonLClicked()
@@ -5557,6 +5934,8 @@ class UpdateDisplay(QtCore.QObject):
                 else:
                     self.MW.HTR6214.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR6214.State.ButtonRClicked()
+
+
 
                 self.MW.PT2121.SetValue(self.Client.receive_dic["data"]["PT"]["PT2121"])
                 self.MW.PT2316.SetValue(self.Client.receive_dic["data"]["PT"]["PT2316"])
@@ -5653,6 +6032,510 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HTR6225.HeaterSubWindow.RTD2.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6412"])
                 self.MW.HTR1202.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6413"])
                 self.MW.HTR2203.HeaterSubWindow.RTD1.SetValue(self.Client.receive_dic["data"]["TT"]["FP"]["TT6414"])
+
+                self.MW.SERVO3321.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["SERVO3321"])
+                self.MW.SERVO3321.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["SERVO3321"])
+                self.MW.SERVO3321.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["SERVO3321"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["SERVO3321"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["SERVO3321"]]:
+                    self.MW.SERVO3321.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.SERVO3321.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.SERVO3321.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["SERVO3321"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["SERVO3321"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["SERVO3321"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["SERVO3321"]))
+                self.MW.SERVO3321.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["SERVO3321"])
+                self.MW.SERVO3321.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["SERVO3321"])
+                self.MW.SERVO3321.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["SERVO3321"])
+                self.MW.SERVO3321.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["SERVO3321"])
+                self.MW.SERVO3321.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["SERVO3321"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["SERVO3321"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["SERVO3321"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["SERVO3321"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["SERVO3321"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["SERVO3321"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["SERVO3321"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["SERVO3321"]))
+                self.MW.HTR6214.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["SERVO3321"])
+
+                self.MW.HTR6225.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6225"])
+                self.MW.HTR6225.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6225"])
+                self.MW.HTR6225.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6225"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR6225"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR6225"]]:
+                    self.MW.HTR6225.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR6225.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR6225.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6225"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6225"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6225"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6225"]))
+                self.MW.HTR6225.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6225"])
+                self.MW.HTR6225.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6225"])
+                self.MW.HTR6225.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6225"])
+                self.MW.HTR6225.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6225"])
+                self.MW.HTR6225.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6225"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6225"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6225"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6225"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR6225"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6225"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6225"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6225"]))
+                self.MW.HTR6225.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6225"])
+
+                self.MW.HTR2123.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR2123"])
+                self.MW.HTR2123.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR2123"])
+                self.MW.HTR2123.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2123"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR2123"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR2123"]]:
+                    self.MW.HTR2123.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR2123.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR2123.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR2123"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR2123"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR2123"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR2123"]))
+                self.MW.HTR2123.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR2123"])
+                self.MW.HTR2123.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR2123"])
+                self.MW.HTR2123.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR2123"])
+                self.MW.HTR2123.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR2123"])
+                self.MW.HTR2123.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR2123"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR2123"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR2123"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR2123"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR2123"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR2123"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR2123"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR2123"]))
+                self.MW.HTR2123.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR2123"])
+
+                self.MW.HTR2124.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR2124"])
+                self.MW.HTR2124.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR2124"])
+                self.MW.HTR2124.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2124"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR2124"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR2124"]]:
+                    self.MW.HTR2124.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR2124.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR2124.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR2124"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR2124"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR2124"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR2124"]))
+                self.MW.HTR2124.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR2124"])
+                self.MW.HTR2124.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR2124"])
+                self.MW.HTR2124.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR2124"])
+                self.MW.HTR2124.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR2124"])
+                self.MW.HTR2124.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR2124"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR2124"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR2124"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR2124"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR2124"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR2124"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR2124"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR2124"]))
+                self.MW.HTR2124.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR2124"])
+
+                self.MW.HTR2125.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR2125"])
+                self.MW.HTR2125.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR2125"])
+                self.MW.HTR2125.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2125"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR2125"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR2125"]]:
+                    self.MW.HTR2125.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR2125.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR2125.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR2125"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR2125"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR2125"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR2125"]))
+                self.MW.HTR2125.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR2125"])
+                self.MW.HTR2125.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR2125"])
+                self.MW.HTR2125.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR2125"])
+                self.MW.HTR2125.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR2125"])
+                self.MW.HTR2125.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR2125"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR2125"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR2125"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR2125"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR2125"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR2125"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR2125"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR2125"]))
+                self.MW.HTR2125.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR2125"])
+
+                self.MW.HTR1202.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR1202"])
+                self.MW.HTR1202.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR1202"])
+                self.MW.HTR1202.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR1202"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR1202"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR1202"]]:
+                    self.MW.HTR1202.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR1202.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR1202.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR1202"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR1202"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR1202"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR1202"]))
+                self.MW.HTR1202.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR1202"])
+                self.MW.HTR1202.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR1202"])
+                self.MW.HTR1202.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR1202"])
+                self.MW.HTR1202.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR1202"])
+                self.MW.HTR1202.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR1202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR1202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR1202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR1202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR1202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR1202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR1202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR1202"]))
+                self.MW.HTR1202.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR1202"])
+
+                self.MW.HTR2203.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR2203"])
+                self.MW.HTR2203.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR2203"])
+                self.MW.HTR2203.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR2203"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR2203"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR2203"]]:
+                    self.MW.HTR2203.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR2203.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR2203.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR2203"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR2203"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR2203"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR2203"]))
+                self.MW.HTR2203.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR2203"])
+                self.MW.HTR2203.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR2203"])
+                self.MW.HTR2203.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR2203"])
+                self.MW.HTR2203.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR2203"])
+                self.MW.HTR2203.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR2203"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR2203"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR2203"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR2203"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR2203"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR2203"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR2203"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR2203"]))
+                self.MW.HTR2203.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR2203"])
+
+                self.MW.HTR6202.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6202"])
+                self.MW.HTR6202.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6202"])
+                self.MW.HTR6202.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6202"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR6202"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR6202"]]:
+                    self.MW.HTR6202.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR6202.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR6202.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6202"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6202"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6202"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6202"]))
+                self.MW.HTR6202.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6202"])
+                self.MW.HTR6202.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6202"])
+                self.MW.HTR6202.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6202"])
+                self.MW.HTR6202.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6202"])
+                self.MW.HTR6202.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR6202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6202"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6202"]))
+                self.MW.HTR6202.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6202"])
+
+                self.MW.HTR6206.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6206"])
+                self.MW.HTR6206.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6206"])
+                self.MW.HTR6206.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6206"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR6206"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR6206"]]:
+                    self.MW.HTR6206.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR6206.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR6206.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6206"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6206"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6206"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6206"]))
+                self.MW.HTR6206.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6206"])
+                self.MW.HTR6206.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6206"])
+                self.MW.HTR6206.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6206"])
+                self.MW.HTR6206.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6206"])
+                self.MW.HTR6206.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6206"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6206"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6206"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6206"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR6206"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6206"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6206"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6206"]))
+                self.MW.HTR6206.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6206"])
+
+                self.MW.HTR6210.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6210"])
+                self.MW.HTR6210.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6210"])
+                self.MW.HTR6210.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6210"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR6210"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR6210"]]:
+                    self.MW.HTR6210.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR6210.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR6210.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6210"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6210"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6210"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6210"]))
+                self.MW.HTR6210.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6210"])
+                self.MW.HTR6210.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6210"])
+                self.MW.HTR6210.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6210"])
+                self.MW.HTR6210.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6210"])
+                self.MW.HTR6210.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6210"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6210"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6210"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6210"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR6210"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6210"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6210"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6210"]))
+                self.MW.HTR6210.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6210"])
+
+                self.MW.HTR6223.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6223"])
+                self.MW.HTR6223.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6223"])
+                self.MW.HTR6223.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6223"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR6223"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR6223"]]:
+                    self.MW.HTR6223.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR6223.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR6223.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6223"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6223"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6223"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6223"]))
+                self.MW.HTR6223.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6223"])
+                self.MW.HTR6223.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6223"])
+                self.MW.HTR6223.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6223"])
+                self.MW.HTR6223.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6223"])
+                self.MW.HTR6223.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6223"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6223"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6223"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6223"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR6223"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6223"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6223"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6223"]))
+                self.MW.HTR6223.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6223"])
+
+                self.MW.HTR6224.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6224"])
+                self.MW.HTR6224.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6224"])
+                self.MW.HTR6224.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6224"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR6224"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR6224"]]:
+                    self.MW.HTR6224.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR6224.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR6224.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6224"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6224"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6224"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6224"]))
+                self.MW.HTR6224.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6224"])
+                self.MW.HTR6224.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6224"])
+                self.MW.HTR6224.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6224"])
+                self.MW.HTR6224.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6224"])
+                self.MW.HTR6224.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6224"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6224"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6224"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6224"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR6224"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6224"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6224"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6224"]))
+                self.MW.HTR6224.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6224"])
+
+                self.MW.HTR6219.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6219"])
+                self.MW.HTR6219.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6219"])
+                self.MW.HTR6219.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6219"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR6219"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR6219"]]:
+                    self.MW.HTR6219.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR6219.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR6219.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6219"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6219"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6219"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6219"]))
+                self.MW.HTR6219.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6219"])
+                self.MW.HTR6219.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6219"])
+                self.MW.HTR6219.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6219"])
+                self.MW.HTR6219.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6219"])
+                self.MW.HTR6219.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6219"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6219"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6219"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6219"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR6219"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6219"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6219"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6219"]))
+                self.MW.HTR6219.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6219"])
+
+                self.MW.HTR6221.HeaterSubWindow.Interlock.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6221"])
+                self.MW.HTR6221.HeaterSubWindow.Error.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6221"])
+                self.MW.HTR6221.HeaterSubWindow.MANSP.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6221"])
+                if True in [self.Client.receive_dic["data"]["LOOPPID"]["SATHI"]["HTR6221"],
+                            self.Client.receive_dic["data"]["LOOPPID"]["SATLO"]["HTR6221"]]:
+                    self.MW.HTR6221.HeaterSubWindow.SAT.UpdateColor(True)
+                else:
+                    self.MW.HTR6221.HeaterSubWindow.SAT.UpdateColor(False)
+                self.MW.HTR6221.HeaterSubWindow.ModeREAD.Field.setText(
+                    self.FindDistinctTrue(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6221"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6221"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6221"],
+                                          self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6221"]))
+                self.MW.HTR6221.HeaterSubWindow.EN.UpdateColor(
+                    self.Client.receive_dic["data"]["LOOPPID"]["EN"]["HTR6221"])
+                self.MW.HTR6221.HeaterSubWindow.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6221"])
+                self.MW.HTR6221.HeaterSubWindow.HIGH.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6221"])
+                self.MW.HTR6221.HeaterSubWindow.LOW.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6221"])
+                self.MW.HTR6221.HeaterSubWindow.SETSP.SetValue(
+                    self.FetchSetPoint(self.Client.receive_dic["data"]["LOOPPID"]["MODE0"]["HTR6221"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE1"]["HTR6221"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE2"]["HTR6221"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["MODE3"]["HTR6221"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET0"]["HTR6221"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET1"]["HTR6221"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET2"]["HTR6221"],
+                                       self.Client.receive_dic["data"]["LOOPPID"]["SET3"]["HTR6221"]))
+                self.MW.HTR6221.Power.SetValue(
+                    self.Client.receive_dic["data"]["LOOPPID"]["OUT"]["HTR6221"])
 
                 self.MW.HTR6214.HeaterSubWindow.Interlock.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
                 self.MW.HTR6214.HeaterSubWindow.Error.UpdateColor(self.Client.receive_dic["data"]["LOOPPID"]["ERR"]["HTR6214"])
