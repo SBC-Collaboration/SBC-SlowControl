@@ -991,27 +991,24 @@ class UpdateDataBase(QtCore.QObject):
                     else:
                         pass
 
-
                 if self.para_Valve >= self.rate_Valve:
                     for key in self.PLC.Valve_OUT:
-                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Valve_OUT[key])
+                        self.db.insert_data_into_datastorage(key+'_OUT', self.dt, self.PLC.Valve_OUT[key])
                         self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
                     self.para_Valve = 0
-
 
                 for key in self.PLC.LOOPPID_EN:
                     # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
                     if self.PLC.LOOPPID_EN[key] != self.LOOPPID_buffer[key]:
-                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.LOOPPID_EN[key])
+                        self.db.insert_data_into_datastorage(key+'_EN', self.dt, self.PLC.LOOPPID_EN[key])
                         self.LOOPPID_buffer[key] = self.PLC.LOOPPID_EN[key]
                         # print(self.PLC.Valve_OUT[key])
                     else:
                         pass
 
-
                 if self.para_LOOPPID >= self.rate_LOOPPID:
                     for key in self.PLC.LOOPPID_EN:
-                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.LOOPPID_EN[key])
+                        self.db.insert_data_into_datastorage(key+'_EN', self.dt, self.PLC.LOOPPID_EN[key])
                         self.LOOPPID_buffer[key] = self.PLC.LOOPPID_EN[key]
                     self.para_LOOPPID = 0
 
