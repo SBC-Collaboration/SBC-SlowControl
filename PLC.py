@@ -946,7 +946,7 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_b=100
         # c is for valve status
         self.para_c = 0
-        self.rate_c = 5
+        self.rate_c = 10
         self.Valve_buffer=self.PLC.Valve_OUT
         print("begin updating Database")
 
