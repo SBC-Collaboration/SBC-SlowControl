@@ -1276,57 +1276,57 @@ class UpdateServer(QtCore.QObject):
     def pack_data(self):
 
 
-        for key in self.PLC.TT_FP_dic:
-            self.TT_FP_dic_ini[key] = self.PLC.TT_FP_dic[key]
-
-        for key in self.PLC.TT_BO_dic:
-            self.TT_BO_dic_ini[key]=self.PLC.TT_BO_dic[key]
-        for key in self.PLC.PT_dic:
-            self.PT_dic_ini[key]=self.PLC.PT_dic[key]
-        for key in self.PLC.Valve_OUT:
-            self.Valve_OUT_ini[key]=self.PLC.Valve_OUT[key]
-        for key in self.PLC.TT_FP_Alarm:
-            self.TT_FP_Alarm_ini[key] = self.PLC.TT_FP_Alarm[key]
-        for key in self.PLC.TT_BO_Alarm:
-            self.TT_BO_Alarm_ini[key] = self.PLC.TT_BO_Alarm[key]
-        for key in self.PLC.PT_dic:
-            self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
-        for key in self.PLC.LOOPPID_MODE0:
-            self.LOOPPID_MODE0_ini[key] = self.PLC.LOOPPID_MODE0[key]
-        for key in self.PLC.LOOPPID_MODE1:
-            self.LOOPPID_MODE1_ini[key] = self.PLC.LOOPPID_MODE1[key]
-        for key in self.PLC.LOOPPID_MODE2:
-            self.LOOPPID_MODE2_ini[key] = self.PLC.LOOPPID_MODE2[key]
-        for key in self.PLC.LOOPPID_MODE3:
-            self.LOOPPID_MODE3_ini[key] = self.PLC.LOOPPID_MODE3[key]
-        for key in self.PLC.LOOPPID_INTLKD:
-            self.LOOPPID_INTLKD_ini[key] = self.PLC.LOOPPID_INTLKD[key]
-        for key in self.PLC.LOOPPID_MAN:
-            self.LOOPPID_MAN_ini[key] = self.PLC.LOOPPID_MAN[key]
-        for key in self.PLC.LOOPPID_ERR:
-            self.LOOPPID_ERR_ini[key] = self.PLC.LOOPPID_ERR[key]
-        for key in self.PLC.LOOPPID_SATHI:
-            self.LOOPPID_SATHI_ini[key] = self.PLC.LOOPPID_SATHI[key]
-        for key in self.PLC.LOOPPID_SATLO:
-            self.LOOPPID_SATLO_ini[key] = self.PLC.LOOPPID_SATLO[key]
-        for key in self.PLC.LOOPPID_EN:
-            self.LOOPPID_EN_ini[key] = self.PLC.LOOPPID_EN[key]
-        for key in self.PLC.LOOPPID_OUT:
-            self.LOOPPID_OUT_ini[key] = self.PLC.LOOPPID_OUT[key]
-        for key in self.PLC.LOOPPID_IN:
-            self.LOOPPID_IN_ini[key] = self.PLC.LOOPPID_IN[key]
-        for key in self.PLC.LOOPPID_HI_LIM:
-            self.LOOPPID_HI_LIM_ini[key] = self.PLC.LOOPPID_HI_LIM[key]
-        for key in self.PLC.LOOPPID_LO_LIM:
-            self.LOOPPID_LO_LIM_ini[key] = self.PLC.LOOPPID_LO_LIM[key]
-        for key in self.PLC.LOOPPID_SET0:
-            self.LOOPPID_SET0_ini[key] = self.PLC.LOOPPID_SET0[key]
-        for key in self.PLC.LOOPPID_SET1:
-            self.LOOPPID_SET1_ini[key] = self.PLC.LOOPPID_SET1[key]
-        for key in self.PLC.LOOPPID_SET2:
-            self.LOOPPID_SET2_ini[key] = self.PLC.LOOPPID_SET2[key]
-        for key in self.PLC.LOOPPID_SET3:
-            self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
+        # for key in self.PLC.TT_FP_dic:
+        #     self.TT_FP_dic_ini[key] = self.PLC.TT_FP_dic[key]
+        #
+        # for key in self.PLC.TT_BO_dic:
+        #     self.TT_BO_dic_ini[key]=self.PLC.TT_BO_dic[key]
+        # for key in self.PLC.PT_dic:
+        #     self.PT_dic_ini[key]=self.PLC.PT_dic[key]
+        # for key in self.PLC.Valve_OUT:
+        #     self.Valve_OUT_ini[key]=self.PLC.Valve_OUT[key]
+        # for key in self.PLC.TT_FP_Alarm:
+        #     self.TT_FP_Alarm_ini[key] = self.PLC.TT_FP_Alarm[key]
+        # for key in self.PLC.TT_BO_Alarm:
+        #     self.TT_BO_Alarm_ini[key] = self.PLC.TT_BO_Alarm[key]
+        # for key in self.PLC.PT_dic:
+        #     self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
+        # for key in self.PLC.LOOPPID_MODE0:
+        #     self.LOOPPID_MODE0_ini[key] = self.PLC.LOOPPID_MODE0[key]
+        # for key in self.PLC.LOOPPID_MODE1:
+        #     self.LOOPPID_MODE1_ini[key] = self.PLC.LOOPPID_MODE1[key]
+        # for key in self.PLC.LOOPPID_MODE2:
+        #     self.LOOPPID_MODE2_ini[key] = self.PLC.LOOPPID_MODE2[key]
+        # for key in self.PLC.LOOPPID_MODE3:
+        #     self.LOOPPID_MODE3_ini[key] = self.PLC.LOOPPID_MODE3[key]
+        # for key in self.PLC.LOOPPID_INTLKD:
+        #     self.LOOPPID_INTLKD_ini[key] = self.PLC.LOOPPID_INTLKD[key]
+        # for key in self.PLC.LOOPPID_MAN:
+        #     self.LOOPPID_MAN_ini[key] = self.PLC.LOOPPID_MAN[key]
+        # for key in self.PLC.LOOPPID_ERR:
+        #     self.LOOPPID_ERR_ini[key] = self.PLC.LOOPPID_ERR[key]
+        # for key in self.PLC.LOOPPID_SATHI:
+        #     self.LOOPPID_SATHI_ini[key] = self.PLC.LOOPPID_SATHI[key]
+        # for key in self.PLC.LOOPPID_SATLO:
+        #     self.LOOPPID_SATLO_ini[key] = self.PLC.LOOPPID_SATLO[key]
+        # for key in self.PLC.LOOPPID_EN:
+        #     self.LOOPPID_EN_ini[key] = self.PLC.LOOPPID_EN[key]
+        # for key in self.PLC.LOOPPID_OUT:
+        #     self.LOOPPID_OUT_ini[key] = self.PLC.LOOPPID_OUT[key]
+        # for key in self.PLC.LOOPPID_IN:
+        #     self.LOOPPID_IN_ini[key] = self.PLC.LOOPPID_IN[key]
+        # for key in self.PLC.LOOPPID_HI_LIM:
+        #     self.LOOPPID_HI_LIM_ini[key] = self.PLC.LOOPPID_HI_LIM[key]
+        # for key in self.PLC.LOOPPID_LO_LIM:
+        #     self.LOOPPID_LO_LIM_ini[key] = self.PLC.LOOPPID_LO_LIM[key]
+        # for key in self.PLC.LOOPPID_SET0:
+        #     self.LOOPPID_SET0_ini[key] = self.PLC.LOOPPID_SET0[key]
+        # for key in self.PLC.LOOPPID_SET1:
+        #     self.LOOPPID_SET1_ini[key] = self.PLC.LOOPPID_SET1[key]
+        # for key in self.PLC.LOOPPID_SET2:
+        #     self.LOOPPID_SET2_ini[key] = self.PLC.LOOPPID_SET2[key]
+        # for key in self.PLC.LOOPPID_SET3:
+        #     self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
 
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
         # print("pack",self.data_dic)
