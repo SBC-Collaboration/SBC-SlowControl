@@ -945,8 +945,8 @@ class UpdateDataBase(QtCore.QObject):
         self.para_b=0
         self.rate_b=100
         # c is for valve status
-        # self.para_c = 0
-        # self.rate_c = 10
+        self.para_c = 0
+        self.rate_c = 5
         self.Valve_buffer=self.PLC.Valve_OUT
         print("begin updating Database")
 
@@ -971,16 +971,17 @@ class UpdateDataBase(QtCore.QObject):
                     # print("write pressure transducer")
                     self.para_b=0
 
-                # for key in self.PLC.Valve_OUT:
-                #     if self.PLC.Valve_OUT[key] != self.Valve_buffer[key]:
-                #         self.db.insert_data_into_datastorage(key, self.dt, self.Valve_buffer[key])
-                #         self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
-                #     else:
-                #         if self.para_c >= self.rate_c:
-                #             self.db.insert_data_into_datastorage(key, self.dt, self.Valve_buffer[key])
-                #             self.para_c = 0
-                #         else:
-                #             pass
+                for key in self.PLC.Valve_OUT:
+                    if self.PLC.Valve_OUT[key] != self.Valve_buffer[key]:
+                        self.db.insert_data_into_datastorage(key, self.dt, self.Valve_buffer[key])
+                        self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
+                    else:
+                        if self.para_c >= self.rate_c:
+                            self.db.insert_data_into_datastorage(key, self.dt, self.Valve_buffer[key])
+                            self.para_c = 0
+                        else:
+                            pass
+                        self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
 
 
 
@@ -990,6 +991,7 @@ class UpdateDataBase(QtCore.QObject):
                 print("Wrting PLC data to database...")
                 self.para_a += 1
                 self.para_b += 1
+                self.para_c += 1
                 self.PLC.NewData_Database = False
 
             else:
