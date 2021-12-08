@@ -946,7 +946,7 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_b=100
         # c is for valve status
         self.para_c = 0
-        self.rate_c = 10
+        self.rate_c = 100
         self.Valve_buffer=self.PLC.Valve_OUT
         print("begin updating Database")
 
@@ -975,6 +975,7 @@ class UpdateDataBase(QtCore.QObject):
                     if self.PLC.Valve_OUT[key] != self.Valve_buffer[key]:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Valve_OUT[key])
                         self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
+                        print(self.PLC.Valve_OUT[key])
                     else:
                         pass
 
@@ -985,7 +986,7 @@ class UpdateDataBase(QtCore.QObject):
                     self.para_c = 0
 
 
-                print(self.PLC.Valve_OUT)
+
 
 
 
@@ -1322,24 +1323,24 @@ class UpdateServer(QtCore.QObject):
 
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
         # print("pack",self.data_dic)
-        print("HTR6214 \n", "MODE0", self.data_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],
-                    "\n","MODE1", self.data_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
-                    "\n","MODE2", self.data_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],
-                    "\n","MODE3", self.data_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"],
-                    "\n","INTLKD", self.data_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"],
-                    "\n","MAN", self.data_dic["data"]["LOOPPID"]["MAN"]["HTR6214"],
-                    "\n","ERR", self.data_dic["data"]["LOOPPID"]["ERR"]["HTR6214"],
-                    "\n","SATHI", self.data_dic["data"]["LOOPPID"]["SATHI"]["HTR6214"],
-                    "\n","SATLO", self.data_dic["data"]["LOOPPID"]["SATLO"]["HTR6214"],
-                    "\n","EN", self.data_dic["data"]["LOOPPID"]["EN"]["HTR6214"],
-                    "\n","OUT", self.data_dic["data"]["LOOPPID"]["OUT"]["HTR6214"],
-                    "\n","IN", self.data_dic["data"]["LOOPPID"]["IN"]["HTR6214"],
-                    "\n","HI_LIM", self.data_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6214"],
-                    "\n","LO_LIM", self.data_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6214"],
-                    "\n","SET0", self.data_dic["data"]["LOOPPID"]["SET0"]["HTR6214"],
-                    "\n","SET1", self.data_dic["data"]["LOOPPID"]["SET1"]["HTR6214"],
-                    "\n","SET2", self.data_dic["data"]["LOOPPID"]["SET2"]["HTR6214"],
-                    "\n","SET3", self.data_dic["data"]["LOOPPID"]["SET3"]["HTR6214"])
+        # print("HTR6214 \n", "MODE0", self.data_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],
+        #             "\n","MODE1", self.data_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
+        #             "\n","MODE2", self.data_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],
+        #             "\n","MODE3", self.data_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"],
+        #             "\n","INTLKD", self.data_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"],
+        #             "\n","MAN", self.data_dic["data"]["LOOPPID"]["MAN"]["HTR6214"],
+        #             "\n","ERR", self.data_dic["data"]["LOOPPID"]["ERR"]["HTR6214"],
+        #             "\n","SATHI", self.data_dic["data"]["LOOPPID"]["SATHI"]["HTR6214"],
+        #             "\n","SATLO", self.data_dic["data"]["LOOPPID"]["SATLO"]["HTR6214"],
+        #             "\n","EN", self.data_dic["data"]["LOOPPID"]["EN"]["HTR6214"],
+        #             "\n","OUT", self.data_dic["data"]["LOOPPID"]["OUT"]["HTR6214"],
+        #             "\n","IN", self.data_dic["data"]["LOOPPID"]["IN"]["HTR6214"],
+        #             "\n","HI_LIM", self.data_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6214"],
+        #             "\n","LO_LIM", self.data_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6214"],
+        #             "\n","SET0", self.data_dic["data"]["LOOPPID"]["SET0"]["HTR6214"],
+        #             "\n","SET1", self.data_dic["data"]["LOOPPID"]["SET1"]["HTR6214"],
+        #             "\n","SET2", self.data_dic["data"]["LOOPPID"]["SET2"]["HTR6214"],
+        #             "\n","SET3", self.data_dic["data"]["LOOPPID"]["SET3"]["HTR6214"])
 
 
         self.data_package=pickle.dumps(self.data_dic)
