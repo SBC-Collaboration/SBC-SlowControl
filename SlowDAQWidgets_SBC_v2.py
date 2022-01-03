@@ -62,45 +62,33 @@ class ButtonGroup(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("ButtonGroup")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
-        self.setMinimumSize(70*R, 40*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 150*R))
+        self.setMinimumSize(70*R, 150*R)
         self.setSizePolicy(sizePolicy)
 
-        self.VL = QtWidgets.QVBoxLayout()
-        self.VL.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
-        self.VL.setSpacing(20 * R)
-        self.VL.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.Button0 = QtWidgets.QPushButton()
+        self.Button0 = QtWidgets.QPushButton(self)
         self.Button0.setObjectName("Button0")
-        self.Button0.setGeometry(QtCore.QRect(0*R, 20*R, 65*R, 15*R))
+        self.Button0.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 30*R))
         self.Button0.setText("Mode0")
         self.Button0.setStyleSheet("QPushButton {" + FONT + "}")
-        self.VL.addWidget(self.Button0)
 
-        self.Button1 = QtWidgets.QPushButton()
+        self.Button1 = QtWidgets.QPushButton(self)
         self.Button1.setObjectName("Button1")
-        self.Button1.setGeometry(QtCore.QRect(0 * R, 20 * R, 65 * R, 15 * R))
+        self.Button1.setGeometry(QtCore.QRect(0 * R, 35 * R, 70 * R, 30 * R))
         self.Button1.setText("Mode1")
         self.Button1.setStyleSheet("QPushButton {" + FONT + "}")
-        self.VL.addWidget(self.Button1)
 
-        self.Button2 = QtWidgets.QPushButton()
+        self.Button2 = QtWidgets.QPushButton(self)
         self.Button2.setObjectName("Button2")
-        self.Button2.setGeometry(QtCore.QRect(0 * R, 20 * R, 65 * R, 15 * R))
+        self.Button2.setGeometry(QtCore.QRect(0 * R, 70 * R, 70 * R, 30 * R))
         self.Button2.setText("Mode2")
         self.Button2.setStyleSheet("QPushButton {" + FONT + "}")
-        self.VL.addWidget(self.Button2)
 
-        self.Button3 = QtWidgets.QPushButton()
+        self.Button3 = QtWidgets.QPushButton(self)
         self.Button3.setObjectName("Button3")
-        self.Button3.setGeometry(QtCore.QRect(0 * R, 20 * R, 65 * R, 15 * R))
+        self.Button3.setGeometry(QtCore.QRect(0 * R, 105 * R, 70 * R, 30 * R))
         self.Button3.setText("Mode3")
         self.Button3.setStyleSheet("QPushButton {" + FONT + "}")
-        self.VL.addWidget(self.Button3)
-
-
-
 
 class PnID_Alone(QtWidgets.QWidget):
     def __init__(self, parent=None):
