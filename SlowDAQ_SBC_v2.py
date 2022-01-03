@@ -4636,6 +4636,9 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         # self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
         self.GLWR.addWidget(self.Label)
 
+        self.ButtonGroup = ButtonGroup(self.GroupWR)
+        self.GLWR.addWidget(self.ButtonGroup)
+
         self.FBSwitch = Menu(self.GroupWR)
         self.FBSwitch.Label.setText("FBSWITCH")
         self.GLWR.addWidget(self.FBSwitch)
