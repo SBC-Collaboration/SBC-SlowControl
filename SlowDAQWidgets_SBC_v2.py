@@ -66,7 +66,7 @@ class ButtonGroup(QtWidgets.QWidget):
         self.setMinimumSize(70*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
-        self.VL = QtWidgets.QVBoxLayout(self)
+        self.VL = QtWidgets.QVBoxLayout()
         self.VL.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
         self.VL.setSpacing(20 * R)
         self.VL.setAlignment(QtCore.Qt.AlignCenter)
