@@ -965,7 +965,8 @@ class UpdateDataBase(QtCore.QObject):
     def run(self):
         self.Running = True
         while self.Running:
-            self.dt = datetime_in_s()
+            self.dt = datetime_in_1e5micro()
+            self.early_dt= early_datetime()
             print("Database Updating", self.dt)
 
             if self.PLC.NewData_Database:
@@ -1001,7 +1002,7 @@ class UpdateDataBase(QtCore.QObject):
                 for key in self.PLC.LOOPPID_EN:
                     # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
                     if self.PLC.LOOPPID_EN[key] != self.LOOPPID_buffer[key]:
-                        self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.LOOPPID_buffer[key])
+                        self.db.insert_data_into_datastorage(key + '_EN', self.early_dt, self.LOOPPID_buffer[key])
                         self.db.insert_data_into_datastorage(key+'_EN', self.dt, self.PLC.LOOPPID_EN[key])
                         self.LOOPPID_buffer[key] = self.PLC.LOOPPID_EN[key]
                         # print(self.PLC.Valve_OUT[key])

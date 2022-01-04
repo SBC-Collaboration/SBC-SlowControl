@@ -7,8 +7,25 @@ import random
 
 def datetime_in_s():
     d=datetime.datetime.now()
-    x=d-datetime.timedelta(microseconds=d.microsecond)
+    timeR = int(d.microsecond%1e6)
+    delta=datetime.timedelta(microseconds=timeR)
+    x=d-delta
     return x
+
+def datetime_in_1e5micro():
+    d=datetime.datetime.now()
+    timeR = int(d.microsecond%1e5)
+    delta=datetime.timedelta(microseconds=timeR)
+    x=d-delta
+    return x
+
+def early_datetime():
+    d = datetime.datetime.now()
+    timeR = int(d.microsecond % 1e5)
+    delta = datetime.timedelta(microseconds=timeR)
+    x = d - delta - datetime.timedelta(microseconds=1e5)
+    return x
+
 
 
 class mydatabase():
@@ -93,6 +110,7 @@ class mydatabase():
 
 
 if __name__ == "__main__":
+
     db = mydatabase()
     dt = datetime_in_s()
     # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
@@ -108,3 +126,8 @@ if __name__ == "__main__":
     db.show_tables()
 
     db.close_database()
+
+    # #test datetime function
+    # print(datetime_in_1e5micro())
+    # print(early_datetime())
+
