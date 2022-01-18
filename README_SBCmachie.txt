@@ -7,7 +7,7 @@ This is a help files to specify some detais on how to operate GUI on sbcslowcont
        if you want to see conda env list, run "conda env list"
    0.c cd ~/Downloads/sbc_slowcontrol/SBC_slowcontrol 
        this is is the code directory
-   0.d run the backgroudn code "python PLC.py"
+   0.d run the backgroudn code "source PLD_init.sh"
    0.e add another tab or terminal, activate conda environment again and run "python SlowDAQ_SBC_v2.py"-this is GUI
    0.f if you quit the program or the program crashes by accident, you will find you can not rerun the code because some tcp error
        "source clear_tcp.sh"
