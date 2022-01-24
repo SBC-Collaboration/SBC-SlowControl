@@ -393,17 +393,19 @@ class PLC:
 
             #########################################################################
         if self.Connected_BO:
-            # Raw_BO_TT_BO = {}
-            # for key in self.TT_BO_address:
-            #     Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=2, unit=0x01)
-            #     self.TT_BO_dic[key] = round(
-            #         struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
-            #     # print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
-            #     # print(key, "'s' value is", self.TT_BO_dic[key])
-            print(0)
+            Raw_BO_TT_BO = {}
+            for key in self.TT_BO_address:
+                Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=2, unit=0x01)
+                self.TT_BO_dic[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
+                # print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
+                # print(key, "'s' value is", self.TT_BO_dic[key])
+            print(1)
 
 
         ##########################################################################################
+
+            #test endian of TT BO
 
             # for key in self.TT_BO_address:
             #     Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=4, unit=0x01)
