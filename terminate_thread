@@ -39,6 +39,7 @@ def install():
     sys.excepthook = sendKillSignal
     QtCore.QThread.__init__ = patched_init
 
+install()
 
 class Mythread(QtCore.QThread):
     def __init__(self, target=None):
@@ -48,7 +49,7 @@ class Mythread(QtCore.QThread):
         if self.target:
             self.target()
 
-install()
+
 
 
 
