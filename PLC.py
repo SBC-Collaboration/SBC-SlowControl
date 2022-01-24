@@ -346,16 +346,16 @@ class PLC:
         # print(self.TT_BO_HighLimit["TT2119"])
         # print(self.TT_BO_Alarm["TT2119"])
         if self.Connected:
-            # # Reading all the RTDs
-            # Raw_RTDs_FP={}
-            # for key in self.TT_FP_address:
-            #     Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
-            #     self.TT_FP_dic[key] = round(
-            #         struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
-            #
-            #
-            #     # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
-            print(0)
+            # Reading all the RTDs
+            Raw_RTDs_FP={}
+            for key in self.TT_FP_address:
+                Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
+                self.TT_FP_dic[key] = round(
+                    struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
+
+
+                # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
+            # print(0)
 
 
             #################################################################################################
@@ -400,7 +400,7 @@ class PLC:
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
                 # print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
                 # print(key, "'s' value is", self.TT_BO_dic[key])
-            print(1)
+
 
 
         ##########################################################################################
