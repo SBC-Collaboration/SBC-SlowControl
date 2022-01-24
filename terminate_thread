@@ -1,9 +1,12 @@
+#https://stackoverflow.com/questions/49663124/cause-python-to-exit-if-any-thread-has-an-exception/49665590
+
 import threading
 import sys
 import traceback
 import os
 import signal
 import time
+from PySide2 import QtCore
 
 def countdown(initial):
     while True:
@@ -17,7 +20,7 @@ def sendKillSignal(etype, value, tb):
     os.kill(os.getpid(), signal.SIGKILL)
 
 
-original_init = threading.Thread.__init__
+original_init = QtCore.QThread.__init__
 def patched_init(self, *args, **kwargs):
     print("thread init'ed")
     original_init(self, *args, **kwargs)
@@ -32,12 +35,23 @@ def patched_init(self, *args, **kwargs):
 
 def install():
     sys.excepthook = sendKillSignal
-    threading.Thread.__init__ = patched_init
+    QtCore.QThread.__init__ = patched_init
+
+class Mythread(QtCore.QThread):
+    def __init__(self, target=None):
+        super().__init__()
+        self.target = target
+    def run(self):
+        if self.target:
+            self.target()
+
+
+
 
 if __name__ == '__main__':
     install()
-    helper = threading.Thread(target=countdown, args=['failsoon'])
+    helper = Mythread(target=countdown('FAST'))
     helper.start()
     time.sleep(0.5)
     #countdown('THISWILLTAKELONGERTOFAILBECAUSEITSMOREDATA')
-    countdown('FAST')
+    # countdown('FAST')
