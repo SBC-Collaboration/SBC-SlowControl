@@ -8,6 +8,8 @@ import signal
 import time
 from PySide2 import QtCore
 
+
+
 def countdown(initial):
     while True:
         print(initial[0])
@@ -37,6 +39,7 @@ def install():
     sys.excepthook = sendKillSignal
     QtCore.QThread.__init__ = patched_init
 
+
 class Mythread(QtCore.QThread):
     def __init__(self, target=None):
         super().__init__()
@@ -45,11 +48,13 @@ class Mythread(QtCore.QThread):
         if self.target:
             self.target()
 
+install()
+
 
 
 
 if __name__ == '__main__':
-    install()
+
     helper = Mythread(target=countdown('FAST'))
     helper.start()
     time.sleep(0.5)
