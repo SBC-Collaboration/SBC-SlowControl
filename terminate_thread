@@ -36,13 +36,17 @@ class myclass1(QtCore.QObject):
     def run(self):
         self.Running = True
         while self.Running:
-            print(self.string[0])
-            # print(self.count)
-            # self.count += 1
-            # if self.count == 5:
-            #     sendKillSignal(*sys.exc_info())
-            self.string = self.string[1:]
-            time.sleep(1)
+            try:
+                print(self.string[0])
+                # print(self.count)
+                # self.count += 1
+                # if self.count == 5:
+                #     sendKillSignal(*sys.exc_info())
+                self.string = self.string[1:]
+                time.sleep(1)
+            except:
+                sendKillSignal(*sys.exc_info())
+
 
     @QtCore.Slot()
     def stop(self):
