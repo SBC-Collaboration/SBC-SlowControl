@@ -16,7 +16,7 @@ class myclass(QtCore.QObject):
     def countdown(self):
         while True:
             print(self.string[0])
-            initial = self.string[1:]
+            self.string = self.string[1:]
             time.sleep(1)
 
 def sendKillSignal(etype, value, tb):
