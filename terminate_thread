@@ -39,7 +39,7 @@ class myclass1(QtCore.QObject):
             print(self.string[0])
             print(self.count)
             self.count += 1
-            if self.count = 5
+            if self.count == 5:
                 sendKillSignal(*sys.exc_info())
             self.string = self.string[1:]
             time.sleep(1)
