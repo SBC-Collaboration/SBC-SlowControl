@@ -176,16 +176,18 @@ def patched_init(self, *args, **kwargs):
     print("thread init'ed")
     original_init(self, *args, **kwargs)
     original_run = self.run
-    def patched_run(*args, **kw):
+    def patched_run(*args, **kwargs):
         try:
-            original_run(*args, **kw)
+            original_run(*args, **kwargs)
         except:
             sys.excepthook(*sys.exc_info())
     self.run = patched_run
+QtCore.QThread.__init__ = patched_init
 
 
 
 def install():
+    sys._excepthook = sys.excepthook
     sys.excepthook = sendKillSignal
     QtCore.QThread.__init__ = patched_init
 
@@ -195,8 +197,10 @@ def install():
 
 
 if __name__ == '__main__':
-    App = QtWidgets.QApplication(sys.argv)
-
-    # MC = MainClass()
-    Update=Update()
-    sys.exit(App.exec_())
+    # App = QtWidgets.QApplication(sys.argv)
+    #
+    # # MC = MainClass()
+    # Update=Update()
+    # sys.exit(App.exec_())
+    print('1')
+    sendKillSignal(*sys.exc_info())
