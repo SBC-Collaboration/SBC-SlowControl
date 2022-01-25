@@ -9,12 +9,14 @@ import time
 from PySide2 import QtCore
 
 
-
-def countdown(initial):
-    while True:
-        print(initial[0])
-        initial = initial[1:]
-        time.sleep(1)
+class myclass():
+    def __init__(self,string = None):
+        self.string = string
+    def countdown(self):
+        while True:
+            print(self.string[0])
+            initial = self.string[1:]
+            time.sleep(1)
 
 def sendKillSignal(etype, value, tb):
     print('KILL ALL')
@@ -35,29 +37,26 @@ def patched_init(self, *args, **kwargs):
     self.run = patched_run
 
 
+
 def install():
     sys.excepthook = sendKillSignal
     QtCore.QThread.__init__ = patched_init
-
-install()
-
-class Mythread(QtCore.QThread):
-    def __init__(self, target=None):
-        super().__init__()
-        self.target = target
-    def run(self):
-        if self.target:
-            self.target()
-
-
 
 
 
 
 if __name__ == '__main__':
-
-    helper = Mythread(target=countdown('FAST'))
-    helper.start()
-    time.sleep(0.5)
+    install()
+    # helper = Mythread(target=countdown('FAST'))
+    Mythread = QtCore.QThread()
+    Myclass = myclass('FAST')
+    Myclass.moveToThread(Mythread)
+    Mythread.started.connect(Myclass.countdown())
+    Mythread.start()
+    
+    i = 0
+    while True:
+        print(i)
+        time.sleep(0.5)
     #countdown('THISWILLTAKELONGERTOFAILBECAUSEITSMOREDATA')
     # countdown('FAST')
