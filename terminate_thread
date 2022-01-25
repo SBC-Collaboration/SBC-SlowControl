@@ -37,10 +37,10 @@ class myclass1(QtCore.QObject):
         self.Running = True
         while self.Running:
             print(self.string[0])
-            print(self.count)
-            self.count += 1
-            if self.count == 5:
-                sendKillSignal(*sys.exc_info())
+            # print(self.count)
+            # self.count += 1
+            # if self.count == 5:
+            #     sendKillSignal(*sys.exc_info())
             self.string = self.string[1:]
             time.sleep(1)
 
@@ -135,21 +135,25 @@ class Update(QtCore.QObject):
         # self.mythread1.start()
         # RUN()!! have to
         install()
-        self.mythread1 = QtCore.QThread()
-        self.myclass1 = myclass1()
-        self.myclass1.moveToThread(self.mythread1)
-        self.mythread1.started.connect(self.myclass1.run)
-        self.mythread1.start()
+        try:
+            self.mythread1 = QtCore.QThread()
+            self.myclass1 = myclass1()
+            self.myclass1.moveToThread(self.mythread1)
+            self.mythread1.started.connect(self.myclass1.run)
+            self.mythread1.start()
 
-        # wait for PLC initialization finished
-        time.sleep(2)
+            # wait for PLC initialization finished
+            time.sleep(2)
 
-        # Update database on another thread
-        self.mythread2 = QtCore.QThread()
-        self.myclass2 = myclass2()
-        self.myclass2.moveToThread(self.mythread2)
-        self.mythread2.started.connect(self.myclass2.run)
-        self.mythread2.start()
+            # Update database on another thread
+            self.mythread2 = QtCore.QThread()
+            self.myclass2 = myclass2()
+            self.myclass2.moveToThread(self.mythread2)
+            self.mythread2.started.connect(self.myclass2.run)
+            self.mythread2.start()
+        except:
+            sendKillSignal()
+
 
 
 
