@@ -60,23 +60,6 @@ def install():
 install()
 
 
-#output address to attribute function in FP ()
-def FPADS_OUT_AT(outaddress):
-    # 1e5 digit
-    e5 = outaddress // 10000
-    e4 = (outaddress % 10000) // 1000
-    e3 = (outaddress % 1000) // 100
-    e2 = (outaddress % 100) // 10
-    e1 = (outaddress % 10) // 1
-    new_e5 = e5-2
-    new_e4 = e4
-    new_e321=(e3*100+e2*10+e1)*4
-    new_address=new_e5*10000+new_e4*1000+new_e321
-    print(e5,e4,e3,e2,e1)
-    print(new_address)
-    return new_address
-
-
 class PLC:
     def __init__(self):
         super().__init__()
@@ -177,6 +160,8 @@ class Update(QtCore.QObject):
 if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
+
+    install()
 
     App = QtWidgets.QApplication(sys.argv)
     Update=Update()
