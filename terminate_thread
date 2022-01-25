@@ -8,29 +8,96 @@ import signal
 import time
 from PySide2 import QtCore,QtWidgets
 
+
+
+class myclass(QtCore.QObject):
+    def __init__(self,  parent = None):
+        super().__init__(parent)
+        self.string = '()*^(*)'
+    @QtCore.Slot()
+    def run(self):
+        self.Running = True
+        while self.Running:
+            print(self.string[0])
+            self.string = self.string[1:]
+            time.sleep(1)
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
+
+class myclass1(QtCore.QObject):
+    def __init__(self, parent = None):
+        super().__init__(parent)
+        self.string = 'short'
+    @QtCore.Slot()
+    def run(self):
+        self.Running = True
+        while self.Running:
+            print(self.string[0])
+            self.string = self.string[1:]
+            time.sleep(1)
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
+class myclass2(QtCore.QObject):
+    def __init__(self, parent = None):
+        super().__init__(parent)
+        self.string = 'THISISBIGSTRING'
+        print(self.string)
+    @QtCore.Slot()
+    def run(self):
+        self.Running = True
+        while self.Running:
+            print(self.string[0])
+            self.string = self.string[1:]
+            time.sleep(1)
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
+
 class MainClass(QtCore.QObject):
     def __init__(self, parent=None):
         super().__init__(parent)
         print('MainClass')
-        App.aboutToQuit.connect(self.stopprogram)
-        self.startprogram()
+        App.aboutToQuit.connect(self.StopUpdater)
+        self.StartUpdater()
 
-    def startprogram(self):
+
+    def StartUpdater(self):
+        # self.Mythread = QtCore.QThread()
+        # self.Myclass = myclass(string = 'thisisashorttest')
+        # self.Myclass.moveToThread(self.Mythread)
+        # self.Mythread.started.connect(self.Myclass.run())
+        # self.Mythread.start()
+        #
+        # time.sleep(0.5)
+        # self.Mythread2 = QtCore.QThread()
+        # self.Myclass2 = myclass(string = 'THISISALONGTEST')
+        # self.Myclass2.moveToThread(self.Mythread2)
+        # self.Mythread2.started.connect(self.Myclass2.run())
+        # self.Mythread2.start()
+
         self.Mythread = QtCore.QThread()
-        self.Myclass = myclass(string = 'thisisashorttest')
+        self.Myclass = myclass1()
         self.Myclass.moveToThread(self.Mythread)
         self.Mythread.started.connect(self.Myclass.run())
         self.Mythread.start()
 
         time.sleep(0.5)
         self.Mythread2 = QtCore.QThread()
-        self.Myclass2 = myclass(string = 'THISISALONGTEST')
+        self.Myclass2 = myclass2()
         self.Myclass2.moveToThread(self.Mythread2)
         self.Mythread2.started.connect(self.Myclass2.run())
         self.Mythread2.start()
 
     @QtCore.Slot()
-    def stopprogram(self):
+    def StopUpdater(self):
         self.Myclass.stop()
         self.Mythread.quit()
         self.Mythread.wait()
@@ -40,20 +107,63 @@ class MainClass(QtCore.QObject):
         self.Mythread2.wait()
 
 
-class myclass(QtCore.QObject):
-    def __init__(self,string = None, parent = None):
-        super().__init__(parent)
-        self.string = string
-    @QtCore.Slot()
-    def run(self):
-        self.Running = True
-        while self.Running:
-            print(self.string[0])
-            self.string = self.string[1:]
-            time.sleep(1)
 
-    def stop(self):
-        return 0
+class Update(QtCore.QObject):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        App.aboutToQuit.connect(self.StopUpdater)
+        self.StartUpdater()
+
+    def StartUpdater(self):
+        # self.mythread2 = QtCore.QThread()
+        # self.myclass2 = myclass2()
+        # self.myclass2.moveToThread(self.mythread2)
+        # self.mythread2.started.connect(self.myclass2.run())
+        # self.mythread2.start()
+        #
+        # time.sleep(2)
+        #
+        # self.mythread1 = QtCore.QThread()
+        # self.myclass1 = myclass1()
+        # self.myclass1.moveToThread(self.mythread1)
+        # self.mythread1.started.connect(self.myclass1.run())
+        # self.mythread1.start()
+        # RUN()!! have to
+        install()
+        self.mythread1 = QtCore.QThread()
+        self.myclass1 = myclass1()
+        self.myclass1.moveToThread(self.mythread1)
+        self.mythread1.started.connect(self.myclass1.run)
+        self.mythread1.start()
+
+        # wait for PLC initialization finished
+        time.sleep(2)
+
+        # Update database on another thread
+        self.mythread2 = QtCore.QThread()
+        self.myclass2 = myclass2()
+        self.myclass2.moveToThread(self.mythread2)
+        self.mythread2.started.connect(self.myclass2.run)
+        self.mythread2.start()
+
+
+
+
+
+
+
+
+        # Stop all updater threads
+    @QtCore.Slot()
+    def StopUpdater(self):
+        self.Myclass.stop()
+        self.Mythread.quit()
+        self.Mythread.wait()
+
+        self.Myclass2.stop()
+        self.Mythread2.quit()
+        self.Mythread2.wait()
+
 
 def sendKillSignal(etype, value, tb):
     print('KILL ALL')
@@ -79,7 +189,7 @@ def install():
     sys.excepthook = sendKillSignal
     QtCore.QThread.__init__ = patched_init
 
-install()
+
 
 
 
@@ -87,5 +197,6 @@ install()
 if __name__ == '__main__':
     App = QtWidgets.QApplication(sys.argv)
 
-    MC = MainClass()
+    # MC = MainClass()
+    Update=Update()
     sys.exit(App.exec_())

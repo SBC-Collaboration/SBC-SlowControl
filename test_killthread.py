@@ -1,14 +1,4 @@
-"""
-Class PLC is used to read/write via modbus to the temperature PLC
 
-To read the variable, just call the ReadAll() method
-To write to a variable, call the proper setXXX() method
-
-By: Mathieu Laurin
-
-v1.0 Initial code 25/11/19 ML
-v1.1 Initialize values, flag when values are updated more modbus variables 04/03/20 ML
-"""
 
 import struct, time, zmq, sys, pickle
 import numpy as np
@@ -35,20 +25,20 @@ from pymodbus.client.sync import ModbusTcpClient
 
 
 
-class PLC:
-    def __init__(self):
-        super().__init__()
-        print('class0')
+# class PLC:
+#     def __init__(self):
+#         super().__init__()
+#         print('class0')
+#
+#     def ReadAll(self):
+#         print('PLC')
 
-    def ReadAll(self):
-        print('PLC')
 
-# Class to update myseeq database
-class UpdateDataBase(QtCore.QObject):
-    def __init__(self, PLC, parent=None):
+class myclass(QtCore.QObject):
+    def __init__(self, parent = None):
         super().__init__(parent)
-        self.string = 'small'
 
+        self.string = '(*&*^$(*)_)&^'
     @QtCore.Slot()
     def run(self):
         self.Running = True
@@ -61,12 +51,32 @@ class UpdateDataBase(QtCore.QObject):
     def stop(self):
         self.Running = False
 
-# Class to read PLC value every 2 sec
-class UpdatePLC(QtCore.QObject):
-    def __init__(self, PLC, parent=None):
+# Class to update myseeq database
+class myclass1(QtCore.QObject):
+    def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.string = 'THISISALARGEMESSAGE'
+        self.string = 'small'
+
+    @QtCore.Slot()
+    def run(self):
+
+        self.Running = True
+        while self.Running:
+            print(self.string[0])
+            self.string = self.string[1:]
+            time.sleep(1)
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
+# Class to read PLC value every 2 sec
+class myclass2(QtCore.QObject):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.string = 'LARGE'
 
     @QtCore.Slot()
     def run(self):
@@ -95,24 +105,18 @@ class Update(QtCore.QObject):
         self.StartUpdater()
 
     def StartUpdater(self):
-        self.PLC = PLC()
+
 
         # Read PLC value on another thread
-        self.PLCUpdateThread = QtCore.QThread()
-        self.UpPLC = UpdatePLC(self.PLC)
-        self.UpPLC.moveToThread(self.PLCUpdateThread)
-        self.PLCUpdateThread.started.connect(self.UpPLC.run)
-        self.PLCUpdateThread.start()
 
-        # wait for PLC initialization finished
+
         time.sleep(2)
 
-        # Update database on another thread
-        self.DataUpdateThread = QtCore.QThread()
-        self.UpDatabase = UpdateDataBase(self.PLC)
-        self.UpDatabase.moveToThread(self.DataUpdateThread)
-        self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        self.DataUpdateThread.start()
+        self.Mythread = QtCore.QThread()
+        self.Myclass = myclass()
+        self.Myclass.moveToThread(self.Mythread)
+        self.Mythread.started.connect(self.Myclass.run())
+        self.Mythread.start()
 
 
 
@@ -127,6 +131,10 @@ class Update(QtCore.QObject):
         self.UpDatabase.stop()
         self.DataUpdateThread.quit()
         self.DataUpdateThread.wait()
+
+        self.Myclass.stop()
+        self.Mythread.quit()
+        self.Mythread.wait()
 
 
 
