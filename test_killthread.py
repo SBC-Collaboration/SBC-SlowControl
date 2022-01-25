@@ -33,31 +33,6 @@ import random
 from pymodbus.client.sync import ModbusTcpClient
 
 
-def sendKillSignal(etype, value, tb):
-    print('KILL ALL')
-    traceback.print_exception(etype, value, tb)
-    os.kill(os.getpid(), signal.SIGKILL)
-
-
-original_init = QtCore.QThread.__init__
-def patched_init(self, *args, **kwargs):
-    print("thread init'ed")
-    original_init(self, *args, **kwargs)
-    original_run = self.run
-    def patched_run(*args, **kw):
-        try:
-            original_run(*args, **kw)
-        except:
-            sys.excepthook(*sys.exc_info())
-    self.run = patched_run
-
-
-
-def install():
-    sys.excepthook = sendKillSignal
-    QtCore.QThread.__init__ = patched_init
-
-install()
 
 
 class PLC:
@@ -152,6 +127,34 @@ class Update(QtCore.QObject):
         self.UpDatabase.stop()
         self.DataUpdateThread.quit()
         self.DataUpdateThread.wait()
+
+
+
+def sendKillSignal(etype, value, tb):
+    print('KILL ALL')
+    traceback.print_exception(etype, value, tb)
+    os.kill(os.getpid(), signal.SIGKILL)
+
+
+original_init = QtCore.QThread.__init__
+def patched_init(self, *args, **kwargs):
+    print("thread init'ed")
+    original_init(self, *args, **kwargs)
+    original_run = self.run
+    def patched_run(*args, **kw):
+        try:
+            original_run(*args, **kw)
+        except:
+            sys.excepthook(*sys.exc_info())
+    self.run = patched_run
+
+
+
+def install():
+    sys.excepthook = sendKillSignal
+    QtCore.QThread.__init__ = patched_init
+
+install()
 
 
 
