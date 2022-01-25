@@ -9,8 +9,9 @@ import time
 from PySide2 import QtCore
 
 
-class myclass():
-    def __init__(self,string = None):
+class myclass(QtCore.QObject):
+    def __init__(self,string = None, parent = None):
+        super().__init__(parent)
         self.string = string
     def countdown(self):
         while True:
@@ -53,7 +54,7 @@ if __name__ == '__main__':
     Myclass.moveToThread(Mythread)
     Mythread.started.connect(Myclass.countdown())
     Mythread.start()
-    
+
     i = 0
     while True:
         print(i)
