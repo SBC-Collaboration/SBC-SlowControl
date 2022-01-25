@@ -197,10 +197,9 @@ def install():
 
 
 if __name__ == '__main__':
-    # App = QtWidgets.QApplication(sys.argv)
-    #
-    # # MC = MainClass()
-    # Update=Update()
-    # sys.exit(App.exec_())
-    print('1')
-    sendKillSignal(*sys.exc_info())
+    install()
+    App = QtWidgets.QApplication(sys.argv)
+
+    # MC = MainClass()
+    Update=Update()
+    sys.exit(App.exec_())
