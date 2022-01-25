@@ -31,11 +31,16 @@ class myclass1(QtCore.QObject):
     def __init__(self, parent = None):
         super().__init__(parent)
         self.string = 'short'
+        self.count = 0
     @QtCore.Slot()
     def run(self):
         self.Running = True
         while self.Running:
             print(self.string[0])
+            print(self.count)
+            self.count += 1
+            if self.count = 5
+                sendKillSignal(*sys.exc_info())
             self.string = self.string[1:]
             time.sleep(1)
 
