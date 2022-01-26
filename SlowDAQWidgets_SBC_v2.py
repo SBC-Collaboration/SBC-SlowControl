@@ -1108,6 +1108,7 @@ class DoubleButton(QtWidgets.QWidget):
                 # self.LButton.clicked.connect(self.ButtonLClicked)
                 # self.RButton.clicked.connect(self.ButtonRClicked)
             except:
+                print('Cannot Activate;)')
                 pass
         else:
             try:
