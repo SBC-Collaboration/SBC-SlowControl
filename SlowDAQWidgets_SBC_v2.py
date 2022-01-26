@@ -1115,6 +1115,7 @@ class DoubleButton(QtWidgets.QWidget):
                 self.LButton.clicked.disconnect(self.ButtonLClicked)
                 self.RButton.clicked.disconnect(self.ButtonRClicked)
             except:
+                print('Cannot DE Activate;)')
                 pass
 
 
