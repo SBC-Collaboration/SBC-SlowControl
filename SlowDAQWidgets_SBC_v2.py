@@ -1103,7 +1103,8 @@ class DoubleButton(QtWidgets.QWidget):
     def Activate(self, Activate):
         if Activate:
             try:
-                pass
+                self.LButton.clicked.disconnect(self.ButtonLClicked)
+                self.RButton.clicked.disconnect(self.ButtonRClicked)
                 # self.LButton.clicked.connect(self.ButtonLClicked)
                 # self.RButton.clicked.connect(self.ButtonRClicked)
             except:
