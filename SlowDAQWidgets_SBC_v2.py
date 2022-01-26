@@ -1101,18 +1101,20 @@ class DoubleButton(QtWidgets.QWidget):
         self.Signals.sSignal.emit(self.RButton.text())
 
     def Activate(self, Activate):
-        if Activate:
-            try:
-                self.LButton.clicked.connect(self.ButtonLClicked)
-                self.RButton.clicked.connect(self.ButtonRClicked)
-            except:
-                pass
-        else:
-            try:
-                self.LButton.clicked.disconnect(self.ButtonLClicked)
-                self.RButton.clicked.disconnect(self.ButtonRClicked)
-            except:
-                pass
+        self.LButton.clicked.disconnect(self.ButtonLClicked)
+        self.RButton.clicked.disconnect(self.ButtonRClicked)
+        # if Activate:
+        #     try:
+        #         self.LButton.clicked.connect(self.ButtonLClicked)
+        #         self.RButton.clicked.connect(self.ButtonRClicked)
+        #     except:
+        #         pass
+        # else:
+        #     try:
+        #         self.LButton.clicked.disconnect(self.ButtonLClicked)
+        #         self.RButton.clicked.disconnect(self.ButtonRClicked)
+        #     except:
+        #         pass
 
 
 class SingleButton(QtWidgets.QWidget):
