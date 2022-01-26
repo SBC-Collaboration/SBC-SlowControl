@@ -777,6 +777,7 @@ class MainWindow(QtWidgets.QMainWindow):
                               "TT6404": 37004, "TT6405": 37006, "TT6406": 37008, "TT6410": 37010, "TT6411": 37012,
                               "TT6412": 37014, "TT6413": 38000, "TT6414": 38002}
         self.commands = {}
+        self.statustransition={}
 
         self.signal_connection()
 
@@ -2124,6 +2125,7 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LButtonClicked(self,pid):
         self.commands[pid]={"server":"BO","address": self.address[pid], "type":"valve","operation":"OPEN", "value":1}
+        self.statustransition[pid] = {"server": "BO", "address": self.address[pid], "type": "valve", "operation": "OPEN", "value": 1}
         print(self.commands)
         print(pid,"LButton is clicked")
 
@@ -5252,7 +5254,7 @@ class UpdateClient(QtCore.QObject):
         self.socket = self.context.socket(zmq.REQ)
         self.socket.connect("tcp://localhost:5555")
         self.Running=False
-        self.period=1
+        self.period=0.5
         print("client is connecting to the ZMQ server")
 
         self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,

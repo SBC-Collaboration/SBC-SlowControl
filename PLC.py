@@ -1160,7 +1160,7 @@ class UpdateServer(QtCore.QObject):
         self.socket = self.context.socket(zmq.REP)
         self.socket.bind("tcp://*:5555")
         self.Running=False
-        self.period=1
+        self.period=0.5
         print("connect to the PLC server")
 
 
