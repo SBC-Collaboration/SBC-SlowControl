@@ -5254,7 +5254,7 @@ class UpdateClient(QtCore.QObject):
         self.socket = self.context.socket(zmq.REQ)
         self.socket.connect("tcp://localhost:5555")
         self.Running=False
-        self.period=0.5
+        self.period=1
         print("client is connecting to the ZMQ server")
 
         self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
