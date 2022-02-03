@@ -159,11 +159,17 @@ class ColoredStatus(QtWidgets.QWidget):
             self.Field.setStyleSheet(
                 "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_GREEN +
                 "} QWidget[Active = false]{" + C_MEDIUM_GREY + "}")
+        elif self.Mode == 3:
+            # mode 3: color is green when active is false and orange when active is true
+            self.Field.setStyleSheet(
+                "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_ORANGE +
+                "} QWidget[Active = false]{" + C_GREEN + "}")
         elif self.Mode == 4:
-            # mode 0: color is green when active is false and red when active is true
+            # mode 4: color is green when active is false and red when active is true
             self.Field.setStyleSheet(
                 "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_GREEN +
                 "} QWidget[Active = false]{" + C_RED + "}")
+
         else:
             print("Please set a mode number to class colorstatus widget!")
         self.Field.setProperty("Active", False)
@@ -1019,8 +1025,8 @@ class DoubleButton(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("DoubleButton")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
-        self.setMinimumSize(140*R, 40*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 200*R, 40*R))
+        self.setMinimumSize(200*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
@@ -1053,6 +1059,15 @@ class DoubleButton(QtWidgets.QWidget):
         self.RButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
             + C_GREEN + "} QWidget[State = false]{" + C_RED + "}")
+
+        #Button States transition Indicator
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("")
+        self.StatusTransition.move(150*R,0*R)
+
+
+
 
 
         self.LState = "Active"
@@ -1108,14 +1123,13 @@ class DoubleButton(QtWidgets.QWidget):
                 # self.LButton.clicked.connect(self.ButtonLClicked)
                 # self.RButton.clicked.connect(self.ButtonRClicked)
             except:
-                print('Cannot Activate;)')
+
                 pass
         else:
             try:
                 self.LButton.clicked.disconnect(self.ButtonLClicked)
                 self.RButton.clicked.disconnect(self.ButtonRClicked)
             except:
-                print('Cannot DE Activate;)')
                 pass
 
 
