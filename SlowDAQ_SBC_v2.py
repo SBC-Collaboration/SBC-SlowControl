@@ -9,7 +9,7 @@ v0.1.2 Alarm implemented 07/01/20 ML
 v0.1.3 PLC online detection, poll PLCs only when values are updated, fix Centos window size bug 04/03/20 ML
 """
 
-import os, sys, time, platform, datetime, random, pickle, cgitb
+import os, sys, time, platform, datetime, random, pickle, cgitb, traceback
 
 
 from PySide2 import QtWidgets, QtCore, QtGui
@@ -86,6 +86,32 @@ def exception_hook(exctype, value, traceback):
     sys.exit(1)
 sys.excepthook = exception_hook
 
+
+
+def sendKillSignal(etype, value, tb):
+    print('KILL ALL')
+    traceback.print_exception(etype, value, tb)
+    os.kill(os.getpid(), signal.SIGKILL)
+
+
+original_init = QtCore.QThread.__init__
+def patched_init(self, *args, **kwargs):
+    print("thread init'ed")
+    original_init(self, *args, **kwargs)
+    original_run = self.run
+    def patched_run(*args, **kwargs):
+        try:
+            original_run(*args, **kwargs)
+        except:
+            sys.excepthook(*sys.exc_info())
+    self.run = patched_run
+QtCore.QThread.__init__ = patched_init
+
+def install():
+    sys._excepthook = sys.excepthook
+    sys.excepthook = sendKillSignal
+    QtCore.QThread.__init__ = patched_init
+    
 
 def TwoD_into_OneD(Twod_array):
     Oned_array = []
@@ -814,32 +840,39 @@ class MainWindow(QtWidgets.QMainWindow):
         self.StartUpdater()
 
     def StartUpdater(self):
-        # Open connection to both PLCs
-        # self.PLC = PLC()
 
-        # Read PLC value on another thread
-        # self.PLCUpdateThread = QtCore.QThread()
-        # self.UpPLC = UpdatePLC(self.PLC)
-        # self.UpPLC.moveToThread(self.PLCUpdateThread)
-        # self.PLCUpdateThread.started.connect(self.UpPLC.run)
-        # self.PLCUpdateThread.start()
+        # this is main thread and the try function ensures all threads close and quit when one thread crashes.
+        install()
+        try:
+            # Open connection to both PLCs
+            # self.PLC = PLC()
 
-        self.ClientUpdateThread = QtCore.QThread()
-        self.UpClient = UpdateClient(self)
-        self.UpClient.moveToThread(self.ClientUpdateThread)
-        self.ClientUpdateThread.started.connect(self.UpClient.run)
-        self.ClientUpdateThread.start()
+            # Read PLC value on another thread
+            # self.PLCUpdateThread = QtCore.QThread()
+            # self.UpPLC = UpdatePLC(self.PLC)
+            # self.UpPLC.moveToThread(self.PLCUpdateThread)
+            # self.PLCUpdateThread.started.connect(self.UpPLC.run)
+            # self.PLCUpdateThread.start()
+
+            self.ClientUpdateThread = QtCore.QThread()
+            self.UpClient = UpdateClient(self)
+            self.UpClient.moveToThread(self.ClientUpdateThread)
+            self.ClientUpdateThread.started.connect(self.UpClient.run)
+            self.ClientUpdateThread.start()
+
+            # Make sure PLCs values are initialized before trying to access them with update function
+            time.sleep(2)
+
+            # Update display values on another thread
+            self.DUpdateThread = QtCore.QThread()
+            self.UpDisplay = UpdateDisplay(self, self.UpClient)
+            self.UpDisplay.moveToThread(self.DUpdateThread)
+            self.DUpdateThread.started.connect(self.UpDisplay.run)
+            self.DUpdateThread.start()
+        except:
+            sendKillSignal()
 
 
-        # Make sure PLCs values are initialized before trying to access them with update function
-        time.sleep(2)
-
-        # Update display values on another thread
-        self.DUpdateThread = QtCore.QThread()
-        self.UpDisplay = UpdateDisplay(self,self.UpClient)
-        self.UpDisplay.moveToThread(self.DUpdateThread)
-        self.DUpdateThread.started.connect(self.UpDisplay.run)
-        self.DUpdateThread.start()
 
 
     # Stop all updater threads
