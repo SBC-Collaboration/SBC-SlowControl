@@ -13,6 +13,7 @@ import os
 
 # FONT = "font-family: \"Calibri\"; font-size: 14px;"
 FONT = "font-family: \"Calibri\"; font-size: 8px;"
+LAG_FONT = "font-family: \"Calibri\"; font-size: 10px;"
 
 # FONT = " "
 
@@ -650,29 +651,29 @@ class Indicator(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("Indicator")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
-        self.setMinimumSize(70*R, 40*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 60*R))
+        self.setMinimumSize(90*R, 60*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 60*R))
         self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Indicator")
-        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 25*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet("QLabel {" +FONT+"}")
 
         self.Field = QtWidgets.QLineEdit(self)
         self.Field.setObjectName("indicator value")
-        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
+        self.Field.setGeometry(QtCore.QRect(0*R, 25*R, 90*R, 35*R))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setReadOnly(True)
         self.Field.setStyleSheet(
-            "QLineEdit{" + BORDER_STYLE + C_WHITE + FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
+            "QLineEdit{" + BORDER_STYLE + C_WHITE + LAG_FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
             "} QLineEdit[Alarm = false]{" + C_MEDIUM_GREY + "}")
         self.Field.Property = False
         self.Field.setProperty("Alarm", False)
@@ -1025,8 +1026,8 @@ class DoubleButton(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("DoubleButton")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 200*R, 40*R))
-        self.setMinimumSize(200*R, 40*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 220*R, 40*R))
+        self.setMinimumSize(220*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
@@ -1063,12 +1064,8 @@ class DoubleButton(QtWidgets.QWidget):
         #Button States transition Indicator
         self.StatusTransition = ColoredStatus(self, mode=3)
         self.StatusTransition.setObjectName("StatusTransition")
-        self.StatusTransition.Label.setText("")
+        self.StatusTransition.Label.setText("Busy")
         self.StatusTransition.move(150*R,0*R)
-
-
-
-
 
         self.LState = "Active"
         self.RState = "Inactive"

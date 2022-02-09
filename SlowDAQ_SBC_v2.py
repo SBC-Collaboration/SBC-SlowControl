@@ -237,7 +237,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4306 = Indicator(self.ThermosyphonTab)
         self.PT4306.Label.setText("PT4306")
         self.PT4306.move(1020*R, 60*R)
-        self.PT4306.SetUnit(" psi")
+        self.PT4306.SetUnit(" bara")
 
         self.PV4307 = Valve(self.ThermosyphonTab)
         self.PV4307.Label.setText("PV4307")
@@ -275,7 +275,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4315 = Indicator(self.ThermosyphonTab)
         self.PT4315.Label.setText("PT4315")
         self.PT4315.move(950*R, 440*R)
-        self.PT4315.SetUnit(" psi")
+        self.PT4315.SetUnit(" bara")
 
         self.PG4316 = PnID_Alone(self.ThermosyphonTab)
         self.PG4316.Label.setText("PG4316")
@@ -292,7 +292,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4319 = Indicator(self.ThermosyphonTab)
         self.PT4319.Label.setText("PT4319")
         self.PT4319.move(570*R, 720*R)
-        self.PT4319.SetUnit(" psi")
+        self.PT4319.SetUnit(" bara")
 
         self.PRV4320 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4320.Label.setText("PRV4320")
@@ -305,7 +305,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4322 = Indicator(self.ThermosyphonTab)
         self.PT4322.Label.setText("PT4322")
         self.PT4322.move(850*R, 720*R)
-        self.PT4322.SetUnit(" psi")
+        self.PT4322.SetUnit(" bara")
 
         self.PRV4323 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4323.Label.setText("PRV4323")
@@ -318,7 +318,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4325 = Indicator(self.ThermosyphonTab)
         self.PT4325.Label.setText("PT4325")
         self.PT4325.move(1150*R, 720*R)
-        self.PT4325.SetUnit(" psi")
+        self.PT4325.SetUnit(" bara")
 
         self.PRV4326 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4326.Label.setText("PRV4326")
@@ -360,7 +360,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT6302 = Indicator(self.ThermosyphonTab)
         self.PT6302.Label.setText("PT6302")
         self.PT6302.move(2030*R, 690*R)
-        self.PT6302.SetUnit(" psi")
+        self.PT6302.SetUnit(" bara")
 
         self.PRV6303 = PnID_Alone(self.ThermosyphonTab)
         self.PRV6303.Label.setText("PRV6303")
@@ -518,12 +518,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1101 = Indicator(self.ChamberTab)
         self.PT1101.move(940*R, 990*R)
         self.PT1101.Label.setText("PT1101")
-        self.PT1101.SetUnit(" psi")
+        self.PT1101.SetUnit(" bara")
 
         self.PT2121 = Indicator(self.ChamberTab)
         self.PT2121.move(1210*R, 990*R)
         self.PT2121.Label.setText("PT2121")
-        self.PT2121.SetUnit(" psi")
+        self.PT2121.SetUnit(" bara")
 
         self.HTR1202 = Heater(self.ChamberTab)
         self.HTR1202.move(840*R, 1250*R)
@@ -547,17 +547,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2316 = Indicator(self.FluidTab)
         self.PT2316.move(1900*R, 360*R)
         self.PT2316.Label.setText("PT2316")
-        self.PT2316.SetUnit(" psi")
+        self.PT2316.SetUnit(" bara")
 
         self.PT2330 = Indicator(self.FluidTab)
         self.PT2330.move(1780*R, 360*R)
         self.PT2330.Label.setText("PT2330")
-        self.PT2330.SetUnit(" psi")
+        self.PT2330.SetUnit(" bara")
 
         self.PT2335 = Indicator(self.FluidTab)
         self.PT2335.move(1590*R, 420*R)
         self.PT2335.Label.setText("PT2335")
-        self.PT2335.SetUnit(" psi")
+        self.PT2335.SetUnit(" bara")
 
         self.TT7401 = Indicator(self.FluidTab)
         self.TT7401.move(1985*R, 250*R)
@@ -574,12 +574,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1101Fluid = Indicator(self.FluidTab)
         self.PT1101Fluid.move(1030*R, 1300*R)
         self.PT1101Fluid.Label.setText("PT1101")
-        self.PT1101Fluid.SetUnit(" psi")
+        self.PT1101Fluid.SetUnit(" bara")
 
         self.PT2121Fluid = Indicator(self.FluidTab)
         self.PT2121Fluid.move(1260*R, 1300*R)
         self.PT2121Fluid.Label.setText("PT2121")
-        self.PT2121Fluid.SetUnit(" psi")
+        self.PT2121Fluid.SetUnit(" bara")
 
         self.MFC1316 = Heater(self.FluidTab)
         self.MFC1316.move(400*R, 800*R)
@@ -593,7 +593,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1332 = Indicator(self.FluidTab)
         self.PT1332.move(630*R, 900*R)
         self.PT1332.Label.setText("PT1332")
-        self.PT1332.SetUnit(" psi")
+        self.PT1332.SetUnit(" bara")
 
         self.PV1344=Valve(self.FluidTab)
         self.PV1344.Label.setText("PV1344")
@@ -631,27 +631,27 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT3314 = Indicator(self.HydraulicTab)
         self.PT3314.move(700*R, 450*R)
         self.PT3314.Label.setText("PT3314")
-        self.PT3314.SetUnit(" psi")
+        self.PT3314.SetUnit(" bara")
 
         self.PT3320 = Indicator(self.HydraulicTab)
         self.PT3320.move(880*R, 530*R)
         self.PT3320.Label.setText("PT3320")
-        self.PT3320.SetUnit(" psi")
+        self.PT3320.SetUnit(" bara")
 
         self.PT3308 = Indicator(self.HydraulicTab)
         self.PT3308.move(440*R, 1080*R)
         self.PT3308.Label.setText("PT3308")
-        self.PT3308.SetUnit(" psi")
+        self.PT3308.SetUnit(" bara")
 
         self.PT3309 = Indicator(self.HydraulicTab)
         self.PT3309.move(665*R, 1140*R)
         self.PT3309.Label.setText("PT3309")
-        self.PT3309.SetUnit(" psi")
+        self.PT3309.SetUnit(" bara")
 
         self.PT3311 = Indicator(self.HydraulicTab)
         self.PT3311.move(750*R, 1110*R)
         self.PT3311.Label.setText("PT3311")
-        self.PT3311.SetUnit(" psi")
+        self.PT3311.SetUnit(" bara")
 
         self.HFSV3312 = Valve(self.HydraulicTab)
         self.HFSV3312.Label.setText("HFSV3312")
@@ -668,16 +668,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT3332 = Indicator(self.HydraulicTab)
         self.PT3332.move(1570*R, 1125*R)
         self.PT3332.Label.setText("PT3332")
-        self.PT3332.SetUnit(" psi")
+        self.PT3332.SetUnit(" bara")
 
         self.PT3333 = Indicator(self.HydraulicTab)
         self.PT3333.move(1570*R, 1250*R)
         self.PT3333.Label.setText("PT3333")
-        self.PT3333.SetUnit(" psi")
+        self.PT3333.SetUnit(" bara")
 
-        self.SV3326 = Valve(self.HydraulicTab)
-        self.SV3326.Label.setText("SV3326")
-        self.SV3326.move(1200*R, 400*R)
 
         self.SV3329 = Valve(self.HydraulicTab)
         self.SV3329.Label.setText("SV3329")
@@ -726,12 +723,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1101Hy = Indicator(self.HydraulicTab)
         self.PT1101Hy.move(1900*R, 800*R)
         self.PT1101Hy.Label.setText("PT1101")
-        self.PT1101Hy.SetUnit(" psi")
+        self.PT1101Hy.SetUnit(" bara")
 
         self.PT2121Hy = Indicator(self.HydraulicTab)
         self.PT2121Hy.move(2100*R, 800*R)
         self.PT2121Hy.Label.setText("PT2121")
-        self.PT2121Hy.SetUnit(" psi")
+        self.PT2121Hy.SetUnit(" bara")
 
         # Data and Signal Tab
         self.ReadSettings = Loadfile(self.DatanSignalTab)
@@ -759,7 +756,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.address ={'SERVO3321': 14288, 'HTR6225': 14306, 'HTR2123': 14324, 'HTR2124': 14342, 'HTR2125': 14360,
                               'HTR1202': 14378, 'HTR2203': 14396, 'HTR6202': 14414, 'HTR6206': 14432, 'HTR6210': 14450,
                               'HTR6223': 14468, 'HTR6224': 14486, 'HTR6219': 14504, 'HTR6221': 14522, 'HTR6214': 14540, "PV1344":12288, "PV4307":12289,"PV4308":12290,"PV4317":12291,"PV4318":12292,"PV4321":12293,"PV4324":12294,"PV5305":12295,"PV5306":12296,
-                       "PV5307":12297,"PV5309":12298,"SV3307":12299,"SV3310":12300,"SV3322":12301,"SV3325":12302,"SV3326":12303,"SV3329":12304,
+                       "PV5307":12297,"PV5309":12298,"SV3307":12299,"SV3310":12300,"SV3322":12301,"SV3325":12302,"SV3329":12304,
                        "SV4327":12305,"SV4328":12306,"SV4329":12307,"SV4331":12308,"SV4332":12309, "SV4337": 12310, "HFSV3312": 12311,
                        "HFSV3323":12312, "HFSV3331":12313,"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
                            "TT4330": 12998, "TT6203": 13000, "TT6207": 13002, "TT6211": 13004, "TT6213": 13006,
@@ -805,7 +802,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.SV3322.Signals.sSignal.connect(self.SetSVMode)
         # self.HFSV3323.Signals.sSignal.connect(self.SetSVMode)
         # self.SV3325.Signals.sSignal.connect(self.SetSVMode)
-        # self.SV3326.Signals.sSignal.connect(self.SetSVMode)
+
         # self.SV3329.Signals.sSignal.connect(self.SetSVMode)
         # self.HFSV3331.Signals.sSignal.connect(self.SetSVMode)
         self.LoginT.Button.clicked.connect(self.ChangeUser)
@@ -892,8 +889,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV3322.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3322.Label.text()))
         self.SV3325.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3325.Label.text()))
         self.SV3325.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3325.Label.text()))
-        self.SV3326.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3326.Label.text()))
-        self.SV3326.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3326.Label.text()))
         self.SV3329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3329.Label.text()))
         self.SV3329.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3329.Label.text()))
         self.SV4327.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4327.Label.text()))
@@ -2320,7 +2315,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.SV3322.Activate(Activate)
         # self.HFSV3323.Activate(Activate)
         # self.SV3325.Activate(Activate)
-        # self.SV3326.Activate(Activate)
         # self.SV3329.Activate(Activate)
         # self.HFSV3331.Activate(Activate)
         return
@@ -5151,7 +5145,7 @@ class AOMutiLoopExpand(QtWidgets.QWidget):
 
 # Defines a reusable layout containing widget
 class Valve(QtWidgets.QWidget):
-    def __init__(self, parent=None, mode=0):
+    def __init__(self, parent=None, mode=4):
         super().__init__(parent)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -5160,23 +5154,49 @@ class Valve(QtWidgets.QWidget):
         self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
         self.VL.setSpacing(3)
 
-        self.Label = QtWidgets.QLabel(self)
-        # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
-        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE + BORDER_STYLE+"}")
-        self.Label.setAlignment(QtCore.Qt.AlignCenter)
-        self.Label.setText("Label")
-        self.VL.addWidget(self.Label)
+        # self.Label = QtWidgets.QLabel(self)
+        # # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
+        # self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
+        # self.Label.setStyleSheet("QLabel {" +TITLE_STYLE + BORDER_STYLE+"}")
+        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setText("Label")
+        # self.VL.addWidget(self.Label)
+        #
+        # self.HL = QtWidgets.QHBoxLayout()
+        # self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        # self.VL.addLayout(self.HL)
+        #
+        # self.Set = DoubleButton(self)
+        # self.Set.Label.setText("Set")
+        # self.Set.LButton.setText("open")
+        # self.Set.RButton.setText("close")
+        # self.HL.addWidget(self.Set)
+        #
+        # self.ActiveState = ColoredStatus(self, mode)
+        # # self.ActiveState = ColorIndicator(self) for test the function
+        # self.ActiveState.Label.setText("Status")
+        # self.HL.addWidget(self.ActiveState)
 
         self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        self.HL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
         self.VL.addLayout(self.HL)
+
+        self.Label = QtWidgets.QLabel(self)
+        # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 200 * R, 40 * R))
+        self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setText("Label")
+        # self.Label.setSizePolicy(sizePolicy)
+        self.HL.addWidget(self.Label)
+
 
         self.Set = DoubleButton(self)
         self.Set.Label.setText("Set")
         self.Set.LButton.setText("open")
         self.Set.RButton.setText("close")
-        self.HL.addWidget(self.Set)
+        self.VL.addWidget(self.Set)
 
         self.ActiveState = ColoredStatus(self, mode)
         # self.ActiveState = ColorIndicator(self) for test the function
@@ -5374,28 +5394,28 @@ class UpdateClient(QtCore.QObject):
         self.Valve_OUT = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
                           "PV4324": 0, "PV5305": 0, "PV5306": 0,
                           "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
-                          "SV3325": 0, "SV3326": 0, "SV3329": 0,
+                          "SV3325": 0,  "SV3329": 0,
                           "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
                           "SV4337": 0, "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0}
         self.Valve_MAN = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False,
                           "PV4321": False,
                           "PV4324": False, "PV5305": True, "PV5306": True,
                           "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
-                          "SV3325": True, "SV3326": True, "SV3329": True,
+                          "SV3325": True,  "SV3329": True,
                           "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
                           "SV4337": False, "HFSV3312": True, "HFSV3323": True, "HFSV3331": True}
         self.Valve_INTLKD = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False,
                              "PV4321": False,
                              "PV4324": False, "PV5305": False, "PV5306": False,
                              "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-                             "SV3325": False, "SV3326": False, "SV3329": False,
+                             "SV3325": False,  "SV3329": False,
                              "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
                              "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
         self.Valve_ERR = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False,
                           "PV4321": False,
                           "PV4324": False, "PV5305": False, "PV5306": False,
                           "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-                          "SV3325": False, "SV3326": False, "SV3329": False,
+                          "SV3325": False,  "SV3329": False,
                           "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
                           "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
 
@@ -5708,7 +5728,6 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.SV3310.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3310"])
                 self.MW.SV3322.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3322"])
                 self.MW.SV3325.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3325"])
-                self.MW.SV3326.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3326"])
                 self.MW.SV3329.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3329"])
                 self.MW.SV4327.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4327"])
                 self.MW.SV4328.Set.Activate(self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4328"])
@@ -5779,6 +5798,132 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.HTR6214.HeaterSubWindow.Mode.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
                 self.MW.HTR6214.State.Activate(self.Client.receive_dic["data"]["LOOPPID"]["MAN"]["HTR6214"])
 
+
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV1344"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV1344"]:
+                    self.MW.PV1344.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV1344.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4307"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV4307"]:
+                    self.MW.PV4307.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV4307.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4308"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV4308"]:
+                    self.MW.PV4308.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV4308.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4317"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV4317"]:
+                    self.MW.PV4317.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV4317.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4318"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV4318"]:
+                    self.MW.PV4318.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV4318.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4321"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV4321"]:
+                    self.MW.PV4321.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV4321.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV4324"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV4324"]:
+                    self.MW.PV4324.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV4324.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5305"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV5305"]:
+                    self.MW.PV5305.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV5305.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5306"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV5306"]:
+                    self.MW.PV5306.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV5306.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5307"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV5307"]:
+                    self.MW.PV5307.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV5307.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["PV5309"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["PV5309"]:
+                    self.MW.PV5309.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.PV5309.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3307"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV3307"]:
+                    self.MW.SV3307.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV3307.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3310"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV3310"]:
+                    self.MW.SV3310.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV3310.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3322"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV3322"]:
+                    self.MW.SV3322.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV3322.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3325"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV3325"]:
+                    self.MW.SV3325.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV3325.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV3329"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV3329"]:
+                    self.MW.SV3329.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV3329.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4327"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV4327"]:
+                    self.MW.SV4327.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV4327.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4328"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV4328"]:
+                    self.MW.SV4328.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV4328.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4329"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV4329"]:
+                    self.MW.SV4329.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV4329.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4331"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV4331"]:
+                    self.MW.SV4331.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV4331.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4332"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV4332"]:
+                    self.MW.SV4332.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV4332.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["SV4337"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["SV4337"]:
+                    self.MW.SV4337.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.SV4337.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3312"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["HFSV3312"]:
+                    self.MW.HFSV3312.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.HFSV3312.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3323"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["HFSV3323"]:
+                    self.MW.HFSV3323.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.HFSV3323.ActiveState.UpdateColor(False)
+
+                if self.Client.receive_dic["data"]["Valve"]["MAN"]["HFSV3331"] and not self.Client.receive_dic["data"]["Valve"]["ERR"]["HFSV3331"]:
+                    self.MW.HFSV3331.ActiveState.UpdateColor(True)
+                else:
+                    self.MW.HFSV3331.ActiveState.UpdateColor(False)
 
 
 
@@ -5864,10 +6009,6 @@ class UpdateDisplay(QtCore.QObject):
                     else:
                         self.MW.SV3325.Set.ButtonRClicked()
 
-                    if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3326"]:
-                        self.MW.SV3326.Set.ButtonLClicked()
-                    else:
-                        self.MW.SV3326.Set.ButtonRClicked()
 
                     if self.Client.receive_dic["data"]["Valve"]["OUT"]["SV3329"]:
                         self.MW.SV3329.Set.ButtonLClicked()
