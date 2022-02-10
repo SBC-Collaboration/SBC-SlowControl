@@ -841,36 +841,35 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def StartUpdater(self):
 
-        # this is main thread and the try function ensures all threads close and quit when one thread crashes.
+
         install()
-        try:
-            # Open connection to both PLCs
-            # self.PLC = PLC()
 
-            # Read PLC value on another thread
-            # self.PLCUpdateThread = QtCore.QThread()
-            # self.UpPLC = UpdatePLC(self.PLC)
-            # self.UpPLC.moveToThread(self.PLCUpdateThread)
-            # self.PLCUpdateThread.started.connect(self.UpPLC.run)
-            # self.PLCUpdateThread.start()
+        # Open connection to both PLCs
+        # self.PLC = PLC()
 
-            self.ClientUpdateThread = QtCore.QThread()
-            self.UpClient = UpdateClient(self)
-            self.UpClient.moveToThread(self.ClientUpdateThread)
-            self.ClientUpdateThread.started.connect(self.UpClient.run)
-            self.ClientUpdateThread.start()
+        # Read PLC value on another thread
+        # self.PLCUpdateThread = QtCore.QThread()
+        # self.UpPLC = UpdatePLC(self.PLC)
+        # self.UpPLC.moveToThread(self.PLCUpdateThread)
+        # self.PLCUpdateThread.started.connect(self.UpPLC.run)
+        # self.PLCUpdateThread.start()
 
-            # Make sure PLCs values are initialized before trying to access them with update function
-            time.sleep(2)
+        self.ClientUpdateThread = QtCore.QThread()
+        self.UpClient = UpdateClient(self)
+        self.UpClient.moveToThread(self.ClientUpdateThread)
+        self.ClientUpdateThread.started.connect(self.UpClient.run)
+        self.ClientUpdateThread.start()
 
-            # Update display values on another thread
-            self.DUpdateThread = QtCore.QThread()
-            self.UpDisplay = UpdateDisplay(self, self.UpClient)
-            self.UpDisplay.moveToThread(self.DUpdateThread)
-            self.DUpdateThread.started.connect(self.UpDisplay.run)
-            self.DUpdateThread.start()
-        except:
-            sendKillSignal()
+        # Make sure PLCs values are initialized before trying to access them with update function
+        time.sleep(2)
+
+        # Update display values on another thread
+        self.DUpdateThread = QtCore.QThread()
+        self.UpDisplay = UpdateDisplay(self, self.UpClient)
+        self.UpDisplay.moveToThread(self.DUpdateThread)
+        self.DUpdateThread.started.connect(self.UpDisplay.run)
+        self.DUpdateThread.start()
+
 
 
 
@@ -2544,11 +2543,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ret = self.CloseMessage.exec_()
         if self.ret == QtWidgets.QMessageBox.Save:
             self.Save()
+            sys.exit(0)
             event.accept()
-            sendKillSignal()
         elif self.ret == QtWidgets.QMessageBox.Discard:
+            sys.exit(0)
             event.accept()
-            sendKillSignal()
         elif self.ret == QtWidgets.QMessageBox.Cancel:
             event.ignore()
         else:
