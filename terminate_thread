@@ -156,6 +156,7 @@ class Update(QtCore.QObject):
             self.mythread2.started.connect(self.myclass2.run)
             self.mythread2.start()
         except:
+            print("send kill signal")
             sendKillSignal()
 
 
