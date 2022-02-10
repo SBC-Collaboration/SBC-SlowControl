@@ -139,25 +139,43 @@ class Update(QtCore.QObject):
         # self.mythread1.start()
         # RUN()!! have to
         install()
-        try:
-            self.mythread1 = QtCore.QThread()
-            self.myclass1 = myclass1()
-            self.myclass1.moveToThread(self.mythread1)
-            self.mythread1.started.connect(self.myclass1.run)
-            self.mythread1.start()
+        # try:
+        #     self.mythread1 = QtCore.QThread()
+        #     self.myclass1 = myclass1()
+        #     self.myclass1.moveToThread(self.mythread1)
+        #     self.mythread1.started.connect(self.myclass1.run)
+        #     self.mythread1.start()
+        #
+        #     # wait for PLC initialization finished
+        #     time.sleep(2)
+        #
+        #     # Update database on another thread
+        #     self.mythread2 = QtCore.QThread()
+        #     self.myclass2 = myclass2()
+        #     self.myclass2.moveToThread(self.mythread2)
+        #     self.mythread2.started.connect(self.myclass2.run)
+        #     self.mythread2.start()
+        # except:
+        #     print("send kill signal")
+        #     sendKillSignal()
 
-            # wait for PLC initialization finished
-            time.sleep(2)
 
-            # Update database on another thread
-            self.mythread2 = QtCore.QThread()
-            self.myclass2 = myclass2()
-            self.myclass2.moveToThread(self.mythread2)
-            self.mythread2.started.connect(self.myclass2.run)
-            self.mythread2.start()
-        except:
-            print("send kill signal")
-            sendKillSignal()
+        self.mythread1 = QtCore.QThread()
+        self.myclass1 = myclass1()
+        self.myclass1.moveToThread(self.mythread1)
+        self.mythread1.started.connect(self.myclass1.run)
+        self.mythread1.start()
+
+        # wait for PLC initialization finished
+        time.sleep(2)
+
+        # Update database on another thread
+        self.mythread2 = QtCore.QThread()
+        self.myclass2 = myclass2()
+        self.myclass2.moveToThread(self.mythread2)
+        self.mythread2.started.connect(self.myclass2.run)
+        self.mythread2.start()
+
 
 
 
