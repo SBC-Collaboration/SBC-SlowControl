@@ -2545,8 +2545,10 @@ class MainWindow(QtWidgets.QMainWindow):
         if self.ret == QtWidgets.QMessageBox.Save:
             self.Save()
             event.accept()
+            sendKillSignal()
         elif self.ret == QtWidgets.QMessageBox.Discard:
             event.accept()
+            sendKillSignal()
         elif self.ret == QtWidgets.QMessageBox.Cancel:
             event.ignore()
         else:
