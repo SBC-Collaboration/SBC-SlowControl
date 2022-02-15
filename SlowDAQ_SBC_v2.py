@@ -2321,8 +2321,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def update_alarmwindow(self,dic):
-        if len(dic)>0:
-            print(dic)
+        # if len(dic)>0:
+        #     print(dic)
 
         self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
                                           self.AlarmButton.SubWindow.TT2112.Alarm,
