@@ -5620,7 +5620,7 @@ class UpdateClient(QtCore.QObject):
         #message mush be a dictionary
         self.receive_dic = message
 
-        self.client_data_tranport.emit(self.receive_dic)
+        # self.client_data_tranport.emit(self.receive_dic)
 
     def commands(self):
         print("Commands are here",datetime.datetime.now())
