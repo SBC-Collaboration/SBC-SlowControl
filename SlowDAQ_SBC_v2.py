@@ -5322,7 +5322,7 @@ class UpdateClient(QtCore.QObject):
         self.Running=False
         self.period=1
 
-        client_data_transport.connect(self.UD.fetchdata)
+        self.client_data_transport.connect(self.UD.fetchdata)
         print("client is connecting to the ZMQ server")
 
 
@@ -5620,7 +5620,7 @@ class UpdateClient(QtCore.QObject):
         #message mush be a dictionary
         self.receive_dic = message
 
-        client_data_tranport.emit(self.receive_dic)
+        self.client_data_tranport.emit(self.receive_dic)
 
     def commands(self):
         print("Commands are here",datetime.datetime.now())
