@@ -5600,19 +5600,22 @@ class UpdateClient(QtCore.QObject):
     def run(self):
         self.Running = True
         while self.Running:
+            try:
 
-            print(f"Sending request...")
+                print(f"Sending request...")
 
-            #  Send reply back to client
-            # self.socket.send(b"Hello")
-            self.commands()
-            # print(self.receive_dic)
-            message = pickle.loads(self.socket.recv())
+                #  Send reply back to client
+                # self.socket.send(b"Hello")
+                self.commands()
+                # print(self.receive_dic)
+                message = pickle.loads(self.socket.recv())
 
-
-            # print(f"Received reply [ {message} ]")
-            self.update_data(message)
-            time.sleep(self.period)
+                # print(f"Received reply [ {message} ]")
+                self.update_data(message)
+                time.sleep(self.period)
+            except:
+                (type, value, traceback) = sys.exc_info()
+                exception_hook(type, value, traceback)
 
     @QtCore.Slot()
     def stop(self):
