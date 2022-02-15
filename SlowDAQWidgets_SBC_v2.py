@@ -1078,6 +1078,16 @@ class DoubleButton(QtWidgets.QWidget):
         self.InactiveName = Inactive
 
     # Neutral means that the button shouldn't show any color
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self):
+        self.StatusTransition.UpdateColor(True)
+
+
+
+    # Neutral means that the button shouldn't show any color
+
+
     def ButtonLState(self):
         if self.LState == self.InactiveName and self.RState == self.ActiveName:
             self.LButton.setProperty("State", True)
@@ -1113,20 +1123,42 @@ class DoubleButton(QtWidgets.QWidget):
         self.Signals.sSignal.emit(self.RButton.text())
 
     def Activate(self, Activate):
+
         if Activate:
             try:
                 self.LButton.clicked.disconnect(self.ButtonLClicked)
                 self.RButton.clicked.disconnect(self.ButtonRClicked)
+
+                self.LButton.clicked.connect(self.ButtonTransitionState)
+                self.RButton.clicked.connect(self.ButtonTransitionState)
+            except:
+                self.LButton.clicked.connect(self.ButtonTransitionState)
+                self.RButton.clicked.connect(self.ButtonTransitionState)
+                # print(Activate)
+
+
                 # self.LButton.clicked.connect(self.ButtonLClicked)
                 # self.RButton.clicked.connect(self.ButtonRClicked)
-            except:
+
 
                 pass
         else:
             try:
                 self.LButton.clicked.disconnect(self.ButtonLClicked)
                 self.RButton.clicked.disconnect(self.ButtonRClicked)
+
+                # self.LButton.clicked.connect(self.ButtonTransitionState)
+                # self.RButton.clicked.connect(self.ButtonTransitionState)
+                # self.LButton.clicked.disconnect(self.ButtonTransitionState)
+                # self.RButton.clicked.disconnect(self.ButtonTransitionState)
+
+
             except:
+                # self.LButton.clicked.connect(self.ButtonTransitionState)
+                # self.RButton.clicked.connect(self.ButtonTransitionState)
+                # self.LButton.clicked.disconnect(self.ButtonTransitionState)
+                # self.RButton.clicked.disconnect(self.ButtonTransitionState)
+
                 pass
 
 
