@@ -1078,6 +1078,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.InactiveName = Inactive
 
     # Neutral means that the button shouldn't show any color
+
     @QtCore.Slot()
     def ButtonTransitionState(self):
         self.StatusTransition.UpdateColor(True)
@@ -1085,6 +1086,7 @@ class DoubleButton(QtWidgets.QWidget):
 
 
     # Neutral means that the button shouldn't show any color
+
 
     def ButtonLState(self):
         if self.LState == self.InactiveName and self.RState == self.ActiveName:
@@ -1126,6 +1128,7 @@ class DoubleButton(QtWidgets.QWidget):
             try:
                 self.LButton.clicked.disconnect(self.ButtonLClicked)
                 self.RButton.clicked.disconnect(self.ButtonRClicked)
+
                 self.LButton.clicked.connect(self.ButtonTransitionState)
                 self.RButton.clicked.connect(self.ButtonTransitionState)
             except:
@@ -1134,11 +1137,16 @@ class DoubleButton(QtWidgets.QWidget):
                 # print(Activate)
 
 
+                # self.LButton.clicked.connect(self.ButtonLClicked)
+                # self.RButton.clicked.connect(self.ButtonRClicked)
+
+
                 pass
         else:
             try:
                 self.LButton.clicked.disconnect(self.ButtonLClicked)
                 self.RButton.clicked.disconnect(self.ButtonRClicked)
+
                 # self.LButton.clicked.connect(self.ButtonTransitionState)
                 # self.RButton.clicked.connect(self.ButtonTransitionState)
                 # self.LButton.clicked.disconnect(self.ButtonTransitionState)
@@ -1150,6 +1158,7 @@ class DoubleButton(QtWidgets.QWidget):
                 # self.RButton.clicked.connect(self.ButtonTransitionState)
                 # self.LButton.clicked.disconnect(self.ButtonTransitionState)
                 # self.RButton.clicked.disconnect(self.ButtonTransitionState)
+
                 pass
 
 

@@ -7,8 +7,26 @@ import random
 
 def datetime_in_s():
     d=datetime.datetime.now()
-    x=d-datetime.timedelta(microseconds=d.microsecond)
+    timeR = int(d.microsecond%1e6)
+    delta=datetime.timedelta(microseconds=timeR)
+    x=d-delta
     return x
+
+def datetime_in_1e5micro():
+    d=datetime.datetime.now()
+    timeR = int(d.microsecond%1e5)
+    delta=datetime.timedelta(microseconds=timeR)
+    x=d-delta
+    return x
+
+def early_datetime():
+    d = datetime.datetime.now()
+    timeR = int(d.microsecond % 1e5)
+    delta = datetime.timedelta(microseconds=timeR)
+    x = d - delta - datetime.timedelta(microseconds=1e5)
+    return x
+
+
 
 class mydatabase():
     def __init__(self):
@@ -21,14 +39,14 @@ class mydatabase():
             self.mycursor.execute(statement)
         except:
             print("Statement formal is wrong, please check it")
-    # user slowcontrol doesn't have permission to create tables. Besides, table column name should be different
+    # user slowcontrol doesn't have permission to create tables. Besides, table columVn name should be different
     # def create_table(self, table_name):
     #     self.mycursor.execute(
     #         "CREATE TABLE {}(Time DATETIME, Value DECIMAL(7,3), PRIMARY KEY(Time));".format(table_name))
     #     self.db.commit()
 
     def show_tables(self, key=None):
-        if key == None:
+        if key is None:
             self.mycursor.execute(
                 "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'SBCslowcontrol'"
             )
@@ -40,16 +58,18 @@ class mydatabase():
         print(result)
 
     def insert_data_into_datastorage(self,instrument, time,value):
-        #time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss) value is a decimal from -9999.999 to 9999.999
-        #name must be consistent with P&ID
+        # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
+        # value is a decimal from -9999.999 to 9999.999
+        # name must be consistent with P&ID
         data=(instrument, time,value)
         self.mycursor.execute(
             "INSERT INTO DataStorage (Instrument, Time, Value) VALUES(%s, %s, %s);", data)
         self.db.commit()
 
     def insert_data_into_metadata(self,instrument, Description,Unit):
-        #time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss) value is a decimal from -9999.999 to 9999.999
-        #name must be consistent with P&ID
+        # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
+        # value is a decimal from -9999.999 to 9999.999
+        # name must be consistent with P&ID
         data=(instrument, Description,Unit)
         self.mycursor.execute(
             "INSERT INTO MetaDataStorage VALUES(%s, %s, %s);", data)
@@ -78,7 +98,7 @@ class mydatabase():
         #     except:
         #         print("SHOW ERROR!")
 
-    #No permission on user sbcslowcontrol
+    # No permission on user sbcslowcontrol
     # def drop_table(self,table_name):
     #     self.mycursor.execute(
     #         "DROP TABLE {}".format(table_name))
@@ -90,6 +110,7 @@ class mydatabase():
 
 
 if __name__ == "__main__":
+
     db = mydatabase()
     dt = datetime_in_s()
     # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
@@ -105,3 +126,8 @@ if __name__ == "__main__":
     db.show_tables()
 
     db.close_database()
+
+    # #test datetime function
+    # print(datetime_in_1e5micro())
+    # print(early_datetime())
+

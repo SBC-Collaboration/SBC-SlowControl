@@ -23,8 +23,8 @@ from TPLC_v1 import TPLC
 from PPLC_v1 import PPLC
 from PICOPW import VerifyPW
 from Database_SBC import *
-
 from SlowDAQWidgets_SBC_v1 import *
+
 
 VERSION = "v0.1.3"
 SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
@@ -40,6 +40,21 @@ ADMIN_PASSWORD = "60b6a2988e4ee1ad831ad567ad938adcc8e294825460bbcab26c1948b935bd
                  "f5845cf006961abcc0a4007e3ac87d26c8981b792259f3f4db207dc14dbff315071c2f419122f1367668" \
                  "31c12bff0da3a2314ca2266"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 6px; border-color: black;"
+
+def TwoD_into_OneD(Twod_array):
+    Oned_array=[]
+    i_max=len(Twod_array)
+    j_max=len(Twod_array[0])
+    i_last=len(Twod_array)-1
+    j_last=len(Twod_array[i_last])-1
+    for i in range(0,i_max ):
+        for j in range(0,j_max):
+            Oned_array.append(Twod_array[i][j])
+            if (i,j) == (i_last, j_last):
+                break
+        if (i, j) == (i_last, j_last):
+            break
+    return Oned_array
 
 
 # Main class
@@ -139,9 +154,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Temperature tab buttons
 
-        self.Tstatus = FunctionButton(self.ThermosyphonTab)
-        self.Tstatus.StatusWindow.resize(1000, 1050)
-        self.Tstatus.StatusWindow.thermosyphon()
+        self.ThermosyphonWin=ThermosyphonWindow()
+        self.Tstatus = FunctionButton(self.ThermosyphonWin,self.ThermosyphonTab)
+        self.Tstatus.SubWindow.resize(1000, 1050)
+        # self.Tstatus.StatusWindow.thermosyphon()
         self.Tstatus.move(0, 0)
         self.Tstatus.Button.setText("Thermosyphon status")
 
@@ -149,6 +165,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LoginT.move(340, 1200)
         self.LoginT.Label.setText("Login")
         self.LoginT.Button.setText("Guest")
+
+        #PLC test window
+        self.TT9998=Indicator(self.ThermosyphonTab)
+        self.TT9998.Label.setText("TT9998")
+        self.TT9998.move(300,1100)
+
+        self.TT9999 = Indicator(self.ThermosyphonTab)
+        self.TT9999.Label.setText("TT9998")
+        self.TT9999.move(300, 1150)
 
         self.GV4301 = PnID_Alone(self.ThermosyphonTab)
         self.GV4301.Label.setText("GV4301")
@@ -329,25 +354,29 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LoginP.Label.setText("Login")
         self.LoginP.Button.setText("Guest")
 
-        self.RTDSET1 = FunctionButton(self.ChamberTab)
-        self.RTDSET1.StatusWindow.RTDset1()
-        self.RTDSET1.move(300, 330)
-        self.RTDSET1.Button.setText("RTDSET1")
+        self.RTDset1Win=RTDset1()
+        self.RTDSET1Button = FunctionButton(self.RTDset1Win,self.ChamberTab)
+        # self.RTDSET1.StatusWindow.RTDset1()
+        self.RTDSET1Button.move(300, 330)
+        self.RTDSET1Button.Button.setText("RTDSET1")
 
-        self.RTDSET2 = FunctionButton(self.ChamberTab)
-        self.RTDSET2.StatusWindow.RTDset2()
-        self.RTDSET2.move(300, 510)
-        self.RTDSET2.Button.setText("RTDSET2")
+        self.RTDset2Win=RTDset2()
+        self.RTDSET2Button = FunctionButton(self.RTDset2Win,self.ChamberTab)
+        # self.RTDSET2.StatusWindow.RTDset2()
+        self.RTDSET2Button.move(300, 510)
+        self.RTDSET2Button.Button.setText("RTDSET2")
 
-        self.RTDSET3 = FunctionButton(self.ChamberTab)
-        self.RTDSET3.StatusWindow.RTDset3()
-        self.RTDSET3.move(300, 610)
-        self.RTDSET3.Button.setText("RTDSET3")
+        self.RTDset3Win = RTDset3()
+        self.RTDSET3Button = FunctionButton(self.RTDset3Win,self.ChamberTab)
+        # self.RTDSET3.StatusWindow.RTDset3()
+        self.RTDSET3Button.move(300, 610)
+        self.RTDSET3Button.Button.setText("RTDSET3")
 
-        self.RTDSET4 = FunctionButton(self.ChamberTab)
-        self.RTDSET4.StatusWindow.RTDset4()
-        self.RTDSET4.move(1780, 1150)
-        self.RTDSET4.Button.setText("RTDSET4")
+        self.RTDset4Win=RTDset4()
+        self.RTDSET4Button = FunctionButton(self.RTDset4Win,self.ChamberTab)
+        # self.RTDSET4.StatusWindow.RTDset4()
+        self.RTDSET4Button.move(1780, 1150)
+        self.RTDSET4Button.Button.setText("RTDSET4")
 
         self.HT6219 = Heater(self.ChamberTab)
         self.HT6219.move(820, 120)
@@ -737,31 +766,26 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121Hy.SetUnit(" psi")
 
         # Data and Signal Tab
-        # self.DataL = QtWidgets.QHBoxLayout(self.DatanSignalTab)
-
         self.ReadSettings = Loadfile(self.DatanSignalTab)
-        # self.ReadSettings = Loadfile(self)
         self.ReadSettings.move(50, 50)
         self.ReadSettings.LoadFileButton.clicked.connect(
             lambda x: self.Recover(address=self.ReadSettings.FilePath.text()))
-        # self.DataL.addWidget(self.ReadSettings)
 
         self.SaveSettings = CustomSave(self.DatanSignalTab)
-        # self.SaveSettings = CustomSave(self)
         self.SaveSettings.move(700, 50)
         self.SaveSettings.SaveFileButton.clicked.connect(
             lambda x: self.Save(directory=self.SaveSettings.Head, project=self.SaveSettings.Tail))
-        # self.DataL.addWidget(self.SaveSettings)
 
         self.Datacheck = QtWidgets.QCheckBox(self.DatanSignalTab)
         self.Datacheck.move(800, 150)
         self.Datacheck.setText("Clone data into sbc slowcontrol database")
-        self.Datacheck.setStyleSheet("background-color: gray;")
+        self.Datacheck.setStyleSheet("background-color:gray;")
 
         # Alarm button
-        self.AlarmButton = AlarmButton(self)
-        self.AlarmButton.StatusWindow.resize(1000, 500)
-        self.AlarmButton.StatusWindow.AlarmWindow()
+        self.AlarmWindow=AlarmWin()
+        self.AlarmButton = AlarmButton(self.AlarmWindow,self)
+        self.AlarmButton.SubWindow.resize(1000, 500)
+        # self.AlarmButton.StatusWindow.AlarmWindow()
 
         self.AlarmButton.move(0, 1300)
         self.AlarmButton.Button.setText("Alarm Button")
@@ -812,12 +836,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PUpdateThread.started.connect(self.UpPPLC.run)
         self.PUpdateThread.start()
 
-        # Read PPLC value on another thread
-        # self.PUpdateThread = QtCore.QThread()
-        # self.UpPPLC = UpdateTPLC(self.T)
-        # self.UpPPLC.moveToThread(self.PUpdateThread)
-        # self.PUpdateThread.started.connect(self.UpPPLC.run)
-        # self.PUpdateThread.start()
 
         # Read TPLC value on another thread
         self.TUpdateThread = QtCore.QThread()
@@ -837,11 +855,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DUpdateThread.start()
 
         # Update database on another thread
-        self.DataUpdateThread = QtCore.QThread()
-        self.UpDatabase = UpdateDataBase(self)
-        self.UpDatabase.moveToThread(self.DataUpdateThread)
-        self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        self.DataUpdateThread.start()
+        # self.DataUpdateThread = QtCore.QThread()
+        # self.UpDatabase = UpdateDataBase(self)
+        # self.UpDatabase.moveToThread(self.DataUpdateThread)
+        # self.DataUpdateThread.started.connect(self.UpDatabase.run)
+        # self.DataUpdateThread.start()
 
     # Stop all updater threads
     @QtCore.Slot()
@@ -1119,45 +1137,212 @@ class MainWindow(QtWidgets.QMainWindow):
     def Save(self, directory=None, company="SBC", project="Slowcontrol"):
         # dir is the path storing the ini setting file
         if directory is None:
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2111/CheckBox",
+                                   self.AlarmButton.SubWindow.TT2111.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2401/CheckBox",
+                                   self.AlarmButton.SubWindow.TT2401.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2406/CheckBox",
+                                   self.AlarmButton.SubWindow.TT2406.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2411/CheckBox",
+                                   self.AlarmButton.SubWindow.TT2411.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2416/CheckBox",
+                                   self.AlarmButton.SubWindow.TT2416.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2421/CheckBox",
+                                   self.AlarmButton.SubWindow.TT2421.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2426/CheckBox",
+                                   self.AlarmButton.SubWindow.TT2426.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2431/CheckBox",
+                                   self.AlarmButton.SubWindow.TT2431.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2435/CheckBox",
+                                   self.AlarmButton.SubWindow.TT2435.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2440/CheckBox",
+                                   self.AlarmButton.SubWindow.TT2440.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT4330/CheckBox",
+                                   self.AlarmButton.SubWindow.TT4330.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/CheckBox",
+                                   self.AlarmButton.SubWindow.TT6220.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/CheckBox",
+                                   self.AlarmButton.SubWindow.TT6220.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6221/CheckBox",
+                                   self.AlarmButton.SubWindow.TT6221.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6222/CheckBox",
+                                   self.AlarmButton.SubWindow.TT6222.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6223/CheckBox",
+                                   self.AlarmButton.SubWindow.TT6223.AlarmMode.isChecked())
+            #set PT value
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT1101/CheckBox",
+                                   self.AlarmButton.SubWindow.PT1101.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2316/CheckBox",
+                                   self.AlarmButton.SubWindow.PT2316.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2321/CheckBox",
+                                   self.AlarmButton.SubWindow.PT2321.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2330/CheckBox",
+                                   self.AlarmButton.SubWindow.PT2330.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2335/CheckBox",
+                                   self.AlarmButton.SubWindow.PT2335.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3308/CheckBox",
+                                   self.AlarmButton.SubWindow.PT3308.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3309/CheckBox",
+                                   self.AlarmButton.SubWindow.PT3309.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3310/CheckBox",
+                                   self.AlarmButton.SubWindow.PT3310.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3311/CheckBox",
+                                   self.AlarmButton.SubWindow.PT3311.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3314/CheckBox",
+                                   self.AlarmButton.SubWindow.PT3314.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3320/CheckBox",
+                                   self.AlarmButton.SubWindow.PT3320.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3333/CheckBox",
+                                   self.AlarmButton.SubWindow.PT3333.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4306/CheckBox",
+                                   self.AlarmButton.SubWindow.PT4306.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4315/CheckBox",
+                                   self.AlarmButton.SubWindow.PT4315.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4319/CheckBox",
+                                   self.AlarmButton.SubWindow.PT4319.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4322/CheckBox",
+                                   self.AlarmButton.SubWindow.PT4322.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4325/CheckBox",
+                                   self.AlarmButton.SubWindow.PT4325.AlarmMode.isChecked())
 
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",
-                                   self.AlarmButton.StatusWindow.TT4330.AlarmMode.isChecked())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",
-                                   self.AlarmButton.StatusWindow.PT4306.AlarmMode.isChecked())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4315/CheckBox",
-                                   self.AlarmButton.StatusWindow.PT4315.AlarmMode.isChecked())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4319/CheckBox",
-                                   self.AlarmButton.StatusWindow.PT4319.AlarmMode.isChecked())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4322/CheckBox",
-                                   self.AlarmButton.StatusWindow.PT4322.AlarmMode.isChecked())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4325/CheckBox",
-                                   self.AlarmButton.StatusWindow.PT4325.AlarmMode.isChecked())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2111/LowLimit",
+                                   self.AlarmButton.SubWindow.TT2111.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2401/LowLimit",
+                                   self.AlarmButton.SubWindow.TT2401.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2406/LowLimit",
+                                   self.AlarmButton.SubWindow.TT2406.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2411/LowLimit",
+                                   self.AlarmButton.SubWindow.TT2411.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2416/LowLimit",
+                                   self.AlarmButton.SubWindow.TT2416.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2421/LowLimit",
+                                   self.AlarmButton.SubWindow.TT2421.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2426/LowLimit",
+                                   self.AlarmButton.SubWindow.TT2426.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2431/LowLimit",
+                                   self.AlarmButton.SubWindow.TT2431.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2435/LowLimit",
+                                   self.AlarmButton.SubWindow.TT2435.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2440/LowLimit",
+                                   self.AlarmButton.SubWindow.TT2440.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT4330/LowLimit",
+                                   self.AlarmButton.SubWindow.TT4330.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/LowLimit",
+                                   self.AlarmButton.SubWindow.TT6220.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/LowLimit",
+                                   self.AlarmButton.SubWindow.TT6220.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6221/LowLimit",
+                                   self.AlarmButton.SubWindow.TT6221.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6222/LowLimit",
+                                   self.AlarmButton.SubWindow.TT6222.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6223/LowLimit",
+                                   self.AlarmButton.SubWindow.TT6223.Low_Limit.Field.text())
+            # set PT value
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT1101/LowLimit",
+                                   self.AlarmButton.SubWindow.PT1101.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2316/LowLimit",
+                                   self.AlarmButton.SubWindow.PT2316.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2321/LowLimit",
+                                   self.AlarmButton.SubWindow.PT2321.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2330/LowLimit",
+                                   self.AlarmButton.SubWindow.PT2330.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2335/LowLimit",
+                                   self.AlarmButton.SubWindow.PT2335.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3308/LowLimit",
+                                   self.AlarmButton.SubWindow.PT3308.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3309/LowLimit",
+                                   self.AlarmButton.SubWindow.PT3309.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3310/LowLimit",
+                                   self.AlarmButton.SubWindow.PT3310.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3311/LowLimit",
+                                   self.AlarmButton.SubWindow.PT3311.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3314/LowLimit",
+                                   self.AlarmButton.SubWindow.PT3314.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3320/LowLimit",
+                                   self.AlarmButton.SubWindow.PT3320.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3333/LowLimit",
+                                   self.AlarmButton.SubWindow.PT3333.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4306/LowLimit",
+                                   self.AlarmButton.SubWindow.PT4306.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4315/LowLimit",
+                                   self.AlarmButton.SubWindow.PT4315.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4319/LowLimit",
+                                   self.AlarmButton.SubWindow.PT4319.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4322/LowLimit",
+                                   self.AlarmButton.SubWindow.PT4322.Low_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4325/LowLimit",
+                                   self.AlarmButton.SubWindow.PT4325.Low_Limit.Field.text())
 
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/LowLimit",
-                                   self.AlarmButton.StatusWindow.TT4330.Low_Limit.Field.text())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/LowLimit",
-                                   self.AlarmButton.StatusWindow.PT4306.Low_Limit.Field.text())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4315/LowLimit",
-                                   self.AlarmButton.StatusWindow.PT4315.Low_Limit.Field.text())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4319/LowLimit",
-                                   self.AlarmButton.StatusWindow.PT4319.Low_Limit.Field.text())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4322/LowLimit",
-                                   self.AlarmButton.StatusWindow.PT4322.Low_Limit.Field.text())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4325/LowLimit",
-                                   self.AlarmButton.StatusWindow.PT4325.Low_Limit.Field.text())
+            #high limit
 
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/HighLimit",
-                                   self.AlarmButton.StatusWindow.TT4330.High_Limit.Field.text())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/HighLimit",
-                                   self.AlarmButton.StatusWindow.PT4306.High_Limit.Field.text())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4315/HighLimit",
-                                   self.AlarmButton.StatusWindow.PT4315.High_Limit.Field.text())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4319/HighLimit",
-                                   self.AlarmButton.StatusWindow.PT4319.High_Limit.Field.text())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4322/HighLimit",
-                                   self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.text())
-            self.settings.setValue("MainWindow/AlarmButton/StatusWindow/PT4325/HighLimit",
-                                   self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2111/HighLimit",
+                                   self.AlarmButton.SubWindow.TT2111.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2401/HighLimit",
+                                   self.AlarmButton.SubWindow.TT2401.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2406/HighLimit",
+                                   self.AlarmButton.SubWindow.TT2406.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2411/HighLimit",
+                                   self.AlarmButton.SubWindow.TT2411.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2416/HighLimit",
+                                   self.AlarmButton.SubWindow.TT2416.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2421/HighLimit",
+                                   self.AlarmButton.SubWindow.TT2421.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2426/HighLimit",
+                                   self.AlarmButton.SubWindow.TT2426.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2431/HighLimit",
+                                   self.AlarmButton.SubWindow.TT2431.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2435/HighLimit",
+                                   self.AlarmButton.SubWindow.TT2435.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT2440/HighLimit",
+                                   self.AlarmButton.SubWindow.TT2440.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT4330/HighLimit",
+                                   self.AlarmButton.SubWindow.TT4330.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/HighLimit",
+                                   self.AlarmButton.SubWindow.TT6220.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/HighLimit",
+                                   self.AlarmButton.SubWindow.TT6220.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6221/HighLimit",
+                                   self.AlarmButton.SubWindow.TT6221.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6222/HighLimit",
+                                   self.AlarmButton.SubWindow.TT6222.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/TT6223/HighLimit",
+                                   self.AlarmButton.SubWindow.TT6223.High_Limit.Field.text())
+            # set PT value
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT1101/HighLimit",
+                                   self.AlarmButton.SubWindow.PT1101.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2316/HighLimit",
+                                   self.AlarmButton.SubWindow.PT2316.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2321/HighLimit",
+                                   self.AlarmButton.SubWindow.PT2321.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2330/HighLimit",
+                                   self.AlarmButton.SubWindow.PT2330.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT2335/HighLimit",
+                                   self.AlarmButton.SubWindow.PT2335.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3308/HighLimit",
+                                   self.AlarmButton.SubWindow.PT3308.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3309/HighLimit",
+                                   self.AlarmButton.SubWindow.PT3309.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3310/HighLimit",
+                                   self.AlarmButton.SubWindow.PT3310.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3311/HighLimit",
+                                   self.AlarmButton.SubWindow.PT3311.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3314/HighLimit",
+                                   self.AlarmButton.SubWindow.PT3314.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3320/HighLimit",
+                                   self.AlarmButton.SubWindow.PT3320.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT3333/HighLimit",
+                                   self.AlarmButton.SubWindow.PT3333.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4306/HighLimit",
+                                   self.AlarmButton.SubWindow.PT4306.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4315/HighLimit",
+                                   self.AlarmButton.SubWindow.PT4315.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4319/HighLimit",
+                                   self.AlarmButton.SubWindow.PT4319.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4322/HighLimit",
+                                   self.AlarmButton.SubWindow.PT4322.High_Limit.Field.text())
+            self.settings.setValue("MainWindow/AlarmButton/SubWindow/PT4325/HighLimit",
+                                   self.AlarmButton.SubWindow.PT4325.High_Limit.Field.text())
+
             print("saving data to Default path: $HOME/.config//SBC/SlowControl.ini")
         else:
             try:
@@ -1171,44 +1356,212 @@ class MainWindow(QtWidgets.QMainWindow):
                 print(path)
                 self.customsettings = QtCore.QSettings(path, QtCore.QSettings.IniFormat)
 
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",
-                                             self.AlarmButton.StatusWindow.TT4330.AlarmMode.isChecked())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",
-                                             self.AlarmButton.StatusWindow.PT4306.AlarmMode.isChecked())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4315/CheckBox",
-                                             self.AlarmButton.StatusWindow.PT4315.AlarmMode.isChecked())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4319/CheckBox",
-                                             self.AlarmButton.StatusWindow.PT4319.AlarmMode.isChecked())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4322/CheckBox",
-                                             self.AlarmButton.StatusWindow.PT4322.AlarmMode.isChecked())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4325/CheckBox",
-                                             self.AlarmButton.StatusWindow.PT4325.AlarmMode.isChecked())
 
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/LowLimit",
-                                             self.AlarmButton.StatusWindow.TT4330.Low_Limit.Field.text())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/LowLimit",
-                                             self.AlarmButton.StatusWindow.PT4306.Low_Limit.Field.text())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4315/LowLimit",
-                                             self.AlarmButton.StatusWindow.PT4315.Low_Limit.Field.text())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4319/LowLimit",
-                                             self.AlarmButton.StatusWindow.PT4319.Low_Limit.Field.text())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4322/LowLimit",
-                                             self.AlarmButton.StatusWindow.PT4322.Low_Limit.Field.text())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4325/LowLimit",
-                                             self.AlarmButton.StatusWindow.PT4325.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2111/CheckBox",
+                                       self.AlarmButton.SubWindow.TT2111.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2401/CheckBox",
+                                       self.AlarmButton.SubWindow.TT2401.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2406/CheckBox",
+                                       self.AlarmButton.SubWindow.TT2406.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2411/CheckBox",
+                                       self.AlarmButton.SubWindow.TT2411.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2416/CheckBox",
+                                       self.AlarmButton.SubWindow.TT2416.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2421/CheckBox",
+                                       self.AlarmButton.SubWindow.TT2421.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2426/CheckBox",
+                                       self.AlarmButton.SubWindow.TT2426.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2431/CheckBox",
+                                       self.AlarmButton.SubWindow.TT2431.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2435/CheckBox",
+                                       self.AlarmButton.SubWindow.TT2435.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2440/CheckBox",
+                                       self.AlarmButton.SubWindow.TT2440.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT4330/CheckBox",
+                                       self.AlarmButton.SubWindow.TT4330.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/CheckBox",
+                                       self.AlarmButton.SubWindow.TT6220.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/CheckBox",
+                                       self.AlarmButton.SubWindow.TT6220.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6221/CheckBox",
+                                       self.AlarmButton.SubWindow.TT6221.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6222/CheckBox",
+                                       self.AlarmButton.SubWindow.TT6222.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6223/CheckBox",
+                                       self.AlarmButton.SubWindow.TT6223.AlarmMode.isChecked())
+                # set PT value
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT1101/CheckBox",
+                                       self.AlarmButton.SubWindow.PT1101.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2316/CheckBox",
+                                       self.AlarmButton.SubWindow.PT2316.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2321/CheckBox",
+                                       self.AlarmButton.SubWindow.PT2321.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2330/CheckBox",
+                                       self.AlarmButton.SubWindow.PT2330.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2335/CheckBox",
+                                       self.AlarmButton.SubWindow.PT2335.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3308/CheckBox",
+                                       self.AlarmButton.SubWindow.PT3308.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3309/CheckBox",
+                                       self.AlarmButton.SubWindow.PT3309.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3310/CheckBox",
+                                       self.AlarmButton.SubWindow.PT3310.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3311/CheckBox",
+                                       self.AlarmButton.SubWindow.PT3311.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3314/CheckBox",
+                                       self.AlarmButton.SubWindow.PT3314.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3320/CheckBox",
+                                       self.AlarmButton.SubWindow.PT3320.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3333/CheckBox",
+                                       self.AlarmButton.SubWindow.PT3333.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4306/CheckBox",
+                                       self.AlarmButton.SubWindow.PT4306.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4315/CheckBox",
+                                       self.AlarmButton.SubWindow.PT4315.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4319/CheckBox",
+                                       self.AlarmButton.SubWindow.PT4319.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4322/CheckBox",
+                                       self.AlarmButton.SubWindow.PT4322.AlarmMode.isChecked())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4325/CheckBox",
+                                       self.AlarmButton.SubWindow.PT4325.AlarmMode.isChecked())
 
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/TT4330/HighLimit",
-                                             self.AlarmButton.StatusWindow.TT4330.High_Limit.Field.text())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4306/HighLimit",
-                                             self.AlarmButton.StatusWindow.PT4306.High_Limit.Field.text())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4315/HighLimit",
-                                             self.AlarmButton.StatusWindow.PT4315.High_Limit.Field.text())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4319/HighLimit",
-                                             self.AlarmButton.StatusWindow.PT4319.High_Limit.Field.text())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4322/HighLimit",
-                                             self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.text())
-                self.customsettings.setValue("MainWindow/AlarmButton/StatusWindow/PT4325/HighLimit",
-                                             self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2111/LowLimit",
+                                       self.AlarmButton.SubWindow.TT2111.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2401/LowLimit",
+                                       self.AlarmButton.SubWindow.TT2401.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2406/LowLimit",
+                                       self.AlarmButton.SubWindow.TT2406.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2411/LowLimit",
+                                       self.AlarmButton.SubWindow.TT2411.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2416/LowLimit",
+                                       self.AlarmButton.SubWindow.TT2416.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2421/LowLimit",
+                                       self.AlarmButton.SubWindow.TT2421.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2426/LowLimit",
+                                       self.AlarmButton.SubWindow.TT2426.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2431/LowLimit",
+                                       self.AlarmButton.SubWindow.TT2431.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2435/LowLimit",
+                                       self.AlarmButton.SubWindow.TT2435.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2440/LowLimit",
+                                       self.AlarmButton.SubWindow.TT2440.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT4330/LowLimit",
+                                       self.AlarmButton.SubWindow.TT4330.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/LowLimit",
+                                       self.AlarmButton.SubWindow.TT6220.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/LowLimit",
+                                       self.AlarmButton.SubWindow.TT6220.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6221/LowLimit",
+                                       self.AlarmButton.SubWindow.TT6221.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6222/LowLimit",
+                                       self.AlarmButton.SubWindow.TT6222.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6223/LowLimit",
+                                       self.AlarmButton.SubWindow.TT6223.Low_Limit.Field.text())
+                # set PT value
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT1101/LowLimit",
+                                       self.AlarmButton.SubWindow.PT1101.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2316/LowLimit",
+                                       self.AlarmButton.SubWindow.PT2316.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2321/LowLimit",
+                                       self.AlarmButton.SubWindow.PT2321.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2330/LowLimit",
+                                       self.AlarmButton.SubWindow.PT2330.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2335/LowLimit",
+                                       self.AlarmButton.SubWindow.PT2335.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3308/LowLimit",
+                                       self.AlarmButton.SubWindow.PT3308.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3309/LowLimit",
+                                       self.AlarmButton.SubWindow.PT3309.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3310/LowLimit",
+                                       self.AlarmButton.SubWindow.PT3310.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3311/LowLimit",
+                                       self.AlarmButton.SubWindow.PT3311.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3314/LowLimit",
+                                       self.AlarmButton.SubWindow.PT3314.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3320/LowLimit",
+                                       self.AlarmButton.SubWindow.PT3320.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3333/LowLimit",
+                                       self.AlarmButton.SubWindow.PT3333.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4306/LowLimit",
+                                       self.AlarmButton.SubWindow.PT4306.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4315/LowLimit",
+                                       self.AlarmButton.SubWindow.PT4315.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4319/LowLimit",
+                                       self.AlarmButton.SubWindow.PT4319.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4322/LowLimit",
+                                       self.AlarmButton.SubWindow.PT4322.Low_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4325/LowLimit",
+                                       self.AlarmButton.SubWindow.PT4325.Low_Limit.Field.text())
+
+                # high limit
+
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2111/HighLimit",
+                                       self.AlarmButton.SubWindow.TT2111.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2401/HighLimit",
+                                       self.AlarmButton.SubWindow.TT2401.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2406/HighLimit",
+                                       self.AlarmButton.SubWindow.TT2406.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2411/HighLimit",
+                                       self.AlarmButton.SubWindow.TT2411.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2416/HighLimit",
+                                       self.AlarmButton.SubWindow.TT2416.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2421/HighLimit",
+                                       self.AlarmButton.SubWindow.TT2421.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2426/HighLimit",
+                                       self.AlarmButton.SubWindow.TT2426.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2431/HighLimit",
+                                       self.AlarmButton.SubWindow.TT2431.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2435/HighLimit",
+                                       self.AlarmButton.SubWindow.TT2435.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT2440/HighLimit",
+                                       self.AlarmButton.SubWindow.TT2440.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT4330/HighLimit",
+                                       self.AlarmButton.SubWindow.TT4330.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/HighLimit",
+                                       self.AlarmButton.SubWindow.TT6220.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6220/HighLimit",
+                                       self.AlarmButton.SubWindow.TT6220.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6221/HighLimit",
+                                       self.AlarmButton.SubWindow.TT6221.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6222/HighLimit",
+                                       self.AlarmButton.SubWindow.TT6222.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/TT6223/HighLimit",
+                                       self.AlarmButton.SubWindow.TT6223.High_Limit.Field.text())
+                # set PT value
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT1101/HighLimit",
+                                       self.AlarmButton.SubWindow.PT1101.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2316/HighLimit",
+                                       self.AlarmButton.SubWindow.PT2316.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2321/HighLimit",
+                                       self.AlarmButton.SubWindow.PT2321.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2330/HighLimit",
+                                       self.AlarmButton.SubWindow.PT2330.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT2335/HighLimit",
+                                       self.AlarmButton.SubWindow.PT2335.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3308/HighLimit",
+                                       self.AlarmButton.SubWindow.PT3308.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3309/HighLimit",
+                                       self.AlarmButton.SubWindow.PT3309.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3310/HighLimit",
+                                       self.AlarmButton.SubWindow.PT3310.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3311/HighLimit",
+                                       self.AlarmButton.SubWindow.PT3311.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3314/HighLimit",
+                                       self.AlarmButton.SubWindow.PT3314.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3320/HighLimit",
+                                       self.AlarmButton.SubWindow.PT3320.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT3333/HighLimit",
+                                       self.AlarmButton.SubWindow.PT3333.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4306/HighLimit",
+                                       self.AlarmButton.SubWindow.PT4306.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4315/HighLimit",
+                                       self.AlarmButton.SubWindow.PT4315.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4319/HighLimit",
+                                       self.AlarmButton.SubWindow.PT4319.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4322/HighLimit",
+                                       self.AlarmButton.SubWindow.PT4322.High_Limit.Field.text())
+                self.customsettings.setValue("MainWindow/AlarmButton/SubWindow/PT4325/HighLimit",
+                                       self.AlarmButton.SubWindow.PT4325.High_Limit.Field.text())
                 print("saving data to ", path)
             except:
                 print("Failed to custom save the settings.")
@@ -1219,118 +1572,118 @@ class MainWindow(QtWidgets.QMainWindow):
         try:
             # default recover. If no other address is claimed, then recover settings from default directory
             if address == "$HOME/.config//SBC/SlowControl.ini":
-                self.RecoverChecked(self.AlarmButton.StatusWindow.TT4330,
-                                    "MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox")
-                self.RecoverChecked(self.AlarmButton.StatusWindow.PT4306,
-                                    "MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox")
-                self.RecoverChecked(self.AlarmButton.StatusWindow.PT4315,
-                                    "MainWindow/AlarmButton/StatusWindow/PT4315/CheckBox")
-                self.RecoverChecked(self.AlarmButton.StatusWindow.PT4319,
-                                    "MainWindow/AlarmButton/StatusWindow/PT4319/CheckBox")
-                self.RecoverChecked(self.AlarmButton.StatusWindow.PT4322,
-                                    "MainWindow/AlarmButton/StatusWindow/PT4322/CheckBox")
-                self.RecoverChecked(self.AlarmButton.StatusWindow.PT4325,
-                                    "MainWindow/AlarmButton/StatusWindow/PT4325/CheckBox")
+                self.RecoverChecked(self.AlarmButton.SubWindow.TT4330,
+                                    "MainWindow/AlarmButton/SubWindow/TT4330/CheckBox")
+                self.RecoverChecked(self.AlarmButton.SubWindow.PT4306,
+                                    "MainWindow/AlarmButton/SubWindow/PT4306/CheckBox")
+                self.RecoverChecked(self.AlarmButton.SubWindow.PT4315,
+                                    "MainWindow/AlarmButton/SubWindow/PT4315/CheckBox")
+                self.RecoverChecked(self.AlarmButton.SubWindow.PT4319,
+                                    "MainWindow/AlarmButton/SubWindow/PT4319/CheckBox")
+                self.RecoverChecked(self.AlarmButton.SubWindow.PT4322,
+                                    "MainWindow/AlarmButton/SubWindow/PT4322/CheckBox")
+                self.RecoverChecked(self.AlarmButton.SubWindow.PT4325,
+                                    "MainWindow/AlarmButton/SubWindow/PT4325/CheckBox")
 
-                self.AlarmButton.StatusWindow.TT4330.Low_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/TT4330/LowLimit"))
-                self.AlarmButton.StatusWindow.TT4330.Low_Limit.UpdateValue()
-                self.AlarmButton.StatusWindow.PT4306.Low_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/PT4306/LowLimit"))
-                self.AlarmButton.StatusWindow.PT4306.Low_Limit.UpdateValue()
-                self.AlarmButton.StatusWindow.PT4315.Low_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/PT4315/LowLimit"))
-                self.AlarmButton.StatusWindow.PT4315.Low_Limit.UpdateValue()
-                self.AlarmButton.StatusWindow.PT4319.Low_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/PT4319/LowLimit"))
-                self.AlarmButton.StatusWindow.PT4319.Low_Limit.UpdateValue()
-                self.AlarmButton.StatusWindow.PT4322.Low_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/PT4322/LowLimit"))
-                self.AlarmButton.StatusWindow.PT4322.Low_Limit.UpdateValue()
-                self.AlarmButton.StatusWindow.PT4325.Low_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/PT4325/LowLimit"))
-                self.AlarmButton.StatusWindow.PT4325.Low_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.TT4330.Low_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/TT4330/LowLimit"))
+                self.AlarmButton.SubWindow.TT4330.Low_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.PT4306.Low_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/PT4306/LowLimit"))
+                self.AlarmButton.SubWindow.PT4306.Low_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.PT4315.Low_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/PT4315/LowLimit"))
+                self.AlarmButton.SubWindow.PT4315.Low_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.PT4319.Low_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/PT4319/LowLimit"))
+                self.AlarmButton.SubWindow.PT4319.Low_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.PT4322.Low_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/PT4322/LowLimit"))
+                self.AlarmButton.SubWindow.PT4322.Low_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.PT4325.Low_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/PT4325/LowLimit"))
+                self.AlarmButton.SubWindow.PT4325.Low_Limit.UpdateValue()
 
-                self.AlarmButton.StatusWindow.TT4330.High_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/TT4330/HighLimit"))
-                self.AlarmButton.StatusWindow.TT4330.High_Limit.UpdateValue()
-                self.AlarmButton.StatusWindow.PT4306.High_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/PT4306/HighLimit"))
-                self.AlarmButton.StatusWindow.PT4306.High_Limit.UpdateValue()
-                self.AlarmButton.StatusWindow.PT4315.High_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/PT4315/HighLimit"))
-                self.AlarmButton.StatusWindow.PT4315.High_Limit.UpdateValue()
-                self.AlarmButton.StatusWindow.PT4319.High_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/PT4319/HighLimit"))
-                self.AlarmButton.StatusWindow.PT4319.High_Limit.UpdateValue()
-                self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/PT4322/HighLimit"))
-                self.AlarmButton.StatusWindow.PT4322.High_Limit.UpdateValue()
-                self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.setText(self.settings.value(
-                    "MainWindow/AlarmButton/StatusWindow/PT4325/HighLimit"))
-                self.AlarmButton.StatusWindow.PT4325.High_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.TT4330.High_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/TT4330/HighLimit"))
+                self.AlarmButton.SubWindow.TT4330.High_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.PT4306.High_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/PT4306/HighLimit"))
+                self.AlarmButton.SubWindow.PT4306.High_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.PT4315.High_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/PT4315/HighLimit"))
+                self.AlarmButton.SubWindow.PT4315.High_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.PT4319.High_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/PT4319/HighLimit"))
+                self.AlarmButton.SubWindow.PT4319.High_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.PT4322.High_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/PT4322/HighLimit"))
+                self.AlarmButton.SubWindow.PT4322.High_Limit.UpdateValue()
+                self.AlarmButton.SubWindow.PT4325.High_Limit.Field.setText(self.settings.value(
+                    "MainWindow/AlarmButton/SubWindow/PT4325/HighLimit"))
+                self.AlarmButton.SubWindow.PT4325.High_Limit.UpdateValue()
             else:
                 try:
                     # else, recover from the claimed directory
                     # address should be surfix with ini. Example:$HOME/.config//SBC/SlowControl.ini
                     directory = QtCore.QSettings(str(address), QtCore.QSettings.IniFormat)
                     print("Recovering from " + str(address))
-                    self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.TT4330,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/TT4330/CheckBox",
+                    self.RecoverChecked(GUIid=self.AlarmButton.SubWindow.TT4330,
+                                        subdir="MainWindow/AlarmButton/SubWindow/TT4330/CheckBox",
                                         loadedsettings=directory)
-                    self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4306,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox",
+                    self.RecoverChecked(GUIid=self.AlarmButton.SubWindow.PT4306,
+                                        subdir="MainWindow/AlarmButton/SubWindow/PT4306/CheckBox",
                                         loadedsettings=directory)
-                    self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4315,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4315/CheckBox",
+                    self.RecoverChecked(GUIid=self.AlarmButton.SubWindow.PT4315,
+                                        subdir="MainWindow/AlarmButton/SubWindow/PT4315/CheckBox",
                                         loadedsettings=directory)
-                    self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4319,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4319/CheckBox",
+                    self.RecoverChecked(GUIid=self.AlarmButton.SubWindow.PT4319,
+                                        subdir="MainWindow/AlarmButton/SubWindow/PT4319/CheckBox",
                                         loadedsettings=directory)
-                    self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4322,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4322/CheckBox",
+                    self.RecoverChecked(GUIid=self.AlarmButton.SubWindow.PT4322,
+                                        subdir="MainWindow/AlarmButton/SubWindow/PT4322/CheckBox",
                                         loadedsettings=directory)
-                    self.RecoverChecked(GUIid=self.AlarmButton.StatusWindow.PT4325,
-                                        subdir="MainWindow/AlarmButton/StatusWindow/PT4325/CheckBox",
+                    self.RecoverChecked(GUIid=self.AlarmButton.SubWindow.PT4325,
+                                        subdir="MainWindow/AlarmButton/SubWindow/PT4325/CheckBox",
                                         loadedsettings=directory)
 
-                    self.AlarmButton.StatusWindow.TT4330.Low_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/TT4330/LowLimit"))
-                    self.AlarmButton.StatusWindow.TT4330.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4306.Low_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/PT4306/LowLimit"))
-                    self.AlarmButton.StatusWindow.PT4306.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4315.Low_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/PT4315/LowLimit"))
-                    self.AlarmButton.StatusWindow.PT4315.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4319.Low_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/PT4319/LowLimit"))
-                    self.AlarmButton.StatusWindow.PT4319.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4322.Low_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/PT4322/LowLimit"))
-                    self.AlarmButton.StatusWindow.PT4322.Low_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4325.Low_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/PT4325/LowLimit"))
-                    self.AlarmButton.StatusWindow.PT4325.Low_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.TT4330.Low_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/TT4330/LowLimit"))
+                    self.AlarmButton.SubWindow.TT4330.Low_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.PT4306.Low_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/PT4306/LowLimit"))
+                    self.AlarmButton.SubWindow.PT4306.Low_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.PT4315.Low_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/PT4315/LowLimit"))
+                    self.AlarmButton.SubWindow.PT4315.Low_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.PT4319.Low_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/PT4319/LowLimit"))
+                    self.AlarmButton.SubWindow.PT4319.Low_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.PT4322.Low_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/PT4322/LowLimit"))
+                    self.AlarmButton.SubWindow.PT4322.Low_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.PT4325.Low_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/PT4325/LowLimit"))
+                    self.AlarmButton.SubWindow.PT4325.Low_Limit.UpdateValue()
 
-                    self.AlarmButton.StatusWindow.TT4330.High_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/TT4330/HighLimit"))
-                    self.AlarmButton.StatusWindow.TT4330.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4306.High_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/PT4306/HighLimit"))
-                    self.AlarmButton.StatusWindow.PT4306.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4315.High_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/PT4315/HighLimit"))
-                    self.AlarmButton.StatusWindow.PT4315.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4319.High_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/PT4319/HighLimit"))
-                    self.AlarmButton.StatusWindow.PT4319.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4322.High_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/PT4322/HighLimit"))
-                    self.AlarmButton.StatusWindow.PT4322.High_Limit.UpdateValue()
-                    self.AlarmButton.StatusWindow.PT4325.High_Limit.Field.setText(directory.value(
-                        "MainWindow/AlarmButton/StatusWindow/PT4325/HighLimit"))
-                    self.AlarmButton.StatusWindow.PT4325.High_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.TT4330.High_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/TT4330/HighLimit"))
+                    self.AlarmButton.SubWindow.TT4330.High_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.PT4306.High_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/PT4306/HighLimit"))
+                    self.AlarmButton.SubWindow.PT4306.High_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.PT4315.High_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/PT4315/HighLimit"))
+                    self.AlarmButton.SubWindow.PT4315.High_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.PT4319.High_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/PT4319/HighLimit"))
+                    self.AlarmButton.SubWindow.PT4319.High_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.PT4322.High_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/PT4322/HighLimit"))
+                    self.AlarmButton.SubWindow.PT4322.High_Limit.UpdateValue()
+                    self.AlarmButton.SubWindow.PT4325.High_Limit.Field.setText(directory.value(
+                        "MainWindow/AlarmButton/SubWindow/PT4325/HighLimit"))
+                    self.AlarmButton.SubWindow.PT4325.High_Limit.UpdateValue()
 
                 except:
                     print("Wrong Path to recover")
@@ -1341,8 +1694,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def RecoverChecked(self, GUIid, subdir, loadedsettings=None):
         # add a function because you can not directly set check status to checkbox
-        # GUIid should be form of "self.AlarmButton.StatusWindow.PT4315", is the variable name in the Main window
-        # subdir like ""MainWindow/AlarmButton/StatusWindow/PT4306/CheckBox"", is the path file stored in the ini file
+        # GUIid should be form of "self.AlarmButton.SubWindow.PT4315", is the variable name in the Main window
+        # subdir like ""MainWindow/AlarmButton/SubWindow/PT4306/CheckBox"", is the path file stored in the ini file
         # loadedsettings is the Qtsettings file the program is to load
         if loadedsettings is None:
             # It is weired here, when I save the data and close the program, the setting value
@@ -1422,25 +1775,23 @@ class RegionPID(QtWidgets.QWidget):
         self.HL.addWidget(self.D)
 
 
-# Defines a status subwindow
-class StatusWindow(QtWidgets.QMainWindow):
+class ThermosyphonWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
-        super(StatusWindow, self).__init__(parent)
+        super().__init__(parent)
 
         self.resize(2000, 1000)
         self.setMinimumSize(2000, 1000)
-        self.setWindowTitle("Status Window")
+        self.setWindowTitle("Thermosyphon")
 
         # self.Widget = QtWidgets.QWidget()
         self.Widget = QtWidgets.QWidget(self)
         self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
 
-    def thermosyphon(self):
         # reset the size of the window
-        self.setMinimumSize(1000, 500)
+        self.setMinimumSize(2000, 500)
         self.resize(1000, 500)
         self.setWindowTitle("Thermosyphon Status Window")
-        self.Widget.setGeometry(QtCore.QRect(0, 0, 1000, 500))
+        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 500))
 
         # set gridlayout
         self.GL = QtWidgets.QGridLayout()
@@ -1457,25 +1808,57 @@ class StatusWindow(QtWidgets.QMainWindow):
 
         self.PV4308 = MultiStatusIndicator(self)
         self.PV4308.Label.setText("PV4308")
-        self.GL.addWidget(self.PV4308, 1, 0)
+        self.GL.addWidget(self.PV4308, 0, 1)
 
         self.PV4317 = MultiStatusIndicator(self)
         self.PV4317.Label.setText("PV4317")
-        self.GL.addWidget(self.PV4317, 2, 0)
+        self.GL.addWidget(self.PV4317, 0, 2)
 
         self.PV4318 = MultiStatusIndicator(self)
         self.PV4318.Label.setText("PV4318")
-        self.GL.addWidget(self.PV4318, 0, 1)
+        self.GL.addWidget(self.PV4318, 0, 3)
 
         self.PV4321 = MultiStatusIndicator(self)
         self.PV4321.Label.setText("PV4321")
-        self.GL.addWidget(self.PV4321, 1, 1)
+        self.GL.addWidget(self.PV4321, 0, 4)
 
         self.PV4324 = MultiStatusIndicator(self)
         self.PV4324.Label.setText("PV4324")
-        self.GL.addWidget(self.PV4324, 2, 1)
+        self.GL.addWidget(self.PV4324, 0, 5)
 
-    def RTDset1(self):
+        self.SV4327 = MultiStatusIndicator(self)
+        self.SV4327.Label.setText("SV4327")
+        self.GL.addWidget(self.SV4327, 1, 0)
+
+        self.SV4328 = MultiStatusIndicator(self)
+        self.SV4328.Label.setText("SV4328.")
+        self.GL.addWidget(self.SV4328, 1, 1)
+
+        self.SV4329 = MultiStatusIndicator(self)
+        self.SV4329.Label.setText("SV4329")
+        self.GL.addWidget(self.SV4329, 1, 2)
+
+        self.SV4331 = MultiStatusIndicator(self)
+        self.SV4331.Label.setText("SV4331")
+        self.GL.addWidget(self.SV4331, 1, 3)
+
+        self.SV4332 = MultiStatusIndicator(self)
+        self.SV4332.Label.setText("SV4332")
+        self.GL.addWidget(self.SV4332, 1, 4)
+
+
+class RTDset1(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.resize(2000, 1000)
+        self.setMinimumSize(2000, 1000)
+        self.setWindowTitle("Status Window")
+
+        # self.Widget = QtWidgets.QWidget()
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+
         # reset the size of the window
         self.setMinimumSize(1000, 500)
         self.resize(1000, 500)
@@ -1531,7 +1914,14 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.TT2120.Label.setText("TT2120")
         self.GL.addWidget(self.TT2120, 1, 4)
 
-    def RTDset2(self):
+class RTDset2(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        # self.Widget = QtWidgets.QWidget()
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+
         # reset the size of the window
         self.setMinimumSize(1000, 500)
         self.resize(1000, 500)
@@ -1680,7 +2070,18 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.GroupBox.setLayout(self.GL)
         self.GroupBox.setStyleSheet("background-color:transparent;")
 
-    def RTDset3(self):
+class RTDset3(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.resize(2000, 1000)
+        self.setMinimumSize(2000, 1000)
+        self.setWindowTitle("Status Window")
+
+        # self.Widget = QtWidgets.QWidget()
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+
         # reset the size of the window
         self.setMinimumSize(1000, 500)
         self.resize(1000, 500)
@@ -1756,7 +2157,18 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.TT2449.Label.setText("TT2449")
         self.GL.addWidget(self.TT2449, 2, 4)
 
-    def RTDset4(self):
+class RTDset4(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.resize(2000, 1000)
+        self.setMinimumSize(2000, 1000)
+        self.setWindowTitle("Status Window")
+
+        # self.Widget = QtWidgets.QWidget()
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
+
         # reset the size of the window
         self.setMinimumSize(1000, 500)
         self.resize(1000, 500)
@@ -1812,34 +2224,40 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.TT2110.Label.setText("TT2110")
         self.GL.addWidget(self.TT2110, 1, 4)
 
-    def AlarmWindow(self):
-        # reset the size of the window
-        self.setMinimumSize(2000, 1000)
-        self.resize(2000, 1000)
-        self.setWindowTitle("Alarm Window")
+
+class AlarmWin(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.Widget = QtWidgets.QWidget(self)
         self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1000))
 
-        # variables usable for building widgets
-        i_TT_max = 1
-        j_TT_max = 1
-        i_PT_max = 2
-        j_PT_max = 3
-        i_TT_last = 0
-        j_TT_last = 0
-        i_PT_last = 1
-        j_PT_last = 1
+        # reset the size of the window
+        self.setMinimumSize(2000, 1100)
+        self.resize(2000, 1100)
+        self.setWindowTitle("Alarm Window")
+        self.Widget.setGeometry(QtCore.QRect(0, 0, 2000, 1100))
+
+        self.Tab = QtWidgets.QTabWidget(self)
+        self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
+        self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
+        self.Tab.setGeometry(QtCore.QRect(0, 0, 2400, 1400))
+
+        self.PressureTab=QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.PressureTab,"Pressure Transducers")
+
+        self.RTDSET12Tab=QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.RTDSET12Tab, "RTD SET 1&2")
+
+        self.RTDSET34Tab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.RTDSET34Tab, "RTD SET 3&4")
+
+        self.RTDLEFTTab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.RTDLEFTTab, "HEATER RTDs and ETC")
+
 
         # Groupboxs for alarm/PT/TT
-        self.GLTT = QtWidgets.QGridLayout()
-        # self.GLTT = QtWidgets.QGridLayout(self)
-        self.GLTT.setContentsMargins(20, 20, 20, 20)
-        self.GLTT.setSpacing(20)
-        self.GLTT.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.GroupTT = QtWidgets.QGroupBox(self.Widget)
-        self.GroupTT.setTitle("Temperature Transducer")
-        self.GroupTT.setLayout(self.GLTT)
-        self.GroupTT.move(0, 0)
 
         self.GLPT = QtWidgets.QGridLayout()
         # self.GLPT = QtWidgets.QGridLayout(self)
@@ -1847,66 +2265,520 @@ class StatusWindow(QtWidgets.QMainWindow):
         self.GLPT.setSpacing(20)
         self.GLPT.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.GroupPT = QtWidgets.QGroupBox(self.Widget)
+        self.GroupPT = QtWidgets.QGroupBox(self.PressureTab)
         self.GroupPT.setTitle("Pressure Transducer")
         self.GroupPT.setLayout(self.GLPT)
-        self.GroupPT.move(0, 500)
+        self.GroupPT.move(0, 0)
 
-        self.TT4330 = AlarmStatusWidget(self)
+        self.GLRTD1 = QtWidgets.QGridLayout()
+        # self.GLRTD1 = QtWidgets.QGridLayout(self)
+        self.GLRTD1.setContentsMargins(20, 20, 20, 20)
+        self.GLRTD1.setSpacing(20)
+        self.GLRTD1.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRTD1 = QtWidgets.QGroupBox(self.RTDSET12Tab)
+        self.GroupRTD1.setTitle("RTD SET 1")
+        self.GroupRTD1.setLayout(self.GLRTD1)
+        self.GroupRTD1.move(0, 0)
+
+        self.GLRTD2 = QtWidgets.QGridLayout()
+        # self.GLRTD2 = QtWidgets.QGridLayout(self)
+        self.GLRTD2.setContentsMargins(20, 20, 20, 20)
+        self.GLRTD2.setSpacing(20)
+        self.GLRTD2.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRTD2 = QtWidgets.QGroupBox(self.RTDSET12Tab)
+        self.GroupRTD2.setTitle("RTD SET 2")
+        self.GroupRTD2.setLayout(self.GLRTD2)
+        self.GroupRTD2.move(0, 300)
+
+        self.GLRTD3 = QtWidgets.QGridLayout()
+        # self.GLRTD3 = QtWidgets.QGridLayout(self)
+        self.GLRTD3.setContentsMargins(20, 20, 20, 20)
+        self.GLRTD3.setSpacing(20)
+        self.GLRTD3.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRTD3 = QtWidgets.QGroupBox(self.RTDSET34Tab)
+        self.GroupRTD3.setTitle("RTD SET 3")
+        self.GroupRTD3.setLayout(self.GLRTD3)
+        self.GroupRTD3.move(0, 0)
+
+        self.GLRTD4 = QtWidgets.QGridLayout()
+        # self.GLRTD4 = QtWidgets.QGridLayout(self)
+        self.GLRTD4.setContentsMargins(20, 20, 20, 20)
+        self.GLRTD4.setSpacing(20)
+        self.GLRTD4.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRTD4 = QtWidgets.QGroupBox(self.RTDSET34Tab)
+        self.GroupRTD4.setTitle("RTD SET 4")
+        self.GroupRTD4.setLayout(self.GLRTD4)
+        self.GroupRTD4.move(0, 500)
+
+        self.GLRTDLEFT = QtWidgets.QGridLayout()
+        # self.GLRTDLEFT = QtWidgets.QGridLayout(self)
+        self.GLRTDLEFT.setContentsMargins(20, 20, 20, 20)
+        self.GLRTDLEFT.setSpacing(20)
+        self.GLRTDLEFT.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRTDLEFT = QtWidgets.QGroupBox(self.RTDLEFTTab)
+        self.GroupRTDLEFT.setTitle(" LEFT RTDs ")
+        self.GroupRTDLEFT.setLayout(self.GLRTDLEFT)
+        self.GroupRTDLEFT.move(0, 0)
+
+        self.TT2111 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2111.Label.setText("TT2111")
+
+        self.TT2112 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2112.Label.setText("TT2112")
+
+        self.TT2113 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2113.Label.setText("TT2113")
+
+        self.TT2114 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2114.Label.setText("TT2114")
+
+        self.TT2115 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2115.Label.setText("TT2115")
+
+        self.TT2116 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2116.Label.setText("TT2116")
+
+        self.TT2117 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2117.Label.setText("TT2117")
+
+        self.TT2118 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2118.Label.setText("TT2118")
+
+        self.TT2119 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2119.Label.setText("TT2119")
+
+        self.TT2120 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2120.Label.setText("TT2120")
+
+        self.TT2401 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2401.Label.setText("TT2401")
+
+        self.TT2402 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2402.Label.setText("TT2402")
+
+        self.TT2403 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2403.Label.setText("TT2403")
+
+        self.TT2404 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2404.Label.setText("TT2404")
+
+        self.TT2405 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2405.Label.setText("TT2405")
+
+        self.TT2406 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2406.Label.setText("TT2406")
+
+        self.TT2407 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2407.Label.setText("TT2407")
+
+        self.TT2408 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2408.Label.setText("TT2408")
+
+        self.TT2409 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2409.Label.setText("TT2409")
+
+        self.TT2410 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2410.Label.setText("TT2410")
+
+        self.TT2411 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2411.Label.setText("TT2411")
+
+        self.TT2412 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2412.Label.setText("TT2412")
+
+        self.TT2413 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2413.Label.setText("TT2413")
+
+        self.TT2414 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2414.Label.setText("TT2414")
+
+        self.TT2415 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2415.Label.setText("TT2415")
+
+        self.TT2416 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2416.Label.setText("TT2416")
+
+        self.TT2417 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2417.Label.setText("TT2417")
+
+        self.TT2418 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2418.Label.setText("TT2418")
+
+        self.TT2419 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2419.Label.setText("TT2419")
+
+        self.TT2420 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2420.Label.setText("TT2420")
+
+        self.TT2421 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2421.Label.setText("TT2421")
+
+        self.TT2422 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2422.Label.setText("TT2422")
+
+        self.TT2423 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2423.Label.setText("TT2423")
+
+        self.TT2424 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2424.Label.setText("TT2424")
+
+        self.TT2425 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2425.Label.setText("TT2425")
+
+        self.TT2426 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2426.Label.setText("TT2426")
+
+        self.TT2427 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2427.Label.setText("TT2427")
+
+        self.TT2428 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2428.Label.setText("TT2428")
+
+        self.TT2429 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2429.Label.setText("TT2429")
+
+        self.TT2430 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2430.Label.setText("TT2430")
+
+        self.TT2431 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2431.Label.setText("TT2431")
+
+        self.TT2432 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2432.Label.setText("TT2432")
+
+        #RTDSET34
+        self.TT2435 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2435.Label.setText("TT2435")
+
+        self.TT2436 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2436.Label.setText("TT2436")
+
+        self.TT2437 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2437.Label.setText("TT2437")
+
+        self.TT2438 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2438.Label.setText("TT2438")
+
+        self.TT2439 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2439.Label.setText("TT2439")
+
+        self.TT2440 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2440.Label.setText("TT2440")
+
+        self.TT2441 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2441.Label.setText("TT2441")
+
+        self.TT2442 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2442.Label.setText("TT2442")
+
+        self.TT2443 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2443.Label.setText("TT2443")
+
+        self.TT2444 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2444.Label.setText("TT2444")
+
+        self.TT2445 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2445.Label.setText("TT2445")
+
+        self.TT2446 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2446.Label.setText("TT2446")
+
+        self.TT2447 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2447.Label.setText("TT2447")
+
+        self.TT2448 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2448.Label.setText("TT2448")
+
+        self.TT2449 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2449.Label.setText("TT2449")
+
+        self.TT2101 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2101.Label.setText("TT2101")
+
+        self.TT2102 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2102.Label.setText("TT2102")
+
+        self.TT2103 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2103.Label.setText("TT2103")
+
+        self.TT2104 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2104.Label.setText("TT2104")
+
+        self.TT2105 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2105.Label.setText("TT2105")
+
+        self.TT2106 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2106.Label.setText("TT2106")
+
+        self.TT2107 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2107.Label.setText("TT2107")
+
+        self.TT2108 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2108.Label.setText("TT2108")
+
+        self.TT2109 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2109.Label.setText("TT2109")
+
+        self.TT2110 = AlarmStatusWidget(self.RTDSET34Tab)
+        self.TT2110.Label.setText("TT2110")
+
+
+        #RTDLEFT part
+
+        self.TT4330 = AlarmStatusWidget(self.RTDLEFTTab)
         self.TT4330.Label.setText("TT4330")
 
-        self.PT4306 = AlarmStatusWidget(self)
+        self.TT6220 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6220.Label.setText("TT6220")
+
+        self.TT6213 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6213.Label.setText("TT6213")
+
+        self.TT6401 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6401.Label.setText("TT6401")
+
+        self.TT6215 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6215.Label.setText("TT6215")
+
+        self.TT6402 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6402.Label.setText("TT6402")
+
+        self.TT6217 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6217.Label.setText("TT6217")
+
+        self.TT6403 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6403.Label.setText("TT6403")
+
+        self.TT6203 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6203.Label.setText("TT6203")
+
+        self.TT6404 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6404.Label.setText("TT6404")
+
+        self.TT6207 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6207.Label.setText("TT6207")
+
+        self.TT6405 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6405.Label.setText("TT6405")
+
+        self.TT6211 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6211.Label.setText("TT6211")
+
+        self.TT6406 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6406.Label.setText("TT6406")
+
+        self.TT6223 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6223.Label.setText("TT6223")
+
+        self.TT6410 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6410.Label.setText("TT6410")
+
+        self.TT6408 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6408.Label.setText("TT6408")
+
+        self.TT6409 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6409.Label.setText("TT6409")
+
+        self.TT6412 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT6412.Label.setText("TT6412")
+
+        self.TT7202 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT7202.Label.setText("TT7202")
+
+        self.TT7401 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT7401.Label.setText("TT7401")
+
+        self.TT3402 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT3402.Label.setText("TT3402")
+
+        self.TT3401 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT3401.Label.setText("TT3401")
+
+        self.TT7403 = AlarmStatusWidget(self.RTDLEFTTab)
+        self.TT7403.Label.setText("TT7403")
+
+
+        # PT part
+        self.PT1101 = AlarmStatusWidget(self.PressureTab)
+        self.PT1101.Label.setText("PT1101")
+
+        self.PT2316 = AlarmStatusWidget(self.PressureTab)
+        self.PT2316.Label.setText("PT2316")
+
+        self.PT2321 = AlarmStatusWidget(self.PressureTab)
+        self.PT2321.Label.setText("PT2321")
+
+        self.PT2330 = AlarmStatusWidget(self.PressureTab)
+        self.PT2330.Label.setText("PT2330")
+
+        self.PT2335 = AlarmStatusWidget(self.PressureTab)
+        self.PT2335.Label.setText("PT2335")
+
+        self.PT3308 = AlarmStatusWidget(self.PressureTab)
+        self.PT3308.Label.setText("PT3308")
+
+        self.PT3309 = AlarmStatusWidget(self.PressureTab)
+        self.PT3309.Label.setText("PT3309")
+
+        self.PT3310 = AlarmStatusWidget(self.PressureTab)
+        self.PT3310.Label.setText("PT3310")
+
+        self.PT3311 = AlarmStatusWidget(self.PressureTab)
+        self.PT3311.Label.setText("PT3311")
+
+        self.PT3314 = AlarmStatusWidget(self.PressureTab)
+        self.PT3314.Label.setText("PT3314")
+
+        self.PT3320 = AlarmStatusWidget(self.PressureTab)
+        self.PT3320.Label.setText("PT3320")
+
+        self.PT3333 = AlarmStatusWidget(self.PressureTab)
+        self.PT3333.Label.setText("PT3333")
+
+        self.PT4306 = AlarmStatusWidget(self.PressureTab)
         self.PT4306.Label.setText("PT4306")
 
-        self.PT4315 = AlarmStatusWidget(self)
+        self.PT4315 = AlarmStatusWidget(self.PressureTab)
         self.PT4315.Label.setText("PT4315")
 
-        self.PT4319 = AlarmStatusWidget(self)
+        self.PT4319 = AlarmStatusWidget(self.PressureTab)
         self.PT4319.Label.setText("PT4319")
 
-        self.PT4322 = AlarmStatusWidget(self)
+        self.PT4322 = AlarmStatusWidget(self.PressureTab)
         self.PT4322.Label.setText("PT4322")
 
-        self.PT4325 = AlarmStatusWidget(self)
+        self.PT4325 = AlarmStatusWidget(self.PressureTab)
         self.PT4325.Label.setText("PT4325")
 
-        # make a diretory for the alarm instrument and assign instrument to certain position
-        self.AlarmTTdir = {0: {0: self.TT4330}}
-        self.AlarmPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319},
-                           1: {0: self.PT4322, 1: self.PT4325}}
+        # make a directory for the alarm instrument and assign instrument to certain position
+        self.AlarmRTD1dir = {0: {0: self.TT2111, 1: self.TT2112, 2: self.TT2113, 3: self.TT2114, 4: self.TT2115},
+                           1: {0: self.TT2116, 1: self.TT2117, 2: self.TT2118, 3: self.TT2119, 4: self.TT2120}}
 
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                self.GLTT.addWidget(self.AlarmTTdir[i][j], i, j)
+        self.AlarmRTD2dir = {0: {0: self.TT2401, 1: self.TT2402, 2: self.TT2403, 3: self.TT2404, 4: self.TT2405},
+                             1: {0: self.TT2406, 1: self.TT2407, 2: self.TT2408, 3: self.TT2409, 4: self.TT2410},
+                             2: {0: self.TT2411, 1: self.TT2412, 2: self.TT2413, 3: self.TT2414, 4: self.TT2415},
+                             3: {0: self.TT2416, 1: self.TT2417, 2: self.TT2418, 3: self.TT2419, 4: self.TT2420},
+                             4: {0: self.TT2421, 1: self.TT2422, 2: self.TT2423, 3: self.TT2424, 4: self.TT2425},
+                             5: {0: self.TT2426, 1: self.TT2427, 2: self.TT2428, 3: self.TT2429, 4: self.TT2430},
+                             6: {0: self.TT2431, 1: self.TT2432}}
+
+        self.AlarmRTD3dir = {0: {0: self.TT2435, 1: self.TT2436, 2: self.TT2437, 3: self.TT2438, 4: self.TT2439},
+                             1: {0: self.TT2440, 1: self.TT2441, 2: self.TT2442, 3: self.TT2443, 4: self.TT2444},
+                             2: {0: self.TT2445, 1: self.TT2446, 2: self.TT2447, 3: self.TT2448, 4: self.TT2449}}
+
+        self.AlarmRTD4dir = {0: {0: self.TT2101, 1: self.TT2102, 2: self.TT2103, 3: self.TT2104, 4: self.TT2105},
+                             1: {0: self.TT2106, 1: self.TT2107, 2: self.TT2108, 3: self.TT2109, 4: self.TT2110}}
+
+        self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
+                           1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3314},
+                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
+                           3: {0: self.PT4322, 1: self.PT4325}}
+
+        self.AlarmRTDLEFTdir = {0: {0: self.TT4330, 1: self.TT6220, 2: self.TT6213, 3: self.TT6401, 4: self.TT6215},
+                                1: {0: self.TT6402, 1: self.TT6217, 2: self.TT6403, 3: self.TT6203, 4: self.TT6404},
+                                2: {0: self.TT6207, 1: self.TT6405, 2: self.TT6211, 3: self.TT6406, 4: self.TT6223},
+                                3: {0: self.TT6410, 1: self.TT6408, 2: self.TT6409, 3: self.TT6412, 4: self.TT7202},
+                                4: {0: self.TT7401, 1: self.TT3402, 2: self.TT3401, 3: self.TT7403}}
+
+
+        # variables usable for building widgets
+        # i is row number, j is column number
+        # RTD1 is for temperature transducer while PT is for pressure transducer
+        # max is max row and column number
+        # last is the last widget's row and column index in gridbox
+        self.i_RTD1_max = len(self.AlarmRTD1dir)
+        # which is 2
+        self.j_RTD1_max = len(self.AlarmRTD1dir[0])
+        # which is 5
+        self.i_RTD2_max = len(self.AlarmRTD2dir)
+        self.j_RTD2_max = len(self.AlarmRTD2dir[0])
+        self.i_RTD3_max = len(self.AlarmRTD3dir)
+        self.j_RTD3_max = len(self.AlarmRTD3dir[0])
+        self.i_RTD4_max = len(self.AlarmRTD4dir)
+        self.j_RTD4_max = len(self.AlarmRTD4dir[0])
+        self.i_RTDLEFT_max = len(self.AlarmRTDLEFTdir)
+        self.j_RTDLEFT_max = len(self.AlarmRTDLEFTdir[0])
+
+        self.i_PT_max = len(self.AlarmPTdir)
+        #which is 4
+        self.j_PT_max = len(self.AlarmPTdir[0])
+        #which is 5
+        self.i_RTD1_last = len(self.AlarmRTD1dir)-1
+        # which is 1
+        self.j_RTD1_last = len(self.AlarmRTD1dir[self.i_RTD1_last])-1
+        #which is 4
+        self.i_RTD2_last = len(self.AlarmRTD2dir) - 1
+        self.j_RTD2_last = len(self.AlarmRTD2dir[self.i_RTD2_last]) - 1
+        self.i_RTD3_last = len(self.AlarmRTD3dir) - 1
+        self.j_RTD3_last = len(self.AlarmRTD3dir[self.i_RTD3_last]) - 1
+        self.i_RTD4_last = len(self.AlarmRTD4dir) - 1
+        self.j_RTD4_last = len(self.AlarmRTD4dir[self.i_RTD4_last]) - 1
+        self.i_RTDLEFT_last = len(self.AlarmRTDLEFTdir) - 1
+        self.j_RTDLEFT_last = len(self.AlarmRTDLEFTdir[self.i_RTDLEFT_last]) - 1
+        self.i_PT_last = len(self.AlarmPTdir)-1
+        #which is 3
+        self.j_PT_last = len(self.AlarmPTdir[self.i_PT_last])-1
+        #which is 1
+
+        for i in range(0, self.i_RTD1_max):
+            for j in range(0, self.j_RTD1_max):
+                self.GLRTD1.addWidget(self.AlarmRTD1dir[i][j], i, j)
                 # end the position generator when i= last element's row number, j= last element's column number
-                if (i, j) == (i_TT_last, j_TT_last):
+                if (i, j) == (self.i_RTD1_last, self.j_RTD1_last):
                     break
-            if (i, j) == (i_TT_last, j_TT_last):
+            if (i, j) == (self.i_RTD1_last, self.j_RTD1_last):
                 break
 
-        for i in range(0, i_PT_max):
-            for j in range(0, j_PT_max):
+        for i in range(0, self.i_RTD2_max):
+            for j in range(0, self.j_RTD2_max):
+                self.GLRTD2.addWidget(self.AlarmRTD2dir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_RTD2_last, self.j_RTD2_last):
+                    break
+            if (i, j) == (self.i_RTD2_last, self.j_RTD2_last):
+                break
+
+        for i in range(0, self.i_RTD3_max):
+            for j in range(0, self.j_RTD3_max):
+                self.GLRTD3.addWidget(self.AlarmRTD3dir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_RTD3_last, self.j_RTD3_last):
+                    break
+            if (i, j) == (self.i_RTD3_last, self.j_RTD3_last):
+                break
+
+        for i in range(0, self.i_RTD4_max):
+            for j in range(0, self.j_RTD4_max):
+                self.GLRTD4.addWidget(self.AlarmRTD4dir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_RTD4_last, self.j_RTD4_last):
+                    break
+            if (i, j) == (self.i_RTD4_last, self.j_RTD4_last):
+                break
+
+        for i in range(0, self.i_RTDLEFT_max):
+            for j in range(0, self.j_RTDLEFT_max):
+                self.GLRTDLEFT.addWidget(self.AlarmRTDLEFTdir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_RTDLEFT_last, self.j_RTDLEFT_last):
+                    break
+            if (i, j) == (self.i_RTDLEFT_last, self.j_RTDLEFT_last):
+                break
+
+        for i in range(0, self.i_PT_max):
+            for j in range(0, self.j_PT_max):
                 self.GLPT.addWidget(self.AlarmPTdir[i][j], i, j)
                 # end the position generator when i= last element's row number -1, j= last element's column number
-                if (i, j) == (i_PT_last, j_PT_last):
+                if (i, j) == (self.i_PT_last, self.j_PT_last):
                     break
-            if (i, j) == (i_PT_last, j_PT_last):
+            if (i, j) == (self.i_PT_last, self.j_PT_last):
                 break
 
-        # self.CheckButton = CheckButton(self)
-        # self.CheckButton.move(1200, 100)
-        # change it to self.TT.checkalarm
-        # self.CheckButton.CheckButton.clicked.connect(self.TT4330.CheckAlarm)
-        # self.CheckButton.CheckButton.clicked.connect(self.PT4306.CheckAlarm)
-        # self.CheckButton.CheckButton.clicked.connect(self.PT4315.CheckAlarm)
-        # self.CheckButton.CheckButton.clicked.connect(self.PT4319.CheckAlarm)
-        # self.CheckButton.CheckButton.clicked.connect(self.PT4322.CheckAlarm)
-        # self.CheckButton.CheckButton.clicked.connect(self.PT4325.CheckAlarm)
-        # rewrite collectalarm in updatedisplay
-        # self.CheckButton.CheckButton.clicked.connect(lambda x:
-        # self.CheckButton.CollectAlarm(self.TT4330, self.PT4306, self.PT4315, self.PT4319, self.PT4322, self.PT4325))
-        # generally checkbutton.clicked -> move to updatedisplay
-        # self.CheckButton.CheckButton.clicked.connect(self.ReassignOrder)
 
     @QtCore.Slot()
     def ReassignOrder(self):
@@ -1916,51 +2788,217 @@ class StatusWindow(QtWidgets.QMainWindow):
         # i_max, j_max are max row and column number
         # l max are max column number+1
         # i_last,j_last are last elements's diretory coordinate
-        TempRefTTdir = {0: {0: self.TT4330}}
-        TempRefPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319}, 1: {0: self.PT4322, 1: self.PT4325}}
-        TempTTdir = {0: {0: self.TT4330}}
-        TempPTdir = {0: {0: self.PT4306, 1: self.PT4315, 2: self.PT4319}, 1: {0: self.PT4322, 1: self.PT4325}}
-        l_TT = 0
-        k_TT = 0
+        TempRefRTD1dir = self.AlarmRTD1dir
+        TempRefRTD2dir = self.AlarmRTD2dir
+        TempRefRTD3dir = self.AlarmRTD3dir
+        TempRefRTD4dir = self.AlarmRTD4dir
+        TempRefRTDLEFTdir = self.AlarmRTDLEFTdir
+        TempRefPTdir = self.AlarmPTdir
+        
+        TempRTD1dir = self.AlarmRTD1dir
+        TempRTD2dir = self.AlarmRTD2dir
+        TempRTD3dir = self.AlarmRTD3dir
+        TempRTD4dir = self.AlarmRTD4dir
+        TempRTDLEFTdir = self.AlarmRTDLEFTdir
+        TempPTdir = self.AlarmPTdir
+        # l_RTD1_max is max number of column
+        l_RTD1 = 0
+        k_RTD1 = 0
+        l_RTD2 = 0
+        k_RTD2 = 0
+        l_RTD3 = 0
+        k_RTD3 = 0
+        l_RTD4 = 0
+        k_RTD4 = 0
+        l_RTDLEFT = 0
+        k_RTDLEFT = 0
+        
         l_PT = 0
         k_PT = 0
-        i_TT_max = 1
-        j_TT_max = 1
-        i_PT_max = 2
-        j_PT_max = 3
-        l_TT_max = 3
-        l_PT_max = 3
-        i_TT_last = 0
-        j_TT_last = 0
-        i_PT_last = 1
-        j_PT_last = 1
-        # TT put alarm true widget to the begining of the diretory
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                if TempRefTTdir[i][j].Alarm:
-                    TempTTdir[k_TT][l_TT] = TempRefTTdir[i][j]
-                    l_TT = l_TT + 1
-                    if l_TT == l_TT_max:
-                        l_TT = 0
-                        k_TT = k_TT + 1
-                if (i, j) == (i_TT_last, j_TT_last):
+        # i_RTD1_max = 3
+        # j_RTD1_max = 5
+        # i_PT_max = 4
+        # j_PT_max = 5
+        # l_RTD1_max = 4
+        # l_PT_max = 4
+        # i_RTD1_last = 2
+        # j_RTD1_last = 4
+        # i_PT_last = 3
+        # j_PT_last = 1
+        i_RTD1_max = len(self.AlarmRTD1dir)
+        # which is 3
+        j_RTD1_max = len(self.AlarmRTD1dir[0])
+        # which is 5
+        i_RTD2_max = len(self.AlarmRTD2dir)
+        j_RTD2_max = len(self.AlarmRTD2dir[0])
+        i_RTD3_max = len(self.AlarmRTD3dir)
+        j_RTD3_max = len(self.AlarmRTD3dir[0])
+        i_RTD4_max = len(self.AlarmRTD4dir)
+        j_RTD4_max = len(self.AlarmRTD4dir[0])
+        i_RTDLEFT_max = len(self.AlarmRTDLEFTdir)
+        j_RTDLEFT_max = len(self.AlarmRTDLEFTdir[0])
+        i_PT_max = len(self.AlarmPTdir)
+        # which is 4
+        j_PT_max = len(self.AlarmPTdir[0])
+        # which is 5
+        i_RTD1_last = len(self.AlarmRTD1dir) - 1
+        # which is 2
+        j_RTD1_last = len(self.AlarmRTD1dir[i_RTD1_last]) - 1
+        # which is 4
+        i_RTD2_last = len(self.AlarmRTD2dir) - 1
+        j_RTD2_last = len(self.AlarmRTD2dir[i_RTD2_last]) - 1
+        i_RTD3_last = len(self.AlarmRTD3dir) - 1
+        j_RTD3_last = len(self.AlarmRTD3dir[i_RTD3_last]) - 1
+        i_RTD4_last = len(self.AlarmRTD4dir) - 1
+        j_RTD4_last = len(self.AlarmRTD4dir[i_RTD4_last]) - 1
+        i_RTDLEFT_last = len(self.AlarmRTDLEFTdir) - 1
+        j_RTDLEFT_last = len(self.AlarmRTDLEFTdir[i_RTDLEFT_last]) - 1
+        i_PT_last = len(self.AlarmPTdir) - 1
+        # which is 3
+        j_PT_last = len(self.AlarmPTdir[i_PT_last]) - 1
+        # which is 1
+        l_RTD1_max = j_RTD1_max-1
+        l_RTD2_max = j_RTD2_max - 1
+        l_RTD3_max = j_RTD3_max - 1
+        l_RTD4_max = j_RTD4_max - 1
+        l_RTDLEFT_max = j_RTDLEFT_max - 1
+        l_PT_max = j_PT_max-1
+        # RTD1 put alarm true widget to the begining of the diretory
+        for i in range(0, i_RTD1_max):
+            for j in range(0, j_RTD1_max):
+                if TempRefRTD1dir[i][j].Alarm:
+                    TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
+                    l_RTD1 = l_RTD1 + 1
+                    if l_RTD1 == l_RTD1_max:
+                        l_RTD1 = 0
+                        k_RTD1 = k_RTD1 + 1
+                if (i, j) == (i_RTD1_last, j_RTD1_last):
                     break
-            if (i, j) == (i_TT_last, j_TT_last):
+            if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
 
-        # TT put alarm false widget after that
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                if not TempRefTTdir[i][j].Alarm:
-                    TempTTdir[k_TT][l_TT] = TempRefTTdir[i][j]
-                    l_TT = l_TT + 1
-                    if l_TT == l_TT_max:
-                        l_TT = 0
-                        k_TT = k_TT + 1
-                if (i, j) == (i_TT_last, j_TT_last):
+        # RTD1 put alarm false widget after that
+        for i in range(0, i_RTD1_max):
+            for j in range(0, j_RTD1_max):
+                if not TempRefRTD1dir[i][j].Alarm:
+                    TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
+                    l_RTD1 = l_RTD1 + 1
+                    if l_RTD1 == l_RTD1_max:
+                        l_RTD1 = 0
+                        k_RTD1 = k_RTD1 + 1
+                if (i, j) == (i_RTD1_last, j_RTD1_last):
                     break
-            if (i, j) == (i_TT_last, j_TT_last):
+            if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
+
+        for i in range(0, i_RTD2_max):
+            for j in range(0, j_RTD2_max):
+                if TempRefRTD2dir[i][j].Alarm:
+                    TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
+                    l_RTD2 = l_RTD2 + 1
+                    if l_RTD2 == l_RTD2_max:
+                        l_RTD2 = 0
+                        k_RTD2 = k_RTD2 + 1
+                if (i, j) == (i_RTD2_last, j_RTD2_last):
+                    break
+            if (i, j) == (i_RTD2_last, j_RTD2_last):
+                break
+
+        # RTD2 put alarm false widget after that
+        for i in range(0, i_RTD2_max):
+            for j in range(0, j_RTD2_max):
+                if not TempRefRTD2dir[i][j].Alarm:
+                    TempRTD2dir[k_RTD2][l_RTD2] = TempRefRTD2dir[i][j]
+                    l_RTD2 = l_RTD2 + 1
+                    if l_RTD2 == l_RTD2_max:
+                        l_RTD2 = 0
+                        k_RTD2 = k_RTD2 + 1
+                if (i, j) == (i_RTD2_last, j_RTD2_last):
+                    break
+            if (i, j) == (i_RTD2_last, j_RTD2_last):
+                break
+
+        for i in range(0, i_RTD3_max):
+            for j in range(0, j_RTD3_max):
+                if TempRefRTD3dir[i][j].Alarm:
+                    TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
+                    l_RTD3 = l_RTD3 + 1
+                    if l_RTD3 == l_RTD3_max:
+                        l_RTD3 = 0
+                        k_RTD3 = k_RTD3 + 1
+                if (i, j) == (i_RTD3_last, j_RTD3_last):
+                    break
+            if (i, j) == (i_RTD3_last, j_RTD3_last):
+                break
+
+        # RTD3 put alarm false widget after that
+        for i in range(0, i_RTD3_max):
+            for j in range(0, j_RTD3_max):
+                if not TempRefRTD3dir[i][j].Alarm:
+                    TempRTD3dir[k_RTD3][l_RTD3] = TempRefRTD3dir[i][j]
+                    l_RTD3 = l_RTD3 + 1
+                    if l_RTD3 == l_RTD3_max:
+                        l_RTD3 = 0
+                        k_RTD3 = k_RTD3 + 1
+                if (i, j) == (i_RTD3_last, j_RTD3_last):
+                    break
+            if (i, j) == (i_RTD3_last, j_RTD3_last):
+                break
+
+        for i in range(0, i_RTD4_max):
+            for j in range(0, j_RTD4_max):
+                if TempRefRTD4dir[i][j].Alarm:
+                    TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
+                    l_RTD4 = l_RTD4 + 1
+                    if l_RTD4 == l_RTD4_max:
+                        l_RTD4 = 0
+                        k_RTD4 = k_RTD4 + 1
+                if (i, j) == (i_RTD4_last, j_RTD4_last):
+                    break
+            if (i, j) == (i_RTD4_last, j_RTD4_last):
+                break
+
+        # RTD4 put alarm false widget after that
+        for i in range(0, i_RTD4_max):
+            for j in range(0, j_RTD4_max):
+                if not TempRefRTD4dir[i][j].Alarm:
+                    TempRTD4dir[k_RTD4][l_RTD4] = TempRefRTD4dir[i][j]
+                    l_RTD4 = l_RTD4 + 1
+                    if l_RTD4 == l_RTD4_max:
+                        l_RTD4 = 0
+                        k_RTD4 = k_RTD4 + 1
+                if (i, j) == (i_RTD4_last, j_RTD4_last):
+                    break
+            if (i, j) == (i_RTD4_last, j_RTD4_last):
+                break
+
+        for i in range(0, i_RTDLEFT_max):
+            for j in range(0, j_RTDLEFT_max):
+                if TempRefRTDLEFTdir[i][j].Alarm:
+                    TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
+                    l_RTDLEFT = l_RTDLEFT + 1
+                    if l_RTDLEFT == l_RTDLEFT_max:
+                        l_RTDLEFT = 0
+                        k_RTDLEFT = k_RTDLEFT + 1
+                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                    break
+            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                break
+
+        # RTDLEFT put alarm false widget after that
+        for i in range(0, i_RTDLEFT_max):
+            for j in range(0, j_RTDLEFT_max):
+                if not TempRefRTDLEFTdir[i][j].Alarm:
+                    TempRTDLEFTdir[k_RTDLEFT][l_RTDLEFT] = TempRefRTDLEFTdir[i][j]
+                    l_RTDLEFT = l_RTDLEFT + 1
+                    if l_RTDLEFT == l_RTDLEFT_max:
+                        l_RTDLEFT = 0
+                        k_RTDLEFT = k_RTDLEFT + 1
+                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                    break
+            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                break
+
 
         # PT
         for i in range(0, i_PT_max):
@@ -1991,13 +3029,46 @@ class StatusWindow(QtWidgets.QMainWindow):
 
         # Reassign position
         # end the position generator when i= last element's row number, j= last element's column number
-        for i in range(0, i_TT_max):
-            for j in range(0, j_TT_max):
-                self.GLTT.addWidget(TempTTdir[i][j], i, j)
-                if (i, j) == (i_TT_last, j_TT_last):
+        for i in range(0, i_RTD1_max):
+            for j in range(0, j_RTD1_max):
+                self.GLRTD1.addWidget(TempRTD1dir[i][j], i, j)
+                if (i, j) == (i_RTD1_last, j_RTD1_last):
                     break
-            if (i, j) == (i_TT_last, j_TT_last):
+            if (i, j) == (i_RTD1_last, j_RTD1_last):
                 break
+
+        for i in range(0, i_RTD2_max):
+            for j in range(0, j_RTD2_max):
+                self.GLRTD2.addWidget(TempRTD2dir[i][j], i, j)
+                if (i, j) == (i_RTD2_last, j_RTD2_last):
+                    break
+            if (i, j) == (i_RTD2_last, j_RTD2_last):
+                break
+
+        for i in range(0, i_RTD3_max):
+            for j in range(0, j_RTD3_max):
+                self.GLRTD3.addWidget(TempRTD3dir[i][j], i, j)
+                if (i, j) == (i_RTD3_last, j_RTD3_last):
+                    break
+            if (i, j) == (i_RTD3_last, j_RTD3_last):
+                break
+
+        for i in range(0, i_RTD4_max):
+            for j in range(0, j_RTD4_max):
+                self.GLRTD4.addWidget(TempRTD4dir[i][j], i, j)
+                if (i, j) == (i_RTD4_last, j_RTD4_last):
+                    break
+            if (i, j) == (i_RTD4_last, j_RTD4_last):
+                break
+
+        for i in range(0, i_RTDLEFT_max):
+            for j in range(0, j_RTDLEFT_max):
+                self.GLRTDLEFT.addWidget(TempRTDLEFTdir[i][j], i, j)
+                if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                    break
+            if (i, j) == (i_RTDLEFT_last, j_RTDLEFT_last):
+                break
+
         # end the position generator when i= last element's row number, j= last element's column number
         for i in range(0, i_PT_max):
             for j in range(0, j_PT_max):
@@ -2077,7 +3148,7 @@ class MultiStatusIndicator(QtWidgets.QWidget):
 
 # Define an alarm button
 class AlarmButton(QtWidgets.QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, Window, parent=None):
         super().__init__(parent)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -2090,7 +3161,7 @@ class AlarmButton(QtWidgets.QWidget):
         self.setSizePolicy(sizePolicy)
 
         # link the button to a new window
-        self.StatusWindow = StatusWindow(self)
+        self.SubWindow = Window
 
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
@@ -2103,29 +3174,31 @@ class AlarmButton(QtWidgets.QWidget):
         self.Button.setProperty("Alarm", False)
         self.Button.Alarm = False
         self.Button.clicked.connect(self.ButtonClicked)
+        self.Collected = False
 
     @QtCore.Slot()
     def ButtonClicked(self):
-        self.StatusWindow.show()
-        self.Signals.sSignal.emit(self.Button.text())
+        self.SubWindow.show()
+        # self.Signals.sSignal.emit(self.Button.text())
 
     @QtCore.Slot()
     def ButtonAlarmSignal(self):
         self.Button.setProperty("Alarm", self.Button.Alarm)
+        print(type(self.Button.Alarm))
+        print(self.Button.Alarm)
         self.Button.setStyle(self.Button.style())
 
     @QtCore.Slot()
-    def CollectAlarm(self, *args):
-        self.Collected = False
-        for i in range(len(args)):
+    def CollectAlarm(self, list):
+        for i in range(len(list)):
             # calculate collected alarm status
-            self.Collected = self.Collected or args[i].Alarm
+            self.Collected = self.Collected or list[i].Alarm
         self.Button.Alarm = self.Collected
 
 
 # Define a function tab that shows the status of the widgets
 class FunctionButton(QtWidgets.QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, Window, parent=None):
         super().__init__(parent)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -2138,7 +3211,7 @@ class FunctionButton(QtWidgets.QWidget):
         self.setSizePolicy(sizePolicy)
 
         # link the button to a new window
-        self.StatusWindow = StatusWindow(self)
+        self.SubWindow = Window
 
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
@@ -2148,8 +3221,8 @@ class FunctionButton(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def ButtonClicked(self):
-        self.StatusWindow.show()
-        self.Signals.sSignal.emit(self.Button.text())
+        self.SubWindow.show()
+        # self.Signals.sSignal.emit(self.Button.text())
 
 
 # Defines a reusable layout containing widgets
@@ -2559,7 +3632,8 @@ class UpdateDataBase(QtCore.QObject):
 
                 if self.MW.T.NewData_Database:
                     print("Wrting TPLC data to database...")
-                    self.db.insert_data_into_datastorage("TT2111", self.dt, self.MW.T.RTD[0])
+                    self.db.insert_data_into_datastorage("TT9998", self.dt, self.MW.T.RTD[6])
+                    self.db.insert_data_into_datastorage("TT9999", self.dt, self.MW.T.RTD[7])
                     self.MW.T.NewData_Database = False
 
                 if self.MW.P.NewData_Database:
@@ -2567,10 +3641,10 @@ class UpdateDataBase(QtCore.QObject):
                     self.db.insert_data_into_datastorage("PT4325", self.dt, self.MW.P.PT[4])
                     self.MW.P.NewData_Database = False
             else:
-                print("Database Updating stops.")
+                print("Database Updating stopps.")
                 pass
 
-            time.sleep(4)
+            time.sleep(60)
 
     @QtCore.Slot()
     def stop(self):
@@ -2586,25 +3660,37 @@ class UpdateDisplay(QtCore.QObject):
         self.MW = MW
         self.Running = False
 
+        self.RTD1_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD1dir)
+        self.RTD2_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD2dir)
+        self.RTD3_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD3dir)
+        self.RTD4_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTD4dir)
+        self.RTDLEFT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmRTDLEFTdir)
+        self.PT_array = TwoD_into_OneD(self.MW.AlarmButton.SubWindow.AlarmPTdir)
+        self.array = self.RTD1_array + self.RTD2_array + self.RTD3_array + self.RTD4_array + self.RTDLEFT_array + self.PT_array
+
+
     @QtCore.Slot()
     def run(self):
         self.Running = True
         while self.Running:
 
             print("Display updating", datetime.datetime.now())
+
             # print(self.MW.T.RTD)
             # print(3, self.MW.T.RTD[3])
             # for i in range(0,6):
             #     print(i, self.MW.T.RTD[i])
 
             if self.MW.T.NewData_Display:
-                self.MW.RTDSET1.StatusWindow.TT2111.SetValue(self.MW.T.RTD[0])
-                self.MW.RTDSET1.StatusWindow.TT2112.SetValue(self.MW.T.RTD[1])
-                self.MW.RTDSET1.StatusWindow.TT2113.SetValue(self.MW.T.RTD[2])
-                self.MW.RTDSET1.StatusWindow.TT2114.SetValue(self.MW.T.RTD[3])
-                self.MW.RTDSET1.StatusWindow.TT2115.SetValue(self.MW.T.RTD[4])
-                self.MW.RTDSET1.StatusWindow.TT2116.SetValue(self.MW.T.RTD[5])
-                self.MW.RTDSET1.StatusWindow.TT2117.SetValue(self.MW.T.RTD[6])
+                self.MW.TT9998.SetValue(self.MW.T.RTD[6])
+                self.MW.TT9999.SetValue(self.MW.T.RTD[7])
+                self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.T.RTD[0])
+                self.MW.RTDSET1Button.SubWindow.TT2112.SetValue(self.MW.T.RTD[1])
+                self.MW.RTDSET1Button.SubWindow.TT2113.SetValue(self.MW.T.RTD[2])
+                self.MW.RTDSET1Button.SubWindow.TT2114.SetValue(self.MW.T.RTD[3])
+                self.MW.RTDSET1Button.SubWindow.TT2115.SetValue(self.MW.T.RTD[4])
+                self.MW.RTDSET1Button.SubWindow.TT2116.SetValue(self.MW.T.RTD[5])
+                self.MW.RTDSET1Button.SubWindow.TT2117.SetValue(self.MW.T.RTD[6])
 
                 # self.MW.TT2118.SetValue(self.MW.T.RTD[0])
                 # self.MW.TT2119.SetValue(self.MW.T.RTD[0])
@@ -2747,22 +3833,88 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.P.NewData_Display = False
 
             # Check if alarm values are met and set them
-            self.MW.AlarmButton.StatusWindow.TT4330.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT4306.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT4315.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT4319.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT4322.CheckAlarm()
-            self.MW.AlarmButton.StatusWindow.PT4325.CheckAlarm()
-            # # rewrite collectalarm in updatedisplay
-            self.MW.AlarmButton.CollectAlarm(self.MW.AlarmButton.StatusWindow.TT4330,
-                                             self.MW.AlarmButton.StatusWindow.PT4306,
-                                             self.MW.AlarmButton.StatusWindow.PT4315,
-                                             self.MW.AlarmButton.StatusWindow.PT4319,
-                                             self.MW.AlarmButton.StatusWindow.PT4322,
-                                             self.MW.AlarmButton.StatusWindow.PT4325)
+            # self.MW.AlarmButton.SubWindow.TT2111.CheckAlarm()
+            # self.MW.AlarmButton.SubWindow.PT1101.CheckAlarm()
+            # self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0].CheckAlarm()
+            # print(self.MW.AlarmButton.SubWindow.AlarmPTdir[0][0]==self.MW.AlarmButton.SubWindow.PT1101)
+            for i in range(0,self.MW.AlarmButton.SubWindow.i_RTD1_max):
+                for j in range(0,self.MW.AlarmButton.SubWindow.j_RTD1_max):
+                    self.MW.AlarmButton.SubWindow.AlarmRTD1dir[i][j].CheckAlarm()
+                    if (i,j) ==(self.MW.AlarmButton.SubWindow.i_RTD1_last,self.MW.AlarmButton.SubWindow.j_RTD1_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD1_last, self.MW.AlarmButton.SubWindow.j_RTD1_last):
+                    break
+
+            for i in range(0,self.MW.AlarmButton.SubWindow.i_RTD2_max):
+                for j in range(0,self.MW.AlarmButton.SubWindow.j_RTD2_max):
+                    self.MW.AlarmButton.SubWindow.AlarmRTD2dir[i][j].CheckAlarm()
+                    if (i,j) ==(self.MW.AlarmButton.SubWindow.i_RTD2_last,self.MW.AlarmButton.SubWindow.j_RTD2_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD2_last, self.MW.AlarmButton.SubWindow.j_RTD2_last):
+                    break
+
+            for i in range(0,self.MW.AlarmButton.SubWindow.i_RTD3_max):
+                for j in range(0,self.MW.AlarmButton.SubWindow.j_RTD3_max):
+                    self.MW.AlarmButton.SubWindow.AlarmRTD3dir[i][j].CheckAlarm()
+                    if (i,j) ==(self.MW.AlarmButton.SubWindow.i_RTD3_last,self.MW.AlarmButton.SubWindow.j_RTD3_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD3_last, self.MW.AlarmButton.SubWindow.j_RTD3_last):
+                    break
+
+            for i in range(0,self.MW.AlarmButton.SubWindow.i_RTD4_max):
+                for j in range(0,self.MW.AlarmButton.SubWindow.j_RTD4_max):
+                    self.MW.AlarmButton.SubWindow.AlarmRTD4dir[i][j].CheckAlarm()
+                    if (i,j) ==(self.MW.AlarmButton.SubWindow.i_RTD4_last,self.MW.AlarmButton.SubWindow.j_RTD4_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_RTD4_last, self.MW.AlarmButton.SubWindow.j_RTD4_last):
+                    break
+
+            for i in range(0,self.MW.AlarmButton.SubWindow.i_PT_max):
+                for j in range(0,self.MW.AlarmButton.SubWindow.j_PT_max):
+                    self.MW.AlarmButton.SubWindow.AlarmPTdir[i][j].CheckAlarm()
+                    if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
+                        break
+                if (i, j) == (self.MW.AlarmButton.SubWindow.i_PT_last, self.MW.AlarmButton.SubWindow.j_PT_last):
+                    break
+
+            # # # rewrite collectalarm in updatedisplay
+
+            # self.MW.AlarmButton.CollectAlarm(self.array)
+
+            self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111,self.MW.AlarmButton.SubWindow.TT2401])
+
+            # self.MW.AlarmButton.CollectAlarm([self.MW.AlarmButton.SubWindow.TT2111,
+            #                                  self.MW.AlarmButton.SubWindow.TT2401,
+            #                                  self.MW.AlarmButton.SubWindow.TT2406,
+            #                                  self.MW.AlarmButton.SubWindow.TT2411,
+            #                                  self.MW.AlarmButton.SubWindow.TT2416,
+            #                                  self.MW.AlarmButton.SubWindow.TT2421,
+            #                                  self.MW.AlarmButton.SubWindow.TT2426,
+            #                                  self.MW.AlarmButton.SubWindow.TT2431,
+            #                                  self.MW.AlarmButton.SubWindow.TT2435,
+            #                                  self.MW.AlarmButton.SubWindow.TT2440,
+            #                                  self.MW.AlarmButton.SubWindow.PT1101,
+            #                                  self.MW.AlarmButton.SubWindow.PT2316,
+            #                                  self.MW.AlarmButton.SubWindow.PT2321,
+            #                                  self.MW.AlarmButton.SubWindow.PT2330,
+            #                                  self.MW.AlarmButton.SubWindow.PT2335,
+            #                                  self.MW.AlarmButton.SubWindow.PT3308,
+            #                                  self.MW.AlarmButton.SubWindow.PT3309,
+            #                                  self.MW.AlarmButton.SubWindow.PT3310,
+            #                                  self.MW.AlarmButton.SubWindow.PT3311,
+            #                                  self.MW.AlarmButton.SubWindow.PT3314,
+            #                                  self.MW.AlarmButton.SubWindow.PT3320,
+            #                                  self.MW.AlarmButton.SubWindow.PT3333,
+            #                                  self.MW.AlarmButton.SubWindow.PT4306,
+            #                                  self.MW.AlarmButton.SubWindow.PT4315,
+            #                                  self.MW.AlarmButton.SubWindow.PT4319,
+            #                                  self.MW.AlarmButton.SubWindow.PT4322,
+            #                                  self.MW.AlarmButton.SubWindow.PT4325])
+
             self.MW.AlarmButton.ButtonAlarmSignal()
-            # # generally checkbutton.clicked -> move to updatedisplay
-            self.MW.AlarmButton.StatusWindow.ReassignOrder()
+            # # # generally checkbutton.clicked -> move to updatedisplay
+            if self.MW.AlarmButton.Button.Alarm:
+                self.MW.AlarmButton.SubWindow.ReassignOrder()
 
             # if (self.MW.PT1.Value > 220 or self.MW.PT1.Value < 0) and not self.MW.PT1.Field.property("Alarm"):
             #     self.MW.PT1.SetAlarm()

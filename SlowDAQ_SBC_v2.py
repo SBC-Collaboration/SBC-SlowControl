@@ -861,9 +861,11 @@ class MainWindow(QtWidgets.QMainWindow):
         # Update display values on another thread
         self.DUpdateThread = QtCore.QThread()
         self.UpDisplay = UpdateDisplay(self)
+
         self.UpDisplay.moveToThread(self.DUpdateThread)
         self.DUpdateThread.started.connect(self.UpDisplay.run)
         self.DUpdateThread.start()
+
 
         # Make sure PLCs values are initialized before trying to access them with update function
         time.sleep(2)
@@ -873,6 +875,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpClient.moveToThread(self.ClientUpdateThread)
         self.ClientUpdateThread.started.connect(self.UpClient.run)
         self.ClientUpdateThread.start()
+
 
 
 
@@ -5305,17 +5308,20 @@ class UpdatePLC(QtCore.QObject):
 
 
 class UpdateClient(QtCore.QObject):
+
     client_data_transport = QtCore.Signal(dict)
     # def __init__(self, MW, parent=None):
     def __init__(self, MW, UpDisplay, parent=None):
         super().__init__(parent)
         self.MW = MW
         self.UD = UpDisplay
+
         self.context = zmq.Context()
         self.socket = self.context.socket(zmq.REQ)
         self.socket.connect("tcp://localhost:5555")
         self.Running=False
         self.period=1
+
         client_data_transport.connect(self.UD.fetchdata)
         print("client is connecting to the ZMQ server")
 
@@ -5613,7 +5619,9 @@ class UpdateClient(QtCore.QObject):
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic = message
+
         client_data_tranport.emit(self.receive_dic)
+
     def commands(self):
         print("Commands are here",datetime.datetime.now())
         print("commands",self.MW.commands)
@@ -5629,6 +5637,7 @@ class UpdateClient(QtCore.QObject):
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs
 class UpdateDisplay(QtCore.QObject):
+
     alarm_update = QtCore.Signal(dict)
     def __init__(self, MW, parent=None):
         super().__init__(parent)
@@ -5910,6 +5919,7 @@ class UpdateDisplay(QtCore.QObject):
         self.data = dict        
         
 
+
     @QtCore.Slot()
     def run(self):
         try:
@@ -5923,6 +5933,7 @@ class UpdateDisplay(QtCore.QObject):
                 #     print(i, self.MW.PLC.RTD[i])
 
                 # if self.MW.PLC.NewData_Display:
+
 
                 # print(dic)
                 # print(type(dic))
@@ -5991,6 +6002,7 @@ class UpdateDisplay(QtCore.QObject):
                 self.MW.AlarmButton.SubWindow.TT6416.Indicator.SetValue(self.data["data"]["TT"]["BO"]["TT6416"])
 
 
+
                 # FP TTs
 
                 FPRTDAlarmMatrix=[self.MW.AlarmButton.SubWindow.TT2420, self.MW.AlarmButton.SubWindow.TT2422, self.MW.AlarmButton.SubWindow.TT2424, self.MW.AlarmButton.SubWindow.TT2425, self.MW.AlarmButton.SubWindow.TT2442,
@@ -6010,6 +6022,7 @@ class UpdateDisplay(QtCore.QObject):
                     # print(element.Label.text())
 
                     element.UpdateAlarm(
+
                         self.data["Alarm"]["TT"]["FP"][element.Label.text()])
                 #     element.Indicator.SetValue(
                 #         self.data["data"]["TT"]["FP"][element.Label.text()])
@@ -6116,126 +6129,173 @@ class UpdateDisplay(QtCore.QObject):
 
 
                 if self.data["data"]["Valve"]["MAN"]["PV1344"] and not self.data["data"]["Valve"]["ERR"]["PV1344"]:
+
                     self.MW.PV1344.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV1344.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["PV4307"] and not self.data["data"]["Valve"]["ERR"]["PV4307"]:
+
                     self.MW.PV4307.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV4307.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["PV4308"] and not self.data["data"]["Valve"]["ERR"]["PV4308"]:
+
                     self.MW.PV4308.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV4308.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["PV4317"] and not self.data["data"]["Valve"]["ERR"]["PV4317"]:
+
                     self.MW.PV4317.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV4317.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["PV4318"] and not self.data["data"]["Valve"]["ERR"]["PV4318"]:
+
                     self.MW.PV4318.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV4318.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["PV4321"] and not self.data["data"]["Valve"]["ERR"]["PV4321"]:
+
                     self.MW.PV4321.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV4321.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["PV4324"] and not self.data["data"]["Valve"]["ERR"]["PV4324"]:
+
                     self.MW.PV4324.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV4324.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["PV5305"] and not self.data["data"]["Valve"]["ERR"]["PV5305"]:
+
                     self.MW.PV5305.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV5305.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["PV5306"] and not self.data["data"]["Valve"]["ERR"]["PV5306"]:
+
                     self.MW.PV5306.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV5306.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["PV5307"] and not self.data["data"]["Valve"]["ERR"]["PV5307"]:
+
                     self.MW.PV5307.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV5307.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["PV5309"] and not self.data["data"]["Valve"]["ERR"]["PV5309"]:
+
                     self.MW.PV5309.ActiveState.UpdateColor(True)
                 else:
                     self.MW.PV5309.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["SV3307"] and not self.data["data"]["Valve"]["ERR"]["SV3307"]:
+
                     self.MW.SV3307.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV3307.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["SV3310"] and not self.data["data"]["Valve"]["ERR"]["SV3310"]:
+
                     self.MW.SV3310.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV3310.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["SV3322"] and not self.data["data"]["Valve"]["ERR"]["SV3322"]:
+
                     self.MW.SV3322.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV3322.ActiveState.UpdateColor(False)
 
                 if self.data["data"]["Valve"]["MAN"]["SV3325"] and not self.data["data"]["Valve"]["ERR"]["SV3325"]:
+
                     self.MW.SV3325.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV3325.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["SV3329"] and not self.data["data"]["Valve"]["ERR"]["SV3329"]:
+
                     self.MW.SV3329.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV3329.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["SV4327"] and not self.data["data"]["Valve"]["ERR"]["SV4327"]:
+
                     self.MW.SV4327.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV4327.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["SV4328"] and not self.data["data"]["Valve"]["ERR"]["SV4328"]:
+
                     self.MW.SV4328.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV4328.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["SV4329"] and not self.data["data"]["Valve"]["ERR"]["SV4329"]:
+
                     self.MW.SV4329.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV4329.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["SV4331"] and not self.data["data"]["Valve"]["ERR"]["SV4331"]:
+
                     self.MW.SV4331.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV4331.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["SV4332"] and not self.data["data"]["Valve"]["ERR"]["SV4332"]:
+
                     self.MW.SV4332.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV4332.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["SV4337"] and not self.data["data"]["Valve"]["ERR"]["SV4337"]:
+
                     self.MW.SV4337.ActiveState.UpdateColor(True)
                 else:
                     self.MW.SV4337.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["HFSV3312"] and not self.data["data"]["Valve"]["ERR"]["HFSV3312"]:
+
                     self.MW.HFSV3312.ActiveState.UpdateColor(True)
                 else:
                     self.MW.HFSV3312.ActiveState.UpdateColor(False)
 
+
                 if self.data["data"]["Valve"]["MAN"]["HFSV3323"] and not self.data["data"]["Valve"]["ERR"]["HFSV3323"]:
+
                     self.MW.HFSV3323.ActiveState.UpdateColor(True)
                 else:
                     self.MW.HFSV3323.ActiveState.UpdateColor(False)
 
                 if self.data["data"]["Valve"]["MAN"]["HFSV3331"] and not self.data["data"]["Valve"]["ERR"]["HFSV3331"]:
+
                     self.MW.HFSV3331.ActiveState.UpdateColor(True)
                 else:
                     self.MW.HFSV3331.ActiveState.UpdateColor(False)
@@ -6245,132 +6305,178 @@ class UpdateDisplay(QtCore.QObject):
                 # refreshing the valve status from PLC every 30s
                 # if self.count >= self.button_refreshing_count:
                 if self.count > 0:
+
                     if self.data["data"]["Valve"]["OUT"]["PV1344"]:
+
                         self.MW.PV1344.Set.ButtonLClicked()
                     else:
                         self.MW.PV1344.Set.ButtonRClicked()
 
                     if self.data["data"]["Valve"]["OUT"]["PV4307"]:
+
                         self.MW.PV4307.Set.ButtonLClicked()
                     else:
                         self.MW.PV4307.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["PV4308"]:
+
                         self.MW.PV4308.Set.ButtonLClicked()
                     else:
                         self.MW.PV4308.Set.ButtonRClicked()
                     self.count = 0
 
+
                     if self.data["data"]["Valve"]["OUT"]["PV4317"]:
+
                         self.MW.PV4317.Set.ButtonLClicked()
                     else:
                         self.MW.PV4317.Set.ButtonRClicked()
                     self.count = 0
 
+
                     if self.data["data"]["Valve"]["OUT"]["PV4318"]:
+
                         self.MW.PV4318.Set.ButtonLClicked()
                     else:
                         self.MW.PV4318.Set.ButtonRClicked()
                     self.count = 0
 
                     if self.data["data"]["Valve"]["OUT"]["PV4321"]:
+
                         self.MW.PV4321.Set.ButtonLClicked()
                     else:
                         self.MW.PV4321.Set.ButtonRClicked()
                     self.count = 0
 
+
                     if self.data["data"]["Valve"]["OUT"]["PV4324"]:
+
                         self.MW.PV4324.Set.ButtonLClicked()
                     else:
                         self.MW.PV4324.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["PV5305"]:
+
                         self.MW.PV5305.Set.ButtonLClicked()
                     else:
                         self.MW.PV5305.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["PV5306"]:
+
                         self.MW.PV5306.Set.ButtonLClicked()
                     else:
                         self.MW.PV5306.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["PV5307"]:
+
                         self.MW.PV5307.Set.ButtonLClicked()
                     else:
                         self.MW.PV5307.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["PV5309"]:
+
                         self.MW.PV5309.Set.ButtonLClicked()
                     else:
                         self.MW.PV5309.Set.ButtonRClicked()
 
                     if self.data["data"]["Valve"]["OUT"]["SV3307"]:
+
                         self.MW.SV3307.Set.ButtonLClicked()
                     else:
                         self.MW.SV3307.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["SV3310"]:
+
                         self.MW.SV3310.Set.ButtonLClicked()
                     else:
                         self.MW.SV3310.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["SV3322"]:
+
                         self.MW.SV3322.Set.ButtonLClicked()
                     else:
                         self.MW.SV3322.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["SV3325"]:
+
                         self.MW.SV3325.Set.ButtonLClicked()
                     else:
                         self.MW.SV3325.Set.ButtonRClicked()
 
 
+
                     if self.data["data"]["Valve"]["OUT"]["SV3329"]:
+
                         self.MW.SV3329.Set.ButtonLClicked()
                     else:
                         self.MW.SV3329.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["SV4327"]:
+
                         self.MW.SV4327.Set.ButtonLClicked()
                     else:
                         self.MW.SV3307.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["SV4328"]:
+
                         self.MW.SV4328.Set.ButtonLClicked()
                     else:
                         self.MW.SV4328.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["SV4329"]:
+
                         self.MW.SV4329.Set.ButtonLClicked()
                     else:
                         self.MW.SV4329.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["SV4331"]:
+
                         self.MW.SV4331.Set.ButtonLClicked()
                     else:
                         self.MW.SV4331.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["SV4332"]:
+
                         self.MW.SV4332.Set.ButtonLClicked()
                     else:
                         self.MW.SV4332.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["SV4337"]:
+
                         self.MW.SV4337.Set.ButtonLClicked()
                     else:
                         self.MW.SV4337.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["HFSV3312"]:
+
                         self.MW.HFSV3312.Set.ButtonLClicked()
                     else:
                         self.MW.HFSV3312.Set.ButtonRClicked()
 
+
                     if self.data["data"]["Valve"]["OUT"]["HFSV3323"]:
+
                         self.MW.HFSV3323.Set.ButtonLClicked()
                     else:
                         self.MW.HFSV3323.Set.ButtonRClicked()
 
                     if self.data["data"]["Valve"]["OUT"]["HFSV3331"]:
+
                         self.MW.HFSV3331.Set.ButtonLClicked()
                     else:
                         self.MW.HFSV3331.Set.ButtonRClicked()
@@ -6378,7 +6484,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.count = 0
                 self.count += 1
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["SERVO3321"]:
+
                     self.MW.SERVO3321.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.SERVO3321.State.ButtonLClicked()
 
@@ -6386,7 +6494,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.SERVO3321.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.SERVO3321.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR6225"]:
+
                     self.MW.HTR6225.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR6225.State.ButtonLClicked()
 
@@ -6394,7 +6504,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR6225.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR6225.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR2123"]:
+
                     self.MW.HTR2123.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR2123.State.ButtonLClicked()
 
@@ -6402,7 +6514,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR2123.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR2123.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR2124"]:
+
                     self.MW.HTR2124.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR2124.State.ButtonLClicked()
 
@@ -6410,7 +6524,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR2124.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR2124.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR2125"]:
+
                     self.MW.HTR2125.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR2125.State.ButtonLClicked()
 
@@ -6418,7 +6534,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR2125.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR2125.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR1202"]:
+
                     self.MW.HTR1202.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR1202.State.ButtonLClicked()
 
@@ -6426,7 +6544,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR1202.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR1202.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR2203"]:
+
                     self.MW.HTR2203.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR2203.State.ButtonLClicked()
 
@@ -6434,7 +6554,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR2203.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR2203.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR6202"]:
+
                     self.MW.HTR6202.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR6202.State.ButtonLClicked()
 
@@ -6442,7 +6564,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR6202.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR6202.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR6206"]:
+
                     self.MW.HTR6206.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR6206.State.ButtonLClicked()
 
@@ -6450,7 +6574,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR6206.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR6206.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR6210"]:
+
                     self.MW.HTR6210.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR6210.State.ButtonLClicked()
 
@@ -6458,7 +6584,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR6210.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR6210.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR6223"]:
+
                     self.MW.HTR6223.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR6223.State.ButtonLClicked()
 
@@ -6466,7 +6594,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR6223.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR6223.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR6224"]:
+
                     self.MW.HTR6224.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR6224.State.ButtonLClicked()
 
@@ -6475,6 +6605,7 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR6224.State.ButtonRClicked()
 
                 if self.data["data"]["LOOPPID"]["EN"]["HTR6219"]:
+
                     self.MW.HTR6219.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR6219.State.ButtonLClicked()
 
@@ -6482,7 +6613,9 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR6219.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR6219.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR6221"]:
+
                     self.MW.HTR6221.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR6221.State.ButtonLClicked()
 
@@ -6490,13 +6623,16 @@ class UpdateDisplay(QtCore.QObject):
                     self.MW.HTR6221.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR6221.State.ButtonRClicked()
 
+
                 if self.data["data"]["LOOPPID"]["EN"]["HTR6214"]:
+
                     self.MW.HTR6214.HeaterSubWindow.Mode.ButtonLClicked()
                     self.MW.HTR6214.State.ButtonLClicked()
 
                 else:
                     self.MW.HTR6214.HeaterSubWindow.Mode.ButtonRClicked()
                     self.MW.HTR6214.State.ButtonRClicked()
+
 
 
 
@@ -6604,10 +6740,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["SERVO3321"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["SERVO3321"],
                             self.data["data"]["LOOPPID"]["SATLO"]["SERVO3321"]]:
+
                     self.MW.SERVO3321.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.SERVO3321.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.SERVO3321.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["SERVO3321"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["SERVO3321"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["SERVO3321"],
@@ -6640,10 +6778,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR6225"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR6225"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR6225"]]:
+
                     self.MW.HTR6225.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR6225.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR6225.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR6225"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR6225"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR6225"],
@@ -6676,10 +6816,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR2123"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR2123"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR2123"]]:
+
                     self.MW.HTR2123.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR2123.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR2123.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR2123"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR2123"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR2123"],
@@ -6712,10 +6854,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR2124"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR2124"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR2124"]]:
+
                     self.MW.HTR2124.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR2124.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR2124.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR2124"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR2124"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR2124"],
@@ -6748,10 +6892,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR2125"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR2125"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR2125"]]:
+
                     self.MW.HTR2125.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR2125.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR2125.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR2125"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR2125"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR2125"],
@@ -6784,10 +6930,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR1202"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR1202"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR1202"]]:
+
                     self.MW.HTR1202.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR1202.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR1202.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR1202"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR1202"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR1202"],
@@ -6820,10 +6968,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR2203"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR2203"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR2203"]]:
+
                     self.MW.HTR2203.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR2203.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR2203.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR2203"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR2203"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR2203"],
@@ -6856,10 +7006,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR6202"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR6202"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR6202"]]:
+
                     self.MW.HTR6202.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR6202.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR6202.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR6202"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR6202"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR6202"],
@@ -6892,10 +7044,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR6206"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR6206"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR6206"]]:
+
                     self.MW.HTR6206.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR6206.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR6206.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR6206"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR6206"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR6206"],
@@ -6928,10 +7082,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR6210"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR6210"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR6210"]]:
+
                     self.MW.HTR6210.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR6210.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR6210.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR6210"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR6210"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR6210"],
@@ -6964,10 +7120,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR6223"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR6223"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR6223"]]:
+
                     self.MW.HTR6223.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR6223.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR6223.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR6223"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR6223"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR6223"],
@@ -7000,10 +7158,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR6224"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR6224"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR6224"]]:
+
                     self.MW.HTR6224.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR6224.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR6224.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR6224"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR6224"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR6224"],
@@ -7036,10 +7196,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR6219"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR6219"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR6219"]]:
+
                     self.MW.HTR6219.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR6219.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR6219.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR6219"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR6219"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR6219"],
@@ -7072,10 +7234,12 @@ class UpdateDisplay(QtCore.QObject):
                     self.data["data"]["LOOPPID"]["MAN"]["HTR6221"])
                 if True in [self.data["data"]["LOOPPID"]["SATHI"]["HTR6221"],
                             self.data["data"]["LOOPPID"]["SATLO"]["HTR6221"]]:
+
                     self.MW.HTR6221.HeaterSubWindow.SAT.UpdateColor(True)
                 else:
                     self.MW.HTR6221.HeaterSubWindow.SAT.UpdateColor(False)
                 self.MW.HTR6221.HeaterSubWindow.ModeREAD.Field.setText(
+
                     self.FindDistinctTrue(self.data["data"]["LOOPPID"]["MODE0"]["HTR6221"],
                                           self.data["data"]["LOOPPID"]["MODE1"]["HTR6221"],
                                           self.data["data"]["LOOPPID"]["MODE2"]["HTR6221"],
@@ -7131,7 +7295,9 @@ class UpdateDisplay(QtCore.QObject):
 
 
 
+
                 # self.MW.subwindow.alarmbutton(self.data)
+
                 # reorfer
                 #     self.MW.RTDSET1Button.SubWindow.TT2111.SetValue(self.MW.PLC.RTD[0])
                 #     self.MW.RTDSET1Button.SubWindow.TT2112.SetValue(self.MW.PLC.RTD[1])
@@ -7343,7 +7509,9 @@ class UpdateDisplay(QtCore.QObject):
                 #     (type, value, traceback) = sys.exc_info()
                 #     exception_hook(type, value, traceback)
 
+
                 # if self.data["MainAlarm"]:
+
                 #     self.MW.AlarmButton.ButtonAlarmSetSignal()
                 # else:
                 #     self.MW.AlarmButton.ButtonAlarmResetSignal()
