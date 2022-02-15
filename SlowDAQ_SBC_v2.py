@@ -5914,9 +5914,7 @@ class UpdateDisplay(QtCore.QObject):
                                       "PT": self.PT_Alarm},
                             "MainAlarm": self.MainAlarm}
 
-    @QtCore.Slot()
-    def fetchdata(self,dict):
-        self.data = dict        
+
         
 
 
@@ -7600,6 +7598,11 @@ class UpdateDisplay(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+
+    @QtCore.Slot()
+    def fetchdata(self, dict):
+        self.data = dict
+        print(self.data)
 
     def FindDistinctTrue(self,v0, v1, v2, v3):
         if v0 == True:
