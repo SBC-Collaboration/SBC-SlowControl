@@ -5639,10 +5639,10 @@ class UpdateClient(QtCore.QObject):
 class UpdateDisplay(QtCore.QObject):
 
     alarm_update = QtCore.Signal(dict)
-    def __init__(self, MW, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.MW = MW
+
         self.Running = False
 
         self.alarm_update.connect(self.MW.update_alarmwindow)
@@ -5938,6 +5938,7 @@ class UpdateDisplay(QtCore.QObject):
                 # print(dic)
                 # print(type(dic))
 
+
                 self.MW.AlarmButton.SubWindow.TT2101.UpdateAlarm(self.data["Alarm"]["TT"]["BO"]["TT2101"])
                 self.MW.AlarmButton.SubWindow.TT2101.Indicator.SetValue(
                     self.data["data"]["TT"]["BO"]["TT2101"])
@@ -6028,7 +6029,7 @@ class UpdateDisplay(QtCore.QObject):
                 #         self.data["data"]["TT"]["FP"][element.Label.text()])
 
 
-                self.alarm_update.emit(dic)
+                self.alarm_update.emit(self.data)
 
 
 
