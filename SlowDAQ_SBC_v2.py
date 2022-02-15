@@ -5639,10 +5639,10 @@ class UpdateClient(QtCore.QObject):
 class UpdateDisplay(QtCore.QObject):
 
     alarm_update = QtCore.Signal(dict)
-    def __init__(self, parent=None):
+    def __init__(self, MW, parent=None):
         super().__init__(parent)
 
-
+        self.MW = MW
         self.Running = False
 
         self.alarm_update.connect(self.MW.update_alarmwindow)
