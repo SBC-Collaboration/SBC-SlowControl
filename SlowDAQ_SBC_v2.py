@@ -2319,7 +2319,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             self.ActivateControls(False)
 
-    @QtCore.Slot()
+    @QtCore.Slot(object)
     def update_alarmwindow(self,dic):
         # if len(dic)>0:
         #     print(dic)
@@ -5623,13 +5623,9 @@ class UpdateClient(QtCore.QObject):
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic = message
-        try:
+        self.client_data_transport.emit(self.receive_dic)
+        print('Client update result for HFSV3331:',self.receive_dic["data"]["Valve"]["OUT"]["HFSV3331"])
 
-            self.client_data_transport.emit(self.receive_dic)
-            print('Client update result for HFSV3331:',self.receive_dic["data"]["Valve"]["OUT"]["HFSV3331"])
-        except:
-            (type, value, traceback) = sys.exc_info()
-            exception_hook(type, value, traceback)
 
     def commands(self):
         print("Commands are here",datetime.datetime.now())
@@ -7608,7 +7604,7 @@ class UpdateDisplay(QtCore.QObject):
     def stop(self):
         self.Running = False
 
-    @QtCore.Slot()
+    @QtCore.Slot(object)
     def fetchdata(self, dict):
         self.data = dict
         print(self.data)
