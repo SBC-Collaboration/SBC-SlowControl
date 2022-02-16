@@ -1126,8 +1126,9 @@ class DoubleButton(QtWidgets.QWidget):
 
         if Activate:
             try:
-                self.LButton.clicked.connect(self.ButtonLClicked)
-                self.RButton.clicked.connect(self.ButtonRClicked)
+                # Don't need this because the button only read feedback from PLC
+                # self.LButton.clicked.connect(self.ButtonLClicked)
+                # self.RButton.clicked.connect(self.ButtonRClicked)
 
                 self.LButton.clicked.connect(self.ButtonTransitionState)
                 self.RButton.clicked.connect(self.ButtonTransitionState)
@@ -1137,11 +1138,13 @@ class DoubleButton(QtWidgets.QWidget):
                 pass
         else:
             try:
-                self.LButton.clicked.connect(self.ButtonLClicked)
-                self.RButton.clicked.connect(self.ButtonRClicked)
+                #Don't need this because the button only read feedback from PLC
+                # self.LButton.clicked.connect(self.ButtonLClicked)
+                # self.RButton.clicked.connect(self.ButtonRClicked)
 
-                self.LButton.clicked.disconnect(self.ButtonLClicked)
-                self.RButton.clicked.disconnect(self.ButtonRClicked)
+                # self.LButton.clicked.disconnect(self.ButtonLClicked)
+                # self.RButton.clicked.disconnect(self.ButtonRClicked)
+                pass
 
 
 
