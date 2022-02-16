@@ -2321,8 +2321,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def update_alarmwindow(self,dic):
-        if len(dic)>0:
-            print(dic)
+        # if len(dic)>0:
+        #     print(dic)
 
         self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
                                           self.AlarmButton.SubWindow.TT2112.Alarm,
@@ -5310,7 +5310,7 @@ class UpdatePLC(QtCore.QObject):
 
 
 class UpdateClient(QtCore.QObject):
-    client_data_transport = QtCore.Signal(dict)
+    client_data_transport = QtCore.Signal(object)
     # def __init__(self, MW, parent=None):
     def __init__(self, MW, UpDisplay, parent=None):
         super().__init__(parent)
@@ -5642,7 +5642,7 @@ class UpdateClient(QtCore.QObject):
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs
 class UpdateDisplay(QtCore.QObject):
-    alarm_update = QtCore.Signal(dict)
+    alarm_update = QtCore.Signal(object)
     def __init__(self, MW, parent=None):
         super().__init__(parent)
 
@@ -7607,7 +7607,7 @@ class UpdateDisplay(QtCore.QObject):
     @QtCore.Slot()
     def fetchdata(self, dict):
         self.data = dict
-        # print(self.data)
+        print(self.data)
 
     def FindDistinctTrue(self,v0, v1, v2, v3):
         if v0 == True:
