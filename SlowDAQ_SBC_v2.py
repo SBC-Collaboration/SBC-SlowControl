@@ -2321,8 +2321,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def update_alarmwindow(self,dic):
-        # if len(dic)>0:
-        #     print(dic)
+        if len(dic)>0:
+            print(dic)
 
         self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
                                           self.AlarmButton.SubWindow.TT2112.Alarm,
@@ -7607,7 +7607,7 @@ class UpdateDisplay(QtCore.QObject):
     @QtCore.Slot()
     def fetchdata(self, dict):
         self.data = dict
-        print(self.data)
+        # print(self.data)
 
     def FindDistinctTrue(self,v0, v1, v2, v3):
         if v0 == True:
