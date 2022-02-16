@@ -5625,6 +5625,7 @@ class UpdateClient(QtCore.QObject):
         self.receive_dic = message
 
         self.client_data_transport.emit(self.receive_dic)
+        print('Client update result for HFSV3331:',self.receive_dic["data"]["Valve"]["OUT"]["HFSV3331"])
 
     def commands(self):
         print("Commands are here",datetime.datetime.now())
@@ -5927,6 +5928,7 @@ class UpdateDisplay(QtCore.QObject):
             self.Running = True
             while self.Running:
                 print("Display updating", datetime.datetime.now())
+                print('Client update result for HFSV3331:', self.receive_dic["data"]["Valve"]["OUT"]["HFSV3331"])
 
                 # print(self.MW.PLC.RTD)
                 # print(3, self.MW.PLC.RTD[3])
