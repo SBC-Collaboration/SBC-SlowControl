@@ -5310,7 +5310,7 @@ class UpdatePLC(QtCore.QObject):
 
 
 class UpdateClient(QtCore.QObject):
-    client_data_transport = QtCore.pyqtSignal(object)
+    client_data_transport = QtCore.Signal(object)
     # def __init__(self, MW, parent=None):
     def __init__(self, MW, UpDisplay, parent=None):
         super().__init__(parent)
@@ -5623,9 +5623,13 @@ class UpdateClient(QtCore.QObject):
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic = message
+        try:
 
-        self.client_data_transport.emit(self.receive_dic)
-        print('Client update result for HFSV3331:',self.receive_dic["data"]["Valve"]["OUT"]["HFSV3331"])
+            self.client_data_transport.emit(self.receive_dic)
+            print('Client update result for HFSV3331:',self.receive_dic["data"]["Valve"]["OUT"]["HFSV3331"])
+        except:
+            (type, value, traceback) = sys.exc_info()
+            exception_hook(type, value, traceback)
 
     def commands(self):
         print("Commands are here",datetime.datetime.now())
@@ -5642,7 +5646,7 @@ class UpdateClient(QtCore.QObject):
 # Class to update display with PLC values every time PLC values ave been updated
 # All commented lines are modbus variables not yet implemented on the PLCs
 class UpdateDisplay(QtCore.QObject):
-    alarm_update = QtCore.pyqtSignal(object)
+    alarm_update = QtCore.Signal(object)
     def __init__(self, MW, parent=None):
         super().__init__(parent)
 
