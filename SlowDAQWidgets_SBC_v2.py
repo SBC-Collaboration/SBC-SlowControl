@@ -1126,38 +1126,28 @@ class DoubleButton(QtWidgets.QWidget):
 
         if Activate:
             try:
-                self.LButton.clicked.disconnect(self.ButtonLClicked)
-                self.RButton.clicked.disconnect(self.ButtonRClicked)
+                self.LButton.clicked.connect(self.ButtonLClicked)
+                self.RButton.clicked.connect(self.ButtonRClicked)
 
                 self.LButton.clicked.connect(self.ButtonTransitionState)
                 self.RButton.clicked.connect(self.ButtonTransitionState)
             except:
-                self.LButton.clicked.connect(self.ButtonTransitionState)
-                self.RButton.clicked.connect(self.ButtonTransitionState)
-                # print(Activate)
 
-
-                # self.LButton.clicked.connect(self.ButtonLClicked)
-                # self.RButton.clicked.connect(self.ButtonRClicked)
-
-
+                print("Failed to Activate the Doublebutton")
                 pass
         else:
             try:
+                self.LButton.clicked.connect(self.ButtonLClicked)
+                self.RButton.clicked.connect(self.ButtonRClicked)
+
                 self.LButton.clicked.disconnect(self.ButtonLClicked)
                 self.RButton.clicked.disconnect(self.ButtonRClicked)
 
-                # self.LButton.clicked.connect(self.ButtonTransitionState)
-                # self.RButton.clicked.connect(self.ButtonTransitionState)
-                # self.LButton.clicked.disconnect(self.ButtonTransitionState)
-                # self.RButton.clicked.disconnect(self.ButtonTransitionState)
+
 
 
             except:
-                # self.LButton.clicked.connect(self.ButtonTransitionState)
-                # self.RButton.clicked.connect(self.ButtonTransitionState)
-                # self.LButton.clicked.disconnect(self.ButtonTransitionState)
-                # self.RButton.clicked.disconnect(self.ButtonTransitionState)
+                print("Failed to Deactivate the Doublebutton")
 
                 pass
 
