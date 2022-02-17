@@ -2664,162 +2664,158 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.HFSV3331.ActiveState.UpdateColor(False)
 
-        # refreshing the valve status from PLC every 30s
-        # if self.count >= self.button_refreshing_count:
-        if self.count > 0:
+        if received_dic_c["data"]["Valve"]["OUT"]["PV1344"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV1344"]:
+            self.PV1344.Set.ButtonLClicked()
+        else:
+            self.PV1344.Set.ButtonRClicked()
 
-                self.PV1344.Set.ButtonLClicked()
-            else:
-                self.PV1344.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4307"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV4307"]:
+            self.PV4307.Set.ButtonLClicked()
+        else:
+            self.PV4307.Set.ButtonRClicked()
 
-                self.PV4307.Set.ButtonLClicked()
-            else:
-                self.PV4307.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4308"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV4308"]:
+            self.PV4308.Set.ButtonLClicked()
+        else:
+            self.PV4308.Set.ButtonRClicked()
 
-                self.PV4308.Set.ButtonLClicked()
-            else:
-                self.PV4308.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
+            self.PV4317.Set.ButtonLClicked()
+        else:
+            self.PV4317.Set.ButtonRClicked()
 
-                self.PV4317.Set.ButtonLClicked()
-            else:
-                self.PV4317.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4318"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV4318"]:
+            self.PV4318.Set.ButtonLClicked()
+        else:
+            self.PV4318.Set.ButtonRClicked()
 
-                self.PV4318.Set.ButtonLClicked()
-            else:
-                self.PV4318.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4321"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV4321"]:
+            self.PV4321.Set.ButtonLClicked()
+        else:
+            self.PV4321.Set.ButtonRClicked()
 
-                self.PV4321.Set.ButtonLClicked()
-            else:
-                self.PV4321.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4324"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV4324"]:
+            self.PV4324.Set.ButtonLClicked()
+        else:
+            self.PV4324.Set.ButtonRClicked()
 
-                self.PV4324.Set.ButtonLClicked()
-            else:
-                self.PV4324.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["PV5305"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV5305"]:
+            self.PV5305.Set.ButtonLClicked()
+        else:
+            self.PV5305.Set.ButtonRClicked()
 
-                self.PV5305.Set.ButtonLClicked()
-            else:
-                self.PV5305.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["PV5306"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV5306"]:
+            self.PV5306.Set.ButtonLClicked()
+        else:
+            self.PV5306.Set.ButtonRClicked()
 
-                self.PV5306.Set.ButtonLClicked()
-            else:
-                self.PV5306.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["PV5307"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV5307"]:
+            self.PV5307.Set.ButtonLClicked()
+        else:
+            self.PV5307.Set.ButtonRClicked()
 
-                self.PV5307.Set.ButtonLClicked()
-            else:
-                self.PV5307.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["PV5309"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["PV5309"]:
+            self.PV5309.Set.ButtonLClicked()
+        else:
+            self.PV5309.Set.ButtonRClicked()
 
-                self.PV5309.Set.ButtonLClicked()
-            else:
-                self.PV5309.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV3307"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV3307"]:
+            self.SV3307.Set.ButtonLClicked()
+        else:
+            self.SV3307.Set.ButtonRClicked()
 
-                self.SV3307.Set.ButtonLClicked()
-            else:
-                self.SV3307.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV3310"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV3310"]:
+            self.SV3310.Set.ButtonLClicked()
+        else:
+            self.SV3310.Set.ButtonRClicked()
 
-                self.SV3310.Set.ButtonLClicked()
-            else:
-                self.SV3310.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV3322"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV3322"]:
+            self.SV3322.Set.ButtonLClicked()
+        else:
+            self.SV3322.Set.ButtonRClicked()
 
-                self.SV3322.Set.ButtonLClicked()
-            else:
-                self.SV3322.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV3325"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV3325"]:
+            self.SV3325.Set.ButtonLClicked()
+        else:
+            self.SV3325.Set.ButtonRClicked()
 
-                self.SV3325.Set.ButtonLClicked()
-            else:
-                self.SV3325.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV3329"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV3329"]:
+            self.SV3329.Set.ButtonLClicked()
+        else:
+            self.SV3329.Set.ButtonRClicked()
 
-                self.SV3329.Set.ButtonLClicked()
-            else:
-                self.SV3329.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
+            self.SV4327.Set.ButtonLClicked()
+        else:
+            self.SV3307.Set.ButtonRClicked()
 
-                self.SV4327.Set.ButtonLClicked()
-            else:
-                self.SV3307.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4328"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV4328"]:
+            self.SV4328.Set.ButtonLClicked()
+        else:
+            self.SV4328.Set.ButtonRClicked()
 
-                self.SV4328.Set.ButtonLClicked()
-            else:
-                self.SV4328.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4329"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV4329"]:
+            self.SV4329.Set.ButtonLClicked()
+        else:
+            self.SV4329.Set.ButtonRClicked()
 
-                self.SV4329.Set.ButtonLClicked()
-            else:
-                self.SV4329.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4331"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV4331"]:
+            self.SV4331.Set.ButtonLClicked()
+        else:
+            self.SV4331.Set.ButtonRClicked()
 
-                self.SV4331.Set.ButtonLClicked()
-            else:
-                self.SV4331.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4332"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV4332"]:
+            self.SV4332.Set.ButtonLClicked()
+        else:
+            self.SV4332.Set.ButtonRClicked()
 
-                self.SV4332.Set.ButtonLClicked()
-            else:
-                self.SV4332.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
+            self.SV4337.Set.ButtonLClicked()
+        else:
+            self.SV4337.Set.ButtonRClicked()
 
-                self.SV4337.Set.ButtonLClicked()
-            else:
-                self.SV4337.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]:
+            self.HFSV3312.Set.ButtonLClicked()
+        else:
+            self.HFSV3312.Set.ButtonRClicked()
 
-                self.HFSV3312.Set.ButtonLClicked()
-            else:
-                self.HFSV3312.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"]:
+            self.HFSV3323.Set.ButtonLClicked()
+        else:
+            self.HFSV3323.Set.ButtonRClicked()
 
-                self.HFSV3323.Set.ButtonLClicked()
-            else:
-                self.HFSV3323.Set.ButtonRClicked()
+        if received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"]:
 
-            if received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"]:
+            self.HFSV3331.Set.ButtonLClicked()
+        else:
+            self.HFSV3331.Set.ButtonRClicked()
 
-                self.HFSV3331.Set.ButtonLClicked()
-            else:
-                self.HFSV3331.Set.ButtonRClicked()
 
-            self.count = 0
-        self.count += 1
+
 
         if received_dic_c["data"]["LOOPPID"]["EN"]["SERVO3321"]:
 
