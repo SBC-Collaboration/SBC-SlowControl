@@ -2315,7 +2315,59 @@ class MainWindow(QtWidgets.QMainWindow):
     def clearcommands(self):
         self.commands = {}
 
-            
+    def FindDistinctTrue(self, v0, v1, v2, v3):
+        if v0 == True:
+            if True in [v1, v2, v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return "MODE0"
+        elif v1 == True:
+            if True in [v2, v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return "MODE1"
+        elif v2 == True:
+            if True in [v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return "MODE2"
+        else:
+            if v3:
+                return "MODE3"
+            else:
+                print("No True Value")
+                return "False"
+
+    def FetchSetPoint(self, v0, v1, v2, v3, w0, w1, w2, w3):
+        # v0-3 must corresponds to w0-3 in order
+        if v0 == True:
+            if True in [v1, v2, v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return w0
+        elif v1 == True:
+            if True in [v2, v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return w1
+        elif v2 == True:
+            if True in [v3]:
+                print("Multiple True values")
+                return "False"
+            else:
+                return w2
+        else:
+            if v3:
+                return w3
+            else:
+                print("No True Value")
+                return "False"
+
     @QtCore.Slot(object)
     def updatedisplay(self, received_dic_c):
         print("Display updating", datetime.datetime.now())
