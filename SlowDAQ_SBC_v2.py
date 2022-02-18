@@ -838,7 +838,8 @@ class MainWindow(QtWidgets.QMainWindow):
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater;
         self.StartUpdater()
-    send_command_signal_MW = QtCore.Signal(object)
+    # send_command_signal_MW = QtCore.Signal(object)
+    send_command_signal_MW = QtCore.Signal()
 
     def StartUpdater(self):
 
@@ -853,15 +854,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpClient.moveToThread(self.ClientUpdateThread)
         self.ClientUpdateThread.started.connect(self.UpClient.run)
 
-
+        # signal receive the signal and send command to client
         self.UpClient.client_command_fectch.connect(self.sendcommands)
-        self.send_command_signal_MW.connect(self.UpClient.commands)
+        # self.send_command_signal_MW.connect(self.UpClient.commands)
+        self.send_command_signal_MW.connect(lambda:self.UpClient.commands(self.commands))
 
-
+        #signal clear the self.command
 
         self.UpClient.client_clear_commands.connect(self.clearcommands)
+        # transport read client data into GUI
 
-        self.UpClient.client_data_transport.connect(self.updatedisplay)
+        self.UpClient.client_data_transport.connect(lambda: self.updatedisplay(self.UpClient.receive_dic))
         self.ClientUpdateThread.start()
 
 
@@ -2309,7 +2312,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def sendcommands(self):
-        self.send_command_signal_MW.emit(self.commands)
+        self.send_command_signal_MW.emit()
+        print(self.commands)
+        # print("signal received")
 
     @QtCore.Slot()
     def clearcommands(self):
@@ -6650,7 +6655,7 @@ class UpdatePLC(QtCore.QObject):
 
 
 class UpdateClient(QtCore.QObject):
-    client_data_transport = QtCore.Signal(object)
+    client_data_transport = QtCore.Signal()
     client_command_fectch = QtCore.Signal()
     client_clear_commands = QtCore.Signal()
     # def __init__(self, MW, parent=None):
@@ -6662,6 +6667,7 @@ class UpdateClient(QtCore.QObject):
         self.socket = self.context.socket(zmq.REQ)
         self.socket.connect("tcp://localhost:5555")
         self.Running=False
+        self.readcommand = False
         self.period=1
 
         print("client is connecting to the ZMQ server")
@@ -6947,10 +6953,14 @@ class UpdateClient(QtCore.QObject):
                 #  Send reply back to client
                 # self.socket.send(b"Hello")
 
-                # self.client_command_fectch.emit()
-                self.commands({})
+                self.client_command_fectch.emit()
+                # # wait until command read from the main thread
+                while not self.readcommand:
+                    print("read command from GUI...")
+                    time.sleep(1)
+                self.readcommand = False
 
-                # self.commands()
+                # self.commands({})
                 # print(self.receive_dic)
                 message = pickle.loads(self.socket.recv())
 
@@ -6967,7 +6977,7 @@ class UpdateClient(QtCore.QObject):
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic = message
-        self.client_data_transport.emit(self.receive_dic)
+        self.client_data_transport.emit()
         print('Client update result for HFSV3331:',self.receive_dic["data"]["Valve"]["OUT"]["HFSV3331"])
 
     @QtCore.Slot(object)
@@ -6981,6 +6991,7 @@ class UpdateClient(QtCore.QObject):
             self.client_clear_commands.emit()
         else:
             self.socket.send(pickle.dumps({}))
+        self.readcommand = True
 
 
 
