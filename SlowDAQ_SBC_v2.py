@@ -6978,7 +6978,6 @@ class UpdateClient(QtCore.QObject):
         #message mush be a dictionary
         self.receive_dic = message
         self.client_data_transport.emit()
-        print('Client update result for HFSV3331:',self.receive_dic["data"]["Valve"]["OUT"]["HFSV3331"])
 
     @QtCore.Slot(object)
     def commands(self, MWcommands):
