@@ -21,7 +21,7 @@ INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("MFC1316_IN"
 
 INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("CYL3334_FCALC", " Cylinder ",””);
 
-INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("SERVO3321_IN", " Servo Valve ",””);
+INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("SERVO3321_IN", " Servo Valve feed back",””);
 
 INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("TS1_MASS", "Thermosyphon1",””);
  
