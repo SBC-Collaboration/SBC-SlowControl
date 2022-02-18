@@ -6,4 +6,62 @@ INSERT INTO MetaDataStorage VALUES ("PT1325", "Pressure Transducer", "bara" ), (
 
 INSERT INTO MetaDataStorage VALUES ("PV1344_OUT", "Pneumatic Valve output", "BOOL"), ( "PV4307_OUT", "Pneumatic Valve output", "BOOL"), ( "PV4308_OUT", "Pneumatic Valve output", "BOOL"), ( "PV4317_OUT", "Pneumatic Valve output", "BOOL"), ( "PV4318_OUT", "Pneumatic Valve output", "BOOL"), ( "PV4321_OUT", "Pneumatic Valve output", "BOOL"), ("PV4324_OUT", "Pneumatic Valve output", "BOOL"), ( "PV5305_OUT", "Pneumatic Valve output", "BOOL"), ( "PV5306_OUT", "Pneumatic Valve output", "BOOL"), ("PV5307_OUT", "Pneumatic Valve output", "BOOL"), ( "PV5309_OUT", "Pneumatic Valve output", "BOOL"), ( "SV3307_OUT", "Solenoid Valve output", "BOOL"), ( "SV3310_OUT", "Solenoid Valve  output", "BOOL"), ( "SV3322_OUT", "Solenoid Valve  output", "BOOL"), ("SV3325_OUT", "Solenoid Valve  output", "BOOL"), ( "SV3326_OUT", "Solenoid Valve  output", "BOOL"), ( "SV3329_OUT", "Solenoid Valve  output", "BOOL"), ("SV4327_OUT", "Solenoid Valve  output", "BOOL"), ( "SV4328_OUT", "Solenoid Valve  output", "BOOL"), ( "SV4329_OUT", "Solenoid Valve  output", "BOOL"), ( "SV4331_OUT", "Solenoid Valve  output", "BOOL"), ( "SV4332_OUT", "Solenoid Valve  output", "BOOL"), ("SV4337_OUT", "Solenoid Valve  output", "BOOL"), ( "HFSV3312_OUT", "High Flow Solenoid Valve output", "BOOL"), ( "HFSV3323_OUT", "High Flow Solenoid Valve output", "BOOL"), ( "HFSV3331_OUT", "High Flow Solenoid Valve output", "BOOL");
 
-INSERT INTO MetaDataStorage VALUES ("SERVO3321_EN", "Current state of Servo Valve's DO channel ", "BOOL"), ( "HTR6225_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR2123_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR2124_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR2125_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR1202_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR2203_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6202_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6206_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6210_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6223_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6224_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6219_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6221_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6214_EN", "Current state of Heater's DO channel ", "BOOL");
+INSERT INTO MetaDataStorage VALUES ("SERVO3321_EN", "Current state of Servo Valve's DO channel ", "BOOL"), ( "HTR6225_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR2123_EN", "Current state
+of Heater's DO channel ", "BOOL"), ( "HTR2124_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR2125_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR1202_EN", "Current state of Heater's DO channel ", "BOOL"),
+ ( "HTR2203_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6202_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6206_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6210_EN", "Current state of Heater's DO channel ", "BOOL"),
+  ( "HTR6223_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6224_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6219_EN", "Current state of Heater's DO channel ", "BOOL"), ( "HTR6221_EN", "Current state of Heater's DO channel ", "BOOL"),
+  ( "HTR6214_EN", "Current state of Heater's DO channel ", "BOOL");
+
+
+#addd on Feb 18th 2022
+
+ INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("BFM4313", " Bidirectional Flow Meter",”cms?”);
+INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("LT3335", " Level Transducer",””);
+INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("MFC1316_IN", " Mass Flow Controller Input",””);
+
+INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("CYL3334_FCALC", " Cylinder ",””);
+
+INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("SERVO3321_IN", " Servo Valve ",””);
+
+INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("TS1_MASS", "Thermosyphon1",””);
+ 
+INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("TS2_MASS", " Thermosyphon2",””);
+INSERT INTO MetaDataStorage (Instrument, Description, Unit) VALUES ("TS3_MASS", " Thermosyphon3",””);
+
+
+INSERT INTO MetaDataStorage VALUES ("SERVO3321_MODE0", "PID MODE number", "BOOL"), ( "HTR6225_MODE0", "PID MODE number", "BOOL"), ( "HTR2123_MODE0", "Current state
+of Heater's DO channel ", "BOOL"), ( "HTR2124_MODE0", "PID MODE number", "BOOL"), ( "HTR2125_MODE0", "PID MODE number", "BOOL"), ( "HTR1202_MODE0", "PID MODE number", "BOOL"),
+ ( "HTR2203_MODE0", "PID MODE number", "BOOL"), ( "HTR6202_MODE0", "PID MODE number", "BOOL"), ( "HTR6206_MODE0", "PID MODE number", "BOOL"), ( "HTR6210_MODE0", "PID MODE number", "BOOL"),
+  ( "HTR6223_MODE0", "PID MODE number", "BOOL"), ( "HTR6224_MODE0", "PID MODE number", "BOOL"), ( "HTR6219_MODE0", "PID MODE number", "BOOL"), ( "HTR6221_MODE0", "PID MODE number", "BOOL"),
+  ( "HTR6214_MODE0", "PID MODE number", "BOOL");
+
+ INSERT INTO MetaDataStorage VALUES ("SERVO3321_MODE1", "PID MODE number", "BOOL"), ( "HTR6225_MODE1", "PID MODE number", "BOOL"), ( "HTR2123_MODE1", "Current state
+of Heater's DO channel ", "BOOL"), ( "HTR2124_MODE1", "PID MODE number", "BOOL"), ( "HTR2125_MODE1", "PID MODE number", "BOOL"), ( "HTR1202_MODE1", "PID MODE number", "BOOL"),
+ ( "HTR2203_MODE1", "PID MODE number", "BOOL"), ( "HTR6202_MODE1", "PID MODE number", "BOOL"), ( "HTR6206_MODE1", "PID MODE number", "BOOL"), ( "HTR6210_MODE1", "PID MODE number", "BOOL"),
+  ( "HTR6223_MODE1", "PID MODE number", "BOOL"), ( "HTR6224_MODE1", "PID MODE number", "BOOL"), ( "HTR6219_MODE1", "PID MODE number", "BOOL"), ( "HTR6221_MODE1", "PID MODE number", "BOOL"),
+  ( "HTR6214_MODE1", "PID MODE number", "BOOL");
+
+ INSERT INTO MetaDataStorage VALUES ("SERVO3321_MODE2", "PID MODE number", "BOOL"), ( "HTR6225_MODE2", "PID MODE number", "BOOL"), ( "HTR2123_MODE2", "Current state
+of Heater's DO channel ", "BOOL"), ( "HTR2124_MODE2", "PID MODE number", "BOOL"), ( "HTR2125_MODE2", "PID MODE number", "BOOL"), ( "HTR1202_MODE2", "PID MODE number", "BOOL"),
+ ( "HTR2203_MODE2", "PID MODE number", "BOOL"), ( "HTR6202_MODE2", "PID MODE number", "BOOL"), ( "HTR6206_MODE2", "PID MODE number", "BOOL"), ( "HTR6210_MODE2", "PID MODE number", "BOOL"),
+  ( "HTR6223_MODE2", "PID MODE number", "BOOL"), ( "HTR6224_MODE2", "PID MODE number", "BOOL"), ( "HTR6219_MODE2", "PID MODE number", "BOOL"), ( "HTR6221_MODE2", "PID MODE number", "BOOL"),
+  ( "HTR6214_MODE2", "PID MODE number", "BOOL");
+
+ INSERT INTO MetaDataStorage VALUES ("SERVO3321_MODE3", "PID MODE number", "BOOL"), ( "HTR6225_MODE3", "PID MODE number", "BOOL"), ( "HTR2123_MODE3", "Current state
+of Heater's DO channel ", "BOOL"), ( "HTR2124_MODE3", "PID MODE number", "BOOL"), ( "HTR2125_MODE3", "PID MODE number", "BOOL"), ( "HTR1202_MODE3", "PID MODE number", "BOOL"),
+ ( "HTR2203_MODE3", "PID MODE number", "BOOL"), ( "HTR6202_MODE3", "PID MODE number", "BOOL"), ( "HTR6206_MODE3", "PID MODE number", "BOOL"), ( "HTR6210_MODE3", "PID MODE number", "BOOL"),
+  ( "HTR6223_MODE3", "PID MODE number", "BOOL"), ( "HTR6224_MODE3", "PID MODE number", "BOOL"), ( "HTR6219_MODE3", "PID MODE number", "BOOL"), ( "HTR6221_MODE3", "PID MODE number", "BOOL"),
+  ( "HTR6214_MODE3", "PID MODE number", "BOOL");
+
+ INSERT INTO MetaDataStorage VALUES ("SERVO3321_IN", "AO feedback, if exits ", "BOOL"), ( "HTR6225_IN", "AO feedback, if exits", "BOOL"), ( "HTR2123_IN", "Current state
+of Heater's DO channel ", "BOOL"), ( "HTR2124_IN", "AO feedback, if exits", "BOOL"), ( "HTR2125_IN", "AO feedback, if exits", "BOOL"), ( "HTR1202_IN", "AO feedback, if exits", "BOOL"),
+ ( "HTR2203_IN", "AO feedback, if exits", "BOOL"), ( "HTR6202_IN", "AO feedback, if exits", "BOOL"), ( "HTR6206_IN", "AO feedback, if exits", "BOOL"), ( "HTR6210_IN", "AO feedback, if exits", "BOOL"),
+  ( "HTR6223_IN", "AO feedback, if exits", "BOOL"), ( "HTR6224_IN", "AO feedback, if exits", "BOOL"), ( "HTR6219_IN", "AO feedback, if exits", "BOOL"), ( "HTR6221_IN", "AO feedback, if exits", "BOOL"),
+  ( "HTR6214_IN", "AO feedback, if exits", "BOOL");
+
+ INSERT INTO MetaDataStorage VALUES ("SERVO3321_OUT", "output for the AO channel ", "BOOL"), ( "HTR6225_OUT", "output for the AO channel", "BOOL"), ( "HTR2123_OUT", "Current state
+of Heater's DO channel ", "BOOL"), ( "HTR2124_OUT", "output for the AO channel", "BOOL"), ( "HTR2125_OUT", "output for the AO channel", "BOOL"), ( "HTR1202_OUT", "output for the AO channel", "BOOL"),
+ ( "HTR2203_OUT", "output for the AO channel", "BOOL"), ( "HTR6202_OUT", "output for the AO channel", "BOOL"), ( "HTR6206_OUT", "output for the AO channel", "BOOL"), ( "HTR6210_OUT", "output for the AO channel", "BOOL"),
+  ( "HTR6223_OUT", "output for the AO channel", "BOOL"), ( "HTR6224_OUT", "output for the AO channel", "BOOL"), ( "HTR6219_OUT", "output for the AO channel", "BOOL"), ( "HTR6221_OUT", "output for the AO channel", "BOOL"),
+  ( "HTR6214_OUT", "output for the AO channel", "BOOL");
+
