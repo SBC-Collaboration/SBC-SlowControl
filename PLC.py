@@ -1114,7 +1114,7 @@ class UpdateDataBase(QtCore.QObject):
                 if self.para_REAL >= self.rate_REAL:
                     for key in self.PLC.LEFT_REAL_address:
                         print(key, self.PLC.LEFT_REAL_dic[key])
-                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.LEFT_REAL_dic[key])
+                        # self.db.insert_data_into_datastorage(key, self.dt, self.PLC.LEFT_REAL_dic[key])
                     # print("write pressure transducer")
                     self.para_REAL=0
 
