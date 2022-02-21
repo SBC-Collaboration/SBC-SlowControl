@@ -90,7 +90,7 @@ class PLC:
                          "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820,"PT4319": 12822,
                          "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
 
-        self.LEFT_REAL_address = {'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792,"CYL3334_FCALC":12832, "SERVO3321_IN":12830,"TS1_MASS":16288,"TS2_MASS":16290,"TS3_MASS":16292}
+        self.LEFT_REAL_address = {'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792,"CYL3334_FCALC":12832, "SERVO3321_IN_REAL":12830,"TS1_MASS":16288,"TS2_MASS":16290,"TS3_MASS":16292}
 
         self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                               "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
@@ -114,7 +114,7 @@ class PLC:
                        "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
 
-        self.LEFT_REAL_dic = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
+        self.LEFT_REAL_dic = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
 
         self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                               "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
