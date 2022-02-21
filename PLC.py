@@ -1130,6 +1130,7 @@ class UpdateDataBase(QtCore.QObject):
                 self.para_PT += 1
                 self.para_Valve += 1
                 self.para_LOOPPID += 1
+                self.para_REAL += 1
                 self.PLC.NewData_Database = False
 
             else:
