@@ -90,6 +90,8 @@ class PLC:
                          "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820,"PT4319": 12822,
                          "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
 
+        self.LEFT_REAL_address = {'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792,"CYL3334_FCALC":12832, "SERVO3321_IN_REAL":12830,"TS1_MASS":16288,"TS2_MASS":16290,"TS3_MASS":16292}
+
         self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                               "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
                               "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
@@ -111,6 +113,8 @@ class PLC:
                        "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                        "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
+
+        self.LEFT_REAL_dic = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
 
         self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                               "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
@@ -203,6 +207,7 @@ class PLC:
         self.nTT_BO = len(self.TT_BO_address)
         self.nTT_FP = len(self.TT_FP_address)
         self.nPT = len(self.PT_address)
+        self.nREAL = len(self.LEFT_REAL_address)
         self.TT_BO_setting = [0.] * self.nTT_BO
         self.nTT_BO_Attribute = [0.] * self.nTT_BO
         self.PT_setting = [0.] * self.nPT
@@ -429,6 +434,14 @@ class PLC:
                 self.PT_dic[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_BO_PT[key].getRegister(0 + 1),
                                                     Raw_BO_PT[key].getRegister(0)))[0], 3)
+
+            Raw_BO_REAL = {}
+            for key in self.LEFT_REAL_address:
+                Raw_BO_REAL[key] = self.Client_BO.read_holding_registers(self.LEFT_REAL_address[key], count=2, unit=0x01)
+                self.LEFT_REAL_dic[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_BO_REAL[key].getRegister(0 + 1),
+                                                    Raw_BO_REAL[key].getRegister(0)))[0], 3)
+
 
                 # print(key, "'s' value is", self.PT_dic[key])
 
@@ -914,6 +927,8 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_TT=30
         self.para_PT=0
         self.rate_PT=30
+        self.para_REAL = 0
+        self.rate_REAL = 30
         # c is for valve status
         self.para_Valve = 0
         self.rate_Valve = 30
@@ -925,10 +940,41 @@ class UpdateDataBase(QtCore.QObject):
                           "SV3325": 0,  "SV3329": 0,
                           "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
                           "SV4337": 0, "HFSV3312":0, "HFSV3323": 0, "HFSV3331": 0}
-        self.LOOPPID_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+        self.LOOPPID_EN_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                                               'HTR2125': False,
                                               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
                                               'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_MODE0_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                  'HTR2125': False,
+                                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_MODE1_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                  'HTR2125': False,
+                                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_MODE2_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                  'HTR2125': False,
+                                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_MODE3_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                  'HTR2125': False,
+                                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.LOOPPID_OUT_buffer = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                  'HTR2125': 0,
+                                  'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+        self.LOOPPID_IN_buffer = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                                  'HTR2125': 0,
+                                  'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
         print("begin updating Database")
 
     @QtCore.Slot()
@@ -969,22 +1015,108 @@ class UpdateDataBase(QtCore.QObject):
                         self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
                     self.para_Valve = 0
 
+                # if state of bool variable changes, write the data into database
+
                 for key in self.PLC.LOOPPID_EN:
                     # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                    if self.PLC.LOOPPID_EN[key] != self.LOOPPID_buffer[key]:
-                        self.db.insert_data_into_datastorage(key + '_EN', self.early_dt, self.LOOPPID_buffer[key])
+                    if self.PLC.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
+                        self.db.insert_data_into_datastorage(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key])
                         self.db.insert_data_into_datastorage(key+'_EN', self.dt, self.PLC.LOOPPID_EN[key])
-                        self.LOOPPID_buffer[key] = self.PLC.LOOPPID_EN[key]
+                        self.LOOPPID_EN_buffer[key] = self.PLC.LOOPPID_EN[key]
                         # print(self.PLC.Valve_OUT[key])
                     else:
                         pass
 
+
+
+
+                for key in self.PLC.LOOPPID_MODE0:
+                    # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
+                    if self.PLC.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
+                        self.db.insert_data_into_datastorage(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key])
+                        self.db.insert_data_into_datastorage(key+'_MODE0', self.dt, self.PLC.LOOPPID_MODE0[key])
+                        self.LOOPPID_MODE0_buffer[key] = self.PLC.LOOPPID_MODE0[key]
+                        # print(self.PLC.Valve_OUT[key])
+                    else:
+                        pass
+
+
+
+
+                for key in self.PLC.LOOPPID_MODE1:
+                    # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
+                    if self.PLC.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
+                        self.db.insert_data_into_datastorage(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key])
+                        self.db.insert_data_into_datastorage(key+'_MODE1', self.dt, self.PLC.LOOPPID_MODE1[key])
+                        self.LOOPPID_MODE1_buffer[key] = self.PLC.LOOPPID_MODE1[key]
+                        # print(self.PLC.Valve_OUT[key])
+                    else:
+                        pass
+
+
+
+                for key in self.PLC.LOOPPID_MODE2:
+                    # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
+                    if self.PLC.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
+                        self.db.insert_data_into_datastorage(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key])
+                        self.db.insert_data_into_datastorage(key+'_MODE2', self.dt, self.PLC.LOOPPID_MODE2[key])
+                        self.LOOPPID_MODE2_buffer[key] = self.PLC.LOOPPID_MODE2[key]
+                        # print(self.PLC.Valve_OUT[key])
+                    else:
+                        pass
+
+
+
+                for key in self.PLC.LOOPPID_MODE3:
+                    # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
+                    if self.PLC.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
+                        self.db.insert_data_into_datastorage(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key])
+                        self.db.insert_data_into_datastorage(key+'_MODE3', self.dt, self.PLC.LOOPPID_MODE3[key])
+                        self.LOOPPID_MODE3_buffer[key] = self.PLC.LOOPPID_MODE3[key]
+                        # print(self.PLC.Valve_OUT[key])
+                    else:
+                        pass
+
+                #if no changes, write the data every fixed time interval
+
+
                 if self.para_LOOPPID >= self.rate_LOOPPID:
                     for key in self.PLC.LOOPPID_EN:
                         self.db.insert_data_into_datastorage(key+'_EN', self.dt, self.PLC.LOOPPID_EN[key])
-                        self.LOOPPID_buffer[key] = self.PLC.LOOPPID_EN[key]
+                        self.LOOPPID_EN_buffer[key] = self.PLC.LOOPPID_EN[key]
+                    for key in self.PLC.LOOPPID_MODE0:
+                        self.db.insert_data_into_datastorage(key+'_MODE0', self.dt, self.PLC.LOOPPID_MODE0[key])
+                        self.LOOPPID_MODE0_buffer[key] = self.PLC.LOOPPID_MODE0[key]
+                    for key in self.PLC.LOOPPID_MODE1:
+                        self.db.insert_data_into_datastorage(key+'_MODE1', self.dt, self.PLC.LOOPPID_MODE1[key])
+                        self.LOOPPID_MODE1_buffer[key] = self.PLC.LOOPPID_MODE1[key]
+                    for key in self.PLC.LOOPPID_MODE2:
+                        self.db.insert_data_into_datastorage(key+'_MODE2', self.dt, self.PLC.LOOPPID_MODE2[key])
+                        self.LOOPPID_MODE2_buffer[key] = self.PLC.LOOPPID_MODE2[key]
+                    for key in self.PLC.LOOPPID_MODE3:
+                        self.db.insert_data_into_datastorage(key+'_MODE3', self.dt, self.PLC.LOOPPID_MODE3[key])
+                        self.LOOPPID_MODE3_buffer[key] = self.PLC.LOOPPID_MODE3[key]
+                    # write float data.
+                    for key in self.PLC.LOOPPID_OUT:
+                        self.db.insert_data_into_datastorage(key+'_OUT', self.dt, self.PLC.LOOPPID_OUT[key])
+                        self.LOOPPID_OUT_buffer[key] = self.PLC.LOOPPID_OUT[key]
+                    for key in self.PLC.LOOPPID_IN:
+                        self.db.insert_data_into_datastorage(key+'_IN', self.dt, self.PLC.LOOPPID_IN[key])
+                        self.LOOPPID_IN_buffer[key] = self.PLC.LOOPPID_IN[key]
                     self.para_LOOPPID = 0
 
+
+
+
+
+
+
+                if self.para_REAL >= self.rate_REAL:
+                    for key in self.PLC.LEFT_REAL_address:
+                        print(key, self.PLC.LEFT_REAL_dic[key])
+                        # self.db.insert_data_into_datastorage(key, self.dt, self.PLC.LEFT_REAL_dic[key])
+                    # print("write pressure transducer")
+                    self.para_REAL=0
 
 
 
@@ -998,6 +1130,7 @@ class UpdateDataBase(QtCore.QObject):
                 self.para_PT += 1
                 self.para_Valve += 1
                 self.para_LOOPPID += 1
+                self.para_REAL += 1
                 self.PLC.NewData_Database = False
 
             else:
