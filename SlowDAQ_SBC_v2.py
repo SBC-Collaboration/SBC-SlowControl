@@ -802,6 +802,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.commands = {}
         self.statustransition={}
 
+        self.Valve_buffer = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
+                             "PV4324": 0, "PV5305": 0, "PV5306": 0,
+                             "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
+                             "SV3325": 0, "SV3329": 0,
+                             "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
+                             "SV4337": 0, "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0}
+        self.LOOPPID_EN_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                                  'HTR2125': False,
+                                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+
+
+
+
         self.signal_connection()
 
         # Set user to guest by default
@@ -2378,6 +2393,9 @@ class MainWindow(QtWidgets.QMainWindow):
         print("Display updating", datetime.datetime.now())
         print('Display update result for HFSV3331:', received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
 
+
+        #Update alarmwindow's widgets' value
+
         self.AlarmButton.SubWindow.TT2101.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2101"])
         self.AlarmButton.SubWindow.TT2101.Indicator.SetValue(
             received_dic_c["data"]["TT"]["BO"]["TT2101"])
@@ -2442,7 +2460,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmButton.SubWindow.TT6416.Indicator.SetValue(received_dic_c["data"]["TT"]["BO"]["TT6416"])
 
         # FP TTs
-
+        # update alarmwindow widgets' <alarm> value
         FPRTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2420, self.AlarmButton.SubWindow.TT2422, self.AlarmButton.SubWindow.TT2424, self.AlarmButton.SubWindow.TT2425,
                             self.AlarmButton.SubWindow.TT2442,
                             self.AlarmButton.SubWindow.TT2403, self.AlarmButton.SubWindow.TT2418, self.AlarmButton.SubWindow.TT2427, self.AlarmButton.SubWindow.TT2429,
@@ -2485,6 +2503,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # print("SV3307_OUT", received_dic_c["data"]["Valve"]["OUT"]["SV3307"])
         # print("SV3307_MAN", received_dic_c["data"]["Valve"]["MAN"]["SV3307"])
         print(received_dic_c["data"]["Valve"]["MAN"]["PV1344"])
+
+        # set whether Valves are manually active or not
 
         self.PV1344.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1344"])
         self.PV4307.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4307"])
@@ -2570,6 +2590,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR6214.HeaterSubWindow.Mode.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
         self.HTR6214.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
+
+
+        # show whether the widgets status are normal: manully controlled and no error signal
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV1344"] and not received_dic_c["data"]["Valve"]["ERR"]["PV1344"]:
 
@@ -2721,6 +2744,273 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.HFSV3331.ActiveState.UpdateColor(False)
 
+        # set Valves' widget busy status
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV1344"] != self.Valve_buffer["PV1344"]:
+            self.PV1344.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4307"] != self.Valve_buffer["PV4307"]:
+            self.PV4307.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV4307"] = received_dic_c["data"]["Valve"]["OUT"]["PV4307"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4308"] != self.Valve_buffer["PV4308"]:
+            self.PV4308.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV4308"] = received_dic_c["data"]["Valve"]["OUT"]["PV4308"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
+            self.PV4317.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4318"] != self.Valve_buffer["PV4318"]:
+            self.PV4318.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV4318"] = received_dic_c["data"]["Valve"]["OUT"]["PV4318"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4321"] != self.Valve_buffer["PV4321"]:
+            self.PV4321.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV4321"] = received_dic_c["data"]["Valve"]["OUT"]["PV4321"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4324"] != self.Valve_buffer["PV4324"]:
+            self.PV4324.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV4324"] = received_dic_c["data"]["Valve"]["OUT"]["PV4324"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV5305"] != self.Valve_buffer["PV5305"]:
+            self.PV5305.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV5305"] = received_dic_c["data"]["Valve"]["OUT"]["PV5305"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV5306"] != self.Valve_buffer["PV5306"]:
+            self.PV5306.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV5306"] = received_dic_c["data"]["Valve"]["OUT"]["PV5306"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV5307"] != self.Valve_buffer["PV5307"]:
+            self.PV5307.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV5307"] = received_dic_c["data"]["Valve"]["OUT"]["PV5307"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV5309"] != self.Valve_buffer["PV5309"]:
+            self.PV5309.Set.ButtonTransitionState(False)
+            self.Valve_buffer["PV5309"] = received_dic_c["data"]["Valve"]["OUT"]["PV5309"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV3307"] != self.Valve_buffer["SV3307"]:
+            self.SV3307.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV3307"] = received_dic_c["data"]["Valve"]["OUT"]["SV3307"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV3310"] != self.Valve_buffer["SV3310"]:
+            self.SV3310.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV3310"] = received_dic_c["data"]["Valve"]["OUT"]["SV3310"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV3322"] != self.Valve_buffer["SV3322"]:
+            self.SV3322.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV3322"] = received_dic_c["data"]["Valve"]["OUT"]["SV3322"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV3325"] != self.Valve_buffer["SV3325"]:
+            self.SV3325.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV3325"] = received_dic_c["data"]["Valve"]["OUT"]["SV3325"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV3329"] != self.Valve_buffer["SV3329"]:
+            self.SV3329.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV3329"] = received_dic_c["data"]["Valve"]["OUT"]["SV3329"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4327"] != self.Valve_buffer["SV4327"]:
+            self.SV4327.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4328"] != self.Valve_buffer["SV4328"]:
+            self.SV4328.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV4328"] = received_dic_c["data"]["Valve"]["OUT"]["SV4328"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4329"] != self.Valve_buffer["SV4329"]:
+            self.SV4329.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV4329"] = received_dic_c["data"]["Valve"]["OUT"]["SV4329"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4331"] != self.Valve_buffer["SV4331"]:
+            self.SV4331.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV4331"] = received_dic_c["data"]["Valve"]["OUT"]["SV4331"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4332"] != self.Valve_buffer["SV4332"]:
+            self.SV4332.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV4332"] = received_dic_c["data"]["Valve"]["OUT"]["SV4332"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4337"] != self.Valve_buffer["SV4337"]:
+            self.SV4337.Set.ButtonTransitionState(False)
+            self.Valve_buffer["SV4337"] = received_dic_c["data"]["Valve"]["OUT"]["SV4337"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"] != self.Valve_buffer["HFSV3312"]:
+            self.HFSV3312.Set.ButtonTransitionState(False)
+            self.Valve_buffer["HFSV3312"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"] != self.Valve_buffer["HFSV3323"]:
+            self.HFSV3323.Set.ButtonTransitionState(False)
+            self.Valve_buffer["HFSV3323"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"] != self.Valve_buffer["HFSV3331"]:
+            self.HFSV3331.Set.ButtonTransitionState(False)
+            self.Valve_buffer["HFSV3331"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"]
+        else:
+            pass
+
+        #PIDLOOP part
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SERVO3321"] != self.Valve_buffer["SERVO3321"]:
+            self.SERVO3321.State.ButtonTransitionState(False)
+            self.SERVO3321.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["SERVO3321"] = received_dic_c["data"]["Valve"]["OUT"]["SERVO3321"]
+        else:
+            pass
+
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR6225"] != self.Valve_buffer["HTR6225"]:
+            self.HTR6225.State.ButtonTransitionState(False)
+            self.HTR6225.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR6225"] = received_dic_c["data"]["Valve"]["OUT"]["HTR6225"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR2123"] != self.Valve_buffer["HTR2123"]:
+            self.HTR2123.State.ButtonTransitionState(False)
+            self.HTR2123.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR2123"] = received_dic_c["data"]["Valve"]["OUT"]["HTR2123"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR2124"] != self.Valve_buffer["HTR2124"]:
+            self.HTR2124.State.ButtonTransitionState(False)
+            self.HTR2124.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR2124"] = received_dic_c["data"]["Valve"]["OUT"]["HTR2124"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR2125"] != self.Valve_buffer["HTR2125"]:
+            self.HTR2125.State.ButtonTransitionState(False)
+            self.HTR2125.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR2125"] = received_dic_c["data"]["Valve"]["OUT"]["HTR2125"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR1202"] != self.Valve_buffer["HTR1202"]:
+            self.HTR1202.State.ButtonTransitionState(False)
+            self.HTR1202.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR1202"] = received_dic_c["data"]["Valve"]["OUT"]["HTR1202"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR2203"] != self.Valve_buffer["HTR2203"]:
+            self.HTR2203.State.ButtonTransitionState(False)
+            self.HTR2203.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR2203"] = received_dic_c["data"]["Valve"]["OUT"]["HTR2203"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR6202"] != self.Valve_buffer["HTR6202"]:
+            self.HTR6202.State.ButtonTransitionState(False)
+            self.HTR6202.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR6202"] = received_dic_c["data"]["Valve"]["OUT"]["HTR6202"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR6206"] != self.Valve_buffer["HTR6206"]:
+            self.HTR6206.State.ButtonTransitionState(False)
+            self.HTR6206.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR6206"] = received_dic_c["data"]["Valve"]["OUT"]["HTR6206"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR6210"] != self.Valve_buffer["HTR6210"]:
+            self.HTR6210.State.ButtonTransitionState(False)
+            self.HTR6210.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR6210"] = received_dic_c["data"]["Valve"]["OUT"]["HTR6210"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR6223"] != self.Valve_buffer["HTR6223"]:
+            self.HTR6223.State.ButtonTransitionState(False)
+            self.HTR6223.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR6223"] = received_dic_c["data"]["Valve"]["OUT"]["HTR6223"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR6224"] != self.Valve_buffer["HTR6224"]:
+            self.HTR6224.State.ButtonTransitionState(False)
+            self.HTR6224.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR6224"] = received_dic_c["data"]["Valve"]["OUT"]["HTR6224"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR6219"] != self.Valve_buffer["HTR6219"]:
+            self.HTR6219.State.ButtonTransitionState(False)
+            self.HTR6219.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR6219"] = received_dic_c["data"]["Valve"]["OUT"]["HTR6219"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR6221"] != self.Valve_buffer["HTR6221"]:
+            self.HTR6221.State.ButtonTransitionState(False)
+            self.HTR6221.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR6221"] = received_dic_c["data"]["Valve"]["OUT"]["HTR6221"]
+        else:
+            pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["HTR6214"] != self.Valve_buffer["HTR6214"]:
+            self.HTR6214.State.ButtonTransitionState(False)
+            self.HTR6214.HeaterSubWindow.Mode.ButtonTransitionState(False)
+            self.Valve_buffer["HTR6214"] = received_dic_c["data"]["Valve"]["OUT"]["HTR6214"]
+        else:
+            pass
+
+
+
+
+
+        # set Valves' widget status
+
+
         if received_dic_c["data"]["Valve"]["OUT"]["PV1344"]:
 
             self.PV1344.Set.ButtonLClicked()
@@ -2871,7 +3161,7 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.HFSV3331.Set.ButtonRClicked()
 
-
+        # set LOOPPID double button status ON/OFF also the status in the subwindow
 
 
         if received_dic_c["data"]["LOOPPID"]["EN"]["SERVO3321"]:
@@ -3008,6 +3298,9 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.HTR6214.HeaterSubWindow.Mode.ButtonRClicked()
             self.HTR6214.State.ButtonRClicked()
+
+
+        # set indicators value
 
         self.PT2121.SetValue(received_dic_c["data"]["PT"]["PT2121"])
         self.PT2316.SetValue(received_dic_c["data"]["PT"]["PT2316"])
