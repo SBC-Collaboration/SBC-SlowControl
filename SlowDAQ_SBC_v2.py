@@ -9,7 +9,7 @@ v0.1.2 Alarm implemented 07/01/20 ML
 v0.1.3 PLC online detection, poll PLCs only when values are updated, fix Centos window size bug 04/03/20 ML
 """
 
-import os, sys, time, platform, datetime, random, pickle, cgitb, traceback
+import os, sys, time, platform, datetime, random, pickle, cgitb, traceback, signal
 
 
 from PySide2 import QtWidgets, QtCore, QtGui
