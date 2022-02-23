@@ -11,10 +11,11 @@ v1.1 Initialize values, flag when values are updated more modbus variables 04/03
 """
 
 import struct, time
-#delete this line when you read real data from PLC
+# delete this line when you read real data from PLC
 import random
 
 from pymodbus.client.sync import ModbusTcpClient
+
 
 class PPLC:
     def __init__(self):
@@ -27,8 +28,7 @@ class PPLC:
         self.Connected = self.Client.connect()
         print("PPLC connected: " + str(self.Connected))
 
-
-        self.nPT=8
+        self.nPT = 8
         self.PT = [0.] * self.nPT
 
         # self.LabAirPressureState = 0
@@ -81,7 +81,7 @@ class PPLC:
         
     def ReadAll(self):
         if self.Connected:
-            #somehow count maximam value=8, PTs number =8
+            # somehow count maximam value=8, PTs number =8
 
             Raw = self.Client.read_holding_registers(37000, count=2*self.nPT, unit=0x01)
 
@@ -124,21 +124,26 @@ class PPLC:
             # self.PT10 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(7), Raw.getRegister(6)))[0], 2)
             # self.PT11 = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(9), Raw.getRegister(8)))[0], 2)
             # Raw = self.Client.read_holding_registers(0x40E, count = 2, unit = 0x01)
-            # self.AirRegulator = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
+            # self.AirRegulator = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1),
+            # Raw.getRegister(0)))[0], 2)
             # Raw = self.Client.read_holding_registers(0x460, count = 2, unit = 0x01)
             # self.PDiff = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
 
             # Setpoint
             # Raw = self.Client.read_holding_registers(0xB6, count = 2, unit = 0x01)
-            # self.AirRegulatorSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
+            # self.AirRegulatorSetpoint = round(struct.unpack("<f", struct.pack("<HH",
+            # Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
             # Raw = self.Client.read_holding_registers(0xC0, count = 2, unit = 0x01)
-            # self.PressureSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 1)
+            # self.PressureSetpoint = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1),
+            # Raw.getRegister(0)))[0], 1)
             #
             # Positions
             # Raw = self.Client.read_holding_registers(0xF4, count = 2, unit = 0x01)
-            # self.BellowsPosition = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
+            # self.BellowsPosition = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1),
+            # Raw.getRegister(0)))[0], 2)
             # Raw = self.Client.read_holding_registers(0xF6, count = 2, unit = 0x01)
-            # self.IVPosition = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 2)
+            # self.IVPosition = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1),
+            # Raw.getRegister(0)))[0], 2)
             #
             # Current state
             # Raw = self.Client.read_holding_registers(0x454, count = 1, unit = 0x01)
@@ -192,169 +197,202 @@ class PPLC:
             self.NewData_Display = True
             self.NewData_Database = True
 
-
             return 0
         else:
             return 1
         
     def SetFastCompressValve1(self, State):
         if State == "Close":
-            Value = 0
+            value = 0
         elif State == "Open":
-            Value = 1
+            value = 1
+        else:
+            print("State is either on or off in string format.")
+            value = None
             
-        return self.WriteBool(0xB0, 0, Value)
+        return self.WriteBool(0xB0, 0, value)
 
     def SetFastCompressValve2(self, State):
         if State == "Close":
-            Value = 0
+            value = 0
         elif State == "Open":
-            Value = 1
+            value = 1
+        else:
+            print("State is either on or off in string format.")
+            value = None
             
-        return self.WriteBool(0xB0, 1, Value)  
+        return self.WriteBool(0xB0, 1, value)  
 
     def SetFastCompressValve3(self, State):
         if State == "Close":
-            Value = 0
+            value = 0
         elif State == "Open":
-            Value = 1
+            value = 1
+        else:
+            print("State is either on or off in string format.")
+            value = None
             
-        return self.WriteBool(0xB0, 2, Value)  
+        return self.WriteBool(0xB0, 2, value)  
 
     def SetPumpState(self, State):
         if State == "Off":
-            Value = 0
+            value = 0
         elif State == "On":
-            Value = 1
+            value = 1
+        else:
+            print("State is either on or off in string format.")
+            value = None
             
-        return self.WriteBool(0xB0, 6, Value)  
+        return self.WriteBool(0xB0, 6, value)  
 
     def SetSlowCompressValve(self, State):
         if State == "Close":
-            Value = 1
+            value = 1
         elif State == "Open":
-            Value = 0
+            value = 0
+        else:
+            print("State is either on or off in string format.")
+            value = None
             
-        return self.WriteBool(0xB0, 7, Value)  
+        return self.WriteBool(0xB0, 7, value)  
 
     def SetFastCompressValveCart(self, State):
         if State == "Close":
-            Value = 0
+            value = 0
         elif State == "Open":
-            Value = 1
+            value = 1
+        else:
+            print("State is either on or off in string format.")
+            value = None
             
-        return self.WriteBool(0xB0, 8, Value)  
+        return self.WriteBool(0xB0, 8, value)  
 
     def SetExpansionValve(self, State):
         if State == "Close":
-            Value = 0
+            value = 0
         elif State == "Open":
-            Value = 1
+            value = 1
+        else:
+            print("State is either on or off in string format.")
+            value = None
             
-        return self.WriteBool(0xB0, 9, Value)  
+        return self.WriteBool(0xB0, 9, value)  
 
     def SetOilReliefValve(self, State):
         if State == "Close":
-            Value = 0
+            value = 0
         elif State == "Open":
-            Value = 1
+            value = 1
+        else:
+            print("State is either on or off in string format.")
+            value = None
             
-        return self.WriteBool(0xB0, 12, Value)  
+        return self.WriteBool(0xB0, 12, value)  
 
     def SetFreonInValve(self, State):
         if State == "Close":
-            Value = 0
+            value = 0
         elif State == "Open":
-            Value = 1
+            value = 1
+        else:
+            print("State is either on or off in string format.")
+            value = None
             
-        return self.WriteBool(0xB0, 13, Value)  
+        return self.WriteBool(0xB0, 13, value)  
 
     def SetFreonOutValve(self, State):
         if State == "Close":
-            Value = 0
+            value = 0
         elif State == "Open":
-            Value = 1
+            value = 1
+        else:
+            print("State is either on or off in string format.")
+            value = None
             
-        return self.WriteBool(0xB0, 14, Value)          
+        return self.WriteBool(0xB0, 14, value)          
         
-    def SetAirRegulatorSetpoint(self, Value):
+    def SetAirRegulatorSetpoint(self, value):
             
-        return self.WriteFloat(0xB6, Value)
+        return self.WriteFloat(0xB6, value)
         
-    def SetPressureSetpoint(self, Value):
+    def SetPressureSetpoint(self, value):
             
-        return self.WriteFloat(0xC0, Value)
+        return self.WriteFloat(0xC0, value)
 
     def SetSValveMode(self, Mode):
         if Mode == "Off":
-            Value = 0
+            value = 0
         elif Mode == "On":
-            Value = 1
-        return self.WriteBool(0x0, 0, Value)
+            value = 1
+        else:
+            print("State is either on or off in string format.")
+            value = None
+        return self.WriteBool(0x0, 0, value)
         
     def SaveSetting(self):
         self.WriteBool(0x100, 0, 1) 
         
-        return 0 # There is no way to know if it worked... Cross your fingers!
+        return 0  # There is no way to know if it worked... Cross your fingers!
         
     def Compress(self):
         self.WriteBool(0xB8, 0, 1) 
         
-        return 0 # To know if it worked, read CurrentState
+        return 0  # To know if it worked, read CurrentState
         
     def GoIdle(self):
         self.WriteBool(0xB8, 1, 1) 
         
-        return 0 # To know if it worked, read CurrentState
+        return 0  # To know if it worked, read CurrentState
         
     def Expand(self):
         self.WriteBool(0xB8, 2, 1)
          
-        return 0 # To know if it worked, read CurrentState
+        return 0  # To know if it worked, read CurrentState
         
     def GoManual(self):
         self.WriteBool(0xB8, 3, 1)
                     
-        return 0 # To know if it worked, read CurrentState
+        return 0  # To know if it worked, read CurrentState
             
-    def WriteFloat(self, Address, Value):
+    def WriteFloat(self, Address, value):
         if self.Connected:
-            Value = round(Value, 3)
-            Dummy = self.Client.write_register(Address, struct.unpack("<HH", struct.pack("<f", Value))[1], unit = 0x01)
-            Dummy = self.Client.write_register(Address + 1, struct.unpack("<HH", struct.pack("<f", Value))[0], unit = 0x01)
+            value = round(value, 3)
+            Dummy = self.Client.write_register(Address, struct.unpack("<HH", struct.pack("<f", value))[1], unit=0x01)
+            Dummy = self.Client.write_register(Address + 1, struct.unpack("<HH", struct.pack("<f", value))[0], unit=0x01)
         
             time.sleep(1)
         
-            Raw = self.Client.read_holding_registers(Address, count = 2, unit = 0x01)
-            rValue = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
+            Raw = self.Client.read_holding_registers(Address, count=2, unit=0x01)
+            rvalue = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
         
-            if Value == rValue:
+            if value == rvalue:
                 return 0
             else:
                 return 2
         else:
             return 1
                 
-    def WriteBool(self, Address, Bit, Value):
+    def WriteBool(self, Address, Bit, value):
         if self.Connected:
-            Raw = self.Client.read_holding_registers(Address, count = 1, unit = 0x01)
+            Raw = self.Client.read_holding_registers(Address, count=1, unit=0x01)
 
             Mask = 1 << Bit 
-            nValue = (Raw.getRegister(0) & ~Mask) | ((Value << Bit) & Mask)
+            nvalue = (Raw.getRegister(0) & ~Mask) | ((value << Bit) & Mask)
 
-            Dummy = self.Client.write_register(Address, nValue, unit = 0x01)
+            Dummy = self.Client.write_register(Address, nvalue, unit=0x01)
         
             time.sleep(1)
         
-            Raw = self.Client.read_holding_registers(Address, count = 1, unit = 0x01)
-            rValue = Raw.getRegister(0)
+            Raw = self.Client.read_holding_registers(Address, count=1, unit=0x01)
+            rvalue = Raw.getRegister(0)
         
-            if nValue == rValue:
+            if nvalue == rvalue:
                 return 0
             else:
                 return 2
         else:
             return 1
+
 
 if __name__=="__main__":
     PPLC=PPLC()
