@@ -1083,6 +1083,22 @@ class DoubleButton(QtWidgets.QWidget):
     def ButtonTransitionState(self, bool):
         self.StatusTransition.UpdateColor(bool)
 
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.LState == self.InactiveName and self.RState == self.ActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.LState == self.ActiveName and self.RState == self.InactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+
+
 
 
     # Neutral means that the button shouldn't show any color
@@ -1130,8 +1146,8 @@ class DoubleButton(QtWidgets.QWidget):
                 # self.LButton.clicked.connect(self.ButtonLClicked)
                 # self.RButton.clicked.connect(self.ButtonRClicked)
 
-                self.LButton.clicked.connect(lambda: self.ButtonTransitionState(True))
-                self.RButton.clicked.connect(lambda: self.ButtonTransitionState(True))
+                self.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
+                self.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
             except:
 
                 print("Failed to Activate the Doublebutton")
