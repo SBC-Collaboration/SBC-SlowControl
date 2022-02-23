@@ -478,16 +478,16 @@ class PLC:
                 # print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
                 # print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
 
-            Raw_BO_Switch = {}
-
-            for key in self.Switch_address:
-                Raw_BO_Switch[key] = self.Client_BO.read_holding_registers(self.Switch_address[key], count=1, unit=0x01)
-                self.Switch[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
-
-                self.Switch_OUT[key] = self.ReadCoil(1, self.Switch_address[key])
-                self.Switch_INTLKD[key] = self.ReadCoil(8, self.Switch_address[key])
-                self.Switch_MAN[key] = self.ReadCoil(16, self.Switch_address[key])
-                self.Switch_ERR[key] = self.ReadCoil(32, self.Switch_address[key])
+            # Raw_BO_Switch = {}
+            #
+            # for key in self.Switch_address:
+            #     Raw_BO_Switch[key] = self.Client_BO.read_holding_registers(self.Switch_address[key], count=1, unit=0x01)
+            #     self.Switch[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
+            #
+            #     self.Switch_OUT[key] = self.ReadCoil(1, self.Switch_address[key])
+            #     self.Switch_INTLKD[key] = self.ReadCoil(8, self.Switch_address[key])
+            #     self.Switch_MAN[key] = self.ReadCoil(16, self.Switch_address[key])
+            #     self.Switch_ERR[key] = self.ReadCoil(32, self.Switch_address[key])
 
 
             Raw_LOOPPID_2 = Raw_LOOPPID_4 = Raw_LOOPPID_6 = Raw_LOOPPID_8 = Raw_LOOPPID_10 = Raw_LOOPPID_12 = Raw_LOOPPID_14 = Raw_LOOPPID_16 ={}
