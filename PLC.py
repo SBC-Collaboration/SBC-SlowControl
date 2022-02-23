@@ -92,6 +92,7 @@ class PLC:
 
         self.LEFT_REAL_address = {'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792,"CYL3334_FCALC":12832, "SERVO3321_IN_REAL":12830,"TS1_MASS":16288,"TS2_MASS":16290,"TS3_MASS":16292}
 
+
         self.TT_FP_dic = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                               "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
                               "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
@@ -115,6 +116,8 @@ class PLC:
                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
 
         self.LEFT_REAL_dic = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
+
+
 
         self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                               "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
@@ -208,10 +211,24 @@ class PLC:
         self.nTT_FP = len(self.TT_FP_address)
         self.nPT = len(self.PT_address)
         self.nREAL = len(self.LEFT_REAL_address)
+
         self.TT_BO_setting = [0.] * self.nTT_BO
         self.nTT_BO_Attribute = [0.] * self.nTT_BO
         self.PT_setting = [0.] * self.nPT
         self.nPT_Attribute = [0.] * self.nPT
+
+        self.Switch_address = {"PUMP3305": 12688}
+        self.nSwitch = len(self.Switch_address)
+        self.Switch = {}
+        self.Switch_OUT = {"PUMP3305": 0}
+        self.Switch_MAN = {"PUMP3305": False}
+        self.Switch_INTLKD = {"PUMP3305": False}
+        self.Switch_ERR = {"PUMP3305": False}
+
+
+
+
+
 
         self.valve_address = {"PV1344": 12288, "PV4307": 12289, "PV4308": 12290, "PV4317": 12291, "PV4318": 12292, "PV4321": 12293,
                         "PV4324": 12294, "PV5305": 12295, "PV5306": 12296,
@@ -461,6 +478,18 @@ class PLC:
                 # print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
                 # print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
 
+            Raw_BO_Switch = {}
+
+            for key in self.Switch_address:
+                Raw_BO_Switch[key] = self.Client_BO.read_holding_registers(self.Switch_address[key], count=1, unit=0x01)
+                self.Switch[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
+
+                self.Switch_OUT[key] = self.ReadCoil(1, self.Switch_address[key])
+                self.Switch_INTLKD[key] = self.ReadCoil(8, self.Switch_address[key])
+                self.Switch_MAN[key] = self.ReadCoil(16, self.Switch_address[key])
+                self.Switch_ERR[key] = self.ReadCoil(32, self.Switch_address[key])
+
+
             Raw_LOOPPID_2 = Raw_LOOPPID_4 = Raw_LOOPPID_6 = Raw_LOOPPID_8 = Raw_LOOPPID_10 = Raw_LOOPPID_12 = Raw_LOOPPID_14 = Raw_LOOPPID_16 ={}
             for key in self.LOOPPID_ADR_BASE:
                 self.LOOPPID_MODE0[key] = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
@@ -547,6 +576,8 @@ class PLC:
 
             return 0
         else:
+            raise Exception('Not connected to PLC') #will it restart the PLC ?
+
             return 1
 
     def Read_BO_1(self,address):
@@ -676,12 +707,6 @@ class PLC:
     def LOOPPID_SET_LO_LIM(self,address, value):
         self.Write_BO_2(address + 8, value)
         print("LOOPPID_LO")
-
-
-
-        
-    
-
 
     def SaveSetting(self):
         self.WriteBool(0x0, 0, 1)
@@ -932,6 +957,8 @@ class UpdateDataBase(QtCore.QObject):
         # c is for valve status
         self.para_Valve = 0
         self.rate_Valve = 30
+        self.para_Switch = 0
+        self.rate_Switch = 30
         self.para_LOOPPID = 0
         self.rate_LOOPPID = 30
         self.Valve_buffer = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
@@ -940,6 +967,7 @@ class UpdateDataBase(QtCore.QObject):
                           "SV3325": 0,  "SV3329": 0,
                           "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
                           "SV4337": 0, "HFSV3312":0, "HFSV3323": 0, "HFSV3331": 0}
+        self.Switch_buffer = {"PUMP3305": 0}
         self.LOOPPID_EN_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                                               'HTR2125': False,
                                               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
@@ -1015,6 +1043,23 @@ class UpdateDataBase(QtCore.QObject):
                         self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
                     self.para_Valve = 0
 
+
+                for key in self.PLC.Switch_OUT:
+                    # print(key, self.PLC.Switch_OUT[key] != self.Switch_buffer[key])
+                    if self.PLC.Switch_OUT[key] != self.Switch_buffer[key]:
+                        self.db.insert_data_into_datastorage(key + '_OUT', self.early_dt, self.Switch_buffer[key])
+                        self.db.insert_data_into_datastorage(key+'_OUT', self.dt, self.PLC.Switch_OUT[key])
+                        self.Switch_buffer[key] = self.PLC.Switch_OUT[key]
+                        # print(self.PLC.Switch_OUT[key])
+                    else:
+                        pass
+
+                if self.para_Switch >= self.rate_Switch:
+                    for key in self.PLC.Switch_OUT:
+                        self.db.insert_data_into_datastorage(key+'_OUT', self.dt, self.PLC.Switch_OUT[key])
+                        self.Switch_buffer[key] = self.PLC.Switch_OUT[key]
+                    self.para_Switch = 0
+
                 # if state of bool variable changes, write the data into database
 
                 for key in self.PLC.LOOPPID_EN:
@@ -1027,9 +1072,6 @@ class UpdateDataBase(QtCore.QObject):
                     else:
                         pass
 
-
-
-
                 for key in self.PLC.LOOPPID_MODE0:
                     # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
                     if self.PLC.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
@@ -1039,9 +1081,6 @@ class UpdateDataBase(QtCore.QObject):
                         # print(self.PLC.Valve_OUT[key])
                     else:
                         pass
-
-
-
 
                 for key in self.PLC.LOOPPID_MODE1:
                     # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
@@ -1053,8 +1092,6 @@ class UpdateDataBase(QtCore.QObject):
                     else:
                         pass
 
-
-
                 for key in self.PLC.LOOPPID_MODE2:
                     # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
                     if self.PLC.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
@@ -1064,8 +1101,6 @@ class UpdateDataBase(QtCore.QObject):
                         # print(self.PLC.Valve_OUT[key])
                     else:
                         pass
-
-
 
                 for key in self.PLC.LOOPPID_MODE3:
                     # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
@@ -1078,7 +1113,6 @@ class UpdateDataBase(QtCore.QObject):
                         pass
 
                 #if no changes, write the data every fixed time interval
-
 
                 if self.para_LOOPPID >= self.rate_LOOPPID:
                     for key in self.PLC.LOOPPID_EN:
@@ -1105,23 +1139,12 @@ class UpdateDataBase(QtCore.QObject):
                         self.LOOPPID_IN_buffer[key] = self.PLC.LOOPPID_IN[key]
                     self.para_LOOPPID = 0
 
-
-
-
-
-
-
                 if self.para_REAL >= self.rate_REAL:
                     for key in self.PLC.LEFT_REAL_address:
-                        print(key, self.PLC.LEFT_REAL_dic[key])
-                        # self.db.insert_data_into_datastorage(key, self.dt, self.PLC.LEFT_REAL_dic[key])
+                        # print(key, self.PLC.LEFT_REAL_dic[key])
+                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.LEFT_REAL_dic[key])
                     # print("write pressure transducer")
                     self.para_REAL=0
-
-
-
-
-
 
                 # print("a",self.para_TT,"b",self.para_PT )
 
@@ -1129,16 +1152,17 @@ class UpdateDataBase(QtCore.QObject):
                 self.para_TT += 1
                 self.para_PT += 1
                 self.para_Valve += 1
+                self.para_Switch += 1
                 self.para_LOOPPID += 1
                 self.para_REAL += 1
                 self.PLC.NewData_Database = False
 
             else:
+
                 print("No new data from PLC")
                 pass
 
             time.sleep(self.base_period)
-
 
 
     @QtCore.Slot()
@@ -1300,6 +1324,7 @@ class UpdateServer(QtCore.QObject):
         self.TT_FP_dic_ini = self.PLC.TT_FP_dic
         self.TT_BO_dic_ini = self.PLC.TT_BO_dic
         self.PT_dic_ini = self.PLC.PT_dic
+        self.LEFT_REAL_ini = self.PLC.LEFT_REAL_dic
         self.TT_FP_LowLimit_ini = self.PLC.TT_FP_LowLimit
         self.TT_FP_HighLimit_ini = self.PLC.TT_FP_HighLimit
         self.TT_BO_LowLimit_ini = self.PLC.TT_BO_LowLimit
@@ -1317,6 +1342,10 @@ class UpdateServer(QtCore.QObject):
         self.Valve_MAN_ini = self.PLC.Valve_MAN
         self.Valve_INTLKD_ini = self.PLC.Valve_INTLKD
         self.Valve_ERR_ini = self.PLC.Valve_ERR
+        self.Switch_OUT_ini = self.PLC.Switch_OUT
+        self.Switch_MAN_ini = self.PLC.Switch_MAN
+        self.Switch_INTLKD_ini = self.PLC.Switch_INTLKD
+        self.Switch_ERR_ini = self.PLC.Switch_ERR
         self.LOOPPID_MODE0_ini = self.PLC.LOOPPID_MODE0
         self.LOOPPID_MODE1_ini = self.PLC.LOOPPID_MODE1
         self.LOOPPID_MODE2_ini = self.PLC.LOOPPID_MODE2
@@ -1339,10 +1368,15 @@ class UpdateServer(QtCore.QObject):
         self.data_dic={"data":{"TT":{"FP":self.TT_FP_dic_ini,
                                      "BO":self.TT_BO_dic_ini},
                                "PT":self.PT_dic_ini,
+                               "LEFT_REAL":self.LEFT_REAL_ini,
                                "Valve":{"OUT":self.Valve_OUT_ini,
                                         "INTLKD":self.Valve_INTLKD_ini,
                                         "MAN":self.Valve_MAN_ini,
                                         "ERR":self.Valve_ERR_ini},
+                               "Switch": {"OUT": self.Switch_OUT_ini,
+                                         "INTLKD": self.Switch_INTLKD_ini,
+                                         "MAN": self.Switch_MAN_ini,
+                                         "ERR": self.Switch_ERR_ini},
                                "LOOPPID":{"MODE0": self.LOOPPID_MODE0_ini,
                                           "MODE1": self.LOOPPID_MODE1_ini,
                                           "MODE2": self.LOOPPID_MODE2_ini,
@@ -1367,8 +1401,6 @@ class UpdateServer(QtCore.QObject):
                        "MainAlarm" : self.MainAlarm_ini}
 
         self.data_package=pickle.dumps(self.data_dic)
-
-
 
     @QtCore.Slot()
     def run(self):
@@ -1410,8 +1442,26 @@ class UpdateServer(QtCore.QObject):
             self.TT_BO_dic_ini[key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
             self.PT_dic_ini[key]=self.PLC.PT_dic[key]
+        for key in self.PLC.LEFT_REAL_dic:
+            self.LEFT_REAL_ini[key]=self.PLC.LEFT_REAL_dic[key]
         for key in self.PLC.Valve_OUT:
             self.Valve_OUT_ini[key]=self.PLC.Valve_OUT[key]
+        for key in self.PLC.Valve_INTLKD:
+            self.Valve_INTLKD_ini[key]=self.PLC.Valve_INTLKD[key]
+        for key in self.PLC.Valve_MAN:
+            self.Valve_MAN_ini[key]=self.PLC.Valve_MAN[key]
+        for key in self.PLC.Valve_ERR:
+            self.Valve_ERR_ini[key]=self.PLC.Valve_ERR[key]
+        for key in self.PLC.Switch_OUT:
+            self.Switch_OUT_ini[key]=self.PLC.Switch_OUT[key]
+        for key in self.PLC.Switch_INTLKD:
+            self.Switch_INTLKD_ini[key]=self.PLC.Switch_INTLKD[key]
+        for key in self.PLC.Switch_MAN:
+            self.Switch_MAN_ini[key]=self.PLC.Switch_MAN[key]
+        for key in self.PLC.Switch_ERR:
+            self.Switch_ERR_ini[key]=self.PLC.Switch_ERR[key]
+
+
         for key in self.PLC.TT_FP_Alarm:
             self.TT_FP_Alarm_ini[key] = self.PLC.TT_FP_Alarm[key]
         for key in self.PLC.TT_BO_Alarm:
@@ -1476,7 +1526,6 @@ class UpdateServer(QtCore.QObject):
         #             "\n","SET2", self.data_dic["data"]["LOOPPID"]["SET2"]["HTR6214"],
         #             "\n","SET3", self.data_dic["data"]["LOOPPID"]["SET3"]["HTR6214"])
 
-
         self.data_package=pickle.dumps(self.data_dic)
 
     def write_data(self):
@@ -1492,6 +1541,13 @@ class UpdateServer(QtCore.QObject):
                     if message[key]["operation"]=="OPEN":
                         self.PLC.WriteOpen(address= message[key]["address"])
                     elif message[key]["operation"]=="CLOSE":
+                        self.PLC.WriteClose(address= message[key]["address"])
+                    else:
+                        pass
+                if message[key]["type"]=="switch":
+                    if message[key]["operation"]=="ON":
+                        self.PLC.WriteOpen(address= message[key]["address"])
+                    elif message[key]["operation"]=="OFF":
                         self.PLC.WriteClose(address= message[key]["address"])
                     else:
                         pass

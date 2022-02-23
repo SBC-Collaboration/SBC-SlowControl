@@ -144,8 +144,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.resize(2400*R, 1400*R)  # Open at center using resized
-        self.setMinimumSize(2400*R, 1400*R)
+        self.resize(2400*R, 1450*R)  # Open at center using resized
+        self.setMinimumSize(2400*R, 1450*R)
         self.setWindowTitle("SlowDAQ " + VERSION)
         self.setWindowIcon(QtGui.QIcon(os.path.join(self.ImagePath, "Logo white_resized.png")))
 
@@ -155,7 +155,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
         self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
-        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2400*R, 1400*R))
+        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2400*R, 1450*R))
 
         self.ThermosyphonTab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.ThermosyphonTab, "Thermosyphon Main Panel")
@@ -642,9 +642,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV5309.move(1130*R, 310*R)
 
         # Hydraulic buttons
-        self.PU3305 = Valve(self.HydraulicTab)
-        self.PU3305.Label.setText("PU3305")
-        self.PU3305.move(365*R, 380*R)
+        self.PUMP3305 = Valve(self.HydraulicTab)
+        self.PUMP3305.Label.setText("PUMP3305")
+        self.PUMP3305.move(365*R, 380*R)
+        self.PUMP3305.Set.LButton.setText("ON")
+        self.PUMP3305.Set.RButton.setText("OFF")
 
         self.TT3401 = Indicator(self.HydraulicTab)
         self.TT3401.move(385*R, 500*R)
@@ -734,17 +736,25 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT7403.move(1880*R, 950*R)
         self.TT7403.Label.setText("TT7403")
 
-        self.LI3335 = Indicator(self.HydraulicTab)
-        self.LI3335.move(2100*R, 950*R)
-        self.LI3335.Label.setText("LI3335 ")
+        self.LT3335 = Indicator(self.HydraulicTab)
+        self.LT3335.move(2100*R, 950*R)
+        self.LT3335.Label.setText("LT3335")
+        self.LT3335.SetUnit(" ?")
 
         self.LT3338 = Indicator(self.HydraulicTab)
-        self.LT3338.move(2100*R, 990*R)
-        self.LT3338.Label.setText("LT3338 ")
+        self.LT3338.move(2100*R, 1010*R)
+        self.LT3338.Label.setText("LT3338")
+        self.LT3338.SetUnit(" ?")
 
         self.LT3339 = Indicator(self.HydraulicTab)
-        self.LT3339.move(2100*R, 1030*R)
-        self.LT3339.Label.setText("LT3339 ")
+        self.LT3339.move(2100*R, 1070*R)
+        self.LT3339.Label.setText("LT3339")
+        self.LT3339.SetUnit(" ?")
+
+        self.CYL3334 = Indicator(self.HydraulicTab)
+        self.CYL3334.move(2100 * R, 1160 * R)
+        self.CYL3334.Label.setText("CYL3334")
+        self.CYL3334.SetUnit(" ?")
 
         self.PT1101Hy = Indicator(self.HydraulicTab)
         self.PT1101Hy.move(1900*R, 800*R)
@@ -784,7 +794,7 @@ class MainWindow(QtWidgets.QMainWindow):
                               'HTR6223': 14468, 'HTR6224': 14486, 'HTR6219': 14504, 'HTR6221': 14522, 'HTR6214': 14540, "PV1344":12288, "PV4307":12289,"PV4308":12290,"PV4317":12291,"PV4318":12292,"PV4321":12293,"PV4324":12294,"PV5305":12295,"PV5306":12296,
                        "PV5307":12297,"PV5309":12298,"SV3307":12299,"SV3310":12300,"SV3322":12301,"SV3325":12302,"SV3329":12304,
                        "SV4327":12305,"SV4328":12306,"SV4329":12307,"SV4331":12308,"SV4332":12309, "SV4337": 12310, "HFSV3312": 12311,
-                       "HFSV3323":12312, "HFSV3331":12313,"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
+                       "HFSV3323":12312, "HFSV3331":12313,"PUMP3305": 12688,"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
                            "TT4330": 12998, "TT6203": 13000, "TT6207": 13002, "TT6211": 13004, "TT6213": 13006,
                            "TT6222": 13008, "TT6407": 13010, "TT6408": 13012, "TT6409": 13014, "TT6415": 13016,
                            "TT6416": 13018,"TT2420": 31000, "TT2422": 31002, "TT2424": 31004, "TT2425": 31006, "TT2442": 36000,
@@ -808,10 +818,13 @@ class MainWindow(QtWidgets.QMainWindow):
                              "SV3325": 0, "SV3329": 0,
                              "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
                              "SV4337": 0, "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0}
+
+        self.Switch_buffer = {'PUMP3305': False}
         self.LOOPPID_EN_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                                   'HTR2125': False,
                                   'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
                                   'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
 
 
 
@@ -877,7 +890,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #signal clear the self.command
 
         self.UpClient.client_clear_commands.connect(self.clearcommands)
-        # transport read client data into GUI
+        # transport read client data into GUI, this makes sure that only when new directory comes, main thread will update the display
 
         self.UpClient.client_data_transport.connect(lambda: self.updatedisplay(self.UpClient.receive_dic))
         self.ClientUpdateThread.start()
@@ -954,6 +967,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3323.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3323.Label.text()))
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
+
+        self.PUMP3305.Set.LButton.clicked.connect(lambda x: self.SwitchLButtonClicked(self.PUMP3305.Label.text()))
+        self.PUMP3305.Set.RButton.clicked.connect(lambda x: self.SwitchRButtonClicked(self.PUMP3305.Label.text()))
 
 
         self.SERVO3321.HeaterSubWindow.Mode.LButton.clicked.connect(
@@ -2177,6 +2193,20 @@ class MainWindow(QtWidgets.QMainWindow):
         print(pid, "R Button is clicked")
 
     @QtCore.Slot()
+    def SwitchLButtonClicked(self, pid):
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "switch", "operation": "ON", "value": 1}
+        self.statustransition[pid] = {"server": "BO", "address": self.address[pid], "type": "valve", "operation": "OPEN", "value": 1}
+        print(self.commands)
+        print(pid, "LButton is clicked")
+
+    @QtCore.Slot()
+    def SwitchRButtonClicked(self, pid):
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "switch", "operation": "OFF",
+                              "value": 1}
+        print(self.commands)
+        print(pid, "R Button is clicked")
+
+    @QtCore.Slot()
     def HTLButtonClicked(self, pid):
         self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "heater_power", "operation": "EN",
                               "value": 1}
@@ -2391,7 +2421,7 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot(object)
     def updatedisplay(self, received_dic_c):
         print("Display updating", datetime.datetime.now())
-        print('Display update result for HFSV3331:', received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
+        # print('Display update result for HFSV3331:', received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
 
 
         #Update alarmwindow's widgets' value
@@ -2502,7 +2532,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # print("PV5305_MAN", received_dic_c["data"]["Valve"]["MAN"]["PV5305"])
         # print("SV3307_OUT", received_dic_c["data"]["Valve"]["OUT"]["SV3307"])
         # print("SV3307_MAN", received_dic_c["data"]["Valve"]["MAN"]["SV3307"])
-        print(received_dic_c["data"]["Valve"]["MAN"]["PV1344"])
+        # print(received_dic_c["data"]["Valve"]["MAN"]["PV1344"])
 
         # set whether Valves are manually active or not
 
@@ -2531,6 +2561,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3312.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"])
         self.HFSV3323.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3323"])
         self.HFSV3331.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3331"])
+
+        self.PUMP3305.Set.Activate(received_dic_c["data"]["Switch"]["MAN"]["PUMP3305"])
 
         self.SERVO3321.HeaterSubWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["SERVO3321"])
@@ -2744,7 +2776,14 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.HFSV3331.ActiveState.UpdateColor(False)
 
-        # set Valves' widget busy status
+
+        if received_dic_c["data"]["Switch"]["MAN"]["PUMP3305"] and not received_dic_c["data"]["Switch"]["ERR"]["PUMP3305"]:
+
+            self.PUMP3305.ActiveState.UpdateColor(True)
+        else:
+            self.PUMP3305.ActiveState.UpdateColor(False)
+
+        # reset Valves' widget busy status
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV1344"] != self.Valve_buffer["PV1344"]:
             self.PV1344.Set.ButtonTransitionState(False)
@@ -2896,6 +2935,12 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
+        if received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"] != self.Switch_buffer["PUMP3305"]:
+            self.PUMP3305.State.ButtonTransitionState(False)
+            self.Switch_buffer["PUMP3305"] = received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"]
+        else:
+            pass
+
         #PIDLOOP part
 
         if received_dic_c["data"]["Valve"]["OUT"]["SERVO3321"] != self.Valve_buffer["SERVO3321"]:
@@ -3003,6 +3048,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.Valve_buffer["HTR6214"] = received_dic_c["data"]["Valve"]["OUT"]["HTR6214"]
         else:
             pass
+
 
 
 
@@ -3161,6 +3207,13 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.HFSV3331.Set.ButtonRClicked()
 
+
+        if received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"]:
+
+            self.PUMP3305.Set.ButtonLClicked()
+        else:
+            self.PUMP3305.Set.ButtonRClicked()
+
         # set LOOPPID double button status ON/OFF also the status in the subwindow
 
 
@@ -3300,6 +3353,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.HTR6214.State.ButtonRClicked()
 
 
+
+
+
+
         # set indicators value
 
         self.PT2121.SetValue(received_dic_c["data"]["PT"]["PT2121"])
@@ -3319,6 +3376,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4322.SetValue(received_dic_c["data"]["PT"]["PT4322"])
         self.PT4325.SetValue(received_dic_c["data"]["PT"]["PT4325"])
         self.PT6302.SetValue(received_dic_c["data"]["PT"]["PT6302"])
+
+        self.LT3335.SetValue(received_dic_c["data"]["LEFT_REAL"]["LT3335"])
+        self.BFM4313.SetValue(received_dic_c["data"]["LEFT_REAL"]["BFM4313"])
+        # self.MFC1316.SetValue not given value
+        self.CYL3334.SetValue(received_dic_c["data"]["LEFT_REAL"]["CYL3334_FCALC"])
+
+
 
         self.RTDset4Win.TT2101.SetValue(received_dic_c["data"]["TT"]["BO"]["TT2101"])
         self.RTDset1Win.TT2111.SetValue(received_dic_c["data"]["TT"]["BO"]["TT2111"])
@@ -6988,6 +7052,8 @@ class UpdateClient(QtCore.QObject):
                        "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
 
+        self.LEFT_REAL_dic = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
+
         self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                                "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
                                "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
@@ -7078,7 +7144,10 @@ class UpdateClient(QtCore.QObject):
                          "PT4322": False, "PT4325": False, "PT6302": False}
         self.MainAlarm = False
 
-
+        self.Switch_OUT = {"PUMP3305": 0}
+        self.Switch_MAN = {"PUMP3305": False}
+        self.Switch_INTLKD = {"PUMP3305": False}
+        self.Switch_ERR = {"PUMP3305": False}
 
         self.Valve_OUT = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
                           "PV4324": 0, "PV5305": 0, "PV5306": 0,
@@ -7207,10 +7276,15 @@ class UpdateClient(QtCore.QObject):
         self.receive_dic = {"data":{"TT":{"FP":self.TT_FP_dic,
                                           "BO":self.TT_BO_dic},
                                     "PT":self.PT_dic,
+                                    "LEFT_REAL": self.LEFT_REAL_dic,
                                     "Valve":{"OUT":self.Valve_OUT,
                                              "INTLKD":self.Valve_INTLKD,
                                              "MAN":self.Valve_MAN,
                                              "ERR":self.Valve_ERR},
+                                    "Switch": {"OUT": self.Switch_OUT,
+                                               "INTLKD": self.Switch_INTLKD,
+                                               "MAN": self.Switch_MAN,
+                                               "ERR": self.Switch_ERR},
                                     "LOOPPID":{"MODE0": self.LOOPPID_MODE0,
                                                "MODE1": self.LOOPPID_MODE1,
                                                "MODE2": self.LOOPPID_MODE2,
