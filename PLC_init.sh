@@ -5,7 +5,8 @@ source /home/hep/anaconda3/bin/activate sbcslowcontrol
 which python
 while true; do
 source /home/hep/Downloads/sbc_slowcontrol/SBC-SlowControl/clear_tcp.sh
-python /home/hep/Downloads/sbc_slowcontrol/SBC-SlowControl/PLC.py
+#python /home/hep/Downloads/sbc_slowcontrol/SBC-SlowControl/PLC.py
+python ./PLC.py
 sleep 2
 done
 echo "quit the loop" > ~/ECHO.txt
