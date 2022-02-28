@@ -2937,7 +2937,7 @@ class MainWindow(QtWidgets.QMainWindow):
             pass
 
         if received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"] != self.Switch_buffer["PUMP3305"]:
-            self.PUMP3305.State.ButtonTransitionState(False)
+            self.PUMP3305.Set.ButtonTransitionState(False)
             self.Switch_buffer["PUMP3305"] = received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"]
         else:
             pass
