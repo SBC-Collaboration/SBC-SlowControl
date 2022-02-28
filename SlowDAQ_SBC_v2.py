@@ -2562,6 +2562,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3323.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3323"])
         self.HFSV3331.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3331"])
 
+
         self.PUMP3305.Set.Activate(received_dic_c["data"]["Switch"]["MAN"]["PUMP3305"])
 
         self.SERVO3321.HeaterSubWindow.Mode.Activate(
@@ -7331,6 +7332,7 @@ class UpdateClient(QtCore.QObject):
                 # print(self.receive_dic)
                 message = pickle.loads(self.socket.recv())
 
+
                 # print(f"Received reply [ {message} ]")
                 self.update_data(message)
                 time.sleep(self.period)
@@ -7344,6 +7346,7 @@ class UpdateClient(QtCore.QObject):
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic = message
+        print(self.receive_dic["data"]["Switch"])
         self.client_data_transport.emit()
 
     @QtCore.Slot(object)
