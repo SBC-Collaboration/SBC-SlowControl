@@ -7145,7 +7145,7 @@ class UpdateClient(QtCore.QObject):
         self.MainAlarm = False
 
         self.Switch_OUT = {"PUMP3305": 0}
-        self.Switch_MAN = {"PUMP3305": False}
+        self.Switch_MAN = {"PUMP3305": True}
         self.Switch_INTLKD = {"PUMP3305": False}
         self.Switch_ERR = {"PUMP3305": False}
 
