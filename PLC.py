@@ -544,7 +544,7 @@ class PLC:
                     struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
                 if key =='SERVO3321':
-                     print(self.LOOPPID_HI_LIM[key])
+                     print(self.LOOPPID_ADR_BASE[key] + 8, self.LOOPPID_HI_LIM[key])
 
             ##########################################################################################
 
