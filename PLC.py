@@ -543,6 +543,8 @@ class PLC:
                 self.LOOPPID_SET3[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
+                 if key =='SERVO3321':
+                     print(self.LOOPPID_HI_LIM[key])
 
             ##########################################################################################
 
