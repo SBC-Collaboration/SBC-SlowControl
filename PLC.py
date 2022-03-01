@@ -1624,6 +1624,7 @@ class UpdateServer(QtCore.QObject):
                             self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
 
                         elif message[key]["operation"] == "SET1":
+                            print(True)
                             self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode = 1)
 
                         elif message[key]["operation"] == "SET2":
