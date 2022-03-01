@@ -2484,7 +2484,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2330, self.AlarmButton.SubWindow.PT2335,
-                              self.AlarmButton.SubWindow.PT3308,self.AlarmButton.SubWindow.PT3309, self.AlarmButton.SubWindow.PT3310, self.AlarmButton.SubWindow.PT3311, self.AlarmButton.SubWindow.PT3314,
+                              self.AlarmButton.SubWindow.PT3308,self.AlarmButton.SubWindow.PT3309, self.AlarmButton.SubWindow.PT3311, self.AlarmButton.SubWindow.PT3314,
                               self.AlarmButton.SubWindow.PT3320, self.AlarmButton.SubWindow.PT3333, self.AlarmButton.SubWindow.PT4306, self.AlarmButton.SubWindow.PT4315, self.AlarmButton.SubWindow.PT4319,
                               self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325]
 
