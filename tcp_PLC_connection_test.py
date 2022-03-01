@@ -88,7 +88,7 @@ class PLC:
             Raw_RTDs_BO = self.Client_BO.read_holding_registers(self.BO_address, count=2, unit=0x01)
             # print(Raw_RTDs_BO)
             self.TT_BO_dic = round(
-                struct.unpack("<f", struct.pack("<HH", Raw_RTDs_BO.getRegister(1), Raw_RTDs_BO.getRegister(0)))[0], 3)
+                struct.unpack(">f", struct.pack(">HH", Raw_RTDs_BO.getRegister(1), Raw_RTDs_BO.getRegister(0)))[0], 3)
             print("BO",self.BO_address, self.TT_BO_dic)
 
 
