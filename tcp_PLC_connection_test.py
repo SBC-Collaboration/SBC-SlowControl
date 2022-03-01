@@ -91,6 +91,8 @@ class PLC:
                 struct.unpack(">f", struct.pack(">HH", Raw_RTDs_BO.getRegister(1), Raw_RTDs_BO.getRegister(0)))[0], 3)
             print("BO",self.BO_address, self.TT_BO_dic)
 
+            self.LOOPPID_SET_MODE(address=self.BO_address, mode=1)
+
 
 
             return 0
@@ -176,6 +178,7 @@ class PLC:
 
     def LOOPPID_SET_MODE(self, address, mode=0):
         output_BO = self.Read_BO_1(address)
+        print(struct.unpack("H", output_BO)[0])
         if mode == 0:
             input_BO = struct.unpack("H", output_BO)[0] | 0x0010
             Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
