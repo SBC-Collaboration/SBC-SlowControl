@@ -5369,19 +5369,19 @@ class AlarmWin(QtWidgets.QMainWindow):
         super().__init__(parent)
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1000*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1400*R))
 
         # reset the size of the window
-        self.setMinimumSize(2000*R, 1100*R)
-        self.resize(2000*R, 1100*R)
+        self.setMinimumSize(2300*R, 1400*R)
+        self.resize(2300*R, 1400*R)
         self.setWindowTitle("Alarm Window")
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1100*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1400*R))
 
         self.Tab = QtWidgets.QTabWidget(self)
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
         self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
-        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2400*R, 1400*R))
+        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1400*R))
 
         self.PressureTab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.PressureTab, "Pressure Transducers")
@@ -6448,12 +6448,12 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.resize(2400*R, 1400*R)
-        self.setMinimumSize(2400*R, 1400*R)
+        self.resize(1500*R, 600*R)
+        self.setMinimumSize(1500*R, 600*R)
         self.setWindowTitle("Detailed Information")
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2400*R, 1400*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 600*R))
 
         # Groupboxs for alarm/PT/TT
 
