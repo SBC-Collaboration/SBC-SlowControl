@@ -2429,68 +2429,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #Update alarmwindow's widgets' value
 
-        # self.AlarmButton.SubWindow.TT2101.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2101"])
-        # self.AlarmButton.SubWindow.TT2101.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT2101"])
-        #
-        # self.AlarmButton.SubWindow.TT2111.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2111"])
-        # self.AlarmButton.SubWindow.TT2111.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT2111"])
-        #
-        # self.AlarmButton.SubWindow.TT2113.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2113"])
-        # self.AlarmButton.SubWindow.TT2113.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT2113"])
-        #
-        # self.AlarmButton.SubWindow.TT2118.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2118"])
-        # self.AlarmButton.SubWindow.TT2118.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT2118"])
-        #
-        # self.AlarmButton.SubWindow.TT2119.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2119"])
-        # self.AlarmButton.SubWindow.TT2119.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT2119"])
-        #
-        # self.AlarmButton.SubWindow.TT4330.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT4330"])
-        # self.AlarmButton.SubWindow.TT4330.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT4330"])
-        #
-        # self.AlarmButton.SubWindow.TT6203.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6203"])
-        # self.AlarmButton.SubWindow.TT6203.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT6203"])
-        #
-        # self.AlarmButton.SubWindow.TT6207.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6207"])
-        # self.AlarmButton.SubWindow.TT6207.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT6207"])
-        #
-        # self.AlarmButton.SubWindow.TT6211.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6211"])
-        # self.AlarmButton.SubWindow.TT6211.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT6211"])
-        #
-        # self.AlarmButton.SubWindow.TT6213.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6213"])
-        # self.AlarmButton.SubWindow.TT6213.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT6213"])
-        #
-        # self.AlarmButton.SubWindow.TT6222.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6222"])
-        # self.AlarmButton.SubWindow.TT6222.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT6222"])
-        #
-        # self.AlarmButton.SubWindow.TT6407.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6407"])
-        # self.AlarmButton.SubWindow.TT6407.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT6407"])
-        #
-        # self.AlarmButton.SubWindow.TT6408.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6408"])
-        # self.AlarmButton.SubWindow.TT6408.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT6408"])
-        #
-        # self.AlarmButton.SubWindow.TT6409.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6409"])
-        # self.AlarmButton.SubWindow.TT6409.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT6409"])
-        #
-        # self.AlarmButton.SubWindow.TT6415.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6415"])
-        # self.AlarmButton.SubWindow.TT6415.Indicator.SetValue(
-        #     received_dic_c["data"]["TT"]["BO"]["TT6415"])
-        #
-        # self.AlarmButton.SubWindow.TT6416.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6416"])
-        # self.AlarmButton.SubWindow.TT6416.Indicator.SetValue(received_dic_c["data"]["TT"]["BO"]["TT6416"])
+
 
         self.BORTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2101,self.AlarmButton.SubWindow.TT2111,self.AlarmButton.SubWindow.TT2113,self.AlarmButton.SubWindow.TT2118,self.AlarmButton.SubWindow.TT2119,
                             self.AlarmButton.SubWindow.TT4330,self.AlarmButton.SubWindow.TT6203,self.AlarmButton.SubWindow.TT6207,self.AlarmButton.SubWindow.TT6211,self.AlarmButton.SubWindow.TT6213,
@@ -2542,7 +2481,20 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["Alarm"]["TT"]["FP"][element.Label.text()])
             element.Indicator.SetValue(
                 received_dic_c["data"]["TT"]["FP"][element.Label.text()])
-        self.update_alarmwindow(self.FPRTDAlarmMatrix)
+
+
+        self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT1101,self.AlarmButton.SubWindow.PT2316,self.AlarmButton.SubWindow.PT2321self.AlarmButton.SubWindow.PT2330self.AlarmButton.SubWindow.PT2335,
+                              self.AlarmButton.SubWindow.PT3308,self.AlarmButton.SubWindow.PT3309, self.AlarmButton.SubWindow.PT3310, self.AlarmButton.SubWindow.PT3311, self.AlarmButton.SubWindow.PT3314,
+                              self.AlarmButton.SubWindow.PT3320, self.AlarmButton.SubWindow.PT3333, self.AlarmButton.SubWindow.PT4306, self.AlarmButton.SubWindow.PT4315, self.AlarmButton.SubWindow.PT4319,
+                              self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325]
+
+        for element in self.PTAlarmMatrix:
+            # print(element.Label.text())
+
+            element.UpdateAlarm(
+                received_dic_c["Alarm"]["PT"][element.Label.text()])
+            element.Indicator.SetValue(
+                received_dic_c["data"]["PT"][element.Label.text()])
 
 
 
