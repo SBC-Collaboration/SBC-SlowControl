@@ -279,7 +279,7 @@ class SetPoint(QtWidgets.QWidget):
         self.Label.setStyleSheet("QLabel {" +FONT+"}")
 
         self.Field = QtWidgets.QLineEdit(self)
-        self.Field.setValidator(QtGui.QIntValidator(0*R, 1000*R, self))
+        self.Field.setValidator(QtGui.QDoubleValidator(-1000,1000,2))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setObjectName("setpoint value")
         self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))

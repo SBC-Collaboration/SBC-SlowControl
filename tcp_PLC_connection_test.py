@@ -227,133 +227,133 @@ class PLC:
 
 
 
-
-
-class Update(QtCore.QObject):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        App.aboutToQuit.connect(self.StopUpdater)
-        self.StartUpdater()
-
-    def StartUpdater(self):
-        self.PLC = PLC()
-
-        # Read PLC value on another thread
-        self.PLCUpdateThread = QtCore.QThread()
-        self.UpPLC = UpdatePLC(self.PLC)
-        self.UpPLC.moveToThread(self.PLCUpdateThread)
-        self.PLCUpdateThread.started.connect(self.UpPLC.run)
-        self.PLCUpdateThread.start()
-
-
-
-        # Stop all updater threads
-    @QtCore.Slot()
-    def StopUpdater(self):
-        self.UpPLC.stop()
-        self.PLCUpdateThread.quit()
-        self.PLCUpdateThread.wait()
-
-        self.UpDatabase.stop()
-        self.DataUpdateThread.quit()
-        self.DataUpdateThread.wait()
-
-        self.UpServer.stop()
-        self.ServerUpdateThread.quit()
-        self.ServerUpdateThread.wait()
-
-class message_manager():
-    def __init__(self):
-        # info about tencent mail settings
-        self.host_server = "smtp.qq.com"
-        self.sender_qq = "390282332"
-        self.pwd = "bngozrzmzsbocafa"
-        self.sender_mail = "390282332@qq.com"
-        # self.receiver1_mail = "cdahl@northwestern.edu"
-        self.receiver1_mail = "runzezhang@foxmail.com"
-        self.mail_title = "Alarm from SBC"
-
-        #info about slack settings
-        self.slack_webhook_url = 'https://hooks.slack.com/services/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'
-        self.slack_channel = None
-        self.alert_map = {
-            "emoji": {
-                "up": ":white_check_mark:",
-                "down": ":fire:"
-            },
-            "text": {
-                "up": "RESOLVED",
-                "down": "FIRING"
-            },
-            "message": {
-                "up": "Everything is good!",
-                "down": "Stuff is burning!"
-            },
-            "color": {
-                "up": "#32a852",
-                "down": "#ad1721"
-            }
-        }
-
-    def tencent_alarm(self, message):
-        try:
-            # The body content of the mail
-            mail_content = " Alarm from SBC slowcontrol: " + message
-            # sslLogin
-            smtp = SMTP_SSL(self.host_server)
-            # set_debuglevel() is used for debugging. The parameter value is 1 to enable debug mode and 0 to disable debug mode.
-            smtp.set_debuglevel(1)
-            smtp.ehlo(self.host_server)
-            smtp.login(self.sender_qq, self.pwd)
-            # Define mail content
-            msg = MIMEText(mail_content, "plain", "utf-8")
-            msg["Subject"] = Header(self.mail_title, "utf-8")
-            msg["From"] = self.sender_mail
-            msg["To"] = self.receiver1_mail
-            # send email
-            smtp.sendmail(self.sender_mail, self.receiver1_mail, msg.as_string())
-            smtp.quit()
-            print("mail sent successfully")
-        except Exception as e:
-            print("mail failed to send")
-            print(e)
-
-    def slack_alarm(self, message, status=None):
-        data = {
-            "text": "AlertManager",
-            "username": "Notifications",
-            "channel": self.slack_channel,
-            "attachments": [{"text": message}]
-        #     "attachments": [g
-        #         {
-        #             "text": "{emoji} [*{state}*] Status Checker\n {message}".format(
-        #                 emoji=self.alert_map["emoji"][status],
-        #                 state=self.alert_map["text"][status],
-        #                 message=self.alert_map["message"][status]
-        #             ),
-        #             "color": self.alert_map["color"][status],
-        #             "attachment_type": "default",
-        #             "actions": [
-        #                 {
-        #                     "name": "Logs",f
-        #                     "text": "Logs",
-        #                     "type": "button",
-        #                     "style": "primary",
-        #                     "url": "https://grafana-logs.dashboard.local"
-        #                 },
-        #                 {
-        #                     "name": "Metrics",
-        #                     "text": "Metrics",
-        #                     "type": "button",
-        #                     "style": "primary",
-        #                     "url": "https://grafana-metrics.dashboard.local"
-        #                 }
-        #             ]
-        #         }]
-        }
-        r = requests.post(self.slack_webhook_url, json=data)
-        return r.status_code
-
+#
+#
+# class Update(QtCore.QObject):
+#     def __init__(self, parent=None):
+#         super().__init__(parent)
+#         App.aboutToQuit.connect(self.StopUpdater)
+#         self.StartUpdater()
+#
+#     def StartUpdater(self):
+#         self.PLC = PLC()
+#
+#         # Read PLC value on another thread
+#         self.PLCUpdateThread = QtCore.QThread()
+#         self.UpPLC = UpdatePLC(self.PLC)
+#         self.UpPLC.moveToThread(self.PLCUpdateThread)
+#         self.PLCUpdateThread.started.connect(self.UpPLC.run)
+#         self.PLCUpdateThread.start()
+#
+#
+#
+#         # Stop all updater threads
+#     @QtCore.Slot()
+#     def StopUpdater(self):
+#         self.UpPLC.stop()
+#         self.PLCUpdateThread.quit()
+#         self.PLCUpdateThread.wait()
+#
+#         self.UpDatabase.stop()
+#         self.DataUpdateThread.quit()
+#         self.DataUpdateThread.wait()
+#
+#         self.UpServer.stop()
+#         self.ServerUpdateThread.quit()
+#         self.ServerUpdateThread.wait()
+#
+# class message_manager():
+#     def __init__(self):
+#         # info about tencent mail settings
+#         self.host_server = "smtp.qq.com"
+#         self.sender_qq = "390282332"
+#         self.pwd = "bngozrzmzsbocafa"
+#         self.sender_mail = "390282332@qq.com"
+#         # self.receiver1_mail = "cdahl@northwestern.edu"
+#         self.receiver1_mail = "runzezhang@foxmail.com"
+#         self.mail_title = "Alarm from SBC"
+#
+#         #info about slack settings
+#         self.slack_webhook_url = 'https://hooks.slack.com/services/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'
+#         self.slack_channel = None
+#         self.alert_map = {
+#             "emoji": {
+#                 "up": ":white_check_mark:",
+#                 "down": ":fire:"
+#             },
+#             "text": {
+#                 "up": "RESOLVED",
+#                 "down": "FIRING"
+#             },
+#             "message": {
+#                 "up": "Everything is good!",
+#                 "down": "Stuff is burning!"
+#             },
+#             "color": {
+#                 "up": "#32a852",
+#                 "down": "#ad1721"
+#             }
+#         }
+#
+#     def tencent_alarm(self, message):
+#         try:
+#             # The body content of the mail
+#             mail_content = " Alarm from SBC slowcontrol: " + message
+#             # sslLogin
+#             smtp = SMTP_SSL(self.host_server)
+#             # set_debuglevel() is used for debugging. The parameter value is 1 to enable debug mode and 0 to disable debug mode.
+#             smtp.set_debuglevel(1)
+#             smtp.ehlo(self.host_server)
+#             smtp.login(self.sender_qq, self.pwd)
+#             # Define mail content
+#             msg = MIMEText(mail_content, "plain", "utf-8")
+#             msg["Subject"] = Header(self.mail_title, "utf-8")
+#             msg["From"] = self.sender_mail
+#             msg["To"] = self.receiver1_mail
+#             # send email
+#             smtp.sendmail(self.sender_mail, self.receiver1_mail, msg.as_string())
+#             smtp.quit()
+#             print("mail sent successfully")
+#         except Exception as e:
+#             print("mail failed to send")
+#             print(e)
+#
+#     def slack_alarm(self, message, status=None):
+#         data = {
+#             "text": "AlertManager",
+#             "username": "Notifications",
+#             "channel": self.slack_channel,
+#             "attachments": [{"text": message}]
+#         #     "attachments": [g
+#         #         {
+#         #             "text": "{emoji} [*{state}*] Status Checker\n {message}".format(
+#         #                 emoji=self.alert_map["emoji"][status],
+#         #                 state=self.alert_map["text"][status],
+#         #                 message=self.alert_map["message"][status]
+#         #             ),
+#         #             "color": self.alert_map["color"][status],
+#         #             "attachment_type": "default",
+#         #             "actions": [
+#         #                 {
+#         #                     "name": "Logs",f
+#         #                     "text": "Logs",
+#         #                     "type": "button",
+#         #                     "style": "primary",
+#         #                     "url": "https://grafana-logs.dashboard.local"
+#         #                 },
+#         #                 {
+#         #                     "name": "Metrics",
+#         #                     "text": "Metrics",
+#         #                     "type": "button",
+#         #                     "style": "primary",
+#         #                     "url": "https://grafana-metrics.dashboard.local"
+#         #                 }
+#         #             ]
+#         #         }]
+#         }
+#         r = requests.post(self.slack_webhook_url, json=data)
+#         return r.status_code
+#
 
 
 
@@ -362,7 +362,7 @@ if __name__ == "__main__":
     # msg_mana.tencent_alarm("this is a test message")
 
     App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
+    # Update=Update()
 
 
     PLC=PLC()

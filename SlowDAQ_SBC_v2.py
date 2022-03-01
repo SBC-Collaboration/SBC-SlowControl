@@ -996,9 +996,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SERVO3321.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.SERVO3321.HeaterSubWindow.Label.text(),
                                      self.SERVO3321.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.SERVO3321.HeaterSubWindow.SP.Field.text()),
-                                     int(self.SERVO3321.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.SERVO3321.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.SERVO3321.HeaterSubWindow.SP.Field.text()),
+                                     float(self.SERVO3321.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.SERVO3321.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6225.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6225.HeaterSubWindow.Label.text()))
@@ -1017,9 +1017,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6225.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6225.HeaterSubWindow.Label.text(),
                                      self.HTR6225.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6225.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6225.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6225.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6225.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6225.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6225.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR2123.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR2123.HeaterSubWindow.Label.text()))
@@ -1038,9 +1038,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2123.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR2123.HeaterSubWindow.Label.text(),
                                      self.HTR2123.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR2123.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR2123.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR2123.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR2123.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR2123.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR2123.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR2124.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR2124.HeaterSubWindow.Label.text()))
@@ -1059,9 +1059,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2124.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR2124.HeaterSubWindow.Label.text(),
                                      self.HTR2124.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR2124.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR2124.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR2124.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR2124.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR2124.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR2124.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR2125.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR2125.HeaterSubWindow.Label.text()))
@@ -1079,9 +1079,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2125.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR2125.HeaterSubWindow.Label.text(),
                                      self.HTR2125.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR2125.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR2125.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR2125.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR2125.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR2125.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR2125.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR1202.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR1202.HeaterSubWindow.Label.text()))
@@ -1099,9 +1099,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR1202.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR1202.HeaterSubWindow.Label.text(),
                                      self.HTR1202.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR1202.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR1202.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR1202.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR1202.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR1202.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR1202.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR2203.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR2203.HeaterSubWindow.Label.text()))
@@ -1119,9 +1119,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2203.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR2203.HeaterSubWindow.Label.text(),
                                      self.HTR2203.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR2203.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR2203.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR2203.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR2203.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR2203.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR2203.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6202.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6202.HeaterSubWindow.Label.text()))
@@ -1139,9 +1139,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6202.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6202.HeaterSubWindow.Label.text(),
                                      self.HTR6202.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6202.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6202.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6202.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6202.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6202.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6202.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6206.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6206.HeaterSubWindow.Label.text()))
@@ -1159,9 +1159,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6206.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6206.HeaterSubWindow.Label.text(),
                                      self.HTR6206.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6206.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6206.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6206.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6206.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6206.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6206.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6210.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6210.HeaterSubWindow.Label.text()))
@@ -1179,9 +1179,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6210.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6210.HeaterSubWindow.Label.text(),
                                      self.HTR6210.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6210.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6210.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6210.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6210.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6210.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6210.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6223.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6223.HeaterSubWindow.Label.text()))
@@ -1199,9 +1199,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6223.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6223.HeaterSubWindow.Label.text(),
                                      self.HTR6223.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6223.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6223.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6223.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6223.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6223.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6223.HeaterSubWindow.LOSP.Field.text())))
 
 
         self.HTR6224.HeaterSubWindow.Mode.LButton.clicked.connect(
@@ -1220,9 +1220,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6224.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6224.HeaterSubWindow.Label.text(),
                                      self.HTR6224.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6224.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6224.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6224.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6224.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6224.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6224.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6219.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6219.HeaterSubWindow.Label.text()))
@@ -1240,9 +1240,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6219.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6219.HeaterSubWindow.Label.text(),
                                      self.HTR6219.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6219.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6219.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6219.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6219.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6219.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6219.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6221.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6221.HeaterSubWindow.Label.text()))
@@ -1260,9 +1260,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6221.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6221.HeaterSubWindow.Label.text(),
                                      self.HTR6221.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6221.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6221.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6221.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6221.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6221.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6221.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6214.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
@@ -1280,9 +1280,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6214.HeaterSubWindow.Label.text(),
                                      self.HTR6214.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6214.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6214.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6214.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6214.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6214.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6214.HeaterSubWindow.LOSP.Field.text())))
 
         # Beckoff RTDs
 
