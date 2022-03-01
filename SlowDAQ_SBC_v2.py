@@ -2524,8 +2524,8 @@ class MainWindow(QtWidgets.QMainWindow):
             element.UpdateAlarm(
 
                 received_dic_c["Alarm"]["TT"]["FP"][element.Label.text()])
-        #     element.Indicator.SetValue(
-        #         received_dic_c["data"]["TT"]["FP"][element.Label.text()])
+            element.Indicator.SetValue(
+                received_dic_c["data"]["TT"]["FP"][element.Label.text()])
         self.update_alarmwindow(FPRTDAlarmMatrix)
 
 
@@ -6448,12 +6448,12 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.resize(1500*R, 600*R)
-        self.setMinimumSize(1500*R, 600*R)
+        self.resize(1800*R, 900*R)
+        self.setMinimumSize(1800*R, 900*R)
         self.setWindowTitle("Detailed Information")
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 600*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1800*R, 900*R))
 
         # Groupboxs for alarm/PT/TT
 
