@@ -1618,23 +1618,24 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 3)
                         self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"], value=message[key]["value"]["HI_LIM"])
                         self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"], value=message[key]["value"]["LO_LIM"])
+                    else:
+                        pass
 
-                    elif message[key]["type"] == "heater_setmode":
-                        if message[key]["operation"] == "SET0":
-                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
+                elif message[key]["type"] == "heater_setmode":
+                    if message[key]["operation"] == "SET0":
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
 
-                        elif message[key]["operation"] == "SET1":
-                            print(True)
-                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode = 1)
+                    elif message[key]["operation"] == "SET1":
+                        print(True)
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode = 1)
 
-                        elif message[key]["operation"] == "SET2":
-                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
+                    elif message[key]["operation"] == "SET2":
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
 
-                        elif message[key]["operation"] == "SET3":
-                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
+                    elif message[key]["operation"] == "SET3":
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
 
                     else:
-                        print("PASS\n PASS")
                         pass
 
 
