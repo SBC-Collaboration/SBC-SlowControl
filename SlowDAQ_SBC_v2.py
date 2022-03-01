@@ -3502,7 +3502,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                received_dic_c["data"]["LOOPPID"]["SET1"]["SERVO3321"],
                                received_dic_c["data"]["LOOPPID"]["SET2"]["SERVO3321"],
                                received_dic_c["data"]["LOOPPID"]["SET3"]["SERVO3321"]))
-        self.HTR6214.Power.SetValue(
+        self.SERVO3321.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["SERVO3321"])
 
         self.HTR6225.HeaterSubWindow.Interlock.UpdateColor(
