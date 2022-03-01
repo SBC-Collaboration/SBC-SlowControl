@@ -719,6 +719,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SERVO3321.HeaterSubWindow.Label.setText("SERVO3321")
         self.SERVO3321.HeaterSubWindow.RTD1.Label.setText("EMPTY")
         self.SERVO3321.HeaterSubWindow.RTD2.Label.setText("EMPTY")
+        self.SERVO3321.HeaterSubWindow.LOSP.Field.setText('-100')
+        self.SERVO3321.HeaterSubWindow.HISP.Field.setText('100')
+
 
         self.SV3325 = Valve(self.HydraulicTab)
         self.SV3325.Label.setText("SV3325")
@@ -2523,6 +2526,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["Alarm"]["TT"]["FP"][element.Label.text()])
         #     element.Indicator.SetValue(
         #         received_dic_c["data"]["TT"]["FP"][element.Label.text()])
+        self.update_alarmwindow(FPRTDAlarmMatrix)
 
 
 
@@ -4023,24 +4027,21 @@ class MainWindow(QtWidgets.QMainWindow):
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6214"])
 
     @QtCore.Slot(object)
-    def update_alarmwindow(self,dic):
+    def update_alarmwindow(self,list):
         # if len(dic)>0:
         #     print(dic)
 
-        self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
-                                          self.AlarmButton.SubWindow.TT2112.Alarm,
-                                          self.AlarmButton.SubWindow.TT2113.Alarm,
-                                          self.AlarmButton.SubWindow.TT2114.Alarm,
-                                          self.AlarmButton.SubWindow.TT2115.Alarm,
-                                          self.AlarmButton.SubWindow.TT2116.Alarm,
-                                          self.AlarmButton.SubWindow.TT2117.Alarm,
-                                          self.AlarmButton.SubWindow.TT2118.Alarm,
-                                          self.AlarmButton.SubWindow.TT2119.Alarm,
-                                          self.AlarmButton.SubWindow.TT2120.Alarm])
+        self.AlarmButton.CollectAlarm(list)
         # print("Alarm Status=", self.AlarmButton.Button.Alarm)
         if self.AlarmButton.Button.Alarm:
             self.AlarmButton.ButtonAlarmSetSignal()
             self.AlarmButton.SubWindow.ReassignRTD1Order()
+            self.AlarmButton.SubWindow.ReassignRTD2Order()
+            self.AlarmButton.SubWindow.ReassignRTD3Order()
+            self.AlarmButton.SubWindow.ReassignRTD4Order()
+            self.AlarmButton.SubWindow.ReassignRTDLEFTOrder()
+            self.AlarmButton.SubWindow.ReassignPTOrder()
+
 
         else:
             self.AlarmButton.ButtonAlarmResetSignal()
@@ -6447,12 +6448,12 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.resize(1200*R, 600*R)
-        self.setMinimumSize(1200*R, 600*R)
+        self.resize(1500*R, 600*R)
+        self.setMinimumSize(1500*R, 600*R)
         self.setWindowTitle("Detailed Information")
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 600*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 600*R))
 
         # Groupboxs for alarm/PT/TT
 
@@ -6491,6 +6492,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.Mode.Label.setText("Mode")
         self.GLWR.addWidget(self.Mode)
 
+
         self.LOSP = SetPoint(self.GroupWR)
         self.LOSP.Label.setText("LO SET")
         self.GLWR.addWidget(self.LOSP)
@@ -6527,6 +6529,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
 
         self.ModeREAD = Indicator(self.GroupRD)
         self.ModeREAD.Label.setText("Mode")
+        self.ModeREAD.Field.setText('MODE0')
         self.GLRD.addWidget(self.ModeREAD)
 
         self.EN = ColoredStatus(self.GroupRD, mode = 4)
