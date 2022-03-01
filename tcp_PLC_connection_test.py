@@ -57,7 +57,8 @@ class PLC:
 
         self.FP_address = 12288
 
-        self.BO_address = 14294
+        # self.BO_address = 14294
+        self.BO_address = 12988
 
 
 
