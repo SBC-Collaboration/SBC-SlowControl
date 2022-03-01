@@ -2533,6 +2533,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
+        print(received_dic_c["Alarm"]["PT"])
+
+
+
 
         for element in self.PTAlarmMatrix:
             # print(element.Label.text())
