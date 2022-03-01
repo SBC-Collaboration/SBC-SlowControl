@@ -1634,6 +1634,7 @@ class UpdateServer(QtCore.QObject):
                             self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
 
                     else:
+                        print("PASS\n PASS")
                         pass
 
 
