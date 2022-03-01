@@ -490,7 +490,14 @@ class PLC:
                 self.Switch_ERR[key] = self.ReadCoil(32, self.Switch_address[key])
 
 
-            Raw_LOOPPID_2 = Raw_LOOPPID_4 = Raw_LOOPPID_6 = Raw_LOOPPID_8 = Raw_LOOPPID_10 = Raw_LOOPPID_12 = Raw_LOOPPID_14 = Raw_LOOPPID_16 ={}
+            Raw_LOOPPID_2 = {}
+            Raw_LOOPPID_4 = {}
+            Raw_LOOPPID_6 = {}
+            Raw_LOOPPID_8 = {}
+            Raw_LOOPPID_10 = {}
+            Raw_LOOPPID_12 = {}
+            Raw_LOOPPID_14 = {}
+            Raw_LOOPPID_16 ={}
             for key in self.LOOPPID_ADR_BASE:
                 self.LOOPPID_MODE0[key] = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
                 self.LOOPPID_MODE1[key] = self.ReadCoil(2, self.LOOPPID_ADR_BASE[key])
