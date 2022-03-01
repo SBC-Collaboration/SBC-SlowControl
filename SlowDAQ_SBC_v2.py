@@ -7349,7 +7349,6 @@ class UpdateClient(QtCore.QObject):
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic = message
-        print(self.receive_dic["data"])
         self.client_data_transport.emit()
 
     @QtCore.Slot(object)
