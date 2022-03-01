@@ -489,7 +489,6 @@ class PLC:
                 self.Switch_MAN[key] = self.ReadCoil(16, self.Switch_address[key])
                 self.Switch_ERR[key] = self.ReadCoil(32, self.Switch_address[key])
 
-
             Raw_LOOPPID_2 = {}
             Raw_LOOPPID_4 = {}
             Raw_LOOPPID_6 = {}
@@ -550,8 +549,6 @@ class PLC:
                 self.LOOPPID_SET3[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
-                if key =='SERVO3321':
-                     print(self.LOOPPID_ADR_BASE[key] + 8, self.LOOPPID_HI_LIM[key])
 
             ##########################################################################################
 
