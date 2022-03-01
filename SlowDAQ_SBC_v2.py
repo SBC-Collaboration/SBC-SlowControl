@@ -6448,12 +6448,12 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.resize(1800*R, 900*R)
-        self.setMinimumSize(1800*R, 900*R)
+        self.resize(2000*R, 1200*R)
+        self.setMinimumSize(2000*R, 1200*R)
         self.setWindowTitle("Detailed Information")
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1800*R, 900*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1200*R))
 
         # Groupboxs for alarm/PT/TT
 
