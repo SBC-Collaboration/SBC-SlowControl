@@ -18,9 +18,7 @@ from email.mime.text import MIMEText
 from email.header import Header
 from smtplib import SMTP_SSL
 import requests
-import logging,os
-from slack_sdk import WebClient
-from slack_sdk.errors import SlackApiError
+import os
 
 # delete random number package when you read real data from PLC
 import random
@@ -1736,9 +1734,26 @@ class message_manager():
         self.mail_title = "Alarm from SBC"
 
         #info about slack settings
-        self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
-        self.logger = logging.getLogger(__name__)
-        self.channel_id = "C01918B8WDD"
+        self.slack_webhook_url = 'https://hooks.slack.com/services/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'
+        self.slack_channel = None
+        self.alert_map = {
+            "emoji": {
+                "up": ":white_check_mark:",
+                "down": ":fire:"
+            },
+            "text": {
+                "up": "RESOLVED",
+                "down": "FIRING"
+            },
+            "message": {
+                "up": "Everything is good!",
+                "down": "Stuff is burning!"
+            },
+            "color": {
+                "up": "#32a852",
+                "down": "#ad1721"
+            }
+        }
 
     def tencent_alarm(self, message):
         try:
@@ -1763,22 +1778,41 @@ class message_manager():
             print("mail failed to send")
             print(e)
 
-    def slack_alarm(self, message):
-        # ID of channel you want to post message to
-
-
-        try:
-            # Call the conversations.list method using the WebClient
-            result = self.client.chat_postMessage(
-                channel=self.channel_id,
-                text=message
-                # You could also use a blocks[] array to send richer content
-            )
-            # Print result, which includes information about the message (like TS)
-            print(result)
-
-        except SlackApiError as e:
-            print(f"Error: {e}")
+    def slack_alarm(self, message, status=None):
+        data = {
+            "text": "AlertManager",
+            "username": "Notifications",
+            "channel": self.slack_channel,
+            "attachments": [{"text": message}]
+        #     "attachments": [g
+        #         {
+        #             "text": "{emoji} [*{state}*] Status Checker\n {message}".format(
+        #                 emoji=self.alert_map["emoji"][status],
+        #                 state=self.alert_map["text"][status],
+        #                 message=self.alert_map["message"][status]
+        #             ),
+        #             "color": self.alert_map["color"][status],
+        #             "attachment_type": "default",
+        #             "actions": [
+        #                 {
+        #                     "name": "Logs",f
+        #                     "text": "Logs",
+        #                     "type": "button",
+        #                     "style": "primary",
+        #                     "url": "https://grafana-logs.dashboard.local"
+        #                 },
+        #                 {
+        #                     "name": "Metrics",
+        #                     "text": "Metrics",
+        #                     "type": "button",
+        #                     "style": "primary",
+        #                     "url": "https://grafana-metrics.dashboard.local"
+        #                 }
+        #             ]
+        #         }]
+        }
+        r = requests.post(self.slack_webhook_url, json=data)
+        return r.status_code
 
 
 
