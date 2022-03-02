@@ -1290,6 +1290,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.TT_FP_Alarm[pid] = True
         # and send email or slack messages
         # every time interval send a alarm message
+        print(self.TT_FP_para)
         if self.TT_FP_para>=self.TT_FP_rate:
             msg = "SBC alarm: {pid} is out of range".format(pid=pid)
             # self.message_manager.tencent_alarm(msg)
@@ -1306,6 +1307,7 @@ class UpdatePLC(QtCore.QObject):
     def TTBOalarmmsg(self, pid):
         self.PLC.TT_BO_Alarm[pid] = True
         # and send email or slack messages
+        print(self.TT_BO_para)
         if self.TT_BO_para >= self.TT_BO_rate:
             msg = "SBC alarm: {pid} is out of range".format(pid=pid)
             # self.message_manager.tencent_alarm(msg)
