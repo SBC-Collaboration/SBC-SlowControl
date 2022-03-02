@@ -165,27 +165,27 @@ class PLC:
                             "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
                             "PT4322": 300, "PT4325": 300, "PT6302": 300}
 
-        self.TT_FP_Activated = {"TT2420": True, "TT2422": True, "TT2424": True, "TT2425": True, "TT2442": True,
-                              "TT2403": True, "TT2418": True, "TT2427": True, "TT2429": True, "TT2431": True,
-                              "TT2441": True, "TT2414": True, "TT2413": True, "TT2412": True, "TT2415": True,
-                              "TT2409": True, "TT2436": True, "TT2438": True, "TT2440": True, "TT2402": True,
-                              "TT2411": True, "TT2443": True, "TT2417": True, "TT2404": True, "TT2408": True,
-                              "TT2407": True, "TT2406": True, "TT2428": True, "TT2432": True, "TT2421": True,
-                              "TT2416": True, "TT2439": True, "TT2419": True, "TT2423": True, "TT2426": True,
-                              "TT2430": True, "TT2450": True, "TT2401": True, "TT2449": True, "TT2445": True,
-                              "TT2444": True, "TT2435": True, "TT2437": True, "TT2446": True, "TT2447": True,
-                              "TT2448": True, "TT2410": True, "TT2405": True, "TT6220": True, "TT6401": True,
-                              "TT6404": True, "TT6405": True, "TT6406": True, "TT6410": True, "TT6411": True,
-                              "TT6412": True, "TT6413": True, "TT6414": True}
+        self.TT_FP_Activated = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
+                              "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
+                              "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
+                              "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
+                              "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
+                              "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
+                              "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
+                              "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
+                              "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
+                              "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
+                              "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
+                              "TT6412": False, "TT6413": False, "TT6414": False}
 
-        self.TT_BO_Activated = {"TT2101": True, "TT2111": True, "TT2113": True, "TT2118": True, "TT2119": True, "TT4330": True,
-                             "TT6203": True, "TT6207": True, "TT6211": True, "TT6213": True, "TT6222": True,
-                             "TT6407": True, "TT6408": True, "TT6409": True, "TT6415": True, "TT6416": True}
+        self.TT_BO_Activated = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
+                             "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
+                             "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
 
-        self.PT_Activated = {"PT1325": True, "PT2121": True, "PT2316": True, "PT2330": True, "PT2335": True,
-                             "PT3308": True, "PT3309": True, "PT3311": True, "PT3314": True, "PT3320": True,
-                             "PT3332": True, "PT3333": True, "PT4306": True, "PT4315": True, "PT4319": True,
-                             "PT4322": True, "PT4325": True, "PT6302": True}
+        self.PT_Activated = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
+                             "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
+                             "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
+                             "PT4322": False, "PT4325": False, "PT6302": False}
 
         self.TT_FP_Alarm = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
                               "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
