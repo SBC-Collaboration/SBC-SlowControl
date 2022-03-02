@@ -1186,6 +1186,12 @@ class UpdatePLC(QtCore.QObject):
         self.message_manager = message_manager()
         self.Running = False
         self.period=1
+        self.TT_FP_para = 0
+        self.TT_FP_rate = 30
+        self.TT_BO_para = 0
+        self.TT_BO_rate = 30
+        self.PT_para = 0
+        self.PT_rate = 30
 
     @QtCore.Slot()
     def run(self):
@@ -1221,19 +1227,19 @@ class UpdatePLC(QtCore.QObject):
                 print("Low limit should be less than high limit!")
             else:
                 if int(self.PLC.TT_FP_dic[pid]) < int(self.PLC.TT_FP_LowLimit[pid]):
-                    self.setTTFPalarm(pid)
+                    self.TTFPalarmmsg(pid)
                     self.PLC.TT_FP_Alarm[pid] = True
                     # print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.TT_FP_dic[pid]) > int(self.PLC.TT_FP_HighLimit[pid]):
-                    self.setTTFPalarm(pid)
+                    self.TTFPalarmmsg(pid)
                     self.PLC.TT_FP_Alarm[pid] = True
                     # print(pid,  " reading is higher than the high limit")
                 else:
-                    self.resetTTFPalarm(pid)
+                    self.resetTTFPalarmmsg(pid)
                     # print(pid, " is in normal range")
 
         else:
-            self.resetTTFPalarm(pid)
+            self.resetTTFPalarmmsg(pid)
             pass
 
     def check_TT_BO_alarm(self, pid):
@@ -1243,19 +1249,19 @@ class UpdatePLC(QtCore.QObject):
                 print("Low limit should be less than high limit!")
             else:
                 if int(self.PLC.TT_BO_dic[pid]) < int(self.PLC.TT_BO_LowLimit[pid]):
-                    self.setTTBOalarm(pid)
+                    self.TTBOalarmmsg(pid)
                     self.PLC.TT_BO_Alarm[pid] = True
                     # print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.TT_BO_dic[pid]) > int(self.PLC.TT_BO_HighLimit[pid]):
-                    self.setTTBOalarm(pid)
+                    self.TTBOalarmmsg(pid)
                     self.PLC.TT_BO_Alarm[pid] = True
                     # print(pid,  " reading is higher than the high limit")
                 else:
-                    self.resetTTBOalarm(pid)
+                    self.resetTTBOalarmmsg(pid)
                     # print(pid, " is in normal range")
 
         else:
-            self.resetTTBOalarm(pid)
+            self.resetTTBOalarmmsg(pid)
             pass
 
     def check_PT_alarm(self, pid):
@@ -1265,55 +1271,68 @@ class UpdatePLC(QtCore.QObject):
                 print("Low limit should be less than high limit!")
             else:
                 if int(self.PLC.PT_dic[pid]) < int(self.PLC.PT_LowLimit[pid]):
-                    self.setPTalarm(pid)
+                    self.PTalarmmsg(pid)
                     self.PLC.PT_Alarm[pid] = True
                     # print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.PT_dic[pid]) > int(self.PLC.PT_HighLimit[pid]):
-                    self.setPTalarm(pid)
+                    self.PTalarmmsg(pid)
                     self.PLC.PT_Alarm[pid] = True
                     # print(pid,  " reading is higher than the high limit")
                 else:
-                    self.resetPTalarm(pid)
+                    self.resetPTalarmmsg(pid)
                     # print(pid, " is in normal range")
 
         else:
-            self.resetPTalarm(pid)
+            self.resetPTalarmmsg(pid)
             pass
 
-    def setTTFPalarm(self, pid):
+    def TTFPalarmmsg(self, pid):
         self.PLC.TT_FP_Alarm[pid] = True
         # and send email or slack messages
-        msg = "SBC alarm: {pid} is out of range".format(pid=pid)
-        print(msg)
-        # self.message_manager.tencent_alarm(msg)
-        self.message_manager.slack_alarm(msg)
+        # every time interval send a alarm message
+        if self.TT_FP_para>=self.TT_BO_rate:
+            msg = "SBC alarm: {pid} is out of range".format(pid=pid)
+            # self.message_manager.tencent_alarm(msg)
+            self.message_manager.slack_alarm(msg)
+            self.TT_FP_para = 0
+        else:
+            self.TT_FP_para += 1
 
-    def resetTTFPalarm(self, pid):
+    def resetTTFPalarmmsg(self, pid):
         self.PLC.TT_FP_Alarm[pid] = False
+        self.TT_FP_para = 0
         # and send email or slack messages
 
-    def setTTBOalarm(self, pid):
+    def TTBOalarmmsg(self, pid):
         self.PLC.TT_BO_Alarm[pid] = True
         # and send email or slack messages
-        msg = "SBC alarm: {pid} is out of range".format(pid=pid)
-        print(msg)
-        # self.message_manager.tencent_alarm(msg)
-        self.message_manager.slack_alarm(msg)
+        if self.TT_BO_para >= self.TT_BO_rate:
+            msg = "SBC alarm: {pid} is out of range".format(pid=pid)
+            # self.message_manager.tencent_alarm(msg)
+            self.message_manager.slack_alarm(msg)
+        else:
+            self.TT_BO_para += 1
 
-    def resetTTBOalarm(self, pid):
+    def resetTTBOalarmmsg(self, pid):
         self.PLC.TT_BO_Alarm[pid] = False
+        self.TT_BO_para = 0
         # and send email or slack messages
 
-    def setPTalarm(self, pid):
+    def PTalarmmsg(self, pid):
         self.PLC.PT_Alarm[pid] = True
         # and send email or slack messages
-        msg = "SBC alarm: {pid} is out of range".format(pid=pid)
+        if self.PT_para >= self.PT_rate:
+            msg = "SBC alarm: {pid} is out of range".format(pid=pid)
 
-        # self.message_manager.tencent_alarm(msg)
-        # self.message_manager.slack_alarm(msg)
+            # self.message_manager.tencent_alarm(msg)
+            # self.message_manager.slack_alarm(msg)
+            self.PT_para = 0
+        else:
+            self.PT_para += 1
 
-    def resetPTalarm(self, pid):
+    def resetPTalarmmsg(self, pid):
         self.PLC.PT_Alarm[pid] = False
+        self.PT_para = 0
         # and send email or slack messages
 
     def or_alarm_signal(self):
