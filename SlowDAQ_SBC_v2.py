@@ -719,6 +719,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SERVO3321.HeaterSubWindow.Label.setText("SERVO3321")
         self.SERVO3321.HeaterSubWindow.RTD1.Label.setText("EMPTY")
         self.SERVO3321.HeaterSubWindow.RTD2.Label.setText("EMPTY")
+        self.SERVO3321.HeaterSubWindow.LOSP.Field.setText('-100')
+        self.SERVO3321.HeaterSubWindow.HISP.Field.setText('100')
+
 
         self.SV3325 = Valve(self.HydraulicTab)
         self.SV3325.Label.setText("SV3325")
@@ -824,6 +827,80 @@ class MainWindow(QtWidgets.QMainWindow):
                                   'HTR2125': False,
                                   'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
                                   'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+        self.BORTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111, self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118,
+                                 self.AlarmButton.SubWindow.TT2119,
+                                 self.AlarmButton.SubWindow.TT4330, self.AlarmButton.SubWindow.TT6203, self.AlarmButton.SubWindow.TT6207, self.AlarmButton.SubWindow.TT6211,
+                                 self.AlarmButton.SubWindow.TT6213,
+                                 self.AlarmButton.SubWindow.TT6222, self.AlarmButton.SubWindow.TT6407, self.AlarmButton.SubWindow.TT6408, self.AlarmButton.SubWindow.TT6409,
+                                 self.AlarmButton.SubWindow.TT6415,
+                                 self.AlarmButton.SubWindow.TT6416]
+
+        self.FPRTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2420, self.AlarmButton.SubWindow.TT2422, self.AlarmButton.SubWindow.TT2424, self.AlarmButton.SubWindow.TT2425,
+                                 self.AlarmButton.SubWindow.TT2442,
+                                 self.AlarmButton.SubWindow.TT2403, self.AlarmButton.SubWindow.TT2418, self.AlarmButton.SubWindow.TT2427, self.AlarmButton.SubWindow.TT2429,
+                                 self.AlarmButton.SubWindow.TT2431,
+                                 self.AlarmButton.SubWindow.TT2441, self.AlarmButton.SubWindow.TT2414, self.AlarmButton.SubWindow.TT2413, self.AlarmButton.SubWindow.TT2412,
+                                 self.AlarmButton.SubWindow.TT2415,
+                                 self.AlarmButton.SubWindow.TT2409, self.AlarmButton.SubWindow.TT2436, self.AlarmButton.SubWindow.TT2438, self.AlarmButton.SubWindow.TT2440,
+                                 self.AlarmButton.SubWindow.TT2402,
+                                 self.AlarmButton.SubWindow.TT2411, self.AlarmButton.SubWindow.TT2443, self.AlarmButton.SubWindow.TT2417, self.AlarmButton.SubWindow.TT2404,
+                                 self.AlarmButton.SubWindow.TT2408,
+                                 self.AlarmButton.SubWindow.TT2407, self.AlarmButton.SubWindow.TT2406, self.AlarmButton.SubWindow.TT2428, self.AlarmButton.SubWindow.TT2432,
+                                 self.AlarmButton.SubWindow.TT2421,
+                                 self.AlarmButton.SubWindow.TT2416, self.AlarmButton.SubWindow.TT2439, self.AlarmButton.SubWindow.TT2419, self.AlarmButton.SubWindow.TT2423,
+                                 self.AlarmButton.SubWindow.TT2426,
+                                 self.AlarmButton.SubWindow.TT2430, self.AlarmButton.SubWindow.TT2450, self.AlarmButton.SubWindow.TT2401, self.AlarmButton.SubWindow.TT2449,
+                                 self.AlarmButton.SubWindow.TT2445,
+                                 self.AlarmButton.SubWindow.TT2444, self.AlarmButton.SubWindow.TT2435, self.AlarmButton.SubWindow.TT2437, self.AlarmButton.SubWindow.TT2446,
+                                 self.AlarmButton.SubWindow.TT2447,
+                                 self.AlarmButton.SubWindow.TT2448, self.AlarmButton.SubWindow.TT2410, self.AlarmButton.SubWindow.TT2405, self.AlarmButton.SubWindow.TT6220,
+                                 self.AlarmButton.SubWindow.TT6401,
+                                 self.AlarmButton.SubWindow.TT6404, self.AlarmButton.SubWindow.TT6405, self.AlarmButton.SubWindow.TT6406, self.AlarmButton.SubWindow.TT6410,
+                                 self.AlarmButton.SubWindow.TT6411,
+                                 self.AlarmButton.SubWindow.TT6412, self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414]
+
+        self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2330, self.AlarmButton.SubWindow.PT2335,
+                              self.AlarmButton.SubWindow.PT3308, self.AlarmButton.SubWindow.PT3309, self.AlarmButton.SubWindow.PT3311, self.AlarmButton.SubWindow.PT3314,
+                              self.AlarmButton.SubWindow.PT3320, self.AlarmButton.SubWindow.PT3333, self.AlarmButton.SubWindow.PT4306, self.AlarmButton.SubWindow.PT4315,
+                              self.AlarmButton.SubWindow.PT4319,
+                              self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325]
+
+        self.AlarmMatrix = [self.AlarmButton.SubWindow.TT2101.Alarm, self.AlarmButton.SubWindow.TT2111.Alarm, self.AlarmButton.SubWindow.TT2113.Alarm, self.AlarmButton.SubWindow.TT2118.Alarm,
+                                 self.AlarmButton.SubWindow.TT2119.Alarm,
+                                 self.AlarmButton.SubWindow.TT4330.Alarm, self.AlarmButton.SubWindow.TT6203.Alarm, self.AlarmButton.SubWindow.TT6207.Alarm, self.AlarmButton.SubWindow.TT6211.Alarm,
+                                 self.AlarmButton.SubWindow.TT6213.Alarm,
+                                 self.AlarmButton.SubWindow.TT6222.Alarm, self.AlarmButton.SubWindow.TT6407.Alarm, self.AlarmButton.SubWindow.TT6408.Alarm, self.AlarmButton.SubWindow.TT6409.Alarm,
+                                 self.AlarmButton.SubWindow.TT6415.Alarm,
+                                 self.AlarmButton.SubWindow.TT6416.Alarm,
+                            self.AlarmButton.SubWindow.TT2420.Alarm, self.AlarmButton.SubWindow.TT2422.Alarm, self.AlarmButton.SubWindow.TT2424.Alarm, self.AlarmButton.SubWindow.TT2425.Alarm,
+                                 self.AlarmButton.SubWindow.TT2442.Alarm,
+                                 self.AlarmButton.SubWindow.TT2403.Alarm, self.AlarmButton.SubWindow.TT2418.Alarm, self.AlarmButton.SubWindow.TT2427.Alarm, self.AlarmButton.SubWindow.TT2429.Alarm,
+                                 self.AlarmButton.SubWindow.TT2431.Alarm,
+                                 self.AlarmButton.SubWindow.TT2441.Alarm, self.AlarmButton.SubWindow.TT2414.Alarm, self.AlarmButton.SubWindow.TT2413.Alarm, self.AlarmButton.SubWindow.TT2412.Alarm,
+                                 self.AlarmButton.SubWindow.TT2415.Alarm,
+                                 self.AlarmButton.SubWindow.TT2409.Alarm, self.AlarmButton.SubWindow.TT2436.Alarm, self.AlarmButton.SubWindow.TT2438.Alarm, self.AlarmButton.SubWindow.TT2440.Alarm,
+                                 self.AlarmButton.SubWindow.TT2402.Alarm,
+                                 self.AlarmButton.SubWindow.TT2411.Alarm, self.AlarmButton.SubWindow.TT2443.Alarm, self.AlarmButton.SubWindow.TT2417.Alarm, self.AlarmButton.SubWindow.TT2404.Alarm,
+                                 self.AlarmButton.SubWindow.TT2408.Alarm,
+                                 self.AlarmButton.SubWindow.TT2407.Alarm, self.AlarmButton.SubWindow.TT2406.Alarm, self.AlarmButton.SubWindow.TT2428.Alarm, self.AlarmButton.SubWindow.TT2432.Alarm,
+                                 self.AlarmButton.SubWindow.TT2421.Alarm,
+                                 self.AlarmButton.SubWindow.TT2416.Alarm, self.AlarmButton.SubWindow.TT2439.Alarm, self.AlarmButton.SubWindow.TT2419.Alarm, self.AlarmButton.SubWindow.TT2423.Alarm,
+                                 self.AlarmButton.SubWindow.TT2426.Alarm,
+                                 self.AlarmButton.SubWindow.TT2430.Alarm, self.AlarmButton.SubWindow.TT2450.Alarm, self.AlarmButton.SubWindow.TT2401.Alarm, self.AlarmButton.SubWindow.TT2449.Alarm,
+                                 self.AlarmButton.SubWindow.TT2445.Alarm,
+                                 self.AlarmButton.SubWindow.TT2444.Alarm, self.AlarmButton.SubWindow.TT2435.Alarm, self.AlarmButton.SubWindow.TT2437.Alarm, self.AlarmButton.SubWindow.TT2446.Alarm,
+                                 self.AlarmButton.SubWindow.TT2447.Alarm,
+                                 self.AlarmButton.SubWindow.TT2448.Alarm, self.AlarmButton.SubWindow.TT2410.Alarm, self.AlarmButton.SubWindow.TT2405.Alarm, self.AlarmButton.SubWindow.TT6220.Alarm,
+                                 self.AlarmButton.SubWindow.TT6401.Alarm,
+                                 self.AlarmButton.SubWindow.TT6404.Alarm, self.AlarmButton.SubWindow.TT6405.Alarm, self.AlarmButton.SubWindow.TT6406.Alarm, self.AlarmButton.SubWindow.TT6410.Alarm,
+                                 self.AlarmButton.SubWindow.TT6411.Alarm,
+                                 self.AlarmButton.SubWindow.TT6412.Alarm, self.AlarmButton.SubWindow.TT6413.Alarm, self.AlarmButton.SubWindow.TT6414.Alarm,
+                            self.AlarmButton.SubWindow.PT2316.Alarm, self.AlarmButton.SubWindow.PT2330.Alarm, self.AlarmButton.SubWindow.PT2335.Alarm,
+                              self.AlarmButton.SubWindow.PT3308.Alarm, self.AlarmButton.SubWindow.PT3309.Alarm, self.AlarmButton.SubWindow.PT3311.Alarm, self.AlarmButton.SubWindow.PT3314.Alarm,
+                              self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
+                              self.AlarmButton.SubWindow.PT4319.Alarm,
+                              self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm]
 
 
 
@@ -993,9 +1070,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SERVO3321.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.SERVO3321.HeaterSubWindow.Label.text(),
                                      self.SERVO3321.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.SERVO3321.HeaterSubWindow.SP.Field.text()),
-                                     int(self.SERVO3321.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.SERVO3321.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.SERVO3321.HeaterSubWindow.SP.Field.text()),
+                                     float(self.SERVO3321.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.SERVO3321.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6225.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6225.HeaterSubWindow.Label.text()))
@@ -1014,9 +1091,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6225.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6225.HeaterSubWindow.Label.text(),
                                      self.HTR6225.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6225.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6225.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6225.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6225.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6225.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6225.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR2123.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR2123.HeaterSubWindow.Label.text()))
@@ -1035,9 +1112,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2123.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR2123.HeaterSubWindow.Label.text(),
                                      self.HTR2123.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR2123.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR2123.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR2123.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR2123.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR2123.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR2123.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR2124.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR2124.HeaterSubWindow.Label.text()))
@@ -1056,9 +1133,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2124.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR2124.HeaterSubWindow.Label.text(),
                                      self.HTR2124.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR2124.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR2124.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR2124.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR2124.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR2124.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR2124.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR2125.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR2125.HeaterSubWindow.Label.text()))
@@ -1076,9 +1153,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2125.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR2125.HeaterSubWindow.Label.text(),
                                      self.HTR2125.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR2125.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR2125.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR2125.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR2125.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR2125.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR2125.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR1202.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR1202.HeaterSubWindow.Label.text()))
@@ -1096,9 +1173,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR1202.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR1202.HeaterSubWindow.Label.text(),
                                      self.HTR1202.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR1202.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR1202.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR1202.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR1202.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR1202.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR1202.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR2203.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR2203.HeaterSubWindow.Label.text()))
@@ -1116,9 +1193,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2203.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR2203.HeaterSubWindow.Label.text(),
                                      self.HTR2203.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR2203.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR2203.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR2203.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR2203.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR2203.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR2203.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6202.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6202.HeaterSubWindow.Label.text()))
@@ -1136,9 +1213,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6202.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6202.HeaterSubWindow.Label.text(),
                                      self.HTR6202.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6202.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6202.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6202.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6202.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6202.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6202.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6206.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6206.HeaterSubWindow.Label.text()))
@@ -1156,9 +1233,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6206.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6206.HeaterSubWindow.Label.text(),
                                      self.HTR6206.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6206.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6206.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6206.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6206.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6206.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6206.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6210.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6210.HeaterSubWindow.Label.text()))
@@ -1176,9 +1253,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6210.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6210.HeaterSubWindow.Label.text(),
                                      self.HTR6210.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6210.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6210.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6210.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6210.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6210.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6210.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6223.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6223.HeaterSubWindow.Label.text()))
@@ -1196,9 +1273,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6223.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6223.HeaterSubWindow.Label.text(),
                                      self.HTR6223.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6223.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6223.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6223.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6223.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6223.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6223.HeaterSubWindow.LOSP.Field.text())))
 
 
         self.HTR6224.HeaterSubWindow.Mode.LButton.clicked.connect(
@@ -1217,9 +1294,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6224.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6224.HeaterSubWindow.Label.text(),
                                      self.HTR6224.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6224.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6224.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6224.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6224.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6224.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6224.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6219.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6219.HeaterSubWindow.Label.text()))
@@ -1237,9 +1314,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6219.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6219.HeaterSubWindow.Label.text(),
                                      self.HTR6219.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6219.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6219.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6219.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6219.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6219.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6219.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6221.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6221.HeaterSubWindow.Label.text()))
@@ -1257,9 +1334,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6221.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6221.HeaterSubWindow.Label.text(),
                                      self.HTR6221.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6221.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6221.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6221.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6221.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6221.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6221.HeaterSubWindow.LOSP.Field.text())))
 
         self.HTR6214.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
@@ -1277,9 +1354,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
             lambda x: self.HTRupdate(self.HTR6214.HeaterSubWindow.Label.text(),
                                      self.HTR6214.HeaterSubWindow.ModeREAD.Field.text(),
-                                     int(self.HTR6214.HeaterSubWindow.SP.Field.text()),
-                                     int(self.HTR6214.HeaterSubWindow.HISP.Field.text()),
-                                     int(self.HTR6214.HeaterSubWindow.LOSP.Field.text())))
+                                     float(self.HTR6214.HeaterSubWindow.SP.Field.text()),
+                                     float(self.HTR6214.HeaterSubWindow.HISP.Field.text()),
+                                     float(self.HTR6214.HeaterSubWindow.LOSP.Field.text())))
 
         # Beckoff RTDs
 
@@ -2174,6 +2251,177 @@ class MainWindow(QtWidgets.QMainWindow):
                                        HighLimit=self.AlarmButton.SubWindow.TT6414.High_Limit.Field.text()))
 
 
+        #BO PT updatebutton and activate button
+
+        # self.AlarmButton.SubWindow.PT2316.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2316.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT2316.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT2316.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT2316.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT2316.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2316.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT2316.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT2316.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT2316.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT2330.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2330.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT2330.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT2330.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT2330.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT2330.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2330.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT2330.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT2330.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT2330.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT2335.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2335.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT2335.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT2335.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT2335.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT2335.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2335.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT2335.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT2335.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT2335.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3308.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3308.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3308.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3308.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3308.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3308.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3308.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3308.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3308.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3308.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3309.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3309.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3309.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3309.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3309.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3309.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3309.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3309.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3309.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3309.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3311.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3311.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3311.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3311.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3311.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3311.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3311.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3311.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3311.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3311.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3314.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3314.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3314.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3314.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3314.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3314.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3314.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3314.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3314.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3314.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3320.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3320.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3320.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3320.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3320.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3320.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3320.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3320.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3320.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3320.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3333.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3333.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3333.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3333.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3333.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT3333.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3333.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT3333.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT3333.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT3333.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT4306.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4306.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT4306.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT4306.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT4306.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT4306.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4306.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT4306.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT4306.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT4306.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT4315.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4315.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT4315.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT4315.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT4315.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT4315.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4315.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT4315.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT4315.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT4315.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT4319.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4319.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT4319.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT4319.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT4319.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT4319.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4319.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT4319.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT4319.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT4319.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT4322.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4322.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT4322.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT4322.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT4322.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT4322.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4322.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT4322.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT4322.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT4322.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT4322.AlarmMode.stateChanged.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4322.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT4322.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT4322.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT4322.High_Limit.Field.text()))
+        #
+        # self.AlarmButton.SubWindow.PT4325.updatebutton.clicked.connect(
+        #     lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4325.Label.text(),
+        #                                Act=self.AlarmButton.SubWindow.PT4325.AlarmMode.isChecked(),
+        #                                LowLimit=self.AlarmButton.SubWindow.PT4325.Low_Limit.Field.text(),
+        #                                HighLimit=self.AlarmButton.SubWindow.PT4325.High_Limit.Field.text()))
+
+
 
 
 
@@ -2318,6 +2566,14 @@ class MainWindow(QtWidgets.QMainWindow):
                                 "LowLimit":LowLimit,"HighLimit":HighLimit}}
         print(pid,Act,LowLimit,HighLimit,"ARE OK?")
 
+    @QtCore.Slot()
+    def PTBoxUpdate(self, pid, Act, LowLimit, HighLimit):
+        self.commands[pid] = {"server": "BO", "address": self.address[pid], "type": "PT", "operation": {"Act": Act,
+                                                                                                        "LowLimit": LowLimit, "HighLimit": HighLimit}}
+        print(pid, Act, LowLimit, HighLimit, "ARE OK?")
+
+
+
 
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()
@@ -2426,103 +2682,50 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #Update alarmwindow's widgets' value
 
-        self.AlarmButton.SubWindow.TT2101.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2101"])
-        self.AlarmButton.SubWindow.TT2101.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT2101"])
 
-        self.AlarmButton.SubWindow.TT2111.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2111"])
-        self.AlarmButton.SubWindow.TT2111.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT2111"])
 
-        self.AlarmButton.SubWindow.TT2113.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2113"])
-        self.AlarmButton.SubWindow.TT2113.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT2113"])
 
-        self.AlarmButton.SubWindow.TT2118.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2118"])
-        self.AlarmButton.SubWindow.TT2118.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT2118"])
 
-        self.AlarmButton.SubWindow.TT2119.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT2119"])
-        self.AlarmButton.SubWindow.TT2119.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT2119"])
+        for element in self.BORTDAlarmMatrix:
+            # print(element.Label.text())
 
-        self.AlarmButton.SubWindow.TT4330.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT4330"])
-        self.AlarmButton.SubWindow.TT4330.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT4330"])
+            element.UpdateAlarm(
 
-        self.AlarmButton.SubWindow.TT6203.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6203"])
-        self.AlarmButton.SubWindow.TT6203.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT6203"])
+                received_dic_c["Alarm"]["TT"]["BO"][element.Label.text()])
+            element.Indicator.SetValue(
+                received_dic_c["data"]["TT"]["BO"][element.Label.text()])
 
-        self.AlarmButton.SubWindow.TT6207.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6207"])
-        self.AlarmButton.SubWindow.TT6207.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT6207"])
 
-        self.AlarmButton.SubWindow.TT6211.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6211"])
-        self.AlarmButton.SubWindow.TT6211.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT6211"])
-
-        self.AlarmButton.SubWindow.TT6213.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6213"])
-        self.AlarmButton.SubWindow.TT6213.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT6213"])
-
-        self.AlarmButton.SubWindow.TT6222.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6222"])
-        self.AlarmButton.SubWindow.TT6222.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT6222"])
-
-        self.AlarmButton.SubWindow.TT6407.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6407"])
-        self.AlarmButton.SubWindow.TT6407.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT6407"])
-
-        self.AlarmButton.SubWindow.TT6408.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6408"])
-        self.AlarmButton.SubWindow.TT6408.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT6408"])
-
-        self.AlarmButton.SubWindow.TT6409.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6409"])
-        self.AlarmButton.SubWindow.TT6409.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT6409"])
-
-        self.AlarmButton.SubWindow.TT6415.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6415"])
-        self.AlarmButton.SubWindow.TT6415.Indicator.SetValue(
-            received_dic_c["data"]["TT"]["BO"]["TT6415"])
-
-        self.AlarmButton.SubWindow.TT6416.UpdateAlarm(received_dic_c["Alarm"]["TT"]["BO"]["TT6416"])
-        self.AlarmButton.SubWindow.TT6416.Indicator.SetValue(received_dic_c["data"]["TT"]["BO"]["TT6416"])
 
         # FP TTs
         # update alarmwindow widgets' <alarm> value
-        FPRTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2420, self.AlarmButton.SubWindow.TT2422, self.AlarmButton.SubWindow.TT2424, self.AlarmButton.SubWindow.TT2425,
-                            self.AlarmButton.SubWindow.TT2442,
-                            self.AlarmButton.SubWindow.TT2403, self.AlarmButton.SubWindow.TT2418, self.AlarmButton.SubWindow.TT2427, self.AlarmButton.SubWindow.TT2429,
-                            self.AlarmButton.SubWindow.TT2431,
-                            self.AlarmButton.SubWindow.TT2441, self.AlarmButton.SubWindow.TT2414, self.AlarmButton.SubWindow.TT2413, self.AlarmButton.SubWindow.TT2412,
-                            self.AlarmButton.SubWindow.TT2415,
-                            self.AlarmButton.SubWindow.TT2409, self.AlarmButton.SubWindow.TT2436, self.AlarmButton.SubWindow.TT2438, self.AlarmButton.SubWindow.TT2440,
-                            self.AlarmButton.SubWindow.TT2402,
-                            self.AlarmButton.SubWindow.TT2411, self.AlarmButton.SubWindow.TT2443, self.AlarmButton.SubWindow.TT2417, self.AlarmButton.SubWindow.TT2404,
-                            self.AlarmButton.SubWindow.TT2408,
-                            self.AlarmButton.SubWindow.TT2407, self.AlarmButton.SubWindow.TT2406, self.AlarmButton.SubWindow.TT2428, self.AlarmButton.SubWindow.TT2432,
-                            self.AlarmButton.SubWindow.TT2421,
-                            self.AlarmButton.SubWindow.TT2416, self.AlarmButton.SubWindow.TT2439, self.AlarmButton.SubWindow.TT2419, self.AlarmButton.SubWindow.TT2423,
-                            self.AlarmButton.SubWindow.TT2426,
-                            self.AlarmButton.SubWindow.TT2430, self.AlarmButton.SubWindow.TT2450, self.AlarmButton.SubWindow.TT2401, self.AlarmButton.SubWindow.TT2449,
-                            self.AlarmButton.SubWindow.TT2445,
-                            self.AlarmButton.SubWindow.TT2444, self.AlarmButton.SubWindow.TT2435, self.AlarmButton.SubWindow.TT2437, self.AlarmButton.SubWindow.TT2446,
-                            self.AlarmButton.SubWindow.TT2447,
-                            self.AlarmButton.SubWindow.TT2448, self.AlarmButton.SubWindow.TT2410, self.AlarmButton.SubWindow.TT2405, self.AlarmButton.SubWindow.TT6220,
-                            self.AlarmButton.SubWindow.TT6401,
-                            self.AlarmButton.SubWindow.TT6404, self.AlarmButton.SubWindow.TT6405, self.AlarmButton.SubWindow.TT6406, self.AlarmButton.SubWindow.TT6410,
-                            self.AlarmButton.SubWindow.TT6411,
-                            self.AlarmButton.SubWindow.TT6412, self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414]
 
-        for element in FPRTDAlarmMatrix:
+
+        for element in self.FPRTDAlarmMatrix:
             # print(element.Label.text())
 
             element.UpdateAlarm(
 
                 received_dic_c["Alarm"]["TT"]["FP"][element.Label.text()])
-        #     element.Indicator.SetValue(
-        #         received_dic_c["data"]["TT"]["FP"][element.Label.text()])
+            element.Indicator.SetValue(
+                received_dic_c["data"]["TT"]["FP"][element.Label.text()])
+
+
+
+        print(received_dic_c["Alarm"]["PT"])
+
+
+
+
+        for element in self.PTAlarmMatrix:
+            # print(element.Label.text())
+
+            element.UpdateAlarm(
+                received_dic_c["Alarm"]["PT"][element.Label.text()])
+            element.Indicator.SetValue(
+                received_dic_c["data"]["PT"][element.Label.text()])
+
+        # self.update_alarmwindow(self.AlarmMatrix)
 
 
 
@@ -3498,7 +3701,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                received_dic_c["data"]["LOOPPID"]["SET1"]["SERVO3321"],
                                received_dic_c["data"]["LOOPPID"]["SET2"]["SERVO3321"],
                                received_dic_c["data"]["LOOPPID"]["SET3"]["SERVO3321"]))
-        self.HTR6214.Power.SetValue(
+        self.SERVO3321.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["SERVO3321"])
 
         self.HTR6225.HeaterSubWindow.Interlock.UpdateColor(
@@ -4023,24 +4226,21 @@ class MainWindow(QtWidgets.QMainWindow):
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6214"])
 
     @QtCore.Slot(object)
-    def update_alarmwindow(self,dic):
+    def update_alarmwindow(self,list):
         # if len(dic)>0:
         #     print(dic)
 
-        self.AlarmButton.CollectAlarm([self.AlarmButton.SubWindow.TT2111.Alarm,
-                                          self.AlarmButton.SubWindow.TT2112.Alarm,
-                                          self.AlarmButton.SubWindow.TT2113.Alarm,
-                                          self.AlarmButton.SubWindow.TT2114.Alarm,
-                                          self.AlarmButton.SubWindow.TT2115.Alarm,
-                                          self.AlarmButton.SubWindow.TT2116.Alarm,
-                                          self.AlarmButton.SubWindow.TT2117.Alarm,
-                                          self.AlarmButton.SubWindow.TT2118.Alarm,
-                                          self.AlarmButton.SubWindow.TT2119.Alarm,
-                                          self.AlarmButton.SubWindow.TT2120.Alarm])
+        self.AlarmButton.CollectAlarm(list)
         # print("Alarm Status=", self.AlarmButton.Button.Alarm)
         if self.AlarmButton.Button.Alarm:
             self.AlarmButton.ButtonAlarmSetSignal()
             self.AlarmButton.SubWindow.ReassignRTD1Order()
+            self.AlarmButton.SubWindow.ReassignRTD2Order()
+            self.AlarmButton.SubWindow.ReassignRTD3Order()
+            self.AlarmButton.SubWindow.ReassignRTD4Order()
+            self.AlarmButton.SubWindow.ReassignRTDLEFTOrder()
+            self.AlarmButton.SubWindow.ReassignPTOrder()
+
 
         else:
             self.AlarmButton.ButtonAlarmResetSignal()
@@ -5368,19 +5568,19 @@ class AlarmWin(QtWidgets.QMainWindow):
         super().__init__(parent)
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1000*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1400*R))
 
         # reset the size of the window
-        self.setMinimumSize(2000*R, 1100*R)
-        self.resize(2000*R, 1100*R)
+        self.setMinimumSize(2300*R, 1400*R)
+        self.resize(2300*R, 1400*R)
         self.setWindowTitle("Alarm Window")
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1100*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1400*R))
 
         self.Tab = QtWidgets.QTabWidget(self)
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
         self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
-        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2400*R, 1400*R))
+        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1400*R))
 
         self.PressureTab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.PressureTab, "Pressure Transducers")
@@ -6447,12 +6647,12 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.resize(1200*R, 600*R)
-        self.setMinimumSize(1200*R, 600*R)
+        self.resize(1500*R, 600*R)
+        self.setMinimumSize(1500*R, 600*R)
         self.setWindowTitle("Detailed Information")
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 600*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 600*R))
 
         # Groupboxs for alarm/PT/TT
 
@@ -6491,6 +6691,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.Mode.Label.setText("Mode")
         self.GLWR.addWidget(self.Mode)
 
+
         self.LOSP = SetPoint(self.GroupWR)
         self.LOSP.Label.setText("LO SET")
         self.GLWR.addWidget(self.LOSP)
@@ -6527,6 +6728,7 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
 
         self.ModeREAD = Indicator(self.GroupRD)
         self.ModeREAD.Label.setText("Mode")
+        self.ModeREAD.Field.setText('MODE0')
         self.GLRD.addWidget(self.ModeREAD)
 
         self.EN = ColoredStatus(self.GroupRD, mode = 4)
@@ -7346,7 +7548,6 @@ class UpdateClient(QtCore.QObject):
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic = message
-        print(self.receive_dic["data"])
         self.client_data_transport.emit()
 
     @QtCore.Slot(object)

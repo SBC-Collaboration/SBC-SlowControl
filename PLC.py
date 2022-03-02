@@ -489,8 +489,14 @@ class PLC:
                 self.Switch_MAN[key] = self.ReadCoil(16, self.Switch_address[key])
                 self.Switch_ERR[key] = self.ReadCoil(32, self.Switch_address[key])
 
-
-            Raw_LOOPPID_2 = Raw_LOOPPID_4 = Raw_LOOPPID_6 = Raw_LOOPPID_8 = Raw_LOOPPID_10 = Raw_LOOPPID_12 = Raw_LOOPPID_14 = Raw_LOOPPID_16 ={}
+            Raw_LOOPPID_2 = {}
+            Raw_LOOPPID_4 = {}
+            Raw_LOOPPID_6 = {}
+            Raw_LOOPPID_8 = {}
+            Raw_LOOPPID_10 = {}
+            Raw_LOOPPID_12 = {}
+            Raw_LOOPPID_14 = {}
+            Raw_LOOPPID_16 ={}
             for key in self.LOOPPID_ADR_BASE:
                 self.LOOPPID_MODE0[key] = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
                 self.LOOPPID_MODE1[key] = self.ReadCoil(2, self.LOOPPID_ADR_BASE[key])
@@ -1612,19 +1618,22 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.LOOPPID_SETPOINT( address= message[key]["address"], setpoint = message[key]["value"]["SETPOINT"], mode = 3)
                         self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"], value=message[key]["value"]["HI_LIM"])
                         self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"], value=message[key]["value"]["LO_LIM"])
+                    else:
+                        pass
 
-                    elif message[key]["type"] == "heater_setmode":
-                        if message[key]["operation"] == "SET0":
-                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
+                elif message[key]["type"] == "heater_setmode":
+                    if message[key]["operation"] == "SET0":
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
 
-                        elif message[key]["operation"] == "SET1":
-                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode = 1)
+                    elif message[key]["operation"] == "SET1":
+                        print(True)
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode = 1)
 
-                        elif message[key]["operation"] == "SET2":
-                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
+                    elif message[key]["operation"] == "SET2":
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
 
-                        elif message[key]["operation"] == "SET3":
-                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
+                    elif message[key]["operation"] == "SET3":
+                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
 
                     else:
                         pass
