@@ -31,7 +31,7 @@ def exception_hook(exctype, value, traceback):
     print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
     # sys._excepthook(exctype, value, traceback)
     sys.exit(1)
-sys.excepthook = exception_hook
+sdksys.excepthook = exception_hook
 
 #output address to attribute function in FP ()
 def FPADS_OUT_AT(outaddress):
@@ -1739,7 +1739,6 @@ class message_manager():
         #SLACK_BOT_TOKEN is a linux enviromental variable saved locally on sbcslowcontrol mathine
         # it can be fetched on slack app page in SBCAlarm app: https://api.slack.com/apps/A035X77RW64/general
         self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
-        # xoxb - 732641375872 - 3182433478739 - HGWMhvrXjt6twEn3blOlHhtz
         self.logger = logging.getLogger(__name__)
         self.channel_id = "C01918B8WDD"
 
