@@ -1281,6 +1281,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.TT_FP_Alarm[pid] = True
         # and send email or slack messages
         msg = "SBC alarm: {pid} is out of range".format(pid=pid)
+        print(msg)
         # self.message_manager.tencent_alarm(msg)
         self.message_manager.slack_alarm(msg)
 
@@ -1292,6 +1293,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.TT_BO_Alarm[pid] = True
         # and send email or slack messages
         msg = "SBC alarm: {pid} is out of range".format(pid=pid)
+        print(msg)
         # self.message_manager.tencent_alarm(msg)
         self.message_manager.slack_alarm(msg)
 
@@ -1303,6 +1305,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.PT_Alarm[pid] = True
         # and send email or slack messages
         msg = "SBC alarm: {pid} is out of range".format(pid=pid)
+
         # self.message_manager.tencent_alarm(msg)
         # self.message_manager.slack_alarm(msg)
 
@@ -1767,6 +1770,7 @@ class message_manager():
 
     def slack_alarm(self, message):
         # ID of channel you want to post message to
+
 
 
 
