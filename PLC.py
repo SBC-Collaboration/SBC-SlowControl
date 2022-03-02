@@ -1739,6 +1739,7 @@ class message_manager():
         #SLACK_BOT_TOKEN is a linux enviromental variable saved locally on sbcslowcontrol mathine
         # it can be fetched on slack app page in SBCAlarm app: https://api.slack.com/apps/A035X77RW64/general
         self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
+        # xoxb - 732641375872 - 3182433478739 - HGWMhvrXjt6twEn3blOlHhtz
         self.logger = logging.getLogger(__name__)
         self.channel_id = "C01918B8WDD"
 
