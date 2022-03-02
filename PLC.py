@@ -1282,7 +1282,7 @@ class UpdatePLC(QtCore.QObject):
         # and send email or slack messages
         msg = "SBC alarm: {pid} is out of range".format(pid=pid)
         # self.message_manager.tencent_alarm(msg)
-        # self.message_manager.slack_alarm(msg)
+        self.message_manager.slack_alarm(msg)
 
     def resetTTFPalarm(self, pid):
         self.PLC.TT_FP_Alarm[pid] = False
@@ -1293,7 +1293,7 @@ class UpdatePLC(QtCore.QObject):
         # and send email or slack messages
         msg = "SBC alarm: {pid} is out of range".format(pid=pid)
         # self.message_manager.tencent_alarm(msg)
-        # self.message_manager.slack_alarm(msg)
+        self.message_manager.slack_alarm(msg)
 
     def resetTTBOalarm(self, pid):
         self.PLC.TT_BO_Alarm[pid] = False
