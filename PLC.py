@@ -31,7 +31,7 @@ def exception_hook(exctype, value, traceback):
     print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
     # sys._excepthook(exctype, value, traceback)
     sys.exit(1)
-sdksys.excepthook = exception_hook
+sys.excepthook = exception_hook
 
 #output address to attribute function in FP ()
 def FPADS_OUT_AT(outaddress):
