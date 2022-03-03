@@ -2788,7 +2788,7 @@ class MainWindow(QtWidgets.QMainWindow):
             element.Indicator.SetValue(
                 received_dic_c["data"]["PT"][element.Label.text()])
 
-        print("PT3309", " receive ", received_dic_c["Alarm"]["PT"][element.Label.text()], "  value ", self.AlarmButton.SubWindow.PT3309.Alarm)
+        print("PT3309", " receive ", received_dic_c["Alarm"]["PT"]["PT3309"], "  value ", self.AlarmButton.SubWindow.PT3309.Alarm)
 
         self.update_alarmwindow(self.AlarmMatrix)
 
