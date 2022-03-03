@@ -2436,7 +2436,7 @@ class MainWindow(QtWidgets.QMainWindow):
             print(self.commands)
             print(pid,"LButton is clicked")
         except Exception as e:
-            print(e.message)
+            print(e)
 
 
 
@@ -2450,7 +2450,7 @@ class MainWindow(QtWidgets.QMainWindow):
             print(self.commands)
             print(pid, "R Button is clicked")
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def SwitchLButtonClicked(self, pid):
@@ -2461,7 +2461,7 @@ class MainWindow(QtWidgets.QMainWindow):
             print(self.commands)
             print(pid, "LButton is clicked")
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def SwitchRButtonClicked(self, pid):
@@ -2473,7 +2473,7 @@ class MainWindow(QtWidgets.QMainWindow):
             print(self.commands)
             print(pid, "R Button is clicked")
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def HTLButtonClicked(self, pid):
@@ -2484,7 +2484,7 @@ class MainWindow(QtWidgets.QMainWindow):
             print(self.commands)
             print(pid, "LButton is clicked")
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def HTRButtonClicked(self, pid):
@@ -2495,7 +2495,7 @@ class MainWindow(QtWidgets.QMainWindow):
             print(self.commands)
             print(pid, "R Button is clicked")
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def HTSwitchSet(self, pid, value):
@@ -2507,7 +2507,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 print("value should be 0, 1, 2, 3")
             print(self.commands)
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def HTHISet(self, pid, value):
@@ -2518,7 +2518,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             print(self.commands)
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def HTLOSet(self, pid, value):
@@ -2529,7 +2529,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             print(self.commands)
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def HTSETPOINTSet(self, pid, value1, value2):
@@ -2552,7 +2552,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             print(self.commands)
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def HTRGroupButtonClicked(self, pid, setN):
@@ -2575,7 +2575,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             print(self.commands)
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def HTRupdate(self,pid, modeN, setpoint, HI, LO):
@@ -2598,7 +2598,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
             print(self.commands)
         except Exception as e:
-            print(e.message)
+            print(e)
 
 
 
@@ -2614,7 +2614,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                 "LowLimit":LowLimit,"HighLimit":HighLimit}}
             print(pid,Act,LowLimit,HighLimit,"ARE OK?")
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def FPTTBoxUpdate(self,pid, Act,LowLimit, HighLimit):
@@ -2624,7 +2624,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                 "LowLimit":LowLimit,"HighLimit":HighLimit}}
             print(pid,Act,LowLimit,HighLimit,"ARE OK?")
         except Exception as e:
-            print(e.message)
+            print(e)
 
     @QtCore.Slot()
     def PTBoxUpdate(self, pid, Act, LowLimit, HighLimit):
@@ -2634,7 +2634,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                                                                                         "LowLimit": LowLimit, "HighLimit": HighLimit}}
             print(pid, Act, LowLimit, HighLimit, "ARE OK?")
         except Exception as e:
-            print(e.message)
+            print(e)
 
 
 
