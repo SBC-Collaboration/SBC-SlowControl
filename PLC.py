@@ -1310,6 +1310,7 @@ class UpdatePLC(QtCore.QObject):
             msg = "SBC alarm: {pid} is out of range".format(pid=pid)
             # self.message_manager.tencent_alarm(msg)
             self.message_manager.slack_alarm(msg)
+            self.TT_BO_para = 0
 
         self.TT_BO_para += 1
 
