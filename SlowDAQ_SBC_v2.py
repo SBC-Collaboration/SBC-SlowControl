@@ -2791,7 +2791,7 @@ class MainWindow(QtWidgets.QMainWindow):
             element.Indicator.SetValue(
                 received_dic_c["data"]["PT"][element.Label.text()])
 
-        # self.update_alarmwindow(self.AlarmMatrix)
+        self.update_alarmwindow(self.AlarmMatrix)
 
 
 
