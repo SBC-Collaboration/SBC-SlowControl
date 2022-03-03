@@ -4295,6 +4295,11 @@ class MainWindow(QtWidgets.QMainWindow):
     def update_alarmwindow(self,list):
         # if len(dic)>0:
         #     print(dic)
+        print(list[0])
+        if True in list:
+            print('list',True)
+        else:
+            print('list',False)
 
         self.AlarmButton.CollectAlarm(list)
         # print("Alarm Status=", self.AlarmButton.Button.Alarm)
