@@ -1228,11 +1228,11 @@ class UpdatePLC(QtCore.QObject):
             else:
                 if int(self.PLC.TT_FP_dic[pid]) < int(self.PLC.TT_FP_LowLimit[pid]):
                     self.TTFPalarmmsg(pid)
-                    self.PLC.TT_FP_Alarm[pid] = True
+
                     # print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.TT_FP_dic[pid]) > int(self.PLC.TT_FP_HighLimit[pid]):
                     self.TTFPalarmmsg(pid)
-                    self.PLC.TT_FP_Alarm[pid] = True
+
                     # print(pid,  " reading is higher than the high limit")
                 else:
                     self.resetTTFPalarmmsg(pid)
@@ -1250,11 +1250,11 @@ class UpdatePLC(QtCore.QObject):
             else:
                 if int(self.PLC.TT_BO_dic[pid]) < int(self.PLC.TT_BO_LowLimit[pid]):
                     self.TTBOalarmmsg(pid)
-                    self.PLC.TT_BO_Alarm[pid] = True
+
                     # print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.TT_BO_dic[pid]) > int(self.PLC.TT_BO_HighLimit[pid]):
                     self.TTBOalarmmsg(pid)
-                    self.PLC.TT_BO_Alarm[pid] = True
+
                     # print(pid,  " reading is higher than the high limit")
                 else:
                     self.resetTTBOalarmmsg(pid)
@@ -1272,11 +1272,10 @@ class UpdatePLC(QtCore.QObject):
             else:
                 if int(self.PLC.PT_dic[pid]) < int(self.PLC.PT_LowLimit[pid]):
                     self.PTalarmmsg(pid)
-                    self.PLC.PT_Alarm[pid] = True
+
                     # print(pid , " reading is lower than the low limit")
                 elif int(self.PLC.PT_dic[pid]) > int(self.PLC.PT_HighLimit[pid]):
                     self.PTalarmmsg(pid)
-                    self.PLC.PT_Alarm[pid] = True
                     # print(pid,  " reading is higher than the high limit")
                 else:
                     self.resetPTalarmmsg(pid)
@@ -1300,7 +1299,7 @@ class UpdatePLC(QtCore.QObject):
 
     def resetTTFPalarmmsg(self, pid):
         self.PLC.TT_FP_Alarm[pid] = False
-        self.TT_FP_para = 0
+        # self.TT_FP_para = 0
         # and send email or slack messages
 
     def TTBOalarmmsg(self, pid):
@@ -1316,7 +1315,7 @@ class UpdatePLC(QtCore.QObject):
 
     def resetTTBOalarmmsg(self, pid):
         self.PLC.TT_BO_Alarm[pid] = False
-        self.TT_BO_para = 0
+        # self.TT_BO_para = 0
         # and send email or slack messages
 
     def PTalarmmsg(self, pid):
@@ -1332,7 +1331,7 @@ class UpdatePLC(QtCore.QObject):
 
     def resetPTalarmmsg(self, pid):
         self.PLC.PT_Alarm[pid] = False
-        self.PT_para = 0
+        # self.PT_para = 0
         # and send email or slack messages
 
     def or_alarm_signal(self):
