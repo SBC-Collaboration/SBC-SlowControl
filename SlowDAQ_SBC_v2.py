@@ -2788,8 +2788,6 @@ class MainWindow(QtWidgets.QMainWindow):
             element.Indicator.SetValue(
                 received_dic_c["data"]["PT"][element.Label.text()])
 
-        print("PT3309", " receive ", received_dic_c["Alarm"]["PT"]["PT3309"], "  value ", self.AlarmButton.SubWindow.PT3309.Alarm)
-        print(self.AlarmMatrix[-15:])
         # update value in a Matrix
 
         AlarmMatrix = [self.AlarmButton.SubWindow.TT2101.Alarm, self.AlarmButton.SubWindow.TT2111.Alarm, self.AlarmButton.SubWindow.TT2113.Alarm, self.AlarmButton.SubWindow.TT2118.Alarm,
@@ -6113,6 +6111,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PT4325.Label.setText("PT4325")
 
         # make a directory for the alarm instrument and assign instrument to certain position
+        #IF you change the dimenstion of the following matrixes, don't forget to change TempMatrix in the Reassign function
         self.AlarmRTD1dir = {0: {0: self.TT2111, 1: self.TT2112, 2: self.TT2113, 3: self.TT2114, 4: self.TT2115},
                              1: {0: self.TT2116, 1: self.TT2117, 2: self.TT2118, 3: self.TT2119, 4: self.TT2120}}
 
@@ -6370,7 +6369,13 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefRTD2dir = self.AlarmRTD2dir
 
-        TempRTD2dir = self.AlarmRTD2dir
+        TempRTD2dir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
+                             1: {0: None, 1: None, 2: None, 3: None, 4: None},
+                             2: {0: None, 1: None, 2: None, 3: None, 4: None},
+                             3: {0: None, 1: None, 2: None, 3: None, 4: None},
+                             4: {0: None, 1: None, 2: None, 3: None, 4: None},
+                             5: {0: None, 1: None, 2: None, 3: None, 4: None},
+                             6: {0: None, 1: None}}
 
         # l_RTD1_max is max number of column
 
@@ -6450,7 +6455,10 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefRTD3dir = self.AlarmRTD3dir
 
-        TempRTD3dir = self.AlarmRTD3dir
+        TempRTD3dir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
+                       1: {0: None, 1: None, 2: None, 3: None, 4: None},
+                       2: {0: None, 1: None, 2: None, 3: None, 4: None},
+                       3: {0: None}}
 
         # l_RTD1_max is max number of column
 
@@ -6526,7 +6534,8 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefRTD4dir = self.AlarmRTD4dir
 
-        TempRTD4dir = self.AlarmRTD4dir
+        TempRTD4dir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
+                       1: {0: None, 1: None, 2: None, 3: None, 4: None}}
 
         # l_RTD1_max is max number of column
 
@@ -6605,8 +6614,12 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefRTDLEFTdir = self.AlarmRTDLEFTdir
 
-
-        TempRTDLEFTdir = self.AlarmRTDLEFTdir
+        TempRTDLEFTdir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
+                          1: {0: None, 1: None, 2: None, 3: None, 4: None},
+                          2: {0: None, 1: None, 2: None, 3: None, 4: None},
+                          3: {0: None, 1: None, 2: None, 3: None, 4: None},
+                          4: {0: None, 1: None, 2: None, 3: None, 4: None},
+                          5: {0: None, 1: None}}
 
         # l_RTD1_max is max number of column
 
@@ -6684,7 +6697,10 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefPTdir = self.AlarmPTdir
 
-        TempPTdir = self.AlarmPTdir
+        TempPTdir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
+                     1: {0: None, 1: None, 2: None, 3: None, 4: None},
+                     2: {0: None, 1: None, 2: None, 3: None, 4: None},
+                     3: {0: None, 1: None}}
         # l_RTD1_max is max number of column
 
         l_PT = 0
