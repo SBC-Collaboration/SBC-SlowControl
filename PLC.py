@@ -1296,8 +1296,7 @@ class UpdatePLC(QtCore.QObject):
             # self.message_manager.tencent_alarm(msg)
             self.message_manager.slack_alarm(msg)
             self.TT_FP_para = 0
-        else:
-            self.TT_FP_para += 1
+        self.TT_FP_para += 1
 
     def resetTTFPalarmmsg(self, pid):
         self.PLC.TT_FP_Alarm[pid] = False
@@ -1312,8 +1311,8 @@ class UpdatePLC(QtCore.QObject):
             msg = "SBC alarm: {pid} is out of range".format(pid=pid)
             # self.message_manager.tencent_alarm(msg)
             self.message_manager.slack_alarm(msg)
-        else:
-            self.TT_BO_para += 1
+
+        self.TT_BO_para += 1
 
     def resetTTBOalarmmsg(self, pid):
         self.PLC.TT_BO_Alarm[pid] = False
@@ -1329,8 +1328,7 @@ class UpdatePLC(QtCore.QObject):
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
             self.PT_para = 0
-        else:
-            self.PT_para += 1
+        self.PT_para += 1
 
     def resetPTalarmmsg(self, pid):
         self.PLC.PT_Alarm[pid] = False
