@@ -2789,6 +2789,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["data"]["PT"][element.Label.text()])
 
         print("PT3309", " receive ", received_dic_c["Alarm"]["PT"]["PT3309"], "  value ", self.AlarmButton.SubWindow.PT3309.Alarm)
+        print(self.AlarmMatrix[-10])
 
         self.update_alarmwindow(self.AlarmMatrix)
 
