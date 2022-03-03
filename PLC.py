@@ -1329,7 +1329,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high = self.PLC.PT_HighLimit[pid], low = self.PLC.PT_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
-            # self.message_manager.slack_alarm(msg)
+            self.message_manager.slack_alarm(msg)
             self.PT_para = 0
         self.PT_para += 1
 
