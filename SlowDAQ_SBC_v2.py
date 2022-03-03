@@ -876,7 +876,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.TT6222.Alarm, self.AlarmButton.SubWindow.TT6407.Alarm, self.AlarmButton.SubWindow.TT6408.Alarm, self.AlarmButton.SubWindow.TT6409.Alarm,
                                  self.AlarmButton.SubWindow.TT6415.Alarm,
                                  self.AlarmButton.SubWindow.TT6416.Alarm,
-                            self.AlarmButton.SubWindow.TT2420.Alarm, self.AlarmButton.SubWindow.TT2422.Alarm, self.AlarmButton.SubWindow.TT2424.Alarm, self.AlarmButton.SubWindow.TT2425.Alarm,
+                                 self.AlarmButton.SubWindow.TT2420.Alarm, self.AlarmButton.SubWindow.TT2422.Alarm, self.AlarmButton.SubWindow.TT2424.Alarm, self.AlarmButton.SubWindow.TT2425.Alarm,
                                  self.AlarmButton.SubWindow.TT2442.Alarm,
                                  self.AlarmButton.SubWindow.TT2403.Alarm, self.AlarmButton.SubWindow.TT2418.Alarm, self.AlarmButton.SubWindow.TT2427.Alarm, self.AlarmButton.SubWindow.TT2429.Alarm,
                                  self.AlarmButton.SubWindow.TT2431.Alarm,
@@ -899,11 +899,11 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.TT6404.Alarm, self.AlarmButton.SubWindow.TT6405.Alarm, self.AlarmButton.SubWindow.TT6406.Alarm, self.AlarmButton.SubWindow.TT6410.Alarm,
                                  self.AlarmButton.SubWindow.TT6411.Alarm,
                                  self.AlarmButton.SubWindow.TT6412.Alarm, self.AlarmButton.SubWindow.TT6413.Alarm, self.AlarmButton.SubWindow.TT6414.Alarm,
-                            self.AlarmButton.SubWindow.PT2316.Alarm, self.AlarmButton.SubWindow.PT2330.Alarm, self.AlarmButton.SubWindow.PT2335.Alarm,
-                              self.AlarmButton.SubWindow.PT3308.Alarm, self.AlarmButton.SubWindow.PT3309.Alarm, self.AlarmButton.SubWindow.PT3311.Alarm, self.AlarmButton.SubWindow.PT3314.Alarm,
-                              self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
-                              self.AlarmButton.SubWindow.PT4319.Alarm,
-                              self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm]
+                                 self.AlarmButton.SubWindow.PT2316.Alarm, self.AlarmButton.SubWindow.PT2330.Alarm, self.AlarmButton.SubWindow.PT2335.Alarm,
+                                 self.AlarmButton.SubWindow.PT3308.Alarm, self.AlarmButton.SubWindow.PT3309.Alarm, self.AlarmButton.SubWindow.PT3311.Alarm, self.AlarmButton.SubWindow.PT3314.Alarm,
+                                 self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
+                                 self.AlarmButton.SubWindow.PT4319.Alarm,
+                                 self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm]
 
 
 
@@ -2778,9 +2778,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        print(received_dic_c["Alarm"]["PT"])
-
-
 
 
         for element in self.PTAlarmMatrix:
@@ -2790,6 +2787,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["Alarm"]["PT"][element.Label.text()])
             element.Indicator.SetValue(
                 received_dic_c["data"]["PT"][element.Label.text()])
+
+        print("PT3309", " receive ", received_dic_c["Alarm"]["PT"][element.Label.text()], "  value ", self.AlarmButton.SubWindow.PT3309.Alarm)
 
         self.update_alarmwindow(self.AlarmMatrix)
 
