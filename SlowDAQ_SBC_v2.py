@@ -2614,7 +2614,7 @@ class MainWindow(QtWidgets.QMainWindow):
         try:
             address = self.address[pid]
             self.commands[pid]={"server": "BO", "address": address, "type": "TT", "operation": {"Act":Act,
-                                "LowLimit":LowLimit,"HighLimit":HighLimit,"Update":update}}
+                                "LowLimit":float(LowLimit),"HighLimit":float(HighLimit),"Update":update}}
             print(pid,Act,LowLimit,HighLimit,"ARE OK?")
         except Exception as e:
             print(e)
@@ -2624,7 +2624,7 @@ class MainWindow(QtWidgets.QMainWindow):
         try:
             address = self.address[pid]
             self.commands[pid]={"server": "FP", "address": address, "type": "TT", "operation": {"Act":Act,
-                                "LowLimit":LowLimit,"HighLimit":HighLimit,"Update":update}}
+                                "LowLimit":float(LowLimit),"HighLimit":float(HighLimit),"Update":update}}
             print(pid,Act,LowLimit,HighLimit,"ARE OK?")
         except Exception as e:
             print(e)
@@ -2634,7 +2634,7 @@ class MainWindow(QtWidgets.QMainWindow):
         try:
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "PT", "operation": {"Act": Act,
-                                                                                                        "LowLimit": LowLimit, "HighLimit": HighLimit,"Update":update}}
+                                                                                                        "LowLimit": float(LowLimit), "HighLimit": float(HighLimit),"Update":update}}
             print(pid, Act, LowLimit, HighLimit, "ARE OK?")
         except Exception as e:
             print(e)
@@ -2795,7 +2795,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["Alarm"]["PT"][element.Label.text()])
             element.Indicator.SetValue(
                 received_dic_c["data"]["PT"]["value"][element.Label.text()])
-            print(type(received_dic_c["data"]["PT"]["low"][element.Label.text()]))
             element.Low_Read.SetValue(
                 received_dic_c["data"]["PT"]["low"][element.Label.text()])
             element.High_Read.SetValue(
