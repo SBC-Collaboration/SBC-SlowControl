@@ -2787,7 +2787,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        print(received_dic_c["data"]["PT"]["low"])
+
         for element in self.PTAlarmMatrix:
             # print(element.Label.text())
 
@@ -2795,6 +2795,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["Alarm"]["PT"][element.Label.text()])
             element.Indicator.SetValue(
                 received_dic_c["data"]["PT"]["value"][element.Label.text()])
+            print(type(received_dic_c["data"]["PT"]["low"][element.Label.text()]))
             element.Low_Read.SetValue(
                 received_dic_c["data"]["PT"]["low"][element.Label.text()])
             element.High_Read.SetValue(
