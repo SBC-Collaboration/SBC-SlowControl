@@ -5687,25 +5687,28 @@ class AlarmWin(QtWidgets.QMainWindow):
         super().__init__(parent)
 
         self.Widget = QtWidgets.QWidget(self)
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1400*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1500*R))
 
         # reset the size of the window
-        self.setMinimumSize(2300*R, 1400*R)
-        self.resize(2300*R, 1400*R)
+        self.setMinimumSize(2300*R, 1500*R)
+        self.resize(2300*R, 1500*R)
         self.setWindowTitle("Alarm Window")
-        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1400*R))
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1500*R))
 
         self.Tab = QtWidgets.QTabWidget(self)
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
         self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
-        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1400*R))
+        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1500*R))
 
         self.PressureTab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.PressureTab, "Pressure Transducers")
 
-        self.RTDSET12Tab = QtWidgets.QTabWidget(self.Tab)
-        self.Tab.addTab(self.RTDSET12Tab, "RTD SET 1&2")
+        self.RTDSET1Tab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.RTDSET1Tab, "RTD SET 1")
+
+        self.RTDSET2Tab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.RTDSET2Tab, "RTD SET 2")
 
         self.RTDSET34Tab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.RTDSET34Tab, "RTD SET 3&4")
@@ -5732,7 +5735,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.GLRTD1.setSpacing(20*R)
         self.GLRTD1.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.GroupRTD1 = QtWidgets.QGroupBox(self.RTDSET12Tab)
+        self.GroupRTD1 = QtWidgets.QGroupBox(self.RTDSET1Tab)
         self.GroupRTD1.setTitle("RTD SET 1")
         self.GroupRTD1.setLayout(self.GLRTD1)
         self.GroupRTD1.move(0*R, 0*R)
@@ -5743,10 +5746,10 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.GLRTD2.setSpacing(20*R)
         self.GLRTD2.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.GroupRTD2 = QtWidgets.QGroupBox(self.RTDSET12Tab)
+        self.GroupRTD2 = QtWidgets.QGroupBox(self.RTDSET2Tab)
         self.GroupRTD2.setTitle("RTD SET 2")
         self.GroupRTD2.setLayout(self.GLRTD2)
-        self.GroupRTD2.move(0*R, 300*R)
+        self.GroupRTD2.move(0*R, 0*R)
 
         self.GLRTD3 = QtWidgets.QGridLayout()
         # self.GLRTD3 = QtWidgets.QGridLayout(self)
@@ -5768,7 +5771,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.GroupRTD4 = QtWidgets.QGroupBox(self.RTDSET34Tab)
         self.GroupRTD4.setTitle("RTD SET 4")
         self.GroupRTD4.setLayout(self.GLRTD4)
-        self.GroupRTD4.move(0*R, 500*R)
+        self.GroupRTD4.move(0*R, 870*R)
 
         self.GLRTDLEFT = QtWidgets.QGridLayout()
         # self.GLRTDLEFT = QtWidgets.QGridLayout(self)
@@ -5781,130 +5784,133 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.GroupRTDLEFT.setLayout(self.GLRTDLEFT)
         self.GroupRTDLEFT.move(0*R, 0*R)
 
-        self.TT2111 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2111 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2111.Label.setText("TT2111")
 
-        self.TT2112 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2112 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2112.Label.setText("TT2112")
 
-        self.TT2113 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2113 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2113.Label.setText("TT2113")
 
-        self.TT2114 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2114 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2114.Label.setText("TT2114")
 
-        self.TT2115 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2115 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2115.Label.setText("TT2115")
 
-        self.TT2116 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2116 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2116.Label.setText("TT2116")
 
-        self.TT2117 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2117 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2117.Label.setText("TT2117")
 
-        self.TT2118 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2118 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2118.Label.setText("TT2118")
 
-        self.TT2119 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2119 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2119.Label.setText("TT2119")
 
-        self.TT2120 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2120 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2120.Label.setText("TT2120")
 
-        self.TT2401 = AlarmStatusWidget(self.RTDSET12Tab)
+
+        #RTD2
+
+        self.TT2401 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2401.Label.setText("TT2401")
 
-        self.TT2402 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2402 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2402.Label.setText("TT2402")
 
-        self.TT2403 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2403 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2403.Label.setText("TT2403")
 
-        self.TT2404 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2404 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2404.Label.setText("TT2404")
 
-        self.TT2405 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2405 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2405.Label.setText("TT2405")
 
-        self.TT2406 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2406 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2406.Label.setText("TT2406")
 
-        self.TT2407 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2407 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2407.Label.setText("TT2407")
 
-        self.TT2408 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2408 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2408.Label.setText("TT2408")
 
-        self.TT2409 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2409 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2409.Label.setText("TT2409")
 
-        self.TT2410 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2410 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2410.Label.setText("TT2410")
 
-        self.TT2411 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2411 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2411.Label.setText("TT2411")
 
-        self.TT2412 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2412 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2412.Label.setText("TT2412")
 
-        self.TT2413 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2413 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2413.Label.setText("TT2413")
 
-        self.TT2414 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2414 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2414.Label.setText("TT2414")
 
-        self.TT2415 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2415 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2415.Label.setText("TT2415")
 
-        self.TT2416 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2416 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2416.Label.setText("TT2416")
 
-        self.TT2417 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2417 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2417.Label.setText("TT2417")
 
-        self.TT2418 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2418 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2418.Label.setText("TT2418")
 
-        self.TT2419 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2419 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2419.Label.setText("TT2419")
 
-        self.TT2420 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2420 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2420.Label.setText("TT2420")
 
-        self.TT2421 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2421 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2421.Label.setText("TT2421")
 
-        self.TT2422 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2422 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2422.Label.setText("TT2422")
 
-        self.TT2423 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2423 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2423.Label.setText("TT2423")
 
-        self.TT2424 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2424 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2424.Label.setText("TT2424")
 
-        self.TT2425 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2425 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2425.Label.setText("TT2425")
 
-        self.TT2426 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2426 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2426.Label.setText("TT2426")
 
-        self.TT2427 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2427 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2427.Label.setText("TT2427")
 
-        self.TT2428 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2428 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2428.Label.setText("TT2428")
 
-        self.TT2429 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2429 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2429.Label.setText("TT2429")
 
-        self.TT2430 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2430 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2430.Label.setText("TT2430")
 
-        self.TT2431 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2431 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2431.Label.setText("TT2431")
 
-        self.TT2432 = AlarmStatusWidget(self.RTDSET12Tab)
+        self.TT2432 = AlarmStatusWidget(self.RTDSET2Tab)
         self.TT2432.Label.setText("TT2432")
 
         # RTDSET34
