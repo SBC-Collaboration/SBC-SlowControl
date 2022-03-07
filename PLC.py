@@ -1192,6 +1192,8 @@ class UpdatePLC(QtCore.QObject):
         self.TT_BO_rate = 30
         self.PT_para = 29
         self.PT_rate = 30
+        self.PR_CYCLE_para =0
+        self.PR_CYCLE_rate = 30
 
     @QtCore.Slot()
     def run(self):
@@ -1219,6 +1221,10 @@ class UpdatePLC(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+
+    # def pressure_cycle(self):
+    #     if self.PR_CYCLE_para >= self.PR_CYCLE_rate:
+    #         self.PLC.
 
     def check_TT_FP_alarm(self, pid):
 
@@ -1401,9 +1407,9 @@ class UpdateServer(QtCore.QObject):
         self.LOOPPID_SET2_ini = self.PLC.LOOPPID_SET2
         self.LOOPPID_SET3_ini = self.PLC.LOOPPID_SET3
 
-        self.data_dic={"data":{"TT":{"FP":self.TT_FP_dic_ini,
-                                     "BO":self.TT_BO_dic_ini},
-                               "PT":self.PT_dic_ini,
+        self.data_dic={"data":{"TT":{"FP":{"value":self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini,"low":self.TT_FP_LowLimit_ini},
+                                     "BO":{"value":self.TT_BO_dic_ini, "high":self.TT_BO_HighLimit_ini,"low":self.TT_BO_LowLimit_ini}},
+                               "PT":{"value":self.PT_dic_ini,"high":self.PT_HighLimit_ini,"low":self.PT_LowLimit_ini},
                                "LEFT_REAL":self.LEFT_REAL_ini,
                                "Valve":{"OUT":self.Valve_OUT_ini,
                                         "INTLKD":self.Valve_INTLKD_ini,
@@ -1589,21 +1595,31 @@ class UpdateServer(QtCore.QObject):
                         pass
                 elif message[key]["type"] == "TT":
                     if message[key]["server"] == "BO":
-                        self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
-                        self.PLC.TT_BO_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                        self.PLC.TT_BO_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        # Update is to decide whether write new Low/High limit values into bkg code
+                        if message[key]["operation"]["Update"]:
+                            self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
+                            self.PLC.TT_BO_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                            self.PLC.TT_BO_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        else:
+                            self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
 
                     elif message[key]["server"] == "FP":
-                        self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
-                        self.PLC.TT_FP_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                        self.PLC.TT_FP_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        if message[key]["operation"]["Update"]:
+                            self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
+                            self.PLC.TT_FP_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                            self.PLC.TT_FP_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        else:
+                            self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
                     else:
                         pass
                 elif message[key]["type"] == "PT":
                     if message[key]["server"] == "BO":
-                        self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
-                        self.PLC.PT_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                        self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        if message[key]["operation"]["Update"]:
+                            self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
+                            self.PLC.PT_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                            self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        else:
+                            self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
                     else:
                         pass
                 elif message[key]["type"] == "heater_power":
