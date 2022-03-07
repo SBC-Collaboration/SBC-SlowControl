@@ -2787,7 +2787,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-
+        print(received_dic_c["data"]["PT"]["low"])
         for element in self.PTAlarmMatrix:
             # print(element.Label.text())
 
