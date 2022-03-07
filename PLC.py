@@ -1484,6 +1484,20 @@ class UpdateServer(QtCore.QObject):
             self.TT_BO_dic_ini[key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
             self.PT_dic_ini[key]=self.PLC.PT_dic[key]
+        for key in self.PLC.TT_FP_HighLimit:
+            self.TT_FP_HighLimit_ini[key] = self.PLC.TT_FP_HighLimit[key]
+
+        for key in self.PLC.TT_BO_HighLimit:
+            self.TT_BO_HighLimit_ini[key]=self.PLC.TT_BO_HighLimit[key]
+        for key in self.PLC.PT_HighLimit:
+            self.PT_HighLimit_ini[key]=self.PLC.PT_HighLimit[key]
+        for key in self.PLC.TT_FP_LowLimit:
+            self.TT_FP_LowLimit_ini[key] = self.PLC.TT_FP_LowLimit[key]
+
+        for key in self.PLC.TT_BO_LowLimit:
+            self.TT_BO_LowLimit_ini[key]=self.PLC.TT_BO_LowLimit[key]
+        for key in self.PLC.PT_LowLimit:
+            self.PT_LowLimit_ini[key]=self.PLC.PT_LowLimit[key]
         for key in self.PLC.LEFT_REAL_dic:
             self.LEFT_REAL_ini[key]=self.PLC.LEFT_REAL_dic[key]
         for key in self.PLC.Valve_OUT:
