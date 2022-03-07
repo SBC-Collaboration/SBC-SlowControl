@@ -2761,9 +2761,9 @@ class MainWindow(QtWidgets.QMainWindow):
             element.Indicator.SetValue(
                 received_dic_c["data"]["TT"]["BO"]["value"][element.Label.text()])
             element.Low_Read.SetValue(
-                received_dic_c["data"]["TT"]["BO"]["Low"][element.Label.text()])
+                received_dic_c["data"]["TT"]["BO"]["low"][element.Label.text()])
             element.High_Read.SetValue(
-                received_dic_c["data"]["TT"]["BO"]["High"][element.Label.text()])
+                received_dic_c["data"]["TT"]["BO"]["high"][element.Label.text()])
 
 
 
@@ -2780,9 +2780,9 @@ class MainWindow(QtWidgets.QMainWindow):
             element.Indicator.SetValue(
                 received_dic_c["data"]["TT"]["FP"]["value"][element.Label.text()])
             element.Low_Read.SetValue(
-                received_dic_c["data"]["TT"]["FP"]["Low"][element.Label.text()])
+                received_dic_c["data"]["TT"]["FP"]["low"][element.Label.text()])
             element.High_Read.SetValue(
-                received_dic_c["data"]["TT"]["FP"]["High"][element.Label.text()])
+                received_dic_c["data"]["TT"]["FP"]["high"][element.Label.text()])
 
 
 
@@ -2796,9 +2796,9 @@ class MainWindow(QtWidgets.QMainWindow):
             element.Indicator.SetValue(
                 received_dic_c["data"]["PT"]["value"][element.Label.text()])
             element.Low_Read.SetValue(
-                received_dic_c["data"]["PT"]["Low"][element.Label.text()])
+                received_dic_c["data"]["PT"]["low"][element.Label.text()])
             element.High_Read.SetValue(
-                received_dic_c["data"]["PT"]["High"][element.Label.text()])
+                received_dic_c["data"]["PT"]["high"][element.Label.text()])
 
         # update value in a Matrix
 
