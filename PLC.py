@@ -1186,11 +1186,11 @@ class UpdatePLC(QtCore.QObject):
         self.message_manager = message_manager()
         self.Running = False
         self.period=0.8
-        self.TT_FP_para = 29
+        self.TT_FP_para = 0
         self.TT_FP_rate = 30
-        self.TT_BO_para = 29
+        self.TT_BO_para = 0
         self.TT_BO_rate = 30
-        self.PT_para = 29
+        self.PT_para = 0
         self.PT_rate = 30
         self.PR_CYCLE_para =0
         self.PR_CYCLE_rate = 30
