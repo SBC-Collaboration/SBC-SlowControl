@@ -18,7 +18,9 @@ from email.mime.text import MIMEText
 from email.header import Header
 from smtplib import SMTP_SSL
 import requests
-import os
+import logging,os
+from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
 
 # delete random number package when you read real data from PLC
 import random
@@ -163,27 +165,27 @@ class PLC:
                             "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
                             "PT4322": 300, "PT4325": 300, "PT6302": 300}
 
-        self.TT_FP_Activated = {"TT2420": True, "TT2422": True, "TT2424": True, "TT2425": True, "TT2442": True,
-                              "TT2403": True, "TT2418": True, "TT2427": True, "TT2429": True, "TT2431": True,
-                              "TT2441": True, "TT2414": True, "TT2413": True, "TT2412": True, "TT2415": True,
-                              "TT2409": True, "TT2436": True, "TT2438": True, "TT2440": True, "TT2402": True,
-                              "TT2411": True, "TT2443": True, "TT2417": True, "TT2404": True, "TT2408": True,
-                              "TT2407": True, "TT2406": True, "TT2428": True, "TT2432": True, "TT2421": True,
-                              "TT2416": True, "TT2439": True, "TT2419": True, "TT2423": True, "TT2426": True,
-                              "TT2430": True, "TT2450": True, "TT2401": True, "TT2449": True, "TT2445": True,
-                              "TT2444": True, "TT2435": True, "TT2437": True, "TT2446": True, "TT2447": True,
-                              "TT2448": True, "TT2410": True, "TT2405": True, "TT6220": True, "TT6401": True,
-                              "TT6404": True, "TT6405": True, "TT6406": True, "TT6410": True, "TT6411": True,
-                              "TT6412": True, "TT6413": True, "TT6414": True}
+        self.TT_FP_Activated = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
+                              "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
+                              "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
+                              "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
+                              "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
+                              "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
+                              "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
+                              "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
+                              "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
+                              "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
+                              "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
+                              "TT6412": False, "TT6413": False, "TT6414": False}
 
-        self.TT_BO_Activated = {"TT2101": True, "TT2111": True, "TT2113": True, "TT2118": True, "TT2119": True, "TT4330": True,
-                             "TT6203": True, "TT6207": True, "TT6211": True, "TT6213": True, "TT6222": True,
-                             "TT6407": True, "TT6408": True, "TT6409": True, "TT6415": True, "TT6416": True}
+        self.TT_BO_Activated = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
+                             "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
+                             "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
 
-        self.PT_Activated = {"PT1325": True, "PT2121": True, "PT2316": True, "PT2330": True, "PT2335": True,
-                             "PT3308": True, "PT3309": True, "PT3311": True, "PT3314": True, "PT3320": True,
-                             "PT3332": True, "PT3333": True, "PT4306": True, "PT4315": True, "PT4319": True,
-                             "PT4322": True, "PT4325": True, "PT6302": True}
+        self.PT_Activated = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
+                             "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
+                             "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
+                             "PT4322": False, "PT4325": False, "PT6302": False}
 
         self.TT_FP_Alarm = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
                               "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
@@ -1183,7 +1185,15 @@ class UpdatePLC(QtCore.QObject):
         self.PLC = PLC
         self.message_manager = message_manager()
         self.Running = False
-        self.period=1
+        self.period=0.8
+        self.TT_FP_para = 0
+        self.TT_FP_rate = 30
+        self.TT_BO_para = 0
+        self.TT_BO_rate = 30
+        self.PT_para = 0
+        self.PT_rate = 30
+        self.PR_CYCLE_para =0
+        self.PR_CYCLE_rate = 30
 
     @QtCore.Slot()
     def run(self):
@@ -1212,100 +1222,126 @@ class UpdatePLC(QtCore.QObject):
     def stop(self):
         self.Running = False
 
+    # def pressure_cycle(self):
+    #     if self.PR_CYCLE_para >= self.PR_CYCLE_rate:
+    #         self.PLC.
+
     def check_TT_FP_alarm(self, pid):
 
         if self.PLC.TT_FP_Activated[pid]:
-            if int(self.PLC.TT_FP_LowLimit[pid]) > int(self.PLC.TT_FP_HighLimit[pid]):
+            if float(self.PLC.TT_FP_LowLimit[pid]) > float(self.PLC.TT_FP_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if int(self.PLC.TT_FP_dic[pid]) < int(self.PLC.TT_FP_LowLimit[pid]):
-                    self.setTTFPalarm(pid)
-                    self.PLC.TT_FP_Alarm[pid] = True
+                if float(self.PLC.TT_FP_dic[pid]) < float(self.PLC.TT_FP_LowLimit[pid]):
+                    self.TTFPalarmmsg(pid)
+
                     # print(pid , " reading is lower than the low limit")
-                elif int(self.PLC.TT_FP_dic[pid]) > int(self.PLC.TT_FP_HighLimit[pid]):
-                    self.setTTFPalarm(pid)
+                elif float(self.PLC.TT_FP_dic[pid]) > float(self.PLC.TT_FP_HighLimit[pid]):
+                    self.TTFPalarmmsg(pid)
+
                     # print(pid,  " reading is higher than the high limit")
                 else:
-                    self.resetTTFPalarm(pid)
+                    self.resetTTFPalarmmsg(pid)
                     # print(pid, " is in normal range")
 
         else:
-            self.resetTTFPalarm(pid)
+            self.resetTTFPalarmmsg(pid)
             pass
 
     def check_TT_BO_alarm(self, pid):
 
         if self.PLC.TT_BO_Activated[pid]:
-            if int(self.PLC.TT_BO_LowLimit[pid]) > int(self.PLC.TT_BO_HighLimit[pid]):
+            if float(self.PLC.TT_BO_LowLimit[pid]) > float(self.PLC.TT_BO_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if int(self.PLC.TT_BO_dic[pid]) < int(self.PLC.TT_BO_LowLimit[pid]):
-                    self.setTTBOalarm(pid)
-                    self.PLC.TT_BO_Alarm[pid] = True
+                if float(self.PLC.TT_BO_dic[pid]) < float(self.PLC.TT_BO_LowLimit[pid]):
+                    self.TTBOalarmmsg(pid)
+
                     # print(pid , " reading is lower than the low limit")
-                elif int(self.PLC.TT_BO_dic[pid]) > int(self.PLC.TT_BO_HighLimit[pid]):
-                    self.setTTBOalarm(pid)
+                elif float(self.PLC.TT_BO_dic[pid]) > float(self.PLC.TT_BO_HighLimit[pid]):
+                    self.TTBOalarmmsg(pid)
+
                     # print(pid,  " reading is higher than the high limit")
                 else:
-                    self.resetTTBOalarm(pid)
+                    self.resetTTBOalarmmsg(pid)
                     # print(pid, " is in normal range")
 
         else:
-            self.resetTTBOalarm(pid)
+            self.resetTTBOalarmmsg(pid)
             pass
 
     def check_PT_alarm(self, pid):
 
         if self.PLC.PT_Activated[pid]:
-            if int(self.PLC.PT_LowLimit[pid]) > int(self.PLC.PT_HighLimit[pid]):
+            if float(self.PLC.PT_LowLimit[pid]) > float(self.PLC.PT_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if int(self.PLC.PT_dic[pid]) < int(self.PLC.PT_LowLimit[pid]):
-                    self.setPTalarm(pid)
-                    self.PLC.PT_Alarm[pid] = True
+                if float(self.PLC.PT_dic[pid]) < float(self.PLC.PT_LowLimit[pid]):
+                    self.PTalarmmsg(pid)
+
                     # print(pid , " reading is lower than the low limit")
-                elif int(self.PLC.PT_dic[pid]) > int(self.PLC.PT_HighLimit[pid]):
-                    self.setPTalarm(pid)
+                elif float(self.PLC.PT_dic[pid]) > float(self.PLC.PT_HighLimit[pid]):
+                    self.PTalarmmsg(pid)
                     # print(pid,  " reading is higher than the high limit")
                 else:
-                    self.resetPTalarm(pid)
+                    self.resetPTalarmmsg(pid)
                     # print(pid, " is in normal range")
 
         else:
-            self.resetPTalarm(pid)
+            self.resetPTalarmmsg(pid)
             pass
 
-    def setTTFPalarm(self, pid):
+    def TTFPalarmmsg(self, pid):
         self.PLC.TT_FP_Alarm[pid] = True
         # and send email or slack messages
-        msg = "SBC alarm: {pid} is out of range".format(pid=pid)
-        # self.message_manager.tencent_alarm(msg)
-        # self.message_manager.slack_alarm(msg)
+        # every time interval send a alarm message
+        print(self.TT_FP_para)
+        if self.TT_FP_para>=self.TT_FP_rate:
+            msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, HI_LIM: {high}, LO_LIM: {low}".format(pid=pid, current = self.PLC.TT_FP_dic[pid],
+                                                                                                                     high = self.PLC.TT_FP_HighLimit[pid], low = self.PLC.TT_FP_LowLimit[pid])
+            # self.message_manager.tencent_alarm(msg)
+            self.message_manager.slack_alarm(msg)
+            self.TT_FP_para = 0
+        self.TT_FP_para += 1
 
-    def resetTTFPalarm(self, pid):
+    def resetTTFPalarmmsg(self, pid):
         self.PLC.TT_FP_Alarm[pid] = False
+        # self.TT_FP_para = 0
         # and send email or slack messages
 
-    def setTTBOalarm(self, pid):
+    def TTBOalarmmsg(self, pid):
         self.PLC.TT_BO_Alarm[pid] = True
         # and send email or slack messages
-        msg = "SBC alarm: {pid} is out of range".format(pid=pid)
-        # self.message_manager.tencent_alarm(msg)
-        # self.message_manager.slack_alarm(msg)
+        print(self.TT_BO_para)
+        if self.TT_BO_para >= self.TT_BO_rate:
+            msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, HI_LIM: {high}, LO_LIM: {low}".format(pid=pid, current = self.PLC.TT_BO_dic[pid],
+                                                                                                                     high = self.PLC.TT_BO_HighLimit[pid], low = self.PLC.TT_BO_LowLimit[pid])
+            # self.message_manager.tencent_alarm(msg)
+            self.message_manager.slack_alarm(msg)
+            self.TT_BO_para = 0
 
-    def resetTTBOalarm(self, pid):
+        self.TT_BO_para += 1
+
+    def resetTTBOalarmmsg(self, pid):
         self.PLC.TT_BO_Alarm[pid] = False
+        # self.TT_BO_para = 0
         # and send email or slack messages
 
-    def setPTalarm(self, pid):
+    def PTalarmmsg(self, pid):
         self.PLC.PT_Alarm[pid] = True
         # and send email or slack messages
-        msg = "SBC alarm: {pid} is out of range".format(pid=pid)
-        # self.message_manager.tencent_alarm(msg)
-        # self.message_manager.slack_alarm(msg)
+        if self.PT_para >= self.PT_rate:
+            msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, HI_LIM: {high}, LO_LIM: {low}".format(pid=pid, current = self.PLC.PT_dic[pid],
+                                                                                                                     high = self.PLC.PT_HighLimit[pid], low = self.PLC.PT_LowLimit[pid])
 
-    def resetPTalarm(self, pid):
+            # self.message_manager.tencent_alarm(msg)
+            self.message_manager.slack_alarm(msg)
+            self.PT_para = 0
+        self.PT_para += 1
+
+    def resetPTalarmmsg(self, pid):
         self.PLC.PT_Alarm[pid] = False
+        # self.PT_para = 0
         # and send email or slack messages
 
     def or_alarm_signal(self):
@@ -1371,9 +1407,9 @@ class UpdateServer(QtCore.QObject):
         self.LOOPPID_SET2_ini = self.PLC.LOOPPID_SET2
         self.LOOPPID_SET3_ini = self.PLC.LOOPPID_SET3
 
-        self.data_dic={"data":{"TT":{"FP":self.TT_FP_dic_ini,
-                                     "BO":self.TT_BO_dic_ini},
-                               "PT":self.PT_dic_ini,
+        self.data_dic={"data":{"TT":{"FP":{"value":self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini,"low":self.TT_FP_LowLimit_ini},
+                                     "BO":{"value":self.TT_BO_dic_ini, "high":self.TT_BO_HighLimit_ini,"low":self.TT_BO_LowLimit_ini}},
+                               "PT":{"value":self.PT_dic_ini,"high":self.PT_HighLimit_ini,"low":self.PT_LowLimit_ini},
                                "LEFT_REAL":self.LEFT_REAL_ini,
                                "Valve":{"OUT":self.Valve_OUT_ini,
                                         "INTLKD":self.Valve_INTLKD_ini,
@@ -1448,6 +1484,20 @@ class UpdateServer(QtCore.QObject):
             self.TT_BO_dic_ini[key]=self.PLC.TT_BO_dic[key]
         for key in self.PLC.PT_dic:
             self.PT_dic_ini[key]=self.PLC.PT_dic[key]
+        for key in self.PLC.TT_FP_HighLimit:
+            self.TT_FP_HighLimit_ini[key] = self.PLC.TT_FP_HighLimit[key]
+
+        for key in self.PLC.TT_BO_HighLimit:
+            self.TT_BO_HighLimit_ini[key]=self.PLC.TT_BO_HighLimit[key]
+        for key in self.PLC.PT_HighLimit:
+            self.PT_HighLimit_ini[key]=self.PLC.PT_HighLimit[key]
+        for key in self.PLC.TT_FP_LowLimit:
+            self.TT_FP_LowLimit_ini[key] = self.PLC.TT_FP_LowLimit[key]
+
+        for key in self.PLC.TT_BO_LowLimit:
+            self.TT_BO_LowLimit_ini[key]=self.PLC.TT_BO_LowLimit[key]
+        for key in self.PLC.PT_LowLimit:
+            self.PT_LowLimit_ini[key]=self.PLC.PT_LowLimit[key]
         for key in self.PLC.LEFT_REAL_dic:
             self.LEFT_REAL_ini[key]=self.PLC.LEFT_REAL_dic[key]
         for key in self.PLC.Valve_OUT:
@@ -1559,21 +1609,31 @@ class UpdateServer(QtCore.QObject):
                         pass
                 elif message[key]["type"] == "TT":
                     if message[key]["server"] == "BO":
-                        self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
-                        self.PLC.TT_BO_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                        self.PLC.TT_BO_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        # Update is to decide whether write new Low/High limit values into bkg code
+                        if message[key]["operation"]["Update"]:
+                            self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
+                            self.PLC.TT_BO_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                            self.PLC.TT_BO_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        else:
+                            self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
 
                     elif message[key]["server"] == "FP":
-                        self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
-                        self.PLC.TT_FP_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                        self.PLC.TT_FP_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        if message[key]["operation"]["Update"]:
+                            self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
+                            self.PLC.TT_FP_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                            self.PLC.TT_FP_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        else:
+                            self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
                     else:
                         pass
                 elif message[key]["type"] == "PT":
                     if message[key]["server"] == "BO":
-                        self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
-                        self.PLC.PT_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                        self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        if message[key]["operation"]["Update"]:
+                            self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
+                            self.PLC.PT_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                            self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        else:
+                            self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
                     else:
                         pass
                 elif message[key]["type"] == "heater_power":
@@ -1734,26 +1794,11 @@ class message_manager():
         self.mail_title = "Alarm from SBC"
 
         #info about slack settings
-        self.slack_webhook_url = 'https://hooks.slack.com/services/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'
-        self.slack_channel = None
-        self.alert_map = {
-            "emoji": {
-                "up": ":white_check_mark:",
-                "down": ":fire:"
-            },
-            "text": {
-                "up": "RESOLVED",
-                "down": "FIRING"
-            },
-            "message": {
-                "up": "Everything is good!",
-                "down": "Stuff is burning!"
-            },
-            "color": {
-                "up": "#32a852",
-                "down": "#ad1721"
-            }
-        }
+        #SLACK_BOT_TOKEN is a linux enviromental variable saved locally on sbcslowcontrol mathine
+        # it can be fetched on slack app page in SBCAlarm app: https://api.slack.com/apps/A035X77RW64/general
+        self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
+        self.logger = logging.getLogger(__name__)
+        self.channel_id = "C01918B8WDD"
 
     def tencent_alarm(self, message):
         try:
@@ -1778,41 +1823,24 @@ class message_manager():
             print("mail failed to send")
             print(e)
 
-    def slack_alarm(self, message, status=None):
-        data = {
-            "text": "AlertManager",
-            "username": "Notifications",
-            "channel": self.slack_channel,
-            "attachments": [{"text": message}]
-        #     "attachments": [g
-        #         {
-        #             "text": "{emoji} [*{state}*] Status Checker\n {message}".format(
-        #                 emoji=self.alert_map["emoji"][status],
-        #                 state=self.alert_map["text"][status],
-        #                 message=self.alert_map["message"][status]
-        #             ),
-        #             "color": self.alert_map["color"][status],
-        #             "attachment_type": "default",
-        #             "actions": [
-        #                 {
-        #                     "name": "Logs",f
-        #                     "text": "Logs",
-        #                     "type": "button",
-        #                     "style": "primary",
-        #                     "url": "https://grafana-logs.dashboard.local"
-        #                 },
-        #                 {
-        #                     "name": "Metrics",
-        #                     "text": "Metrics",
-        #                     "type": "button",
-        #                     "style": "primary",
-        #                     "url": "https://grafana-metrics.dashboard.local"
-        #                 }
-        #             ]
-        #         }]
-        }
-        r = requests.post(self.slack_webhook_url, json=data)
-        return r.status_code
+    def slack_alarm(self, message):
+        # ID of channel you want to post message to
+
+
+
+
+        try:
+            # Call the conversations.list method using the WebClient
+            result = self.client.chat_postMessage(
+                channel=self.channel_id,
+                text=str(message)
+                # You could also use a blocks[] array to send richer content
+            )
+            # Print result, which includes information about the message (like TS)
+            print(result)
+
+        except SlackApiError as e:
+            print(f"Error: {e}")
 
 
 

@@ -440,44 +440,62 @@ class AlarmStatusWidget(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
-        self.Label.setStyleSheet("QLabel {" +TITLE_STYLE+"}")
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + "}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 150 * R, 60 * R))
         self.Label.setText("Label")
-        self.GL.addWidget(self.Label,0,1)
+        self.GL.addWidget(self.Label, 0, 0,1,2)
+
 
         self.Indicator = Indicator(self)
         self.Indicator.Label.setText("Indicator")
-        self.GL.addWidget(self.Indicator,1,0)
 
-        self.Low_Limit = SetPoint(self)
-        self.Low_Limit.Label.setText("LOW")
-        self.GL.addWidget(self.Low_Limit,1,1)
+        self.GL.addWidget(self.Indicator,1,0,QtCore.Qt.AlignCenter)
 
-        self.High_Limit = SetPoint(self)
-        self.High_Limit.Label.setText("HIGH")
-        self.GL.addWidget(self.High_Limit,1,2)
+
+        self.Low_Read = Indicator(self)
+        self.Low_Read.Label.setText("Low")
+
+        self.GL.addWidget(self.Low_Read,1,1,QtCore.Qt.AlignCenter)
+
+        self.High_Read = Indicator(self)
+        self.High_Read.Label.setText("High")
+
+        self.GL.addWidget(self.High_Read, 1, 2,QtCore.Qt.AlignCenter)
+
+        self.Low_Set = SetPoint(self)
+        self.Low_Set.Label.setText("L SET")
+
+        self.GL.addWidget(self.Low_Set,2,0,QtCore.Qt.AlignCenter)
+
+        self.High_Set = SetPoint(self)
+        self.High_Set.Label.setText("H SET")
+
+        self.GL.addWidget(self.High_Set,2,1,QtCore.Qt.AlignCenter)
 
         # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
         self.AlarmMode = QtWidgets.QCheckBox(self)
         self.AlarmMode.setText("Active")
-        self.GL.addWidget(self.AlarmMode,0,3)
+        self.GL.addWidget(self.AlarmMode,0,2,QtCore.Qt.AlignCenter)
         self.Alarm = False
 
         self.updatebutton =  QtWidgets.QPushButton(self)
         self.updatebutton.setText("Update")
-        self.GL.addWidget(self.updatebutton,1,3)
+        self.GL.addWidget(self.updatebutton,2,2,QtCore.Qt.AlignCenter)
+
+
 
     @QtCore.Slot()
     def CheckAlarm(self):
         if self.AlarmMode.isChecked():
-            if int(self.Low_Limit.value) > int(self.High_Limit.value):
+            if int(self.Low_Read.value) > int(self.High_Read.value):
                 print("Low limit should be less than high limit!")
             else:
-                if int(self.Indicator.value) < int(self.Low_Limit.value):
+                if int(self.Indicator.value) < int(self.Low_Read.value):
                     self.Indicator.SetAlarm()
                     self.Alarm = True
                     print(str(self.Label.text()) + " reading is lower than the low limit")
-                elif int(self.Indicator.value) > int(self.High_Limit.value):
+                elif int(self.Indicator.value) > int(self.High_Read.value):
                     self.Indicator.SetAlarm()
                     self.Alarm = True
                     print(str(self.Label.text()) + " reading is higher than the high limit")
