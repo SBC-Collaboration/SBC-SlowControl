@@ -571,7 +571,7 @@ class PLC:
 
                 self.Procedure_running[key] = self.ReadCoil(1, self.Procedure_address[key])
                 self.Procedure_INTLKD[key] = self.ReadCoil(2, self.Procedure_address[key])
-                self.Procedure_EXIT[key] = struct.unpack(">I", struct.pack(">HH", Raw_Procedure[key].getRegister(0 + 1), Raw_Procedure[key].getRegister(0)))[0]
+                self.Procedure_EXIT[key] = struct.unpack(">f", struct.pack(">HH", Raw_Procedure[key].getRegister(0 + 1), Raw_Procedure[key].getRegister(0)))[0]
 
 
             #test the writing function
