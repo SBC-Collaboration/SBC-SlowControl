@@ -265,7 +265,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4306 = Indicator(self.ThermosyphonTab)
         self.PT4306.Label.setText("PT4306")
         self.PT4306.move(1020*R, 60*R)
-        self.PT4306.SetUnit(" bara")
+        self.PT4306.SetUnit(" bar")
 
         self.PV4307 = Valve(self.ThermosyphonTab)
         self.PV4307.Label.setText("PV4307")
@@ -303,7 +303,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4315 = Indicator(self.ThermosyphonTab)
         self.PT4315.Label.setText("PT4315")
         self.PT4315.move(950*R, 440*R)
-        self.PT4315.SetUnit(" bara")
+        self.PT4315.SetUnit(" bar")
 
         self.PG4316 = PnID_Alone(self.ThermosyphonTab)
         self.PG4316.Label.setText("PG4316")
@@ -320,7 +320,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4319 = Indicator(self.ThermosyphonTab)
         self.PT4319.Label.setText("PT4319")
         self.PT4319.move(570*R, 720*R)
-        self.PT4319.SetUnit(" bara")
+        self.PT4319.SetUnit(" bar")
 
         self.PRV4320 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4320.Label.setText("PRV4320")
@@ -333,7 +333,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4322 = Indicator(self.ThermosyphonTab)
         self.PT4322.Label.setText("PT4322")
         self.PT4322.move(850*R, 720*R)
-        self.PT4322.SetUnit(" bara")
+        self.PT4322.SetUnit(" bar")
 
         self.PRV4323 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4323.Label.setText("PRV4323")
@@ -346,7 +346,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4325 = Indicator(self.ThermosyphonTab)
         self.PT4325.Label.setText("PT4325")
         self.PT4325.move(1150*R, 720*R)
-        self.PT4325.SetUnit(" bara")
+        self.PT4325.SetUnit(" bar")
 
         self.PRV4326 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4326.Label.setText("PRV4326")
@@ -388,7 +388,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT6302 = Indicator(self.ThermosyphonTab)
         self.PT6302.Label.setText("PT6302")
         self.PT6302.move(2030*R, 690*R)
-        self.PT6302.SetUnit(" bara")
+        self.PT6302.SetUnit(" bar")
 
         self.PRV6303 = PnID_Alone(self.ThermosyphonTab)
         self.PRV6303.Label.setText("PRV6303")
@@ -546,12 +546,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1101 = Indicator(self.ChamberTab)
         self.PT1101.move(940*R, 990*R)
         self.PT1101.Label.setText("PT1101")
-        self.PT1101.SetUnit(" bara")
+        self.PT1101.SetUnit(" bar")
 
         self.PT2121 = Indicator(self.ChamberTab)
         self.PT2121.move(1210*R, 990*R)
         self.PT2121.Label.setText("PT2121")
-        self.PT2121.SetUnit(" bara")
+        self.PT2121.SetUnit(" bar")
 
         self.HTR1202 = Heater(self.ChamberTab)
         self.HTR1202.move(840*R, 1250*R)
@@ -575,17 +575,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2316 = Indicator(self.FluidTab)
         self.PT2316.move(1900*R, 360*R)
         self.PT2316.Label.setText("PT2316")
-        self.PT2316.SetUnit(" bara")
+        self.PT2316.SetUnit(" bar")
 
         self.PT2330 = Indicator(self.FluidTab)
         self.PT2330.move(1780*R, 360*R)
         self.PT2330.Label.setText("PT2330")
-        self.PT2330.SetUnit(" bara")
+        self.PT2330.SetUnit(" bar")
 
         self.PT2335 = Indicator(self.FluidTab)
         self.PT2335.move(1590*R, 420*R)
         self.PT2335.Label.setText("PT2335")
-        self.PT2335.SetUnit(" bara")
+        self.PT2335.SetUnit(" bar")
 
         self.TT7401 = Indicator(self.FluidTab)
         self.TT7401.move(1985*R, 250*R)
@@ -602,12 +602,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1101Fluid = Indicator(self.FluidTab)
         self.PT1101Fluid.move(1030*R, 1300*R)
         self.PT1101Fluid.Label.setText("PT1101")
-        self.PT1101Fluid.SetUnit(" bara")
+        self.PT1101Fluid.SetUnit(" bar")
 
         self.PT2121Fluid = Indicator(self.FluidTab)
         self.PT2121Fluid.move(1260*R, 1300*R)
         self.PT2121Fluid.Label.setText("PT2121")
-        self.PT2121Fluid.SetUnit(" bara")
+        self.PT2121Fluid.SetUnit(" bar")
 
         self.MFC1316 = Heater(self.FluidTab)
         self.MFC1316.move(400*R, 800*R)
@@ -621,7 +621,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1332 = Indicator(self.FluidTab)
         self.PT1332.move(630*R, 900*R)
         self.PT1332.Label.setText("PT1332")
-        self.PT1332.SetUnit(" bara")
+        self.PT1332.SetUnit(" bar")
 
         self.PV1344=Valve(self.FluidTab)
         self.PV1344.Label.setText("PV1344")
@@ -661,27 +661,27 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT3314 = Indicator(self.HydraulicTab)
         self.PT3314.move(700*R, 450*R)
         self.PT3314.Label.setText("PT3314")
-        self.PT3314.SetUnit(" bara")
+        self.PT3314.SetUnit(" bar")
 
         self.PT3320 = Indicator(self.HydraulicTab)
         self.PT3320.move(880*R, 530*R)
         self.PT3320.Label.setText("PT3320")
-        self.PT3320.SetUnit(" bara")
+        self.PT3320.SetUnit(" bar")
 
         self.PT3308 = Indicator(self.HydraulicTab)
         self.PT3308.move(440*R, 1080*R)
         self.PT3308.Label.setText("PT3308")
-        self.PT3308.SetUnit(" bara")
+        self.PT3308.SetUnit(" bar")
 
         self.PT3309 = Indicator(self.HydraulicTab)
         self.PT3309.move(665*R, 1140*R)
         self.PT3309.Label.setText("PT3309")
-        self.PT3309.SetUnit(" bara")
+        self.PT3309.SetUnit(" bar")
 
         self.PT3311 = Indicator(self.HydraulicTab)
         self.PT3311.move(750*R, 1110*R)
         self.PT3311.Label.setText("PT3311")
-        self.PT3311.SetUnit(" bara")
+        self.PT3311.SetUnit(" bar")
 
         self.HFSV3312 = Valve(self.HydraulicTab)
         self.HFSV3312.Label.setText("HFSV3312")
@@ -698,12 +698,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT3332 = Indicator(self.HydraulicTab)
         self.PT3332.move(1570*R, 1125*R)
         self.PT3332.Label.setText("PT3332")
-        self.PT3332.SetUnit(" bara")
+        self.PT3332.SetUnit(" bar")
 
         self.PT3333 = Indicator(self.HydraulicTab)
         self.PT3333.move(1570*R, 1250*R)
         self.PT3333.Label.setText("PT3333")
-        self.PT3333.SetUnit(" bara")
+        self.PT3333.SetUnit(" bar")
 
 
         self.SV3329 = Valve(self.HydraulicTab)
@@ -744,32 +744,32 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LT3335 = Indicator(self.HydraulicTab)
         self.LT3335.move(2100*R, 950*R)
         self.LT3335.Label.setText("LT3335")
-        self.LT3335.SetUnit(" ?")
+        self.LT3335.SetUnit(" in")
 
         self.LT3338 = Indicator(self.HydraulicTab)
         self.LT3338.move(2100*R, 1010*R)
         self.LT3338.Label.setText("LT3338")
-        self.LT3338.SetUnit(" ?")
+        self.LT3338.SetUnit(" in")
 
         self.LT3339 = Indicator(self.HydraulicTab)
         self.LT3339.move(2100*R, 1070*R)
         self.LT3339.Label.setText("LT3339")
-        self.LT3339.SetUnit(" ?")
+        self.LT3339.SetUnit(" in")
 
         self.CYL3334 = Indicator(self.HydraulicTab)
         self.CYL3334.move(2100 * R, 1160 * R)
         self.CYL3334.Label.setText("CYL3334")
-        self.CYL3334.SetUnit(" ?")
+        self.CYL3334.SetUnit(" pbs")
 
         self.PT1101Hy = Indicator(self.HydraulicTab)
         self.PT1101Hy.move(1900*R, 800*R)
         self.PT1101Hy.Label.setText("PT1101")
-        self.PT1101Hy.SetUnit(" bara")
+        self.PT1101Hy.SetUnit(" bar")
 
         self.PT2121Hy = Indicator(self.HydraulicTab)
         self.PT2121Hy.move(2100*R, 800*R)
         self.PT2121Hy.Label.setText("PT2121")
-        self.PT2121Hy.SetUnit(" bara")
+        self.PT2121Hy.SetUnit(" bar")
 
         # Data and Signal Tab
         self.ReadSettings = Loadfile(self.DatanSignalTab)
@@ -6221,63 +6221,121 @@ class AlarmWin(QtWidgets.QMainWindow):
         # PT part
         self.PT1101 = AlarmStatusWidget(self.PressureTab)
         self.PT1101.Label.setText("PT1101")
+        self.PT1101.Indicator.SetUnit(" bar")
+        self.PT1101.Low_Read.SetUnit(" bar")
+        self.PT1101.High_Read.SetUnit(" bar")
 
         self.PT2316 = AlarmStatusWidget(self.PressureTab)
         self.PT2316.Label.setText("PT2316")
+        self.PT2316.Indicator.SetUnit(" bar")
+        self.PT2316.Low_Read.SetUnit(" bar")
+        self.PT2316.High_Read.SetUnit(" bar")
 
         self.PT2321 = AlarmStatusWidget(self.PressureTab)
         self.PT2321.Label.setText("PT2321")
+        self.PT2321.Indicator.SetUnit(" bar")
+        self.PT2321.Low_Read.SetUnit(" bar")
+        self.PT2321.High_Read.SetUnit(" bar")
+
 
         self.PT2330 = AlarmStatusWidget(self.PressureTab)
         self.PT2330.Label.setText("PT2330")
+        self.PT2330.Indicator.SetUnit(" bar")
+        self.PT2330.Low_Read.SetUnit(" bar")
+        self.PT2330.High_Read.SetUnit(" bar")
 
         self.PT2335 = AlarmStatusWidget(self.PressureTab)
         self.PT2335.Label.setText("PT2335")
+        self.PT2335.Indicator.SetUnit(" bar")
+        self.PT2335.Low_Read.SetUnit(" bar")
+        self.PT2335.High_Read.SetUnit(" bar")
 
         self.PT3308 = AlarmStatusWidget(self.PressureTab)
         self.PT3308.Label.setText("PT3308")
+        self.PT3308.Indicator.SetUnit(" bar")
+        self.PT3308.Low_Read.SetUnit(" bar")
+        self.PT3308.High_Read.SetUnit(" bar")
 
         self.PT3309 = AlarmStatusWidget(self.PressureTab)
         self.PT3309.Label.setText("PT3309")
+        self.PT3309.Indicator.SetUnit(" bar")
+        self.PT3309.Low_Read.SetUnit(" bar")
+        self.PT3309.High_Read.SetUnit(" bar")
 
         self.PT3310 = AlarmStatusWidget(self.PressureTab)
         self.PT3310.Label.setText("PT3310")
+        self.PT3310.Indicator.SetUnit(" bar")
+        self.PT3310.Low_Read.SetUnit(" bar")
+        self.PT3310.High_Read.SetUnit(" bar")
 
         self.PT3311 = AlarmStatusWidget(self.PressureTab)
         self.PT3311.Label.setText("PT3311")
+        self.PT3311.Indicator.SetUnit(" bar")
+        self.PT3311.Low_Read.SetUnit(" bar")
+        self.PT3311.High_Read.SetUnit(" bar")
 
         self.PT3314 = AlarmStatusWidget(self.PressureTab)
         self.PT3314.Label.setText("PT3314")
+        self.PT3314.Indicator.SetUnit(" bar")
+        self.PT3314.Low_Read.SetUnit(" bar")
+        self.PT3314.High_Read.SetUnit(" bar")
 
         self.PT3320 = AlarmStatusWidget(self.PressureTab)
         self.PT3320.Label.setText("PT3320")
+        self.PT3320.Indicator.SetUnit(" bar")
+        self.PT3320.Low_Read.SetUnit(" bar")
+        self.PT3320.High_Read.SetUnit(" bar")
 
         self.PT3332 = AlarmStatusWidget(self.PressureTab)
         self.PT3332.Label.setText("PT3332")
+        self.PT3332.Indicator.SetUnit(" bar")
+        self.PT3332.Low_Read.SetUnit(" bar")
+        self.PT3332.High_Read.SetUnit(" bar")
 
         self.PT3333 = AlarmStatusWidget(self.PressureTab)
         self.PT3333.Label.setText("PT3333")
+        self.PT3333.Indicator.SetUnit(" bar")
+        self.PT3333.Low_Read.SetUnit(" bar")
+        self.PT3333.High_Read.SetUnit(" bar")
 
         self.PT4306 = AlarmStatusWidget(self.PressureTab)
         self.PT4306.Label.setText("PT4306")
+        self.PT4306.Indicator.SetUnit(" bar")
+        self.PT4306.Low_Read.SetUnit(" bar")
+        self.PT4306.High_Read.SetUnit(" bar")
 
         self.PT4315 = AlarmStatusWidget(self.PressureTab)
         self.PT4315.Label.setText("PT4315")
+        self.PT4315.Indicator.SetUnit(" bar")
+        self.PT4315.Low_Read.SetUnit(" bar")
+        self.PT4315.High_Read.SetUnit(" bar")
 
         self.PT4319 = AlarmStatusWidget(self.PressureTab)
         self.PT4319.Label.setText("PT4319")
+        self.PT4319.Indicator.SetUnit(" bar")
+        self.PT4319.Low_Read.SetUnit(" bar")
+        self.PT4319.High_Read.SetUnit(" bar")
 
         self.PT4322 = AlarmStatusWidget(self.PressureTab)
         self.PT4322.Label.setText("PT4322")
+        self.PT4322.Indicator.SetUnit(" bar")
+        self.PT4322.Low_Read.SetUnit(" bar")
+        self.PT4322.High_Read.SetUnit(" bar")
 
         self.PT4325 = AlarmStatusWidget(self.PressureTab)
         self.PT4325.Label.setText("PT4325")
+        self.PT4325.Indicator.SetUnit(" bar")
+        self.PT4325.Low_Read.SetUnit(" bar")
+        self.PT4325.High_Read.SetUnit(" bar")
 
 
         #left variable part
         self.LT3335 = AlarmStatusWidget(self.LEFTVariableTab)
         self.LT3335.Label.setText("LT3335")
+        self.LT3335.Indicator.SetUnit(" in")
 
+        self.LT3335.Low_Read.SetUnit(" in")
+        self.LT3335.High_Read.SetUnit(" in")
 
         # make a directory for the alarm instrument and assign instrument to certain position
         #IF you change the dimenstion of the following matrixes, don't forget to change TempMatrix in the Reassign function
