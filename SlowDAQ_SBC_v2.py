@@ -3822,10 +3822,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4325.SetValue(received_dic_c["data"]["PT"]["value"]["PT4325"])
         self.PT6302.SetValue(received_dic_c["data"]["PT"]["value"]["PT6302"])
 
-        self.LT3335.SetValue(received_dic_c["data"]["LEFT_REAL"]["LT3335"])
-        self.BFM4313.SetValue(received_dic_c["data"]["LEFT_REAL"]["BFM4313"])
+        self.LT3335.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LT3335"])
+        self.BFM4313.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BFM4313"])
         # self.MFC1316.SetValue not given value
-        self.CYL3334.SetValue(received_dic_c["data"]["LEFT_REAL"]["CYL3334_FCALC"])
+        self.CYL3334.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["CYL3334_FCALC"])
 
 
 
