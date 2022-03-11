@@ -1236,6 +1236,59 @@ class SingleButton(QtWidgets.QWidget):
             except:
                 pass
 
+class ProcedureWidget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("ProcedureWidget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 460 * R, 200 * R))
+        self.setMinimumSize(460 * R, 20 * R)
+        self.setSizePolicy(sizePolicy)
+        self.objectname = "ProcedureWidget"
+
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GL.setSpacing(3)
+
+        self.Group = QtWidgets.QGroupBox(self)
+        self.Group.setTitle("ProcedureWidget")
+        self.Group.setLayout(self.GL)
+        self.Group.move(0 * R, 0 * R)
+
+
+        self.Running = Indicator(self)
+        self.Running.Label.setText("Running")
+        self.GL.addWidget(self.Running,0,0,QtCore.Qt.AlignCenter)
+
+        self.INTLKD = Indicator(self)
+        self.INTLKD.Label.setText("INTLKD")
+        self.GL.addWidget(self.INTLKD,0,1,QtCore.Qt.AlignCenter)
+
+        self.EXIT = Indicator(self)
+        self.EXIT.Label.setText("EXIT")
+
+        self.GL.addWidget(self.EXIT, 0, 2,QtCore.Qt.AlignCenter)
+
+        self.START = QtWidgets.QPushButton(self)
+        self.START.setText("Start")
+
+        self.GL.addWidget(self.START,1,0,QtCore.Qt.AlignCenter)
+
+        self.STOP = QtWidgets.QPushButton(self)
+        self.STOP.setText("Stop")
+
+        self.GL.addWidget(self.STOP,1,1,QtCore.Qt.AlignCenter)
+
+
+
+        self.ABORT =  QtWidgets.QPushButton(self)
+        self.ABORT.setText("Abort")
+        self.GL.addWidget(self.ABORT,1,2,QtCore.Qt.AlignCenter)
+
+
 
 class ChangeValueSignal(QtCore.QObject):
     fSignal = QtCore.Signal(float)

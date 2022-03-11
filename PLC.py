@@ -165,6 +165,9 @@ class PLC:
                             "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
                             "PT4322": 300, "PT4325": 300, "PT6302": 300}
 
+        self.LEFT_REAL_HighLimit = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
+        self.LEFT_REAL_LowLimit = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
+
         self.TT_FP_Activated = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
                               "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
                               "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
@@ -186,6 +189,7 @@ class PLC:
                              "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                              "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
                              "PT4322": False, "PT4325": False, "PT6302": False}
+        self.LEFT_REAL_Activated = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False}
 
         self.TT_FP_Alarm = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
                               "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
@@ -208,6 +212,7 @@ class PLC:
                          "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                          "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
                          "PT4322": False, "PT4325": False, "PT6302": False}
+        self.LEFT_REAL_Alarm = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False}
         self.MainAlarm = False
         self.nTT_BO = len(self.TT_BO_address)
         self.nTT_FP = len(self.TT_FP_address)
@@ -354,6 +359,11 @@ class PLC:
                            'HTR2125': 0,
                            'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
                            'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+        self.Procedure_address = {'TS_ADDREM': 15288, 'TS_EMPTY': 15290, 'TS_EMPTYALL': 15292, 'PU_PRIME': 15294, 'WRITE_SLOWDAQ': 15296}
+        self.Procedure_running = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False}
+        self.Procedure_INTLKD = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False}
+        self.Procedure_EXIT = {'TS_ADDREM': 0, 'TS_EMPTY': 0, 'TS_EMPTYALL': 0, 'PU_PRIME': 0, 'WRITE_SLOWDAQ': 0}
 
 
 
@@ -553,6 +563,16 @@ class PLC:
                                                     Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
 
             ##########################################################################################
+            #procedure
+            Raw_Procedure = {}
+            Raw_Procedure_OUT = {}
+            for key in self.Procedure_address:
+                Raw_Procedure[key] = self.Client_BO.read_holding_registers(self.Procedure_address[key]+1, count=1, unit=0x01)
+
+                self.Procedure_running[key] = self.ReadCoil(1, self.Procedure_address[key])
+                self.Procedure_INTLKD[key] = self.ReadCoil(2, self.Procedure_address[key])
+                self.Procedure_EXIT[key] = struct.unpack(">I", struct.pack(">HH", Raw_Procedure[key].getRegister(0 + 1),
+                                                    Raw_Procedure[key].getRegister(0)))[0]
 
 
             #test the writing function
@@ -621,21 +641,36 @@ class PLC:
         print("write result = ", Raw1, Raw2)
 
 
-    def WriteOpen(self,address):
+    def WriteBase2(self,address):
         output_BO = self.Read_BO_1(address)
         input_BO= struct.unpack("H",output_BO)[0] | 0x0002
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
-        print("write open result=", Raw)
+        print("write base2 result=", Raw)
 
-    def WriteClose(self,address):
+    def WriteBase4(self,address):
         output_BO = self.Read_BO_1(address)
         input_BO = struct.unpack("H",output_BO)[0] | 0x0004
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
-        print("write close result=", Raw)
+        print("write base4 result=", Raw)
+
+
+    def WriteBase8(self,address):
+        output_BO = self.Read_BO_1(address)
+        input_BO = struct.unpack("H",output_BO)[0] | 0x0008
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        print("write base8 result=", Raw)
+
+    def WriteBase16(self,address):
+        output_BO = self.Read_BO_1(address)
+        input_BO = struct.unpack("H",output_BO)[0] | 0x0010
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        print("write base16 result=", Raw)
 
     def Reset(self,address):
         Raw = self.Client_BO.write_register(address, value=0x0010, unit=0x01)
-        print("write reset result=", Raw)
+        print("write Reset result=", Raw)
+
+
 
     # mask is a number to read a particular digit. for example, if you want to read 3rd digit, the mask is 0100(binary)
     def ReadCoil(self, mask,address):
@@ -1194,6 +1229,8 @@ class UpdatePLC(QtCore.QObject):
         self.PT_rate = 30
         self.PR_CYCLE_para =0
         self.PR_CYCLE_rate = 30
+        self.LEFT_REAL_para = 0
+        self.LEFT_REAL_rate = 30
 
     @QtCore.Slot()
     def run(self):
@@ -1209,6 +1246,8 @@ class UpdatePLC(QtCore.QObject):
                     self.check_TT_BO_alarm(keyTT_BO)
                 for keyPT in self.PLC.PT_dic:
                     self.check_PT_alarm(keyPT)
+                for keyLEFT_REAL in self.PLC.LEFT_REAL_dic:
+                    self.check_LEFT_REAL_alarm(keyLEFT_REAL)
                 self.or_alarm_signal()
                 time.sleep(self.period)
         except KeyboardInterrupt:
@@ -1291,6 +1330,29 @@ class UpdatePLC(QtCore.QObject):
             self.resetPTalarmmsg(pid)
             pass
 
+    def check_LEFT_REAL_alarm(self, pid):
+
+        if self.PLC.LEFT_REAL_Activated[pid]:
+            if float(self.PLC.LEFT_REAL_LowLimit[pid]) > float(self.PLC.LEFT_REAL_HighLimit[pid]):
+                print("Low limit should be less than high limit!")
+            else:
+                if float(self.PLC.LEFT_REAL_dic[pid]) < float(self.PLC.LEFT_REAL_LowLimit[pid]):
+                    self.LEFT_REALalarmmsg(pid)
+
+                    # print(pid , " reading is lower than the low limit")
+                elif float(self.PLC.LEFT_REAL_dic[pid]) > float(self.PLC.LEFT_REAL_HighLimit[pid]):
+                    self.LEFT_REALalarmmsg(pid)
+                    # print(pid,  " reading is higher than the high limit")
+                else:
+                    self.resetLEFT_REALalarmmsg(pid)
+                    # print(pid, " is in normal range")
+
+        else:
+            self.resetLEFT_REALalarmmsg(pid)
+            pass
+
+
+
     def TTFPalarmmsg(self, pid):
         self.PLC.TT_FP_Alarm[pid] = True
         # and send email or slack messages
@@ -1344,8 +1406,26 @@ class UpdatePLC(QtCore.QObject):
         # self.PT_para = 0
         # and send email or slack messages
 
+    def LEFT_REALalarmmsg(self, pid):
+        self.PLC.LEFT_REAL_Alarm[pid] = True
+        # and send email or slack messages
+        if self.LEFT_REAL_para >= self.LEFT_REAL_rate:
+            msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, HI_LIM: {high}, LO_LIM: {low}".format(pid=pid, current = self.PLC.LEFT_REAL_dic[pid],
+                                                                                                                     high = self.PLC.LEFT_REAL_HighLimit[pid], low = self.PLC.LEFT_REAL_LowLimit[pid])
+
+            # self.message_manager.tencent_alarm(msg)
+            self.message_manager.slack_alarm(msg)
+            self.LEFT_REAL_para = 0
+        self.LEFT_REAL_para += 1
+
+    def resetLEFT_REALalarmmsg(self, pid):
+        self.PLC.LEFT_REAL_Alarm[pid] = False
+        # self.LEFT_REAL_para = 0
+        # and send email or slack messages
+
+
     def or_alarm_signal(self):
-        if (True in self.PLC.TT_BO_Alarm) or (True in self.PLC.PT_Alarm) or (True in self.PLC.TT_FP_Alarm):
+        if (True in self.PLC.TT_BO_Alarm) or (True in self.PLC.PT_Alarm) or (True in self.PLC.TT_FP_Alarm) or (True in self.PLC.LEFT_REAL_Alarm):
             self.PLC.MainAlarm = True
         else:
             self.PLC.MainAlarm = False
@@ -1373,12 +1453,15 @@ class UpdateServer(QtCore.QObject):
         self.TT_BO_HighLimit_ini = self.PLC.TT_BO_HighLimit
         self.PT_LowLimit_ini = self.PLC.PT_LowLimit
         self.PT_HighLimit_ini = self.PLC.PT_HighLimit
+        self.LEFT_REAL_LowLimit_ini = self.PLC.LEFT_REAL_LowLimit
+        self.LEFT_REAL_HighLimit_ini = self.PLC.LEFT_REAL_HighLimit
         self.TT_FP_Activated = self.PLC.TT_FP_Activated
         self.TT_BO_Activated_ini = self.PLC.TT_BO_Activated
         self.PT_Activated_ini = self.PLC.PT_Activated
         self.TT_FP_Alarm_ini = self.PLC.TT_FP_Alarm
         self.TT_BO_Alarm_ini = self.PLC.TT_BO_Alarm
         self.PT_Alarm_ini = self.PLC.PT_Alarm
+        self.LEFT_REAL_Alarm_ini = self.PLC.LEFT_REAL_Alarm
         self.MainAlarm_ini = self.PLC.MainAlarm
         self.Valve_OUT_ini = self.PLC.Valve_OUT
         self.Valve_MAN_ini = self.PLC.Valve_MAN
@@ -1406,11 +1489,15 @@ class UpdateServer(QtCore.QObject):
         self.LOOPPID_SET1_ini = self.PLC.LOOPPID_SET1
         self.LOOPPID_SET2_ini = self.PLC.LOOPPID_SET2
         self.LOOPPID_SET3_ini = self.PLC.LOOPPID_SET3
+        self.Procedure_running_ini = self.PLC.Procedure_running
+        self.Procedure_INTLKD_ini = self.PLC.Procedure_INTLKD
+        self.Procedure_EXIT_ini = self.PLC.Procedure_EXIT
+
 
         self.data_dic={"data":{"TT":{"FP":{"value":self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini,"low":self.TT_FP_LowLimit_ini},
                                      "BO":{"value":self.TT_BO_dic_ini, "high":self.TT_BO_HighLimit_ini,"low":self.TT_BO_LowLimit_ini}},
                                "PT":{"value":self.PT_dic_ini,"high":self.PT_HighLimit_ini,"low":self.PT_LowLimit_ini},
-                               "LEFT_REAL":self.LEFT_REAL_ini,
+                               "LEFT_REAL":{"value":self.LEFT_REAL_ini,"high":self.LEFT_REAL_HighLimit_ini,"low":self.LEFT_REAL_LowLimit_ini},
                                "Valve":{"OUT":self.Valve_OUT_ini,
                                         "INTLKD":self.Valve_INTLKD_ini,
                                         "MAN":self.Valve_MAN_ini,
@@ -1437,9 +1524,11 @@ class UpdateServer(QtCore.QObject):
                                         "SET1" : self.LOOPPID_SET1_ini,
                                         "SET2" : self.LOOPPID_SET2_ini,
                                         "SET3" : self.LOOPPID_SET3_ini}},
+                                "Procedure":{"Running":self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini,"EXIT": self.Procedure_EXIT_ini},
                        "Alarm":{"TT" : {"FP":self.TT_FP_Alarm_ini,
                                       "BO":self.TT_BO_Alarm_ini},
-                                "PT" : self.PT_Alarm_ini},
+                                "PT" : self.PT_Alarm_ini,
+                                "LEFT_REAL": self.LEFT_REAL_Alarm_ini},
                        "MainAlarm" : self.MainAlarm_ini}
 
         self.data_package=pickle.dumps(self.data_dic)
@@ -1491,6 +1580,9 @@ class UpdateServer(QtCore.QObject):
             self.TT_BO_HighLimit_ini[key]=self.PLC.TT_BO_HighLimit[key]
         for key in self.PLC.PT_HighLimit:
             self.PT_HighLimit_ini[key]=self.PLC.PT_HighLimit[key]
+        for key in self.PLC.LEFT_REAL_HighLimit:
+            self.LEFT_REAL_HighLimit_ini[key]=self.PLC.LEFT_REAL_HighLimit[key]
+
         for key in self.PLC.TT_FP_LowLimit:
             self.TT_FP_LowLimit_ini[key] = self.PLC.TT_FP_LowLimit[key]
 
@@ -1498,6 +1590,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_BO_LowLimit_ini[key]=self.PLC.TT_BO_LowLimit[key]
         for key in self.PLC.PT_LowLimit:
             self.PT_LowLimit_ini[key]=self.PLC.PT_LowLimit[key]
+        for key in self.PLC.LEFT_REAL_LowLimit:
+            self.LEFT_REAL_LowLimit_ini[key]=self.PLC.LEFT_REAL_LowLimit[key]
         for key in self.PLC.LEFT_REAL_dic:
             self.LEFT_REAL_ini[key]=self.PLC.LEFT_REAL_dic[key]
         for key in self.PLC.Valve_OUT:
@@ -1524,6 +1618,8 @@ class UpdateServer(QtCore.QObject):
             self.TT_BO_Alarm_ini[key] = self.PLC.TT_BO_Alarm[key]
         for key in self.PLC.PT_dic:
             self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
+        for key in self.PLC.LEFT_REAL_dic:
+            self.LEFT_REAL_Alarm_ini[key] = self.PLC.LEFT_REAL_Alarm[key]
         for key in self.PLC.LOOPPID_MODE0:
             self.LOOPPID_MODE0_ini[key] = self.PLC.LOOPPID_MODE0[key]
         for key in self.PLC.LOOPPID_MODE1:
@@ -1561,6 +1657,13 @@ class UpdateServer(QtCore.QObject):
         for key in self.PLC.LOOPPID_SET3:
             self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
 
+        for key in self.PLC.Procedure_running:
+            self.Procedure_running_ini[key]= self.PLC.Procedure_running[key]
+        for key in self.PLC.Procedure_INTLKD:
+            self.Procedure_INTLKD_ini[key]= self.PLC.Procedure_INTLKD[key]
+        for key in self.PLC.Procedure_EXIT:
+            self.Procedure_EXIT_ini[key]= self.PLC.Procedure_EXIT[key]
+
         self.data_dic["MainAlarm"]=self.PLC.MainAlarm
         # print("pack",self.data_dic)
         # print("HTR6214 \n", "MODE0", self.data_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],
@@ -1595,16 +1698,16 @@ class UpdateServer(QtCore.QObject):
                 print(message[key]["type"]=="valve")
                 if message[key]["type"]=="valve":
                     if message[key]["operation"]=="OPEN":
-                        self.PLC.WriteOpen(address= message[key]["address"])
+                        self.PLC.WriteBase2(address= message[key]["address"])
                     elif message[key]["operation"]=="CLOSE":
-                        self.PLC.WriteClose(address= message[key]["address"])
+                        self.PLC.WriteBase4(address= message[key]["address"])
                     else:
                         pass
                 if message[key]["type"]=="switch":
                     if message[key]["operation"]=="ON":
-                        self.PLC.WriteOpen(address= message[key]["address"])
+                        self.PLC.WriteBase2(address= message[key]["address"])
                     elif message[key]["operation"]=="OFF":
-                        self.PLC.WriteClose(address= message[key]["address"])
+                        self.PLC.WriteBase4(address= message[key]["address"])
                     else:
                         pass
                 elif message[key]["type"] == "TT":
@@ -1634,6 +1737,28 @@ class UpdateServer(QtCore.QObject):
                             self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
                         else:
                             self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
+                    else:
+                        pass
+                elif message[key]["type"] == "LEFT":
+                    if message[key]["server"] == "BO":
+                        if message[key]["operation"]["Update"]:
+                            self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
+                            self.PLC.PT_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                            self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                        else:
+                            self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
+                    else:
+                        pass
+                elif message[key]["type"] == "Procedure":
+                    if message[key]["server"] == "BO":
+                        if message[key]["operation"]["Start"]:
+                            self.PLC.WriteBase4(address= message[key]["address"])
+                        elif message[key]["operation"]["Stop"]:
+                            self.PLC.WriteBase8(address= message[key]["address"])
+                        elif message[key]["operation"]["Abort"]:
+                            self.PLC.WriteBase16(address= message[key]["address"])
+                        else:
+                            pass
                     else:
                         pass
                 elif message[key]["type"] == "heater_power":
@@ -1717,11 +1842,11 @@ class UpdateServer(QtCore.QObject):
 
 
         # if message == b'this is a command':
-        #     self.PLC.WriteOpen()
+        #     self.PLC.WriteBase2()
         #     self.PLC.Read_BO_1()
         #     print("I will set valve")
         # elif message == b'no command':
-        #     self.PLC.WriteClose()
+        #     self.PLC.WriteBase4()
         #     self.PLC.Read_BO_1()
         #     print("I will stay here")
         # elif message == b'this an anti_conmmand':
@@ -1798,7 +1923,7 @@ class message_manager():
         # it can be fetched on slack app page in SBCAlarm app: https://api.slack.com/apps/A035X77RW64/general
         self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
         self.logger = logging.getLogger(__name__)
-        self.channel_id = "C01918B8WDD"
+        self.channel_id = "C01A549VDHS"
 
     def tencent_alarm(self, message):
         try:
