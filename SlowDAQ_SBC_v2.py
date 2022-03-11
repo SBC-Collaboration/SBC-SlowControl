@@ -2916,13 +2916,13 @@ class MainWindow(QtWidgets.QMainWindow):
         #LEFT Variables: because the receive_dic's dimension is different from the dimension in self.GLLEFT, I have to set widgets' value in self.GLLEFT mannually
 
         self.AlarmButton.SubWindow.LT3335.UpdateAlarm(
-            received_dic_c["Alarm"]["LEFTREAL"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+            received_dic_c["Alarm"]["LEFT_REAL"][self.AlarmButton.SubWindow.LT3335.Label.text()])
         self.AlarmButton.SubWindow.LT3335.Indicator.SetValue(
-            received_dic_c["data"]["LEFTREAL"]["value"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+            received_dic_c["data"]["LEFT_REAL"]["value"][self.AlarmButton.SubWindow.LT3335.Label.text()])
         self.AlarmButton.SubWindow.LT3335.Low_Read.SetValue(
-            received_dic_c["data"]["LEFTREAL"]["low"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+            received_dic_c["data"]["LEFT_REAL"]["low"][self.AlarmButton.SubWindow.LT3335.Label.text()])
         self.AlarmButton.SubWindow.LT3335.High_Read.SetValue(
-            received_dic_c["data"]["LEFTREAL"]["high"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+            received_dic_c["data"]["LEFT_REAL"]["high"][self.AlarmButton.SubWindow.LT3335.Label.text()])
 
 
 
