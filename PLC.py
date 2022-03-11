@@ -1741,11 +1741,11 @@ class UpdateServer(QtCore.QObject):
                 elif message[key]["type"] == "LEFT":
                     if message[key]["server"] == "BO":
                         if message[key]["operation"]["Update"]:
-                            self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
-                            self.PLC.PT_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                            self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                            self.PLC.LEFT_REAL_Activated[key] = message[key]["operation"]["Act"]
+                            self.PLC.LEFT_REAL_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                            self.PLC.LEFT_REAL_HighLimit[key] = message[key]["operation"]["HighLimit"]
                         else:
-                            self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
+                            self.PLC.LEFT_REAL_Activated[key] = message[key]["operation"]["Act"]
                     else:
                         pass
                 elif message[key]["type"] == "Procedure":
