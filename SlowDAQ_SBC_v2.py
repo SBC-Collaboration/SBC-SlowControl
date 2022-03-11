@@ -2841,7 +2841,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print("Display updating", datetime.datetime.now())
         # print('Display update result for HFSV3331:', received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
 
-
+        print(received_dic_c["data"]["Procedure"])
         self.TS_ADDREM.Running.SetValue(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.INTLKD.SetValue(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_ADDREM.objectname])
