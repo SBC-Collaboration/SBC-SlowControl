@@ -2843,24 +2843,24 @@ class MainWindow(QtWidgets.QMainWindow):
 
         print(received_dic_c["data"]["Procedure"])
 
-        self.TS_ADDREM.Running.SetValue(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
-        self.TS_ADDREM.INTLKD.SetValue(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
+        self.TS_ADDREM.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
+        self.TS_ADDREM.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_ADDREM.objectname])
 
-        self.TS_EMPTY.Running.SetValue(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTY.objectname])
-        self.TS_EMPTY.INTLKD.SetValue(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTY.objectname])
+        self.TS_EMPTY.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTY.objectname])
+        self.TS_EMPTY.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTY.objectname])
         self.TS_EMPTY.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_EMPTY.objectname])
 
-        self.TS_EMPTYALL.Running.SetValue(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTYALL.objectname])
-        self.TS_EMPTYALL.INTLKD.SetValue(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTYALL.objectname])
+        self.TS_EMPTYALL.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTYALL.objectname])
+        self.TS_EMPTYALL.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTYALL.objectname])
         self.TS_EMPTYALL.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_EMPTYALL.objectname])
 
-        self.PU_PRIME.Running.SetValue(received_dic_c["data"]["Procedure"]["Running"][self.PU_PRIME.objectname])
-        self.PU_PRIME.INTLKD.SetValue(received_dic_c["data"]["Procedure"]["INTLKD"][self.PU_PRIME.objectname])
+        self.PU_PRIME.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.PU_PRIME.objectname])
+        self.PU_PRIME.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.PU_PRIME.objectname])
         self.PU_PRIME.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.PU_PRIME.objectname])
 
-        self.WRITE_SLOWDAQ.Running.SetValue(received_dic_c["data"]["Procedure"]["Running"][self.WRITE_SLOWDAQ.objectname])
-        self.WRITE_SLOWDAQ.INTLKD.SetValue(received_dic_c["data"]["Procedure"]["INTLKD"][self.WRITE_SLOWDAQ.objectname])
+        self.WRITE_SLOWDAQ.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.WRITE_SLOWDAQ.objectname])
+        self.WRITE_SLOWDAQ.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.WRITE_SLOWDAQ.objectname])
         self.WRITE_SLOWDAQ.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.WRITE_SLOWDAQ.objectname])
 
         #Update alarmwindow's widgets' value

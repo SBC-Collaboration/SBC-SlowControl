@@ -166,7 +166,7 @@ class ColoredStatus(QtWidgets.QWidget):
                 "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_ORANGE +
                 "} QWidget[Active = false]{" + C_GREEN + "}")
         elif self.Mode == 4:
-            # mode 4: color is green when active is false and red when active is true
+            # mode 4: color is green when active is true and red when active is false
             self.Field.setStyleSheet(
                 "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_GREEN +
                 "} QWidget[Active = false]{" + C_RED + "}")
@@ -1259,11 +1259,11 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.Group.move(0 * R, 0 * R)
 
 
-        self.Running = Indicator(self)
+        self.Running = ColoredStatus(self, mode= 4)
         self.Running.Label.setText("Running")
         self.GL.addWidget(self.Running,0,0,QtCore.Qt.AlignCenter)
 
-        self.INTLKD = Indicator(self)
+        self.INTLKD = ColoredStatus(self, mode= 1)
         self.INTLKD.Label.setText("INTLKD")
         self.GL.addWidget(self.INTLKD,0,1,QtCore.Qt.AlignCenter)
 
