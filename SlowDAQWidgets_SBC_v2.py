@@ -166,7 +166,7 @@ class ColoredStatus(QtWidgets.QWidget):
                 "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_ORANGE +
                 "} QWidget[Active = false]{" + C_GREEN + "}")
         elif self.Mode == 4:
-            # mode 4: color is green when active is false and red when active is true
+            # mode 4: color is green when active is true and red when active is false
             self.Field.setStyleSheet(
                 "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_GREEN +
                 "} QWidget[Active = false]{" + C_RED + "}")
@@ -1235,6 +1235,60 @@ class SingleButton(QtWidgets.QWidget):
                 self.Button.clicked.disconnect(self.ButtonClicked)
             except:
                 pass
+
+class ProcedureWidget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("ProcedureWidget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 460 * R, 200 * R))
+        self.setMinimumSize(460 * R, 20 * R)
+        self.setSizePolicy(sizePolicy)
+        self.objectname = "ProcedureWidget"
+
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GL.setSpacing(3)
+
+        self.Group = QtWidgets.QGroupBox(self)
+        self.Group.setTitle("ProcedureWidget")
+        self.Group.setLayout(self.GL)
+        self.Group.move(0 * R, 0 * R)
+
+
+        self.Running = ColoredStatus(self, mode= 4)
+        self.Running.Label.setText("Running")
+        self.GL.addWidget(self.Running,0,0,QtCore.Qt.AlignCenter)
+
+        self.INTLKD = ColoredStatus(self, mode= 1)
+        self.INTLKD.Label.setText("INTLKD")
+        self.GL.addWidget(self.INTLKD,0,1,QtCore.Qt.AlignCenter)
+
+        self.EXIT = Indicator(self)
+        self.EXIT.Label.setText("EXIT")
+        self.EXIT.SetUnit(" ")
+
+        self.GL.addWidget(self.EXIT, 0, 2,QtCore.Qt.AlignCenter)
+
+        self.START = QtWidgets.QPushButton(self)
+        self.START.setText("Start")
+
+        self.GL.addWidget(self.START,1,0,QtCore.Qt.AlignCenter)
+
+        self.STOP = QtWidgets.QPushButton(self)
+        self.STOP.setText("Stop")
+
+        self.GL.addWidget(self.STOP,1,1,QtCore.Qt.AlignCenter)
+
+
+
+        self.ABORT =  QtWidgets.QPushButton(self)
+        self.ABORT.setText("Abort")
+        self.GL.addWidget(self.ABORT,1,2,QtCore.Qt.AlignCenter)
+
 
 
 class ChangeValueSignal(QtCore.QObject):

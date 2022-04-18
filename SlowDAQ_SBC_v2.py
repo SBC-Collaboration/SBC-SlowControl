@@ -224,6 +224,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # Data setting form is ended with .ini and directory is https://doc.qt.io/archives/qtforpython-5.12/PySide2/QtCore/QSettings.html depending on the System
         self.settings = QtCore.QSettings("$HOME/.config//SBC/SlowControl.ini", QtCore.QSettings.IniFormat)
 
+
+
         # Temperature tab buttons
 
         self.ThermosyphonWin = ThermosyphonWindow()
@@ -263,7 +265,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4306 = Indicator(self.ThermosyphonTab)
         self.PT4306.Label.setText("PT4306")
         self.PT4306.move(1020*R, 60*R)
-        self.PT4306.SetUnit(" bara")
+        self.PT4306.SetUnit(" bar")
 
         self.PV4307 = Valve(self.ThermosyphonTab)
         self.PV4307.Label.setText("PV4307")
@@ -301,7 +303,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4315 = Indicator(self.ThermosyphonTab)
         self.PT4315.Label.setText("PT4315")
         self.PT4315.move(950*R, 440*R)
-        self.PT4315.SetUnit(" bara")
+        self.PT4315.SetUnit(" bar")
 
         self.PG4316 = PnID_Alone(self.ThermosyphonTab)
         self.PG4316.Label.setText("PG4316")
@@ -318,7 +320,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4319 = Indicator(self.ThermosyphonTab)
         self.PT4319.Label.setText("PT4319")
         self.PT4319.move(570*R, 720*R)
-        self.PT4319.SetUnit(" bara")
+        self.PT4319.SetUnit(" bar")
 
         self.PRV4320 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4320.Label.setText("PRV4320")
@@ -331,7 +333,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4322 = Indicator(self.ThermosyphonTab)
         self.PT4322.Label.setText("PT4322")
         self.PT4322.move(850*R, 720*R)
-        self.PT4322.SetUnit(" bara")
+        self.PT4322.SetUnit(" bar")
 
         self.PRV4323 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4323.Label.setText("PRV4323")
@@ -344,7 +346,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4325 = Indicator(self.ThermosyphonTab)
         self.PT4325.Label.setText("PT4325")
         self.PT4325.move(1150*R, 720*R)
-        self.PT4325.SetUnit(" bara")
+        self.PT4325.SetUnit(" bar")
 
         self.PRV4326 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4326.Label.setText("PRV4326")
@@ -386,7 +388,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT6302 = Indicator(self.ThermosyphonTab)
         self.PT6302.Label.setText("PT6302")
         self.PT6302.move(2030*R, 690*R)
-        self.PT6302.SetUnit(" bara")
+        self.PT6302.SetUnit(" bar")
 
         self.PRV6303 = PnID_Alone(self.ThermosyphonTab)
         self.PRV6303.Label.setText("PRV6303")
@@ -544,12 +546,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1101 = Indicator(self.ChamberTab)
         self.PT1101.move(940*R, 990*R)
         self.PT1101.Label.setText("PT1101")
-        self.PT1101.SetUnit(" bara")
+        self.PT1101.SetUnit(" bar")
 
         self.PT2121 = Indicator(self.ChamberTab)
         self.PT2121.move(1210*R, 990*R)
         self.PT2121.Label.setText("PT2121")
-        self.PT2121.SetUnit(" bara")
+        self.PT2121.SetUnit(" bar")
 
         self.HTR1202 = Heater(self.ChamberTab)
         self.HTR1202.move(840*R, 1250*R)
@@ -573,17 +575,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2316 = Indicator(self.FluidTab)
         self.PT2316.move(1900*R, 360*R)
         self.PT2316.Label.setText("PT2316")
-        self.PT2316.SetUnit(" bara")
+        self.PT2316.SetUnit(" bar")
 
         self.PT2330 = Indicator(self.FluidTab)
         self.PT2330.move(1780*R, 360*R)
         self.PT2330.Label.setText("PT2330")
-        self.PT2330.SetUnit(" bara")
+        self.PT2330.SetUnit(" bar")
 
         self.PT2335 = Indicator(self.FluidTab)
         self.PT2335.move(1590*R, 420*R)
         self.PT2335.Label.setText("PT2335")
-        self.PT2335.SetUnit(" bara")
+        self.PT2335.SetUnit(" bar")
 
         self.TT7401 = Indicator(self.FluidTab)
         self.TT7401.move(1985*R, 250*R)
@@ -600,12 +602,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1101Fluid = Indicator(self.FluidTab)
         self.PT1101Fluid.move(1030*R, 1300*R)
         self.PT1101Fluid.Label.setText("PT1101")
-        self.PT1101Fluid.SetUnit(" bara")
+        self.PT1101Fluid.SetUnit(" bar")
 
         self.PT2121Fluid = Indicator(self.FluidTab)
         self.PT2121Fluid.move(1260*R, 1300*R)
         self.PT2121Fluid.Label.setText("PT2121")
-        self.PT2121Fluid.SetUnit(" bara")
+        self.PT2121Fluid.SetUnit(" bar")
 
         self.MFC1316 = Heater(self.FluidTab)
         self.MFC1316.move(400*R, 800*R)
@@ -619,7 +621,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1332 = Indicator(self.FluidTab)
         self.PT1332.move(630*R, 900*R)
         self.PT1332.Label.setText("PT1332")
-        self.PT1332.SetUnit(" bara")
+        self.PT1332.SetUnit(" bar")
 
         self.PV1344=Valve(self.FluidTab)
         self.PV1344.Label.setText("PV1344")
@@ -659,27 +661,27 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT3314 = Indicator(self.HydraulicTab)
         self.PT3314.move(700*R, 450*R)
         self.PT3314.Label.setText("PT3314")
-        self.PT3314.SetUnit(" bara")
+        self.PT3314.SetUnit(" bar")
 
         self.PT3320 = Indicator(self.HydraulicTab)
         self.PT3320.move(880*R, 530*R)
         self.PT3320.Label.setText("PT3320")
-        self.PT3320.SetUnit(" bara")
+        self.PT3320.SetUnit(" bar")
 
         self.PT3308 = Indicator(self.HydraulicTab)
         self.PT3308.move(440*R, 1080*R)
         self.PT3308.Label.setText("PT3308")
-        self.PT3308.SetUnit(" bara")
+        self.PT3308.SetUnit(" bar")
 
         self.PT3309 = Indicator(self.HydraulicTab)
         self.PT3309.move(665*R, 1140*R)
         self.PT3309.Label.setText("PT3309")
-        self.PT3309.SetUnit(" bara")
+        self.PT3309.SetUnit(" bar")
 
         self.PT3311 = Indicator(self.HydraulicTab)
         self.PT3311.move(750*R, 1110*R)
         self.PT3311.Label.setText("PT3311")
-        self.PT3311.SetUnit(" bara")
+        self.PT3311.SetUnit(" bar")
 
         self.HFSV3312 = Valve(self.HydraulicTab)
         self.HFSV3312.Label.setText("HFSV3312")
@@ -696,12 +698,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT3332 = Indicator(self.HydraulicTab)
         self.PT3332.move(1570*R, 1125*R)
         self.PT3332.Label.setText("PT3332")
-        self.PT3332.SetUnit(" bara")
+        self.PT3332.SetUnit(" bar")
 
         self.PT3333 = Indicator(self.HydraulicTab)
         self.PT3333.move(1570*R, 1250*R)
         self.PT3333.Label.setText("PT3333")
-        self.PT3333.SetUnit(" bara")
+        self.PT3333.SetUnit(" bar")
 
 
         self.SV3329 = Valve(self.HydraulicTab)
@@ -742,32 +744,32 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LT3335 = Indicator(self.HydraulicTab)
         self.LT3335.move(2100*R, 950*R)
         self.LT3335.Label.setText("LT3335")
-        self.LT3335.SetUnit(" ?")
+        self.LT3335.SetUnit(" in")
 
         self.LT3338 = Indicator(self.HydraulicTab)
         self.LT3338.move(2100*R, 1010*R)
         self.LT3338.Label.setText("LT3338")
-        self.LT3338.SetUnit(" ?")
+        self.LT3338.SetUnit(" in")
 
         self.LT3339 = Indicator(self.HydraulicTab)
         self.LT3339.move(2100*R, 1070*R)
         self.LT3339.Label.setText("LT3339")
-        self.LT3339.SetUnit(" ?")
+        self.LT3339.SetUnit(" in")
 
         self.CYL3334 = Indicator(self.HydraulicTab)
         self.CYL3334.move(2100 * R, 1160 * R)
         self.CYL3334.Label.setText("CYL3334")
-        self.CYL3334.SetUnit(" ?")
+        self.CYL3334.SetUnit(" pbs")
 
         self.PT1101Hy = Indicator(self.HydraulicTab)
         self.PT1101Hy.move(1900*R, 800*R)
         self.PT1101Hy.Label.setText("PT1101")
-        self.PT1101Hy.SetUnit(" bara")
+        self.PT1101Hy.SetUnit(" bar")
 
         self.PT2121Hy = Indicator(self.HydraulicTab)
         self.PT2121Hy.move(2100*R, 800*R)
         self.PT2121Hy.Label.setText("PT2121")
-        self.PT2121Hy.SetUnit(" bara")
+        self.PT2121Hy.SetUnit(" bar")
 
         # Data and Signal Tab
         self.ReadSettings = Loadfile(self.DatanSignalTab)
@@ -779,6 +781,32 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SaveSettings.move(700*R, 50*R)
         # self.SaveSettings.SaveFileButton.clicked.connect(
         #     lambda x: self.Save(directory=self.SaveSettings.Head, project=self.SaveSettings.Tail))
+
+
+        self.TS_ADDREM = ProcedureWidget(self.DatanSignalTab)
+        self.TS_ADDREM.move(700*R, 150*R)
+        self.TS_ADDREM.Group.setTitle("TS ADDREM")
+        self.TS_ADDREM.objectname = "TS_ADDREM"
+
+        self.TS_EMPTY = ProcedureWidget(self.DatanSignalTab)
+        self.TS_EMPTY.move(700 * R, 390 * R)
+        self.TS_EMPTY.Group.setTitle("TS EMPTY")
+        self.TS_EMPTY.objectname = "TS_EMPTY"
+
+        self.TS_EMPTYALL = ProcedureWidget(self.DatanSignalTab)
+        self.TS_EMPTYALL.move(700 * R, 630 * R)
+        self.TS_EMPTYALL.Group.setTitle("TS EMPTY ALL")
+        self.TS_EMPTYALL.objectname = "TS_EMPTYALL"
+
+        self.PU_PRIME = ProcedureWidget(self.DatanSignalTab)
+        self.PU_PRIME.move(700 * R, 870 * R)
+        self.PU_PRIME.Group.setTitle("PU PRIME")
+        self.PU_PRIME.objectname = "PU_PRIME"
+
+        self.WRITE_SLOWDAQ = ProcedureWidget(self.DatanSignalTab)
+        self.WRITE_SLOWDAQ.move(700 * R, 1110 * R)
+        self.WRITE_SLOWDAQ.Group.setTitle("WRITE SLOWDAQ")
+        self.WRITE_SLOWDAQ.objectname = "WRITE_SLOWDAQ"
 
 
         # Alarm button
@@ -814,7 +842,8 @@ class MainWindow(QtWidgets.QMainWindow):
                               "TT6412": 37014, "TT6413": 38000, "TT6414": 38002,"PT1325": 12794, "PT2121": 12796, "PT2316": 12798, "PT2330": 12800, "PT2335": 12802,
                          "PT3308": 12804, "PT3309": 12806, "PT3311": 12808, "PT3314": 12810, "PT3320": 12812,
                          "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820,"PT4319": 12822,
-                         "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
+                         "PT4322": 12824, "PT4325": 12826, "PT6302": 12828, 'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792,"CYL3334_FCALC":12832,
+                       "SERVO3321_IN_REAL":12830,"TS1_MASS":16288,"TS2_MASS":16290,"TS3_MASS":16292,'TS_ADDREM': 15288, 'TS_EMPTY': 15290, 'TS_EMPTYALL': 15292, 'PU_PRIME': 15294, 'WRITE_SLOWDAQ': 15296}
         self.commands = {}
         # self.statustransition={}
 
@@ -865,9 +894,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2330, self.AlarmButton.SubWindow.PT2335,
                               self.AlarmButton.SubWindow.PT3308, self.AlarmButton.SubWindow.PT3309, self.AlarmButton.SubWindow.PT3311, self.AlarmButton.SubWindow.PT3314,
-                              self.AlarmButton.SubWindow.PT3320, self.AlarmButton.SubWindow.PT3333, self.AlarmButton.SubWindow.PT4306, self.AlarmButton.SubWindow.PT4315,
+                              self.AlarmButton.SubWindow.PT3320, self.AlarmButton.SubWindow.PT3332,self.AlarmButton.SubWindow.PT3333, self.AlarmButton.SubWindow.PT4306, self.AlarmButton.SubWindow.PT4315,
                               self.AlarmButton.SubWindow.PT4319,
                               self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325]
+
+        self.LEFTVariableMatrix = [self.AlarmButton.SubWindow.LT3335]
 
         self.AlarmMatrix = [self.AlarmButton.SubWindow.TT2101.Alarm, self.AlarmButton.SubWindow.TT2111.Alarm, self.AlarmButton.SubWindow.TT2113.Alarm, self.AlarmButton.SubWindow.TT2118.Alarm,
                                  self.AlarmButton.SubWindow.TT2119.Alarm,
@@ -901,9 +932,9 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.TT6412.Alarm, self.AlarmButton.SubWindow.TT6413.Alarm, self.AlarmButton.SubWindow.TT6414.Alarm,
                                  self.AlarmButton.SubWindow.PT2316.Alarm, self.AlarmButton.SubWindow.PT2330.Alarm, self.AlarmButton.SubWindow.PT2335.Alarm,
                                  self.AlarmButton.SubWindow.PT3308.Alarm, self.AlarmButton.SubWindow.PT3309.Alarm, self.AlarmButton.SubWindow.PT3311.Alarm, self.AlarmButton.SubWindow.PT3314.Alarm,
-                                 self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
+                                 self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3332.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
                                  self.AlarmButton.SubWindow.PT4319.Alarm,
-                                 self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm]
+                                 self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm, self.AlarmButton.SubWindow.LT3335.Alarm]
 
 
 
@@ -2352,6 +2383,18 @@ class MainWindow(QtWidgets.QMainWindow):
                                        LowLimit=self.AlarmButton.SubWindow.PT3320.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.PT3320.High_Set.Field.text()))
 
+        self.AlarmButton.SubWindow.PT3332.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3332.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT3332.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT3332.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT3332.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PT3332.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3332.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT3332.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT3332.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT3332.High_Set.Field.text()))
+
         self.AlarmButton.SubWindow.PT3333.AlarmMode.stateChanged.connect(
             lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT3333.Label.text(),
                                        Act=self.AlarmButton.SubWindow.PT3333.AlarmMode.isChecked(),
@@ -2423,6 +2466,42 @@ class MainWindow(QtWidgets.QMainWindow):
                                        Act=self.AlarmButton.SubWindow.PT4325.AlarmMode.isChecked(),
                                        LowLimit=self.AlarmButton.SubWindow.PT4325.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.PT4325.High_Set.Field.text()))
+
+
+        #LEFT Variables
+        self.AlarmButton.SubWindow.LT3335.AlarmMode.stateChanged.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.LT3335.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.LT3335.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.LT3335.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.LT3335.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.LT3335.updatebutton.clicked.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.LT3335.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.LT3335.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.LT3335.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.LT3335.High_Set.Field.text()))
+
+
+        #Procedure widgets
+        self.TS_ADDREM.START.clicked.connect(lambda: self.ProcedureClick(pid = self.TS_ADDREM.objectname, start = True, stop = False, abort = False))
+        self.TS_ADDREM.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=True, abort=False))
+        self.TS_ADDREM.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=False, abort=True))
+
+        self.TS_EMPTY.START.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=True, stop=False, abort=False))
+        self.TS_EMPTY.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=False, stop=True, abort=False))
+        self.TS_EMPTY.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=False, stop=False, abort=True))
+
+        self.TS_EMPTYALL.START.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTYALL.objectname, start=True, stop=False, abort=False))
+        self.TS_EMPTYALL.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTYALL.objectname, start=False, stop=True, abort=False))
+        self.TS_EMPTYALL.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTYALL.objectname, start=False, stop=False, abort=True))
+
+        self.PU_PRIME.START.clicked.connect(lambda: self.ProcedureClick(pid=self.PU_PRIME.objectname, start=True, stop=False, abort=False))
+        self.PU_PRIME.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.PU_PRIME.objectname, start=False, stop=True, abort=False))
+        self.PU_PRIME.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.PU_PRIME.objectname, start=False, stop=False, abort=True))
+
+        self.WRITE_SLOWDAQ.START.clicked.connect(lambda: self.ProcedureClick(pid=self.WRITE_SLOWDAQ.objectname, start=True, stop=False, abort=False))
+        self.WRITE_SLOWDAQ.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.WRITE_SLOWDAQ.objectname, start=False, stop=True, abort=False))
+        self.WRITE_SLOWDAQ.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.WRITE_SLOWDAQ.objectname, start=False, stop=False, abort=True))
 
 
 
@@ -2639,7 +2718,24 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception as e:
             print(e)
 
+    @QtCore.Slot()
+    def LEFTBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
+        try:
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "LEFT", "operation": {"Act": Act,
+                                                                                                  "LowLimit": float(LowLimit), "HighLimit": float(HighLimit), "Update": update}}
+            print(pid, Act, LowLimit, HighLimit, "ARE OK?")
+        except Exception as e:
+            print(e)
 
+    @QtCore.Slot()
+    def ProcedureClick(self, pid, start, stop, abort):
+        try:
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "Procedure", "operation": {"Start": start, "Stop": stop, "Abort": abort}}
+            print(pid, start, stop, abort, "ARE OK?")
+        except Exception as e:
+            print(e)
 
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()
@@ -2745,6 +2841,27 @@ class MainWindow(QtWidgets.QMainWindow):
         print("Display updating", datetime.datetime.now())
         # print('Display update result for HFSV3331:', received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
 
+        print(received_dic_c["data"]["Procedure"])
+
+        self.TS_ADDREM.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
+        self.TS_ADDREM.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
+        self.TS_ADDREM.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_ADDREM.objectname])
+
+        self.TS_EMPTY.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTY.objectname])
+        self.TS_EMPTY.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTY.objectname])
+        self.TS_EMPTY.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_EMPTY.objectname])
+
+        self.TS_EMPTYALL.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTYALL.objectname])
+        self.TS_EMPTYALL.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTYALL.objectname])
+        self.TS_EMPTYALL.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_EMPTYALL.objectname])
+
+        self.PU_PRIME.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.PU_PRIME.objectname])
+        self.PU_PRIME.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.PU_PRIME.objectname])
+        self.PU_PRIME.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.PU_PRIME.objectname])
+
+        self.WRITE_SLOWDAQ.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.WRITE_SLOWDAQ.objectname])
+        self.WRITE_SLOWDAQ.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.WRITE_SLOWDAQ.objectname])
+        self.WRITE_SLOWDAQ.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.WRITE_SLOWDAQ.objectname])
 
         #Update alarmwindow's widgets' value
 
@@ -2784,10 +2901,6 @@ class MainWindow(QtWidgets.QMainWindow):
             element.High_Read.SetValue(
                 received_dic_c["data"]["TT"]["FP"]["high"][element.Label.text()])
 
-
-
-
-
         for element in self.PTAlarmMatrix:
             # print(element.Label.text())
 
@@ -2799,6 +2912,21 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["data"]["PT"]["low"][element.Label.text()])
             element.High_Read.SetValue(
                 received_dic_c["data"]["PT"]["high"][element.Label.text()])
+
+
+        #LEFT Variables: because the receive_dic's dimension is different from the dimension in self.GLLEFT, I have to set widgets' value in self.GLLEFT mannually
+
+        self.AlarmButton.SubWindow.LT3335.UpdateAlarm(
+            received_dic_c["Alarm"]["LEFT_REAL"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+        self.AlarmButton.SubWindow.LT3335.Indicator.SetValue(
+            received_dic_c["data"]["LEFT_REAL"]["value"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+        self.AlarmButton.SubWindow.LT3335.Low_Read.SetValue(
+            received_dic_c["data"]["LEFT_REAL"]["low"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+        self.AlarmButton.SubWindow.LT3335.High_Read.SetValue(
+            received_dic_c["data"]["LEFT_REAL"]["high"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+
+
+
 
         # update value in a Matrix
 
@@ -2834,9 +2962,9 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.TT6412.Alarm, self.AlarmButton.SubWindow.TT6413.Alarm, self.AlarmButton.SubWindow.TT6414.Alarm,
                                  self.AlarmButton.SubWindow.PT2316.Alarm, self.AlarmButton.SubWindow.PT2330.Alarm, self.AlarmButton.SubWindow.PT2335.Alarm,
                                  self.AlarmButton.SubWindow.PT3308.Alarm, self.AlarmButton.SubWindow.PT3309.Alarm, self.AlarmButton.SubWindow.PT3311.Alarm, self.AlarmButton.SubWindow.PT3314.Alarm,
-                                 self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
+                                 self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3332.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
                                  self.AlarmButton.SubWindow.PT4319.Alarm,
-                                 self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm]
+                                 self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm, self.AlarmButton.SubWindow.LT3335.Alarm]
 
 
         self.update_alarmwindow(AlarmMatrix)
@@ -3695,10 +3823,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4325.SetValue(received_dic_c["data"]["PT"]["value"]["PT4325"])
         self.PT6302.SetValue(received_dic_c["data"]["PT"]["value"]["PT6302"])
 
-        self.LT3335.SetValue(received_dic_c["data"]["LEFT_REAL"]["LT3335"])
-        self.BFM4313.SetValue(received_dic_c["data"]["LEFT_REAL"]["BFM4313"])
+        self.LT3335.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LT3335"])
+        self.BFM4313.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BFM4313"])
         # self.MFC1316.SetValue not given value
-        self.CYL3334.SetValue(received_dic_c["data"]["LEFT_REAL"]["CYL3334_FCALC"])
+        self.CYL3334.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["CYL3334_FCALC"])
 
 
 
@@ -4359,6 +4487,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.AlarmButton.SubWindow.ReassignRTD4Order()
             self.AlarmButton.SubWindow.ReassignRTDLEFTOrder()
             self.AlarmButton.SubWindow.ReassignPTOrder()
+            self.AlarmButton.SubWindow.ReassignLEFTOrder()
 
 
         else:
@@ -5716,6 +5845,9 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.RTDLEFTTab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.RTDLEFTTab, "HEATER RTDs and ETC")
 
+        self.LEFTVariableTab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.LEFTVariableTab, "LEFT VARIABLEs")
+
         # Groupboxs for alarm/PT/TT
 
         self.GLPT = QtWidgets.QGridLayout()
@@ -5783,6 +5915,16 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.GroupRTDLEFT.setTitle(" LEFT RTDs ")
         self.GroupRTDLEFT.setLayout(self.GLRTDLEFT)
         self.GroupRTDLEFT.move(0*R, 0*R)
+
+        self.GLLEFT = QtWidgets.QGridLayout()
+        self.GLLEFT.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLLEFT.setSpacing(20 * R)
+        self.GLLEFT.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupLEFT = QtWidgets.QGroupBox(self.LEFTVariableTab)
+        self.GroupLEFT.setTitle(" LEFT Variables ")
+        self.GroupLEFT.setLayout(self.GLLEFT)
+        self.GroupLEFT.move(0 * R, 0 * R)
 
         self.TT2111 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2111.Label.setText("TT2111")
@@ -6079,54 +6221,121 @@ class AlarmWin(QtWidgets.QMainWindow):
         # PT part
         self.PT1101 = AlarmStatusWidget(self.PressureTab)
         self.PT1101.Label.setText("PT1101")
+        self.PT1101.Indicator.SetUnit(" bar")
+        self.PT1101.Low_Read.SetUnit(" bar")
+        self.PT1101.High_Read.SetUnit(" bar")
 
         self.PT2316 = AlarmStatusWidget(self.PressureTab)
         self.PT2316.Label.setText("PT2316")
+        self.PT2316.Indicator.SetUnit(" bar")
+        self.PT2316.Low_Read.SetUnit(" bar")
+        self.PT2316.High_Read.SetUnit(" bar")
 
         self.PT2321 = AlarmStatusWidget(self.PressureTab)
         self.PT2321.Label.setText("PT2321")
+        self.PT2321.Indicator.SetUnit(" bar")
+        self.PT2321.Low_Read.SetUnit(" bar")
+        self.PT2321.High_Read.SetUnit(" bar")
+
 
         self.PT2330 = AlarmStatusWidget(self.PressureTab)
         self.PT2330.Label.setText("PT2330")
+        self.PT2330.Indicator.SetUnit(" bar")
+        self.PT2330.Low_Read.SetUnit(" bar")
+        self.PT2330.High_Read.SetUnit(" bar")
 
         self.PT2335 = AlarmStatusWidget(self.PressureTab)
         self.PT2335.Label.setText("PT2335")
+        self.PT2335.Indicator.SetUnit(" bar")
+        self.PT2335.Low_Read.SetUnit(" bar")
+        self.PT2335.High_Read.SetUnit(" bar")
 
         self.PT3308 = AlarmStatusWidget(self.PressureTab)
         self.PT3308.Label.setText("PT3308")
+        self.PT3308.Indicator.SetUnit(" bar")
+        self.PT3308.Low_Read.SetUnit(" bar")
+        self.PT3308.High_Read.SetUnit(" bar")
 
         self.PT3309 = AlarmStatusWidget(self.PressureTab)
         self.PT3309.Label.setText("PT3309")
+        self.PT3309.Indicator.SetUnit(" bar")
+        self.PT3309.Low_Read.SetUnit(" bar")
+        self.PT3309.High_Read.SetUnit(" bar")
 
         self.PT3310 = AlarmStatusWidget(self.PressureTab)
         self.PT3310.Label.setText("PT3310")
+        self.PT3310.Indicator.SetUnit(" bar")
+        self.PT3310.Low_Read.SetUnit(" bar")
+        self.PT3310.High_Read.SetUnit(" bar")
 
         self.PT3311 = AlarmStatusWidget(self.PressureTab)
         self.PT3311.Label.setText("PT3311")
+        self.PT3311.Indicator.SetUnit(" bar")
+        self.PT3311.Low_Read.SetUnit(" bar")
+        self.PT3311.High_Read.SetUnit(" bar")
 
         self.PT3314 = AlarmStatusWidget(self.PressureTab)
         self.PT3314.Label.setText("PT3314")
+        self.PT3314.Indicator.SetUnit(" bar")
+        self.PT3314.Low_Read.SetUnit(" bar")
+        self.PT3314.High_Read.SetUnit(" bar")
 
         self.PT3320 = AlarmStatusWidget(self.PressureTab)
         self.PT3320.Label.setText("PT3320")
+        self.PT3320.Indicator.SetUnit(" bar")
+        self.PT3320.Low_Read.SetUnit(" bar")
+        self.PT3320.High_Read.SetUnit(" bar")
+
+        self.PT3332 = AlarmStatusWidget(self.PressureTab)
+        self.PT3332.Label.setText("PT3332")
+        self.PT3332.Indicator.SetUnit(" bar")
+        self.PT3332.Low_Read.SetUnit(" bar")
+        self.PT3332.High_Read.SetUnit(" bar")
 
         self.PT3333 = AlarmStatusWidget(self.PressureTab)
         self.PT3333.Label.setText("PT3333")
+        self.PT3333.Indicator.SetUnit(" bar")
+        self.PT3333.Low_Read.SetUnit(" bar")
+        self.PT3333.High_Read.SetUnit(" bar")
 
         self.PT4306 = AlarmStatusWidget(self.PressureTab)
         self.PT4306.Label.setText("PT4306")
+        self.PT4306.Indicator.SetUnit(" bar")
+        self.PT4306.Low_Read.SetUnit(" bar")
+        self.PT4306.High_Read.SetUnit(" bar")
 
         self.PT4315 = AlarmStatusWidget(self.PressureTab)
         self.PT4315.Label.setText("PT4315")
+        self.PT4315.Indicator.SetUnit(" bar")
+        self.PT4315.Low_Read.SetUnit(" bar")
+        self.PT4315.High_Read.SetUnit(" bar")
 
         self.PT4319 = AlarmStatusWidget(self.PressureTab)
         self.PT4319.Label.setText("PT4319")
+        self.PT4319.Indicator.SetUnit(" bar")
+        self.PT4319.Low_Read.SetUnit(" bar")
+        self.PT4319.High_Read.SetUnit(" bar")
 
         self.PT4322 = AlarmStatusWidget(self.PressureTab)
         self.PT4322.Label.setText("PT4322")
+        self.PT4322.Indicator.SetUnit(" bar")
+        self.PT4322.Low_Read.SetUnit(" bar")
+        self.PT4322.High_Read.SetUnit(" bar")
 
         self.PT4325 = AlarmStatusWidget(self.PressureTab)
         self.PT4325.Label.setText("PT4325")
+        self.PT4325.Indicator.SetUnit(" bar")
+        self.PT4325.Low_Read.SetUnit(" bar")
+        self.PT4325.High_Read.SetUnit(" bar")
+
+
+        #left variable part
+        self.LT3335 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LT3335.Label.setText("LT3335")
+        self.LT3335.Indicator.SetUnit(" in")
+
+        self.LT3335.Low_Read.SetUnit(" in")
+        self.LT3335.High_Read.SetUnit(" in")
 
         # make a directory for the alarm instrument and assign instrument to certain position
         #IF you change the dimenstion of the following matrixes, don't forget to change TempMatrix in the Reassign function
@@ -6155,8 +6364,8 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
                            1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3314},
-                           2: {0: self.PT3320, 1: self.PT3333, 2: self.PT4306, 3: self.PT4315, 4: self.PT4319},
-                           3: {0: self.PT4322, 1: self.PT4325}}
+                           2: {0: self.PT3320, 1: self.PT3332, 2: self.PT3333, 3: self.PT4306, 4: self.PT4315},
+                           3: {0: self.PT4319, 1: self.PT4322, 2: self.PT4325}}
 
         self.AlarmRTDLEFTdir = {0: {0: self.TT4330, 1: self.TT6220, 2: self.TT6213, 3: self.TT6401, 4: self.TT6203},
                                 1: {0: self.TT6404, 1: self.TT6207, 2: self.TT6405, 3: self.TT6211, 4: self.TT6406},
@@ -6164,6 +6373,8 @@ class AlarmWin(QtWidgets.QMainWindow):
                                 3: {0: self.TT3402, 1: self.TT3401, 2: self.TT7401, 3: self.TT7202, 4: self.TT7403},
                                 4: {0: self.TT6222, 1: self.TT6407, 2: self.TT6415, 3: self.TT6416, 4: self.TT6411},
                                 5: {0: self.TT6413, 1: self.TT6414}}
+
+        self.AlarmLEFTdir = {0:{0: self.LT3335}}
 
         # self.AlarmRTD1dir = {0: {0: "self.TT2111", 1: "self.TT2112", 2: "self.TT2113", 3: "self.TT2114", 4: "self.TT2115"},
         #                      1: {0: "self.TT2116", 1: "self.TT2117", 2: "self.TT2118", 3: "self.TT2119", 4: "self.TT2120"}}
@@ -6215,6 +6426,9 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.i_PT_max = len(self.AlarmPTdir)
         # which is 4
         self.j_PT_max = len(self.AlarmPTdir[0])
+        self.i_LEFT_max = len(self.AlarmPTdir)
+        # which is 4
+        self.j_LEFT_max = len(self.AlarmPTdir[0])
         # which is 5
         self.i_RTD1_last = len(self.AlarmRTD1dir) - 1
         # which is 1
@@ -6231,6 +6445,10 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.i_PT_last = len(self.AlarmPTdir) - 1
         # which is 3
         self.j_PT_last = len(self.AlarmPTdir[self.i_PT_last]) - 1
+
+        self.i_LEFT_last = len(self.AlarmLEFTdir) - 1
+        # which is 3
+        self.j_LEFT_last = len(self.AlarmLEFTdir[self.i_LEFT_last]) - 1
         # which is 1
         self.ResetOrder()
 
@@ -6294,6 +6512,16 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if (i, j) == (self.i_PT_last, self.j_PT_last):
                     break
             if (i, j) == (self.i_PT_last, self.j_PT_last):
+                break
+
+        for i in range(0, self.i_LEFT_max):
+            for j in range(0, self.j_LEFT_max):
+                # self.GLPT.addWidget(eval(self.AlarmPTdir[i][j]), i, j)
+                self.GLLEFT.addWidget(self.AlarmLEFTdir[i][j], i, j)
+                # end the position generator when i= last element's row number -1, j= last element's column number
+                if (i, j) == (self.i_LEFT_last, self.j_LEFT_last):
+                    break
+            if (i, j) == (self.i_LEFT_last, self.j_LEFT_last):
                 break
 
     @QtCore.Slot()
@@ -6712,13 +6940,12 @@ class AlarmWin(QtWidgets.QMainWindow):
         # l max are max column number+1
         # i_last,j_last are last elements's diretory coordinate
 
-
         TempRefPTdir = self.AlarmPTdir
 
         TempPTdir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
                      1: {0: None, 1: None, 2: None, 3: None, 4: None},
                      2: {0: None, 1: None, 2: None, 3: None, 4: None},
-                     3: {0: None, 1: None}}
+                     3: {0: None, 1: None, 2: None}}
         # l_RTD1_max is max number of column
 
         l_PT = 0
@@ -6752,7 +6979,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if TempRefPTdir[i][j].Alarm:
                     TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
                     l_PT = l_PT + 1
-                    if l_PT == l_PT_max+1:
+                    if l_PT == l_PT_max + 1:
                         l_PT = 0
                         k_PT = k_PT + 1
                 if (i, j) == (i_PT_last, j_PT_last):
@@ -6765,7 +6992,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if not TempRefPTdir[i][j].Alarm:
                     TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
                     l_PT = l_PT + 1
-                    if l_PT == l_PT_max+1:
+                    if l_PT == l_PT_max + 1:
                         l_PT = 0
                         k_PT = k_PT + 1
                     if (i, j) == (i_PT_last, j_PT_last):
@@ -6784,6 +7011,78 @@ class AlarmWin(QtWidgets.QMainWindow):
                     break
             if (i, j) == (i_PT_last, j_PT_last):
                 break
+
+
+    @QtCore.Slot()
+    def ReassignLEFTOrder(self):
+        # check the status of the Widget and reassign the diretory
+        # establish 2 diretory, reorder TempDic to reorder the widgets
+        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+        # i_max, j_max are max row and column number
+        # l max are max column number+1
+        # i_last,j_last are last elements's diretory coordinate
+
+
+        TempRefLEFTdir = self.AlarmLEFTdir
+
+        TempLEFTdir = {0: {0: None}}
+        # l_RTD1_max is max number of column
+
+        l_LEFT = 0
+        k_LEFT = 0
+
+
+        i_LEFT_max = len(self.AlarmLEFTdir)
+
+        j_LEFT_max = len(self.AlarmLEFTdir[0])
+
+
+        i_LEFT_last = len(self.AlarmLEFTdir) - 1
+
+        j_LEFT_last = len(self.AlarmLEFTdir[i_LEFT_last]) - 1
+
+
+        l_LEFT_max = j_LEFT_max - 1
+
+        # LEFT
+        for i in range(0, i_LEFT_max):
+            for j in range(0, j_LEFT_max):
+                if TempRefLEFTdir[i][j].Alarm:
+                    TempLEFTdir[k_LEFT][l_LEFT] = TempRefLEFTdir[i][j]
+                    l_LEFT = l_LEFT + 1
+                    if l_LEFT == l_LEFT_max+1:
+                        l_LEFT = 0
+                        k_LEFT = k_LEFT + 1
+                if (i, j) == (i_LEFT_last, j_LEFT_last):
+                    break
+            if (i, j) == (i_LEFT_last, j_LEFT_last):
+                break
+
+        for i in range(0, i_LEFT_max):
+            for j in range(0, j_LEFT_max):
+                if not TempRefLEFTdir[i][j].Alarm:
+                    TempLEFTdir[k_LEFT][l_LEFT] = TempRefLEFTdir[i][j]
+                    l_LEFT = l_LEFT + 1
+                    if l_LEFT == l_LEFT_max+1:
+                        l_LEFT = 0
+                        k_LEFT = k_LEFT + 1
+                    if (i, j) == (i_LEFT_last, j_LEFT_last):
+                        break
+                if (i, j) == (i_LEFT_last, j_LEFT_last):
+                    break
+
+        # Reassign position
+        # end the position generator when i= last element's row number, j= last element's column number
+
+        # end the position generator when i= last element's row number, j= last element's column number
+        for i in range(0, i_LEFT_max):
+            for j in range(0, j_LEFT_max):
+                self.GLLEFT.addWidget(TempLEFTdir[i][j], i, j)
+                if (i, j) == (i_LEFT_last, j_LEFT_last):
+                    break
+            if (i, j) == (i_LEFT_last, j_LEFT_last):
+                break
+
 
 
 class HeaterSubWindow(QtWidgets.QMainWindow):
@@ -7371,7 +7670,7 @@ class UpdateClient(QtCore.QObject):
         self.socket.connect("tcp://localhost:5555")
         self.Running=False
         self.readcommand = False
-        self.period=1
+        self.period = 1
 
         print("client is connecting to the ZMQ server")
 
@@ -7399,6 +7698,8 @@ class UpdateClient(QtCore.QObject):
                        "PT4322": 0, "PT4325": 0, "PT6302": 0}
 
         self.LEFT_REAL_dic = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
+        self.LEFT_REAL_LowLimit = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
+        self.LEFT_REAL_HighLimit = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
 
         self.TT_FP_LowLimit = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
                                "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
@@ -7488,6 +7789,8 @@ class UpdateClient(QtCore.QObject):
                          "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                          "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
                          "PT4322": False, "PT4325": False, "PT6302": False}
+        self.LEFT_REAL_Alarm = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False}
+
         self.MainAlarm = False
 
         self.Switch_OUT = {"PUMP3305": 0}
@@ -7619,10 +7922,14 @@ class UpdateClient(QtCore.QObject):
                              'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
                              'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
 
+        self.Procedure_running = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False}
+        self.Procedure_INTLKD = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False}
+        self.Procedure_EXIT = {'TS_ADDREM': 0, 'TS_EMPTY': 0, 'TS_EMPTYALL': 0, 'PU_PRIME': 0, 'WRITE_SLOWDAQ': 0}
+
         self.receive_dic = {"data":{"TT":{"FP":{"value":self.TT_FP_dic, "high": self.TT_FP_HighLimit,"low":self.TT_FP_LowLimit},
                                           "BO":{"value":self.TT_BO_dic, "high":self.TT_BO_HighLimit,"low":self.TT_BO_LowLimit}},
                                     "PT":{"value":self.PT_dic,"high":self.PT_HighLimit,"low":self.PT_LowLimit},
-                                    "LEFT_REAL": self.LEFT_REAL_dic,
+                                    "LEFT_REAL": {"value":self.LEFT_REAL_dic,"high":self.LEFT_REAL_HighLimit,"low":self.LEFT_REAL_LowLimit},
                                     "Valve":{"OUT":self.Valve_OUT,
                                              "INTLKD":self.Valve_INTLKD,
                                              "MAN":self.Valve_MAN,
@@ -7648,10 +7955,12 @@ class UpdateClient(QtCore.QObject):
                                                "SET0" : self.LOOPPID_SET0,
                                                "SET1" : self.LOOPPID_SET1,
                                                "SET2" : self.LOOPPID_SET2,
-                                               "SET3" : self.LOOPPID_SET3}},
+                                               "SET3" : self.LOOPPID_SET3},
+                                    "Procedure": {"Running": self.Procedure_running, "INTLKD": self.Procedure_INTLKD, "EXIT": self.Procedure_EXIT}},
                              "Alarm":{"TT" : {"FP":self.TT_FP_Alarm,
                                               "BO":self.TT_BO_Alarm},
-                                      "PT" : self.PT_Alarm},
+                                      "PT" : self.PT_Alarm,
+                                      "LEFT_REAL": self.LEFT_REAL_Alarm},
                              "MainAlarm" : self.MainAlarm}
         self.commands_package= pickle.dumps({})
 
