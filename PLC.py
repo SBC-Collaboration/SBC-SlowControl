@@ -232,10 +232,10 @@ class PLC:
         self.Switch_INTLKD = {"PUMP3305": False}
         self.Switch_ERR = {"PUMP3305": False}
 
-
-
-
-
+        self.Din_address ={"LS3338":(980,0),"LS3339":(980,1),"ES3347":(980,2),"PUMP3305_CON":(980,3),"PUMP33505_OL":(980,4)}
+        self.nDin = len(self.Din_address)
+        self.Din = {}
+        self.Din_dic = {"LS3338":False,"LS3339":False,"ES3347":False,"PUMP3305_CON": False,"PUMP33505_OL":False}
 
         self.valve_address = {"PV1344": 12288, "PV4307": 12289, "PV4308": 12290, "PV4317": 12291, "PV4318": 12292, "PV4321": 12293,
                         "PV4324": 12294, "PV5305": 12295, "PV5306": 12296,
@@ -500,6 +500,16 @@ class PLC:
                 self.Switch_INTLKD[key] = self.ReadCoil(8, self.Switch_address[key])
                 self.Switch_MAN[key] = self.ReadCoil(16, self.Switch_address[key])
                 self.Switch_ERR[key] = self.ReadCoil(32, self.Switch_address[key])
+
+            # Din's address is a tuple, first number is BO address, the second number is the digit
+            Raw_Din_Switch = {}
+
+            for key in self.Din_address:
+                Raw_BO_Din[key] = self.Client_BO.read_holding_registers(self.Din_address[key][0], count=1, unit=0x01)
+                self.Din[key] = struct.pack("H", Raw_BO_Din[key].getRegister(0))
+
+                self.Din_dic[key] = self.ReadCoil(self.Din_address[key][1], self.Din_address[key][0])
+
 
             Raw_LOOPPID_2 = {}
             Raw_LOOPPID_4 = {}
@@ -996,6 +1006,8 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_PT=30
         self.para_REAL = 0
         self.rate_REAL = 30
+        self.para_Din = 0
+        self.rate_Din = 30
         # c is for valve status
         self.para_Valve = 0
         self.rate_Valve = 30
@@ -1010,6 +1022,7 @@ class UpdateDataBase(QtCore.QObject):
                           "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
                           "SV4337": 0, "HFSV3312":0, "HFSV3323": 0, "HFSV3331": 0}
         self.Switch_buffer = {"PUMP3305": 0}
+        self.Din_buffer = {"LS3338":False,"LS3339":False,"ES3347":False,"PUMP3305_CON": False,"PUMP33505_OL":False}
         self.LOOPPID_EN_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                                               'HTR2125': False,
                                               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
@@ -1056,13 +1069,13 @@ class UpdateDataBase(QtCore.QObject):
             print("Database Updating", self.dt)
 
             if self.PLC.NewData_Database:
-                if self.para_TT>= self.rate_TT:
+                if self.para_TT >= self.rate_TT:
                     for key in self.PLC.TT_FP_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
                     for key in self.PLC.TT_BO_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
                     # print("write RTDS")
-                    self.para_TT=0
+                    self.para_TT = 0
                 if self.para_PT >= self.rate_PT:
                     for key in self.PLC.PT_dic:
                         self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
@@ -1101,6 +1114,21 @@ class UpdateDataBase(QtCore.QObject):
                         self.db.insert_data_into_datastorage(key+'_OUT', self.dt, self.PLC.Switch_OUT[key])
                         self.Switch_buffer[key] = self.PLC.Switch_OUT[key]
                     self.para_Switch = 0
+
+                for key in self.PLC.Din_dic:
+                    # print(key, self.PLC.Switch_OUT[key] != self.Switch_buffer[key])
+                    if self.PLC.Din_dic[key] != self.Din_buffer[key]:
+                        self.db.insert_data_into_datastorage(key, self.early_dt, self.Din_buffer[key])
+                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Din_dic[key])
+                        self.Din_buffer[key] = self.PLC.Din_dic[key]
+                    else:
+                        pass
+
+                if self.para_Din >= self.rate_Din:
+                    for key in self.PLC.Din_dic:
+                        self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Din_dic[key])
+                        self.Din_buffer[key] = self.PLC.Din_dic[key]
+                    self.para_Din = 0
 
                 # if state of bool variable changes, write the data into database
 
@@ -1197,6 +1225,7 @@ class UpdateDataBase(QtCore.QObject):
                 self.para_Switch += 1
                 self.para_LOOPPID += 1
                 self.para_REAL += 1
+                self.para_Din += 1
                 self.PLC.NewData_Database = False
 
             else:
@@ -1470,6 +1499,7 @@ class UpdateServer(QtCore.QObject):
         self.Switch_MAN_ini = self.PLC.Switch_MAN
         self.Switch_INTLKD_ini = self.PLC.Switch_INTLKD
         self.Switch_ERR_ini = self.PLC.Switch_ERR
+        self.Din_dic_ini = self.PLC.Din_dic
         self.LOOPPID_MODE0_ini = self.PLC.LOOPPID_MODE0
         self.LOOPPID_MODE1_ini = self.PLC.LOOPPID_MODE1
         self.LOOPPID_MODE2_ini = self.PLC.LOOPPID_MODE2
@@ -1505,6 +1535,7 @@ class UpdateServer(QtCore.QObject):
                                          "INTLKD": self.Switch_INTLKD_ini,
                                          "MAN": self.Switch_MAN_ini,
                                          "ERR": self.Switch_ERR_ini},
+                               "Din":{'value':self.Din_dic_ini},
                                "LOOPPID":{"MODE0": self.LOOPPID_MODE0_ini,
                                           "MODE1": self.LOOPPID_MODE1_ini,
                                           "MODE2": self.LOOPPID_MODE2_ini,
@@ -1609,7 +1640,8 @@ class UpdateServer(QtCore.QObject):
             self.Switch_MAN_ini[key]=self.PLC.Switch_MAN[key]
         for key in self.PLC.Switch_ERR:
             self.Switch_ERR_ini[key]=self.PLC.Switch_ERR[key]
-
+        for key in self.PLC.Din_dic:
+            self.Din_dic_ini[key] = self.PLC.Din_dic[key]
 
         for key in self.PLC.TT_FP_Alarm:
             self.TT_FP_Alarm_ini[key] = self.PLC.TT_FP_Alarm[key]
