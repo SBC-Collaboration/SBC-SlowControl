@@ -506,8 +506,8 @@ class PLC:
 
             for key in self.Din_address:
                 Raw_BO_Din[key] = self.Client_BO.read_holding_registers(self.Din_address[key][0], count=1, unit=0x01)
-            #     # self.Din[key] = struct.pack("H", Raw_BO_Din[key].getRegister(0))
-            #
+                self.Din[key] = struct.pack("H", Raw_BO_Din[key].getRegister(0))
+
             #     self.Din_dic[key] = self.ReadCoil(self.Din_address[key][1], self.Din_address[key][0])
 
 
