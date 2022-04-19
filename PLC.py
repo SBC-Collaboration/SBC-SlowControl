@@ -504,9 +504,9 @@ class PLC:
             # Din's address is a tuple, first number is BO address, the second number is the digit
             Raw_BO_Din = {}
 
-            for key in self.Din_address:
-                Raw_BO_Din[key] = self.Client_BO.read_holding_registers(self.Din_address[key][0], count=1, unit=0x01)
-                print(Raw_BO_Din[key])
+            # for key in self.Din_address:
+            #     Raw_BO_Din[key] = self.Client_BO.read_holding_registers(self.Din_address[key][0], count=1, unit=0x01)
+                # print(Raw_BO_Din[key])
                 # self.Din[key] = struct.pack("H", Raw_BO_Din[key].getRegister(0))
 
             #     self.Din_dic[key] = self.ReadCoil(self.Din_address[key][1], self.Din_address[key][0])
