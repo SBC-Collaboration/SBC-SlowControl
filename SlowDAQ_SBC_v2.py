@@ -651,12 +651,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PUMP3305.Set.RButton.setText("OFF")
 
         self.PUMP3305_CON = ColoredStatus(self.HydraulicTab, mode = 2)
-        self.PUMP_CON.Label.setText("CON")
-        self.PUMP3305_CON.move(465*R,425*R)
+        self.PUMP3305_CON.Label.setText("CON")
+        self.PUMP3305_CON.move(365*R,330*R)
 
         self.PUMP3305_OL = ColoredStatus(self.HydraulicTab, mode=2)
-        self.PUMP_OL.Label.setText("CON")
-        self.PUMP3305_OL.move(465 * R, 425 * R)
+        self.PUMP3305_OL.Label.setText("OL")
+        self.PUMP3305_OL.move(435 * R, 330 * R)
 
 
         self.TT3401 = Indicator(self.HydraulicTab)
@@ -770,7 +770,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LS3338.Label.setText("LS3338")
 
         self.LS3339 = ColoredStatus(self.HydraulicTab, mode=4)
-        self.LS3339.move(2200 * R, 1010 * R)
+        self.LS3339.move(2200 * R, 1070 * R)
         self.LS3339.Label.setText("LS3339")
 
         self.ES3347 = ColoredStatus(self.HydraulicTab, mode=3)
