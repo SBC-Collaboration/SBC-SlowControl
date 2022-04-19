@@ -650,6 +650,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PUMP3305.Set.LButton.setText("ON")
         self.PUMP3305.Set.RButton.setText("OFF")
 
+        self.PUMP3305_CON = ColoredStatus(self.HydraulicTab, mode = 2)
+        self.PUMP3305_CON.Label.setText("CON")
+        self.PUMP3305_CON.move(365*R,330*R)
+
+        self.PUMP3305_OL = ColoredStatus(self.HydraulicTab, mode=2)
+        self.PUMP3305_OL.Label.setText("OL")
+        self.PUMP3305_OL.move(435 * R, 330 * R)
+
+
         self.TT3401 = Indicator(self.HydraulicTab)
         self.TT3401.move(385*R, 500*R)
         self.TT3401.Label.setText("TT3401")
@@ -756,6 +765,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LT3339.Label.setText("LT3339")
         self.LT3339.SetUnit(" in")
 
+        self.LS3338 = ColoredStatus(self.HydraulicTab, mode= 4)
+        self.LS3338.move(2200*R, 1010*R)
+        self.LS3338.Label.setText("LS3338")
+
+        self.LS3339 = ColoredStatus(self.HydraulicTab, mode=4)
+        self.LS3339.move(2200 * R, 1070 * R)
+        self.LS3339.Label.setText("LS3339")
+
+        self.ES3347 = ColoredStatus(self.HydraulicTab, mode=3)
+        self.ES3347.move(2200 * R, 950 * R)
+        self.ES3347.Label.setText("ES3347")
+
         self.CYL3334 = Indicator(self.HydraulicTab)
         self.CYL3334.move(2100 * R, 1160 * R)
         self.CYL3334.Label.setText("CYL3334")
@@ -859,6 +880,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                   'HTR2125': False,
                                   'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
                                   'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
 
         self.BORTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111, self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118,
                                  self.AlarmButton.SubWindow.TT2119,
@@ -2841,7 +2863,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print("Display updating", datetime.datetime.now())
         # print('Display update result for HFSV3331:', received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
 
-        print(received_dic_c["data"]["Procedure"])
+        # print(received_dic_c["data"]["Procedure"])
 
         self.TS_ADDREM.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
@@ -3069,6 +3091,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.HeaterSubWindow.Mode.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
         self.HTR6214.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
 
+        #update Din widget
+        self.PUMP3305_CON.UpdateColor(received_dic_c["data"]["Din"]["value"]["PUMP3305_CON"])
+        self.PUMP3305_OL.UpdateColor(received_dic_c["data"]["Din"]["value"]["PUMP3305_OL"])
+        self.ES3347.UpdateColor(received_dic_c["data"]["Din"]["value"]["ES3347"])
+        self.LS3338.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS3338"])
+        self.LS3339.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS3339"])
 
         # show whether the widgets status are normal: manully controlled and no error signal
 
@@ -7797,6 +7825,7 @@ class UpdateClient(QtCore.QObject):
         self.Switch_MAN = {"PUMP3305": True}
         self.Switch_INTLKD = {"PUMP3305": False}
         self.Switch_ERR = {"PUMP3305": False}
+        self.Din_dic = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP33505_OL": False}
 
         self.Valve_OUT = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
                           "PV4324": 0, "PV5305": 0, "PV5306": 0,
@@ -7938,6 +7967,7 @@ class UpdateClient(QtCore.QObject):
                                                "INTLKD": self.Switch_INTLKD,
                                                "MAN": self.Switch_MAN,
                                                "ERR": self.Switch_ERR},
+                                    "Din": {'value': self.Din_dic},
                                     "LOOPPID":{"MODE0": self.LOOPPID_MODE0,
                                                "MODE1": self.LOOPPID_MODE1,
                                                "MODE2": self.LOOPPID_MODE2,
