@@ -502,7 +502,7 @@ class PLC:
                 self.Switch_ERR[key] = self.ReadCoil(32, self.Switch_address[key])
 
             # Din's address is a tuple, first number is BO address, the second number is the digit
-            Raw_Din_Switch = {}
+            Raw_BO_Din = {}
 
             for key in self.Din_address:
                 Raw_BO_Din[key] = self.Client_BO.read_holding_registers(self.Din_address[key][0], count=1, unit=0x01)
