@@ -765,11 +765,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LT3339.Label.setText("LT3339")
         self.LT3339.SetUnit(" in")
 
-        self.LS3338 = ColoredStatus(self.HydraulicTab, mode= 4)
+        self.LS3338 = ColoredStatus(self.HydraulicTab, mode= 2)
         self.LS3338.move(2200*R, 1010*R)
         self.LS3338.Label.setText("LS3338")
 
-        self.LS3339 = ColoredStatus(self.HydraulicTab, mode=4)
+        self.LS3339 = ColoredStatus(self.HydraulicTab, mode=2)
         self.LS3339.move(2200 * R, 1070 * R)
         self.LS3339.Label.setText("LS3339")
 
