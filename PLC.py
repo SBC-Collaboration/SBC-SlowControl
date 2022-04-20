@@ -234,10 +234,10 @@ class PLC:
         self.Switch_INTLKD = {"PUMP3305": False}
         self.Switch_ERR = {"PUMP3305": False}
 
-        self.Din_address ={"LS3338":(12778,0),"LS3339":(12778,1),"ES3347":(12778,2),"PUMP3305_CON":(12778,3),"PUMP33505_OL":(12778,4)}
+        self.Din_address ={"LS3338":(12778,0),"LS3339":(12778,1),"ES3347":(12778,2),"PUMP3305_CON":(12778,3),"PUMP3305_OL":(12778,4)}
         self.nDin = len(self.Din_address)
         self.Din = {}
-        self.Din_dic = {"LS3338":False,"LS3339":False,"ES3347":False,"PUMP3305_CON": False,"PUMP33505_OL":False}
+        self.Din_dic = {"LS3338":False,"LS3339":False,"ES3347":False,"PUMP3305_CON": False,"PUMP3305_OL":False}
 
         self.valve_address = {"PV1344": 12288, "PV4307": 12289, "PV4308": 12290, "PV4317": 12291, "PV4318": 12292, "PV4321": 12293,
                         "PV4324": 12294, "PV5305": 12295, "PV5306": 12296,
