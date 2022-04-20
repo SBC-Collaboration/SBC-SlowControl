@@ -506,7 +506,7 @@ class PLC:
 
             for key in self.Din_address:
                 # Raw_BO_Din[key] = self.Client_BO.read_holding_registers(self.Din_address[key][0], count=1, unit=0x01)
-                Raw_BO_Din[key] = self.Client_BO.read_holding_registers(980, count=1, unit=0x01)
+                Raw_BO_Din[key] = self.Client_BO.read_holding_registers(11290, count=1, unit=0x01)
                 print(Raw_BO_Din[key])
                 # self.Din[key] = struct.pack("H", Raw_BO_Din[key].getRegister(0))
 
