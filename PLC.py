@@ -1025,7 +1025,7 @@ class UpdateDataBase(QtCore.QObject):
                           "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
                           "SV4337": 0, "HFSV3312":0, "HFSV3323": 0, "HFSV3331": 0}
         self.Switch_buffer = {"PUMP3305": 0}
-        self.Din_buffer = {"LS3338":False,"LS3339":False,"ES3347":False,"PUMP3305_CON": False,"PUMP33505_OL":False}
+        self.Din_buffer = {"LS3338":False,"LS3339":False,"ES3347":False,"PUMP3305_CON": False,"PUMP3305_OL":False}
         self.LOOPPID_EN_buffer = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                                               'HTR2125': False,
                                               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
