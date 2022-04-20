@@ -26,6 +26,8 @@ from slack_sdk.errors import SlackApiError
 import random
 from pymodbus.client.sync import ModbusTcpClient
 
+BASE_ADDRESS= 12288
+
 sys._excepthook = sys.excepthook
 def exception_hook(exctype, value, traceback):
     print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
@@ -232,7 +234,7 @@ class PLC:
         self.Switch_INTLKD = {"PUMP3305": False}
         self.Switch_ERR = {"PUMP3305": False}
 
-        self.Din_address ={"LS3338":(980,0),"LS3339":(980,1),"ES3347":(980,2),"PUMP3305_CON":(980,3),"PUMP33505_OL":(980,4)}
+        self.Din_address ={"LS3338":(12778,0),"LS3339":(12778,1),"ES3347":(12778,2),"PUMP3305_CON":(12778,3),"PUMP33505_OL":(12778,4)}
         self.nDin = len(self.Din_address)
         self.Din = {}
         self.Din_dic = {"LS3338":False,"LS3339":False,"ES3347":False,"PUMP3305_CON": False,"PUMP33505_OL":False}
@@ -505,12 +507,11 @@ class PLC:
             Raw_BO_Din = {}
 
             for key in self.Din_address:
-                # Raw_BO_Din[key] = self.Client_BO.read_holding_registers(self.Din_address[key][0], count=1, unit=0x01)
-                Raw_BO_Din[key] = self.Client_BO.read_holding_registers(12778, count=1, unit=0x01)
-                print(Raw_BO_Din[key])
-                # self.Din[key] = struct.pack("H", Raw_BO_Din[key].getRegister(0))
+                Raw_BO_Din[key] = self.Client_BO.read_holding_registers(self.Din_address[key][0], count=1, unit=0x01)
+                # print(Raw_BO_Din[key])
+                self.Din[key] = struct.pack("H", Raw_BO_Din[key].getRegister(0))
 
-            #     self.Din_dic[key] = self.ReadCoil(self.Din_address[key][1], self.Din_address[key][0])
+                self.Din_dic[key] = self.ReadCoil(self.Din_address[key][1], self.Din_address[key][0])
 
 
             Raw_LOOPPID_2 = {}
