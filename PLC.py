@@ -1004,20 +1004,20 @@ class UpdateDataBase(QtCore.QObject):
         self.Running = False
         self.base_period=1
         self.para_TT=0
-        self.rate_TT=30
+        self.rate_TT=90
         self.para_PT=0
-        self.rate_PT=30
+        self.rate_PT=90
         self.para_REAL = 0
-        self.rate_REAL = 30
+        self.rate_REAL = 90
         self.para_Din = 0
-        self.rate_Din = 30
+        self.rate_Din = 90
         # c is for valve status
         self.para_Valve = 0
-        self.rate_Valve = 30
+        self.rate_Valve = 90
         self.para_Switch = 0
-        self.rate_Switch = 30
+        self.rate_Switch = 90
         self.para_LOOPPID = 0
-        self.rate_LOOPPID = 30
+        self.rate_LOOPPID = 90
         self.Valve_buffer = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
                           "PV4324": 0, "PV5305": 0, "PV5306": 0,
                           "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
