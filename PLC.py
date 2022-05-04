@@ -1245,7 +1245,7 @@ class UpdateDataBase(QtCore.QObject):
 
 # Class to read PLC value every 2 sec
 class UpdatePLC(QtCore.QObject):
-    AI_slack_alarm=QtCore.Signal()
+    AI_slack_alarm=QtCore.Signal(str)
     def __init__(self, PLC, parent=None):
         super().__init__(parent)
 
