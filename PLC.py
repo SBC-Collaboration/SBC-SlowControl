@@ -511,7 +511,7 @@ class PLC:
                 # print(Raw_BO_Din[key])
                 self.Din[key] = struct.pack("H", Raw_BO_Din[key].getRegister(0))
 
-                self.Din_dic[key] = self.ReadCoil(self.Din_address[key][1], self.Din_address[key][0])
+                self.Din_dic[key] = self.ReadCoil(2**(self.Din_address[key][1]), self.Din_address[key][0])
 
 
             Raw_LOOPPID_2 = {}
@@ -1245,13 +1245,14 @@ class UpdateDataBase(QtCore.QObject):
 
 # Class to read PLC value every 2 sec
 class UpdatePLC(QtCore.QObject):
+    AI_slack_alarm=QtCore.Signal()
     def __init__(self, PLC, parent=None):
         super().__init__(parent)
 
         self.PLC = PLC
         self.message_manager = message_manager()
         self.Running = False
-        self.period=0.8
+        self.period=1
         self.TT_FP_para = 0
         self.TT_FP_rate = 30
         self.TT_BO_para = 0
@@ -1271,6 +1272,7 @@ class UpdatePLC(QtCore.QObject):
             while self.Running:
                 print("PLC updating", datetime.datetime.now())
                 self.PLC.ReadAll()
+                self.AI_slack_alarm.emit("signal")
                 for keyTT_FP in self.PLC.TT_FP_dic:
                     self.check_TT_FP_alarm(keyTT_FP)
                 for keyTT_BO in self.PLC.TT_BO_dic:
@@ -1897,6 +1899,7 @@ class Update(QtCore.QObject):
         super().__init__(parent)
         App.aboutToQuit.connect(self.StopUpdater)
         self.StartUpdater()
+        self.UpPLC.AI_slack_alarm.connect(self.printstr)
 
     def StartUpdater(self):
         self.PLC = PLC()
@@ -1940,6 +1943,11 @@ class Update(QtCore.QObject):
         self.UpServer.stop()
         self.ServerUpdateThread.quit()
         self.ServerUpdateThread.wait()
+
+    @QtCore.Slot()
+    def printstr(self,string):
+        print(string)
+
 
 class message_manager():
     def __init__(self):
