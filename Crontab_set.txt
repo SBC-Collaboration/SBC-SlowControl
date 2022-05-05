@@ -1,0 +1,3 @@
+run crontab -e
+which python
+@reboot export PATH= && python /dir
