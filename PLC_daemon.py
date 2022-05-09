@@ -75,8 +75,9 @@ def PLC_loop():
         time.sleep(5)
 
 def PLC_run():
-    with daemon.DaemonContext():
-        PLC_loop()
+    # with daemon.DaemonContext():
+    #     PLC_loop()
+    PLC_loop()
 def clear_tcp():
     for proc in psutil.process_iter():
         for conns in proc.connections(kind='tcp'):
@@ -91,7 +92,7 @@ def PLC_body():
     App = QtWidgets.QApplication(sys.argv)
     Update = Update()
     sys.exit(App.exec_())
-
+#
 #
 # class PLC:
 #     def __init__(self):
@@ -2030,7 +2031,8 @@ def PLC_body():
 #             print(result)
 #
 #         except SlackApiError as e:
-#             print(f"Error: {e}")
+# #             print(f"Error: {e}")
+#             print(e)
 #
 
 
