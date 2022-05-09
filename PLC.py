@@ -970,13 +970,16 @@ class PLC:
 
 # Class to update myseeq database
 class UpdateDataBase(QtCore.QObject):
-    DB_ERROR_SIG = QtCore.Slot(str)
+    DB_ERROR_SIG = QtCore.Signal(str)
     def __init__(self, PLC, parent=None):
         super().__init__(parent)
 
         self.PLC = PLC
         self.db = mydatabase()
         self.Running = False
+        # if loop runs with _counts times with New_Database = False(No written Data), then send alarm to slack. Otherwise, the code normally run(reset the pointer)
+        self.Running_counts = 270
+        self.Running_pointer = 0
 
         
         self.base_period = 1
@@ -1044,12 +1047,15 @@ class UpdateDataBase(QtCore.QObject):
     def run(self):
         self.Running = True
         try:
+
             while self.Running:
+
                 self.dt = datetime_in_1e5micro()
                 self.early_dt = early_datetime()
                 print("Database Updating", self.dt)
 
                 if self.PLC.NewData_Database:
+                    self.Running_pointer = 0
                     if self.para_TT >= self.rate_TT:
                         for key in self.PLC.TT_FP_dic:
                             self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
@@ -1209,11 +1215,19 @@ class UpdateDataBase(QtCore.QObject):
                     self.PLC.NewData_Database = False
 
                 else:
+                    if self.Running_pointer >= self.Running_counts:
+                        self.DB_ERROR_SIG.emit(
+                            "DATA LOST: Mysql hasn't received the data from PLC for ~10 minutes. Please check them.")
+                        raise Exception("")
+                        self.Running_pointer = 0
+                    print("pointer",self.Running_pointer)
+                    self.Running_pointer += 1
 
                     print("No new data from PLC")
                     pass
 
                 time.sleep(self.base_period)
+                # raise Exception("Test breakup")
         except Exception as e:
             print(e)
             self.DB_ERROR_SIG.emit(e)
@@ -1256,7 +1270,8 @@ class UpdatePLC(QtCore.QObject):
             while self.Running:
                 print("PLC updating", datetime.datetime.now())
                 self.PLC.ReadAll()
-                self.AI_slack_alarm.emit("signal")
+                # test signal
+                # self.AI_slack_alarm.emit("signal")
                 for keyTT_FP in self.PLC.TT_FP_dic:
                     self.check_TT_FP_alarm(keyTT_FP)
                 for keyTT_BO in self.PLC.TT_BO_dic:
@@ -1922,7 +1937,7 @@ class Update(QtCore.QObject):
         self.ServerUpdateThread.quit()
         self.ServerUpdateThread.wait()
 
-    @QtCore.Slot()
+    @QtCore.Slot(str)
     def printstr(self, string):
         print(string)
 
@@ -1976,6 +1991,7 @@ class message_manager():
             print("mail failed to send")
             print(e)
 
+    @QtCore.Slot(str)
     def slack_alarm(self, message):
         # ID of channel you want to post message to
 
@@ -1990,8 +2006,8 @@ class message_manager():
             print(result)
 
         except SlackApiError as e:
-#             print(f"Error: {e}")
-            print(e)
+            print(f"Error: {e}")
+            # print(e)
 
 
 
