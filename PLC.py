@@ -1272,7 +1272,7 @@ class UpdatePLC(QtCore.QObject):
             while self.Running:
                 print("PLC updating", datetime.datetime.now())
                 self.PLC.ReadAll()
-                self.AI_slack_alarm.emit("signal")
+                # self.AI_slack_alarm.emit("signal")
                 for keyTT_FP in self.PLC.TT_FP_dic:
                     self.check_TT_FP_alarm(keyTT_FP)
                 for keyTT_BO in self.PLC.TT_BO_dic:
