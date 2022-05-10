@@ -345,7 +345,7 @@ def FPADS_OUT_AT(outaddress):
     print(new_address)
     return new_address
 
-class PLC:
+class PLC(QtCore.QObject):
     DATA_UPDATE_SIGNAL=QtCore.Signal(object)
     def __init__(self):
         super().__init__()
@@ -1696,7 +1696,7 @@ class UpdateDataBase(QtCore.QObject):
     def stop(self):
         self.Running = False
 
-    @QtCore.Slot()
+    @QtCore.Slot(object)
     def update_value(self,dic):
         for key in self.TT_FP_dic:
             self.TT_FP_dic[key] = dic["TT_FP_dic"][key]
@@ -2512,6 +2512,7 @@ class Update(QtCore.QObject):
 
         self.UpPLC.AI_slack_alarm.connect(self.message_manager.slack_alarm)
         self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
+
     def connect_signals(self):
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
 
