@@ -2516,7 +2516,8 @@ class Update(QtCore.QObject):
         self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
 
     def connect_signals(self):
-        self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
+        # self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
+        self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.update_value)
         print("signal established")
 
 
