@@ -1700,107 +1700,107 @@ class UpdateDataBase(QtCore.QObject):
     @QtCore.Slot(object)
     def update_value(self,dic):
         print("Database received the data from PLC")
-        print(dic)
-        # for key in self.TT_FP_dic:
-        #     self.TT_FP_dic[key] = dic["TT_FP_dic"][key]
-        #
-        # for key in self.TT_BO_dic:
-        #     self.TT_BO_dic[key] = dic["TT_BO_dic"][key]
-        # for key in self.PT_dic:
-        #     self.PT_dic[key] = dic["PT_dic"][key]
-        # for key in self.TT_FP_HighLimit:
-        #     self.TT_FP_HighLimit[key] = dic["TT_FP_HighLimit"][key]
-        #
-        # for key in self.TT_BO_HighLimit:
-        #     self.TT_BO_HighLimit[key] = dic["TT_BO_HighLimit"][key]
-        # for key in self.PT_HighLimit:
-        #     self.PT_HighLimit[key] = dic["PT_HighLimit"][key]
-        # for key in self.LEFT_REAL_HighLimit:
-        #     self.LEFT_REAL_HighLimit[key] = dic["LEFT_REAL_HighLimit"][key]
-        #
-        # for key in self.TT_FP_LowLimit:
-        #     self.TT_FP_LowLimit[key] = dic["TT_FP_LowLimit"][key]
-        #
-        # for key in self.TT_BO_LowLimit:
-        #     self.TT_BO_LowLimit[key] = dic["TT_BO_LowLimit"][key]
-        # for key in self.PT_LowLimit:
-        #     self.PT_LowLimit[key] = dic["PT_LowLimit"][key]
-        # for key in self.LEFT_REAL_LowLimit:
-        #     self.LEFT_REAL_LowLimit[key] = dic["LEFT_REAL_LowLimit"][key]
-        # for key in self.LEFT_REAL_dic:
-        #     self.LEFT_REAL[key] = dic["LEFT_REAL_dic"][key]
-        # for key in self.Valve_OUT:
-        #     self.Valve_OUT[key] = dic["Valve_OUT"][key]
-        # for key in self.Valve_INTLKD:
-        #     self.Valve_INTLKD[key] = dic["Valve_INTLKD"][key]
-        # for key in self.Valve_MAN:
-        #     self.Valve_MAN[key] = dic["Valve_MAN"][key]
-        # for key in self.Valve_ERR:
-        #     self.Valve_ERR[key] = dic["Valve_ERR"][key]
-        # for key in self.Switch_OUT:
-        #     self.Switch_OUT[key] = dic["Switch_OUT"][key]
-        # for key in self.Switch_INTLKD:
-        #     self.Switch_INTLKD[key] = dic["Switch_INTLKD"][key]
-        # for key in self.Switch_MAN:
-        #     self.Switch_MAN[key] = dic["Switch_MAN"][key]
-        # for key in self.Switch_ERR:
-        #     self.Switch_ERR[key] = dic["Switch_ERR"][key]
-        # for key in self.Din_dic:
-        #     self.Din_dic[key] = dic["Din_dic"][key]
-        #
-        # for key in self.TT_FP_Alarm:
-        #     self.TT_FP_Alarm[key] = dic["TT_FP_Alarm"][key]
-        # for key in self.TT_BO_Alarm:
-        #     self.TT_BO_Alarm[key] = dic["TT_BO_Alarm"][key]
-        # for key in self.PT_dic:
-        #     self.PT_Alarm[key] = dic["PT_Alarm"][key]
-        # for key in self.LEFT_REAL_dic:
-        #     self.LEFT_REAL_Alarm[key] = dic["LEFT_REAL_Alarm"][key]
-        # for key in self.LOOPPID_MODE0:
-        #     self.LOOPPID_MODE0[key] = dic["LOOPPID_MODE0"][key]
-        # for key in self.LOOPPID_MODE1:
-        #     self.LOOPPID_MODE1[key] = dic["LOOPPID_MODE1"][key]
-        # for key in self.LOOPPID_MODE2:
-        #     self.LOOPPID_MODE2[key] = dic["LOOPPID_MODE2"][key]
-        # for key in self.LOOPPID_MODE3:
-        #     self.LOOPPID_MODE3[key] = dic["LOOPPID_MODE3"][key]
-        # for key in self.LOOPPID_INTLKD:
-        #     self.LOOPPID_INTLKD[key] = dic["LOOPPID_INTLKD"][key]
-        # for key in self.LOOPPID_MAN:
-        #     self.LOOPPID_MAN[key] = dic["LOOPPID_MAN"][key]
-        # for key in self.LOOPPID_ERR:
-        #     self.LOOPPID_ERR[key] = dic["LOOPPID_ERR"][key]
-        # for key in self.LOOPPID_SATHI:
-        #     self.LOOPPID_SATHI[key] = dic["LOOPPID_SATHI"][key]
-        # for key in self.LOOPPID_SATLO:
-        #     self.LOOPPID_SATLO[key] = dic["LOOPPID_SATLO"][key]
-        # for key in self.LOOPPID_EN:
-        #     self.LOOPPID_EN[key] = dic["LOOPPID_EN"][key]
-        # for key in self.LOOPPID_OUT:
-        #     self.LOOPPID_OUT[key] = dic["LOOPPID_OUT"][key]
-        # for key in self.LOOPPID_IN:
-        #     self.LOOPPID_IN[key] = dic["LOOPPID_IN"][key]
-        # for key in self.LOOPPID_HI_LIM:
-        #     self.LOOPPID_HI_LIM[key] = dic["LOOPPID_HI_LIM"][key]
-        # for key in self.LOOPPID_LO_LIM:
-        #     self.LOOPPID_LO_LIM[key] = dic["LOOPPID_LO_LIM"][key]
-        # for key in self.LOOPPID_SET0:
-        #     self.LOOPPID_SET0[key] = dic["LOOPPID_SET0"][key]
-        # for key in self.LOOPPID_SET1:
-        #     self.LOOPPID_SET1[key] = dic["LOOPPID_SET1"][key]
-        # for key in self.LOOPPID_SET2:
-        #     self.LOOPPID_SET2[key] = dic["LOOPPID_SET2"][key]
-        # for key in self.LOOPPID_SET3:
-        #     self.LOOPPID_SET3[key] = dic["LOOPPID_SET3"][key]
-        #
-        # for key in self.Procedure_running:
-        #     self.Procedure_running[key] = dic["Procedure_running"][key]
-        # for key in self.Procedure_INTLKD:
-        #     self.Procedure_INTLKD[key] = dic["Procedure_INTLKD"][key]
-        # for key in self.Procedure_EXIT:
-        #     self.Procedure_EXIT[key] = dic["Procedure_EXIT"][key]
-        #
-        # self.MainAlarm = dic["MainAlarm"]
+        # print(dic)
+        for key in self.TT_FP_dic:
+            self.TT_FP_dic[key] = dic["TT_FP_dic"][key]
+
+        for key in self.TT_BO_dic:
+            self.TT_BO_dic[key] = dic["TT_BO_dic"][key]
+        for key in self.PT_dic:
+            self.PT_dic[key] = dic["PT_dic"][key]
+        for key in self.TT_FP_HighLimit:
+            self.TT_FP_HighLimit[key] = dic["TT_FP_HighLimit"][key]
+
+        for key in self.TT_BO_HighLimit:
+            self.TT_BO_HighLimit[key] = dic["TT_BO_HighLimit"][key]
+        for key in self.PT_HighLimit:
+            self.PT_HighLimit[key] = dic["PT_HighLimit"][key]
+        for key in self.LEFT_REAL_HighLimit:
+            self.LEFT_REAL_HighLimit[key] = dic["LEFT_REAL_HighLimit"][key]
+
+        for key in self.TT_FP_LowLimit:
+            self.TT_FP_LowLimit[key] = dic["TT_FP_LowLimit"][key]
+
+        for key in self.TT_BO_LowLimit:
+            self.TT_BO_LowLimit[key] = dic["TT_BO_LowLimit"][key]
+        for key in self.PT_LowLimit:
+            self.PT_LowLimit[key] = dic["PT_LowLimit"][key]
+        for key in self.LEFT_REAL_LowLimit:
+            self.LEFT_REAL_LowLimit[key] = dic["LEFT_REAL_LowLimit"][key]
+        for key in self.LEFT_REAL_dic:
+            self.LEFT_REAL[key] = dic["LEFT_REAL_dic"][key]
+        for key in self.Valve_OUT:
+            self.Valve_OUT[key] = dic["Valve_OUT"][key]
+        for key in self.Valve_INTLKD:
+            self.Valve_INTLKD[key] = dic["Valve_INTLKD"][key]
+        for key in self.Valve_MAN:
+            self.Valve_MAN[key] = dic["Valve_MAN"][key]
+        for key in self.Valve_ERR:
+            self.Valve_ERR[key] = dic["Valve_ERR"][key]
+        for key in self.Switch_OUT:
+            self.Switch_OUT[key] = dic["Switch_OUT"][key]
+        for key in self.Switch_INTLKD:
+            self.Switch_INTLKD[key] = dic["Switch_INTLKD"][key]
+        for key in self.Switch_MAN:
+            self.Switch_MAN[key] = dic["Switch_MAN"][key]
+        for key in self.Switch_ERR:
+            self.Switch_ERR[key] = dic["Switch_ERR"][key]
+        for key in self.Din_dic:
+            self.Din_dic[key] = dic["Din_dic"][key]
+
+        for key in self.TT_FP_Alarm:
+            self.TT_FP_Alarm[key] = dic["TT_FP_Alarm"][key]
+        for key in self.TT_BO_Alarm:
+            self.TT_BO_Alarm[key] = dic["TT_BO_Alarm"][key]
+        for key in self.PT_dic:
+            self.PT_Alarm[key] = dic["PT_Alarm"][key]
+        for key in self.LEFT_REAL_dic:
+            self.LEFT_REAL_Alarm[key] = dic["LEFT_REAL_Alarm"][key]
+        for key in self.LOOPPID_MODE0:
+            self.LOOPPID_MODE0[key] = dic["LOOPPID_MODE0"][key]
+        for key in self.LOOPPID_MODE1:
+            self.LOOPPID_MODE1[key] = dic["LOOPPID_MODE1"][key]
+        for key in self.LOOPPID_MODE2:
+            self.LOOPPID_MODE2[key] = dic["LOOPPID_MODE2"][key]
+        for key in self.LOOPPID_MODE3:
+            self.LOOPPID_MODE3[key] = dic["LOOPPID_MODE3"][key]
+        for key in self.LOOPPID_INTLKD:
+            self.LOOPPID_INTLKD[key] = dic["LOOPPID_INTLKD"][key]
+        for key in self.LOOPPID_MAN:
+            self.LOOPPID_MAN[key] = dic["LOOPPID_MAN"][key]
+        for key in self.LOOPPID_ERR:
+            self.LOOPPID_ERR[key] = dic["LOOPPID_ERR"][key]
+        for key in self.LOOPPID_SATHI:
+            self.LOOPPID_SATHI[key] = dic["LOOPPID_SATHI"][key]
+        for key in self.LOOPPID_SATLO:
+            self.LOOPPID_SATLO[key] = dic["LOOPPID_SATLO"][key]
+        for key in self.LOOPPID_EN:
+            self.LOOPPID_EN[key] = dic["LOOPPID_EN"][key]
+        for key in self.LOOPPID_OUT:
+            self.LOOPPID_OUT[key] = dic["LOOPPID_OUT"][key]
+        for key in self.LOOPPID_IN:
+            self.LOOPPID_IN[key] = dic["LOOPPID_IN"][key]
+        for key in self.LOOPPID_HI_LIM:
+            self.LOOPPID_HI_LIM[key] = dic["LOOPPID_HI_LIM"][key]
+        for key in self.LOOPPID_LO_LIM:
+            self.LOOPPID_LO_LIM[key] = dic["LOOPPID_LO_LIM"][key]
+        for key in self.LOOPPID_SET0:
+            self.LOOPPID_SET0[key] = dic["LOOPPID_SET0"][key]
+        for key in self.LOOPPID_SET1:
+            self.LOOPPID_SET1[key] = dic["LOOPPID_SET1"][key]
+        for key in self.LOOPPID_SET2:
+            self.LOOPPID_SET2[key] = dic["LOOPPID_SET2"][key]
+        for key in self.LOOPPID_SET3:
+            self.LOOPPID_SET3[key] = dic["LOOPPID_SET3"][key]
+
+        for key in self.Procedure_running:
+            self.Procedure_running[key] = dic["Procedure_running"][key]
+        for key in self.Procedure_INTLKD:
+            self.Procedure_INTLKD[key] = dic["Procedure_INTLKD"][key]
+        for key in self.Procedure_EXIT:
+            self.Procedure_EXIT[key] = dic["Procedure_EXIT"][key]
+
+        self.MainAlarm = dic["MainAlarm"]
         print("Database received the data from PLC")
 
 
