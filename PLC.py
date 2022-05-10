@@ -2452,7 +2452,7 @@ class UpdateServer(QtCore.QObject):
 
 
 class Update(QtCore.QObject):
-    PATCH_TO_DATABASE = QtCore.Signal(object)
+    PATCH_TO_DATABASE = QtCore.Signal()
     def __init__(self, parent=None):
         super().__init__(parent)
         App.aboutToQuit.connect(self.StopUpdater)
