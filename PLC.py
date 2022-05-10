@@ -1056,6 +1056,7 @@ class UpdateDataBase(QtCore.QObject):
 
                 if self.PLC.NewData_Database:
                     self.Running_pointer = 0
+                    print(0)
                     if self.para_TT >= self.rate_TT:
                         for key in self.PLC.TT_FP_dic:
                             self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
@@ -1063,12 +1064,13 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
                         # print("write RTDS")
                         self.para_TT = 0
+                    print(1)
                     if self.para_PT >= self.rate_PT:
                         for key in self.PLC.PT_dic:
                             self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
                         # print("write pressure transducer")
                         self.para_PT = 0
-
+                    print(2)
                     for key in self.PLC.Valve_OUT:
                         # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.PLC.Valve_OUT[key] != self.Valve_buffer[key]:
@@ -1084,7 +1086,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.Valve_OUT[key])
                             self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
                         self.para_Valve = 0
-
+                    print(3)
                     for key in self.PLC.Switch_OUT:
                         # print(key, self.PLC.Switch_OUT[key] != self.Switch_buffer[key])
                         if self.PLC.Switch_OUT[key] != self.Switch_buffer[key]:
@@ -1100,7 +1102,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.Switch_OUT[key])
                             self.Switch_buffer[key] = self.PLC.Switch_OUT[key]
                         self.para_Switch = 0
-
+                    print(4)
                     for key in self.PLC.Din_dic:
                         # print(key, self.PLC.Switch_OUT[key] != self.Switch_buffer[key])
                         if self.PLC.Din_dic[key] != self.Din_buffer[key]:
@@ -1117,7 +1119,7 @@ class UpdateDataBase(QtCore.QObject):
                         self.para_Din = 0
 
                     # if state of bool variable changes, write the data into database
-
+                    print(5)
                     for key in self.PLC.LOOPPID_EN:
                         # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.PLC.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
@@ -1169,7 +1171,7 @@ class UpdateDataBase(QtCore.QObject):
                             pass
 
                     # if no changes, write the data every fixed time interval
-
+                    print(6)
                     if self.para_LOOPPID >= self.rate_LOOPPID:
                         for key in self.PLC.LOOPPID_EN:
                             self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.PLC.LOOPPID_EN[key])
@@ -1194,7 +1196,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage(key + '_IN', self.dt, self.PLC.LOOPPID_IN[key])
                             self.LOOPPID_IN_buffer[key] = self.PLC.LOOPPID_IN[key]
                         self.para_LOOPPID = 0
-
+                    print(7)
                     if self.para_REAL >= self.rate_REAL:
                         for key in self.PLC.LEFT_REAL_address:
                             # print(key, self.PLC.LEFT_REAL_dic[key])
@@ -1203,7 +1205,7 @@ class UpdateDataBase(QtCore.QObject):
                         self.para_REAL = 0
 
                     # print("a",self.para_TT,"b",self.para_PT )
-
+                    print(8)
                     print("Wrting PLC data to database...")
                     self.para_TT += 1
                     self.para_PT += 1
@@ -1570,7 +1572,7 @@ class UpdateServer(QtCore.QObject):
     def run(self):
         self.Running = True
         while self.Running:
-            print("refreshing the server")
+            print("refreshing the BKG-GUI communication server")
             if self.PLC.NewData_ZMQ:
 
                 # message = self.socket.recv()
@@ -1588,7 +1590,7 @@ class UpdateServer(QtCore.QObject):
                 # self.socket.sendall(self.data_package)
                 self.PLC.NewData_ZMQ = False
             else:
-                print("PLC server stops")
+                print("BKG-GUI communication server stops")
                 pass
             time.sleep(self.period)
 
