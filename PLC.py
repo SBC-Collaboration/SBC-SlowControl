@@ -2482,6 +2482,8 @@ class Update(QtCore.QObject):
         self.DataUpdateThread.started.connect(self.UpDatabase.run)
         self.DataUpdateThread.start()
 
+        time.sleep(2)
+
         # Update database on another thread
         self.ServerUpdateThread = QtCore.QThread()
         self.UpServer = UpdateServer(self.PLC)
@@ -2518,7 +2520,7 @@ class Update(QtCore.QObject):
 
     def connect_signals(self):
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
-        self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.printstr)
+        # self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.printstr)
         print("signal established")
 
 
