@@ -962,6 +962,7 @@ class PLC(QtCore.QObject):
 
 
             self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
+            print("signal sent")
             self.NewData_Display = True
             self.NewData_Database = True
             self.NewData_ZMQ = True
@@ -1698,6 +1699,7 @@ class UpdateDataBase(QtCore.QObject):
 
     @QtCore.Slot(object)
     def update_value(self,dic):
+        print("Database received the data from PLC")
         for key in self.TT_FP_dic:
             self.TT_FP_dic[key] = dic["TT_FP_dic"][key]
 
@@ -2515,6 +2517,7 @@ class Update(QtCore.QObject):
 
     def connect_signals(self):
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
+        print("signal established")
 
 
 
