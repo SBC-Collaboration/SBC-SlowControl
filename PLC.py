@@ -1754,8 +1754,8 @@ class UpdateDataBase(QtCore.QObject):
             self.TT_BO_Alarm[key] = dic["TT_BO_Alarm"][key]
         for key in self.PT_dic:
             self.PT_Alarm[key] = dic["PT_Alarm"][key]
-        # for key in self.LEFT_REAL_dic:
-        #     self.LEFT_REAL_Alarm[key] = dic["LEFT_REAL_Alarm"][key]
+        for key in self.LEFT_REAL_dic:
+            self.LEFT_REAL_Alarm[key] = dic["LEFT_REAL_Alarm"][key]
         for key in self.LOOPPID_MODE0:
             self.LOOPPID_MODE0[key] = dic["LOOPPID_MODE0"][key]
         for key in self.LOOPPID_MODE1:
