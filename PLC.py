@@ -1715,8 +1715,8 @@ class UpdateDataBase(QtCore.QObject):
             self.TT_BO_HighLimit[key] = dic["TT_BO_HighLimit"][key]
         for key in self.PT_HighLimit:
             self.PT_HighLimit[key] = dic["PT_HighLimit"][key]
-        for key in self.LEFT_REAL_HighLimit:
-            self.LEFT_REAL_HighLimit[key] = dic["LEFT_REAL_HighLimit"][key]
+        # for key in self.LEFT_REAL_HighLimit:
+        #     self.LEFT_REAL_HighLimit[key] = dic["LEFT_REAL_HighLimit"][key]
 
         for key in self.TT_FP_LowLimit:
             self.TT_FP_LowLimit[key] = dic["TT_FP_LowLimit"][key]
@@ -1725,10 +1725,10 @@ class UpdateDataBase(QtCore.QObject):
             self.TT_BO_LowLimit[key] = dic["TT_BO_LowLimit"][key]
         for key in self.PT_LowLimit:
             self.PT_LowLimit[key] = dic["PT_LowLimit"][key]
-        for key in self.LEFT_REAL_LowLimit:
-            self.LEFT_REAL_LowLimit[key] = dic["LEFT_REAL_LowLimit"][key]
-        for key in self.LEFT_REAL_dic:
-            self.LEFT_REAL[key] = dic["LEFT_REAL_dic"][key]
+        # for key in self.LEFT_REAL_LowLimit:
+        #     self.LEFT_REAL_LowLimit[key] = dic["LEFT_REAL_LowLimit"][key]
+        # for key in self.LEFT_REAL_dic:
+        #     self.LEFT_REAL[key] = dic["LEFT_REAL_dic"][key]
         for key in self.Valve_OUT:
             self.Valve_OUT[key] = dic["Valve_OUT"][key]
         for key in self.Valve_INTLKD:
@@ -1754,8 +1754,8 @@ class UpdateDataBase(QtCore.QObject):
             self.TT_BO_Alarm[key] = dic["TT_BO_Alarm"][key]
         for key in self.PT_dic:
             self.PT_Alarm[key] = dic["PT_Alarm"][key]
-        for key in self.LEFT_REAL_dic:
-            self.LEFT_REAL_Alarm[key] = dic["LEFT_REAL_Alarm"][key]
+        # for key in self.LEFT_REAL_dic:
+        #     self.LEFT_REAL_Alarm[key] = dic["LEFT_REAL_Alarm"][key]
         for key in self.LOOPPID_MODE0:
             self.LOOPPID_MODE0[key] = dic["LOOPPID_MODE0"][key]
         for key in self.LOOPPID_MODE1:
