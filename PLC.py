@@ -962,7 +962,7 @@ class PLC(QtCore.QObject):
 
 
             self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
-            print("signal sent")
+            # print("signal sent")
             self.NewData_Display = True
             self.NewData_Database = True
             self.NewData_ZMQ = True
@@ -1799,7 +1799,7 @@ class UpdateDataBase(QtCore.QObject):
         for key in self.Procedure_EXIT:
             self.Procedure_EXIT[key] = dic["Procedure_EXIT"][key]
 
-        self.data_dic["MainAlarm"] = dic["MainAlarm"]
+        self.MainAlarm = dic["MainAlarm"]
         print("Database received the data from PLC")
 
 
