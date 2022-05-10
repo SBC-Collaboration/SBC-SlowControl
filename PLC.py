@@ -2452,6 +2452,7 @@ class UpdateServer(QtCore.QObject):
 
 
 class Update(QtCore.QObject):
+    PATCH_TO_DATABASE = QtCore.Signal(object)
     def __init__(self, parent=None):
         super().__init__(parent)
         App.aboutToQuit.connect(self.StopUpdater)
@@ -2515,6 +2516,7 @@ class Update(QtCore.QObject):
     @QtCore.Slot(object)
     def transfer_station(self, data):
         self.data_transfer = data
+        self.PATCH_TO_DATABASE.emit(self.data_transfer)
         print(self.data_transfer)
 
     def slack_signals(self):
@@ -2525,8 +2527,9 @@ class Update(QtCore.QObject):
         self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
 
     def connect_signals(self):
-        self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
+        # self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
+        self.PATCH_TO_DATABASE.connect(self.UpDatabase.update_value)
         print("signal established")
 
 
