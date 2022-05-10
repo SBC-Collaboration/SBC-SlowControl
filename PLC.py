@@ -2516,8 +2516,8 @@ class Update(QtCore.QObject):
     @QtCore.Slot(object)
     def transfer_station(self, data):
         self.data_transfer = data
-        self.PATCH_TO_DATABASE.emit(self.data_transfer)
-        print(self.data_transfer)
+        self.PATCH_TO_DATABASE.emit()
+        # print(self.data_transfer)
 
     def slack_signals(self):
         self.message_manager = message_manager()
@@ -2529,7 +2529,7 @@ class Update(QtCore.QObject):
     def connect_signals(self):
         # self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
-        self.PATCH_TO_DATABASE.connect(self.UpDatabase.update_value)
+        self.PATCH_TO_DATABASE.connect(lambda: self.UpDatabase.update_value(self.data_transfer))
         print("signal established")
 
 
