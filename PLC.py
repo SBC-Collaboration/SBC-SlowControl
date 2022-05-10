@@ -2480,7 +2480,7 @@ class Update(QtCore.QObject):
         self.UpDatabase = UpdateDataBase(self.PLC)
         self.UpDatabase.moveToThread(self.DataUpdateThread)
         self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        # self.DataUpdateThread.start()
+        self.DataUpdateThread.start()
 
         time.sleep(2)
 
