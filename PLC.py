@@ -1699,7 +1699,7 @@ class UpdateDataBase(QtCore.QObject):
 
     @QtCore.Slot(object)
     def update_value(self,dic):
-        print("Database received the data from PLC")
+        # print("Database received the data from PLC")
         # print(dic)
         for key in self.TT_FP_dic:
             self.TT_FP_dic[key] = dic["TT_FP_dic"][key]
