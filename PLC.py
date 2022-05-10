@@ -1727,8 +1727,8 @@ class UpdateDataBase(QtCore.QObject):
             self.PT_LowLimit[key] = dic["PT_LowLimit"][key]
         # for key in self.LEFT_REAL_LowLimit:
         #     self.LEFT_REAL_LowLimit[key] = dic["LEFT_REAL_LowLimit"][key]
-        # for key in self.LEFT_REAL_dic:
-        #     self.LEFT_REAL[key] = dic["LEFT_REAL_dic"][key]
+        for key in self.LEFT_REAL_dic:
+            self.LEFT_REAL[key] = dic["LEFT_REAL_dic"][key]
         for key in self.Valve_OUT:
             self.Valve_OUT[key] = dic["Valve_OUT"][key]
         for key in self.Valve_INTLKD:
