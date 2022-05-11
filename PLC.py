@@ -1518,13 +1518,13 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage(key, self.dt, self.TT_FP_dic[key])
                         for key in self.TT_BO_dic:
                             self.db.insert_data_into_datastorage(key, self.dt, self.TT_BO_dic[key])
-                        # print("write RTDS")
+                        print("write RTDS")
                         self.para_TT = 0
                     # print(1)
                     if self.para_PT >= self.rate_PT:
                         for key in self.PT_dic:
                             self.db.insert_data_into_datastorage(key, self.dt, self.PT_dic[key])
-                        # print("write pressure transducer")
+                        print("write pressure transducer")
                         self.para_PT = 0
                     # print(2)
                     for key in self.Valve_OUT:
