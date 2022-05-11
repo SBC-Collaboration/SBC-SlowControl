@@ -745,224 +745,225 @@ class PLC(QtCore.QObject):
         # print(self.TT_BO_HighLimit["TT2119"])
         # print(self.TT_BO_Alarm["TT2119"])
         if self.Connected:
-        #     # Reading all the RTDs
-        #     Raw_RTDs_FP = {}
-        #     for key in self.TT_FP_address:
-        #         Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
-        #         self.TT_FP_dic[key] = round(
-        #             struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
+            # Reading all the RTDs
+            Raw_RTDs_FP = {}
+            for key in self.TT_FP_address:
+                Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
+                self.TT_FP_dic[key] = round(
+                    struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
+
+                # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
+
+            #################################################################################################
+
+            # # Set Attributes could be commented(disabled) after it is done
+            # Attribute_TTFP_address = {}
+            # Raw_TT_FP_Attribute = {}
+            # for key in self.TT_FP_address:
+            #     Attribute_TTFP_address[key] = FPADS_OUT_AT(self.TT_FP_address[key])
+            # print(Attribute_TTFP_address)
+            # for key in Attribute_TTFP_address:
+            #     print(self.ReadFPAttribute(address = Attribute_TTFP_address[key]))
+            #
+            #     # self.SetFPRTDAttri(mode = 0x2601, address = Attribute_TTFP_address[key])
+
         #
-        #         # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
+        #     Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
+        #     for i in range(0, self.nRTD):
+        #         self.RTD[i] = round(
+        #             struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
+        #         # self.RTD[i] = round(
+        #         #     struct.unpack("<f", Raw2.getRegister(i))[0], 3)
+        #         # self.RTD[i] = round(Raw2.getRegister(i), 3)
+        #         # print("Updating PLC", i, "RTD",self.RTD[i])
         #
-        #     #################################################################################################
         #
-        #     # # Set Attributes could be commented(disabled) after it is done
-        #     # Attribute_TTFP_address = {}
-        #     # Raw_TT_FP_Attribute = {}
-        #     # for key in self.TT_FP_address:
-        #     #     Attribute_TTFP_address[key] = FPADS_OUT_AT(self.TT_FP_address[key])
-        #     # print(Attribute_TTFP_address)
-        #     # for key in Attribute_TTFP_address:
-        #     #     print(self.ReadFPAttribute(address = Attribute_TTFP_address[key]))
-        #     #
-        #     #     # self.SetFPRTDAttri(mode = 0x2601, address = Attribute_TTFP_address[key])
         #
-        # #
-        # #     Raw2 = self.Client.read_holding_registers(38000, count=self.nRTD * 2, unit=0x01)
-        # #     for i in range(0, self.nRTD):
-        # #         self.RTD[i] = round(
-        # #             struct.unpack("<f", struct.pack("<HH", Raw.getRegister((2 * i) + 1), Raw.getRegister(2 * i)))[0], 3)
-        # #         # self.RTD[i] = round(
-        # #         #     struct.unpack("<f", Raw2.getRegister(i))[0], 3)
-        # #         # self.RTD[i] = round(Raw2.getRegister(i), 3)
-        # #         # print("Updating PLC", i, "RTD",self.RTD[i])
-        # #
-        # #
-        # #
-        # #     Attribute = [0.] * self.nRTD
-        # #     for i in range(0, self.nRTD):
-        # #         Attribute[i] = self.Client.read_holding_registers(18000 + i * 8, count=1, unit=0x01)
-        # #         self.nAttribute[i] = hex(Attribute[i].getRegister(0))
-        # #     # print("Attributes", self.nAttribute)
-        #
-        # #########################################################################
-        # if self.Connected_BO:
-        #     Raw_BO_TT_BO = {}
-        #     for key in self.TT_BO_address:
-        #         Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=2, unit=0x01)
-        #         self.TT_BO_dic[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
-        #         # print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
-        #         # print(key, "'s' value is", self.TT_BO_dic[key])
-        #
-        #     ##########################################################################################
-        #
-        #     # test endian of TT BO
-        #
-        #     # for key in self.TT_BO_address:
-        #     #     Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=4, unit=0x01)
-        #     #     self.TT_BO_dic[key] = round(
-        #     #         struct.unpack("<d", struct.pack("<HHHH", Raw_BO_TT_BO[key].getRegister(3),Raw_BO_TT_BO[key].getRegister(2),Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
-        #     #     print(key, "0th", hex(Raw_BO_TT_BO[key].getRegister(0)),"1st",hex(Raw_BO_TT_BO[key].getRegister(1)),"2nd",hex(Raw_BO_TT_BO[key].getRegister(2)),"3rd",hex(Raw_BO_TT_BO[key].getRegister(3)))
-        #     #     print(key, "'s' value is", self.TT_BO_dic[key])
-        #
-        #     # for key in self.TT_BO_address:
-        #     #     Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=4, unit=0x01)
-        #     #     self.TT_BO_dic[key] = round(
-        #     #         struct.unpack("<f", struct.pack(">f",  Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
-        #     #     print(key, "0th", hex(Raw_BO_TT_BO[key].getRegister(0)),"1st",hex(Raw_BO_TT_BO[key].getRegister(1)),"2nd",hex(Raw_BO_TT_BO[key].getRegister(2)),"3rd",hex(Raw_BO_TT_BO[key].getRegister(3)))
-        #     #     print(key, "'s' value is", self.TT_BO_dic[key])
-        #
-        #     ##########################################################################################
-        #
-        #     Raw_BO_PT = {}
-        #     for key in self.PT_address:
-        #         Raw_BO_PT[key] = self.Client_BO.read_holding_registers(self.PT_address[key], count=2, unit=0x01)
-        #         self.PT_dic[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_BO_PT[key].getRegister(0 + 1),
-        #                                             Raw_BO_PT[key].getRegister(0)))[0], 3)
-        #
-        #     Raw_BO_REAL = {}
-        #     for key in self.LEFT_REAL_address:
-        #         Raw_BO_REAL[key] = self.Client_BO.read_holding_registers(self.LEFT_REAL_address[key], count=2, unit=0x01)
-        #         self.LEFT_REAL_dic[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_BO_REAL[key].getRegister(0 + 1),
-        #                                             Raw_BO_REAL[key].getRegister(0)))[0], 3)
-        #
-        #         # print(key, "'s' value is", self.PT_dic[key])
-        #
-        #     Raw_BO_Valve = {}
-        #     Raw_BO_Valve_OUT = {}
-        #     for key in self.valve_address:
-        #         Raw_BO_Valve[key] = self.Client_BO.read_holding_registers(self.valve_address[key], count=1, unit=0x01)
-        #         self.Valve[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
-        #
-        #         self.Valve_OUT[key] = self.ReadCoil(1, self.valve_address[key])
-        #         self.Valve_INTLKD[key] = self.ReadCoil(8, self.valve_address[key])
-        #         self.Valve_MAN[key] = self.ReadCoil(16, self.valve_address[key])
-        #         self.Valve_ERR[key] = self.ReadCoil(32, self.valve_address[key])
-        #         # print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve_OUT[key])
-        #         # print(key, "Address with ", self.valve_address[key], "INTLKD is", self.Valve_INTLKD[key])
-        #         # print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
-        #         # print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
-        #
-        #     Raw_BO_Switch = {}
-        #
-        #     for key in self.Switch_address:
-        #         Raw_BO_Switch[key] = self.Client_BO.read_holding_registers(self.Switch_address[key], count=1, unit=0x01)
-        #         self.Switch[key] = struct.pack("H", Raw_BO_Switch[key].getRegister(0))
-        #
-        #         self.Switch_OUT[key] = self.ReadCoil(1, self.Switch_address[key])
-        #         self.Switch_INTLKD[key] = self.ReadCoil(8, self.Switch_address[key])
-        #         self.Switch_MAN[key] = self.ReadCoil(16, self.Switch_address[key])
-        #         self.Switch_ERR[key] = self.ReadCoil(32, self.Switch_address[key])
-        #
-        #     # Din's address is a tuple, first number is BO address, the second number is the digit
-        #     Raw_BO_Din = {}
-        #
-        #     for key in self.Din_address:
-        #         Raw_BO_Din[key] = self.Client_BO.read_holding_registers(self.Din_address[key][0], count=1, unit=0x01)
-        #         # print(Raw_BO_Din[key])
-        #         self.Din[key] = struct.pack("H", Raw_BO_Din[key].getRegister(0))
-        #
-        #         self.Din_dic[key] = self.ReadCoil(2 ** (self.Din_address[key][1]), self.Din_address[key][0])
-        #
-        #     Raw_LOOPPID_2 = {}
-        #     Raw_LOOPPID_4 = {}
-        #     Raw_LOOPPID_6 = {}
-        #     Raw_LOOPPID_8 = {}
-        #     Raw_LOOPPID_10 = {}
-        #     Raw_LOOPPID_12 = {}
-        #     Raw_LOOPPID_14 = {}
-        #     Raw_LOOPPID_16 = {}
-        #     for key in self.LOOPPID_ADR_BASE:
-        #         self.LOOPPID_MODE0[key] = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
-        #         self.LOOPPID_MODE1[key] = self.ReadCoil(2, self.LOOPPID_ADR_BASE[key])
-        #         self.LOOPPID_MODE2[key] = self.ReadCoil(2 ** 2, self.LOOPPID_ADR_BASE[key])
-        #         self.LOOPPID_MODE3[key] = self.ReadCoil(2 ** 3, self.LOOPPID_ADR_BASE[key])
-        #         self.LOOPPID_INTLKD[key] = self.ReadCoil(2 ** 8, self.LOOPPID_ADR_BASE[key])
-        #         self.LOOPPID_MAN[key] = self.ReadCoil(2 ** 9, self.LOOPPID_ADR_BASE[key])
-        #         self.LOOPPID_ERR[key] = self.ReadCoil(2 ** 10, self.LOOPPID_ADR_BASE[key])
-        #         self.LOOPPID_SATHI[key] = self.ReadCoil(2 ** 11, self.LOOPPID_ADR_BASE[key])
-        #         self.LOOPPID_SATLO[key] = self.ReadCoil(2 ** 12, self.LOOPPID_ADR_BASE[key])
-        #         self.LOOPPID_EN[key] = self.ReadCoil(2 ** 15, self.LOOPPID_ADR_BASE[key])
-        #         Raw_LOOPPID_2[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 2, count=2, unit=0x01)
-        #         Raw_LOOPPID_4[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 4, count=2,
-        #                                                                    unit=0x01)
-        #         Raw_LOOPPID_6[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 6, count=2,
-        #                                                                    unit=0x01)
-        #         Raw_LOOPPID_8[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 8, count=2,
-        #                                                                    unit=0x01)
-        #         Raw_LOOPPID_10[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 10, count=2,
-        #                                                                     unit=0x01)
-        #         Raw_LOOPPID_12[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 12, count=2,
-        #                                                                     unit=0x01)
-        #         Raw_LOOPPID_14[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 14, count=2,
-        #                                                                     unit=0x01)
-        #         Raw_LOOPPID_16[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 16, count=2,
-        #                                                                     unit=0x01)
-        #
-        #         self.LOOPPID_OUT[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_2[key].getRegister(1),
-        #                                             Raw_LOOPPID_2[key].getRegister(0)))[0], 3)
-        #
-        #         self.LOOPPID_IN[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
-        #                                             Raw_LOOPPID_4[key].getRegister(0)))[0], 3)
-        #         self.LOOPPID_HI_LIM[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_6[key].getRegister(0 + 1),
-        #                                             Raw_LOOPPID_6[key].getRegister(0)))[0], 3)
-        #         self.LOOPPID_LO_LIM[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_8[key].getRegister(0 + 1),
-        #                                             Raw_LOOPPID_8[key].getRegister(0)))[0], 3)
-        #         self.LOOPPID_SET0[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_10[key].getRegister(0 + 1),
-        #                                             Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
-        #         self.LOOPPID_SET1[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_12[key].getRegister(0 + 1),
-        #                                             Raw_LOOPPID_12[key].getRegister(0)))[0], 3)
-        #         self.LOOPPID_SET2[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
-        #                                             Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
-        #         self.LOOPPID_SET3[key] = round(
-        #             struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
-        #                                             Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
-        #
-        #     ##########################################################################################
-        #     # procedure
-        #     Raw_Procedure = {}
-        #     Raw_Procedure_OUT = {}
-        #     for key in self.Procedure_address:
-        #         Raw_Procedure[key] = self.Client_BO.read_holding_registers(self.Procedure_address[key] + 1, count=1, unit=0x01)
-        #
-        #         self.Procedure_running[key] = self.ReadCoil(1, self.Procedure_address[key])
-        #         self.Procedure_INTLKD[key] = self.ReadCoil(2, self.Procedure_address[key])
-        #         self.Procedure_EXIT[key] = Raw_Procedure[key].getRegister(0)
-        #
-        #     # test the writing function
-        #     # print(self.Read_BO_2(14308))
-        #     # Raw_BO = self.Client_BO.read_holding_registers(14308, count=2, unit=0x01)
-        #     # print('Raw0',Raw_BO.getRegister(0))
-        #     # print('Raw1', Raw_BO.getRegister(1))
-        #     # output_BO = round(struct.unpack(">f", struct.pack(">HH", Raw_BO.getRegister(1), Raw_BO.getRegister(0)))[
-        #     #                       0], 3)
-        #     # self.Write_BO_2(14308,2.0)
-        #     # print(self.Read_BO_2(14308))
-        #
-        #     # print("base",self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
-        #     #
-        #     # print("other",self.LOOPPID_HI_LIM, "\n", self.LOOPPID_LO_LIM, "\n", self.LOOPPID_SET0, "\n", self.LOOPPID_SET1,
-        #     #           "\n")
-        #
-        #     # PLC
-        #     # Raw = self.Client.read_holding_registers(0x3E9, count=1, unit=0x01)
-        #     # self.LiveCounter = Raw.getRegister(0)
-        #
-        #     ##########################################################################################
-        #
+        #     Attribute = [0.] * self.nRTD
+        #     for i in range(0, self.nRTD):
+        #         Attribute[i] = self.Client.read_holding_registers(18000 + i * 8, count=1, unit=0x01)
+        #         self.nAttribute[i] = hex(Attribute[i].getRegister(0))
+        #     # print("Attributes", self.nAttribute)
+
+        #########################################################################
+        if self.Connected_BO:
+            Raw_BO_TT_BO = {}
+            for key in self.TT_BO_address:
+                Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=2, unit=0x01)
+                self.TT_BO_dic[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
+                # print(key, "little endian", hex(Raw_BO_TT_BO[key].getRegister(1)),"big endian",hex(Raw_BO_TT_BO[key].getRegister(0)))
+                # print(key, "'s' value is", self.TT_BO_dic[key])
+
+            ##########################################################################################
+
+            # test endian of TT BO
+
+            # for key in self.TT_BO_address:
+            #     Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=4, unit=0x01)
+            #     self.TT_BO_dic[key] = round(
+            #         struct.unpack("<d", struct.pack("<HHHH", Raw_BO_TT_BO[key].getRegister(3),Raw_BO_TT_BO[key].getRegister(2),Raw_BO_TT_BO[key].getRegister(1), Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
+            #     print(key, "0th", hex(Raw_BO_TT_BO[key].getRegister(0)),"1st",hex(Raw_BO_TT_BO[key].getRegister(1)),"2nd",hex(Raw_BO_TT_BO[key].getRegister(2)),"3rd",hex(Raw_BO_TT_BO[key].getRegister(3)))
+            #     print(key, "'s' value is", self.TT_BO_dic[key])
+
+            # for key in self.TT_BO_address:
+            #     Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=4, unit=0x01)
+            #     self.TT_BO_dic[key] = round(
+            #         struct.unpack("<f", struct.pack(">f",  Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
+            #     print(key, "0th", hex(Raw_BO_TT_BO[key].getRegister(0)),"1st",hex(Raw_BO_TT_BO[key].getRegister(1)),"2nd",hex(Raw_BO_TT_BO[key].getRegister(2)),"3rd",hex(Raw_BO_TT_BO[key].getRegister(3)))
+            #     print(key, "'s' value is", self.TT_BO_dic[key])
+
+            ##########################################################################################
+
+            Raw_BO_PT = {}
+            for key in self.PT_address:
+                Raw_BO_PT[key] = self.Client_BO.read_holding_registers(self.PT_address[key], count=2, unit=0x01)
+                self.PT_dic[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_BO_PT[key].getRegister(0 + 1),
+                                                    Raw_BO_PT[key].getRegister(0)))[0], 3)
+
+            Raw_BO_REAL = {}
+            for key in self.LEFT_REAL_address:
+                Raw_BO_REAL[key] = self.Client_BO.read_holding_registers(self.LEFT_REAL_address[key], count=2, unit=0x01)
+                self.LEFT_REAL_dic[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_BO_REAL[key].getRegister(0 + 1),
+                                                    Raw_BO_REAL[key].getRegister(0)))[0], 3)
+
+                # print(key, "'s' value is", self.PT_dic[key])
+
+            Raw_BO_Valve = {}
+            Raw_BO_Valve_OUT = {}
+            for key in self.valve_address:
+                Raw_BO_Valve[key] = self.Client_BO.read_holding_registers(self.valve_address[key], count=1, unit=0x01)
+                self.Valve[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
+
+                self.Valve_OUT[key] = self.ReadCoil(1, self.valve_address[key])
+                self.Valve_INTLKD[key] = self.ReadCoil(8, self.valve_address[key])
+                self.Valve_MAN[key] = self.ReadCoil(16, self.valve_address[key])
+                self.Valve_ERR[key] = self.ReadCoil(32, self.valve_address[key])
+                # print(key,"Address with ", self.valve_address[key], "valve value is", self.Valve_OUT[key])
+                # print(key, "Address with ", self.valve_address[key], "INTLKD is", self.Valve_INTLKD[key])
+                # print(key, "Address with ", self.valve_address[key], "MAN value is", self.Valve_MAN[key])
+                # print(key, "Address with ", self.valve_address[key], "ERR value is", self.Valve_ERR[key])
+
+            Raw_BO_Switch = {}
+
+            for key in self.Switch_address:
+                Raw_BO_Switch[key] = self.Client_BO.read_holding_registers(self.Switch_address[key], count=1, unit=0x01)
+                self.Switch[key] = struct.pack("H", Raw_BO_Switch[key].getRegister(0))
+
+                self.Switch_OUT[key] = self.ReadCoil(1, self.Switch_address[key])
+                self.Switch_INTLKD[key] = self.ReadCoil(8, self.Switch_address[key])
+                self.Switch_MAN[key] = self.ReadCoil(16, self.Switch_address[key])
+                self.Switch_ERR[key] = self.ReadCoil(32, self.Switch_address[key])
+
+            # Din's address is a tuple, first number is BO address, the second number is the digit
+            Raw_BO_Din = {}
+
+            for key in self.Din_address:
+                Raw_BO_Din[key] = self.Client_BO.read_holding_registers(self.Din_address[key][0], count=1, unit=0x01)
+                # print(Raw_BO_Din[key])
+                self.Din[key] = struct.pack("H", Raw_BO_Din[key].getRegister(0))
+
+                self.Din_dic[key] = self.ReadCoil(2 ** (self.Din_address[key][1]), self.Din_address[key][0])
+
+            Raw_LOOPPID_2 = {}
+            Raw_LOOPPID_4 = {}
+            Raw_LOOPPID_6 = {}
+            Raw_LOOPPID_8 = {}
+            Raw_LOOPPID_10 = {}
+            Raw_LOOPPID_12 = {}
+            Raw_LOOPPID_14 = {}
+            Raw_LOOPPID_16 = {}
+            for key in self.LOOPPID_ADR_BASE:
+                self.LOOPPID_MODE0[key] = self.ReadCoil(1, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE1[key] = self.ReadCoil(2, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE2[key] = self.ReadCoil(2 ** 2, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MODE3[key] = self.ReadCoil(2 ** 3, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_INTLKD[key] = self.ReadCoil(2 ** 8, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_MAN[key] = self.ReadCoil(2 ** 9, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_ERR[key] = self.ReadCoil(2 ** 10, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_SATHI[key] = self.ReadCoil(2 ** 11, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_SATLO[key] = self.ReadCoil(2 ** 12, self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_EN[key] = self.ReadCoil(2 ** 15, self.LOOPPID_ADR_BASE[key])
+                Raw_LOOPPID_2[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 2, count=2, unit=0x01)
+                Raw_LOOPPID_4[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 4, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_6[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 6, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_8[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 8, count=2,
+                                                                           unit=0x01)
+                Raw_LOOPPID_10[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 10, count=2,
+                                                                            unit=0x01)
+                Raw_LOOPPID_12[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 12, count=2,
+                                                                            unit=0x01)
+                Raw_LOOPPID_14[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 14, count=2,
+                                                                            unit=0x01)
+                Raw_LOOPPID_16[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 16, count=2,
+                                                                            unit=0x01)
+
+                self.LOOPPID_OUT[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_2[key].getRegister(1),
+                                                    Raw_LOOPPID_2[key].getRegister(0)))[0], 3)
+
+                self.LOOPPID_IN[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_4[key].getRegister(0)))[0], 3)
+                self.LOOPPID_HI_LIM[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_6[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_6[key].getRegister(0)))[0], 3)
+                self.LOOPPID_LO_LIM[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_8[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_8[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET0[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_10[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET1[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_12[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_12[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET2[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
+                self.LOOPPID_SET3[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
+                                                    Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
+
+            ##########################################################################################
+            # procedure
+            Raw_Procedure = {}
+            Raw_Procedure_OUT = {}
+            for key in self.Procedure_address:
+                Raw_Procedure[key] = self.Client_BO.read_holding_registers(self.Procedure_address[key] + 1, count=1, unit=0x01)
+
+                self.Procedure_running[key] = self.ReadCoil(1, self.Procedure_address[key])
+                self.Procedure_INTLKD[key] = self.ReadCoil(2, self.Procedure_address[key])
+                self.Procedure_EXIT[key] = Raw_Procedure[key].getRegister(0)
+
+            # test the writing function
+            # print(self.Read_BO_2(14308))
+            # Raw_BO = self.Client_BO.read_holding_registers(14308, count=2, unit=0x01)
+            # print('Raw0',Raw_BO.getRegister(0))
+            # print('Raw1', Raw_BO.getRegister(1))
+            # output_BO = round(struct.unpack(">f", struct.pack(">HH", Raw_BO.getRegister(1), Raw_BO.getRegister(0)))[
+            #                       0], 3)
+            # self.Write_BO_2(14308,2.0)
+            # print(self.Read_BO_2(14308))
+
+            # print("base",self.LOOPPID_MODE0,"\n",self.LOOPPID_MODE1,"\n",self.LOOPPID_MODE2,"\n",self.LOOPPID_MODE3,"\n")
+            #
+            # print("other",self.LOOPPID_HI_LIM, "\n", self.LOOPPID_LO_LIM, "\n", self.LOOPPID_SET0, "\n", self.LOOPPID_SET1,
+            #           "\n")
+
+            # PLC
+            # Raw = self.Client.read_holding_registers(0x3E9, count=1, unit=0x01)
+            # self.LiveCounter = Raw.getRegister(0)
+
+            ##########################################################################################
+
 
             self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
             # print("signal sent")
+            print(True,'\n',True,"\n",True,"\n")
             self.NewData_Display = True
             self.NewData_Database = True
             self.NewData_ZMQ = True
@@ -1518,13 +1519,13 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage(key, self.dt, self.TT_FP_dic[key])
                         for key in self.TT_BO_dic:
                             self.db.insert_data_into_datastorage(key, self.dt, self.TT_BO_dic[key])
-                        print("write RTDS")
+                        # print("write RTDS")
                         self.para_TT = 0
                     # print(1)
                     if self.para_PT >= self.rate_PT:
                         for key in self.PT_dic:
                             self.db.insert_data_into_datastorage(key, self.dt, self.PT_dic[key])
-                        print("write pressure transducer")
+                        # print("write pressure transducer")
                         self.para_PT = 0
                     # print(2)
                     for key in self.Valve_OUT:
