@@ -1514,149 +1514,149 @@ class UpdateDataBase(QtCore.QObject):
                     self.Running_pointer = 0
                     # print(0)
                     if self.para_TT >= self.rate_TT:
-                        for key in self.PLC.TT_FP_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
-                        for key in self.PLC.TT_BO_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
+                        for key in self.TT_FP_dic:
+                            self.db.insert_data_into_datastorage(key, self.dt, self.TT_FP_dic[key])
+                        for key in self.TT_BO_dic:
+                            self.db.insert_data_into_datastorage(key, self.dt, self.TT_BO_dic[key])
                         # print("write RTDS")
                         self.para_TT = 0
                     # print(1)
                     if self.para_PT >= self.rate_PT:
-                        for key in self.PLC.PT_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
+                        for key in self.PT_dic:
+                            self.db.insert_data_into_datastorage(key, self.dt, self.PT_dic[key])
                         # print("write pressure transducer")
                         self.para_PT = 0
                     # print(2)
-                    for key in self.PLC.Valve_OUT:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.Valve_OUT[key] != self.Valve_buffer[key]:
+                    for key in self.Valve_OUT:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.Valve_OUT[key] != self.Valve_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_OUT', self.early_dt, self.Valve_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.Valve_OUT[key])
-                            self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Valve_OUT[key])
+                            self.Valve_buffer[key] = self.Valve_OUT[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
                     if self.para_Valve >= self.rate_Valve:
-                        for key in self.PLC.Valve_OUT:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.Valve_OUT[key])
-                            self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
+                        for key in self.Valve_OUT:
+                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Valve_OUT[key])
+                            self.Valve_buffer[key] = self.Valve_OUT[key]
                         self.para_Valve = 0
                     # print(3)
-                    for key in self.PLC.Switch_OUT:
-                        # print(key, self.PLC.Switch_OUT[key] != self.Switch_buffer[key])
-                        if self.PLC.Switch_OUT[key] != self.Switch_buffer[key]:
+                    for key in self.Switch_OUT:
+                        # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
+                        if self.Switch_OUT[key] != self.Switch_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_OUT', self.early_dt, self.Switch_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.Switch_OUT[key])
-                            self.Switch_buffer[key] = self.PLC.Switch_OUT[key]
-                            # print(self.PLC.Switch_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Switch_OUT[key])
+                            self.Switch_buffer[key] = self.Switch_OUT[key]
+                            # print(self.Switch_OUT[key])
                         else:
                             pass
 
                     if self.para_Switch >= self.rate_Switch:
-                        for key in self.PLC.Switch_OUT:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.Switch_OUT[key])
-                            self.Switch_buffer[key] = self.PLC.Switch_OUT[key]
+                        for key in self.Switch_OUT:
+                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Switch_OUT[key])
+                            self.Switch_buffer[key] = self.Switch_OUT[key]
                         self.para_Switch = 0
                     # print(4)
-                    for key in self.PLC.Din_dic:
-                        # print(key, self.PLC.Switch_OUT[key] != self.Switch_buffer[key])
-                        if self.PLC.Din_dic[key] != self.Din_buffer[key]:
+                    for key in self.Din_dic:
+                        # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
+                        if self.Din_dic[key] != self.Din_buffer[key]:
                             self.db.insert_data_into_datastorage(key, self.early_dt, self.Din_buffer[key])
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Din_dic[key])
-                            self.Din_buffer[key] = self.PLC.Din_dic[key]
+                            self.db.insert_data_into_datastorage(key, self.dt, self.Din_dic[key])
+                            self.Din_buffer[key] = self.Din_dic[key]
                         else:
                             pass
 
                     if self.para_Din >= self.rate_Din:
-                        for key in self.PLC.Din_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Din_dic[key])
-                            self.Din_buffer[key] = self.PLC.Din_dic[key]
+                        for key in self.Din_dic:
+                            self.db.insert_data_into_datastorage(key, self.dt, self.Din_dic[key])
+                            self.Din_buffer[key] = self.Din_dic[key]
                         self.para_Din = 0
 
                     # if state of bool variable changes, write the data into database
                     # print(5)
-                    for key in self.PLC.LOOPPID_EN:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
+                    for key in self.LOOPPID_EN:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.PLC.LOOPPID_EN[key])
-                            self.LOOPPID_EN_buffer[key] = self.PLC.LOOPPID_EN[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.LOOPPID_EN[key])
+                            self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
-                    for key in self.PLC.LOOPPID_MODE0:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
+                    for key in self.LOOPPID_MODE0:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE0', self.dt, self.PLC.LOOPPID_MODE0[key])
-                            self.LOOPPID_MODE0_buffer[key] = self.PLC.LOOPPID_MODE0[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
+                            self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
-                    for key in self.PLC.LOOPPID_MODE1:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
+                    for key in self.LOOPPID_MODE1:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE1', self.dt, self.PLC.LOOPPID_MODE1[key])
-                            self.LOOPPID_MODE1_buffer[key] = self.PLC.LOOPPID_MODE1[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
+                            self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
-                    for key in self.PLC.LOOPPID_MODE2:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
+                    for key in self.LOOPPID_MODE2:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE2', self.dt, self.PLC.LOOPPID_MODE2[key])
-                            self.LOOPPID_MODE2_buffer[key] = self.PLC.LOOPPID_MODE2[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
+                            self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
-                    for key in self.PLC.LOOPPID_MODE3:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
+                    for key in self.LOOPPID_MODE3:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE3', self.dt, self.PLC.LOOPPID_MODE3[key])
-                            self.LOOPPID_MODE3_buffer[key] = self.PLC.LOOPPID_MODE3[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
+                            self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
                     # if no changes, write the data every fixed time interval
                     # print(6)
                     if self.para_LOOPPID >= self.rate_LOOPPID:
-                        for key in self.PLC.LOOPPID_EN:
-                            self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.PLC.LOOPPID_EN[key])
-                            self.LOOPPID_EN_buffer[key] = self.PLC.LOOPPID_EN[key]
-                        for key in self.PLC.LOOPPID_MODE0:
-                            self.db.insert_data_into_datastorage(key + '_MODE0', self.dt, self.PLC.LOOPPID_MODE0[key])
-                            self.LOOPPID_MODE0_buffer[key] = self.PLC.LOOPPID_MODE0[key]
-                        for key in self.PLC.LOOPPID_MODE1:
-                            self.db.insert_data_into_datastorage(key + '_MODE1', self.dt, self.PLC.LOOPPID_MODE1[key])
-                            self.LOOPPID_MODE1_buffer[key] = self.PLC.LOOPPID_MODE1[key]
-                        for key in self.PLC.LOOPPID_MODE2:
-                            self.db.insert_data_into_datastorage(key + '_MODE2', self.dt, self.PLC.LOOPPID_MODE2[key])
-                            self.LOOPPID_MODE2_buffer[key] = self.PLC.LOOPPID_MODE2[key]
-                        for key in self.PLC.LOOPPID_MODE3:
-                            self.db.insert_data_into_datastorage(key + '_MODE3', self.dt, self.PLC.LOOPPID_MODE3[key])
-                            self.LOOPPID_MODE3_buffer[key] = self.PLC.LOOPPID_MODE3[key]
+                        for key in self.LOOPPID_EN:
+                            self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.LOOPPID_EN[key])
+                            self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+                        for key in self.LOOPPID_MODE0:
+                            self.db.insert_data_into_datastorage(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
+                            self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+                        for key in self.LOOPPID_MODE1:
+                            self.db.insert_data_into_datastorage(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
+                            self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+                        for key in self.LOOPPID_MODE2:
+                            self.db.insert_data_into_datastorage(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
+                            self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+                        for key in self.LOOPPID_MODE3:
+                            self.db.insert_data_into_datastorage(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
+                            self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
                         # write float data.
-                        for key in self.PLC.LOOPPID_OUT:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.LOOPPID_OUT[key])
-                            self.LOOPPID_OUT_buffer[key] = self.PLC.LOOPPID_OUT[key]
-                        for key in self.PLC.LOOPPID_IN:
-                            self.db.insert_data_into_datastorage(key + '_IN', self.dt, self.PLC.LOOPPID_IN[key])
-                            self.LOOPPID_IN_buffer[key] = self.PLC.LOOPPID_IN[key]
+                        for key in self.LOOPPID_OUT:
+                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.LOOPPID_OUT[key])
+                            self.LOOPPID_OUT_buffer[key] = self.LOOPPID_OUT[key]
+                        for key in self.LOOPPID_IN:
+                            self.db.insert_data_into_datastorage(key + '_IN', self.dt, self.LOOPPID_IN[key])
+                            self.LOOPPID_IN_buffer[key] = self.LOOPPID_IN[key]
                         self.para_LOOPPID = 0
                     # print(7)
                     if self.para_REAL >= self.rate_REAL:
-                        for key in self.PLC.LEFT_REAL_address:
-                            # print(key, self.PLC.LEFT_REAL_dic[key])
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.LEFT_REAL_dic[key])
+                        for key in self.LEFT_REAL_address:
+                            # print(key, self.LEFT_REAL_dic[key])
+                            self.db.insert_data_into_datastorage(key, self.dt, self.LEFT_REAL_dic[key])
                         # print("write pressure transducer")
                         self.para_REAL = 0
 
