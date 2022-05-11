@@ -1348,10 +1348,11 @@ class PLC(QtCore.QObject):
 # Class to update myseeq database
 class UpdateDataBase(QtCore.QObject):
     DB_ERROR_SIG = QtCore.Signal(str)
-    def __init__(self, PLC, parent=None):
+    # def __init__(self, PLC, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.PLC = PLC
+        # self.PLC = PLC
         self.db = mydatabase()
         self.Running = False
         # if loop runs with _counts times with New_Database = False(No written Data), then send alarm to slack. Otherwise, the code normally run(reset the pointer)
@@ -2491,7 +2492,8 @@ class Update(QtCore.QObject):
 
         # Update database on another thread
         self.DataUpdateThread = QtCore.QThread()
-        self.UpDatabase = UpdateDataBase(self.PLC)
+        self.UpDatabase = UpdateDataBase()
+        # self.UpDatabase = UpdateDataBase(self.PLC)
         self.UpDatabase.moveToThread(self.DataUpdateThread)
         self.DataUpdateThread.started.connect(self.UpDatabase.run)
         self.DataUpdateThread.start()
