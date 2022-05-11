@@ -347,7 +347,7 @@ def FPADS_OUT_AT(outaddress):
 
 class PLC(QtCore.QObject):
     DATA_UPDATE_SIGNAL=QtCore.Signal(object)
-    DATA_TRI_SIGNAL = QtCore.Singal(bool)
+    DATA_TRI_SIGNAL = QtCore.Signal(bool)
     def __init__(self):
         super().__init__()
 
