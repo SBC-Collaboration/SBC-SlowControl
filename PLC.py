@@ -2551,7 +2551,7 @@ class Update(QtCore.QObject):
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
         self.PATCH_TO_DATABASE.connect(lambda: self.UpDatabase.update_value(self.data_transfer))
 
-        self.UpPLC.DATA_TRI_SIGNAL.connect(self.PLCstatus_transfer)
+        self.UpPLC.PLC.DATA_TRI_SIGNAL.connect(self.PLCstatus_transfer)
         self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
         print("signal established")
 
