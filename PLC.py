@@ -1677,7 +1677,8 @@ class UpdateDataBase(QtCore.QObject):
                     self.para_LOOPPID += 1
                     self.para_REAL += 1
                     self.para_Din += 1
-                    self.PLC.NewData_Database = False
+                    # self.PLC.NewData_Database = False
+                    self.status = False
 
                 else:
                     if self.Running_pointer >= self.Running_counts:
