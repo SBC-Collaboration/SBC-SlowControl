@@ -1696,7 +1696,7 @@ class UpdateDataBase(QtCore.QObject):
                 # raise Exception("Test breakup")
         except Exception as e:
             print(e)
-            self.DB_ERROR_SIG.emit(e)
+            # self.DB_ERROR_SIG.emit(e)
             self.DB_ERROR_SIG.emit("There is some ERROR in writing slowcontrol database. Please check it.")
 
 
