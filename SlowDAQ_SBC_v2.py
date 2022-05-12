@@ -200,7 +200,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HydraulicTab.Background = QtWidgets.QLabel(self.HydraulicTab)
         self.HydraulicTab.Background.setScaledContents(True)
         self.HydraulicTab.Background.setStyleSheet('background-color:black;')
-        pixmap_Hydraulic = QtGui.QPixmap(os.path.join(self.ImagePath, "Hydraulic_apparatus.png"))
+        pixmap_Hydraulic = QtGui.QPixmap(os.path.join(self.ImagePath, "Hydraulic_apparatus_v1.png"))
         pixmap_Hydraulic = pixmap_Hydraulic.scaledToWidth(2400*R)
         self.HydraulicTab.Background.setPixmap(QtGui.QPixmap(pixmap_Hydraulic))
         self.HydraulicTab.Background.move(0*R, 0*R)
