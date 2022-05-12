@@ -221,9 +221,9 @@ class COUPP_database():
 
 if __name__ == "__main__":
     db = COUPP_database()
-    # dt = datetime_in_s()
+    dt = datetime_in_s()
     # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
-    # print(dt)
+    print(dt)
     # print(unix_timestamp)
     # db.insert_data_into_datastorage("test",dt,500.55)
     db.ssh_select()
