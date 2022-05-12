@@ -176,7 +176,7 @@ class COUPP_database():
     def update_alarm(self):
         Unixtime = int(tm.time())
         state = 'OK'
-        message = 'alarm messages from Fermi'
+        message = 'AOK'
         data = (Unixtime, state, message)
         self.mycursor.execute(
             "UPDATE sbc_FNAL_alarms SET datime=%s, alarm_state=%s, alarm_message=%s WHERE id=1;", data)
