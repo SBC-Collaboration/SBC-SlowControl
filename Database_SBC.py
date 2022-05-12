@@ -156,6 +156,8 @@ class COUPP_database():
                 ssh_password= self.ssh_password,
                 remote_bind_address=(self.sql_hostname, self.sql_port)) as tunnel:
             print("pointer 0")
+            print(tunnel.local_bind_port)
+            # self.db = mysql.connector.connect(host="127.0.0.1", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
             self.db = mysql.connector.connect(host="127.0.0.1", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
             print(1)
             self.mycursor = self.db.cursor()
