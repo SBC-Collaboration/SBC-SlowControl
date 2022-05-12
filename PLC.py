@@ -1068,6 +1068,7 @@ class UpdateDataBase(QtCore.QObject):
 
                         self.alarm_db.ssh_write()
                         self.para_alarm=0
+
                     if self.para_TT >= self.rate_TT:
                         for key in self.PLC.TT_FP_dic:
                             self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
