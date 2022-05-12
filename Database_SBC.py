@@ -226,7 +226,7 @@ if __name__ == "__main__":
     # print(unix_timestamp)
     # db.insert_data_into_datastorage("test",dt,500.55)
     db.ssh_select()
-    db.ssh_write()
+    # db.ssh_write()
     db.ssh_select()
 
 

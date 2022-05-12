@@ -988,7 +988,7 @@ class UpdateDataBase(QtCore.QObject):
         self.base_period = 1
 
         self.para_alarm = 0
-        self.rate_alarm = 50
+        self.rate_alarm = 10
         self.para_TT = 0
         self.rate_TT = 90
         self.para_PT = 0
@@ -1064,6 +1064,7 @@ class UpdateDataBase(QtCore.QObject):
                     self.Running_pointer = 0
                     # print(0)
                     if self.para_alarm >= self.rate_alarm:
+                        print(self.para_alarm)
                         self.alarm_db.ssh_write()
                         self.para_alarm=0
                     if self.para_TT >= self.rate_TT:
