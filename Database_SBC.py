@@ -185,7 +185,7 @@ class COUPP_database():
         self.mycursor.execute(
             "UPDATE sbc_FNAL_alarms SET datime=%s, alarm_state=%s, alarm_message=%s WHERE id=1;", data)
         self.db.commit()
-        self.close_database()
+        # self.close_database()
 
 
     def close_database(self):
