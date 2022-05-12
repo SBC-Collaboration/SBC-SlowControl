@@ -157,6 +157,7 @@ class COUPP_database():
                 remote_bind_address=(self.sql_hostname, self.sql_port)) as tunnel:
             print("pointer 0")
             self.db = mysql.connector.connect(host="localhost", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
+            print(1)
             self.mycursor = self.db.cursor()
             self.show_data()
             self.close_database()
