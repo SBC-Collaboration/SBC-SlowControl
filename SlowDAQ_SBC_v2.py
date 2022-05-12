@@ -779,7 +779,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LS3339.Label.setText("LS3339")
 
 
-        self.CYL3334 = Indicator(self.HydraulicTab)
+        self.CYL3334 = Indicator_ds(self.HydraulicTab)
         self.CYL3334.move(2100 * R, 1160 * R)
         self.CYL3334.Label.setText("CYL3334")
         self.CYL3334.SetUnit(" pbs")
