@@ -976,13 +976,19 @@ class UpdateDataBase(QtCore.QObject):
 
         self.PLC = PLC
         self.db = mydatabase()
+        self.alarm_db = COUPP_database()
         self.Running = False
         # if loop runs with _counts times with New_Database = False(No written Data), then send alarm to slack. Otherwise, the code normally run(reset the pointer)
         self.Running_counts = 270
         self.Running_pointer = 0
 
+
+
         
         self.base_period = 1
+
+        self.para_alarm = 0
+        self.rate_alarm = 50
         self.para_TT = 0
         self.rate_TT = 90
         self.para_PT = 0
@@ -1057,6 +1063,9 @@ class UpdateDataBase(QtCore.QObject):
                 if self.PLC.NewData_Database:
                     self.Running_pointer = 0
                     # print(0)
+                    if self.para_alarm >= self.rate_alarm:
+                        self.alarm_db.update_alarm()
+                        self.para_alarm=0
                     if self.para_TT >= self.rate_TT:
                         for key in self.PLC.TT_FP_dic:
                             self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
@@ -1207,6 +1216,7 @@ class UpdateDataBase(QtCore.QObject):
                     # print("a",self.para_TT,"b",self.para_PT )
                     # print(8)
                     print("Wrting PLC data to database...")
+                    self.para_alarm += 1
                     self.para_TT += 1
                     self.para_PT += 1
                     self.para_Valve += 1

@@ -1,7 +1,11 @@
+import os.path
+from sshtunnel import SSHTunnelForwarder
 import mysql.connector
 import datetime
+import time as tm
+import paramiko
 import random
-# import pandas as pds
+# import pandas as pd
 # import matplotlib as plot
 
 
@@ -25,6 +29,9 @@ def early_datetime():
     delta = datetime.timedelta(microseconds=timeR)
     x = d - delta - datetime.timedelta(microseconds=1e5)
     return x
+
+def UNIX_time(self):
+    return int(time.time())
 
 
 
@@ -109,23 +116,121 @@ class mydatabase():
         self.db.close()
 
 
+class COUPP_database():
+    def __init__(self):
+        # save the password in ENV at sbcslowcontrol machine
+        self.home = os.path.expanduser('~')
+        self.sql_hostname = 'localhost'
+        self.sql_username = 'coupp_monitor'
+        self.sql_password = 'b(_)bbl3$'
+        self.sql_main_database = 'coupp_alarms'
+        self.sql_port = 3306
+        self.ssh_host = 'dm.phys.northwestern.edu'
+        self.ssh_password = 'UChicago1234'
+        self.ssh_user = 'pico'
+        self.ssh_port = 22
+        self.sql_ip = '1.1.1.1'
+
+    def ssh_write(self):
+        with SSHTunnelForwarder(
+                (self.ssh_host, self.ssh_port),
+                ssh_username=self.ssh_user,
+                ssh_password= self.ssh_password,
+                remote_bind_address=(self.sql_hostname, self.sql_port)) as tunnel:
+            self.db = mysql.connector.connect(host="localhost", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
+            self.mycursor = self.db.cursor()
+            self.update_alarm()
+            self.close_database()
+
+            # conn = pymysql.connect(host='127.0.0.1', user=sql_username,
+            #                        passwd=sql_password, db=sql_main_database,
+            #                        port=tunnel.local_bind_port)
+            # query = '''SELECT VERSION();'''
+            # data = pd.read_sql_query(query, conn)
+            # conn.close()
+
+    def ssh_select(self):
+        with SSHTunnelForwarder(
+                (self.ssh_host, self.ssh_port),
+                ssh_username=self.ssh_user,
+                ssh_password= self.ssh_password,
+                remote_bind_address=(self.sql_hostname, self.sql_port)) as tunnel:
+            self.db = mysql.connector.connect(host="localhost", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
+            self.mycursor = self.db.cursor()
+            self.show_data()
+            self.close_database()
+
+            # conn = pymysql.connect(host='127.0.0.1', user=sql_username,
+            #                        passwd=sql_password, db=sql_main_database,
+            #                        port=tunnel.local_bind_port)
+            # query = '''SELECT VERSION();'''
+            # data = pd.read_sql_query(query, conn)
+            # conn.close()
+    def show_data(self,start_time=None, end_time=None):
+        # if start_time==None or end_time==None:
+        print(start_time,end_time)
+        query = "SELECT * FROM sbc_FNAL_alarms"
+        self.mycursor.execute(query)
+        for (id,datime,alarm_state, alarm_message) in self.mycursor:
+            print(str("Alarm_info"+"| {} | {} | {}".format(datime,alarm_state, alarm_message)))
+    def update_alarm(self):
+        Unixtime = int(tm.time())
+        state = 'OK'
+        message = 'alarm messages from Fermi'
+        data = (Unixtime, state, message)
+        self.mycursor.execute(
+            "UPDATE sbc_FNAL_alarms SET datime=%s, alarm_state=%s, alarm_message=%s WHERE id=1;", data)
+        self.db.commit()
+
+
+    def close_database(self):
+        self.mycursor.close()
+        self.db.close()
+
+
+
+
+
+
+# test sbcslowcontrol database
+#
+# if __name__ == "__main__":
+#
+#     db = mydatabase()
+#     dt = datetime_in_s()
+#     # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
+#     print(dt)
+#     # print(unix_timestamp)
+#     db.insert_data_into_datastorage("test",dt,500.55)
+#     db.show_data_datastorage()
+#
+#     # db.create_table("PV1204")
+#     # db.insert_data("PV1102", now, random.randrange(100))
+#     # db.show_data("PV1102")
+#
+#     db.show_tables()
+#
+#     db.close_database()
+#
+#     # #test datetime function
+#     # print(datetime_in_1e5micro())
+#     # print(early_datetime())
+
+#test NW sbc alarm database
+
 if __name__ == "__main__":
-
-    db = mydatabase()
-    dt = datetime_in_s()
+    db = COUPP_database()
+    # dt = datetime_in_s()
     # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
-    print(dt)
+    # print(dt)
     # print(unix_timestamp)
-    db.insert_data_into_datastorage("test",dt,500.55)
-    db.show_data_datastorage()
+    # db.insert_data_into_datastorage("test",dt,500.55)
+    db.ssh_select()
+    db.ssh_write()
+    db.ssh_select()
 
-    # db.create_table("PV1204")
-    # db.insert_data("PV1102", now, random.randrange(100))
-    # db.show_data("PV1102")
 
-    db.show_tables()
-
-    db.close_database()
+    # db.close_database()
 
     # #test datetime function
     # print(datetime_in_1e5micro())
