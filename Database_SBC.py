@@ -43,7 +43,7 @@ def UNIX_time(self):
 class mydatabase():
     def __init__(self):
         # db=mysql.connector.connect()
-       self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol")
+        self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol")
 
         self.mycursor = self.db.cursor()
 
