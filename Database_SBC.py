@@ -44,7 +44,7 @@ class mydatabase():
     def __init__(self):
         # db=mysql.connector.connect()
         # self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd="Th3Slow1!",database="SBCslowcontrol")
-        self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTOL_LOCAL_TOKEN"), database="SBCslowcontrol")
+        self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol")
 
         self.mycursor = self.db.cursor()
 
