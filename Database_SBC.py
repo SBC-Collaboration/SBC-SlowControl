@@ -43,8 +43,7 @@ def UNIX_time(self):
 class mydatabase():
     def __init__(self):
         # db=mysql.connector.connect()
-        # self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd="Th3Slow1!",database="SBCslowcontrol")
-        self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol")
+       self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol")
 
         self.mycursor = self.db.cursor()
 
@@ -129,13 +128,13 @@ class COUPP_database():
         self.home = os.path.expanduser('~')
         self.sql_hostname = 'localhost'
         self.sql_username = 'coupp_monitor'
-        # self.sql_password = os.environ.get("COUPP_SQL_TOKEN")
-        self.sql_password = "b(_)bbl3$"
+        self.sql_password = os.environ.get("COUPP_SQL_TOKEN")
+        # self.sql_password = "b(_)bbl3$"
         self.sql_main_database = 'coupp_alarms'
         self.sql_port = 3306
         self.ssh_host = 'dm.phys.northwestern.edu'
-        # self.ssh_password = os.environ.get("PEGASUS_SSH_TOKEN")
-        self.ssh_password = "UChicago1234"
+        self.ssh_password = os.environ.get("PEGASUS_SSH_TOKEN")
+        # self.ssh_password = "UChicago1234"
         self.ssh_user = 'pico'
         self.ssh_port = 22
         self.sql_ip = '1.1.1.1'
