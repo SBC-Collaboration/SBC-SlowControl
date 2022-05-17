@@ -128,6 +128,8 @@ class COUPP_database():
         self.home = os.path.expanduser('~')
         self.sql_hostname = 'localhost'
         self.sql_username = 'coupp_monitor'
+
+        print(os.environ.get("COUPP_SQL_TOKEN"),os.environ.get("PEGASUS_SSH_TOKEN"))
         self.sql_password = os.environ.get("COUPP_SQL_TOKEN")
         # self.sql_password = "b(_)bbl3$"
         self.sql_main_database = 'coupp_alarms'
