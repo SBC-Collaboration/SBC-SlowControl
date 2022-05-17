@@ -1722,7 +1722,7 @@ class UpdateDataBase(QtCore.QObject):
                             "DATA LOST: Mysql hasn't received the data from PLC for ~10 minutes. Please check them.")
                         raise Exception("")
                         self.Running_pointer = 0
-                    print("pointer",self.Running_pointer)
+                    # print("pointer",self.Running_pointer)
                     self.Running_pointer += 1
 
                     print("No new data from PLC")
