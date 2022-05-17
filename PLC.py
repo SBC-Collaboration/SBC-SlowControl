@@ -965,7 +965,7 @@ class PLC(QtCore.QObject):
             self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
             self.DATA_TRI_SIGNAL.emit(True)
             # print("signal sent")
-            print(True,'\n',True,"\n",True,"\n")
+            # print(True,'\n',True,"\n",True,"\n")
             self.NewData_Display = True
             self.NewData_Database = True
             self.NewData_ZMQ = True
