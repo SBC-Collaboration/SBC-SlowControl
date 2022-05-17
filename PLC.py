@@ -28,6 +28,300 @@ from pymodbus.client.sync import ModbusTcpClient
 
 BASE_ADDRESS= 12288
 
+# Initialization of Address, Value Matrix
+TT_FP_ADDRESS = {"TT2420": 31000, "TT2422": 31002, "TT2424": 31004, "TT2425": 31006, "TT2442": 36000,
+                              "TT2403": 31008, "TT2418": 31010, "TT2427": 31012, "TT2429": 31014, "TT2431": 32000,
+                              "TT2441": 36002, "TT2414": 32002, "TT2413": 32004, "TT2412": 32006, "TT2415": 32008,
+                              "TT2409": 36004, "TT2436": 32010, "TT2438": 32012, "TT2440": 32014, "TT2402": 33000,
+                              "TT2411": 38004, "TT2443": 36006, "TT2417": 33004, "TT2404": 33006, "TT2408": 33008,
+                              "TT2407": 33010, "TT2406": 36008, "TT2428": 33012, "TT2432": 33014, "TT2421": 34000,
+                              "TT2416": 38006, "TT2439": 36010, "TT2419": 34004, "TT2423": 34006, "TT2426": 34008,
+                              "TT2430": 34010, "TT2450": 36012, "TT2401": 34012, "TT2449": 34014, "TT2445": 35000,
+                              "TT2444": 35002, "TT2435": 35004, "TT2437": 36014, "TT2446": 35006, "TT2447": 35008,
+                              "TT2448": 35010, "TT2410": 35012, "TT2405": 35014, "TT6220": 37000, "TT6401": 37002,
+                              "TT6404": 37004, "TT6405": 37006, "TT6406": 37008, "TT6410": 37010, "TT6411": 37012,
+                              "TT6412": 37014, "TT6413": 38000, "TT6414": 38002}
+
+TT_BO_ADDRESS = {"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
+                              "TT4330": 12998, "TT6203": 13000, "TT6207": 13002, "TT6211": 13004, "TT6213": 13006,
+                              "TT6222": 13008, "TT6407": 13010, "TT6408": 13012, "TT6409": 13014, "TT6415": 13016,
+                 "TT6416": 13018}
+
+PT_ADDRESS = {"PT1325": 12794, "PT2121": 12796, "PT2316": 12798, "PT2330": 12800, "PT2335": 12802,
+              "PT3308": 12804, "PT3309": 12806, "PT3311": 12808, "PT3314": 12810, "PT3320": 12812,
+              "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820, "PT4319": 12822,
+              "PT4322": 12824, "PT4325": 12826, "PT6302": 12828}
+
+LEFT_REAL_ADDRESS = {'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792, "CYL3334_FCALC": 12832, "SERVO3321_IN_REAL": 12830, "TS1_MASS": 16288, "TS2_MASS": 16290, "TS3_MASS": 16292}
+
+TT_FP_DIC = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
+             "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
+             "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
+             "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
+             "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
+             "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
+             "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
+             "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
+             "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
+             "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
+             "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
+             "TT6412": 0, "TT6413": 0, "TT6414": 0}
+
+TT_BO_DIC = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+             "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
+             "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
+
+PT_DIC = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
+          "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
+          "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
+          "PT4322": 0, "PT4325": 0, "PT6302": 0}
+
+LEFT_REAL_DIC = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
+
+TT_FP_LOWLIMIT = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0, "TT2442": 0,
+                  "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0, "TT2431": 0,
+                  "TT2441": 0, "TT2414": 0, "TT2413": 0, "TT2412": 0, "TT2415": 0,
+                  "TT2409": 0, "TT2436": 0, "TT2438": 0, "TT2440": 0, "TT2402": 0,
+                  "TT2411": 0, "TT2443": 0, "TT2417": 0, "TT2404": 0, "TT2408": 0,
+                  "TT2407": 0, "TT2406": 0, "TT2428": 0, "TT2432": 0, "TT2421": 0,
+                  "TT2416": 0, "TT2439": 0, "TT2419": 0, "TT2423": 0, "TT2426": 0,
+                  "TT2430": 0, "TT2450": 0, "TT2401": 0, "TT2449": 0, "TT2445": 0,
+                  "TT2444": 0, "TT2435": 0, "TT2437": 0, "TT2446": 0, "TT2447": 0,
+                  "TT2448": 0, "TT2410": 0, "TT2405": 0, "TT6220": 0, "TT6401": 0,
+                  "TT6404": 0, "TT6405": 0, "TT6406": 0, "TT6410": 0, "TT6411": 0,
+                  "TT6412": 0, "TT6413": 0, "TT6414": 0}
+
+TT_FP_HIGHLIMIT = {"TT2420": 30, "TT2422": 30, "TT2424": 30, "TT2425": 30, "TT2442": 30,
+                   "TT2403": 30, "TT2418": 30, "TT2427": 30, "TT2429": 30, "TT2431": 30,
+                   "TT2441": 30, "TT2414": 30, "TT2413": 30, "TT2412": 30, "TT2415": 30,
+                   "TT2409": 30, "TT2436": 30, "TT2438": 30, "TT2440": 30, "TT2402": 30,
+                   "TT2411": 30, "TT2443": 30, "TT2417": 30, "TT2404": 30, "TT2408": 30,
+                   "TT2407": 30, "TT2406": 30, "TT2428": 30, "TT2432": 30, "TT2421": 30,
+                   "TT2416": 30, "TT2439": 30, "TT2419": 30, "TT2423": 30, "TT2426": 30,
+                   "TT2430": 30, "TT2450": 30, "TT2401": 30, "TT2449": 30, "TT2445": 30,
+                   "TT2444": 30, "TT2435": 30, "TT2437": 30, "TT2446": 30, "TT2447": 30,
+                   "TT2448": 30, "TT2410": 30, "TT2405": 30, "TT6220": 30, "TT6401": 30,
+                   "TT6404": 30, "TT6405": 30, "TT6406": 30, "TT6410": 30, "TT6411": 30,
+                   "TT6412": 30, "TT6413": 30, "TT6414": 30}
+
+TT_BO_LOWLIMIT = {"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
+                  "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
+                  "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
+
+TT_BO_HIGHLIMIT = {"TT2101": 30, "TT2111": 30, "TT2113": 30, "TT2118": 30, "TT2119": 30, "TT4330": 30,
+                   "TT6203": 30, "TT6207": 30, "TT6211": 30, "TT6213": 30, "TT6222": 30,
+                   "TT6407": 30, "TT6408": 30, "TT6409": 30, "TT6415": 30, "TT6416": 30}
+
+PT_LOWLIMIT = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
+               "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
+               "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
+               "PT4322": 0, "PT4325": 0, "PT6302": 0}
+PT_HIGHLIMIT = {"PT1325": 300, "PT2121": 300, "PT2316": 300, "PT2330": 300, "PT2335": 300,
+                "PT3308": 300, "PT3309": 300, "PT3311": 300, "PT3314": 300, "PT3320": 300,
+                "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
+                "PT4322": 300, "PT4325": 300, "PT6302": 300}
+
+LEFT_REAL_HIGHLIMIT = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
+LEFT_REAL_LOWLIMIT = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0}
+
+TT_FP_ACTIVATED = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
+                   "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
+                   "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
+                   "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
+                   "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
+                   "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
+                   "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
+                   "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
+                   "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
+                   "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
+                   "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
+                   "TT6412": False, "TT6413": False, "TT6414": False}
+
+TT_BO_ACTIVATED = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
+                   "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
+                   "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
+
+PT_ACTIVATED = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
+                "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
+                "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
+                "PT4322": False, "PT4325": False, "PT6302": False}
+LEFT_REAL_ACTIVATED = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False}
+
+TT_FP_ALARM = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False, "TT2442": False,
+               "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False, "TT2431": False,
+               "TT2441": False, "TT2414": False, "TT2413": False, "TT2412": False, "TT2415": False,
+               "TT2409": False, "TT2436": False, "TT2438": False, "TT2440": False, "TT2402": False,
+               "TT2411": False, "TT2443": False, "TT2417": False, "TT2404": False, "TT2408": False,
+               "TT2407": False, "TT2406": False, "TT2428": False, "TT2432": False, "TT2421": False,
+               "TT2416": False, "TT2439": False, "TT2419": False, "TT2423": False, "TT2426": False,
+               "TT2430": False, "TT2450": False, "TT2401": False, "TT2449": False, "TT2445": False,
+               "TT2444": False, "TT2435": False, "TT2437": False, "TT2446": False, "TT2447": False,
+               "TT2448": False, "TT2410": False, "TT2405": False, "TT6220": False, "TT6401": False,
+               "TT6404": False, "TT6405": False, "TT6406": False, "TT6410": False, "TT6411": False,
+               "TT6412": False, "TT6413": False, "TT6414": False}
+
+TT_BO_ALARM = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False, "TT4330": False,
+               "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
+               "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
+
+PT_ALARM = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
+            "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
+            "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
+            "PT4322": False, "PT4325": False, "PT6302": False}
+LEFT_REAL_ALARM = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False}
+MAINALARM = False
+nTT_BO = len(TT_BO_ADDRESS)
+nTT_FP = len(TT_FP_ADDRESS)
+nPT = len(PT_ADDRESS)
+nREAL = len(LEFT_REAL_ADDRESS)
+
+TT_BO_SETTING = [0.] * nTT_BO
+nTT_BO_ATTRIBUTE = [0.] * nTT_BO
+PT_SETTING = [0.] * nPT
+nPT_ATTRIBUTE = [0.] * nPT
+
+Switch_ADDRESS = {"PUMP3305": 12688}
+nSwitch = len(Switch_ADDRESS)
+Switch = {}
+Switch_OUT = {"PUMP3305": 0}
+Switch_MAN = {"PUMP3305": False}
+Switch_INTLKD = {"PUMP3305": False}
+Switch_ERR = {"PUMP3305": False}
+
+Din_ADDRESS = {"LS3338": (12778, 0), "LS3339": (12778, 1), "ES3347": (12778, 2), "PUMP3305_CON": (12778, 3), "PUMP3305_OL": (12778, 4)}
+nDin = len(Din_ADDRESS)
+Din = {}
+Din_DIC = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False}
+
+valve_ADDRESS = {"PV1344": 12288, "PV4307": 12289, "PV4308": 12290, "PV4317": 12291, "PV4318": 12292, "PV4321": 12293,
+                 "PV4324": 12294, "PV5305": 12295, "PV5306": 12296,
+                 "PV5307": 12297, "PV5309": 12298, "SV3307": 12299, "SV3310": 12300, "SV3322": 12301,
+                 "SV3325": 12302, "SV3329": 12304,
+                 "SV4327": 12305, "SV4328": 12306, "SV4329": 12307, "SV4331": 12308, "SV4332": 12309,
+                 "SV4337": 12310, "HFSV3312": 12311, "HFSV3323": 12312, "HFSV3331": 12313}
+nValve = len(valve_ADDRESS)
+Valve = {}
+Valve_OUT = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
+             "PV4324": 0, "PV5305": 0, "PV5306": 0,
+             "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
+             "SV3325": 0, "SV3329": 0,
+             "SV4327": 0, "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
+             "SV4337": 0, "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0}
+Valve_MAN = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+             "PV4324": False, "PV5305": True, "PV5306": True,
+             "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
+             "SV3325": True, "SV3329": True,
+             "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+             "SV4337": False, "HFSV3312": True, "HFSV3323": True, "HFSV3331": True}
+Valve_INTLKD = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+                "PV4324": False, "PV5305": False, "PV5306": False,
+                "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+                "SV3325": False, "SV3329": False,
+                "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+                "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
+Valve_ERR = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+             "PV4324": False, "PV5305": False, "PV5306": False,
+             "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+             "SV3325": False, "SV3329": False,
+             "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+             "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
+
+LOOPPID_ADR_BASE = {'SERVO3321': 14288, 'HTR6225': 14306, 'HTR2123': 14324, 'HTR2124': 14342, 'HTR2125': 14360,
+                    'HTR1202': 14378, 'HTR2203': 14396, 'HTR6202': 14414, 'HTR6206': 14432, 'HTR6210': 14450,
+                    'HTR6223': 14468, 'HTR6224': 14486, 'HTR6219': 14504, 'HTR6221': 14522, 'HTR6214': 14540}
+
+LOOPPID_MODE0 = {'SERVO3321': True, 'HTR6225': True, 'HTR2123': True, 'HTR2124': True, 'HTR2125': True,
+                 'HTR1202': True, 'HTR2203': True, 'HTR6202': True, 'HTR6206': True, 'HTR6210': True,
+                 'HTR6223': True, 'HTR6224': True, 'HTR6219': True, 'HTR6221': True, 'HTR6214': True}
+
+LOOPPID_MODE1 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
+                 'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+LOOPPID_MODE2 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
+                 'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+LOOPPID_MODE3 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
+                 'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+LOOPPID_INTLKD = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                  'HTR2125': False,
+                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+LOOPPID_MAN = {'SERVO3321': True, 'HTR6225': True, 'HTR2123': True, 'HTR2124': True,
+               'HTR2125': True,
+               'HTR1202': True, 'HTR2203': True, 'HTR6202': True, 'HTR6206': True, 'HTR6210': True,
+               'HTR6223': True, 'HTR6224': True, 'HTR6219': True, 'HTR6221': True, 'HTR6214': True}
+
+LOOPPID_ERR = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+               'HTR2125': False,
+               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+               'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+LOOPPID_SATHI = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                 'HTR2125': False,
+                 'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+LOOPPID_SATLO = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+                 'HTR2125': False,
+                 'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+LOOPPID_EN = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+              'HTR2125': False,
+              'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+LOOPPID_OUT = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+               'HTR2125': 0,
+               'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+               'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+LOOPPID_IN = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+              'HTR2125': 0,
+              'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+              'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+LOOPPID_HI_LIM = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                  'HTR2125': 0,
+                  'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+LOOPPID_LO_LIM = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                  'HTR2125': 0,
+                  'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+LOOPPID_SET0 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                'HTR2125': 0,
+                'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+LOOPPID_SET1 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                'HTR2125': 0,
+                'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+LOOPPID_SET2 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                'HTR2125': 0,
+                'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+LOOPPID_SET3 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                'HTR2125': 0,
+                'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+Procedure_ADDRESS = {'TS_ADDREM': 15288, 'TS_EMPTY': 15290, 'TS_EMPTYALL': 15292, 'PU_PRIME': 15294, 'WRITE_SLOWDAQ': 15296}
+Procedure_RUNNING = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False}
+Procedure_INTLKD = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False}
+Procedure_EXIT = {'TS_ADDREM': 0, 'TS_EMPTY': 0, 'TS_EMPTYALL': 0, 'PU_PRIME': 0, 'WRITE_SLOWDAQ': 0}
+
+
 sys._excepthook = sys.excepthook
 def exception_hook(exctype, value, traceback):
     print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
@@ -51,7 +345,9 @@ def FPADS_OUT_AT(outaddress):
     print(new_address)
     return new_address
 
-class PLC:
+class PLC(QtCore.QObject):
+    DATA_UPDATE_SIGNAL=QtCore.Signal(object)
+    DATA_TRI_SIGNAL = QtCore.Signal(bool)
     def __init__(self):
         super().__init__()
 
@@ -361,6 +657,82 @@ class PLC:
         self.Procedure_INTLKD = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False}
         self.Procedure_EXIT = {'TS_ADDREM': 0, 'TS_EMPTY': 0, 'TS_EMPTYALL': 0, 'PU_PRIME': 0, 'WRITE_SLOWDAQ': 0}
 
+
+        self.signal_data = {  "TT_FP_address":self.TT_FP_address,
+                              "TT_BO_address":self.TT_BO_address,
+                              "PT_address":self.PT_address,
+                              "LEFT_REAL_address":self.LEFT_REAL_address,
+                              "TT_FP_dic":self.TT_FP_dic,
+                              "TT_BO_dic":self.TT_BO_dic,
+                              "PT_dic":self.PT_dic,
+                              "LEFT_REAL_dic":self.LEFT_REAL_dic,
+                              "TT_FP_LowLimit":self.TT_FP_LowLimit,
+                              "TT_FP_HighLimit":self.TT_FP_HighLimit,
+                              "TT_BO_LowLimit":self.TT_BO_LowLimit,
+                              "TT_BO_HighLimit":self.TT_BO_HighLimit,
+                              "PT_LowLimit":self.PT_LowLimit,
+                              "PT_HighLimit":self.PT_HighLimit,
+                              "LEFT_REAL_HighLimit": self.LEFT_REAL_HighLimit,
+                              "LEFT_REAL_LowLimit":self.LEFT_REAL_LowLimit,
+                              "TT_FP_Activated":self.TT_FP_Activated,
+                              "TT_BO_Activated":self.TT_BO_Activated,
+                              "PT_Activated":self.PT_Activated,
+                              "LEFT_REAL_Activated":self.LEFT_REAL_Activated,
+                              "TT_FP_Alarm":self.TT_FP_Alarm,
+                              "TT_BO_Alarm":self.TT_BO_Alarm,
+                              "PT_Alarm":self.PT_Alarm,
+                              "LEFT_REAL_Alarm":self.LEFT_REAL_Alarm,
+                              "MainAlarm":self.MainAlarm,
+                              "nTT_BO":self.nTT_BO,
+                              "nTT_FP":self.nTT_FP,
+                              "nPT":self.nPT,
+                              "nREAL":self.nREAL,
+                              "TT_BO_setting":self.TT_BO_setting,
+                              "nTT_BO_Attribute":self.nTT_BO_Attribute,
+                              "PT_setting":self.PT_setting,
+                              "nPT_Attribute":self.nPT_Attribute,
+                              "Switch_address":self.Switch_address,
+                              "nSwitch":self.nSwitch,
+                              "Switch":self.Switch,
+                              "Switch_OUT":self.Switch_OUT,
+                              "Switch_MAN":self.Switch_MAN,
+                              "Switch_INTLKD":self.Switch_INTLKD,
+                              "Switch_ERR":self.Switch_ERR,
+                              "Din_address":self.Din_address,
+                              "nDin":self.nDin,
+                              "Din":self.Din,
+                              "Din_dic":self.Din_dic,
+                              "valve_address":self.valve_address,
+                              "nValve":self.nValve,
+                              "Valve":self.Valve,
+                              "Valve_OUT":self.Valve_OUT,
+                              "Valve_MAN":self.Valve_MAN,
+                              "Valve_INTLKD":self.Valve_INTLKD,
+                              "Valve_ERR":self.Valve_ERR,
+                              "LOOPPID_ADR_BASE":self.LOOPPID_ADR_BASE,
+                              "LOOPPID_MODE0":self.LOOPPID_MODE0,
+                              "LOOPPID_MODE1":self.LOOPPID_MODE1,
+                              "LOOPPID_MODE2":self.LOOPPID_MODE2,
+                              "LOOPPID_MODE3":self.LOOPPID_MODE3,
+                              "LOOPPID_INTLKD":self.LOOPPID_INTLKD,
+                              "LOOPPID_MAN":self.LOOPPID_MAN,
+                              "LOOPPID_ERR":self.LOOPPID_ERR,
+                              "LOOPPID_SATHI":self.LOOPPID_SATHI,
+                              "LOOPPID_SATLO":self.LOOPPID_SATLO,
+                              "LOOPPID_EN":self.LOOPPID_EN,
+                              "LOOPPID_OUT":self.LOOPPID_OUT,
+                              "LOOPPID_IN":self.LOOPPID_IN,
+                              "LOOPPID_HI_LIM":self.LOOPPID_HI_LIM,
+                              "LOOPPID_LO_LIM":self.LOOPPID_LO_LIM,
+                              "LOOPPID_SET0":self.LOOPPID_SET0,
+                              "LOOPPID_SET1":self.LOOPPID_SET1,
+                              "LOOPPID_SET2":self.LOOPPID_SET2,
+                              "LOOPPID_SET3":self.LOOPPID_SET3,
+                              "Procedure_address":self.Procedure_address,
+                              "Procedure_running":self.Procedure_running,
+                              "Procedure_INTLKD":self.Procedure_INTLKD,
+                              "Procedure_EXIT":self.Procedure_EXIT}
+
         self.LiveCounter = 0
         self.NewData_Display = False
         self.NewData_Database = False
@@ -589,6 +961,11 @@ class PLC:
 
             ##########################################################################################
 
+
+            self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
+            self.DATA_TRI_SIGNAL.emit(True)
+            # print("signal sent")
+            print(True,'\n',True,"\n",True,"\n")
             self.NewData_Display = True
             self.NewData_Database = True
             self.NewData_ZMQ = True
@@ -971,10 +1348,11 @@ class PLC:
 # Class to update myseeq database
 class UpdateDataBase(QtCore.QObject):
     DB_ERROR_SIG = QtCore.Signal(str)
-    def __init__(self, PLC, parent=None):
+    # def __init__(self, PLC, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.PLC = PLC
+        # self.PLC = PLC
         self.db = mydatabase()
         self.alarm_db = COUPP_database()
         self.Running = False
@@ -1004,6 +1382,91 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_Switch = 90
         self.para_LOOPPID = 0
         self.rate_LOOPPID = 90
+
+        #status initialization
+        self.status = False
+        # INITIALIZATION
+        self.TT_FP_address =     TT_FP_ADDRESS
+        self.TT_BO_address =     TT_BO_ADDRESS
+        self.PT_address =        PT_ADDRESS
+        self.LEFT_REAL_address = LEFT_REAL_ADDRESS
+        self.TT_FP_dic =         TT_FP_DIC
+        self.TT_BO_dic =         TT_BO_DIC
+        self.PT_dic =            PT_DIC
+        self.LEFT_REAL_dic =     LEFT_REAL_DIC
+        self.TT_FP_LowLimit =    TT_FP_LOWLIMIT
+        self.TT_FP_HighLimit =   TT_FP_HIGHLIMIT
+        self.TT_BO_LowLimit =    TT_BO_LOWLIMIT
+        self.TT_BO_HighLimit =   TT_BO_HIGHLIMIT
+
+        self.PT_LowLimit =       PT_LOWLIMIT
+        self.PT_HighLimit =      PT_HIGHLIMIT
+        self.LEFT_REAL_HighLimit=LEFT_REAL_HIGHLIMIT
+        self.LEFT_REAL_LowLimit =LEFT_REAL_LOWLIMIT
+        self.TT_FP_Activated =   TT_FP_ACTIVATED
+        self.TT_BO_Activated =   TT_BO_ACTIVATED
+        self.PT_Activated =      PT_ACTIVATED
+        self.LEFT_REAL_Activated=LEFT_REAL_ACTIVATED
+
+        self.TT_FP_Alarm =       TT_FP_ALARM
+        self.TT_BO_Alarm =       TT_BO_ALARM
+        self.PT_Alarm =          PT_ALARM
+        self.LEFT_REAL_Alarm =   LEFT_REAL_ALARM
+        self.MainAlarm =         MAINALARM
+        self.nTT_BO =            nTT_BO
+        self.nTT_FP =            nTT_FP
+        self.nPT =               nPT
+        self.nREAL =             nREAL
+
+        self.TT_BO_setting =     TT_BO_SETTING
+        self.nTT_BO_Attribute =  nTT_BO_ATTRIBUTE
+        self.PT_setting =        PT_SETTING
+        self.nPT_Attribute =     nPT_ATTRIBUTE
+
+        self.Switch_address =    Switch_ADDRESS
+        self.nSwitch =           nSwitch
+        self.Switch =            Switch
+        self.Switch_OUT =        Switch_OUT
+        self.Switch_MAN =        Switch_MAN
+        self.Switch_INTLKD =     Switch_INTLKD
+        self.Switch_ERR =        Switch_ERR
+        self.Din_address =       Din_ADDRESS
+        self.nDin =              nDin
+        self.Din =               Din
+        self.Din_dic =           Din_DIC
+        self.valve_address =     valve_ADDRESS
+        self.nValve =            nValve
+        self.Valve =             Valve
+        self.Valve_OUT =         Valve_OUT
+        self.Valve_MAN =         Valve_MAN
+        self.Valve_INTLKD =      Valve_INTLKD
+        self.Valve_ERR =         Valve_ERR
+        self.LOOPPID_ADR_BASE =  LOOPPID_ADR_BASE
+        self.LOOPPID_MODE0 =     LOOPPID_MODE0
+        self.LOOPPID_MODE1 =     LOOPPID_MODE1
+        self.LOOPPID_MODE2 =     LOOPPID_MODE2
+        self.LOOPPID_MODE3 =     LOOPPID_MODE3
+        self.LOOPPID_INTLKD =    LOOPPID_INTLKD
+        self.LOOPPID_MAN =       LOOPPID_MAN
+        self.LOOPPID_ERR =       LOOPPID_ERR
+        self.LOOPPID_SATHI =     LOOPPID_SATHI
+        self.LOOPPID_SATLO =     LOOPPID_SATLO
+        self.LOOPPID_EN =        LOOPPID_EN
+        self.LOOPPID_OUT =       LOOPPID_OUT
+        self.LOOPPID_IN =        LOOPPID_IN
+        self.LOOPPID_HI_LIM =    LOOPPID_HI_LIM
+        self.LOOPPID_LO_LIM =    LOOPPID_LO_LIM
+        self.LOOPPID_SET0 =      LOOPPID_SET0
+        self.LOOPPID_SET1 =      LOOPPID_SET1
+        self.LOOPPID_SET2 =      LOOPPID_SET2
+        self.LOOPPID_SET3 =      LOOPPID_SET3
+        self.Procedure_address = Procedure_ADDRESS
+        self.Procedure_running = Procedure_RUNNING
+        self.Procedure_INTLKD =  Procedure_INTLKD
+        self.Procedure_EXIT =    Procedure_EXIT
+
+
+        # BUFFER parts
         self.Valve_buffer = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
                              "PV4324": 0, "PV5305": 0, "PV5306": 0,
                              "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
@@ -1055,12 +1518,12 @@ class UpdateDataBase(QtCore.QObject):
         try:
 
             while self.Running:
-
                 self.dt = datetime_in_1e5micro()
                 self.early_dt = early_datetime()
                 print("Database Updating", self.dt)
 
-                if self.PLC.NewData_Database:
+                # if self.PLC.NewData_Database:
+                if self.status:
                     self.Running_pointer = 0
                     # print(0)
                     print(self.para_alarm)
@@ -1070,156 +1533,158 @@ class UpdateDataBase(QtCore.QObject):
                         self.para_alarm=0
 
                     if self.para_TT >= self.rate_TT:
-                        for key in self.PLC.TT_FP_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_FP_dic[key])
-                        for key in self.PLC.TT_BO_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.TT_BO_dic[key])
+                        for key in self.TT_FP_dic:
+                            self.db.insert_data_into_datastorage(key, self.dt, self.TT_FP_dic[key])
+                        for key in self.TT_BO_dic:
+                            self.db.insert_data_into_datastorage(key, self.dt, self.TT_BO_dic[key])
                         # print("write RTDS")
                         self.para_TT = 0
                     # print(1)
                     if self.para_PT >= self.rate_PT:
-                        for key in self.PLC.PT_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.PT_dic[key])
+                        for key in self.PT_dic:
+                            self.db.insert_data_into_datastorage(key, self.dt, self.PT_dic[key])
                         # print("write pressure transducer")
                         self.para_PT = 0
                     # print(2)
-                    for key in self.PLC.Valve_OUT:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.Valve_OUT[key] != self.Valve_buffer[key]:
+                    for key in self.Valve_OUT:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.Valve_OUT[key] != self.Valve_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_OUT', self.early_dt, self.Valve_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.Valve_OUT[key])
-                            self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Valve_OUT[key])
+                            self.Valve_buffer[key] = self.Valve_OUT[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
                     if self.para_Valve >= self.rate_Valve:
-                        for key in self.PLC.Valve_OUT:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.Valve_OUT[key])
-                            self.Valve_buffer[key] = self.PLC.Valve_OUT[key]
+                        for key in self.Valve_OUT:
+                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Valve_OUT[key])
+                            self.Valve_buffer[key] = self.Valve_OUT[key]
                         self.para_Valve = 0
                     # print(3)
-                    for key in self.PLC.Switch_OUT:
-                        # print(key, self.PLC.Switch_OUT[key] != self.Switch_buffer[key])
-                        if self.PLC.Switch_OUT[key] != self.Switch_buffer[key]:
+                    for key in self.Switch_OUT:
+                        # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
+                        if self.Switch_OUT[key] != self.Switch_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_OUT', self.early_dt, self.Switch_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.Switch_OUT[key])
-                            self.Switch_buffer[key] = self.PLC.Switch_OUT[key]
-                            # print(self.PLC.Switch_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Switch_OUT[key])
+                            self.Switch_buffer[key] = self.Switch_OUT[key]
+                            # print(self.Switch_OUT[key])
                         else:
                             pass
 
                     if self.para_Switch >= self.rate_Switch:
-                        for key in self.PLC.Switch_OUT:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.Switch_OUT[key])
-                            self.Switch_buffer[key] = self.PLC.Switch_OUT[key]
+                        for key in self.Switch_OUT:
+                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Switch_OUT[key])
+                            self.Switch_buffer[key] = self.Switch_OUT[key]
                         self.para_Switch = 0
                     # print(4)
-                    for key in self.PLC.Din_dic:
-                        # print(key, self.PLC.Switch_OUT[key] != self.Switch_buffer[key])
-                        if self.PLC.Din_dic[key] != self.Din_buffer[key]:
+                    for key in self.Din_dic:
+                        # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
+                        if self.Din_dic[key] != self.Din_buffer[key]:
                             self.db.insert_data_into_datastorage(key, self.early_dt, self.Din_buffer[key])
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Din_dic[key])
-                            self.Din_buffer[key] = self.PLC.Din_dic[key]
+                            self.db.insert_data_into_datastorage(key, self.dt, self.Din_dic[key])
+                            self.Din_buffer[key] = self.Din_dic[key]
                         else:
                             pass
 
                     if self.para_Din >= self.rate_Din:
-                        for key in self.PLC.Din_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.Din_dic[key])
-                            self.Din_buffer[key] = self.PLC.Din_dic[key]
+                        for key in self.Din_dic:
+                            self.db.insert_data_into_datastorage(key, self.dt, self.Din_dic[key])
+                            self.Din_buffer[key] = self.Din_dic[key]
                         self.para_Din = 0
 
                     # if state of bool variable changes, write the data into database
                     # print(5)
-                    for key in self.PLC.LOOPPID_EN:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
+                    for key in self.LOOPPID_EN:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.PLC.LOOPPID_EN[key])
-                            self.LOOPPID_EN_buffer[key] = self.PLC.LOOPPID_EN[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.LOOPPID_EN[key])
+                            self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
-                    for key in self.PLC.LOOPPID_MODE0:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
+                    for key in self.LOOPPID_MODE0:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE0', self.dt, self.PLC.LOOPPID_MODE0[key])
-                            self.LOOPPID_MODE0_buffer[key] = self.PLC.LOOPPID_MODE0[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
+                            self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
-                    for key in self.PLC.LOOPPID_MODE1:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
+                    for key in self.LOOPPID_MODE1:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE1', self.dt, self.PLC.LOOPPID_MODE1[key])
-                            self.LOOPPID_MODE1_buffer[key] = self.PLC.LOOPPID_MODE1[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
+                            self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
-                    for key in self.PLC.LOOPPID_MODE2:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
+                    for key in self.LOOPPID_MODE2:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE2', self.dt, self.PLC.LOOPPID_MODE2[key])
-                            self.LOOPPID_MODE2_buffer[key] = self.PLC.LOOPPID_MODE2[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
+                            self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
-                    for key in self.PLC.LOOPPID_MODE3:
-                        # print(key, self.PLC.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PLC.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
+                    for key in self.LOOPPID_MODE3:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
                             self.db.insert_data_into_datastorage(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE3', self.dt, self.PLC.LOOPPID_MODE3[key])
-                            self.LOOPPID_MODE3_buffer[key] = self.PLC.LOOPPID_MODE3[key]
-                            # print(self.PLC.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
+                            self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
+                            # print(self.Valve_OUT[key])
                         else:
                             pass
 
                     # if no changes, write the data every fixed time interval
                     # print(6)
                     if self.para_LOOPPID >= self.rate_LOOPPID:
-                        for key in self.PLC.LOOPPID_EN:
-                            self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.PLC.LOOPPID_EN[key])
-                            self.LOOPPID_EN_buffer[key] = self.PLC.LOOPPID_EN[key]
-                        for key in self.PLC.LOOPPID_MODE0:
-                            self.db.insert_data_into_datastorage(key + '_MODE0', self.dt, self.PLC.LOOPPID_MODE0[key])
-                            self.LOOPPID_MODE0_buffer[key] = self.PLC.LOOPPID_MODE0[key]
-                        for key in self.PLC.LOOPPID_MODE1:
-                            self.db.insert_data_into_datastorage(key + '_MODE1', self.dt, self.PLC.LOOPPID_MODE1[key])
-                            self.LOOPPID_MODE1_buffer[key] = self.PLC.LOOPPID_MODE1[key]
-                        for key in self.PLC.LOOPPID_MODE2:
-                            self.db.insert_data_into_datastorage(key + '_MODE2', self.dt, self.PLC.LOOPPID_MODE2[key])
-                            self.LOOPPID_MODE2_buffer[key] = self.PLC.LOOPPID_MODE2[key]
-                        for key in self.PLC.LOOPPID_MODE3:
-                            self.db.insert_data_into_datastorage(key + '_MODE3', self.dt, self.PLC.LOOPPID_MODE3[key])
-                            self.LOOPPID_MODE3_buffer[key] = self.PLC.LOOPPID_MODE3[key]
+                        for key in self.LOOPPID_EN:
+                            self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.LOOPPID_EN[key])
+                            self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+                        for key in self.LOOPPID_MODE0:
+                            self.db.insert_data_into_datastorage(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
+                            self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+                        for key in self.LOOPPID_MODE1:
+                            self.db.insert_data_into_datastorage(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
+                            self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+                        for key in self.LOOPPID_MODE2:
+                            self.db.insert_data_into_datastorage(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
+                            self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+                        for key in self.LOOPPID_MODE3:
+                            self.db.insert_data_into_datastorage(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
+                            self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
                         # write float data.
-                        for key in self.PLC.LOOPPID_OUT:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.PLC.LOOPPID_OUT[key])
-                            self.LOOPPID_OUT_buffer[key] = self.PLC.LOOPPID_OUT[key]
-                        for key in self.PLC.LOOPPID_IN:
-                            self.db.insert_data_into_datastorage(key + '_IN', self.dt, self.PLC.LOOPPID_IN[key])
-                            self.LOOPPID_IN_buffer[key] = self.PLC.LOOPPID_IN[key]
+                        for key in self.LOOPPID_OUT:
+                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.LOOPPID_OUT[key])
+                            self.LOOPPID_OUT_buffer[key] = self.LOOPPID_OUT[key]
+                        for key in self.LOOPPID_IN:
+                            self.db.insert_data_into_datastorage(key + '_IN', self.dt, self.LOOPPID_IN[key])
+                            self.LOOPPID_IN_buffer[key] = self.LOOPPID_IN[key]
                         self.para_LOOPPID = 0
                     # print(7)
                     if self.para_REAL >= self.rate_REAL:
-                        for key in self.PLC.LEFT_REAL_address:
-                            # print(key, self.PLC.LEFT_REAL_dic[key])
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PLC.LEFT_REAL_dic[key])
+                        for key in self.LEFT_REAL_address:
+                            # print(key, self.LEFT_REAL_dic[key])
+                            self.db.insert_data_into_datastorage(key, self.dt, self.LEFT_REAL_dic[key])
                         # print("write pressure transducer")
                         self.para_REAL = 0
 
                     # print("a",self.para_TT,"b",self.para_PT )
                     # print(8)
+
                     print("Wrting PLC data to database...")
                     self.para_alarm += 1
+
                     self.para_TT += 1
                     self.para_PT += 1
                     self.para_Valve += 1
@@ -1227,7 +1692,8 @@ class UpdateDataBase(QtCore.QObject):
                     self.para_LOOPPID += 1
                     self.para_REAL += 1
                     self.para_Din += 1
-                    self.PLC.NewData_Database = False
+                    # self.PLC.NewData_Database = False
+                    self.status = False
 
                 else:
                     if self.Running_pointer >= self.Running_counts:
@@ -1245,7 +1711,7 @@ class UpdateDataBase(QtCore.QObject):
                 # raise Exception("Test breakup")
         except Exception as e:
             print(e)
-            self.DB_ERROR_SIG.emit(e)
+            # self.DB_ERROR_SIG.emit(e)
             self.DB_ERROR_SIG.emit("There is some ERROR in writing slowcontrol database. Please check it.")
 
 
@@ -1253,6 +1719,118 @@ class UpdateDataBase(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+
+    @QtCore.Slot(object)
+    def update_value(self,dic):
+        # print("Database received the data from PLC")
+        # print(dic)
+        for key in self.TT_FP_dic:
+            self.TT_FP_dic[key] = dic["TT_FP_dic"][key]
+
+        for key in self.TT_BO_dic:
+            self.TT_BO_dic[key] = dic["TT_BO_dic"][key]
+        for key in self.PT_dic:
+            self.PT_dic[key] = dic["PT_dic"][key]
+        for key in self.TT_FP_HighLimit:
+            self.TT_FP_HighLimit[key] = dic["TT_FP_HighLimit"][key]
+
+        for key in self.TT_BO_HighLimit:
+            self.TT_BO_HighLimit[key] = dic["TT_BO_HighLimit"][key]
+        for key in self.PT_HighLimit:
+            self.PT_HighLimit[key] = dic["PT_HighLimit"][key]
+        for key in self.LEFT_REAL_HighLimit:
+            self.LEFT_REAL_HighLimit[key] = dic["LEFT_REAL_HighLimit"][key]
+
+        for key in self.TT_FP_LowLimit:
+            self.TT_FP_LowLimit[key] = dic["TT_FP_LowLimit"][key]
+
+        for key in self.TT_BO_LowLimit:
+            self.TT_BO_LowLimit[key] = dic["TT_BO_LowLimit"][key]
+        for key in self.PT_LowLimit:
+            self.PT_LowLimit[key] = dic["PT_LowLimit"][key]
+        for key in self.LEFT_REAL_LowLimit:
+            self.LEFT_REAL_LowLimit[key] = dic["LEFT_REAL_LowLimit"][key]
+        for key in self.LEFT_REAL_dic:
+            self.LEFT_REAL_dic[key] = dic["LEFT_REAL_dic"][key]
+        for key in self.Valve_OUT:
+            self.Valve_OUT[key] = dic["Valve_OUT"][key]
+        for key in self.Valve_INTLKD:
+            self.Valve_INTLKD[key] = dic["Valve_INTLKD"][key]
+        for key in self.Valve_MAN:
+            self.Valve_MAN[key] = dic["Valve_MAN"][key]
+        for key in self.Valve_ERR:
+            self.Valve_ERR[key] = dic["Valve_ERR"][key]
+        for key in self.Switch_OUT:
+            self.Switch_OUT[key] = dic["Switch_OUT"][key]
+        for key in self.Switch_INTLKD:
+            self.Switch_INTLKD[key] = dic["Switch_INTLKD"][key]
+        for key in self.Switch_MAN:
+            self.Switch_MAN[key] = dic["Switch_MAN"][key]
+        for key in self.Switch_ERR:
+            self.Switch_ERR[key] = dic["Switch_ERR"][key]
+        for key in self.Din_dic:
+            self.Din_dic[key] = dic["Din_dic"][key]
+
+        for key in self.TT_FP_Alarm:
+            self.TT_FP_Alarm[key] = dic["TT_FP_Alarm"][key]
+        for key in self.TT_BO_Alarm:
+            self.TT_BO_Alarm[key] = dic["TT_BO_Alarm"][key]
+        for key in self.PT_dic:
+            self.PT_Alarm[key] = dic["PT_Alarm"][key]
+        for key in self.LEFT_REAL_dic:
+            self.LEFT_REAL_Alarm[key] = dic["LEFT_REAL_Alarm"][key]
+        for key in self.LOOPPID_MODE0:
+            self.LOOPPID_MODE0[key] = dic["LOOPPID_MODE0"][key]
+        for key in self.LOOPPID_MODE1:
+            self.LOOPPID_MODE1[key] = dic["LOOPPID_MODE1"][key]
+        for key in self.LOOPPID_MODE2:
+            self.LOOPPID_MODE2[key] = dic["LOOPPID_MODE2"][key]
+        for key in self.LOOPPID_MODE3:
+            self.LOOPPID_MODE3[key] = dic["LOOPPID_MODE3"][key]
+        for key in self.LOOPPID_INTLKD:
+            self.LOOPPID_INTLKD[key] = dic["LOOPPID_INTLKD"][key]
+        for key in self.LOOPPID_MAN:
+            self.LOOPPID_MAN[key] = dic["LOOPPID_MAN"][key]
+        for key in self.LOOPPID_ERR:
+            self.LOOPPID_ERR[key] = dic["LOOPPID_ERR"][key]
+        for key in self.LOOPPID_SATHI:
+            self.LOOPPID_SATHI[key] = dic["LOOPPID_SATHI"][key]
+        for key in self.LOOPPID_SATLO:
+            self.LOOPPID_SATLO[key] = dic["LOOPPID_SATLO"][key]
+        for key in self.LOOPPID_EN:
+            self.LOOPPID_EN[key] = dic["LOOPPID_EN"][key]
+        for key in self.LOOPPID_OUT:
+            self.LOOPPID_OUT[key] = dic["LOOPPID_OUT"][key]
+        for key in self.LOOPPID_IN:
+            self.LOOPPID_IN[key] = dic["LOOPPID_IN"][key]
+        for key in self.LOOPPID_HI_LIM:
+            self.LOOPPID_HI_LIM[key] = dic["LOOPPID_HI_LIM"][key]
+        for key in self.LOOPPID_LO_LIM:
+            self.LOOPPID_LO_LIM[key] = dic["LOOPPID_LO_LIM"][key]
+        for key in self.LOOPPID_SET0:
+            self.LOOPPID_SET0[key] = dic["LOOPPID_SET0"][key]
+        for key in self.LOOPPID_SET1:
+            self.LOOPPID_SET1[key] = dic["LOOPPID_SET1"][key]
+        for key in self.LOOPPID_SET2:
+            self.LOOPPID_SET2[key] = dic["LOOPPID_SET2"][key]
+        for key in self.LOOPPID_SET3:
+            self.LOOPPID_SET3[key] = dic["LOOPPID_SET3"][key]
+
+        for key in self.Procedure_running:
+            self.Procedure_running[key] = dic["Procedure_running"][key]
+        for key in self.Procedure_INTLKD:
+            self.Procedure_INTLKD[key] = dic["Procedure_INTLKD"][key]
+        for key in self.Procedure_EXIT:
+            self.Procedure_EXIT[key] = dic["Procedure_EXIT"][key]
+
+        self.MainAlarm = dic["MainAlarm"]
+        print("Database received the data from PLC")
+
+    @QtCore.Slot(bool)
+    def update_status(self, status):
+        self.status= status
+
+
 
 
 # Class to read PLC value every 2 sec
@@ -1901,11 +2479,17 @@ class UpdateServer(QtCore.QObject):
 
 
 class Update(QtCore.QObject):
+    PATCH_TO_DATABASE = QtCore.Signal()
+    UPDATE_TO_DATABASE = QtCore.Signal()
     def __init__(self, parent=None):
         super().__init__(parent)
         App.aboutToQuit.connect(self.StopUpdater)
         self.StartUpdater()
         self.slack_signals()
+        self.connect_signals()
+        self.data_transfer = {}
+        self.data_status = False
+
 
 
 
@@ -1924,10 +2508,13 @@ class Update(QtCore.QObject):
 
         # Update database on another thread
         self.DataUpdateThread = QtCore.QThread()
-        self.UpDatabase = UpdateDataBase(self.PLC)
+        self.UpDatabase = UpdateDataBase()
+        # self.UpDatabase = UpdateDataBase(self.PLC)
         self.UpDatabase.moveToThread(self.DataUpdateThread)
         self.DataUpdateThread.started.connect(self.UpDatabase.run)
         self.DataUpdateThread.start()
+
+        time.sleep(2)
 
         # Update database on another thread
         self.ServerUpdateThread = QtCore.QThread()
@@ -1956,12 +2543,35 @@ class Update(QtCore.QObject):
     def printstr(self, string):
         print(string)
 
+    @QtCore.Slot(object)
+    def transfer_station(self, data):
+        self.data_transfer = data
+        self.PATCH_TO_DATABASE.emit()
+        # print(self.data_transfer)
+
+    @QtCore.Slot(object)
+    def PLCstatus_transfer(self, status):
+        self.data_status = status
+        self.UPDATE_TO_DATABASE.emit()
+        print(self.data_status)
+
     def slack_signals(self):
         self.message_manager = message_manager()
         self.UpPLC.AI_slack_alarm.connect(self.printstr)
 
         self.UpPLC.AI_slack_alarm.connect(self.message_manager.slack_alarm)
         self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
+
+    def connect_signals(self):
+        # self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
+        self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
+        self.PATCH_TO_DATABASE.connect(lambda: self.UpDatabase.update_value(self.data_transfer))
+
+        self.UpPLC.PLC.DATA_TRI_SIGNAL.connect(self.PLCstatus_transfer)
+        self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
+        print("signal established")
+
+
 
 
 
