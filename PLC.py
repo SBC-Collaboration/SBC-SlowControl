@@ -1385,6 +1385,9 @@ class UpdateDataBase(QtCore.QObject):
 
         #status initialization
         self.status = False
+
+        #commit initialization
+        self.commit_bool = False
         # INITIALIZATION
         self.TT_FP_address =     TT_FP_ADDRESS
         self.TT_BO_address =     TT_BO_ADDRESS
@@ -1526,7 +1529,7 @@ class UpdateDataBase(QtCore.QObject):
                 if self.status:
                     self.Running_pointer = 0
                     # print(0)
-                    print(self.para_alarm)
+                    # print(self.para_alarm)
                     if self.para_alarm >= self.rate_alarm:
 
                         self.alarm_db.ssh_write()
@@ -1538,12 +1541,14 @@ class UpdateDataBase(QtCore.QObject):
                         for key in self.TT_BO_dic:
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_BO_dic[key])
                         # print("write RTDS")
+                        self.commit_bool = True
                         self.para_TT = 0
                     # print(1)
                     if self.para_PT >= self.rate_PT:
                         for key in self.PT_dic:
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PT_dic[key])
                         # print("write pressure transducer")
+                        self.commit_bool = True
                         self.para_PT = 0
                     # print(2)
                     for key in self.Valve_OUT:
@@ -1552,6 +1557,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.Valve_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Valve_OUT[key])
                             self.Valve_buffer[key] = self.Valve_OUT[key]
+                            self.commit_bool = True
                             # print(self.Valve_OUT[key])
                         else:
                             pass
@@ -1560,6 +1566,7 @@ class UpdateDataBase(QtCore.QObject):
                         for key in self.Valve_OUT:
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Valve_OUT[key])
                             self.Valve_buffer[key] = self.Valve_OUT[key]
+                            self.commit_bool = True
                         self.para_Valve = 0
                     # print(3)
                     for key in self.Switch_OUT:
@@ -1568,6 +1575,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.Switch_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Switch_OUT[key])
                             self.Switch_buffer[key] = self.Switch_OUT[key]
+                            self.commit_bool = True
                             # print(self.Switch_OUT[key])
                         else:
                             pass
@@ -1576,6 +1584,7 @@ class UpdateDataBase(QtCore.QObject):
                         for key in self.Switch_OUT:
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Switch_OUT[key])
                             self.Switch_buffer[key] = self.Switch_OUT[key]
+                            self.commit_bool = True
                         self.para_Switch = 0
                     # print(4)
                     for key in self.Din_dic:
@@ -1584,6 +1593,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.Din_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.Din_dic[key])
                             self.Din_buffer[key] = self.Din_dic[key]
+                            self.commit_bool = True
                         else:
                             pass
 
@@ -1591,6 +1601,7 @@ class UpdateDataBase(QtCore.QObject):
                         for key in self.Din_dic:
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.Din_dic[key])
                             self.Din_buffer[key] = self.Din_dic[key]
+                        self.commit_bool = True
                         self.para_Din = 0
 
                     # if state of bool variable changes, write the data into database
@@ -1601,6 +1612,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.dt, self.LOOPPID_EN[key])
                             self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+                            self.commit_bool = True
                             # print(self.Valve_OUT[key])
                         else:
                             pass
@@ -1611,6 +1623,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
                             self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+                            self.commit_bool = True
                             # print(self.Valve_OUT[key])
                         else:
                             pass
@@ -1621,6 +1634,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
                             self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+                            self.commit_bool = True
                             # print(self.Valve_OUT[key])
                         else:
                             pass
@@ -1631,6 +1645,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
                             self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+                            self.commit_bool = True
                             # print(self.Valve_OUT[key])
                         else:
                             pass
@@ -1641,6 +1656,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
                             self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
+                            self.commit_bool = True
                             # print(self.Valve_OUT[key])
                         else:
                             pass
@@ -1670,6 +1686,7 @@ class UpdateDataBase(QtCore.QObject):
                         for key in self.LOOPPID_IN:
                             self.db.insert_data_into_datastorage_wocommit(key + '_IN', self.dt, self.LOOPPID_IN[key])
                             self.LOOPPID_IN_buffer[key] = self.LOOPPID_IN[key]
+                        self.commit_bool = True
                         self.para_LOOPPID = 0
                     # print(7)
                     if self.para_REAL >= self.rate_REAL:
@@ -1677,11 +1694,15 @@ class UpdateDataBase(QtCore.QObject):
                             # print(key, self.LEFT_REAL_dic[key])
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.LEFT_REAL_dic[key])
                         # print("write pressure transducer")
+                            self.commit_bool = True
                         self.para_REAL = 0
 
                     # print("a",self.para_TT,"b",self.para_PT )
                     # print(8)
-                    self.db.db.commit()
+
+                    #commit the changes at last step only if it is time to write
+                    if self.commit_bool:
+                        self.db.db.commit()
                     print("Wrting PLC data to database...")
                     self.para_alarm += 1
 
