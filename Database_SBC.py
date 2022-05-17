@@ -8,6 +8,11 @@ import random
 # import pandas as pd
 # import matplotlib as plot
 
+"""PASSWORD IN THIS DOCUMENT are saved as enviroment variable at slowcontrol machine
+ You can also get it from SBC mysql document configuration
+ https://docs.google.com/document/d/1o2LEL3cKEVQ6zuR_jJgt-p3UgnVysMm6LkXXOvfMZeE/edit
+ """
+
 
 def datetime_in_s():
     d=datetime.datetime.now()
@@ -38,7 +43,9 @@ def UNIX_time(self):
 class mydatabase():
     def __init__(self):
         # db=mysql.connector.connect()
-        self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd="Th3Slow1!",database="SBCslowcontrol")
+        # self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd="Th3Slow1!",database="SBCslowcontrol")
+        self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTOL_LOCAL_TOKEN"), database="SBCslowcontrol")
+
         self.mycursor = self.db.cursor()
 
     def query(self,statement):
@@ -122,11 +129,11 @@ class COUPP_database():
         self.home = os.path.expanduser('~')
         self.sql_hostname = 'localhost'
         self.sql_username = 'coupp_monitor'
-        self.sql_password = 'b(_)bbl3$'
+        self.sql_password = os.environ.get("COUPP_SQL_TOKEN")
         self.sql_main_database = 'coupp_alarms'
         self.sql_port = 3306
         self.ssh_host = 'dm.phys.northwestern.edu'
-        self.ssh_password = 'UChicago1234'
+        self.ssh_password = os.environ.get("PEGASUS_SSH_TOKEN")
         self.ssh_user = 'pico'
         self.ssh_port = 22
         self.sql_ip = '1.1.1.1'
