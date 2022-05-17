@@ -1534,23 +1534,23 @@ class UpdateDataBase(QtCore.QObject):
 
                     if self.para_TT >= self.rate_TT:
                         for key in self.TT_FP_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.TT_FP_dic[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_FP_dic[key])
                         for key in self.TT_BO_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.TT_BO_dic[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_BO_dic[key])
                         # print("write RTDS")
                         self.para_TT = 0
                     # print(1)
                     if self.para_PT >= self.rate_PT:
                         for key in self.PT_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.PT_dic[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PT_dic[key])
                         # print("write pressure transducer")
                         self.para_PT = 0
                     # print(2)
                     for key in self.Valve_OUT:
                         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.Valve_OUT[key] != self.Valve_buffer[key]:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.early_dt, self.Valve_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.Valve_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Valve_OUT[key])
                             self.Valve_buffer[key] = self.Valve_OUT[key]
                             # print(self.Valve_OUT[key])
                         else:
@@ -1558,15 +1558,15 @@ class UpdateDataBase(QtCore.QObject):
 
                     if self.para_Valve >= self.rate_Valve:
                         for key in self.Valve_OUT:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Valve_OUT[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Valve_OUT[key])
                             self.Valve_buffer[key] = self.Valve_OUT[key]
                         self.para_Valve = 0
                     # print(3)
                     for key in self.Switch_OUT:
                         # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
                         if self.Switch_OUT[key] != self.Switch_buffer[key]:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.early_dt, self.Switch_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Switch_OUT[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.Switch_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Switch_OUT[key])
                             self.Switch_buffer[key] = self.Switch_OUT[key]
                             # print(self.Switch_OUT[key])
                         else:
@@ -1574,22 +1574,22 @@ class UpdateDataBase(QtCore.QObject):
 
                     if self.para_Switch >= self.rate_Switch:
                         for key in self.Switch_OUT:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.Switch_OUT[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Switch_OUT[key])
                             self.Switch_buffer[key] = self.Switch_OUT[key]
                         self.para_Switch = 0
                     # print(4)
                     for key in self.Din_dic:
                         # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
                         if self.Din_dic[key] != self.Din_buffer[key]:
-                            self.db.insert_data_into_datastorage(key, self.early_dt, self.Din_buffer[key])
-                            self.db.insert_data_into_datastorage(key, self.dt, self.Din_dic[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.Din_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.Din_dic[key])
                             self.Din_buffer[key] = self.Din_dic[key]
                         else:
                             pass
 
                     if self.para_Din >= self.rate_Din:
                         for key in self.Din_dic:
-                            self.db.insert_data_into_datastorage(key, self.dt, self.Din_dic[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.Din_dic[key])
                             self.Din_buffer[key] = self.Din_dic[key]
                         self.para_Din = 0
 
@@ -1598,8 +1598,8 @@ class UpdateDataBase(QtCore.QObject):
                     for key in self.LOOPPID_EN:
                         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
-                            self.db.insert_data_into_datastorage(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.LOOPPID_EN[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.dt, self.LOOPPID_EN[key])
                             self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
                             # print(self.Valve_OUT[key])
                         else:
@@ -1608,8 +1608,8 @@ class UpdateDataBase(QtCore.QObject):
                     for key in self.LOOPPID_MODE0:
                         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
-                            self.db.insert_data_into_datastorage(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
                             self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
                             # print(self.Valve_OUT[key])
                         else:
@@ -1618,8 +1618,8 @@ class UpdateDataBase(QtCore.QObject):
                     for key in self.LOOPPID_MODE1:
                         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
-                            self.db.insert_data_into_datastorage(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
                             self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
                             # print(self.Valve_OUT[key])
                         else:
@@ -1628,8 +1628,8 @@ class UpdateDataBase(QtCore.QObject):
                     for key in self.LOOPPID_MODE2:
                         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
-                            self.db.insert_data_into_datastorage(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
                             self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
                             # print(self.Valve_OUT[key])
                         else:
@@ -1638,8 +1638,8 @@ class UpdateDataBase(QtCore.QObject):
                     for key in self.LOOPPID_MODE3:
                         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
-                            self.db.insert_data_into_datastorage(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key])
-                            self.db.insert_data_into_datastorage(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
                             self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
                             # print(self.Valve_OUT[key])
                         else:
@@ -1649,39 +1649,39 @@ class UpdateDataBase(QtCore.QObject):
                     # print(6)
                     if self.para_LOOPPID >= self.rate_LOOPPID:
                         for key in self.LOOPPID_EN:
-                            self.db.insert_data_into_datastorage(key + '_EN', self.dt, self.LOOPPID_EN[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.dt, self.LOOPPID_EN[key])
                             self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
                         for key in self.LOOPPID_MODE0:
-                            self.db.insert_data_into_datastorage(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
                             self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
                         for key in self.LOOPPID_MODE1:
-                            self.db.insert_data_into_datastorage(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
                             self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
                         for key in self.LOOPPID_MODE2:
-                            self.db.insert_data_into_datastorage(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
                             self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
                         for key in self.LOOPPID_MODE3:
-                            self.db.insert_data_into_datastorage(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
                             self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
                         # write float data.
                         for key in self.LOOPPID_OUT:
-                            self.db.insert_data_into_datastorage(key + '_OUT', self.dt, self.LOOPPID_OUT[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOPPID_OUT[key])
                             self.LOOPPID_OUT_buffer[key] = self.LOOPPID_OUT[key]
                         for key in self.LOOPPID_IN:
-                            self.db.insert_data_into_datastorage(key + '_IN', self.dt, self.LOOPPID_IN[key])
+                            self.db.insert_data_into_datastorage_wocommit(key + '_IN', self.dt, self.LOOPPID_IN[key])
                             self.LOOPPID_IN_buffer[key] = self.LOOPPID_IN[key]
                         self.para_LOOPPID = 0
                     # print(7)
                     if self.para_REAL >= self.rate_REAL:
                         for key in self.LEFT_REAL_address:
                             # print(key, self.LEFT_REAL_dic[key])
-                            self.db.insert_data_into_datastorage(key, self.dt, self.LEFT_REAL_dic[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.LEFT_REAL_dic[key])
                         # print("write pressure transducer")
                         self.para_REAL = 0
 
                     # print("a",self.para_TT,"b",self.para_PT )
                     # print(8)
-
+                    self.db.db.commit()
                     print("Wrting PLC data to database...")
                     self.para_alarm += 1
 
