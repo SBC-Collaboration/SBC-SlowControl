@@ -136,11 +136,13 @@ class COUPP_database():
         self.home = os.path.expanduser('~')
         self.sql_hostname = 'localhost'
         self.sql_username = 'coupp_monitor'
-        self.sql_password = os.environ.get("COUPP_SQL_TOKEN")
+        # self.sql_password = os.environ.get("COUPP_SQL_TOKEN")
+        self.sql_password = 'b(_)bbl3$'
         self.sql_main_database = 'coupp_alarms'
         self.sql_port = 3306
         self.ssh_host = 'dm.phys.northwestern.edu'
-        self.ssh_password = os.environ.get("PEGASUS_SSH_TOKEN")
+        # self.ssh_password = os.environ.get("PEGASUS_SSH_TOKEN")
+        self.ssh_password = 'UChicago1234'
         self.ssh_user = 'pico'
         self.ssh_port = 22
         self.sql_ip = '1.1.1.1'
@@ -151,6 +153,7 @@ class COUPP_database():
                 ssh_username=self.ssh_user,
                 ssh_password= self.ssh_password,
                 remote_bind_address=(self.sql_hostname, self.sql_port)) as tunnel:
+
             self.db = pymysql.connect(host="localhost", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
             self.mycursor = self.db.cursor()
             self.update_alarm()
@@ -245,7 +248,7 @@ if __name__ == "__main__":
     # print(unix_timestamp)
     # db.insert_data_into_datastorage("test",dt,500.55)
     db.ssh_select()
-    # db.ssh_write()
+    db.ssh_write()
     db.ssh_select()
 
 

@@ -782,7 +782,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.CYL3334 = Indicator_ds(self.HydraulicTab)
         self.CYL3334.move(2100 * R, 1160 * R)
         self.CYL3334.Label.setText("CYL3334")
-        self.CYL3334.SetUnit(" pbs")
+        self.CYL3334.SetUnit(" lbs")
 
         self.PT1101Hy = Indicator(self.HydraulicTab)
         self.PT1101Hy.move(1900*R, 800*R)
