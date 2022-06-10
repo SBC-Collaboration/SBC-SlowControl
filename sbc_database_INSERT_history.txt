@@ -65,3 +65,6 @@ of Heater's DO channel ", "float"), ( "HTR2124_OUT", "output for the AO channel"
   ( "HTR6223_OUT", "output for the AO channel", "float"), ( "HTR6224_OUT", "output for the AO channel", "float"), ( "HTR6219_OUT", "output for the AO channel", "float"), ( "HTR6221_OUT", "output for the AO channel", "float"),
   ( "HTR6214_OUT", "output for the AO channel", "float");
 
+
+  INSERT INTO MetaDataStorage VALUES ("PUMP3305_CON", "input for the DI channel ", "float"), ( "PUMP3305_OL", "input for the DI channel", "float"), ( "LS3338", "input for the DI channel ", "float"), ( "LS3339", "input for the DI channel ", "float"), ( "ES3347", "input for the DI channel ", "float");
+

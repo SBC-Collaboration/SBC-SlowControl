@@ -21,16 +21,23 @@ import requests
 import logging,os
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
+
+import daemon, os, sys, psutil
+import PLC_daemon
+import time
+# from PLC_damemon import *
+from PLC import *
+PORT_N=5555
+PROCESS_NAME = "TCP"
+pid = None
 import slowcontrol_env_cons as sec
+
 
 # delete random number package when you read real data from PLC
 import random
 from pymodbus.client.sync import ModbusTcpClient
 
 BASE_ADDRESS= 12288
-
-# Initialization of Address, Value Matrix
-
 
 sys._excepthook = sys.excepthook
 def exception_hook(exctype, value, traceback):
@@ -54,6 +61,40 @@ def FPADS_OUT_AT(outaddress):
     print(e5,e4,e3,e2,e1)
     print(new_address)
     return new_address
+
+
+def PLC_loop():
+
+    while True:
+        try:
+            clear_tcp()
+            PLC_body()
+        except:
+            (type, value, traceback) = sys.exc_info()
+            exception_hook(type, value, traceback)
+            time.sleep(5)
+            print("restarting the BKG loop...")
+        time.sleep(5)
+
+def PLC_run():
+    # with daemon.DaemonContext():
+    #     PLC_loop()
+    PLC_loop()
+
+def clear_tcp():
+    for proc in psutil.process_iter():
+        for conns in proc.connections(kind='tcp'):
+            if conns.laddr.port ==PORT_N:
+        # if PROCESS_NAME in proc.name() &:
+                pid = proc.pid
+                p=psutil.Process(pid)
+                p.terminate()
+                print("\n",pid, "KILLED")
+
+def PLC_body():
+    App = QtWidgets.QApplication(sys.argv)
+    Update = PLC_daemon.Update()
+    sys.exit(App.exec_())
 
 class PLC(QtCore.QObject):
     DATA_UPDATE_SIGNAL=QtCore.Signal(object)
@@ -2311,8 +2352,6 @@ class Update(QtCore.QObject):
         self.data_status = False
 
 
-
-
     def StartUpdater(self):
         self.PLC = PLC()
 
@@ -2457,18 +2496,16 @@ class message_manager():
 
 
 
-
 if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
 
-    App = QtWidgets.QApplication(sys.argv)
-    Update=Update()
+    # App = QtWidgets.QApplication(sys.argv)
+    # PLC_body()
+    #
+    # # PLC=PLC()
+    # # PLC.ReadAll()
+    #
+    # sys.exit(App.exec_())
 
-
-    # PLC=PLC()
-    # PLC.ReadAll()
-
-    sys.exit(App.exec_())
-
-
+    PLC_run()

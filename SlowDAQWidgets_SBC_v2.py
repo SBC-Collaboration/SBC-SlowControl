@@ -721,6 +721,66 @@ class Indicator(QtWidgets.QWidget):
     def SetAlarmMode(self, Mode):
         self.AlarmMode = Mode
 
+#Indicator with different size
+class Indicator_ds(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("Indicator")
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 100*R, 60*R))
+        self.setMinimumSize(100*R, 60*R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Background = QtWidgets.QLabel(self)
+        self.Background.setObjectName("Background")
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 100*R, 60*R))
+        self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Indicator")
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 100*R, 25*R))
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setStyleSheet("QLabel {" +FONT+"}")
+
+        self.Field = QtWidgets.QLineEdit(self)
+        self.Field.setObjectName("indicator value")
+        self.Field.setGeometry(QtCore.QRect(0*R, 25*R, 100*R, 35*R))
+        self.Field.setAlignment(QtCore.Qt.AlignCenter)
+        self.Field.setReadOnly(True)
+        self.Field.setStyleSheet(
+            "QLineEdit{" + BORDER_STYLE + C_WHITE + LAG_FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
+            "} QLineEdit[Alarm = false]{" + C_MEDIUM_GREY + "}")
+        self.Field.Property = False
+        self.Field.setProperty("Alarm", False)
+
+        self.Unit = " K"
+        self.SetValue(0.)
+
+    def SetValue(self, value):
+        self.value = value
+        self.Field.setText(format(value, '#.2f') + self.Unit)
+
+    def SetAlarm(self):
+        self.Field.Property = True
+        self.Field.setProperty("Alarm", self.Field.Property)
+        self.Field.setStyle(self.Field.style())
+
+    def ResetAlarm(self):
+        self.Field.Property = False
+        self.Field.setProperty("Alarm", self.Field.Property)
+        self.Field.setStyle(self.Field.style())
+
+    def SetUnit(self, unit=" °C"):
+        self.Unit = unit
+        self.Field.setText(format(self.value, '#.2f') + self.Unit)
+
+    # set alarm mode, if the mode is false, then the alarm will not be triggered despite of alarm value
+    def SetAlarmMode(self, Mode):
+        self.AlarmMode = Mode
+
 
 class Control(QtWidgets.QWidget):
     def __init__(self, parent=None):
