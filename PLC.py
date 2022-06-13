@@ -1539,11 +1539,8 @@ class UpdateDataBase(QtCore.QObject):
             self.LOOPPID_SET2[key] = dic["LOOPPID_SET2"][key]
         for key in self.LOOPPID_SET3:
             self.LOOPPID_SET3[key] = dic["LOOPPID_SET3"][key]
-
         for key in self.LOOP2PT_OUT:
             self.LOOP2PT_OUT[key] = dic["LOOP2PT_OUT"][key]
-        for key in self.LOOP2PT_SET0:
-            self.LOOP2PT_SET0[key] = dic["LOOP2PT_SET0"][key]
         for key in self.LOOP2PT_SET1:
             self.LOOP2PT_SET1[key] = dic["LOOP2PT_SET1"][key]
         for key in self.LOOP2PT_SET2:
