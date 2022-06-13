@@ -2241,6 +2241,7 @@ class UpdateServer(QtCore.QObject):
                     if message[key]["operation"] == "OPEN":
                         self.PLC.LOOP2PT_OPEN(address=message[key]["address"])
                     elif message[key]["operation"] == "CLOSE":
+                        print("close it")
                         self.PLC.LOOPPID_CLOSE(address=message[key]["address"])
                     else:
                         pass
