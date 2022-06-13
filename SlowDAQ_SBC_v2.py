@@ -652,6 +652,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PUMP3305.move(365*R, 380*R)
         self.PUMP3305.State.LButton.setText("ON")
         self.PUMP3305.State.RButton.setText("OFF")
+        self.PUMP3305.LOOP2PTSubWindow.setWindowTitle("PUMP3305")
+        self.PUMP3305.LOOP2PTSubWindow.Label.setText("PUMP3305")
 
 
         self.PUMP3305_CON = ColoredStatus(self.HydraulicTab, mode = 2)
