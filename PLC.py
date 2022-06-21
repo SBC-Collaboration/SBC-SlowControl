@@ -27,7 +27,7 @@ import slowcontrol_env_cons as sec
 import random
 from pymodbus.client.sync import ModbusTcpClient
 
-BASE_ADDRESS= 12288
+
 
 # Initialization of Address, Value Matrix
 
@@ -206,6 +206,19 @@ class PLC(QtCore.QObject):
         self.Procedure_INTLKD = sec.PROCEDURE_INTLKD
         self.Procedure_EXIT = sec.PROCEDURE_EXIT
 
+        self.INTLK_D_ADDRESS = sec.INTLK_D_ADDRESS
+        self.INTLK_D_DIC = sec.INTLK_D_DIC
+        self.INTLK_D_EN = sec.INTLK_D_EN
+        self.INTLK_D_COND = sec.INTLK_D_COND
+        self.INTLK_A_ADDRESS = sec.INTLK_A_ADDRESS
+        self.INTLK_A_DIC = sec.INTLK_A_DIC
+        self.INTLK_A_EN = sec.INTLK_A_EN
+        self.INTLK_A_COND = sec.INTLK_A_COND
+        self.INTLK_A_SET = sec.INTLK_A_SET
+
+        self.FLAG_ADDRESS = sec.FLAG_ADDRESS
+        self.FLAG_DIC = sec.FLAG_DIC
+        self.FLAG_INTLKD = sec.FLAG_INTLKD
 
         self.signal_data = {  "TT_FP_address":self.TT_FP_address,
                               "TT_BO_address":self.TT_BO_address,
@@ -292,7 +305,20 @@ class PLC(QtCore.QObject):
                               "Procedure_address":self.Procedure_address,
                               "Procedure_running":self.Procedure_running,
                               "Procedure_INTLKD":self.Procedure_INTLKD,
-                              "Procedure_EXIT":self.Procedure_EXIT}
+                              "Procedure_EXIT":self.Procedure_EXIT,
+                              "INTLK_D_ADDRESS":self.INTLK_D_ADDRESS,
+                              "INTLK_D_DIC": self.INTLK_D_DIC,
+                              "INTLK_D_EN":self.INTLK_D_EN,
+                              "INTLK_D_COND":self.INTLK_D_COND,
+                              "INTLK_A_ADDRESS":self.INTLK_A_ADDRESS,
+                              "INTLK_A_DIC": self.INTLK_A_DIC,
+                              "INTLK_A_EN":self.INTLK_A_EN,
+                              "INTLK_A_COND":self.INTLK_A_COND,
+                              "INTLK_A_SET":self.INTLK_A_SET,
+                              "FLAG_ADDRESS":self.FLAG_ADDRESS,
+                              "FLAG_DIC":self.FLAG_DIC,
+                              "FLAG_INTLKD":self.FLAG_INTLKD
+                                                            }
 
         self.LiveCounter = 0
         self.NewData_Display = False
@@ -533,6 +559,32 @@ class PLC(QtCore.QObject):
                 self.Procedure_running[key] = self.ReadCoil(1, self.Procedure_address[key])
                 self.Procedure_INTLKD[key] = self.ReadCoil(2, self.Procedure_address[key])
                 self.Procedure_EXIT[key] = Raw_Procedure[key].getRegister(0)
+
+
+            ##################################################################################################
+            Raw_INTLK_A = {}
+            for key in self.INTLK_A_ADDRESS:
+                Raw_INTLK_A[key] = self.Client_BO.read_holding_registers(self.INTLK_A_ADDRESS[key] + 2, count=2, unit=0x01)
+                self.INTLK_A_SET[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_INTLK_A[key].getRegister(1),
+                                                    Raw_INTLK_A[key].getRegister(0)))[0], 3)
+                self.INTLK_A_DIC[key] = self.ReadCoil(1, self.INTLK_A_ADDRESS[key])
+                self.INTLK_A_EN[key] = self.ReadCoil(2 ** 1 , self.INTLK_A_ADDRESS[key])
+                self.INTLK_A_COND[key] = self.ReadCoil(2 ** 2, self.INTLK_A_ADDRESS[key])
+
+
+            for key in self.INTLK_D_ADDRESS:
+
+                self.INTLK_D_DIC[key] = self.ReadCoil(1, self.INTLK_D_ADDRESS[key])
+                self.INTLK_D_EN[key] = self.ReadCoil(2 ** 1, self.INTLK_D_ADDRESS[key])
+                self.INTLK_D_COND[key] = self.ReadCoil(2 ** 2, self.INTLK_D_ADDRESS[key])
+
+
+            ############################################################################################
+            #FLAG
+            for key in self.FLAG_ADDRESS:
+                self.FLAG_DIC[key] = self.ReadCoil(1, self.FLAG_ADDRESS[key])
+                self.FLAG_INTLKD[key] = self.ReadCoil(2 ** 1, self.FLAG_ADDRESS[key])
 
             # test the writing function
             # print(self.Read_BO_2(14308))
@@ -1021,6 +1073,12 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_LOOPPID = 90
         self.para_LOOP2PT = 0
         self.rate_LOOP2PT = 90
+        self.para_FLAG=0
+        self.rate_FLAG=90
+        self.para_INTLK_A=0
+        self.rate_INTLK_A = 90
+        self.para_INTLK_D = 0
+        self.rate_INTLK_D = 90
         #status initialization
         self.status = False
 
@@ -1117,6 +1175,19 @@ class UpdateDataBase(QtCore.QObject):
         self.Procedure_running = sec.PROCEDURE_RUNNING
         self.Procedure_INTLKD = sec.PROCEDURE_INTLKD
         self.Procedure_EXIT = sec.PROCEDURE_EXIT
+        # self.INTLK_D_ADDRESS = sec.INTLK_D_ADDRESS
+        # self.INTLK_D_DIC = sec.INTLK_D_DIC
+        # self.INTLK_D_EN = sec.INTLK_D_EN
+        # self.INTLK_D_COND = sec.INTLK_D_COND
+        # self.INTLK_A_ADDRESS = sec.INTLK_A_ADDRESS
+        # self.INTLK_A_DIC = sec.INTLK_A_DIC
+        # self.INTLK_A_EN = sec.INTLK_A_EN
+        # self.INTLK_A_COND = sec.INTLK_A_COND
+        # self.INTLK_A_SET = sec.INTLK_A_SET
+        #
+        # self.FLAG_ADDRESS = sec.FLAG_ADDRESS
+        # self.FLAG_DIC = sec.FLAG_DIC
+        # self.FLAG_INTLKD = sec.FLAG_INTLKD
 
 
         # BUFFER parts
@@ -1865,6 +1936,20 @@ class UpdateServer(QtCore.QObject):
         self.Procedure_INTLKD_ini = sec.PROCEDURE_INTLKD
         self.Procedure_EXIT_ini = sec.PROCEDURE_EXIT
 
+        self.INTLK_D_ADDRESS_ini = sec.INTLK_D_ADDRESS
+        self.INTLK_D_DIC_ini = sec.INTLK_D_DIC
+        self.INTLK_D_EN_ini = sec.INTLK_D_EN
+        self.INTLK_D_COND_ini = sec.INTLK_D_COND
+        self.INTLK_A_ADDRESS_ini = sec.INTLK_A_ADDRESS
+        self.INTLK_A_DIC_ini = sec.INTLK_A_DIC
+        self.INTLK_A_EN_ini = sec.INTLK_A_EN
+        self.INTLK_A_COND_ini = sec.INTLK_A_COND
+        self.INTLK_A_SET_ini = sec.INTLK_A_SET
+
+        self.FLAG_ADDRESS_ini = sec.FLAG_ADDRESS
+        self.FLAG_DIC_ini = sec.FLAG_DIC
+        self.FLAG_INTLKD_ini = sec.FLAG_INTLKD
+
         self.data_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
@@ -1907,6 +1992,15 @@ class UpdateServer(QtCore.QObject):
                                               "SET1": self.LOOP2PT_SET1_ini,
                                               "SET2": self.LOOP2PT_SET2_ini,
                                               "SET3": self.LOOP2PT_SET3_ini},
+                                  "INTLK_D": {"value": self.INTLK_D_DIC_ini,
+                                              "EN": self.INTLK_D_EN_ini,
+                                              "COND": self.INTLK_D_COND_ini},
+                                  "INTLK_A": {"value":self.INTLK_A_DIC_ini,
+                                              "EN":self.INTLK_A_EN_ini,
+                                              "COND":self.INTLK_A_COND_ini,
+                                              "SET":self.INTLK_A_SET_ini},
+                                  "FLAG": {"value":self.FLAG_DIC_ini,
+                                           "INTLKD":self.FLAG_INTLKD_ini},
                                   "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini}},
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},
@@ -2069,27 +2163,26 @@ class UpdateServer(QtCore.QObject):
             self.Procedure_INTLKD_ini[key] = self.PLC.Procedure_INTLKD[key]
         for key in self.PLC.Procedure_EXIT:
             self.Procedure_EXIT_ini[key] = self.PLC.Procedure_EXIT[key]
+        for key in self.PLC.INTLK_D_DIC:
+            self.INTLK_D_DIC_ini[key] = self.PLC.INTLK_D_DIC[key]
+        for key in self.PLC.INTLK_D_EN:
+            self.INTLK_D_EN_ini[key] = self.PLC.INTLK_D_EN[key]
+        for key in self.PLC.INTLK_D_COND:
+            self.INTLK_D_COND_ini[key] = self.PLC.INTLK_D_COND[key]
+        for key in self.PLC.INTLK_A_DIC:
+            self.INTLK_A_DIC_ini[key] = self.PLC.INTLK_A_DIC[key]
+        for key in self.PLC.INTLK_A_EN:
+            self.INTLK_A_EN_ini[key] = self.PLC.INTLK_A_EN[key]
+        for key in self.PLC.INTLK_A_COND:
+            self.INTLK_A_COND_ini[key] = self.PLC.INTLK_A_COND[key]
+        for key in self.PLC.INTLK_A_SET:
+            self.INTLK_A_SET_ini[key] = self.PLC.INTLK_A_SET[key]
+        for key in self.PLC.FLAG_DIC:
+            self.FLAG_DIC_ini[key] = self.PLC.FLAG_DIC[key]
+        for key in self.PLC.FLAG_INTLKD:
+            self.FLAG_INTLKD_ini[key] = self.PLC.FLAG_INTLKD[key]
 
         self.data_dic["MainAlarm"] = self.PLC.MainAlarm
-        # print("pack",self.data_dic)
-        # print("HTR6214 \n", "MODE0", self.data_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],
-        #             "\n","MODE1", self.data_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
-        #             "\n","MODE2", self.data_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],
-        #             "\n","MODE3", self.data_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"],
-        #             "\n","INTLKD", self.data_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"],
-        #             "\n","MAN", self.data_dic["data"]["LOOPPID"]["MAN"]["HTR6214"],
-        #             "\n","ERR", self.data_dic["data"]["LOOPPID"]["ERR"]["HTR6214"],
-        #             "\n","SATHI", self.data_dic["data"]["LOOPPID"]["SATHI"]["HTR6214"],
-        #             "\n","SATLO", self.data_dic["data"]["LOOPPID"]["SATLO"]["HTR6214"],
-        #             "\n","EN", self.data_dic["data"]["LOOPPID"]["EN"]["HTR6214"],
-        #             "\n","OUT", self.data_dic["data"]["LOOPPID"]["OUT"]["HTR6214"],
-        #             "\n","IN", self.data_dic["data"]["LOOPPID"]["IN"]["HTR6214"],
-        #             "\n","HI_LIM", self.data_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6214"],
-        #             "\n","LO_LIM", self.data_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6214"],
-        #             "\n","SET0", self.data_dic["data"]["LOOPPID"]["SET0"]["HTR6214"],
-        #             "\n","SET1", self.data_dic["data"]["LOOPPID"]["SET1"]["HTR6214"],
-        #             "\n","SET2", self.data_dic["data"]["LOOPPID"]["SET2"]["HTR6214"],
-        #             "\n","SET3", self.data_dic["data"]["LOOPPID"]["SET3"]["HTR6214"])
 
         self.data_package = pickle.dumps(self.data_dic)
 

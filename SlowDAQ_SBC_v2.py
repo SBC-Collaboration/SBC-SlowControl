@@ -842,6 +842,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRESSURE_CYCLE.objectname = "PRESSURE_CYCLE"
 
 
+        self.INTLK_A = INTLK_A_Widget(self.DatanSignalTab)
+        self.INTLK_A.move(1300 * R, 390 * R)
+
+
         # Alarm button
         self.AlarmWindow = AlarmWin()
         self.AlarmButton = AlarmButton(self.AlarmWindow, self)
@@ -3671,9 +3675,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
         else:
             pass
-
-
-
 
         # set Valves' widget status
 
@@ -7773,7 +7774,6 @@ class Valve(QtWidgets.QWidget):
         self.ActiveState.Label.setText("Status")
         self.HL.addWidget(self.ActiveState)
 
-
 # Defines a reusable layout containing widgets
 class Camera(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -7899,6 +7899,20 @@ class UpdateClient(QtCore.QObject):
         self.Procedure_INTLKD_ini = sec.PROCEDURE_INTLKD
         self.Procedure_EXIT_ini = sec.PROCEDURE_EXIT
 
+        self.INTLK_D_ADDRESS_ini = sec.INTLK_D_ADDRESS
+        self.INTLK_D_DIC_ini = sec.INTLK_D_DIC
+        self.INTLK_D_EN_ini = sec.INTLK_D_EN
+        self.INTLK_D_COND_ini = sec.INTLK_D_COND
+        self.INTLK_A_ADDRESS_ini = sec.INTLK_A_ADDRESS
+        self.INTLK_A_DIC_ini = sec.INTLK_A_DIC
+        self.INTLK_A_EN_ini = sec.INTLK_A_EN
+        self.INTLK_A_COND_ini = sec.INTLK_A_COND
+        self.INTLK_A_SET_ini = sec.INTLK_A_SET
+
+        self.FLAG_ADDRESS_ini = sec.FLAG_ADDRESS
+        self.FLAG_DIC_ini = sec.FLAG_DIC
+        self.FLAG_INTLKD_ini = sec.FLAG_INTLKD
+
         self.receive_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
@@ -7941,6 +7955,15 @@ class UpdateClient(QtCore.QObject):
                                               "SET1": self.LOOP2PT_SET1_ini,
                                               "SET2": self.LOOP2PT_SET2_ini,
                                               "SET3": self.LOOP2PT_SET3_ini},
+                                  "INTLK_D": {"value": self.INTLK_D_DIC_ini,
+                                              "EN": self.INTLK_D_EN_ini,
+                                              "COND": self.INTLK_D_COND_ini},
+                                  "INTLK_A": {"value":self.INTLK_A_DIC_ini,
+                                              "EN":self.INTLK_A_EN_ini,
+                                              "COND":self.INTLK_A_COND_ini,
+                                              "SET":self.INTLK_A_SET_ini},
+                                  "FLAG": {"value":self.FLAG_DIC_ini,
+                                           "INTLKD":self.FLAG_INTLKD_ini},
                                   "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini}},
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},

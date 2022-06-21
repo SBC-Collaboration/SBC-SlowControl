@@ -523,6 +523,70 @@ class AlarmStatusWidget(QtWidgets.QWidget):
             self.Alarm = False
 
 
+class INTLK_A_Widget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("INTLK_A_Widget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 200 * R, 100 * R))
+        self.setMinimumSize(200 * R, 100 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.GL.setSpacing(3)
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + "}")
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 150 * R, 60 * R))
+        self.Label.setText("Label")
+        self.GL.addWidget(self.Label, 0, 0,1,2)
+
+        self.Indicator = ColorIndicator(self)
+        self.Indicator.Label.setText("Indicator")
+        self.GL.addWidget(self.Indicator,1,0,QtCore.Qt.AlignCenter)
+
+        self.EN = DoubleButton(self)
+        self.EN.Label.setText("Low")
+        self.EN.Label.setText("Set")
+        self.EN.LButton.setText("open")
+        self.EN.RButton.setText("close")
+
+        self.GL.addWidget(self.EN,1,1,QtCore.Qt.AlignCenter)
+
+        self.COND = ColorIndicator(self)
+        self.COND.Label.setText("COND")
+
+        self.GL.addWidget(self.COND, 1, 2,QtCore.Qt.AlignCenter)
+
+        self.SET_W = SetPoint(self)
+        self.SET_W.Label.setText("SET_W")
+
+        self.GL.addWidget(self.SET_W,2,0,QtCore.Qt.AlignCenter)
+
+        self.SET_R = SetPoint(self)
+        self.SET_R.Label.setText("SET_R")
+
+        self.GL.addWidget(self.SET_R, 2, 1, QtCore.Qt.AlignCenter)
+
+        # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        self.RST = QtWidgets.QPushButton(self)
+        self.RST.setText("Active")
+        self.GL.addWidget(self.RST,2,2,QtCore.Qt.AlignCenter)
+
+
+        self.updatebutton =  QtWidgets.QPushButton(self)
+        self.updatebutton.setText("Update")
+        self.GL.addWidget(self.updatebutton,2,3,QtCore.Qt.AlignCenter)
+
+
+
+
+
 # class HeaterExpand(QtWidgets.QWidget):
 #     def __init__(self, parent=None):
 #         super().__init__(parent)
