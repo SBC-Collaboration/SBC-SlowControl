@@ -1233,7 +1233,7 @@ class UpdateDataBase(QtCore.QObject):
                     # print(self.para_alarm)
                     if self.para_alarm >= self.rate_alarm:
 
-                        # self.alarm_db.ssh_write()
+                        self.alarm_db.ssh_write()
                         self.para_alarm=0
 
                     if self.para_TT >= self.rate_TT:
