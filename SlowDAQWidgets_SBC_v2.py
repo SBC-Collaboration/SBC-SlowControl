@@ -620,8 +620,8 @@ class INTLK_LA_Widget(QtWidgets.QWidget):
 
         self.GL.addWidget(self.EN,1,0,QtCore.Qt.AlignCenter)
 
-        self.COND = ColoredStatus(self, mode= 3)
-        self.COND.Label.setText("COND")
+        self.CON = ColoredStatus(self, mode= 3)
+        self.COND.Label.setText("CON")
 
         self.GL.addWidget(self.COND, 1, 2,QtCore.Qt.AlignCenter)
 
