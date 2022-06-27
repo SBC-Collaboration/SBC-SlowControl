@@ -287,6 +287,7 @@ class SetPoint(QtWidgets.QWidget):
         self.Field.editingFinished.connect(self.UpdateValue)
         self.value = 0
         self.Field.setText(str(self.value))
+        self.Unit = " "
 
     def SetValue(self, value):
         self.value = value
