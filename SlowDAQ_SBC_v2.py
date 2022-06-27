@@ -5243,73 +5243,73 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #INTLCK indicator
         self.TT2118_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["TT2118_HI_INTLK"])
-        self.TT2118_HI_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_A"]["CON"]["TT2118_HI_INTLK"])
+        self.TT2118_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT2118_HI_INTLK"])
         self.TT2118_HI_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["TT2118_HI_INTLK"])
 
         self.TT2118_LO_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["TT2118_LO_INTLK"])
-        self.TT2118_LO_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_A"]["CON"]["TT2118_LO_INTLK"])
+        self.TT2118_LO_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT2118_LO_INTLK"])
         self.TT2118_LO_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["TT2118_LO_INTLK"])
 
         self.PT4306_LO_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4306_LO_INTLK"])
-        self.PT4306_LO_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_A"]["CON"]["PT4306_LO_INTLK"])
+        self.PT4306_LO_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4306_LO_INTLK"])
         self.PT4306_LO_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["PT4306_LO_INTLK"])
 
         self.PT4306_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4306_HI_INTLK"])
-        self.PT4306_HI_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_A"]["CON"]["PT4306_HI_INTLK"])
+        self.PT4306_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4306_HI_INTLK"])
         self.PT4306_HI_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["PT4306_HI_INTLK"])
 
         self.PT4322_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4322_HI_INTLK"])
-        self.PT4322_HI_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_A"]["CON"]["PT4322_HI_INTLK"])
+        self.PT4322_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4322_HI_INTLK"])
         self.PT4322_HI_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["PT4322_HI_INTLK"])
 
         self.PT4322_HIHI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4322_HIHI_INTLK"])
-        self.PT4322_HIHI_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_A"]["CON"]["PT4322_HIHI_INTLK"])
+        self.PT4322_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4322_HIHI_INTLK"])
         self.PT4322_HIHI_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["PT4322_HIHI_INTLK"])
 
         self.PT4319_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4319_HI_INTLK"])
-        self.PT4319_HI_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_A"]["CON"]["PT4319_HI_INTLK"])
+        self.PT4319_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4319_HI_INTLK"])
         self.PT4319_HI_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["PT4319_HI_INTLK"])
 
         self.PT4319_HIHI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4319_HIHI_INTLK"])
-        self.PT4319_HIHI_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_A"]["CON"]["PT4319_HIHI_INTLK"])
+        self.PT4319_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4319_HIHI_INTLK"])
         self.PT4319_HIHI_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["PT4319_HIHI_INTLK"])
 
 
         self.PT4325_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4325_HI_INTLK"])
-        self.PT4325_HI_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_A"]["CON"]["PT4325_HI_INTLK"])
+        self.PT4325_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4325_HI_INTLK"])
         self.PT4325_HI_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["PT4325_HI_INTLK"])
 
         self.PT4325_HIHI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4325_HIHI_INTLK"])
-        self.PT4325_HIHI_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_A"]["CON"]["PT4325_HIHI_INTLK"])
+        self.PT4325_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4325_HIHI_INTLK"])
         self.PT4325_HIHI_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["PT4325_HIHI_INTLK"])
 
         self.TS1_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["TS1_INTLK"])
-        self.TS1_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_D"]["CON"]["TS1_INTLK"])
+        self.TS1_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS1_INTLK"])
 
         self.ES3347_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["ES3347_INTLK"])
-        self.ES3347_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_D"]["CON"]["ES3347_INTLK"])
+        self.ES3347_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["ES3347_INTLK"])
 
         self.PUMP3305_OL_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["PUMP3305_OL_INTLK"])
-        self.PUMP3305_OL_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_D"]["CON"]["PUMP3305_OL_INTLK"])
+        self.PUMP3305_OL_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PUMP3305_OL_INTLK"])
 
         self.TS2_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["TS2_INTLK"])
-        self.TS2_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_D"]["CON"]["TS2_INTLK"])
+        self.TS2_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS2_INTLK"])
 
         self.TS3_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["TS3_INTLK"])
-        self.TS3_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_D"]["CON"]["TS3_INTLK"])
+        self.TS3_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS3_INTLK"])
 
         self.PU_PRIME_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["PU_PRIME_INTLK"])
-        self.PU_PRIME_INTLK.CON.UpdateColor(received_dic_c["data"]["INTLK_D"]["CON"]["PU_PRIME_INTLK"])
+        self.PU_PRIME_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PU_PRIME_INTLK"])
 
 
     @QtCore.Slot(object)
