@@ -568,10 +568,12 @@ class INTLK_RA_Widget(QtWidgets.QWidget):
 
         self.GL.addWidget(self.SET_W,2,0,QtCore.Qt.AlignCenter)
 
+
         self.SET_R = SetPoint(self)
         self.SET_R.Label.setText("SET_R")
 
         self.GL.addWidget(self.SET_R, 2, 1, QtCore.Qt.AlignCenter)
+
 
         # # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
         # self.RST = QtWidgets.QPushButton(self)
@@ -629,6 +631,12 @@ class INTLK_LA_Widget(QtWidgets.QWidget):
         self.SET_W.Label.setText("SET_W")
 
         self.GL.addWidget(self.SET_W,2,0,QtCore.Qt.AlignCenter)
+
+
+        self.SET_R = SetPoint(self)
+        self.SET_R.Label.setText("SET_R")
+
+        self.GL.addWidget(self.SET_R, 2, 1, QtCore.Qt.AlignCenter)
 
 
         # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
