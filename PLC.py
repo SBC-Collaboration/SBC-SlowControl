@@ -678,6 +678,12 @@ class PLC(QtCore.QObject):
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write base16 result=", Raw)
 
+    def WriteBase32(self, address):
+        output_BO = self.Read_BO_1(address)
+        input_BO = struct.unpack("H", output_BO)[0] | 0x0020
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        print("write base32 result=", Raw)
+
     def Reset(self, address):
         Raw = self.Client_BO.write_register(address, value=0x0010, unit=0x01)
         print("write Reset result=", Raw)
@@ -2366,6 +2372,30 @@ class UpdateServer(QtCore.QObject):
                     elif message[key]["operation"] == "SET3":
                         self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=3)
 
+                    else:
+                        pass
+                elif message[key]["type"] == "INTLK_A":
+                    if message[key]["server"] == "BO":
+                        if message[key]["operation"]=="ON":
+                            self.PLC.WriteBase8(address=message[key]["address"])
+                        elif message[key]["operation"]=="OFF":
+                            self.PLC.WriteBase16(address=message[key]["address"])
+                        elif message[key]["operation"]=="RESET":
+                            self.PLC.WriteBase32(address=message[key]["address"])
+                        elif message[key]["operation"]=="update":
+                            self.PLC.Write_BO_2(message[key]["address"]+2,message[key]["value"])
+                        else:
+                            pass
+                    elif message[key]["type"] == "INTLK_D":
+                        if message[key]["server"] == "BO":
+                            if message[key]["operation"] == "ON":
+                                self.PLC.WriteBase8(address=message[key]["address"])
+                            elif message[key]["operation"] == "OFF":
+                                self.PLC.WriteBase16(address=message[key]["address"])
+                            elif message[key]["operation"] == "RESET":
+                                self.PLC.WriteBase32(address=message[key]["address"])
+                            else:
+                                pass
                     else:
                         pass
 
