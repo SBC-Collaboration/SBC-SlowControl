@@ -4468,63 +4468,63 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.TT2118_LO_INTLK.EN.ButtonRClicked()
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT4306_LO_INTLK"]:
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"]:
 
-            self.TT4306_LO_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.TT4306_LO_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT4306_HI_INTLK"]:
-
-            self.TT4306_HI_INTLK.EN.ButtonLClicked()
+            self.PT4306_LO_INTLK.EN.ButtonLClicked()
 
         else:
-            self.TT4306_HI_INTLK.EN.ButtonRClicked()
+            self.PT4306_LO_INTLK.EN.ButtonRClicked()
 
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]:
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT4322_HI_INTLK"]:
-
-            self.TT4322_HI_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.TT4322_HI_INTLK.EN.ButtonRClicked()
-
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT4322_HIHI_INTLK"]:
-
-            self.TT4322_HIHI_INTLK.EN.ButtonLClicked()
+            self.PT4306_HI_INTLK.EN.ButtonLClicked()
 
         else:
-            self.TT4322_HIHI_INTLK.EN.ButtonRClicked()
+            self.PT4306_HI_INTLK.EN.ButtonRClicked()
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT4319_HI_INTLK"]:
 
-            self.TT4319_HI_INTLK.EN.ButtonLClicked()
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"]:
 
-        else:
-            self.TT4319_HI_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT4319_HIHI_INTLK"]:
-
-            self.TT4319_HIHI_INTLK.EN.ButtonLClicked()
+            self.PT4322_HI_INTLK.EN.ButtonLClicked()
 
         else:
-            self.TT4319_HIHI_INTLK.EN.ButtonRClicked()
+            self.PT4322_HI_INTLK.EN.ButtonRClicked()
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT4325_HI_INTLK"]:
 
-            self.TT4325_HI_INTLK.EN.ButtonLClicked()
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"]:
 
-        else:
-            self.TT4325_HI_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT4325_HIHI_INTLK"]:
-
-            self.TT4325_HIHI_INTLK.EN.ButtonLClicked()
+            self.PT4322_HIHI_INTLK.EN.ButtonLClicked()
 
         else:
-            self.TT4325_HIHI_INTLK.EN.ButtonRClicked()
+            self.PT4322_HIHI_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"]:
+
+            self.PT4319_HI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4319_HI_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"]:
+
+            self.PT4319_HIHI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4319_HIHI_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"]:
+
+            self.PT4325_HI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4325_HI_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"]:
+
+            self.PT4325_HIHI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4325_HIHI_INTLK.EN.ButtonRClicked()
 
         if received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"]:
 
