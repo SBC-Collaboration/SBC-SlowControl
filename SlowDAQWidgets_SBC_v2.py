@@ -547,7 +547,7 @@ class INTLK_RA_Widget(QtWidgets.QWidget):
         self.Label.setText("Label")
         self.GL.addWidget(self.Label, 0, 0,1,3)
 
-        self.Indicator = ColoredStatus(self, mode= 3)
+        self.Indicator = ColoredStatus(self, mode= 4)
         self.Indicator.Label.setText("Indicator")
         self.GL.addWidget(self.Indicator,0,3,QtCore.Qt.AlignCenter)
 
@@ -559,7 +559,7 @@ class INTLK_RA_Widget(QtWidgets.QWidget):
 
         self.GL.addWidget(self.EN,1,0,QtCore.Qt.AlignCenter)
 
-        self.COND = ColoredStatus(self, mode= 3)
+        self.COND = ColoredStatus(self, mode= 4)
         self.COND.Label.setText("COND")
 
         self.GL.addWidget(self.COND, 1, 2,QtCore.Qt.AlignCenter)
@@ -611,7 +611,7 @@ class INTLK_LA_Widget(QtWidgets.QWidget):
         self.Label.setText("Label")
         self.GL.addWidget(self.Label, 0, 0,1,3)
 
-        self.Indicator = ColoredStatus(self, mode= 3)
+        self.Indicator = ColoredStatus(self, mode= 4)
         self.Indicator.Label.setText("Indicator")
         self.GL.addWidget(self.Indicator,0,3,QtCore.Qt.AlignCenter)
 
@@ -623,7 +623,7 @@ class INTLK_LA_Widget(QtWidgets.QWidget):
 
         self.GL.addWidget(self.EN,1,0,QtCore.Qt.AlignCenter)
 
-        self.COND = ColoredStatus(self, mode= 3)
+        self.COND = ColoredStatus(self, mode= 4)
         self.COND.Label.setText("COND")
 
         self.GL.addWidget(self.COND, 1, 2,QtCore.Qt.AlignCenter)
@@ -674,7 +674,7 @@ class INTLK_RD_Widget(QtWidgets.QWidget):
         self.Label.setText("Label")
         self.GL.addWidget(self.Label, 0, 0,1,3)
 
-        self.Indicator = ColoredStatus(self, mode= 3)
+        self.Indicator = ColoredStatus(self, mode= 4)
         self.Indicator.Label.setText("Indicator")
         self.GL.addWidget(self.Indicator,0,3,QtCore.Qt.AlignCenter)
 
@@ -686,7 +686,7 @@ class INTLK_RD_Widget(QtWidgets.QWidget):
 
         self.GL.addWidget(self.EN,1,0,QtCore.Qt.AlignCenter)
 
-        self.COND = ColoredStatus(self, mode= 3)
+        self.COND = ColoredStatus(self, mode= 4)
         self.COND.Label.setText("COND")
 
         self.GL.addWidget(self.COND, 1, 2,QtCore.Qt.AlignCenter)
@@ -721,7 +721,7 @@ class INTLK_LD_Widget(QtWidgets.QWidget):
         self.Label.setText("Label")
         self.GL.addWidget(self.Label, 0, 0,1,3)
 
-        self.Indicator = ColoredStatus(self, mode= 3)
+        self.Indicator = ColoredStatus(self, mode= 4)
         self.Indicator.Label.setText("Indicator")
         self.GL.addWidget(self.Indicator,0,3,QtCore.Qt.AlignCenter)
 
@@ -733,7 +733,7 @@ class INTLK_LD_Widget(QtWidgets.QWidget):
 
         self.GL.addWidget(self.EN,1,0,QtCore.Qt.AlignCenter)
 
-        self.COND = ColoredStatus(self, mode= 3)
+        self.COND = ColoredStatus(self, mode= 4)
         self.COND.Label.setText("COND")
 
         self.GL.addWidget(self.COND, 1, 2,QtCore.Qt.AlignCenter)
