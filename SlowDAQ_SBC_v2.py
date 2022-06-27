@@ -4117,9 +4117,9 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
-        if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_INTLK"] != self.INTLK_D_DIC_buffer["PUMP3305_INTLK"]:
-            self.PUMP3305_INTLK.EN.ButtonTransitionState(False)
-            self.INTLK_D_DIC_buffer["PUMP3305_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_INTLK"]
+        if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"] != self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"]:
+            self.PUMP3305_OL_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]
         else:
             pass
 
