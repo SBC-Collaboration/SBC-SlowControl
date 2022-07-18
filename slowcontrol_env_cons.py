@@ -1,4 +1,5 @@
 BASE_ADDRESS= 12288
+# real address  = base+ comparative/2
 # Initialization of Address, Value Matrix
 TT_FP_ADDRESS = {"TT2420": 31000, "TT2422": 31002, "TT2424": 31004, "TT2425": 31006, "TT2442": 36000,
                               "TT2403": 31008, "TT2418": 31010, "TT2427": 31012, "TT2429": 31014, "TT2431": 32000,
