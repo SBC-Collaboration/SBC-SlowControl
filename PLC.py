@@ -584,7 +584,7 @@ class PLC(QtCore.QObject):
             #FLAG
             for key in self.FLAG_ADDRESS:
                 self.FLAG_DIC[key] = self.ReadCoil(1, self.FLAG_ADDRESS[key])
-                print("/n",self.FLAG_DIC,"/n")
+                print("\n",self.FLAG_DIC,"\n")
                 self.FLAG_INTLKD[key] = self.ReadCoil(2 ** 1, self.FLAG_ADDRESS[key])
 
             # test the writing function
