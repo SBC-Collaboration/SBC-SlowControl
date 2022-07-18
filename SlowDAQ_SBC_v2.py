@@ -2791,8 +2791,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def LButtonClicked(self,pid):
         try:
             #if there is alread a command to send to tcp server, wait the new command until last one has been sent
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if not self.commands[pid]:
+            #     time.sleep(self.command_buffer_waiting)
             # in case cannot find the pid's address
             address = self.address[pid]
             self.commands[pid]={"server":"BO","address": address, "type":"valve","operation":"OPEN", "value":1}
@@ -2808,8 +2808,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def RButtonClicked(self, pid):
 
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "CLOSE",
                               "value": 1}
@@ -2822,8 +2822,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def FLAGLButtonClicked(self, pid):
         try:
             # if there is alread a command to send to tcp server, wait the new command until last one has been sent
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             # in case cannot find the pid's address
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "FLAG", "operation": "OPEN", "value": 1}
@@ -2837,8 +2837,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def FLAGRButtonClicked(self, pid):
 
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "FLAG", "operation": "CLOSE",
                                   "value": 1}
@@ -2850,8 +2850,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def SwitchLButtonClicked(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "switch", "operation": "ON", "value": 1}
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
@@ -2863,8 +2863,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def SwitchRButtonClicked(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "switch", "operation": "OFF",
                               "value": 1}
@@ -2877,8 +2877,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def INTLK_A_LButtonClicked(self, pid):
         try:
 
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "ON", "value": 1}
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
@@ -2890,8 +2890,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_A_RButtonClicked(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "OFF",
                               "value": 1}
@@ -2903,8 +2903,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_A_RESET(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "RESET",
                                   "value": 1}
@@ -2916,8 +2916,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_A_update(self, pid,value):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "update",
                                   "value": float(value)}
@@ -2929,8 +2929,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_D_LButtonClicked(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_D", "operation": "ON", "value": 1}
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
@@ -2942,8 +2942,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_D_RButtonClicked(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_D", "operation": "OFF",
                                   "value": 1}
@@ -2955,8 +2955,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_D_RESET(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_D", "operation": "RESET",
                                   "value": 1}
@@ -2968,8 +2968,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTLButtonClicked(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_power", "operation": "OPEN", "value": 1}
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
@@ -2982,8 +2982,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTRButtonClicked(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_power", "operation": "CLOSE",
                                   "value": 1}
@@ -2995,8 +2995,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTSet(self, pid, value):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value in [0, 1, 2, 3]:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT", "operation": "SETMODE", "value": value}
@@ -3010,8 +3010,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTSETPOINTSet(self, pid, value1, value2):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value1 == 1:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT",
@@ -3032,8 +3032,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTGroupButtonClicked(self, pid, setN):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if setN == 0:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_setmode",
@@ -3057,8 +3057,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTupdate(self, pid, modeN, setpoint):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if modeN == 'MODE0':
                 self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_para",
@@ -3082,8 +3082,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRupdate(self,pid, modeN, setpoint, HI, LO):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if modeN == 'MODE0':
                 self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
@@ -3110,8 +3110,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTLButtonClicked(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "heater_power", "operation": "EN",
                               "value": 1}
@@ -3123,8 +3123,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRButtonClicked(self, pid):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "heater_power", "operation": "DISEN",
                               "value": 1}
@@ -3137,8 +3137,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def HTSwitchSet(self, pid, value):
         try:
 
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value in [0,1,2,3]:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "heater", "operation": "SETMODE", "value": value}
@@ -3151,8 +3151,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTHISet(self, pid, value):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
                                   "operation": "HI_LIM", "value": value}
@@ -3164,8 +3164,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTLOSet(self, pid, value):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
                               "operation": "LO_LIM", "value": value}
@@ -3177,8 +3177,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTSETPOINTSet(self, pid, value1, value2):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value1 == 0:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
@@ -3202,8 +3202,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRGroupButtonClicked(self, pid, setN):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if setN == 0:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "heater_setmode",
@@ -3227,8 +3227,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRupdate(self,pid, modeN, setpoint, HI, LO):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if modeN == 'MODE0':
                 self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
@@ -3258,8 +3258,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def BOTTBoxUpdate(self,pid, Act,LowLimit, HighLimit,update=True):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid]={"server": "BO", "address": address, "type": "TT", "operation": {"Act":Act,
                                 "LowLimit":float(LowLimit),"HighLimit":float(HighLimit),"Update":update}}
@@ -3270,8 +3270,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def FPTTBoxUpdate(self,pid, Act,LowLimit, HighLimit,update=True):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid]={"server": "FP", "address": address, "type": "TT", "operation": {"Act":Act,
                                 "LowLimit":float(LowLimit),"HighLimit":float(HighLimit),"Update":update}}
@@ -3282,8 +3282,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def PTBoxUpdate(self, pid, Act, LowLimit, HighLimit,update=True):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "PT", "operation": {"Act": Act,
                                                                                                         "LowLimit": float(LowLimit), "HighLimit": float(HighLimit),"Update":update}}
@@ -3294,8 +3294,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LEFTBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "LEFT", "operation": {"Act": Act,
                                                                                                   "LowLimit": float(LowLimit), "HighLimit": float(HighLimit), "Update": update}}
@@ -3306,8 +3306,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def ProcedureClick(self, pid, start, stop, abort):
         try:
-            if self.commands[pid] != None:
-                time.sleep(self.command_buffer_waiting)
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "Procedure", "operation": {"Start": start, "Stop": stop, "Abort": abort}}
             print(pid, start, stop, abort, "ARE OK?")
