@@ -2386,16 +2386,21 @@ class UpdateServer(QtCore.QObject):
                             self.PLC.Write_BO_2(message[key]["address"]+2,message[key]["value"])
                         else:
                             pass
-                    elif message[key]["type"] == "INTLK_D":
-                        if message[key]["server"] == "BO":
-                            if message[key]["operation"] == "ON":
-                                self.PLC.WriteBase8(address=message[key]["address"])
-                            elif message[key]["operation"] == "OFF":
-                                self.PLC.WriteBase16(address=message[key]["address"])
-                            elif message[key]["operation"] == "RESET":
-                                self.PLC.WriteBase32(address=message[key]["address"])
-                            else:
-                                pass
+                elif message[key]["type"] == "INTLK_D":
+                    if message[key]["server"] == "BO":
+                        if message[key]["operation"] == "ON":
+                            self.PLC.WriteBase8(address=message[key]["address"])
+                        elif message[key]["operation"] == "OFF":
+                            self.PLC.WriteBase16(address=message[key]["address"])
+                        elif message[key]["operation"] == "RESET":
+                            self.PLC.WriteBase32(address=message[key]["address"])
+                        else:
+                            pass
+                elif message[key]["type"] == "FLAG":
+                    if message[key]["operation"] == "OPEN":
+                        self.PLC.WriteBase4(address=message[key]["address"])
+                    elif message[key]["operation"] == "CLOSE":
+                        self.PLC.WriteBase8(address=message[key]["address"])
                     else:
                         pass
 

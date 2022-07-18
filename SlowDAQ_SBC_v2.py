@@ -854,6 +854,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRESSURE_CYCLE.Group.setTitle("PRESSURE_CYCLE")
         self.PRESSURE_CYCLE.objectname = "PRESSURE_CYCLE"
 
+        self.MAN_TS = Flag(self.DatanSignalTab)
+        self.MAN_TS.move(1300 * R, 390 * R)
+        self.MAN_TS.Label.setText("MAN_TS")
+
+
+        self.MAN_HYD = Flag(self.DatanSignalTab)
+        self.MAN_HYD.move(1300 * R, 500 * R)
+        self.MAN_HYD.Label.setText("MAN_HYD")
+
 
         self.TT2118_HI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
         self.TT2118_HI_INTLK.move(10 * R, 10 * R)
@@ -954,7 +963,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #commands stack
         self.address =sec.merge_dic(sec.TT_FP_ADDRESS,sec.TT_BO_ADDRESS,sec.PT_ADDRESS,sec.LEFT_REAL_ADDRESS,
                                                      sec.DIN_ADDRESS,sec.VALVE_ADDRESS,sec.LOOPPID_ADR_BASE,sec.LOOP2PT_ADR_BASE,sec.PROCEDURE_ADDRESS, sec.INTLK_A_ADDRESS,
-                                    sec.INTLK_D_ADDRESS)
+                                    sec.INTLK_D_ADDRESS,sec.FLAG_ADDRESS)
         self.commands = {}
         self.command_buffer_waiting= 1
         # self.statustransition={}
@@ -966,6 +975,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LOOP2PT_OUT_buffer =sec.LOOP2PT_OUT
         self.INTLK_D_DIC_buffer = sec.INTLK_D_DIC
         self.INTLK_A_DIC_buffer = sec.INTLK_A_DIC
+        self.FLAG_buffer = sec.FLAG_DIC
 
 
         self.BORTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111, self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118,
@@ -2737,6 +2747,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PU_PRIME_INTLK.RST.clicked.connect(
             lambda x: self.INTLK_D_RESET(self.PU_PRIME_INTLK.Label.text() + "_INTLK"))
 
+        #FLAG
+        self.MAN_TS.Set.LButton.clicked.connect(
+            lambda x: self.FLAGLButtonClicked(self.MAN_TS.Label.text()))
+        self.MAN_TS.Set.RButton.clicked.connect(
+            lambda x: self.FLAGRButtonClicked(self.MAN_TS.Label.text()))
+
+        self.MAN_HYD.Set.LButton.clicked.connect(
+            lambda x: self.FLAGLButtonClicked(self.MAN_HYD.Label.text()))
+        self.MAN_HYD.Set.RButton.clicked.connect(
+            lambda x: self.FLAGRButtonClicked(self.MAN_HYD.Label.text()))
+
+
 
 
         #Procedure widgets
@@ -2791,6 +2813,35 @@ class MainWindow(QtWidgets.QMainWindow):
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "CLOSE",
                               "value": 1}
+            print(self.commands)
+            print(pid, "R Button is clicked")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def FLAGLButtonClicked(self, pid):
+        try:
+            # if there is alread a command to send to tcp server, wait the new command until last one has been sent
+            if self.commands[pid] != None:
+                time.sleep(self.command_buffer_waiting)
+            # in case cannot find the pid's address
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "FLAG", "operation": "OPEN", "value": 1}
+            # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
+            print(self.commands)
+            print(pid, "LButton is clicked")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def FLAGRButtonClicked(self, pid):
+
+        try:
+            if self.commands[pid] != None:
+                time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "FLAG", "operation": "CLOSE",
+                                  "value": 1}
             print(self.commands)
             print(pid, "R Button is clicked")
         except Exception as e:
@@ -3922,6 +3973,31 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
+        # FLAG
+        if received_dic_c["data"]["FLAG"]["INTLKD"]["MAN_TS"]:
+
+            self.MAN_TS.INTLK.UpdateColor(True)
+        else:
+            self.MAN_TS.INTLK.UpdateColor(False)
+
+        if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"] != self.FLAG_buffer["MAN_TS"]:
+            self.MAN_TS.Set.ButtonTransitionState(False)
+            self.self.FLAG_buffer["MAN_TS"] = received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]
+        else:
+            pass
+
+        if received_dic_c["data"]["FLAG"]["INTLKD"]["MAN_HYD"]:
+
+            self.MAN_HYD.INTLK.UpdateColor(True)
+        else:
+            self.MAN_HYD.INTLK.UpdateColor(False)
+
+        if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"] != self.FLAG_buffer["MAN_HYD"]:
+            self.MAN_HYD.Set.ButtonTransitionState(False)
+            self.self.FLAG_buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
+        else:
+            pass
+
         # if received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"] != self.Switch_buffer["PUMP3305"]:
         #     self.PUMP3305.Set.ButtonTransitionState(False)
         #     self.Switch_buffer["PUMP3305"] = received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"]
@@ -4302,6 +4378,20 @@ class MainWindow(QtWidgets.QMainWindow):
         #     self.PUMP3305.Set.ButtonLClicked()
         # else:
         #     self.PUMP3305.Set.ButtonRClicked()
+
+
+
+#      FLAGs
+        if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]:
+            self.MAN_TS.Set.ButtonLClicked()
+        else:
+            self.MAN_TS.Set.ButtonRClicked()
+
+
+        if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
+            self.MAN_HYD.Set.ButtonLClicked()
+        else:
+            self.MAN_HYD.Set.ButtonRClicked()
 
         # set LOOPPID double button status ON/OFF also the status in the subwindow
 

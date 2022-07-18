@@ -44,7 +44,7 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-fami
               "\"Calibri\"; font-size: 14px; font-weight: bold;"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
                " border-color: black;"
-TITLE_STYLE = "background-color: rgb(204,204,204); "
+# TITLE_STYLE = "background-color: rgb(204,204,204); "
 # BORDER_STYLE = " "
 # FONT = " font-size: 14px;"
 # TITLE_STYLE = "background-color: rgb(204,204,204);  " \
@@ -838,6 +838,44 @@ class INTLK_LD_Widget(QtWidgets.QWidget):
 #         # self.GL.addWidget(self.updatebutton,1,14)
 
 
+
+# Defines a reusable layout containing widget
+class Flag(QtWidgets.QWidget):
+    def __init__(self, parent=None, mode=4):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.VL = QtWidgets.QVBoxLayout(self)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        self.VL.setSpacing(3)
+
+
+        self.HL = QtWidgets.QHBoxLayout()
+        self.HL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.VL.addLayout(self.HL)
+
+        self.Label = QtWidgets.QLabel(self)
+        # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 200 * R, 40 * R))
+        self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setText("Label")
+        # self.Label.setSizePolicy(sizePolicy)
+        self.HL.addWidget(self.Label)
+
+
+        self.Set = DoubleButton(self)
+        self.Set.Label.setText("Set")
+        self.Set.LButton.setText("open")
+        self.Set.RButton.setText("close")
+        self.VL.addWidget(self.Set)
+
+        self.INTLK = ColoredStatus(self, mode)
+        # self.ActiveState = ColorIndicator(self) for test the function
+        self.INTLK.Label.setText("INTLK")
+        self.HL.addWidget(self.INTLK)
 
 
 class BoolIndicator(QtWidgets.QWidget):
