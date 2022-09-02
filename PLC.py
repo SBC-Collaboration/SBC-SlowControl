@@ -1609,8 +1609,8 @@ class UpdateDataBase(QtCore.QObject):
                     # for key in self.FLAG_INTLKD:
                     #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
                     #     if self.FLAG_INTLKD[key] != self.FLAG_INTLKD_buffer[key]:
-                    #         self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.FLAG_INTLKD_buffer[key])
-                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_INTLKD[key])
+                    #         self.db.insert_data_into_datastorage_wocommit(key+'_INTLKD', self.early_dt, self.FLAG_INTLKD_buffer[key])
+                    #         self.db.insert_data_into_datastorage_wocommit(key+'_INTLKD', self.dt, self.FLAG_INTLKD[key])
                     #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_DIC[key])
                     #         self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
                     #         self.commit_bool = True
@@ -1621,73 +1621,73 @@ class UpdateDataBase(QtCore.QObject):
                     # if self.para_FLAG >= self.rate_FLAG:
                     #     for key in self.FLAG_INTLKD:
                     #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_DIC[key])
-                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_INTLKD[key])
+                    #         self.db.insert_data_into_datastorage_wocommit(key+'_INTLKD', self.dt, self.FLAG_INTLKD[key])
                     #         self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
                     #         self.commit_bool = True
                     #     self.para_FLAG = 0
                     #
 
                     # FF
-                    for key in self.FF_DIC:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.FF_DIC[key] != self.FF_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.FF_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FF_DIC[key])
-                            self.FF_buffer[key] = self.FF_DIC[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    if self.para_FF >= self.rate_FF:
-                        for key in self.FF_DIC:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FF_DIC[key])
-                            self.FF_buffer[key] = self.FF_DIC[key]
-                            self.commit_bool = True
-                        self.para_FF = 0
-
-                    # PARAM_B
-                    for key in self.PARAM_B_DIC:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PARAM_B_DIC[key] != self.PARAM_B_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.PARAM_B_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_B_DIC[key])
-                            self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    if self.para_PARAM_B >= self.rate_PARAM_B:
-                        for key in self.PARAM_B_DIC:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_B_DIC[key])
-                            self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
-                            self.commit_bool = True
-                        self.para_PARAM_B = 0
-
-                    # other parameters I/F/T
-                    if self.para_PARAM_F >= self.rate_PARAM_F:
-                        for key in self.PARAM_F_DIC:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_F_DIC[key])
-                            self.PARAM_F_buffer[key] = self.PARAM_F_DIC[key]
-                            self.commit_bool = True
-                        self.para_PARAM_F = 0
-
-
-                    if self.para_PARAM_I >= self.rate_PARAM_I:
-                        for key in self.PARAM_I_DIC:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_I_DIC[key])
-                            self.PARAM_I_buffer[key] = self.PARAM_I_DIC[key]
-                            self.commit_bool = True
-                        self.para_PARAM_I = 0
-
-
-                    if self.para_PARAM_T >= self.rate_PARAM_T:
-                        for key in self.PARAM_T_DIC:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_T_DIC[key])
-                            self.PARAM_T_buffer[key] = self.PARAM_T_DIC[key]
-                            self.commit_bool = True
-                        self.para_PARAM_T = 0
+                    # for key in self.FF_DIC:
+                    #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                    #     if self.FF_DIC[key] != self.FF_buffer[key]:
+                    #         self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.FF_buffer[key])
+                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FF_DIC[key])
+                    #         self.FF_buffer[key] = self.FF_DIC[key]
+                    #         self.commit_bool = True
+                    #         # print(self.Valve_OUT[key])
+                    #     else:
+                    #         pass
+                    #
+                    # if self.para_FF >= self.rate_FF:
+                    #     for key in self.FF_DIC:
+                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FF_DIC[key])
+                    #         self.FF_buffer[key] = self.FF_DIC[key]
+                    #         self.commit_bool = True
+                    #     self.para_FF = 0
+                    #
+                    # # PARAM_B
+                    # for key in self.PARAM_B_DIC:
+                    #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                    #     if self.PARAM_B_DIC[key] != self.PARAM_B_buffer[key]:
+                    #         self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.PARAM_B_buffer[key])
+                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_B_DIC[key])
+                    #         self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
+                    #         self.commit_bool = True
+                    #         # print(self.Valve_OUT[key])
+                    #     else:
+                    #         pass
+                    #
+                    # if self.para_PARAM_B >= self.rate_PARAM_B:
+                    #     for key in self.PARAM_B_DIC:
+                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_B_DIC[key])
+                    #         self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
+                    #         self.commit_bool = True
+                    #     self.para_PARAM_B = 0
+                    #
+                    # # other parameters I/F/T
+                    # if self.para_PARAM_F >= self.rate_PARAM_F:
+                    #     for key in self.PARAM_F_DIC:
+                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_F_DIC[key])
+                    #         self.PARAM_F_buffer[key] = self.PARAM_F_DIC[key]
+                    #         self.commit_bool = True
+                    #     self.para_PARAM_F = 0
+                    #
+                    #
+                    # if self.para_PARAM_I >= self.rate_PARAM_I:
+                    #     for key in self.PARAM_I_DIC:
+                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_I_DIC[key])
+                    #         self.PARAM_I_buffer[key] = self.PARAM_I_DIC[key]
+                    #         self.commit_bool = True
+                    #     self.para_PARAM_I = 0
+                    #
+                    #
+                    # if self.para_PARAM_T >= self.rate_PARAM_T:
+                    #     for key in self.PARAM_T_DIC:
+                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_T_DIC[key])
+                    #         self.PARAM_T_buffer[key] = self.PARAM_T_DIC[key]
+                    #         self.commit_bool = True
+                    #     self.para_PARAM_T = 0
 
 
                     if self.para_TIME >= self.rate_TIME:
