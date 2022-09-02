@@ -1366,14 +1366,14 @@ class UpdateDataBase(QtCore.QObject):
                         self.alarm_db.ssh_write()
                         self.para_alarm=0
 
-                    if self.PARAM_TT >= self.rate_TT:
+                    if self.para_TT >= self.rate_TT:
                         for key in self.TT_FP_dic:
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_FP_dic[key])
                         for key in self.TT_BO_dic:
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_BO_dic[key])
                         # print("write RTDS")
                         self.commit_bool = True
-                        self.PARAM_TT = 0
+                        self.para_TT = 0
                     # print(1)
                     if self.para_PT >= self.rate_PT:
                         for key in self.PT_dic:
@@ -1698,7 +1698,7 @@ class UpdateDataBase(QtCore.QObject):
                         self.para_TIME = 0
 
 
-                    # print("a",self.PARAM_TT,"b",self.para_PT )
+                    # print("a",self.para_TT,"b",self.para_PT )
                     # print(8)
 
                     #commit the changes at last step only if it is time to write
@@ -1707,7 +1707,7 @@ class UpdateDataBase(QtCore.QObject):
                     print("Wrting PLC data to database...")
                     self.para_alarm += 1
 
-                    self.PARAM_TT += 1
+                    self.para_TT += 1
                     self.para_PT += 1
                     self.para_Valve += 1
                     self.para_Switch += 1
