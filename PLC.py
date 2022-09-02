@@ -1669,7 +1669,7 @@ class UpdateDataBase(QtCore.QObject):
                     # if self.para_PARAM_F >= self.rate_PARAM_F:
                     #     for key in self.PARAM_F_DIC:
                     #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_F_DIC[key])
-                    #         self.PARAM_F_buffer[key] = self.PARAM_F_DIC[key]
+                    #
                     #         self.commit_bool = True
                     #     self.para_PARAM_F = 0
                     #
@@ -1677,7 +1677,7 @@ class UpdateDataBase(QtCore.QObject):
                     # if self.para_PARAM_I >= self.rate_PARAM_I:
                     #     for key in self.PARAM_I_DIC:
                     #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_I_DIC[key])
-                    #         self.PARAM_I_buffer[key] = self.PARAM_I_DIC[key]
+                    #
                     #         self.commit_bool = True
                     #     self.para_PARAM_I = 0
                     #
@@ -1685,7 +1685,7 @@ class UpdateDataBase(QtCore.QObject):
                     # if self.para_PARAM_T >= self.rate_PARAM_T:
                     #     for key in self.PARAM_T_DIC:
                     #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_T_DIC[key])
-                    #         self.PARAM_T_buffer[key] = self.PARAM_T_DIC[key]
+                    #
                     #         self.commit_bool = True
                     #     self.para_PARAM_T = 0
 
@@ -1693,7 +1693,7 @@ class UpdateDataBase(QtCore.QObject):
                     if self.para_TIME >= self.rate_TIME:
                         for key in self.TIME_DIC:
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TIME_DIC[key])
-                            self.TIME_buffer[key] = self.TIME_DIC[key]
+
                             self.commit_bool = True
                         self.para_TIME = 0
 
