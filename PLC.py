@@ -216,6 +216,10 @@ class PLC(QtCore.QObject):
         self.INTLK_A_COND = sec.INTLK_A_COND
         self.INTLK_A_SET = sec.INTLK_A_SET
 
+        self.FLAG_ADDRESS = sec.FLAG_ADDRESS
+        self.FLAG_DIC = sec.FLAG_DIC
+        self.FLAG_INTLKD = sec.FLAG_INTLKD
+
         self.FF_ADDRESS = sec.FF_ADDRESS
         self.FF_DIC = sec.FF_DIC
 
