@@ -216,9 +216,24 @@ class PLC(QtCore.QObject):
         self.INTLK_A_COND = sec.INTLK_A_COND
         self.INTLK_A_SET = sec.INTLK_A_SET
 
-        self.FLAG_ADDRESS = sec.FLAG_ADDRESS
-        self.FLAG_DIC = sec.FLAG_DIC
-        self.FLAG_INTLKD = sec.FLAG_INTLKD
+        self.FF_ADDRESS = sec.FF_ADDRESS
+        self.FF_DIC = sec.FF_DIC
+
+        self.PARAM_F_ADDRESS = sec.PARAM_F_ADDRESS
+        self.PARAM_F_DIC = sec.PARAM_F_DIC
+
+        self.PARAM_I_ADDRESS = sec.PARAM_I_ADDRESS
+        self.PARAM_I_DIC = sec.PARAM_I_DIC
+
+        self.PARAM_B_ADDRESS = sec.PARAM_B_ADDRESS
+        self.PARAM_B_DIC = sec.PARAM_B_DIC
+
+        self.PARAM_T_ADDRESS = sec.PARAM_T_ADDRESS
+        self.PARAM_T_DIC = sec.PARAM_T_DIC
+
+        self.TIME_ADDRESS = sec.TIME_ADDRESS
+        self.TIME_DIC = sec.TIME_DIC
+
 
         self.signal_data = {  "TT_FP_address":self.TT_FP_address,
                               "TT_BO_address":self.TT_BO_address,
@@ -317,8 +332,19 @@ class PLC(QtCore.QObject):
                               "INTLK_A_SET":self.INTLK_A_SET,
                               "FLAG_ADDRESS":self.FLAG_ADDRESS,
                               "FLAG_DIC":self.FLAG_DIC,
-                              "FLAG_INTLKD":self.FLAG_INTLKD
-                                                            }
+                              "FLAG_INTLKD":self.FLAG_INTLKD,
+                              "FF_ADDRESS": self.FF_ADDRESS,
+                              "FF_DIC": self.FF_DIC,
+                              "PARAM_F_ADDRESS": self.PARAM_F_ADDRESS,
+                              "PARAM_F_DIC": self.PARAM_F_DIC,
+                              "PARAM_I_ADDRESS": self.PARAM_I_ADDRESS,
+                              "PARAM_I_DIC": self.PARAM_I_DIC,
+                              "PARAM_B_ADDRESS": self.PARAM_B_ADDRESS,
+                              "PARAM_B_DIC": self.PARAM_B_DIC,
+                              "PARAM_T_ADDRESS": self.PARAM_T_ADDRESS,
+                              "PARAM_T_DIC": self.PARAM_T_DIC,
+                              "TIME_ADDRESS": self.TIME_ADDRESS,
+                              "TIME_DIC": self.TIME_DIC}
 
         self.LiveCounter = 0
         self.NewData_Display = False
@@ -586,6 +612,70 @@ class PLC(QtCore.QObject):
                 self.FLAG_DIC[key] = self.ReadCoil(1, self.FLAG_ADDRESS[key])
                 print("\n",self.FLAG_DIC,"\n")
                 self.FLAG_INTLKD[key] = self.ReadCoil(2 ** 1, self.FLAG_ADDRESS[key])
+
+
+
+            #######################################################################################################
+
+            ##FF
+            Raw_FF = {}
+            for key in self.FF_ADDRESS:
+                Raw_FF[key] = self.Client_BO.read_holding_registers(self.FF_ADDRESS[key], count=2, unit=0x01)
+                self.FF_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_FF[key].getRegister(1),Raw_FF[key].getRegister(0)))[0]
+                
+            print("FF",self.FF_DIC)
+
+
+
+            ## PARAMETER
+            Raw_PARAM_F= {}
+            for key in self.PARAM_F_ADDRESS:
+                Raw_PARAM_F[key] = self.Client_BO.read_holding_registers(self.PARAM_F_ADDRESS[key], count=2, unit=0x01)
+                self.PARAM_F_DIC[key] = struct.unpack(">f", struct.pack(">HH", Raw_PARAM_F[key].getRegister(1), Raw_PARAM_F[key].getRegister(0)))[0]
+
+            print("PARAM_F", self.PARAM_F_DIC)
+
+            Raw_PARAM_I = {}
+            for key in self.PARAM_I_ADDRESS:
+                Raw_PARAM_I[key] = self.Client_BO.read_holding_registers(self.PARAM_I_ADDRESS[key], count=1, unit=0x01)
+                self.PARAM_I_DIC[key] = Raw_PARAM_I[key].getRegister(0)
+
+            print("PARAM_I", self.PARAM_I_DIC)
+
+            for key in self.PARAM_B_ADDRESS:
+                self.PARAM_B_DIC[key] = self.ReadCoil(2 ** self.INTLK_D_ADDRESS[key][1], self.INTLK_D_ADDRESS[key][0])
+
+            print("PARAM_B", self.PARAM_B_DIC)
+            
+            Raw_PARAM_T = {}
+            for key in self.PARAM_T_ADDRESS:
+                Raw_PARAM_T[key] = self.Client_BO.read_holding_registers(self.PARAM_T_ADDRESS[key], count=2, unit=0x01)
+                self.PARAM_T_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_PARAM_T[key].getRegister(1), Raw_PARAM_T[key].getRegister(0)))[0]
+
+            print("PARAM_T", self.PARAM_T_DIC)
+
+
+
+            ###TIME
+            Raw_TIME = {}
+            for key in self.TIME_ADDRESS:
+                Raw_TIME[key] = self.Client_BO.read_holding_registers(self.TIME_ADDRESS[key], count=2, unit=0x01)
+                self.TIME_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_TIME[key].getRegister(1), Raw_TIME[key].getRegister(0)))[0]
+            print("TIME", self.TIME_DIC)
+            
+
+
+
+
+            #########################################################################################################
+
+
+
+
+
+
+
+            ##########################################################################################################
 
             # test the writing function
             # print(self.Read_BO_2(14308))
@@ -1063,7 +1153,7 @@ class UpdateDataBase(QtCore.QObject):
 
         self.para_alarm = 0
         self.rate_alarm = 10
-        self.para_TT = 0
+        self.PARAM_TT = 0
         self.rate_TT = 90
         self.para_PT = 0
         self.rate_PT = 90
@@ -1086,6 +1176,19 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_INTLK_A = 90
         self.para_INTLK_D = 0
         self.rate_INTLK_D = 90
+        self.para_FF = 0
+        self.rate_FF = 90
+        self.para_PARAM_F = 0
+        self.rate_PARAM_F = 90
+        self.para_PARAM_I = 0
+        self.rate_PARAM_I = 90
+        self.para_PARAM_B = 0
+        self.rate_PARAM_B = 90
+        self.para_PARAM_T = 0
+        self.rate_PARAM_T = 90
+        self.para_TIME = 0
+        self.rate_TIME = 90
+
         #status initialization
         self.status = False
 
@@ -1192,9 +1295,24 @@ class UpdateDataBase(QtCore.QObject):
         # self.INTLK_A_COND = sec.INTLK_A_COND
         # self.INTLK_A_SET = sec.INTLK_A_SET
         #
-        # self.FLAG_ADDRESS = sec.FLAG_ADDRESS
-        # self.FLAG_DIC = sec.FLAG_DIC
-        # self.FLAG_INTLKD = sec.FLAG_INTLKD
+        self.FLAG_ADDRESS = sec.FLAG_ADDRESS
+        self.FLAG_DIC = sec.FLAG_DIC
+        self.FLAG_INTLKD = sec.FLAG_INTLKD
+
+        self.FF_ADDRESS = sec.FF_ADDRESS
+        self.FF_DIC = sec.FF_DIC
+
+        self.PARAM_F_ADDRESS = sec.PARAM_F_ADDRESS
+        self.PARAM_F_DIC = sec.PARAM_F_DIC
+        self.PARAM_I_ADDRESS = sec.PARAM_I_ADDRESS
+        self.PARAM_I_DIC = sec.PARAM_I_DIC
+        self.PARAM_B_ADDRESS = sec.PARAM_B_ADDRESS
+        self.PARAM_B_DIC = sec.PARAM_B_DIC
+        self.PARAM_T_ADDRESS = sec.PARAM_T_ADDRESS
+        self.PARAM_T_DIC = sec.PARAM_T_DIC
+        self.TIME_ADDRESS = sec.TIME_ADDRESS
+        self.TIME_DIC = sec.TIME_DIC
+
 
 
         # BUFFER parts
@@ -1215,6 +1333,10 @@ class UpdateDataBase(QtCore.QObject):
         self.LOOP2PT_MODE2_buffer = sec.LOOP2PT_MODE2
         self.LOOP2PT_MODE3_buffer = sec.LOOP2PT_MODE3
         self.LOOP2PT_OUT_buffer = sec.LOOP2PT_OUT
+
+        self.FF_buffer = sec.FF_DIC
+        self.PARAM_B_buffer = sec.PARAM_B_DIC
+
 
         print("begin updating Database")
 
@@ -1237,14 +1359,14 @@ class UpdateDataBase(QtCore.QObject):
                         self.alarm_db.ssh_write()
                         self.para_alarm=0
 
-                    if self.para_TT >= self.rate_TT:
+                    if self.PARAM_TT >= self.rate_TT:
                         for key in self.TT_FP_dic:
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_FP_dic[key])
                         for key in self.TT_BO_dic:
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_BO_dic[key])
                         # print("write RTDS")
                         self.commit_bool = True
-                        self.para_TT = 0
+                        self.PARAM_TT = 0
                     # print(1)
                     if self.para_PT >= self.rate_PT:
                         for key in self.PT_dic:
@@ -1475,7 +1597,78 @@ class UpdateDataBase(QtCore.QObject):
                             self.commit_bool = True
                         self.para_REAL = 0
 
-                    # print("a",self.para_TT,"b",self.para_PT )
+                    # FF
+                    for key in self.FF_DIC:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.FF_DIC[key] != self.FF_buffer[key]:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.FF_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FF_DIC[key])
+                            self.FF_buffer[key] = self.FF_DIC[key]
+                            self.commit_bool = True
+                            # print(self.Valve_OUT[key])
+                        else:
+                            pass
+
+                    if self.para_FF >= self.rate_FF:
+                        for key in self.FF_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FF_DIC[key])
+                            self.FF_buffer[key] = self.FF_DIC[key]
+                            self.commit_bool = True
+                        self.para_FF = 0
+
+                    # PARAM_B
+                    for key in self.PARAM_B_DIC:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.PARAM_B_DIC[key] != self.PARAM_B_buffer[key]:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.PARAM_B_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_B_DIC[key])
+                            self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
+                            self.commit_bool = True
+                            # print(self.Valve_OUT[key])
+                        else:
+                            pass
+
+                    if self.para_PARAM_B >= self.rate_PARAM_B:
+                        for key in self.PARAM_B_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_B_DIC[key])
+                            self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
+                            self.commit_bool = True
+                        self.para_PARAM_B = 0
+
+                    # other parameters I/F/T
+                    if self.para_PARAM_F >= self.rate_PARAM_F:
+                        for key in self.PARAM_F_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_F_DIC[key])
+                            self.PARAM_F_buffer[key] = self.PARAM_F_DIC[key]
+                            self.commit_bool = True
+                        self.para_PARAM_F = 0
+
+
+                    if self.para_PARAM_I >= self.rate_PARAM_I:
+                        for key in self.PARAM_I_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_I_DIC[key])
+                            self.PARAM_I_buffer[key] = self.PARAM_I_DIC[key]
+                            self.commit_bool = True
+                        self.para_PARAM_I = 0
+
+
+                    if self.para_PARAM_T >= self.rate_PARAM_T:
+                        for key in self.PARAM_T_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_T_DIC[key])
+                            self.PARAM_T_buffer[key] = self.PARAM_T_DIC[key]
+                            self.commit_bool = True
+                        self.para_PARAM_T = 0
+
+
+                    if self.para_TIME >= self.rate_TIME:
+                        for key in self.TIME_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TIME_DIC[key])
+                            self.TIME_buffer[key] = self.TIME_DIC[key]
+                            self.commit_bool = True
+                        self.para_TIME = 0
+
+
+                    # print("a",self.PARAM_TT,"b",self.para_PT )
                     # print(8)
 
                     #commit the changes at last step only if it is time to write
@@ -1484,7 +1677,7 @@ class UpdateDataBase(QtCore.QObject):
                     print("Wrting PLC data to database...")
                     self.para_alarm += 1
 
-                    self.para_TT += 1
+                    self.PARAM_TT += 1
                     self.para_PT += 1
                     self.para_Valve += 1
                     self.para_Switch += 1
@@ -1632,6 +1825,22 @@ class UpdateDataBase(QtCore.QObject):
             self.Procedure_INTLKD[key] = dic["Procedure_INTLKD"][key]
         for key in self.Procedure_EXIT:
             self.Procedure_EXIT[key] = dic["Procedure_EXIT"][key]
+        for key in self.FLAG_DIC:
+            self.FLAG_DIC[key] = dic["FLAG_DIC"][key]
+        for key in self.FLAG_INTLKD:
+            self.FLAG_INTLKD[key] = dic["FLAG_INTLKD"][key]
+        for key in self.FF_DIC:
+            self.FF_DIC[key] = dic["FF_DIC"][key]
+        for key in self.PARAM_F_DIC:
+            self.PARAM_F_DIC[key] = dic["PARAM_F_DIC"][key]
+        for key in self.PARAM_I_DIC:
+            self.PARAM_I_DIC[key] = dic["PARAM_I_DIC"][key]
+        for key in self.PARAM_B_DIC:
+            self.PARAM_B_DIC[key] = dic["PARAM_B_DIC"][key]
+        for key in self.PARAM_T_DIC:
+            self.PARAM_T_DIC[key] = dic["PARAM_T_DIC"][key]
+        for key in self.TIME_DIC:
+            self.TIME_DIC[key] = dic["TIME_DIC"][key]
 
         self.MainAlarm = dic["MainAlarm"]
         print("Database received the data from PLC")
