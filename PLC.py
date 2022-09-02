@@ -627,7 +627,7 @@ class PLC(QtCore.QObject):
                 Raw_FF[key] = self.Client_BO.read_holding_registers(self.FF_ADDRESS[key], count=2, unit=0x01)
                 self.FF_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_FF[key].getRegister(1),Raw_FF[key].getRegister(0)))[0]
                 
-            print("FF",self.FF_DIC)
+            # print("FF",self.FF_DIC)
 
 
 
@@ -637,27 +637,27 @@ class PLC(QtCore.QObject):
                 Raw_PARAM_F[key] = self.Client_BO.read_holding_registers(self.PARAM_F_ADDRESS[key], count=2, unit=0x01)
                 self.PARAM_F_DIC[key] = struct.unpack(">f", struct.pack(">HH", Raw_PARAM_F[key].getRegister(1), Raw_PARAM_F[key].getRegister(0)))[0]
 
-            print("PARAM_F", self.PARAM_F_DIC)
+            # print("PARAM_F", self.PARAM_F_DIC)
 
             Raw_PARAM_I = {}
             for key in self.PARAM_I_ADDRESS:
                 Raw_PARAM_I[key] = self.Client_BO.read_holding_registers(self.PARAM_I_ADDRESS[key], count=1, unit=0x01)
                 self.PARAM_I_DIC[key] = Raw_PARAM_I[key].getRegister(0)
 
-            print("PARAM_I", self.PARAM_I_DIC)
+            # print("PARAM_I", self.PARAM_I_DIC)
 
             for key in self.PARAM_B_ADDRESS:
 
                 self.PARAM_B_DIC[key] = self.ReadCoil(2 ** (self.PARAM_B_ADDRESS[key][1]), self.PARAM_B_ADDRESS[key][0])
 
-            print("PARAM_B", self.PARAM_B_DIC)
+            # print("PARAM_B", self.PARAM_B_DIC)
             
             Raw_PARAM_T = {}
             for key in self.PARAM_T_ADDRESS:
                 Raw_PARAM_T[key] = self.Client_BO.read_holding_registers(self.PARAM_T_ADDRESS[key], count=2, unit=0x01)
                 self.PARAM_T_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_PARAM_T[key].getRegister(1), Raw_PARAM_T[key].getRegister(0)))[0]
 
-            print("PARAM_T", self.PARAM_T_DIC)
+            # print("PARAM_T", self.PARAM_T_DIC)
 
 
 
@@ -666,7 +666,7 @@ class PLC(QtCore.QObject):
             for key in self.TIME_ADDRESS:
                 Raw_TIME[key] = self.Client_BO.read_holding_registers(self.TIME_ADDRESS[key], count=2, unit=0x01)
                 self.TIME_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_TIME[key].getRegister(1), Raw_TIME[key].getRegister(0)))[0]
-            print("TIME", self.TIME_DIC)
+            # print("TIME", self.TIME_DIC)
             
 
 
@@ -1158,7 +1158,7 @@ class UpdateDataBase(QtCore.QObject):
 
         self.para_alarm = 0
         self.rate_alarm = 10
-        self.PARAM_TT = 0
+        self.para_TT = 0
         self.rate_TT = 90
         self.para_PT = 0
         self.rate_PT = 90
@@ -1602,6 +1602,9 @@ class UpdateDataBase(QtCore.QObject):
                             self.commit_bool = True
                         self.para_REAL = 0
 
+
+                    #FLAGS
+
                     # FF
                     for key in self.FF_DIC:
                         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
@@ -1690,6 +1693,12 @@ class UpdateDataBase(QtCore.QObject):
                     self.para_LOOP2PT += 1
                     self.para_REAL += 1
                     self.para_Din += 1
+                    self.para_FF += 1
+                    self.para_PARAM_T += 1
+                    self.para_PARAM_I += 1
+                    self.para_PARAM_B += 1
+                    self.para_PARAM_F += 1
+                    self.para_TIME += 1
                     # self.PLC.NewData_Database = False
                     self.status = False
 
