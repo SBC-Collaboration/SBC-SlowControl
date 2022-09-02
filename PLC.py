@@ -646,10 +646,10 @@ class PLC(QtCore.QObject):
 
             print("PARAM_I", self.PARAM_I_DIC)
 
-            for key in self.PARAM_B_ADDRESS:
-                self.PARAM_B_DIC[key] = self.ReadCoil(2 ** (self.INTLK_D_ADDRESS[key][1]), self.INTLK_D_ADDRESS[key][0])
-
-            print("PARAM_B", self.PARAM_B_DIC)
+            # for key in self.PARAM_B_ADDRESS:
+            #     self.PARAM_B_DIC[key] = self.ReadCoil(2 ** (self.INTLK_D_ADDRESS[key][1]), self.INTLK_D_ADDRESS[key][0])
+            #
+            # print("PARAM_B", self.PARAM_B_DIC)
             
             Raw_PARAM_T = {}
             for key in self.PARAM_T_ADDRESS:
