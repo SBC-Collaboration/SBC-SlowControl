@@ -1339,6 +1339,8 @@ class UpdateDataBase(QtCore.QObject):
         self.LOOP2PT_MODE3_buffer = sec.LOOP2PT_MODE3
         self.LOOP2PT_OUT_buffer = sec.LOOP2PT_OUT
 
+        self.FLAG_INTLKD_buffer = sec.FLAG_INTLKD
+
         self.FF_buffer = sec.FF_DIC
         self.PARAM_B_buffer = sec.PARAM_B_DIC
 
@@ -1604,6 +1606,26 @@ class UpdateDataBase(QtCore.QObject):
 
 
                     #FLAGS
+                    for key in self.FLAG_INTLKD:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.FLAG_INTLKD[key] != self.FLAG_INTLKD_buffer[key]:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.FLAG_INTLKD_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_INTLKD[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_DIC[key])
+                            self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
+                            self.commit_bool = True
+                            # print(self.Valve_OUT[key])
+                        else:
+                            pass
+
+                    if self.para_FLAG >= self.rate_FLAG:
+                        for key in self.FLAG_INTLKD:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_DIC[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_INTLKD[key])
+                            self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
+                            self.commit_bool = True
+                        self.para_FLAG = 0
+
 
                     # FF
                     for key in self.FF_DIC:
@@ -1693,6 +1715,7 @@ class UpdateDataBase(QtCore.QObject):
                     self.para_LOOP2PT += 1
                     self.para_REAL += 1
                     self.para_Din += 1
+                    self.para_FLAG += 1
                     self.para_FF += 1
                     self.para_PARAM_T += 1
                     self.para_PARAM_I += 1
