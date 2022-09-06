@@ -1673,12 +1673,12 @@ class UpdateDataBase(QtCore.QObject):
                         self.para_PARAM_F = 0
 
 
-                    # if self.para_PARAM_I >= self.rate_PARAM_I:
-                    #     for key in self.PARAM_I_DIC:
-                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_I_DIC[key])
-                    #
-                    #         self.commit_bool = True
-                    #     self.para_PARAM_I = 0
+                    if self.para_PARAM_I >= self.rate_PARAM_I:
+                        for key in self.PARAM_I_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_I_DIC[key])
+
+                            self.commit_bool = True
+                        self.para_PARAM_I = 0
 
 
                     if self.para_PARAM_T >= self.rate_PARAM_T:
