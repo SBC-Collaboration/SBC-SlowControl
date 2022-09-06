@@ -215,41 +215,41 @@ class COUPP_database():
 
 
 # test sbcslowcontrol database
-#
-# if __name__ == "__main__":
-#
-#     db = mydatabase()
-#     dt = datetime_in_s()
-#     # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
-#     print(dt)
-#     # print(unix_timestamp)
-#     db.insert_data_into_datastorage("test",dt,500.55)
-#     db.show_data_datastorage()
-#
-#     # db.create_table("PV1204")
-#     # db.insert_data("PV1102", now, random.randrange(100))
-#     # db.show_data("PV1102")
-#
-#     db.show_tables()
-#
-#     db.close_database()
-#
-#     # #test datetime function
-#     # print(datetime_in_1e5micro())
-#     # print(early_datetime())
-
-#test NW sbc alarm database
 
 if __name__ == "__main__":
-    db = COUPP_database()
+
+    db = mydatabase()
     dt = datetime_in_s()
     # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
     print(dt)
     # print(unix_timestamp)
-    # db.insert_data_into_datastorage("test",dt,500.55)
-    db.ssh_select()
-    db.ssh_write()
-    db.ssh_select()
+    db.insert_data_into_datastorage("test",dt,500.55)
+    # db.show_data_datastorage()
+
+    # db.create_table("PV1204")
+    # db.insert_data("PV1102", now, random.randrange(100))
+    # db.show_data("PV1102")
+
+    # db.show_tables()
+
+    db.close_database()
+
+    # #test datetime function
+    # print(datetime_in_1e5micro())
+    # print(early_datetime())
+
+##test NW sbc alarm database
+
+# if __name__ == "__main__":
+    # db = COUPP_database()
+    # dt = datetime_in_s()
+    # # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
+    # print(dt)
+    # # print(unix_timestamp)
+    # # db.insert_data_into_datastorage("test",dt,500.55)
+    # db.ssh_select()
+    # db.ssh_write()
+    # db.ssh_select()
 
 
     # db.close_database()
