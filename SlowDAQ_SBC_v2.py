@@ -3986,17 +3986,17 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
-        # if received_dic_c["data"]["FLAG"]["INTLKD"]["MAN_HYD"]:
-        #
-        #     self.MAN_HYD.INTLK.UpdateColor(True)
-        # else:
-        #     self.MAN_HYD.INTLK.UpdateColor(False)
-        #
-        # if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"] != self.FLAG_buffer["MAN_HYD"]:
-        #     self.MAN_HYD.Set.ButtonTransitionState(False)
-        #     self.self.FLAG_buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
-        # else:
-        #     pass
+        if received_dic_c["data"]["FLAG"]["INTLKD"]["MAN_HYD"]:
+
+            self.MAN_HYD.INTLK.UpdateColor(True)
+        else:
+            self.MAN_HYD.INTLK.UpdateColor(False)
+
+        if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"] != self.FLAG_buffer["MAN_HYD"]:
+            self.MAN_HYD.Set.ButtonTransitionState(False)
+            self.self.FLAG_buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
+        else:
+            pass
 
         # if received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"] != self.Switch_buffer["PUMP3305"]:
         #     self.PUMP3305.Set.ButtonTransitionState(False)
@@ -4388,10 +4388,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.MAN_TS.Set.ButtonRClicked()
 
 
-        # if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
-        #     self.MAN_HYD.Set.ButtonLClicked()
-        # else:
-        #     self.MAN_HYD.Set.ButtonRClicked()
+        if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
+            self.MAN_HYD.Set.ButtonLClicked()
+        else:
+            self.MAN_HYD.Set.ButtonRClicked()
 
         # set LOOPPID double button status ON/OFF also the status in the subwindow
 
