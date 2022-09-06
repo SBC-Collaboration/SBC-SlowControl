@@ -1614,7 +1614,6 @@ class UpdateDataBase(QtCore.QObject):
                             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_DIC[key])
                             self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
                             self.commit_bool = True
-
                         else:
                             pass
 
@@ -1674,12 +1673,12 @@ class UpdateDataBase(QtCore.QObject):
                         self.para_PARAM_F = 0
 
 
-                    if self.para_PARAM_I >= self.rate_PARAM_I:
-                        for key in self.PARAM_I_DIC:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_I_DIC[key])
-
-                            self.commit_bool = True
-                        self.para_PARAM_I = 0
+                    # if self.para_PARAM_I >= self.rate_PARAM_I:
+                    #     for key in self.PARAM_I_DIC:
+                    #         self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_I_DIC[key])
+                    #
+                    #         self.commit_bool = True
+                    #     self.para_PARAM_I = 0
 
 
                     if self.para_PARAM_T >= self.rate_PARAM_T:

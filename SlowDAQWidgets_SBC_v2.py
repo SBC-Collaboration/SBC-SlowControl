@@ -872,7 +872,7 @@ class Flag(QtWidgets.QWidget):
         self.Set.RButton.setText("close")
         self.VL.addWidget(self.Set)
 
-        self.INTLK = ColoredStatus(self, mode)
+        self.INTLK = ColoredStatus(self, mode=mode)
         # self.ActiveState = ColorIndicator(self) for test the function
         self.INTLK.Label.setText("INTLK")
         self.HL.addWidget(self.INTLK)
