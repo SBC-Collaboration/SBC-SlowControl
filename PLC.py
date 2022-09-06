@@ -1361,10 +1361,10 @@ class UpdateDataBase(QtCore.QObject):
                     self.Running_pointer = 0
                     # print(0)
                     # print(self.para_alarm)
-                    if self.para_alarm >= self.rate_alarm:
-
-                        self.alarm_db.ssh_write()
-                        self.para_alarm=0
+                    # if self.para_alarm >= self.rate_alarm:
+                    #
+                    #     self.alarm_db.ssh_write()
+                    #     self.para_alarm=0
 
                     if self.para_TT >= self.rate_TT:
                         for key in self.TT_FP_dic:
