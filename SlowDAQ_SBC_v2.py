@@ -3982,7 +3982,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"] != self.FLAG_buffer["MAN_TS"]:
             self.MAN_TS.Set.ButtonTransitionState(False)
-            self.self.FLAG_buffer["MAN_TS"] = received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]
+            self.FLAG_buffer["MAN_TS"] = received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]
         else:
             pass
 
@@ -3994,7 +3994,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"] != self.FLAG_buffer["MAN_HYD"]:
             self.MAN_HYD.Set.ButtonTransitionState(False)
-            self.self.FLAG_buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
+            self.FLAG_buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
         else:
             pass
 
