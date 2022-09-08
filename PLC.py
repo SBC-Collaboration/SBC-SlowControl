@@ -27,7 +27,7 @@ import slowcontrol_env_cons as sec
 import random
 from pymodbus.client.sync import ModbusTcpClient
 
-BASE_ADDRESS= 12288
+
 
 # Initialization of Address, Value Matrix
 
@@ -206,6 +206,38 @@ class PLC(QtCore.QObject):
         self.Procedure_INTLKD = sec.PROCEDURE_INTLKD
         self.Procedure_EXIT = sec.PROCEDURE_EXIT
 
+        self.INTLK_D_ADDRESS = sec.INTLK_D_ADDRESS
+        self.INTLK_D_DIC = sec.INTLK_D_DIC
+        self.INTLK_D_EN = sec.INTLK_D_EN
+        self.INTLK_D_COND = sec.INTLK_D_COND
+        self.INTLK_A_ADDRESS = sec.INTLK_A_ADDRESS
+        self.INTLK_A_DIC = sec.INTLK_A_DIC
+        self.INTLK_A_EN = sec.INTLK_A_EN
+        self.INTLK_A_COND = sec.INTLK_A_COND
+        self.INTLK_A_SET = sec.INTLK_A_SET
+
+        self.FLAG_ADDRESS = sec.FLAG_ADDRESS
+        self.FLAG_DIC = sec.FLAG_DIC
+        self.FLAG_INTLKD = sec.FLAG_INTLKD
+
+        self.FF_ADDRESS = sec.FF_ADDRESS
+        self.FF_DIC = sec.FF_DIC
+
+        self.PARAM_F_ADDRESS = sec.PARAM_F_ADDRESS
+        self.PARAM_F_DIC = sec.PARAM_F_DIC
+
+        self.PARAM_I_ADDRESS = sec.PARAM_I_ADDRESS
+        self.PARAM_I_DIC = sec.PARAM_I_DIC
+
+        self.PARAM_B_ADDRESS = sec.PARAM_B_ADDRESS
+        self.PARAM_B_DIC = sec.PARAM_B_DIC
+
+        self.PARAM_T_ADDRESS = sec.PARAM_T_ADDRESS
+        self.PARAM_T_DIC = sec.PARAM_T_DIC
+
+        self.TIME_ADDRESS = sec.TIME_ADDRESS
+        self.TIME_DIC = sec.TIME_DIC
+
 
         self.signal_data = {  "TT_FP_address":self.TT_FP_address,
                               "TT_BO_address":self.TT_BO_address,
@@ -292,7 +324,31 @@ class PLC(QtCore.QObject):
                               "Procedure_address":self.Procedure_address,
                               "Procedure_running":self.Procedure_running,
                               "Procedure_INTLKD":self.Procedure_INTLKD,
-                              "Procedure_EXIT":self.Procedure_EXIT}
+                              "Procedure_EXIT":self.Procedure_EXIT,
+                              "INTLK_D_ADDRESS":self.INTLK_D_ADDRESS,
+                              "INTLK_D_DIC": self.INTLK_D_DIC,
+                              "INTLK_D_EN":self.INTLK_D_EN,
+                              "INTLK_D_COND":self.INTLK_D_COND,
+                              "INTLK_A_ADDRESS":self.INTLK_A_ADDRESS,
+                              "INTLK_A_DIC": self.INTLK_A_DIC,
+                              "INTLK_A_EN":self.INTLK_A_EN,
+                              "INTLK_A_COND":self.INTLK_A_COND,
+                              "INTLK_A_SET":self.INTLK_A_SET,
+                              "FLAG_ADDRESS":self.FLAG_ADDRESS,
+                              "FLAG_DIC":self.FLAG_DIC,
+                              "FLAG_INTLKD":self.FLAG_INTLKD,
+                              "FF_ADDRESS": self.FF_ADDRESS,
+                              "FF_DIC": self.FF_DIC,
+                              "PARAM_F_ADDRESS": self.PARAM_F_ADDRESS,
+                              "PARAM_F_DIC": self.PARAM_F_DIC,
+                              "PARAM_I_ADDRESS": self.PARAM_I_ADDRESS,
+                              "PARAM_I_DIC": self.PARAM_I_DIC,
+                              "PARAM_B_ADDRESS": self.PARAM_B_ADDRESS,
+                              "PARAM_B_DIC": self.PARAM_B_DIC,
+                              "PARAM_T_ADDRESS": self.PARAM_T_ADDRESS,
+                              "PARAM_T_DIC": self.PARAM_T_DIC,
+                              "TIME_ADDRESS": self.TIME_ADDRESS,
+                              "TIME_DIC": self.TIME_DIC}
 
         self.LiveCounter = 0
         self.NewData_Display = False
@@ -534,6 +590,98 @@ class PLC(QtCore.QObject):
                 self.Procedure_INTLKD[key] = self.ReadCoil(2, self.Procedure_address[key])
                 self.Procedure_EXIT[key] = Raw_Procedure[key].getRegister(0)
 
+
+            ##################################################################################################
+            Raw_INTLK_A = {}
+            for key in self.INTLK_A_ADDRESS:
+                Raw_INTLK_A[key] = self.Client_BO.read_holding_registers(self.INTLK_A_ADDRESS[key] + 2, count=2, unit=0x01)
+                self.INTLK_A_SET[key] = round(
+                    struct.unpack(">f", struct.pack(">HH", Raw_INTLK_A[key].getRegister(1),
+                                                    Raw_INTLK_A[key].getRegister(0)))[0], 3)
+                self.INTLK_A_DIC[key] = self.ReadCoil(1, self.INTLK_A_ADDRESS[key])
+                self.INTLK_A_EN[key] = self.ReadCoil(2 ** 1 , self.INTLK_A_ADDRESS[key])
+                self.INTLK_A_COND[key] = self.ReadCoil(2 ** 2, self.INTLK_A_ADDRESS[key])
+
+
+            for key in self.INTLK_D_ADDRESS:
+
+                self.INTLK_D_DIC[key] = self.ReadCoil(1, self.INTLK_D_ADDRESS[key])
+                self.INTLK_D_EN[key] = self.ReadCoil(2 ** 1, self.INTLK_D_ADDRESS[key])
+                self.INTLK_D_COND[key] = self.ReadCoil(2 ** 2, self.INTLK_D_ADDRESS[key])
+
+
+            ############################################################################################
+            #FLAG
+            for key in self.FLAG_ADDRESS:
+                self.FLAG_DIC[key] = self.ReadCoil(1, self.FLAG_ADDRESS[key])
+                print("\n",self.FLAG_DIC,"\n")
+                self.FLAG_INTLKD[key] = self.ReadCoil(2 ** 1, self.FLAG_ADDRESS[key])
+
+
+
+            #######################################################################################################
+
+            ##FF
+            Raw_FF = {}
+            for key in self.FF_ADDRESS:
+                Raw_FF[key] = self.Client_BO.read_holding_registers(self.FF_ADDRESS[key], count=2, unit=0x01)
+                self.FF_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_FF[key].getRegister(1),Raw_FF[key].getRegister(0)))[0]
+                
+            # print("FF",self.FF_DIC)
+
+
+
+            ## PARAMETER
+            Raw_PARAM_F= {}
+            for key in self.PARAM_F_ADDRESS:
+                Raw_PARAM_F[key] = self.Client_BO.read_holding_registers(self.PARAM_F_ADDRESS[key], count=2, unit=0x01)
+                self.PARAM_F_DIC[key] = struct.unpack(">f", struct.pack(">HH", Raw_PARAM_F[key].getRegister(1), Raw_PARAM_F[key].getRegister(0)))[0]
+
+            # print("PARAM_F", self.PARAM_F_DIC)
+
+            Raw_PARAM_I = {}
+            for key in self.PARAM_I_ADDRESS:
+                Raw_PARAM_I[key] = self.Client_BO.read_holding_registers(self.PARAM_I_ADDRESS[key], count=1, unit=0x01)
+                self.PARAM_I_DIC[key] = Raw_PARAM_I[key].getRegister(0)
+
+            # print("PARAM_I", self.PARAM_I_DIC)
+
+            for key in self.PARAM_B_ADDRESS:
+
+                self.PARAM_B_DIC[key] = self.ReadCoil(2 ** (self.PARAM_B_ADDRESS[key][1]), self.PARAM_B_ADDRESS[key][0])
+
+            # print("PARAM_B", self.PARAM_B_DIC)
+            
+            Raw_PARAM_T = {}
+            for key in self.PARAM_T_ADDRESS:
+                Raw_PARAM_T[key] = self.Client_BO.read_holding_registers(self.PARAM_T_ADDRESS[key], count=2, unit=0x01)
+                self.PARAM_T_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_PARAM_T[key].getRegister(1), Raw_PARAM_T[key].getRegister(0)))[0]
+
+            # print("PARAM_T", self.PARAM_T_DIC)
+
+
+
+            ###TIME
+            Raw_TIME = {}
+            for key in self.TIME_ADDRESS:
+                Raw_TIME[key] = self.Client_BO.read_holding_registers(self.TIME_ADDRESS[key], count=2, unit=0x01)
+                self.TIME_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_TIME[key].getRegister(1), Raw_TIME[key].getRegister(0)))[0]
+            # print("TIME", self.TIME_DIC)
+            
+
+
+
+
+            #########################################################################################################
+
+
+
+
+
+
+
+            ##########################################################################################################
+
             # test the writing function
             # print(self.Read_BO_2(14308))
             # Raw_BO = self.Client_BO.read_holding_registers(14308, count=2, unit=0x01)
@@ -625,6 +773,12 @@ class PLC(QtCore.QObject):
         input_BO = struct.unpack("H", output_BO)[0] | 0x0010
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write base16 result=", Raw)
+
+    def WriteBase32(self, address):
+        output_BO = self.Read_BO_1(address)
+        input_BO = struct.unpack("H", output_BO)[0] | 0x0020
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        print("write base32 result=", Raw)
 
     def Reset(self, address):
         Raw = self.Client_BO.write_register(address, value=0x0010, unit=0x01)
@@ -996,9 +1150,9 @@ class UpdateDataBase(QtCore.QObject):
         self.alarm_db = COUPP_database()
         self.Running = False
         # if loop runs with _counts times with New_Database = False(No written Data), then send alarm to slack. Otherwise, the code normally run(reset the pointer)
-        self.Running_counts = 270
+        self.Running_counts = 600
         self.Running_pointer = 0
-        self.longsleep = 60
+        self.longsleep = 600
 
         self.base_period = 1
 
@@ -1007,9 +1161,9 @@ class UpdateDataBase(QtCore.QObject):
         self.para_TT = 0
         self.rate_TT = 90
         self.para_PT = 0
-        self.rate_PT = 90
+        self.rate_PT = 3
         self.para_REAL = 0
-        self.rate_REAL = 90
+        self.rate_REAL = 3
         self.para_Din = 0
         self.rate_Din = 90
         # c is for valve status
@@ -1021,6 +1175,25 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_LOOPPID = 90
         self.para_LOOP2PT = 0
         self.rate_LOOP2PT = 90
+        self.para_FLAG=0
+        self.rate_FLAG=90
+        self.para_INTLK_A=0
+        self.rate_INTLK_A = 90
+        self.para_INTLK_D = 0
+        self.rate_INTLK_D = 90
+        self.para_FF = 0
+        self.rate_FF = 90
+        self.para_PARAM_F = 0
+        self.rate_PARAM_F = 90
+        self.para_PARAM_I = 0
+        self.rate_PARAM_I = 90
+        self.para_PARAM_B = 0
+        self.rate_PARAM_B = 90
+        self.para_PARAM_T = 0
+        self.rate_PARAM_T = 90
+        self.para_TIME = 0
+        self.rate_TIME = 90
+
         #status initialization
         self.status = False
 
@@ -1117,6 +1290,34 @@ class UpdateDataBase(QtCore.QObject):
         self.Procedure_running = sec.PROCEDURE_RUNNING
         self.Procedure_INTLKD = sec.PROCEDURE_INTLKD
         self.Procedure_EXIT = sec.PROCEDURE_EXIT
+        # self.INTLK_D_ADDRESS = sec.INTLK_D_ADDRESS
+        # self.INTLK_D_DIC = sec.INTLK_D_DIC
+        # self.INTLK_D_EN = sec.INTLK_D_EN
+        # self.INTLK_D_COND = sec.INTLK_D_COND
+        # self.INTLK_A_ADDRESS = sec.INTLK_A_ADDRESS
+        # self.INTLK_A_DIC = sec.INTLK_A_DIC
+        # self.INTLK_A_EN = sec.INTLK_A_EN
+        # self.INTLK_A_COND = sec.INTLK_A_COND
+        # self.INTLK_A_SET = sec.INTLK_A_SET
+        #
+        self.FLAG_ADDRESS = sec.FLAG_ADDRESS
+        self.FLAG_DIC = sec.FLAG_DIC
+        self.FLAG_INTLKD = sec.FLAG_INTLKD
+
+        self.FF_ADDRESS = sec.FF_ADDRESS
+        self.FF_DIC = sec.FF_DIC
+
+        self.PARAM_F_ADDRESS = sec.PARAM_F_ADDRESS
+        self.PARAM_F_DIC = sec.PARAM_F_DIC
+        self.PARAM_I_ADDRESS = sec.PARAM_I_ADDRESS
+        self.PARAM_I_DIC = sec.PARAM_I_DIC
+        self.PARAM_B_ADDRESS = sec.PARAM_B_ADDRESS
+        self.PARAM_B_DIC = sec.PARAM_B_DIC
+        self.PARAM_T_ADDRESS = sec.PARAM_T_ADDRESS
+        self.PARAM_T_DIC = sec.PARAM_T_DIC
+        self.TIME_ADDRESS = sec.TIME_ADDRESS
+        self.TIME_DIC = sec.TIME_DIC
+
 
 
         # BUFFER parts
@@ -1138,6 +1339,12 @@ class UpdateDataBase(QtCore.QObject):
         self.LOOP2PT_MODE3_buffer = sec.LOOP2PT_MODE3
         self.LOOP2PT_OUT_buffer = sec.LOOP2PT_OUT
 
+        self.FLAG_INTLKD_buffer = sec.FLAG_INTLKD
+
+        self.FF_buffer = sec.FF_DIC
+        self.PARAM_B_buffer = sec.PARAM_B_DIC
+
+
         print("begin updating Database")
 
     @QtCore.Slot()
@@ -1154,10 +1361,10 @@ class UpdateDataBase(QtCore.QObject):
                     self.Running_pointer = 0
                     # print(0)
                     # print(self.para_alarm)
-                    if self.para_alarm >= self.rate_alarm:
-
-                        self.alarm_db.ssh_write()
-                        self.para_alarm=0
+                    # if self.para_alarm >= self.rate_alarm:
+                    #
+                    #     self.alarm_db.ssh_write()
+                    #     self.para_alarm=0
 
                     if self.para_TT >= self.rate_TT:
                         for key in self.TT_FP_dic:
@@ -1397,6 +1604,99 @@ class UpdateDataBase(QtCore.QObject):
                             self.commit_bool = True
                         self.para_REAL = 0
 
+                    #
+                    # #FLAGS
+                    for key in self.FLAG_INTLKD:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.FLAG_INTLKD[key] != self.FLAG_INTLKD_buffer[key]:
+                            self.db.insert_data_into_datastorage_wocommit(key+'_INTLKD', self.early_dt, self.FLAG_INTLKD_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key+'_INTLKD', self.dt, self.FLAG_INTLKD[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_DIC[key])
+                            self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
+                            self.commit_bool = True
+                        else:
+                            pass
+
+                    if self.para_FLAG >= self.rate_FLAG:
+                        for key in self.FLAG_INTLKD:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FLAG_DIC[key])
+                            self.db.insert_data_into_datastorage_wocommit(key+'_INTLKD', self.dt, self.FLAG_INTLKD[key])
+                            self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
+                            self.commit_bool = True
+                        self.para_FLAG = 0
+
+
+                    # FF
+                    for key in self.FF_DIC:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.FF_DIC[key] != self.FF_buffer[key]:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.FF_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FF_DIC[key])
+                            self.FF_buffer[key] = self.FF_DIC[key]
+                            self.commit_bool = True
+                            # print(self.Valve_OUT[key])
+                        else:
+                            pass
+
+                    if self.para_FF >= self.rate_FF:
+                        for key in self.FF_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.FF_DIC[key])
+                            self.FF_buffer[key] = self.FF_DIC[key]
+                            self.commit_bool = True
+                        self.para_FF = 0
+
+                    # PARAM_B
+                    for key in self.PARAM_B_DIC:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.PARAM_B_DIC[key] != self.PARAM_B_buffer[key]:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.PARAM_B_buffer[key])
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_B_DIC[key])
+                            self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
+                            self.commit_bool = True
+                            # print(self.Valve_OUT[key])
+                        else:
+                            pass
+
+                    if self.para_PARAM_B >= self.rate_PARAM_B:
+                        for key in self.PARAM_B_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_B_DIC[key])
+                            self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
+                            self.commit_bool = True
+                        self.para_PARAM_B = 0
+
+                    # other parameters I/F/T
+                    if self.para_PARAM_F >= self.rate_PARAM_F:
+                        for key in self.PARAM_F_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_F_DIC[key])
+
+                            self.commit_bool = True
+                        self.para_PARAM_F = 0
+
+
+                    if self.para_PARAM_I >= self.rate_PARAM_I:
+                        for key in self.PARAM_I_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_I_DIC[key])
+
+                            self.commit_bool = True
+                        self.para_PARAM_I = 0
+
+
+                    if self.para_PARAM_T >= self.rate_PARAM_T:
+                        for key in self.PARAM_T_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PARAM_T_DIC[key])
+
+                            self.commit_bool = True
+                        self.para_PARAM_T = 0
+
+
+                    if self.para_TIME >= self.rate_TIME:
+                        for key in self.TIME_DIC:
+                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TIME_DIC[key])
+
+                            self.commit_bool = True
+                        self.para_TIME = 0
+
+
                     # print("a",self.para_TT,"b",self.para_PT )
                     # print(8)
 
@@ -1414,6 +1714,13 @@ class UpdateDataBase(QtCore.QObject):
                     self.para_LOOP2PT += 1
                     self.para_REAL += 1
                     self.para_Din += 1
+                    self.para_FLAG += 1
+                    self.para_FF += 1
+                    self.para_PARAM_T += 1
+                    self.para_PARAM_I += 1
+                    self.para_PARAM_B += 1
+                    self.para_PARAM_F += 1
+                    self.para_TIME += 1
                     # self.PLC.NewData_Database = False
                     self.status = False
 
@@ -1539,11 +1846,8 @@ class UpdateDataBase(QtCore.QObject):
             self.LOOPPID_SET2[key] = dic["LOOPPID_SET2"][key]
         for key in self.LOOPPID_SET3:
             self.LOOPPID_SET3[key] = dic["LOOPPID_SET3"][key]
-
         for key in self.LOOP2PT_OUT:
             self.LOOP2PT_OUT[key] = dic["LOOP2PT_OUT"][key]
-        for key in self.LOOP2PT_SET0:
-            self.LOOP2PT_SET0[key] = dic["LOOP2PT_SET0"][key]
         for key in self.LOOP2PT_SET1:
             self.LOOP2PT_SET1[key] = dic["LOOP2PT_SET1"][key]
         for key in self.LOOP2PT_SET2:
@@ -1557,6 +1861,22 @@ class UpdateDataBase(QtCore.QObject):
             self.Procedure_INTLKD[key] = dic["Procedure_INTLKD"][key]
         for key in self.Procedure_EXIT:
             self.Procedure_EXIT[key] = dic["Procedure_EXIT"][key]
+        for key in self.FLAG_DIC:
+            self.FLAG_DIC[key] = dic["FLAG_DIC"][key]
+        for key in self.FLAG_INTLKD:
+            self.FLAG_INTLKD[key] = dic["FLAG_INTLKD"][key]
+        for key in self.FF_DIC:
+            self.FF_DIC[key] = dic["FF_DIC"][key]
+        for key in self.PARAM_F_DIC:
+            self.PARAM_F_DIC[key] = dic["PARAM_F_DIC"][key]
+        for key in self.PARAM_I_DIC:
+            self.PARAM_I_DIC[key] = dic["PARAM_I_DIC"][key]
+        for key in self.PARAM_B_DIC:
+            self.PARAM_B_DIC[key] = dic["PARAM_B_DIC"][key]
+        for key in self.PARAM_T_DIC:
+            self.PARAM_T_DIC[key] = dic["PARAM_T_DIC"][key]
+        for key in self.TIME_DIC:
+            self.TIME_DIC[key] = dic["TIME_DIC"][key]
 
         self.MainAlarm = dic["MainAlarm"]
         print("Database received the data from PLC")
@@ -1868,6 +2188,20 @@ class UpdateServer(QtCore.QObject):
         self.Procedure_INTLKD_ini = sec.PROCEDURE_INTLKD
         self.Procedure_EXIT_ini = sec.PROCEDURE_EXIT
 
+        self.INTLK_D_ADDRESS_ini = sec.INTLK_D_ADDRESS
+        self.INTLK_D_DIC_ini = sec.INTLK_D_DIC
+        self.INTLK_D_EN_ini = sec.INTLK_D_EN
+        self.INTLK_D_COND_ini = sec.INTLK_D_COND
+        self.INTLK_A_ADDRESS_ini = sec.INTLK_A_ADDRESS
+        self.INTLK_A_DIC_ini = sec.INTLK_A_DIC
+        self.INTLK_A_EN_ini = sec.INTLK_A_EN
+        self.INTLK_A_COND_ini = sec.INTLK_A_COND
+        self.INTLK_A_SET_ini = sec.INTLK_A_SET
+
+        self.FLAG_ADDRESS_ini = sec.FLAG_ADDRESS
+        self.FLAG_DIC_ini = sec.FLAG_DIC
+        self.FLAG_INTLKD_ini = sec.FLAG_INTLKD
+
         self.data_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
@@ -1910,6 +2244,15 @@ class UpdateServer(QtCore.QObject):
                                               "SET1": self.LOOP2PT_SET1_ini,
                                               "SET2": self.LOOP2PT_SET2_ini,
                                               "SET3": self.LOOP2PT_SET3_ini},
+                                  "INTLK_D": {"value": self.INTLK_D_DIC_ini,
+                                              "EN": self.INTLK_D_EN_ini,
+                                              "COND": self.INTLK_D_COND_ini},
+                                  "INTLK_A": {"value":self.INTLK_A_DIC_ini,
+                                              "EN":self.INTLK_A_EN_ini,
+                                              "COND":self.INTLK_A_COND_ini,
+                                              "SET":self.INTLK_A_SET_ini},
+                                  "FLAG": {"value":self.FLAG_DIC_ini,
+                                           "INTLKD":self.FLAG_INTLKD_ini},
                                   "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini}},
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},
@@ -2072,27 +2415,26 @@ class UpdateServer(QtCore.QObject):
             self.Procedure_INTLKD_ini[key] = self.PLC.Procedure_INTLKD[key]
         for key in self.PLC.Procedure_EXIT:
             self.Procedure_EXIT_ini[key] = self.PLC.Procedure_EXIT[key]
+        for key in self.PLC.INTLK_D_DIC:
+            self.INTLK_D_DIC_ini[key] = self.PLC.INTLK_D_DIC[key]
+        for key in self.PLC.INTLK_D_EN:
+            self.INTLK_D_EN_ini[key] = self.PLC.INTLK_D_EN[key]
+        for key in self.PLC.INTLK_D_COND:
+            self.INTLK_D_COND_ini[key] = self.PLC.INTLK_D_COND[key]
+        for key in self.PLC.INTLK_A_DIC:
+            self.INTLK_A_DIC_ini[key] = self.PLC.INTLK_A_DIC[key]
+        for key in self.PLC.INTLK_A_EN:
+            self.INTLK_A_EN_ini[key] = self.PLC.INTLK_A_EN[key]
+        for key in self.PLC.INTLK_A_COND:
+            self.INTLK_A_COND_ini[key] = self.PLC.INTLK_A_COND[key]
+        for key in self.PLC.INTLK_A_SET:
+            self.INTLK_A_SET_ini[key] = self.PLC.INTLK_A_SET[key]
+        for key in self.PLC.FLAG_DIC:
+            self.FLAG_DIC_ini[key] = self.PLC.FLAG_DIC[key]
+        for key in self.PLC.FLAG_INTLKD:
+            self.FLAG_INTLKD_ini[key] = self.PLC.FLAG_INTLKD[key]
 
         self.data_dic["MainAlarm"] = self.PLC.MainAlarm
-        # print("pack",self.data_dic)
-        # print("HTR6214 \n", "MODE0", self.data_dic["data"]["LOOPPID"]["MODE0"]["HTR6214"],
-        #             "\n","MODE1", self.data_dic["data"]["LOOPPID"]["MODE1"]["HTR6214"],
-        #             "\n","MODE2", self.data_dic["data"]["LOOPPID"]["MODE2"]["HTR6214"],
-        #             "\n","MODE3", self.data_dic["data"]["LOOPPID"]["MODE3"]["HTR6214"],
-        #             "\n","INTLKD", self.data_dic["data"]["LOOPPID"]["INTLKD"]["HTR6214"],
-        #             "\n","MAN", self.data_dic["data"]["LOOPPID"]["MAN"]["HTR6214"],
-        #             "\n","ERR", self.data_dic["data"]["LOOPPID"]["ERR"]["HTR6214"],
-        #             "\n","SATHI", self.data_dic["data"]["LOOPPID"]["SATHI"]["HTR6214"],
-        #             "\n","SATLO", self.data_dic["data"]["LOOPPID"]["SATLO"]["HTR6214"],
-        #             "\n","EN", self.data_dic["data"]["LOOPPID"]["EN"]["HTR6214"],
-        #             "\n","OUT", self.data_dic["data"]["LOOPPID"]["OUT"]["HTR6214"],
-        #             "\n","IN", self.data_dic["data"]["LOOPPID"]["IN"]["HTR6214"],
-        #             "\n","HI_LIM", self.data_dic["data"]["LOOPPID"]["HI_LIM"]["HTR6214"],
-        #             "\n","LO_LIM", self.data_dic["data"]["LOOPPID"]["LO_LIM"]["HTR6214"],
-        #             "\n","SET0", self.data_dic["data"]["LOOPPID"]["SET0"]["HTR6214"],
-        #             "\n","SET1", self.data_dic["data"]["LOOPPID"]["SET1"]["HTR6214"],
-        #             "\n","SET2", self.data_dic["data"]["LOOPPID"]["SET2"]["HTR6214"],
-        #             "\n","SET3", self.data_dic["data"]["LOOPPID"]["SET3"]["HTR6214"])
 
         self.data_package = pickle.dumps(self.data_dic)
 
@@ -2244,7 +2586,7 @@ class UpdateServer(QtCore.QObject):
                     if message[key]["operation"] == "OPEN":
                         self.PLC.LOOP2PT_OPEN(address=message[key]["address"])
                     elif message[key]["operation"] == "CLOSE":
-                        self.PLC.LOOPPID_CLOSE(address=message[key]["address"])
+                        self.PLC.LOOP2PT_CLOSE(address=message[key]["address"])
                     else:
                         pass
                 elif message[key]["type"] == "LOOP2PT_para":
@@ -2276,6 +2618,35 @@ class UpdateServer(QtCore.QObject):
                     elif message[key]["operation"] == "SET3":
                         self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=3)
 
+                    else:
+                        pass
+                elif message[key]["type"] == "INTLK_A":
+                    if message[key]["server"] == "BO":
+                        if message[key]["operation"]=="ON":
+                            self.PLC.WriteBase8(address=message[key]["address"])
+                        elif message[key]["operation"]=="OFF":
+                            self.PLC.WriteBase16(address=message[key]["address"])
+                        elif message[key]["operation"]=="RESET":
+                            self.PLC.WriteBase32(address=message[key]["address"])
+                        elif message[key]["operation"]=="update":
+                            self.PLC.Write_BO_2(message[key]["address"]+2,message[key]["value"])
+                        else:
+                            pass
+                elif message[key]["type"] == "INTLK_D":
+                    if message[key]["server"] == "BO":
+                        if message[key]["operation"] == "ON":
+                            self.PLC.WriteBase8(address=message[key]["address"])
+                        elif message[key]["operation"] == "OFF":
+                            self.PLC.WriteBase16(address=message[key]["address"])
+                        elif message[key]["operation"] == "RESET":
+                            self.PLC.WriteBase32(address=message[key]["address"])
+                        else:
+                            pass
+                elif message[key]["type"] == "FLAG":
+                    if message[key]["operation"] == "OPEN":
+                        self.PLC.WriteBase4(address=message[key]["address"])
+                    elif message[key]["operation"] == "CLOSE":
+                        self.PLC.WriteBase8(address=message[key]["address"])
                     else:
                         pass
 

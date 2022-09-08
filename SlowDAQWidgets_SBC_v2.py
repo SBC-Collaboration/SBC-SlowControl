@@ -44,7 +44,7 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-fami
               "\"Calibri\"; font-size: 14px; font-weight: bold;"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
                " border-color: black;"
-TITLE_STYLE = "background-color: rgb(204,204,204); "
+# TITLE_STYLE = "background-color: rgb(204,204,204); "
 # BORDER_STYLE = " "
 # FONT = " font-size: 14px;"
 # TITLE_STYLE = "background-color: rgb(204,204,204);  " \
@@ -287,6 +287,7 @@ class SetPoint(QtWidgets.QWidget):
         self.Field.editingFinished.connect(self.UpdateValue)
         self.value = 0
         self.Field.setText(str(self.value))
+        self.Unit = " "
 
     def SetValue(self, value):
         self.value = value
@@ -523,6 +524,230 @@ class AlarmStatusWidget(QtWidgets.QWidget):
             self.Alarm = False
 
 
+class INTLK_RA_Widget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("INTLK_A_Widget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 450 * R, 200 * R))
+        self.setMinimumSize(200 * R, 100 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.GL.setSpacing(3)
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + "}")
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 150 * R, 60 * R))
+        self.Label.setText("Label")
+        self.GL.addWidget(self.Label, 0, 0,1,3)
+
+        self.Indicator = ColoredStatus(self, mode= 4)
+        self.Indicator.Label.setText("Indicator")
+        self.GL.addWidget(self.Indicator,0,3,QtCore.Qt.AlignCenter)
+
+        self.EN = DoubleButton(self)
+        self.EN.Label.setText("Low")
+        self.EN.Label.setText("Set")
+        self.EN.LButton.setText("open")
+        self.EN.RButton.setText("close")
+
+        self.GL.addWidget(self.EN,1,0,QtCore.Qt.AlignCenter)
+
+        self.COND = ColoredStatus(self, mode= 4)
+        self.COND.Label.setText("COND")
+
+        self.GL.addWidget(self.COND, 1, 2,QtCore.Qt.AlignCenter)
+
+        self.SET_W = SetPoint(self)
+        self.SET_W.Label.setText("SET_W")
+
+        self.GL.addWidget(self.SET_W,2,0,QtCore.Qt.AlignCenter)
+
+
+        self.SET_R = SetPoint(self)
+        self.SET_R.Label.setText("SET_R")
+
+        self.GL.addWidget(self.SET_R, 2, 1, QtCore.Qt.AlignCenter)
+
+
+        # # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        # self.RST = QtWidgets.QPushButton(self)
+        # self.RST.setText("Reset")
+        # self.GL.addWidget(self.RST,1,3,QtCore.Qt.AlignCenter)
+
+
+        self.updatebutton =  QtWidgets.QPushButton(self)
+        self.updatebutton.setText("Update")
+        self.GL.addWidget(self.updatebutton,2,3,QtCore.Qt.AlignCenter)
+
+
+
+class INTLK_LA_Widget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("INTLK_A_Widget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 450 * R, 200 * R))
+        self.setMinimumSize(200 * R, 100 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.GL.setSpacing(3)
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + "}")
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 150 * R, 60 * R))
+        self.Label.setText("Label")
+        self.GL.addWidget(self.Label, 0, 0,1,3)
+
+        self.Indicator = ColoredStatus(self, mode= 4)
+        self.Indicator.Label.setText("Indicator")
+        self.GL.addWidget(self.Indicator,0,3,QtCore.Qt.AlignCenter)
+
+        self.EN = DoubleButton(self)
+        self.EN.Label.setText("Low")
+        self.EN.Label.setText("Set")
+        self.EN.LButton.setText("open")
+        self.EN.RButton.setText("close")
+
+        self.GL.addWidget(self.EN,1,0,QtCore.Qt.AlignCenter)
+
+        self.COND = ColoredStatus(self, mode= 4)
+        self.COND.Label.setText("COND")
+
+        self.GL.addWidget(self.COND, 1, 2,QtCore.Qt.AlignCenter)
+
+        self.SET_W = SetPoint(self)
+        self.SET_W.Label.setText("SET_W")
+
+        self.GL.addWidget(self.SET_W,2,0,QtCore.Qt.AlignCenter)
+
+
+        self.SET_R = SetPoint(self)
+        self.SET_R.Label.setText("SET_R")
+
+        self.GL.addWidget(self.SET_R, 2, 1, QtCore.Qt.AlignCenter)
+
+
+        # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        self.RST = QtWidgets.QPushButton(self)
+        self.RST.setText("Reset")
+        self.GL.addWidget(self.RST,1,3,QtCore.Qt.AlignCenter)
+
+
+        self.updatebutton =  QtWidgets.QPushButton(self)
+        self.updatebutton.setText("Update")
+        self.GL.addWidget(self.updatebutton,2,3,QtCore.Qt.AlignCenter)
+
+
+class INTLK_RD_Widget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("INTLK_A_Widget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 450 * R, 200 * R))
+        self.setMinimumSize(200 * R, 100 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.GL.setSpacing(3)
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + "}")
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 150 * R, 60 * R))
+        self.Label.setText("Label")
+        self.GL.addWidget(self.Label, 0, 0,1,3)
+
+        self.Indicator = ColoredStatus(self, mode= 4)
+        self.Indicator.Label.setText("Indicator")
+        self.GL.addWidget(self.Indicator,0,3,QtCore.Qt.AlignCenter)
+
+        self.EN = DoubleButton(self)
+        self.EN.Label.setText("Low")
+        self.EN.Label.setText("Set")
+        self.EN.LButton.setText("open")
+        self.EN.RButton.setText("close")
+
+        self.GL.addWidget(self.EN,1,0,QtCore.Qt.AlignCenter)
+
+        self.COND = ColoredStatus(self, mode= 4)
+        self.COND.Label.setText("COND")
+
+        self.GL.addWidget(self.COND, 1, 2,QtCore.Qt.AlignCenter)
+
+        # # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        # self.RST = QtWidgets.QPushButton(self)
+        # self.RST.setText("Reset")
+        # self.GL.addWidget(self.RST,1,3,QtCore.Qt.AlignCenter)
+
+
+
+class INTLK_LD_Widget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("INTLK_A_Widget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 450 * R, 200 * R))
+        self.setMinimumSize(200 * R, 100 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.GL.setSpacing(3)
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + "}")
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 150 * R, 60 * R))
+        self.Label.setText("Label")
+        self.GL.addWidget(self.Label, 0, 0,1,3)
+
+        self.Indicator = ColoredStatus(self, mode= 4)
+        self.Indicator.Label.setText("Indicator")
+        self.GL.addWidget(self.Indicator,0,3,QtCore.Qt.AlignCenter)
+
+        self.EN = DoubleButton(self)
+        self.EN.Label.setText("Low")
+        self.EN.Label.setText("Set")
+        self.EN.LButton.setText("open")
+        self.EN.RButton.setText("close")
+
+        self.GL.addWidget(self.EN,1,0,QtCore.Qt.AlignCenter)
+
+        self.COND = ColoredStatus(self, mode= 4)
+        self.COND.Label.setText("COND")
+
+        self.GL.addWidget(self.COND, 1, 2,QtCore.Qt.AlignCenter)
+
+        # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        self.RST = QtWidgets.QPushButton(self)
+        self.RST.setText("Reset")
+        self.GL.addWidget(self.RST, 1, 3, QtCore.Qt.AlignCenter)
+
+
+
+
+
+
 # class HeaterExpand(QtWidgets.QWidget):
 #     def __init__(self, parent=None):
 #         super().__init__(parent)
@@ -613,6 +838,44 @@ class AlarmStatusWidget(QtWidgets.QWidget):
 #         # self.GL.addWidget(self.updatebutton,1,14)
 
 
+
+# Defines a reusable layout containing widget
+class Flag(QtWidgets.QWidget):
+    def __init__(self, parent=None, mode=4):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.VL = QtWidgets.QVBoxLayout(self)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        self.VL.setSpacing(3)
+
+
+        self.HL = QtWidgets.QHBoxLayout()
+        self.HL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.VL.addLayout(self.HL)
+
+        self.Label = QtWidgets.QLabel(self)
+        # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 200 * R, 40 * R))
+        self.Label.setMinimumSize(QtCore.QSize(10 * R, 10 * R))
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setText("Label")
+        # self.Label.setSizePolicy(sizePolicy)
+        self.HL.addWidget(self.Label)
+
+
+        self.Set = DoubleButton(self)
+        self.Set.Label.setText("Set")
+        self.Set.LButton.setText("open")
+        self.Set.RButton.setText("close")
+        self.VL.addWidget(self.Set)
+
+        self.INTLK = ColoredStatus(self, mode=mode)
+        # self.ActiveState = ColorIndicator(self) for test the function
+        self.INTLK.Label.setText("INTLK")
+        self.HL.addWidget(self.INTLK)
 
 
 class BoolIndicator(QtWidgets.QWidget):

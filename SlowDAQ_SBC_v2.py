@@ -223,6 +223,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DatanSignalTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.DatanSignalTab.Background.setObjectName("DatanSignalBkg")
 
+        self.INTLCKTab = QtWidgets.QWidget()
+        self.Tab.addTab(self.INTLCKTab, "INTLCK Panel")
+
+        self.INTLCKTab.Background = QtWidgets.QLabel(self.INTLCKTab)
+        self.INTLCKTab.Background.setScaledContents(True)
+        self.INTLCKTab.Background.setStyleSheet('background-color:black;')
+        pixmap_INTLCK = QtGui.QPixmap(os.path.join(self.ImagePath, "Default_Background.png"))
+        pixmap_INTLCK = pixmap_INTLCK.scaledToWidth(2400 * R)
+        self.INTLCKTab.Background.setPixmap(QtGui.QPixmap(pixmap_INTLCK))
+        self.INTLCKTab.Background.move(0 * R, 0 * R)
+        self.INTLCKTab.Background.setAlignment(QtCore.Qt.AlignCenter)
+        self.INTLCKTab.Background.setObjectName("INTLCKBkg")
+
         # Data saving and recovery
         # Data setting form is ended with .ini and directory is https://doc.qt.io/archives/qtforpython-5.12/PySide2/QtCore/QSettings.html depending on the System
         self.settings = QtCore.QSettings("$HOME/.config//SBC/SlowControl.ini", QtCore.QSettings.IniFormat)
@@ -652,6 +665,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PUMP3305.move(365*R, 380*R)
         self.PUMP3305.State.LButton.setText("ON")
         self.PUMP3305.State.RButton.setText("OFF")
+        self.PUMP3305.LOOP2PTSubWindow.setWindowTitle("PUMP3305")
+        self.PUMP3305.LOOP2PTSubWindow.Label.setText("PUMP3305")
 
 
         self.PUMP3305_CON = ColoredStatus(self.HydraulicTab, mode = 2)
@@ -839,6 +854,101 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRESSURE_CYCLE.Group.setTitle("PRESSURE_CYCLE")
         self.PRESSURE_CYCLE.objectname = "PRESSURE_CYCLE"
 
+        self.MAN_TS = Flag(self.DatanSignalTab)
+        self.MAN_TS.move(1300 * R, 390 * R)
+        self.MAN_TS.Label.setText("MAN_TS")
+
+
+        self.MAN_HYD = Flag(self.DatanSignalTab)
+        self.MAN_HYD.move(1300 * R, 500 * R)
+        self.MAN_HYD.Label.setText("MAN_HYD")
+
+
+        self.TT2118_HI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
+        self.TT2118_HI_INTLK.move(10 * R, 10 * R)
+        self.TT2118_HI_INTLK.Label.setText("TT2118_HI")
+        self.TT2118_HI_INTLK.setObjectName("TT2118_HI_INTLK")
+
+        self.TT2118_LO_INTLK = INTLK_RA_Widget(self.INTLCKTab)
+        self.TT2118_LO_INTLK.move(460 * R, 10 * R)
+        self.TT2118_LO_INTLK.Label.setText("TT2118_LO")
+        self.TT2118_LO_INTLK.setObjectName("TT2118_LO_INTLK")
+
+        self.PT4306_LO_INTLK = INTLK_RA_Widget(self.INTLCKTab)
+        self.PT4306_LO_INTLK.move(920 * R, 10 * R)
+        self.PT4306_LO_INTLK.Label.setText("PT4306_LO")
+        self.PT4306_LO_INTLK.setObjectName("PT4306_LO_INTLK")
+
+        self.PT4306_HI_INTLK = INTLK_RA_Widget(self.INTLCKTab)
+        self.PT4306_HI_INTLK.move(1380 * R, 10 * R)
+        self.PT4306_HI_INTLK.Label.setText("PT4306_HI")
+        self.PT4306_HI_INTLK.setObjectName("PT4306_HI_INTLK")
+
+        self.PT4322_HI_INTLK = INTLK_RA_Widget(self.INTLCKTab)
+        self.PT4322_HI_INTLK.move(1840 * R, 10 * R)
+        self.PT4322_HI_INTLK.Label.setText("PT4322_HI")
+        self.PT4322_HI_INTLK.setObjectName("PT4322_HI_INTLK")
+
+        self.PT4322_HIHI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
+        self.PT4322_HIHI_INTLK.move(10 * R, 220 * R)
+        self.PT4322_HIHI_INTLK.Label.setText("PT4322_HIHI")
+        self.PT4322_HIHI_INTLK.setObjectName("PT4322_HIHI_INTLK")
+
+        self.PT4319_HI_INTLK = INTLK_RA_Widget(self.INTLCKTab)
+        self.PT4319_HI_INTLK.move(460 * R, 220 * R)
+        self.PT4319_HI_INTLK.Label.setText("PT4319_HI")
+        self.PT4319_HI_INTLK.setObjectName("PT4319_HI_INTLK")
+
+        self.PT4319_HIHI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
+        self.PT4319_HIHI_INTLK.move(920 * R, 220 * R)
+        self.PT4319_HIHI_INTLK.Label.setText("PT4319_HIHI")
+        self.PT4319_HIHI_INTLK.setObjectName("PT4319_HIHI_INTLK")
+
+        self.PT4325_HI_INTLK = INTLK_RA_Widget(self.INTLCKTab)
+        self.PT4325_HI_INTLK.move(1380 * R, 220 * R)
+        self.PT4325_HI_INTLK.Label.setText("PT4325_HI")
+        self.PT4325_HI_INTLK.setObjectName("PT4325_HI_INTLK")
+
+        self.PT4325_HIHI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
+        self.PT4325_HIHI_INTLK.move(1840 * R, 220 * R)
+        self.PT4325_HIHI_INTLK.Label.setText("PT4325_HIHI")
+        self.PT4325_HIHI_INTLK.setObjectName("PT4325_HIHI_INTLK")
+
+
+
+
+        self.TS1_INTLK = INTLK_LD_Widget(self.INTLCKTab)
+        self.TS1_INTLK.move(10 * R, 460 * R)
+        self.TS1_INTLK.Label.setText("TS1")
+        self.TS1_INTLK.setObjectName("TS1")
+
+        self.ES3347_INTLK = INTLK_RD_Widget(self.INTLCKTab)
+        self.ES3347_INTLK.move(460 * R, 460 * R)
+        self.ES3347_INTLK.Label.setText("ES3347")
+        self.ES3347_INTLK.setObjectName("ES3347")
+
+        self.PUMP3305_OL_INTLK = INTLK_LD_Widget(self.INTLCKTab)
+        self.PUMP3305_OL_INTLK.move(920 * R, 460 * R)
+        self.PUMP3305_OL_INTLK.Label.setText("PUMP3305_OL")
+        self.PUMP3305_OL_INTLK.setObjectName("PUMP3305_OL")
+
+        self.TS2_INTLK = INTLK_LD_Widget(self.INTLCKTab)
+        self.TS2_INTLK.move(1380 * R, 460 * R)
+        self.TS2_INTLK.Label.setText("TS2")
+        self.TS2_INTLK.setObjectName("TS2")
+
+        self.TS3_INTLK = INTLK_LD_Widget(self.INTLCKTab)
+        self.TS3_INTLK.move(1840 * R, 460 * R)
+        self.TS3_INTLK.Label.setText("TS3")
+        self.TS3_INTLK.setObjectName("TS3")
+
+        self.PU_PRIME_INTLK = INTLK_LD_Widget(self.INTLCKTab)
+        self.PU_PRIME_INTLK.move(10 * R, 670 * R)
+        self.PU_PRIME_INTLK.Label.setText("PU_PRIME")
+        self.PU_PRIME_INTLK.setObjectName("PU_PRIME")
+
+
+
 
         # Alarm button
         self.AlarmWindow = AlarmWin()
@@ -852,8 +962,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #commands stack
         self.address =sec.merge_dic(sec.TT_FP_ADDRESS,sec.TT_BO_ADDRESS,sec.PT_ADDRESS,sec.LEFT_REAL_ADDRESS,
-                                                     sec.DIN_ADDRESS,sec.VALVE_ADDRESS,sec.LOOPPID_ADR_BASE,sec.LOOP2PT_ADR_BASE,sec.PROCEDURE_ADDRESS)
+                                                     sec.DIN_ADDRESS,sec.VALVE_ADDRESS,sec.LOOPPID_ADR_BASE,sec.LOOP2PT_ADR_BASE,sec.PROCEDURE_ADDRESS, sec.INTLK_A_ADDRESS,
+                                    sec.INTLK_D_ADDRESS,sec.FLAG_ADDRESS)
         self.commands = {}
+        self.command_buffer_waiting= 1
         # self.statustransition={}
 
         self.Valve_buffer = sec.VALVE_OUT
@@ -861,6 +973,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Switch_buffer = sec.SWITCH_OUT
         self.LOOPPID_EN_buffer = sec.LOOPPID_EN
         self.LOOP2PT_OUT_buffer =sec.LOOP2PT_OUT
+        self.INTLK_D_DIC_buffer = sec.INTLK_D_DIC
+        self.INTLK_A_DIC_buffer = sec.INTLK_A_DIC
+        self.FLAG_buffer = sec.FLAG_DIC
 
 
         self.BORTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111, self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118,
@@ -2510,6 +2625,142 @@ class MainWindow(QtWidgets.QMainWindow):
                                      HighLimit=self.AlarmButton.SubWindow.LT3335.High_Set.Field.text()))
 
 
+        # INTLK
+        self.TT2118_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.TT2118_HI_INTLK.Label.text()+"_INTLK"))
+        self.TT2118_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.TT2118_HI_INTLK.Label.text() + "_INTLK"))
+        self.TT2118_HI_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_A_RESET(self.TT2118_HI_INTLK.Label.text() + "_INTLK"))
+        self.TT2118_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.TT2118_HI_INTLK.Label.text() + "_INTLK", self.TT2118_HI_INTLK.SET_W.Field.text()))
+
+        self.TT2118_LO_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.TT2118_LO_INTLK.Label.text() + "_INTLK"))
+        self.TT2118_LO_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.TT2118_LO_INTLK.Label.text() + "_INTLK"))
+        self.TT2118_LO_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.TT2118_LO_INTLK.Label.text() + "_INTLK", self.TT2118_LO_INTLK.SET_W.Field.text()))
+
+
+        self.PT4306_LO_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.PT4306_LO_INTLK.Label.text() + "_INTLK"))
+        self.PT4306_LO_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.PT4306_LO_INTLK.Label.text() + "_INTLK"))
+        self.PT4306_LO_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.PT4306_LO_INTLK.Label.text() + "_INTLK", self.PT4306_LO_INTLK.SET_W.Field.text()))
+
+        self.PT4306_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.PT4306_HI_INTLK.Label.text() + "_INTLK"))
+        self.PT4306_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.PT4306_HI_INTLK.Label.text() + "_INTLK"))
+        self.PT4306_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.PT4306_HI_INTLK.Label.text() + "_INTLK", self.PT4306_HI_INTLK.SET_W.Field.text()))
+
+        self.PT4322_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.PT4322_HI_INTLK.Label.text() + "_INTLK"))
+        self.PT4322_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.PT4322_HI_INTLK.Label.text() + "_INTLK"))
+        self.PT4322_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.PT4322_HI_INTLK.Label.text() + "_INTLK", self.PT4322_HI_INTLK.SET_W.Field.text()))
+
+        self.PT4322_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.PT4322_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.PT4322_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.PT4322_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.PT4322_HIHI_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_A_RESET(self.PT4322_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.PT4322_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.PT4322_HIHI_INTLK.Label.text() + "_INTLK", self.PT4322_HIHI_INTLK.SET_W.Field.text()))
+
+        self.PT4319_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.PT4319_HI_INTLK.Label.text() + "_INTLK"))
+        self.PT4319_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.PT4319_HI_INTLK.Label.text() + "_INTLK"))
+        self.PT4319_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.PT4319_HI_INTLK.Label.text() + "_INTLK", self.PT4319_HI_INTLK.SET_W.Field.text()))
+
+        self.PT4319_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.PT4319_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.PT4319_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.PT4319_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.PT4319_HIHI_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_A_RESET(self.PT4319_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.PT4319_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.PT4319_HIHI_INTLK.Label.text() + "_INTLK", self.PT4319_HIHI_INTLK.SET_W.Field.text()))
+
+        self.PT4325_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.PT4325_HI_INTLK.Label.text() + "_INTLK"))
+        self.PT4325_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.PT4325_HI_INTLK.Label.text() + "_INTLK"))
+        self.PT4325_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.PT4325_HI_INTLK.Label.text() + "_INTLK", self.PT4325_HI_INTLK.SET_W.Field.text()))
+
+        self.PT4325_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.PT4325_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.PT4325_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.PT4325_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.PT4325_HIHI_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_A_RESET(self.PT4325_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.PT4325_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.PT4325_HIHI_INTLK.Label.text() + "_INTLK", self.PT4325_HIHI_INTLK.SET_W.Field.text()))
+
+        #INTLK D part
+        self.TS1_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.TS1_INTLK.Label.text() + "_INTLK"))
+        self.TS1_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.TS1_INTLK.Label.text() + "_INTLK"))
+        self.TS1_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.TS1_INTLK.Label.text() + "_INTLK"))
+
+        self.ES3347_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.ES3347_INTLK.Label.text() + "_INTLK"))
+        self.ES3347_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.ES3347_INTLK.Label.text() + "_INTLK"))
+
+
+        self.PUMP3305_OL_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.PUMP3305_OL_INTLK.Label.text() + "_INTLK"))
+        self.PUMP3305_OL_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.PUMP3305_OL_INTLK.Label.text() + "_INTLK"))
+        self.PUMP3305_OL_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.PUMP3305_OL_INTLK.Label.text() + "_INTLK"))
+
+        self.TS2_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.TS2_INTLK.Label.text() + "_INTLK"))
+        self.TS2_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.TS2_INTLK.Label.text() + "_INTLK"))
+        self.TS2_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.TS2_INTLK.Label.text() + "_INTLK"))
+
+        self.TS3_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.TS3_INTLK.Label.text() + "_INTLK"))
+        self.TS3_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.TS3_INTLK.Label.text() + "_INTLK"))
+        self.TS3_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.TS3_INTLK.Label.text() + "_INTLK"))
+
+        self.PU_PRIME_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.PU_PRIME_INTLK.Label.text() + "_INTLK"))
+        self.PU_PRIME_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.PU_PRIME_INTLK.Label.text() + "_INTLK"))
+        self.PU_PRIME_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.PU_PRIME_INTLK.Label.text() + "_INTLK"))
+
+        #FLAG
+        self.MAN_TS.Set.LButton.clicked.connect(
+            lambda x: self.FLAGLButtonClicked(self.MAN_TS.Label.text()))
+        self.MAN_TS.Set.RButton.clicked.connect(
+            lambda x: self.FLAGRButtonClicked(self.MAN_TS.Label.text()))
+
+        self.MAN_HYD.Set.LButton.clicked.connect(
+            lambda x: self.FLAGLButtonClicked(self.MAN_HYD.Label.text()))
+        self.MAN_HYD.Set.RButton.clicked.connect(
+            lambda x: self.FLAGRButtonClicked(self.MAN_HYD.Label.text()))
+
+
+
+
         #Procedure widgets
         self.TS_ADDREM.START.clicked.connect(lambda: self.ProcedureClick(pid = self.TS_ADDREM.objectname, start = True, stop = False, abort = False))
         self.TS_ADDREM.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=True, abort=False))
@@ -2539,6 +2790,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LButtonClicked(self,pid):
         try:
+            #if there is alread a command to send to tcp server, wait the new command until last one has been sent
+            # if not self.commands[pid]:
+            #     time.sleep(self.command_buffer_waiting)
             # in case cannot find the pid's address
             address = self.address[pid]
             self.commands[pid]={"server":"BO","address": address, "type":"valve","operation":"OPEN", "value":1}
@@ -2554,6 +2808,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def RButtonClicked(self, pid):
 
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "CLOSE",
                               "value": 1}
@@ -2563,8 +2819,39 @@ class MainWindow(QtWidgets.QMainWindow):
             print(e)
 
     @QtCore.Slot()
+    def FLAGLButtonClicked(self, pid):
+        try:
+            # if there is alread a command to send to tcp server, wait the new command until last one has been sent
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            # in case cannot find the pid's address
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "FLAG", "operation": "OPEN", "value": 1}
+            # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
+            print(self.commands)
+            print(pid, "LButton is clicked")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def FLAGRButtonClicked(self, pid):
+
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "FLAG", "operation": "CLOSE",
+                                  "value": 1}
+            print(self.commands)
+            print(pid, "R Button is clicked")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
     def SwitchLButtonClicked(self, pid):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "switch", "operation": "ON", "value": 1}
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
@@ -2576,7 +2863,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def SwitchRButtonClicked(self, pid):
         try:
-
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "switch", "operation": "OFF",
                               "value": 1}
@@ -2586,8 +2874,102 @@ class MainWindow(QtWidgets.QMainWindow):
             print(e)
 
     @QtCore.Slot()
+    def INTLK_A_LButtonClicked(self, pid):
+        try:
+
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "ON", "value": 1}
+            # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
+            print(self.commands)
+            print(pid, "LButton is clicked")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def INTLK_A_RButtonClicked(self, pid):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "OFF",
+                              "value": 1}
+            print(self.commands)
+            print(pid, "R Button is clicked")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def INTLK_A_RESET(self, pid):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "RESET",
+                                  "value": 1}
+            print(self.commands)
+            print(pid, "RESET")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def INTLK_A_update(self, pid,value):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "update",
+                                  "value": float(value)}
+            print(self.commands)
+            print(pid, "update")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def INTLK_D_LButtonClicked(self, pid):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_D", "operation": "ON", "value": 1}
+            # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
+            print(self.commands)
+            print(pid, "LButton is clicked")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def INTLK_D_RButtonClicked(self, pid):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_D", "operation": "OFF",
+                                  "value": 1}
+            print(self.commands)
+            print(pid, "R Button is clicked")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def INTLK_D_RESET(self, pid):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_D", "operation": "RESET",
+                                  "value": 1}
+            print(self.commands)
+            print(pid, "RESET")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
     def LOOP2PTLButtonClicked(self, pid):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_power", "operation": "OPEN", "value": 1}
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
@@ -2596,10 +2978,12 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception as e:
             print(e)
 
+
     @QtCore.Slot()
     def LOOP2PTRButtonClicked(self, pid):
         try:
-
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_power", "operation": "CLOSE",
                                   "value": 1}
@@ -2611,6 +2995,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTSet(self, pid, value):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value in [0, 1, 2, 3]:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT", "operation": "SETMODE", "value": value}
@@ -2624,6 +3010,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTSETPOINTSet(self, pid, value1, value2):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value1 == 1:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT",
@@ -2644,6 +3032,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTGroupButtonClicked(self, pid, setN):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if setN == 0:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_setmode",
@@ -2667,6 +3057,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTupdate(self, pid, modeN, setpoint):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if modeN == 'MODE0':
                 self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_para",
@@ -2690,6 +3082,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRupdate(self,pid, modeN, setpoint, HI, LO):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if modeN == 'MODE0':
                 self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
@@ -2716,6 +3110,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTLButtonClicked(self, pid):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "heater_power", "operation": "EN",
                               "value": 1}
@@ -2727,6 +3123,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRButtonClicked(self, pid):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "heater_power", "operation": "DISEN",
                               "value": 1}
@@ -2738,6 +3136,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTSwitchSet(self, pid, value):
         try:
+
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value in [0,1,2,3]:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "heater", "operation": "SETMODE", "value": value}
@@ -2750,6 +3151,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTHISet(self, pid, value):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
                                   "operation": "HI_LIM", "value": value}
@@ -2761,6 +3164,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTLOSet(self, pid, value):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
                               "operation": "LO_LIM", "value": value}
@@ -2772,6 +3177,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTSETPOINTSet(self, pid, value1, value2):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value1 == 0:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
@@ -2795,6 +3202,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRGroupButtonClicked(self, pid, setN):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if setN == 0:
                 self.commands[pid] = {"server": "BO", "address": address, "type": "heater_setmode",
@@ -2818,6 +3227,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRupdate(self,pid, modeN, setpoint, HI, LO):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if modeN == 'MODE0':
                 self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
@@ -2847,6 +3258,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def BOTTBoxUpdate(self,pid, Act,LowLimit, HighLimit,update=True):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid]={"server": "BO", "address": address, "type": "TT", "operation": {"Act":Act,
                                 "LowLimit":float(LowLimit),"HighLimit":float(HighLimit),"Update":update}}
@@ -2857,6 +3270,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def FPTTBoxUpdate(self,pid, Act,LowLimit, HighLimit,update=True):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid]={"server": "FP", "address": address, "type": "TT", "operation": {"Act":Act,
                                 "LowLimit":float(LowLimit),"HighLimit":float(HighLimit),"Update":update}}
@@ -2867,6 +3282,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def PTBoxUpdate(self, pid, Act, LowLimit, HighLimit,update=True):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "PT", "operation": {"Act": Act,
                                                                                                         "LowLimit": float(LowLimit), "HighLimit": float(HighLimit),"Update":update}}
@@ -2877,6 +3294,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LEFTBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "LEFT", "operation": {"Act": Act,
                                                                                                   "LowLimit": float(LowLimit), "HighLimit": float(HighLimit), "Update": update}}
@@ -2887,6 +3306,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def ProcedureClick(self, pid, start, stop, abort):
         try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             self.commands[pid] = {"server": "BO", "address": address, "type": "Procedure", "operation": {"Start": start, "Stop": stop, "Abort": abort}}
             print(pid, start, stop, abort, "ARE OK?")
@@ -3230,6 +3651,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.HeaterSubWindow.Mode.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
         self.HTR6214.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
 
+
+
         #update Din widget
         self.PUMP3305_CON.UpdateColor(received_dic_c["data"]["Din"]["value"]["PUMP3305_CON"])
         self.PUMP3305_OL.UpdateColor(received_dic_c["data"]["Din"]["value"]["PUMP3305_OL"])
@@ -3390,6 +3813,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.HFSV3331.ActiveState.UpdateColor(False)
 
 
+
+
         # if received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"] and not received_dic_c["data"]["LOOP2PT"]["ERR"]["PUMP3305"]:
         #
         #     self.PUMP3305.ActiveState.UpdateColor(True)
@@ -3548,6 +3973,31 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
+        # FLAG
+        if received_dic_c["data"]["FLAG"]["INTLKD"]["MAN_TS"]:
+
+            self.MAN_TS.INTLK.UpdateColor(True)
+        else:
+            self.MAN_TS.INTLK.UpdateColor(False)
+
+        if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"] != self.FLAG_buffer["MAN_TS"]:
+            self.MAN_TS.Set.ButtonTransitionState(False)
+            self.FLAG_buffer["MAN_TS"] = received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]
+        else:
+            pass
+
+        if received_dic_c["data"]["FLAG"]["INTLKD"]["MAN_HYD"]:
+
+            self.MAN_HYD.INTLK.UpdateColor(True)
+        else:
+            self.MAN_HYD.INTLK.UpdateColor(False)
+
+        if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"] != self.FLAG_buffer["MAN_HYD"]:
+            self.MAN_HYD.Set.ButtonTransitionState(False)
+            self.FLAG_buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
+        else:
+            pass
+
         # if received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"] != self.Switch_buffer["PUMP3305"]:
         #     self.PUMP3305.Set.ButtonTransitionState(False)
         #     self.Switch_buffer["PUMP3305"] = received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"]
@@ -3670,6 +4120,102 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
+        #INTLK part
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT2118_HI_INTLK"]:
+            self.TT2118_HI_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_A_DIC_buffer["TT2118_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"] != self.INTLK_A_DIC_buffer["TT2118_LO_INTLK"]:
+            self.TT2118_LO_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_A_DIC_buffer["TT2118_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"] != self.INTLK_A_DIC_buffer["PT4306_LO_INTLK"]:
+            self.PT4306_LO_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_A_DIC_buffer["PT4306_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"]:
+            self.PT4306_HI_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4322_HI_INTLK"]:
+            self.PT4322_HI_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_A_DIC_buffer["PT4322_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4322_HIHI_INTLK"]:
+            self.PT4322_HIHI_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_A_DIC_buffer["PT4322_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4319_HI_INTLK"]:
+            self.PT4319_HI_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_A_DIC_buffer["PT4319_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"]
+        else:
+            pass
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4319_HIHI_INTLK"]:
+            self.PT4319_HIHI_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_A_DIC_buffer["PT4319_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4325_HI_INTLK"]:
+            self.PT4325_HI_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_A_DIC_buffer["PT4325_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"]
+        else:
+            pass
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4325_HIHI_INTLK"]:
+            self.PT4325_HIHI_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_A_DIC_buffer["PT4325_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"]
+        else:
+            pass
+
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"] != self.INTLK_D_DIC_buffer["TS1_INTLK"]:
+            self.TS1_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_D_DIC_buffer["TS1_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"] != self.INTLK_D_DIC_buffer["ES3347_INTLK"]:
+            self.ES3347_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_D_DIC_buffer["ES3347_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"] != self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"]:
+            self.PUMP3305_OL_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"] != self.INTLK_D_DIC_buffer["TS2_INTLK"]:
+            self.TS2_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_D_DIC_buffer["TS2_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"] != self.INTLK_D_DIC_buffer["TS3_INTLK"]:
+            self.TS3_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_D_DIC_buffer["TS3_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"]
+        else:
+            pass
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"] != self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"]:
+            self.PU_PRIME_INTLK.EN.ButtonTransitionState(False)
+            self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"]
+        else:
+            pass
 
 
 
@@ -3833,6 +4379,20 @@ class MainWindow(QtWidgets.QMainWindow):
         # else:
         #     self.PUMP3305.Set.ButtonRClicked()
 
+
+
+#      FLAGs
+        if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]:
+            self.MAN_TS.Set.ButtonLClicked()
+        else:
+            self.MAN_TS.Set.ButtonRClicked()
+
+
+        if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
+            self.MAN_HYD.Set.ButtonLClicked()
+        else:
+            self.MAN_HYD.Set.ButtonRClicked()
+
         # set LOOPPID double button status ON/OFF also the status in the subwindow
 
 
@@ -3981,6 +4541,124 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
             self.PUMP3305.State.ButtonRClicked()
+
+        #INTLK
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"]:
+
+            self.TT2118_HI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.TT2118_HI_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"]:
+
+            self.TT2118_LO_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.TT2118_LO_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"]:
+
+            self.PT4306_LO_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4306_LO_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]:
+
+            self.PT4306_HI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4306_HI_INTLK.EN.ButtonRClicked()
+
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"]:
+
+            self.PT4322_HI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4322_HI_INTLK.EN.ButtonRClicked()
+
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"]:
+
+            self.PT4322_HIHI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4322_HIHI_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"]:
+
+            self.PT4319_HI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4319_HI_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"]:
+
+            self.PT4319_HIHI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4319_HIHI_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"]:
+
+            self.PT4325_HI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4325_HI_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"]:
+
+            self.PT4325_HIHI_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PT4325_HIHI_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"]:
+
+            self.TS1_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.TS1_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"]:
+
+            self.ES3347_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.ES3347_INTLK.EN.ButtonRClicked()
+
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]:
+
+            self.PUMP3305_OL_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PUMP3305_OL_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"]:
+
+            self.TS2_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.TS2_INTLK.EN.ButtonRClicked()
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"]:
+
+            self.TS3_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.TS3_INTLK.EN.ButtonRClicked()
+
+
+        if received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"]:
+
+            self.PU_PRIME_INTLK.EN.ButtonLClicked()
+
+        else:
+            self.PU_PRIME_INTLK.EN.ButtonRClicked()
 
 
 
@@ -4650,6 +5328,79 @@ class MainWindow(QtWidgets.QMainWindow):
                                received_dic_c["data"]["LOOPPID"]["SET3"]["HTR6214"]))
         self.HTR6214.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6214"])
+
+
+
+        #INTLCK indicator
+        self.TT2118_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["TT2118_HI_INTLK"])
+        self.TT2118_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT2118_HI_INTLK"])
+        self.TT2118_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT2118_HI_INTLK"])
+
+        self.TT2118_LO_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["TT2118_LO_INTLK"])
+        self.TT2118_LO_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT2118_LO_INTLK"])
+        self.TT2118_LO_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT2118_LO_INTLK"])
+
+        self.PT4306_LO_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4306_LO_INTLK"])
+        self.PT4306_LO_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4306_LO_INTLK"])
+        self.PT4306_LO_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4306_LO_INTLK"])
+
+        self.PT4306_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4306_HI_INTLK"])
+        self.PT4306_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4306_HI_INTLK"])
+        self.PT4306_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4306_HI_INTLK"])
+
+        self.PT4322_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4322_HI_INTLK"])
+        self.PT4322_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4322_HI_INTLK"])
+        self.PT4322_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4322_HI_INTLK"])
+
+        self.PT4322_HIHI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4322_HIHI_INTLK"])
+        self.PT4322_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4322_HIHI_INTLK"])
+        self.PT4322_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4322_HIHI_INTLK"])
+
+        self.PT4319_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4319_HI_INTLK"])
+        self.PT4319_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4319_HI_INTLK"])
+        self.PT4319_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4319_HI_INTLK"])
+
+        self.PT4319_HIHI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4319_HIHI_INTLK"])
+        self.PT4319_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4319_HIHI_INTLK"])
+        self.PT4319_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4319_HIHI_INTLK"])
+
+
+        self.PT4325_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4325_HI_INTLK"])
+        self.PT4325_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4325_HI_INTLK"])
+        self.PT4325_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4325_HI_INTLK"])
+
+        self.PT4325_HIHI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4325_HIHI_INTLK"])
+        self.PT4325_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4325_HIHI_INTLK"])
+        self.PT4325_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4325_HIHI_INTLK"])
+
+        self.TS1_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["TS1_INTLK"])
+        self.TS1_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS1_INTLK"])
+
+        self.ES3347_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["ES3347_INTLK"])
+        self.ES3347_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["ES3347_INTLK"])
+
+        self.PUMP3305_OL_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["PUMP3305_OL_INTLK"])
+        self.PUMP3305_OL_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PUMP3305_OL_INTLK"])
+
+        self.TS2_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["TS2_INTLK"])
+        self.TS2_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS2_INTLK"])
+
+        self.TS3_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["TS3_INTLK"])
+        self.TS3_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS3_INTLK"])
+
+        self.PU_PRIME_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["PU_PRIME_INTLK"])
+        self.PU_PRIME_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PU_PRIME_INTLK"])
+
 
     @QtCore.Slot(object)
     def update_alarmwindow(self,list):
@@ -7771,7 +8522,6 @@ class Valve(QtWidgets.QWidget):
         self.ActiveState.Label.setText("Status")
         self.HL.addWidget(self.ActiveState)
 
-
 # Defines a reusable layout containing widgets
 class Camera(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -7897,6 +8647,20 @@ class UpdateClient(QtCore.QObject):
         self.Procedure_INTLKD_ini = sec.PROCEDURE_INTLKD
         self.Procedure_EXIT_ini = sec.PROCEDURE_EXIT
 
+        self.INTLK_D_ADDRESS_ini = sec.INTLK_D_ADDRESS
+        self.INTLK_D_DIC_ini = sec.INTLK_D_DIC
+        self.INTLK_D_EN_ini = sec.INTLK_D_EN
+        self.INTLK_D_COND_ini = sec.INTLK_D_COND
+        self.INTLK_A_ADDRESS_ini = sec.INTLK_A_ADDRESS
+        self.INTLK_A_DIC_ini = sec.INTLK_A_DIC
+        self.INTLK_A_EN_ini = sec.INTLK_A_EN
+        self.INTLK_A_COND_ini = sec.INTLK_A_COND
+        self.INTLK_A_SET_ini = sec.INTLK_A_SET
+
+        self.FLAG_ADDRESS_ini = sec.FLAG_ADDRESS
+        self.FLAG_DIC_ini = sec.FLAG_DIC
+        self.FLAG_INTLKD_ini = sec.FLAG_INTLKD
+
         self.receive_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
@@ -7939,6 +8703,15 @@ class UpdateClient(QtCore.QObject):
                                               "SET1": self.LOOP2PT_SET1_ini,
                                               "SET2": self.LOOP2PT_SET2_ini,
                                               "SET3": self.LOOP2PT_SET3_ini},
+                                  "INTLK_D": {"value": self.INTLK_D_DIC_ini,
+                                              "EN": self.INTLK_D_EN_ini,
+                                              "COND": self.INTLK_D_COND_ini},
+                                  "INTLK_A": {"value":self.INTLK_A_DIC_ini,
+                                              "EN":self.INTLK_A_EN_ini,
+                                              "COND":self.INTLK_A_COND_ini,
+                                              "SET":self.INTLK_A_SET_ini},
+                                  "FLAG": {"value":self.FLAG_DIC_ini,
+                                           "INTLKD":self.FLAG_INTLKD_ini},
                                   "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini}},
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},
