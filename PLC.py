@@ -1172,7 +1172,7 @@ class UpdateDataBase(QtCore.QObject):
         self.para_Switch = 0
         self.rate_Switch = 90
         self.para_LOOPPID = 0
-        self.rate_LOOPPID = 90
+        self.rate_LOOPPID = 5
         self.para_LOOP2PT = 0
         self.rate_LOOP2PT = 90
         self.para_FLAG=0
@@ -1383,7 +1383,8 @@ class UpdateDataBase(QtCore.QObject):
                         self.para_PT = 0
                     # print(2)
                     for key in self.Valve_OUT:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if key == 'SV3307':
+                            print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.Valve_OUT[key] != self.Valve_buffer[key]:
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.Valve_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Valve_OUT[key])
