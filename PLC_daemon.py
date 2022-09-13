@@ -1470,7 +1470,7 @@ class UpdateDataBase(QtCore.QObject):
                 #     print("No new data from PLC")
                 #     pass
                 # self.db.insert_data_into_datastorage(2,self.dt, 2)
-                self.db.insert_data_into_datastorage(2, self.dt, 2)
+                self.db.update_data_into_datastorage(2, self.dt, 2)
                 time.sleep(self.base_period*30)
                 # raise Exception("Test breakup")
             except Exception as e:
