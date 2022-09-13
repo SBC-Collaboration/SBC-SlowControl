@@ -67,7 +67,7 @@ def PLC_loop():
 
     while True:
         try:
-            # clear_tcp()
+            clear_tcp()
             PLC_body()
         except:
             (type, value, traceback) = sys.exc_info()
@@ -79,7 +79,7 @@ def PLC_loop():
 def PLC_run():
     # with daemon.DaemonContext():
     #     PLC_loop()
-    clear_tcp()
+    # clear_tcp()
     PLC_loop()
 
 def clear_tcp():
@@ -2494,8 +2494,8 @@ class message_manager():
             print(result)
 
         except SlackApiError as e:
-            # print(f"Error: {e}")
-            print(e)
+            print(f"Error: {e}")
+            # print(e)
 
 
 
