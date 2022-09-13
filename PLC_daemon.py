@@ -91,6 +91,8 @@ def PLC_body():
     os.system("date | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
     os.system("echo 'PLC body ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
     App = QtWidgets.QApplication(sys.argv)
+    os.system("date | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+    os.system("echo 'APP afterwards ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
     Update = PLC_daemon.Update()
     sys.exit(App.exec_())
 
