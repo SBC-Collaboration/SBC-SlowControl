@@ -1186,7 +1186,7 @@ class UpdateDataBase(QtCore.QObject):
         self.Running = True
         while self.Running:
             try:
-                self.dt = datetime_in_s()
+                self.dt = datetime_in_1e5micro()
                 self.early_dt = early_datetime()
                 print("Database Updating", self.dt)
 
@@ -1469,8 +1469,8 @@ class UpdateDataBase(QtCore.QObject):
                 #
                 #     print("No new data from PLC")
                 #     pass
-                # self.db.insert_data_into_datastorage(2,self.dt, 2)
-                self.db.update_data_into_datastorage(2, self.dt, 2)
+                self.db.insert_data_into_datastorage(2,self.dt, 2)
+                # self.db.update_data_into_datastorage(2, self.dt, 2)
                 time.sleep(self.base_period*30)
                 # raise Exception("Test breakup")
             except Exception as e:
