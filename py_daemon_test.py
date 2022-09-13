@@ -60,7 +60,7 @@ class test_qt(QtCore.QObject):
         self.users = fetch(url='https://jsonplaceholder.typicode.com/users')
         self.users = process(users=self.users)
         self.curr_timestamp = int(datetime.timestamp(datetime.now()))
-        self.path = os.path.abspath(f'/home/hep/Documents/cron-tutorial/output/users_{curr_timestamp}.csv')
+        self.path = os.path.abspath(f'/home/hep/Documents/cron-tutorial/output/users_{self.curr_timestamp}.csv')
         self.save(users=self.users, path=self.path)
 
     def save(users: pd.DataFrame, path: str) -> None:
