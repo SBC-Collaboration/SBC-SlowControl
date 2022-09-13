@@ -79,7 +79,7 @@ def PLC_loop():
 def PLC_run():
     # with daemon.DaemonContext():
     #     PLC_loop()
-    clear_tcp()
+    
     PLC_loop()
 
 def clear_tcp():
