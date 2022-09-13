@@ -15,5 +15,9 @@ def clear_tcp():
                 print("\n",pid, "KILLED")
 
 
+def clear_tcp_scripts():
+    os.system("source clear_tcp.sh")
+
 if __name__ == "__main__":
-    clear_tcp()
+    clear_tcp_scripts()
+    # clear_tcp()
