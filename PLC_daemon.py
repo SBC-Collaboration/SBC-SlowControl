@@ -88,6 +88,8 @@ def clear_tcp():
     os.system("source /home/hep/PycharmProjects/pythonProject/SBC-SlowControl/clear_tcp.sh")
 
 def PLC_body():
+    os.system("date | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+    os.system("echo 'PLC body ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
     App = QtWidgets.QApplication(sys.argv)
     Update = PLC_daemon.Update()
     sys.exit(App.exec_())
@@ -2351,6 +2353,8 @@ class Update(QtCore.QObject):
     UPDATE_TO_DATABASE = QtCore.Signal()
     def __init__(self, parent=None):
         super().__init__(parent)
+        os.system("date | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+        os.system("echo 'Update ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
         #error?
         # App.aboutToQuit.connect(self.StopUpdater)
         self.StartUpdater()
