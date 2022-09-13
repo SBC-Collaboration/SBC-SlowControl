@@ -67,7 +67,7 @@ def PLC_loop():
 
     while True:
         try:
-            clear_tcp()
+            # clear_tcp()
             PLC_body()
         except:
             (type, value, traceback) = sys.exc_info()
