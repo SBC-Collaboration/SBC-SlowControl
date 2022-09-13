@@ -16,7 +16,7 @@ def clear_tcp():
 
 
 def clear_tcp_scripts():
-    os.system("source clear_tcp.sh")
+    os.system("/home/hep/PycharmProjects/pythonProject/SBC-SlowControl/source clear_tcp.sh")
 
 if __name__ == "__main__":
     clear_tcp_scripts()
