@@ -1966,8 +1966,8 @@ class UpdateServer(QtCore.QObject):
         self.Running = True
         while self.Running:
             print("refreshing the BKG-GUI communication server")
-            if True:
-            # if self.PLC.NewData_ZMQ:
+            # if True:
+            if self.PLC.NewData_ZMQ:
 
                 # message = self.socket.recv()
                 # print("refreshing")
