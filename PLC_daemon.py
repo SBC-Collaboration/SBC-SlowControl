@@ -1992,6 +1992,12 @@ class UpdateServer(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+        try:
+            self.socket.send('bye')
+            self.socket.recv()
+        except:
+            print("Error disconnecting.")
+        self.socket.close()
 
     def pack_data(self):
 
