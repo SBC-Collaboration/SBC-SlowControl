@@ -57,5 +57,5 @@ if __name__ == '__main__':
     users = fetch(url='https://jsonplaceholder.typicode.com/users')
     users = process(users=users)
     curr_timestamp = int(datetime.timestamp(datetime.now()))
-    path = os.path.abspath(f'Documents/cron-tutorial/output/users_{curr_timestamp}.csv')
+    path = os.path.abspath(f'/home/hep/Documents/cron-tutorial/output/users_{curr_timestamp}.csv')
     save(users=users, path=path)
