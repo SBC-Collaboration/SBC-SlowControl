@@ -28,7 +28,7 @@ import json
 import requests
 import pandas as pd
 from datetime import datetime
-
+from PySide2 import QtWidgets, QtCore, QtGui
 
 def fetch(url: str) -> list:
     res = requests.get(url)
@@ -51,6 +51,20 @@ def process(users: list) -> pd.DataFrame:
 
 def save(users: pd.DataFrame, path: str) -> None:
     users.to_csv(path, index=False)
+
+
+class test_qt(QtCore.QObject):
+
+    def __init__(self):
+        super().__init__()
+        self.users = fetch(url='https://jsonplaceholder.typicode.com/users')
+        self.users = process(users=self.users)
+        self.curr_timestamp = int(datetime.timestamp(datetime.now()))
+        self.path = os.path.abspath(f'/home/hep/Documents/cron-tutorial/output/users_{curr_timestamp}.csv')
+        self.save(users=self.users, path=self.path)
+
+    def save(users: pd.DataFrame, path: str) -> None:
+        self.users.to_csv(path, index=False)
 
 
 if __name__ == '__main__':
