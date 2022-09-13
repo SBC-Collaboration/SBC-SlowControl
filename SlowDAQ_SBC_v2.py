@@ -8579,7 +8579,7 @@ class UpdateClient(QtCore.QObject):
         self.Running=False
         self.readcommand = False
         self.period = 1
-        self.socket.setsockopt(zmq.LINGER, 100)
+        self.socket.setsockopt(zmq.LINGER, 0)
 
         print("client is connecting to the ZMQ server")
 
