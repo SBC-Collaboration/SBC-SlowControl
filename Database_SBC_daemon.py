@@ -79,6 +79,16 @@ class ucsbdatabase():
             "INSERT INTO test (id, time) VALUES(%s, %s);", data)
         self.db.commit()
 
+    def update_data_into_datastorage(self, instrument, time, value):
+
+        data = (time)
+        self.mycursor.execute(
+            "UPDATE test SET datime=%s WHERE id=1;", data)
+        self.db.commit()
+        # self.close_database()
+
+
+
     def insert_data_into_datastorage_wocommit(self,instrument, time,value):
         # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
         # value is a decimal from -9999.999 to 9999.999
