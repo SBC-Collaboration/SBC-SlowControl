@@ -42,6 +42,7 @@ BASE_ADDRESS= 12288
 sys._excepthook = sys.excepthook
 def exception_hook(exctype, value, traceback):
     print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
+    os.system("echo 'ExceptType:{} Value: {}, Traceback: {}' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt".format(exctype,value,traceback))
     # sys._excepthook(exctype, value, traceback)
     sys.exit(1)
 sys.excepthook = exception_hook
