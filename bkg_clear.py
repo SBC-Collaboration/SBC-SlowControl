@@ -18,6 +18,6 @@ def clear_tcp():
 def clear_tcp_scripts():
     os.system("source /home/hep/PycharmProjects/pythonProject/SBC-SlowControl/clear_tcp.sh")
 
-if __name__ == "__main__":
+if __nammysqle__ == "__main__":
     clear_tcp_scripts()
     # clear_tcp()

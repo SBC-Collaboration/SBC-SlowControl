@@ -67,7 +67,7 @@ def PLC_loop():
 
     while True:
         try:
-            # clear_tcp()
+            clear_tcp()
             PLC_body()
         except:
             (type, value, traceback) = sys.exc_info()
@@ -83,14 +83,7 @@ def PLC_run():
     PLC_loop()
 
 def clear_tcp():
-    for proc in psutil.process_iter():
-        for conns in proc.connections(kind='tcp'):
-            if conns.laddr.port ==PORT_N:
-        # if PROCESS_NAME in proc.name() &:
-                pid = proc.pid
-                p=psutil.Process(pid)
-                p.terminate()
-                print("\n",pid, "KILLED")
+    os.system("source /home/hep/PycharmProjects/pythonProject/SBC-SlowControl/clear_tcp.sh")
 
 def PLC_body():
     App = QtWidgets.QApplication(sys.argv)
