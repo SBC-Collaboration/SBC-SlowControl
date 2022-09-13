@@ -112,6 +112,9 @@ class PLC(QtCore.QObject):
         self.Connected_BO = self.Client_BO.connect()
         print(" Beckoff connected: " + str(self.Connected_BO))
 
+        os.system("date | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+        os.system("echo 'BKG PLC ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+
         self.TT_FP_address = sec.TT_FP_ADDRESS
 
         self.TT_BO_address = sec.TT_BO_ADDRESS
