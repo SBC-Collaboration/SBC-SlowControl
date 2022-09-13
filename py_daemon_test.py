@@ -63,7 +63,7 @@ class test_qt(QtCore.QObject):
         self.path = os.path.abspath(f'/home/hep/Documents/cron-tutorial/output/users_{self.curr_timestamp}.csv')
         self.save(users=self.users, path=self.path)
 
-    def save(users: pd.DataFrame, path: str) -> None:
+    def save(self, users: pd.DataFrame, path: str) -> None:
         self.users.to_csv(path, index=False)
 
 
