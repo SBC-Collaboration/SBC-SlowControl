@@ -1186,7 +1186,7 @@ class UpdateDataBase(QtCore.QObject):
         self.Running = True
         while self.Running:
             try:
-                self.dt = datetime_in_1e5micro()
+                self.dt = datetime_in_s()
                 self.early_dt = early_datetime()
                 print("Database Updating", self.dt)
 
