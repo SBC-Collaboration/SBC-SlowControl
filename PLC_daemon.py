@@ -69,7 +69,7 @@ def PLC_loop():
         try:
             # clear_tcp()
             os.system("date | tee /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
-            os.system("echo 'while loop' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+            os.system("echo 'while loop $(date)' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
             PLC_body()
         except:
             (type, value, traceback) = sys.exc_info()
