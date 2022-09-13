@@ -81,9 +81,9 @@ class ucsbdatabase():
 
     def update_data_into_datastorage(self, instrument, time, value):
 
-        data = (time,0)
+        data = (1,time)
         self.mycursor.execute(
-            "UPDATE test SET datime=%s WHERE id=1;", data)
+            "UPDATE test SET id=%1, datime=%s WHERE id=1;", data)
         self.db.commit()
         # self.close_database()
 
