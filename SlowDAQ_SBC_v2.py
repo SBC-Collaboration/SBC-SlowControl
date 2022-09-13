@@ -8579,6 +8579,7 @@ class UpdateClient(QtCore.QObject):
         self.Running=False
         self.readcommand = False
         self.period = 1
+        self.socket.setsockopt(zmq.LINGER, 100)
 
         print("client is connecting to the ZMQ server")
 
@@ -8753,6 +8754,12 @@ class UpdateClient(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+        try:
+            self.socket.send('bye')
+            self.socket.recv()
+        except:
+            print("Error disconnecting.")
+        self.socket.close()
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic = message
