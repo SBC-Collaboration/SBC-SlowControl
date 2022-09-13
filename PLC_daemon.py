@@ -2494,8 +2494,8 @@ class message_manager():
             print(result)
 
         except SlackApiError as e:
-            print(f"Error: {e}")
-            # print(e)
+            # print(f"Error: {e}")
+            print(e)
 
 
 
