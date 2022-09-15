@@ -2360,7 +2360,7 @@ class Update(QtCore.QObject):
         os.system("date | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
         os.system("echo 'Update ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
         #error?
-        # App.aboutToQuit.connect(self.StopUpdater)
+        App.aboutToQuit.connect(self.StopUpdater)
         self.StartUpdater()
         self.slack_signals()
         self.connect_signals()
