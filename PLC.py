@@ -720,7 +720,7 @@ class PLC(QtCore.QObject):
             return 0
         else:
             self.PLC_DISCON_SIGNAL.emit()
-            raise Exception('Not connected to PLC')  # will it restart the PLC ?
+            # raise Exception('Not connected to PLC')  # will it restart the PLC ?
 
             return 1
 
@@ -2704,14 +2704,14 @@ class Update(QtCore.QObject):
         time.sleep(2)
 
         # Update database on another thread
-        self.DataUpdateThread = QtCore.QThread()
-        self.UpDatabase = UpdateDataBase()
-        # self.UpDatabase = UpdateDataBase(self.PLC)
-        self.UpDatabase.moveToThread(self.DataUpdateThread)
-        self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        self.DataUpdateThread.start()
-
-        time.sleep(2)
+        # self.DataUpdateThread = QtCore.QThread()
+        # self.UpDatabase = UpdateDataBase()
+        # # self.UpDatabase = UpdateDataBase(self.PLC)
+        # self.UpDatabase.moveToThread(self.DataUpdateThread)
+        # self.DataUpdateThread.started.connect(self.UpDatabase.run)
+        # self.DataUpdateThread.start()
+        #
+        # time.sleep(2)
 
         # Update database on another thread
         self.ServerUpdateThread = QtCore.QThread()
@@ -2727,14 +2727,23 @@ class Update(QtCore.QObject):
         self.UpPLC.stop()
         self.PLCUpdateThread.quit()
         self.PLCUpdateThread.wait()
+        print("PLC is stopped")
 
-        self.UpDatabase.stop()
-        self.DataUpdateThread.quit()
-        self.DataUpdateThread.wait()
+        # self.UpDatabase.stop()
+        # self.DataUpdateThread.quit()
+        # self.DataUpdateThread.wait()
 
+        print("Database is stopped")
         self.UpServer.stop()
         self.ServerUpdateThread.quit()
         self.ServerUpdateThread.wait()
+        print("ZMQ server is stopped")
+
+        for i in range(10):
+            print(i)
+            time.sleep(i)
+
+        sys.exit(App.exec_())
 
     @QtCore.Slot(str)
     def printstr(self, string):
@@ -2757,15 +2766,15 @@ class Update(QtCore.QObject):
         self.UpPLC.AI_slack_alarm.connect(self.printstr)
 
         self.UpPLC.AI_slack_alarm.connect(self.message_manager.slack_alarm)
-        self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
+        # self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
 
     def connect_signals(self):
         # self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
-        self.PATCH_TO_DATABASE.connect(lambda: self.UpDatabase.update_value(self.data_transfer))
+        # self.PATCH_TO_DATABASE.connect(lambda: self.UpDatabase.update_value(self.data_transfer))
 
         self.UpPLC.PLC.DATA_TRI_SIGNAL.connect(self.PLCstatus_transfer)
-        self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
+        # self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
 
         self.UpPLC.PLC.PLC_DISCON_SIGNAL.connect(self.StopUpdater)
         print("signal established")
