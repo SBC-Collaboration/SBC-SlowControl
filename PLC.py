@@ -58,6 +58,7 @@ def FPADS_OUT_AT(outaddress):
 class PLC(QtCore.QObject):
     DATA_UPDATE_SIGNAL=QtCore.Signal(object)
     DATA_TRI_SIGNAL = QtCore.Signal(bool)
+    PLC_DISCON_SIGNAL = QtCore.Signal()
     def __init__(self):
         super().__init__()
 
@@ -402,6 +403,10 @@ class PLC(QtCore.QObject):
         #         Attribute[i] = self.Client.read_holding_registers(18000 + i * 8, count=1, unit=0x01)
         #         self.nAttribute[i] = hex(Attribute[i].getRegister(0))
         #     # print("Attributes", self.nAttribute)
+        else:
+            print("lost connection to PLC")
+            self.PLC_DISCON_SIGNAL.emit()
+
 
         #########################################################################
         if self.Connected_BO:
@@ -714,6 +719,7 @@ class PLC(QtCore.QObject):
 
             return 0
         else:
+            self.PLC_DISCON_SIGNAL.emit()
             raise Exception('Not connected to PLC')  # will it restart the PLC ?
 
             return 1
@@ -2760,6 +2766,8 @@ class Update(QtCore.QObject):
 
         self.UpPLC.PLC.DATA_TRI_SIGNAL.connect(self.PLCstatus_transfer)
         self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
+
+        self.UpPLC.PLC.PLC_DISCON_SIGNAL.connect(self.StopUpdater)
         print("signal established")
 
 
