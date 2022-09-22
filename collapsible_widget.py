@@ -77,9 +77,7 @@ class CollapsibleBox(QtWidgets.QWidget):
 
 
 if __name__ == "__main__":
-
     app = QtWidgets.QApplication(sys.argv)
-
     w = QtWidgets.QMainWindow()
     w.setCentralWidget(QtWidgets.QWidget())
     dock = QtWidgets.QDockWidget("Collapsible Demo")
