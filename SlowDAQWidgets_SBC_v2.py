@@ -2408,6 +2408,35 @@ class Valve_s(QtWidgets.QWidget):
 
         self.collapse = Valve_CollapsibleBox(self)
         self.HL.addWidget(self.collapse)
+    def Activate(self, Activate):
+
+        if Activate:
+            try:
+                # Don't need this because the button only read feedback from PLC
+                # self.LButton.clicked.connect(self.ButtonLClicked)
+                # self.RButton.clicked.connect(self.ButtonRClicked)
+                print(1)
+
+                # self.Set.LButton.clicked.connect(lambda: self.collapse.ButtonLTransitionState(True))
+                # self.Set.RButton.clicked.connect(lambda: self.collapse.ButtonRTransitionState(True))
+            except:
+
+                print("Failed to Activate the Doublebutton")
+                pass
+        else:
+            try:
+                #Don't need this because the button only read feedback from PLC
+                # self.LButton.clicked.connect(self.ButtonLClicked)
+                # self.RButton.clicked.connect(self.ButtonRClicked)
+
+                # self.LButton.clicked.disconnect(self.ButtonLClicked)
+                # self.RButton.clicked.disconnect(self.ButtonRClicked)
+                pass
+
+            except:
+                print("Failed to Deactivate the Doublebutton")
+
+                pass
 
 # Defines a reusable layout containing widgets
 class Camera(QtWidgets.QWidget):
@@ -3962,25 +3991,6 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.ActiveName = Active
         self.InactiveName = Inactive
 
-    # Neutral means that the button shouldn't show any color
-
-    @QtCore.Slot()
-    def ButtonTransitionState(self, bool):
-        self.StatusTransition.UpdateColor(bool)
-
-    @QtCore.Slot()
-    def ButtonLTransitionState(self, bool):
-        if self.LState == self.InactiveName and self.RState == self.ActiveName:
-            self.StatusTransition.UpdateColor(bool)
-        else:
-            pass
-
-    @QtCore.Slot()
-    def ButtonRTransitionState(self, bool):
-        if self.LState == self.ActiveName and self.RState == self.InactiveName:
-            self.StatusTransition.UpdateColor(bool)
-        else:
-            pass
 
 
 
@@ -4023,37 +4033,7 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.ButtonRState()
         self.Signals.sSignal.emit(self.RButton.text())
 
-    def Activate(self, Activate):
 
-        if Activate:
-            try:
-                # Don't need this because the button only read feedback from PLC
-                # self.LButton.clicked.connect(self.ButtonLClicked)
-                # self.RButton.clicked.connect(self.ButtonRClicked)
-
-                self.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
-                self.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
-            except:
-
-                print("Failed to Activate the Doublebutton")
-                pass
-        else:
-            try:
-                #Don't need this because the button only read feedback from PLC
-                # self.LButton.clicked.connect(self.ButtonLClicked)
-                # self.RButton.clicked.connect(self.ButtonRClicked)
-
-                # self.LButton.clicked.disconnect(self.ButtonLClicked)
-                # self.RButton.clicked.disconnect(self.ButtonRClicked)
-                pass
-
-
-
-
-            except:
-                print("Failed to Deactivate the Doublebutton")
-
-                pass
 
 
 
@@ -4269,6 +4249,26 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         content_animation.setDuration(500)
         content_animation.setStartValue(0)
         content_animation.setEndValue(content_height)
+# Neutral means that the button shouldn't show any color
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.LState == self.InactiveName and self.RState == self.ActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.LState == self.ActiveName and self.RState == self.InactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
 
 
 class ChangeValueSignal(QtCore.QObject):

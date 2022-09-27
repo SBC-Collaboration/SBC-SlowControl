@@ -283,11 +283,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4306.move(1020*R, 60*R)
         self.PT4306.SetUnit(" bar")
 
-        self.PV4307 = Valve(self.ThermosyphonTab)
+        self.PV4307 = Valve_s(self.ThermosyphonTab)
         self.PV4307.Label.setText("PV4307")
         self.PV4307.move(925*R, 190*R)
 
-        self.PV4308 = Valve(self.ThermosyphonTab)
+        self.PV4308 = Valve_s(self.ThermosyphonTab)
         self.PV4308.Label.setText("PV4308")
         self.PV4308.move(850*R, 320*R)
 
@@ -325,11 +325,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PG4316.Label.setText("PG4316")
         self.PG4316.move(820*R, 470*R)
 
-        self.PV4317 = Valve(self.ThermosyphonTab)
+        self.PV4317 = Valve_s(self.ThermosyphonTab)
         self.PV4317.Label.setText("PV4317")
         self.PV4317.move(520*R, 380*R)
 
-        self.PV4318 = Valve(self.ThermosyphonTab)
+        self.PV4318 = Valve_s(self.ThermosyphonTab)
         self.PV4318.Label.setText("PV4318")
         self.PV4318.move(250*R, 580*R)
 
@@ -342,7 +342,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRV4320.Label.setText("PRV4320")
         self.PRV4320.move(570*R, 860*R)
 
-        self.PV4321 = Valve(self.ThermosyphonTab)
+        self.PV4321 = Valve_s(self.ThermosyphonTab)
         self.PV4321.Label.setText("PV4321")
         self.PV4321.move(530*R, 580*R)
 
@@ -355,7 +355,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRV4323.Label.setText("PRV4323")
         self.PRV4323.move(850*R, 860*R)
 
-        self.PV4324 = Valve(self.ThermosyphonTab)
+        self.PV4324 = Valve_s(self.ThermosyphonTab)
         self.PV4324.Label.setText("PV4324")
         self.PV4324.move(1100*R, 580*R)
 
@@ -368,16 +368,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRV4326.Label.setText("PRV4326")
         self.PRV4326.move(1150*R, 860*R)
 
-        self.SV4327 = Valve(self.ThermosyphonTab)
+        self.SV4327 = Valve_s(self.ThermosyphonTab)
         self.SV4327.Label.setText("SV4327")
         self.SV4327.move(120*R, 330*R)
 
-        self.SV4328 = Valve(self.ThermosyphonTab)
+        self.SV4328 = Valve_s(self.ThermosyphonTab)
         self.SV4328.Label.setText("SV4328")
 
         self.SV4328.move(1350*R, 60*R)
 
-        self.SV4329 = Valve(self.ThermosyphonTab)
+        self.SV4329 = Valve_s(self.ThermosyphonTab)
         self.SV4329.Label.setText("SV4329")
         self.SV4329.move(1700*R, 60*R)
 
@@ -385,15 +385,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT4330.Label.setText("TT4330")
         self.TT4330.move(1915*R, 55*R)
 
-        self.SV4331 = Valve(self.ThermosyphonTab)
+        self.SV4331 = Valve_s(self.ThermosyphonTab)
         self.SV4331.Label.setText("SV4331")
         self.SV4331.move(1340*R, 200*R)
 
-        self.SV4332 = Valve(self.ThermosyphonTab)
+        self.SV4332 = Valve_s(self.ThermosyphonTab)
         self.SV4332.Label.setText("SV4332")
         self.SV4332.move(1450*R, 300*R)
 
-        self.SV4337 = Valve(self.ThermosyphonTab)
+        self.SV4337 = Valve_s(self.ThermosyphonTab)
         self.SV4337.Label.setText("SV4337")
         self.SV4337.move(0*R,220*R)
 
@@ -639,23 +639,23 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT1332.Label.setText("PT1332")
         self.PT1332.SetUnit(" bar")
 
-        self.PV1344=Valve(self.FluidTab)
+        self.PV1344=Valve_s(self.FluidTab)
         self.PV1344.Label.setText("PV1344")
         self.PV1344.move(1400*R,600*R)
 
-        self.PV5305 = Valve(self.FluidTab)
+        self.PV5305 = Valve_s(self.FluidTab)
         self.PV5305.Label.setText("PV5305")
         self.PV5305.move(1200*R, 530*R)
 
-        self.PV5306 = Valve(self.FluidTab)
+        self.PV5306 = Valve_s(self.FluidTab)
         self.PV5306.Label.setText("PV5306")
         self.PV5306.move(1150*R, 800*R)
 
-        self.PV5307 = Valve(self.FluidTab)
+        self.PV5307 = Valve_s(self.FluidTab)
         self.PV5307.Label.setText("PV5307")
         self.PV5307.move(1030*R, 620*R)
 
-        self.PV5309 = Valve(self.FluidTab)
+        self.PV5309 = Valve_s(self.FluidTab)
         self.PV5309.Label.setText("PV5309")
         self.PV5309.move(1130*R, 310*R)
 
@@ -715,15 +715,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT3311.Label.setText("PT3311")
         self.PT3311.SetUnit(" bar")
 
-        self.HFSV3312 = Valve(self.HydraulicTab)
+        self.HFSV3312 = Valve_s(self.HydraulicTab)
         self.HFSV3312.Label.setText("HFSV3312")
         self.HFSV3312.move(650*R, 1030*R)
 
-        self.HFSV3323 = Valve(self.HydraulicTab)
+        self.HFSV3323 = Valve_s(self.HydraulicTab)
         self.HFSV3323.Label.setText("HFSV3323")
         self.HFSV3323.move(1050*R, 1080*R)
 
-        self.HFSV3331 = Valve(self.HydraulicTab)
+        self.HFSV3331 = Valve_s(self.HydraulicTab)
         self.HFSV3331.Label.setText("HFSV3331")
         self.HFSV3331.move(1100*R, 320*R)
 
@@ -738,11 +738,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT3333.SetUnit(" bar")
 
 
-        self.SV3329 = Valve(self.HydraulicTab)
+        self.SV3329 = Valve_s(self.HydraulicTab)
         self.SV3329.Label.setText("SV3329")
         self.SV3329.move(1570*R, 470*R)
 
-        self.SV3322 = Valve(self.HydraulicTab)
+        self.SV3322 = Valve_s(self.HydraulicTab)
         self.SV3322.Label.setText("SV3322")
         self.SV3322.move(1000*R, 780*R)
 
@@ -757,15 +757,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SERVO3321.HeaterSubWindow.HISP.Field.setText('100')
 
 
-        self.SV3325 = Valve(self.HydraulicTab)
+        self.SV3325 = Valve_s(self.HydraulicTab)
         self.SV3325.Label.setText("SV3325")
         self.SV3325.move(1200*R, 1000*R)
 
-        self.SV3307 = Valve(self.HydraulicTab)
+        self.SV3307 = Valve_s(self.HydraulicTab)
         self.SV3307.Label.setText("SV3307")
         self.SV3307.move(200*R, 1030*R)
 
-        self.SV3310 = Valve(self.HydraulicTab)
+        self.SV3310 = Valve_s(self.HydraulicTab)
         self.SV3310.Label.setText("SV3310")
         self.SV3310.move(800*R, 1240*R)
 
@@ -3566,31 +3566,31 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # set whether Valves are manually active or not
 
-        self.PV1344.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1344"])
-        self.PV4307.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4307"])
-        self.PV4308.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4308"])
-        self.PV4317.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4317"])
-        self.PV4318.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4318"])
-        self.PV4321.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4321"])
-        self.PV4324.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4324"])
-        self.PV5305.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5305"])
-        self.PV5306.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5306"])
-        self.PV5307.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5307"])
-        self.PV5309.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5309"])
-        self.SV3307.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3307"])
-        self.SV3310.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3310"])
-        self.SV3322.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3322"])
-        self.SV3325.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3325"])
-        self.SV3329.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3329"])
-        self.SV4327.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4327"])
-        self.SV4328.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4328"])
-        self.SV4329.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4329"])
-        self.SV4331.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4331"])
-        self.SV4332.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4332"])
-        self.SV4337.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4337"])
-        self.HFSV3312.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"])
-        self.HFSV3323.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3323"])
-        self.HFSV3331.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3331"])
+        # self.PV1344.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1344"])
+        # self.PV4307.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4307"])
+        # self.PV4308.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4308"])
+        # self.PV4317.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4317"])
+        # self.PV4318.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4318"])
+        # self.PV4321.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4321"])
+        # self.PV4324.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4324"])
+        # self.PV5305.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5305"])
+        # self.PV5306.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5306"])
+        # self.PV5307.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5307"])
+        # self.PV5309.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5309"])
+        # self.SV3307.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3307"])
+        # self.SV3310.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3310"])
+        # self.SV3322.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3322"])
+        # self.SV3325.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3325"])
+        # self.SV3329.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3329"])
+        # self.SV4327.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4327"])
+        # self.SV4328.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4328"])
+        # self.SV4329.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4329"])
+        # self.SV4331.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4331"])
+        # self.SV4332.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4332"])
+        # self.SV4337.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4337"])
+        # self.HFSV3312.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"])
+        # self.HFSV3323.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3323"])
+        # self.HFSV3331.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3331"])
 
 
         self.PUMP3305.LOOP2PTSubWindow.Mode.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
@@ -3668,153 +3668,153 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV1344"] and not received_dic_c["data"]["Valve"]["ERR"]["PV1344"]:
 
-            self.PV1344.ActiveState.UpdateColor(True)
+            self.PV1344.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV1344.ActiveState.UpdateColor(False)
+            self.PV1344.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV4307"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4307"]:
 
-            self.PV4307.ActiveState.UpdateColor(True)
+            self.PV4307.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV4307.ActiveState.UpdateColor(False)
+            self.PV4307.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV4308"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4308"]:
 
-            self.PV4308.ActiveState.UpdateColor(True)
+            self.PV4308.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV4308.ActiveState.UpdateColor(False)
+            self.PV4308.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV4317"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4317"]:
 
-            self.PV4317.ActiveState.UpdateColor(True)
+            self.PV4317.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV4317.ActiveState.UpdateColor(False)
+            self.PV4317.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV4318"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4318"]:
 
-            self.PV4318.ActiveState.UpdateColor(True)
+            self.PV4318.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV4318.ActiveState.UpdateColor(False)
+            self.PV4318.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV4321"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4321"]:
 
-            self.PV4321.ActiveState.UpdateColor(True)
+            self.PV4321.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV4321.ActiveState.UpdateColor(False)
+            self.PV4321.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV4324"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4324"]:
 
-            self.PV4324.ActiveState.UpdateColor(True)
+            self.PV4324.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV4324.ActiveState.UpdateColor(False)
+            self.PV4324.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV5305"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5305"]:
 
-            self.PV5305.ActiveState.UpdateColor(True)
+            self.PV5305.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV5305.ActiveState.UpdateColor(False)
+            self.PV5305.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV5306"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5306"]:
 
-            self.PV5306.ActiveState.UpdateColor(True)
+            self.PV5306.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV5306.ActiveState.UpdateColor(False)
+            self.PV5306.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV5307"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5307"]:
 
-            self.PV5307.ActiveState.UpdateColor(True)
+            self.PV5307.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV5307.ActiveState.UpdateColor(False)
+            self.PV5307.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV5309"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5309"]:
 
-            self.PV5309.ActiveState.UpdateColor(True)
+            self.PV5309.collapse.ActiveState.UpdateColor(True)
         else:
-            self.PV5309.ActiveState.UpdateColor(False)
+            self.PV5309.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV3307"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3307"]:
 
-            self.SV3307.ActiveState.UpdateColor(True)
+            self.SV3307.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV3307.ActiveState.UpdateColor(False)
+            self.SV3307.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV3310"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3310"]:
 
-            self.SV3310.ActiveState.UpdateColor(True)
+            self.SV3310.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV3310.ActiveState.UpdateColor(False)
+            self.SV3310.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV3322"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3322"]:
 
-            self.SV3322.ActiveState.UpdateColor(True)
+            self.SV3322.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV3322.ActiveState.UpdateColor(False)
+            self.SV3322.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV3325"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3325"]:
 
-            self.SV3325.ActiveState.UpdateColor(True)
+            self.SV3325.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV3325.ActiveState.UpdateColor(False)
+            self.SV3325.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV3329"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3329"]:
 
-            self.SV3329.ActiveState.UpdateColor(True)
+            self.SV3329.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV3329.ActiveState.UpdateColor(False)
+            self.SV3329.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV4327"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4327"]:
 
-            self.SV4327.ActiveState.UpdateColor(True)
+            self.SV4327.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV4327.ActiveState.UpdateColor(False)
+            self.SV4327.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV4328"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4328"]:
 
-            self.SV4328.ActiveState.UpdateColor(True)
+            self.SV4328.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV4328.ActiveState.UpdateColor(False)
+            self.SV4328.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV4329"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4329"]:
 
-            self.SV4329.ActiveState.UpdateColor(True)
+            self.SV4329.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV4329.ActiveState.UpdateColor(False)
+            self.SV4329.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV4331"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4331"]:
 
-            self.SV4331.ActiveState.UpdateColor(True)
+            self.SV4331.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV4331.ActiveState.UpdateColor(False)
+            self.SV4331.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV4332"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4332"]:
 
-            self.SV4332.ActiveState.UpdateColor(True)
+            self.SV4332.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV4332.ActiveState.UpdateColor(False)
+            self.SV4332.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["SV4337"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4337"]:
 
-            self.SV4337.ActiveState.UpdateColor(True)
+            self.SV4337.collapse.ActiveState.UpdateColor(True)
         else:
-            self.SV4337.ActiveState.UpdateColor(False)
+            self.SV4337.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3312"]:
 
-            self.HFSV3312.ActiveState.UpdateColor(True)
+            self.HFSV3312.collapse.ActiveState.UpdateColor(True)
         else:
-            self.HFSV3312.ActiveState.UpdateColor(False)
+            self.HFSV3312.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["HFSV3323"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3323"]:
 
-            self.HFSV3323.ActiveState.UpdateColor(True)
+            self.HFSV3323.collapse.ActiveState.UpdateColor(True)
         else:
-            self.HFSV3323.ActiveState.UpdateColor(False)
+            self.HFSV3323.collapse.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["HFSV3331"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3331"]:
 
-            self.HFSV3331.ActiveState.UpdateColor(True)
+            self.HFSV3331.collapse.ActiveState.UpdateColor(True)
         else:
-            self.HFSV3331.ActiveState.UpdateColor(False)
+            self.HFSV3331.collapse.ActiveState.UpdateColor(False)
 
 
 
@@ -3828,151 +3828,151 @@ class MainWindow(QtWidgets.QMainWindow):
         # reset Valves' widget busy status
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV1344"] != self.Valve_buffer["PV1344"]:
-            self.PV1344.Set.ButtonTransitionState(False)
+            self.PV1344.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4307"] != self.Valve_buffer["PV4307"]:
-            self.PV4307.Set.ButtonTransitionState(False)
+            self.PV4307.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV4307"] = received_dic_c["data"]["Valve"]["OUT"]["PV4307"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4308"] != self.Valve_buffer["PV4308"]:
-            self.PV4308.Set.ButtonTransitionState(False)
+            self.PV4308.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV4308"] = received_dic_c["data"]["Valve"]["OUT"]["PV4308"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
-            self.PV4317.Set.ButtonTransitionState(False)
+            self.PV4317.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4318"] != self.Valve_buffer["PV4318"]:
-            self.PV4318.Set.ButtonTransitionState(False)
+            self.PV4318.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV4318"] = received_dic_c["data"]["Valve"]["OUT"]["PV4318"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4321"] != self.Valve_buffer["PV4321"]:
-            self.PV4321.Set.ButtonTransitionState(False)
+            self.PV4321.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV4321"] = received_dic_c["data"]["Valve"]["OUT"]["PV4321"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4324"] != self.Valve_buffer["PV4324"]:
-            self.PV4324.Set.ButtonTransitionState(False)
+            self.PV4324.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV4324"] = received_dic_c["data"]["Valve"]["OUT"]["PV4324"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5305"] != self.Valve_buffer["PV5305"]:
-            self.PV5305.Set.ButtonTransitionState(False)
+            self.PV5305.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV5305"] = received_dic_c["data"]["Valve"]["OUT"]["PV5305"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5306"] != self.Valve_buffer["PV5306"]:
-            self.PV5306.Set.ButtonTransitionState(False)
+            self.PV5306.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV5306"] = received_dic_c["data"]["Valve"]["OUT"]["PV5306"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5307"] != self.Valve_buffer["PV5307"]:
-            self.PV5307.Set.ButtonTransitionState(False)
+            self.PV5307.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV5307"] = received_dic_c["data"]["Valve"]["OUT"]["PV5307"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5309"] != self.Valve_buffer["PV5309"]:
-            self.PV5309.Set.ButtonTransitionState(False)
+            self.PV5309.collapse.ButtonTransitionState(False)
             self.Valve_buffer["PV5309"] = received_dic_c["data"]["Valve"]["OUT"]["PV5309"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3307"] != self.Valve_buffer["SV3307"]:
-            self.SV3307.Set.ButtonTransitionState(False)
+            self.SV3307.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV3307"] = received_dic_c["data"]["Valve"]["OUT"]["SV3307"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3310"] != self.Valve_buffer["SV3310"]:
-            self.SV3310.Set.ButtonTransitionState(False)
+            self.SV3310.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV3310"] = received_dic_c["data"]["Valve"]["OUT"]["SV3310"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3322"] != self.Valve_buffer["SV3322"]:
-            self.SV3322.Set.ButtonTransitionState(False)
+            self.SV3322.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV3322"] = received_dic_c["data"]["Valve"]["OUT"]["SV3322"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3325"] != self.Valve_buffer["SV3325"]:
-            self.SV3325.Set.ButtonTransitionState(False)
+            self.SV3325.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV3325"] = received_dic_c["data"]["Valve"]["OUT"]["SV3325"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3329"] != self.Valve_buffer["SV3329"]:
-            self.SV3329.Set.ButtonTransitionState(False)
+            self.SV3329.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV3329"] = received_dic_c["data"]["Valve"]["OUT"]["SV3329"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4327"] != self.Valve_buffer["SV4327"]:
-            self.SV4327.Set.ButtonTransitionState(False)
+            self.SV4327.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4328"] != self.Valve_buffer["SV4328"]:
-            self.SV4328.Set.ButtonTransitionState(False)
+            self.SV4328.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV4328"] = received_dic_c["data"]["Valve"]["OUT"]["SV4328"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4329"] != self.Valve_buffer["SV4329"]:
-            self.SV4329.Set.ButtonTransitionState(False)
+            self.SV4329.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV4329"] = received_dic_c["data"]["Valve"]["OUT"]["SV4329"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4331"] != self.Valve_buffer["SV4331"]:
-            self.SV4331.Set.ButtonTransitionState(False)
+            self.SV4331.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV4331"] = received_dic_c["data"]["Valve"]["OUT"]["SV4331"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4332"] != self.Valve_buffer["SV4332"]:
-            self.SV4332.Set.ButtonTransitionState(False)
+            self.SV4332.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV4332"] = received_dic_c["data"]["Valve"]["OUT"]["SV4332"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4337"] != self.Valve_buffer["SV4337"]:
-            self.SV4337.Set.ButtonTransitionState(False)
+            self.SV4337.collapse.ButtonTransitionState(False)
             self.Valve_buffer["SV4337"] = received_dic_c["data"]["Valve"]["OUT"]["SV4337"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"] != self.Valve_buffer["HFSV3312"]:
-            self.HFSV3312.Set.ButtonTransitionState(False)
+            self.HFSV3312.collapse.ButtonTransitionState(False)
             self.Valve_buffer["HFSV3312"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"] != self.Valve_buffer["HFSV3323"]:
-            self.HFSV3323.Set.ButtonTransitionState(False)
+            self.HFSV3323.collapse.ButtonTransitionState(False)
             self.Valve_buffer["HFSV3323"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"] != self.Valve_buffer["HFSV3331"]:
-            self.HFSV3331.Set.ButtonTransitionState(False)
+            self.HFSV3331.collapse.ButtonTransitionState(False)
             self.Valve_buffer["HFSV3331"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"]
         else:
             pass
