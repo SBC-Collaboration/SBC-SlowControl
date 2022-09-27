@@ -2347,6 +2347,68 @@ class Valve(QtWidgets.QWidget):
         self.ActiveState.Label.setText("Status")
         self.HL.addWidget(self.ActiveState)
 
+
+class Valve_s(QtWidgets.QWidget):
+    def __init__(self, parent=None, mode=4):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 330 * R, 110 * R))
+        self.setSizePolicy(sizePolicy)
+
+        self.VL = QtWidgets.QVBoxLayout(self)
+        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        self.VL.setSpacing(3)
+
+        # self.Label = QtWidgets.QLabel(self)
+        # # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
+        # self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
+        # self.Label.setStyleSheet("QLabel {" +TITLE_STYLE + BORDER_STYLE+"}")
+        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.Label.setText("Label")
+        # self.VL.addWidget(self.Label)
+        #
+        # self.HL = QtWidgets.QHBoxLayout()
+        # self.HL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        # self.VL.addLayout(self.HL)
+        #
+        # self.Set = DoubleButton(self)
+        # self.Set.Label.setText("Set")
+        # self.Set.LButton.setText("open")
+        # self.Set.RButton.setText("close")
+        # self.HL.addWidget(self.Set)
+        #
+        # self.ActiveState = ColoredStatus(self, mode)
+        # # self.ActiveState = ColorIndicator(self) for test the function
+        # self.ActiveState.Label.setText("Status")
+        # self.HL.addWidget(self.ActiveState)
+
+        self.HL = QtWidgets.QHBoxLayout()
+        self.HL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.VL.addLayout(self.HL)
+
+        self.Label = QtWidgets.QLabel(self)
+        # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 140 * R, 40 * R))
+        self.Label.setSizePolicy(sizePolicy)
+        self.Label.setMinimumSize(QtCore.QSize(140 * R, 40 * R))
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setText("Label")
+        # self.Label.setSizePolicy(sizePolicy)
+        self.HL.addWidget(self.Label)
+
+
+        self.Set = DoubleButton_s(self)
+        self.Set.Label.setText("Set")
+        self.Set.LButton.setText("open")
+        self.Set.RButton.setText("close")
+        self.VL.addWidget(self.Set)
+
+        self.collapse = Valve_CollapsibleBox(self)
+        self.HL.addWidget(self.collapse)
+
 # Defines a reusable layout containing widgets
 class Camera(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -3843,6 +3905,158 @@ class DoubleButton(QtWidgets.QWidget):
                 pass
 
 
+
+class DoubleButton_s(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.Signals = ChangeValueSignal()
+
+        self.setObjectName("DoubleButton")
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 220*R, 40*R))
+        self.setMinimumSize(220*R, 40*R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Background = QtWidgets.QLabel(self)
+        self.Background.setObjectName("Background")
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
+        self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Double button")
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 20*R))
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setStyleSheet("QLabel {" +FONT+"}")
+
+        self.LButton = QtWidgets.QPushButton(self)
+        self.LButton.setObjectName("LButton")
+        self.LButton.setText("On")
+        self.LButton.setGeometry(QtCore.QRect(2.5*R, 20*R, 65*R, 15*R))
+        self.LButton.setProperty("State", True)
+        self.LButton.setStyleSheet(
+            "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
+            + "} QWidget[State = false]{" + C_RED + "}")
+
+
+        self.RButton = QtWidgets.QPushButton(self)
+        self.RButton.setObjectName("RButton")
+        self.RButton.setText("Off")
+        self.RButton.setGeometry(QtCore.QRect(72.5*R, 20*R, 65*R, 15*R))
+        self.RButton.setProperty("State", False)
+        self.RButton.setStyleSheet(
+            "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
+            + C_GREEN + "} QWidget[State = false]{" + C_RED + "}")
+
+        self.LState = "Active"
+        self.RState = "Inactive"
+        self.SetButtonStateNames("Active", "Inactive")
+        self.ButtonRState()
+        self.Activate(True)
+
+
+
+    def SetButtonStateNames(self, Active, Inactive):
+        self.ActiveName = Active
+        self.InactiveName = Inactive
+
+    # Neutral means that the button shouldn't show any color
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.LState == self.InactiveName and self.RState == self.ActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.LState == self.ActiveName and self.RState == self.InactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+
+
+
+
+    # Neutral means that the button shouldn't show any color
+
+
+    def ButtonLState(self):
+        if self.LState == self.InactiveName and self.RState == self.ActiveName:
+            self.LButton.setProperty("State", True)
+            self.LButton.setStyle(self.LButton.style())
+            self.LState = self.ActiveName
+            self.RButton.setProperty("State", "Neutral")
+            self.RButton.setStyle(self.RButton.style())
+            self.RState = self.InactiveName
+        else:
+            pass
+
+    def ButtonRState(self):
+        if self.LState == self.ActiveName and self.RState == self.InactiveName:
+            self.RButton.setProperty("State", False)
+            self.RButton.setStyle(self.RButton.style())
+            self.LState = self.InactiveName
+            self.LButton.setProperty("State", "Neutral")
+            self.LButton.setStyle(self.LButton.style())
+            self.RState = self.ActiveName
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonLClicked(self):
+        # time.sleep(1)
+        self.ButtonLState()
+        self.Signals.sSignal.emit(self.LButton.text())
+
+    @QtCore.Slot()
+    def ButtonRClicked(self):
+        # time.sleep(1)
+        self.ButtonRState()
+        self.Signals.sSignal.emit(self.RButton.text())
+
+    def Activate(self, Activate):
+
+        if Activate:
+            try:
+                # Don't need this because the button only read feedback from PLC
+                # self.LButton.clicked.connect(self.ButtonLClicked)
+                # self.RButton.clicked.connect(self.ButtonRClicked)
+
+                self.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
+                self.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
+            except:
+
+                print("Failed to Activate the Doublebutton")
+                pass
+        else:
+            try:
+                #Don't need this because the button only read feedback from PLC
+                # self.LButton.clicked.connect(self.ButtonLClicked)
+                # self.RButton.clicked.connect(self.ButtonRClicked)
+
+                # self.LButton.clicked.disconnect(self.ButtonLClicked)
+                # self.RButton.clicked.disconnect(self.ButtonRClicked)
+                pass
+
+
+
+
+            except:
+                print("Failed to Deactivate the Doublebutton")
+
+                pass
+
+
+
 class SingleButton(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -3959,6 +4173,12 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         super(Valve_CollapsibleBox, self).__init__(parent)
         # super().__init__(parent)
 
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 40* R))
+        self.setSizePolicy(sizePolicy)
+        # self.setSizePolicy(sizePolicy)
+
         self.toggle_button = QtWidgets.QToolButton(
             text=title, checkable=True, checked=False
         )
@@ -3966,6 +4186,7 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.toggle_button.setToolButtonStyle(
             QtCore.Qt.ToolButtonTextBesideIcon
         )
+        self.toggle_button.setSizePolicy(sizePolicy)
         self.toggle_button.setArrowType(QtCore.Qt.RightArrow)
         self.toggle_button.pressed.connect(self.on_pressed)
 
@@ -3974,8 +4195,12 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.content_area = QtWidgets.QScrollArea(
             maximumHeight=0, minimumHeight=0
         )
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 140 * R, 40* R))
+        # self.content_area.setSizePolicy(
+        #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+        # )
         self.content_area.setSizePolicy(
-            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+            sizePolicy
         )
         self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.content_area.setStyleSheet("QWidget { background: transparent; }")
@@ -3996,7 +4221,7 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
             QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
         )
 
-        self.lay = QtWidgets.QVBoxLayout()
+        self.lay = QtWidgets.QHBoxLayout()
 
         self.StatusTransition = ColoredStatus(self, mode=3)
         self.StatusTransition.setObjectName("StatusTransition")

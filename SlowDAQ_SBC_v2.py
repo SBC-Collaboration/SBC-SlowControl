@@ -863,6 +863,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MAN_HYD.move(1300 * R, 500 * R)
         self.MAN_HYD.Label.setText("MAN_HYD")
 
+        self.valve_test = Valve_s(self.DatanSignalTab)
+        self.valve_test.move(1300 * R, 600 * R)
+        self.valve_test.Label.setText("PVXXXX")
+
 
         self.TT2118_HI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
         self.TT2118_HI_INTLK.move(10 * R, 10 * R)
