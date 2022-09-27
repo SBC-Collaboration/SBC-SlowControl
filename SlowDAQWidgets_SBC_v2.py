@@ -2408,6 +2408,8 @@ class Valve_s(QtWidgets.QWidget):
 
         self.collapse = Valve_CollapsibleBox(self)
         self.HL.addWidget(self.collapse)
+
+        self.Activate(True)
     def Activate(self, Activate):
 
         if Activate:
@@ -2415,10 +2417,10 @@ class Valve_s(QtWidgets.QWidget):
                 # Don't need this because the button only read feedback from PLC
                 # self.LButton.clicked.connect(self.ButtonLClicked)
                 # self.RButton.clicked.connect(self.ButtonRClicked)
-                print(1)
+                # print(1)
 
-                # self.Set.LButton.clicked.connect(lambda: self.collapse.ButtonLTransitionState(True))
-                # self.Set.RButton.clicked.connect(lambda: self.collapse.ButtonRTransitionState(True))
+                self.Set.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
+                self.Set.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
             except:
 
                 print("Failed to Activate the Doublebutton")
@@ -2437,6 +2439,25 @@ class Valve_s(QtWidgets.QWidget):
                 print("Failed to Deactivate the Doublebutton")
 
                 pass
+
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.collapse.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.Set.LState == self.Set.InactiveName and self.Set.RState == self.Set.ActiveName:
+            self.collapse.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.Set.LState == self.Set.ActiveName and self.Set.RState == self.Set.InactiveName:
+            self.collapse.StatusTransition.UpdateColor(bool)
+        else:
+            pass
 
 # Defines a reusable layout containing widgets
 class Camera(QtWidgets.QWidget):
@@ -3983,7 +4004,7 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.RState = "Inactive"
         self.SetButtonStateNames("Active", "Inactive")
         self.ButtonRState()
-        self.Activate(True)
+
 
 
 
@@ -4251,23 +4272,6 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         content_animation.setEndValue(content_height)
 # Neutral means that the button shouldn't show any color
 
-    @QtCore.Slot()
-    def ButtonTransitionState(self, bool):
-        self.StatusTransition.UpdateColor(bool)
-
-    @QtCore.Slot()
-    def ButtonLTransitionState(self, bool):
-        if self.LState == self.InactiveName and self.RState == self.ActiveName:
-            self.StatusTransition.UpdateColor(bool)
-        else:
-            pass
-
-    @QtCore.Slot()
-    def ButtonRTransitionState(self, bool):
-        if self.LState == self.ActiveName and self.RState == self.InactiveName:
-            self.StatusTransition.UpdateColor(bool)
-        else:
-            pass
 
 
 
