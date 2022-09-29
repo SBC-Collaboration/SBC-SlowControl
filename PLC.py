@@ -363,6 +363,8 @@ class PLC(QtCore.QObject):
     def ReadAll(self):
         # print(self.TT_BO_HighLimit["TT2119"])
         # print(self.TT_BO_Alarm["TT2119"])
+        self.Connected = self.Client.connect()
+        self.Connected_BO = self.Client_BO.connect()
         if self.Connected:
             # Reading all the RTDs
             Raw_RTDs_FP = {}
