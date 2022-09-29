@@ -2703,7 +2703,7 @@ class Update(QtCore.QObject):
         # wait for PLC initialization finished
         time.sleep(2)
 
-        Update database on another thread
+        # Update database on another thread
         self.DataUpdateThread = QtCore.QThread()
         self.UpDatabase = UpdateDataBase()
         # self.UpDatabase = UpdateDataBase(self.PLC)
