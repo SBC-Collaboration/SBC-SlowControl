@@ -3828,151 +3828,151 @@ class MainWindow(QtWidgets.QMainWindow):
         # reset Valves' widget busy status
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV1344"] != self.Valve_buffer["PV1344"]:
-            self.PV1344.collapse.ButtonTransitionState(False)
+            self.PV1344.ButtonTransitionState(False)
             self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4307"] != self.Valve_buffer["PV4307"]:
-            self.PV4307.collapse.ButtonTransitionState(False)
+            self.PV4307.ButtonTransitionState(False)
             self.Valve_buffer["PV4307"] = received_dic_c["data"]["Valve"]["OUT"]["PV4307"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4308"] != self.Valve_buffer["PV4308"]:
-            self.PV4308.collapse.ButtonTransitionState(False)
+            self.PV4308.ButtonTransitionState(False)
             self.Valve_buffer["PV4308"] = received_dic_c["data"]["Valve"]["OUT"]["PV4308"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
-            self.PV4317.collapse.ButtonTransitionState(False)
+            self.PV4317.ButtonTransitionState(False)
             self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4318"] != self.Valve_buffer["PV4318"]:
-            self.PV4318.collapse.ButtonTransitionState(False)
+            self.PV4318.ButtonTransitionState(False)
             self.Valve_buffer["PV4318"] = received_dic_c["data"]["Valve"]["OUT"]["PV4318"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4321"] != self.Valve_buffer["PV4321"]:
-            self.PV4321.collapse.ButtonTransitionState(False)
+            self.PV4321.ButtonTransitionState(False)
             self.Valve_buffer["PV4321"] = received_dic_c["data"]["Valve"]["OUT"]["PV4321"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4324"] != self.Valve_buffer["PV4324"]:
-            self.PV4324.collapse.ButtonTransitionState(False)
+            self.PV4324.ButtonTransitionState(False)
             self.Valve_buffer["PV4324"] = received_dic_c["data"]["Valve"]["OUT"]["PV4324"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5305"] != self.Valve_buffer["PV5305"]:
-            self.PV5305.collapse.ButtonTransitionState(False)
+            self.PV5305.ButtonTransitionState(False)
             self.Valve_buffer["PV5305"] = received_dic_c["data"]["Valve"]["OUT"]["PV5305"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5306"] != self.Valve_buffer["PV5306"]:
-            self.PV5306.collapse.ButtonTransitionState(False)
+            self.PV5306.ButtonTransitionState(False)
             self.Valve_buffer["PV5306"] = received_dic_c["data"]["Valve"]["OUT"]["PV5306"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5307"] != self.Valve_buffer["PV5307"]:
-            self.PV5307.collapse.ButtonTransitionState(False)
+            self.PV5307.ButtonTransitionState(False)
             self.Valve_buffer["PV5307"] = received_dic_c["data"]["Valve"]["OUT"]["PV5307"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5309"] != self.Valve_buffer["PV5309"]:
-            self.PV5309.collapse.ButtonTransitionState(False)
+            self.PV5309.ButtonTransitionState(False)
             self.Valve_buffer["PV5309"] = received_dic_c["data"]["Valve"]["OUT"]["PV5309"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3307"] != self.Valve_buffer["SV3307"]:
-            self.SV3307.collapse.ButtonTransitionState(False)
+            self.SV3307.ButtonTransitionState(False)
             self.Valve_buffer["SV3307"] = received_dic_c["data"]["Valve"]["OUT"]["SV3307"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3310"] != self.Valve_buffer["SV3310"]:
-            self.SV3310.collapse.ButtonTransitionState(False)
+            self.SV3310.ButtonTransitionState(False)
             self.Valve_buffer["SV3310"] = received_dic_c["data"]["Valve"]["OUT"]["SV3310"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3322"] != self.Valve_buffer["SV3322"]:
-            self.SV3322.collapse.ButtonTransitionState(False)
+            self.SV3322.ButtonTransitionState(False)
             self.Valve_buffer["SV3322"] = received_dic_c["data"]["Valve"]["OUT"]["SV3322"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3325"] != self.Valve_buffer["SV3325"]:
-            self.SV3325.collapse.ButtonTransitionState(False)
+            self.SV3325.ButtonTransitionState(False)
             self.Valve_buffer["SV3325"] = received_dic_c["data"]["Valve"]["OUT"]["SV3325"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3329"] != self.Valve_buffer["SV3329"]:
-            self.SV3329.collapse.ButtonTransitionState(False)
+            self.SV3329.ButtonTransitionState(False)
             self.Valve_buffer["SV3329"] = received_dic_c["data"]["Valve"]["OUT"]["SV3329"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4327"] != self.Valve_buffer["SV4327"]:
-            self.SV4327.collapse.ButtonTransitionState(False)
+            self.SV4327.ButtonTransitionState(False)
             self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4328"] != self.Valve_buffer["SV4328"]:
-            self.SV4328.collapse.ButtonTransitionState(False)
+            self.SV4328.ButtonTransitionState(False)
             self.Valve_buffer["SV4328"] = received_dic_c["data"]["Valve"]["OUT"]["SV4328"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4329"] != self.Valve_buffer["SV4329"]:
-            self.SV4329.collapse.ButtonTransitionState(False)
+            self.SV4329.ButtonTransitionState(False)
             self.Valve_buffer["SV4329"] = received_dic_c["data"]["Valve"]["OUT"]["SV4329"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4331"] != self.Valve_buffer["SV4331"]:
-            self.SV4331.collapse.ButtonTransitionState(False)
+            self.SV4331.ButtonTransitionState(False)
             self.Valve_buffer["SV4331"] = received_dic_c["data"]["Valve"]["OUT"]["SV4331"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4332"] != self.Valve_buffer["SV4332"]:
-            self.SV4332.collapse.ButtonTransitionState(False)
+            self.SV4332.ButtonTransitionState(False)
             self.Valve_buffer["SV4332"] = received_dic_c["data"]["Valve"]["OUT"]["SV4332"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4337"] != self.Valve_buffer["SV4337"]:
-            self.SV4337.collapse.ButtonTransitionState(False)
+            self.SV4337.ButtonTransitionState(False)
             self.Valve_buffer["SV4337"] = received_dic_c["data"]["Valve"]["OUT"]["SV4337"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"] != self.Valve_buffer["HFSV3312"]:
-            self.HFSV3312.collapse.ButtonTransitionState(False)
+            self.HFSV3312.ButtonTransitionState(False)
             self.Valve_buffer["HFSV3312"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"] != self.Valve_buffer["HFSV3323"]:
-            self.HFSV3323.collapse.ButtonTransitionState(False)
+            self.HFSV3323.ButtonTransitionState(False)
             self.Valve_buffer["HFSV3323"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"]
         else:
             pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"] != self.Valve_buffer["HFSV3331"]:
-            self.HFSV3331.collapse.ButtonTransitionState(False)
+            self.HFSV3331.ButtonTransitionStatels(False)
             self.Valve_buffer["HFSV3331"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"]
         else:
             pass
