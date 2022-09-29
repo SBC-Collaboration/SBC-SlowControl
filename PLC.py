@@ -2703,15 +2703,15 @@ class Update(QtCore.QObject):
         # wait for PLC initialization finished
         time.sleep(2)
 
-        # Update database on another thread
-        # self.DataUpdateThread = QtCore.QThread()
-        # self.UpDatabase = UpdateDataBase()
-        # # self.UpDatabase = UpdateDataBase(self.PLC)
-        # self.UpDatabase.moveToThread(self.DataUpdateThread)
-        # self.DataUpdateThread.started.connect(self.UpDatabase.run)
-        # self.DataUpdateThread.start()
-        #
-        # time.sleep(2)
+        Update database on another thread
+        self.DataUpdateThread = QtCore.QThread()
+        self.UpDatabase = UpdateDataBase()
+        # self.UpDatabase = UpdateDataBase(self.PLC)
+        self.UpDatabase.moveToThread(self.DataUpdateThread)
+        self.DataUpdateThread.started.connect(self.UpDatabase.run)
+        self.DataUpdateThread.start()
+
+        time.sleep(2)
 
         # Update database on another thread
         self.ServerUpdateThread = QtCore.QThread()
@@ -2729,9 +2729,9 @@ class Update(QtCore.QObject):
         self.PLCUpdateThread.wait()
         print("PLC is stopped")
 
-        # self.UpDatabase.stop()
-        # self.DataUpdateThread.quit()
-        # self.DataUpdateThread.wait()
+        self.UpDatabase.stop()
+        self.DataUpdateThread.quit()
+        self.DataUpdateThread.wait()
 
         print("Database is stopped")
         self.UpServer.stop()
