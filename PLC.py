@@ -1940,6 +1940,7 @@ class UpdatePLC(QtCore.QObject):
             print("PLC is interrupted by keyboard[Ctrl-C]")
             self.stop()
         except:
+            self.PLC.PLC_DISCON_SIGNAL.emit()
             (type, value, traceback) = sys.exc_info()
             exception_hook(type, value, traceback)
 
