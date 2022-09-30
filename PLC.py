@@ -2130,6 +2130,7 @@ class UpdateServer(QtCore.QObject):
         self.socket.bind("tcp://*:5555")
         self.Running = False
         self.period = 1
+        self.socket.re
         print("connect to the PLC server")
 
         self.TT_FP_dic_ini = sec.TT_FP_DIC
@@ -2282,10 +2283,12 @@ class UpdateServer(QtCore.QObject):
                 # print("refreshing")
                 # print(f"Received request: {message}")
                 self.write_data()
+                print("data sent")
 
                 #  Send reply back to client
                 # self.socket.send(b"World")
                 self.pack_data()
+                print("data received")
                 # print(self.data_package)
                 # data=pickle.dumps([0,0])
                 # self.socket.send(data)
