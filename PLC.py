@@ -2299,6 +2299,7 @@ class UpdateServer(QtCore.QObject):
 
     @QtCore.Slot()
     def stop(self):
+        self.socket.close()
         self.Running = False
 
     def pack_data(self):
