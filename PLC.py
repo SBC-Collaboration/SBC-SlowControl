@@ -2299,7 +2299,7 @@ class UpdateServer(QtCore.QObject):
                     # self.socket.sendall(self.data_package)
                     self.PLC.NewData_ZMQ = False
                 except:
-                    print("jump")
+                    print("Time out for fetching data from GUI, continue to wait")
 
             else:
                 print("BKG-GUI communication server stops")
