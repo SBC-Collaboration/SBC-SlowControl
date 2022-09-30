@@ -4,9 +4,8 @@
 #source /home/hep/miniconda3/bin/activate sbcslowcontrol
 #which python
 while true; do
-source ./clear_tcp.sh
-python /home/hep/Downloads/sbc_slowcontrol/SBC-SlowControl/PLC.py
-python ./PLC.py
+source /home/hep/PycharmProjects/SBC_slowcontrol_test/clear_tcp.sh
+/hep/home/miniforge3/envs/sbcslowcontrol/bin/python /home/hep/PycharmProjects/SBC_slowcontrol_test/PLC.py
 sleep 2
 done
 echo "quit the loop" > ~/ECHO.txt
