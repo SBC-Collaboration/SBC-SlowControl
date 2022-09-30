@@ -2130,7 +2130,7 @@ class UpdateServer(QtCore.QObject):
         self.socket.bind("tcp://*:5555")
         self.Running = False
         self.period = 1
-        self.socket.re
+        # self.socket.re
         print("connect to the PLC server")
 
         self.TT_FP_dic_ini = sec.TT_FP_DIC
