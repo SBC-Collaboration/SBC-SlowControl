@@ -2281,23 +2281,26 @@ class UpdateServer(QtCore.QObject):
         while self.Running:
             print("refreshing the BKG-GUI communication server")
             if self.PLC.NewData_ZMQ:
+                try:
+                    # message = self.socket.recv()
+                    # print("refreshing")
+                    # print(f"Received request: {message}")
+                    self.write_data()
+                    print("data sent")
 
-                # message = self.socket.recv()
-                # print("refreshing")
-                # print(f"Received request: {message}")
-                self.write_data()
-                print("data sent")
+                    #  Send reply back to client
+                    # self.socket.send(b"World")
+                    self.pack_data()
+                    print("data received")
+                    # print(self.data_package)
+                    # data=pickle.dumps([0,0])
+                    # self.socket.send(data)
+                    self.socket.send(self.data_package)
+                    # self.socket.sendall(self.data_package)
+                    self.PLC.NewData_ZMQ = False
+                except:
+                    print("jump")
 
-                #  Send reply back to client
-                # self.socket.send(b"World")
-                self.pack_data()
-                print("data received")
-                # print(self.data_package)
-                # data=pickle.dumps([0,0])
-                # self.socket.send(data)
-                self.socket.send(self.data_package)
-                # self.socket.sendall(self.data_package)
-                self.PLC.NewData_ZMQ = False
             else:
                 print("BKG-GUI communication server stops")
                 pass
