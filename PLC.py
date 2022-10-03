@@ -150,6 +150,7 @@ class PLC(QtCore.QObject):
         self.Valve_MAN = sec.VALVE_MAN
         self.Valve_INTLKD = sec.VALVE_INTLKD
         self.Valve_ERR = sec.VALVE_ERR
+        self.Valve_Command_Cache = sec.VALVE_COMMAND_CACHE
 
         self.LOOPPID_ADR_BASE = sec.LOOPPID_ADR_BASE
 
@@ -291,6 +292,7 @@ class PLC(QtCore.QObject):
                               "Valve_MAN":self.Valve_MAN,
                               "Valve_INTLKD":self.Valve_INTLKD,
                               "Valve_ERR":self.Valve_ERR,
+                              "Valve_Command_Cache":self.Valve_Command_Cache,
                               "LOOPPID_ADR_BASE":self.LOOPPID_ADR_BASE,
                               "LOOPPID_MODE0":self.LOOPPID_MODE0,
                               "LOOPPID_MODE1":self.LOOPPID_MODE1,
@@ -2161,6 +2163,7 @@ class UpdateServer(QtCore.QObject):
         self.Valve_MAN_ini = sec.VALVE_MAN
         self.Valve_INTLKD_ini = sec.VALVE_INTLKD
         self.Valve_ERR_ini = sec.VALVE_ERR
+        self.Valve_Command_Cache_ini = sec.Valve_Command_Cache
         self.Switch_OUT_ini = sec.SWITCH_OUT
         self.Switch_MAN_ini = sec.SWITCH_MAN
         self.Switch_INTLKD_ini = sec.SWITCH_INTLKD
@@ -2222,7 +2225,8 @@ class UpdateServer(QtCore.QObject):
                                   "Valve": {"OUT": self.Valve_OUT_ini,
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
-                                            "ERR": self.Valve_ERR_ini},
+                                            "ERR": self.Valve_ERR_ini,
+                                            "Valve_Command_Cache":self.Valve_Command_Cache_ini},
                                   "Switch": {"OUT": self.Switch_OUT_ini,
                                              "INTLKD": self.Switch_INTLKD_ini,
                                              "MAN": self.Switch_MAN_ini,
@@ -2350,6 +2354,9 @@ class UpdateServer(QtCore.QObject):
             self.Valve_MAN_ini[key] = self.PLC.Valve_MAN[key]
         for key in self.PLC.Valve_ERR:
             self.Valve_ERR_ini[key] = self.PLC.Valve_ERR[key]
+        for key in self.PLC.Valve_Commmand_Cache:
+            self.Valve_Commmand_Cache_ini[key] = self.PLC.Valve_Commmand_Cache[key]
+            self.PLC.Valve_Commmand_Cache[key] = False
         for key in self.PLC.Switch_OUT:
             self.Switch_OUT_ini[key] = self.PLC.Switch_OUT[key]
         for key in self.PLC.Switch_INTLKD:
@@ -2474,6 +2481,8 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.WriteBase4(address=message[key]["address"])
                     else:
                         pass
+                    # write success signal
+                    self.Valve_Commmand_Cache_ini[key] = True
                 if message[key]["type"] == "switch":
                     if message[key]["operation"] == "ON":
                         self.PLC.WriteBase2(address=message[key]["address"])
@@ -2755,7 +2764,7 @@ class Update(QtCore.QObject):
 
         for i in range(10):
             print(i)
-            time.sleep(i)
+            time.sleep(1)
 
         sys.exit(App.exec_())
 

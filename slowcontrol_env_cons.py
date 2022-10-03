@@ -197,7 +197,12 @@ VALVE_ERR = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False,
              "SV3325": False, "SV3329": False,
              "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
              "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
-
+VALVE_COMMAND_CACHE = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+             "PV4324": False, "PV5305": False, "PV5306": False,
+             "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+             "SV3325": False, "SV3329": False,
+             "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+             "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
 LOOPPID_ADR_BASE = {'SERVO3321': 14288, 'HTR6225': 14306, 'HTR2123': 14324, 'HTR2124': 14342, 'HTR2125': 14360,
                     'HTR1202': 14378, 'HTR2203': 14396, 'HTR6202': 14414, 'HTR6206': 14432, 'HTR6210': 14450,
                     'HTR6223': 14468, 'HTR6224': 14486, 'HTR6219': 14504, 'HTR6221': 14522, 'HTR6214': 14540}

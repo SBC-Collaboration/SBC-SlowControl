@@ -3662,155 +3662,307 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # show whether the widgets status are normal: manully controlled and no error signal
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV1344"] and not received_dic_c["data"]["Valve"]["ERR"]["PV1344"]:
+
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV1344"]:
 
             self.PV1344.ActiveState.UpdateColor(True)
         else:
             self.PV1344.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV4307"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4307"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV4307"]:
 
             self.PV4307.ActiveState.UpdateColor(True)
         else:
             self.PV4307.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV4308"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4308"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV4308"]:
 
             self.PV4308.ActiveState.UpdateColor(True)
         else:
             self.PV4308.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV4317"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4317"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV4317"]:
 
             self.PV4317.ActiveState.UpdateColor(True)
         else:
             self.PV4317.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV4318"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4318"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV4318"]:
 
             self.PV4318.ActiveState.UpdateColor(True)
         else:
             self.PV4318.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV4321"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4321"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV4321"]:
 
             self.PV4321.ActiveState.UpdateColor(True)
         else:
             self.PV4321.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV4324"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4324"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV4324"]:
 
             self.PV4324.ActiveState.UpdateColor(True)
         else:
             self.PV4324.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV5305"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5305"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV5305"] :
 
             self.PV5305.ActiveState.UpdateColor(True)
         else:
             self.PV5305.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV5306"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5306"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV5306"] :
 
             self.PV5306.ActiveState.UpdateColor(True)
         else:
             self.PV5306.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV5307"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5307"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV5307"] :
 
             self.PV5307.ActiveState.UpdateColor(True)
         else:
             self.PV5307.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["PV5309"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5309"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["PV5309"] :
 
             self.PV5309.ActiveState.UpdateColor(True)
         else:
             self.PV5309.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV3307"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3307"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV3307"] :
 
             self.SV3307.ActiveState.UpdateColor(True)
         else:
             self.SV3307.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV3310"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3310"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV3310"] :
 
             self.SV3310.ActiveState.UpdateColor(True)
         else:
             self.SV3310.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV3322"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3322"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV3322"]:
 
             self.SV3322.ActiveState.UpdateColor(True)
         else:
             self.SV3322.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV3325"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3325"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV3325"]:
 
             self.SV3325.ActiveState.UpdateColor(True)
         else:
             self.SV3325.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV3329"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3329"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV3329"]:
 
             self.SV3329.ActiveState.UpdateColor(True)
         else:
             self.SV3329.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV4327"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4327"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV4327"]:
 
             self.SV4327.ActiveState.UpdateColor(True)
         else:
             self.SV4327.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV4328"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4328"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV4328"]:
 
             self.SV4328.ActiveState.UpdateColor(True)
         else:
             self.SV4328.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV4329"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4329"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV4329"]:
 
             self.SV4329.ActiveState.UpdateColor(True)
         else:
             self.SV4329.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV4331"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4331"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV4331"]:
 
             self.SV4331.ActiveState.UpdateColor(True)
         else:
             self.SV4331.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV4332"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4332"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV4332"]:
 
             self.SV4332.ActiveState.UpdateColor(True)
         else:
             self.SV4332.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV4337"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4337"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["SV4337"]:
 
             self.SV4337.ActiveState.UpdateColor(True)
         else:
             self.SV4337.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3312"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["HFSV3312"]:
 
             self.HFSV3312.ActiveState.UpdateColor(True)
         else:
             self.HFSV3312.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["HFSV3323"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3323"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["HFSV3323"]:
 
             self.HFSV3323.ActiveState.UpdateColor(True)
         else:
             self.HFSV3323.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["HFSV3331"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3331"]:
+        if received_dic_c["data"]["Valve"]["Valve_Command_Cache"]["HFSV3331"]:
 
             self.HFSV3331.ActiveState.UpdateColor(True)
         else:
             self.HFSV3331.ActiveState.UpdateColor(False)
+
+
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV1344"] and not received_dic_c["data"]["Valve"]["ERR"]["PV1344"]:
+        #
+        #     self.PV1344.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV1344.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV4307"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4307"]:
+        #
+        #     self.PV4307.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV4307.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV4308"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4308"]:
+        #
+        #     self.PV4308.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV4308.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV4317"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4317"]:
+        #
+        #     self.PV4317.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV4317.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV4318"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4318"]:
+        #
+        #     self.PV4318.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV4318.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV4321"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4321"]:
+        #
+        #     self.PV4321.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV4321.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV4324"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4324"]:
+        #
+        #     self.PV4324.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV4324.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV5305"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5305"]:
+        #
+        #     self.PV5305.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV5305.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV5306"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5306"]:
+        #
+        #     self.PV5306.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV5306.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV5307"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5307"]:
+        #
+        #     self.PV5307.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV5307.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["PV5309"] and not received_dic_c["data"]["Valve"]["ERR"]["PV5309"]:
+        #
+        #     self.PV5309.ActiveState.UpdateColor(True)
+        # else:
+        #     self.PV5309.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV3307"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3307"]:
+        #
+        #     self.SV3307.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV3307.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV3310"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3310"]:
+        #
+        #     self.SV3310.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV3310.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV3322"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3322"]:
+        #
+        #     self.SV3322.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV3322.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV3325"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3325"]:
+        #
+        #     self.SV3325.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV3325.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV3329"] and not received_dic_c["data"]["Valve"]["ERR"]["SV3329"]:
+        #
+        #     self.SV3329.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV3329.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV4327"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4327"]:
+        #
+        #     self.SV4327.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV4327.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV4328"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4328"]:
+        #
+        #     self.SV4328.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV4328.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV4329"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4329"]:
+        #
+        #     self.SV4329.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV4329.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV4331"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4331"]:
+        #
+        #     self.SV4331.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV4331.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV4332"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4332"]:
+        #
+        #     self.SV4332.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV4332.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["SV4337"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4337"]:
+        #
+        #     self.SV4337.ActiveState.UpdateColor(True)
+        # else:
+        #     self.SV4337.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3312"]:
+        #
+        #     self.HFSV3312.ActiveState.UpdateColor(True)
+        # else:
+        #     self.HFSV3312.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["HFSV3323"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3323"]:
+        #
+        #     self.HFSV3323.ActiveState.UpdateColor(True)
+        # else:
+        #     self.HFSV3323.ActiveState.UpdateColor(False)
+        #
+        # if received_dic_c["data"]["Valve"]["MAN"]["HFSV3331"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3331"]:
+        #
+        #     self.HFSV3331.ActiveState.UpdateColor(True)
+        # else:
+        #     self.HFSV3331.ActiveState.UpdateColor(False)
 
 
 
@@ -8608,6 +8760,7 @@ class UpdateClient(QtCore.QObject):
         self.Valve_MAN_ini = sec.VALVE_MAN
         self.Valve_INTLKD_ini = sec.VALVE_INTLKD
         self.Valve_ERR_ini = sec.VALVE_ERR
+        self.Valve_Command_Cache = sec.VALVE_COMMAND_CACHE
         self.Switch_OUT_ini = sec.SWITCH_OUT
         self.Switch_MAN_ini = sec.SWITCH_MAN
         self.Switch_INTLKD_ini = sec.SWITCH_INTLKD
@@ -8669,7 +8822,8 @@ class UpdateClient(QtCore.QObject):
                                   "Valve": {"OUT": self.Valve_OUT_ini,
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
-                                            "ERR": self.Valve_ERR_ini},
+                                            "ERR": self.Valve_ERR_ini,
+                                            "Valve_Command_Cache":self.Valve_Command_Cache_ini},
                                   "Switch": {"OUT": self.Switch_OUT_ini,
                                              "INTLKD": self.Switch_INTLKD_ini,
                                              "MAN": self.Switch_MAN_ini,
