@@ -58,6 +58,7 @@ def FPADS_OUT_AT(outaddress):
 class PLC(QtCore.QObject):
     DATA_UPDATE_SIGNAL=QtCore.Signal(object)
     DATA_TRI_SIGNAL = QtCore.Signal(bool)
+    PLC_DISCON_SIGNAL = QtCore.Signal()
     def __init__(self):
         super().__init__()
 
@@ -362,6 +363,8 @@ class PLC(QtCore.QObject):
     def ReadAll(self):
         # print(self.TT_BO_HighLimit["TT2119"])
         # print(self.TT_BO_Alarm["TT2119"])
+        self.Connected = self.Client.connect()
+        self.Connected_BO = self.Client_BO.connect()
         if self.Connected:
             # Reading all the RTDs
             Raw_RTDs_FP = {}
@@ -402,6 +405,10 @@ class PLC(QtCore.QObject):
         #         Attribute[i] = self.Client.read_holding_registers(18000 + i * 8, count=1, unit=0x01)
         #         self.nAttribute[i] = hex(Attribute[i].getRegister(0))
         #     # print("Attributes", self.nAttribute)
+        else:
+            print("lost connection to PLC")
+            self.PLC_DISCON_SIGNAL.emit()
+
 
         #########################################################################
         if self.Connected_BO:
@@ -614,7 +621,7 @@ class PLC(QtCore.QObject):
             #FLAG
             for key in self.FLAG_ADDRESS:
                 self.FLAG_DIC[key] = self.ReadCoil(1, self.FLAG_ADDRESS[key])
-                print("\n",self.FLAG_DIC,"\n")
+                # print("\n",self.FLAG_DIC,"\n")
                 self.FLAG_INTLKD[key] = self.ReadCoil(2 ** 1, self.FLAG_ADDRESS[key])
 
 
@@ -714,7 +721,8 @@ class PLC(QtCore.QObject):
 
             return 0
         else:
-            raise Exception('Not connected to PLC')  # will it restart the PLC ?
+            self.PLC_DISCON_SIGNAL.emit()
+            # raise Exception('Not connected to PLC')  # will it restart the PLC ?
 
             return 1
 
@@ -1934,6 +1942,7 @@ class UpdatePLC(QtCore.QObject):
             print("PLC is interrupted by keyboard[Ctrl-C]")
             self.stop()
         except:
+            self.PLC.PLC_DISCON_SIGNAL.emit()
             (type, value, traceback) = sys.exc_info()
             exception_hook(type, value, traceback)
 
@@ -2118,9 +2127,13 @@ class UpdateServer(QtCore.QObject):
         self.PLC = PLC
         self.context = zmq.Context()
         self.socket = self.context.socket(zmq.REP)
+        self.socket.setsockopt(zmq.LINGER, 0)  # ____POLICY: set upon instantiations
+        self.socket.setsockopt(zmq.AFFINITY, 1)  # ____POLICY: map upon IO-type thread
+        self.socket.setsockopt(zmq.RCVTIMEO, 2000)
         self.socket.bind("tcp://*:5555")
         self.Running = False
         self.period = 1
+        # self.socket.re
         print("connect to the PLC server")
 
         self.TT_FP_dic_ini = sec.TT_FP_DIC
@@ -2268,21 +2281,26 @@ class UpdateServer(QtCore.QObject):
         while self.Running:
             print("refreshing the BKG-GUI communication server")
             if self.PLC.NewData_ZMQ:
+                try:
+                    # message = self.socket.recv()
+                    # print("refreshing")
+                    # print(f"Received request: {message}")
+                    self.write_data()
+                    print("data sent")
 
-                # message = self.socket.recv()
-                # print("refreshing")
-                # print(f"Received request: {message}")
-                self.write_data()
+                    #  Send reply back to client
+                    # self.socket.send(b"World")
+                    self.pack_data()
+                    print("data received")
+                    # print(self.data_package)
+                    # data=pickle.dumps([0,0])
+                    # self.socket.send(data)
+                    self.socket.send(self.data_package)
+                    # self.socket.sendall(self.data_package)
+                    self.PLC.NewData_ZMQ = False
+                except:
+                    print("Time out for fetching data from GUI, continue to wait")
 
-                #  Send reply back to client
-                # self.socket.send(b"World")
-                self.pack_data()
-                # print(self.data_package)
-                # data=pickle.dumps([0,0])
-                # self.socket.send(data)
-                self.socket.send(self.data_package)
-                # self.socket.sendall(self.data_package)
-                self.PLC.NewData_ZMQ = False
             else:
                 print("BKG-GUI communication server stops")
                 pass
@@ -2290,6 +2308,8 @@ class UpdateServer(QtCore.QObject):
 
     @QtCore.Slot()
     def stop(self):
+        self.socket.close()
+        self.context.term()
         self.Running = False
 
     def pack_data(self):
@@ -2721,14 +2741,23 @@ class Update(QtCore.QObject):
         self.UpPLC.stop()
         self.PLCUpdateThread.quit()
         self.PLCUpdateThread.wait()
+        print("PLC is stopped")
 
         self.UpDatabase.stop()
         self.DataUpdateThread.quit()
         self.DataUpdateThread.wait()
 
+        print("Database is stopped")
         self.UpServer.stop()
         self.ServerUpdateThread.quit()
         self.ServerUpdateThread.wait()
+        print("ZMQ server is stopped")
+
+        for i in range(10):
+            print(i)
+            time.sleep(i)
+
+        sys.exit(App.exec_())
 
     @QtCore.Slot(str)
     def printstr(self, string):
@@ -2754,12 +2783,14 @@ class Update(QtCore.QObject):
         self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
 
     def connect_signals(self):
-        # self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
+        self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
         self.PATCH_TO_DATABASE.connect(lambda: self.UpDatabase.update_value(self.data_transfer))
 
         self.UpPLC.PLC.DATA_TRI_SIGNAL.connect(self.PLCstatus_transfer)
         self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
+
+        self.UpPLC.PLC.PLC_DISCON_SIGNAL.connect(self.StopUpdater)
         print("signal established")
 
 
