@@ -150,6 +150,7 @@ class PLC(QtCore.QObject):
         self.Valve_MAN = sec.VALVE_MAN
         self.Valve_INTLKD = sec.VALVE_INTLKD
         self.Valve_ERR = sec.VALVE_ERR
+        self.Valve_Command_Cache = sec.VALVE_COMMAND_CACHE
 
         self.LOOPPID_ADR_BASE = sec.LOOPPID_ADR_BASE
 
@@ -188,6 +189,7 @@ class PLC(QtCore.QObject):
         self.LOOPPID_SET2 = sec.LOOPPID_SET2
 
         self.LOOPPID_SET3 = sec.LOOPPID_SET3
+        self.LOOPPID_Command_Cache = sec.LOOPPID_COMMAND_CACHE
 
         self.LOOP2PT_ADR_BASE = sec.LOOP2PT_ADR_BASE
         self.LOOP2PT_MODE0 = sec.LOOP2PT_MODE0
@@ -201,6 +203,7 @@ class PLC(QtCore.QObject):
         self.LOOP2PT_SET1 = sec.LOOP2PT_SET1
         self.LOOP2PT_SET2 = sec.LOOP2PT_SET2
         self.LOOP2PT_SET3 = sec.LOOP2PT_SET3
+        self.LOOP2PT_Command_Cache =  sec.LOOP2PT_COMMAND_CACHE
 
         self.Procedure_address = sec.PROCEDURE_ADDRESS
         self.Procedure_running = sec.PROCEDURE_RUNNING
@@ -291,6 +294,7 @@ class PLC(QtCore.QObject):
                               "Valve_MAN":self.Valve_MAN,
                               "Valve_INTLKD":self.Valve_INTLKD,
                               "Valve_ERR":self.Valve_ERR,
+                              "Valve_Command_Cache":self.Valve_Command_Cache,
                               "LOOPPID_ADR_BASE":self.LOOPPID_ADR_BASE,
                               "LOOPPID_MODE0":self.LOOPPID_MODE0,
                               "LOOPPID_MODE1":self.LOOPPID_MODE1,
@@ -310,6 +314,7 @@ class PLC(QtCore.QObject):
                               "LOOPPID_SET1":self.LOOPPID_SET1,
                               "LOOPPID_SET2":self.LOOPPID_SET2,
                               "LOOPPID_SET3":self.LOOPPID_SET3,
+                              "LOOPPID_Command_Cache":self.LOOPPID_Command_Cache,
                               "LOOP2PT_ADR_BASE":self.LOOP2PT_ADR_BASE,
                               "LOOP2PT_MODE0": self.LOOP2PT_MODE0,
                               "LOOP2PT_MODE1": self.LOOP2PT_MODE1,
@@ -322,6 +327,7 @@ class PLC(QtCore.QObject):
                               "LOOP2PT_SET1": self.LOOP2PT_SET1,
                               "LOOP2PT_SET2": self.LOOP2PT_SET2,
                               "LOOP2PT_SET3": self.LOOP2PT_SET3,
+                              "LOOP2PT_Command_Cache":self.LOOP2PT_Command_Cache,
                               "Procedure_address":self.Procedure_address,
                               "Procedure_running":self.Procedure_running,
                               "Procedure_INTLKD":self.Procedure_INTLKD,
@@ -1363,6 +1369,7 @@ class UpdateDataBase(QtCore.QObject):
                 self.dt = datetime_in_1e5micro()
                 self.early_dt = early_datetime()
                 print("Database Updating", self.dt)
+                print("earlytime", self.early_dt)
 
                 # if self.PLC.NewData_Database:
                 if self.status:
@@ -2129,7 +2136,7 @@ class UpdateServer(QtCore.QObject):
         self.socket = self.context.socket(zmq.REP)
         self.socket.setsockopt(zmq.LINGER, 0)  # ____POLICY: set upon instantiations
         self.socket.setsockopt(zmq.AFFINITY, 1)  # ____POLICY: map upon IO-type thread
-        self.socket.setsockopt(zmq.RCVTIMEO, 2000)
+        self.socket.setsockopt(zmq.RCVTIMEO, 5000)
         self.socket.bind("tcp://*:5555")
         self.Running = False
         self.period = 1
@@ -2161,6 +2168,7 @@ class UpdateServer(QtCore.QObject):
         self.Valve_MAN_ini = sec.VALVE_MAN
         self.Valve_INTLKD_ini = sec.VALVE_INTLKD
         self.Valve_ERR_ini = sec.VALVE_ERR
+        self.Valve_Command_Cache_ini = sec.VALVE_COMMAND_CACHE
         self.Switch_OUT_ini = sec.SWITCH_OUT
         self.Switch_MAN_ini = sec.SWITCH_MAN
         self.Switch_INTLKD_ini = sec.SWITCH_INTLKD
@@ -2184,6 +2192,7 @@ class UpdateServer(QtCore.QObject):
         self.LOOPPID_SET1_ini = sec.LOOPPID_SET1
         self.LOOPPID_SET2_ini = sec.LOOPPID_SET2
         self.LOOPPID_SET3_ini = sec.LOOPPID_SET3
+        self.LOOPPID_Command_Cache_ini = sec.LOOPPID_COMMAND_CACHE
 
         self.LOOP2PT_MODE0_ini = sec.LOOP2PT_MODE0
         self.LOOP2PT_MODE1_ini = sec.LOOP2PT_MODE1
@@ -2196,6 +2205,7 @@ class UpdateServer(QtCore.QObject):
         self.LOOP2PT_SET1_ini = sec.LOOP2PT_SET1
         self.LOOP2PT_SET2_ini = sec.LOOP2PT_SET2
         self.LOOP2PT_SET3_ini = sec.LOOP2PT_SET3
+        self.LOOP2PT_Command_Cache_ini = sec.LOOP2PT_COMMAND_CACHE
 
         self.Procedure_running_ini = sec.PROCEDURE_RUNNING
         self.Procedure_INTLKD_ini = sec.PROCEDURE_INTLKD
@@ -2222,7 +2232,8 @@ class UpdateServer(QtCore.QObject):
                                   "Valve": {"OUT": self.Valve_OUT_ini,
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
-                                            "ERR": self.Valve_ERR_ini},
+                                            "ERR": self.Valve_ERR_ini,
+                                            "Command_Cache":self.Valve_Command_Cache_ini},
                                   "Switch": {"OUT": self.Switch_OUT_ini,
                                              "INTLKD": self.Switch_INTLKD_ini,
                                              "MAN": self.Switch_MAN_ini,
@@ -2245,7 +2256,8 @@ class UpdateServer(QtCore.QObject):
                                               "SET0": self.LOOPPID_SET0_ini,
                                               "SET1": self.LOOPPID_SET1_ini,
                                               "SET2": self.LOOPPID_SET2_ini,
-                                              "SET3": self.LOOPPID_SET3_ini},
+                                              "SET3": self.LOOPPID_SET3_ini,
+                                              "Command_Cache":self.LOOPPID_Command_Cache_ini},
                                   "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
                                               "MODE1": self.LOOP2PT_MODE1_ini,
                                               "MODE2": self.LOOP2PT_MODE2_ini,
@@ -2256,7 +2268,8 @@ class UpdateServer(QtCore.QObject):
                                               "OUT": self.LOOP2PT_OUT_ini,
                                               "SET1": self.LOOP2PT_SET1_ini,
                                               "SET2": self.LOOP2PT_SET2_ini,
-                                              "SET3": self.LOOP2PT_SET3_ini},
+                                              "SET3": self.LOOP2PT_SET3_ini,
+                                              "Command_Cache":self.LOOP2PT_Command_Cache_ini},
                                   "INTLK_D": {"value": self.INTLK_D_DIC_ini,
                                               "EN": self.INTLK_D_EN_ini,
                                               "COND": self.INTLK_D_COND_ini},
@@ -2298,7 +2311,8 @@ class UpdateServer(QtCore.QObject):
                     self.socket.send(self.data_package)
                     # self.socket.sendall(self.data_package)
                     self.PLC.NewData_ZMQ = False
-                except:
+                except Exception as e:
+                    print("Error:",e)
                     print("Time out for fetching data from GUI, continue to wait")
 
             else:
@@ -2350,6 +2364,9 @@ class UpdateServer(QtCore.QObject):
             self.Valve_MAN_ini[key] = self.PLC.Valve_MAN[key]
         for key in self.PLC.Valve_ERR:
             self.Valve_ERR_ini[key] = self.PLC.Valve_ERR[key]
+        for key in self.PLC.Valve_Command_Cache:
+            self.Valve_Command_Cache_ini[key] = self.PLC.Valve_Command_Cache[key]
+            self.PLC.Valve_Command_Cache[key] = False
         for key in self.PLC.Switch_OUT:
             self.Switch_OUT_ini[key] = self.PLC.Switch_OUT[key]
         for key in self.PLC.Switch_INTLKD:
@@ -2405,6 +2422,9 @@ class UpdateServer(QtCore.QObject):
             self.LOOPPID_SET2_ini[key] = self.PLC.LOOPPID_SET2[key]
         for key in self.PLC.LOOPPID_SET3:
             self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
+        for key in self.PLC.LOOPPID_Command_Cache:
+            self.LOOPPID_Command_Cache_ini[key] = self.PLC.LOOPPID_Command_Cache[key]
+            self.PLC.LOOPPID_Command_Cache[key] = False
 
         for key in self.PLC.LOOP2PT_MODE0:
             self.LOOP2PT_MODE0_ini[key] = self.PLC.LOOP2PT_MODE0[key]
@@ -2428,6 +2448,9 @@ class UpdateServer(QtCore.QObject):
             self.LOOP2PT_SET2_ini[key] = self.PLC.LOOP2PT_SET2[key]
         for key in self.PLC.LOOP2PT_SET3:
             self.LOOP2PT_SET3_ini[key] = self.PLC.LOOP2PT_SET3[key]
+        for key in self.PLC.LOOP2PT_Command_Cache:
+            self.LOOP2PT_Command_Cache_ini[key] = self.PLC.LOOP2PT_Command_Cache[key]
+            self.PLC.LOOP2PT_Command_Cache[key] = False
 
         for key in self.PLC.Procedure_running:
             self.Procedure_running_ini[key] = self.PLC.Procedure_running[key]
@@ -2474,6 +2497,8 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.WriteBase4(address=message[key]["address"])
                     else:
                         pass
+                    # write success signal
+                    self.PLC.Valve_Command_Cache[key] = True
                 if message[key]["type"] == "switch":
                     if message[key]["operation"] == "ON":
                         self.PLC.WriteBase2(address=message[key]["address"])
@@ -2539,6 +2564,7 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.LOOPPID_OUT_DIS(address=message[key]["address"])
                     else:
                         pass
+                    self.PLC.LOOPPID_Command_Cache[key] = True
                     #
                     # if message[key]["operation"] == "SETMODE":
                     #     self.PLC.LOOPPID_SET_MODE(address = message[key]["address"], mode = message[key]["value"])
@@ -2609,6 +2635,7 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.LOOP2PT_CLOSE(address=message[key]["address"])
                     else:
                         pass
+                    self.PLC.LOOP2PT_Command_Cache[key] = True
                 elif message[key]["type"] == "LOOP2PT_para":
 
                     if message[key]["operation"] == "SET1":
@@ -2755,7 +2782,7 @@ class Update(QtCore.QObject):
 
         for i in range(10):
             print(i)
-            time.sleep(i)
+            time.sleep(1)
 
         sys.exit(App.exec_())
 
@@ -2864,12 +2891,13 @@ if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
 
+
     App = QtWidgets.QApplication(sys.argv)
     Update=Update()
 
 
     # PLC=PLC()
-    # PLC.ReadAll()
+    # PLC.ReadAll()python
 
     sys.exit(App.exec_())
 
