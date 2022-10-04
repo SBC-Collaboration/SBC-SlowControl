@@ -2365,10 +2365,10 @@ class UpdateServer(QtCore.QObject):
         for key in self.PLC.Valve_ERR:
             self.Valve_ERR_ini[key] = self.PLC.Valve_ERR[key]
         for key in self.PLC.Valve_Command_Cache:
-            print("SV4328",self.Valve_Command_Cache_ini["SV4328"],self.PLC.Valve_Command_Cache_ini["SV4328"])
+            print("SV4328",self.Valve_Command_Cache_ini["SV4328"],self.PLC.Valve_Command_Cache["SV4328"])
             self.Valve_Command_Cache_ini[key] = self.PLC.Valve_Command_Cache[key]
             self.PLC.Valve_Command_Cache[key] = False
-            print("SV4328", self.Valve_Command_Cache_ini["SV4328"], self.PLC.Valve_Command_Cache_ini["SV4328"])
+            print("SV4328", self.Valve_Command_Cache_ini["SV4328"], self.PLC.Valve_Command_Cache["SV4328"])
         for key in self.PLC.Switch_OUT:
             self.Switch_OUT_ini[key] = self.PLC.Switch_OUT[key]
         for key in self.PLC.Switch_INTLKD:
