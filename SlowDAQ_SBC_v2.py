@@ -9009,6 +9009,7 @@ class UpdateClient(QtCore.QObject):
         else:
             self.socket.send(pickle.dumps({}))
         self.readcommand = True
+        print("finished sending commands")
 
 
 
