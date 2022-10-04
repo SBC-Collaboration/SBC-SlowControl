@@ -1351,7 +1351,7 @@ class UpdateDataBase(QtCore.QObject):
         self.LOOP2PT_MODE1_buffer = sec.LOOP2PT_MODE1
         self.LOOP2PT_MODE2_buffer = sec.LOOP2PT_MODE2
         self.LOOP2PT_MODE3_buffer = sec.LOOP2PT_MODE3
-        self.LOOP2PT_OUT_buffer = sec.LOOP2PT_OUT
+        LOOP2PT_OUT_buffer = sec.LOOP2PT_OUT
 
         self.FLAG_INTLKD_buffer = sec.FLAG_INTLKD
 
@@ -1539,12 +1539,12 @@ class UpdateDataBase(QtCore.QObject):
                     for key in self.LOOP2PT_OUT:
                         print(7)
                         print(8)
-                        print(key, self.LOOP2PT_OUT[key], self.LOOP2PT_OUT_buffer[key],self.LOOP2PT_OUT[key]==self.LOOP2PT_OUT_buffer[key])
+                        print(key, self.LOOP2PT_OUT[key], LOOP2PT_OUT_buffer[key],self.LOOP2PT_OUT[key]==LOOP2PT_OUT_buffer[key])
                         # print(key, self.LOOP2PT_OUT[key])
-                        if self.LOOP2PT_OUT[key] != self.LOOP2PT_OUT_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.LOOP2PT_OUT_buffer[key])
+                        if self.LOOP2PT_OUT[key] != LOOP2PT_OUT_buffer[key]:
+                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, LOOP2PT_OUT_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
-                            self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
+                            LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
                             self.commit_bool = True
                             # print(self.Valve_OUT[key])
                         else:
@@ -1608,7 +1608,7 @@ class UpdateDataBase(QtCore.QObject):
                         # write float data.
                         for key in self.LOOP2PT_OUT:
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
-                            self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
+                            LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
 
                         self.commit_bool = True
                         self.para_LOOP2PT = 0
