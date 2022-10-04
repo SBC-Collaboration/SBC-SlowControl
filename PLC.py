@@ -2422,9 +2422,9 @@ class UpdateServer(QtCore.QObject):
             self.LOOPPID_SET2_ini[key] = self.PLC.LOOPPID_SET2[key]
         for key in self.PLC.LOOPPID_SET3:
             self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
-        # for key in self.PLC.LOOPPID_Command_Cache:
-        #     self.LOOPPID_Command_Cache_ini[key] = self.LOOPPID_Command_Cache[key]
-        #     self.PLC.LOOPPID_Command_Cache[key] = False
+        for key in self.PLC.LOOPPID_Command_Cache:
+            self.LOOPPID_Command_Cache_ini[key] = self.LOOPPID_Command_Cache[key]
+            self.PLC.LOOPPID_Command_Cache[key] = False
 
         for key in self.PLC.LOOP2PT_MODE0:
             self.LOOP2PT_MODE0_ini[key] = self.PLC.LOOP2PT_MODE0[key]
