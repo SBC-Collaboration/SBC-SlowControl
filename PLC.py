@@ -1539,7 +1539,7 @@ class UpdateDataBase(QtCore.QObject):
                     for key in self.LOOP2PT_OUT:
                         print(7)
                         print(8)
-                        # print(key, self.Valve_OUT[key], self.Valve_OUT[key] != self.Valve_buffer[key])
+                        print(key, self.Valve_OUT[key], self.Valve_buffer[key])
                         if self.LOOP2PT_OUT[key] != self.LOOP2PT_OUT_buffer[key]:
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.LOOP2PT_OUT_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
@@ -2848,6 +2848,7 @@ class message_manager():
         # info about slack settings
         # SLACK_BOT_TOKEN is a linux enviromental variable saved locally on sbcslowcontrol mathine
         # it can be fetched on slack app page in SBCAlarm app: https://api.slack.com/apps/A035X77RW64/general
+        # if not_in_channel error type /invite @SBC_Alarm in channel
         self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
         self.logger = logging.getLogger(__name__)
         self.channel_id = "C01A549VDHS"
