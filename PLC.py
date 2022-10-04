@@ -2368,9 +2368,9 @@ class UpdateServer(QtCore.QObject):
             if key=="SV4328":
                 print("SV4328",self.Valve_Command_Cache_ini["SV4328"],self.PLC.Valve_Command_Cache["SV4328"])
             self.Valve_Command_Cache_ini[key] = self.PLC.Valve_Command_Cache[key]
-            self.PLC.Valve_Command_Cache[key] = False
-            if key=="SV4328":
-                print("SV4328", self.Valve_Command_Cache_ini["SV4328"], self.PLC.Valve_Command_Cache["SV4328"])
+            # self.PLC.Valve_Command_Cache[key] = False
+            # if key=="SV4328":
+            #     print("SV4328", self.Valve_Command_Cache_ini["SV4328"], self.PLC.Valve_Command_Cache["SV4328"])
         for key in self.PLC.Switch_OUT:
             self.Switch_OUT_ini[key] = self.PLC.Switch_OUT[key]
         for key in self.PLC.Switch_INTLKD:
@@ -2484,6 +2484,11 @@ class UpdateServer(QtCore.QObject):
         self.data_dic["MainAlarm"] = self.PLC.MainAlarm
 
         self.data_package = pickle.dumps(self.data_dic)
+
+        for key in self.PLC.Valve_Command_Cache:
+            self.PLC.Valve_Command_Cache[key] = False
+            if key=="SV4328":
+                print("SV4328", self.Valve_Command_Cache_ini["SV4328"], self.PLC.Valve_Command_Cache["SV4328"])
 
     def write_data(self):
         message = pickle.loads(self.socket.recv())
