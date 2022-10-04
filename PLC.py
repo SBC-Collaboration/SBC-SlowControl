@@ -2890,14 +2890,14 @@ if __name__ == "__main__":
     # msg_mana=message_manager()
     # msg_mana.tencent_alarm("this is a test message")
 
-    # #
-    # # App = QtWidgets.QApplication(sys.argv)
-    # # Update=Update()
-    # #
-    # #
-    # # # PLC=PLC()
-    # # # PLC.ReadAll()
-    # #
-    # # sys.exit(App.exec_())
+
+    App = QtWidgets.QApplication(sys.argv)
+    Update=Update()
+
+
+    # PLC=PLC()
+    # PLC.ReadAll()python
+
+    sys.exit(App.exec_())
 
 
