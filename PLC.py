@@ -2134,9 +2134,9 @@ class UpdateServer(QtCore.QObject):
         self.PLC = PLC
         self.context = zmq.Context()
         self.socket = self.context.socket(zmq.REP)
-        # self.socket.setsockopt(zmq.LINGER, 0)  # ____POLICY: set upon instantiations
-        # self.socket.setsockopt(zmq.AFFINITY, 1)  # ____POLICY: map upon IO-type thread
-        # self.socket.setsockopt(zmq.RCVTIMEO, 5000)
+        self.socket.setsockopt(zmq.LINGER, 0)  # ____POLICY: set upon instantiations
+        self.socket.setsockopt(zmq.AFFINITY, 1)  # ____POLICY: map upon IO-type thread
+        self.socket.setsockopt(zmq.RCVTIMEO, 5000)
         self.socket.bind("tcp://*:5555")
         self.Running = False
         self.period = 1
@@ -2311,7 +2311,8 @@ class UpdateServer(QtCore.QObject):
                     self.socket.send(self.data_package)
                     # self.socket.sendall(self.data_package)
                     self.PLC.NewData_ZMQ = False
-                except:
+                except Exception as e:
+                    print(e)
                     print("Time out for fetching data from GUI, continue to wait")
 
             else:
