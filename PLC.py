@@ -2168,7 +2168,7 @@ class UpdateServer(QtCore.QObject):
         self.Valve_MAN_ini = sec.VALVE_MAN
         self.Valve_INTLKD_ini = sec.VALVE_INTLKD
         self.Valve_ERR_ini = sec.VALVE_ERR
-        self.Valve_Command_Cache_ini = sec.Valve_Command_Cache
+        self.Valve_Command_Cache_ini = sec.VALVE_COMMAND_CACHE
         self.Switch_OUT_ini = sec.SWITCH_OUT
         self.Switch_MAN_ini = sec.SWITCH_MAN
         self.Switch_INTLKD_ini = sec.SWITCH_INTLKD
