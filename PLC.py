@@ -1351,7 +1351,7 @@ class UpdateDataBase(QtCore.QObject):
         self.LOOP2PT_MODE1_buffer = sec.LOOP2PT_MODE1
         self.LOOP2PT_MODE2_buffer = sec.LOOP2PT_MODE2
         self.LOOP2PT_MODE3_buffer = sec.LOOP2PT_MODE3
-        LOOP2PT_OUT_buffer = sec.LOOP2PT_OUT
+
 
         self.FLAG_INTLKD_buffer = sec.FLAG_INTLKD
 
@@ -1363,6 +1363,7 @@ class UpdateDataBase(QtCore.QObject):
 
     @QtCore.Slot()
     def run(self):
+        LOOP2PT_OUT_buffer = sec.LOOP2PT_OUT
         self.Running = True
         while self.Running:
             try:
