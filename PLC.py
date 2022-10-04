@@ -2134,9 +2134,9 @@ class UpdateServer(QtCore.QObject):
         self.PLC = PLC
         self.context = zmq.Context()
         self.socket = self.context.socket(zmq.REP)
-        self.socket.setsockopt(zmq.LINGER, 0)  # ____POLICY: set upon instantiations
-        self.socket.setsockopt(zmq.AFFINITY, 1)  # ____POLICY: map upon IO-type thread
-        self.socket.setsockopt(zmq.RCVTIMEO, 5000)
+        # self.socket.setsockopt(zmq.LINGER, 0)  # ____POLICY: set upon instantiations
+        # self.socket.setsockopt(zmq.AFFINITY, 1)  # ____POLICY: map upon IO-type thread
+        # self.socket.setsockopt(zmq.RCVTIMEO, 5000)
         self.socket.bind("tcp://*:5555")
         self.Running = False
         self.period = 1
@@ -2364,9 +2364,9 @@ class UpdateServer(QtCore.QObject):
             self.Valve_MAN_ini[key] = self.PLC.Valve_MAN[key]
         for key in self.PLC.Valve_ERR:
             self.Valve_ERR_ini[key] = self.PLC.Valve_ERR[key]
-        for key in self.PLC.Valve_Command_Cache:
-            self.Valve_Command_Cache_ini[key] = self.PLC.Valve_Command_Cache[key]
-            self.PLC.Valve_Command_Cache[key] = False
+        # for key in self.PLC.Valve_Command_Cache:
+            # self.Valve_Command_Cache_ini[key] = self.PLC.Valve_Command_Cache[key]
+            # self.PLC.Valve_Command_Cache[key] = False
         for key in self.PLC.Switch_OUT:
             self.Switch_OUT_ini[key] = self.PLC.Switch_OUT[key]
         for key in self.PLC.Switch_INTLKD:
@@ -2422,9 +2422,9 @@ class UpdateServer(QtCore.QObject):
             self.LOOPPID_SET2_ini[key] = self.PLC.LOOPPID_SET2[key]
         for key in self.PLC.LOOPPID_SET3:
             self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
-        for key in self.PLC.LOOPPID_Command_Cache:
-            self.LOOPPID_Command_Cache_ini[key] = self.LOOPPID_Command_Cache[key]
-            self.PLC.LOOPPID_Command_Cache[key] = False
+        # for key in self.PLC.LOOPPID_Command_Cache:
+        #     self.LOOPPID_Command_Cache_ini[key] = self.LOOPPID_Command_Cache[key]
+        #     self.PLC.LOOPPID_Command_Cache[key] = False
 
         for key in self.PLC.LOOP2PT_MODE0:
             self.LOOP2PT_MODE0_ini[key] = self.PLC.LOOP2PT_MODE0[key]
@@ -2448,9 +2448,9 @@ class UpdateServer(QtCore.QObject):
             self.LOOP2PT_SET2_ini[key] = self.PLC.LOOP2PT_SET2[key]
         for key in self.PLC.LOOP2PT_SET3:
             self.LOOP2PT_SET3_ini[key] = self.PLC.LOOP2PT_SET3[key]
-        for key in self.PLC.LOOP2PT_Command_Cache:
-            self.LOOP2PT_Command_Cache_ini[key] = self.LOOP2PT_Command_Cache[key]
-            self.PLC.LOOP2PT_Command_Cache[key] = False
+        # for key in self.PLC.LOOP2PT_Command_Cache:
+        #     self.LOOP2PT_Command_Cache_ini[key] = self.LOOP2PT_Command_Cache[key]
+        #     self.PLC.LOOP2PT_Command_Cache[key] = False
 
         for key in self.PLC.Procedure_running:
             self.Procedure_running_ini[key] = self.PLC.Procedure_running[key]
@@ -2498,7 +2498,7 @@ class UpdateServer(QtCore.QObject):
                     else:
                         pass
                     # write success signal
-                    self.PLC.Valve_Command_Cache[key] = True
+                    # self.PLC.Valve_Command_Cache[key] = True
                 if message[key]["type"] == "switch":
                     if message[key]["operation"] == "ON":
                         self.PLC.WriteBase2(address=message[key]["address"])
@@ -2564,7 +2564,7 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.LOOPPID_OUT_DIS(address=message[key]["address"])
                     else:
                         pass
-                    self.PLC.LOOPPID_Command_Cache[key] = True
+                    # self.PLC.LOOPPID_Command_Cache[key] = True
                     #
                     # if message[key]["operation"] == "SETMODE":
                     #     self.PLC.LOOPPID_SET_MODE(address = message[key]["address"], mode = message[key]["value"])
@@ -2635,7 +2635,7 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.LOOP2PT_CLOSE(address=message[key]["address"])
                     else:
                         pass
-                    self.PLC.LOOP2PT_Command_Cache[key] = True
+                    # self.PLC.LOOP2PT_Command_Cache[key] = True
                 elif message[key]["type"] == "LOOP2PT_para":
 
                     if message[key]["operation"] == "SET1":
