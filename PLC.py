@@ -716,7 +716,7 @@ class PLC(QtCore.QObject):
 
             ##########################################################################################
 
-            # print(self.Valve_MAN)
+            print(self.LOOP2PT_MAN)
             self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
             self.DATA_TRI_SIGNAL.emit(True)
             # print("signal sent")
@@ -2483,7 +2483,7 @@ class UpdateServer(QtCore.QObject):
 
         for key in self.PLC.LOOPPID_Command_Cache:
             self.PLC.LOOPPID_Command_Cache[key] = False
-            
+
         for key in self.PLC.LOOP2PT_Command_Cache:
             self.PLC.LOOP2PT_Command_Cache[key] =False
 
