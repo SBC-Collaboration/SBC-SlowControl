@@ -2312,7 +2312,7 @@ class UpdateServer(QtCore.QObject):
                     # self.socket.sendall(self.data_package)
                     self.PLC.NewData_ZMQ = False
                 except Exception as e:
-                    print(e)
+                    print("Error:",e)
                     print("Time out for fetching data from GUI, continue to wait")
 
             else:
