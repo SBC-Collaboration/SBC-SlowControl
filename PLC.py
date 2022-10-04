@@ -2498,7 +2498,7 @@ class UpdateServer(QtCore.QObject):
                     else:
                         pass
                     # write success signal
-                    self.PLC.Valve_Commmand_Cache[key] = True
+                    self.PLC.Valve_Command_Cache[key] = True
                 if message[key]["type"] == "switch":
                     if message[key]["operation"] == "ON":
                         self.PLC.WriteBase2(address=message[key]["address"])
