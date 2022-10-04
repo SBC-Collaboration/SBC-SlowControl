@@ -10,7 +10,7 @@ v1.0 Initial code 25/11/19 ML
 v1.1 Initialize values, flag when values are updated more modbus variables 04/03/20 ML
 """
 
-import struct, time, zmq, sys, pickle
+import struct, time, zmq, sys, pickle, copy
 import numpy as np
 from PySide2 import QtWidgets, QtCore, QtGui
 from Database_SBC import *
@@ -1363,7 +1363,7 @@ class UpdateDataBase(QtCore.QObject):
 
     @QtCore.Slot()
     def run(self):
-        LOOP2PT_OUT_buffer = sec.LOOP2PT_OUT
+        LOOP2PT_OUT_buffer = copy.deepcopy(sec.LOOP2PT_OUT)
         self.Running = True
         while self.Running:
             try:
