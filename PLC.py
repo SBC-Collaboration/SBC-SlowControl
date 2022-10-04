@@ -2365,12 +2365,7 @@ class UpdateServer(QtCore.QObject):
         for key in self.PLC.Valve_ERR:
             self.Valve_ERR_ini[key] = self.PLC.Valve_ERR[key]
         for key in self.PLC.Valve_Command_Cache:
-            if key=="SV4328":
-                print("SV4328",self.Valve_Command_Cache_ini["SV4328"],self.PLC.Valve_Command_Cache["SV4328"])
             self.Valve_Command_Cache_ini[key] = self.PLC.Valve_Command_Cache[key]
-            # self.PLC.Valve_Command_Cache[key] = False
-            # if key=="SV4328":
-            #     print("SV4328", self.Valve_Command_Cache_ini["SV4328"], self.PLC.Valve_Command_Cache["SV4328"])
         for key in self.PLC.Switch_OUT:
             self.Switch_OUT_ini[key] = self.PLC.Switch_OUT[key]
         for key in self.PLC.Switch_INTLKD:
@@ -2428,7 +2423,6 @@ class UpdateServer(QtCore.QObject):
             self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
         for key in self.PLC.LOOPPID_Command_Cache:
             self.LOOPPID_Command_Cache_ini[key] = self.PLC.LOOPPID_Command_Cache[key]
-            self.PLC.LOOPPID_Command_Cache[key] = False
 
         for key in self.PLC.LOOP2PT_MODE0:
             self.LOOP2PT_MODE0_ini[key] = self.PLC.LOOP2PT_MODE0[key]
@@ -2454,7 +2448,6 @@ class UpdateServer(QtCore.QObject):
             self.LOOP2PT_SET3_ini[key] = self.PLC.LOOP2PT_SET3[key]
         for key in self.PLC.LOOP2PT_Command_Cache:
             self.LOOP2PT_Command_Cache_ini[key] = self.PLC.LOOP2PT_Command_Cache[key]
-            self.PLC.LOOP2PT_Command_Cache[key] = False
 
         for key in self.PLC.Procedure_running:
             self.Procedure_running_ini[key] = self.PLC.Procedure_running[key]
@@ -2487,8 +2480,13 @@ class UpdateServer(QtCore.QObject):
 
         for key in self.PLC.Valve_Command_Cache:
             self.PLC.Valve_Command_Cache[key] = False
-            if key=="SV4328":
-                print("SV4328", self.Valve_Command_Cache_ini["SV4328"], self.PLC.Valve_Command_Cache["SV4328"])
+
+        for key in self.PLC.LOOPPID_Command_Cache:
+            self.PLC.LOOPPID_Command_Cache[key] = False
+            
+        for key in self.PLC.LOOP2PT_Command_Cache:
+            self.PLC.LOOP2PT_Command_Cache[key] =False
+
 
     def write_data(self):
         message = pickle.loads(self.socket.recv())
