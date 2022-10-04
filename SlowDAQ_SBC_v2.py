@@ -3910,7 +3910,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.SV4327.Set.ButtonTransitionState(False)
         else:
             pass
-
+        print("SV4328",received_dic_c["data"]["Valve"]["Command_Cache"]["SV4328"])
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4328"] == True:
             self.SV4328.Set.ButtonTransitionState(False)
         else:
