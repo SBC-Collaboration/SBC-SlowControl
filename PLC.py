@@ -1537,8 +1537,8 @@ class UpdateDataBase(QtCore.QObject):
                     # print(7)
 
                     for key in self.LOOP2PT_OUT:
-                        print("7")
-                        print(key, self.Valve_OUT[key], self.Valve_OUT[key] != self.Valve_buffer[key])
+                        print(7)
+                        # print(key, self.Valve_OUT[key], self.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.LOOP2PT_OUT[key] != self.LOOP2PT_OUT_buffer[key]:
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.LOOP2PT_OUT_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
