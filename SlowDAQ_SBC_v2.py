@@ -8858,6 +8858,7 @@ class UpdateClient(QtCore.QObject):
         self.LOOPPID_SET1_ini = sec.LOOPPID_SET1
         self.LOOPPID_SET2_ini = sec.LOOPPID_SET2
         self.LOOPPID_SET3_ini = sec.LOOPPID_SET3
+        self.LOOPPID_Command_Cache_ini = sec.LOOPPID_COMMAND_CACHE
 
         self.LOOP2PT_MODE0_ini = sec.LOOP2PT_MODE0
         self.LOOP2PT_MODE1_ini = sec.LOOP2PT_MODE1
@@ -8921,7 +8922,8 @@ class UpdateClient(QtCore.QObject):
                                               "SET0": self.LOOPPID_SET0_ini,
                                               "SET1": self.LOOPPID_SET1_ini,
                                               "SET2": self.LOOPPID_SET2_ini,
-                                              "SET3": self.LOOPPID_SET3_ini},
+                                              "SET3": self.LOOPPID_SET3_ini,
+                                              "Command_Cache":self.LOOPPID_Command_Cache_ini},
                                   "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
                                               "MODE1": self.LOOP2PT_MODE1_ini,
                                               "MODE2": self.LOOP2PT_MODE2_ini,
