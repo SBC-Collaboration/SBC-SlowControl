@@ -2498,7 +2498,7 @@ class UpdateServer(QtCore.QObject):
                     else:
                         pass
                     # write success signal
-                    # self.PLC.Valve_Command_Cache[key] = True
+                    self.PLC.Valve_Command_Cache[key] = True
                 if message[key]["type"] == "switch":
                     if message[key]["operation"] == "ON":
                         self.PLC.WriteBase2(address=message[key]["address"])
@@ -2564,7 +2564,7 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.LOOPPID_OUT_DIS(address=message[key]["address"])
                     else:
                         pass
-                    # self.PLC.LOOPPID_Command_Cache[key] = True
+                    self.PLC.LOOPPID_Command_Cache[key] = True
                     #
                     # if message[key]["operation"] == "SETMODE":
                     #     self.PLC.LOOPPID_SET_MODE(address = message[key]["address"], mode = message[key]["value"])
@@ -2635,7 +2635,7 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.LOOP2PT_CLOSE(address=message[key]["address"])
                     else:
                         pass
-                    # self.PLC.LOOP2PT_Command_Cache[key] = True
+                    self.PLC.LOOP2PT_Command_Cache[key] = True
                 elif message[key]["type"] == "LOOP2PT_para":
 
                     if message[key]["operation"] == "SET1":
