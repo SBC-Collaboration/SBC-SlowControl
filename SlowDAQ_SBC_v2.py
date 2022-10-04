@@ -1121,7 +1121,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UpClient.client_clear_commands.connect(self.clearcommands)
         # transport read client data into GUI, this makes sure that only when new directory comes, main thread will update the display
 
-        # self.UpClient.client_data_transport.connect(lambda: self.updatedisplay(self.UpClient.receive_dic))
+        self.UpClient.client_data_transport.connect(lambda: self.updatedisplay(self.UpClient.receive_dic))
         self.ClientUpdateThread.start()
 
 
