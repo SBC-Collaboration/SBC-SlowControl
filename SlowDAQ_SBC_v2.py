@@ -4225,13 +4225,6 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
-        #LOOP2PT part
-        if received_dic_c["data"]["LOOP2PT"]["Command_Cache"]["PUMP3305"] == True:
-            self.PUMP3305.State.ButtonTransitionState(False)
-            self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonTransitionState(False)
-            # self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
-        else:
-            pass
 
         # if received_dic_c["data"]["LOOPPID"]["EN"]["SERVO3321"] != self.LOOPPID_EN_buffer["SERVO3321"]:
         #     self.SERVO3321.State.ButtonTransitionState(False)
@@ -4340,12 +4333,12 @@ class MainWindow(QtWidgets.QMainWindow):
         #     pass
         #
         # #LOOP2PT part
-        # if received_dic_c["data"]["LOOP2PT"]["Command_Cache"]["PUMP3305"] == True:
-        #     self.PUMP3305.State.ButtonTransitionState(False)
-        #     self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonTransitionState(False)
-        #     # self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
-        # else:
-        #     pass
+        if received_dic_c["data"]["LOOP2PT"]["Command_Cache"]["PUMP3305"] == True:
+            self.PUMP3305.State.ButtonTransitionState(False)
+            self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonTransitionState(False)
+            # self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
+        else:
+            pass
         # if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"] != self.LOOP2PT_OUT_buffer["PUMP3305"]:
         #     self.PUMP3305.State.ButtonTransitionState(False)
         #     self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonTransitionState(False)
