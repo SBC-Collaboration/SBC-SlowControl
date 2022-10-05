@@ -280,7 +280,7 @@ class PLC(QtCore.QObject):
         self.TIME_ADDRESS = copy.copy(sec.TIME_ADDRESS)
         self.TIME_DIC = copy.copy(sec.TIME_DIC)
 
-        print("good")
+
 
 
         self.signal_data = {  "TT_FP_address":self.TT_FP_address,
@@ -397,6 +397,7 @@ class PLC(QtCore.QObject):
                               "TIME_ADDRESS": self.TIME_ADDRESS,
                               "TIME_DIC": self.TIME_DIC}
 
+        print("good?")
         self.LiveCounter = 0
         self.NewData_Display = False
         self.NewData_Database = False
