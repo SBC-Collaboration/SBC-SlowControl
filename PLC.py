@@ -412,7 +412,7 @@ class PLC(QtCore.QObject):
         # print(self.TT_BO_Alarm["TT2119"])
         self.Connected = self.Client.connect()
         self.Connected_BO = self.Client_BO.connect()
-        print("good")
+
         if self.Connected:
             # Reading all the RTDs
             Raw_RTDs_FP = {}
@@ -457,7 +457,7 @@ class PLC(QtCore.QObject):
             print("lost connection to PLC")
             self.PLC_DISCON_SIGNAL.emit()
 
-
+        print("good?")
         #########################################################################
         if self.Connected_BO:
             Raw_BO_TT_BO = {}
