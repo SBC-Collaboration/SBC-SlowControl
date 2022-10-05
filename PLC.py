@@ -412,7 +412,7 @@ class PLC(QtCore.QObject):
         # print(self.TT_BO_Alarm["TT2119"])
         self.Connected = self.Client.connect()
         self.Connected_BO = self.Client_BO.connect()
-
+        print("good")
         if self.Connected:
             # Reading all the RTDs
             Raw_RTDs_FP = {}
@@ -1987,15 +1987,15 @@ class UpdatePLC(QtCore.QObject):
                 # self.AI_slack_alarm.emit("signal")
 
                 # check alarms
-                # for keyTT_FP in self.PLC.TT_FP_dic:
-                #     self.check_TT_FP_alarm(keyTT_FP)
-                # for keyTT_BO in self.PLC.TT_BO_dic:
-                #     self.check_TT_BO_alarm(keyTT_BO)
-                # for keyPT in self.PLC.PT_dic:
-                #     self.check_PT_alarm(keyPT)
-                # for keyLEFT_REAL in self.PLC.LEFT_REAL_dic:
-                #     self.check_LEFT_REAL_alarm(keyLEFT_REAL)
-                # self.or_alarm_signal()
+                for keyTT_FP in self.PLC.TT_FP_dic:
+                    self.check_TT_FP_alarm(keyTT_FP)
+                for keyTT_BO in self.PLC.TT_BO_dic:
+                    self.check_TT_BO_alarm(keyTT_BO)
+                for keyPT in self.PLC.PT_dic:
+                    self.check_PT_alarm(keyPT)
+                for keyLEFT_REAL in self.PLC.LEFT_REAL_dic:
+                    self.check_LEFT_REAL_alarm(keyLEFT_REAL)
+                self.or_alarm_signal()
                 time.sleep(self.period)
         except KeyboardInterrupt:
             print("PLC is interrupted by keyboard[Ctrl-C]")
