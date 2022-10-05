@@ -604,10 +604,10 @@ class PLC(QtCore.QObject):
                     struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
 
-                self.LOOPPID_Command_Cache[key] = self.ReadCoil(2**13, self.valve_address[key]) or self.ReadCoil(2**14,self.valve_address[key])
+                # self.LOOPPID_Command_Cache[key] = self.ReadCoil(2**13, self.valve_address[key]) or self.ReadCoil(2**14,self.valve_address[key])
 
             ##########################################################################################
-            print("good?")
+
             Raw_LOOP2PT_2 = {}
             Raw_LOOP2PT_4 = {}
             Raw_LOOP2PT_6 = {}
