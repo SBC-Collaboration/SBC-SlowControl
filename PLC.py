@@ -1658,7 +1658,7 @@ class UpdateDataBase(QtCore.QObject):
                         # write float data.
                         for key in self.LOOP2PT_OUT:
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
-                            LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
+                            self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
 
                         self.commit_bool = True
                         self.para_LOOP2PT = 0
