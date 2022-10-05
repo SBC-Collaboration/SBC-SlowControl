@@ -469,6 +469,7 @@ class PLC(QtCore.QObject):
                 self.Valve[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
 
                 self.Valve_OUT[key] = self.ReadCoil(1, self.valve_address[key])
+                self.Valve_Command_Cache[key] = self.ReadCoil(2, self.valve_address[key]) or self.ReadCoil(4, self.valve_address[key])
                 self.Valve_INTLKD[key] = self.ReadCoil(8, self.valve_address[key])
                 self.Valve_MAN[key] = self.ReadCoil(16, self.valve_address[key])
                 self.Valve_ERR[key] = self.ReadCoil(32, self.valve_address[key])
@@ -559,6 +560,8 @@ class PLC(QtCore.QObject):
                     struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
 
+                self.LOOPPID_Command_Cache[key] = self.ReadCoil(2**13, self.valve_address[key]) or self.ReadCoil(2**14,self.valve_address[key])
+
             ##########################################################################################
             Raw_LOOP2PT_2 = {}
             Raw_LOOP2PT_4 = {}
@@ -590,6 +593,8 @@ class PLC(QtCore.QObject):
                 self.LOOP2PT_SET3[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_LOOP2PT_6[key].getRegister(0 + 1),
                                                     Raw_LOOP2PT_6[key].getRegister(0)))[0], 3)
+                self.LOOPPID_Command_Cache[key] = self.ReadCoil(2 ** 1, self.valve_address[key]) or self.ReadCoil(
+                    2 ** 2, self.valve_address[key])
 
 
             ############################################################################################
@@ -2481,14 +2486,14 @@ class UpdateServer(QtCore.QObject):
 
         self.data_package = pickle.dumps(self.data_dic)
 
-        for key in self.PLC.Valve_Command_Cache:
-            self.PLC.Valve_Command_Cache[key] = False
-
-        for key in self.PLC.LOOPPID_Command_Cache:
-            self.PLC.LOOPPID_Command_Cache[key] = False
-
-        for key in self.PLC.LOOP2PT_Command_Cache:
-            self.PLC.LOOP2PT_Command_Cache[key] =False
+        # for key in self.PLC.Valve_Command_Cache:
+        #     self.PLC.Valve_Command_Cache[key] = False
+        #
+        # for key in self.PLC.LOOPPID_Command_Cache:
+        #     self.PLC.LOOPPID_Command_Cache[key] = False
+        #
+        # for key in self.PLC.LOOP2PT_Command_Cache:
+        #     self.PLC.LOOP2PT_Command_Cache[key] =False
 
 
     def write_data(self):
@@ -2645,7 +2650,7 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.LOOP2PT_CLOSE(address=message[key]["address"])
                     else:
                         pass
-                    
+
                 elif message[key]["type"] == "LOOP2PT_para":
 
                     if message[key]["operation"] == "SET1":

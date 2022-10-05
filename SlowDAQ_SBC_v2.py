@@ -862,6 +862,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MAN_HYD.move(1300 * R, 500 * R)
         self.MAN_HYD.Label.setText("MAN_HYD")
 
+        self.PCYCLE_AUTOCYCLE = Flag(self.DatanSignalTab)
+        self.PCYCLE_AUTOCYCLE.move(1300 * R, 600 * R)
+        self.PCYCLE_AUTOCYCLE.Label.setText("PCYCLE_AUTOCYCLE")
+
 
         self.TT2118_HI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
         self.TT2118_HI_INTLK.move(10 * R, 10 * R)
@@ -2758,6 +2762,11 @@ class MainWindow(QtWidgets.QMainWindow):
             lambda x: self.FLAGRButtonClicked(self.MAN_HYD.Label.text()))
 
 
+        self.PCYCLE_AUTOCYCLE.Set.LButton.clicked.connect(
+            lambda x: self.FLAGLButtonClicked(self.PCYCLE_AUTOCYCLE.Label.text()))
+        self.PCYCLE_AUTOCYCLE.Set.RButton.clicked.connect(
+            lambda x: self.FLAGRButtonClicked(self.PCYCLE_AUTOCYCLE.Label.text()))
+
 
 
         #Procedure widgets
@@ -3822,133 +3831,236 @@ class MainWindow(QtWidgets.QMainWindow):
         #     self.PUMP3305.ActiveState.UpdateColor(False)
 
         # reset Valves' widget busy status
-
+        # if commands are rejected by PLC, set busy back
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV1344"] ==True:
             self.PV1344.Set.ButtonTransitionState(False)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
         else:
-            pass
+            #if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
+            if received_dic_c["data"]["Valve"]["OUT"]["PV1344"] != self.Valve_buffer["PV1344"]:
+                self.PV1344.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
+            else:
+                pass
+
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4307"] == True:
             self.PV4307.Set.ButtonTransitionState(False)
 
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["PV4307"] != self.Valve_buffer["PV4307"]:
+                self.PV4307.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV4307"] = received_dic_c["data"]["Valve"]["OUT"]["PV4307"]
+            else:
+                pass
+
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4308"] == True:
             self.PV4308.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["PV4308"] != self.Valve_buffer["PV4308"]:
+                self.PV4308.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV4308"] = received_dic_c["data"]["Valve"]["OUT"]["PV4308"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4317"] == True:
             self.PV4317.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
+                self.PV4317.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4318"] == True:
             self.PV4318.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["PV4318"] != self.Valve_buffer["PV4318"]:
+                self.PV4318.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV4318"] = received_dic_c["data"]["Valve"]["OUT"]["PV4318"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4321"] == True:
             self.PV4321.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["PV4321"] != self.Valve_buffer["PV4321"]:
+                self.PV4321.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV4321"] = received_dic_c["data"]["Valve"]["OUT"]["PV4321"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4324"] == True:
             self.PV4324.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["PV4324"] != self.Valve_buffer["PV4324"]:
+                self.PV4324.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV4324"] = received_dic_c["data"]["Valve"]["OUT"]["PV4324"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV5305"] == True:
             self.PV5305.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["PV5305"] != self.Valve_buffer["PV5305"]:
+                self.PV5305.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV5305"] = received_dic_c["data"]["Valve"]["OUT"]["PV5305"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV5306"] == True:
             self.PV5306.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["PV5306"] != self.Valve_buffer["PV5306"]:
+                self.PV5306.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV5306"] = received_dic_c["data"]["Valve"]["OUT"]["PV5306"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV5307"] == True:
             self.PV5307.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["PV5307"] != self.Valve_buffer["PV5307"]:
+                self.PV5307.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV5307"] = received_dic_c["data"]["Valve"]["OUT"]["PV5307"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV5309"] == True:
             self.PV5309.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["PV5309"] != self.Valve_buffer["PV5309"]:
+                self.PV5309.Set.ButtonTransitionState(False)
+                self.Valve_buffer["PV5309"] = received_dic_c["data"]["Valve"]["OUT"]["PV5309"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV3307"] == True:
             self.SV3307.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV3307"] != self.Valve_buffer["SV3307"]:
+                self.SV3307.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV3307"] = received_dic_c["data"]["Valve"]["OUT"]["SV3307"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV3310"] == True:
             self.SV3310.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV3310"] != self.Valve_buffer["SV3310"]:
+                self.SV3310.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV3310"] = received_dic_c["data"]["Valve"]["OUT"]["SV3310"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV3322"] == True:
             self.SV3322.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV3322"] != self.Valve_buffer["SV3322"]:
+                self.SV3322.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV3322"] = received_dic_c["data"]["Valve"]["OUT"]["SV3322"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV3325"] == True:
             self.SV3325.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV3325"] != self.Valve_buffer["SV3325"]:
+                self.SV3325.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV3325"] = received_dic_c["data"]["Valve"]["OUT"]["SV3325"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV3329"] == True:
             self.SV3329.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV3329"] != self.Valve_buffer["SV3329"]:
+                self.SV3329.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV3329"] = received_dic_c["data"]["Valve"]["OUT"]["SV3329"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4327"] == True:
             self.SV4327.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV4327"] != self.Valve_buffer["SV4327"]:
+                self.SV4327.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
+            else:
+                pass
         print("SV4328",received_dic_c["data"]["Valve"]["Command_Cache"]["SV4328"])
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4328"] == True:
             self.SV4328.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV4328"] != self.Valve_buffer["SV4328"]:
+                self.SV4328.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV4328"] = received_dic_c["data"]["Valve"]["OUT"]["SV4328"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4329"] == True:
             self.SV4329.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV4329"] != self.Valve_buffer["SV4329"]:
+                self.SV4329.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV4329"] = received_dic_c["data"]["Valve"]["OUT"]["SV4329"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4331"] == True:
             self.SV4331.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV4331"] != self.Valve_buffer["SV4331"]:
+                self.SV4331.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV4331"] = received_dic_c["data"]["Valve"]["OUT"]["SV4331"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4332"] == True:
             self.SV4332.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV4332"] != self.Valve_buffer["SV4332"]:
+                self.SV4332.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV4332"] = received_dic_c["data"]["Valve"]["OUT"]["SV4332"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4337"] == True:
             self.SV4337.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["SV4337"] != self.Valve_buffer["SV4337"]:
+                self.SV4337.Set.ButtonTransitionState(False)
+                self.Valve_buffer["SV4337"] = received_dic_c["data"]["Valve"]["OUT"]["SV4337"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["HFSV3312"] == True:
             self.HFSV3312.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"] != self.Valve_buffer["HFSV3312"]:
+                self.HFSV3312.Set.ButtonTransitionState(False)
+                self.Valve_buffer["HFSV3312"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["HFSV3323"] == True:
             self.HFSV3323.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"] != self.Valve_buffer["HFSV3323"]:
+                self.HFSV3323.Set.ButtonTransitionState(False)
+                self.Valve_buffer["HFSV3323"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"]
+            else:
+                pass
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["HFSV3331"] == True:
             self.HFSV3331.Set.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"] != self.Valve_buffer["HFSV3331"]:
+                self.HFSV3331.Set.ButtonTransitionState(False)
+                self.Valve_buffer["HFSV3331"] = received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"]
+            else:
+                pass
 
         # if received_dic_c["data"]["Valve"]["OUT"]["PV1344"] != self.Valve_buffer["PV1344"]:
         #     self.PV1344.Set.ButtonTransitionState(False)
@@ -4113,6 +4225,8 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
+
+
         if received_dic_c["data"]["FLAG"]["INTLKD"]["MAN_HYD"]:
 
             self.MAN_HYD.INTLK.UpdateColor(True)
@@ -4125,6 +4239,18 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
+
+        if received_dic_c["data"]["FLAG"]["INTLKD"]["PCYCLE_AUTOCYCLE"]:
+
+            self.PCYCLE_AUTOCYCLE.INTLK.UpdateColor(True)
+        else:
+            self.PCYCLE_AUTOCYCLE.INTLK.UpdateColor(False)
+
+        if received_dic_c["data"]["FLAG"]["value"]["PCYCLE_AUTOCYCLE"] != self.FLAG_buffer["PCYCLE_AUTOCYCLE"]:
+            self.PCYCLE_AUTOCYCLE.Set.ButtonTransitionState(False)
+            self.FLAG_buffer["PCYCLE_AUTOCYCLE"] = received_dic_c["data"]["FLAG"]["value"]["PCYCLE_AUTOCYCLE"]
+        else:
+            pass
         # if received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"] != self.Switch_buffer["PUMP3305"]:
         #     self.PUMP3305.Set.ButtonTransitionState(False)
         #     self.Switch_buffer["PUMP3305"] = received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"]
@@ -4137,92 +4263,168 @@ class MainWindow(QtWidgets.QMainWindow):
             self.SERVO3321.State.ButtonTransitionState(False)
             self.SERVO3321.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["SERVO3321"] != self.LOOPPID_EN_buffer["SERVO3321"]:
+                self.SERVO3321.State.ButtonTransitionState(False)
+                self.SERVO3321.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["SERVO3321"] = received_dic_c["data"]["LOOPPID"]["EN"]["SERVO3321"]
+            else:
+                pass
+
 
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6225"] ==True:
             self.HTR6225.State.ButtonTransitionState(False)
             self.HTR6225.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6225"] != self.LOOPPID_EN_buffer["HTR6225"]:
+                self.HTR6225.State.ButtonTransitionState(False)
+                self.HTR6225.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR6225"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6225"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR2123"] ==True:
             self.HTR2123.State.ButtonTransitionState(False)
             self.HTR2123.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR2123"] != self.LOOPPID_EN_buffer["HTR2123"]:
+                self.HTR2123.State.ButtonTransitionState(False)
+                self.HTR2123.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR2123"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR2123"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR2124"] ==True:
             self.HTR2124.State.ButtonTransitionState(False)
             self.HTR2124.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR2124"] != self.LOOPPID_EN_buffer["HTR2124"]:
+                self.HTR2124.State.ButtonTransitionState(False)
+                self.HTR2124.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR2124"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR2124"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR2125"] ==True:
             self.HTR2125.State.ButtonTransitionState(False)
             self.HTR2125.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR2125"] != self.LOOPPID_EN_buffer["HTR2125"]:
+                self.HTR2125.State.ButtonTransitionState(False)
+                self.HTR2125.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR2125"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR2125"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR1202"] ==True:
             self.HTR1202.State.ButtonTransitionState(False)
             self.HTR1202.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR1202"] != self.LOOPPID_EN_buffer["HTR1202"]:
+                self.HTR1202.State.ButtonTransitionState(False)
+                self.HTR1202.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR1202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR1202"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR2203"] ==True:
             self.HTR2203.State.ButtonTransitionState(False)
             self.HTR2203.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR2203"] != self.LOOPPID_EN_buffer["HTR2203"]:
+                self.HTR2203.State.ButtonTransitionState(False)
+                self.HTR2203.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR2203"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR2203"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6202"] ==True:
             self.HTR6202.State.ButtonTransitionState(False)
             self.HTR6202.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"] != self.LOOPPID_EN_buffer["HTR6202"]:
+                self.HTR6202.State.ButtonTransitionState(False)
+                self.HTR6202.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6206"] ==True:
             self.HTR6206.State.ButtonTransitionState(False)
             self.HTR6206.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6206"] != self.LOOPPID_EN_buffer["HTR6206"]:
+                self.HTR6206.State.ButtonTransitionState(False)
+                self.HTR6206.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR6206"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6206"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6210"] ==True:
             self.HTR6210.State.ButtonTransitionState(False)
             self.HTR6210.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6210"] != self.LOOPPID_EN_buffer["HTR6210"]:
+                self.HTR6210.State.ButtonTransitionState(False)
+                self.HTR6210.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR6210"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6210"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6223"] ==True:
             self.HTR6223.State.ButtonTransitionState(False)
             self.HTR6223.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6223"] != self.LOOPPID_EN_buffer["HTR6223"]:
+                self.HTR6223.State.ButtonTransitionState(False)
+                self.HTR6223.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR6223"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6223"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6224"] ==True:
             self.HTR6224.State.ButtonTransitionState(False)
             self.HTR6224.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6224"] != self.LOOPPID_EN_buffer["HTR6224"]:
+                self.HTR6224.State.ButtonTransitionState(False)
+                self.HTR6224.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR6224"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6224"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6219"] ==True:
             self.HTR6219.State.ButtonTransitionState(False)
             self.HTR6219.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6219"] != self.LOOPPID_EN_buffer["HTR6219"]:
+                self.HTR6219.State.ButtonTransitionState(False)
+                self.HTR6219.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR6219"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6219"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6221"] ==True:
             self.HTR6221.State.ButtonTransitionState(False)
             self.HTR6221.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"] != self.LOOPPID_EN_buffer["HTR6221"]:
+                self.HTR6221.State.ButtonTransitionState(False)
+                self.HTR6221.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR6221"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"]
+            else:
+                pass
 
         if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6214"] ==True:
             self.HTR6214.State.ButtonTransitionState(False)
             self.HTR6214.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
-            pass
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6214"] != self.LOOPPID_EN_buffer["HTR6214"]:
+                self.HTR6214.State.ButtonTransitionState(False)
+                self.HTR6214.HeaterSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOPPID_EN_buffer["HTR6214"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6214"]
+            else:
+                pass
 
 
         # if received_dic_c["data"]["LOOPPID"]["EN"]["SERVO3321"] != self.LOOPPID_EN_buffer["SERVO3321"]:
@@ -4337,7 +4539,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonTransitionState(False)
             # self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
         else:
-            pass
+            if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"] != self.LOOP2PT_OUT_buffer["PUMP3305"]:
+                self.PUMP3305.State.ButtonTransitionState(False)
+                self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonTransitionState(False)
+                self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
+            else:
+                pass
+
         # if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"] != self.LOOP2PT_OUT_buffer["PUMP3305"]:
         #     self.PUMP3305.State.ButtonTransitionState(False)
         #     self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonTransitionState(False)
@@ -4618,6 +4826,11 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.MAN_HYD.Set.ButtonRClicked()
 
+
+        if received_dic_c["data"]["FLAG"]["value"]["PCYCLE_AUTOCYCLE"]:
+            self.PCYCLE_AUTOCYCLE.Set.ButtonLClicked()
+        else:
+            self.PCYCLE_AUTOCYCLE.Set.ButtonRClicked()
         # set LOOPPID double button status ON/OFF also the status in the subwindow
 
 
