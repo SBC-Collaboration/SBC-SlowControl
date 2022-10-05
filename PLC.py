@@ -541,6 +541,8 @@ class PLC(QtCore.QObject):
 
                 self.Din_dic[key] = self.ReadCoil(2 ** (self.Din_address[key][1]), self.Din_address[key][0])
 
+            print("good?")
+
             Raw_LOOPPID_2 = {}
             Raw_LOOPPID_4 = {}
             Raw_LOOPPID_6 = {}
