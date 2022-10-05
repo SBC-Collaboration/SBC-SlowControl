@@ -541,7 +541,7 @@ class PLC(QtCore.QObject):
 
                 self.Din_dic[key] = self.ReadCoil(2 ** (self.Din_address[key][1]), self.Din_address[key][0])
 
-            print("good?")
+
 
             Raw_LOOPPID_2 = {}
             Raw_LOOPPID_4 = {}
@@ -607,6 +607,7 @@ class PLC(QtCore.QObject):
                 self.LOOPPID_Command_Cache[key] = self.ReadCoil(2**13, self.valve_address[key]) or self.ReadCoil(2**14,self.valve_address[key])
 
             ##########################################################################################
+            print("good?")
             Raw_LOOP2PT_2 = {}
             Raw_LOOP2PT_4 = {}
             Raw_LOOP2PT_6 = {}
