@@ -152,82 +152,82 @@ class PLC(QtCore.QObject):
         self.Valve_ERR = copy.copy(sec.VALVE_ERR)
         self.Valve_Command_Cache = copy.copy(sec.VALVE_COMMAND_CACHE)
 
-        # self.LOOPPID_ADR_BASE = copy.copy(sec.LOOPPID_ADR_BASE)
-        #
-        # self.LOOPPID_MODE0 = copy.copy(sec.LOOPPID_MODE0)
-        #
-        # self.LOOPPID_MODE1 = copy.copy(sec.LOOPPID_MODE1)
-        #
-        # self.LOOPPID_MODE2 = copy.copy(sec.LOOPPID_MODE2)
-        #
-        # self.LOOPPID_MODE3 = copy.copy(sec.LOOPPID_MODE3)
-        #
-        # self.LOOPPID_INTLKD = copy.copy(sec.LOOPPID_INTLKD)
-        #
-        # self.LOOPPID_MAN = copy.copy(sec.LOOPPID_MAN)
-        #
-        # self.LOOPPID_ERR = copy.copy(sec.LOOPPID_ERR)
-        #
-        # self.LOOPPID_SATHI = copy.copy(sec.LOOPPID_SATHI)
-        #
-        # self.LOOPPID_SATLO = copy.copy(sec.LOOPPID_SATLO)
-        #
-        # self.LOOPPID_EN = copy.copy(sec.LOOPPID_EN)
-        #
-        # self.LOOPPID_OUT = copy.copy(sec.LOOPPID_OUT)
-        #
-        # self.LOOPPID_IN = copy.copy(sec.LOOPPID_IN)
-        #
-        # self.LOOPPID_HI_LIM = copy.copy(sec.LOOPPID_HI_LIM)
-        #
-        # self.LOOPPID_LO_LIM = copy.copy(sec.LOOPPID_LO_LIM)
-        #
-        # self.LOOPPID_SET0 = copy.copy(sec.LOOPPID_SET0)
-        #
-        # self.LOOPPID_SET1 = copy.copy(sec.LOOPPID_SET1)
-        #
-        # self.LOOPPID_SET2 = copy.copy(sec.LOOPPID_SET2)
-        #
-        # self.LOOPPID_SET3 = copy.copy(sec.LOOPPID_SET3)
-        # self.LOOPPID_Command_Cache = copy.copy(sec.LOOPPID_COMMAND_CACHE)
-        self.LOOPPID_ADR_BASE = sec.LOOPPID_ADR_BASE
+        self.LOOPPID_ADR_BASE = copy.copy(sec.LOOPPID_ADR_BASE)
 
-        self.LOOPPID_MODE0 = sec.LOOPPID_MODE0
+        self.LOOPPID_MODE0 = copy.copy(sec.LOOPPID_MODE0)
 
-        self.LOOPPID_MODE1 = sec.LOOPPID_MODE1
+        self.LOOPPID_MODE1 = copy.copy(sec.LOOPPID_MODE1)
 
-        self.LOOPPID_MODE2 = sec.LOOPPID_MODE2
+        self.LOOPPID_MODE2 = copy.copy(sec.LOOPPID_MODE2)
 
-        self.LOOPPID_MODE3 = sec.LOOPPID_MODE3
+        self.LOOPPID_MODE3 = copy.copy(sec.LOOPPID_MODE3)
 
-        self.LOOPPID_INTLKD = sec.LOOPPID_INTLKD
+        self.LOOPPID_INTLKD = copy.copy(sec.LOOPPID_INTLKD)
 
-        self.LOOPPID_MAN = sec.LOOPPID_MAN
+        self.LOOPPID_MAN = copy.copy(sec.LOOPPID_MAN)
 
-        self.LOOPPID_ERR = sec.LOOPPID_ERR
+        self.LOOPPID_ERR = copy.copy(sec.LOOPPID_ERR)
 
-        self.LOOPPID_SATHI = sec.LOOPPID_SATHI
+        self.LOOPPID_SATHI = copy.copy(sec.LOOPPID_SATHI)
 
-        self.LOOPPID_SATLO = sec.LOOPPID_SATLO
+        self.LOOPPID_SATLO = copy.copy(sec.LOOPPID_SATLO)
 
-        self.LOOPPID_EN = sec.LOOPPID_EN
+        self.LOOPPID_EN = copy.copy(sec.LOOPPID_EN)
 
-        self.LOOPPID_OUT = sec.LOOPPID_OUT
+        self.LOOPPID_OUT = copy.copy(sec.LOOPPID_OUT)
 
-        self.LOOPPID_IN = sec.LOOPPID_IN
+        self.LOOPPID_IN = copy.copy(sec.LOOPPID_IN)
 
-        self.LOOPPID_HI_LIM = sec.LOOPPID_HI_LIM
+        self.LOOPPID_HI_LIM = copy.copy(sec.LOOPPID_HI_LIM)
 
-        self.LOOPPID_LO_LIM = sec.LOOPPID_LO_LIM
+        self.LOOPPID_LO_LIM = copy.copy(sec.LOOPPID_LO_LIM)
 
-        self.LOOPPID_SET0 = sec.LOOPPID_SET0
+        self.LOOPPID_SET0 = copy.copy(sec.LOOPPID_SET0)
 
-        self.LOOPPID_SET1 = sec.LOOPPID_SET1
+        self.LOOPPID_SET1 = copy.copy(sec.LOOPPID_SET1)
 
-        self.LOOPPID_SET2 = sec.LOOPPID_SET2
+        self.LOOPPID_SET2 = copy.copy(sec.LOOPPID_SET2)
 
-        self.LOOPPID_SET3 = sec.LOOPPID_SET3
-        self.LOOPPID_Command_Cache = sec.LOOPPID_COMMAND_CACHE
+        self.LOOPPID_SET3 = copy.copy(sec.LOOPPID_SET3)
+        self.LOOPPID_Command_Cache = copy.copy(sec.LOOPPID_COMMAND_CACHE)
+        # self.LOOPPID_ADR_BASE = sec.LOOPPID_ADR_BASE
+        #
+        # self.LOOPPID_MODE0 = sec.LOOPPID_MODE0
+        #
+        # self.LOOPPID_MODE1 = sec.LOOPPID_MODE1
+        #
+        # self.LOOPPID_MODE2 = sec.LOOPPID_MODE2
+        #
+        # self.LOOPPID_MODE3 = sec.LOOPPID_MODE3
+        #
+        # self.LOOPPID_INTLKD = sec.LOOPPID_INTLKD
+        #
+        # self.LOOPPID_MAN = sec.LOOPPID_MAN
+        #
+        # self.LOOPPID_ERR = sec.LOOPPID_ERR
+        #
+        # self.LOOPPID_SATHI = sec.LOOPPID_SATHI
+        #
+        # self.LOOPPID_SATLO = sec.LOOPPID_SATLO
+        #
+        # self.LOOPPID_EN = sec.LOOPPID_EN
+        #
+        # self.LOOPPID_OUT = sec.LOOPPID_OUT
+        #
+        # self.LOOPPID_IN = sec.LOOPPID_IN
+        #
+        # self.LOOPPID_HI_LIM = sec.LOOPPID_HI_LIM
+        #
+        # self.LOOPPID_LO_LIM = sec.LOOPPID_LO_LIM
+        #
+        # self.LOOPPID_SET0 = sec.LOOPPID_SET0
+        #
+        # self.LOOPPID_SET1 = sec.LOOPPID_SET1
+        #
+        # self.LOOPPID_SET2 = sec.LOOPPID_SET2
+        #
+        # self.LOOPPID_SET3 = sec.LOOPPID_SET3
+        # self.LOOPPID_Command_Cache = sec.LOOPPID_COMMAND_CACHE
 
         self.LOOP2PT_ADR_BASE = copy.copy(sec.LOOP2PT_ADR_BASE)
         self.LOOP2PT_MODE0 = copy.copy(sec.LOOP2PT_MODE0)
@@ -279,6 +279,8 @@ class PLC(QtCore.QObject):
 
         self.TIME_ADDRESS = copy.copy(sec.TIME_ADDRESS)
         self.TIME_DIC = copy.copy(sec.TIME_DIC)
+
+        print("good")
 
 
         self.signal_data = {  "TT_FP_address":self.TT_FP_address,
