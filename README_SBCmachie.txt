@@ -58,6 +58,20 @@ kill -9 <pid>
 
 PS.now you could directly source clear_tcp.sh to clean the corrupted files.
 
+10.BKG settings
+The reason why we made this so complicated is that our background code(PLC.py or PLC_init.sh) depends on the Qt package. Because the PICO's code, which is our mother code, didn't seperate bkg and GUI code.
+So the method they used to communicated between classes was QT thread and QT signal, which is a very easy tool. However, both of them depends on the DISPLAY settings. When we firstly
+seperate the BKG and GUI, I didn't know that the BKG code cannot be run in crontab/systemctl with QT thread. And for now, it is much easy to change the way how to run the code instead of chaning the code itself(because the bkg
+also communicates with the GUI.) But we definitely will fix this one day...Because Gnome might be not so reliable.
+But don't forget one thing: When you add it into crontab/system service, the order launching mysql and the bkg code matters.
+Here is how to set BKG codes autorun after the machine reboot
+1.You need to put a desktop executive file into ~/.local/share/applications, which I have put it there already, also you can find it in current directory. It is slowcontrol.desktop
+This code will be executated by the Gnome after you log into the desktop
+2.To enable it is been executated, Menu-> Applications->Accessories->Tweak-> Startup Applications-> add SBCslowcontrol. The purpose of step 1 is to let SBCslowcontrol appear in the application list.
+3.TO run the bkg automatically, you also need the pc to auto log in. You can log in via root and grant hep auto login privilige.
+4. If you want the background run without terminal, edit the desktop file with setting Terminal=False
+5. If you don't want to it run when PC reboot just delete it from the Tweak startup application.
+
 
 
 
