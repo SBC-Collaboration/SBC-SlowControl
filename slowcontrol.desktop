@@ -1,0 +1,20 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+#Terminal=true
+#Exec=/home/hep/miniforge3/envs/slowcontrol/bin/python /home/hep/PycharmProjects/pythonProject/SBC-SlowControl/PLC_daemon.py
+Exec= bash /home/hep/PycharmProjects/pythonProject/SBC-SlowControl/PLC_init.sh
+Icon=/home/hep/PycharmProjects/pythonProject/SBC-SlowControl/images/Logo white_resized.png
+Name=Slowcontrol_bkg
+OnlyShowIn=GNOME;
+#AutostartCondition=GSettings org.gnome.desktop.background show-desktop-icons
+Hidden=false
+#Path=/home/hep/PycharmProjects/pythonProject/SBC-SlowControl/
+Path=/usr/bin
+#NoDisplay=false
+#X-GNOME-Autostart-enabled=true
+Name[en_US]=slowcontrol
+Comment[en_US]=trial
+Comment=trial
