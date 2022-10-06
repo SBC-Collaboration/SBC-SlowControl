@@ -234,7 +234,7 @@ if __name__ == "__main__":
 
     db.close_database()
 
-    # #test datetime function
+    #test datetime function
     # print(datetime_in_1e5micro())
     # print(early_datetime())
 
