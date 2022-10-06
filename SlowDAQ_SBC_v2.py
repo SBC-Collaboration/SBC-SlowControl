@@ -4876,7 +4876,7 @@ class MainWindow(QtWidgets.QMainWindow):
                         self.MAN_HYD.Set.ButtonLClicked()
                     else:
                         self.MAN_HYD.Set.ButtonRClicked()
-                    self.FLAG__buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
+                    self.FLAG_buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
                 else:
                     pass
         
