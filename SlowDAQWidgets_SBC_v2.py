@@ -1448,13 +1448,14 @@ class DoubleButton(QtWidgets.QWidget):
     # Neutral means that the button shouldn't show any color
     @QtCore.Slot()
     def ButtonLStateLocked(self):
-        self.RButton.setProperty("State", True)
-        self.RButton.setStyle(self.RButton.style())
+        if self.LState == self.InactiveName and self.RState == self.ActiveName:
+            self.RButton.setProperty("State", True)
+            self.RButton.setStyle(self.RButton.style())
 
 
     @QtCore.Slot()
     def ButtonRStateLocked(self):
-
+        if self.LState == self.ActiveName and self.RState == self.InactiveName:
             self.LButton.setProperty("State", False)
             self.LButton.setStyle(self.LButton.style())
 
