@@ -640,6 +640,7 @@ class PLC(QtCore.QObject):
                                                     Raw_LOOP2PT_6[key].getRegister(0)))[0], 3)
                 self.LOOP2PT_Command_Cache[key] = self.ReadCoil(2 ** 1, self.LOOP2PT_ADR_BASE[key]) or self.ReadCoil(
                     2 ** 2, self.LOOP2PT_ADR_BASE[key])
+                print(self.LOOP2PT_Command_Cache[key])
 
 
             ############################################################################################
