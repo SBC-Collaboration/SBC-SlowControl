@@ -1426,7 +1426,7 @@ class DoubleButton(QtWidgets.QWidget):
     @QtCore.Slot()
     def ButtonTransitionState(self, bool):
         self.StatusTransition.UpdateColor(bool)
-
+    # when you clicked the button, busy will change into orange
     @QtCore.Slot()
     def ButtonLTransitionState(self, bool):
         if self.LState == self.InactiveName and self.RState == self.ActiveName:

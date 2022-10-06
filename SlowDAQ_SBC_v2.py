@@ -3837,11 +3837,7 @@ class MainWindow(QtWidgets.QMainWindow):
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
         else:
             #if not rejected, and new value is different from the previous one(the valve status changed), then set busy back
-            if received_dic_c["data"]["Valve"]["OUT"]["PV1344"] != self.Valve_buffer["PV1344"]:
-                self.PV1344.Set.ButtonTransitionState(False)
-                self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
-            else:
-                pass
+            self.PV1344.Set.ButtonTransitionState(True)
 
 
         if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4307"] == True:
@@ -4219,9 +4215,16 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.MAN_TS.INTLK.UpdateColor(False)
 
-        if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"] != self.FLAG_buffer["MAN_TS"]:
+        # if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"] != self.FLAG_buffer["MAN_TS"]:
+        #     self.MAN_TS.Set.ButtonTransitionState(False)
+        #     self.FLAG_buffer["MAN_TS"] = received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]
+        # else:
+        #     pass
+        if received_dic_c["data"]["FLAG"]["Busy"]["MAN_TS"] == True:
             self.MAN_TS.Set.ButtonTransitionState(False)
-            self.FLAG_buffer["MAN_TS"] = received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]
+
+        elif received_dic_c["data"]["FLAG"]["Busy"]["MAN_TS"] == False:
+            self.MAN_TS.Set.ButtonTransitionState(False)
         else:
             pass
 
@@ -4233,9 +4236,16 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.MAN_HYD.INTLK.UpdateColor(False)
 
-        if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"] != self.FLAG_buffer["MAN_HYD"]:
+        # if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"] != self.FLAG_buffer["MAN_HYD"]:
+        #     self.MAN_HYD.Set.ButtonTransitionState(False)
+        #     self.FLAG_buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
+        # else:
+        #     pass
+        if received_dic_c["data"]["FLAG"]["Busy"]["MAN_HYD"] == True:
             self.MAN_HYD.Set.ButtonTransitionState(False)
-            self.FLAG_buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
+
+        elif received_dic_c["data"]["FLAG"]["Busy"]["MAN_HYD"] == False:
+            self.MAN_HYD.Set.ButtonTransitionState(False)
         else:
             pass
 
@@ -4246,11 +4256,19 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.PCYCLE_AUTOCYCLE.INTLK.UpdateColor(False)
 
-        if received_dic_c["data"]["FLAG"]["value"]["PCYCLE_AUTOCYCLE"] != self.FLAG_buffer["PCYCLE_AUTOCYCLE"]:
+        # if received_dic_c["data"]["FLAG"]["value"]["PCYCLE_AUTOCYCLE"] != self.FLAG_buffer["PCYCLE_AUTOCYCLE"]:
+        #     self.PCYCLE_AUTOCYCLE.Set.ButtonTransitionState(False)
+        #     self.FLAG_buffer["PCYCLE_AUTOCYCLE"] = received_dic_c["data"]["FLAG"]["value"]["PCYCLE_AUTOCYCLE"]
+        # else:
+        #     pass
+        if received_dic_c["data"]["FLAG"]["Busy"]["PCYCLE_AUTOCYCLE"] == True:
             self.PCYCLE_AUTOCYCLE.Set.ButtonTransitionState(False)
-            self.FLAG_buffer["PCYCLE_AUTOCYCLE"] = received_dic_c["data"]["FLAG"]["value"]["PCYCLE_AUTOCYCLE"]
+
+        elif received_dic_c["data"]["FLAG"]["Busy"]["PCYCLE_AUTOCYCLE"] == False:
+            self.PCYCLE_AUTOCYCLE.Set.ButtonTransitionState(False)
         else:
             pass
+
         # if received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"] != self.Switch_buffer["PUMP3305"]:
         #     self.PUMP3305.Set.ButtonTransitionState(False)
         #     self.Switch_buffer["PUMP3305"] = received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"]
@@ -9102,6 +9120,7 @@ class UpdateClient(QtCore.QObject):
         self.FLAG_ADDRESS_ini = copy.copy(sec.FLAG_ADDRESS)
         self.FLAG_DIC_ini = copy.copy(sec.FLAG_DIC)
         self.FLAG_INTLKD_ini = copy.copy(sec.FLAG_INTLKD)
+        self.FLAG_Busy_ini = copy.copy(sec.FLAG_BUSY)
 
         self.receive_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
@@ -9156,7 +9175,8 @@ class UpdateClient(QtCore.QObject):
                                               "COND":self.INTLK_A_COND_ini,
                                               "SET":self.INTLK_A_SET_ini},
                                   "FLAG": {"value":self.FLAG_DIC_ini,
-                                           "INTLKD":self.FLAG_INTLKD_ini},
+                                           "INTLKD":self.FLAG_INTLKD_ini,
+                                            "Busy":self.FLAG_Busy_ini},
                                   "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini}},
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},

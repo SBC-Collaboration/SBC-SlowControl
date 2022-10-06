@@ -261,6 +261,7 @@ class PLC(QtCore.QObject):
         self.FLAG_ADDRESS = copy.copy(sec.FLAG_ADDRESS)
         self.FLAG_DIC = copy.copy(sec.FLAG_DIC)
         self.FLAG_INTLKD = copy.copy(sec.FLAG_INTLKD)
+        self.FLAG_Busy = copy.copy(sec.FLAG_BUSY)
 
         self.FF_ADDRESS = copy.copy(sec.FF_ADDRESS)
         self.FF_DIC = copy.copy(sec.FF_DIC)
@@ -384,6 +385,7 @@ class PLC(QtCore.QObject):
                               "FLAG_ADDRESS":self.FLAG_ADDRESS,
                               "FLAG_DIC":self.FLAG_DIC,
                               "FLAG_INTLKD":self.FLAG_INTLKD,
+                              "FLAG_Busy":self.FLAG_Busy,
                               "FF_ADDRESS": self.FF_ADDRESS,
                               "FF_DIC": self.FF_DIC,
                               "PARAM_F_ADDRESS": self.PARAM_F_ADDRESS,
@@ -1371,6 +1373,7 @@ class UpdateDataBase(QtCore.QObject):
         self.FLAG_ADDRESS = copy.copy(sec.FLAG_ADDRESS)
         self.FLAG_DIC = copy.copy(sec.FLAG_DIC)
         self.FLAG_INTLKD = copy.copy(sec.FLAG_INTLKD)
+        self.FLAG_Busy =copy.copy(sec.FLAG_BUSY)
 
         self.FF_ADDRESS = copy.copy(sec.FF_ADDRESS)
         self.FF_DIC = copy.copy(sec.FF_DIC)
@@ -2283,6 +2286,7 @@ class UpdateServer(QtCore.QObject):
         self.FLAG_ADDRESS_ini = copy.copy(sec.FLAG_ADDRESS)
         self.FLAG_DIC_ini = copy.copy(sec.FLAG_DIC)
         self.FLAG_INTLKD_ini = copy.copy(sec.FLAG_INTLKD)
+        self.FLAG_Busy_ini = copy.copy(sec.FLAG_BUSY)
 
         self.data_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
@@ -2337,7 +2341,8 @@ class UpdateServer(QtCore.QObject):
                                               "COND":self.INTLK_A_COND_ini,
                                               "SET":self.INTLK_A_SET_ini},
                                   "FLAG": {"value":self.FLAG_DIC_ini,
-                                           "INTLKD":self.FLAG_INTLKD_ini},
+                                           "INTLKD":self.FLAG_INTLKD_ini,
+                                           "Busy":self.FLAG_Busy_ini},
                                   "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini}},
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},
@@ -2532,6 +2537,9 @@ class UpdateServer(QtCore.QObject):
             self.FLAG_DIC_ini[key] = self.PLC.FLAG_DIC[key]
         for key in self.PLC.FLAG_INTLKD:
             self.FLAG_INTLKD_ini[key] = self.PLC.FLAG_INTLKD[key]
+        for key in self.PLC.FLAG_Busy:
+            self.FLAG_Busy_ini[key] = self.PLC.FLAG_Busy[key]
+
 
         self.data_dic["MainAlarm"] = self.PLC.MainAlarm
 
