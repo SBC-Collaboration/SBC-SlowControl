@@ -640,7 +640,7 @@ class PLC(QtCore.QObject):
                                                     Raw_LOOP2PT_6[key].getRegister(0)))[0], 3)
                 self.LOOP2PT_Command_Cache[key] = self.ReadCoil(2 ** 1, self.LOOP2PT_ADR_BASE[key]) or self.ReadCoil(
                     2 ** 2, self.LOOP2PT_ADR_BASE[key])
-                print(self.LOOP2PT_Command_Cache[key])
+                print(key,self.LOOP2PT_Command_Cache[key])
 
 
             ############################################################################################
@@ -680,8 +680,8 @@ class PLC(QtCore.QObject):
                 self.FLAG_DIC[key] = self.ReadCoil(1, self.FLAG_ADDRESS[key])
                 # print("\n",self.FLAG_DIC,"\n")
                 self.FLAG_INTLKD[key] = self.ReadCoil(2 ** 1, self.FLAG_ADDRESS[key])
-                print("MAN",key, self.ReadCoil(2 ** 2, self.FLAG_ADDRESS[key]) or self.ReadCoil(2 ** 3, self.FLAG_ADDRESS[key]))
-                print("OUT",self.FLAG_DIC[key])
+                # print("MAN",key, self.ReadCoil(2 ** 2, self.FLAG_ADDRESS[key]) or self.ReadCoil(2 ** 3, self.FLAG_ADDRESS[key]))
+                # print("OUT",self.FLAG_DIC[key])
                 # print("INTLKC", self.FLAG_INTLKD[key])
 
 
