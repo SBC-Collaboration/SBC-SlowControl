@@ -1390,7 +1390,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.LButton.setProperty("State", True)
         self.LButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
-            + "} QWidget[State = false]{" + C_RED + "}")
+            + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
 
 
         self.RButton = QtWidgets.QPushButton(self)
@@ -1400,7 +1400,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.RButton.setProperty("State", False)
         self.RButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
-            + C_GREEN + "} QWidget[State = false]{" + C_RED + "}")
+            + C_MEDIUM_GREY + "} QWidget[State = false]{" + C_RED + "}")
 
         #Button States transition Indicator
         self.StatusTransition = ColoredStatus(self, mode=3)
@@ -1413,6 +1413,9 @@ class DoubleButton(QtWidgets.QWidget):
         self.SetButtonStateNames("Active", "Inactive")
         self.ButtonRState()
         self.Activate(True)
+        self.LButton.clicked.connect(self.ButtonLStateLocked)
+        # self.RButton.clicked.connect(self.ButtonRStateLocked)
+
 
     def SetButtonStateNames(self, Active, Inactive):
         self.ActiveName = Active
@@ -1443,6 +1446,19 @@ class DoubleButton(QtWidgets.QWidget):
 
 
     # Neutral means that the button shouldn't show any color
+    @QtCore.Slot()
+    def ButtonLStateLocked(self):
+        if self.LState == self.InactiveName and self.RState == self.ActiveName:
+            self.RButton.setProperty("State", True)
+            self.RButton.setStyle(self.RButton.style())
+
+
+    @QtCore.Slot()
+    def ButtonRStateLocked(self):
+        if self.LState == self.ActiveName and self.RState == self.InactiveName:
+            self.LButton.setProperty("State", False)
+            self.LButton.setStyle(self.LButton.style())
+
 
 
     def ButtonLState(self):
