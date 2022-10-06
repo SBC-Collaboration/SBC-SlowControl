@@ -2673,7 +2673,7 @@ class UpdateServer(QtCore.QObject):
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=0)
 
                     elif message[key]["operation"] == "SET1":
-                        print(True)
+                        # print(True)
                         self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=1)
 
                     elif message[key]["operation"] == "SET2":
@@ -2756,9 +2756,9 @@ class UpdateServer(QtCore.QObject):
                             pass
                 elif message[key]["type"] == "FLAG":
                     if message[key]["operation"] == "OPEN":
-                        self.PLC.WriteBase4(address=message[key]["address"])
+                        self.PLC.WriteBase2(address=message[key]["address"])
                     elif message[key]["operation"] == "CLOSE":
-                        self.PLC.WriteBase8(address=message[key]["address"])
+                        self.PLC.WriteBase4(address=message[key]["address"])
                     else:
                         pass
 
