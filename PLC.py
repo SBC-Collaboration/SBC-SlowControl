@@ -770,7 +770,7 @@ class PLC(QtCore.QObject):
 
             ##########################################################################################
 
-            print(self.LOOP2PT_MAN)
+            # print(self.LOOP2PT_MAN)
             self.DATA_UPDATE_SIGNAL.emit(self.signal_data)
             self.DATA_TRI_SIGNAL.emit(True)
             # print("signal sent")
