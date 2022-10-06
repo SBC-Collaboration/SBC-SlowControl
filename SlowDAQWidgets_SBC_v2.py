@@ -1502,9 +1502,9 @@ class DoubleButton(QtWidgets.QWidget):
                 # Don't need this because the button only read feedback from PLC
                 # self.LButton.clicked.connect(self.ButtonLClicked)
                 # self.RButton.clicked.connect(self.ButtonRClicked)
-
-                self.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
-                self.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
+                print("busy?")
+                # self.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
+                # self.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
             except:
 
                 print("Failed to Activate the Doublebutton")
