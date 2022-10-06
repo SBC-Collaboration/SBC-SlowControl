@@ -1414,7 +1414,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.ButtonRState()
         self.Activate(True)
         self.LButton.clicked.connect(self.ButtonLStateLocked)
-        # self.RButton.clicked.connect(self.ButtonRStateLocked)
+        self.RButton.clicked.connect(self.ButtonRStateLocked)
 
 
     def SetButtonStateNames(self, Active, Inactive):
