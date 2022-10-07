@@ -1441,10 +1441,6 @@ class DoubleButton(QtWidgets.QWidget):
         else:
             pass
 
-
-
-
-
     # Neutral means that the button shouldn't show any color
     @QtCore.Slot()
     def ButtonLStateLocked(self):
