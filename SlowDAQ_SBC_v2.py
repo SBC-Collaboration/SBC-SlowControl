@@ -5044,6 +5044,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
                 self.PUMP3305.State.ButtonRClicked()
         elif received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"]:
+            print("MAN is true")
             if received_dic_c["data"]["LOOP2PT"]["Command_Cache"]["PUMP3305"]:
                 if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
 
