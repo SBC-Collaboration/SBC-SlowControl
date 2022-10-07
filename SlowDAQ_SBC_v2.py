@@ -4859,12 +4859,12 @@ class MainWindow(QtWidgets.QMainWindow):
         #         else:
         #             pass
 
-        if False:
+        if True:
             if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
                 self.MAN_HYD.Set.ButtonLClicked()
             else:
                 self.MAN_HYD.Set.ButtonRClicked()
-        elif True:
+        elif False:
             if received_dic_c["data"]["FLAG"]["Busy"]["MAN_HYD"]:
                 if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
                     self.MAN_HYD.Set.ButtonLClicked()
