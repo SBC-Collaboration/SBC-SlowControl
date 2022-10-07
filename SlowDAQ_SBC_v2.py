@@ -4859,12 +4859,12 @@ class MainWindow(QtWidgets.QMainWindow):
         #         else:
         #             pass
 
-        if True:
+        if False:
             if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
                 self.MAN_HYD.Set.ButtonLClicked()
             else:
                 self.MAN_HYD.Set.ButtonRClicked()
-        elif False:
+        elif True:
             if received_dic_c["data"]["FLAG"]["Busy"]["MAN_HYD"]:
                 if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
                     self.MAN_HYD.Set.ButtonLClicked()
@@ -5033,14 +5033,46 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #LOOP2PT
-        if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
+        if not received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"]:
+            if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
 
-            self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonLClicked()
-            self.PUMP3305.State.ButtonLClicked()
+                self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonLClicked()
+                self.PUMP3305.State.ButtonLClicked()
 
-        else:
-            self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
-            self.PUMP3305.State.ButtonRClicked()
+            else:
+                self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
+                self.PUMP3305.State.ButtonRClicked()
+        elif received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"]:
+            if received_dic_c["data"]["LOOP2PT"]["Busy"]["PUMP3305"]:
+                if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
+
+                    self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonLClicked()
+                    self.PUMP3305.State.ButtonLClicked()
+
+                else:
+                    self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
+                    self.PUMP3305.State.ButtonRClicked()
+            elif not received_dic_c["data"]["LOOP2PT"]["Busy"]["PUMP3305"]:
+                if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"] != self.LOOP2PT_OUT_buffer["PUMP3305"]:
+                    if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
+
+                        self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonLClicked()
+                        self.PUMP3305.State.ButtonLClicked()
+
+                    else:
+                        self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
+                        self.PUMP3305.State.ButtonRClicked()
+                    self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
+                else:
+                    pass
+        # if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
+        #
+        #     self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonLClicked()
+        #     self.PUMP3305.State.ButtonLClicked()
+        #
+        # else:
+        #     self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
+        #     self.PUMP3305.State.ButtonRClicked()
 
         #INTLK
 
