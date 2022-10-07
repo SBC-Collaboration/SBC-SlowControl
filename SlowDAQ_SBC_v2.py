@@ -5034,6 +5034,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #LOOP2PT
         if not received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"]:
+            print("MAN is false")
             if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
 
                 self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonLClicked()
