@@ -1199,9 +1199,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3323.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3323.Label.text()))
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
-
-        self.PUMP3305.Set.LButton.clicked.connect(lambda x: self.LOOP2PTLButtonClicked(self.PUMP3305.Label.text()))
-        self.PUMP3305.Set.RButton.clicked.connect(lambda x: self.LOOP2PTRButtonClicked(self.PUMP3305.Label.text()))
+        #
+        # self.PUMP3305.Set.LButton.clicked.connect(lambda x: self.LOOP2PTLButtonClicked(self.PUMP3305.Label.text()))
+        # self.PUMP3305.Set.RButton.clicked.connect(lambda x: self.LOOP2PTRButtonClicked(self.PUMP3305.Label.text()))
 
 
         self.SERVO3321.HeaterSubWindow.Mode.LButton.clicked.connect(
