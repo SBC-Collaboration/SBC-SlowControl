@@ -3597,8 +3597,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3331.Set.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3331"])
 
 
-        self.PUMP3305.LOOP2PTSubWindow.Mode.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
-        self.PUMP3305.State.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
+        # self.PUMP3305.LOOP2PTSubWindow.Mode.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
+        # self.PUMP3305.State.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
 
         self.SERVO3321.HeaterSubWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["SERVO3321"])
