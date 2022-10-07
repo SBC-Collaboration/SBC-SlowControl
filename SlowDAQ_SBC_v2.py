@@ -5042,6 +5042,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.PUMP3305.State.ButtonLClicked()
 
             else:
+                print("if out is false")
                 self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
                 self.PUMP3305.State.ButtonRClicked()
         elif received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"]:
