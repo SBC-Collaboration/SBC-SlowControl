@@ -688,6 +688,7 @@ class PLC(QtCore.QObject):
                 # print("MAN",key, self.ReadCoil(2 ** 2, self.FLAG_ADDRESS[key]) or self.ReadCoil(2 ** 3, self.FLAG_ADDRESS[key]))
                 # print("OUT",self.FLAG_DIC[key])
                 # print("INTLKC", self.FLAG_INTLKD[key])
+            print("PLC FLAG",self.FLAG_DIC,time.time())
 
 
 
@@ -2477,6 +2478,7 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
+        print("Updateserver", self.data_dic["data"]['FLAG']["value"],time.time())
 
         for key in self.PLC.TT_FP_dic:
             self.TT_FP_dic_ini[key] = self.PLC.TT_FP_dic[key]
@@ -2850,6 +2852,7 @@ class UpdateServer(QtCore.QObject):
                         else:
                             pass
                 elif message[key]["type"] == "FLAG":
+                    print("time",time.time())
                     if message[key]["operation"] == "OPEN":
                         self.PLC.WriteBase2(address=message[key]["address"])
                     elif message[key]["operation"] == "CLOSE":
