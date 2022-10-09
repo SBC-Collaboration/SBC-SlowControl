@@ -2822,7 +2822,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.commands[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "CLOSE",
                               "value": 1}
             print(self.commands)
-            print(pid, "R Button is clicked", time.datetime())
+            print(pid, "R Button is clicked", datetime.datetime.now())
         except Exception as e:
             print(e)
 
@@ -4837,7 +4837,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.MAN_TS.Set.ButtonLClicked()
         else:
             self.MAN_TS.Set.ButtonRClicked()
-        print("display",received_dic_c["data"]["FLAG"]["value"]["MAN_TS"],time.datetime())
+        print("display",received_dic_c["data"]["FLAG"]["value"]["MAN_TS"],datetime.datetime.now())
 
         # if not received_dic_c["data"]["FLAG"]["MAN"]["MAN_HYD"]:
         #     if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
