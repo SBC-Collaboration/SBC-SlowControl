@@ -3868,6 +3868,12 @@ class MainWindow(QtWidgets.QMainWindow):
         #         self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
         #     else:
         #         pass
+        if received_dic_c["data"]["Valve"]["Busy"]["PV4317"] == True:
+            self.PV4317.Set.ButtonTransitionState(False)
+        elif not received_dic_c["data"]["Valve"]["Busy"]["PV4317"]:
+            self.PV4317.Set.ButtonTransitionState(True)
+        else:
+            pass
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV4318"] == True:
             self.PV4318.Set.ButtonTransitionState(False)
