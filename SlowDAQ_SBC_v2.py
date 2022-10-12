@@ -3869,9 +3869,9 @@ class MainWindow(QtWidgets.QMainWindow):
         #     else:
         #         pass
         if received_dic_c["data"]["Valve"]["Busy"]["PV4317"] == True:
-            self.PV4317.Set.ButtonTransitionState(False)
-        elif not received_dic_c["data"]["Valve"]["Busy"]["PV4317"]:
             self.PV4317.Set.ButtonTransitionState(True)
+        elif not received_dic_c["data"]["Valve"]["Busy"]["PV4317"]:
+            self.PV4317.Set.ButtonTransitionState(False)
         else:
             pass
 
