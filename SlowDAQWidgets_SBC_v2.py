@@ -2418,9 +2418,9 @@ class Valve_s(QtWidgets.QWidget):
                 # self.LButton.clicked.connect(self.ButtonLClicked)
                 # self.RButton.clicked.connect(self.ButtonRClicked)
                 # print(1)
-
-                self.Set.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
-                self.Set.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
+                pass
+                # self.Set.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
+                # self.Set.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
             except:
 
                 print("Failed to Activate the Doublebutton")
