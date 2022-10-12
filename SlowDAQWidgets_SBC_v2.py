@@ -4022,26 +4022,29 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.LButton = QtWidgets.QPushButton(self)
         self.LButton.setObjectName("LButton")
         self.LButton.setText("On")
-        self.LButton.setGeometry(QtCore.QRect(2.5*R, 20*R, 65*R, 15*R))
+        self.LButton.setGeometry(QtCore.QRect(2.5 * R, 20 * R, 65 * R, 15 * R))
         self.LButton.setProperty("State", True)
         self.LButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
-            + "} QWidget[State = false]{" + C_RED + "}")
-
+            + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
 
         self.RButton = QtWidgets.QPushButton(self)
         self.RButton.setObjectName("RButton")
         self.RButton.setText("Off")
-        self.RButton.setGeometry(QtCore.QRect(72.5*R, 20*R, 65*R, 15*R))
+        self.RButton.setGeometry(QtCore.QRect(72.5 * R, 20 * R, 65 * R, 15 * R))
         self.RButton.setProperty("State", False)
         self.RButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
-            + C_GREEN + "} QWidget[State = false]{" + C_RED + "}")
+            + C_MEDIUM_GREY + "} QWidget[State = false]{" + C_RED + "}")
 
         self.LState = "Active"
         self.RState = "Inactive"
         self.SetButtonStateNames("Active", "Inactive")
         self.ButtonRState()
+
+        self.Activate(True)
+        self.LButton.clicked.connect(self.ButtonLStateLocked)
+        self.RButton.clicked.connect(self.ButtonRStateLocked)
 
 
 
@@ -4058,27 +4061,85 @@ class DoubleButton_s(QtWidgets.QWidget):
     # Neutral means that the button shouldn't show any color
 
 
-    def ButtonLState(self):
-        if self.LState == self.InactiveName and self.RState == self.ActiveName:
-            self.LButton.setProperty("State", True)
-            self.LButton.setStyle(self.LButton.style())
-            self.LState = self.ActiveName
-            self.RButton.setProperty("State", "Neutral")
-            self.RButton.setStyle(self.RButton.style())
-            self.RState = self.InactiveName
-        else:
-            pass
+    # def ButtonLState(self):
+    #     if self.LState == self.InactiveName and self.RState == self.ActiveName:
+    #         self.LButton.setProperty("State", True)
+    #         self.LButton.setStyle(self.LButton.style())
+    #         self.LState = self.ActiveName
+    #         self.RButton.setProperty("State", "Neutral")
+    #         self.RButton.setStyle(self.RButton.style())
+    #         self.RState = self.InactiveName
+    #     else:
+    #         pass
+    #
+    # def ButtonRState(self):
+    #     if self.LState == self.ActiveName and self.RState == self.InactiveName:
+    #         self.RButton.setProperty("State", False)
+    #         self.RButton.setStyle(self.RButton.style())
+    #         self.LState = self.InactiveName
+    #         self.LButton.setProperty("State", "Neutral")
+    #         self.LButton.setStyle(self.LButton.style())
+    #         self.RState = self.ActiveName
+    #     else:
+    #         pass
 
-    def ButtonRState(self):
-        if self.LState == self.ActiveName and self.RState == self.InactiveName:
-            self.RButton.setProperty("State", False)
-            self.RButton.setStyle(self.RButton.style())
-            self.LState = self.InactiveName
-            self.LButton.setProperty("State", "Neutral")
-            self.LButton.setStyle(self.LButton.style())
-            self.RState = self.ActiveName
-        else:
-            pass
+        # Neutral means that the button shouldn't show any
+        # if in R state and clicked L, then turn into R* (R lock/gray out) state
+        @QtCore.Slot()
+        def ButtonLStateLocked(self):
+            if self.LState == self.InactiveName and self.RState == self.ActiveName:
+                self.RButton.setProperty("State", True)
+                self.RButton.setStyle(self.RButton.style())
+
+        @QtCore.Slot()
+        def ButtonRStateLocked(self):
+            if self.LState == self.ActiveName and self.RState == self.InactiveName:
+                self.LButton.setProperty("State", False)
+                self.LButton.setStyle(self.LButton.style())
+
+        # L->L/R->L state.
+        # initial state is R active, then change into L
+        # initial state is L*(L but grey), then change into L but L(green)
+        def ButtonLState(self):
+            #
+            if self.LState == self.InactiveName and self.RState == self.ActiveName:
+                self.LButton.setProperty("State", True)
+                self.LButton.setStyle(self.LButton.style())
+                self.LState = self.ActiveName
+                self.RButton.setProperty("State", "Neutral")
+                self.RButton.setStyle(self.RButton.style())
+                self.RState = self.InactiveName
+            elif self.LState == self.ActiveName and self.RState == self.InactiveName:
+
+                self.LButton.setProperty("State", True)
+                self.LButton.setStyle(self.LButton.style())
+                self.LState = self.ActiveName
+                self.RButton.setProperty("State", "Neutral")
+                self.RButton.setStyle(self.RButton.style())
+                self.RState = self.InactiveName
+            else:
+                pass
+
+        # R->R/L->R state.
+        # initial state is L active, then change into R
+        # initial state is R*(R but grey), then change into R but R(red)
+        def ButtonRState(self):
+            if self.LState == self.ActiveName and self.RState == self.InactiveName:
+                self.RButton.setProperty("State", False)
+                self.RButton.setStyle(self.RButton.style())
+                self.LState = self.InactiveName
+                self.LButton.setProperty("State", "Neutral")
+                self.LButton.setStyle(self.LButton.style())
+                self.RState = self.ActiveName
+            elif self.LState == self.InactiveName and self.RState == self.ActiveName:
+                self.RButton.setProperty("State", False)
+                self.RButton.setStyle(self.RButton.style())
+                self.LState = self.InactiveName
+                self.LButton.setProperty("State", "Neutral")
+                self.LButton.setStyle(self.LButton.style())
+                self.RState = self.ActiveName
+            else:
+                pass
 
     @QtCore.Slot()
     def ButtonLClicked(self):
