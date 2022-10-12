@@ -3321,6 +3321,9 @@ class Flag(QtWidgets.QWidget):
         self.HL.addWidget(self.INTLK)
 
 
+
+
+
 class BoolIndicator(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)

@@ -4271,15 +4271,15 @@ class MainWindow(QtWidgets.QMainWindow):
             self.MAN_TS.INTLK.UpdateColor(False)
 
         # if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"] != self.FLAG_buffer["MAN_TS"]:
-        #     self.MAN_TS.ButtonTransitionState(False)
+        #     self.MAN_TS.Set.ButtonTransitionState(False)
         #     self.FLAG_buffer["MAN_TS"] = received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]
         # else:
         #     pass
         if received_dic_c["data"]["FLAG"]["Busy"]["MAN_TS"] == True:
-            self.MAN_TS.ButtonTransitionState(False)
+            self.MAN_TS.Set.ButtonTransitionState(False)
 
         elif received_dic_c["data"]["FLAG"]["Busy"]["MAN_TS"] == False:
-            self.MAN_TS.ButtonTransitionState(False)
+            self.MAN_TS.Set.ButtonTransitionState(False)
         else:
             pass
 
@@ -4292,15 +4292,15 @@ class MainWindow(QtWidgets.QMainWindow):
             self.MAN_HYD.INTLK.UpdateColor(False)
 
         # if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"] != self.FLAG_buffer["MAN_HYD"]:
-        #     self.MAN_HYD.ButtonTransitionState(False)
+        #     self.MAN_HYD.Set.ButtonTransitionState(False)
         #     self.FLAG_buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
         # else:
         #     pass
         if received_dic_c["data"]["FLAG"]["Busy"]["MAN_HYD"] == True:
-            self.MAN_HYD.ButtonTransitionState(False)
+            self.MAN_HYD.Set.ButtonTransitionState(False)
 
         elif received_dic_c["data"]["FLAG"]["Busy"]["MAN_HYD"] == False:
-            self.MAN_HYD.ButtonTransitionState(False)
+            self.MAN_HYD.Set.ButtonTransitionState(False)
         else:
             pass
 
@@ -4312,15 +4312,15 @@ class MainWindow(QtWidgets.QMainWindow):
             self.PCYCLE_AUTOCYCLE.INTLK.UpdateColor(False)
 
         # if received_dic_c["data"]["FLAG"]["value"]["PCYCLE_AUTOCYCLE"] != self.FLAG_buffer["PCYCLE_AUTOCYCLE"]:
-        #     self.PCYCLE_AUTOCYCLE.ButtonTransitionState(False)
+        #     self.PCYCLE_AUTOCYCLE.Set.ButtonTransitionState(False)
         #     self.FLAG_buffer["PCYCLE_AUTOCYCLE"] = received_dic_c["data"]["FLAG"]["value"]["PCYCLE_AUTOCYCLE"]
         # else:
         #     pass
         if received_dic_c["data"]["FLAG"]["Busy"]["PCYCLE_AUTOCYCLE"] == True:
-            self.PCYCLE_AUTOCYCLE.ButtonTransitionState(False)
+            self.PCYCLE_AUTOCYCLE.Set.ButtonTransitionState(False)
 
         elif received_dic_c["data"]["FLAG"]["Busy"]["PCYCLE_AUTOCYCLE"] == False:
-            self.PCYCLE_AUTOCYCLE.ButtonTransitionState(False)
+            self.PCYCLE_AUTOCYCLE.Set.ButtonTransitionState(False)
         else:
             pass
 
