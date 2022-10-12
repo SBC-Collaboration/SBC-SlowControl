@@ -3860,14 +3860,14 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Busy"]["PV4317"] == True:
-            self.PV4317.Set.ButtonTransitionState(False)
-        else:
-            if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
-                self.PV4317.Set.ButtonTransitionState(False)
-                self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
-            else:
-                pass
+        # if received_dic_c["data"]["Valve"]["Busy"]["PV4317"] == True:
+        #     self.PV4317.Set.ButtonTransitionState(False)
+        # else:
+        #     if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
+        #         self.PV4317.Set.ButtonTransitionState(False)
+        #         self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
+        #     else:
+        #         pass
 
         if received_dic_c["data"]["Valve"]["Busy"]["PV4318"] == True:
             self.PV4318.Set.ButtonTransitionState(False)
