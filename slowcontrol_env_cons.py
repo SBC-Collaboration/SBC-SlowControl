@@ -197,7 +197,18 @@ VALVE_ERR = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False,
              "SV3325": False, "SV3329": False,
              "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
              "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
-
+VALVE_COMMAND_CACHE = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+             "PV4324": False, "PV5305": False, "PV5306": False,
+             "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+             "SV3325": False, "SV3329": False,
+             "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+             "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
+VALVE_BUSY = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
+             "PV4324": False, "PV5305": False, "PV5306": False,
+             "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
+             "SV3325": False, "SV3329": False,
+             "SV4327": False, "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+             "SV4337": False, "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
 LOOPPID_ADR_BASE = {'SERVO3321': 14288, 'HTR6225': 14306, 'HTR2123': 14324, 'HTR2124': 14342, 'HTR2125': 14360,
                     'HTR1202': 14378, 'HTR2203': 14396, 'HTR6202': 14414, 'HTR6206': 14432, 'HTR6210': 14450,
                     'HTR6223': 14468, 'HTR6224': 14486, 'HTR6219': 14504, 'HTR6221': 14522, 'HTR6214': 14540}
@@ -289,6 +300,18 @@ LOOPPID_SET3 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                 'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
 
 
+LOOPPID_COMMAND_CACHE = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+              'HTR2125': False,
+              'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+
+LOOPPID_BUSY = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
+              'HTR2125': False,
+              'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
+              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+
+
 LOOP2PT_ADR_BASE = {'PUMP3305':14688}
 
 LOOP2PT_MODE0 = {'PUMP3305': True}
@@ -313,6 +336,10 @@ LOOP2PT_SET2 = {'PUMP3305': 0}
 
 LOOP2PT_SET3 = {'PUMP3305': 0}
 
+LOOP2PT_COMMAND_CACHE = {'PUMP3305': False}
+
+LOOP2PT_BUSY = {'PUMP3305': False}
+
 PROCEDURE_ADDRESS = {'TS_ADDREM': 15288, 'TS_EMPTY': 15290, 'TS_EMPTYALL': 15292, 'PU_PRIME': 15294, 'WRITE_SLOWDAQ': 15296, 'PRESSURE_CYCLE':15298}
 PROCEDURE_RUNNING = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False, 'PRESSURE_CYCLE':False}
 PROCEDURE_INTLKD = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False, 'PRESSURE_CYCLE':False}
@@ -321,6 +348,7 @@ PROCEDURE_EXIT = {'TS_ADDREM': 0, 'TS_EMPTY': 0, 'TS_EMPTYALL': 0, 'PU_PRIME': 0
 FLAG_ADDRESS={'MAN_TS':13288,'MAN_HYD':13289,"PCYCLE_AUTOCYCLE":13290}
 FLAG_DIC = {'MAN_TS':False,'MAN_HYD':False,"PCYCLE_AUTOCYCLE":False}
 FLAG_INTLKD={'MAN_TS':False,'MAN_HYD':False,"PCYCLE_AUTOCYCLE":False}
+FLAG_BUSY={'MAN_TS':False,'MAN_HYD':False,"PCYCLE_AUTOCYCLE":False}
 
 INTLK_D_ADDRESS={'TS1_INTLK': 13828, 'ES3347_INTLK': 13829, 'PUMP3305_OL_INTLK': 13830, 'TS2_INTLK': 13832, 'TS3_INTLK': 13836, 'PU_PRIME_INTLK': 13840}
 INTLK_D_DIC={'TS1_INTLK': True, 'ES3347_INTLK': True, 'PUMP3305_OL_INTLK': True, 'TS2_INTLK': True, 'TS3_INTLK': True, 'PU_PRIME_INTLK': True}

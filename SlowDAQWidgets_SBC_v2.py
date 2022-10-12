@@ -3833,7 +3833,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.LButton.setProperty("State", True)
         self.LButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
-            + "} QWidget[State = false]{" + C_RED + "}")
+            + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
 
 
         self.RButton = QtWidgets.QPushButton(self)
@@ -3843,7 +3843,7 @@ class DoubleButton(QtWidgets.QWidget):
         self.RButton.setProperty("State", False)
         self.RButton.setStyleSheet(
             "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
-            + C_GREEN + "} QWidget[State = false]{" + C_RED + "}")
+            + C_MEDIUM_GREY + "} QWidget[State = false]{" + C_RED + "}")
 
         #Button States transition Indicator
         self.StatusTransition = ColoredStatus(self, mode=3)
@@ -3856,6 +3856,9 @@ class DoubleButton(QtWidgets.QWidget):
         self.SetButtonStateNames("Active", "Inactive")
         self.ButtonRState()
         self.Activate(True)
+        self.LButton.clicked.connect(self.ButtonLStateLocked)
+        self.RButton.clicked.connect(self.ButtonRStateLocked)
+
 
     def SetButtonStateNames(self, Active, Inactive):
         self.ActiveName = Active
@@ -3866,7 +3869,7 @@ class DoubleButton(QtWidgets.QWidget):
     @QtCore.Slot()
     def ButtonTransitionState(self, bool):
         self.StatusTransition.UpdateColor(bool)
-
+    # when you clicked the button, busy will change into orange
     @QtCore.Slot()
     def ButtonLTransitionState(self, bool):
         if self.LState == self.InactiveName and self.RState == self.ActiveName:
@@ -3881,15 +3884,36 @@ class DoubleButton(QtWidgets.QWidget):
         else:
             pass
 
-
-
-
-
-    # Neutral means that the button shouldn't show any color
-
-
-    def ButtonLState(self):
+    # Neutral means that the button shouldn't show any
+    #if in R state and clicked L, then turn into R* (R lock/gray out) state
+    @QtCore.Slot()
+    def ButtonLStateLocked(self):
         if self.LState == self.InactiveName and self.RState == self.ActiveName:
+            self.RButton.setProperty("State", True)
+            self.RButton.setStyle(self.RButton.style())
+
+
+    @QtCore.Slot()
+    def ButtonRStateLocked(self):
+        if self.LState == self.ActiveName and self.RState == self.InactiveName:
+            self.LButton.setProperty("State", False)
+            self.LButton.setStyle(self.LButton.style())
+
+
+    # L->L/R->L state.
+    # initial state is R active, then change into L
+    # initial state is L*(L but grey), then change into L but L(green)
+    def ButtonLState(self):
+        #
+        if self.LState == self.InactiveName and self.RState == self.ActiveName:
+            self.LButton.setProperty("State", True)
+            self.LButton.setStyle(self.LButton.style())
+            self.LState = self.ActiveName
+            self.RButton.setProperty("State", "Neutral")
+            self.RButton.setStyle(self.RButton.style())
+            self.RState = self.InactiveName
+        elif self.LState == self.ActiveName and self.RState == self.InactiveName:
+
             self.LButton.setProperty("State", True)
             self.LButton.setStyle(self.LButton.style())
             self.LState = self.ActiveName
@@ -3899,8 +3923,18 @@ class DoubleButton(QtWidgets.QWidget):
         else:
             pass
 
+    # R->R/L->R state.
+    # initial state is L active, then change into R
+    # initial state is R*(R but grey), then change into R but R(red)
     def ButtonRState(self):
         if self.LState == self.ActiveName and self.RState == self.InactiveName:
+            self.RButton.setProperty("State", False)
+            self.RButton.setStyle(self.RButton.style())
+            self.LState = self.InactiveName
+            self.LButton.setProperty("State", "Neutral")
+            self.LButton.setStyle(self.LButton.style())
+            self.RState = self.ActiveName
+        elif self.LState == self.InactiveName and self.RState == self.ActiveName:
             self.RButton.setProperty("State", False)
             self.RButton.setStyle(self.RButton.style())
             self.LState = self.InactiveName
@@ -3929,9 +3963,10 @@ class DoubleButton(QtWidgets.QWidget):
                 # Don't need this because the button only read feedback from PLC
                 # self.LButton.clicked.connect(self.ButtonLClicked)
                 # self.RButton.clicked.connect(self.ButtonRClicked)
-
-                self.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
-                self.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
+                # print("busy?")
+                pass
+                # self.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
+                # self.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
             except:
 
                 print("Failed to Activate the Doublebutton")

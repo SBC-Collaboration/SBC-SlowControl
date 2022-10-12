@@ -40,10 +40,10 @@ def UNIX_time(self):
 
 
 
-class mydatabase():
+class ucsbdatabase():
     def __init__(self):
         # db=mysql.connector.connect()
-        self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol")
+        self.db = mysql.connector.connect(host="localhost", user="root", passwd="Iamh3puser!", database="slowcontrol")
 
         self.mycursor = self.db.cursor()
 
@@ -74,10 +74,20 @@ class mydatabase():
         # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
         # value is a decimal from -9999.999 to 9999.999
         # name must be consistent with P&ID
-        data=(instrument, time,value)
+        data=(1, time)
         self.mycursor.execute(
-            "INSERT INTO DataStorage (Instrument, Time, Value) VALUES(%s, %s, %s);", data)
+            "INSERT INTO test (id, time) VALUES(%s, %s);", data)
         self.db.commit()
+
+    def update_data_into_datastorage(self, instrument, time, value):
+
+        data = (time)
+        self.mycursor.execute(
+            "UPDATE test SET time=%s WHERE id=1;", data)
+        self.db.commit()
+        # self.close_database()
+
+
 
     def insert_data_into_datastorage_wocommit(self,instrument, time,value):
         # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
@@ -234,7 +244,7 @@ if __name__ == "__main__":
 
     db.close_database()
 
-    #test datetime function
+    # #test datetime function
     # print(datetime_in_1e5micro())
     # print(early_datetime())
 

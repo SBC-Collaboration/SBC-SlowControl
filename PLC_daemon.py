@@ -13,7 +13,7 @@ v1.1 Initialize values, flag when values are updated more modbus variables 04/03
 import struct, time, zmq, sys, pickle
 import numpy as np
 from PySide2 import QtWidgets, QtCore, QtGui
-from Database_SBC import *
+from Database_SBC_daemon import *
 from email.mime.text import MIMEText
 from email.header import Header
 from smtplib import SMTP_SSL
@@ -42,6 +42,7 @@ BASE_ADDRESS= 12288
 sys._excepthook = sys.excepthook
 def exception_hook(exctype, value, traceback):
     print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
+    os.system("echo 'ExceptType:{} Value: {}, Traceback: {}' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt".format(exctype,value,traceback))
     # sys._excepthook(exctype, value, traceback)
     sys.exit(1)
 sys.excepthook = exception_hook
@@ -67,7 +68,9 @@ def PLC_loop():
 
     while True:
         try:
-            clear_tcp()
+            # clear_tcp()
+            os.system("date | tee /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+            os.system("echo 'while loop ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
             PLC_body()
         except:
             (type, value, traceback) = sys.exc_info()
@@ -79,20 +82,19 @@ def PLC_loop():
 def PLC_run():
     # with daemon.DaemonContext():
     #     PLC_loop()
+
     PLC_loop()
 
 def clear_tcp():
-    for proc in psutil.process_iter():
-        for conns in proc.connections(kind='tcp'):
-            if conns.laddr.port ==PORT_N:
-        # if PROCESS_NAME in proc.name() &:
-                pid = proc.pid
-                p=psutil.Process(pid)
-                p.terminate()
-                print("\n",pid, "KILLED")
+    os.system("source /home/hep/PycharmProjects/pythonProject/SBC-SlowControl/clear_tcp.sh")
 
 def PLC_body():
+    os.system("date | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+    os.system("echo 'PLC body ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
     App = QtWidgets.QApplication(sys.argv)
+    os.system("date | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+    os.system("echo 'APP afterwards ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+    # print(int("feagrea")) # raise problems
     Update = PLC_daemon.Update()
     sys.exit(App.exec_())
 
@@ -115,6 +117,9 @@ class PLC(QtCore.QObject):
         self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
         self.Connected_BO = self.Client_BO.connect()
         print(" Beckoff connected: " + str(self.Connected_BO))
+
+        os.system("date | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+        os.system("echo 'BKG PLC ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
 
         self.TT_FP_address = sec.TT_FP_ADDRESS
 
@@ -606,10 +611,10 @@ class PLC(QtCore.QObject):
             self.NewData_ZMQ = True
 
             return 0
-        else:
-            raise Exception('Not connected to PLC')  # will it restart the PLC ?
+        # else:
+        #     raise Exception('Not connected to PLC')  # will it restart the PLC ?
 
-            return 1
+        return 1
 
     def Read_BO_1(self, address):
         Raw_BO = self.Client_BO.read_holding_registers(address, count=1, unit=0x01)
@@ -1033,8 +1038,8 @@ class UpdateDataBase(QtCore.QObject):
         super().__init__(parent)
 
         # self.PLC = PLC
-        self.db = mydatabase()
-        self.alarm_db = COUPP_database()
+        self.db = ucsbdatabase()
+        # self.alarm_db = COUPP_database()
         self.Running = False
         # if loop runs with _counts times with New_Database = False(No written Data), then send alarm to slack. Otherwise, the code normally run(reset the pointer)
         self.Running_counts = 270
@@ -1197,280 +1202,281 @@ class UpdateDataBase(QtCore.QObject):
                     # print(self.para_alarm)
                     if self.para_alarm >= self.rate_alarm:
 
-                        self.alarm_db.ssh_write()
+                        # self.alarm_db.ssh_write()
                         self.para_alarm=0
 
-                    if self.para_TT >= self.rate_TT:
-                        for key in self.TT_FP_dic:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_FP_dic[key])
-                        for key in self.TT_BO_dic:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_BO_dic[key])
-                        # print("write RTDS")
-                        self.commit_bool = True
-                        self.para_TT = 0
-                    # print(1)
-                    if self.para_PT >= self.rate_PT:
-                        for key in self.PT_dic:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PT_dic[key])
-                        # print("write pressure transducer")
-                        self.commit_bool = True
-                        self.para_PT = 0
-                    # print(2)
-                    for key in self.Valve_OUT:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.Valve_OUT[key] != self.Valve_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.Valve_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Valve_OUT[key])
-                            self.Valve_buffer[key] = self.Valve_OUT[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    if self.para_Valve >= self.rate_Valve:
-                        for key in self.Valve_OUT:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Valve_OUT[key])
-                            self.Valve_buffer[key] = self.Valve_OUT[key]
-                            self.commit_bool = True
-                        self.para_Valve = 0
-                    # print(3)
-                    for key in self.Switch_OUT:
-                        # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
-                        if self.Switch_OUT[key] != self.Switch_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.Switch_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Switch_OUT[key])
-                            self.Switch_buffer[key] = self.Switch_OUT[key]
-                            self.commit_bool = True
-                            # print(self.Switch_OUT[key])
-                        else:
-                            pass
-
-                    if self.para_Switch >= self.rate_Switch:
-                        for key in self.Switch_OUT:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Switch_OUT[key])
-                            self.Switch_buffer[key] = self.Switch_OUT[key]
-                            self.commit_bool = True
-                        self.para_Switch = 0
-                    # print(4)
-                    for key in self.Din_dic:
-                        # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
-                        if self.Din_dic[key] != self.Din_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.Din_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.Din_dic[key])
-                            self.Din_buffer[key] = self.Din_dic[key]
-                            self.commit_bool = True
-                        else:
-                            pass
-
-                    if self.para_Din >= self.rate_Din:
-                        for key in self.Din_dic:
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.Din_dic[key])
-                            self.Din_buffer[key] = self.Din_dic[key]
-                        self.commit_bool = True
-                        self.para_Din = 0
-
-                    # if state of bool variable changes, write the data into database
-                    # print(5)
-                    for key in self.LOOPPID_EN:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.dt, self.LOOPPID_EN[key])
-                            self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOPPID_MODE0:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
-                            self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOPPID_MODE1:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
-                            self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOPPID_MODE2:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
-                            self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOPPID_MODE3:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
-                            self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    # if no changes, write the data every fixed time interval
-                    # print(6)
-                    if self.para_LOOPPID >= self.rate_LOOPPID:
-                        for key in self.LOOPPID_EN:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.dt, self.LOOPPID_EN[key])
-                            self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
-                        for key in self.LOOPPID_MODE0:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
-                            self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
-                        for key in self.LOOPPID_MODE1:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
-                            self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
-                        for key in self.LOOPPID_MODE2:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
-                            self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
-                        for key in self.LOOPPID_MODE3:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
-                            self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
-                        # write float data.
-                        for key in self.LOOPPID_OUT:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOPPID_OUT[key])
-                            self.LOOPPID_OUT_buffer[key] = self.LOOPPID_OUT[key]
-                        for key in self.LOOPPID_IN:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_IN', self.dt, self.LOOPPID_IN[key])
-                            self.LOOPPID_IN_buffer[key] = self.LOOPPID_IN[key]
-                        self.commit_bool = True
-                        self.para_LOOPPID = 0
-                    # print(7)
-
-                    for key in self.LOOP2PT_OUT:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOP2PT_OUT[key] != self.LOOP2PT_OUT_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.LOOP2PT_OUT_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
-                            self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOP2PT_MODE0:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOP2PT_MODE0[key] != self.LOOP2PT_MODE0_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.early_dt, self.LOOP2PT_MODE0_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOP2PT_MODE0[key])
-                            self.LOOP2PT_MODE0_buffer[key] = self.LOOP2PT_MODE0[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOP2PT_MODE1:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOP2PT_MODE1[key] != self.LOOP2PT_MODE1_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.early_dt, self.LOOP2PT_MODE1_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOP2PT_MODE1[key])
-                            self.LOOP2PT_MODE1_buffer[key] = self.LOOP2PT_MODE1[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-                    for key in self.LOOP2PT_MODE2:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOP2PT_MODE2[key] != self.LOOP2PT_MODE2_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.early_dt, self.LOOP2PT_MODE2_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOP2PT_MODE2[key])
-                            self.LOOP2PT_MODE2_buffer[key] = self.LOOP2PT_MODE2[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-                    for key in self.LOOP2PT_MODE3:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOP2PT_MODE3[key] != self.LOOP2PT_MODE3_buffer[key]:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.early_dt, self.LOOP2PT_MODE3_buffer[key])
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOP2PT_MODE3[key])
-                            self.LOOP2PT_MODE3_buffer[key] = self.LOOP2PT_MODE3[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-                    if self.para_LOOP2PT >= self.rate_LOOP2PT:
-
-                        for key in self.LOOP2PT_MODE0:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOP2PT_MODE0[key])
-                            self.LOOP2PT_MODE0_buffer[key] = self.LOOP2PT_MODE0[key]
-                        for key in self.LOOP2PT_MODE1:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOP2PT_MODE1[key])
-                            self.LOOP2PT_MODE1_buffer[key] = self.LOOP2PT_MODE1[key]
-                        for key in self.LOOP2PT_MODE2:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOP2PT_MODE2[key])
-                            self.LOOP2PT_MODE2_buffer[key] = self.LOOP2PT_MODE2[key]
-                        for key in self.LOOP2PT_MODE3:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOP2PT_MODE3[key])
-                            self.LOOP2PT_MODE3_buffer[key] = self.LOOP2PT_MODE3[key]
-                        # write float data.
-                        for key in self.LOOP2PT_OUT:
-                            self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
-                            self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
-
-                        self.commit_bool = True
-                        self.para_LOOP2PT = 0
-
-
-                    if self.para_REAL >= self.rate_REAL:
-                        for key in self.LEFT_REAL_address:
-                            # print(key, self.LEFT_REAL_dic[key])
-                            self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.LEFT_REAL_dic[key])
-                        # print("write pressure transducer")
-                            self.commit_bool = True
-                        self.para_REAL = 0
-
-                    # print("a",self.para_TT,"b",self.para_PT )
-                    # print(8)
-
-                    #commit the changes at last step only if it is time to write
-                    if self.commit_bool:
-                        self.db.db.commit()
-                    print("Wrting PLC data to database...")
-                    self.para_alarm += 1
-
-                    self.para_TT += 1
-                    self.para_PT += 1
-                    self.para_Valve += 1
-                    self.para_Switch += 1
-                    self.para_LOOPPID += 1
-                    self.para_LOOP2PT += 1
-                    self.para_REAL += 1
-                    self.para_Din += 1
-                    # self.PLC.NewData_Database = False
-                    self.status = False
-
-                else:
-                    if self.Running_pointer >= self.Running_counts:
-                        self.DB_ERROR_SIG.emit(
-                            "DATA LOST: Mysql hasn't received the data from PLC for ~10 minutes. Please check them.")
-                        raise Exception("")
-                        self.Running_pointer = 0
-                    # print("pointer",self.Running_pointer)
-                    self.Running_pointer += 1
-
-                    print("No new data from PLC")
-                    pass
-
-                time.sleep(self.base_period)
+                #     if self.para_TT >= self.rate_TT:
+                #         for key in self.TT_FP_dic:
+                #             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_FP_dic[key])
+                #         for key in self.TT_BO_dic:
+                #             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.TT_BO_dic[key])
+                #         # print("write RTDS")
+                #         self.commit_bool = True
+                #         self.para_TT = 0
+                #     # print(1)
+                #     if self.para_PT >= self.rate_PT:
+                #         for key in self.PT_dic:
+                #             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.PT_dic[key])
+                #         # print("write pressure transducer")
+                #         self.commit_bool = True
+                #         self.para_PT = 0
+                #     # print(2)
+                #     for key in self.Valve_OUT:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.Valve_OUT[key] != self.Valve_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.Valve_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Valve_OUT[key])
+                #             self.Valve_buffer[key] = self.Valve_OUT[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #
+                #     if self.para_Valve >= self.rate_Valve:
+                #         for key in self.Valve_OUT:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Valve_OUT[key])
+                #             self.Valve_buffer[key] = self.Valve_OUT[key]
+                #             self.commit_bool = True
+                #         self.para_Valve = 0
+                #     # print(3)
+                #     for key in self.Switch_OUT:
+                #         # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
+                #         if self.Switch_OUT[key] != self.Switch_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.Switch_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Switch_OUT[key])
+                #             self.Switch_buffer[key] = self.Switch_OUT[key]
+                #             self.commit_bool = True
+                #             # print(self.Switch_OUT[key])
+                #         else:
+                #             pass
+                #
+                #     if self.para_Switch >= self.rate_Switch:
+                #         for key in self.Switch_OUT:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Switch_OUT[key])
+                #             self.Switch_buffer[key] = self.Switch_OUT[key]
+                #             self.commit_bool = True
+                #         self.para_Switch = 0
+                #     # print(4)
+                #     for key in self.Din_dic:
+                #         # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
+                #         if self.Din_dic[key] != self.Din_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key, self.early_dt, self.Din_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.Din_dic[key])
+                #             self.Din_buffer[key] = self.Din_dic[key]
+                #             self.commit_bool = True
+                #         else:
+                #             pass
+                #
+                #     if self.para_Din >= self.rate_Din:
+                #         for key in self.Din_dic:
+                #             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.Din_dic[key])
+                #             self.Din_buffer[key] = self.Din_dic[key]
+                #         self.commit_bool = True
+                #         self.para_Din = 0
+                #
+                #     # if state of bool variable changes, write the data into database
+                #     # print(5)
+                #     for key in self.LOOPPID_EN:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.dt, self.LOOPPID_EN[key])
+                #             self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #
+                #     for key in self.LOOPPID_MODE0:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
+                #             self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #
+                #     for key in self.LOOPPID_MODE1:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
+                #             self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #
+                #     for key in self.LOOPPID_MODE2:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
+                #             self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #
+                #     for key in self.LOOPPID_MODE3:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
+                #             self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #
+                #     # if no changes, write the data every fixed time interval
+                #     # print(6)
+                #     if self.para_LOOPPID >= self.rate_LOOPPID:
+                #         for key in self.LOOPPID_EN:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_EN', self.dt, self.LOOPPID_EN[key])
+                #             self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+                #         for key in self.LOOPPID_MODE0:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
+                #             self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+                #         for key in self.LOOPPID_MODE1:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
+                #             self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+                #         for key in self.LOOPPID_MODE2:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
+                #             self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+                #         for key in self.LOOPPID_MODE3:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
+                #             self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
+                #         # write float data.
+                #         for key in self.LOOPPID_OUT:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOPPID_OUT[key])
+                #             self.LOOPPID_OUT_buffer[key] = self.LOOPPID_OUT[key]
+                #         for key in self.LOOPPID_IN:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_IN', self.dt, self.LOOPPID_IN[key])
+                #             self.LOOPPID_IN_buffer[key] = self.LOOPPID_IN[key]
+                #         self.commit_bool = True
+                #         self.para_LOOPPID = 0
+                #     # print(7)
+                #
+                #     for key in self.LOOP2PT_OUT:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.LOOP2PT_OUT[key] != self.LOOP2PT_OUT_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.LOOP2PT_OUT_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
+                #             self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #
+                #     for key in self.LOOP2PT_MODE0:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.LOOP2PT_MODE0[key] != self.LOOP2PT_MODE0_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.early_dt, self.LOOP2PT_MODE0_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOP2PT_MODE0[key])
+                #             self.LOOP2PT_MODE0_buffer[key] = self.LOOP2PT_MODE0[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #
+                #     for key in self.LOOP2PT_MODE1:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.LOOP2PT_MODE1[key] != self.LOOP2PT_MODE1_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.early_dt, self.LOOP2PT_MODE1_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOP2PT_MODE1[key])
+                #             self.LOOP2PT_MODE1_buffer[key] = self.LOOP2PT_MODE1[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #     for key in self.LOOP2PT_MODE2:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.LOOP2PT_MODE2[key] != self.LOOP2PT_MODE2_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.early_dt, self.LOOP2PT_MODE2_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOP2PT_MODE2[key])
+                #             self.LOOP2PT_MODE2_buffer[key] = self.LOOP2PT_MODE2[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #     for key in self.LOOP2PT_MODE3:
+                #         # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                #         if self.LOOP2PT_MODE3[key] != self.LOOP2PT_MODE3_buffer[key]:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.early_dt, self.LOOP2PT_MODE3_buffer[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOP2PT_MODE3[key])
+                #             self.LOOP2PT_MODE3_buffer[key] = self.LOOP2PT_MODE3[key]
+                #             self.commit_bool = True
+                #             # print(self.Valve_OUT[key])
+                #         else:
+                #             pass
+                #     if self.para_LOOP2PT >= self.rate_LOOP2PT:
+                #
+                #         for key in self.LOOP2PT_MODE0:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE0', self.dt, self.LOOP2PT_MODE0[key])
+                #             self.LOOP2PT_MODE0_buffer[key] = self.LOOP2PT_MODE0[key]
+                #         for key in self.LOOP2PT_MODE1:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE1', self.dt, self.LOOP2PT_MODE1[key])
+                #             self.LOOP2PT_MODE1_buffer[key] = self.LOOP2PT_MODE1[key]
+                #         for key in self.LOOP2PT_MODE2:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE2', self.dt, self.LOOP2PT_MODE2[key])
+                #             self.LOOP2PT_MODE2_buffer[key] = self.LOOP2PT_MODE2[key]
+                #         for key in self.LOOP2PT_MODE3:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_MODE3', self.dt, self.LOOP2PT_MODE3[key])
+                #             self.LOOP2PT_MODE3_buffer[key] = self.LOOP2PT_MODE3[key]
+                #         # write float data.
+                #         for key in self.LOOP2PT_OUT:
+                #             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
+                #             self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
+                #
+                #         self.commit_bool = True
+                #         self.para_LOOP2PT = 0
+                #
+                #
+                #     if self.para_REAL >= self.rate_REAL:
+                #         for key in self.LEFT_REAL_address:
+                #             # print(key, self.LEFT_REAL_dic[key])
+                #             self.db.insert_data_into_datastorage_wocommit(key, self.dt, self.LEFT_REAL_dic[key])
+                #         # print("write pressure transducer")
+                #             self.commit_bool = True
+                #         self.para_REAL = 0
+                #
+                #     # print("a",self.para_TT,"b",self.para_PT )
+                #     # print(8)
+                #
+                #     #commit the changes at last step only if it is time to write
+                #     if self.commit_bool:
+                #         self.db.db.commit()
+                #     print("Wrting PLC data to database...")
+                #     self.para_alarm += 1
+                #
+                #     self.para_TT += 1
+                #     self.para_PT += 1
+                #     self.para_Valve += 1
+                #     self.para_Switch += 1
+                #     self.para_LOOPPID += 1
+                #     self.para_LOOP2PT += 1
+                #     self.para_REAL += 1
+                #     self.para_Din += 1
+                #     # self.PLC.NewData_Database = False
+                #     self.status = False
+                #
+                # else:
+                #     if self.Running_pointer >= self.Running_counts:
+                #         self.DB_ERROR_SIG.emit(
+                #             "DATA LOST: Mysql hasn't received the data from PLC for ~10 minutes. Please check them.")
+                #         raise Exception("")
+                #         self.Running_pointer = 0
+                #     # print("pointer",self.Running_pointer)
+                #     self.Running_pointer += 1
+                #
+                #     print("No new data from PLC")
+                #     pass
+                self.db.insert_data_into_datastorage(2,self.dt, 2)
+                # self.db.update_data_into_datastorage(2, self.dt, 2)
+                time.sleep(self.base_period*30)
                 # raise Exception("Test breakup")
             except Exception as e:
                 print(e)
@@ -1965,6 +1971,7 @@ class UpdateServer(QtCore.QObject):
         self.Running = True
         while self.Running:
             print("refreshing the BKG-GUI communication server")
+            # if True:
             if self.PLC.NewData_ZMQ:
 
                 # message = self.socket.recv()
@@ -1989,6 +1996,12 @@ class UpdateServer(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+        try:
+            self.socket.send('bye')
+            self.socket.recv()
+        except:
+            print("Error disconnecting.")
+        self.socket.close()
 
     def pack_data(self):
 
@@ -2344,6 +2357,9 @@ class Update(QtCore.QObject):
     UPDATE_TO_DATABASE = QtCore.Signal()
     def __init__(self, parent=None):
         super().__init__(parent)
+        os.system("date | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+        os.system("echo 'Update ' | tee -a /home/hep/Documents/cron-tutorial/output/daemon_test.txt")
+        #error?
         App.aboutToQuit.connect(self.StopUpdater)
         self.StartUpdater()
         self.slack_signals()
@@ -2373,7 +2389,7 @@ class Update(QtCore.QObject):
         self.DataUpdateThread.started.connect(self.UpDatabase.run)
         self.DataUpdateThread.start()
 
-        time.sleep(2)
+        # time.sleep(2)
 
         # Update database on another thread
         self.ServerUpdateThread = QtCore.QThread()
