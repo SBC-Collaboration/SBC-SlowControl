@@ -1815,10 +1815,11 @@ class UpdateDataBase(QtCore.QObject):
                     print("No new data from PLC")
                     pass
 
+                time.sleep(self.base_period)
                 # raise Exception("Test breakup")
             except Exception as e:
                 print(e)
-                self.DB_ERROR_SIG.emit(str(e))
+                # self.DB_ERROR_SIG.emit(e)
                 self.DB_ERROR_SIG.emit("There is some ERROR in writing slowcontrol database. Please check it.")
                 time.sleep(self.longsleep)
                 continue
