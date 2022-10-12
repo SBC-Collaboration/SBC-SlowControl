@@ -3832,7 +3832,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # reset Valves' widget busy status
         # if commands are rejected by PLC, set busy back
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV1344"] ==True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV1344"] ==True:
             self.PV1344.Set.ButtonTransitionState(False)
             # self.Valve_buffer["PV1344"] = received_dic_c["data"]["Valve"]["OUT"]["PV1344"]
         else:
@@ -3840,7 +3840,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.PV1344.Set.ButtonTransitionState(True)
 
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4307"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV4307"] == True:
             self.PV4307.Set.ButtonTransitionState(False)
 
         else:
@@ -3851,7 +3851,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 pass
 
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4308"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV4308"] == True:
             self.PV4308.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["PV4308"] != self.Valve_buffer["PV4308"]:
@@ -3860,7 +3860,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4317"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV4317"] == True:
             self.PV4317.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
@@ -3869,7 +3869,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4318"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV4318"] == True:
             self.PV4318.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["PV4318"] != self.Valve_buffer["PV4318"]:
@@ -3878,7 +3878,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4321"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV4321"] == True:
             self.PV4321.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["PV4321"] != self.Valve_buffer["PV4321"]:
@@ -3887,7 +3887,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV4324"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV4324"] == True:
             self.PV4324.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["PV4324"] != self.Valve_buffer["PV4324"]:
@@ -3896,7 +3896,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV5305"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV5305"] == True:
             self.PV5305.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["PV5305"] != self.Valve_buffer["PV5305"]:
@@ -3905,7 +3905,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV5306"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV5306"] == True:
             self.PV5306.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["PV5306"] != self.Valve_buffer["PV5306"]:
@@ -3914,7 +3914,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV5307"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV5307"] == True:
             self.PV5307.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["PV5307"] != self.Valve_buffer["PV5307"]:
@@ -3923,7 +3923,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["PV5309"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["PV5309"] == True:
             self.PV5309.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["PV5309"] != self.Valve_buffer["PV5309"]:
@@ -3932,7 +3932,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV3307"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["SV3307"] == True:
             self.SV3307.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV3307"] != self.Valve_buffer["SV3307"]:
@@ -3941,7 +3941,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV3310"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["SV3310"] == True:
             self.SV3310.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV3310"] != self.Valve_buffer["SV3310"]:
@@ -3950,7 +3950,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV3322"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["SV3322"] == True:
             self.SV3322.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV3322"] != self.Valve_buffer["SV3322"]:
@@ -3959,7 +3959,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV3325"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["SV3325"] == True:
             self.SV3325.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV3325"] != self.Valve_buffer["SV3325"]:
@@ -3968,7 +3968,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV3329"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["SV3329"] == True:
             self.SV3329.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV3329"] != self.Valve_buffer["SV3329"]:
@@ -3977,7 +3977,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4327"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["SV4327"] == True:
             self.SV4327.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV4327"] != self.Valve_buffer["SV4327"]:
@@ -3985,8 +3985,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
             else:
                 pass
-        print("SV4328",received_dic_c["data"]["Valve"]["Command_Cache"]["SV4328"])
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4328"] == True:
+        print("SV4328",received_dic_c["data"]["Valve"]["Busy"]["SV4328"])
+        if received_dic_c["data"]["Valve"]["Busy"]["SV4328"] == True:
             self.SV4328.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV4328"] != self.Valve_buffer["SV4328"]:
@@ -3995,7 +3995,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4329"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["SV4329"] == True:
             self.SV4329.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV4329"] != self.Valve_buffer["SV4329"]:
@@ -4004,7 +4004,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4331"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["SV4331"] == True:
             self.SV4331.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV4331"] != self.Valve_buffer["SV4331"]:
@@ -4013,7 +4013,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4332"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["SV4332"] == True:
             self.SV4332.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV4332"] != self.Valve_buffer["SV4332"]:
@@ -4022,7 +4022,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["SV4337"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["SV4337"] == True:
             self.SV4337.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["SV4337"] != self.Valve_buffer["SV4337"]:
@@ -4031,7 +4031,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["HFSV3312"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["HFSV3312"] == True:
             self.HFSV3312.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"] != self.Valve_buffer["HFSV3312"]:
@@ -4040,7 +4040,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["HFSV3323"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["HFSV3323"] == True:
             self.HFSV3323.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"] != self.Valve_buffer["HFSV3323"]:
@@ -4049,7 +4049,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["Valve"]["Command_Cache"]["HFSV3331"] == True:
+        if received_dic_c["data"]["Valve"]["Busy"]["HFSV3331"] == True:
             self.HFSV3331.Set.ButtonTransitionState(False)
         else:
             if received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"] != self.Valve_buffer["HFSV3331"]:
@@ -4277,7 +4277,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #PIDLOOP part
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["SERVO3321"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["SERVO3321"] ==True:
             self.SERVO3321.State.ButtonTransitionState(False)
             self.SERVO3321.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4290,7 +4290,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6225"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6225"] ==True:
             self.HTR6225.State.ButtonTransitionState(False)
             self.HTR6225.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4301,7 +4301,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR2123"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR2123"] ==True:
             self.HTR2123.State.ButtonTransitionState(False)
             self.HTR2123.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4312,7 +4312,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR2124"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR2124"] ==True:
             self.HTR2124.State.ButtonTransitionState(False)
             self.HTR2124.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4323,7 +4323,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR2125"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR2125"] ==True:
             self.HTR2125.State.ButtonTransitionState(False)
             self.HTR2125.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4334,7 +4334,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR1202"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR1202"] ==True:
             self.HTR1202.State.ButtonTransitionState(False)
             self.HTR1202.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4345,7 +4345,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR2203"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR2203"] ==True:
             self.HTR2203.State.ButtonTransitionState(False)
             self.HTR2203.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4356,7 +4356,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6202"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6202"] ==True:
             self.HTR6202.State.ButtonTransitionState(False)
             self.HTR6202.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4367,7 +4367,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6206"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6206"] ==True:
             self.HTR6206.State.ButtonTransitionState(False)
             self.HTR6206.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4378,7 +4378,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6210"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6210"] ==True:
             self.HTR6210.State.ButtonTransitionState(False)
             self.HTR6210.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4389,7 +4389,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6223"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6223"] ==True:
             self.HTR6223.State.ButtonTransitionState(False)
             self.HTR6223.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4400,7 +4400,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6224"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6224"] ==True:
             self.HTR6224.State.ButtonTransitionState(False)
             self.HTR6224.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4411,7 +4411,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6219"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6219"] ==True:
             self.HTR6219.State.ButtonTransitionState(False)
             self.HTR6219.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4422,7 +4422,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6221"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6221"] ==True:
             self.HTR6221.State.ButtonTransitionState(False)
             self.HTR6221.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4433,7 +4433,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
-        if received_dic_c["data"]["LOOPPID"]["Command_Cache"]["HTR6214"] ==True:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6214"] ==True:
             self.HTR6214.State.ButtonTransitionState(False)
             self.HTR6214.HeaterSubWindow.Mode.ButtonTransitionState(False)
         else:
@@ -4552,7 +4552,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #     pass
         #
         # #LOOP2PT part
-        # if received_dic_c["data"]["LOOP2PT"]["Command_Cache"]["PUMP3305"] == True:
+        # if received_dic_c["data"]["LOOP2PT"]["Busy"]["PUMP3305"] == True:
         #     self.PUMP3305.State.ButtonTransitionState(False)
         #     self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonTransitionState(False)
         #     # self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
@@ -5069,7 +5069,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #         self.PUMP3305.State.ButtonRClicked()
         # elif received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"]:
         #     print("MAN is true")
-        #     if received_dic_c["data"]["LOOP2PT"]["Command_Cache"]["PUMP3305"]:
+        #     if received_dic_c["data"]["LOOP2PT"]["Busy"]["PUMP3305"]:
         #         if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
         #
         #             self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonLClicked()
@@ -5078,7 +5078,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #         else:
         #             self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
         #             self.PUMP3305.State.ButtonRClicked()
-        #     elif not received_dic_c["data"]["LOOP2PT"]["Command_Cache"]["PUMP3305"]:
+        #     elif not received_dic_c["data"]["LOOP2PT"]["Busy"]["PUMP3305"]:
         #         print("not busy")
         #         if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"] != self.LOOP2PT_OUT_buffer["PUMP3305"]:
         #             if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
@@ -9167,7 +9167,7 @@ class UpdateClient(QtCore.QObject):
         self.Valve_MAN_ini = copy.copy(sec.VALVE_MAN)
         self.Valve_INTLKD_ini = copy.copy(sec.VALVE_INTLKD)
         self.Valve_ERR_ini = copy.copy(sec.VALVE_ERR)
-        self.Valve_Command_Cache = copy.copy(sec.VALVE_COMMAND_CACHE)
+        self.Valve_Busy = copy.copy(sec.VALVE_BUSY)
         self.Switch_OUT_ini = copy.copy(sec.SWITCH_OUT)
         self.Switch_MAN_ini = copy.copy(sec.SWITCH_MAN)
         self.Switch_INTLKD_ini = copy.copy(sec.SWITCH_INTLKD)
@@ -9191,7 +9191,7 @@ class UpdateClient(QtCore.QObject):
         self.LOOPPID_SET1_ini = copy.copy(sec.LOOPPID_SET1)
         self.LOOPPID_SET2_ini = copy.copy(sec.LOOPPID_SET2)
         self.LOOPPID_SET3_ini = copy.copy(sec.LOOPPID_SET3)
-        self.LOOPPID_Command_Cache_ini = copy.copy(sec.LOOPPID_COMMAND_CACHE)
+        self.LOOPPID_Busy_ini = copy.copy(sec.LOOPPID_BUSY)
 
         self.LOOP2PT_MODE0_ini = copy.copy(sec.LOOP2PT_MODE0)
         self.LOOP2PT_MODE1_ini = copy.copy(sec.LOOP2PT_MODE1)
@@ -9204,7 +9204,7 @@ class UpdateClient(QtCore.QObject):
         self.LOOP2PT_SET1_ini = copy.copy(sec.LOOP2PT_SET1)
         self.LOOP2PT_SET2_ini = copy.copy(sec.LOOP2PT_SET2)
         self.LOOP2PT_SET3_ini = copy.copy(sec.LOOP2PT_SET3)
-        self.LOOP2PT_Command_Cache_ini = copy.copy(sec.LOOP2PT_COMMAND_CACHE)
+        self.LOOP2PT_Busy_ini = copy.copy(sec.LOOP2PT_BUSY)
 
         self.Procedure_running_ini = copy.copy(sec.PROCEDURE_RUNNING)
         self.Procedure_INTLKD_ini = copy.copy(sec.PROCEDURE_INTLKD)
@@ -9233,7 +9233,7 @@ class UpdateClient(QtCore.QObject):
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
                                             "ERR": self.Valve_ERR_ini,
-                                            "Command_Cache":self.Valve_Command_Cache},
+                                            "Busy":self.Valve_Busy},
                                   "Switch": {"OUT": self.Switch_OUT_ini,
                                              "INTLKD": self.Switch_INTLKD_ini,
                                              "MAN": self.Switch_MAN_ini,
@@ -9257,7 +9257,7 @@ class UpdateClient(QtCore.QObject):
                                               "SET1": self.LOOPPID_SET1_ini,
                                               "SET2": self.LOOPPID_SET2_ini,
                                               "SET3": self.LOOPPID_SET3_ini,
-                                              "Command_Cache":self.LOOPPID_Command_Cache_ini},
+                                              "Busy":self.LOOPPID_Busy_ini},
                                   "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
                                               "MODE1": self.LOOP2PT_MODE1_ini,
                                               "MODE2": self.LOOP2PT_MODE2_ini,
@@ -9269,7 +9269,7 @@ class UpdateClient(QtCore.QObject):
                                               "SET1": self.LOOP2PT_SET1_ini,
                                               "SET2": self.LOOP2PT_SET2_ini,
                                               "SET3": self.LOOP2PT_SET3_ini,
-                                              "Command_Cache":self.LOOP2PT_Command_Cache_ini},
+                                              "Busy":self.LOOP2PT_Busy_ini},
                                   "INTLK_D": {"value": self.INTLK_D_DIC_ini,
                                               "EN": self.INTLK_D_EN_ini,
                                               "COND": self.INTLK_D_COND_ini},
