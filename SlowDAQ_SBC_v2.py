@@ -4833,32 +4833,32 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 #      FLAGs
-        if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]:
-            self.MAN_TS.Set.ButtonLClicked()
-        else:
-            self.MAN_TS.Set.ButtonRClicked()
+#         if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]:
+#             self.MAN_TS.Set.ButtonLClicked()
+#         else:
+#             self.MAN_TS.Set.ButtonRClicked()
         print("display",received_dic_c["data"]["FLAG"]["value"]["MAN_TS"],datetime.datetime.now())
 
-        # if not received_dic_c["data"]["FLAG"]["MAN"]["MAN_HYD"]:
-        #     if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
-        #         self.MAN_HYD.Set.ButtonLClicked()
-        #     else:
-        #         self.MAN_HYD.Set.ButtonRClicked()
-        # elif received_dic_c["data"]["FLAG"]["MAN"]["MAN_HYD"]:
-        #     if received_dic_c["data"]["FLAG"]["Busy"]["MAN_HYD"]:
-        #         if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
-        #             self.MAN_HYD.Set.ButtonLClicked()
-        #         else:
-        #             self.MAN_HYD.Set.ButtonRClicked()
-        #     elif not received_dic_c["data"]["FLAG"]["Busy"]["MAN_HYD"]:
-        #         if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"] != self.FLAG_buffer["MAN_HYD"]:
-        #             if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
-        #                 self.MAN_HYD.Set.ButtonLClicked()
-        #             else:
-        #                 self.MAN_HYD.Set.ButtonRClicked()
-        #             self.FLAG__buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
-        #         else:
-        #             pass
+        if not received_dic_c["data"]["FLAG"]["MAN"]["MAN_HYD"]:
+            if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
+                self.MAN_HYD.Set.ButtonLClicked()
+            else:
+                self.MAN_HYD.Set.ButtonRClicked()
+        elif received_dic_c["data"]["FLAG"]["MAN"]["MAN_HYD"]:
+            if received_dic_c["data"]["FLAG"]["Busy"]["MAN_HYD"]:
+                if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
+                    self.MAN_HYD.Set.ButtonLClicked()
+                else:
+                    self.MAN_HYD.Set.ButtonRClicked()
+            elif not received_dic_c["data"]["FLAG"]["Busy"]["MAN_HYD"]:
+                if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"] != self.FLAG_buffer["MAN_HYD"]:
+                    if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
+                        self.MAN_HYD.Set.ButtonLClicked()
+                    else:
+                        self.MAN_HYD.Set.ButtonRClicked()
+                    self.FLAG__buffer["MAN_HYD"] = received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]
+                else:
+                    pass
 
         if False:
             if received_dic_c["data"]["FLAG"]["value"]["MAN_HYD"]:
