@@ -4712,6 +4712,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
             elif not received_dic_c["data"]["Valve"]["Busy"]["PV4317"]:
                 print("PV4317", received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"])
+                print("OUT", received_dic_c["data"]["Valve"]["OUT"]["PV4317"])
+                print("Buffer", self.Valve_buffer["PV4317"])
                 if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
                     if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
                         self.PV4317.Set.ButtonLClicked()
