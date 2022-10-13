@@ -2654,6 +2654,7 @@ class UpdateServer(QtCore.QObject):
                 print(message[key]["type"])
                 print(message[key]["type"] == "valve")
                 if message[key]["type"] == "valve":
+                    print("Valve", datetime_in_1e5micro())
                     if message[key]["operation"] == "OPEN":
                         self.PLC.WriteBase2(address=message[key]["address"])
                     elif message[key]["operation"] == "CLOSE":
