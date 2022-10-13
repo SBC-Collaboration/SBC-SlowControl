@@ -2393,7 +2393,9 @@ class Valve_s(QtWidgets.QWidget):
         self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 140 * R, 40 * R))
         self.Label.setSizePolicy(sizePolicy)
         self.Label.setMinimumSize(QtCore.QSize(140 * R, 40 * R))
-        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE +"}")
+        self.Label.setProperty("State", False)
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE +"} QWidget[State = true]{" + C_GREEN
+        + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         # self.Label.setSizePolicy(sizePolicy)
@@ -2445,6 +2447,10 @@ class Valve_s(QtWidgets.QWidget):
     def ButtonTransitionState(self, bool):
         self.collapse.StatusTransition.UpdateColor(bool)
 
+    @QtCore.Slot()
+    def ColorLabel(self, bool):
+        self.Label.setProperty("State", bool)
+        self.Label.setStyle(self.RButton.style())
 
 
 # Defines a reusable layout containing widgets
