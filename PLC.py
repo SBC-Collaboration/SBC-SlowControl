@@ -2792,6 +2792,7 @@ class UpdateServer(QtCore.QObject):
                     #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
 
                 elif message[key]["type"] == "LOOP2PT_power":
+                    print("PUMP",datetime_in_1e5micro())
                     if message[key]["operation"] == "OPEN":
                         self.PLC.LOOP2PT_OPEN(address=message[key]["address"])
                     elif message[key]["operation"] == "CLOSE":
