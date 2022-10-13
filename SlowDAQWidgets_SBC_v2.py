@@ -2354,7 +2354,7 @@ class Valve_s(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 330 * R, 110 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 330 * R, 180 * R))
         self.setSizePolicy(sizePolicy)
 
         self.VL = QtWidgets.QVBoxLayout(self)
@@ -2384,80 +2384,68 @@ class Valve_s(QtWidgets.QWidget):
         # self.ActiveState.Label.setText("Status")
         # self.HL.addWidget(self.ActiveState)
 
-        self.HL = QtWidgets.QHBoxLayout()
-        self.HL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-        self.VL.addLayout(self.HL)
+        # self.HL = QtWidgets.QHBoxLayout()
+        # self.HL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        # self.VL.addLayout(self.HL)
 
         self.Label = QtWidgets.QLabel(self)
         # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
         self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 140 * R, 40 * R))
         self.Label.setSizePolicy(sizePolicy)
         self.Label.setMinimumSize(QtCore.QSize(140 * R, 40 * R))
-        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE + "}")
+        self.Label.setStyleSheet("QLabel {" + TITLE_STYLE + BORDER_STYLE +"}")
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         # self.Label.setSizePolicy(sizePolicy)
-        self.HL.addWidget(self.Label)
+        self.VL.addWidget(self.Label)
 
 
-        self.Set = DoubleButton_s(self)
-        self.Set.Label.setText("Set")
-        self.Set.LButton.setText("open")
-        self.Set.RButton.setText("close")
-        self.VL.addWidget(self.Set)
+        # self.Set = DoubleButton_s(self)
+        # self.Set.Label.setText("Set")
+        # self.Set.LButton.setText("open")
+        # self.Set.RButton.setText("close")
+        # self.VL.addWidget(self.Set)
 
         self.collapse = Valve_CollapsibleBox(self)
-        self.HL.addWidget(self.collapse)
+        self.VL.addWidget(self.collapse)
 
-        self.Activate(True)
-    def Activate(self, Activate):
-
-        if Activate:
-            try:
-                # Don't need this because the button only read feedback from PLC
-                # self.LButton.clicked.connect(self.ButtonLClicked)
-                # self.RButton.clicked.connect(self.ButtonRClicked)
-                # print(1)
-                pass
-                # self.Set.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
-                # self.Set.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
-            except:
-
-                print("Failed to Activate the Doublebutton")
-                pass
-        else:
-            try:
-                #Don't need this because the button only read feedback from PLC
-                # self.LButton.clicked.connect(self.ButtonLClicked)
-                # self.RButton.clicked.connect(self.ButtonRClicked)
-
-                # self.LButton.clicked.disconnect(self.ButtonLClicked)
-                # self.RButton.clicked.disconnect(self.ButtonRClicked)
-                pass
-
-            except:
-                print("Failed to Deactivate the Doublebutton")
-
-                pass
+    #     self.Activate(True)
+    # def Activate(self, Activate):
+    #
+    #     if Activate:
+    #         try:
+    #             # Don't need this because the button only read feedback from PLC
+    #             # self.LButton.clicked.connect(self.ButtonLClicked)
+    #             # self.RButton.clicked.connect(self.ButtonRClicked)
+    #             # print(1)
+    #             pass
+    #             # self.Set.LButton.clicked.connect(lambda: self.ButtonLTransitionState(True))
+    #             # self.Set.RButton.clicked.connect(lambda: self.ButtonRTransitionState(True))
+    #         except:
+    #
+    #             print("Failed to Activate the Doublebutton")
+    #             pass
+    #     else:
+    #         try:
+    #             #Don't need this because the button only read feedback from PLC
+    #             # self.LButton.clicked.connect(self.ButtonLClicked)
+    #             # self.RButton.clicked.connect(self.ButtonRClicked)
+    #
+    #             # self.LButton.clicked.disconnect(self.ButtonLClicked)
+    #             # self.RButton.clicked.disconnect(self.ButtonRClicked)
+    #             pass
+    #
+    #         except:
+    #             print("Failed to Deactivate the Doublebutton")
+    #
+    #             pass
 
 
     @QtCore.Slot()
     def ButtonTransitionState(self, bool):
         self.collapse.StatusTransition.UpdateColor(bool)
 
-    @QtCore.Slot()
-    def ButtonLTransitionState(self, bool):
-        if self.Set.LState == self.Set.InactiveName and self.Set.RState == self.Set.ActiveName:
-            self.collapse.StatusTransition.UpdateColor(bool)
-        else:
-            pass
 
-    @QtCore.Slot()
-    def ButtonRTransitionState(self, bool):
-        if self.Set.LState == self.Set.ActiveName and self.Set.RState == self.Set.InactiveName:
-            self.collapse.StatusTransition.UpdateColor(bool)
-        else:
-            pass
 
 # Defines a reusable layout containing widgets
 class Camera(QtWidgets.QWidget):
@@ -4268,7 +4256,7 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 40* R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 100* R))
         self.setSizePolicy(sizePolicy)
         # self.setSizePolicy(sizePolicy)
 
@@ -4277,10 +4265,10 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         )
         self.toggle_button.setStyleSheet("QToolButton { border: none; }")
         self.toggle_button.setToolButtonStyle(
-            QtCore.Qt.ToolButtonTextBesideIcon
+            QtCore.Qt.ToolButtonIconOnly
         )
         self.toggle_button.setSizePolicy(sizePolicy)
-        self.toggle_button.setArrowType(QtCore.Qt.RightArrow)
+        self.toggle_button.setArrowType(QtCore.Qt.DownArrow)
         self.toggle_button.pressed.connect(self.on_pressed)
 
         self.toggle_animation = QtCore.QParallelAnimationGroup(self)
@@ -4288,7 +4276,7 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.content_area = QtWidgets.QScrollArea(
             maximumHeight=0, minimumHeight=0
         )
-        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 140 * R, 40* R))
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 100* R))
         # self.content_area.setSizePolicy(
         #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
         # )
@@ -4298,7 +4286,7 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.content_area.setStyleSheet("QWidget { background: transparent; }")
 
-        lay = QtWidgets.QVBoxLayout(self)
+        lay = QtWidgets.QHBoxLayout(self)
         lay.setSpacing(0)
         lay.setContentsMargins(0, 0, 0, 0)
         lay.addWidget(self.toggle_button)
@@ -4314,7 +4302,14 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
             QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
         )
 
-        self.lay = QtWidgets.QHBoxLayout()
+        self.lay = QtWidgets.QVBoxLayout()
+        self.Hlay= QtWidgets.QHBoxLayout()
+
+        self.Set = DoubleButton_s(self)
+        self.Set.Label.setText("Set")
+        self.Set.LButton.setText("open")
+        self.Set.RButton.setText("close")
+        # self.VL.addWidget(self.Set)
 
         self.StatusTransition = ColoredStatus(self, mode=3)
         self.StatusTransition.setObjectName("StatusTransition")
@@ -4323,9 +4318,10 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.ActiveState = ColoredStatus(self, mode =2)
         self.ActiveState.Label.setText("Status")
 
-
-        self.lay.addWidget(self.StatusTransition)
-        self.lay.addWidget(self.ActiveState)
+        self.lay.addWidget(self.Set)
+        self.lay.addLayout(self.Hlay)
+        self.Hlay.addWidget(self.StatusTransition)
+        self.Hlay.addWidget(self.ActiveState)
 
         self.setContentLayout(self.lay)
 
@@ -4363,6 +4359,20 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         content_animation.setStartValue(0)
         content_animation.setEndValue(content_height)
 # Neutral means that the button shouldn't show any color
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.Set.LState == self.Set.InactiveName and self.Set.RState == self.Set.ActiveName:
+            self.collapse.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.Set.LState == self.Set.ActiveName and self.Set.RState == self.Set.InactiveName:
+            self.collapse.StatusTransition.UpdateColor(bool)
+        else:
+            pass
 
 
 

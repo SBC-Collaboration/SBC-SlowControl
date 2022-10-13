@@ -1155,59 +1155,110 @@ class MainWindow(QtWidgets.QMainWindow):
     # signal connections to write settings to PLC codes
 
     def signal_connection(self):
-        self.PV1344.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1344.Label.text()))
-        self.PV1344.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1344.Label.text()))
-        self.PV4307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4307.Label.text()))
-        self.PV4307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4307.Label.text()))
-        self.PV4308.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4308.Label.text()))
-        self.PV4308.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4308.Label.text()))
-        self.PV4317.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4317.Label.text()))
-        self.PV4317.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4317.Label.text()))
-        self.PV4318.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4318.Label.text()))
-        self.PV4318.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4318.Label.text()))
-        self.PV4321.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4321.Label.text()))
-        self.PV4321.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4321.Label.text()))
-        self.PV4324.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4324.Label.text()))
-        self.PV4324.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4324.Label.text()))
-        self.PV5305.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5305.Label.text()))
-        self.PV5305.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5305.Label.text()))
-        self.PV5306.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5306.Label.text()))
-        self.PV5306.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5306.Label.text()))
-        self.PV5307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5307.Label.text()))
-        self.PV5307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5307.Label.text()))
-        self.PV5309.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5309.Label.text()))
-        self.PV5309.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5309.Label.text()))
-        self.SV3307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3307.Label.text()))
-        self.SV3307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3307.Label.text()))
-        self.SV3310.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3310.Label.text()))
-        self.SV3310.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3310.Label.text()))
-        self.SV3322.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3322.Label.text()))
-        self.SV3322.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3322.Label.text()))
-        self.SV3325.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3325.Label.text()))
-        self.SV3325.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3325.Label.text()))
-        self.SV3329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3329.Label.text()))
-        self.SV3329.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3329.Label.text()))
-        self.SV4327.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4327.Label.text()))
-        self.SV4327.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4327.Label.text()))
-        self.SV4328.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4328.Label.text()))
-        self.SV4328.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4328.Label.text()))
-        self.SV4329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4329.Label.text()))
-        self.SV4329.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4329.Label.text()))
-        self.SV4331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4331.Label.text()))
-        self.SV4331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4331.Label.text()))
-        self.SV4332.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4332.Label.text()))
-        self.SV4332.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4332.Label.text()))
-        self.SV4337.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4337.Label.text()))
-        self.SV4337.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4337.Label.text()))
-        self.HFSV3312.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3312.Label.text()))
-        self.HFSV3312.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3312.Label.text()))
-        self.HFSV3323.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3323.Label.text()))
-        self.HFSV3323.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3323.Label.text()))
-        self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
-        self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
+        # self.PV1344.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1344.Label.text()))
+        # self.PV1344.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1344.Label.text()))
+        # self.PV4307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4307.Label.text()))
+        # self.PV4307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4307.Label.text()))
+        # self.PV4308.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4308.Label.text()))
+        # self.PV4308.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4308.Label.text()))
+        # self.PV4317.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4317.Label.text()))
+        # self.PV4317.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4317.Label.text()))
+        # self.PV4318.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4318.Label.text()))
+        # self.PV4318.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4318.Label.text()))
+        # self.PV4321.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4321.Label.text()))
+        # self.PV4321.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4321.Label.text()))
+        # self.PV4324.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4324.Label.text()))
+        # self.PV4324.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4324.Label.text()))
+        # self.PV5305.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5305.Label.text()))
+        # self.PV5305.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5305.Label.text()))
+        # self.PV5306.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5306.Label.text()))
+        # self.PV5306.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5306.Label.text()))
+        # self.PV5307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5307.Label.text()))
+        # self.PV5307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5307.Label.text()))
+        # self.PV5309.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5309.Label.text()))
+        # self.PV5309.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5309.Label.text()))
+        # self.SV3307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3307.Label.text()))
+        # self.SV3307.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3307.Label.text()))
+        # self.SV3310.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3310.Label.text()))
+        # self.SV3310.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3310.Label.text()))
+        # self.SV3322.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3322.Label.text()))
+        # self.SV3322.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3322.Label.text()))
+        # self.SV3325.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3325.Label.text()))
+        # self.SV3325.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3325.Label.text()))
+        # self.SV3329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3329.Label.text()))
+        # self.SV3329.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3329.Label.text()))
+        # self.SV4327.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4327.Label.text()))
+        # self.SV4327.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4327.Label.text()))
+        # self.SV4328.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4328.Label.text()))
+        # self.SV4328.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4328.Label.text()))
+        # self.SV4329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4329.Label.text()))
+        # self.SV4329.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4329.Label.text()))
+        # self.SV4331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4331.Label.text()))
+        # self.SV4331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4331.Label.text()))
+        # self.SV4332.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4332.Label.text()))
+        # self.SV4332.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4332.Label.text()))
+        # self.SV4337.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4337.Label.text()))
+        # self.SV4337.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4337.Label.text()))
+        # self.HFSV3312.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3312.Label.text()))
+        # self.HFSV3312.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3312.Label.text()))
+        # self.HFSV3323.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3323.Label.text()))
+        # self.HFSV3323.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3323.Label.text()))
+        # self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
+        # self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
+
+        self.PV1344.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1344.Label.text()))
+        self.PV1344.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1344.Label.text()))
+        self.PV4307.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4307.Label.text()))
+        self.PV4307.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4307.Label.text()))
+        self.PV4308.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4308.Label.text()))
+        self.PV4308.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4308.Label.text()))
+        self.PV4317.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4317.Label.text()))
+        self.PV4317.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4317.Label.text()))
+        self.PV4318.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4318.Label.text()))
+        self.PV4318.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4318.Label.text()))
+        self.PV4321.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4321.Label.text()))
+        self.PV4321.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4321.Label.text()))
+        self.PV4324.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4324.Label.text()))
+        self.PV4324.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4324.Label.text()))
+        self.PV5305.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5305.Label.text()))
+        self.PV5305.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5305.Label.text()))
+        self.PV5306.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5306.Label.text()))
+        self.PV5306.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5306.Label.text()))
+        self.PV5307.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5307.Label.text()))
+        self.PV5307.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5307.Label.text()))
+        self.PV5309.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV5309.Label.text()))
+        self.PV5309.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV5309.Label.text()))
+        self.SV3307.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3307.Label.text()))
+        self.SV3307.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3307.Label.text()))
+        self.SV3310.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3310.Label.text()))
+        self.SV3310.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3310.Label.text()))
+        self.SV3322.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3322.Label.text()))
+        self.SV3322.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3322.Label.text()))
+        self.SV3325.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3325.Label.text()))
+        self.SV3325.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3325.Label.text()))
+        self.SV3329.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3329.Label.text()))
+        self.SV3329.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3329.Label.text()))
+        self.SV4327.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4327.Label.text()))
+        self.SV4327.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4327.Label.text()))
+        self.SV4328.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4328.Label.text()))
+        self.SV4328.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4328.Label.text()))
+        self.SV4329.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4329.Label.text()))
+        self.SV4329.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4329.Label.text()))
+        self.SV4331.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4331.Label.text()))
+        self.SV4331.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4331.Label.text()))
+        self.SV4332.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4332.Label.text()))
+        self.SV4332.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4332.Label.text()))
+        self.SV4337.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4337.Label.text()))
+        self.SV4337.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4337.Label.text()))
+        self.HFSV3312.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3312.Label.text()))
+        self.HFSV3312.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3312.Label.text()))
+        self.HFSV3323.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3323.Label.text()))
+        self.HFSV3323.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3323.Label.text()))
+        self.HFSV3331.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
+        self.HFSV3331.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
         #
-        # self.PUMP3305.Set.LButton.clicked.connect(lambda x: self.LOOP2PTLButtonClicked(self.PUMP3305.Label.text()))
-        # self.PUMP3305.Set.RButton.clicked.connect(lambda x: self.LOOP2PTRButtonClicked(self.PUMP3305.Label.text()))
+        # self.PUMP3305.collapse.Set.LButton.clicked.connect(lambda x: self.LOOP2PTLButtonClicked(self.PUMP3305.Label.text()))
+        # self.PUMP3305.collapse.Set.RButton.clicked.connect(lambda x: self.LOOP2PTRButtonClicked(self.PUMP3305.Label.text()))
 
 
         self.SERVO3321.HeaterSubWindow.Mode.LButton.clicked.connect(
@@ -4730,40 +4781,40 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV1344"]:
 
-            self.PV1344.Set.ButtonLClicked()
+            self.PV1344.collapse.Set.ButtonLClicked()
         else:
-            self.PV1344.Set.ButtonRClicked()
+            self.PV1344.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4307"]:
 
-            self.PV4307.Set.ButtonLClicked()
+            self.PV4307.collapse.Set.ButtonLClicked()
         else:
-            self.PV4307.Set.ButtonRClicked()
+            self.PV4307.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4308"]:
 
-            self.PV4308.Set.ButtonLClicked()
+            self.PV4308.collapse.Set.ButtonLClicked()
         else:
-            self.PV4308.Set.ButtonRClicked()
+            self.PV4308.collapse.Set.ButtonRClicked()
 
         # if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
         #
-        #     self.PV4317.Set.ButtonLClicked()
+        #     self.PV4317.collapse.Set.ButtonLClicked()
         # else:
-        #     self.PV4317.Set.ButtonRClicked()
+        #     self.PV4317.collapse.Set.ButtonRClicked()
 
         if not received_dic_c["data"]["Valve"]["MAN"]["PV4317"]:
             if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
-                self.PV4317.Set.ButtonLClicked()
+                self.PV4317.collapse.Set.ButtonLClicked()
             else:
-                self.PV4317.Set.ButtonRClicked()
+                self.PV4317.collapse.Set.ButtonRClicked()
             self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
         elif received_dic_c["data"]["Valve"]["MAN"]["PV4317"]:
             if received_dic_c["data"]["Valve"]["Busy"]["PV4317"]:
                 if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
-                    self.PV4317.Set.ButtonLClicked()
+                    self.PV4317.collapse.Set.ButtonLClicked()
                 else:
-                    self.PV4317.Set.ButtonRClicked()
+                    self.PV4317.collapse.Set.ButtonRClicked()
                 self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
             elif not received_dic_c["data"]["Valve"]["Busy"]["PV4317"]:
                 print("PV4317", received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"])
@@ -4771,145 +4822,145 @@ class MainWindow(QtWidgets.QMainWindow):
                 print("Buffer", self.Valve_buffer["PV4317"])
                 if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
                     if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
-                        self.PV4317.Set.ButtonLClicked()
+                        self.PV4317.collapse.Set.ButtonLClicked()
                     else:
-                        self.PV4317.Set.ButtonRClicked()
+                        self.PV4317.collapse.Set.ButtonRClicked()
                     self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
                 else:
                     pass
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4318"]:
 
-            self.PV4318.Set.ButtonLClicked()
+            self.PV4318.collapse.Set.ButtonLClicked()
         else:
-            self.PV4318.Set.ButtonRClicked()
+            self.PV4318.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4321"]:
 
-            self.PV4321.Set.ButtonLClicked()
+            self.PV4321.collapse.Set.ButtonLClicked()
         else:
-            self.PV4321.Set.ButtonRClicked()
+            self.PV4321.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV4324"]:
 
-            self.PV4324.Set.ButtonLClicked()
+            self.PV4324.collapse.Set.ButtonLClicked()
         else:
-            self.PV4324.Set.ButtonRClicked()
+            self.PV4324.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5305"]:
 
-            self.PV5305.Set.ButtonLClicked()
+            self.PV5305.collapse.Set.ButtonLClicked()
         else:
-            self.PV5305.Set.ButtonRClicked()
+            self.PV5305.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5306"]:
 
-            self.PV5306.Set.ButtonLClicked()
+            self.PV5306.collapse.Set.ButtonLClicked()
         else:
-            self.PV5306.Set.ButtonRClicked()
+            self.PV5306.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5307"]:
 
-            self.PV5307.Set.ButtonLClicked()
+            self.PV5307.collapse.Set.ButtonLClicked()
         else:
-            self.PV5307.Set.ButtonRClicked()
+            self.PV5307.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["PV5309"]:
 
-            self.PV5309.Set.ButtonLClicked()
+            self.PV5309.collapse.Set.ButtonLClicked()
         else:
-            self.PV5309.Set.ButtonRClicked()
+            self.PV5309.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3307"]:
 
-            self.SV3307.Set.ButtonLClicked()
+            self.SV3307.collapse.Set.ButtonLClicked()
         else:
-            self.SV3307.Set.ButtonRClicked()
+            self.SV3307.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3310"]:
 
-            self.SV3310.Set.ButtonLClicked()
+            self.SV3310.collapse.Set.ButtonLClicked()
         else:
-            self.SV3310.Set.ButtonRClicked()
+            self.SV3310.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3322"]:
 
-            self.SV3322.Set.ButtonLClicked()
+            self.SV3322.collapse.Set.ButtonLClicked()
         else:
-            self.SV3322.Set.ButtonRClicked()
+            self.SV3322.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3325"]:
 
-            self.SV3325.Set.ButtonLClicked()
+            self.SV3325.collapse.Set.ButtonLClicked()
         else:
-            self.SV3325.Set.ButtonRClicked()
+            self.SV3325.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV3329"]:
 
-            self.SV3329.Set.ButtonLClicked()
+            self.SV3329.collapse.Set.ButtonLClicked()
         else:
-            self.SV3329.Set.ButtonRClicked()
+            self.SV3329.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
 
-            self.SV4327.Set.ButtonLClicked()
+            self.SV4327.collapse.Set.ButtonLClicked()
         else:
-            self.SV3307.Set.ButtonRClicked()
+            self.SV3307.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4328"]:
 
-            self.SV4328.Set.ButtonLClicked()
+            self.SV4328.collapse.Set.ButtonLClicked()
         else:
-            self.SV4328.Set.ButtonRClicked()
+            self.SV4328.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4329"]:
 
-            self.SV4329.Set.ButtonLClicked()
+            self.SV4329.collapse.Set.ButtonLClicked()
         else:
-            self.SV4329.Set.ButtonRClicked()
+            self.SV4329.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4331"]:
 
-            self.SV4331.Set.ButtonLClicked()
+            self.SV4331.collapse.Set.ButtonLClicked()
         else:
-            self.SV4331.Set.ButtonRClicked()
+            self.SV4331.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4332"]:
 
-            self.SV4332.Set.ButtonLClicked()
+            self.SV4332.collapse.Set.ButtonLClicked()
         else:
-            self.SV4332.Set.ButtonRClicked()
+            self.SV4332.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
 
-            self.SV4337.Set.ButtonLClicked()
+            self.SV4337.collapse.Set.ButtonLClicked()
         else:
-            self.SV4337.Set.ButtonRClicked()
+            self.SV4337.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]:
 
-            self.HFSV3312.Set.ButtonLClicked()
+            self.HFSV3312.collapse.Set.ButtonLClicked()
         else:
-            self.HFSV3312.Set.ButtonRClicked()
+            self.HFSV3312.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"]:
 
-            self.HFSV3323.Set.ButtonLClicked()
+            self.HFSV3323.collapse.Set.ButtonLClicked()
         else:
-            self.HFSV3323.Set.ButtonRClicked()
+            self.HFSV3323.collapse.Set.ButtonRClicked()
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"]:
 
-            self.HFSV3331.Set.ButtonLClicked()
+            self.HFSV3331.collapse.Set.ButtonLClicked()
         else:
-            self.HFSV3331.Set.ButtonRClicked()
+            self.HFSV3331.collapse.Set.ButtonRClicked()
 
 
         # if received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"]:
         #
-        #     self.PUMP3305.Set.ButtonLClicked()
+        #     self.PUMP3305.collapse.Set.ButtonLClicked()
         # else:
-        #     self.PUMP3305.Set.ButtonRClicked()
+        #     self.PUMP3305.collapse.Set.ButtonRClicked()
 
 
 
