@@ -2354,7 +2354,7 @@ class Valve_s(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 330 * R, 180 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 300 * R, 180 * R))
         self.setSizePolicy(sizePolicy)
 
         self.VL = QtWidgets.QVBoxLayout(self)
@@ -4280,7 +4280,7 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.toggle_animation = QtCore.QParallelAnimationGroup(self)
 
         self.content_area = QtWidgets.QScrollArea(
-            maximumHeight=0, minimumHeight=0
+            maximumWidth=0, minimumWidth=0
         )
         self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 140 * R, 100* R))
         # self.content_area.setSizePolicy(
@@ -4299,13 +4299,13 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         lay.addWidget(self.content_area)
 
         self.toggle_animation.addAnimation(
-            QtCore.QPropertyAnimation(self, b"minimumHeight")
+            QtCore.QPropertyAnimation(self, b"minimumWidth")
         )
         self.toggle_animation.addAnimation(
-            QtCore.QPropertyAnimation(self, b"maximumHeight")
+            QtCore.QPropertyAnimation(self, b"maximumWidth")
         )
         self.toggle_animation.addAnimation(
-            QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
+            QtCore.QPropertyAnimation(self.content_area, b"maximumWidth")
         )
 
         # self.lay = QtWidgets.QVBoxLayout()
@@ -4359,7 +4359,7 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
     def on_pressed(self):
         checked = self.toggle_button.isChecked()
         self.toggle_button.setArrowType(
-            QtCore.Qt.DownArrow if not checked else QtCore.Qt.RightArrow
+            QtCore.Qt.RightArrow if not checked else QtCore.Qt.DownArrow
         )
         self.toggle_animation.setDirection(
             QtCore.QAbstractAnimation.Forward
@@ -4372,22 +4372,22 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         lay = self.content_area.layout()
         del lay
         self.content_area.setLayout(layout)
-        collapsed_height = (
-            self.sizeHint().height() - self.content_area.maximumHeight()
+        collapsed_width = (
+            self.sizeHint().width() - self.content_area.maximumWidth()
         )
-        content_height = layout.sizeHint().height()
+        content_width = layout.sizeHint().width()
         for i in range(self.toggle_animation.animationCount()):
             animation = self.toggle_animation.animationAt(i)
             animation.setDuration(500)
-            animation.setStartValue(collapsed_height)
-            animation.setEndValue(collapsed_height + content_height)
+            animation.setStartValue(collapsed_width)
+            animation.setEndValue(collapsed_width + content_width)
 
         content_animation = self.toggle_animation.animationAt(
             self.toggle_animation.animationCount() - 1
         )
         content_animation.setDuration(500)
         content_animation.setStartValue(0)
-        content_animation.setEndValue(content_height)
+        content_animation.setEndValue(content_width)
 # Neutral means that the button shouldn't show any color
 
     @QtCore.Slot()
