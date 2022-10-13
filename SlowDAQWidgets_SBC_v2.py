@@ -2450,7 +2450,7 @@ class Valve_s(QtWidgets.QWidget):
     @QtCore.Slot()
     def ColorLabel(self, bool):
         self.Label.setProperty("State", bool)
-        self.Label.setStyle(self.RButton.style())
+        self.Label.setStyle(self.Label.style())
 
 
 # Defines a reusable layout containing widgets
@@ -4262,7 +4262,7 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 100* R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 140 * R, 100* R))
         self.setSizePolicy(sizePolicy)
         # self.setSizePolicy(sizePolicy)
 
@@ -4282,7 +4282,7 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.content_area = QtWidgets.QScrollArea(
             maximumHeight=0, minimumHeight=0
         )
-        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 100* R))
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 140 * R, 100* R))
         # self.content_area.setSizePolicy(
         #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
         # )
@@ -4308,8 +4308,31 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
             QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
         )
 
-        self.lay = QtWidgets.QVBoxLayout()
-        self.Hlay= QtWidgets.QHBoxLayout()
+        # self.lay = QtWidgets.QVBoxLayout()
+        # self.Hlay= QtWidgets.QHBoxLayout()
+        #
+        # self.Set = DoubleButton_s(self)
+        # self.Set.Label.setText("Set")
+        # self.Set.LButton.setText("open")
+        # self.Set.RButton.setText("close")
+        # # self.VL.addWidget(self.Set)
+        #
+        # self.StatusTransition = ColoredStatus(self, mode=3)
+        # self.StatusTransition.setObjectName("StatusTransition")
+        # self.StatusTransition.Label.setText("Busy")
+        #
+        # self.ActiveState = ColoredStatus(self, mode =2)
+        # self.ActiveState.Label.setText("Status")
+        #
+        # self.lay.addWidget(self.Set)
+        # self.lay.addLayout(self.Hlay)
+        # self.Hlay.addWidget(self.StatusTransition)
+        # self.Hlay.addWidget(self.ActiveState)
+
+        self.lay = QtWidgets.QGridLayout()
+        self.lay.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.lay.setSpacing(3)
+
 
         self.Set = DoubleButton_s(self)
         self.Set.Label.setText("Set")
@@ -4321,13 +4344,14 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.StatusTransition.setObjectName("StatusTransition")
         self.StatusTransition.Label.setText("Busy")
 
-        self.ActiveState = ColoredStatus(self, mode =2)
+        self.ActiveState = ColoredStatus(self, mode=2)
         self.ActiveState.Label.setText("Status")
 
-        self.lay.addWidget(self.Set)
-        self.lay.addLayout(self.Hlay)
-        self.Hlay.addWidget(self.StatusTransition)
-        self.Hlay.addWidget(self.ActiveState)
+        # self.GL.addWidget(self.Running, 0, 0, QtCore.Qt.AlignCenter)
+        self.lay.addWidget(self.Set, 0,0, 1,3, QtCore.Qt.AlignCenter)
+        # self.lay.addLayout(self.Hlay)
+        self.lay.addWidget(self.StatusTransition, 1,0, QtCore.Qt.AlignRight)
+        self.lay.addWidget(self.ActiveState,1,1,QtCore.Qt.AlignRight)
 
         self.setContentLayout(self.lay)
 
