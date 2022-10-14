@@ -23,6 +23,7 @@ BORDER_RADIUS = " "
 
 C_LIGHT_GREY = "background-color: rgb(204,204,204);"
 C_MEDIUM_GREY = "background-color: rgb(167,167,167);"
+C_BKG_WHITE = "background-color: white;"
 C_WHITE = "color: white;"
 C_BLACK = "color: black;"
 C_GREEN = "background-color: rgb(0,217,0);"
@@ -4190,7 +4191,8 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
         self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
-        self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
+        self.Background.setStyleSheet("QLabel {" +C_BKG_WHITE + BORDER_STYLE+"}")
+
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
@@ -4205,7 +4207,7 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.LButton.setGeometry(QtCore.QRect(2.5 * R, 20 * R, 65 * R, 15 * R))
         self.LButton.setProperty("State", True)
         self.LButton.setStyleSheet(
-            "QPushButton {" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
+            "QWidget {" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
             + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
 
         self.RButton = QtWidgets.QPushButton(self)
@@ -4214,7 +4216,7 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.RButton.setGeometry(QtCore.QRect(72.5 * R, 20 * R, 65 * R, 15 * R))
         self.RButton.setProperty("State", False)
         self.RButton.setStyleSheet(
-            "QPushButton{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
+            "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
             + C_MEDIUM_GREY + "} QWidget[State = false]{" + C_RED + "}")
 
         self.LState = "Active"
