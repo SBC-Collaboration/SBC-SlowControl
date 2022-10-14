@@ -330,7 +330,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV4317.move(520*R, 380*R)
 
         self.PV4317_icon = Valve_image(self.ThermosyphonTab, mode="V")
-        self.PV4317_icon.move(500 * R, 380 * R)
+        self.PV4317_icon.move(470 * R, 380 * R)
 
         self.PV4318 = Valve_s(self.ThermosyphonTab)
         self.PV4318.Label.setText("PV4318")

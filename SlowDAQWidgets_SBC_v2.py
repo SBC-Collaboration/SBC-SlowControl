@@ -4613,11 +4613,11 @@ class Valve_image(QtWidgets.QWidget):
             self.Path = os.getcwd()
         self.ImagePath = os.path.join(self.Path, "images")
         self.setObjectName("Valve_image")
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 90 * R, 90 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 70 * R))
 
         self.mode=mode
 
-        self.setMinimumSize(90 * R, 90 * R)
+        self.setMinimumSize(70 * R, 70 * R)
         self.setSizePolicy(sizePolicy)
         self.objectname = "Valve_image"
 
@@ -4638,7 +4638,7 @@ class Valve_image(QtWidgets.QWidget):
         self.icon_RH = QtGui.QIcon(self.pixmap_valve_RH)
 
         self.Turnon()
-        self.button.setIconSize(QtCore.QSize(80*R, 80*R))
+        self.button.setIconSize(QtCore.QSize(60*R, 60*R))
         # self.Turnoff(mode=mode)
 
 
