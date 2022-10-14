@@ -4205,7 +4205,7 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.LButton.setGeometry(QtCore.QRect(2.5 * R, 20 * R, 65 * R, 15 * R))
         self.LButton.setProperty("State", True)
         self.LButton.setStyleSheet(
-            "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
+            "QPushButton {" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
             + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
 
         self.RButton = QtWidgets.QPushButton(self)
@@ -4214,7 +4214,7 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.RButton.setGeometry(QtCore.QRect(72.5 * R, 20 * R, 65 * R, 15 * R))
         self.RButton.setProperty("State", False)
         self.RButton.setStyleSheet(
-            "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
+            "QPushButton{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
             + C_MEDIUM_GREY + "} QWidget[State = false]{" + C_RED + "}")
 
         self.LState = "Active"
@@ -4597,6 +4597,70 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
             self.collapse.StatusTransition.UpdateColor(bool)
         else:
             pass
+
+
+
+
+
+class Valve_image(QtWidgets.QWidget):
+    def __init__(self, parent=None, mode="H"):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        if '__file__' in globals():
+            self.Path = os.path.dirname(os.path.realpath(__file__))
+        else:
+            self.Path = os.getcwd()
+        self.ImagePath = os.path.join(self.Path, "images")
+        self.setObjectName("Valve_image")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 90 * R, 90 * R))
+
+        self.mode=mode
+
+        self.setMinimumSize(90 * R, 90 * R)
+        self.setSizePolicy(sizePolicy)
+        self.objectname = "Valve_image"
+
+        self.button = QtWidgets.QPushButton(self)
+        self.button.setStyleSheet("QPushButton { background: transparent; }")
+        # Green vertical
+        self.pixmap_valve_GV = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_green_V.png"))
+        # self.pixmap_valve_GV =  self.pixmap_valve_GV.scaledToWidth(80*R)
+        self.icon_GV = QtGui.QIcon(self.pixmap_valve_GV)
+        #Green horizontal
+        self.pixmap_valve_GH = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_green_H.png"))
+        self.icon_GH = QtGui.QIcon(self.pixmap_valve_GH)
+        # Red vertical
+        self.pixmap_valve_RV = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_red_V.png"))
+        self.icon_RV = QtGui.QIcon(self.pixmap_valve_RV)
+        # Red horizontal
+        self.pixmap_valve_RH = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_red_H.png"))
+        self.icon_RH = QtGui.QIcon(self.pixmap_valve_RH)
+
+        self.Turnon()
+        self.button.setIconSize(QtCore.QSize(80*R, 80*R))
+        # self.Turnoff(mode=mode)
+
+
+    def Turnon(self):
+        if self.mode == "H":
+            self.button.setIcon(self.icon_GH)
+
+        elif self.mode == "V":
+            self.button.setIcon(self.icon_GV)
+        else:
+            pass
+
+    def Turnoff(self,mode):
+        if self.mode == "H":
+            self.button.setIcon(self.icon_RH)
+        elif self.mode == "V":
+            self.button.setIcon(self.icon_RV)
+        else:
+            pass
+
+
+
 
 
 

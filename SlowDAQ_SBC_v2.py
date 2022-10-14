@@ -286,6 +286,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV4307.Label.setText("PV4307")
         self.PV4307.move(925*R, 190*R)
 
+
         self.PV4308 = Valve_s(self.ThermosyphonTab)
         self.PV4308.Label.setText("PV4308")
         self.PV4308.move(850*R, 320*R)
@@ -327,6 +328,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV4317 = Valve_v2(self.ThermosyphonTab)
         self.PV4317.Label.setText("PV4317")
         self.PV4317.move(520*R, 380*R)
+
+        self.PV4317_icon = Valve_image(self.ThermosyphonTab, mode="V")
+        self.PV4317_icon.move(500 * R, 380 * R)
 
         self.PV4318 = Valve_s(self.ThermosyphonTab)
         self.PV4318.Label.setText("PV4318")
@@ -863,9 +867,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MAN_HYD.Label.setText("MAN_HYD")
 
 
-        self.valve_test = Valve_s(self.DatanSignalTab)
-        self.valve_test.move(1300 * R, 600 * R)
-        self.valve_test.Label.setText("PVXXXX")
+        self.valve_test = Valve_image(self.DatanSignalTab, mode="H")
+        self.valve_test.move(1300 * R, 900 * R)
 
         self.PCYCLE_AUTOCYCLE = Flag(self.DatanSignalTab)
         self.PCYCLE_AUTOCYCLE.move(1300 * R, 600 * R)
@@ -3660,7 +3663,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV4308.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4308"])
         self.PV4317.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4317"])
 
-        self.PV4318.ColorLabel(True)
         self.PV4321.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4321"])
         self.PV4324.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4324"])
         self.PV5305.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV5305"])
@@ -4860,6 +4862,11 @@ class MainWindow(QtWidgets.QMainWindow):
         #             self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
         #         else:
         #             pass
+
+        if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
+            self.PV4317_icon.Turnon()
+        else:
+            self.PV4317_icon.Turnoff()
 
         if not received_dic_c["data"]["Valve"]["MAN"]["PV4317"]:
             if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
