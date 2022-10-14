@@ -4651,7 +4651,7 @@ class Valve_image(QtWidgets.QWidget):
         else:
             pass
 
-    def Turnoff(self,mode):
+    def Turnoff(self):
         if self.mode == "H":
             self.button.setIcon(self.icon_RH)
         elif self.mode == "V":
