@@ -324,7 +324,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PG4316.Label.setText("PG4316")
         self.PG4316.move(820*R, 470*R)
 
-        self.PV4317 = Valve_s(self.ThermosyphonTab)
+        self.PV4317 = Valve_v2(self.ThermosyphonTab)
         self.PV4317.Label.setText("PV4317")
         self.PV4317.move(520*R, 380*R)
 
@@ -1212,8 +1212,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV4307.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4307.Label.text()))
         self.PV4308.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4308.Label.text()))
         self.PV4308.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4308.Label.text()))
-        self.PV4317.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4317.Label.text()))
-        self.PV4317.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4317.Label.text()))
+
+        self.PV4317.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4317.Label.text()))
+        self.PV4317.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4317.Label.text()))
+
         self.PV4318.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4318.Label.text()))
         self.PV4318.collapse.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4318.Label.text()))
         self.PV4321.collapse.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4321.Label.text()))
@@ -3773,11 +3775,14 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.PV4308.collapse.ActiveState.UpdateColor(False)
 
+
         if received_dic_c["data"]["Valve"]["MAN"]["PV4317"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4317"]:
 
-            self.PV4317.collapse.ActiveState.UpdateColor(True)
+            self.PV4317.ActiveState.UpdateColor(True)
         else:
-            self.PV4317.collapse.ActiveState.UpdateColor(False)
+            self.PV4317.ActiveState.UpdateColor(False)
+
+
 
         if received_dic_c["data"]["Valve"]["MAN"]["PV4318"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4318"]:
 
@@ -4830,18 +4835,44 @@ class MainWindow(QtWidgets.QMainWindow):
         # else:
         #     self.PV4317.collapse.Set.ButtonRClicked()
 
+        # if not received_dic_c["data"]["Valve"]["MAN"]["PV4317"]:
+        #     if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
+        #         self.PV4317.collapse.Set.ButtonLClicked()
+        #     else:
+        #         self.PV4317.collapse.Set.ButtonRClicked()
+        #     self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
+        # elif received_dic_c["data"]["Valve"]["MAN"]["PV4317"]:
+        #     if received_dic_c["data"]["Valve"]["Busy"]["PV4317"]:
+        #         if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
+        #             self.PV4317.collapse.Set.ButtonLClicked()
+        #         else:
+        #             self.PV4317.collapse.Set.ButtonRClicked()
+        #         self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
+        #     elif not received_dic_c["data"]["Valve"]["Busy"]["PV4317"]:
+        #         print("PV4317", received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"])
+        #         print("OUT", received_dic_c["data"]["Valve"]["OUT"]["PV4317"])
+        #         print("Buffer", self.Valve_buffer["PV4317"])
+        #         if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
+        #             if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
+        #                 self.PV4317.collapse.Set.ButtonLClicked()
+        #             else:
+        #                 self.PV4317.collapse.Set.ButtonRClicked()
+        #             self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
+        #         else:
+        #             pass
+
         if not received_dic_c["data"]["Valve"]["MAN"]["PV4317"]:
             if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
-                self.PV4317.collapse.Set.ButtonLClicked()
+                self.PV4317.Set.ButtonLClicked()
             else:
-                self.PV4317.collapse.Set.ButtonRClicked()
+                self.PV4317.Set.ButtonRClicked()
             self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
         elif received_dic_c["data"]["Valve"]["MAN"]["PV4317"]:
             if received_dic_c["data"]["Valve"]["Busy"]["PV4317"]:
                 if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
-                    self.PV4317.collapse.Set.ButtonLClicked()
+                    self.PV4317.Set.ButtonLClicked()
                 else:
-                    self.PV4317.collapse.Set.ButtonRClicked()
+                    self.PV4317.Set.ButtonRClicked()
                 self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
             elif not received_dic_c["data"]["Valve"]["Busy"]["PV4317"]:
                 print("PV4317", received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"])
@@ -4849,9 +4880,9 @@ class MainWindow(QtWidgets.QMainWindow):
                 print("Buffer", self.Valve_buffer["PV4317"])
                 if received_dic_c["data"]["Valve"]["OUT"]["PV4317"] != self.Valve_buffer["PV4317"]:
                     if received_dic_c["data"]["Valve"]["OUT"]["PV4317"]:
-                        self.PV4317.collapse.Set.ButtonLClicked()
+                        self.PV4317.Set.ButtonLClicked()
                     else:
-                        self.PV4317.collapse.Set.ButtonRClicked()
+                        self.PV4317.Set.ButtonRClicked()
                     self.Valve_buffer["PV4317"] = received_dic_c["data"]["Valve"]["OUT"]["PV4317"]
                 else:
                     pass

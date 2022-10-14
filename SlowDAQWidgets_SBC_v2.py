@@ -2354,12 +2354,16 @@ class Valve_s(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 300 * R, 180 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 200 * R, 170 * R))
         self.setSizePolicy(sizePolicy)
 
-        self.VL = QtWidgets.QVBoxLayout(self)
-        self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
-        self.VL.setSpacing(3)
+        # self.VL = QtWidgets.QVBoxLayout(self)
+        # self.VL.setContentsMargins(0*R, 0*R, 0*R, 0*R)
+        # self.VL.setSpacing(3)
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        self.GL.setSpacing(3)
 
         # self.Label = QtWidgets.QLabel(self)
         # # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
@@ -2390,7 +2394,7 @@ class Valve_s(QtWidgets.QWidget):
 
         self.Label = QtWidgets.QLabel(self)
         # self.Label.setMinimumSize(QtCore.QSize(30*R, 30*R))
-        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 140 * R, 40 * R))
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 200 * R, 40 * R))
         self.Label.setSizePolicy(sizePolicy)
         self.Label.setMinimumSize(QtCore.QSize(140 * R, 40 * R))
         self.Label.setProperty("State", False)
@@ -2399,7 +2403,7 @@ class Valve_s(QtWidgets.QWidget):
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
         # self.Label.setSizePolicy(sizePolicy)
-        self.VL.addWidget(self.Label)
+        self.GL.addWidget(self.Label,0,0,1,2,QtCore.Qt.AlignRight)
 
 
         # self.Set = DoubleButton_s(self)
@@ -2409,7 +2413,7 @@ class Valve_s(QtWidgets.QWidget):
         # self.VL.addWidget(self.Set)
 
         self.collapse = Valve_CollapsibleBox(self)
-        self.VL.addWidget(self.collapse)
+        self.GL.addWidget(self.collapse,1,0,1,2,QtCore.Qt.AlignLeft)
 
     #     self.Activate(True)
     # def Activate(self, Activate):
@@ -2451,6 +2455,188 @@ class Valve_s(QtWidgets.QWidget):
     def ColorLabel(self, bool):
         self.Label.setProperty("State", bool)
         self.Label.setStyle(self.Label.style())
+
+
+
+
+class Valve_v2(QtWidgets.QWidget):
+    def __init__(self,  parent=None, title=""):
+        super(Valve_v2, self).__init__(parent)
+        # super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 170 * R, 200* R))
+        self.setSizePolicy(sizePolicy)
+        # self.setSizePolicy(sizePolicy)
+
+        self.Label = QtWidgets.QToolButton(
+            text=title, checkable=True, checked=False
+        )
+        # self.Label.setStyleSheet("QToolButton { border: none; subcontrol-position: top;}")
+        # self.Label.setStyleSheet("QToolButton { background: white;}")
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 170 * R, 30 * R))
+        self.Label.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
+        # self.Label.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
+
+        self.Label.setMinimumSize(QtCore.QSize(170 * R, 30 * R))
+        self.Label.setProperty("State", False)
+        self.Label.setStyleSheet("QToolButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                 + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setText("Label")
+        # self.Label.setSizePolicy(sizePolicy)
+        # self.GL.addWidget(self.Label, 0, 0, 1, 2, QtCore.Qt.AlignRight)
+
+        self.Label.setSizePolicy(sizePolicy)
+        # self.Label.setArrowType(QtCore.Qt.RightArrow)
+        self.Label.pressed.connect(self.on_pressed)
+
+
+        self.toggle_animation = QtCore.QParallelAnimationGroup(self)
+
+        self.content_area = QtWidgets.QScrollArea(
+            maximumHeight=0, minimumHeight=0
+        )
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 170 * R, 100* R))
+        # self.content_area.setSizePolicy(
+        #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+        # )
+        self.content_area.setSizePolicy(
+            sizePolicy
+        )
+        self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.content_area.setStyleSheet("QWidget { background: transparent; }")
+
+        # lay = QtWidgets.QHBoxLayout(self)
+        # lay.setSpacing(0)
+        # lay.setContentsMargins(0, 0, 0, 0)
+        # lay.addWidget(self.Label,QtCore.Qt.AlignTop)
+        # lay.addWidget(self.content_area)
+
+        lay = QtWidgets.QGridLayout(self)
+        lay.setSpacing(0)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.addWidget(self.Label,0,0,1,3)
+        lay.addWidget(self.content_area,1,0,3,3)
+
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"minimumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"maximumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
+        )
+
+        # self.lay = QtWidgets.QVBoxLayout()
+        # self.Hlay= QtWidgets.QHBoxLayout()
+        #
+        # self.Set = DoubleButton_s(self)
+        # self.Set.Label.setText("Set")
+        # self.Set.LButton.setText("open")
+        # self.Set.RButton.setText("close")
+        # # self.VL.addWidget(self.Set)
+        #
+        # self.StatusTransition = ColoredStatus(self, mode=3)
+        # self.StatusTransition.setObjectName("StatusTransition")
+        # self.StatusTransition.Label.setText("Busy")
+        #
+        # self.ActiveState = ColoredStatus(self, mode =2)
+        # self.ActiveState.Label.setText("Status")
+        #
+        # self.lay.addWidget(self.Set)
+        # self.lay.addLayout(self.Hlay)
+        # self.Hlay.addWidget(self.StatusTransition)
+        # self.Hlay.addWidget(self.ActiveState)
+
+        self.lay = QtWidgets.QGridLayout()
+        # self.lay.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        # self.lay.setSpacing(3)
+
+
+        self.Set = DoubleButton_s(self)
+        self.Set.Label.setText("Set")
+        self.Set.LButton.setText("open")
+        self.Set.RButton.setText("close")
+        # self.VL.addWidget(self.Set)
+
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("Busy")
+
+        self.ActiveState = ColoredStatus(self, mode=2)
+        self.ActiveState.Label.setText("Status")
+
+        # self.GL.addWidget(self.Running, 0, 0, QtCore.Qt.AlignCenter)
+        self.lay.addWidget(self.Set, 0,0, 1,2, QtCore.Qt.AlignTop)
+        # self.lay.addLayout(self.Hlay)
+        self.lay.addWidget(self.StatusTransition, 1,0, QtCore.Qt.AlignRight)
+        self.lay.addWidget(self.ActiveState,1,1)
+
+        self.setContentLayout(self.lay)
+
+
+    @QtCore.Slot()
+    def on_pressed(self):
+        checked = self.Label.isChecked()
+        # self.Label.setArrowType(
+        #     QtCore.Qt.RightArrow if not checked else QtCore.Qt.DownArrow
+        # )
+        self.toggle_animation.setDirection(
+            QtCore.QAbstractAnimation.Forward
+            if not checked
+            else QtCore.QAbstractAnimation.Backward
+        )
+        self.toggle_animation.start()
+
+    def setContentLayout(self, layout):
+        lay = self.content_area.layout()
+        del lay
+        self.content_area.setLayout(layout)
+        collapsed_height = (
+            self.sizeHint().height() - self.content_area.maximumHeight()
+        )
+        content_height = layout.sizeHint().height()
+        for i in range(self.toggle_animation.animationCount()):
+            animation = self.toggle_animation.animationAt(i)
+            animation.setDuration(500)
+            animation.setStartValue(collapsed_height)
+            animation.setEndValue(collapsed_height + content_height)
+
+        content_animation = self.toggle_animation.animationAt(
+            self.toggle_animation.animationCount() - 1
+        )
+        content_animation.setDuration(500)
+        content_animation.setStartValue(0)
+        content_animation.setEndValue(content_height)
+# Neutral means that the button shouldn't show any color
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.Set.LState == self.Set.InactiveName and self.Set.RState == self.Set.ActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.Set.LState == self.Set.ActiveName and self.Set.RState == self.Set.InactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ColorLabel(self, bool):
+        self.Label.setProperty("State", bool)
+        self.Label.setStyle(self.Label.style())
+
+
 
 
 # Defines a reusable layout containing widgets
@@ -4269,7 +4455,9 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.toggle_button = QtWidgets.QToolButton(
             text=title, checkable=True, checked=False
         )
-        self.toggle_button.setStyleSheet("QToolButton { border: none; }")
+        self.toggle_button.setStyleSheet("QToolButton { border: none; subcontrol-position: top;}")
+        # self.toggle_button.setStyleSheet("QToolButton { background: white;}")
+
         self.toggle_button.setToolButtonStyle(
             QtCore.Qt.ToolButtonIconOnly
         )
@@ -4292,11 +4480,17 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.content_area.setStyleSheet("QWidget { background: transparent; }")
 
-        lay = QtWidgets.QHBoxLayout(self)
+        # lay = QtWidgets.QHBoxLayout(self)
+        # lay.setSpacing(0)
+        # lay.setContentsMargins(0, 0, 0, 0)
+        # lay.addWidget(self.toggle_button,QtCore.Qt.AlignTop)
+        # lay.addWidget(self.content_area)
+
+        lay = QtWidgets.QGridLayout(self)
         lay.setSpacing(0)
         lay.setContentsMargins(0, 0, 0, 0)
-        lay.addWidget(self.toggle_button)
-        lay.addWidget(self.content_area)
+        lay.addWidget(self.toggle_button ,0,0)
+        lay.addWidget(self.content_area,0,1,3,2, QtCore.Qt.AlignTop)
 
         self.toggle_animation.addAnimation(
             QtCore.QPropertyAnimation(self, b"minimumWidth")
@@ -4348,7 +4542,7 @@ class Valve_CollapsibleBox(QtWidgets.QWidget):
         self.ActiveState.Label.setText("Status")
 
         # self.GL.addWidget(self.Running, 0, 0, QtCore.Qt.AlignCenter)
-        self.lay.addWidget(self.Set, 0,0, 1,3, QtCore.Qt.AlignCenter)
+        self.lay.addWidget(self.Set, 0,0, 1,3, QtCore.Qt.AlignTop)
         # self.lay.addLayout(self.Hlay)
         self.lay.addWidget(self.StatusTransition, 1,0, QtCore.Qt.AlignRight)
         self.lay.addWidget(self.ActiveState,1,1,QtCore.Qt.AlignRight)
