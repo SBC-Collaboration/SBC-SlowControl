@@ -4616,6 +4616,7 @@ class Valve_image(QtWidgets.QWidget):
         self.ImagePath = os.path.join(self.Path, "images")
         self.setObjectName("Valve_image")
         self.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 70 * R))
+        self.setStyleSheet("QWidget { background: transparent; }")
 
         self.mode=mode
 
