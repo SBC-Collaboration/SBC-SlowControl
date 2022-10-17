@@ -26,7 +26,7 @@ class Example(QtWidgets.QWidget):
 
         self.move(300, 200)
         self.setWindowTitle('Image with PyQt')
-        self.setStyleSheet("QWidget { background: white; }")
+        self.setStyleSheet("QWidget { background: red; }")
         self.show()
 
 if __name__ == '__main__':
