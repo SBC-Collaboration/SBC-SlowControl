@@ -4207,7 +4207,7 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.LButton.setGeometry(QtCore.QRect(2.5 * R, 20 * R, 65 * R, 15 * R))
         self.LButton.setProperty("State", True)
         self.LButton.setStyleSheet(
-            "QWidget {" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{" + C_GREEN
+            "QWidget {" + BORDER_RADIUS + C_WHITE + FONT +C_BKG_WHITE+ "} QWidget[State = true]{" + C_GREEN
             + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
 
         self.RButton = QtWidgets.QPushButton(self)
@@ -4216,7 +4216,7 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.RButton.setGeometry(QtCore.QRect(72.5 * R, 20 * R, 65 * R, 15 * R))
         self.RButton.setProperty("State", False)
         self.RButton.setStyleSheet(
-            "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[State = true]{"
+            "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + C_BKG_WHITE+"} QWidget[State = true]{"
             + C_MEDIUM_GREY + "} QWidget[State = false]{" + C_RED + "}")
 
         self.LState = "Active"
