@@ -4625,7 +4625,8 @@ class Valve_image(QtWidgets.QWidget):
         self.objectname = "Valve_image"
 
         self.button = QtWidgets.QToolButton(self)
-        self.button.setStyleSheet("QToolButton { background: transparent; }")
+        # self.button.setStyleSheet("QToolButton { background: transparent; }")
+        self.button.setStyleSheet("QWidget { background: transparent; }")
         # self.button.setStyleSheet("QPushButton {"+C_MEDIUM_GREY+"; }")
         # Green vertical
         self.pixmap_valve_GV = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_green_V.png"))
