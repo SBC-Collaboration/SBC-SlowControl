@@ -4647,22 +4647,19 @@ class Valve_image(QtWidgets.QWidget):
         # self.button.setIconSize(QtCore.QSize(60*R, 60*R))
         # # self.Turnoff(mode=mode)
 
-        self.button = QtWidgets.QLabel(self)
-        # self.button.setStyleSheet("QToolButton { background: transparent; }")
-        self.button.setStyleSheet("QLabel { background: transparent; }")
-        self.button.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        # self.button.setStyleSheet("QPushButton {"+C_MEDIUM_GREY+"; }")
+        self.label = QtWidgets.QLabel(self)
+        self.label.setStyleSheet("QLabel { background: transparent; }")
+        self.label.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         # Green vertical
         self.pixmap_valve_GV = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_green_V.png"))
-        self.pixmap_valve_GV =  self.pixmap_valve_GV.scaledToWidth(60*R)
-        # self.icon_GV = QtGui.QIcon(self.pixmap_valve_GV)
+        self.pixmap_valve_GV =  self.pixmap_valve_GV.scaledToHeight(60*R)
         # Green horizontal
         self.pixmap_valve_GH = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_green_H.png"))
         self.pixmap_valve_GH = self.pixmap_valve_GH.scaledToWidth(60 * R)
         # self.icon_GH = QtGui.QIcon(self.pixmap_valve_GH)
         # Red vertical
         self.pixmap_valve_RV = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_red_V.png"))
-        self.pixmap_valve_RV = self.pixmap_valve_RV.scaledToWidth(60 * R)
+        self.pixmap_valve_RV = self.pixmap_valve_RV.scaledToHeight(60 * R)
         # self.icon_RV = QtGui.QIcon(self.pixmap_valve_RV)
         # Red horizontal
         self.pixmap_valve_RH = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_red_H.png"))
@@ -4670,7 +4667,7 @@ class Valve_image(QtWidgets.QWidget):
         # self.icon_RH = QtGui.QIcon(self.pixmap_valve_RH)
 
         self.Turnon()
-        # self.button.setIconSize(QtCore.QSize(60 * R, 60 * R))
+        # self.label.setIconSize(QtCore.QSize(60 * R, 60 * R))
         # self.Turnoff(mode=mode)
 
     # def Turnon(self):
@@ -4692,18 +4689,18 @@ class Valve_image(QtWidgets.QWidget):
 
     def Turnon(self):
         if self.mode == "H":
-            self.button.setPixmap(self.pixmap_valve_GH)
+            self.label.setPixmap(self.pixmap_valve_GH)
 
         elif self.mode == "V":
-            self.button.setPixmap(self.pixmap_valve_GV)
+            self.label.setPixmap(self.pixmap_valve_GV)
         else:
             pass
 
     def Turnoff(self):
         if self.mode == "H":
-            self.button.setPixmap(self.pixmap_valve_RH)
+            self.label.setPixmap(self.pixmap_valve_RH)
         elif self.mode == "V":
-            self.button.setPixmap(self.pixmap_valve_RV)
+            self.label.setPixmap(self.pixmap_valve_RV)
         else:
             pass
 
