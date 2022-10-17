@@ -4626,17 +4626,17 @@ class Valve_image(QtWidgets.QWidget):
         self.button = QtWidgets.QPushButton(self)
         self.button.setStyleSheet("QPushButton { background: transparent; }")
         # Green vertical
-        self.pixmap_valve_GV = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_green_V.jpg"))
+        self.pixmap_valve_GV = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_green_V_tr.jpg"))
         # self.pixmap_valve_GV =  self.pixmap_valve_GV.scaledToWidth(80*R)
         self.icon_GV = QtGui.QIcon(self.pixmap_valve_GV)
         #Green horizontal
-        self.pixmap_valve_GH = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_green_H.jpg"))
+        self.pixmap_valve_GH = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_green_H_tr.jpg"))
         self.icon_GH = QtGui.QIcon(self.pixmap_valve_GH)
         # Red vertical
-        self.pixmap_valve_RV = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_red_V.jpg"))
+        self.pixmap_valve_RV = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_red_V_tr.jpg"))
         self.icon_RV = QtGui.QIcon(self.pixmap_valve_RV)
         # Red horizontal
-        self.pixmap_valve_RH = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_red_H.jpg"))
+        self.pixmap_valve_RH = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_red_H_tr.jpg"))
         self.icon_RH = QtGui.QIcon(self.pixmap_valve_RH)
 
         self.Turnon()
