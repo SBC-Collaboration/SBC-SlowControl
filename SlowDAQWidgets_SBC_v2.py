@@ -4625,7 +4625,7 @@ class Valve_image(QtWidgets.QWidget):
 
         self.button = QtWidgets.QPushButton(self)
         # self.button.setStyleSheet("QPushButton { background: transparent; }")
-        self.button.setStyleSheet("QPushButton {"+C_GREEN+"; }")
+        self.button.setStyleSheet("QPushButton {"+C_MEDIUM_GREY+"; }")
         # Green vertical
         self.pixmap_valve_GV = QtGui.QPixmap(os.path.join(self.ImagePath, "Valve_green_V.png"))
         # self.pixmap_valve_GV =  self.pixmap_valve_GV.scaledToWidth(80*R)
