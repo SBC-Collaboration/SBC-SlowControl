@@ -3726,7 +3726,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV4307.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4307"])
         self.PV4308.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4308"])
         self.PV4317.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4317"])
-
+        self.PV4318.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4318"])
         self.PV4321.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4321"])
         self.PV4324.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4324"])
         self.PV5305.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV5305"])
