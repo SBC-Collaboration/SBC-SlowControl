@@ -295,6 +295,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV4308_icon = Valve_image(self.ThermosyphonTab, mode="H")
         self.PV4308_icon.move(937 * R, 280 * R)
+        self.PV4308_icon.stackUnder(self.PV4308)
+
 
         self.MV4309 = PnID_Alone(self.ThermosyphonTab)
         self.MV4309.Label.setText("MV4309")
@@ -347,7 +349,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PT4319 = Indicator(self.ThermosyphonTab)
         self.PT4319.Label.setText("PT4319")
-        self.PT4319.move(570*R, 720*R)
+        self.PT4319.move(570*R, 760*R)
         self.PT4319.SetUnit(" bar")
 
         self.PRV4320 = PnID_Alone(self.ThermosyphonTab)
@@ -363,7 +365,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PT4322 = Indicator(self.ThermosyphonTab)
         self.PT4322.Label.setText("PT4322")
-        self.PT4322.move(850*R, 720*R)
+        self.PT4322.move(850*R, 760*R)
         self.PT4322.SetUnit(" bar")
 
         self.PRV4323 = PnID_Alone(self.ThermosyphonTab)
@@ -379,7 +381,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PT4325 = Indicator(self.ThermosyphonTab)
         self.PT4325.Label.setText("PT4325")
-        self.PT4325.move(1150*R, 720*R)
+        self.PT4325.move(1150*R, 760*R)
         self.PT4325.SetUnit(" bar")
 
         self.PRV4326 = PnID_Alone(self.ThermosyphonTab)
@@ -395,10 +397,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.SV4328 = Valve_v2(self.ThermosyphonTab)
         self.SV4328.Label.setText("SV4328")
-        self.SV4328.move(1413*R, 190*R)
+        self.SV4328.move(1360*R, 190*R)
 
         self.SV4328_icon = Valve_image(self.ThermosyphonTab, mode="H")
-        self.SV4328_icon.move(1430 * R, 145 * R)
+        self.SV4328_icon.move(1410 * R, 145 * R)
 
         self.SV4329 = Valve_v2(self.ThermosyphonTab)
         self.SV4329.Label.setText("SV4329")
@@ -420,7 +422,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.SV4332 = Valve_v2(self.ThermosyphonTab)
         self.SV4332.Label.setText("SV4332")
-        self.SV4332.move(1644*R, 380*R)
+        self.SV4332.move(1680*R, 380*R)
 
         self.SV4332_icon = Valve_image(self.ThermosyphonTab, mode="H")
         self.SV4332_icon.move(1673 * R, 322 * R)
@@ -668,7 +670,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC1316.HeaterSubWindow.RTD1.Label.setText("TT1332")
         self.MFC1316.HeaterSubWindow.RTD2.Label.setText("EMPTY")
 
-
         self.PT1332 = Indicator(self.FluidTab)
         self.PT1332.move(630*R, 900*R)
         self.PT1332.Label.setText("PT1332")
@@ -676,7 +677,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV1344=Valve_v2(self.FluidTab)
         self.PV1344.Label.setText("PV1344")
-        self.PV1344.move(1431*R,770*R)
+        self.PV1344.move(1460*R,870*R)
 
         self.PV1344_icon = Valve_image(self.FluidTab, mode="H")
         self.PV1344_icon.move(1520 * R, 815 * R)
@@ -756,25 +757,25 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT3308.SetUnit(" bar")
 
         self.PT3309 = Indicator(self.HydraulicTab)
-        self.PT3309.move(665*R, 1140*R)
+        self.PT3309.move(665*R, 1245*R)
         self.PT3309.Label.setText("PT3309")
         self.PT3309.SetUnit(" bar")
 
         self.PT3311 = Indicator(self.HydraulicTab)
-        self.PT3311.move(750*R, 1110*R)
+        self.PT3311.move(910*R, 1110*R)
         self.PT3311.Label.setText("PT3311")
         self.PT3311.SetUnit(" bar")
 
         self.HFSV3312 = Valve_v2(self.HydraulicTab)
         self.HFSV3312.Label.setText("HFSV3312")
-        self.HFSV3312.move(650*R, 800*R)
+        self.HFSV3312.move(670*R, 1040*R)
 
         self.HFSV3312_icon = Valve_image(self.HydraulicTab, mode="H")
         self.HFSV3312_icon.move(731 * R, 990* R)
 
         self.HFSV3323 = Valve_v2(self.HydraulicTab)
         self.HFSV3323.Label.setText("HFSV3323")
-        self.HFSV3323.move(1050*R, 1230*R)
+        self.HFSV3323.move(1050*R, 1210*R)
 
         self.HFSV3323_icon = Valve_image(self.HydraulicTab, mode="H")
         self.HFSV3323_icon.move(1112 * R, 1152 * R)
@@ -785,6 +786,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HFSV3331_icon = Valve_image(self.HydraulicTab, mode="H")
         self.HFSV3331_icon.move(1172 * R, 280 * R)
+        self.HFSV3331_icon.stackUnder(self.HFSV3331)
 
         self.PT3332 = Indicator(self.HydraulicTab)
         self.PT3332.move(1570*R, 1125*R)
@@ -799,7 +801,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.SV3329 = Valve_v2(self.HydraulicTab)
         self.SV3329.Label.setText("SV3329")
-        self.SV3329.move(1570*R, 470*R)
+        self.SV3329.move(1580*R, 470*R)
 
         self.SV3329_icon = Valve_image(self.HydraulicTab, mode="V")
         self.SV3329_icon.move(1547 * R, 470 * R)
@@ -839,7 +841,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.SV3310 = Valve_v2(self.HydraulicTab)
         self.SV3310.Label.setText("SV3310")
-        self.SV3310.move(800*R, 1240*R)
+        self.SV3310.move(800*R, 1245*R)
 
         self.SV3310_icon = Valve_image(self.HydraulicTab, mode="V")
         self.SV3310_icon.move(876 * R, 1160 * R)
