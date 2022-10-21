@@ -6217,7 +6217,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 self.HTR6202_v2.LOOPPIDWindow.Mode.ButtonRClicked()
                 self.HTR6202_v2.State.ButtonRClicked()
-            self.LOOPPID_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
+            self.LOOPPID_EN_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
         elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6202"]:
             if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6202"]:
                 if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]:
@@ -6226,16 +6226,16 @@ class MainWindow(QtWidgets.QMainWindow):
                 else:
                     self.HTR6202_v2.LOOPPIDWindow.Mode.ButtonRClicked()
                     self.HTR6202_v2.State.ButtonRClicked()
-                self.LOOPPID_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
+                self.LOOPPID_EN_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
             elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6202"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"] != self.LOOPPID_buffer["HTR6202"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"] != self.LOOPPID_EN_buffer["HTR6202"]:
                     if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]:
                         self.HTR6202_v2.LOOPPIDWindow.Mode.ButtonLClicked()
                         self.HTR6202_v2.State.ButtonLClicked()
                     else:
                         self.HTR6202_v2.LOOPPIDWindow.Mode.ButtonRClicked()
                         self.HTR6202_v2.State.ButtonRClicked()
-                    self.LOOPPID_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
+                    self.LOOPPID_EN_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
                 else:
                     pass
 
