@@ -4310,7 +4310,7 @@ class Control_v2(QtWidgets.QWidget):
         self.Button.setObjectName("Button")
         self.Button.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
         self.Button.setProperty("State",True)
-        self.Button.setStyleSheet("QPushButton {" +C_BLUE + C_WHITE + FONT + BORDER_RADIUS + "} QWidget[State = true]{" + C_GREEN
+        self.Button.setStyleSheet("QPushButton {" +C_BLUE + C_WHITE + FONT + BORDER_RADIUS + "} QWidget[State = true]{" + C_BLUE
                                  + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
 
         self.Unit = " W"
