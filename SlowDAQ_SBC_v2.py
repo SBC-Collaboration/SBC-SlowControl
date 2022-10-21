@@ -7220,7 +7220,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                received_dic_c["data"]["LOOP2PT"]["MODE1"]["PUMP3305"],
                                received_dic_c["data"]["LOOP2PT"]["MODE2"]["PUMP3305"],
                                received_dic_c["data"]["LOOP2PT"]["MODE3"]["PUMP3305"],
-                               received_dic_c["data"]["LOOP2PT"]["SET0"]["PUMP3305"],
+                               -999,
                                received_dic_c["data"]["LOOP2PT"]["SET1"]["PUMP3305"],
                                received_dic_c["data"]["LOOP2PT"]["SET2"]["PUMP3305"],
                                received_dic_c["data"]["LOOP2PT"]["SET3"]["PUMP3305"]))
