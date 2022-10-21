@@ -4923,6 +4923,7 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.setMinimumSize(460 * R, 20 * R)
         self.setSizePolicy(sizePolicy)
         self.objectname = "ProcedureWidget"
+        self.setStyleSheet("QWidget { background: transparent; }")
 
 
         self.GL = QtWidgets.QGridLayout(self)
@@ -4935,6 +4936,7 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.Group.setTitle("ProcedureWidget")
         self.Group.setLayout(self.GL)
         self.Group.move(0 * R, 0 * R)
+        self.Group.setStyleSheet("QWidget { background: transparent; }")
 
 
         self.Running = ColoredStatus(self, mode= 4)
