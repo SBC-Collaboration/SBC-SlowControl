@@ -4860,10 +4860,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 pass
 
         if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6202"]:
-            self.HTR6202_v2.State.ButtonTransitionState(True)
+            self.HTR6202_v2.ButtonTransitionState(True)
             self.HTR6202_v2.LOOPPIDWindow.ButtonTransitionState(True)
         elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6202"]:
-            self.HTR6202_v2.State.ButtonTransitionState(False)
+            self.HTR6202_v2.ButtonTransitionState(False)
             self.HTR6202_v2.LOOPPIDWindow.ButtonTransitionState(False)
         else:
             pass
