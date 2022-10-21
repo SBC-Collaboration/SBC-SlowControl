@@ -3863,7 +3863,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.PUMP3305.LOOP2PTSubWindow.Mode.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
         # self.PUMP3305.State.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
 
-        
+
         # need to be verified that this is not needed at all
         # self.SERVO3321.LOOPPIDWindow.Mode.Activate(
         #     received_dic_c["data"]["LOOPPID"]["MAN"]["SERVO3321"])
@@ -7000,14 +7000,14 @@ class MainWindow(QtWidgets.QMainWindow):
         #             self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
         #         else:
         #             pass
-        if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
-
-            self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonLClicked()
-            self.PUMP3305.State.ButtonLClicked()
-
-        else:
-            self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
-            self.PUMP3305.State.ButtonRClicked()
+        # if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
+        #
+        #     self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonLClicked()
+        #     self.PUMP3305.State.ButtonLClicked()
+        #
+        # else:
+        #     self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
+        #     self.PUMP3305.State.ButtonRClicked()
 
 
 
