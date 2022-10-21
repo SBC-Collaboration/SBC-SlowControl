@@ -150,7 +150,7 @@ class PLC(QtCore.QObject):
         self.Valve_MAN = copy.copy(sec.VALVE_MAN)
         self.Valve_INTLKD = copy.copy(sec.VALVE_INTLKD)
         self.Valve_ERR = copy.copy(sec.VALVE_ERR)
-        self.Valve_Command_Cache = copy.copy(sec.VALVE_COMMAND_CACHE)
+        self.Valve_Busy = copy.copy(sec.VALVE_BUSY)
 
         self.LOOPPID_ADR_BASE = copy.copy(sec.LOOPPID_ADR_BASE)
 
@@ -189,7 +189,7 @@ class PLC(QtCore.QObject):
         self.LOOPPID_SET2 = copy.copy(sec.LOOPPID_SET2)
 
         self.LOOPPID_SET3 = copy.copy(sec.LOOPPID_SET3)
-        self.LOOPPID_Command_Cache = copy.copy(sec.LOOPPID_COMMAND_CACHE)
+        self.LOOPPID_Busy = copy.copy(sec.LOOPPID_BUSY)
         # self.LOOPPID_ADR_BASE = sec.LOOPPID_ADR_BASE
         #
         # self.LOOPPID_MODE0 = sec.LOOPPID_MODE0
@@ -227,7 +227,7 @@ class PLC(QtCore.QObject):
         # self.LOOPPID_SET2 = sec.LOOPPID_SET2
         #
         # self.LOOPPID_SET3 = sec.LOOPPID_SET3
-        # self.LOOPPID_Command_Cache = sec.LOOPPID_COMMAND_CACHE
+        # self.LOOPPID_Busy = sec.LOOPPID_BUSY
 
         self.LOOP2PT_ADR_BASE = copy.copy(sec.LOOP2PT_ADR_BASE)
         self.LOOP2PT_MODE0 = copy.copy(sec.LOOP2PT_MODE0)
@@ -241,7 +241,7 @@ class PLC(QtCore.QObject):
         self.LOOP2PT_SET1 = copy.copy(sec.LOOP2PT_SET1)
         self.LOOP2PT_SET2 = copy.copy(sec.LOOP2PT_SET2)
         self.LOOP2PT_SET3 = copy.copy(sec.LOOP2PT_SET3)
-        self.LOOP2PT_Command_Cache =  copy.copy(sec.LOOP2PT_COMMAND_CACHE)
+        self.LOOP2PT_Busy =  copy.copy(sec.LOOP2PT_BUSY)
 
         self.Procedure_address = copy.copy(sec.PROCEDURE_ADDRESS)
         self.Procedure_running = copy.copy(sec.PROCEDURE_RUNNING)
@@ -261,6 +261,7 @@ class PLC(QtCore.QObject):
         self.FLAG_ADDRESS = copy.copy(sec.FLAG_ADDRESS)
         self.FLAG_DIC = copy.copy(sec.FLAG_DIC)
         self.FLAG_INTLKD = copy.copy(sec.FLAG_INTLKD)
+        self.FLAG_Busy = copy.copy(sec.FLAG_BUSY)
 
         self.FF_ADDRESS = copy.copy(sec.FF_ADDRESS)
         self.FF_DIC = copy.copy(sec.FF_DIC)
@@ -334,7 +335,7 @@ class PLC(QtCore.QObject):
                               "Valve_MAN":self.Valve_MAN,
                               "Valve_INTLKD":self.Valve_INTLKD,
                               "Valve_ERR":self.Valve_ERR,
-                              "Valve_Command_Cache":self.Valve_Command_Cache,
+                              "Valve_Busy":self.Valve_Busy,
                               "LOOPPID_ADR_BASE":self.LOOPPID_ADR_BASE,
                               "LOOPPID_MODE0":self.LOOPPID_MODE0,
                               "LOOPPID_MODE1":self.LOOPPID_MODE1,
@@ -354,7 +355,7 @@ class PLC(QtCore.QObject):
                               "LOOPPID_SET1":self.LOOPPID_SET1,
                               "LOOPPID_SET2":self.LOOPPID_SET2,
                               "LOOPPID_SET3":self.LOOPPID_SET3,
-                              "LOOPPID_Command_Cache":self.LOOPPID_Command_Cache,
+                              "LOOPPID_Busy":self.LOOPPID_Busy,
                               "LOOP2PT_ADR_BASE":self.LOOP2PT_ADR_BASE,
                               "LOOP2PT_MODE0": self.LOOP2PT_MODE0,
                               "LOOP2PT_MODE1": self.LOOP2PT_MODE1,
@@ -367,7 +368,7 @@ class PLC(QtCore.QObject):
                               "LOOP2PT_SET1": self.LOOP2PT_SET1,
                               "LOOP2PT_SET2": self.LOOP2PT_SET2,
                               "LOOP2PT_SET3": self.LOOP2PT_SET3,
-                              "LOOP2PT_Command_Cache":self.LOOP2PT_Command_Cache,
+                              "LOOP2PT_Busy":self.LOOP2PT_Busy,
                               "Procedure_address":self.Procedure_address,
                               "Procedure_running":self.Procedure_running,
                               "Procedure_INTLKD":self.Procedure_INTLKD,
@@ -384,6 +385,7 @@ class PLC(QtCore.QObject):
                               "FLAG_ADDRESS":self.FLAG_ADDRESS,
                               "FLAG_DIC":self.FLAG_DIC,
                               "FLAG_INTLKD":self.FLAG_INTLKD,
+                              "FLAG_Busy":self.FLAG_Busy,
                               "FF_ADDRESS": self.FF_ADDRESS,
                               "FF_DIC": self.FF_DIC,
                               "PARAM_F_ADDRESS": self.PARAM_F_ADDRESS,
@@ -511,7 +513,7 @@ class PLC(QtCore.QObject):
                 self.Valve[key] = struct.pack("H", Raw_BO_Valve[key].getRegister(0))
 
                 self.Valve_OUT[key] = self.ReadCoil(1, self.valve_address[key])
-                self.Valve_Command_Cache[key] = self.ReadCoil(2, self.valve_address[key]) or self.ReadCoil(4, self.valve_address[key])
+                self.Valve_Busy[key] = self.ReadCoil(2, self.valve_address[key]) or self.ReadCoil(4, self.valve_address[key])
                 self.Valve_INTLKD[key] = self.ReadCoil(8, self.valve_address[key])
                 self.Valve_MAN[key] = self.ReadCoil(16, self.valve_address[key])
                 self.Valve_ERR[key] = self.ReadCoil(32, self.valve_address[key])
@@ -604,7 +606,7 @@ class PLC(QtCore.QObject):
                     struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
                                                     Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
 
-                self.LOOPPID_Command_Cache[key] = self.ReadCoil(2**13, self.LOOPPID_ADR_BASE[key]) or self.ReadCoil(2**14,self.LOOPPID_ADR_BASE[key])
+                self.LOOPPID_Busy[key] = self.ReadCoil(2**13, self.LOOPPID_ADR_BASE[key]) or self.ReadCoil(2**14,self.LOOPPID_ADR_BASE[key])
 
             ##########################################################################################
 
@@ -638,9 +640,9 @@ class PLC(QtCore.QObject):
                 self.LOOP2PT_SET3[key] = round(
                     struct.unpack(">f", struct.pack(">HH", Raw_LOOP2PT_6[key].getRegister(0 + 1),
                                                     Raw_LOOP2PT_6[key].getRegister(0)))[0], 3)
-                self.LOOP2PT_Command_Cache[key] = self.ReadCoil(2 ** 1, self.LOOP2PT_ADR_BASE[key]) or self.ReadCoil(
+                self.LOOP2PT_Busy[key] = self.ReadCoil(2 ** 1, self.LOOP2PT_ADR_BASE[key]) or self.ReadCoil(
                     2 ** 2, self.LOOP2PT_ADR_BASE[key])
-                print(key,self.LOOP2PT_Command_Cache[key])
+                print(key,self.LOOP2PT_Busy[key])
 
 
             ############################################################################################
@@ -679,10 +681,14 @@ class PLC(QtCore.QObject):
             for key in self.FLAG_ADDRESS:
                 self.FLAG_DIC[key] = self.ReadCoil(1, self.FLAG_ADDRESS[key])
                 # print("\n",self.FLAG_DIC,"\n")
-                self.FLAG_INTLKD[key] = self.ReadCoil(2 ** 1, self.FLAG_ADDRESS[key])
+                self.FLAG_INTLKD[key] = self.ReadCoil(2 ** 3, self.FLAG_ADDRESS[key])
+                self.FLAG_Busy[key] = self.ReadCoil(2 ** 1, self.FLAG_ADDRESS[key]) or self.ReadCoil(
+                    2 ** 2, self.FLAG_ADDRESS[key])
+
                 # print("MAN",key, self.ReadCoil(2 ** 2, self.FLAG_ADDRESS[key]) or self.ReadCoil(2 ** 3, self.FLAG_ADDRESS[key]))
                 # print("OUT",self.FLAG_DIC[key])
                 # print("INTLKC", self.FLAG_INTLKD[key])
+            print("PLC FLAG",self.FLAG_DIC,datetime.datetime.now())
 
 
 
@@ -1240,7 +1246,7 @@ class UpdateDataBase(QtCore.QObject):
         self.para_Switch = 0
         self.rate_Switch = 90
         self.para_LOOPPID = 0
-        self.rate_LOOPPID = 90
+        self.rate_LOOPPID = 5
         self.para_LOOP2PT = 0
         self.rate_LOOP2PT = 90
         self.para_FLAG=0
@@ -1371,6 +1377,7 @@ class UpdateDataBase(QtCore.QObject):
         self.FLAG_ADDRESS = copy.copy(sec.FLAG_ADDRESS)
         self.FLAG_DIC = copy.copy(sec.FLAG_DIC)
         self.FLAG_INTLKD = copy.copy(sec.FLAG_INTLKD)
+        self.FLAG_Busy =copy.copy(sec.FLAG_BUSY)
 
         self.FF_ADDRESS = copy.copy(sec.FF_ADDRESS)
         self.FF_DIC = copy.copy(sec.FF_DIC)
@@ -1453,7 +1460,8 @@ class UpdateDataBase(QtCore.QObject):
                         self.para_PT = 0
                     # print(2)
                     for key in self.Valve_OUT:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if key == 'SV3307':
+                            print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
                         if self.Valve_OUT[key] != self.Valve_buffer[key]:
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.early_dt, self.Valve_buffer[key])
                             self.db.insert_data_into_datastorage_wocommit(key + '_OUT', self.dt, self.Valve_OUT[key])
@@ -2195,94 +2203,178 @@ class UpdateServer(QtCore.QObject):
         self.socket = self.context.socket(zmq.REP)
         self.socket.setsockopt(zmq.LINGER, 0)  # ____POLICY: set upon instantiations
         self.socket.setsockopt(zmq.AFFINITY, 1)  # ____POLICY: map upon IO-type thread
-        self.socket.setsockopt(zmq.RCVTIMEO, 5000)
+        self.socket.setsockopt(zmq.RCVTIMEO, 1000)
         self.socket.bind("tcp://*:5555")
         self.Running = False
         self.period = 1
         # self.socket.re
         print("connect to the PLC server")
 
-        self.TT_FP_dic_ini = copy.copy(sec.TT_FP_DIC)
-        self.TT_BO_dic_ini = copy.copy(sec.TT_BO_DIC)
-        self.PT_dic_ini = copy.copy(sec.PT_DIC)
-        self.LEFT_REAL_ini = copy.copy(sec.LEFT_REAL_DIC)
-        self.TT_FP_LowLimit_ini = copy.copy(sec.TT_FP_LOWLIMIT)
-        self.TT_FP_HighLimit_ini = copy.copy(sec.TT_FP_HIGHLIMIT)
-        self.TT_BO_LowLimit_ini = copy.copy(sec.TT_BO_LOWLIMIT)
-        self.TT_BO_HighLimit_ini = copy.copy(sec.TT_BO_HIGHLIMIT)
-        self.PT_LowLimit_ini = copy.copy(sec.PT_LOWLIMIT)
-        self.PT_HighLimit_ini = copy.copy(sec.PT_HIGHLIMIT)
-        self.LEFT_REAL_LowLimit_ini = copy.copy(sec.LEFT_REAL_LOWLIMIT)
-        self.LEFT_REAL_HighLimit_ini = copy.copy(sec.LEFT_REAL_HIGHLIMIT)
-        self.TT_FP_Activated_ini = copy.copy(sec.TT_FP_ACTIVATED)
-        self.TT_BO_Activated_ini = copy.copy(sec.TT_BO_ACTIVATED)
-        self.PT_Activated_ini = copy.copy(sec.PT_ACTIVATED)
-        self.TT_FP_Alarm_ini = copy.copy(sec.TT_FP_ALARM)
-        self.TT_BO_Alarm_ini = copy.copy(sec.TT_BO_ALARM)
-        self.PT_Alarm_ini = copy.copy(sec.PT_ALARM)
-        self.LEFT_REAL_Activated_ini= copy.copy(sec.LEFT_REAL_ACTIVATED)
-        self.LEFT_REAL_Alarm_ini = copy.copy(sec.LEFT_REAL_ALARM)
-        self.MainAlarm_ini = copy.copy(sec.MAINALARM)
-        self.Valve_OUT_ini = copy.copy(sec.VALVE_OUT)
-        self.Valve_MAN_ini = copy.copy(sec.VALVE_MAN)
-        self.Valve_INTLKD_ini = copy.copy(sec.VALVE_INTLKD)
-        self.Valve_ERR_ini = copy.copy(sec.VALVE_ERR)
-        self.Valve_Command_Cache_ini = copy.copy(sec.VALVE_COMMAND_CACHE)
-        self.Switch_OUT_ini = copy.copy(sec.SWITCH_OUT)
-        self.Switch_MAN_ini = copy.copy(sec.SWITCH_MAN)
-        self.Switch_INTLKD_ini = copy.copy(sec.SWITCH_INTLKD)
-        self.Switch_ERR_ini = copy.copy(sec.SWITCH_ERR)
-        self.Din_dic_ini = copy.copy(sec.DIN_DIC)
-        self.LOOPPID_MODE0_ini = copy.copy(sec.LOOPPID_MODE0)
-        self.LOOPPID_MODE1_ini = copy.copy(sec.LOOPPID_MODE1)
-        self.LOOPPID_MODE2_ini = copy.copy(sec.LOOPPID_MODE2)
-        self.LOOPPID_MODE3_ini = copy.copy(sec.LOOPPID_MODE3)
-        self.LOOPPID_INTLKD_ini = copy.copy(sec.LOOPPID_INTLKD)
-        self.LOOPPID_MAN_ini = copy.copy(sec.LOOPPID_MAN)
-        self.LOOPPID_ERR_ini = copy.copy(sec.LOOPPID_ERR)
-        self.LOOPPID_SATHI_ini = copy.copy(sec.LOOPPID_SATHI)
-        self.LOOPPID_SATLO_ini = copy.copy(sec.LOOPPID_SATLO)
-        self.LOOPPID_EN_ini = copy.copy(sec.LOOPPID_EN)
-        self.LOOPPID_OUT_ini = copy.copy(sec.LOOPPID_OUT)
-        self.LOOPPID_IN_ini = copy.copy(sec.LOOPPID_IN)
-        self.LOOPPID_HI_LIM_ini = copy.copy(sec.LOOPPID_HI_LIM)
-        self.LOOPPID_LO_LIM_ini = copy.copy(sec.LOOPPID_LO_LIM)
-        self.LOOPPID_SET0_ini = copy.copy(sec.LOOPPID_SET0)
-        self.LOOPPID_SET1_ini = copy.copy(sec.LOOPPID_SET1)
-        self.LOOPPID_SET2_ini = copy.copy(sec.LOOPPID_SET2)
-        self.LOOPPID_SET3_ini = copy.copy(sec.LOOPPID_SET3)
-        self.LOOPPID_Command_Cache_ini = copy.copy(sec.LOOPPID_COMMAND_CACHE)
+        # self.TT_FP_dic_ini = copy.copy(sec.TT_FP_DIC)
+        # self.TT_BO_dic_ini = copy.copy(sec.TT_BO_DIC)
+        # self.PT_dic_ini = copy.copy(sec.PT_DIC)
+        # self.LEFT_REAL_ini = copy.copy(sec.LEFT_REAL_DIC)
+        # self.TT_FP_LowLimit_ini = copy.copy(sec.TT_FP_LOWLIMIT)
+        # self.TT_FP_HighLimit_ini = copy.copy(sec.TT_FP_HIGHLIMIT)
+        # self.TT_BO_LowLimit_ini = copy.copy(sec.TT_BO_LOWLIMIT)
+        # self.TT_BO_HighLimit_ini = copy.copy(sec.TT_BO_HIGHLIMIT)
+        # self.PT_LowLimit_ini = copy.copy(sec.PT_LOWLIMIT)
+        # self.PT_HighLimit_ini = copy.copy(sec.PT_HIGHLIMIT)
+        # self.LEFT_REAL_LowLimit_ini = copy.copy(sec.LEFT_REAL_LOWLIMIT)
+        # self.LEFT_REAL_HighLimit_ini = copy.copy(sec.LEFT_REAL_HIGHLIMIT)
+        # self.TT_FP_Activated_ini = copy.copy(sec.TT_FP_ACTIVATED)
+        # self.TT_BO_Activated_ini = copy.copy(sec.TT_BO_ACTIVATED)
+        # self.PT_Activated_ini = copy.copy(sec.PT_ACTIVATED)
+        # self.TT_FP_Alarm_ini = copy.copy(sec.TT_FP_ALARM)
+        # self.TT_BO_Alarm_ini = copy.copy(sec.TT_BO_ALARM)
+        # self.PT_Alarm_ini = copy.copy(sec.PT_ALARM)
+        # self.LEFT_REAL_Activated_ini= copy.copy(sec.LEFT_REAL_ACTIVATED)
+        # self.LEFT_REAL_Alarm_ini = copy.copy(sec.LEFT_REAL_ALARM)
+        # self.MainAlarm_ini = copy.copy(sec.MAINALARM)
+        # self.Valve_OUT_ini = copy.copy(sec.VALVE_OUT)
+        # self.Valve_MAN_ini = copy.copy(sec.VALVE_MAN)
+        # self.Valve_INTLKD_ini = copy.copy(sec.VALVE_INTLKD)
+        # self.Valve_ERR_ini = copy.copy(sec.VALVE_ERR)
+        # self.Valve_Busy_ini = copy.copy(sec.VALVE_BUSY)
+        # self.Switch_OUT_ini = copy.copy(sec.SWITCH_OUT)
+        # self.Switch_MAN_ini = copy.copy(sec.SWITCH_MAN)
+        # self.Switch_INTLKD_ini = copy.copy(sec.SWITCH_INTLKD)
+        # self.Switch_ERR_ini = copy.copy(sec.SWITCH_ERR)
+        # self.Din_dic_ini = copy.copy(sec.DIN_DIC)
+        # self.LOOPPID_MODE0_ini = copy.copy(sec.LOOPPID_MODE0)
+        # self.LOOPPID_MODE1_ini = copy.copy(sec.LOOPPID_MODE1)
+        # self.LOOPPID_MODE2_ini = copy.copy(sec.LOOPPID_MODE2)
+        # self.LOOPPID_MODE3_ini = copy.copy(sec.LOOPPID_MODE3)
+        # self.LOOPPID_INTLKD_ini = copy.copy(sec.LOOPPID_INTLKD)
+        # self.LOOPPID_MAN_ini = copy.copy(sec.LOOPPID_MAN)
+        # self.LOOPPID_ERR_ini = copy.copy(sec.LOOPPID_ERR)
+        # self.LOOPPID_SATHI_ini = copy.copy(sec.LOOPPID_SATHI)
+        # self.LOOPPID_SATLO_ini = copy.copy(sec.LOOPPID_SATLO)
+        # self.LOOPPID_EN_ini = copy.copy(sec.LOOPPID_EN)
+        # self.LOOPPID_OUT_ini = copy.copy(sec.LOOPPID_OUT)
+        # self.LOOPPID_IN_ini = copy.copy(sec.LOOPPID_IN)
+        # self.LOOPPID_HI_LIM_ini = copy.copy(sec.LOOPPID_HI_LIM)
+        # self.LOOPPID_LO_LIM_ini = copy.copy(sec.LOOPPID_LO_LIM)
+        # self.LOOPPID_SET0_ini = copy.copy(sec.LOOPPID_SET0)
+        # self.LOOPPID_SET1_ini = copy.copy(sec.LOOPPID_SET1)
+        # self.LOOPPID_SET2_ini = copy.copy(sec.LOOPPID_SET2)
+        # self.LOOPPID_SET3_ini = copy.copy(sec.LOOPPID_SET3)
+        # self.LOOPPID_Busy_ini = copy.copy(sec.LOOPPID_BUSY)
+        #
+        # self.LOOP2PT_MODE0_ini = copy.copy(sec.LOOP2PT_MODE0)
+        # self.LOOP2PT_MODE1_ini = copy.copy(sec.LOOP2PT_MODE1)
+        # self.LOOP2PT_MODE2_ini = copy.copy(sec.LOOP2PT_MODE2)
+        # self.LOOP2PT_MODE3_ini = copy.copy(sec.LOOP2PT_MODE3)
+        # self.LOOP2PT_INTLKD_ini = copy.copy(sec.LOOP2PT_INTLKD)
+        # self.LOOP2PT_MAN_ini = copy.copy(sec.LOOP2PT_MAN)
+        # self.LOOP2PT_ERR_ini = copy.copy(sec.LOOP2PT_ERR)
+        # self.LOOP2PT_OUT_ini = copy.copy(sec.LOOP2PT_OUT)
+        # self.LOOP2PT_SET1_ini = copy.copy(sec.LOOP2PT_SET1)
+        # self.LOOP2PT_SET2_ini = copy.copy(sec.LOOP2PT_SET2)
+        # self.LOOP2PT_SET3_ini = copy.copy(sec.LOOP2PT_SET3)
+        # self.LOOP2PT_Busy_ini = copy.copy(sec.LOOP2PT_BUSY)
+        #
+        # self.Procedure_running_ini = copy.copy(sec.PROCEDURE_RUNNING)
+        # self.Procedure_INTLKD_ini = copy.copy(sec.PROCEDURE_INTLKD)
+        # self.Procedure_EXIT_ini = copy.copy(sec.PROCEDURE_EXIT)
+        #
+        # self.INTLK_D_ADDRESS_ini = copy.copy(sec.INTLK_D_ADDRESS)
+        # self.INTLK_D_DIC_ini = copy.copy(sec.INTLK_D_DIC)
+        # self.INTLK_D_EN_ini = copy.copy(sec.INTLK_D_EN)
+        # self.INTLK_D_COND_ini = copy.copy(sec.INTLK_D_COND)
+        # self.INTLK_A_ADDRESS_ini = copy.copy(sec.INTLK_A_ADDRESS)
+        # self.INTLK_A_DIC_ini = copy.copy(sec.INTLK_A_DIC)
+        # self.INTLK_A_EN_ini = copy.copy(sec.INTLK_A_EN)
+        # self.INTLK_A_COND_ini = copy.copy(sec.INTLK_A_COND)
+        # self.INTLK_A_SET_ini = copy.copy(sec.INTLK_A_SET)
+        #
+        # self.FLAG_ADDRESS_ini = copy.copy(sec.FLAG_ADDRESS)
+        # self.FLAG_DIC_ini = copy.copy(sec.FLAG_DIC)
+        # self.FLAG_INTLKD_ini = copy.copy(sec.FLAG_INTLKD)
+        # self.FLAG_Busy_ini = copy.copy(sec.FLAG_BUSY)
 
-        self.LOOP2PT_MODE0_ini = copy.copy(sec.LOOP2PT_MODE0)
-        self.LOOP2PT_MODE1_ini = copy.copy(sec.LOOP2PT_MODE1)
-        self.LOOP2PT_MODE2_ini = copy.copy(sec.LOOP2PT_MODE2)
-        self.LOOP2PT_MODE3_ini = copy.copy(sec.LOOP2PT_MODE3)
-        self.LOOP2PT_INTLKD_ini = copy.copy(sec.LOOP2PT_INTLKD)
-        self.LOOP2PT_MAN_ini = copy.copy(sec.LOOP2PT_MAN)
-        self.LOOP2PT_ERR_ini = copy.copy(sec.LOOP2PT_ERR)
-        self.LOOP2PT_OUT_ini = copy.copy(sec.LOOP2PT_OUT)
-        self.LOOP2PT_SET1_ini = copy.copy(sec.LOOP2PT_SET1)
-        self.LOOP2PT_SET2_ini = copy.copy(sec.LOOP2PT_SET2)
-        self.LOOP2PT_SET3_ini = copy.copy(sec.LOOP2PT_SET3)
-        self.LOOP2PT_Command_Cache_ini = copy.copy(sec.LOOP2PT_COMMAND_CACHE)
+        self.TT_FP_dic_ini = sec.TT_FP_DIC
+        self.TT_BO_dic_ini = sec.TT_BO_DIC
+        self.PT_dic_ini = sec.PT_DIC
+        self.LEFT_REAL_ini = sec.LEFT_REAL_DIC
+        self.TT_FP_LowLimit_ini = sec.TT_FP_LOWLIMIT
+        self.TT_FP_HighLimit_ini = sec.TT_FP_HIGHLIMIT
+        self.TT_BO_LowLimit_ini = sec.TT_BO_LOWLIMIT
+        self.TT_BO_HighLimit_ini = sec.TT_BO_HIGHLIMIT
+        self.PT_LowLimit_ini = sec.PT_LOWLIMIT
+        self.PT_HighLimit_ini = sec.PT_HIGHLIMIT
+        self.LEFT_REAL_LowLimit_ini = sec.LEFT_REAL_LOWLIMIT
+        self.LEFT_REAL_HighLimit_ini = sec.LEFT_REAL_HIGHLIMIT
+        self.TT_FP_Activated_ini = sec.TT_FP_ACTIVATED
+        self.TT_BO_Activated_ini = sec.TT_BO_ACTIVATED
+        self.PT_Activated_ini = sec.PT_ACTIVATED
+        self.TT_FP_Alarm_ini = sec.TT_FP_ALARM
+        self.TT_BO_Alarm_ini = sec.TT_BO_ALARM
+        self.PT_Alarm_ini = sec.PT_ALARM
+        self.LEFT_REAL_Activated_ini = sec.LEFT_REAL_ACTIVATED
+        self.LEFT_REAL_Alarm_ini = sec.LEFT_REAL_ALARM
+        self.MainAlarm_ini = sec.MAINALARM
+        self.Valve_OUT_ini = sec.VALVE_OUT
+        self.Valve_MAN_ini = sec.VALVE_MAN
+        self.Valve_INTLKD_ini = sec.VALVE_INTLKD
+        self.Valve_ERR_ini = sec.VALVE_ERR
+        self.Valve_Busy_ini = sec.VALVE_BUSY
+        self.Switch_OUT_ini = sec.SWITCH_OUT
+        self.Switch_MAN_ini = sec.SWITCH_MAN
+        self.Switch_INTLKD_ini = sec.SWITCH_INTLKD
+        self.Switch_ERR_ini = sec.SWITCH_ERR
+        self.Din_dic_ini = sec.DIN_DIC
+        self.LOOPPID_MODE0_ini = sec.LOOPPID_MODE0
+        self.LOOPPID_MODE1_ini = sec.LOOPPID_MODE1
+        self.LOOPPID_MODE2_ini = sec.LOOPPID_MODE2
+        self.LOOPPID_MODE3_ini = sec.LOOPPID_MODE3
+        self.LOOPPID_INTLKD_ini = sec.LOOPPID_INTLKD
+        self.LOOPPID_MAN_ini = sec.LOOPPID_MAN
+        self.LOOPPID_ERR_ini = sec.LOOPPID_ERR
+        self.LOOPPID_SATHI_ini = sec.LOOPPID_SATHI
+        self.LOOPPID_SATLO_ini = sec.LOOPPID_SATLO
+        self.LOOPPID_EN_ini = sec.LOOPPID_EN
+        self.LOOPPID_OUT_ini = sec.LOOPPID_OUT
+        self.LOOPPID_IN_ini = sec.LOOPPID_IN
+        self.LOOPPID_HI_LIM_ini = sec.LOOPPID_HI_LIM
+        self.LOOPPID_LO_LIM_ini = sec.LOOPPID_LO_LIM
+        self.LOOPPID_SET0_ini = sec.LOOPPID_SET0
+        self.LOOPPID_SET1_ini = sec.LOOPPID_SET1
+        self.LOOPPID_SET2_ini = sec.LOOPPID_SET2
+        self.LOOPPID_SET3_ini = sec.LOOPPID_SET3
+        self.LOOPPID_Busy_ini = sec.LOOPPID_BUSY
 
-        self.Procedure_running_ini = copy.copy(sec.PROCEDURE_RUNNING)
-        self.Procedure_INTLKD_ini = copy.copy(sec.PROCEDURE_INTLKD)
-        self.Procedure_EXIT_ini = copy.copy(sec.PROCEDURE_EXIT)
+        self.LOOP2PT_MODE0_ini = sec.LOOP2PT_MODE0
+        self.LOOP2PT_MODE1_ini = sec.LOOP2PT_MODE1
+        self.LOOP2PT_MODE2_ini = sec.LOOP2PT_MODE2
+        self.LOOP2PT_MODE3_ini = sec.LOOP2PT_MODE3
+        self.LOOP2PT_INTLKD_ini = sec.LOOP2PT_INTLKD
+        self.LOOP2PT_MAN_ini = sec.LOOP2PT_MAN
+        self.LOOP2PT_ERR_ini = sec.LOOP2PT_ERR
+        self.LOOP2PT_OUT_ini = sec.LOOP2PT_OUT
+        self.LOOP2PT_SET1_ini = sec.LOOP2PT_SET1
+        self.LOOP2PT_SET2_ini = sec.LOOP2PT_SET2
+        self.LOOP2PT_SET3_ini = sec.LOOP2PT_SET3
+        self.LOOP2PT_Busy_ini = sec.LOOP2PT_BUSY
 
-        self.INTLK_D_ADDRESS_ini = copy.copy(sec.INTLK_D_ADDRESS)
-        self.INTLK_D_DIC_ini = copy.copy(sec.INTLK_D_DIC)
-        self.INTLK_D_EN_ini = copy.copy(sec.INTLK_D_EN)
-        self.INTLK_D_COND_ini = copy.copy(sec.INTLK_D_COND)
-        self.INTLK_A_ADDRESS_ini = copy.copy(sec.INTLK_A_ADDRESS)
-        self.INTLK_A_DIC_ini = copy.copy(sec.INTLK_A_DIC)
-        self.INTLK_A_EN_ini = copy.copy(sec.INTLK_A_EN)
-        self.INTLK_A_COND_ini = copy.copy(sec.INTLK_A_COND)
-        self.INTLK_A_SET_ini = copy.copy(sec.INTLK_A_SET)
+        self.Procedure_running_ini = sec.PROCEDURE_RUNNING
+        self.Procedure_INTLKD_ini = sec.PROCEDURE_INTLKD
+        self.Procedure_EXIT_ini = sec.PROCEDURE_EXIT
 
-        self.FLAG_ADDRESS_ini = copy.copy(sec.FLAG_ADDRESS)
-        self.FLAG_DIC_ini = copy.copy(sec.FLAG_DIC)
-        self.FLAG_INTLKD_ini = copy.copy(sec.FLAG_INTLKD)
+        self.INTLK_D_ADDRESS_ini = sec.INTLK_D_ADDRESS
+        self.INTLK_D_DIC_ini = sec.INTLK_D_DIC
+        self.INTLK_D_EN_ini = sec.INTLK_D_EN
+        self.INTLK_D_COND_ini = sec.INTLK_D_COND
+        self.INTLK_A_ADDRESS_ini = sec.INTLK_A_ADDRESS
+        self.INTLK_A_DIC_ini = sec.INTLK_A_DIC
+        self.INTLK_A_EN_ini = sec.INTLK_A_EN
+        self.INTLK_A_COND_ini = sec.INTLK_A_COND
+        self.INTLK_A_SET_ini = sec.INTLK_A_SET
+
+        self.FLAG_ADDRESS_ini = sec.FLAG_ADDRESS
+        self.FLAG_DIC_ini = sec.FLAG_DIC
+        self.FLAG_INTLKD_ini = sec.FLAG_INTLKD
+        self.FLAG_Busy_ini = sec.FLAG_BUSY
 
         self.data_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
@@ -2292,7 +2384,7 @@ class UpdateServer(QtCore.QObject):
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
                                             "ERR": self.Valve_ERR_ini,
-                                            "Command_Cache":self.Valve_Command_Cache_ini},
+                                            "Busy":self.Valve_Busy_ini},
                                   "Switch": {"OUT": self.Switch_OUT_ini,
                                              "INTLKD": self.Switch_INTLKD_ini,
                                              "MAN": self.Switch_MAN_ini,
@@ -2316,7 +2408,7 @@ class UpdateServer(QtCore.QObject):
                                               "SET1": self.LOOPPID_SET1_ini,
                                               "SET2": self.LOOPPID_SET2_ini,
                                               "SET3": self.LOOPPID_SET3_ini,
-                                              "Command_Cache":self.LOOPPID_Command_Cache_ini},
+                                              "Busy":self.LOOPPID_Busy_ini},
                                   "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
                                               "MODE1": self.LOOP2PT_MODE1_ini,
                                               "MODE2": self.LOOP2PT_MODE2_ini,
@@ -2328,7 +2420,7 @@ class UpdateServer(QtCore.QObject):
                                               "SET1": self.LOOP2PT_SET1_ini,
                                               "SET2": self.LOOP2PT_SET2_ini,
                                               "SET3": self.LOOP2PT_SET3_ini,
-                                              "Command_Cache":self.LOOP2PT_Command_Cache_ini},
+                                              "Busy":self.LOOP2PT_Busy_ini},
                                   "INTLK_D": {"value": self.INTLK_D_DIC_ini,
                                               "EN": self.INTLK_D_EN_ini,
                                               "COND": self.INTLK_D_COND_ini},
@@ -2337,7 +2429,8 @@ class UpdateServer(QtCore.QObject):
                                               "COND":self.INTLK_A_COND_ini,
                                               "SET":self.INTLK_A_SET_ini},
                                   "FLAG": {"value":self.FLAG_DIC_ini,
-                                           "INTLKD":self.FLAG_INTLKD_ini},
+                                           "INTLKD":self.FLAG_INTLKD_ini,
+                                           "Busy":self.FLAG_Busy_ini},
                                   "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini}},
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},
@@ -2386,6 +2479,7 @@ class UpdateServer(QtCore.QObject):
         self.Running = False
 
     def pack_data(self):
+        print("Updateserver", self.data_dic["data"]['FLAG']["value"],datetime.datetime.now())
 
         for key in self.PLC.TT_FP_dic:
             self.TT_FP_dic_ini[key] = self.PLC.TT_FP_dic[key]
@@ -2423,8 +2517,8 @@ class UpdateServer(QtCore.QObject):
             self.Valve_MAN_ini[key] = self.PLC.Valve_MAN[key]
         for key in self.PLC.Valve_ERR:
             self.Valve_ERR_ini[key] = self.PLC.Valve_ERR[key]
-        for key in self.PLC.Valve_Command_Cache:
-            self.Valve_Command_Cache_ini[key] = self.PLC.Valve_Command_Cache[key]
+        for key in self.PLC.Valve_Busy:
+            self.Valve_Busy_ini[key] = self.PLC.Valve_Busy[key]
         for key in self.PLC.Switch_OUT:
             self.Switch_OUT_ini[key] = self.PLC.Switch_OUT[key]
         for key in self.PLC.Switch_INTLKD:
@@ -2480,8 +2574,8 @@ class UpdateServer(QtCore.QObject):
             self.LOOPPID_SET2_ini[key] = self.PLC.LOOPPID_SET2[key]
         for key in self.PLC.LOOPPID_SET3:
             self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
-        for key in self.PLC.LOOPPID_Command_Cache:
-            self.LOOPPID_Command_Cache_ini[key] = self.PLC.LOOPPID_Command_Cache[key]
+        for key in self.PLC.LOOPPID_Busy:
+            self.LOOPPID_Busy_ini[key] = self.PLC.LOOPPID_Busy[key]
 
         for key in self.PLC.LOOP2PT_MODE0:
             self.LOOP2PT_MODE0_ini[key] = self.PLC.LOOP2PT_MODE0[key]
@@ -2505,8 +2599,8 @@ class UpdateServer(QtCore.QObject):
             self.LOOP2PT_SET2_ini[key] = self.PLC.LOOP2PT_SET2[key]
         for key in self.PLC.LOOP2PT_SET3:
             self.LOOP2PT_SET3_ini[key] = self.PLC.LOOP2PT_SET3[key]
-        for key in self.PLC.LOOP2PT_Command_Cache:
-            self.LOOP2PT_Command_Cache_ini[key] = self.PLC.LOOP2PT_Command_Cache[key]
+        for key in self.PLC.LOOP2PT_Busy:
+            self.LOOP2PT_Busy_ini[key] = self.PLC.LOOP2PT_Busy[key]
 
         for key in self.PLC.Procedure_running:
             self.Procedure_running_ini[key] = self.PLC.Procedure_running[key]
@@ -2532,19 +2626,22 @@ class UpdateServer(QtCore.QObject):
             self.FLAG_DIC_ini[key] = self.PLC.FLAG_DIC[key]
         for key in self.PLC.FLAG_INTLKD:
             self.FLAG_INTLKD_ini[key] = self.PLC.FLAG_INTLKD[key]
+        for key in self.PLC.FLAG_Busy:
+            self.FLAG_Busy_ini[key] = self.PLC.FLAG_Busy[key]
+
 
         self.data_dic["MainAlarm"] = self.PLC.MainAlarm
 
         self.data_package = pickle.dumps(self.data_dic)
 
-        # for key in self.PLC.Valve_Command_Cache:
-        #     self.PLC.Valve_Command_Cache[key] = False
+        # for key in self.PLC.Valve_Busy:
+        #     self.PLC.Valve_Busy[key] = False
         #
-        # for key in self.PLC.LOOPPID_Command_Cache:
-        #     self.PLC.LOOPPID_Command_Cache[key] = False
+        # for key in self.PLC.LOOPPID_Busy:
+        #     self.PLC.LOOPPID_Busy[key] = False
         #
-        # for key in self.PLC.LOOP2PT_Command_Cache:
-        #     self.PLC.LOOP2PT_Command_Cache[key] =False
+        # for key in self.PLC.LOOP2PT_Busy:
+        #     self.PLC.LOOP2PT_Busy[key] =False
 
 
     def write_data(self):
@@ -2557,6 +2654,7 @@ class UpdateServer(QtCore.QObject):
                 print(message[key]["type"])
                 print(message[key]["type"] == "valve")
                 if message[key]["type"] == "valve":
+                    print("Valve", datetime_in_1e5micro())
                     if message[key]["operation"] == "OPEN":
                         self.PLC.WriteBase2(address=message[key]["address"])
                     elif message[key]["operation"] == "CLOSE":
@@ -2695,6 +2793,7 @@ class UpdateServer(QtCore.QObject):
                     #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
 
                 elif message[key]["type"] == "LOOP2PT_power":
+                    print("PUMP",datetime_in_1e5micro())
                     if message[key]["operation"] == "OPEN":
                         self.PLC.LOOP2PT_OPEN(address=message[key]["address"])
                     elif message[key]["operation"] == "CLOSE":
@@ -2756,6 +2855,7 @@ class UpdateServer(QtCore.QObject):
                         else:
                             pass
                 elif message[key]["type"] == "FLAG":
+                    print("time",datetime.datetime.now())
                     if message[key]["operation"] == "OPEN":
                         self.PLC.WriteBase2(address=message[key]["address"])
                     elif message[key]["operation"] == "CLOSE":
