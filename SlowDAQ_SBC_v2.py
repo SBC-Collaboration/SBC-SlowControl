@@ -6267,6 +6267,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     pass
 
         self.HTR6202_v2.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"])
+        self.HTR6202_v2.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"])
+
 
 
 
@@ -6359,6 +6361,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     pass
 
         self.PUMP3305_v2.ColorLabel(received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"])
+
 
         #INTLK
 
