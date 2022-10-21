@@ -7099,22 +7099,22 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6202_v2.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6202"])
 
-        self.HTR6214.LOOPPIDWindow.Interlock.UpdateColor(received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
-        self.HTR6214.LOOPPIDWindow.Error.UpdateColor(received_dic_c["data"]["LOOPPID"]["ERR"]["HTR6214"])
-        self.HTR6214.LOOPPIDWindow.MANSP.UpdateColor(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
+        self.HTR6214.HeaterSubWindow.Interlock.UpdateColor(received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
+        self.HTR6214.HeaterSubWindow.Error.UpdateColor(received_dic_c["data"]["LOOPPID"]["ERR"]["HTR6214"])
+        self.HTR6214.HeaterSubWindow.MANSP.UpdateColor(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
         if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR6214"], received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR6214"]]:
-            self.HTR6214.LOOPPIDWindow.SAT.UpdateColor(True)
+            self.HTR6214.HeaterSubWindow.SAT.UpdateColor(True)
         else:
-            self.HTR6214.LOOPPIDWindow.SAT.UpdateColor(False)
-        self.HTR6214.LOOPPIDWindow.ModeREAD.Field.setText(self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR6214"], received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR6214"],
+            self.HTR6214.HeaterSubWindow.SAT.UpdateColor(False)
+        self.HTR6214.HeaterSubWindow.ModeREAD.Field.setText(self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR6214"], received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR6214"],
                                                                                      received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR6214"], received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR6214"]))
-        self.HTR6214.LOOPPIDWindow.EN.UpdateColor(received_dic_c["data"]["LOOPPID"]["EN"]["HTR6214"])
-        self.HTR6214.LOOPPIDWindow.Power.SetValue(received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6214"])
-        self.HTR6214.LOOPPIDWindow.HIGH.SetValue(
+        self.HTR6214.HeaterSubWindow.EN.UpdateColor(received_dic_c["data"]["LOOPPID"]["EN"]["HTR6214"])
+        self.HTR6214.HeaterSubWindow.Power.SetValue(received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6214"])
+        self.HTR6214.HeaterSubWindow.HIGH.SetValue(
             received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR6214"])
-        self.HTR6214.LOOPPIDWindow.LOW.SetValue(
+        self.HTR6214.HeaterSubWindow.LOW.SetValue(
             received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR6214"])
-        self.HTR6214.LOOPPIDWindow.SETSP.SetValue(
+        self.HTR6214.HeaterSubWindow.SETSP.SetValue(
             self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR6214"],
                                received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR6214"],
                                received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR6214"],
