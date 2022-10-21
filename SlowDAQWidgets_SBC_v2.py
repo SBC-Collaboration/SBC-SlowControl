@@ -2324,7 +2324,7 @@ class LOOPPID_v2(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 35 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 50 * R))
         self.setSizePolicy(sizePolicy)
 
 
@@ -2332,12 +2332,20 @@ class LOOPPID_v2(QtWidgets.QWidget):
         # self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
 
         self.Label = QtWidgets.QPushButton(self)
-        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 300 * R, 35 * R))
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 35 * R))
         self.Label.setMinimumSize(QtCore.QSize(150*R, 30*R))
         self.Label.setProperty("State", False)
         self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
                                  + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
         # self.HL1.addWidget(self.Label)
+
+        self.Power = Control_v2(self)
+        self.Power.Label.setText("Power")
+        self.Power.SetUnit(" %")
+        self.Power.Max = 100.
+        self.Power.Min = 0.
+        self.Power.Step = 0.1
+        self.Power.Decimals = 1
 
         self.Tool = QtWidgets.QToolButton(
             text=title, checkable=True, checked=False
@@ -2378,7 +2386,8 @@ class LOOPPID_v2(QtWidgets.QWidget):
         lay.setSpacing(0)
         lay.setContentsMargins(0, 0, 0, 0)
         lay.addWidget(self.Label, 0,0,1,4)
-        lay.addWidget(self.Tool,0,4,1,1)
+        lay.addWidget(self.Power,0,4,1,1)
+        lay.addWidget(self.Tool,0,5,1,1)
         # lay.addWidget(self.Tool)
         lay.addWidget(self.content_area,1,0,1,5)
 
@@ -2399,13 +2408,7 @@ class LOOPPID_v2(QtWidgets.QWidget):
         self.State.LButton.setText("On")
         self.State.RButton.setText("Off")
 
-        self.Power = Control(self)
-        self.Power.Label.setText("Power")
-        self.Power.SetUnit(" %")
-        self.Power.Max = 100.
-        self.Power.Min = 0.
-        self.Power.Step = 0.1
-        self.Power.Decimals = 1
+
 
         self.StatusTransition = ColoredStatus(self, mode=3)
         self.StatusTransition.setObjectName("StatusTransition")
@@ -2413,7 +2416,6 @@ class LOOPPID_v2(QtWidgets.QWidget):
 
         self.lay.addWidget(self.State)
         self.lay.addWidget(self.StatusTransition)
-        self.lay.addWidget(self.Power)
 
         self.setContentLayout(self.lay)
 
@@ -4277,6 +4279,88 @@ class Control(QtWidgets.QWidget):
             except:
                 pass
 
+
+
+class Control_v2(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.Signals = ChangeValueSignal()
+
+        self.setObjectName("Control")
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.setMinimumSize(70*R, 40*R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Background = QtWidgets.QLabel(self)
+        self.Background.setObjectName("Background")
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Control")
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setStyleSheet("QLabel {" +FONT+"}")
+
+        self.Button = QtWidgets.QPushButton(self)
+        self.Button.setObjectName("Button")
+        self.Button.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
+        self.Button.setProperty("State",True)
+        self.Button.setStyleSheet("QPushButton {" +C_BLUE + C_WHITE + FONT + BORDER_RADIUS + "} QWidget[State = true]{" + C_GREEN
+                                 + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+
+        self.Unit = " W"
+        self.SetValue(0.)
+
+        self.Max = 10.
+        self.Min = -10.
+        self.Step = 0.1
+        self.Decimals = 1
+
+    def SetValue(self, value):
+        self.value = value
+        self.Button.setText(str(value) + self.Unit)
+
+    def SetUnit(self, unit=" °C"):
+        self.Unit = unit
+        self.Button.setText(format(self.value, '#.2f') + self.Unit)
+
+    @QtCore.Slot()
+    def Changevalue(self):
+        Dialog = QtWidgets.QInputDialog()
+        Dialog.setInputMode(QtWidgets.QInputDialog.DoubleInput)
+        Dialog.setDoubleDecimals(self.Decimals)
+        Dialog.setDoubleRange(self.Min, self.Max)
+        Dialog.setDoubleStep(self.Step)
+        Dialog.setDoublevalue(self.value)
+        Dialog.setLabelText("Please entre a new value (min = " + str(self.Min) + ", max = " + str(self.Max) + ")")
+        Dialog.setModal(True)
+        Dialog.setWindowTitle("Modify value")
+        Dialog.exec()
+        if Dialog.result():
+            self.SetValue(Dialog.doublevalue())
+            self.Signals.fSignal.emit(self.value)
+
+    def Activate(self, Activate):
+        if Activate:
+            try:
+                self.Button.clicked.connect(self.Changevalue)
+            except:
+                pass
+        else:
+            try:
+                self.Button.clicked.disconnect(self.Changevalue)
+            except:
+                pass
+
+    @QtCore.Slot()
+    def ColorButton(self, bool):
+        self.Button.setProperty("State", bool)
+        self.Button.setStyle(self.Button.style())
 
 class Menu(QtWidgets.QWidget):
     def __init__(self, parent=None):
