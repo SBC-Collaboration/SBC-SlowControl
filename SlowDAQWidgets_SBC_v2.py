@@ -4936,7 +4936,7 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.Group.setTitle("ProcedureWidget")
         self.Group.setLayout(self.GL)
         self.Group.move(0 * R, 0 * R)
-        self.Group.setStyleSheet("QWidget { background: transparent; }")
+        # self.Group.setStyleSheet("QWidget { background: transparent; }")
 
 
         self.Running = ColoredStatus(self, mode= 4)
