@@ -6358,7 +6358,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 else:
                     pass
 
-        self.LOOP2PT_v2.ColorLabel(received_dic_c["data"]["LOOP2PT"]["OUT"]["LOOP2PT"])
+        self.PUMP3305_v2.ColorLabel(received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"])
 
         #INTLK
 
