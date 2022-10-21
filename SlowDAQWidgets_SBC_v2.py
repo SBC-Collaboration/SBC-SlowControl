@@ -2324,19 +2324,20 @@ class LOOPPID_v2(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 90 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 35 * R))
         self.setSizePolicy(sizePolicy)
 
 
-        self.HL1 = QtWidgets.QHBoxLayout()
-        self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+        # self.HL1 = QtWidgets.QHBoxLayout()
+        # self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
 
         self.Label = QtWidgets.QPushButton(self)
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 300 * R, 35 * R))
         self.Label.setMinimumSize(QtCore.QSize(150*R, 30*R))
         self.Label.setProperty("State", False)
         self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
                                  + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
-        self.HL1.addWidget(self.Label)
+        # self.HL1.addWidget(self.Label)
 
         self.Tool = QtWidgets.QToolButton(
             text=title, checkable=True, checked=False
@@ -2345,14 +2346,15 @@ class LOOPPID_v2(QtWidgets.QWidget):
         self.Tool.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         self.Tool.setArrowType(QtCore.Qt.RightArrow)
 
+
         self.Tool.setMinimumSize(QtCore.QSize(30 * R, 30 * R))
         self.Tool.setProperty("State", False)
-        # self.Tool.setStyleSheet("QToolButton { background: transparent}")
+        self.Tool.setStyleSheet("QToolButton { background: transparent}")
         self.Tool.setText("Label")
 
         self.Tool.setSizePolicy(sizePolicy)
         self.Tool.pressed.connect(self.on_pressed)
-        self.HL1.addWidget(self.Tool)
+        # self.HL1.addWidget(self.Tool)
 
         # Add a Sub window popped out when click the name
         self.LOOPPIDWindow = LOOPPIDSubWindow(self)
@@ -2364,19 +2366,21 @@ class LOOPPID_v2(QtWidgets.QWidget):
             maximumHeight=0, minimumHeight=0
         )
         self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 40 * R))
+        # self.content_area.setMinimumSize()
         # self.content_area.setSizePolicy(
         #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
         # )
         self.content_area.setSizePolicy(sizePolicy)
         self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
-        # self.content_area.setStyleSheet("QWidget { background: transparent; }")
+        self.content_area.setStyleSheet("QWidget { background: transparent; }")
 
-        lay = QtWidgets.QVBoxLayout(self)
+        lay = QtWidgets.QGridLayout(self)
         lay.setSpacing(0)
         lay.setContentsMargins(0, 0, 0, 0)
-        lay.addLayout(self.HL1)
+        lay.addWidget(self.Label, 0,0,1,4)
+        lay.addWidget(self.Tool,0,4,1,1)
         # lay.addWidget(self.Tool)
-        lay.addWidget(self.content_area)
+        lay.addWidget(self.content_area,1,0,1,5)
 
         self.toggle_animation.addAnimation(
             QtCore.QPropertyAnimation(self, b"minimumHeight")
@@ -2430,9 +2434,11 @@ class LOOPPID_v2(QtWidgets.QWidget):
         lay = self.content_area.layout()
         del lay
         self.content_area.setLayout(layout)
+        # But the -8 make the whole thing work
         collapsed_height = (
                 self.sizeHint().height() - self.content_area.maximumHeight()
-        )
+        )-15*R
+        # print("height",collapsed_height, self.sizeHint().height(),self.content_area.maximumHeight())
         content_height = layout.sizeHint().height()
         for i in range(self.toggle_animation.animationCount()):
             animation = self.toggle_animation.animationAt(i)
