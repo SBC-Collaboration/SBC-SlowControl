@@ -4936,7 +4936,7 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.Group.setTitle("ProcedureWidget")
         self.Group.setLayout(self.GL)
         self.Group.move(0 * R, 0 * R)
-        # self.Group.setStyleSheet("QWidget { background: transparent; }")
+        self.Group.setStyleSheet("QGroupbox { background: transparent; }")
 
 
         self.Running = ColoredStatus(self, mode= 4)
@@ -4958,13 +4958,9 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.START.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 20 * R))
 
 
-
         self.STOP = QtWidgets.QPushButton(self)
         self.STOP.setText("Stop")
         self.STOP.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 20 * R))
-
-
-
 
 
         self.ABORT =  QtWidgets.QPushButton(self)
