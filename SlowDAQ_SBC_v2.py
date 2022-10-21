@@ -1725,297 +1725,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        #
-        #
-        # self.SERVO3321.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text()))
-        # self.SERVO3321.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text()))
-        # self.SERVO3321.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text()))
-        # self.SERVO3321.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text()))
-        #
-        # self.SERVO3321.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(
-        #     lambda x: self.HTRGroupButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text(), 0))
-        # self.SERVO3321.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(
-        #     lambda x: self.HTRGroupButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text(), 1))
-        # self.SERVO3321.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(
-        #     lambda x: self.HTRGroupButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text(), 2))
-        # self.SERVO3321.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(
-        #     lambda x: self.HTRGroupButtonClicked(self.SERVO3321.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.SERVO3321.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.SERVO3321.HeaterSubWindow.Label.text(),
-        #                              self.SERVO3321.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.SERVO3321.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.SERVO3321.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.SERVO3321.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR6225.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6225.HeaterSubWindow.Label.text()))
-        # self.HTR6225.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6225.HeaterSubWindow.Label.text()))
-        # self.HTR6225.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6225.HeaterSubWindow.Label.text()))
-        # self.HTR6225.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6225.HeaterSubWindow.Label.text()))
-        #
-        # self.HTR6225.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6225.HeaterSubWindow.Label.text(), 0))
-        # self.HTR6225.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6225.HeaterSubWindow.Label.text(), 1))
-        # self.HTR6225.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6225.HeaterSubWindow.Label.text(), 2))
-        # self.HTR6225.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6225.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR6225.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR6225.HeaterSubWindow.Label.text(),
-        #                              self.HTR6225.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR6225.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR6225.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR6225.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR2123.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR2123.HeaterSubWindow.Label.text()))
-        # self.HTR2123.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR2123.HeaterSubWindow.Label.text()))
-        # self.HTR2123.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR2123.HeaterSubWindow.Label.text()))
-        # self.HTR2123.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR2123.HeaterSubWindow.Label.text()))
-        #
-        # self.HTR2123.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2123.HeaterSubWindow.Label.text(), 0))
-        # self.HTR2123.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2123.HeaterSubWindow.Label.text(), 1))
-        # self.HTR2123.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2123.HeaterSubWindow.Label.text(), 2))
-        # self.HTR2123.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2123.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR2123.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR2123.HeaterSubWindow.Label.text(),
-        #                              self.HTR2123.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR2123.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR2123.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR2123.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR2124.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR2124.HeaterSubWindow.Label.text()))
-        # self.HTR2124.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR2124.HeaterSubWindow.Label.text()))
-        # self.HTR2124.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR2124.HeaterSubWindow.Label.text()))
-        # self.HTR2124.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR2124.HeaterSubWindow.Label.text()))
-        #
-        # self.HTR2124.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HT2124.HeaterSubWindow.Label.text(), 0))
-        # self.HTR2124.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HT2124.HeaterSubWindow.Label.text(), 1))
-        # self.HTR2124.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HT2124.HeaterSubWindow.Label.text(), 2))
-        # self.HTR2124.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HT2124.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR2124.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR2124.HeaterSubWindow.Label.text(),
-        #                              self.HTR2124.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR2124.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR2124.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR2124.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR2125.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR2125.HeaterSubWindow.Label.text()))
-        # self.HTR2125.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR2125.HeaterSubWindow.Label.text()))
-        # self.HTR2125.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR2125.HeaterSubWindow.Label.text()))
-        # self.HTR2125.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR2125.HeaterSubWindow.Label.text()))
-        # self.HTR2125.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2125.HeaterSubWindow.Label.text(), 0))
-        # self.HTR2125.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2125.HeaterSubWindow.Label.text(), 1))
-        # self.HTR2125.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2125.HeaterSubWindow.Label.text(), 2))
-        # self.HTR2125.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2125.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR2125.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR2125.HeaterSubWindow.Label.text(),
-        #                              self.HTR2125.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR2125.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR2125.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR2125.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR1202.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR1202.HeaterSubWindow.Label.text()))
-        # self.HTR1202.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR1202.HeaterSubWindow.Label.text()))
-        # self.HTR1202.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR1202.HeaterSubWindow.Label.text()))
-        # self.HTR1202.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR1202.HeaterSubWindow.Label.text()))
-        # self.HTR1202.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HT1202.HeaterSubWindow.Label.text(), 0))
-        # self.HTR1202.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HT1202.HeaterSubWindow.Label.text(), 1))
-        # self.HTR1202.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HT1202.HeaterSubWindow.Label.text(), 2))
-        # self.HTR1202.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HT1202.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR1202.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR1202.HeaterSubWindow.Label.text(),
-        #                              self.HTR1202.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR1202.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR1202.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR1202.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR2203.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR2203.HeaterSubWindow.Label.text()))
-        # self.HTR2203.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR2203.HeaterSubWindow.Label.text()))
-        # self.HTR2203.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR2203.HeaterSubWindow.Label.text()))
-        # self.HTR2203.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR2203.HeaterSubWindow.Label.text()))
-        # self.HTR2203.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2203.HeaterSubWindow.Label.text(), 0))
-        # self.HTR2203.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2203.HeaterSubWindow.Label.text(), 1))
-        # self.HTR2203.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2203.HeaterSubWindow.Label.text(), 2))
-        # self.HTR2203.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR2203.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR2203.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR2203.HeaterSubWindow.Label.text(),
-        #                              self.HTR2203.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR2203.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR2203.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR2203.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR6202.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6202.HeaterSubWindow.Label.text()))
-        # self.HTR6202.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6202.HeaterSubWindow.Label.text()))
-        # self.HTR6202.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6202.HeaterSubWindow.Label.text()))
-        # self.HTR6202.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6202.HeaterSubWindow.Label.text()))
-        # self.HTR6202.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6202.HeaterSubWindow.Label.text(), 0))
-        # self.HTR6202.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6202.HeaterSubWindow.Label.text(), 1))
-        # self.HTR6202.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6202.HeaterSubWindow.Label.text(), 2))
-        # self.HTR6202.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6202.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR6202.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR6202.HeaterSubWindow.Label.text(),
-        #                              self.HTR6202.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR6202.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR6202.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR6202.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR6206.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6206.HeaterSubWindow.Label.text()))
-        # self.HTR6206.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6206.HeaterSubWindow.Label.text()))
-        # self.HTR6206.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6206.HeaterSubWindow.Label.text()))
-        # self.HTR6206.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6206.HeaterSubWindow.Label.text()))
-        # self.HTR6206.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6206.HeaterSubWindow.Label.text(), 0))
-        # self.HTR6206.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6206.HeaterSubWindow.Label.text(), 1))
-        # self.HTR6206.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6206.HeaterSubWindow.Label.text(), 2))
-        # self.HTR6206.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6206.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR6206.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR6206.HeaterSubWindow.Label.text(),
-        #                              self.HTR6206.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR6206.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR6206.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR6206.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR6210.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6210.HeaterSubWindow.Label.text()))
-        # self.HTR6210.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6210.HeaterSubWindow.Label.text()))
-        # self.HTR6210.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6210.HeaterSubWindow.Label.text()))
-        # self.HTR6210.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6210.HeaterSubWindow.Label.text()))
-        # self.HTR6210.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6210.HeaterSubWindow.Label.text(), 0))
-        # self.HTR6210.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6210.HeaterSubWindow.Label.text(), 1))
-        # self.HTR6210.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6210.HeaterSubWindow.Label.text(), 2))
-        # self.HTR6210.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6210.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR6210.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR6210.HeaterSubWindow.Label.text(),
-        #                              self.HTR6210.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR6210.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR6210.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR6210.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR6223.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6223.HeaterSubWindow.Label.text()))
-        # self.HTR6223.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6223.HeaterSubWindow.Label.text()))
-        # self.HTR6223.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6223.HeaterSubWindow.Label.text()))
-        # self.HTR6223.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6223.HeaterSubWindow.Label.text()))
-        # self.HTR6223.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6223.HeaterSubWindow.Label.text(), 0))
-        # self.HTR6223.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6223.HeaterSubWindow.Label.text(), 1))
-        # self.HTR6223.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6223.HeaterSubWindow.Label.text(), 2))
-        # self.HTR6223.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6223.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR6223.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR6223.HeaterSubWindow.Label.text(),
-        #                              self.HTR6223.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR6223.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR6223.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR6223.HeaterSubWindow.LOSP.Field.text())))
-        #
-        #
-        # self.HTR6224.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6224.HeaterSubWindow.Label.text()))
-        # self.HTR6224.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6224.HeaterSubWindow.Label.text()))
-        # self.HTR6224.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6224.HeaterSubWindow.Label.text()))
-        # self.HTR6224.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6224.HeaterSubWindow.Label.text()))
-        # self.HTR6224.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6224.HeaterSubWindow.Label.text(), 0))
-        # self.HTR6224.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6224.HeaterSubWindow.Label.text(), 1))
-        # self.HTR6224.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6224.HeaterSubWindow.Label.text(), 2))
-        # self.HTR6224.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6224.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR6224.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR6224.HeaterSubWindow.Label.text(),
-        #                              self.HTR6224.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR6224.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR6224.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR6224.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR6219.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6219.HeaterSubWindow.Label.text()))
-        # self.HTR6219.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6219.HeaterSubWindow.Label.text()))
-        # self.HTR6219.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6219.HeaterSubWindow.Label.text()))
-        # self.HTR6219.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6219.HeaterSubWindow.Label.text()))
-        # self.HTR6219.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6219.HeaterSubWindow.Label.text(), 0))
-        # self.HTR6219.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6219.HeaterSubWindow.Label.text(), 1))
-        # self.HTR6219.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6219.HeaterSubWindow.Label.text(), 2))
-        # self.HTR6219.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6219.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR6219.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR6219.HeaterSubWindow.Label.text(),
-        #                              self.HTR6219.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR6219.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR6219.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR6219.HeaterSubWindow.LOSP.Field.text())))
-        #
-        # self.HTR6221.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6221.HeaterSubWindow.Label.text()))
-        # self.HTR6221.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6221.HeaterSubWindow.Label.text()))
-        # self.HTR6221.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6221.HeaterSubWindow.Label.text()))
-        # self.HTR6221.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6221.HeaterSubWindow.Label.text()))
-        # self.HTR6221.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6221.HeaterSubWindow.Label.text(), 0))
-        # self.HTR6221.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6221.HeaterSubWindow.Label.text(), 1))
-        # self.HTR6221.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6221.HeaterSubWindow.Label.text(), 2))
-        # self.HTR6221.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6221.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR6221.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR6221.HeaterSubWindow.Label.text(),
-        #                              self.HTR6221.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR6221.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR6221.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR6221.HeaterSubWindow.LOSP.Field.text())))
-
         self.HTR6202_v2.LOOPPIDWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6202_v2.LOOPPIDWindow.Label.text()))
         self.HTR6202_v2.LOOPPIDWindow.Mode.RButton.clicked.connect(
@@ -2039,26 +1748,6 @@ class MainWindow(QtWidgets.QMainWindow):
                                      float(self.HTR6202_v2.LOOPPIDWindow.SP.Field.text()),
                                      float(self.HTR6202_v2.LOOPPIDWindow.HISP.Field.text()),
                                      float(self.HTR6202_v2.LOOPPIDWindow.LOSP.Field.text())))
-
-        # self.HTR6214.HeaterSubWindow.Mode.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
-        # self.HTR6214.HeaterSubWindow.Mode.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
-        # self.HTR6214.State.LButton.clicked.connect(
-        #     lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
-        # self.HTR6214.State.RButton.clicked.connect(
-        #     lambda x: self.HTRButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
-        # self.HTR6214.HeaterSubWindow.ButtonGroup.Button0.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6214.HeaterSubWindow.Label.text(), 0))
-        # self.HTR6214.HeaterSubWindow.ButtonGroup.Button1.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6214.HeaterSubWindow.Label.text(), 1))
-        # self.HTR6214.HeaterSubWindow.ButtonGroup.Button2.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6214.HeaterSubWindow.Label.text(), 2))
-        # self.HTR6214.HeaterSubWindow.ButtonGroup.Button3.clicked.connect(lambda x: self.HTRGroupButtonClicked(self.HTR6214.HeaterSubWindow.Label.text(), 3))
-        #
-        # self.HTR6214.HeaterSubWindow.updatebutton.clicked.connect(
-        #     lambda x: self.HTRupdate(self.HTR6214.HeaterSubWindow.Label.text(),
-        #                              self.HTR6214.HeaterSubWindow.ModeREAD.Field.text(),
-        #                              float(self.HTR6214.HeaterSubWindow.SP.Field.text()),
-        #                              float(self.HTR6214.HeaterSubWindow.HISP.Field.text()),
-        #                              float(self.HTR6214.HeaterSubWindow.LOSP.Field.text())))
 
         #LOOP2PT
 
@@ -4174,63 +3863,63 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.PUMP3305.LOOP2PTSubWindow.Mode.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
         # self.PUMP3305.State.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
 
-        self.SERVO3321.HeaterSubWindow.Mode.Activate(
+        self.SERVO3321.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["SERVO3321"])
         self.SERVO3321.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["SERVO3321"])
 
-        self.HTR6225.HeaterSubWindow.Mode.Activate(
+        self.HTR6225.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6225"])
         self.HTR6225.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6225"])
 
-        self.HTR2123.HeaterSubWindow.Mode.Activate(
+        self.HTR2123.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2123"])
         self.HTR2123.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2123"])
 
-        self.HTR2124.HeaterSubWindow.Mode.Activate(
+        self.HTR2124.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2124"])
         self.HTR2124.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2124"])
 
-        self.HTR2125.HeaterSubWindow.Mode.Activate(
+        self.HTR2125.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2125"])
         self.HTR2125.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2125"])
 
-        self.HTR1202.HeaterSubWindow.Mode.Activate(
+        self.HTR1202.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1202"])
         self.HTR1202.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1202"])
 
-        self.HTR2203.HeaterSubWindow.Mode.Activate(
+        self.HTR2203.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2203"])
         self.HTR2203.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2203"])
 
-        self.HTR6202.HeaterSubWindow.Mode.Activate(
+        self.HTR6202.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6202"])
         self.HTR6202.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6202"])
 
-        self.HTR6206.HeaterSubWindow.Mode.Activate(
+        self.HTR6206.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6206"])
         self.HTR6206.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6206"])
 
-        self.HTR6210.HeaterSubWindow.Mode.Activate(
+        self.HTR6210.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6210"])
         self.HTR6210.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6210"])
 
-        self.HTR6223.HeaterSubWindow.Mode.Activate(
+        self.HTR6223.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6223"])
         self.HTR6223.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6223"])
 
-        self.HTR6224.HeaterSubWindow.Mode.Activate(
+        self.HTR6224.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6224"])
         self.HTR6224.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6224"])
 
-        self.HTR6219.HeaterSubWindow.Mode.Activate(
+        self.HTR6219.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6219"])
         self.HTR6219.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6219"])
 
-        self.HTR6221.HeaterSubWindow.Mode.Activate(
+        self.HTR6221.LOOPPIDWindow.Mode.Activate(
             received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6221"])
         self.HTR6221.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6221"])
 
-        self.HTR6214.HeaterSubWindow.Mode.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
+        self.HTR6214.LOOPPIDWindow.Mode.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
         self.HTR6214.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
 
 
