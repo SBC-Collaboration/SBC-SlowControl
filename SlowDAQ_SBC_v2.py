@@ -945,15 +945,19 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.HTR6202_v2 = LOOPPID_v2(self.DatanSignalTab)
         self.HTR6202_v2.move(1300 * R, 900 * R)
-
         self.HTR6202_v2.Label.setText("HTR6202")
         self.HTR6202_v2.LOOPPIDWindow.setWindowTitle("HTR6202")
         self.HTR6202_v2.LOOPPIDWindow.Label.setText("HTR6202")
         self.HTR6202_v2.LOOPPIDWindow.RTD1.Label.setText("TT6222")
         self.HTR6202_v2.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
 
-        self.valve_test2 = LOOP2PT_v2(self.DatanSignalTab)
-        self.valve_test2.move(1300 * R, 1000 * R)
+        self.PUMP3305_v2 = LOOP2PT_v2(self.DatanSignalTab)
+        self.PUMP3305_v2.move(1300 * R, 1000 * R)
+        self.PUMP3305_v2.Label.setText("PUMP3305")
+        self.PUMP3305_v2.State.LButton.setText("ON")
+        self.PUMP3305_v2.State.RButton.setText("OFF")
+        self.PUMP3305_v2.LOOP2PTWindow.setWindowTitle("PUMP3305")
+        self.PUMP3305_v2.LOOP2PTWindow.Label.setText("PUMP3305")
 
         self.PCYCLE_AUTOCYCLE = Flag(self.DatanSignalTab)
         self.PCYCLE_AUTOCYCLE.move(1300 * R, 600 * R)
@@ -1339,8 +1343,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
         #
-        # self.PUMP3305.collapse.Set.LButton.clicked.connect(lambda x: self.LOOP2PTLButtonClicked(self.PUMP3305.Label.text()))
-        # self.PUMP3305.collapse.Set.RButton.clicked.connect(lambda x: self.LOOP2PTRButtonClicked(self.PUMP3305.Label.text()))
+        # self.PUMP3305_v2.Set.LButton.clicked.connect(lambda x: self.LOOP2PTLButtonClicked(self.PUMP3305.Label.text()))
+        # self.PUMP3305_v2.Set.RButton.clicked.connect(lambda x: self.LOOP2PTRButtonClicked(self.PUMP3305.Label.text()))
 
 
         self.SERVO3321.HeaterSubWindow.Mode.LButton.clicked.connect(
@@ -1700,6 +1704,29 @@ class MainWindow(QtWidgets.QMainWindow):
                                      self.PUMP3305.LOOP2PTSubWindow.ModeREAD.Field.text(),
                                      float(self.PUMP3305.LOOP2PTSubWindow.SP.Field.text())))
 
+
+        self.PUMP3305_v2.LOOP2PTWindow.Mode.LButton.clicked.connect(
+            lambda x: self.LOOP2PTLButtonClicked(self.PUMP3305_v2.LOOP2PTWindow.Label.text()))
+        self.PUMP3305_v2.LOOP2PTWindow.Mode.RButton.clicked.connect(
+            lambda x: self.LOOP2PTRButtonClicked(self.PUMP3305_v2.LOOP2PTWindow.Label.text()))
+        self.PUMP3305_v2.State.LButton.clicked.connect(
+            lambda x: self.LOOP2PTLButtonClicked(self.PUMP3305_v2.LOOP2PTWindow.Label.text()))
+        self.PUMP3305_v2.State.RButton.clicked.connect(
+            lambda x: self.LOOP2PTRButtonClicked(self.PUMP3305_v2.LOOP2PTWindow.Label.text()))
+
+        self.PUMP3305_v2.LOOP2PTWindow.ButtonGroup.Button0.clicked.connect(
+            lambda x: self.LOOP2PTGroupButtonClicked(self.PUMP3305_v2.LOOP2PTWindow.Label.text(), 0))
+        self.PUMP3305_v2.LOOP2PTWindow.ButtonGroup.Button1.clicked.connect(
+            lambda x: self.LOOP2PTGroupButtonClicked(self.PUMP3305_v2.LOOP2PTWindow.Label.text(), 1))
+        self.PUMP3305_v2.LOOP2PTWindow.ButtonGroup.Button2.clicked.connect(
+            lambda x: self.LOOP2PTGroupButtonClicked(self.PUMP3305_v2.LOOP2PTWindow.Label.text(), 2))
+        self.PUMP3305_v2.LOOP2PTWindow.ButtonGroup.Button3.clicked.connect(
+            lambda x: self.LOOP2PTGroupButtonClicked(self.PUMP3305_v2.LOOP2PTWindow.Label.text(), 3))
+
+        self.PUMP3305_v2.LOOP2PTWindow.updatebutton.clicked.connect(
+            lambda x: self.LOOP2PTupdate(self.PUMP3305_v2.LOOP2PTWindow.Label.text(),
+                                         self.PUMP3305_v2.LOOP2PTWindow.ModeREAD.Field.text(),
+                                         float(self.PUMP3305_v2.LOOP2PTWindow.SP.Field.text())))
 
         # Beckoff RTDs
 
@@ -6300,6 +6327,39 @@ class MainWindow(QtWidgets.QMainWindow):
             self.PUMP3305.LOOP2PTSubWindow.Mode.ButtonRClicked()
             self.PUMP3305.State.ButtonRClicked()
 
+
+
+        if not received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"]:
+            if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
+                self.PUMP3305_v2.LOOP2PTWindow.Mode.ButtonLClicked()
+                self.PUMP3305_v2.State.ButtonLClicked()
+            else:
+                self.PUMP3305_v2.LOOP2PTWindow.Mode.ButtonRClicked()
+                self.PUMP3305_v2.State.ButtonRClicked()
+            self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
+        elif received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"]:
+            if received_dic_c["data"]["LOOP2PT"]["Busy"]["PUMP3305"]:
+                if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
+                    self.PUMP3305_v2.LOOP2PTWindow.Mode.ButtonLClicked()
+                    self.PUMP3305_v2.State.ButtonLClicked()
+                else:
+                    self.PUMP3305_v2.LOOP2PTWindow.Mode.ButtonRClicked()
+                    self.PUMP3305_v2.State.ButtonRClicked()
+                self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
+            elif not received_dic_c["data"]["LOOP2PT"]["Busy"]["PUMP3305"]:
+                if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"] != self.LOOP2PT_OUT_buffer["PUMP3305"]:
+                    if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
+                        self.PUMP3305_v2.LOOP2PTWindow.Mode.ButtonLClicked()
+                        self.PUMP3305_v2.State.ButtonLClicked()
+                    else:
+                        self.PUMP3305_v2.LOOP2PTWindow.Mode.ButtonRClicked()
+                        self.PUMP3305_v2.State.ButtonRClicked()
+                    self.LOOP2PT_OUT_buffer["PUMP3305"] = received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]
+                else:
+                    pass
+
+        self.LOOP2PT_v2.ColorLabel(received_dic_c["data"]["LOOP2PT"]["OUT"]["LOOP2PT"])
+
         #INTLK
 
         if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"]:
@@ -6395,6 +6455,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         else:
             self.PUMP3305_OL_INTLK.EN.ButtonRClicked()
+
+
+
 
         if received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"]:
 
@@ -7126,7 +7189,43 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6214"])
 
+        #LOOP2PT
+        self.PUMP3305_v2.LOOP2PTWindow.Interlock.UpdateColor(
+            received_dic_c["data"]["LOOP2PT"]["INTLKD"]["PUMP3305"])
+        self.PUMP3305_v2.LOOP2PTWindow.Error.UpdateColor(
+            received_dic_c["data"]["LOOP2PT"]["ERR"]["PUMP3305"])
+        self.PUMP3305_v2.LOOP2PTWindow.MANSP.UpdateColor(
+            received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
+        # if True in [received_dic_c["data"]["LOOP2PT"]["SATHI"]["PUMP3305"],
+        #             received_dic_c["data"]["LOOP2PT"]["SATLO"]["PUMP3305"]]:
+        #
+        #     self.PUMP3305_v2.LOOP2PTWindow.SAT.UpdateColor(True)
+        # else:
+        #     self.PUMP3305_v2.LOOP2PTWindow.SAT.UpdateColor(False)
+        self.PUMP3305_v2.LOOP2PTWindow.ModeREAD.Field.setText(
 
+            self.FindDistinctTrue(received_dic_c["data"]["LOOP2PT"]["MODE0"]["PUMP3305"],
+                                  received_dic_c["data"]["LOOP2PT"]["MODE1"]["PUMP3305"],
+                                  received_dic_c["data"]["LOOP2PT"]["MODE2"]["PUMP3305"],
+                                  received_dic_c["data"]["LOOP2PT"]["MODE3"]["PUMP3305"]))
+
+        # self.PUMP3305_v2.LOOP2PTWindow.Power.SetValue(
+        #     received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"])
+        # self.PUMP3305_v2.LOOP2PTWindow.HIGH.SetValue(
+        #     received_dic_c["data"]["LOOP2PT"]["HI_LIM"]["PUMP3305"])
+        # self.PUMP3305_v2.LOOP2PTWindow.LOW.SetValue(
+        #     received_dic_c["data"]["LOOP2PT"]["LO_LIM"]["PUMP3305"])
+        self.PUMP3305_v2.LOOP2PTWindow.SETSP.SetValue(
+            self.FetchSetPoint(received_dic_c["data"]["LOOP2PT"]["MODE0"]["PUMP3305"],
+                               received_dic_c["data"]["LOOP2PT"]["MODE1"]["PUMP3305"],
+                               received_dic_c["data"]["LOOP2PT"]["MODE2"]["PUMP3305"],
+                               received_dic_c["data"]["LOOP2PT"]["MODE3"]["PUMP3305"],
+                               received_dic_c["data"]["LOOP2PT"]["SET0"]["PUMP3305"],
+                               received_dic_c["data"]["LOOP2PT"]["SET1"]["PUMP3305"],
+                               received_dic_c["data"]["LOOP2PT"]["SET2"]["PUMP3305"],
+                               received_dic_c["data"]["LOOP2PT"]["SET3"]["PUMP3305"]))
+        # self.PUMP3305_v2.Power.SetValue(
+        #     received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"])
 
         #INTLCK indicator
         self.TT2118_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["TT2118_HI_INTLK"])
