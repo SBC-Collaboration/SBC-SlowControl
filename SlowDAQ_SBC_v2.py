@@ -3863,65 +3863,67 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.PUMP3305.LOOP2PTSubWindow.Mode.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
         # self.PUMP3305.State.Activate(received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"])
 
-        self.SERVO3321.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["SERVO3321"])
-        self.SERVO3321.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["SERVO3321"])
-
-        self.HTR6225.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6225"])
-        self.HTR6225.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6225"])
-
-        self.HTR2123.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2123"])
-        self.HTR2123.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2123"])
-
-        self.HTR2124.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2124"])
-        self.HTR2124.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2124"])
-
-        self.HTR2125.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2125"])
-        self.HTR2125.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2125"])
-
-        self.HTR1202.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1202"])
-        self.HTR1202.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1202"])
-
-        self.HTR2203.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2203"])
-        self.HTR2203.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2203"])
-
-        self.HTR6202.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6202"])
-        self.HTR6202.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6202"])
-
-        self.HTR6206.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6206"])
-        self.HTR6206.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6206"])
-
-        self.HTR6210.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6210"])
-        self.HTR6210.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6210"])
-
-        self.HTR6223.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6223"])
-        self.HTR6223.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6223"])
-
-        self.HTR6224.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6224"])
-        self.HTR6224.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6224"])
-
-        self.HTR6219.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6219"])
-        self.HTR6219.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6219"])
-
-        self.HTR6221.LOOPPIDWindow.Mode.Activate(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6221"])
-        self.HTR6221.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6221"])
-
-        self.HTR6214.LOOPPIDWindow.Mode.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
-        self.HTR6214.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
-
+        
+        # need to be verified that this is not needed at all
+        # self.SERVO3321.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["SERVO3321"])
+        # self.SERVO3321.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["SERVO3321"])
+        #
+        # self.HTR6225.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6225"])
+        # self.HTR6225.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6225"])
+        #
+        # self.HTR2123.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2123"])
+        # self.HTR2123.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2123"])
+        #
+        # self.HTR2124.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2124"])
+        # self.HTR2124.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2124"])
+        #
+        # self.HTR2125.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2125"])
+        # self.HTR2125.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2125"])
+        #
+        # self.HTR1202.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1202"])
+        # self.HTR1202.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR1202"])
+        #
+        # self.HTR2203.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2203"])
+        # self.HTR2203.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR2203"])
+        #
+        # self.HTR6202.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6202"])
+        # self.HTR6202.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6202"])
+        #
+        # self.HTR6206.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6206"])
+        # self.HTR6206.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6206"])
+        #
+        # self.HTR6210.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6210"])
+        # self.HTR6210.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6210"])
+        #
+        # self.HTR6223.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6223"])
+        # self.HTR6223.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6223"])
+        #
+        # self.HTR6224.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6224"])
+        # self.HTR6224.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6224"])
+        #
+        # self.HTR6219.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6219"])
+        # self.HTR6219.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6219"])
+        #
+        # self.HTR6221.LOOPPIDWindow.Mode.Activate(
+        #     received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6221"])
+        # self.HTR6221.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6221"])
+        #
+        # self.HTR6214.LOOPPIDWindow.Mode.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
+        # self.HTR6214.State.Activate(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
+        #
 
 
         #update Din widget
