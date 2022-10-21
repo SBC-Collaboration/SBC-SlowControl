@@ -1,0 +1,183 @@
+{
+  "Version" : "com.seeq.link.connectors.sql2.config.SqlConnectorV2ConfigV1",
+  "Connections" : [ {
+    "Name" : "Postgres - Ignition",
+    "Id" : "f8a8d228-a4dc-4c23-9f64-05862264d5ee",
+    "Enabled" : true,
+    "Type" : "POSTGRES",
+    "Hostname" : "ifdbprod2",
+    "Port" : 5462,
+    "DatabaseName" : "iceberg_prd",
+    "Username" : "cryo_reader",
+    "Password" : "Cryo4Rid",
+    "InitialSql" : null,
+    "TimeZone" : "America/Chicago",
+    "PrintRows" : false,
+    "UseWindowsAuth" : false,
+    "Indexing" : {
+      "Frequency" : "1w",
+      "OnStartupAndConfigChange" : true,
+      "Next" : "2022-10-26T11:54:17.633Z"
+    },
+    "MaxConcurrentRequests" : null,
+    "MaxResultsPerRequest" : null,
+    "QueryDefinitions" : null,
+    "Transforms" : null
+  }, {
+    "Name" : "SBC Slow Control",
+    "Id" : "3a832e44-5f31-4514-be2a-f617a8397362",
+    "Enabled" : true,
+    "Type" : "MYSQL",
+    "Hostname" : "131.225.176.47",
+    "Port" : 3306,
+    "DatabaseName" : "SBCslowcontrol",
+    "Username" : "seeq",
+    "Password" : "SEEQ!user1",
+    "InitialSql" : null,
+    "TimeZone" : "America/Chicago",
+    "PrintRows" : false,
+    "UseWindowsAuth" : false,
+    "UseSSL" : false,
+    "Indexing" : {
+      "Frequency" : "1w",
+      "OnStartupAndConfigChange" : true,
+      "Next" : "2022-10-24T16:44:53.097095800Z"
+    },
+    "MaxConcurrentRequests" : null,
+    "MaxResultsPerRequest" : null,
+    "QueryDefinitions" : [ {
+      "Name" : "MyIdSignal",
+      "Type" : "SIGNAL",
+      "Sql" : "SELECT Time, Value FROM DataStorage WHERE Instrument= '${myInstrument}'",
+      "Enabled" : true,
+      "TestMode" : false,
+      "TestQueriesDuringSync" : true,
+      "Variables" : [ {
+        "Names" : [ "myInstrument" ],
+        "Values" : [ [ "${result}" ] ],
+        "Sql" : "select distinct Instrument from MetaDataStorage"
+      } ],
+      "Properties" : [ {
+        "Name" : "Name",
+        "Value" : "${myInstrument} Signal",
+        "Sql" : null,
+        "Uom" : "string"
+      }, {
+        "Name" : "Interpolation Method",
+        "Value" : "linear",
+        "Sql" : null,
+        "Uom" : "string"
+      }, {
+        "Name" : "Maximum Interpolation",
+        "Value" : "2day",
+        "Sql" : null,
+        "Uom" : "string"
+      }, {
+        "Name" : "Description",
+        "Value" : "${result}",
+        "Sql" : "Select Description FROM MetaDataStorage WHERE Instrument= '${myInstrument}'",
+        "Uom" : "string"
+      }, {
+        "Name" : "Value Unit Of Measure",
+        "Value" : "${result}",
+        "Sql" : "Select Unit FROM MetaDataStorage WHERE Instrument= '${myInstrument}'",
+        "Uom" : "string"
+      } ],
+      "CapsuleProperties" : null
+    }, {
+      "Name" : "InstrumentProperties",
+      "Type" : "SCALAR",
+      "Sql" : "SELECT Description FROM MetaDataStorage WHERE Instrument= '${myInstrument}'",
+      "Enabled" : true,
+      "TestMode" : false,
+      "TestQueriesDuringSync" : true,
+      "Variables" : [ {
+        "Names" : [ "myInstrument" ],
+        "Values" : [ [ "${result}" ] ],
+        "Sql" : "select distinct Instrument from MetaDataStorage"
+      } ],
+      "Properties" : [ {
+        "Name" : "Name",
+        "Value" : "${myInstrument} Scalar",
+        "Sql" : null,
+        "Uom" : "string"
+      }, {
+        "Name" : "Unit Of Measure",
+        "Value" : "string",
+        "Sql" : null,
+        "Uom" : "string"
+      } ],
+      "CapsuleProperties" : null
+    } ],
+    "Transforms" : null
+  }, {
+    "Name" : "Microsoft SQL Server",
+    "Id" : "88174092-d90c-42d9-a16e-192bcc2f60ac",
+    "Enabled" : false,
+    "Type" : "MSSQLSERVER",
+    "Hostname" : "localhost",
+    "Port" : 1433,
+    "DatabaseName" : "test",
+    "Username" : null,
+    "Password" : null,
+    "InitialSql" : null,
+    "TimeZone" : "America/Chicago",
+    "PrintRows" : false,
+    "UseWindowsAuth" : true,
+    "Indexing" : {
+      "Frequency" : "1w",
+      "OnStartupAndConfigChange" : true,
+      "Next" : "2018-05-30T06:54:17.633-05:00[America/Chicago]"
+    },
+    "MaxConcurrentRequests" : null,
+    "MaxResultsPerRequest" : null,
+    "QueryDefinitions" : null,
+    "Transforms" : null
+  }, {
+    "Name" : "MySQL",
+    "Id" : "2fe0d8f7-7578-42fe-bc43-d4bf0c4c0e52",
+    "Enabled" : false,
+    "Type" : "MYSQL",
+    "Hostname" : "localhost",
+    "Port" : 3306,
+    "DatabaseName" : "test",
+    "Username" : "root",
+    "Password" : null,
+    "InitialSql" : null,
+    "TimeZone" : "America/Chicago",
+    "PrintRows" : false,
+    "UseWindowsAuth" : false,
+    "Indexing" : {
+      "Frequency" : "1w",
+      "OnStartupAndConfigChange" : true,
+      "Next" : "2018-05-30T06:54:17.633-05:00[America/Chicago]"
+    },
+    "MaxConcurrentRequests" : null,
+    "MaxResultsPerRequest" : null,
+    "QueryDefinitions" : null,
+    "Transforms" : null
+  }, {
+    "Name" : "Oracle",
+    "Id" : "da11c8b8-cde5-4b2f-b81c-8f69dd3bc4aa",
+    "Enabled" : false,
+    "Type" : "ORACLE",
+    "Hostname" : "localhost",
+    "Port" : 1521,
+    "DatabaseName" : "orcl",
+    "Username" : "hr",
+    "Password" : null,
+    "InitialSql" : null,
+    "TimeZone" : "America/Chicago",
+    "PrintRows" : false,
+    "UseWindowsAuth" : false,
+    "Indexing" : {
+      "Frequency" : "1w",
+      "OnStartupAndConfigChange" : true,
+      "Next" : "2018-05-30T06:54:17.633-05:00[America/Chicago]"
+    },
+    "MaxConcurrentRequests" : null,
+    "MaxResultsPerRequest" : null,
+    "QueryDefinitions" : null,
+    "Transforms" : null
+  } ]
+}
