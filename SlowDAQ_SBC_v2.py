@@ -515,6 +515,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6221.HeaterSubWindow.RTD1.Label.setText("TT6222")
         self.HTR6221.HeaterSubWindow.RTD2.Label.setText("EMPTY")
 
+
+
+
         self.HTR6214 = Heater(self.ChamberTab)
         self.HTR6214.move(1780*R, 145*R)
         self.HTR6214.Label.setText("HTR6214")
@@ -940,9 +943,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MAN_HYD.move(1300 * R, 500 * R)
         self.MAN_HYD.Label.setText("MAN_HYD")
 
-        #
-        # self.valve_test = Valve_image(self.DatanSignalTab, mode="H")
-        # self.valve_test.move(1300 * R, 900 * R)
+        self.HTR6221_v2 = LOOPPID_v2(self.DatanSignalTab)
+        self.HTR6221_v2.move(1300 * R, 900 * R)
+
+        self.HTR6221_v2.Label.setText("HTR6221")
+        self.HTR6221_v2.LOOPPIDWindow.setWindowTitle("HTR6221")
+        self.HTR6221_v2.LOOPPIDWindow.Label.setText("HTR6221")
+        self.HTR6221_v2.LOOPPIDWindow.RTD1.Label.setText("TT6222")
+        self.HTR6221_v2.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
+
+        self.valve_test2 = LOOP2PT_v2(self.DatanSignalTab)
+        self.valve_test2.move(1300 * R, 1000 * R)
 
         self.PCYCLE_AUTOCYCLE = Flag(self.DatanSignalTab)
         self.PCYCLE_AUTOCYCLE.move(1300 * R, 600 * R)
@@ -1620,6 +1631,30 @@ class MainWindow(QtWidgets.QMainWindow):
                                      float(self.HTR6221.HeaterSubWindow.SP.Field.text()),
                                      float(self.HTR6221.HeaterSubWindow.HISP.Field.text()),
                                      float(self.HTR6221.HeaterSubWindow.LOSP.Field.text())))
+
+        self.HTR6221_v2.LOOPPIDWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6221_v2.LOOPPIDWindow.Label.text()))
+        self.HTR6221_v2.LOOPPIDWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6221_v2.LOOPPIDWindow.Label.text()))
+        self.HTR6221_v2.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.HTR6221_v2.LOOPPIDWindow.Label.text()))
+        self.HTR6221_v2.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.HTR6221_v2.LOOPPIDWindow.Label.text()))
+        self.HTR6221_v2.LOOPPIDWindow.ButtonGroup.Button0.clicked.connect(
+            lambda x: self.HTRGroupButtonClicked(self.HTR6221_v2.LOOPPIDWindow.Label.text(), 0))
+        self.HTR6221_v2.LOOPPIDWindow.ButtonGroup.Button1.clicked.connect(
+            lambda x: self.HTRGroupButtonClicked(self.HTR6221_v2.LOOPPIDWindow.Label.text(), 1))
+        self.HTR6221_v2.LOOPPIDWindow.ButtonGroup.Button2.clicked.connect(
+            lambda x: self.HTRGroupButtonClicked(self.HTR6221_v2.LOOPPIDWindow.Label.text(), 2))
+        self.HTR6221_v2.LOOPPIDWindow.ButtonGroup.Button3.clicked.connect(
+            lambda x: self.HTRGroupButtonClicked(self.HTR6221_v2.LOOPPIDWindow.Label.text(), 3))
+
+        self.HTR6221_v2.LOOPPIDWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.HTR6221_v2.LOOPPIDWindow.Label.text(),
+                                     self.HTR6221_v2.LOOPPIDWindow.ModeREAD.Field.text(),
+                                     float(self.HTR6221_v2.LOOPPIDWindow.SP.Field.text()),
+                                     float(self.HTR6221_v2.LOOPPIDWindow.HISP.Field.text()),
+                                     float(self.HTR6221_v2.LOOPPIDWindow.LOSP.Field.text())))
 
         self.HTR6214.HeaterSubWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.HTR6214.HeaterSubWindow.Label.text()))
@@ -4824,6 +4859,15 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6221"]:
+            self.HTR6221_v2.State.ButtonTransitionState(True)
+            self.HTR6221_v2.LOOPPIDWindow.ButtonTransitionState(True)
+        elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6221"]:
+            self.HTR6221_v2.State.ButtonTransitionState(False)
+            self.HTR6221_v2.LOOPPIDWindow.ButtonTransitionState(False)
+        else:
+            pass
+
         if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6214"] ==True:
             self.HTR6214.State.ButtonTransitionState(False)
             self.HTR6214.HeaterSubWindow.Mode.ButtonTransitionState(False)
@@ -6164,6 +6208,41 @@ class MainWindow(QtWidgets.QMainWindow):
             self.HTR6221.HeaterSubWindow.Mode.ButtonRClicked()
             self.HTR6221.State.ButtonRClicked()
 
+
+
+        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6221"]:
+            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"]:
+                self.HTR6221_v2.LOOPPIDWindow.Mode.ButtonLClicked()
+                self.HTR6221_v2.State.ButtonLClicked()
+            else:
+                self.HTR6221_v2.LOOPPIDWindow.Mode.ButtonRClicked()
+                self.HTR6221_v2.State.ButtonRClicked()
+            self.LOOPPID_buffer["HTR6221"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"]
+        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6221"]:
+            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6221"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"]:
+                    self.HTR6221_v2.LOOPPIDWindow.Mode.ButtonLClicked()
+                    self.HTR6221_v2.State.ButtonLClicked()
+                else:
+                    self.HTR6221_v2.LOOPPIDWindow.Mode.ButtonRClicked()
+                    self.HTR6221_v2.State.ButtonRClicked()
+                self.LOOPPID_buffer["HTR6221"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"]
+            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6221"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"] != self.LOOPPID_buffer["HTR6221"]:
+                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"]:
+                        self.HTR6221_v2.LOOPPIDWindow.Mode.ButtonLClicked()
+                        self.HTR6221_v2.State.ButtonLClicked()
+                    else:
+                        self.HTR6221_v2.LOOPPIDWindow.Mode.ButtonRClicked()
+                        self.HTR6221_v2.State.ButtonRClicked()
+                    self.LOOPPID_buffer["HTR6221"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"]
+                else:
+                    pass
+
+        self.HTR6221_v2.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"])
+
+
+
         if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6214"]:
 
             self.HTR6214.HeaterSubWindow.Mode.ButtonLClicked()
@@ -6383,6 +6462,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6210.HeaterSubWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6211"])
         self.HTR6214.HeaterSubWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6213"])
         self.HTR6221.HeaterSubWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6222"])
+        self.HTR6221_v2.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6222"])
         self.HTR6223.HeaterSubWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6407"])
         self.HTR6224.HeaterSubWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6408"])
         self.HTR6225.HeaterSubWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6409"])
@@ -6981,22 +7061,60 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6221.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6221"])
 
-        self.HTR6214.HeaterSubWindow.Interlock.UpdateColor(received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
-        self.HTR6214.HeaterSubWindow.Error.UpdateColor(received_dic_c["data"]["LOOPPID"]["ERR"]["HTR6214"])
-        self.HTR6214.HeaterSubWindow.MANSP.UpdateColor(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
-        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR6214"], received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR6214"]]:
-            self.HTR6214.HeaterSubWindow.SAT.UpdateColor(True)
+        self.HTR6221_v2.LOOPPIDWindow.Interlock.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR6221"])
+        self.HTR6221_v2.LOOPPIDWindow.Error.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR6221"])
+        self.HTR6221_v2.LOOPPIDWindow.MANSP.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6221"])
+        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR6221"],
+                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR6221"]]:
+
+            self.HTR6221_v2.LOOPPIDWindow.SAT.UpdateColor(True)
         else:
-            self.HTR6214.HeaterSubWindow.SAT.UpdateColor(False)
-        self.HTR6214.HeaterSubWindow.ModeREAD.Field.setText(self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR6214"], received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR6214"],
+            self.HTR6221_v2.LOOPPIDWindow.SAT.UpdateColor(False)
+        self.HTR6221_v2.LOOPPIDWindow.ModeREAD.Field.setText(
+
+            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR6221"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR6221"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR6221"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR6221"]))
+        self.HTR6221_v2.LOOPPIDWindow.EN.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["EN"]["HTR6221"])
+        self.HTR6221_v2.LOOPPIDWindow.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6221"])
+        self.HTR6221_v2.LOOPPIDWindow.HIGH.SetValue(
+            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR6221"])
+        self.HTR6221_v2.LOOPPIDWindow.LOW.SetValue(
+            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR6221"])
+        self.HTR6221_v2.LOOPPIDWindow.SETSP.SetValue(
+            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR6221"],
+                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR6221"],
+                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR6221"],
+                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR6221"],
+                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR6221"],
+                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR6221"],
+                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR6221"],
+                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR6221"]))
+        self.HTR6221_v2.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6221"])
+
+        self.HTR6214.LOOPPIDWindow.Interlock.UpdateColor(received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR6214"])
+        self.HTR6214.LOOPPIDWindow.Error.UpdateColor(received_dic_c["data"]["LOOPPID"]["ERR"]["HTR6214"])
+        self.HTR6214.LOOPPIDWindow.MANSP.UpdateColor(received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6214"])
+        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR6214"], received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR6214"]]:
+            self.HTR6214.LOOPPIDWindow.SAT.UpdateColor(True)
+        else:
+            self.HTR6214.LOOPPIDWindow.SAT.UpdateColor(False)
+        self.HTR6214.LOOPPIDWindow.ModeREAD.Field.setText(self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR6214"], received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR6214"],
                                                                                      received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR6214"], received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR6214"]))
-        self.HTR6214.HeaterSubWindow.EN.UpdateColor(received_dic_c["data"]["LOOPPID"]["EN"]["HTR6214"])
-        self.HTR6214.HeaterSubWindow.Power.SetValue(received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6214"])
-        self.HTR6214.HeaterSubWindow.HIGH.SetValue(
+        self.HTR6214.LOOPPIDWindow.EN.UpdateColor(received_dic_c["data"]["LOOPPID"]["EN"]["HTR6214"])
+        self.HTR6214.LOOPPIDWindow.Power.SetValue(received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6214"])
+        self.HTR6214.LOOPPIDWindow.HIGH.SetValue(
             received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR6214"])
-        self.HTR6214.HeaterSubWindow.LOW.SetValue(
+        self.HTR6214.LOOPPIDWindow.LOW.SetValue(
             received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR6214"])
-        self.HTR6214.HeaterSubWindow.SETSP.SetValue(
+        self.HTR6214.LOOPPIDWindow.SETSP.SetValue(
             self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR6214"],
                                received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR6214"],
                                received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR6214"],
