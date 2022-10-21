@@ -2437,7 +2437,7 @@ class LOOPPID_v2(QtWidgets.QWidget):
         # But the -8 make the whole thing work
         collapsed_height = (
                 self.sizeHint().height() - self.content_area.maximumHeight()
-        )-15*R
+        )-12*R
         # print("height",collapsed_height, self.sizeHint().height(),self.content_area.maximumHeight())
         content_height = layout.sizeHint().height()
         for i in range(self.toggle_animation.animationCount()):
@@ -2486,8 +2486,8 @@ class LOOPPID_v2(QtWidgets.QWidget):
     @QtCore.Slot()
     def InitWindow(self):
         self.LOOPPIDWindow.SP.SetValue(self.LOOPPIDWindow.SETSP.value)
-        self.LOOPPIDWindow.LOSP.SetValue(self.LOOPPIDWindow.HIGH.value)
-        self.LOOPPIDWindow.HISP.SetValue(self.LOOPPIDWindow.LOW.value)
+        self.LOOPPIDWindow.LOSP.SetValue(self.LOOPPIDWindow.LOW.value)
+        self.LOOPPIDWindow.HISP.SetValue(self.LOOPPIDWindow.HIGH.value)
 
 
 

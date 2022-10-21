@@ -4789,7 +4789,7 @@ class MainWindow(QtWidgets.QMainWindow):
             if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"] != self.LOOPPID_EN_buffer["HTR6202"]:
                 self.HTR6202.State.ButtonTransitionState(False)
                 self.HTR6202.HeaterSubWindow.Mode.ButtonTransitionState(False)
-                self.LOOPPID_EN_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
+                # self.LOOPPID_EN_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
             else:
                 pass
 
