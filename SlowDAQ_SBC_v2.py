@@ -962,6 +962,28 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PCYCLE_AUTOCYCLE.move(1300 * R, 600 * R)
         self.PCYCLE_AUTOCYCLE.Label.setText("PCYCLE_AUTOCYCLE")
 
+        self.TT2118_HI_INTLK_v2 = INTLK_LA_Widget_v2(self.DatanSignalTab)
+        self.TT2118_HI_INTLK_v2.move(1900 * R, 200 * R)
+        self.TT2118_HI_INTLK_v2.Label.setText("TT2118_HI")
+        self.TT2118_HI_INTLK_v2.setObjectName("TT2118_HI_INTLK")
+
+        self.TT2118_LO_INTLK_v2 = INTLK_RA_Widget_v2(self.DatanSignalTab)
+        self.TT2118_LO_INTLK_v2.move(1900 * R, 500 * R)
+        self.TT2118_LO_INTLK_v2.Label.setText("TT2118_LO")
+        self.TT2118_LO_INTLK_v2.setObjectName("TT2118_LO_INTLK")
+
+        self.TS1_INTLK_v2 = INTLK_LD_Widget_v2(self.DatanSignalTab)
+        self.TS1_INTLK_v2.move(1900 * R, 750 * R)
+        self.TS1_INTLK_v2.Label.setText("TS1")
+        self.TS1_INTLK_v2.setObjectName("TS1")
+
+        self.ES3347_INTLK_v2 = INTLK_RD_Widget_v2(self.DatanSignalTab)
+        self.ES3347_INTLK_v2.move(1900 * R, 1000 * R)
+        self.ES3347_INTLK_v2.Label.setText("ES3347")
+        self.ES3347_INTLK_v2.setObjectName("ES3347")
+
+
+
         self.TT2118_HI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
         self.TT2118_HI_INTLK.move(10 * R, 10 * R)
         self.TT2118_HI_INTLK.Label.setText("TT2118_HI")
