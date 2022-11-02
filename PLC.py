@@ -252,11 +252,13 @@ class PLC(QtCore.QObject):
         self.INTLK_D_DIC = copy.copy(sec.INTLK_D_DIC)
         self.INTLK_D_EN = copy.copy(sec.INTLK_D_EN)
         self.INTLK_D_COND = copy.copy(sec.INTLK_D_COND)
+        self.INTLK_D_Busy = copy.copy(sec.INTLK_D_BUSY)
         self.INTLK_A_ADDRESS = copy.copy(sec.INTLK_A_ADDRESS)
         self.INTLK_A_DIC = copy.copy(sec.INTLK_A_DIC)
         self.INTLK_A_EN = copy.copy(sec.INTLK_A_EN)
         self.INTLK_A_COND = copy.copy(sec.INTLK_A_COND)
         self.INTLK_A_SET = copy.copy(sec.INTLK_A_SET)
+        self.INTLK_A_Busy = copy.copy(sec.INTLK_A_BUSY)
 
         self.FLAG_ADDRESS = copy.copy(sec.FLAG_ADDRESS)
         self.FLAG_DIC = copy.copy(sec.FLAG_DIC)
@@ -280,8 +282,6 @@ class PLC(QtCore.QObject):
 
         self.TIME_ADDRESS = copy.copy(sec.TIME_ADDRESS)
         self.TIME_DIC = copy.copy(sec.TIME_DIC)
-
-
 
 
         self.signal_data = {  "TT_FP_address":self.TT_FP_address,
@@ -377,11 +377,13 @@ class PLC(QtCore.QObject):
                               "INTLK_D_DIC": self.INTLK_D_DIC,
                               "INTLK_D_EN":self.INTLK_D_EN,
                               "INTLK_D_COND":self.INTLK_D_COND,
+                              "INTLK_D_Busy":self.INTLK_D_Busy,
                               "INTLK_A_ADDRESS":self.INTLK_A_ADDRESS,
                               "INTLK_A_DIC": self.INTLK_A_DIC,
                               "INTLK_A_EN":self.INTLK_A_EN,
                               "INTLK_A_COND":self.INTLK_A_COND,
                               "INTLK_A_SET":self.INTLK_A_SET,
+                              "INTLK_A_Busy":self.INTLK_A_Busy,
                               "FLAG_ADDRESS":self.FLAG_ADDRESS,
                               "FLAG_DIC":self.FLAG_DIC,
                               "FLAG_INTLKD":self.FLAG_INTLKD,
@@ -642,7 +644,6 @@ class PLC(QtCore.QObject):
                                                     Raw_LOOP2PT_6[key].getRegister(0)))[0], 3)
                 self.LOOP2PT_Busy[key] = self.ReadCoil(2 ** 1, self.LOOP2PT_ADR_BASE[key]) or self.ReadCoil(
                     2 ** 2, self.LOOP2PT_ADR_BASE[key])
-                print(key,self.LOOP2PT_Busy[key])
 
 
             ############################################################################################
@@ -667,6 +668,8 @@ class PLC(QtCore.QObject):
                 self.INTLK_A_DIC[key] = self.ReadCoil(1, self.INTLK_A_ADDRESS[key])
                 self.INTLK_A_EN[key] = self.ReadCoil(2 ** 1 , self.INTLK_A_ADDRESS[key])
                 self.INTLK_A_COND[key] = self.ReadCoil(2 ** 2, self.INTLK_A_ADDRESS[key])
+                self.INTLK_A_Busy[key] = self.ReadCoil(2 ** 2, self.INTLK_A_ADDRESS[key]) or self.ReadCoil(
+                    2 ** 3, self.INTLK_A_ADDRESS[key])
 
 
             for key in self.INTLK_D_ADDRESS:
@@ -674,6 +677,8 @@ class PLC(QtCore.QObject):
                 self.INTLK_D_DIC[key] = self.ReadCoil(1, self.INTLK_D_ADDRESS[key])
                 self.INTLK_D_EN[key] = self.ReadCoil(2 ** 1, self.INTLK_D_ADDRESS[key])
                 self.INTLK_D_COND[key] = self.ReadCoil(2 ** 2, self.INTLK_D_ADDRESS[key])
+                self.INTLK_D_Busy[key] = self.ReadCoil(2 ** 2, self.INTLK_D_ADDRESS[key]) or self.ReadCoil(
+                    2 ** 3, self.INTLK_D_ADDRESS[key])
 
 
             ############################################################################################
@@ -2365,11 +2370,13 @@ class UpdateServer(QtCore.QObject):
         self.INTLK_D_DIC_ini = sec.INTLK_D_DIC
         self.INTLK_D_EN_ini = sec.INTLK_D_EN
         self.INTLK_D_COND_ini = sec.INTLK_D_COND
+        self.INTLK_D_Busy_ini = sec.INTLK_D_BUSY
         self.INTLK_A_ADDRESS_ini = sec.INTLK_A_ADDRESS
         self.INTLK_A_DIC_ini = sec.INTLK_A_DIC
         self.INTLK_A_EN_ini = sec.INTLK_A_EN
         self.INTLK_A_COND_ini = sec.INTLK_A_COND
         self.INTLK_A_SET_ini = sec.INTLK_A_SET
+        self.INTLK_A_Busy_ini = sec.INTLK_A_BUSY
 
         self.FLAG_ADDRESS_ini = sec.FLAG_ADDRESS
         self.FLAG_DIC_ini = sec.FLAG_DIC
@@ -2423,11 +2430,13 @@ class UpdateServer(QtCore.QObject):
                                               "Busy":self.LOOP2PT_Busy_ini},
                                   "INTLK_D": {"value": self.INTLK_D_DIC_ini,
                                               "EN": self.INTLK_D_EN_ini,
-                                              "COND": self.INTLK_D_COND_ini},
+                                              "COND": self.INTLK_D_COND_ini,
+                                              "Busy":self.INTLK_D_Busy_ini},
                                   "INTLK_A": {"value":self.INTLK_A_DIC_ini,
                                               "EN":self.INTLK_A_EN_ini,
                                               "COND":self.INTLK_A_COND_ini,
-                                              "SET":self.INTLK_A_SET_ini},
+                                              "SET":self.INTLK_A_SET_ini,
+                                              "Busy":self.INTLK_A_Busy_ini},
                                   "FLAG": {"value":self.FLAG_DIC_ini,
                                            "INTLKD":self.FLAG_INTLKD_ini,
                                            "Busy":self.FLAG_Busy_ini},
