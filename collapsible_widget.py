@@ -61,6 +61,7 @@ class CollapsibleBox(QtWidgets.QWidget):
         collapsed_height = (
             self.sizeHint().height() - self.content_area.maximumHeight()
         )
+        print("c_height", collapsed_height)
         content_height = layout.sizeHint().height()
         for i in range(self.toggle_animation.animationCount()):
             animation = self.toggle_animation.animationAt(i)

@@ -1973,6 +1973,144 @@ class HeaterSubWindow(QtWidgets.QMainWindow):
         self.GLRD.addWidget(self.RTD2)
 
 
+
+class LOOPPIDSubWindow(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.resize(1500*R, 600*R)
+        self.setMinimumSize(1500*R, 600*R)
+        self.setWindowTitle("Detailed Information")
+
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 600*R))
+
+        # Groupboxs for alarm/PT/TT
+
+        self.GLWR = QtWidgets.QHBoxLayout()
+        self.GLWR.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLWR.setSpacing(20 * R)
+        self.GLWR.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupWR = QtWidgets.QGroupBox(self.Widget)
+        self.GroupWR.setTitle("Write")
+        self.GroupWR.setLayout(self.GLWR)
+        self.GroupWR.move(0 * R, 0 * R)
+
+        self.GLRD = QtWidgets.QHBoxLayout()
+        self.GLRD.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLRD.setSpacing(20 * R)
+        self.GLRD.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRD = QtWidgets.QGroupBox(self.Widget)
+        self.GroupRD.setTitle("Read")
+        self.GroupRD.setLayout(self.GLRD)
+        self.GroupRD.move(0 * R, 240 * R)
+
+        self.Label = QtWidgets.QPushButton(self.GroupWR)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Indicator")
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        # self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
+        self.GLWR.addWidget(self.Label)
+
+        self.ButtonGroup = ButtonGroup(self.GroupWR)
+        self.GLWR.addWidget(self.ButtonGroup)
+
+
+        self.Mode = DoubleButton_s(self.GroupWR)
+        self.Mode.Label.setText("Mode")
+        self.GLWR.addWidget(self.Mode)
+
+
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("Busy")
+        self.GLWR.addWidget(self.StatusTransition)
+
+
+        self.LOSP = SetPoint(self.GroupWR)
+        self.LOSP.Label.setText("LO SET")
+        self.GLWR.addWidget(self.LOSP)
+
+        self.HISP = SetPoint(self.GroupWR)
+        self.HISP.Label.setText("HI SET")
+        self.GLWR.addWidget(self.HISP)
+
+
+        self.SP = SetPoint(self.GroupWR)
+        self.SP.Label.setText("SetPoint")
+        self.GLWR.addWidget(self.SP)
+
+        self.updatebutton = QtWidgets.QPushButton(self.GroupWR)
+        self.updatebutton.setText("Update")
+        self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.updatebutton)
+
+        self.Interlock = ColoredStatus(self.GroupRD, mode = 1)
+        self.Interlock.Label.setText("INTLCK")
+        self.GLRD.addWidget(self.Interlock)
+
+        self.Error = ColoredStatus(self.GroupRD, mode = 1)
+        self.Error.Label.setText("ERR")
+        self.GLRD.addWidget(self.Error)
+
+        self.MANSP = ColoredStatus(self.GroupRD, mode = 2)
+        self.MANSP.Label.setText("MAN")
+        self.GLRD.addWidget(self.MANSP)
+
+        self.SAT = ColoredStatus(self.GroupRD, mode = 1)
+        self.SAT.Label.setText("SAT")
+        self.GLRD.addWidget(self.SAT)
+
+        self.ModeREAD = Indicator(self.GroupRD)
+        self.ModeREAD.Label.setText("Mode")
+        self.ModeREAD.Field.setText('MODE0')
+        self.GLRD.addWidget(self.ModeREAD)
+
+        self.EN = ColoredStatus(self.GroupRD, mode = 4)
+        self.EN.Label.setText("ENABLE")
+        self.GLRD.addWidget(self.EN)
+
+        self.Power = Control(self.GroupRD)
+        self.Power.Label.setText("Power")
+        self.Power.SetUnit(" %")
+        self.Power.Max = 100.
+        self.Power.Min = 0.
+        self.Power.Step = 0.1
+        self.Power.Decimals = 1
+        self.GLRD.addWidget(self.Power)
+
+        self.IN = Indicator(self.GroupRD)
+        self.IN.Label.setText("IN")
+        self.GLRD.addWidget(self.IN)
+
+        self.LOW = Indicator(self.GroupRD)
+        self.LOW.Label.setText("LOW")
+        self.GLRD.addWidget(self.LOW)
+
+        self.HIGH = Indicator(self.GroupRD)
+        self.HIGH.Label.setText("HIGH")
+        self.GLRD.addWidget(self.HIGH)
+
+
+        self.SETSP = Indicator(self.GroupRD)
+        self.SETSP.Label.setText("SP")
+        self.GLRD.addWidget(self.SETSP)
+
+        self.RTD1 = Indicator(self.GroupRD)
+        self.RTD1.Label.setText("RTD1")
+        self.GLRD.addWidget(self.RTD1)
+
+        self.RTD2 = Indicator(self.GroupRD)
+        self.RTD2.Label.setText("RTD2")
+        self.GLRD.addWidget(self.RTD2)
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+
 # Define a function tab that shows the status of the widgets
 
 class MultiStatusIndicator(QtWidgets.QWidget):
@@ -2176,6 +2314,439 @@ class Heater(QtWidgets.QWidget):
 
     def PushButton(self):
         self.HeaterSubWindow.show()
+
+
+
+# Defines a reusable layout containing widgets
+class LOOPPID_v2(QtWidgets.QWidget):
+    def __init__(self, parent=None, title=""):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 50 * R))
+        self.setSizePolicy(sizePolicy)
+
+
+        # self.HL1 = QtWidgets.QHBoxLayout()
+        # self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+
+        self.Label = QtWidgets.QPushButton(self)
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 35 * R))
+        self.Label.setMinimumSize(QtCore.QSize(150*R, 30*R))
+        self.Label.setProperty("State", False)
+        self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                 + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+        # self.HL1.addWidget(self.Label)
+
+        self.Power = Control_v2(self)
+        self.Power.Label.setText("Power")
+        self.Power.SetUnit(" %")
+        self.Power.Max = 100.
+        self.Power.Min = 0.
+        self.Power.Step = 0.1
+        self.Power.Decimals = 1
+
+        self.Tool = QtWidgets.QToolButton(
+            text=title, checkable=True, checked=False
+        )
+        self.Tool.setGeometry(QtCore.QRect(0 * R, 0 * R, 30 * R, 30 * R))
+        self.Tool.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        self.Tool.setArrowType(QtCore.Qt.RightArrow)
+
+
+        self.Tool.setMinimumSize(QtCore.QSize(30 * R, 30 * R))
+        self.Tool.setProperty("State", False)
+        self.Tool.setStyleSheet("QToolButton { background: transparent}")
+        self.Tool.setText("Label")
+
+        self.Tool.setSizePolicy(sizePolicy)
+        self.Tool.pressed.connect(self.on_pressed)
+        # self.HL1.addWidget(self.Tool)
+
+        # Add a Sub window popped out when click the name
+        self.LOOPPIDWindow = LOOPPIDSubWindow(self)
+        self.Label.clicked.connect(self.PushButton)
+
+        self.toggle_animation = QtCore.QParallelAnimationGroup(self)
+
+        self.content_area = QtWidgets.QScrollArea(
+            maximumHeight=0, minimumHeight=0
+        )
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 40 * R))
+        # self.content_area.setMinimumSize()
+        # self.content_area.setSizePolicy(
+        #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+        # )
+        self.content_area.setSizePolicy(sizePolicy)
+        self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.content_area.setStyleSheet("QWidget { background: transparent; }")
+
+        lay = QtWidgets.QGridLayout(self)
+        lay.setSpacing(0)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.addWidget(self.Label, 0,0,1,4)
+        lay.addWidget(self.Power,0,4,1,1)
+        lay.addWidget(self.Tool,0,5,1,1)
+        # lay.addWidget(self.Tool)
+        lay.addWidget(self.content_area,1,0,1,5)
+
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"minimumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"maximumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
+        )
+
+        self.lay = QtWidgets.QHBoxLayout()
+
+        self.State = DoubleButton_s(self)
+        self.State.Label.setText("State")
+        self.State.LButton.setText("On")
+        self.State.RButton.setText("Off")
+
+
+
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("Busy")
+
+        self.lay.addWidget(self.State)
+        self.lay.addWidget(self.StatusTransition)
+
+        self.setContentLayout(self.lay)
+
+    @QtCore.Slot()
+    def on_pressed(self):
+        checked = self.Tool.isChecked()
+        self.Tool.setArrowType(
+            QtCore.Qt.DownArrow if not checked else QtCore.Qt.RightArrow
+        )
+        self.toggle_animation.setDirection(
+            QtCore.QAbstractAnimation.Forward
+            if not checked
+            else QtCore.QAbstractAnimation.Backward
+        )
+        self.toggle_animation.start()
+
+    def setContentLayout(self, layout):
+        lay = self.content_area.layout()
+        del lay
+        self.content_area.setLayout(layout)
+        # But the -8 make the whole thing work
+        collapsed_height = (
+                self.sizeHint().height() - self.content_area.maximumHeight()
+        )
+        # print("height",collapsed_height, self.sizeHint().height(),self.content_area.maximumHeight())
+        content_height = layout.sizeHint().height()
+        for i in range(self.toggle_animation.animationCount()):
+            animation = self.toggle_animation.animationAt(i)
+            animation.setDuration(500)
+            animation.setStartValue(collapsed_height)
+            animation.setEndValue(collapsed_height + content_height)
+
+        content_animation = self.toggle_animation.animationAt(
+            self.toggle_animation.animationCount() - 1
+        )
+        content_animation.setDuration(500)
+        content_animation.setStartValue(0)
+        content_animation.setEndValue(content_height)
+
+    # Neutral means that the button shouldn't show any color
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.StateLState == self.StateInactiveName and self.StateRState == self.StateActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.StateLState == self.StateActiveName and self.StateRState == self.StateInactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ColorLabel(self, bool):
+        self.Label.setProperty("State", bool)
+        self.Label.setStyle(self.Tool.style())
+
+    @QtCore.Slot()
+    def PushButton(self):
+        self.LOOPPIDWindow.show()
+        self.InitWindow()
+
+    @QtCore.Slot()
+    def InitWindow(self):
+        self.LOOPPIDWindow.SP.SetValue(self.LOOPPIDWindow.SETSP.value)
+        self.LOOPPIDWindow.LOSP.SetValue(self.LOOPPIDWindow.LOW.value)
+        self.LOOPPIDWindow.HISP.SetValue(self.LOOPPIDWindow.HIGH.value)
+
+
+
+# Defines a reusable layout containing widgets
+class LOOP2PT_v2(QtWidgets.QWidget):
+    def __init__(self, parent=None, title=""):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 300 * R, 35 * R))
+        self.setSizePolicy(sizePolicy)
+
+
+        # self.HL1 = QtWidgets.QHBoxLayout()
+        # self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+
+        self.Label = QtWidgets.QPushButton(self)
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 300 * R, 35 * R))
+        self.Label.setMinimumSize(QtCore.QSize(150*R, 30*R))
+        self.Label.setProperty("State", False)
+        self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                 + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+        # self.HL1.addWidget(self.Label)
+
+        self.Tool = QtWidgets.QToolButton(
+            text=title, checkable=True, checked=False
+        )
+        self.Tool.setGeometry(QtCore.QRect(0 * R, 0 * R, 30 * R, 30 * R))
+        self.Tool.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        self.Tool.setArrowType(QtCore.Qt.RightArrow)
+
+
+        self.Tool.setMinimumSize(QtCore.QSize(30 * R, 30 * R))
+        self.Tool.setProperty("State", False)
+        self.Tool.setStyleSheet("QToolButton { background: transparent}")
+        self.Tool.setText("Label")
+
+        self.Tool.setSizePolicy(sizePolicy)
+        self.Tool.pressed.connect(self.on_pressed)
+        # self.HL1.addWidget(self.Tool)
+
+        # Add a Sub window popped out when click the name
+        self.LOOP2PTWindow = LOOP2PTSubWindow_v2(self)
+        self.Label.clicked.connect(self.PushButton)
+
+        self.toggle_animation = QtCore.QParallelAnimationGroup(self)
+
+        self.content_area = QtWidgets.QScrollArea(
+            maximumHeight=0, minimumHeight=0
+        )
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 300 * R, 40 * R))
+        # self.content_area.setMinimumSize()
+        # self.content_area.setSizePolicy(
+        #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+        # )
+        self.content_area.setSizePolicy(sizePolicy)
+        self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.content_area.setStyleSheet("QWidget { background: transparent; }")
+
+        lay = QtWidgets.QGridLayout(self)
+        lay.setSpacing(0)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.addWidget(self.Label, 0,0,1,4)
+        lay.addWidget(self.Tool,0,4,1,1)
+        # lay.addWidget(self.Tool)
+        lay.addWidget(self.content_area,1,0,1,5)
+
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"minimumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"maximumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
+        )
+
+        self.lay = QtWidgets.QHBoxLayout()
+
+        self.State = DoubleButton_s(self)
+        self.State.Label.setText("State")
+        self.State.LButton.setText("On")
+        self.State.RButton.setText("Off")
+        #
+        # self.Power = Control(self)
+        # self.Power.Label.setText("Power")
+        # self.Power.SetUnit(" %")
+        # self.Power.Max = 100.
+        # self.Power.Min = 0.
+        # self.Power.Step = 0.1
+        # self.Power.Decimals = 1
+
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("Busy")
+
+        self.lay.addWidget(self.State)
+        self.lay.addWidget(self.StatusTransition)
+        # self.lay.addWidget(self.Power)
+
+        self.setContentLayout(self.lay)
+
+    @QtCore.Slot()
+    def on_pressed(self):
+        checked = self.Tool.isChecked()
+        self.Tool.setArrowType(
+            QtCore.Qt.DownArrow if not checked else QtCore.Qt.RightArrow
+        )
+        self.toggle_animation.setDirection(
+            QtCore.QAbstractAnimation.Forward
+            if not checked
+            else QtCore.QAbstractAnimation.Backward
+        )
+        self.toggle_animation.start()
+
+    def setContentLayout(self, layout):
+        lay = self.content_area.layout()
+        del lay
+        self.content_area.setLayout(layout)
+        # But the -8 make the whole thing work
+        collapsed_height = (
+                self.sizeHint().height() - self.content_area.maximumHeight()
+        )-10*R
+        # print("height",collapsed_height, self.sizeHint().height(),self.content_area.maximumHeight())
+        content_height = layout.sizeHint().height()
+        for i in range(self.toggle_animation.animationCount()):
+            animation = self.toggle_animation.animationAt(i)
+            animation.setDuration(500)
+            animation.setStartValue(collapsed_height)
+            animation.setEndValue(collapsed_height + content_height)
+
+        content_animation = self.toggle_animation.animationAt(
+            self.toggle_animation.animationCount() - 1
+        )
+        content_animation.setDuration(500)
+        content_animation.setStartValue(0)
+        content_animation.setEndValue(content_height)
+
+    # Neutral means that the button shouldn't show any color
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.StateLState == self.StateInactiveName and self.StateRState == self.StateActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.StateLState == self.StateActiveName and self.StateRState == self.StateInactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ColorLabel(self, bool):
+        self.Label.setProperty("State", bool)
+        self.Label.setStyle(self.Tool.style())
+
+    @QtCore.Slot()
+    def PushButton(self):
+        self.LOOP2PTWindow.show()
+        self.InitWindow()
+
+    @QtCore.Slot()
+    def InitWindow(self):
+        self.LOOP2PTWindow.SP.SetValue(self.LOOP2PTWindow.SETSP.value)
+
+
+# Defines a reusable layout containing widgets
+class LOOP2PTSubWindow_v2(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.resize(1500*R, 600*R)
+        self.setMinimumSize(1500*R, 600*R)
+        self.setWindowTitle("Detailed Information")
+
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 600*R))
+
+        # Groupboxs for alarm/PT/TT
+
+        self.GLWR = QtWidgets.QHBoxLayout()
+        self.GLWR.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLWR.setSpacing(20 * R)
+        self.GLWR.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupWR = QtWidgets.QGroupBox(self.Widget)
+        self.GroupWR.setTitle("Write")
+        self.GroupWR.setLayout(self.GLWR)
+        self.GroupWR.move(0 * R, 0 * R)
+
+        self.GLRD = QtWidgets.QHBoxLayout()
+        self.GLRD.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLRD.setSpacing(20 * R)
+        self.GLRD.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRD = QtWidgets.QGroupBox(self.Widget)
+        self.GroupRD.setTitle("Read")
+        self.GroupRD.setLayout(self.GLRD)
+        self.GroupRD.move(0 * R, 240 * R)
+
+        self.Label = QtWidgets.QPushButton(self.GroupWR)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Indicator")
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        # self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
+        self.GLWR.addWidget(self.Label)
+
+        self.ButtonGroup = ButtonGroup(self.GroupWR)
+        self.GLWR.addWidget(self.ButtonGroup)
+
+        self.Mode = DoubleButton_s(self.GroupWR)
+        self.Mode.Label.setText("Mode")
+        self.GLWR.addWidget(self.Mode)
+
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("Busy")
+        self.GLWR.addWidget(self.StatusTransition)
+
+        self.SP = SetPoint(self.GroupWR)
+        self.SP.Label.setText("SetPoint")
+        self.GLWR.addWidget(self.SP)
+
+        self.updatebutton = QtWidgets.QPushButton(self.GroupWR)
+        self.updatebutton.setText("Update")
+        self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.updatebutton)
+
+        self.Interlock = ColoredStatus(self.GroupRD, mode = 1)
+        self.Interlock.Label.setText("INTLCK")
+        self.GLRD.addWidget(self.Interlock)
+
+        self.Error = ColoredStatus(self.GroupRD, mode = 1)
+        self.Error.Label.setText("ERR")
+        self.GLRD.addWidget(self.Error)
+
+        self.MANSP = ColoredStatus(self.GroupRD, mode = 2)
+        self.MANSP.Label.setText("MAN")
+        self.GLRD.addWidget(self.MANSP)
+
+        self.ModeREAD = Indicator(self.GroupRD)
+        self.ModeREAD.Label.setText("Mode")
+        self.ModeREAD.Field.setText('MODE0')
+        self.GLRD.addWidget(self.ModeREAD)
+
+        self.SETSP = Indicator(self.GroupRD)
+        self.SETSP.Label.setText("SP")
+        self.GLRD.addWidget(self.SETSP)
+
 
 
 # Defines a reusable layout containing widgets
@@ -2474,23 +3045,16 @@ class Valve_v2(QtWidgets.QWidget):
         self.Label = QtWidgets.QToolButton(
             text=title, checkable=True, checked=False
         )
-        # self.Label.setStyleSheet("QToolButton { border: none; subcontrol-position: top;}")
-        # self.Label.setStyleSheet("QToolButton { background: white;}")
         self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 170 * R, 30 * R))
         self.Label.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
-        # self.Label.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
 
         self.Label.setMinimumSize(QtCore.QSize(170 * R, 30 * R))
         self.Label.setProperty("State", False)
         self.Label.setStyleSheet("QToolButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
                                  + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
-        # self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setText("Label")
-        # self.Label.setSizePolicy(sizePolicy)
-        # self.GL.addWidget(self.Label, 0, 0, 1, 2, QtCore.Qt.AlignRight)
 
         self.Label.setSizePolicy(sizePolicy)
-        # self.Label.setArrowType(QtCore.Qt.RightArrow)
         self.Label.pressed.connect(self.on_pressed)
 
 
@@ -2509,11 +3073,6 @@ class Valve_v2(QtWidgets.QWidget):
         self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.content_area.setStyleSheet("QWidget { background: transparent; }")
 
-        # lay = QtWidgets.QHBoxLayout(self)
-        # lay.setSpacing(0)
-        # lay.setContentsMargins(0, 0, 0, 0)
-        # lay.addWidget(self.Label,QtCore.Qt.AlignTop)
-        # lay.addWidget(self.content_area)
 
         lay = QtWidgets.QGridLayout(self)
         lay.setSpacing(0)
@@ -2531,37 +3090,13 @@ class Valve_v2(QtWidgets.QWidget):
             QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
         )
 
-        # self.lay = QtWidgets.QVBoxLayout()
-        # self.Hlay= QtWidgets.QHBoxLayout()
-        #
-        # self.Set = DoubleButton_s(self)
-        # self.Set.Label.setText("Set")
-        # self.Set.LButton.setText("open")
-        # self.Set.RButton.setText("close")
-        # # self.VL.addWidget(self.Set)
-        #
-        # self.StatusTransition = ColoredStatus(self, mode=3)
-        # self.StatusTransition.setObjectName("StatusTransition")
-        # self.StatusTransition.Label.setText("Busy")
-        #
-        # self.ActiveState = ColoredStatus(self, mode =2)
-        # self.ActiveState.Label.setText("Status")
-        #
-        # self.lay.addWidget(self.Set)
-        # self.lay.addLayout(self.Hlay)
-        # self.Hlay.addWidget(self.StatusTransition)
-        # self.Hlay.addWidget(self.ActiveState)
-
         self.lay = QtWidgets.QGridLayout()
-        # self.lay.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
-        # self.lay.setSpacing(3)
 
 
         self.Set = DoubleButton_s(self)
         self.Set.Label.setText("Set")
         self.Set.LButton.setText("open")
         self.Set.RButton.setText("close")
-        # self.VL.addWidget(self.Set)
 
         self.StatusTransition = ColoredStatus(self, mode=3)
         self.StatusTransition.setObjectName("StatusTransition")
@@ -2570,9 +3105,7 @@ class Valve_v2(QtWidgets.QWidget):
         self.ActiveState = ColoredStatus(self, mode=2)
         self.ActiveState.Label.setText("Status")
 
-        # self.GL.addWidget(self.Running, 0, 0, QtCore.Qt.AlignCenter)
         self.lay.addWidget(self.Set, 0,0, 1,2, QtCore.Qt.AlignTop)
-        # self.lay.addLayout(self.Hlay)
         self.lay.addWidget(self.StatusTransition, 1,0, QtCore.Qt.AlignRight)
         self.lay.addWidget(self.ActiveState,1,1)
 
@@ -3747,6 +4280,88 @@ class Control(QtWidgets.QWidget):
                 pass
 
 
+
+class Control_v2(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.Signals = ChangeValueSignal()
+
+        self.setObjectName("Control")
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.setMinimumSize(70*R, 40*R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Background = QtWidgets.QLabel(self)
+        self.Background.setObjectName("Background")
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Control")
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setStyleSheet("QLabel {" +FONT+"}")
+
+        self.Button = QtWidgets.QPushButton(self)
+        self.Button.setObjectName("Button")
+        self.Button.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
+        self.Button.setProperty("State",True)
+        self.Button.setStyleSheet("QPushButton {" +C_BLUE + C_WHITE + FONT + BORDER_RADIUS + "} QWidget[State = true]{" + C_BLUE
+                                 + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+
+        self.Unit = " W"
+        self.SetValue(0.)
+
+        self.Max = 10.
+        self.Min = -10.
+        self.Step = 0.1
+        self.Decimals = 1
+
+    def SetValue(self, value):
+        self.value = value
+        self.Button.setText(str(value) + self.Unit)
+
+    def SetUnit(self, unit=" °C"):
+        self.Unit = unit
+        self.Button.setText(format(self.value, '#.2f') + self.Unit)
+
+    @QtCore.Slot()
+    def Changevalue(self):
+        Dialog = QtWidgets.QInputDialog()
+        Dialog.setInputMode(QtWidgets.QInputDialog.DoubleInput)
+        Dialog.setDoubleDecimals(self.Decimals)
+        Dialog.setDoubleRange(self.Min, self.Max)
+        Dialog.setDoubleStep(self.Step)
+        Dialog.setDoublevalue(self.value)
+        Dialog.setLabelText("Please entre a new value (min = " + str(self.Min) + ", max = " + str(self.Max) + ")")
+        Dialog.setModal(True)
+        Dialog.setWindowTitle("Modify value")
+        Dialog.exec()
+        if Dialog.result():
+            self.SetValue(Dialog.doublevalue())
+            self.Signals.fSignal.emit(self.value)
+
+    def Activate(self, Activate):
+        if Activate:
+            try:
+                self.Button.clicked.connect(self.Changevalue)
+            except:
+                pass
+        else:
+            try:
+                self.Button.clicked.disconnect(self.Changevalue)
+            except:
+                pass
+
+    @QtCore.Slot()
+    def ColorButton(self, bool):
+        self.Button.setProperty("State", bool)
+        self.Button.setStyle(self.Button.style())
+
 class Menu(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -4184,8 +4799,8 @@ class DoubleButton_s(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("DoubleButton")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 220*R, 40*R))
-        self.setMinimumSize(220*R, 40*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 140*R, 40*R))
+        self.setMinimumSize(140*R, 40*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
@@ -4392,6 +5007,7 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.setMinimumSize(460 * R, 20 * R)
         self.setSizePolicy(sizePolicy)
         self.objectname = "ProcedureWidget"
+        # self.setStyleSheet("QWidget { background: transparent; }")
 
 
         self.GL = QtWidgets.QGridLayout(self)
@@ -4404,6 +5020,7 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.Group.setTitle("ProcedureWidget")
         self.Group.setLayout(self.GL)
         self.Group.move(0 * R, 0 * R)
+        self.Group.setStyleSheet("QGroupbox { background: transparent; }")
 
 
         self.Running = ColoredStatus(self, mode= 4)
@@ -4425,13 +5042,9 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.START.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 20 * R))
 
 
-
         self.STOP = QtWidgets.QPushButton(self)
         self.STOP.setText("Stop")
         self.STOP.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 20 * R))
-
-
-
 
 
         self.ABORT =  QtWidgets.QPushButton(self)
