@@ -5,7 +5,7 @@ import datetime
 import time as tm
 import paramiko, pymysql
 import random
-# import pandas as pd
+import pandas as pd
 # import matplotlib as plot
 
 """PASSWORD IN THIS DOCUMENT are saved as enviroment variable at slowcontrol machine
@@ -35,6 +35,13 @@ def early_datetime():
     x = d - delta - datetime.timedelta(microseconds=1e5)
     return x
 
+def later_datetime():
+    d = datetime.datetime.now()
+    timeR = int(d.microsecond % 1e5)
+    delta = datetime.timedelta(microseconds=timeR)
+    x = d - delta + datetime.timedelta(microseconds=1e5)
+    return x
+
 def UNIX_time(self):
     return int(tm.time())
 
@@ -46,6 +53,7 @@ class mydatabase():
         self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol")
 
         self.mycursor = self.db.cursor()
+        self.stack= pd.DataFrame(columns=['Instrument', 'Time', 'Value'])
 
     def query(self,statement):
         try:
@@ -86,6 +94,31 @@ class mydatabase():
         data=(instrument, time,value)
         self.mycursor.execute(
             "INSERT INTO DataStorage (Instrument, Time, Value) VALUES(%s, %s, %s);", data)
+    def insert_data_into_stack(self,instrument, time,value):
+        # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
+        # value is a decimal from -9999.999 to 9999.999
+        # name must be consistent with P&ID
+        data=(instrument, time,value)
+        new_df=pd.DataFrame({'Instrument':instrument,"Time":time,"Value": value},index=[len(self.stack)])
+        self.stack = pd.concat((self.stack,new_df), axis=0,ignore_index= True)
+
+    def sort_stack(self):
+        self.stack = self.stack.sort_values(by=['Time'])
+        self.stack = self.stack.reset_index(drop=True)
+        print("first", self.stack.iloc[:5])
+        print("last",self.stack.iloc[-5:])
+
+    def convert_stack_into_queries(self):
+        for idx in self.stack.index:
+            newdata = (self.stack['Instrument'][idx], self.stack['Time'][idx], self.stack['Value'][idx])
+            # print(newdata)
+
+            self.mycursor.execute(
+                "INSERT INTO DataStorage (Instrument, Time, Value) VALUES(%s, %s, %s);", newdata)
+
+    def drop_stack(self):
+        self.stack = self.stack.iloc[0:0]
+        print(self.stack)
 
     def insert_data_into_metadata(self,instrument, Description,Unit):
         # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
@@ -220,10 +253,20 @@ if __name__ == "__main__":
 
     db = mydatabase()
     dt = datetime_in_s()
+    early_dt = early_datetime()
     # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
     print(dt)
     # print(unix_timestamp)
-    db.insert_data_into_datastorage("test",dt,500.55)
+    # db.insert_data_into_datastorage("test",dt,500.55)
+
+    db.insert_data_into_stack("PV5535", early_dt, 0)
+    db.insert_data_into_stack("PV5535", dt, 1)
+    db.insert_data_into_stack("PV5485", early_dt, 1)
+    db.insert_data_into_stack("PV5485", dt, 0)
+    db.insert_data_into_stack("PV5935", early_dt, 0)
+    db.insert_data_into_stack("PV5595", dt, 1)
+    db.sort_stack()
+
     # db.show_data_datastorage()
 
     # db.create_table("PV1204")
@@ -232,7 +275,7 @@ if __name__ == "__main__":
 
     # db.show_tables()
 
-    db.close_database()
+    # db.close_database()
 
     #test datetime function
     # print(datetime_in_1e5micro())
