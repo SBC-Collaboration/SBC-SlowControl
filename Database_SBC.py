@@ -105,8 +105,8 @@ class mydatabase():
     def sort_stack(self):
         self.stack = self.stack.sort_values(by=['Time'])
         self.stack = self.stack.reset_index(drop=True)
-        print("first", self.stack.iloc[:5])
-        print("last",self.stack.iloc[-5:])
+        # print("first", self.stack.iloc[:5])
+        # print("last",self.stack.iloc[-5:])
 
     def convert_stack_into_queries(self):
         for idx in self.stack.index:
@@ -118,7 +118,7 @@ class mydatabase():
 
     def drop_stack(self):
         self.stack = self.stack.iloc[0:0]
-        print(self.stack)
+        # print(self.stack)
 
     def insert_data_into_metadata(self,instrument, Description,Unit):
         # time must be like '2021-02-17 20:36:26' or datetime.datetime(yy,mm,dd,hh,mm,ss)
