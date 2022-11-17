@@ -962,6 +962,28 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PCYCLE_AUTOCYCLE.move(1300 * R, 600 * R)
         self.PCYCLE_AUTOCYCLE.Label.setText("PCYCLE_AUTOCYCLE")
 
+        self.TT2118_HI_INTLK_v2 = INTLK_LA_Widget_v2(self.DatanSignalTab)
+        self.TT2118_HI_INTLK_v2.move(1900 * R, 200 * R)
+        self.TT2118_HI_INTLK_v2.Label.setText("TT2118_HI")
+        self.TT2118_HI_INTLK_v2.setObjectName("TT2118_HI_INTLK")
+
+        self.TT2118_LO_INTLK_v2 = INTLK_RA_Widget_v2(self.DatanSignalTab)
+        self.TT2118_LO_INTLK_v2.move(1900 * R, 500 * R)
+        self.TT2118_LO_INTLK_v2.Label.setText("TT2118_LO")
+        self.TT2118_LO_INTLK_v2.setObjectName("TT2118_LO_INTLK")
+
+        self.TS1_INTLK_v2 = INTLK_LD_Widget_v2(self.DatanSignalTab)
+        self.TS1_INTLK_v2.move(1900 * R, 750 * R)
+        self.TS1_INTLK_v2.Label.setText("TS1")
+        self.TS1_INTLK_v2.setObjectName("TS1")
+
+        self.ES3347_INTLK_v2 = INTLK_RD_Widget_v2(self.DatanSignalTab)
+        self.ES3347_INTLK_v2.move(1900 * R, 1000 * R)
+        self.ES3347_INTLK_v2.Label.setText("ES3347")
+        self.ES3347_INTLK_v2.setObjectName("ES3347")
+
+
+
         self.TT2118_HI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
         self.TT2118_HI_INTLK.move(10 * R, 10 * R)
         self.TT2118_HI_INTLK.Label.setText("TT2118_HI")
@@ -1042,14 +1064,23 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PU_PRIME_INTLK.Label.setText("PU_PRIME")
         self.PU_PRIME_INTLK.setObjectName("PU_PRIME")
 
+        # INTLCK button
+        self.INTLCKWindow = INTLCK_Win_v2()
+        self.INTLCKButton = INTLCKButton(self.INTLCKWindow, self)
+        self.INTLCKButton.SubWindow.resize(1000 * R, 500 * R)
+        # self.AlarmButton.StatusWindow.AlarmWindow()
+
+        self.INTLCKButton.move(90 * R, 1350 * R)
+        # self.INTLCKButton.Button.setText("INTLCK Button")
+
         # Alarm button
         self.AlarmWindow = AlarmWin()
         self.AlarmButton = AlarmButton(self.AlarmWindow, self)
         self.AlarmButton.SubWindow.resize(1000*R, 500*R)
         # self.AlarmButton.StatusWindow.AlarmWindow()
 
-        self.AlarmButton.move(0*R, 1300*R)
-        self.AlarmButton.Button.setText("Alarm Button")
+        self.AlarmButton.move(10*R, 1350*R)
+        # self.AlarmButton.Button.setText("Alarm Button")
 
 
         #commands stack
@@ -2945,13 +2976,235 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4325_HIHI_INTLK.updatebutton.clicked.connect(
             lambda x: self.INTLK_A_update(self.PT4325_HIHI_INTLK.Label.text() + "_INTLK", self.PT4325_HIHI_INTLK.SET_W.Field.text()))
 
+        ##intlck A window
+        self.INTLCKWindow.TT2118_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT2118_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT2118_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT2118_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT2118_HI_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_A_RESET(self.INTLCKWindow.TT2118_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT2118_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT2118_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT2118_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT2118_LO_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT2118_LO_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT2118_LO_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT2118_LO_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT2118_LO_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT2118_LO_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT2118_LO_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.PT4306_LO_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT4306_LO_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4306_LO_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT4306_LO_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4306_LO_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT4306_LO_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT4306_LO_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.PT4306_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT4306_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4306_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT4306_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4306_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT4306_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT4306_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.PT4322_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT4322_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4322_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT4322_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4322_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT4322_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT4322_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.PT4322_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT4322_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4322_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT4322_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4322_HIHI_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_A_RESET(self.INTLCKWindow.PT4322_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4322_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT4322_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT4322_HIHI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.PT4319_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT4319_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4319_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT4319_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4319_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT4319_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT4319_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.PT4319_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT4319_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4319_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT4319_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4319_HIHI_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_A_RESET(self.INTLCKWindow.PT4319_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4319_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT4319_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT4319_HIHI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.PT4325_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT4325_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4325_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT4325_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4325_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT4325_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT4325_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.PT4325_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT4325_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4325_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT4325_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4325_HIHI_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_A_RESET(self.INTLCKWindow.PT4325_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT4325_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT4325_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT4325_HIHI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6203_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6203_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6203_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6203_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6203_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6203_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6203_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6207_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6207_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6207_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6207_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6207_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6207_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6207_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6211_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6211_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6211_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6211_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6211_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6211_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6211_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6213_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6213_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6213_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6213_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6213_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6213_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6213_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6222_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6222_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6222_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6222_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6222_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6222_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6222_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6407_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6407_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6407_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6407_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6407_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6407_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6407_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6408_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6408_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6408_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6408_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6408_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6408_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6408_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6409_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6409_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6409_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6409_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6409_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6409_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6409_HI_INTLK.SET_W.Field.text()))
+
+
+        self.INTLCKWindow.TT6203_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6203_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6203_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6203_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6203_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6203_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6203_HIHI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6207_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6207_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6207_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6207_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6207_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6207_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6207_HIHI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6211_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6211_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6211_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6211_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6211_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6211_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6211_HIHI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6213_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6213_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6213_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6213_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6213_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6213_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6213_HIHI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6222_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6222_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6222_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6222_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6222_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6222_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6222_HIHI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6407_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6407_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6407_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6407_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6407_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6407_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6407_HIHI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6408_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6408_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6408_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6408_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6408_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6408_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6408_HIHI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.TT6409_HIHI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.TT6409_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6409_HIHI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.TT6409_HIHI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TT6409_HIHI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.TT6409_HIHI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.TT6409_HIHI_INTLK.SET_W.Field.text()))
+
+
+
         #INTLK D part
+
         self.TS1_INTLK.EN.LButton.clicked.connect(
             lambda x: self.INTLK_D_LButtonClicked(self.TS1_INTLK.Label.text() + "_INTLK"))
         self.TS1_INTLK.EN.RButton.clicked.connect(
             lambda x: self.INTLK_D_RButtonClicked(self.TS1_INTLK.Label.text() + "_INTLK"))
         self.TS1_INTLK.RST.clicked.connect(
             lambda x: self.INTLK_D_RESET(self.TS1_INTLK.Label.text() + "_INTLK"))
+
 
         self.ES3347_INTLK.EN.LButton.clicked.connect(
             lambda x: self.INTLK_D_LButtonClicked(self.ES3347_INTLK.Label.text() + "_INTLK"))
@@ -2986,6 +3239,49 @@ class MainWindow(QtWidgets.QMainWindow):
             lambda x: self.INTLK_D_RButtonClicked(self.PU_PRIME_INTLK.Label.text() + "_INTLK"))
         self.PU_PRIME_INTLK.RST.clicked.connect(
             lambda x: self.INTLK_D_RESET(self.PU_PRIME_INTLK.Label.text() + "_INTLK"))
+
+        ##intlkc window d
+
+        self.INTLCKWindow.TS1_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.INTLCKWindow.TS1_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TS1_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.INTLCKWindow.TS1_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TS1_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.INTLCKWindow.TS1_INTLK.Label.text() + "_INTLK"))
+
+
+        self.INTLCKWindow.ES3347_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.INTLCKWindow.ES3347_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.ES3347_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.INTLCKWindow.ES3347_INTLK.Label.text() + "_INTLK"))
+
+        self.INTLCKWindow.PUMP3305_OL_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.INTLCKWindow.PUMP3305_OL_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PUMP3305_OL_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.INTLCKWindow.PUMP3305_OL_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PUMP3305_OL_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.INTLCKWindow.PUMP3305_OL_INTLK.Label.text() + "_INTLK"))
+
+        self.INTLCKWindow.TS2_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.INTLCKWindow.TS2_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TS2_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.INTLCKWindow.TS2_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TS2_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.INTLCKWindow.TS2_INTLK.Label.text() + "_INTLK"))
+
+        self.INTLCKWindow.TS3_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.INTLCKWindow.TS3_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TS3_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.INTLCKWindow.TS3_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.TS3_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.INTLCKWindow.TS3_INTLK.Label.text() + "_INTLK"))
+
+        self.INTLCKWindow.PU_PRIME_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.INTLCKWindow.PU_PRIME_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PU_PRIME_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.INTLCKWindow.PU_PRIME_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PU_PRIME_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.INTLCKWindow.PU_PRIME_INTLK.Label.text() + "_INTLK"))
 
         #FLAG
         self.MAN_TS.Set.LButton.clicked.connect(
@@ -5220,100 +5516,621 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #INTLK part
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT2118_HI_INTLK"]:
-            self.TT2118_HI_INTLK.EN.ButtonTransitionState(False)
+        # if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT2118_HI_INTLK"]:
+        #     self.TT2118_HI_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_A_DIC_buffer["TT2118_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"] != self.INTLK_A_DIC_buffer["TT2118_LO_INTLK"]:
+        #     self.TT2118_LO_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_A_DIC_buffer["TT2118_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"] != self.INTLK_A_DIC_buffer["PT4306_LO_INTLK"]:
+        #     self.PT4306_LO_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_A_DIC_buffer["PT4306_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"]:
+        #     self.PT4306_HI_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4322_HI_INTLK"]:
+        #     self.PT4322_HI_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_A_DIC_buffer["PT4322_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4322_HIHI_INTLK"]:
+        #     self.PT4322_HIHI_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_A_DIC_buffer["PT4322_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4319_HI_INTLK"]:
+        #     self.PT4319_HI_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_A_DIC_buffer["PT4319_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"]
+        # else:
+        #     pass
+        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4319_HIHI_INTLK"]:
+        #     self.PT4319_HIHI_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_A_DIC_buffer["PT4319_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4325_HI_INTLK"]:
+        #     self.PT4325_HI_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_A_DIC_buffer["PT4325_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"]
+        # else:
+        #     pass
+        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4325_HIHI_INTLK"]:
+        #     self.PT4325_HIHI_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_A_DIC_buffer["PT4325_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"]
+        # else:
+        #     pass
+        #
+        #
+        # if received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"] != self.INTLK_D_DIC_buffer["TS1_INTLK"]:
+        #     self.TS1_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_D_DIC_buffer["TS1_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"] != self.INTLK_D_DIC_buffer["ES3347_INTLK"]:
+        #     self.ES3347_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_D_DIC_buffer["ES3347_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"] != self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"]:
+        #     self.PUMP3305_OL_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"] != self.INTLK_D_DIC_buffer["TS2_INTLK"]:
+        #     self.TS2_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_D_DIC_buffer["TS2_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"] != self.INTLK_D_DIC_buffer["TS3_INTLK"]:
+        #     self.TS3_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_D_DIC_buffer["TS3_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"]
+        # else:
+        #     pass
+        #
+        # if received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"] != self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"]:
+        #     self.PU_PRIME_INTLK.EN.ButtonTransitionState(False)
+        #     self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"]
+        # else:
+        #     pass
+        #
+
+        # intlck window A button
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT2118_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"]:
+                self.INTLCKWindow.TT2118_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT2118_HI_INTLK.EN.ButtonRClicked()
             self.INTLK_A_DIC_buffer["TT2118_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT2118_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT2118_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"]:
+                    self.INTLCKWindow.TT2118_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT2118_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT2118_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"] != self.INTLK_A_DIC_buffer["TT2118_LO_INTLK"]:
-            self.TT2118_LO_INTLK.EN.ButtonTransitionState(False)
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT2118_LO_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"]:
+                self.INTLCKWindow.TT2118_LO_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT2118_LO_INTLK.EN.ButtonRClicked()
             self.INTLK_A_DIC_buffer["TT2118_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT2118_LO_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"] != self.INTLK_A_DIC_buffer["TT2118_LO_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"]:
+                    self.INTLCKWindow.TT2118_LO_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT2118_LO_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT2118_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"] != self.INTLK_A_DIC_buffer["PT4306_LO_INTLK"]:
-            self.PT4306_LO_INTLK.EN.ButtonTransitionState(False)
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT4306_LO_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"]:
+                self.INTLCKWindow.PT4306_LO_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT4306_LO_INTLK.EN.ButtonRClicked()
             self.INTLK_A_DIC_buffer["PT4306_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT4306_LO_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"] != self.INTLK_A_DIC_buffer["PT4306_LO_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"]:
+                    self.INTLCKWindow.PT4306_LO_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT4306_LO_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT4306_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"]:
-            self.PT4306_HI_INTLK.EN.ButtonTransitionState(False)
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT4306_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]:
+                self.INTLCKWindow.PT4306_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT4306_HI_INTLK.EN.ButtonRClicked()
             self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT4306_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]:
+                    self.INTLCKWindow.PT4306_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT4306_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4322_HI_INTLK"]:
-            self.PT4322_HI_INTLK.EN.ButtonTransitionState(False)
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT4322_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"]:
+                self.INTLCKWindow.PT4322_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT4322_HI_INTLK.EN.ButtonRClicked()
             self.INTLK_A_DIC_buffer["PT4322_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT4322_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4322_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"]:
+                    self.INTLCKWindow.PT4322_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT4322_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT4322_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4322_HIHI_INTLK"]:
-            self.PT4322_HIHI_INTLK.EN.ButtonTransitionState(False)
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT4322_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"]:
+                self.INTLCKWindow.PT4322_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT4322_HIHI_INTLK.EN.ButtonRClicked()
             self.INTLK_A_DIC_buffer["PT4322_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT4322_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4322_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"]:
+                    self.INTLCKWindow.PT4322_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT4322_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT4322_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4319_HI_INTLK"]:
-            self.PT4319_HI_INTLK.EN.ButtonTransitionState(False)
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT4319_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"]:
+                self.INTLCKWindow.PT4319_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT4319_HI_INTLK.EN.ButtonRClicked()
             self.INTLK_A_DIC_buffer["PT4319_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"]
-        else:
-            pass
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4319_HIHI_INTLK"]:
-            self.PT4319_HIHI_INTLK.EN.ButtonTransitionState(False)
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT4319_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4319_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"]:
+                    self.INTLCKWindow.PT4319_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT4319_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT4319_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT4319_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"]:
+                self.INTLCKWindow.PT4319_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT4319_HIHI_INTLK.EN.ButtonRClicked()
             self.INTLK_A_DIC_buffer["PT4319_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT4319_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4319_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"]:
+                    self.INTLCKWindow.PT4319_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT4319_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT4319_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4325_HI_INTLK"]:
-            self.PT4325_HI_INTLK.EN.ButtonTransitionState(False)
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT4325_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"]:
+                self.INTLCKWindow.PT4325_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT4325_HI_INTLK.EN.ButtonRClicked()
             self.INTLK_A_DIC_buffer["PT4325_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"]
-        else:
-            pass
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4325_HIHI_INTLK"]:
-            self.PT4325_HIHI_INTLK.EN.ButtonTransitionState(False)
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT4325_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4325_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"]:
+                    self.INTLCKWindow.PT4325_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT4325_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT4325_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT4325_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"]:
+                self.INTLCKWindow.PT4325_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT4325_HIHI_INTLK.EN.ButtonRClicked()
             self.INTLK_A_DIC_buffer["PT4325_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT4325_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4325_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"]:
+                    self.INTLCKWindow.PT4325_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT4325_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT4325_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"]
+            else:
+                pass
 
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6203_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HI_INTLK"]:
+                self.INTLCKWindow.TT6203_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6203_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6203_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6203_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT6203_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HI_INTLK"]:
+                    self.INTLCKWindow.TT6203_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6203_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6203_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HI_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"] != self.INTLK_D_DIC_buffer["TS1_INTLK"]:
-            self.TS1_INTLK.EN.ButtonTransitionState(False)
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6207_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HI_INTLK"]:
+                self.INTLCKWindow.TT6207_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6207_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6207_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6207_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT6207_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HI_INTLK"]:
+                    self.INTLCKWindow.TT6207_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6207_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6207_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6211_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HI_INTLK"]:
+                self.INTLCKWindow.TT6211_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6211_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6211_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6211_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT6211_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HI_INTLK"]:
+                    self.INTLCKWindow.TT6211_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6211_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6211_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6213_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HI_INTLK"]:
+                self.INTLCKWindow.TT6213_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6213_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6213_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6213_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT6213_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HI_INTLK"]:
+                    self.INTLCKWindow.TT6213_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6213_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6213_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6222_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HI_INTLK"]:
+                self.INTLCKWindow.TT6222_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6222_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6222_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6222_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT6222_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HI_INTLK"]:
+                    self.INTLCKWindow.TT6222_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6222_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6222_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6407_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HI_INTLK"]:
+                self.INTLCKWindow.TT6407_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6407_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6407_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6407_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT6407_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HI_INTLK"]:
+                    self.INTLCKWindow.TT6407_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6407_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6407_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6408_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HI_INTLK"]:
+                self.INTLCKWindow.TT6408_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6408_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6408_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6408_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT6408_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HI_INTLK"]:
+                    self.INTLCKWindow.TT6408_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6408_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6408_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6409_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HI_INTLK"]:
+                self.INTLCKWindow.TT6409_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6409_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6409_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6409_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT6409_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HI_INTLK"]:
+                    self.INTLCKWindow.TT6409_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6409_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6409_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6203_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HIHI_INTLK"]:
+                self.INTLCKWindow.TT6203_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6203_HIHI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6203_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HIHI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6203_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["TT6203_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HIHI_INTLK"]:
+                    self.INTLCKWindow.TT6203_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6203_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6203_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HIHI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6207_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HIHI_INTLK"]:
+                self.INTLCKWindow.TT6207_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6207_HIHI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6207_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HIHI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6207_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["TT6207_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HIHI_INTLK"]:
+                    self.INTLCKWindow.TT6207_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6207_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6207_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HIHI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6211_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HIHI_INTLK"]:
+                self.INTLCKWindow.TT6211_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6211_HIHI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6211_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HIHI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6211_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["TT6211_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HIHI_INTLK"]:
+                    self.INTLCKWindow.TT6211_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6211_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6211_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HIHI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6213_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HIHI_INTLK"]:
+                self.INTLCKWindow.TT6213_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6213_HIHI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6213_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HIHI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6213_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["TT6213_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HIHI_INTLK"]:
+                    self.INTLCKWindow.TT6213_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6213_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6213_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HIHI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6222_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HIHI_INTLK"]:
+                self.INTLCKWindow.TT6222_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6222_HIHI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6222_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HIHI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6222_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["TT6222_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HIHI_INTLK"]:
+                    self.INTLCKWindow.TT6222_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6222_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6222_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HIHI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6407_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HIHI_INTLK"]:
+                self.INTLCKWindow.TT6407_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6407_HIHI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6407_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HIHI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6407_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["TT6407_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HIHI_INTLK"]:
+                    self.INTLCKWindow.TT6407_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6407_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6407_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HIHI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6408_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HIHI_INTLK"]:
+                self.INTLCKWindow.TT6408_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6408_HIHI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6408_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HIHI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6408_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["TT6408_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HIHI_INTLK"]:
+                    self.INTLCKWindow.TT6408_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6408_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6408_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HIHI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["TT6409_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HIHI_INTLK"]:
+                self.INTLCKWindow.TT6409_HIHI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TT6409_HIHI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["TT6409_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HIHI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["TT6409_HIHI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["TT6409_HIHI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HIHI_INTLK"]:
+                    self.INTLCKWindow.TT6409_HIHI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TT6409_HIHI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["TT6409_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HIHI_INTLK"]
+            else:
+                pass
+
+        ## intlck window d
+
+        if received_dic_c["data"]["INTLK_D"]["Busy"]["TS1_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"]:
+                self.INTLCKWindow.TS1_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TS1_INTLK.EN.ButtonRClicked()
             self.INTLK_D_DIC_buffer["TS1_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["TS1_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"] != self.INTLK_D_DIC_buffer["TS1_INTLK"]:
+                if received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"]:
+                    self.INTLCKWindow.TS1_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TS1_INTLK.EN.ButtonRClicked()
+                self.INTLK_D_DIC_buffer["TS1_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"] != self.INTLK_D_DIC_buffer["ES3347_INTLK"]:
-            self.ES3347_INTLK.EN.ButtonTransitionState(False)
-            self.INTLK_D_DIC_buffer["ES3347_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"]
-        else:
-            pass
 
-        if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"] != self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"]:
-            self.PUMP3305_OL_INTLK.EN.ButtonTransitionState(False)
-            self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]
-        else:
-            pass
-
-        if received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"] != self.INTLK_D_DIC_buffer["TS2_INTLK"]:
-            self.TS2_INTLK.EN.ButtonTransitionState(False)
+        if received_dic_c["data"]["INTLK_D"]["Busy"]["TS2_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"]:
+                self.INTLCKWindow.TS2_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TS2_INTLK.EN.ButtonRClicked()
             self.INTLK_D_DIC_buffer["TS2_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["TS2_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"] != self.INTLK_D_DIC_buffer["TS2_INTLK"]:
+                if received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"]:
+                    self.INTLCKWindow.TS2_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TS2_INTLK.EN.ButtonRClicked()
+                self.INTLK_D_DIC_buffer["TS2_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"] != self.INTLK_D_DIC_buffer["TS3_INTLK"]:
-            self.TS3_INTLK.EN.ButtonTransitionState(False)
+        if received_dic_c["data"]["INTLK_D"]["Busy"]["TS3_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"]:
+                self.INTLCKWindow.TS3_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.TS3_INTLK.EN.ButtonRClicked()
             self.INTLK_D_DIC_buffer["TS3_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["TS3_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"] != self.INTLK_D_DIC_buffer["TS3_INTLK"]:
+                if received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"]:
+                    self.INTLCKWindow.TS3_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.TS3_INTLK.EN.ButtonRClicked()
+                self.INTLK_D_DIC_buffer["TS3_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"]
+            else:
+                pass
 
-        if received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"] != self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"]:
-            self.PU_PRIME_INTLK.EN.ButtonTransitionState(False)
+        if received_dic_c["data"]["INTLK_D"]["Busy"]["ES3347_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"]:
+                self.INTLCKWindow.ES3347_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.ES3347_INTLK.EN.ButtonRClicked()
+            self.INTLK_D_DIC_buffer["ES3347_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"]
+        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["ES3347_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"] != self.INTLK_D_DIC_buffer["ES3347_INTLK"]:
+                if received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"]:
+                    self.INTLCKWindow.ES3347_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.ES3347_INTLK.EN.ButtonRClicked()
+                self.INTLK_D_DIC_buffer["ES3347_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_D"]["Busy"]["PUMP3305_OL_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]:
+                self.INTLCKWindow.PUMP3305_OL_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PUMP3305_OL_INTLK.EN.ButtonRClicked()
+            self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]
+        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["PUMP3305_OL_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"] != self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"]:
+                if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]:
+                    self.INTLCKWindow.PUMP3305_OL_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PUMP3305_OL_INTLK.EN.ButtonRClicked()
+                self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_D"]["Busy"]["PU_PRIME_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"]:
+                self.INTLCKWindow.PU_PRIME_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PU_PRIME_INTLK.EN.ButtonRClicked()
             self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"]
-        else:
-            pass
+        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["PU_PRIME_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"] != self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"]:
+                if received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"]:
+                    self.INTLCKWindow.PU_PRIME_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PU_PRIME_INTLK.EN.ButtonRClicked()
+                self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"]
+            else:
+                pass
+
 
 
 
@@ -8574,6 +9391,242 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PU_PRIME_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["PU_PRIME_INTLK"])
         self.PU_PRIME_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PU_PRIME_INTLK"])
 
+        # intlck window a indicators
+        # INTLCK indicator
+        self.INTLCKWindow.TT2118_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT2118_HI_INTLK"])
+        self.INTLCKWindow.TT2118_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"])
+        self.INTLCKWindow.TT2118_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT2118_HI_INTLK"])
+        self.INTLCKWindow.TT2118_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT2118_HI_INTLK"])
+
+        self.INTLCKWindow.TT2118_LO_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT2118_LO_INTLK"])
+        self.INTLCKWindow.TT2118_LO_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"])
+        self.INTLCKWindow.TT2118_LO_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT2118_LO_INTLK"])
+        self.INTLCKWindow.TT2118_LO_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT2118_LO_INTLK"])
+
+        self.INTLCKWindow.PT4306_LO_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT4306_LO_INTLK"])
+        self.INTLCKWindow.PT4306_LO_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"])
+        self.INTLCKWindow.PT4306_LO_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4306_LO_INTLK"])
+        self.INTLCKWindow.PT4306_LO_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4306_LO_INTLK"])
+
+        self.INTLCKWindow.PT4306_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT4306_HI_INTLK"])
+        self.INTLCKWindow.PT4306_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"])
+        self.INTLCKWindow.PT4306_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4306_HI_INTLK"])
+        self.INTLCKWindow.PT4306_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4306_HI_INTLK"])
+
+        self.INTLCKWindow.PT4322_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT4322_HI_INTLK"])
+        self.INTLCKWindow.PT4322_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"])
+        self.INTLCKWindow.PT4322_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4322_HI_INTLK"])
+        self.INTLCKWindow.PT4322_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4322_HI_INTLK"])
+
+
+        self.INTLCKWindow.PT4322_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT4322_HIHI_INTLK"])
+        self.INTLCKWindow.PT4322_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"])
+        self.INTLCKWindow.PT4322_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4322_HIHI_INTLK"])
+        self.INTLCKWindow.PT4322_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4322_HIHI_INTLK"])
+
+        self.INTLCKWindow.PT4319_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT4319_HI_INTLK"])
+        self.INTLCKWindow.PT4319_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"])
+        self.INTLCKWindow.PT4319_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4319_HI_INTLK"])
+        self.INTLCKWindow.PT4319_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4319_HI_INTLK"])
+
+        self.INTLCKWindow.PT4319_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT4319_HIHI_INTLK"])
+        self.INTLCKWindow.PT4319_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"])
+        self.INTLCKWindow.PT4319_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4319_HIHI_INTLK"])
+        self.INTLCKWindow.PT4319_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4319_HIHI_INTLK"])
+
+        self.INTLCKWindow.PT4325_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT4325_HI_INTLK"])
+        self.INTLCKWindow.PT4325_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"])
+        self.INTLCKWindow.PT4325_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4325_HI_INTLK"])
+        self.INTLCKWindow.PT4325_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4325_HI_INTLK"])
+
+        self.INTLCKWindow.PT4325_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT4325_HIHI_INTLK"])
+        self.INTLCKWindow.PT4325_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"])
+        self.INTLCKWindow.PT4325_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4325_HIHI_INTLK"])
+        self.INTLCKWindow.PT4325_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT4325_HIHI_INTLK"])
+
+        self.INTLCKWindow.TT6203_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6203_HI_INTLK"])
+        self.INTLCKWindow.TT6203_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HI_INTLK"])
+        self.INTLCKWindow.TT6203_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6203_HI_INTLK"])
+        self.INTLCKWindow.TT6203_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6203_HI_INTLK"])
+
+        self.INTLCKWindow.TT6207_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6207_HI_INTLK"])
+        self.INTLCKWindow.TT6207_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HI_INTLK"])
+        self.INTLCKWindow.TT6207_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6207_HI_INTLK"])
+        self.INTLCKWindow.TT6207_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6207_HI_INTLK"])
+
+        self.INTLCKWindow.TT6211_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6211_HI_INTLK"])
+        self.INTLCKWindow.TT6211_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HI_INTLK"])
+        self.INTLCKWindow.TT6211_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6211_HI_INTLK"])
+        self.INTLCKWindow.TT6211_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6211_HI_INTLK"])
+
+        self.INTLCKWindow.TT6213_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6213_HI_INTLK"])
+        self.INTLCKWindow.TT6213_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HI_INTLK"])
+        self.INTLCKWindow.TT6213_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6213_HI_INTLK"])
+        self.INTLCKWindow.TT6213_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6213_HI_INTLK"])
+
+        self.INTLCKWindow.TT6222_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6222_HI_INTLK"])
+        self.INTLCKWindow.TT6222_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HI_INTLK"])
+        self.INTLCKWindow.TT6222_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6222_HI_INTLK"])
+        self.INTLCKWindow.TT6222_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6222_HI_INTLK"])
+
+        self.INTLCKWindow.TT6407_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6407_HI_INTLK"])
+        self.INTLCKWindow.TT6407_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HI_INTLK"])
+        self.INTLCKWindow.TT6407_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6407_HI_INTLK"])
+        self.INTLCKWindow.TT6407_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6407_HI_INTLK"])
+
+        self.INTLCKWindow.TT6408_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6408_HI_INTLK"])
+        self.INTLCKWindow.TT6408_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HI_INTLK"])
+        self.INTLCKWindow.TT6408_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6408_HI_INTLK"])
+        self.INTLCKWindow.TT6408_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6408_HI_INTLK"])
+
+        self.INTLCKWindow.TT6409_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6409_HI_INTLK"])
+        self.INTLCKWindow.TT6409_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HI_INTLK"])
+        self.INTLCKWindow.TT6409_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6409_HI_INTLK"])
+        self.INTLCKWindow.TT6409_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6409_HI_INTLK"])
+
+        self.INTLCKWindow.TT6203_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6203_HIHI_INTLK"])
+        self.INTLCKWindow.TT6203_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6203_HIHI_INTLK"])
+        self.INTLCKWindow.TT6203_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6203_HIHI_INTLK"])
+        self.INTLCKWindow.TT6203_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6203_HIHI_INTLK"])
+
+        self.INTLCKWindow.TT6207_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6207_HIHI_INTLK"])
+        self.INTLCKWindow.TT6207_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6207_HIHI_INTLK"])
+        self.INTLCKWindow.TT6207_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6207_HIHI_INTLK"])
+        self.INTLCKWindow.TT6207_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6207_HIHI_INTLK"])
+
+
+        self.INTLCKWindow.TT6211_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6211_HIHI_INTLK"])
+        self.INTLCKWindow.TT6211_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6211_HIHI_INTLK"])
+        self.INTLCKWindow.TT6211_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6211_HIHI_INTLK"])
+        self.INTLCKWindow.TT6211_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6211_HIHI_INTLK"])
+
+        self.INTLCKWindow.TT6213_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6213_HIHI_INTLK"])
+        self.INTLCKWindow.TT6213_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6213_HIHI_INTLK"])
+        self.INTLCKWindow.TT6213_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6213_HIHI_INTLK"])
+        self.INTLCKWindow.TT6213_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6213_HIHI_INTLK"])
+
+        self.INTLCKWindow.TT6222_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6222_HIHI_INTLK"])
+        self.INTLCKWindow.TT6222_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6222_HIHI_INTLK"])
+        self.INTLCKWindow.TT6222_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6222_HIHI_INTLK"])
+        self.INTLCKWindow.TT6222_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6222_HIHI_INTLK"])
+
+        self.INTLCKWindow.TT6407_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6407_HIHI_INTLK"])
+        self.INTLCKWindow.TT6407_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6407_HIHI_INTLK"])
+        self.INTLCKWindow.TT6407_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6407_HIHI_INTLK"])
+        self.INTLCKWindow.TT6407_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6407_HIHI_INTLK"])
+
+        self.INTLCKWindow.TT6408_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6408_HIHI_INTLK"])
+        self.INTLCKWindow.TT6408_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6408_HIHI_INTLK"])
+        self.INTLCKWindow.TT6408_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6408_HIHI_INTLK"])
+        self.INTLCKWindow.TT6408_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6408_HIHI_INTLK"])
+
+        self.INTLCKWindow.TT6409_HIHI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["TT6409_HIHI_INTLK"])
+        self.INTLCKWindow.TT6409_HIHI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["TT6409_HIHI_INTLK"])
+        self.INTLCKWindow.TT6409_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT6409_HIHI_INTLK"])
+        self.INTLCKWindow.TT6409_HIHI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["TT6409_HIHI_INTLK"])
+
+        #intlck d window
+        self.INTLCKWindow.TS1_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["TS1_INTLK"])
+        self.INTLCKWindow.TS1_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"])
+        self.INTLCKWindow.TS1_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS1_INTLK"])
+
+        self.INTLCKWindow.TS2_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["TS2_INTLK"])
+        self.INTLCKWindow.TS2_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"])
+        self.INTLCKWindow.TS2_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS2_INTLK"])
+
+        self.INTLCKWindow.TS3_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["TS3_INTLK"])
+        self.INTLCKWindow.TS3_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"])
+        self.INTLCKWindow.TS3_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS3_INTLK"])
+
+        self.INTLCKWindow.PUMP3305_OL_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["PUMP3305_OL_INTLK"])
+        self.INTLCKWindow.PUMP3305_OL_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"])
+        self.INTLCKWindow.PUMP3305_OL_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PUMP3305_OL_INTLK"])
+
+        self.INTLCKWindow.ES3347_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["ES3347_INTLK"])
+        self.INTLCKWindow.ES3347_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"])
+        self.INTLCKWindow.ES3347_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["ES3347_INTLK"])
+
+        self.INTLCKWindow.PU_PRIME_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["PU_PRIME_INTLK"])
+        self.INTLCKWindow.PU_PRIME_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"])
+        self.INTLCKWindow.PU_PRIME_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PU_PRIME_INTLK"])
+
 
     @QtCore.Slot(object)
     def update_alarmwindow(self,list):
@@ -9498,11 +10551,13 @@ class UpdateClient(QtCore.QObject):
         self.INTLK_D_DIC_ini = copy.copy(sec.INTLK_D_DIC)
         self.INTLK_D_EN_ini = copy.copy(sec.INTLK_D_EN)
         self.INTLK_D_COND_ini = copy.copy(sec.INTLK_D_COND)
+        self.INTLK_D_Busy_ini = copy.copy(sec.INTLK_D_BUSY)
         self.INTLK_A_ADDRESS_ini = copy.copy(sec.INTLK_A_ADDRESS)
         self.INTLK_A_DIC_ini = copy.copy(sec.INTLK_A_DIC)
         self.INTLK_A_EN_ini = copy.copy(sec.INTLK_A_EN)
         self.INTLK_A_COND_ini = copy.copy(sec.INTLK_A_COND)
         self.INTLK_A_SET_ini = copy.copy(sec.INTLK_A_SET)
+        self.INTLK_A_Busy_ini = copy.copy(sec.INTLK_A_BUSY)
 
         self.FLAG_ADDRESS_ini = copy.copy(sec.FLAG_ADDRESS)
         self.FLAG_DIC_ini = copy.copy(sec.FLAG_DIC)
@@ -9556,11 +10611,13 @@ class UpdateClient(QtCore.QObject):
                                               "Busy":self.LOOP2PT_Busy_ini},
                                   "INTLK_D": {"value": self.INTLK_D_DIC_ini,
                                               "EN": self.INTLK_D_EN_ini,
-                                              "COND": self.INTLK_D_COND_ini},
+                                              "COND": self.INTLK_D_COND_ini,
+                                              "Busy":self.INTLK_D_Busy_ini},
                                   "INTLK_A": {"value":self.INTLK_A_DIC_ini,
                                               "EN":self.INTLK_A_EN_ini,
                                               "COND":self.INTLK_A_COND_ini,
-                                              "SET":self.INTLK_A_SET_ini},
+                                              "SET":self.INTLK_A_SET_ini,
+                                              "Busy":self.INTLK_A_Busy_ini},
                                   "FLAG": {"value":self.FLAG_DIC_ini,
                                            "INTLKD":self.FLAG_INTLKD_ini,
                                             "Busy":self.FLAG_Busy_ini},

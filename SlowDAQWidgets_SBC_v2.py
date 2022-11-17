@@ -1844,6 +1844,796 @@ class AlarmWin(QtWidgets.QMainWindow):
             if (i, j) == (i_LEFT_last, j_LEFT_last):
                 break
 
+class INTLCK_Win_v2(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1500*R))
+
+        # reset the size of the window
+        self.setMinimumSize(2300*R, 1500*R)
+        self.resize(2300*R, 1500*R)
+        self.setWindowTitle("INTLCK Window")
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1500*R))
+
+        self.Tab = QtWidgets.QTabWidget(self)
+        self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
+        self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
+        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1500*R))
+
+        self.PressureTab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.PressureTab, "PT INTLCK")
+
+        self.RTDSET1Tab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.RTDSET1Tab, "RTD INTLCK")
+
+
+        # self.GLPTLO = QtWidgets.QGridLayout()
+        # # self.GLPT = QtWidgets.QGridLayout(self)
+        # self.GLPTLO.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        # self.GLPTLO.setSpacing(20*R)
+        # self.GLPTLO.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupPTLO = QtWidgets.QGroupBox(self.PressureTab)
+        self.GroupPTLO.setTitle("PT LO INTLCK")
+        # self.GroupPTLO.setLayout(self.GLPTLO)
+        self.GroupPTLO.move(0*R, 0*R)
+        self.GroupPTLO.setMinimumSize(2200*R,250*R)
+
+
+        #
+        # self.GLPTHI = QtWidgets.QGridLayout()
+        # # self.GLPT = QtWidgets.QGridLayout(self)
+        # self.GLPTHI.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        # self.GLPTHI.setSpacing(20*R)
+        # self.GLPTHI.setAlignment(QtCore.Qt.AlignCenter)
+        #
+        self.GroupPTHI = QtWidgets.QGroupBox(self.PressureTab)
+        self.GroupPTHI.setTitle("PT HI INTLCK")
+        # self.GroupPTHI.setLayout(self.GLPTHI)
+        self.GroupPTHI.move(0*R, 300*R)
+        self.GroupPTHI.setMinimumSize(2200 * R, 250 * R)
+        #
+        #
+        #
+        # self.GLPTHIHI = QtWidgets.QGridLayout()
+        # # self.GLPT = QtWidgets.QGridLayout(self)
+        # self.GLPTHIHI.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        # self.GLPTHIHI.setSpacing(20*R)
+        # self.GLPTHIHI.setAlignment(QtCore.Qt.AlignCenter)
+        #
+        self.GroupPTHIHI = QtWidgets.QGroupBox(self.PressureTab)
+        self.GroupPTHIHI.setTitle("PT HIHI INTLCK")
+        # self.GroupPTHIHI.setLayout(self.GLPTHIHI)
+        self.GroupPTHIHI.move(0*R, 600*R)
+        self.GroupPTHIHI.setMinimumSize(2200 * R, 250 * R)
+        #
+        #
+        # self.GLOTHER = QtWidgets.QGridLayout()
+        # self.GLOTHER.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        # self.GLOTHER.setSpacing(20 * R)
+        # self.GLOTHER.setAlignment(QtCore.Qt.AlignCenter)
+        #
+        self.GroupOTHER = QtWidgets.QGroupBox(self.PressureTab)
+        self.GroupOTHER.setTitle("OTHER")
+        # self.GroupOTHER.setLayout(self.GLOTHER)
+        self.GroupOTHER.move(0 * R, 900 * R)
+        self.GroupOTHER.setMinimumSize(2200 * R, 500 * R)
+        #
+        # self.GLTTLO = QtWidgets.QGridLayout()
+        # self.GLTTLO.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        # self.GLTTLO.setSpacing(20*R)
+        # self.GLTTLO.setAlignment(QtCore.Qt.AlignCenter)
+        #
+        self.GroupTTLO = QtWidgets.QGroupBox(self.RTDSET1Tab)
+        self.GroupTTLO.setTitle("RTD LO INTLCK")
+        # self.GroupTTLO.setLayout(self.GLTTLO)
+        self.GroupTTLO.move(0*R, 0*R)
+        self.GroupTTLO.setMinimumSize(2200 * R, 250 * R)
+        #
+        # self.GLTTHI = QtWidgets.QGridLayout()
+        # self.GLTTHI.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        # self.GLTTHI.setSpacing(20 * R)
+        # self.GLTTHI.setAlignment(QtCore.Qt.AlignCenter)
+        #
+        self.GroupTTHI = QtWidgets.QGroupBox(self.RTDSET1Tab)
+        self.GroupTTHI.setTitle("RTD HI INTLCK")
+        # self.GroupTTHI.setLayout(self.GLTTHI)
+        self.GroupTTHI.move(0 * R, 300 * R)
+        self.GroupTTHI.setMinimumSize(2200 * R, 500 * R)
+        #
+        # self.GLTTHIHI = QtWidgets.QGridLayout()
+        # self.GLTTHIHI.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        # self.GLTTHIHI.setSpacing(20 * R)
+        # self.GLTTHIHI.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupTTHIHI = QtWidgets.QGroupBox(self.RTDSET1Tab)
+        self.GroupTTHIHI.setTitle("RTD HIHI INTLCK")
+        # self.GroupTTHIHI.setLayout(self.GLTTHIHI)
+        self.GroupTTHIHI.move(0 * R, 900 * R)
+        self.GroupTTHIHI.setMinimumSize(2200 * R, 500 * R)
+        #
+        #
+        # #
+        self.PT4306_LO_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT4306_LO_INTLK.Label.setText("PT4306_LO")
+        self.PT4306_LO_INTLK.setObjectName("PT4306_LO_INTLK")
+        self.PT4306_LO_INTLK.move(0*R,50*R)
+
+        self.PT4306_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT4306_HI_INTLK.Label.setText("PT4306_HI")
+        self.PT4306_HI_INTLK.setObjectName("PT4306_HI_INTLK")
+        self.PT4306_HI_INTLK.move(0*R,350*R)
+
+        self.PT4322_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT4322_HI_INTLK.Label.setText("PT4322_HI")
+        self.PT4322_HI_INTLK.setObjectName("PT4322_HI_INTLK")
+        self.PT4322_HI_INTLK.move(450*R, 350*R)
+
+        self.PT4322_HIHI_INTLK = INTLK_LA_Widget_v2(self.PressureTab)
+        self.PT4322_HIHI_INTLK.Label.setText("PT4322_HIHI")
+        self.PT4322_HIHI_INTLK.setObjectName("PT4322_HIHI_INTLK")
+        self.PT4322_HIHI_INTLK.move(0*R, 650*R)
+
+        self.PT4319_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT4319_HI_INTLK.Label.setText("PT4319_HI")
+        self.PT4319_HI_INTLK.setObjectName("PT4319_HI_INTLK")
+        self.PT4319_HI_INTLK.move(900*R, 350*R)
+
+        self.PT4319_HIHI_INTLK = INTLK_LA_Widget_v2(self.PressureTab)
+        self.PT4319_HIHI_INTLK.Label.setText("PT4319_HIHI")
+        self.PT4319_HIHI_INTLK.setObjectName("PT4319_HIHI_INTLK")
+        self.PT4319_HIHI_INTLK.move(450*R, 650*R)
+
+        self.PT4325_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT4325_HI_INTLK.Label.setText("PT4325_HI")
+        self.PT4325_HI_INTLK.setObjectName("PT4325_HI_INTLK")
+        self.PT4325_HI_INTLK.move(1350*R, 350*R)
+
+        self.PT4325_HIHI_INTLK = INTLK_LA_Widget_v2(self.PressureTab)
+        self.PT4325_HIHI_INTLK.Label.setText("PT4325_HIHI")
+        self.PT4325_HIHI_INTLK.setObjectName("PT4325_HIHI_INTLK")
+        self.PT4325_HIHI_INTLK.move(900*R,650*R)
+
+        self.TS1_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.TS1_INTLK.Label.setText("TS1")
+        self.TS1_INTLK.setObjectName("TS1")
+        self.TS1_INTLK.move(0*R,950*R)
+
+        self.ES3347_INTLK = INTLK_RD_Widget_v2(self.PressureTab)
+        self.ES3347_INTLK.Label.setText("ES3347")
+        self.ES3347_INTLK.setObjectName("ES3347")
+        self.ES3347_INTLK.move(1350*R, 950*R)
+
+        self.PUMP3305_OL_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.PUMP3305_OL_INTLK.Label.setText("PUMP3305_OL")
+        self.PUMP3305_OL_INTLK.setObjectName("PUMP3305_OL")
+        self.PUMP3305_OL_INTLK.move(1800*R, 950*R)
+
+        self.TS2_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.TS2_INTLK.Label.setText("TS2")
+        self.TS2_INTLK.setObjectName("TS2")
+        self.TS2_INTLK.move(450*R, 950*R)
+
+        self.TS3_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.TS3_INTLK.Label.setText("TS3")
+        self.TS3_INTLK.setObjectName("TS3")
+        self.TS3_INTLK.move(900*R, 950*R)
+
+        self.PU_PRIME_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.PU_PRIME_INTLK.Label.setText("PU_PRIME")
+        self.PU_PRIME_INTLK.setObjectName("PU_PRIME")
+        self.PU_PRIME_INTLK.move(0*R, 1150*R)
+
+        #
+
+        self.TT2118_HI_INTLK = INTLK_LA_Widget_v2(self.RTDSET1Tab)
+        self.TT2118_HI_INTLK.Label.setText("TT2118_HI")
+        self.TT2118_HI_INTLK.move(0*R,350*R)
+
+        self.TT2118_LO_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT2118_LO_INTLK.Label.setText("TT2118_LO")
+        self.TT2118_LO_INTLK.move(0*R, 50*R)
+
+        self.TT6203_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6203_HI_INTLK.Label.setText("TT6203_HI")
+        self.TT6203_HI_INTLK.move(450*R, 350*R )
+
+        self.TT6207_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6207_HI_INTLK.Label.setText("TT6207_HI")
+        self.TT6207_HI_INTLK.move(900*R, 350*R)
+
+        self.TT6211_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6211_HI_INTLK.Label.setText("TT6211_HI")
+        self.TT6211_HI_INTLK.move(1350*R,350*R)
+
+        self.TT6213_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6213_HI_INTLK.Label.setText("TT6213_HI")
+        self.TT6213_HI_INTLK.move(1800*R, 350*R)
+
+        self.TT6222_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6222_HI_INTLK.Label.setText("TT6222_HI")
+        self.TT6222_HI_INTLK.move(0*R, 550*R)
+
+        self.TT6407_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6407_HI_INTLK.Label.setText("TT6407_HI")
+        self.TT6407_HI_INTLK.move(450*R, 550*R)
+
+        self.TT6408_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6408_HI_INTLK.Label.setText("TT6408_HI")
+        self.TT6408_HI_INTLK.move(900*R, 550*R)
+
+        self.TT6409_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6409_HI_INTLK.Label.setText("TT6409_HI")
+        self.TT6409_HI_INTLK.move(1350*R,550*R)
+
+        self.TT6203_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6203_HIHI_INTLK.Label.setText("TT6203_HIHI")
+        self.TT6203_HIHI_INTLK.move(0*R,950*R)
+
+        self.TT6207_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6207_HIHI_INTLK.Label.setText("TT6207_HIHI")
+        self.TT6207_HIHI_INTLK.move(450 * R, 950 * R)
+
+        self.TT6211_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6211_HIHI_INTLK.Label.setText("TT6211_HIHI")
+        self.TT6211_HIHI_INTLK.move(900 * R, 950 * R)
+
+        self.TT6213_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6213_HIHI_INTLK.Label.setText("TT6213_HIHI")
+        self.TT6213_HIHI_INTLK.move(1350 * R, 950 * R)
+
+        self.TT6222_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6222_HIHI_INTLK.Label.setText("TT6222_HIHI")
+        self.TT6222_HIHI_INTLK.move(1800 * R, 950 * R)
+
+        self.TT6407_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6407_HIHI_INTLK.Label.setText("TT6407_HIHI")
+        self.TT6407_HIHI_INTLK.move(0 * R, 1150 * R)
+
+        self.TT6408_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6408_HIHI_INTLK.Label.setText("TT6408_HIHI")
+        self.TT6408_HIHI_INTLK.move(0 * R, 1150 * R)
+
+        self.TT6409_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6409_HIHI_INTLK.Label.setText("TT6409_HIHI")
+        self.TT6409_HIHI_INTLK.move(0 * R, 1150 * R)
+
+
+
+class INTLCK_Win(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1500*R))
+
+        # reset the size of the window
+        self.setMinimumSize(2300*R, 1500*R)
+        self.resize(2300*R, 1500*R)
+        self.setWindowTitle("INTLCK Window")
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1500*R))
+
+        self.Tab = QtWidgets.QTabWidget(self)
+        self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
+        self.Tab.setTabShape(QtWidgets.QTabWidget.Rounded)
+        self.Tab.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1500*R))
+
+        self.PressureTab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.PressureTab, "PT INTLCK")
+
+        self.RTDSET1Tab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.RTDSET1Tab, "RTD INTLCK")
+
+
+        self.GLPTLO = QtWidgets.QGridLayout()
+        # self.GLPT = QtWidgets.QGridLayout(self)
+        self.GLPTLO.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GLPTLO.setSpacing(20*R)
+        self.GLPTLO.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupPTLO = QtWidgets.QGroupBox(self.PressureTab)
+        self.GroupPTLO.setTitle("PT LO INTLCK")
+        self.GroupPTLO.setLayout(self.GLPTLO)
+        self.GroupPTLO.move(0*R, 0*R)
+
+
+
+        self.GLPTHI = QtWidgets.QGridLayout()
+        # self.GLPT = QtWidgets.QGridLayout(self)
+        self.GLPTHI.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GLPTHI.setSpacing(20*R)
+        self.GLPTHI.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupPTHI = QtWidgets.QGroupBox(self.PressureTab)
+        self.GroupPTHI.setTitle("PT HI INTLCK")
+        self.GroupPTHI.setLayout(self.GLPTHI)
+        self.GroupPTHI.move(0*R, 200*R)
+
+
+
+        self.GLPTHIHI = QtWidgets.QGridLayout()
+        # self.GLPT = QtWidgets.QGridLayout(self)
+        self.GLPTHIHI.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GLPTHIHI.setSpacing(20*R)
+        self.GLPTHIHI.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupPTHIHI = QtWidgets.QGroupBox(self.PressureTab)
+        self.GroupPTHIHI.setTitle("PT HIHI INTLCK")
+        self.GroupPTHIHI.setLayout(self.GLPTHIHI)
+        self.GroupPTHIHI.move(0*R, 400*R)
+
+
+        self.GLOTHER = QtWidgets.QGridLayout()
+        self.GLOTHER.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLOTHER.setSpacing(20 * R)
+        self.GLOTHER.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupOTHER = QtWidgets.QGroupBox(self.PressureTab)
+        self.GroupOTHER.setTitle("OTHER")
+        self.GroupOTHER.setLayout(self.GLOTHER)
+        self.GroupOTHER.move(0 * R, 600 * R)
+
+        self.GLTTLO = QtWidgets.QGridLayout()
+        self.GLTTLO.setContentsMargins(20*R, 20*R, 20*R, 20*R)
+        self.GLTTLO.setSpacing(20*R)
+        self.GLTTLO.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupTTLO = QtWidgets.QGroupBox(self.RTDSET1Tab)
+        self.GroupTTLO.setTitle("RTD LO INTLCK")
+        self.GroupTTLO.setLayout(self.GLTTLO)
+        self.GroupTTLO.move(0*R, 0*R)
+
+        self.GLTTHI = QtWidgets.QGridLayout()
+        self.GLTTHI.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLTTHI.setSpacing(20 * R)
+        self.GLTTHI.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupTTHI = QtWidgets.QGroupBox(self.RTDSET1Tab)
+        self.GroupTTHI.setTitle("RTD HI INTLCK")
+        self.GroupTTHI.setLayout(self.GLTTHI)
+        self.GroupTTHI.move(0 * R, 200 * R)
+
+        self.GLTTHIHI = QtWidgets.QGridLayout()
+        self.GLTTHIHI.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLTTHIHI.setSpacing(20 * R)
+        self.GLTTHIHI.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupTTHIHI = QtWidgets.QGroupBox(self.RTDSET1Tab)
+        self.GroupTTHIHI.setTitle("RTD HIHI INTLCK")
+        self.GroupTTHIHI.setLayout(self.GLTTHIHI)
+        self.GroupTTHIHI.move(0 * R, 600 * R)
+
+
+        #
+        self.PT4306_LO_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT4306_LO_INTLK.Label.setText("PT4306_LO")
+        self.PT4306_LO_INTLK.setObjectName("PT4306_LO_INTLK")
+
+        self.PT4306_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT4306_HI_INTLK.Label.setText("PT4306_HI")
+        self.PT4306_HI_INTLK.setObjectName("PT4306_HI_INTLK")
+
+        self.PT4322_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT4322_HI_INTLK.Label.setText("PT4322_HI")
+        self.PT4322_HI_INTLK.setObjectName("PT4322_HI_INTLK")
+
+        self.PT4322_HIHI_INTLK = INTLK_LA_Widget_v2(self.PressureTab)
+        self.PT4322_HIHI_INTLK.Label.setText("PT4322_HIHI")
+        self.PT4322_HIHI_INTLK.setObjectName("PT4322_HIHI_INTLK")
+
+        self.PT4319_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT4319_HI_INTLK.Label.setText("PT4319_HI")
+        self.PT4319_HI_INTLK.setObjectName("PT4319_HI_INTLK")
+
+        self.PT4319_HIHI_INTLK = INTLK_LA_Widget_v2(self.PressureTab)
+        self.PT4319_HIHI_INTLK.Label.setText("PT4319_HIHI")
+        self.PT4319_HIHI_INTLK.setObjectName("PT4319_HIHI_INTLK")
+
+        self.PT4325_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT4325_HI_INTLK.Label.setText("PT4325_HI")
+        self.PT4325_HI_INTLK.setObjectName("PT4325_HI_INTLK")
+
+        self.PT4325_HIHI_INTLK = INTLK_LA_Widget_v2(self.PressureTab)
+        self.PT4325_HIHI_INTLK.Label.setText("PT4325_HIHI")
+        self.PT4325_HIHI_INTLK.setObjectName("PT4325_HIHI_INTLK")
+
+        self.TS1_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.TS1_INTLK.Label.setText("TS1")
+        self.TS1_INTLK.setObjectName("TS1")
+
+        self.ES3347_INTLK = INTLK_RD_Widget_v2(self.PressureTab)
+        self.ES3347_INTLK.Label.setText("ES3347")
+        self.ES3347_INTLK.setObjectName("ES3347")
+
+        self.PUMP3305_OL_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.PUMP3305_OL_INTLK.Label.setText("PUMP3305_OL")
+        self.PUMP3305_OL_INTLK.setObjectName("PUMP3305_OL")
+
+        self.TS2_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.TS2_INTLK.Label.setText("TS2")
+        self.TS2_INTLK.setObjectName("TS2")
+
+        self.TS3_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.TS3_INTLK.Label.setText("TS3")
+        self.TS3_INTLK.setObjectName("TS3")
+
+        self.PU_PRIME_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.PU_PRIME_INTLK.Label.setText("PU_PRIME")
+        self.PU_PRIME_INTLK.setObjectName("PU_PRIME")
+
+        #
+
+        self.TT2118_HI_INTLK = INTLK_LA_Widget_v2(self.RTDSET1Tab)
+        self.TT2118_HI_INTLK.Label.setText("TT2118_HI")
+
+        self.TT2118_LO_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT2118_LO_INTLK.Label.setText("TT2118_LO")
+
+        self.TT6203_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6203_HI_INTLK.Label.setText("TT6203_HI")
+
+        self.TT6207_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6207_HI_INTLK.Label.setText("TT6207_HI")
+
+        self.TT6211_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6211_HI_INTLK.Label.setText("TT6211_HI")
+
+        self.TT6213_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6213_HI_INTLK.Label.setText("TT6213_HI")
+
+        self.TT6222_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6222_HI_INTLK.Label.setText("TT6222_HI")
+
+        self.TT6407_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6407_HI_INTLK.Label.setText("TT6407_HI")
+
+        self.TT6408_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6408_HI_INTLK.Label.setText("TT6408_HI")
+
+        self.TT6409_HI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6409_HI_INTLK.Label.setText("TT6409_HI")
+
+        self.TT6203_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6203_HIHI_INTLK.Label.setText("TT6203_HIHI")
+
+        self.TT6207_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6207_HIHI_INTLK.Label.setText("TT6207_HIHI")
+
+        self.TT6211_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6211_HIHI_INTLK.Label.setText("TT6211_HIHI")
+
+        self.TT6213_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6213_HIHI_INTLK.Label.setText("TT6213_HIHI")
+
+        self.TT6222_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6222_HIHI_INTLK.Label.setText("TT6222_HIHI")
+
+        self.TT6407_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6407_HIHI_INTLK.Label.setText("TT6407_HIHI")
+
+        self.TT6408_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6408_HIHI_INTLK.Label.setText("TT6408_HIHI")
+
+        self.TT6409_HIHI_INTLK = INTLK_RA_Widget_v2(self.RTDSET1Tab)
+        self.TT6409_HIHI_INTLK.Label.setText("TT6409_HIHI")
+
+
+
+        # make a directory for the alarm instrument and assign instrument to certain position
+        #IF you change the dimenstion of the following matrixes, don't forget to change TempMatrix in the Reassign function
+        self.PTLOdir = {0: {0: self.PT4306_LO_INTLK}}
+
+        self.PTHIdir = {0: {0: self.PT4306_HI_INTLK, 1: self.PT4322_HI_INTLK, 2: self.PT4319_HI_INTLK, 3: self.PT4325_HI_INTLK}}
+
+        self.PTHIHIdir = {
+            0: {0: self.PT4322_HIHI_INTLK, 1: self.PT4319_HIHI_INTLK, 2: self.PT4325_HIHI_INTLK}}
+
+        self.OTHERdir = {0: {0: self.TS1_INTLK, 1: self.TS2_INTLK, 2: self.TS3_INTLK, 3: self.ES3347_INTLK, 4: self.PUMP3305_OL_INTLK},
+                           1: {0: self.PU_PRIME_INTLK}}
+
+        self.TTLOdir = {0: {0: self.TT2118_LO_INTLK}}
+
+        self.TTHIdir = {0: {0: self.TT2118_HI_INTLK, 1: self.TT6203_HI_INTLK, 2: self.TT6207_HI_INTLK, 3: self.TT6211_HI_INTLK, 4: self.TT6213_HI_INTLK},
+                           1: {0: self.TT6222_HI_INTLK, 1: self.TT6407_HI_INTLK, 2: self.TT6408_HI_INTLK, 3: self.TT6409_HI_INTLK}}
+
+        self.TTHIHIdir = {0: {0: self.TT6203_HIHI_INTLK, 1: self.TT6207_HIHI_INTLK, 2: self.TT6211_HIHI_INTLK, 3: self.TT6213_HIHI_INTLK, 4: self.TT6222_HIHI_INTLK},
+                        1: { 0: self.TT6407_HIHI_INTLK, 1: self.TT6408_HIHI_INTLK, 2: self.TT6409_HIHI_INTLK}}
+
+
+
+        # variables usable for building widgets
+        # i is row number, j is column number
+        # RTD1 is for temperature transducer while PT is for pressure transducer
+        # max is max row and column number
+        # last is the last widget's row and column index in gridbox
+        self.i_PTLO_max = len(self.PTLOdir)
+        # which is 2
+        self.j_PTLO_max = len(self.PTLOdir[0])
+        # which is 5
+
+        self.i_PTHI_max = len(self.PTHIdir)
+        # which is 4
+        self.j_PTHI_max = len(self.PTHIdir[0])
+
+        self.i_PTHIHI_max = len(self.PTHIHIdir)
+        # which is 4
+        self.j_PTHIHI_max = len(self.PTHIHIdir[0])
+
+        self.i_OTHER_max = len(self.OTHERdir)
+        # which is 4
+        self.j_OTHER_max = len(self.OTHERdir[0])
+
+        self.i_TTLO_max = len(self.TTLOdir)
+        # which is 2
+        self.j_TTLO_max = len(self.TTLOdir[0])
+        # which is 5
+
+        self.i_TTHI_max = len(self.TTHIdir)
+        # which is 4
+        self.j_TTHI_max = len(self.TTHIdir[0])
+
+        self.i_TTHIHI_max = len(self.TTHIHIdir)
+        # which is 4
+        self.j_TTHIHI_max = len(self.TTHIHIdir[0])
+
+        self.i_PTLO_last = len(self.PTLOdir) - 1
+        # which is 1
+        self.j_PTLO_last = len(self.PTLOdir[self.i_PTLO_last]) - 1
+        # which is 4
+        self.i_PTHI_last = len(self.PTHIdir) - 1
+        self.j_PTHI_last = len(self.PTHIdir[self.i_PTHI_last]) - 1
+        self.i_PTHIHI_last = len(self.PTHIHIdir) - 1
+        self.j_PTHIHI_last = len(self.PTHIHIdir[self.i_PTHIHI_last]) - 1
+
+        self.i_OTHER_last = len(self.OTHERdir) - 1
+        self.j_OTHER_last = len(self.OTHERdir[self.i_OTHER_last]) - 1
+
+        self.i_TTLO_last = len(self.TTLOdir) - 1
+        # which is 1
+        self.j_TTLO_last = len(self.TTLOdir[self.i_TTLO_last]) - 1
+        # which is 4
+        self.i_TTHI_last = len(self.TTHIdir) - 1
+        self.j_TTHI_last = len(self.TTHIdir[self.i_TTHI_last]) - 1
+        self.i_TTHIHI_last = len(self.TTHIHIdir) - 1
+        self.j_TTHIHI_last = len(self.TTHIHIdir[self.i_TTHIHI_last]) - 1
+
+        # which is 1
+        self.ResetOrder()
+
+    @QtCore.Slot()
+    def ResetOrder(self):
+        for i in range(0, self.i_PTLO_max):
+            for j in range(0, self.j_PTLO_max):
+                self.GLPTLO.addWidget(self.PTLOdir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_PTLO_last, self.j_PTLO_last):
+                    break
+            if (i, j) == (self.i_PTLO_last, self.j_PTLO_last):
+                break
+
+        for i in range(0, self.i_PTHI_max):
+            for j in range(0, self.j_PTHI_max):
+                self.GLPTHI.addWidget(self.PTHIdir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_PTHI_last, self.j_PTHI_last):
+                    break
+            if (i, j) == (self.i_PTHI_last, self.j_PTHI_last):
+                break
+
+        for i in range(0, self.i_PTHIHI_max):
+            for j in range(0, self.j_PTHIHI_max):
+                self.GLPTHIHI.addWidget(self.PTHIHIdir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_PTHIHI_last, self.j_PTHIHI_last):
+                    break
+            if (i, j) == (self.i_PTHIHI_last, self.j_PTHIHI_last):
+                break
+
+        for i in range(0, self.i_OTHER_max):
+            for j in range(0, self.j_OTHER_max):
+                self.GLOTHER.addWidget(self.OTHERdir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_OTHER_last, self.j_OTHER_last):
+                    break
+            if (i, j) == (self.i_OTHER_last, self.j_OTHER_last):
+                break
+
+        for i in range(0, self.i_TTLO_max):
+            for j in range(0, self.j_TTLO_max):
+                self.GLTTLO.addWidget(self.TTLOdir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_TTLO_last, self.j_TTLO_last):
+                    break
+            if (i, j) == (self.i_TTLO_last, self.j_TTLO_last):
+                break
+
+        for i in range(0, self.i_TTHI_max):
+            for j in range(0, self.j_TTHI_max):
+                self.GLTTHI.addWidget(self.TTHIdir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_TTHI_last, self.j_TTHI_last):
+                    break
+            if (i, j) == (self.i_TTHI_last, self.j_TTHI_last):
+                break
+
+        for i in range(0, self.i_TTHIHI_max):
+            for j in range(0, self.j_TTHIHI_max):
+                self.GLTTHIHI.addWidget(self.TTHIHIdir[i][j], i, j)
+                # end the position generator when i= last element's row number, j= last element's column number
+                if (i, j) == (self.i_TTHIHI_last, self.j_TTHIHI_last):
+                    break
+            if (i, j) == (self.i_TTHIHI_last, self.j_TTHIHI_last):
+                break
+
+
+# comment the change the widgets' order based on the INTLCK status
+    #
+    # @QtCore.Slot()
+    # def ReassignRTD1Order(self):
+    #     # check the status of the Widget and reassign the diretory
+    #     # establish 2 diretory, reorder TempDic to reorder the widgets
+    #     # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+    #     # i_max, j_max are max row and column number
+    #     # l max are max column number+1
+    #     # i_last,j_last are last elements's diretory coordinate
+    #     TempRefRTD1dir = self.AlarmRTD1dir
+    #     TempRTD1dir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
+    #                    1: {0: None, 1: None, 2: None, 3: None, 4: None}}
+    #
+    #     # l_RTD1_max is max number of column
+    #     l_RTD1 = 0
+    #     k_RTD1 = 0
+    #
+    #     # i_RTD1_max = 3
+    #     # j_RTD1_max = 5
+    #     # i_PT_max = 4
+    #     # j_PT_max = 5
+    #     # l_RTD1_max = 4
+    #     # l_PT_max = 4
+    #     # i_RTD1_last = 2
+    #     # j_RTD1_last = 4
+    #     # i_PT_last = 3
+    #     # j_PT_last = 1
+    #     i_RTD1_max = len(self.AlarmRTD1dir)
+    #     # which is 3
+    #     j_RTD1_max = len(self.AlarmRTD1dir[0])
+    #     # which is 5
+    #
+    #     i_RTD1_last = len(self.AlarmRTD1dir) - 1
+    #     # which is 2
+    #     j_RTD1_last = len(self.AlarmRTD1dir[i_RTD1_last]) - 1
+    #     # which is 4
+    #     # print(i_RTD1_max,j_RTD1_max,i_RTD1_last, j_RTD1_last)
+    #
+    #     l_RTD1_max = j_RTD1_max - 1
+    #
+    #     # RTD1 put alarm true widget to the begining of the diretory
+    #     for i in range(0, i_RTD1_max):
+    #         for j in range(0, j_RTD1_max):
+    #             if TempRefRTD1dir[i][j].Alarm:
+    #                 TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
+    #                 l_RTD1 = l_RTD1 + 1
+    #                 if l_RTD1 == l_RTD1_max + 1:
+    #                     l_RTD1 = 0
+    #                     k_RTD1 = k_RTD1 + 1
+    #             if (i, j) == (i_RTD1_last, j_RTD1_last):
+    #                 break
+    #         if (i, j) == (i_RTD1_last, j_RTD1_last):
+    #             break
+    #     # print("1st part")
+    #     #
+    #     #
+    #     # # RTD1 put alarm false widget after that
+    #     for i in range(0, i_RTD1_max):
+    #         for j in range(0, j_RTD1_max):
+    #             if not TempRefRTD1dir[i][j].Alarm:
+    #                 TempRTD1dir[k_RTD1][l_RTD1] = TempRefRTD1dir[i][j]
+    #                 l_RTD1 = l_RTD1 + 1
+    #                 if l_RTD1 == l_RTD1_max + 1:
+    #                     l_RTD1 = 0
+    #                     k_RTD1 = k_RTD1 + 1
+    #             if (i, j) == (i_RTD1_last, j_RTD1_last):
+    #                 break
+    #         if (i, j) == (i_RTD1_last, j_RTD1_last):
+    #             break
+    #     # print("2nd part")
+    #     # Reassign position
+    #     # end the position generator when i= last element's row number, j= last element's column number
+    #     for i in range(0, i_RTD1_max):
+    #         for j in range(0, j_RTD1_max):
+    #             self.GLRTD1.addWidget(TempRTD1dir[i][j], i, j)
+    #             if (i, j) == (i_RTD1_last, j_RTD1_last):
+    #                 break
+    #         if (i, j) == (i_RTD1_last, j_RTD1_last):
+    #             break
+    #     # print("3rd part")
+    #
+    #
+    # @QtCore.Slot()
+    # def ReassignPTOrder(self):
+    #     # check the status of the Widget and reassign the diretory
+    #     # establish 2 diretory, reorder TempDic to reorder the widgets
+    #     # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+    #     # i_max, j_max are max row and column number
+    #     # l max are max column number+1
+    #     # i_last,j_last are last elements's diretory coordinate
+    #
+    #     TempRefPTdir = self.AlarmPTdir
+    #
+    #     TempPTdir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
+    #                  1: {0: None, 1: None, 2: None, 3: None, 4: None},
+    #                  2: {0: None, 1: None, 2: None, 3: None, 4: None},
+    #                  3: {0: None, 1: None, 2: None}}
+    #     # l_RTD1_max is max number of column
+    #
+    #     l_PT = 0
+    #     k_PT = 0
+    #     # i_RTD1_max = 3
+    #     # j_RTD1_max = 5
+    #     # i_PT_max = 4
+    #     # j_PT_max = 5
+    #     # l_RTD1_max = 4
+    #     # l_PT_max = 4
+    #     # i_RTD1_last = 2
+    #     # j_RTD1_last = 4
+    #     # i_PT_last = 3
+    #     # j_PT_last = 1
+    #
+    #     i_PT_max = len(self.AlarmPTdir)
+    #     # which is 4
+    #     j_PT_max = len(self.AlarmPTdir[0])
+    #     # which is 5
+    #
+    #     i_PT_last = len(self.AlarmPTdir) - 1
+    #     # which is 3
+    #     j_PT_last = len(self.AlarmPTdir[i_PT_last]) - 1
+    #     # which is 1
+    #
+    #     l_PT_max = j_PT_max - 1
+    #
+    #     # PT
+    #     for i in range(0, i_PT_max):
+    #         for j in range(0, j_PT_max):
+    #             if TempRefPTdir[i][j].Alarm:
+    #                 TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
+    #                 l_PT = l_PT + 1
+    #                 if l_PT == l_PT_max + 1:
+    #                     l_PT = 0
+    #                     k_PT = k_PT + 1
+    #             if (i, j) == (i_PT_last, j_PT_last):
+    #                 break
+    #         if (i, j) == (i_PT_last, j_PT_last):
+    #             break
+    #
+    #     for i in range(0, i_PT_max):
+    #         for j in range(0, j_PT_max):
+    #             if not TempRefPTdir[i][j].Alarm:
+    #                 TempPTdir[k_PT][l_PT] = TempRefPTdir[i][j]
+    #                 l_PT = l_PT + 1
+    #                 if l_PT == l_PT_max + 1:
+    #                     l_PT = 0
+    #                     k_PT = k_PT + 1
+    #                 if (i, j) == (i_PT_last, j_PT_last):
+    #                     break
+    #             if (i, j) == (i_PT_last, j_PT_last):
+    #                 break
+    #
+    #     # Reassign position
+    #     # end the position generator when i= last element's row number, j= last element's column number
+    #
+    #     # end the position generator when i= last element's row number, j= last element's column number
+    #     for i in range(0, i_PT_max):
+    #         for j in range(0, j_PT_max):
+    #             self.GLPT.addWidget(TempPTdir[i][j], i, j)
+    #             if (i, j) == (i_PT_last, j_PT_last):
+    #                 break
+    #         if (i, j) == (i_PT_last, j_PT_last):
+    #             break
+    #
 
 
 class HeaterSubWindow(QtWidgets.QMainWindow):
@@ -2162,20 +2952,105 @@ class AlarmButton(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("AlarmButton")
-        self.setGeometry(QtCore.QRect(5*R, 5*R, 250*R, 80*R))
-        self.setMinimumSize(250*R, 80*R)
+        self.setGeometry(QtCore.QRect(5*R, 5*R, 70*R, 70*R))
+        self.setMinimumSize(70*R, 70*R)
         self.setSizePolicy(sizePolicy)
 
         # link the button to a new window
         self.SubWindow = Window
 
+        # set alarm icon
+        if '__file__' in globals():
+            self.Path = os.path.dirname(os.path.realpath(__file__))
+        else:
+            self.Path = os.getcwd()
+        self.ImagePath = os.path.join(self.Path, "images")
+        self.pixmap = QtGui.QPixmap(os.path.join(self.ImagePath, "alarm_button.png"))
+        self.pixmap = self.pixmap.scaledToHeight(60 * R)
+
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
-        self.Button.setText("Button")
-        self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 245*R, 75*R))
+        # self.Button.setText("Button")
+        self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 70*R, 70*R))
         self.Button.setStyleSheet(
             "QWidget{" + LABEL_STYLE + "} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} "
                                        "QWidget[Alarm = false]{ background-color: rgb(204,204,204);}")
+        self.Button.setIcon(self.pixmap)
+
+        self.Button.setProperty("Alarm", False)
+        self.Button.Alarm = False
+        self.Button.clicked.connect(self.ButtonClicked)
+        self.Collected = False
+
+
+        # Green vertical
+
+
+
+    @QtCore.Slot()
+    def ButtonClicked(self):
+        self.SubWindow.show()
+        # self.Signals.sSignal.emit(self.Button.text())
+
+    @QtCore.Slot()
+    def ButtonAlarmSetSignal(self):
+        self.Button.setProperty("Alarm", True)
+        self.Button.setStyle(self.Button.style())
+
+    @QtCore.Slot()
+    def ButtonAlarmResetSignal(self):
+        self.Button.setProperty("Alarm", False)
+        self.Button.setStyle(self.Button.style())
+
+
+    @QtCore.Slot()
+    def CollectAlarm(self, list):
+        # self.Collected=False
+        # for i in range(len(list)):
+        #     # calculate collected alarm status
+        #     self.Collected = self.Collected or list[i].Alarm
+        # self.Button.Alarm = self.Collected
+        if True in list:
+            self.Button.Alarm = True
+        else:
+            self.Button.Alarm = False
+
+
+
+# Define an alarm button
+class INTLCKButton(QtWidgets.QWidget):
+    def __init__(self, Window, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.Signals = ChangeValueSignal()
+
+        self.setObjectName("INTLCKButton")
+        self.setGeometry(QtCore.QRect(5*R, 5*R, 70*R, 70*R))
+        self.setMinimumSize(70*R, 70*R)
+        self.setSizePolicy(sizePolicy)
+
+        # link the button to a new window
+        self.SubWindow = Window
+        # set icon
+        if '__file__' in globals():
+            self.Path = os.path.dirname(os.path.realpath(__file__))
+        else:
+            self.Path = os.getcwd()
+        self.ImagePath = os.path.join(self.Path, "images")
+        self.pixmap = QtGui.QPixmap(os.path.join(self.ImagePath, "lock_button.png"))
+        self.pixmap = self.pixmap.scaledToHeight(60 * R)
+
+
+
+        self.Button = QtWidgets.QPushButton(self)
+        self.Button.setObjectName("Button")
+        self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 70*R, 70*R))
+        self.Button.setStyleSheet(
+            "QWidget{" + LABEL_STYLE + "} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} "
+                                       "QWidget[Alarm = false]{ background-color: rgb(204,204,204);}")
+        self.Button.setIcon(self.pixmap)
 
         self.Button.setProperty("Alarm", False)
         self.Button.Alarm = False
@@ -3327,6 +4202,11 @@ class ColoredStatus(QtWidgets.QWidget):
             self.Field.setStyleSheet(
                 "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_GREEN +
                 "} QWidget[Active = false]{" + C_RED + "}")
+        elif self.Mode == 5:
+            # mode 5: color is grey when active is true and red when active is false
+            self.Field.setStyleSheet(
+                "QWidget{" + BORDER_RADIUS + C_WHITE + FONT + "} QWidget[Active = true]{" + C_MEDIUM_GREY +
+                "} QWidget[Active = false]{" + C_RED + "}")
 
         else:
             print("Please set a mode number to class colorstatus widget!")
@@ -3901,99 +4781,655 @@ class INTLK_LD_Widget(QtWidgets.QWidget):
         self.GL.addWidget(self.RST, 1, 3, QtCore.Qt.AlignCenter)
 
 
+## New version of INTLCK
+
+class INTLK_RA_Widget_v2(QtWidgets.QWidget):
+    def __init__(self, parent=None, title=''):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+
+        self.setObjectName("INTLK_RA_Widget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 200 * R))
+        self.setMinimumSize(200 * R, 100 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Label = QtWidgets.QToolButton(
+            text=title, checkable=True, checked=False
+        )
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 30 * R))
+        self.Label.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
+
+        self.Label.setMinimumSize(QtCore.QSize(250 * R, 30 * R))
+        self.Label.setProperty("State", False)
+        self.Label.setStyleSheet("QToolButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_MEDIUM_GREY
+                                 + "} QWidget[State = false]{" + C_ORANGE + "}")
+        self.Label.setText("Label")
+
+        self.Label.setSizePolicy(sizePolicy)
+        self.Label.pressed.connect(self.on_pressed)
+
+        self.toggle_animation = QtCore.QParallelAnimationGroup(self)
+
+        self.content_area = QtWidgets.QScrollArea(
+            maximumHeight=0, minimumHeight=0
+        )
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 100 * R))
+        # self.content_area.setSizePolicy(
+        #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+        # )
+        self.content_area.setSizePolicy(
+            sizePolicy
+        )
+        self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.content_area.setStyleSheet("QWidget { background: transparent; }")
+
+
+        self.Indicator = ColoredStatus(self, mode= 2)
+        self.Indicator.Label.setText("ENABLE")
+
+        lay = QtWidgets.QGridLayout(self)
+        lay.setSpacing(0)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.addWidget(self.Label, 0, 0, 1, 3)
+        lay.addWidget(self.Indicator,0,4,1,1)
+        lay.addWidget(self.content_area, 1, 0, 2, 5)
+
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"minimumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"maximumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
+        )
+
+        self.lay = QtWidgets.QGridLayout()
+
+        self.EN = DoubleButton_s(self)
+        self.EN.Label.setText("Low")
+        self.EN.Label.setText("Set")
+        self.EN.LButton.setText("open")
+        self.EN.RButton.setText("close")
+
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("Busy")
+
+        self.COND = ColoredStatus(self, mode=4)
+        self.COND.Label.setText("COND")
+
+
+        self.SET_W = SetPoint(self)
+        self.SET_W.Label.setText("SET_W")
+
+
+        self.SET_R = SetPoint(self)
+        self.SET_R.Label.setText("SET_R")
+
+
+        # # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        # self.RST = QtWidgets.QPushButton(self)
+        # self.RST.setText("Reset")
+        # self.GL.addWidget(self.RST,1,3,QtCore.Qt.AlignCenter)
+
+        self.updatebutton = QtWidgets.QPushButton(self)
+        self.updatebutton.setText("Write")
+        self.updatebutton.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE +  "}")
+
+
+        self.lay.addWidget(self.EN, 0, 0)
+        self.lay.addWidget(self.StatusTransition, 0, 4)
+        self.lay.addWidget(self.COND, 0,5)
+        self.lay.addWidget(self.SET_R, 1, 0)
+        self.lay.addWidget(self.SET_W,1,2)
+        self.lay.addWidget(self.updatebutton,1,4,1,2)
+
+        self.setContentLayout(self.lay)
+
+    # Neutral means that the button shouldn't show any color
 
 
 
+    @QtCore.Slot()
+    def on_pressed(self):
+        checked = self.Label.isChecked()
+        # self.Label.setArrowType(
+        #     QtCore.Qt.RightArrow if not checked else QtCore.Qt.DownArrow
+        # )
+        self.toggle_animation.setDirection(
+            QtCore.QAbstractAnimation.Forward
+            if not checked
+            else QtCore.QAbstractAnimation.Backward
+        )
+        self.toggle_animation.start()
 
-# class HeaterExpand(QtWidgets.QWidget):
-#     def __init__(self, parent=None):
-#         super().__init__(parent)
-#
-#         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-#
-#         self.setObjectName("HeaterExpand")
-#         self.setGeometry(QtCore.QRect(0*R, 0*R, 1200*R, 200*R))
-#         self.setMinimumSize(1200*R, 200*R)
-#         self.setSizePolicy(sizePolicy)
-#
-#         self.GL = QtWidgets.QGridLayout(self)
-#         self.GL.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
-#         self.GL.setSpacing(3*R)
-#
-#         self.Label = QtWidgets.QLabel(self)
-#         self.Label.setObjectName("Label")
-#         self.Label.setMinimumSize(QtCore.QSize(10*R, 10*R))
-#         # self.Label.setStyleSheet(TITLE_STYLE + BORDER_STYLE)
-#         # self.Label.setAlignment(QtCore.Qt.AlignCenter)
-#         self.Label.setText("Label")
-#         self.GL.addWidget(self.Label,0,1)
-#
-#         self.SP = SetPoint(self)
-#         self.SP.Label.setText("SetPoint")
-#
-#         self.GL.addWidget(self.SP, 1, 0)
-#
-#         self.MANSP = SetPoint(self)
-#         self.MANSP.Label.setText("Manual SetPoint")
-#         self.GL.addWidget(self.MANSP, 1, 1)
-#
-#         self.Power = Control(self)
-#         self.Power.Label.setText("Power")
-#         self.Power.SetUnit(" %")
-#         self.Power.Max = 100.
-#         self.Power.Min = 0.
-#         self.Power.Step = 0.1
-#         self.Power.Decimals = 1
-#         self.GL.addWidget(self.Power, 1, 2)
-#
-#         self.RTD1 = Indicator(self)
-#         self.RTD1.Label.setText("RTD1")
-#         self.GL.addWidget(self.RTD1, 1, 3)
-#
-#         self.RTD2 = Indicator(self)
-#         self.RTD2.Label.setText("RTD2")
-#         self.GL.addWidget(self.RTD2, 1, 4)
-#
-#         self.Interlock = ColorIndicator(self)
-#         self.Interlock.Label.setText("INTLCK")
-#         self.GL.addWidget(self.Interlock, 1, 5)
-#
-#         self.Error = ColorIndicator(self)
-#         self.Error.Label.setText("ERR")
-#         self.GL.addWidget(self.Error, 1, 6)
-#
-#         self.HIGH = SetPoint(self)
-#         self.HIGH.Label.setText("HIGH")
-#         self.GL.addWidget(self.HIGH, 1, 7)
-#
-#         self.LOW = SetPoint(self)
-#         self.LOW.Label.setText("LOW")
-#         self.GL.addWidget(self.LOW, 1, 8)
-#
-#         self.Mode = DoubleButton(self)
-#         self.Mode.Label.setText("Mode")
-#         self.GL.addWidget(self.Mode,1,9)
-#
-#         self.FBSwitch = Menu(self)
-#         self.FBSwitch.Label.setText("FBSWITCH")
-#         self.GL.addWidget(self.FBSwitch,1,10)
-#
-#         self.LOID = Indicator(self)
-#         self.LOID.Label.setText('LOW')
-#         self.GL.addWidget(self.LOID, 1,11)
-#
-#         self.HIID = Indicator(self)
-#         self.HIID.Label.setText('HIGH')
-#         self.GL.addWidget(self.HIID, 1,12)
-#
-#         self.SETSP = Indicator(self)
-#         self.SETSP.Label.setText("SP")
-#         self.GL.addWidget(self.SETSP,1,13)
-#
-#         # self.updatebutton= QtWidgets.QPushButton(self)
-#         # self.updatebutton.setText("Update")
-#         # self.GL.addWidget(self.updatebutton,1,14)
+    def setContentLayout(self, layout):
+        lay = self.content_area.layout()
+        del lay
+        self.content_area.setLayout(layout)
+        collapsed_height = (
+                self.sizeHint().height() - self.content_area.maximumHeight()
+        )
+        content_height = layout.sizeHint().height()
+        for i in range(self.toggle_animation.animationCount()):
+            animation = self.toggle_animation.animationAt(i)
+            animation.setDuration(500)
+            animation.setStartValue(collapsed_height)
+            animation.setEndValue(collapsed_height + content_height)
 
+        content_animation = self.toggle_animation.animationAt(
+            self.toggle_animation.animationCount() - 1
+        )
+        content_animation.setDuration(500)
+        content_animation.setStartValue(0)
+        content_animation.setEndValue(content_height)
+
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.EN.LState == self.EN.InactiveName and self.EN.RState == self.EN.ActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.EN.LState == self.EN.ActiveName and self.EN.RState == self.EN.InactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ColorLabel(self, bool):
+        self.Label.setProperty("State", bool)
+        self.Label.setStyle(self.Label.style())
+
+
+
+class INTLK_LA_Widget_v2(QtWidgets.QWidget):
+    def __init__(self, parent=None, title=''):
+        super().__init__(parent)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("INTLK_LA_Widget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 200 * R))
+        self.setMinimumSize(200 * R, 100 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Label = QtWidgets.QToolButton(
+            text=title, checkable=True, checked=False
+        )
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 30 * R))
+        self.Label.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
+
+        self.Label.setMinimumSize(QtCore.QSize(250 * R, 30 * R))
+        self.Label.setProperty("State", False)
+        self.Label.setStyleSheet("QToolButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_MEDIUM_GREY
+                                 + "} QWidget[State = false]{" + C_ORANGE + "}")
+        self.Label.setText("Label")
+
+        self.Label.setSizePolicy(sizePolicy)
+        self.Label.pressed.connect(self.on_pressed)
+
+        self.toggle_animation = QtCore.QParallelAnimationGroup(self)
+
+        self.content_area = QtWidgets.QScrollArea(
+            maximumHeight=0, minimumHeight=0
+        )
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 100 * R))
+        # self.content_area.setSizePolicy(
+        #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+        # )
+        self.content_area.setSizePolicy(
+            sizePolicy
+        )
+        self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.content_area.setStyleSheet("QWidget { background: transparent; }")
+
+        self.Indicator = ColoredStatus(self, mode=2)
+        self.Indicator.Label.setText("ENABLE")
+
+        lay = QtWidgets.QGridLayout(self)
+        lay.setSpacing(0)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.addWidget(self.Label, 0, 0, 1, 3)
+        lay.addWidget(self.Indicator, 0, 4, 1, 1)
+        lay.addWidget(self.content_area, 1, 0, 2, 5)
+
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"minimumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"maximumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
+        )
+
+        self.lay = QtWidgets.QGridLayout()
+
+        self.EN = DoubleButton_s(self)
+        self.EN.Label.setText("Low")
+        self.EN.Label.setText("Set")
+        self.EN.LButton.setText("open")
+        self.EN.RButton.setText("close")
+
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("Busy")
+
+        self.COND = ColoredStatus(self, mode=4)
+        self.COND.Label.setText("COND")
+
+        self.SET_W = SetPoint(self)
+        self.SET_W.Label.setText("SET_W")
+
+        self.SET_R = SetPoint(self)
+        self.SET_R.Label.setText("SET_R")
+
+        # # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        # self.RST = QtWidgets.QPushButton(self)
+        # self.RST.setText("Reset")
+        # self.GL.addWidget(self.RST,1,3,QtCore.Qt.AlignCenter)
+
+
+        # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        self.RST = QtWidgets.QPushButton(self)
+        self.RST.setText("Reset")
+        self.RST.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "}")
+
+
+        self.updatebutton = QtWidgets.QPushButton(self)
+        self.updatebutton.setText("Write")
+        self.updatebutton.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "}")
+
+        self.lay.addWidget(self.EN, 0, 0)
+        self.lay.addWidget(self.StatusTransition, 0, 4)
+        self.lay.addWidget(self.COND, 0, 5)
+        self.lay.addWidget(self.SET_R, 1, 0)
+        self.lay.addWidget(self.SET_W, 1, 2)
+        self.lay.addWidget(self.RST, 1, 4)
+        self.lay.addWidget(self.updatebutton, 1, 5)
+
+        self.setContentLayout(self.lay)
+
+        # Neutral means that the button shouldn't show any color
+
+    @QtCore.Slot()
+    def on_pressed(self):
+        checked = self.Label.isChecked()
+        # self.Label.setArrowType(
+        #     QtCore.Qt.RightArrow if not checked else QtCore.Qt.DownArrow
+        # )
+        self.toggle_animation.setDirection(
+            QtCore.QAbstractAnimation.Forward
+            if not checked
+            else QtCore.QAbstractAnimation.Backward
+        )
+        self.toggle_animation.start()
+
+    def setContentLayout(self, layout):
+        lay = self.content_area.layout()
+        del lay
+        self.content_area.setLayout(layout)
+        collapsed_height = (
+                self.sizeHint().height() - self.content_area.maximumHeight()
+        )
+        content_height = layout.sizeHint().height()
+        for i in range(self.toggle_animation.animationCount()):
+            animation = self.toggle_animation.animationAt(i)
+            animation.setDuration(500)
+            animation.setStartValue(collapsed_height)
+            animation.setEndValue(collapsed_height + content_height)
+
+        content_animation = self.toggle_animation.animationAt(
+            self.toggle_animation.animationCount() - 1
+        )
+        content_animation.setDuration(500)
+        content_animation.setStartValue(0)
+        content_animation.setEndValue(content_height)
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.EN.LState == self.EN.InactiveName and self.EN.RState == self.EN.ActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.EN.LState == self.EN.ActiveName and self.EN.RState == self.EN.InactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ColorLabel(self, bool):
+        self.Label.setProperty("State", bool)
+        self.Label.setStyle(self.Label.style())
+
+
+class INTLK_RD_Widget_v2(QtWidgets.QWidget):
+
+    def __init__(self, parent=None, title=''):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+
+        self.setObjectName("INTLK_RD_Widget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 200 * R))
+        self.setMinimumSize(200 * R, 100 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Label = QtWidgets.QToolButton(
+            text=title, checkable=True, checked=False
+        )
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 30 * R))
+        self.Label.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
+
+        self.Label.setMinimumSize(QtCore.QSize(250 * R, 30 * R))
+        self.Label.setProperty("State", False)
+        self.Label.setStyleSheet("QToolButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_MEDIUM_GREY
+                                 + "} QWidget[State = false]{" + C_ORANGE + "}")
+        self.Label.setText("Label")
+
+        self.Label.setSizePolicy(sizePolicy)
+        self.Label.pressed.connect(self.on_pressed)
+
+        self.toggle_animation = QtCore.QParallelAnimationGroup(self)
+
+        self.content_area = QtWidgets.QScrollArea(
+            maximumHeight=0, minimumHeight=0
+        )
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 100 * R))
+        # self.content_area.setSizePolicy(
+        #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+        # )
+        self.content_area.setSizePolicy(
+            sizePolicy
+        )
+        self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.content_area.setStyleSheet("QWidget { background: transparent; }")
+
+
+        self.Indicator = ColoredStatus(self, mode= 2)
+        self.Indicator.Label.setText("ENABLE")
+
+        lay = QtWidgets.QGridLayout(self)
+        lay.setSpacing(0)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.addWidget(self.Label, 0, 0, 1, 3)
+        lay.addWidget(self.Indicator,0,4,1,1)
+        lay.addWidget(self.content_area, 1, 0, 2, 5)
+
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"minimumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"maximumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
+        )
+
+        self.lay = QtWidgets.QGridLayout()
+
+        self.EN = DoubleButton_s(self)
+        self.EN.Label.setText("Low")
+        self.EN.Label.setText("Set")
+        self.EN.LButton.setText("open")
+        self.EN.RButton.setText("close")
+
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("Busy")
+
+        self.COND = ColoredStatus(self, mode=4)
+        self.COND.Label.setText("COND")
+
+
+
+        # # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        # self.RST = QtWidgets.QPushButton(self)
+        # self.RST.setText("Reset")
+        # self.GL.addWidget(self.RST,1,3,QtCore.Qt.AlignCenter)
+
+
+
+        self.lay.addWidget(self.EN, 0, 0)
+        self.lay.addWidget(self.StatusTransition, 0, 4)
+        self.lay.addWidget(self.COND, 0,5)
+
+
+        self.setContentLayout(self.lay)
+
+    # Neutral means that the button shouldn't show any color
+
+
+
+    @QtCore.Slot()
+    def on_pressed(self):
+        checked = self.Label.isChecked()
+        # self.Label.setArrowType(
+        #     QtCore.Qt.RightArrow if not checked else QtCore.Qt.DownArrow
+        # )
+        self.toggle_animation.setDirection(
+            QtCore.QAbstractAnimation.Forward
+            if not checked
+            else QtCore.QAbstractAnimation.Backward
+        )
+        self.toggle_animation.start()
+
+    def setContentLayout(self, layout):
+        lay = self.content_area.layout()
+        del lay
+        self.content_area.setLayout(layout)
+        collapsed_height = (
+                self.sizeHint().height() - self.content_area.maximumHeight()
+        )
+        content_height = layout.sizeHint().height()
+        for i in range(self.toggle_animation.animationCount()):
+            animation = self.toggle_animation.animationAt(i)
+            animation.setDuration(500)
+            animation.setStartValue(collapsed_height)
+            animation.setEndValue(collapsed_height + content_height)
+
+        content_animation = self.toggle_animation.animationAt(
+            self.toggle_animation.animationCount() - 1
+        )
+        content_animation.setDuration(500)
+        content_animation.setStartValue(0)
+        content_animation.setEndValue(content_height)
+
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.EN.LState == self.EN.InactiveName and self.EN.RState == self.EN.ActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.EN.LState == self.EN.ActiveName and self.EN.RState == self.EN.InactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ColorLabel(self, bool):
+        self.Label.setProperty("State", bool)
+        self.Label.setStyle(self.Label.style())
+
+
+class INTLK_LD_Widget_v2(QtWidgets.QWidget):
+    def __init__(self, parent=None, title=''):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("INTLK_LD_Widget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 200 * R))
+        self.setMinimumSize(200 * R, 100 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Label = QtWidgets.QToolButton(
+            text=title, checkable=True, checked=False
+        )
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 30 * R))
+        self.Label.setToolButtonStyle(QtCore.Qt.ToolButtonTextOnly)
+
+        self.Label.setMinimumSize(QtCore.QSize(250 * R, 30 * R))
+        self.Label.setProperty("State", False)
+        self.Label.setStyleSheet(
+            "QToolButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_MEDIUM_GREY
+            + "} QWidget[State = false]{" + C_ORANGE + "}")
+        self.Label.setText("Label")
+
+        self.Label.setSizePolicy(sizePolicy)
+        self.Label.pressed.connect(self.on_pressed)
+
+        self.toggle_animation = QtCore.QParallelAnimationGroup(self)
+
+        self.content_area = QtWidgets.QScrollArea(
+            maximumHeight=0, minimumHeight=0
+        )
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 100 * R))
+        # self.content_area.setSizePolicy(
+        #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+        # )
+        self.content_area.setSizePolicy(
+            sizePolicy
+        )
+        self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.content_area.setStyleSheet("QWidget { background: transparent; }")
+
+        self.Indicator = ColoredStatus(self, mode=2)
+        self.Indicator.Label.setText("ENABLE")
+
+        lay = QtWidgets.QGridLayout(self)
+        lay.setSpacing(0)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.addWidget(self.Label, 0, 0, 1, 3)
+        lay.addWidget(self.Indicator, 0, 4, 1, 1)
+        lay.addWidget(self.content_area, 1, 0, 2, 5)
+
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"minimumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"maximumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
+        )
+
+        self.lay = QtWidgets.QGridLayout()
+
+        self.EN = DoubleButton_s(self)
+        self.EN.Label.setText("Low")
+        self.EN.Label.setText("Set")
+        self.EN.LButton.setText("open")
+        self.EN.RButton.setText("close")
+
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("Busy")
+
+        self.COND = ColoredStatus(self, mode=4)
+        self.COND.Label.setText("COND")
+
+        # # When mode is off, the alarm won't be sent out in spite of the value of the indicator value
+        # self.RST = QtWidgets.QPushButton(self)
+        # self.RST.setText("Reset")
+        # self.GL.addWidget(self.RST,1,3,QtCore.Qt.AlignCenter)
+
+        self.RST = QtWidgets.QPushButton(self)
+        self.RST.setText("Reset")
+        self.RST.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "}")
+
+        self.lay.addWidget(self.EN, 0, 0)
+        self.lay.addWidget(self.StatusTransition, 0, 4)
+        self.lay.addWidget(self.COND, 0, 5)
+
+        self.lay.addWidget(self.RST, 1, 0, 1, 6)
+
+        self.setContentLayout(self.lay)
+
+    # Neutral means that the button shouldn't show any color
+
+    @QtCore.Slot()
+    def on_pressed(self):
+        checked = self.Label.isChecked()
+        # self.Label.setArrowType(
+        #     QtCore.Qt.RightArrow if not checked else QtCore.Qt.DownArrow
+        # )
+        self.toggle_animation.setDirection(
+            QtCore.QAbstractAnimation.Forward
+            if not checked
+            else QtCore.QAbstractAnimation.Backward
+        )
+        self.toggle_animation.start()
+
+    def setContentLayout(self, layout):
+        lay = self.content_area.layout()
+        del lay
+        self.content_area.setLayout(layout)
+        collapsed_height = (
+                self.sizeHint().height() - self.content_area.maximumHeight()
+        )
+        content_height = layout.sizeHint().height()
+        for i in range(self.toggle_animation.animationCount()):
+            animation = self.toggle_animation.animationAt(i)
+            animation.setDuration(500)
+            animation.setStartValue(collapsed_height)
+            animation.setEndValue(collapsed_height + content_height)
+
+        content_animation = self.toggle_animation.animationAt(
+            self.toggle_animation.animationCount() - 1
+        )
+        content_animation.setDuration(500)
+        content_animation.setStartValue(0)
+        content_animation.setEndValue(content_height)
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.EN.LState == self.EN.InactiveName and self.EN.RState == self.EN.ActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.EN.LState == self.EN.ActiveName and self.EN.RState == self.EN.InactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ColorLabel(self, bool):
+        self.Label.setProperty("State", bool)
+        self.Label.setStyle(self.Label.style())
 
 
 # Defines a reusable layout containing widget
