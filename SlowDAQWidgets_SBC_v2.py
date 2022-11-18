@@ -6836,12 +6836,12 @@ class Pump_image(QtWidgets.QWidget):
         self.label.setStyleSheet("QLabel { background: transparent; }")
         self.label.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         # Green vertical
-        self.pixmap_pump_G = QtGui.QPixmap(os.path.join(self.ImagePath, "Pump_green.png"))
-        self.pixmap_pump_G =  self.pixmap_pump_G.scaledToHeight(80*R)
+        self.pixmap_pump_G = QtGui.QPixmap(os.path.join(self.ImagePath, "pump_green.png"))
+        self.pixmap_pump_G =  self.pixmap_pump_G.scaledToHeight(60*R)
 
         # Red vertical
-        self.pixmap_pump_R = QtGui.QPixmap(os.path.join(self.ImagePath, "Pump_red.png"))
-        self.pixmap_pump_R = self.pixmap_pump_R.scaledToHeight(80 * R)
+        self.pixmap_pump_R = QtGui.QPixmap(os.path.join(self.ImagePath, "pump_red.png"))
+        self.pixmap_pump_R = self.pixmap_pump_R.scaledToHeight(60 * R)
         # self.icon_RV = QtGui.QIcon(self.pixmap_valve_RV)
 
         self.Turnon()
