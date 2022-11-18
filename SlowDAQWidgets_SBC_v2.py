@@ -1759,9 +1759,9 @@ class AlarmWin(QtWidgets.QMainWindow):
         TempRefPTdir = self.AlarmPTdir
 
         TempPTdir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
-                     1: {0: None, 1: None, 2: None, 3: None, 4: None},
-                     2: {0: None, 1: None, 2: None, 3: None, 4: None},
-                     3: {0: None, 1: None, 2: None}}
+                           1: {0: None, 1: None, 2: None, 3: None, 4: None},
+                           2: {0: None, 1: None, 2: None, 3: None, 4: None},
+                           3: {0: None, 1: None, 2: None, 3: None, 4: None}}
         # l_RTD1_max is max number of column
 
         l_PT = 0
@@ -1841,7 +1841,8 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefLEFTdir = self.AlarmLEFTdir
 
-        TempLEFTdir = {0: {0: None}}
+        TempLEFTdir = {0:{0: None, 1: None, 2: None, 3: None, 4: None},
+                       1:{0: None, 1: None, 2: None}}
         # l_RTD1_max is max number of column
 
         l_LEFT = 0
