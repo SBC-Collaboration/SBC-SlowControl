@@ -422,10 +422,13 @@ class PLC(QtCore.QObject):
             Raw_RTDs_FP = {}
             for key in self.TT_FP_address:
                 Raw_RTDs_FP[key] = self.Client.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
-                # also transform C into K
-                self.TT_FP_dic[key] = 273.15 + round(
-                    struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
+                # also transform C into K if value is not NULL
+                read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1), Raw_RTDs_FP[key].getRegister(0)))[0], 3)
+                if read_value < 849:
 
+                    self.TT_FP_dic[key] = 273.15 + read_value
+                else:
+                    self.TT_FP_dic[key] = read_value
                 # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
 
             #################################################################################################
