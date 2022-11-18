@@ -623,7 +623,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PS8302.Label.setText("PS8302")
 
         self.PS2352 = ColoredStatus(self.FluidTab, mode=2)
-        self.PS2352.move(890 * R, 250 * R)
+        self.PS2352.move(950 * R, 240 * R)
         self.PS2352.Label.setText("PS2352")
 
         self.LI2340 = Indicator(self.FluidTab)
@@ -649,7 +649,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC1316.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
 
         self.PS1361 = ColoredStatus(self.FluidTab, mode=2)
-        self.PS1361.move(900 * R, 900* R)
+        self.PS1361.move(810 * R, 870* R)
         self.PS1361.Label.setText("PS1361")
 
 
@@ -694,7 +694,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV5309_icon.move(1360 * R, 350 * R)
 
         self.PT5304= Indicator(self.FluidTab)
-        self.PT5304.move(1420*R, 200*R)
+        self.PT5304.move(1420*R, 250*R)
         self.PT5304.Label.setText("PT5304")
         self.PT5304.SetUnit(" bar")
 
