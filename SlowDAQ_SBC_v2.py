@@ -32,14 +32,6 @@ VERSION = "v2.1.3"
 #     TITLE_STYLE = "background-color: rgb(204,204,204);  font-family: calibrib;" \
 #                   " font-size: 14px; "
 
-# SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
-#                     " font-size: 14px;" \
-#                     " font-weight: bold;"
-
-# LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\"; " \
-#               "font-size: 18px; font-weight: bold;"
-# TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 10px; font-family: \"Calibri\";" \
-#               " font-size: 22px; font-weight: bold;"
 
 # Settings adapted to sbc slowcontrol machine
 SMALL_LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Calibri\";" \
@@ -52,20 +44,6 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-fami
 
 BORDER_STYLE = " border-radius: 2px; border-color: black;"
 
-# SMALL_LABEL_STYLE = " background-color: rgb(204,204,204); "
-# #
-# LABEL_STYLE = " background-color: rgb(204,204,204); "
-# TITLE_STYLE = " background-color: rgb(204,204,204); "
-# BORDER_STYLE = "  "
-
-
-# SMALL_LABEL_STYLE = "background-color: rgb(204,204,204);  " \
-#                         " font-size: 10px;" \
-#
-# LABEL_STYLE = "background-color: rgb(204,204,204);  " \
-#                   "font-size: 12px; "
-# TITLE_STYLE = "background-color: rgb(204,204,204);  " \
-#                   "  font-size: 14px;"
 
 
 
@@ -209,6 +187,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HydraulicTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.HydraulicTab.Background.setObjectName("HydraulicBkg")
 
+
+
         self.DatanSignalTab = QtWidgets.QWidget()
         self.Tab.addTab(self.DatanSignalTab, "Data and Signal Panel")
 
@@ -222,18 +202,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DatanSignalTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.DatanSignalTab.Background.setObjectName("DatanSignalBkg")
 
-        self.INTLCKTab = QtWidgets.QWidget()
-        self.Tab.addTab(self.INTLCKTab, "INTLCK Panel")
 
-        self.INTLCKTab.Background = QtWidgets.QLabel(self.INTLCKTab)
-        self.INTLCKTab.Background.setScaledContents(True)
-        self.INTLCKTab.Background.setStyleSheet('background-color:black;')
-        pixmap_INTLCK = QtGui.QPixmap(os.path.join(self.ImagePath, "Default_Background.png"))
-        pixmap_INTLCK = pixmap_INTLCK.scaledToWidth(2400 * R)
-        self.INTLCKTab.Background.setPixmap(QtGui.QPixmap(pixmap_INTLCK))
-        self.INTLCKTab.Background.move(0 * R, 0 * R)
-        self.INTLCKTab.Background.setAlignment(QtCore.Qt.AlignCenter)
-        self.INTLCKTab.Background.setObjectName("INTLCKBkg")
 
         # Data saving and recovery
         # Data setting form is ended with .ini and directory is https://doc.qt.io/archives/qtforpython-5.12/PySide2/QtCore/QSettings.html depending on the System
@@ -645,9 +614,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT7401.move(1985*R, 250*R)
         self.TT7401.Label.setText("TT7401")
 
-        self.TT7202 = Indicator(self.FluidTab)
-        self.TT7202.move(910*R, 530*R)
-        self.TT7202.Label.setText("TT7202")
+        self.TT7402 = Indicator(self.FluidTab)
+        self.TT7402.move(910*R, 530*R)
+        self.TT7402.Label.setText("TT7402")
+
+        self.PS8302 = ColoredStatus(self.FluidTab, mode=2)
+        self.PS8302.move(2300 * R, 100 * R)
+        self.PS8302.Label.setText("PS8302")
+
+        self.PS2352 = ColoredStatus(self.FluidTab, mode=2)
+        self.PS2352.move(950 * R, 240 * R)
+        self.PS2352.Label.setText("PS2352")
 
         self.LI2340 = Indicator(self.FluidTab)
         self.LI2340.move(2250*R, 880*R)
@@ -670,6 +647,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC1316.LOOPPIDWindow.Label.setText("MFC1316")
         self.MFC1316.LOOPPIDWindow.RTD1.Label.setText("TT1332")
         self.MFC1316.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
+
+        self.PS1361 = ColoredStatus(self.FluidTab, mode=2)
+        self.PS1361.move(810 * R, 870* R)
+        self.PS1361.Label.setText("PS1361")
+
 
         self.PT1332 = Indicator(self.FluidTab)
         self.PT1332.move(630*R, 900*R)
@@ -711,6 +693,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV5309_icon = Valve_image(self.FluidTab, mode="V")
         self.PV5309_icon.move(1360 * R, 350 * R)
 
+        self.PT5304= Indicator(self.FluidTab)
+        self.PT5304.move(1420*R, 250*R)
+        self.PT5304.Label.setText("PT5304")
+        self.PT5304.SetUnit(" bar")
+
         # Hydraulic buttons
 
         self.PUMP3305 = LOOP2PT_v2(self.HydraulicTab)
@@ -720,6 +707,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PUMP3305.State.RButton.setText("OFF")
         self.PUMP3305.LOOP2PTWindow.setWindowTitle("PUMP3305")
         self.PUMP3305.LOOP2PTWindow.Label.setText("PUMP3305")
+
+        self.PUMP3305_icon = Pump_image(self.HydraulicTab)
+        self.PUMP3305_icon.move(285*R, 390*R)
 
 
         self.PUMP3305_CON = ColoredStatus(self.HydraulicTab, mode = 2)
@@ -733,6 +723,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ES3347 = ColoredStatus(self.HydraulicTab, mode=3)
         self.ES3347.move(505 * R, 330 * R)
         self.ES3347.Label.setText("ES3347")
+
 
 
         self.TT3401 = Indicator(self.HydraulicTab)
@@ -962,107 +953,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PCYCLE_AUTOCYCLE.move(1300 * R, 600 * R)
         self.PCYCLE_AUTOCYCLE.Label.setText("PCYCLE_AUTOCYCLE")
 
-        self.TT2118_HI_INTLK_v2 = INTLK_LA_Widget_v2(self.DatanSignalTab)
-        self.TT2118_HI_INTLK_v2.move(1900 * R, 200 * R)
-        self.TT2118_HI_INTLK_v2.Label.setText("TT2118_HI")
-        self.TT2118_HI_INTLK_v2.setObjectName("TT2118_HI_INTLK")
-
-        self.TT2118_LO_INTLK_v2 = INTLK_RA_Widget_v2(self.DatanSignalTab)
-        self.TT2118_LO_INTLK_v2.move(1900 * R, 500 * R)
-        self.TT2118_LO_INTLK_v2.Label.setText("TT2118_LO")
-        self.TT2118_LO_INTLK_v2.setObjectName("TT2118_LO_INTLK")
-
-        self.TS1_INTLK_v2 = INTLK_LD_Widget_v2(self.DatanSignalTab)
-        self.TS1_INTLK_v2.move(1900 * R, 750 * R)
-        self.TS1_INTLK_v2.Label.setText("TS1")
-        self.TS1_INTLK_v2.setObjectName("TS1")
-
-        self.ES3347_INTLK_v2 = INTLK_RD_Widget_v2(self.DatanSignalTab)
-        self.ES3347_INTLK_v2.move(1900 * R, 1000 * R)
-        self.ES3347_INTLK_v2.Label.setText("ES3347")
-        self.ES3347_INTLK_v2.setObjectName("ES3347")
-
-
-
-        self.TT2118_HI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
-        self.TT2118_HI_INTLK.move(10 * R, 10 * R)
-        self.TT2118_HI_INTLK.Label.setText("TT2118_HI")
-        self.TT2118_HI_INTLK.setObjectName("TT2118_HI_INTLK")
-
-        self.TT2118_LO_INTLK = INTLK_RA_Widget(self.INTLCKTab)
-        self.TT2118_LO_INTLK.move(460 * R, 10 * R)
-        self.TT2118_LO_INTLK.Label.setText("TT2118_LO")
-        self.TT2118_LO_INTLK.setObjectName("TT2118_LO_INTLK")
-
-        self.PT4306_LO_INTLK = INTLK_RA_Widget(self.INTLCKTab)
-        self.PT4306_LO_INTLK.move(920 * R, 10 * R)
-        self.PT4306_LO_INTLK.Label.setText("PT4306_LO")
-        self.PT4306_LO_INTLK.setObjectName("PT4306_LO_INTLK")
-
-        self.PT4306_HI_INTLK = INTLK_RA_Widget(self.INTLCKTab)
-        self.PT4306_HI_INTLK.move(1380 * R, 10 * R)
-        self.PT4306_HI_INTLK.Label.setText("PT4306_HI")
-        self.PT4306_HI_INTLK.setObjectName("PT4306_HI_INTLK")
-
-        self.PT4322_HI_INTLK = INTLK_RA_Widget(self.INTLCKTab)
-        self.PT4322_HI_INTLK.move(1840 * R, 10 * R)
-        self.PT4322_HI_INTLK.Label.setText("PT4322_HI")
-        self.PT4322_HI_INTLK.setObjectName("PT4322_HI_INTLK")
-
-        self.PT4322_HIHI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
-        self.PT4322_HIHI_INTLK.move(10 * R, 220 * R)
-        self.PT4322_HIHI_INTLK.Label.setText("PT4322_HIHI")
-        self.PT4322_HIHI_INTLK.setObjectName("PT4322_HIHI_INTLK")
-
-        self.PT4319_HI_INTLK = INTLK_RA_Widget(self.INTLCKTab)
-        self.PT4319_HI_INTLK.move(460 * R, 220 * R)
-        self.PT4319_HI_INTLK.Label.setText("PT4319_HI")
-        self.PT4319_HI_INTLK.setObjectName("PT4319_HI_INTLK")
-
-        self.PT4319_HIHI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
-        self.PT4319_HIHI_INTLK.move(920 * R, 220 * R)
-        self.PT4319_HIHI_INTLK.Label.setText("PT4319_HIHI")
-        self.PT4319_HIHI_INTLK.setObjectName("PT4319_HIHI_INTLK")
-
-        self.PT4325_HI_INTLK = INTLK_RA_Widget(self.INTLCKTab)
-        self.PT4325_HI_INTLK.move(1380 * R, 220 * R)
-        self.PT4325_HI_INTLK.Label.setText("PT4325_HI")
-        self.PT4325_HI_INTLK.setObjectName("PT4325_HI_INTLK")
-
-        self.PT4325_HIHI_INTLK = INTLK_LA_Widget(self.INTLCKTab)
-        self.PT4325_HIHI_INTLK.move(1840 * R, 220 * R)
-        self.PT4325_HIHI_INTLK.Label.setText("PT4325_HIHI")
-        self.PT4325_HIHI_INTLK.setObjectName("PT4325_HIHI_INTLK")
-
-        self.TS1_INTLK = INTLK_LD_Widget(self.INTLCKTab)
-        self.TS1_INTLK.move(10 * R, 460 * R)
-        self.TS1_INTLK.Label.setText("TS1")
-        self.TS1_INTLK.setObjectName("TS1")
-
-        self.ES3347_INTLK = INTLK_RD_Widget(self.INTLCKTab)
-        self.ES3347_INTLK.move(460 * R, 460 * R)
-        self.ES3347_INTLK.Label.setText("ES3347")
-        self.ES3347_INTLK.setObjectName("ES3347")
-
-        self.PUMP3305_OL_INTLK = INTLK_LD_Widget(self.INTLCKTab)
-        self.PUMP3305_OL_INTLK.move(920 * R, 460 * R)
-        self.PUMP3305_OL_INTLK.Label.setText("PUMP3305_OL")
-        self.PUMP3305_OL_INTLK.setObjectName("PUMP3305_OL")
-
-        self.TS2_INTLK = INTLK_LD_Widget(self.INTLCKTab)
-        self.TS2_INTLK.move(1380 * R, 460 * R)
-        self.TS2_INTLK.Label.setText("TS2")
-        self.TS2_INTLK.setObjectName("TS2")
-
-        self.TS3_INTLK = INTLK_LD_Widget(self.INTLCKTab)
-        self.TS3_INTLK.move(1840 * R, 460 * R)
-        self.TS3_INTLK.Label.setText("TS3")
-        self.TS3_INTLK.setObjectName("TS3")
-
-        self.PU_PRIME_INTLK = INTLK_LD_Widget(self.INTLCKTab)
-        self.PU_PRIME_INTLK.move(10 * R, 670 * R)
-        self.PU_PRIME_INTLK.Label.setText("PU_PRIME")
-        self.PU_PRIME_INTLK.setObjectName("PU_PRIME")
 
         # INTLCK button
         self.INTLCKWindow = INTLCK_Win_v2()
@@ -1080,6 +970,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.AlarmButton.StatusWindow.AlarmWindow()
 
         self.AlarmButton.move(10*R, 1350*R)
+        # self.AlarmButton.move(10 * R, 1200 * R)
         # self.AlarmButton.Button.setText("Alarm Button")
 
 
@@ -1101,85 +992,111 @@ class MainWindow(QtWidgets.QMainWindow):
         self.FLAG_buffer = copy.copy(sec.FLAG_DIC)
 
 
-        self.BORTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111, self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118,
-                                 self.AlarmButton.SubWindow.TT2119,
-                                 self.AlarmButton.SubWindow.TT4330, self.AlarmButton.SubWindow.TT6203, self.AlarmButton.SubWindow.TT6207, self.AlarmButton.SubWindow.TT6211,
-                                 self.AlarmButton.SubWindow.TT6213,
-                                 self.AlarmButton.SubWindow.TT6222, self.AlarmButton.SubWindow.TT6407, self.AlarmButton.SubWindow.TT6408, self.AlarmButton.SubWindow.TT6409,
-                                 self.AlarmButton.SubWindow.TT6415,
-                                 self.AlarmButton.SubWindow.TT6416]
+        self.BORTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111,
+                                 self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118,
+                                 self.AlarmButton.SubWindow.TT2119, self.AlarmButton.SubWindow.TT4330,
+                                 self.AlarmButton.SubWindow.TT6203, self.AlarmButton.SubWindow.TT6207,
+                                 self.AlarmButton.SubWindow.TT6211, self.AlarmButton.SubWindow.TT6213,
+                                 self.AlarmButton.SubWindow.TT6222, self.AlarmButton.SubWindow.TT6407,
+                                 self.AlarmButton.SubWindow.TT6408, self.AlarmButton.SubWindow.TT6409,
+                                 self.AlarmButton.SubWindow.TT6415, self.AlarmButton.SubWindow.TT6416]
 
-        self.FPRTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2420, self.AlarmButton.SubWindow.TT2422, self.AlarmButton.SubWindow.TT2424, self.AlarmButton.SubWindow.TT2425,
-                                 self.AlarmButton.SubWindow.TT2442,
-                                 self.AlarmButton.SubWindow.TT2403, self.AlarmButton.SubWindow.TT2418, self.AlarmButton.SubWindow.TT2427, self.AlarmButton.SubWindow.TT2429,
-                                 self.AlarmButton.SubWindow.TT2431,
-                                 self.AlarmButton.SubWindow.TT2441, self.AlarmButton.SubWindow.TT2414, self.AlarmButton.SubWindow.TT2413, self.AlarmButton.SubWindow.TT2412,
-                                 self.AlarmButton.SubWindow.TT2415,
-                                 self.AlarmButton.SubWindow.TT2409, self.AlarmButton.SubWindow.TT2436, self.AlarmButton.SubWindow.TT2438, self.AlarmButton.SubWindow.TT2440,
-                                 self.AlarmButton.SubWindow.TT2402,
-                                 self.AlarmButton.SubWindow.TT2411, self.AlarmButton.SubWindow.TT2443, self.AlarmButton.SubWindow.TT2417, self.AlarmButton.SubWindow.TT2404,
-                                 self.AlarmButton.SubWindow.TT2408,
-                                 self.AlarmButton.SubWindow.TT2407, self.AlarmButton.SubWindow.TT2406, self.AlarmButton.SubWindow.TT2428, self.AlarmButton.SubWindow.TT2432,
-                                 self.AlarmButton.SubWindow.TT2421,
-                                 self.AlarmButton.SubWindow.TT2416, self.AlarmButton.SubWindow.TT2439, self.AlarmButton.SubWindow.TT2419, self.AlarmButton.SubWindow.TT2423,
-                                 self.AlarmButton.SubWindow.TT2426,
-                                 self.AlarmButton.SubWindow.TT2430, self.AlarmButton.SubWindow.TT2450, self.AlarmButton.SubWindow.TT2401, self.AlarmButton.SubWindow.TT2449,
-                                 self.AlarmButton.SubWindow.TT2445,
-                                 self.AlarmButton.SubWindow.TT2444, self.AlarmButton.SubWindow.TT2435, self.AlarmButton.SubWindow.TT2437, self.AlarmButton.SubWindow.TT2446,
-                                 self.AlarmButton.SubWindow.TT2447,
-                                 self.AlarmButton.SubWindow.TT2448, self.AlarmButton.SubWindow.TT2410, self.AlarmButton.SubWindow.TT2405, self.AlarmButton.SubWindow.TT6220,
-                                 self.AlarmButton.SubWindow.TT6401,
-                                 self.AlarmButton.SubWindow.TT6404, self.AlarmButton.SubWindow.TT6405, self.AlarmButton.SubWindow.TT6406, self.AlarmButton.SubWindow.TT6410,
-                                 self.AlarmButton.SubWindow.TT6411,
-                                 self.AlarmButton.SubWindow.TT6412, self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414]
+        self.FPRTDAlarmMatrix = [self.AlarmButton.SubWindow.TT2420, self.AlarmButton.SubWindow.TT2422,
+                                 self.AlarmButton.SubWindow.TT2424, self.AlarmButton.SubWindow.TT2425,
+                                 self.AlarmButton.SubWindow.TT2442, self.AlarmButton.SubWindow.TT2403,
+                                 self.AlarmButton.SubWindow.TT2418, self.AlarmButton.SubWindow.TT2427,
+                                 self.AlarmButton.SubWindow.TT2429, self.AlarmButton.SubWindow.TT2431,
+                                 self.AlarmButton.SubWindow.TT2441, self.AlarmButton.SubWindow.TT2414,
+                                 self.AlarmButton.SubWindow.TT2413, self.AlarmButton.SubWindow.TT2412,
+                                 self.AlarmButton.SubWindow.TT2415, self.AlarmButton.SubWindow.TT2409,
+                                 self.AlarmButton.SubWindow.TT2436, self.AlarmButton.SubWindow.TT2438,
+                                 self.AlarmButton.SubWindow.TT2440, self.AlarmButton.SubWindow.TT2402,
+                                 self.AlarmButton.SubWindow.TT2411, self.AlarmButton.SubWindow.TT2443,
+                                 self.AlarmButton.SubWindow.TT2417, self.AlarmButton.SubWindow.TT2404,
+                                 self.AlarmButton.SubWindow.TT2408, self.AlarmButton.SubWindow.TT2407,
+                                 self.AlarmButton.SubWindow.TT2406, self.AlarmButton.SubWindow.TT2428,
+                                 self.AlarmButton.SubWindow.TT2432, self.AlarmButton.SubWindow.TT2421,
+                                 self.AlarmButton.SubWindow.TT2416, self.AlarmButton.SubWindow.TT2439,
+                                 self.AlarmButton.SubWindow.TT2419, self.AlarmButton.SubWindow.TT2423,
+                                 self.AlarmButton.SubWindow.TT2426, self.AlarmButton.SubWindow.TT2430,
+                                 self.AlarmButton.SubWindow.TT2450, self.AlarmButton.SubWindow.TT2401,
+                                 self.AlarmButton.SubWindow.TT2449, self.AlarmButton.SubWindow.TT2445,
+                                 self.AlarmButton.SubWindow.TT2444, self.AlarmButton.SubWindow.TT2435,
+                                 self.AlarmButton.SubWindow.TT2437, self.AlarmButton.SubWindow.TT2446,
+                                 self.AlarmButton.SubWindow.TT2447, self.AlarmButton.SubWindow.TT2448,
+                                 self.AlarmButton.SubWindow.TT2410, self.AlarmButton.SubWindow.TT2405,
+                                 self.AlarmButton.SubWindow.TT6220, self.AlarmButton.SubWindow.TT6401,
+                                 self.AlarmButton.SubWindow.TT6404, self.AlarmButton.SubWindow.TT6405,
+                                 self.AlarmButton.SubWindow.TT6406, self.AlarmButton.SubWindow.TT6410,
+                                 self.AlarmButton.SubWindow.TT6411, self.AlarmButton.SubWindow.TT6412,
+                                 self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414]
 
-        self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2330, self.AlarmButton.SubWindow.PT2335,
-                              self.AlarmButton.SubWindow.PT3308, self.AlarmButton.SubWindow.PT3309, self.AlarmButton.SubWindow.PT3311, self.AlarmButton.SubWindow.PT3314,
-                              self.AlarmButton.SubWindow.PT3320, self.AlarmButton.SubWindow.PT3332,self.AlarmButton.SubWindow.PT3333, self.AlarmButton.SubWindow.PT4306, self.AlarmButton.SubWindow.PT4315,
-                              self.AlarmButton.SubWindow.PT4319,
-                              self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325]
+        self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2330,
+                              self.AlarmButton.SubWindow.PT2335, self.AlarmButton.SubWindow.PT3308,
+                              self.AlarmButton.SubWindow.PT3309, self.AlarmButton.SubWindow.PT3311,
+                              self.AlarmButton.SubWindow.PT3314, self.AlarmButton.SubWindow.PT3320,
+                              self.AlarmButton.SubWindow.PT3332,self.AlarmButton.SubWindow.PT3333,
+                              self.AlarmButton.SubWindow.PT4306, self.AlarmButton.SubWindow.PT4315,
+                              self.AlarmButton.SubWindow.PT4319, self.AlarmButton.SubWindow.PT4322,
+                              self.AlarmButton.SubWindow.PT4325, self.AlarmButton.SubWindow.PT6302,
+                              self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT5304]
 
-        self.LEFTVariableMatrix = [self.AlarmButton.SubWindow.LT3335]
+        self.LEFTVariableMatrix = [self.AlarmButton.SubWindow.BFM4313, self.AlarmButton.SubWindow.LT3335,
+                                   self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
+                                   self.AlarmButton.SubWindow.SERVO3321_IN_REAL, self.AlarmButton.SubWindow.TS1_MASS,
+                                   self.AlarmButton.SubWindow.TS2_MASS, self.AlarmButton.SubWindow.TS3_MASS]
 
-        self.AlarmMatrix = [self.AlarmButton.SubWindow.TT2101.Alarm, self.AlarmButton.SubWindow.TT2111.Alarm, self.AlarmButton.SubWindow.TT2113.Alarm, self.AlarmButton.SubWindow.TT2118.Alarm,
-                                 self.AlarmButton.SubWindow.TT2119.Alarm,
-                                 self.AlarmButton.SubWindow.TT4330.Alarm, self.AlarmButton.SubWindow.TT6203.Alarm, self.AlarmButton.SubWindow.TT6207.Alarm, self.AlarmButton.SubWindow.TT6211.Alarm,
-                                 self.AlarmButton.SubWindow.TT6213.Alarm,
-                                 self.AlarmButton.SubWindow.TT6222.Alarm, self.AlarmButton.SubWindow.TT6407.Alarm, self.AlarmButton.SubWindow.TT6408.Alarm, self.AlarmButton.SubWindow.TT6409.Alarm,
-                                 self.AlarmButton.SubWindow.TT6415.Alarm,
-                                 self.AlarmButton.SubWindow.TT6416.Alarm,
-                                 self.AlarmButton.SubWindow.TT2420.Alarm, self.AlarmButton.SubWindow.TT2422.Alarm, self.AlarmButton.SubWindow.TT2424.Alarm, self.AlarmButton.SubWindow.TT2425.Alarm,
-                                 self.AlarmButton.SubWindow.TT2442.Alarm,
-                                 self.AlarmButton.SubWindow.TT2403.Alarm, self.AlarmButton.SubWindow.TT2418.Alarm, self.AlarmButton.SubWindow.TT2427.Alarm, self.AlarmButton.SubWindow.TT2429.Alarm,
-                                 self.AlarmButton.SubWindow.TT2431.Alarm,
-                                 self.AlarmButton.SubWindow.TT2441.Alarm, self.AlarmButton.SubWindow.TT2414.Alarm, self.AlarmButton.SubWindow.TT2413.Alarm, self.AlarmButton.SubWindow.TT2412.Alarm,
-                                 self.AlarmButton.SubWindow.TT2415.Alarm,
-                                 self.AlarmButton.SubWindow.TT2409.Alarm, self.AlarmButton.SubWindow.TT2436.Alarm, self.AlarmButton.SubWindow.TT2438.Alarm, self.AlarmButton.SubWindow.TT2440.Alarm,
-                                 self.AlarmButton.SubWindow.TT2402.Alarm,
-                                 self.AlarmButton.SubWindow.TT2411.Alarm, self.AlarmButton.SubWindow.TT2443.Alarm, self.AlarmButton.SubWindow.TT2417.Alarm, self.AlarmButton.SubWindow.TT2404.Alarm,
-                                 self.AlarmButton.SubWindow.TT2408.Alarm,
-                                 self.AlarmButton.SubWindow.TT2407.Alarm, self.AlarmButton.SubWindow.TT2406.Alarm, self.AlarmButton.SubWindow.TT2428.Alarm, self.AlarmButton.SubWindow.TT2432.Alarm,
-                                 self.AlarmButton.SubWindow.TT2421.Alarm,
-                                 self.AlarmButton.SubWindow.TT2416.Alarm, self.AlarmButton.SubWindow.TT2439.Alarm, self.AlarmButton.SubWindow.TT2419.Alarm, self.AlarmButton.SubWindow.TT2423.Alarm,
-                                 self.AlarmButton.SubWindow.TT2426.Alarm,
-                                 self.AlarmButton.SubWindow.TT2430.Alarm, self.AlarmButton.SubWindow.TT2450.Alarm, self.AlarmButton.SubWindow.TT2401.Alarm, self.AlarmButton.SubWindow.TT2449.Alarm,
-                                 self.AlarmButton.SubWindow.TT2445.Alarm,
-                                 self.AlarmButton.SubWindow.TT2444.Alarm, self.AlarmButton.SubWindow.TT2435.Alarm, self.AlarmButton.SubWindow.TT2437.Alarm, self.AlarmButton.SubWindow.TT2446.Alarm,
-                                 self.AlarmButton.SubWindow.TT2447.Alarm,
-                                 self.AlarmButton.SubWindow.TT2448.Alarm, self.AlarmButton.SubWindow.TT2410.Alarm, self.AlarmButton.SubWindow.TT2405.Alarm, self.AlarmButton.SubWindow.TT6220.Alarm,
-                                 self.AlarmButton.SubWindow.TT6401.Alarm,
-                                 self.AlarmButton.SubWindow.TT6404.Alarm, self.AlarmButton.SubWindow.TT6405.Alarm, self.AlarmButton.SubWindow.TT6406.Alarm, self.AlarmButton.SubWindow.TT6410.Alarm,
-                                 self.AlarmButton.SubWindow.TT6411.Alarm,
-                                 self.AlarmButton.SubWindow.TT6412.Alarm, self.AlarmButton.SubWindow.TT6413.Alarm, self.AlarmButton.SubWindow.TT6414.Alarm,
-                                 self.AlarmButton.SubWindow.PT2316.Alarm, self.AlarmButton.SubWindow.PT2330.Alarm, self.AlarmButton.SubWindow.PT2335.Alarm,
-                                 self.AlarmButton.SubWindow.PT3308.Alarm, self.AlarmButton.SubWindow.PT3309.Alarm, self.AlarmButton.SubWindow.PT3311.Alarm, self.AlarmButton.SubWindow.PT3314.Alarm,
-                                 self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3332.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
-                                 self.AlarmButton.SubWindow.PT4319.Alarm,
-                                 self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm, self.AlarmButton.SubWindow.LT3335.Alarm]
-
-
-
-
+        self.AlarmMatrix = [self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111,
+                            self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118,
+                            self.AlarmButton.SubWindow.TT2119, self.AlarmButton.SubWindow.TT4330,
+                            self.AlarmButton.SubWindow.TT6203, self.AlarmButton.SubWindow.TT6207,
+                            self.AlarmButton.SubWindow.TT6211, self.AlarmButton.SubWindow.TT6213,
+                            self.AlarmButton.SubWindow.TT6222, self.AlarmButton.SubWindow.TT6407,
+                            self.AlarmButton.SubWindow.TT6408, self.AlarmButton.SubWindow.TT6409,
+                            self.AlarmButton.SubWindow.TT6415,self.AlarmButton.SubWindow.TT6416,
+                            self.AlarmButton.SubWindow.TT2420, self.AlarmButton.SubWindow.TT2422,
+                            self.AlarmButton.SubWindow.TT2424, self.AlarmButton.SubWindow.TT2425,
+                            self.AlarmButton.SubWindow.TT2442,self.AlarmButton.SubWindow.TT2403,
+                            self.AlarmButton.SubWindow.TT2418, self.AlarmButton.SubWindow.TT2427,
+                            self.AlarmButton.SubWindow.TT2429, self.AlarmButton.SubWindow.TT2431,
+                            self.AlarmButton.SubWindow.TT2441, self.AlarmButton.SubWindow.TT2414,
+                            self.AlarmButton.SubWindow.TT2413, self.AlarmButton.SubWindow.TT2412,
+                            self.AlarmButton.SubWindow.TT2415, self.AlarmButton.SubWindow.TT2409,
+                            self.AlarmButton.SubWindow.TT2436, self.AlarmButton.SubWindow.TT2438,
+                            self.AlarmButton.SubWindow.TT2440, self.AlarmButton.SubWindow.TT2402,
+                            self.AlarmButton.SubWindow.TT2411, self.AlarmButton.SubWindow.TT2443,
+                            self.AlarmButton.SubWindow.TT2417, self.AlarmButton.SubWindow.TT2404,
+                            self.AlarmButton.SubWindow.TT2408, self.AlarmButton.SubWindow.TT2407,
+                            self.AlarmButton.SubWindow.TT2406, self.AlarmButton.SubWindow.TT2428,
+                            self.AlarmButton.SubWindow.TT2432, self.AlarmButton.SubWindow.TT2421,
+                            self.AlarmButton.SubWindow.TT2416, self.AlarmButton.SubWindow.TT2439,
+                            self.AlarmButton.SubWindow.TT2419, self.AlarmButton.SubWindow.TT2423,
+                            self.AlarmButton.SubWindow.TT2426, self.AlarmButton.SubWindow.TT2430,
+                            self.AlarmButton.SubWindow.TT2450, self.AlarmButton.SubWindow.TT2401,
+                            self.AlarmButton.SubWindow.TT2449, self.AlarmButton.SubWindow.TT2445,
+                            self.AlarmButton.SubWindow.TT2444, self.AlarmButton.SubWindow.TT2435,
+                            self.AlarmButton.SubWindow.TT2437, self.AlarmButton.SubWindow.TT2446,
+                            self.AlarmButton.SubWindow.TT2447, self.AlarmButton.SubWindow.TT2448,
+                            self.AlarmButton.SubWindow.TT2410, self.AlarmButton.SubWindow.TT2405,
+                            self.AlarmButton.SubWindow.TT6220, self.AlarmButton.SubWindow.TT6401,
+                            self.AlarmButton.SubWindow.TT6404, self.AlarmButton.SubWindow.TT6405,
+                            self.AlarmButton.SubWindow.TT6406, self.AlarmButton.SubWindow.TT6410,
+                            self.AlarmButton.SubWindow.TT6411, self.AlarmButton.SubWindow.TT6412,
+                            self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414,
+                            self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2330,
+                            self.AlarmButton.SubWindow.PT2335, self.AlarmButton.SubWindow.PT3308,
+                            self.AlarmButton.SubWindow.PT3309, self.AlarmButton.SubWindow.PT3311,
+                            self.AlarmButton.SubWindow.PT3314, self.AlarmButton.SubWindow.PT3320,
+                            self.AlarmButton.SubWindow.PT3332,self.AlarmButton.SubWindow.PT3333,
+                            self.AlarmButton.SubWindow.PT4306, self.AlarmButton.SubWindow.PT4315,
+                            self.AlarmButton.SubWindow.PT4319, self.AlarmButton.SubWindow.PT4322,
+                            self.AlarmButton.SubWindow.PT4325, self.AlarmButton.SubWindow.PT6302,
+                            self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT5304,
+                            self.AlarmButton.SubWindow.BFM4313, self.AlarmButton.SubWindow.LT3335,
+                            self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
+                            self.AlarmButton.SubWindow.SERVO3321_IN_REAL, self.AlarmButton.SubWindow.TS1_MASS,
+                            self.AlarmButton.SubWindow.TS2_MASS, self.AlarmButton.SubWindow.TS3_MASS
+                            ]
 
 
         self.signal_connection()
@@ -2869,17 +2786,54 @@ class MainWindow(QtWidgets.QMainWindow):
                                        LowLimit=self.AlarmButton.SubWindow.PT4322.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.PT4322.High_Set.Field.text()))
 
-        self.AlarmButton.SubWindow.PT4322.AlarmMode.stateChanged.connect(
-            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4322.Label.text(),
-                                       Act=self.AlarmButton.SubWindow.PT4322.AlarmMode.isChecked(),
-                                       LowLimit=self.AlarmButton.SubWindow.PT4322.Low_Set.Field.text(),
-                                       HighLimit=self.AlarmButton.SubWindow.PT4322.High_Set.Field.text(),update = False))
+        self.AlarmButton.SubWindow.PT4325.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4325.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.PT4325.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.PT4325.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.PT4325.High_Set.Field.text(),update = False))
 
         self.AlarmButton.SubWindow.PT4325.updatebutton.clicked.connect(
             lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT4325.Label.text(),
                                        Act=self.AlarmButton.SubWindow.PT4325.AlarmMode.isChecked(),
                                        LowLimit=self.AlarmButton.SubWindow.PT4325.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.PT4325.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PT6302.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT6302.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT6302.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT6302.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT6302.High_Set.Field.text(), update=False))
+
+
+        self.AlarmButton.SubWindow.PT6302.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT6302.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT6302.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT6302.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT6302.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PT1101.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1101.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT1101.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT1101.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT1101.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PT1101.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1101.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT1101.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT1101.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT1101.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PT5304.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT5304.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT5304.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT5304.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT5304.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PT5304.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT5304.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT5304.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT5304.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT5304.High_Set.Field.text()))
 
 
         #LEFT Variables
@@ -2895,86 +2849,94 @@ class MainWindow(QtWidgets.QMainWindow):
                                      LowLimit=self.AlarmButton.SubWindow.LT3335.Low_Set.Field.text(),
                                      HighLimit=self.AlarmButton.SubWindow.LT3335.High_Set.Field.text()))
 
+        self.AlarmButton.SubWindow.BFM4313.AlarmMode.stateChanged.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.BFM4313.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.BFM4313.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.BFM4313.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.BFM4313.High_Set.Field.text(), update=False))
 
-        # INTLK
-        self.TT2118_HI_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_A_LButtonClicked(self.TT2118_HI_INTLK.Label.text()+"_INTLK"))
-        self.TT2118_HI_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_A_RButtonClicked(self.TT2118_HI_INTLK.Label.text() + "_INTLK"))
-        self.TT2118_HI_INTLK.RST.clicked.connect(
-            lambda x: self.INTLK_A_RESET(self.TT2118_HI_INTLK.Label.text() + "_INTLK"))
-        self.TT2118_HI_INTLK.updatebutton.clicked.connect(
-            lambda x: self.INTLK_A_update(self.TT2118_HI_INTLK.Label.text() + "_INTLK", self.TT2118_HI_INTLK.SET_W.Field.text()))
+        self.AlarmButton.SubWindow.BFM4313.updatebutton.clicked.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.BFM4313.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.BFM4313.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.BFM4313.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.BFM4313.High_Set.Field.text()))
 
-        self.TT2118_LO_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_A_LButtonClicked(self.TT2118_LO_INTLK.Label.text() + "_INTLK"))
-        self.TT2118_LO_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_A_RButtonClicked(self.TT2118_LO_INTLK.Label.text() + "_INTLK"))
-        self.TT2118_LO_INTLK.updatebutton.clicked.connect(
-            lambda x: self.INTLK_A_update(self.TT2118_LO_INTLK.Label.text() + "_INTLK", self.TT2118_LO_INTLK.SET_W.Field.text()))
+        self.AlarmButton.SubWindow.MFC1316_IN.AlarmMode.stateChanged.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.MFC1316_IN.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.MFC1316_IN.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.MFC1316_IN.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.MFC1316_IN.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.MFC1316_IN.updatebutton.clicked.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.MFC1316_IN.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.MFC1316_IN.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.MFC1316_IN.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.MFC1316_IN.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.CYL3334_FCALC.AlarmMode.stateChanged.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.CYL3334_FCALC.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.CYL3334_FCALC.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.CYL3334_FCALC.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.CYL3334_FCALC.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.CYL3334_FCALC.updatebutton.clicked.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.CYL3334_FCALC.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.CYL3334_FCALC.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.CYL3334_FCALC.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.CYL3334_FCALC.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.SERVO3321_IN_REAL.AlarmMode.stateChanged.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.SERVO3321_IN_REAL.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.SERVO3321_IN_REAL.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.SERVO3321_IN_REAL.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.SERVO3321_IN_REAL.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.SERVO3321_IN_REAL.updatebutton.clicked.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.SERVO3321_IN_REAL.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.SERVO3321_IN_REAL.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.SERVO3321_IN_REAL.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.SERVO3321_IN_REAL.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.TS1_MASS.AlarmMode.stateChanged.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.TS1_MASS.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TS1_MASS.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TS1_MASS.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TS1_MASS.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.TS1_MASS.updatebutton.clicked.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.TS1_MASS.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TS1_MASS.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TS1_MASS.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TS1_MASS.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.TS2_MASS.AlarmMode.stateChanged.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.TS2_MASS.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TS2_MASS.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TS2_MASS.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TS2_MASS.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.TS2_MASS.updatebutton.clicked.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.TS2_MASS.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TS2_MASS.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TS2_MASS.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TS2_MASS.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.TS3_MASS.AlarmMode.stateChanged.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.TS3_MASS.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TS3_MASS.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TS3_MASS.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TS3_MASS.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.TS3_MASS.updatebutton.clicked.connect(
+            lambda: self.LEFTBoxUpdate(pid=self.AlarmButton.SubWindow.TS3_MASS.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TS3_MASS.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TS3_MASS.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TS3_MASS.High_Set.Field.text()))
 
 
-        self.PT4306_LO_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_A_LButtonClicked(self.PT4306_LO_INTLK.Label.text() + "_INTLK"))
-        self.PT4306_LO_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_A_RButtonClicked(self.PT4306_LO_INTLK.Label.text() + "_INTLK"))
-        self.PT4306_LO_INTLK.updatebutton.clicked.connect(
-            lambda x: self.INTLK_A_update(self.PT4306_LO_INTLK.Label.text() + "_INTLK", self.PT4306_LO_INTLK.SET_W.Field.text()))
 
-        self.PT4306_HI_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_A_LButtonClicked(self.PT4306_HI_INTLK.Label.text() + "_INTLK"))
-        self.PT4306_HI_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_A_RButtonClicked(self.PT4306_HI_INTLK.Label.text() + "_INTLK"))
-        self.PT4306_HI_INTLK.updatebutton.clicked.connect(
-            lambda x: self.INTLK_A_update(self.PT4306_HI_INTLK.Label.text() + "_INTLK", self.PT4306_HI_INTLK.SET_W.Field.text()))
 
-        self.PT4322_HI_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_A_LButtonClicked(self.PT4322_HI_INTLK.Label.text() + "_INTLK"))
-        self.PT4322_HI_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_A_RButtonClicked(self.PT4322_HI_INTLK.Label.text() + "_INTLK"))
-        self.PT4322_HI_INTLK.updatebutton.clicked.connect(
-            lambda x: self.INTLK_A_update(self.PT4322_HI_INTLK.Label.text() + "_INTLK", self.PT4322_HI_INTLK.SET_W.Field.text()))
 
-        self.PT4322_HIHI_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_A_LButtonClicked(self.PT4322_HIHI_INTLK.Label.text() + "_INTLK"))
-        self.PT4322_HIHI_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_A_RButtonClicked(self.PT4322_HIHI_INTLK.Label.text() + "_INTLK"))
-        self.PT4322_HIHI_INTLK.RST.clicked.connect(
-            lambda x: self.INTLK_A_RESET(self.PT4322_HIHI_INTLK.Label.text() + "_INTLK"))
-        self.PT4322_HIHI_INTLK.updatebutton.clicked.connect(
-            lambda x: self.INTLK_A_update(self.PT4322_HIHI_INTLK.Label.text() + "_INTLK", self.PT4322_HIHI_INTLK.SET_W.Field.text()))
-
-        self.PT4319_HI_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_A_LButtonClicked(self.PT4319_HI_INTLK.Label.text() + "_INTLK"))
-        self.PT4319_HI_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_A_RButtonClicked(self.PT4319_HI_INTLK.Label.text() + "_INTLK"))
-        self.PT4319_HI_INTLK.updatebutton.clicked.connect(
-            lambda x: self.INTLK_A_update(self.PT4319_HI_INTLK.Label.text() + "_INTLK", self.PT4319_HI_INTLK.SET_W.Field.text()))
-
-        self.PT4319_HIHI_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_A_LButtonClicked(self.PT4319_HIHI_INTLK.Label.text() + "_INTLK"))
-        self.PT4319_HIHI_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_A_RButtonClicked(self.PT4319_HIHI_INTLK.Label.text() + "_INTLK"))
-        self.PT4319_HIHI_INTLK.RST.clicked.connect(
-            lambda x: self.INTLK_A_RESET(self.PT4319_HIHI_INTLK.Label.text() + "_INTLK"))
-        self.PT4319_HIHI_INTLK.updatebutton.clicked.connect(
-            lambda x: self.INTLK_A_update(self.PT4319_HIHI_INTLK.Label.text() + "_INTLK", self.PT4319_HIHI_INTLK.SET_W.Field.text()))
-
-        self.PT4325_HI_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_A_LButtonClicked(self.PT4325_HI_INTLK.Label.text() + "_INTLK"))
-        self.PT4325_HI_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_A_RButtonClicked(self.PT4325_HI_INTLK.Label.text() + "_INTLK"))
-        self.PT4325_HI_INTLK.updatebutton.clicked.connect(
-            lambda x: self.INTLK_A_update(self.PT4325_HI_INTLK.Label.text() + "_INTLK", self.PT4325_HI_INTLK.SET_W.Field.text()))
-
-        self.PT4325_HIHI_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_A_LButtonClicked(self.PT4325_HIHI_INTLK.Label.text() + "_INTLK"))
-        self.PT4325_HIHI_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_A_RButtonClicked(self.PT4325_HIHI_INTLK.Label.text() + "_INTLK"))
-        self.PT4325_HIHI_INTLK.RST.clicked.connect(
-            lambda x: self.INTLK_A_RESET(self.PT4325_HIHI_INTLK.Label.text() + "_INTLK"))
-        self.PT4325_HIHI_INTLK.updatebutton.clicked.connect(
-            lambda x: self.INTLK_A_update(self.PT4325_HIHI_INTLK.Label.text() + "_INTLK", self.PT4325_HIHI_INTLK.SET_W.Field.text()))
 
         ##intlck A window
         self.INTLCKWindow.TT2118_HI_INTLK.EN.LButton.clicked.connect(
@@ -3196,49 +3158,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        #INTLK D part
 
-        self.TS1_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_D_LButtonClicked(self.TS1_INTLK.Label.text() + "_INTLK"))
-        self.TS1_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_D_RButtonClicked(self.TS1_INTLK.Label.text() + "_INTLK"))
-        self.TS1_INTLK.RST.clicked.connect(
-            lambda x: self.INTLK_D_RESET(self.TS1_INTLK.Label.text() + "_INTLK"))
-
-
-        self.ES3347_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_D_LButtonClicked(self.ES3347_INTLK.Label.text() + "_INTLK"))
-        self.ES3347_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_D_RButtonClicked(self.ES3347_INTLK.Label.text() + "_INTLK"))
-
-
-        self.PUMP3305_OL_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_D_LButtonClicked(self.PUMP3305_OL_INTLK.Label.text() + "_INTLK"))
-        self.PUMP3305_OL_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_D_RButtonClicked(self.PUMP3305_OL_INTLK.Label.text() + "_INTLK"))
-        self.PUMP3305_OL_INTLK.RST.clicked.connect(
-            lambda x: self.INTLK_D_RESET(self.PUMP3305_OL_INTLK.Label.text() + "_INTLK"))
-
-        self.TS2_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_D_LButtonClicked(self.TS2_INTLK.Label.text() + "_INTLK"))
-        self.TS2_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_D_RButtonClicked(self.TS2_INTLK.Label.text() + "_INTLK"))
-        self.TS2_INTLK.RST.clicked.connect(
-            lambda x: self.INTLK_D_RESET(self.TS2_INTLK.Label.text() + "_INTLK"))
-
-        self.TS3_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_D_LButtonClicked(self.TS3_INTLK.Label.text() + "_INTLK"))
-        self.TS3_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_D_RButtonClicked(self.TS3_INTLK.Label.text() + "_INTLK"))
-        self.TS3_INTLK.RST.clicked.connect(
-            lambda x: self.INTLK_D_RESET(self.TS3_INTLK.Label.text() + "_INTLK"))
-
-        self.PU_PRIME_INTLK.EN.LButton.clicked.connect(
-            lambda x: self.INTLK_D_LButtonClicked(self.PU_PRIME_INTLK.Label.text() + "_INTLK"))
-        self.PU_PRIME_INTLK.EN.RButton.clicked.connect(
-            lambda x: self.INTLK_D_RButtonClicked(self.PU_PRIME_INTLK.Label.text() + "_INTLK"))
-        self.PU_PRIME_INTLK.RST.clicked.connect(
-            lambda x: self.INTLK_D_RESET(self.PU_PRIME_INTLK.Label.text() + "_INTLK"))
 
         ##intlkc window d
 
@@ -3790,12 +3710,6 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception as e:
             print(e)
 
-
-
-
-
-
-
     @QtCore.Slot()
     def BOTTBoxUpdate(self,pid, Act,LowLimit, HighLimit,update=True):
         try:
@@ -4052,43 +3966,45 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # update value in a Matrix
 
-        AlarmMatrix = [self.AlarmButton.SubWindow.TT2101.Alarm, self.AlarmButton.SubWindow.TT2111.Alarm, self.AlarmButton.SubWindow.TT2113.Alarm, self.AlarmButton.SubWindow.TT2118.Alarm,
-                                 self.AlarmButton.SubWindow.TT2119.Alarm,
-                                 self.AlarmButton.SubWindow.TT4330.Alarm, self.AlarmButton.SubWindow.TT6203.Alarm, self.AlarmButton.SubWindow.TT6207.Alarm, self.AlarmButton.SubWindow.TT6211.Alarm,
-                                 self.AlarmButton.SubWindow.TT6213.Alarm,
-                                 self.AlarmButton.SubWindow.TT6222.Alarm, self.AlarmButton.SubWindow.TT6407.Alarm, self.AlarmButton.SubWindow.TT6408.Alarm, self.AlarmButton.SubWindow.TT6409.Alarm,
-                                 self.AlarmButton.SubWindow.TT6415.Alarm,
-                                 self.AlarmButton.SubWindow.TT6416.Alarm,
-                                 self.AlarmButton.SubWindow.TT2420.Alarm, self.AlarmButton.SubWindow.TT2422.Alarm, self.AlarmButton.SubWindow.TT2424.Alarm, self.AlarmButton.SubWindow.TT2425.Alarm,
-                                 self.AlarmButton.SubWindow.TT2442.Alarm,
-                                 self.AlarmButton.SubWindow.TT2403.Alarm, self.AlarmButton.SubWindow.TT2418.Alarm, self.AlarmButton.SubWindow.TT2427.Alarm, self.AlarmButton.SubWindow.TT2429.Alarm,
-                                 self.AlarmButton.SubWindow.TT2431.Alarm,
-                                 self.AlarmButton.SubWindow.TT2441.Alarm, self.AlarmButton.SubWindow.TT2414.Alarm, self.AlarmButton.SubWindow.TT2413.Alarm, self.AlarmButton.SubWindow.TT2412.Alarm,
-                                 self.AlarmButton.SubWindow.TT2415.Alarm,
-                                 self.AlarmButton.SubWindow.TT2409.Alarm, self.AlarmButton.SubWindow.TT2436.Alarm, self.AlarmButton.SubWindow.TT2438.Alarm, self.AlarmButton.SubWindow.TT2440.Alarm,
-                                 self.AlarmButton.SubWindow.TT2402.Alarm,
-                                 self.AlarmButton.SubWindow.TT2411.Alarm, self.AlarmButton.SubWindow.TT2443.Alarm, self.AlarmButton.SubWindow.TT2417.Alarm, self.AlarmButton.SubWindow.TT2404.Alarm,
-                                 self.AlarmButton.SubWindow.TT2408.Alarm,
-                                 self.AlarmButton.SubWindow.TT2407.Alarm, self.AlarmButton.SubWindow.TT2406.Alarm, self.AlarmButton.SubWindow.TT2428.Alarm, self.AlarmButton.SubWindow.TT2432.Alarm,
-                                 self.AlarmButton.SubWindow.TT2421.Alarm,
-                                 self.AlarmButton.SubWindow.TT2416.Alarm, self.AlarmButton.SubWindow.TT2439.Alarm, self.AlarmButton.SubWindow.TT2419.Alarm, self.AlarmButton.SubWindow.TT2423.Alarm,
-                                 self.AlarmButton.SubWindow.TT2426.Alarm,
-                                 self.AlarmButton.SubWindow.TT2430.Alarm, self.AlarmButton.SubWindow.TT2450.Alarm, self.AlarmButton.SubWindow.TT2401.Alarm, self.AlarmButton.SubWindow.TT2449.Alarm,
-                                 self.AlarmButton.SubWindow.TT2445.Alarm,
-                                 self.AlarmButton.SubWindow.TT2444.Alarm, self.AlarmButton.SubWindow.TT2435.Alarm, self.AlarmButton.SubWindow.TT2437.Alarm, self.AlarmButton.SubWindow.TT2446.Alarm,
-                                 self.AlarmButton.SubWindow.TT2447.Alarm,
-                                 self.AlarmButton.SubWindow.TT2448.Alarm, self.AlarmButton.SubWindow.TT2410.Alarm, self.AlarmButton.SubWindow.TT2405.Alarm, self.AlarmButton.SubWindow.TT6220.Alarm,
-                                 self.AlarmButton.SubWindow.TT6401.Alarm,
-                                 self.AlarmButton.SubWindow.TT6404.Alarm, self.AlarmButton.SubWindow.TT6405.Alarm, self.AlarmButton.SubWindow.TT6406.Alarm, self.AlarmButton.SubWindow.TT6410.Alarm,
-                                 self.AlarmButton.SubWindow.TT6411.Alarm,
-                                 self.AlarmButton.SubWindow.TT6412.Alarm, self.AlarmButton.SubWindow.TT6413.Alarm, self.AlarmButton.SubWindow.TT6414.Alarm,
-                                 self.AlarmButton.SubWindow.PT2316.Alarm, self.AlarmButton.SubWindow.PT2330.Alarm, self.AlarmButton.SubWindow.PT2335.Alarm,
-                                 self.AlarmButton.SubWindow.PT3308.Alarm, self.AlarmButton.SubWindow.PT3309.Alarm, self.AlarmButton.SubWindow.PT3311.Alarm, self.AlarmButton.SubWindow.PT3314.Alarm,
-                                 self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3332.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
-                                 self.AlarmButton.SubWindow.PT4319.Alarm,
-                                 self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm, self.AlarmButton.SubWindow.LT3335.Alarm]
+        # AlarmMatrix = [self.AlarmButton.SubWindow.TT2101.Alarm, self.AlarmButton.SubWindow.TT2111.Alarm, self.AlarmButton.SubWindow.TT2113.Alarm, self.AlarmButton.SubWindow.TT2118.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2119.Alarm,
+        #                          self.AlarmButton.SubWindow.TT4330.Alarm, self.AlarmButton.SubWindow.TT6203.Alarm, self.AlarmButton.SubWindow.TT6207.Alarm, self.AlarmButton.SubWindow.TT6211.Alarm,
+        #                          self.AlarmButton.SubWindow.TT6213.Alarm,
+        #                          self.AlarmButton.SubWindow.TT6222.Alarm, self.AlarmButton.SubWindow.TT6407.Alarm, self.AlarmButton.SubWindow.TT6408.Alarm, self.AlarmButton.SubWindow.TT6409.Alarm,
+        #                          self.AlarmButton.SubWindow.TT6415.Alarm,
+        #                          self.AlarmButton.SubWindow.TT6416.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2420.Alarm, self.AlarmButton.SubWindow.TT2422.Alarm, self.AlarmButton.SubWindow.TT2424.Alarm, self.AlarmButton.SubWindow.TT2425.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2442.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2403.Alarm, self.AlarmButton.SubWindow.TT2418.Alarm, self.AlarmButton.SubWindow.TT2427.Alarm, self.AlarmButton.SubWindow.TT2429.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2431.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2441.Alarm, self.AlarmButton.SubWindow.TT2414.Alarm, self.AlarmButton.SubWindow.TT2413.Alarm, self.AlarmButton.SubWindow.TT2412.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2415.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2409.Alarm, self.AlarmButton.SubWindow.TT2436.Alarm, self.AlarmButton.SubWindow.TT2438.Alarm, self.AlarmButton.SubWindow.TT2440.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2402.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2411.Alarm, self.AlarmButton.SubWindow.TT2443.Alarm, self.AlarmButton.SubWindow.TT2417.Alarm, self.AlarmButton.SubWindow.TT2404.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2408.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2407.Alarm, self.AlarmButton.SubWindow.TT2406.Alarm, self.AlarmButton.SubWindow.TT2428.Alarm, self.AlarmButton.SubWindow.TT2432.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2421.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2416.Alarm, self.AlarmButton.SubWindow.TT2439.Alarm, self.AlarmButton.SubWindow.TT2419.Alarm, self.AlarmButton.SubWindow.TT2423.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2426.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2430.Alarm, self.AlarmButton.SubWindow.TT2450.Alarm, self.AlarmButton.SubWindow.TT2401.Alarm, self.AlarmButton.SubWindow.TT2449.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2445.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2444.Alarm, self.AlarmButton.SubWindow.TT2435.Alarm, self.AlarmButton.SubWindow.TT2437.Alarm, self.AlarmButton.SubWindow.TT2446.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2447.Alarm,
+        #                          self.AlarmButton.SubWindow.TT2448.Alarm, self.AlarmButton.SubWindow.TT2410.Alarm, self.AlarmButton.SubWindow.TT2405.Alarm, self.AlarmButton.SubWindow.TT6220.Alarm,
+        #                          self.AlarmButton.SubWindow.TT6401.Alarm,
+        #                          self.AlarmButton.SubWindow.TT6404.Alarm, self.AlarmButton.SubWindow.TT6405.Alarm, self.AlarmButton.SubWindow.TT6406.Alarm, self.AlarmButton.SubWindow.TT6410.Alarm,
+        #                          self.AlarmButton.SubWindow.TT6411.Alarm,
+        #                          self.AlarmButton.SubWindow.TT6412.Alarm, self.AlarmButton.SubWindow.TT6413.Alarm, self.AlarmButton.SubWindow.TT6414.Alarm,
+        #                          self.AlarmButton.SubWindow.PT2316.Alarm, self.AlarmButton.SubWindow.PT2330.Alarm, self.AlarmButton.SubWindow.PT2335.Alarm,
+        #                          self.AlarmButton.SubWindow.PT3308.Alarm, self.AlarmButton.SubWindow.PT3309.Alarm, self.AlarmButton.SubWindow.PT3311.Alarm, self.AlarmButton.SubWindow.PT3314.Alarm,
+        #                          self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3332.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
+        #                          self.AlarmButton.SubWindow.PT4319.Alarm,
+        #                          self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm, self.AlarmButton.SubWindow.LT3335.Alarm]
 
-
+        AlarmMatrix= []
+        for element in self.AlarmMatrix:
+            AlarmMatrix.append(element.Alarm)
         self.update_alarmwindow(AlarmMatrix)
 
 
@@ -4228,6 +4144,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ES3347.UpdateColor(received_dic_c["data"]["Din"]["value"]["ES3347"])
         self.LS3338.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS3338"])
         self.LS3339.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS3339"])
+        self.PS1361.UpdateColor(received_dic_c["data"]["Din"]["value"]["PS1361"])
+        self.PS2352.UpdateColor(received_dic_c["data"]["Din"]["value"]["PS2352"])
+        self.PS8302.UpdateColor(received_dic_c["data"]["Din"]["value"]["PS8302"])
 
         # show whether the widgets status are normal: manully controlled and no error signal
 
@@ -5514,103 +5433,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # else:
         #     pass
 
-        #INTLK part
 
-        # if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"] != self.INTLK_A_DIC_buffer["TT2118_HI_INTLK"]:
-        #     self.TT2118_HI_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_A_DIC_buffer["TT2118_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"] != self.INTLK_A_DIC_buffer["TT2118_LO_INTLK"]:
-        #     self.TT2118_LO_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_A_DIC_buffer["TT2118_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"] != self.INTLK_A_DIC_buffer["PT4306_LO_INTLK"]:
-        #     self.PT4306_LO_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_A_DIC_buffer["PT4306_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"]:
-        #     self.PT4306_HI_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4322_HI_INTLK"]:
-        #     self.PT4322_HI_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_A_DIC_buffer["PT4322_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4322_HIHI_INTLK"]:
-        #     self.PT4322_HIHI_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_A_DIC_buffer["PT4322_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4319_HI_INTLK"]:
-        #     self.PT4319_HI_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_A_DIC_buffer["PT4319_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"]
-        # else:
-        #     pass
-        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4319_HIHI_INTLK"]:
-        #     self.PT4319_HIHI_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_A_DIC_buffer["PT4319_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT4325_HI_INTLK"]:
-        #     self.PT4325_HI_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_A_DIC_buffer["PT4325_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"]
-        # else:
-        #     pass
-        # if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"] != self.INTLK_A_DIC_buffer["PT4325_HIHI_INTLK"]:
-        #     self.PT4325_HIHI_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_A_DIC_buffer["PT4325_HIHI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"]
-        # else:
-        #     pass
-        #
-        #
-        # if received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"] != self.INTLK_D_DIC_buffer["TS1_INTLK"]:
-        #     self.TS1_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_D_DIC_buffer["TS1_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"] != self.INTLK_D_DIC_buffer["ES3347_INTLK"]:
-        #     self.ES3347_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_D_DIC_buffer["ES3347_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"] != self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"]:
-        #     self.PUMP3305_OL_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_D_DIC_buffer["PUMP3305_OL_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"] != self.INTLK_D_DIC_buffer["TS2_INTLK"]:
-        #     self.TS2_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_D_DIC_buffer["TS2_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"] != self.INTLK_D_DIC_buffer["TS3_INTLK"]:
-        #     self.TS3_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_D_DIC_buffer["TS3_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"]
-        # else:
-        #     pass
-        #
-        # if received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"] != self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"]:
-        #     self.PU_PRIME_INTLK.EN.ButtonTransitionState(False)
-        #     self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"]
-        # else:
-        #     pass
-        #
 
         # intlck window A button
 
@@ -7860,128 +7683,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PUMP3305.ColorLabel(received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"])
 
 
-        #INTLK
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_HI_INTLK"]:
-
-            self.TT2118_HI_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.TT2118_HI_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["TT2118_LO_INTLK"]:
-
-            self.TT2118_LO_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.TT2118_LO_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_LO_INTLK"]:
-
-            self.PT4306_LO_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.PT4306_LO_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]:
-
-            self.PT4306_HI_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.PT4306_HI_INTLK.EN.ButtonRClicked()
-
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HI_INTLK"]:
-
-            self.PT4322_HI_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.PT4322_HI_INTLK.EN.ButtonRClicked()
-
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4322_HIHI_INTLK"]:
-
-            self.PT4322_HIHI_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.PT4322_HIHI_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HI_INTLK"]:
-
-            self.PT4319_HI_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.PT4319_HI_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4319_HIHI_INTLK"]:
-
-            self.PT4319_HIHI_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.PT4319_HIHI_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HI_INTLK"]:
-
-            self.PT4325_HI_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.PT4325_HI_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_A"]["EN"]["PT4325_HIHI_INTLK"]:
-
-            self.PT4325_HIHI_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.PT4325_HIHI_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_D"]["EN"]["TS1_INTLK"]:
-
-            self.TS1_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.TS1_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_D"]["EN"]["ES3347_INTLK"]:
-
-            self.ES3347_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.ES3347_INTLK.EN.ButtonRClicked()
-
-
-        if received_dic_c["data"]["INTLK_D"]["EN"]["PUMP3305_OL_INTLK"]:
-
-            self.PUMP3305_OL_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.PUMP3305_OL_INTLK.EN.ButtonRClicked()
-
-
-
-
-        if received_dic_c["data"]["INTLK_D"]["EN"]["TS2_INTLK"]:
-
-            self.TS2_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.TS2_INTLK.EN.ButtonRClicked()
-
-        if received_dic_c["data"]["INTLK_D"]["EN"]["TS3_INTLK"]:
-
-            self.TS3_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.TS3_INTLK.EN.ButtonRClicked()
-
-
-        if received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"]:
-
-            self.PU_PRIME_INTLK.EN.ButtonLClicked()
-
-        else:
-            self.PU_PRIME_INTLK.EN.ButtonRClicked()
-
-
 
 
 
@@ -8005,6 +7706,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4322.SetValue(received_dic_c["data"]["PT"]["value"]["PT4322"])
         self.PT4325.SetValue(received_dic_c["data"]["PT"]["value"]["PT4325"])
         self.PT6302.SetValue(received_dic_c["data"]["PT"]["value"]["PT6302"])
+        self.PT1101.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
+        self.PT1101Fluid.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
+        self.PT1101Hy.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
+        self.PT5304.SetValue(received_dic_c["data"]["PT"]["value"]["PT5304"])
 
         self.LT3335.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LT3335"])
         self.BFM4313.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BFM4313"])
@@ -9322,74 +9027,6 @@ class MainWindow(QtWidgets.QMainWindow):
         #     received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"])
 
         #INTLCK indicator
-        self.TT2118_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["TT2118_HI_INTLK"])
-        self.TT2118_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT2118_HI_INTLK"])
-        self.TT2118_HI_INTLK.SET_R.SetValue(
-            received_dic_c["data"]["INTLK_A"]["SET"]["TT2118_HI_INTLK"])
-
-        self.TT2118_LO_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["TT2118_LO_INTLK"])
-        self.TT2118_LO_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["TT2118_LO_INTLK"])
-        self.TT2118_LO_INTLK.SET_R.SetValue(
-            received_dic_c["data"]["INTLK_A"]["SET"]["TT2118_LO_INTLK"])
-
-        self.PT4306_LO_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4306_LO_INTLK"])
-        self.PT4306_LO_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4306_LO_INTLK"])
-        self.PT4306_LO_INTLK.SET_R.SetValue(
-            received_dic_c["data"]["INTLK_A"]["SET"]["PT4306_LO_INTLK"])
-
-        self.PT4306_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4306_HI_INTLK"])
-        self.PT4306_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4306_HI_INTLK"])
-        self.PT4306_HI_INTLK.SET_R.SetValue(
-            received_dic_c["data"]["INTLK_A"]["SET"]["PT4306_HI_INTLK"])
-
-        self.PT4322_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4322_HI_INTLK"])
-        self.PT4322_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4322_HI_INTLK"])
-        self.PT4322_HI_INTLK.SET_R.SetValue(
-            received_dic_c["data"]["INTLK_A"]["SET"]["PT4322_HI_INTLK"])
-
-        self.PT4322_HIHI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4322_HIHI_INTLK"])
-        self.PT4322_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4322_HIHI_INTLK"])
-        self.PT4322_HIHI_INTLK.SET_R.SetValue(
-            received_dic_c["data"]["INTLK_A"]["SET"]["PT4322_HIHI_INTLK"])
-
-        self.PT4319_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4319_HI_INTLK"])
-        self.PT4319_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4319_HI_INTLK"])
-        self.PT4319_HI_INTLK.SET_R.SetValue(
-            received_dic_c["data"]["INTLK_A"]["SET"]["PT4319_HI_INTLK"])
-
-        self.PT4319_HIHI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4319_HIHI_INTLK"])
-        self.PT4319_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4319_HIHI_INTLK"])
-        self.PT4319_HIHI_INTLK.SET_R.SetValue(
-            received_dic_c["data"]["INTLK_A"]["SET"]["PT4319_HIHI_INTLK"])
-
-
-        self.PT4325_HI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4325_HI_INTLK"])
-        self.PT4325_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4325_HI_INTLK"])
-        self.PT4325_HI_INTLK.SET_R.SetValue(
-            received_dic_c["data"]["INTLK_A"]["SET"]["PT4325_HI_INTLK"])
-
-        self.PT4325_HIHI_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_A"]["value"]["PT4325_HIHI_INTLK"])
-        self.PT4325_HIHI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4325_HIHI_INTLK"])
-        self.PT4325_HIHI_INTLK.SET_R.SetValue(
-            received_dic_c["data"]["INTLK_A"]["SET"]["PT4325_HIHI_INTLK"])
-
-        self.TS1_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["TS1_INTLK"])
-        self.TS1_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS1_INTLK"])
-
-        self.ES3347_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["ES3347_INTLK"])
-        self.ES3347_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["ES3347_INTLK"])
-
-        self.PUMP3305_OL_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["PUMP3305_OL_INTLK"])
-        self.PUMP3305_OL_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PUMP3305_OL_INTLK"])
-
-        self.TS2_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["TS2_INTLK"])
-        self.TS2_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS2_INTLK"])
-
-        self.TS3_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["TS3_INTLK"])
-        self.TS3_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["TS3_INTLK"])
-
-        self.PU_PRIME_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["value"]["PU_PRIME_INTLK"])
-        self.PU_PRIME_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PU_PRIME_INTLK"])
 
         # intlck window a indicators
         # INTLCK indicator

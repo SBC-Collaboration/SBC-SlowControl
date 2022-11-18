@@ -1089,14 +1089,68 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PT4325.Low_Read.SetUnit(" bar")
         self.PT4325.High_Read.SetUnit(" bar")
 
+        self.PT6302 = AlarmStatusWidget(self.PressureTab)
+        self.PT6302.Label.setText("PT6302")
+        self.PT6302.Indicator.SetUnit(" bar")
+        self.PT6302.Low_Read.SetUnit(" bar")
+        self.PT6302.High_Read.SetUnit(" bar")
+
+        self.PT5304 = AlarmStatusWidget(self.PressureTab)
+        self.PT5304.Label.setText("PT5304")
+        self.PT5304.Indicator.SetUnit(" bar")
+        self.PT5304.Low_Read.SetUnit(" bar")
+        self.PT5304.High_Read.SetUnit(" bar")
 
         #left variable part
         self.LT3335 = AlarmStatusWidget(self.LEFTVariableTab)
         self.LT3335.Label.setText("LT3335")
         self.LT3335.Indicator.SetUnit(" in")
-
         self.LT3335.Low_Read.SetUnit(" in")
         self.LT3335.High_Read.SetUnit(" in")
+
+        # 'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792, "CYL3334_FCALC": 12832, "SERVO3321_IN_REAL": 12830, "TS1_MASS": 16288, "TS2_MASS": 16290, "TS3_MASS": 16292
+
+        self.BFM4313 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.BFM4313.Label.setText("BFM4313")
+        self.BFM4313.Indicator.SetUnit("")
+        self.BFM4313.Low_Read.SetUnit("")
+        self.BFM4313.High_Read.SetUnit("")
+
+        self.MFC1316_IN = AlarmStatusWidget(self.LEFTVariableTab)
+        self.MFC1316_IN.Label.setText("MFC1316_IN")
+        self.MFC1316_IN.Indicator.SetUnit("")
+        self.MFC1316_IN.Low_Read.SetUnit("")
+        self.MFC1316_IN.High_Read.SetUnit("")
+
+        self.CYL3334_FCALC = AlarmStatusWidget(self.LEFTVariableTab)
+        self.CYL3334_FCALC.Label.setText("CYL3334_FCALC")
+        self.CYL3334_FCALC.Indicator.SetUnit(" lbs")
+        self.CYL3334_FCALC.Low_Read.SetUnit(" lbs")
+        self.CYL3334_FCALC.High_Read.SetUnit(" lbs")
+
+        self.SERVO3321_IN_REAL = AlarmStatusWidget(self.LEFTVariableTab)
+        self.SERVO3321_IN_REAL.Label.setText("SERVO3321_IN_REAL")
+        self.SERVO3321_IN_REAL.Indicator.SetUnit(" ")
+        self.SERVO3321_IN_REAL.Low_Read.SetUnit(" ")
+        self.SERVO3321_IN_REAL.High_Read.SetUnit(" ")
+
+        self.TS1_MASS = AlarmStatusWidget(self.LEFTVariableTab)
+        self.TS1_MASS.Label.setText("TS1_MASS")
+        self.TS1_MASS.Indicator.SetUnit(" ")
+        self.TS1_MASS.Low_Read.SetUnit(" ")
+        self.TS1_MASS.High_Read.SetUnit(" ")
+
+        self.TS2_MASS = AlarmStatusWidget(self.LEFTVariableTab)
+        self.TS2_MASS.Label.setText("TS2_MASS")
+        self.TS2_MASS.Indicator.SetUnit(" ")
+        self.TS2_MASS.Low_Read.SetUnit(" ")
+        self.TS2_MASS.High_Read.SetUnit(" ")
+
+        self.TS3_MASS = AlarmStatusWidget(self.LEFTVariableTab)
+        self.TS3_MASS.Label.setText("TS3_MASS")
+        self.TS3_MASS.Indicator.SetUnit(" ")
+        self.TS3_MASS.Low_Read.SetUnit(" ")
+        self.TS3_MASS.High_Read.SetUnit(" ")
 
         # make a directory for the alarm instrument and assign instrument to certain position
         #IF you change the dimenstion of the following matrixes, don't forget to change TempMatrix in the Reassign function
@@ -1126,7 +1180,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT2316, 2: self.PT2321, 3: self.PT2330, 4: self.PT2335},
                            1: {0: self.PT3308, 1: self.PT3309, 2: self.PT3310, 3: self.PT3311, 4: self.PT3314},
                            2: {0: self.PT3320, 1: self.PT3332, 2: self.PT3333, 3: self.PT4306, 4: self.PT4315},
-                           3: {0: self.PT4319, 1: self.PT4322, 2: self.PT4325}}
+                           3: {0: self.PT4319, 1: self.PT4322, 2: self.PT4325, 3: self.PT6302, 4: self.PT5304}}
 
         self.AlarmRTDLEFTdir = {0: {0: self.TT4330, 1: self.TT6220, 2: self.TT6213, 3: self.TT6401, 4: self.TT6203},
                                 1: {0: self.TT6404, 1: self.TT6207, 2: self.TT6405, 3: self.TT6211, 4: self.TT6406},
@@ -1135,7 +1189,8 @@ class AlarmWin(QtWidgets.QMainWindow):
                                 4: {0: self.TT6222, 1: self.TT6407, 2: self.TT6415, 3: self.TT6416, 4: self.TT6411},
                                 5: {0: self.TT6413, 1: self.TT6414}}
 
-        self.AlarmLEFTdir = {0:{0: self.LT3335}}
+        self.AlarmLEFTdir = {0:{0: self.BFM4313, 1: self.LT3335, 2: self.MFC1316_IN, 3: self.CYL3334_FCALC, 4: self.SERVO3321_IN_REAL},
+                             1:{0: self.TS1_MASS, 1: self.TS2_MASS, 2: self.TS3_MASS}}
 
         # self.AlarmRTD1dir = {0: {0: "self.TT2111", 1: "self.TT2112", 2: "self.TT2113", 3: "self.TT2114", 4: "self.TT2115"},
         #                      1: {0: "self.TT2116", 1: "self.TT2117", 2: "self.TT2118", 3: "self.TT2119", 4: "self.TT2120"}}
@@ -1704,9 +1759,9 @@ class AlarmWin(QtWidgets.QMainWindow):
         TempRefPTdir = self.AlarmPTdir
 
         TempPTdir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
-                     1: {0: None, 1: None, 2: None, 3: None, 4: None},
-                     2: {0: None, 1: None, 2: None, 3: None, 4: None},
-                     3: {0: None, 1: None, 2: None}}
+                           1: {0: None, 1: None, 2: None, 3: None, 4: None},
+                           2: {0: None, 1: None, 2: None, 3: None, 4: None},
+                           3: {0: None, 1: None, 2: None, 3: None, 4: None}}
         # l_RTD1_max is max number of column
 
         l_PT = 0
@@ -1786,7 +1841,8 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         TempRefLEFTdir = self.AlarmLEFTdir
 
-        TempLEFTdir = {0: {0: None}}
+        TempLEFTdir = {0:{0: None, 1: None, 2: None, 3: None, 4: None},
+                       1:{0: None, 1: None, 2: None}}
         # l_RTD1_max is max number of column
 
         l_LEFT = 0
@@ -2952,7 +3008,7 @@ class AlarmButton(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("AlarmButton")
-        self.setGeometry(QtCore.QRect(5*R, 5*R, 70*R, 70*R))
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 70*R))
         self.setMinimumSize(70*R, 70*R)
         self.setSizePolicy(sizePolicy)
 
@@ -2966,14 +3022,14 @@ class AlarmButton(QtWidgets.QWidget):
             self.Path = os.getcwd()
         self.ImagePath = os.path.join(self.Path, "images")
         self.pixmap = QtGui.QPixmap(os.path.join(self.ImagePath, "alarm_button.png"))
-        self.pixmap = self.pixmap.scaledToHeight(60 * R)
+        self.pixmap = self.pixmap.scaledToHeight(70 * R)
 
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
         # self.Button.setText("Button")
-        self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 70*R, 70*R))
+        self.Button.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 70*R))
         self.Button.setStyleSheet(
-            "QWidget{" + LABEL_STYLE + "} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} "
+            "QPushButton{" + LABEL_STYLE + BORDER_STYLE + BORDER_RADIUS+"} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} "
                                        "QWidget[Alarm = false]{ background-color: rgb(204,204,204);}")
         self.Button.setIcon(self.pixmap)
 
@@ -3027,7 +3083,7 @@ class INTLCKButton(QtWidgets.QWidget):
         self.Signals = ChangeValueSignal()
 
         self.setObjectName("INTLCKButton")
-        self.setGeometry(QtCore.QRect(5*R, 5*R, 70*R, 70*R))
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 70*R))
         self.setMinimumSize(70*R, 70*R)
         self.setSizePolicy(sizePolicy)
 
@@ -3040,15 +3096,15 @@ class INTLCKButton(QtWidgets.QWidget):
             self.Path = os.getcwd()
         self.ImagePath = os.path.join(self.Path, "images")
         self.pixmap = QtGui.QPixmap(os.path.join(self.ImagePath, "lock_button.png"))
-        self.pixmap = self.pixmap.scaledToHeight(60 * R)
+        self.pixmap = self.pixmap.scaledToHeight(70 * R)
 
 
 
         self.Button = QtWidgets.QPushButton(self)
         self.Button.setObjectName("Button")
-        self.Button.setGeometry(QtCore.QRect(5*R, 5*R, 70*R, 70*R))
+        self.Button.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 70*R))
         self.Button.setStyleSheet(
-            "QWidget{" + LABEL_STYLE + "} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} "
+            "QWidget{" + LABEL_STYLE +  BORDER_STYLE + BORDER_RADIUS+"} QWidget[Alarm = true]{ background-color: rgb(255,132,27);} "
                                        "QWidget[Alarm = false]{ background-color: rgb(204,204,204);}")
         self.Button.setIcon(self.pixmap)
 
@@ -6755,8 +6811,94 @@ class Valve_image(QtWidgets.QWidget):
 
 
 
+class Pump_image(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        if '__file__' in globals():
+            self.Path = os.path.dirname(os.path.realpath(__file__))
+        else:
+            self.Path = os.getcwd()
+        self.ImagePath = os.path.join(self.Path, "images")
+        self.setObjectName("Pump_image")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 70 * R))
+        self.setStyleSheet("QWidget { background: transparent; }")
 
 
+
+        self.setMinimumSize(140 * R, 140 * R)
+        self.setSizePolicy(sizePolicy)
+        self.objectname = "Pump_image"
+
+
+        self.label = QtWidgets.QLabel(self)
+        self.label.setStyleSheet("QLabel { background: transparent; }")
+        self.label.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        # Green vertical
+        self.pixmap_pump_G = QtGui.QPixmap(os.path.join(self.ImagePath, "Pump_green.png"))
+        self.pixmap_pump_G =  self.pixmap_pump_G.scaledToHeight(60*R)
+
+        # Red vertical
+        self.pixmap_pump_R = QtGui.QPixmap(os.path.join(self.ImagePath, "Pump_red.png"))
+        self.pixmap_pump_R = self.pixmap_pump_R.scaledToHeight(60 * R)
+        # self.icon_RV = QtGui.QIcon(self.pixmap_valve_RV)
+
+        self.Turnon()
+        # self.label.setIconSize(QtCore.QSize(60 * R, 60 * R))
+        # self.Turnoff(mode=mode)
+
+
+    def Turnon(self):
+            self.label.setPixmap(self.pixmap_pump_G)
+
+    def Turnoff(self):
+            self.label.setPixmap(self.pixmap_pump_R)
+
+
+
+
+class SERVO_image(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        if '__file__' in globals():
+            self.Path = os.path.dirname(os.path.realpath(__file__))
+        else:
+            self.Path = os.getcwd()
+        self.ImagePath = os.path.join(self.Path, "images")
+        self.setObjectName("SERVO_image")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 70 * R))
+        self.setStyleSheet("QWidget { background: transparent; }")
+
+        self.setMinimumSize(140 * R, 140 * R)
+        self.setSizePolicy(sizePolicy)
+        self.objectname = "SERVO_image"
+
+
+        self.label = QtWidgets.QLabel(self)
+        self.label.setStyleSheet("QLabel { background: transparent; }")
+        self.label.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        # Green vertical
+        self.pixmap_pump_G = QtGui.QPixmap(os.path.join(self.ImagePath, "Pump_green.png"))
+        self.pixmap_pump_G =  self.pixmap_pump_G.scaledToHeight(60*R)
+
+        # Red vertical
+        self.pixmap_pump_R = QtGui.QPixmap(os.path.join(self.ImagePath, "Pump_red.png"))
+        self.pixmap_pump_R = self.pixmap_pump_R.scaledToHeight(60 * R)
+        # self.icon_RV = QtGui.QIcon(self.pixmap_valve_RV)
+
+        self.Turnon()
+        # self.label.setIconSize(QtCore.QSize(60 * R, 60 * R))
+        # self.Turnoff(mode=mode)
+
+
+    def Turnon(self):
+            self.label.setPixmap(self.pixmap_pump_G)
+
+    def Turnoff(self):
+            self.label.setPixmap(self.pixmap_pump_R)
 
 
 class ChangeValueSignal(QtCore.QObject):
