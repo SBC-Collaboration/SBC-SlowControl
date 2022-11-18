@@ -6863,6 +6863,11 @@ class MainWindow(QtWidgets.QMainWindow):
         # else:
         #     self.PUMP3305.collapse.Set.ButtonRClicked()
 
+        if received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"]:
+            self.PUMP3305_icon.Turnon()
+        else:
+            self.PUMP3305_icon.Turnoff()
+
 
 
 #      FLAGs
