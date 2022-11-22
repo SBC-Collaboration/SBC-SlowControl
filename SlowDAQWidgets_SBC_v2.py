@@ -4464,9 +4464,8 @@ class Loadfile(QtWidgets.QWidget):
 
         try:
             print("Read " + str(self.FilePath.text()))
-            file = open(self.FilePath.text(), 'wb')
 
-            with file as f:
+            with open(str(self.FilePath.text()), 'rb') as f:
                 self.loaded_dict = pickle.load(f)
                 text = str(self.loaded_dict)
                 self.FileContent.setText(text)
@@ -4524,7 +4523,7 @@ class CustomSave(QtWidgets.QWidget):
     def SaveConfig(self,config):
         print("config",config)
         try:
-            with open(self.FilePath.text(), 'wb') as f:
+            with open(str(self.FilePath.text()), 'wb') as f:
                 pickle.dump(config, f)
 
             print("Save Successfully!")
