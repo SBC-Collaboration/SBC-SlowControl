@@ -4457,7 +4457,7 @@ class Loadfile(QtWidgets.QWidget):
     def LoadPath(self):
         # set default path to read
         # based on linux
-        defaultpath = "/home/hep/.config/SBC/SlowControl.ini"
+        defaultpath = "/home/hep/.config/SBC/SlowControl.pkl"
         filterset = "*.pkl;:*.*"
         name = QtWidgets.QFileDialog.getOpenFileName(self, 'Open File', dir=defaultpath, filter=filterset)
         self.FilePath.setText(name[0])
@@ -4513,7 +4513,7 @@ class CustomSave(QtWidgets.QWidget):
     def LoadPath(self):
         # set default path to save
         # based on linux
-        defaultpath = "/home/hep/.config/SBC"
+        defaultpath = "/home/hep/.config/SBC/"
         filterset = "*.pkl;:*.*"
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File', dir=defaultpath, filter=filterset)
         self.FilePath.setText(name[0])
