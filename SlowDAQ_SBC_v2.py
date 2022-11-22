@@ -1186,6 +1186,14 @@ class MainWindow(QtWidgets.QMainWindow):
     # signal connections to write settings to PLC codes
 
     def signal_connection(self):
+
+        # Data signal saving and writing
+        self.SaveSettings.SaveFileButton.clicked.connect(lambda : self.SaveSettings.SaveConfig(self.UpClient.receive_dic))
+        self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.updatedisplay(self.ReadSettings.loaded_dict))
+
+
+
+
         # self.PV1344.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1344.Label.text()))
         # self.PV1344.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1344.Label.text()))
         # self.PV4307.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4307.Label.text()))

@@ -8,7 +8,7 @@ v1.1 Alarm on state widget 04/03/20 ML
 """
 
 from PySide2 import QtCore, QtWidgets, QtGui
-import time, platform
+import time, platform, pickle
 import os
 
 # FONT = "font-family: \"Calibri\"; font-size: 14px;"
@@ -4420,6 +4420,8 @@ class Loadfile(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
+        self.loaded_dict ={}
+
         self.setObjectName("LoadFile")
         self.setGeometry(QtCore.QRect(0*R, 0*R, 600*R, 1000*R))
         self.setMinimumSize(600*R, 1000*R)
@@ -4455,19 +4457,21 @@ class Loadfile(QtWidgets.QWidget):
     def LoadPath(self):
         # set default path to read
         defaultpath = "$HOME/.config//SBC/SlowControl.ini"
-        filterset = "*.ini;;*.py;;*.*"
+        filterset = "*.pkl;:*.*"
         name = QtWidgets.QFileDialog.getOpenFileName(self, 'Open File', dir=defaultpath, filter=filterset)
         self.FilePath.setText(name[0])
 
         try:
             print("Read " + str(self.FilePath.text()))
-            file = open(self.FilePath.text(), 'r')
+            file = open(self.FilePath.text(), 'wb')
 
-            with file:
-                text = file.read()
+            with file as f:
+                self.loaded_dict = pickle.load(f)
+                text = str(self.loaded_dict)
                 self.FileContent.setText(text)
         except:
             print("Error! Please type in a valid path")
+
 
 
 class CustomSave(QtWidgets.QWidget):
@@ -4508,13 +4512,25 @@ class CustomSave(QtWidgets.QWidget):
     def LoadPath(self):
         # set default path to save
         defaultpath = "$HOME/.config//SBC/"
-        filterset = "*.ini"
+        filterset = "*.pkl;:*.*"
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File', dir=defaultpath, filter=filterset)
         self.FilePath.setText(name[0])
         head_tail = os.path.split(name[0])
         # split path to a local path and the project name for future reference
         self.Head = head_tail[0]
         self.Tail = head_tail[1]
+    def SaveConfig(self,config):
+        # print(self.FilePath.text())
+        try:
+            with open(config, 'wb') as f:
+                pickle.dump(self.FilePath.text(), f)
+
+            print("Save Successfully!")
+        except:
+            print("Error in writing configuration files. Please check it!")
+
+
+
 
 
 class AlarmStatusWidget(QtWidgets.QWidget):
