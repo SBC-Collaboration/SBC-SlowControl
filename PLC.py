@@ -1239,6 +1239,8 @@ class UpdateDataBase(QtCore.QObject):
 
         self.base_period = 1
 
+        self.COUPP_ERROR = False
+
         self.para_alarm = 0
         self.rate_alarm = 10
         self.para_TT = 0
@@ -1447,10 +1449,12 @@ class UpdateDataBase(QtCore.QObject):
                     self.Running_pointer = 0
                     # print(0)
                     # print(self.para_alarm)
-                    # if self.para_alarm >= self.rate_alarm:
-                    #
-                    #     self.alarm_db.ssh_write()
-                    #     self.para_alarm=0
+                    if self.para_alarm >= self.rate_alarm:
+                        self.COUPP_ERROR = True
+                        self.alarm_db.ssh_write()
+                        # if the ssh write fails, the ERROR will be True
+                        self.COUPP_ERROR =False
+                        self.para_alarm=0
 
                     if self.para_TT >= self.rate_TT:
                         for key in self.TT_FP_dic:
@@ -1834,7 +1838,11 @@ class UpdateDataBase(QtCore.QObject):
             except Exception as e:
                 print(e)
                 # self.DB_ERROR_SIG.emit(e)
+                if self.COUPP_ERROR == True:
+                    self.DB_ERROR_SIG.emit("Failed to update PICO watchdog Database.")
+                    self.COUPP_ERROR = False
                 self.DB_ERROR_SIG.emit("There is some ERROR in writing slowcontrol database. Please check it.")
+
                 time.sleep(self.longsleep)
                 continue
 
