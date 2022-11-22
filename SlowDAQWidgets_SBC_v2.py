@@ -4522,7 +4522,7 @@ class CustomSave(QtWidgets.QWidget):
         self.Head = head_tail[0]
         self.Tail = head_tail[1]
     def SaveConfig(self,config):
-        # print(self.FilePath.text())
+        print("config",config)
         try:
             with open(self.FilePath.text(), 'wb') as f:
                 pickle.dump(config, f)
