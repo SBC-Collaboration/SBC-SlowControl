@@ -4511,6 +4511,7 @@ class CustomSave(QtWidgets.QWidget):
 
     def LoadPath(self):
         # set default path to save
+        print(os.getcwd())
         defaultpath = "$HOME/.config//SBC/"
         filterset = "*.pkl;:*.*"
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File', dir=defaultpath, filter=filterset)
