@@ -4524,8 +4524,8 @@ class CustomSave(QtWidgets.QWidget):
     def SaveConfig(self,config):
         # print(self.FilePath.text())
         try:
-            with open(config, 'wb') as f:
-                pickle.dump(self.FilePath.text(), f)
+            with open(self.FilePath.text(), 'wb') as f:
+                pickle.dump(config, f)
 
             print("Save Successfully!")
         except:
