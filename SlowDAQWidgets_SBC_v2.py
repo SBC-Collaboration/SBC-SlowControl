@@ -4458,7 +4458,7 @@ class Loadfile(QtWidgets.QWidget):
         # set default path to read
         # based on linux
         defaultpath = "/home/hep/.config/sbcconfig/"
-        filterset = "*.pkl;:*.*"
+        filterset = "*.pkl;;*.*"
         name = QtWidgets.QFileDialog.getOpenFileName(self, 'Open File', dir=defaultpath, filter=filterset)
         self.FilePath.setText(name[0])
 
@@ -4514,7 +4514,7 @@ class CustomSave(QtWidgets.QWidget):
         # set default path to save
         # based on linux
         defaultpath = "/home/hep/.config/sbcconfig/"
-        filterset = "*.pkl;:*.*"
+        filterset = "*.pkl;;*.*"
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File', dir=defaultpath, filter=filterset)
         self.FilePath.setText(name[0])
         head_tail = os.path.split(name[0])
