@@ -120,6 +120,7 @@ class PLC(QtCore.QObject):
         self.PT_Alarm = copy.copy(sec.PT_ALARM)
         self.LEFT_REAL_Alarm = copy.copy(sec.LEFT_REAL_ALARM)
         self.MainAlarm = copy.copy(sec.MAINALARM)
+        self.MAN_SET = copy.copy(sec.MAN_SET)
         self.nTT_BO = copy.copy(sec.NTT_BO)
         self.nTT_FP = copy.copy(sec.NTT_FP)
         self.nPT = copy.copy(sec.NPT)
@@ -309,6 +310,7 @@ class PLC(QtCore.QObject):
                               "PT_Alarm":self.PT_Alarm,
                               "LEFT_REAL_Alarm":self.LEFT_REAL_Alarm,
                               "MainAlarm":self.MainAlarm,
+                              "MAN_SET":self.MAN_SET,
                               "nTT_BO":self.nTT_BO,
                               "nTT_FP":self.nTT_FP,
                               "nPT":self.nPT,
@@ -1312,6 +1314,7 @@ class UpdateDataBase(QtCore.QObject):
         self.PT_Alarm = copy.copy(sec.PT_ALARM)
         self.LEFT_REAL_Alarm = copy.copy(sec.LEFT_REAL_ALARM)
         self.MainAlarm = copy.copy(sec.MAINALARM)
+        self.MAN_SET = copy.copy(sec.MAN_SET)
         self.nTT_BO = copy.copy(sec.NTT_BO)
         self.nTT_FP = copy.copy(sec.NTT_FP)
         self.nPT = copy.copy(sec.NPT)
@@ -1980,6 +1983,7 @@ class UpdateDataBase(QtCore.QObject):
             self.TIME_DIC[key] = dic["TIME_DIC"][key]
 
         self.MainAlarm = dic["MainAlarm"]
+        self.MAN_SET = dic["MAN_SET"]
         print("Database received the data from PLC")
 
     @QtCore.Slot(bool)
@@ -2335,6 +2339,7 @@ class UpdateServer(QtCore.QObject):
         self.LEFT_REAL_Activated_ini = sec.LEFT_REAL_ACTIVATED
         self.LEFT_REAL_Alarm_ini = sec.LEFT_REAL_ALARM
         self.MainAlarm_ini = sec.MAINALARM
+        self.MAN_SET = sec.MAN_SET
         self.Valve_OUT_ini = sec.VALVE_OUT
         self.Valve_MAN_ini = sec.VALVE_MAN
         self.Valve_INTLKD_ini = sec.VALVE_INTLKD
@@ -2461,7 +2466,8 @@ class UpdateServer(QtCore.QObject):
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini},
-                         "MainAlarm": self.MainAlarm_ini}
+                         "MainAlarm": self.MainAlarm_ini,
+                         "MAN_SET": self.MAN_SET}
 
         self.data_package = pickle.dumps(self.data_dic)
 
@@ -2672,239 +2678,280 @@ class UpdateServer(QtCore.QObject):
     def write_data(self):
         message = pickle.loads(self.socket.recv())
         print(message)
-        if message == {}:
-            pass
-        else:
-            for key in message:
-                print(message[key]["type"])
-                print(message[key]["type"] == "valve")
-                if message[key]["type"] == "valve":
-                    print("Valve", datetime_in_1e5micro())
-                    if message[key]["operation"] == "OPEN":
-                        self.PLC.WriteBase2(address=message[key]["address"])
-                    elif message[key]["operation"] == "CLOSE":
-                        self.PLC.WriteBase4(address=message[key]["address"])
-                    else:
-                        pass
-                    # write success signal
-
-                if message[key]["type"] == "switch":
-                    if message[key]["operation"] == "ON":
-                        self.PLC.WriteBase2(address=message[key]["address"])
-                    elif message[key]["operation"] == "OFF":
-                        self.PLC.WriteBase4(address=message[key]["address"])
-                    else:
-                        pass
-                elif message[key]["type"] == "TT":
-                    if message[key]["server"] == "BO":
-                        # Update is to decide whether write new Low/High limit values into bkg code
-                        if message[key]["operation"]["Update"]:
-                            self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
-                            self.PLC.TT_BO_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                            self.PLC.TT_BO_HighLimit[key] = message[key]["operation"]["HighLimit"]
-                        else:
-                            self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
-
-                    elif message[key]["server"] == "FP":
-                        if message[key]["operation"]["Update"]:
-                            self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
-                            self.PLC.TT_FP_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                            self.PLC.TT_FP_HighLimit[key] = message[key]["operation"]["HighLimit"]
-                        else:
-                            self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
-                    else:
-                        pass
-                elif message[key]["type"] == "PT":
-                    if message[key]["server"] == "BO":
-                        if message[key]["operation"]["Update"]:
-                            self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
-                            self.PLC.PT_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                            self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
-                        else:
-                            self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
-                    else:
-                        pass
-                elif message[key]["type"] == "LEFT":
-                    if message[key]["server"] == "BO":
-                        if message[key]["operation"]["Update"]:
-                            self.PLC.LEFT_REAL_Activated[key] = message[key]["operation"]["Act"]
-                            self.PLC.LEFT_REAL_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                            self.PLC.LEFT_REAL_HighLimit[key] = message[key]["operation"]["HighLimit"]
-                        else:
-                            self.PLC.LEFT_REAL_Activated[key] = message[key]["operation"]["Act"]
-                    else:
-                        pass
-                elif message[key]["type"] == "Procedure":
-                    if message[key]["server"] == "BO":
-                        if message[key]["operation"]["Start"]:
+        if not message["MAN_SET"]:
+            if len(message) <= 1:
+                pass
+            else:
+                for key in message:
+                    print(message[key]["type"])
+                    print(message[key]["type"] == "valve")
+                    if message[key]["type"] == "valve":
+                        print("Valve", datetime_in_1e5micro())
+                        if message[key]["operation"] == "OPEN":
+                            self.PLC.WriteBase2(address=message[key]["address"])
+                        elif message[key]["operation"] == "CLOSE":
                             self.PLC.WriteBase4(address=message[key]["address"])
-                        elif message[key]["operation"]["Stop"]:
-                            self.PLC.WriteBase8(address=message[key]["address"])
-                        elif message[key]["operation"]["Abort"]:
-                            self.PLC.WriteBase16(address=message[key]["address"])
                         else:
                             pass
-                    else:
-                        pass
-                elif message[key]["type"] == "heater_power":
-                    if message[key]["operation"] == "EN":
-                        self.PLC.LOOPPID_OUT_ENA(address=message[key]["address"])
-                    elif message[key]["operation"] == "DISEN":
-                        self.PLC.LOOPPID_OUT_DIS(address=message[key]["address"])
-                    else:
-                        pass
+                        # write success signal
 
-                    #
-                    # if message[key]["operation"] == "SETMODE":
-                    #     self.PLC.LOOPPID_SET_MODE(address = message[key]["address"], mode = message[key]["value"])
-                    # else:
-                    #     pass
-                elif message[key]["type"] == "heater_para":
-                    if message[key]["operation"] == "SET0":
-                        # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
-                        self.PLC.LOOPPID_SETPOINT(address=message[key]["address"], setpoint=message[key]["value"]["SETPOINT"], mode=0)
-                        # self.PLC.LOOPPID_HI_LIM(address=message[key]["address"], value=message[key]["value"]["HI_LIM"])
-                        # self.PLC.LOOPPID_LO_LIM(address=message[key]["address"], value=message[key]["value"]["LO_LIM"])
-                        self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
-                                                    value=message[key]["value"]["HI_LIM"])
-                        self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
-                                                    value=message[key]["value"]["LO_LIM"])
-
-                    elif message[key]["operation"] == "SET1":
-                        # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=1)
-                        self.PLC.LOOPPID_SETPOINT(address=message[key]["address"], setpoint=message[key]["value"]["SETPOINT"], mode=1)
-                        self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
-                                                    value=message[key]["value"]["HI_LIM"])
-                        self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
-                                                    value=message[key]["value"]["LO_LIM"])
-                    elif message[key]["operation"] == "SET2":
-                        # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
-                        self.PLC.LOOPPID_SETPOINT(address=message[key]["address"], setpoint=message[key]["value"]["SETPOINT"], mode=2)
-                        self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
-                                                    value=message[key]["value"]["HI_LIM"])
-                        self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
-                                                    value=message[key]["value"]["LO_LIM"])
-                    elif message[key]["operation"] == "SET3":
-                        # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
-                        self.PLC.LOOPPID_SETPOINT(address=message[key]["address"], setpoint=message[key]["value"]["SETPOINT"], mode=3)
-                        self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"], value=message[key]["value"]["HI_LIM"])
-                        self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"], value=message[key]["value"]["LO_LIM"])
-                    else:
-                        pass
-
-                elif message[key]["type"] == "heater_setmode":
-                    if message[key]["operation"] == "SET0":
-                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=0)
-
-                    elif message[key]["operation"] == "SET1":
-                        # print(True)
-                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=1)
-
-                    elif message[key]["operation"] == "SET2":
-                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
-
-                    elif message[key]["operation"] == "SET3":
-                        self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
-
-                    else:
-                        pass
-
-                    # if message[key]["operation"] == "HI_LIM":
-                    #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
-                    # else:
-                    #     pass
-                    #
-                    # if message[key]["operation"] == "LO_LIM":
-                    #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
-
-                elif message[key]["type"] == "LOOP2PT_power":
-                    print("PUMP",datetime_in_1e5micro())
-                    if message[key]["operation"] == "OPEN":
-                        self.PLC.LOOP2PT_OPEN(address=message[key]["address"])
-                    elif message[key]["operation"] == "CLOSE":
-                        self.PLC.LOOP2PT_CLOSE(address=message[key]["address"])
-                    else:
-                        pass
-
-                elif message[key]["type"] == "LOOP2PT_para":
-
-                    if message[key]["operation"] == "SET1":
-                        # self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=1)
-                        self.PLC.LOOP2PT_SETPOINT(address=message[key]["address"], setpoint=message[key]["value"]["SETPOINT"], mode=1)
-
-                    elif message[key]["operation"] == "SET2":
-                        # self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=2)
-                        self.PLC.LOOP2PT_SETPOINT(address=message[key]["address"], setpoint=message[key]["value"]["SETPOINT"], mode=2)
-
-                    elif message[key]["operation"] == "SET3":
-                        # self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=3)
-                        self.PLC.LOOP2PT_SETPOINT(address=message[key]["address"], setpoint=message[key]["value"]["SETPOINT"], mode=3)
-                    else:
-                        pass
-
-                elif message[key]["type"] == "LOOP2PT_setmode":
-                    if message[key]["operation"] == "SET0":
-                        self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=0)
-
-                    elif message[key]["operation"] == "SET1":
-                        self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=1)
-
-                    elif message[key]["operation"] == "SET2":
-                        self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=2)
-
-                    elif message[key]["operation"] == "SET3":
-                        self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=3)
-
-                    else:
-                        pass
-                elif message[key]["type"] == "INTLK_A":
-                    if message[key]["server"] == "BO":
-                        if message[key]["operation"]=="ON":
-                            self.PLC.WriteBase8(address=message[key]["address"])
-                        elif message[key]["operation"]=="OFF":
-                            self.PLC.WriteBase16(address=message[key]["address"])
-                        elif message[key]["operation"]=="RESET":
-                            self.PLC.WriteBase32(address=message[key]["address"])
-                        elif message[key]["operation"]=="update":
-                            self.PLC.Write_BO_2(message[key]["address"]+2,message[key]["value"])
-                        else:
-                            pass
-                elif message[key]["type"] == "INTLK_D":
-                    if message[key]["server"] == "BO":
+                    if message[key]["type"] == "switch":
                         if message[key]["operation"] == "ON":
-                            self.PLC.WriteBase8(address=message[key]["address"])
+                            self.PLC.WriteBase2(address=message[key]["address"])
                         elif message[key]["operation"] == "OFF":
-                            self.PLC.WriteBase16(address=message[key]["address"])
-                        elif message[key]["operation"] == "RESET":
-                            self.PLC.WriteBase32(address=message[key]["address"])
+                            self.PLC.WriteBase4(address=message[key]["address"])
                         else:
                             pass
-                elif message[key]["type"] == "FLAG":
-                    print("time",datetime.datetime.now())
-                    if message[key]["operation"] == "OPEN":
-                        self.PLC.WriteBase2(address=message[key]["address"])
-                    elif message[key]["operation"] == "CLOSE":
-                        self.PLC.WriteBase4(address=message[key]["address"])
+                    elif message[key]["type"] == "TT":
+                        if message[key]["server"] == "BO":
+                            # Update is to decide whether write new Low/High limit values into bkg code
+                            if message[key]["operation"]["Update"]:
+                                self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.TT_BO_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                                self.PLC.TT_BO_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                            else:
+                                self.PLC.TT_BO_Activated[key] = message[key]["operation"]["Act"]
+
+                        elif message[key]["server"] == "FP":
+                            if message[key]["operation"]["Update"]:
+                                self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.TT_FP_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                                self.PLC.TT_FP_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                            else:
+                                self.PLC.TT_FP_Activated[key] = message[key]["operation"]["Act"]
+                        else:
+                            pass
+                    elif message[key]["type"] == "PT":
+                        if message[key]["server"] == "BO":
+                            if message[key]["operation"]["Update"]:
+                                self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.PT_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                                self.PLC.PT_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                            else:
+                                self.PLC.PT_Activated[key] = message[key]["operation"]["Act"]
+                        else:
+                            pass
+                    elif message[key]["type"] == "LEFT":
+                        if message[key]["server"] == "BO":
+                            if message[key]["operation"]["Update"]:
+                                self.PLC.LEFT_REAL_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.LEFT_REAL_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                                self.PLC.LEFT_REAL_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                            else:
+                                self.PLC.LEFT_REAL_Activated[key] = message[key]["operation"]["Act"]
+                        else:
+                            pass
+                    elif message[key]["type"] == "Procedure":
+                        if message[key]["server"] == "BO":
+                            if message[key]["operation"]["Start"]:
+                                self.PLC.WriteBase4(address=message[key]["address"])
+                            elif message[key]["operation"]["Stop"]:
+                                self.PLC.WriteBase8(address=message[key]["address"])
+                            elif message[key]["operation"]["Abort"]:
+                                self.PLC.WriteBase16(address=message[key]["address"])
+                            else:
+                                pass
+                        else:
+                            pass
+                    elif message[key]["type"] == "heater_power":
+                        if message[key]["operation"] == "EN":
+                            self.PLC.LOOPPID_OUT_ENA(address=message[key]["address"])
+                        elif message[key]["operation"] == "DISEN":
+                            self.PLC.LOOPPID_OUT_DIS(address=message[key]["address"])
+                        else:
+                            pass
+
+                        #
+                        # if message[key]["operation"] == "SETMODE":
+                        #     self.PLC.LOOPPID_SET_MODE(address = message[key]["address"], mode = message[key]["value"])
+                        # else:
+                        #     pass
+                    elif message[key]["type"] == "heater_para":
+                        if message[key]["operation"] == "SET0":
+                            # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode= 0)
+                            self.PLC.LOOPPID_SETPOINT(address=message[key]["address"],
+                                                      setpoint=message[key]["value"]["SETPOINT"], mode=0)
+                            # self.PLC.LOOPPID_HI_LIM(address=message[key]["address"], value=message[key]["value"]["HI_LIM"])
+                            # self.PLC.LOOPPID_LO_LIM(address=message[key]["address"], value=message[key]["value"]["LO_LIM"])
+                            self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
+                                                        value=message[key]["value"]["HI_LIM"])
+                            self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
+                                                        value=message[key]["value"]["LO_LIM"])
+
+                        elif message[key]["operation"] == "SET1":
+                            # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=1)
+                            self.PLC.LOOPPID_SETPOINT(address=message[key]["address"],
+                                                      setpoint=message[key]["value"]["SETPOINT"], mode=1)
+                            self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
+                                                        value=message[key]["value"]["HI_LIM"])
+                            self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
+                                                        value=message[key]["value"]["LO_LIM"])
+                        elif message[key]["operation"] == "SET2":
+                            # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
+                            self.PLC.LOOPPID_SETPOINT(address=message[key]["address"],
+                                                      setpoint=message[key]["value"]["SETPOINT"], mode=2)
+                            self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
+                                                        value=message[key]["value"]["HI_LIM"])
+                            self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
+                                                        value=message[key]["value"]["LO_LIM"])
+                        elif message[key]["operation"] == "SET3":
+                            # self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
+                            self.PLC.LOOPPID_SETPOINT(address=message[key]["address"],
+                                                      setpoint=message[key]["value"]["SETPOINT"], mode=3)
+                            self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
+                                                        value=message[key]["value"]["HI_LIM"])
+                            self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
+                                                        value=message[key]["value"]["LO_LIM"])
+                        else:
+                            pass
+
+                    elif message[key]["type"] == "heater_setmode":
+                        if message[key]["operation"] == "SET0":
+                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=0)
+
+                        elif message[key]["operation"] == "SET1":
+                            # print(True)
+                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=1)
+
+                        elif message[key]["operation"] == "SET2":
+                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=2)
+
+                        elif message[key]["operation"] == "SET3":
+                            self.PLC.LOOPPID_SET_MODE(address=message[key]["address"], mode=3)
+
+                        else:
+                            pass
+
+                        # if message[key]["operation"] == "HI_LIM":
+                        #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
+                        # else:
+                        #     pass
+                        #
+                        # if message[key]["operation"] == "LO_LIM":
+                        #     self.PLC.LOOPPID_HI_LIM(address= message[key]["address"], value = message[key]["value"])
+
+                    elif message[key]["type"] == "LOOP2PT_power":
+                        print("PUMP", datetime_in_1e5micro())
+                        if message[key]["operation"] == "OPEN":
+                            self.PLC.LOOP2PT_OPEN(address=message[key]["address"])
+                        elif message[key]["operation"] == "CLOSE":
+                            self.PLC.LOOP2PT_CLOSE(address=message[key]["address"])
+                        else:
+                            pass
+
+                    elif message[key]["type"] == "LOOP2PT_para":
+
+                        if message[key]["operation"] == "SET1":
+                            # self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=1)
+                            self.PLC.LOOP2PT_SETPOINT(address=message[key]["address"],
+                                                      setpoint=message[key]["value"]["SETPOINT"], mode=1)
+
+                        elif message[key]["operation"] == "SET2":
+                            # self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=2)
+                            self.PLC.LOOP2PT_SETPOINT(address=message[key]["address"],
+                                                      setpoint=message[key]["value"]["SETPOINT"], mode=2)
+
+                        elif message[key]["operation"] == "SET3":
+                            # self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=3)
+                            self.PLC.LOOP2PT_SETPOINT(address=message[key]["address"],
+                                                      setpoint=message[key]["value"]["SETPOINT"], mode=3)
+                        else:
+                            pass
+
+                    elif message[key]["type"] == "LOOP2PT_setmode":
+                        if message[key]["operation"] == "SET0":
+                            self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=0)
+
+                        elif message[key]["operation"] == "SET1":
+                            self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=1)
+
+                        elif message[key]["operation"] == "SET2":
+                            self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=2)
+
+                        elif message[key]["operation"] == "SET3":
+                            self.PLC.LOOP2PT_SET_MODE(address=message[key]["address"], mode=3)
+
+                        else:
+                            pass
+                    elif message[key]["type"] == "INTLK_A":
+                        if message[key]["server"] == "BO":
+                            if message[key]["operation"] == "ON":
+                                self.PLC.WriteBase8(address=message[key]["address"])
+                            elif message[key]["operation"] == "OFF":
+                                self.PLC.WriteBase16(address=message[key]["address"])
+                            elif message[key]["operation"] == "RESET":
+                                self.PLC.WriteBase32(address=message[key]["address"])
+                            elif message[key]["operation"] == "update":
+                                self.PLC.Write_BO_2(message[key]["address"] + 2, message[key]["value"])
+                            else:
+                                pass
+                    elif message[key]["type"] == "INTLK_D":
+                        if message[key]["server"] == "BO":
+                            if message[key]["operation"] == "ON":
+                                self.PLC.WriteBase8(address=message[key]["address"])
+                            elif message[key]["operation"] == "OFF":
+                                self.PLC.WriteBase16(address=message[key]["address"])
+                            elif message[key]["operation"] == "RESET":
+                                self.PLC.WriteBase32(address=message[key]["address"])
+                            else:
+                                pass
+                    elif message[key]["type"] == "FLAG":
+                        print("time", datetime.datetime.now())
+                        if message[key]["operation"] == "OPEN":
+                            self.PLC.WriteBase2(address=message[key]["address"])
+                        elif message[key]["operation"] == "CLOSE":
+                            self.PLC.WriteBase4(address=message[key]["address"])
+                        else:
+                            pass
+
                     else:
                         pass
 
-                else:
-                    pass
+            # if message == b'this is a command':
+            #     self.PLC.WriteBase2()
+            #     self.PLC.Read_BO_1()
+            #     print("I will set valve")
+            # elif message == b'no command':
+            #     self.PLC.WriteBase4()
+            #     self.PLC.Read_BO_1()
+            #     print("I will stay here")
+            # elif message == b'this an anti_conmmand':
+            #
+            #     print("reset the valve")
+            # else:
+            #     print("I didn't see any command")
+            #     pass
+        elif message["MAN_SET"]:
+            # manuall set the configuration
 
-        # if message == b'this is a command':
-        #     self.PLC.WriteBase2()
-        #     self.PLC.Read_BO_1()
-        #     print("I will set valve")
-        # elif message == b'no command':
-        #     self.PLC.WriteBase4()
-        #     self.PLC.Read_BO_1()
-        #     print("I will stay here")
-        # elif message == b'this an anti_conmmand':
-        #
-        #     print("reset the valve")
-        # else:
-        #     print("I didn't see any command")
-        #     pass
+            for key in message["data"]["TT"]["FP"]["high"]:
+                self.PLC.TT_FP_HighLimit[key] = message["data"]["TT"]["FP"]["high"][key]
+
+            for key in message["data"]["TT"]["BO"]["high"]:
+                self.PLC.TT_BO_HighLimit[key] = message["data"]["TT"]["BO"]["high"][key]
+
+            for key in message["data"]["PT"]["high"]:
+                self.PLC.PT_HighLimit[key] = message["data"]["PT"]["high"][key]
+
+            for key in message["data"]["LEFT_REAL"]["high"]:
+                self.PLC.LEFT_REAL_HighLimit[key] = message["data"]["LEFT_REAL"]["high"][key]
+
+            for key in message["data"]["TT"]["FP"]["low"]:
+                self.PLC.TT_FP_LowLimit[key] = message["data"]["TT"]["FP"]["low"][key]
+
+            for key in message["data"]["TT"]["BO"]["low"]:
+                self.PLC.TT_BO_LowLimit[key] = message["data"]["TT"]["BO"]["low"][key]
+
+            for key in message["data"]["PT"]["low"]:
+                self.PLC.PT_LowLimit[key] = message["data"]["PT"]["low"][key]
+
+            for key in message["data"]["LEFT_REAL"]["low"]:
+                self.PLC.LEFT_REAL_LowLimit[key] = message["data"]["LEFT_REAL"]["low"][key]
+
+            self.data_dic["MainAlarm"] = self.PLC.MainAlarm
+            print(1)
+        else:
+            print("Failed to load data from Client. MAN_SET is not either True or False. Please check the code")
 
 
 class Update(QtCore.QObject):

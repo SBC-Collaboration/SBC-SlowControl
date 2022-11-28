@@ -1189,7 +1189,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Data signal saving and writing
         self.SaveSettings.SaveFileButton.clicked.connect(lambda : self.SaveSettings.SaveConfig(self.UpClient.receive_dic))
-        self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.updatedisplay(self.ReadSettings.loaded_dict))
+        # self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.updatedisplay(self.ReadSettings.loaded_dict))
+        self.ReadSettings.LoadFileButton.clicked.connect(lambda: self.UpClient.commands(self.ReadSettings.loaded_dict, manset= True))
 
 
 
@@ -3875,6 +3876,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 print("No True Value")
                 return "False"
+
 
     @QtCore.Slot(object)
     def updatedisplay(self, received_dic_c):
@@ -10127,6 +10129,7 @@ class UpdateClient(QtCore.QObject):
         self.period = 1
         self.socket.setsockopt(zmq.LINGER, 0)
 
+
         print("client is connecting to the ZMQ server")
 
         self.TT_FP_dic_ini = copy.copy(sec.TT_FP_DIC)
@@ -10213,6 +10216,7 @@ class UpdateClient(QtCore.QObject):
         self.FLAG_DIC_ini = copy.copy(sec.FLAG_DIC)
         self.FLAG_INTLKD_ini = copy.copy(sec.FLAG_INTLKD)
         self.FLAG_Busy_ini = copy.copy(sec.FLAG_BUSY)
+        self.MAN_SET = copy.copy(sec.MAN_SET)
 
         self.receive_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
@@ -10276,7 +10280,8 @@ class UpdateClient(QtCore.QObject):
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini},
-                         "MainAlarm": self.MainAlarm_ini}
+                         "MainAlarm": self.MainAlarm_ini,
+                         "MAN_SET":self.MAN_SET}
         self.commands_package= pickle.dumps({})
 
     @QtCore.Slot()
@@ -10325,18 +10330,41 @@ class UpdateClient(QtCore.QObject):
         self.client_data_transport.emit()
 
     @QtCore.Slot(object)
-    def commands(self, MWcommands):
-        print("Commands are here",datetime.datetime.now())
-        print("commands", MWcommands)
-        self.commands_package= pickle.dumps(MWcommands)
-        print("commands len",len(MWcommands))
-        if len(MWcommands) != 0:
-            self.socket.send(self.commands_package)
-            self.client_clear_commands.emit()
+    def commands(self, MWcommands, manset= False):
+        self.MAN_SET = manset
+        # if normal update cycle
+        if not self.MAN_SET:
+            # claim that whether MAN_SET is True or false
+            MWcommands["MAN_SET"]= self.MAN_SET
+            print("Commands are here", datetime.datetime.now())
+            print("commands", MWcommands)
+            self.commands_package = pickle.dumps(MWcommands)
+            print("commands len", len(MWcommands))
+            if len(MWcommands) != 0:
+                self.socket.send(self.commands_package)
+                self.client_clear_commands.emit()
+            else:
+                self.socket.send(pickle.dumps({}))
+            self.readcommand = True
+            print("finished sending commands")
+        # if load config files from pkl file
         else:
-            self.socket.send(pickle.dumps({}))
-        self.readcommand = True
-        print("finished sending commands")
+            print("MAN Commands are here", datetime.datetime.now())
+            print("MAN commands", MWcommands)
+            self.commands_package = pickle.dumps(MWcommands)
+            if len(MWcommands) != 0:
+                self.socket.send(self.commands_package)
+                self.client_clear_commands.emit()
+            else:
+                self.socket.send(pickle.dumps({}))
+            self.readcommand = True
+            # return back to auto loop update data
+            self.MAN_SET = False
+
+            print("finished sending commands")
+
+
+
 
 
 # Code entry point

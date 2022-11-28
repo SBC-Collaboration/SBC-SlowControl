@@ -4442,12 +4442,14 @@ class Loadfile(QtWidgets.QWidget):
         self.LoadPathButton = QtWidgets.QPushButton(self)
         self.LoadPathButton.clicked.connect(self.LoadPath)
         self.LoadPathButton.setText("LoadPath")
+        self.LoadPathButton.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
         self.LoadPathButton.setFixedSize(100*R, 50*R)
         self.HL.addWidget(self.LoadPathButton)
 
         self.LoadFileButton = QtWidgets.QPushButton(self)
         self.LoadFileButton.setFixedSize(100*R, 50*R)
-        self.LoadFileButton.setText("ReadFile")
+        self.LoadFileButton.setText("Read")
+        self.LoadFileButton.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
         self.HL.addWidget(self.LoadFileButton)
 
         self.FileContent = QtWidgets.QTextEdit(self)
@@ -4495,7 +4497,8 @@ class CustomSave(QtWidgets.QWidget):
 
         self.LoadPathButton = QtWidgets.QPushButton(self)
         self.LoadPathButton.clicked.connect(self.LoadPath)
-        self.LoadPathButton.setText("ChoosePath")
+        self.LoadPathButton.setText("SetPath")
+        self.LoadPathButton.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
         self.LoadPathButton.setFixedSize(100*R, 50*R)
         self.LoadPathButton.move(400*R, 0*R)
         self.VL.addWidget(self.LoadPathButton)
@@ -4503,7 +4506,8 @@ class CustomSave(QtWidgets.QWidget):
         self.SaveFileButton = QtWidgets.QPushButton(self)
         self.SaveFileButton.setFixedSize(100*R, 50*R)
         self.SaveFileButton.move(500*R, 0*R)
-        self.SaveFileButton.setText("SaveFile")
+        self.SaveFileButton.setText("Save")
+        self.SaveFileButton.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
         self.VL.addWidget(self.SaveFileButton)
 
         self.Head = None
@@ -4513,7 +4517,7 @@ class CustomSave(QtWidgets.QWidget):
         # set default path to save
         # based on linux
         defaultpath = "/home/hep/.config/sbcconfig/"
-        filterset = "*.pkl;;*.*"
+        filterset = "*.pkl;;"
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File', dir=defaultpath, filter=filterset)
         self.FilePath.setText(name[0])
         head_tail = os.path.split(name[0])

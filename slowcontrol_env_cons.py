@@ -142,6 +142,7 @@ PT_ALARM = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, 
             "PT4322": False, "PT4325": False, "PT6302": False,  "PT1101": False, "PT5304": False}
 LEFT_REAL_ALARM = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False}
 MAINALARM = False
+MAN_SET = False
 NTT_BO = len(TT_BO_ADDRESS)
 NTT_FP = len(TT_FP_ADDRESS)
 NPT = len(PT_ADDRESS)
