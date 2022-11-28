@@ -1190,7 +1190,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Data signal saving and writing
         self.SaveSettings.SaveFileButton.clicked.connect(lambda : self.SaveSettings.SaveConfig(self.UpClient.receive_dic))
         # self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.updatedisplay(self.ReadSettings.loaded_dict))
-        self.ReadSettings.LoadFileButton.clicked.connect(lambda: self.UpClient.commands(self.ReadSettings.loaded_dict, manset= True))
+        self.ReadSettings.LoadFileButton.clicked.connect(lambda: self.man_set(self.ReadSettings.loaded_dict))
 
 
 
@@ -3877,6 +3877,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 print("No True Value")
                 return "False"
 
+    @QtCore.Slot(object)
+    def man_set(self, received_dic_c):
+        self.commands= received_dic_c
+        self.commands['MAN_SET']= True
 
     @QtCore.Slot(object)
     def updatedisplay(self, received_dic_c):
