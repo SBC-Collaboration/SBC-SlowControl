@@ -2466,8 +2466,8 @@ class UpdateServer(QtCore.QObject):
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini},
-                         "MainAlarm": self.MainAlarm_ini,
-                         "MAN_SET": self.MAN_SET}
+                         "MainAlarm": self.MainAlarm_ini
+                         }
 
         self.data_package = pickle.dumps(self.data_dic)
 
@@ -2678,8 +2678,8 @@ class UpdateServer(QtCore.QObject):
     def write_data(self):
         message = pickle.loads(self.socket.recv())
         print(message)
-        if not message["MAN_SET"]:
-            if len(message) <= 1:
+        if not "MAN_SET" in message:
+            if message == {}:
                 pass
             else:
                 for key in message:
@@ -2921,37 +2921,36 @@ class UpdateServer(QtCore.QObject):
             # else:
             #     print("I didn't see any command")
             #     pass
-        elif message["MAN_SET"]:
+        elif "MAN_SET" in message:
             # manuall set the configuration
 
-            for key in message["data"]["TT"]["FP"]["high"]:
-                self.PLC.TT_FP_HighLimit[key] = message["data"]["TT"]["FP"]["high"][key]
+            for key in message["MAN_SET"]["data"]["TT"]["FP"]["high"]:
+                self.PLC.TT_FP_HighLimit[key] = message["MAN_SET"]["data"]["TT"]["FP"]["high"][key]
 
-            for key in message["data"]["TT"]["BO"]["high"]:
-                self.PLC.TT_BO_HighLimit[key] = message["data"]["TT"]["BO"]["high"][key]
+            for key in message["MAN_SET"]["data"]["TT"]["BO"]["high"]:
+                self.PLC.TT_BO_HighLimit[key] = message["MAN_SET"]["data"]["TT"]["BO"]["high"][key]
 
-            for key in message["data"]["PT"]["high"]:
-                self.PLC.PT_HighLimit[key] = message["data"]["PT"]["high"][key]
+            for key in message["MAN_SET"]["data"]["PT"]["high"]:
+                self.PLC.PT_HighLimit[key] = message["MAN_SET"]["data"]["PT"]["high"][key]
 
-            for key in message["data"]["LEFT_REAL"]["high"]:
-                self.PLC.LEFT_REAL_HighLimit[key] = message["data"]["LEFT_REAL"]["high"][key]
+            for key in message["MAN_SET"]["data"]["LEFT_REAL"]["high"]:
+                self.PLC.LEFT_REAL_HighLimit[key] = message["MAN_SET"]["data"]["LEFT_REAL"]["high"][key]
 
-            for key in message["data"]["TT"]["FP"]["low"]:
-                self.PLC.TT_FP_LowLimit[key] = message["data"]["TT"]["FP"]["low"][key]
+            for key in message["MAN_SET"]["data"]["TT"]["FP"]["low"]:
+                self.PLC.TT_FP_LowLimit[key] = message["MAN_SET"]["data"]["TT"]["FP"]["low"][key]
 
-            for key in message["data"]["TT"]["BO"]["low"]:
-                self.PLC.TT_BO_LowLimit[key] = message["data"]["TT"]["BO"]["low"][key]
+            for key in message["MAN_SET"]["data"]["TT"]["BO"]["low"]:
+                self.PLC.TT_BO_LowLimit[key] = message["MAN_SET"]["data"]["TT"]["BO"]["low"][key]
 
-            for key in message["data"]["PT"]["low"]:
-                self.PLC.PT_LowLimit[key] = message["data"]["PT"]["low"][key]
+            for key in message["MAN_SET"]["data"]["PT"]["low"]:
+                self.PLC.PT_LowLimit[key] = message["MAN_SET"]["data"]["PT"]["low"][key]
 
-            for key in message["data"]["LEFT_REAL"]["low"]:
-                self.PLC.LEFT_REAL_LowLimit[key] = message["data"]["LEFT_REAL"]["low"][key]
+            for key in message["MAN_SET"]["data"]["LEFT_REAL"]["low"]:
+                self.PLC.LEFT_REAL_LowLimit[key] = message["MAN_SET"]["data"]["LEFT_REAL"]["low"][key]
 
-            self.data_dic["MainAlarm"] = self.PLC.MainAlarm
-            print(1)
+
         else:
-            print("Failed to load data from Client. MAN_SET is not either True or False. Please check the code")
+            print("Failed to load data from Client. MAN_SET is not either in or not in the received directory. Please check the code")
 
 
 class Update(QtCore.QObject):

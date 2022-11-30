@@ -3878,9 +3878,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 return "False"
 
     @QtCore.Slot(object)
-    def man_set(self, received_dic_c):
-        self.commands= received_dic_c
-        self.commands['MAN_SET']= True
+    def man_set(self, dic_c):
+        self.commands['MAN_SET'] = dic_c
 
     @QtCore.Slot(object)
     def updatedisplay(self, received_dic_c):
@@ -10284,8 +10283,7 @@ class UpdateClient(QtCore.QObject):
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini},
-                         "MainAlarm": self.MainAlarm_ini,
-                         "MAN_SET":self.MAN_SET}
+                         "MainAlarm": self.MainAlarm_ini}
         self.commands_package= pickle.dumps({})
 
     @QtCore.Slot()
@@ -10334,38 +10332,20 @@ class UpdateClient(QtCore.QObject):
         self.client_data_transport.emit()
 
     @QtCore.Slot(object)
-    def commands(self, MWcommands, manset= False):
-        self.MAN_SET = manset
-        # if normal update cycle
-        if not self.MAN_SET:
-            # claim that whether MAN_SET is True or false
-            MWcommands["MAN_SET"]= self.MAN_SET
-            print("Commands are here", datetime.datetime.now())
-            print("commands", MWcommands)
-            self.commands_package = pickle.dumps(MWcommands)
-            print("commands len", len(MWcommands))
-            if len(MWcommands) != 0:
-                self.socket.send(self.commands_package)
-                self.client_clear_commands.emit()
-            else:
-                self.socket.send(pickle.dumps({}))
-            self.readcommand = True
-            print("finished sending commands")
-        # if load config files from pkl file
+    def commands(self, MWcommands):
+        # claim that whether MAN_SET is True or false
+        print("Commands are here", datetime.datetime.now())
+        print("commands", MWcommands)
+        self.commands_package = pickle.dumps(MWcommands)
+        print("commands len", len(MWcommands))
+        if len(MWcommands) != 0:
+            self.socket.send(self.commands_package)
+            self.client_clear_commands.emit()
         else:
-            print("MAN Commands are here", datetime.datetime.now())
-            print("MAN commands", MWcommands)
-            self.commands_package = pickle.dumps(MWcommands)
-            if len(MWcommands) != 0:
-                self.socket.send(self.commands_package)
-                self.client_clear_commands.emit()
-            else:
-                self.socket.send(pickle.dumps({}))
-            self.readcommand = True
-            # return back to auto loop update data
-            self.MAN_SET = False
+            self.socket.send(pickle.dumps({}))
+        self.readcommand = True
+        print("finished sending commands")
 
-            print("finished sending commands")
 
 
 
