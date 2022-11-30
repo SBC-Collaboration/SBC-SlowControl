@@ -4478,7 +4478,13 @@ class Loadfile(QtWidgets.QWidget):
                 text_TT_BO_LO = "TT_BO_LO: " + str(self.loaded_dict["data"]["TT"]["BO"]["low"]) + "\n \n"
                 text_PT_LO = "PT_LO: " + str(self.loaded_dict["data"]["PT"]["low"]) + "\n \n"
                 text_REAL_LO = "REAL_LO: " + str(self.loaded_dict["data"]["LEFT_REAL"]["low"]) + "\n \n"
-                text = text_TT_FP_HI+ text_TT_BO_HI+ text_PT_HI+ text_REAL_HI+ text_TT_FP_LO+ text_TT_BO_LO+ text_PT_LO+ text_REAL_LO
+
+                text_TT_FP_Activated = "TT_FP_Activated: " + str(self.loaded_dict["Active"]["TT"]["FP"]) + "\n \n"
+                text_TT_BO_Activated = "TT_BO_Activated: " + str(self.loaded_dict["Active"]["TT"]["BO"]) + "\n \n"
+                text_PT_Activated_ = "PT_Activated: " + str(self.loaded_dict["Active"]["PT"]) + "\n \n"
+                text_REAL_Activated = "REAL_Activated: " + str(self.loaded_dict["Active"]["LEFT_REAL"]) + "\n \n"
+                text = text_TT_FP_HI+ text_TT_BO_HI+ text_PT_HI+ text_REAL_HI+ text_TT_FP_LO+ text_TT_BO_LO+ text_PT_LO+ \
+                       text_REAL_LO+ text_TT_FP_Activated + text_TT_BO_Activated+ text_PT_Activated_ +text_REAL_Activated
                 self.FileContent.setText(text)
         except:
             print("Error! Please type in a valid path")

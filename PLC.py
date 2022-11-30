@@ -2466,6 +2466,10 @@ class UpdateServer(QtCore.QObject):
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini},
+                         "Active": {"TT": {"FP": self.TT_FP_Activated_ini,
+                                          "BO": self.TT_BO_Activated_ini},
+                                   "PT": self.PT_Activated_ini,
+                                   "LEFT_REAL": self.LEFT_REAL_Activated_ini},
                          "MainAlarm": self.MainAlarm_ini
                          }
 
@@ -2947,6 +2951,18 @@ class UpdateServer(QtCore.QObject):
 
             for key in message["MAN_SET"]["data"]["LEFT_REAL"]["low"]:
                 self.PLC.LEFT_REAL_LowLimit[key] = message["MAN_SET"]["data"]["LEFT_REAL"]["low"][key]
+
+            for key in message["MAN_SET"]["Active"]["TT"]["FP"]:
+                self.PLC.TT_FP_Activated[key] =message["MAN_SET"]["Active"]["TT"]["FP"][key]
+
+            for key in message["MAN_SET"]["Active"]["TT"]["BO"]:
+                self.PLC.TT_BO_Activated[key] = message["MAN_SET"]["Active"]["TT"]["BO"][key]
+
+            for key in message["MAN_SET"]["Active"]["PT"]:
+                self.PLC.PT_Activated[key] = message["MAN_SET"]["Active"]["PT"][key]
+
+            for key in message["MAN_SET"]["Active"]["LEFT_REAL"]:
+                self.PLC.LEFT_REAL_Activated[key] = message["MAN_SET"]["Active"]["LEFT_REAL"][key]
 
 
         else:
