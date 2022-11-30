@@ -585,6 +585,8 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.setWindowTitle("Alarm Window")
         self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2300*R, 1500*R))
 
+
+
         self.Tab = QtWidgets.QTabWidget(self)
         self.Tab.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.Tab.setStyleSheet("font-weight: bold; font-size: 20px; font-family: Calibri;")
@@ -608,6 +610,13 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.LEFTVariableTab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.LEFTVariableTab, "LEFT VARIABLEs")
+
+        self.MAN_ACT = QtWidgets.QPushButton(self)
+        self.MAN_ACT.setObjectName("Label")
+        self.MAN_ACT.setText("MAN_ACT")
+        self.MAN_ACT.setGeometry(QtCore.QRect(0 * R, 0 * R, 150 * R, 50 * R))
+        self.MAN_ACT.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
+        self.MAN_ACT.move(2100*R,1400*R)
 
         # Groupboxs for alarm/PT/TT
 

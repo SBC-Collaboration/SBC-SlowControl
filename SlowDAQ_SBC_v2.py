@@ -967,6 +967,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.AlarmWindow = AlarmWin()
         self.AlarmButton = AlarmButton(self.AlarmWindow, self)
         self.AlarmButton.SubWindow.resize(1000*R, 500*R)
+
         # self.AlarmButton.StatusWindow.AlarmWindow()
 
         self.AlarmButton.move(10*R, 1350*R)
@@ -1191,6 +1192,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SaveSettings.SaveFileButton.clicked.connect(lambda : self.SaveSettings.SaveConfig(self.UpClient.receive_dic))
         # self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.updatedisplay(self.ReadSettings.loaded_dict))
         self.ReadSettings.LoadFileButton.clicked.connect(lambda: self.man_set(self.ReadSettings.loaded_dict))
+        self.AlarmButton.SubWindow.MAN_ACT.clicked.connect(lambda : self.man_activated(self.UpClient.receive_dic))
 
 
 
@@ -3882,6 +3884,32 @@ class MainWindow(QtWidgets.QMainWindow):
         self.commands['MAN_SET'] = dic_c
 
     @QtCore.Slot(object)
+    def man_activated(self, dic_c):
+        for element in self.BORTDAlarmMatrix:
+            element.AlarmMode.setChecked(dic_c["Active"]["TT"]["BO"][element.Label.text()])
+
+        # FP TTs
+        # update alarmwindow widgets' <alarm> value
+
+        for element in self.FPRTDAlarmMatrix:
+            # print(element.Label.text())
+            element.AlarmMode.setChecked(dic_c["Active"]["TT"]["FP"][element.Label.text()])
+
+        for element in self.PTAlarmMatrix:
+            element.AlarmMode.setChecked(dic_c["Active"]["PT"][element.Label.text()])
+
+        for element in self.LEFTVariableMatrix:
+            element.AlarmMode.setChecked(dic_c["Active"]["LEFT_REAL"][element.Label.text()])
+
+        # if dic_c["Active"]["TT"]["FP"]["fa"]:
+        #     self.AlarmWindow.PT2316.AlarmMode.setChecked(True)
+        # elif not dic_c["Active"]["TT"]["FP"]["fa"]:
+        #     self.AlarmWindow.PT2316.AlarmMode.setChecked(False)
+        # else:
+        #     pass
+
+
+    @QtCore.Slot(object)
     def updatedisplay(self, received_dic_c):
         print("Display updating", datetime.datetime.now())
         # print('Display update result for HFSV3331:', received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
@@ -3965,14 +3993,27 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #LEFT Variables: because the receive_dic's dimension is different from the dimension in self.GLLEFT, I have to set widgets' value in self.GLLEFT mannually
 
-        self.AlarmButton.SubWindow.LT3335.UpdateAlarm(
-            received_dic_c["Alarm"]["LEFT_REAL"][self.AlarmButton.SubWindow.LT3335.Label.text()])
-        self.AlarmButton.SubWindow.LT3335.Indicator.SetValue(
-            received_dic_c["data"]["LEFT_REAL"]["value"][self.AlarmButton.SubWindow.LT3335.Label.text()])
-        self.AlarmButton.SubWindow.LT3335.Low_Read.SetValue(
-            received_dic_c["data"]["LEFT_REAL"]["low"][self.AlarmButton.SubWindow.LT3335.Label.text()])
-        self.AlarmButton.SubWindow.LT3335.High_Read.SetValue(
-            received_dic_c["data"]["LEFT_REAL"]["high"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+        for element in self.LEFTVariableMatrix:
+            element.UpdateAlarm(
+                received_dic_c["Alarm"]["LEFT_REAL"][element.Label.text()])
+            element.Indicator.SetValue(
+                received_dic_c["data"]["LEFT_REAL"]["value"][element.Label.text()])
+            element.Low_Read.SetValue(
+                received_dic_c["data"]["LEFT_REAL"]["low"][element.Label.text()])
+            element.High_Read.SetValue(
+                received_dic_c["data"]["LEFT_REAL"]["high"][element.Label.text()])
+
+
+        #
+        #
+        # self.AlarmButton.SubWindow.LT3335.UpdateAlarm(
+        #     received_dic_c["Alarm"]["LEFT_REAL"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+        # self.AlarmButton.SubWindow.LT3335.Indicator.SetValue(
+        #     received_dic_c["data"]["LEFT_REAL"]["value"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+        # self.AlarmButton.SubWindow.LT3335.Low_Read.SetValue(
+        #     received_dic_c["data"]["LEFT_REAL"]["low"][self.AlarmButton.SubWindow.LT3335.Label.text()])
+        # self.AlarmButton.SubWindow.LT3335.High_Read.SetValue(
+        #     received_dic_c["data"]["LEFT_REAL"]["high"][self.AlarmButton.SubWindow.LT3335.Label.text()])
 
 
 
