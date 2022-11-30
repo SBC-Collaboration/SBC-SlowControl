@@ -4469,7 +4469,16 @@ class Loadfile(QtWidgets.QWidget):
 
             with open(str(self.FilePath.text()), 'rb') as f:
                 self.loaded_dict = pickle.load(f)
-                text = str(self.loaded_dict)
+                text_TT_FP_HI="TT_FP_HI: "+ str(self.loaded_dict["data"]["TT"]["FP"]["high"])+"\n"
+                text_TT_BO_HI = "TT_BO_HI: " + str(self.loaded_dict["data"]["TT"]["BO"]["high"]) + "\n"
+                text_PT_HI = "PT_HI: " + str(self.loaded_dict["data"]["PT"]["high"]) + "\n"
+                text_REAL_HI = "REAL_HI: " + str(self.loaded_dict["data"]["LEFT_REAL"]["high"]) + "\n"
+
+                text_TT_FP_LO = "TT_FP_LO: " + str(self.loaded_dict["data"]["TT"]["FP"]["low"]) + "\n"
+                text_TT_BO_LO = "TT_BO_LO: " + str(self.loaded_dict["data"]["TT"]["BO"]["low"]) + "\n"
+                text_PT_LO = "PT_LO: " + str(self.loaded_dict["data"]["PT"]["low"]) + "\n"
+                text_REAL_LO = "REAL_LO: " + str(self.loaded_dict["data"]["LEFT_REAL"]["low"]) + "\n"
+                text = text_TT_FP_HI+ text_TT_BO_HI+ text_PT_HI+ text_REAL_HI+ text_TT_FP_LO+ text_TT_BO_LO+ text_PT_LO+ text_REAL_LO
                 self.FileContent.setText(text)
         except:
             print("Error! Please type in a valid path")
