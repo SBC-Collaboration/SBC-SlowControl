@@ -2544,6 +2544,16 @@ class UpdateServer(QtCore.QObject):
             self.LEFT_REAL_LowLimit_ini[key] = self.PLC.LEFT_REAL_LowLimit[key]
         for key in self.PLC.LEFT_REAL_dic:
             self.LEFT_REAL_ini[key] = self.PLC.LEFT_REAL_dic[key]
+
+        for key in self.PLC.TT_FP_Activated:
+            self.TT_FP_Activated_ini[key]= self.PLC.TT_FP_Activated[key]
+        for key in self.PLC.TT_BO_Activated:
+            self.TT_BO_Activated_ini[key]= self.PLC.TT_BO_Activated[key]
+        for key in self.PLC.PT_Activated:
+            self.PT_Activated_ini[key]= self.PLC.PT_Activated[key]
+        for key in self.PLC.LEFT_REAL_Activated:
+            self.LEFT_REAL_Activated_ini[key]= self.PLC.LEFT_REAL_Activated[key]
+
         for key in self.PLC.Valve_OUT:
             self.Valve_OUT_ini[key] = self.PLC.Valve_OUT[key]
         for key in self.PLC.Valve_INTLKD:
@@ -2663,6 +2673,8 @@ class UpdateServer(QtCore.QObject):
             self.FLAG_INTLKD_ini[key] = self.PLC.FLAG_INTLKD[key]
         for key in self.PLC.FLAG_Busy:
             self.FLAG_Busy_ini[key] = self.PLC.FLAG_Busy[key]
+
+
 
 
         self.data_dic["MainAlarm"] = self.PLC.MainAlarm

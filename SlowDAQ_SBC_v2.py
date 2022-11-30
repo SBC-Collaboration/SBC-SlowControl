@@ -10283,6 +10283,10 @@ class UpdateClient(QtCore.QObject):
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini},
+                         "Active": {"TT": {"FP": self.TT_FP_Activated_ini,
+                                          "BO": self.TT_BO_Activated_ini},
+                                   "PT": self.PT_Activated_ini,
+                                   "LEFT_REAL": self.LEFT_REAL_Activated_ini},
                          "MainAlarm": self.MainAlarm_ini}
         self.commands_package= pickle.dumps({})
 
