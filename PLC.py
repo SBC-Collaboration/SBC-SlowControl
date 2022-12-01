@@ -22,6 +22,7 @@ import logging,os
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 import slowcontrol_env_cons as sec
+import alarm_set as AS
 
 # delete random number package when you read real data from PLC
 import random
@@ -75,6 +76,8 @@ class PLC(QtCore.QObject):
         self.Client_BO = ModbusTcpClient(IP_BO, port=PORT_BO)
         self.Connected_BO = self.Client_BO.connect()
         print(" Beckoff connected: " + str(self.Connected_BO))
+
+        self.alarm_config()
 
         self.TT_FP_address = copy.copy(sec.TT_FP_ADDRESS)
 
@@ -143,6 +146,9 @@ class PLC(QtCore.QObject):
         self.nDin = copy.copy(sec.NDIN)
         self.Din = copy.copy(sec.DIN)
         self.Din_dic = copy.copy(sec.DIN_DIC)
+        self.Din_LowLimit = copy.copy(sec.DIN_LOWLIMIT)
+        self.Din_HighLimit = copy.copy(sec.DIN_HIGHLIMIT)
+        self.Din_Activated = copy.copy(sec.DIN_ACTIVATED)
 
         self.valve_address = copy.copy(sec.VALVE_ADDRESS)
         self.nValve = copy.copy(sec.NVALVE)
@@ -191,6 +197,7 @@ class PLC(QtCore.QObject):
 
         self.LOOPPID_SET3 = copy.copy(sec.LOOPPID_SET3)
         self.LOOPPID_Busy = copy.copy(sec.LOOPPID_BUSY)
+        self.LOOPPID_Activated = copy.copy(sec.LOOPPID_ACTIVATED)
         # self.LOOPPID_ADR_BASE = sec.LOOPPID_ADR_BASE
         #
         # self.LOOPPID_MODE0 = sec.LOOPPID_MODE0
@@ -412,6 +419,57 @@ class PLC(QtCore.QObject):
     def __del__(self):
         self.Client.close()
         self.Client_BO.close()
+
+    def load_alarm_config(self):
+        self.alarm_config = AS.Alarm_Setting()
+        self.alarm_config.read_Information()
+        for key in self.TT_FP_HighLimit:
+            self.TT_FP_HighLimit[key]=self.alarm_config.high_dic[key]
+        for key in self.TT_BO_HighLimit:
+            self.TT_BO_HighLimit[key]=self.alarm_config.high_dic[key]
+        for key in self.PT_HighLimit:
+            self.PT_HighLimit[key]=self.alarm_config.high_dic[key]
+        for key in self.LEFT_REAL_HighLimit:
+            self.LEFT_REAL_HighLimit[key]=self.alarm_config.high_dic[key]
+
+        for key in self.TT_FP_LowLimit:
+            self.TT_FP_LowLimit[key]=self.alarm_config.low_dic[key]
+        for key in self.TT_BO_LowLimit:
+            self.TT_BO_LowLimit[key]=self.alarm_config.low_dic[key]
+        for key in self.PT_LowLimit:
+            self.PT_LowLimit[key]=self.alarm_config.low_dic[key]
+        for key in self.LEFT_REAL_LowLimit:
+            self.LEFT_REAL_LowLimit[key]=self.alarm_config.low_dic[key]
+
+        for key in self.TT_FP_Activated:
+            self.TT_FP_Activated[key] = self.alarm_config.active_dic[key]
+        for key in self.TT_BO_Activated:
+            self.TT_BO_Activated[key] = self.alarm_config.active_dic[key]
+        for key in self.PT_Activated:
+            self.PT_Activated[key] = self.alarm_config.active_dic[key]
+        for key in self.LEFT_REAL_Activated:
+            self.LEFT_REAL_Activated[key] = self.alarm_config.active_dic[key]
+
+        for key in self.Din_LowLimit:
+            self.Din_LowLimit[key]= self.alarm_config.low_dic[key]
+        for key in self.Din_HighLimit:
+            self.Din_HighLimit[key]= self.alarm_config.high_dic[key]
+        for key in self.Din_Activated:
+            self.Din_Activated[key]= self.alarm_config.active_dic[key]
+
+
+        for key in self.LOOPPID_LO_LIM:
+            self.LOOPPID_SET_LO_LIM(address=self.LOOPPID_ADR_BASE[key],
+                                    value=self.alarm_config.low_dic[key])
+
+        for key in self.LOOPPID_HI_LIM:
+            self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
+                                    value=self.alarm_config.high_dic[key])
+
+        for key in self.LOOPPID_Activated:
+            self.LOOPPID_Activated = self.alarm_config.active_dic[key]
+
+
 
     def ReadAll(self):
         # print(self.TT_BO_HighLimit["TT2119"])
