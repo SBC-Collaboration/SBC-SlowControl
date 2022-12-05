@@ -2132,7 +2132,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         # l max are max column number+1
         # i_last,j_last are last elements's diretory coordinate
 
-        TempRefDindir = self.AlarmDINdir
+        TempRefDindir = self.AlarmDindir
 
         TempDindir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
                        1: {0: None, 1: None, 2: None}}
