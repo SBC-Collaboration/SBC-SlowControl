@@ -2953,7 +2953,7 @@ class UpdateServer(QtCore.QObject):
                                                             value=message[key]["operation"]["HI_LIM"])
                                 self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
                                                             value=message[key]["operation"]["LO_LIM"])
-                                
+
                             else:
                                 self.PLC.Din_REAL_Activated[key] = message[key]["operation"]["Act"]
                         else:
