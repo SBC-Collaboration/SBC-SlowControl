@@ -2137,14 +2137,14 @@ class UpdatePLC(QtCore.QObject):
     def check_TT_FP_alarm(self, pid):
 
         if self.PLC.TT_FP_Activated[pid]:
-            if float(self.PLC.TT_FP_LowLimit[pid]) > float(self.PLC.TT_FP_HighLimit[pid]):
+            if float(self.PLC.TT_FP_LowLimit[pid]) >= float(self.PLC.TT_FP_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if float(self.PLC.TT_FP_dic[pid]) < float(self.PLC.TT_FP_LowLimit[pid]):
+                if float(self.PLC.TT_FP_dic[pid]) <= float(self.PLC.TT_FP_LowLimit[pid]):
                     self.TTFPalarmmsg(pid)
 
                     # print(pid , " reading is lower than the low limit")
-                elif float(self.PLC.TT_FP_dic[pid]) > float(self.PLC.TT_FP_HighLimit[pid]):
+                elif float(self.PLC.TT_FP_dic[pid]) >= float(self.PLC.TT_FP_HighLimit[pid]):
                     self.TTFPalarmmsg(pid)
 
                     # print(pid,  " reading is higher than the high limit")
@@ -2159,14 +2159,14 @@ class UpdatePLC(QtCore.QObject):
     def check_TT_BO_alarm(self, pid):
 
         if self.PLC.TT_BO_Activated[pid]:
-            if float(self.PLC.TT_BO_LowLimit[pid]) > float(self.PLC.TT_BO_HighLimit[pid]):
+            if float(self.PLC.TT_BO_LowLimit[pid]) >= float(self.PLC.TT_BO_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if float(self.PLC.TT_BO_dic[pid]) < float(self.PLC.TT_BO_LowLimit[pid]):
+                if float(self.PLC.TT_BO_dic[pid]) <= float(self.PLC.TT_BO_LowLimit[pid]):
                     self.TTBOalarmmsg(pid)
 
                     # print(pid , " reading is lower than the low limit")
-                elif float(self.PLC.TT_BO_dic[pid]) > float(self.PLC.TT_BO_HighLimit[pid]):
+                elif float(self.PLC.TT_BO_dic[pid]) >= float(self.PLC.TT_BO_HighLimit[pid]):
                     self.TTBOalarmmsg(pid)
 
                     # print(pid,  " reading is higher than the high limit")
@@ -2181,14 +2181,14 @@ class UpdatePLC(QtCore.QObject):
     def check_PT_alarm(self, pid):
 
         if self.PLC.PT_Activated[pid]:
-            if float(self.PLC.PT_LowLimit[pid]) > float(self.PLC.PT_HighLimit[pid]):
+            if float(self.PLC.PT_LowLimit[pid]) >= float(self.PLC.PT_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if float(self.PLC.PT_dic[pid]) < float(self.PLC.PT_LowLimit[pid]):
+                if float(self.PLC.PT_dic[pid]) <= float(self.PLC.PT_LowLimit[pid]):
                     self.PTalarmmsg(pid)
 
                     # print(pid , " reading is lower than the low limit")
-                elif float(self.PLC.PT_dic[pid]) > float(self.PLC.PT_HighLimit[pid]):
+                elif float(self.PLC.PT_dic[pid]) >= float(self.PLC.PT_HighLimit[pid]):
                     self.PTalarmmsg(pid)
                     # print(pid,  " reading is higher than the high limit")
                 else:
@@ -2202,14 +2202,14 @@ class UpdatePLC(QtCore.QObject):
     def check_LEFT_REAL_alarm(self, pid):
 
         if self.PLC.LEFT_REAL_Activated[pid]:
-            if float(self.PLC.LEFT_REAL_LowLimit[pid]) > float(self.PLC.LEFT_REAL_HighLimit[pid]):
+            if float(self.PLC.LEFT_REAL_LowLimit[pid]) >= float(self.PLC.LEFT_REAL_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if float(self.PLC.LEFT_REAL_dic[pid]) < float(self.PLC.LEFT_REAL_LowLimit[pid]):
+                if float(self.PLC.LEFT_REAL_dic[pid]) <= float(self.PLC.LEFT_REAL_LowLimit[pid]):
                     self.LEFT_REALalarmmsg(pid)
 
                     # print(pid , " reading is lower than the low limit")
-                elif float(self.PLC.LEFT_REAL_dic[pid]) > float(self.PLC.LEFT_REAL_HighLimit[pid]):
+                elif float(self.PLC.LEFT_REAL_dic[pid]) >= float(self.PLC.LEFT_REAL_HighLimit[pid]):
                     self.LEFT_REALalarmmsg(pid)
                     # print(pid,  " reading is higher than the high limit")
                 else:
@@ -2223,14 +2223,14 @@ class UpdatePLC(QtCore.QObject):
     def check_Din_alarm(self, pid):
 
         if self.PLC.Din_Activated[pid]:
-            if float(self.PLC.Din_LowLimit[pid]) > float(self.PLC.Din_HighLimit[pid]):
+            if float(self.PLC.Din_LowLimit[pid]) >= float(self.PLC.Din_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if float(self.PLC.Din_dic[pid]) < float(self.PLC.Din_LowLimit[pid]):
+                if float(self.PLC.Din_dic[pid]) <= float(self.PLC.Din_LowLimit[pid]):
                     self.Dinalarmmsg(pid)
 
                     # print(pid , " reading is lower than the low limit")
-                elif float(self.PLC.Din_dic[pid]) > float(self.PLC.Din_HighLimit[pid]):
+                elif float(self.PLC.Din_dic[pid]) >= float(self.PLC.Din_HighLimit[pid]):
                     self.Dinalarmmsg(pid)
                     # print(pid,  " reading is higher than the high limit")
                 else:
@@ -2350,7 +2350,7 @@ class UpdatePLC(QtCore.QObject):
         # and send email or slack messages
         if self.LOOPPID_para >= self.LOOPPID_rate:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, HI_LIM: {high}, LO_LIM: {low}".format(pid=pid, current=self.PLC.LOOPPID_OUT[pid],
-                                                                                                                     high=self.PLC.LOOPPID_HighLimit[pid], low=self.PLC.LOOPPID_LowLimit[pid])
+                                                                                                                     high=self.PLC.LOOPPID_HI_LIM[pid], low=self.PLC.LOOPPID_LO_LIM[pid])
 
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
