@@ -2114,7 +2114,7 @@ class UpdatePLC(QtCore.QObject):
                     self.check_LEFT_REAL_alarm(keyLEFT_REAL)
                 for keyDin in self.PLC.Din_dic:
                     self.check_Din_alarm(keyDin)
-                for keyLOOPPID in self.PLC.LOOPPID_dic:
+                for keyLOOPPID in self.PLC.LOOPPID_OUT:
                     self.check_LOOPPID_alarm(keyLOOPPID)
                 self.or_alarm_signal()
                 time.sleep(self.period)
@@ -2349,7 +2349,7 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.LOOPPID_Alarm[pid] = True
         # and send email or slack messages
         if self.LOOPPID_para >= self.LOOPPID_rate:
-            msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, HI_LIM: {high}, LO_LIM: {low}".format(pid=pid, current=self.PLC.LOOPPID_dic[pid],
+            msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, HI_LIM: {high}, LO_LIM: {low}".format(pid=pid, current=self.PLC.LOOPPID_OUT[pid],
                                                                                                                      high=self.PLC.LOOPPID_HighLimit[pid], low=self.PLC.LOOPPID_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
