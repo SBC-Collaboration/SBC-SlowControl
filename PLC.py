@@ -2951,10 +2951,11 @@ class UpdateServer(QtCore.QObject):
                         if message[key]["server"] == "BO":
                             if message[key]["operation"]["Update"]:
                                 self.PLC.LOOPPID_Activated[key] = message[key]["operation"]["Act"]
-                                self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
-                                                            value=message[key]["operation"]["HI_LIM"])
                                 self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
-                                                            value=message[key]["operation"]["LO_LIM"])
+                                                            value=message[key]["operation"]["LowLimit"])
+                                self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
+                                                            value=message[key]["operation"]["HighLimit"])
+
 
                             else:
                                 self.PLC.LOOPPID_Activated[key] = message[key]["operation"]["Act"]
