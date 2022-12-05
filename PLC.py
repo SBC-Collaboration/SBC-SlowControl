@@ -419,7 +419,7 @@ class PLC(QtCore.QObject):
                               "TIME_ADDRESS": self.TIME_ADDRESS,
                               "TIME_DIC": self.TIME_DIC}
 
-        # self.load_alarm_config()
+        self.load_alarm_config()
 
         self.LiveCounter = 0
         self.NewData_Display = False
@@ -436,50 +436,50 @@ class PLC(QtCore.QObject):
         if self.Connected_BO:
             self.alarm_config = AS.Alarm_Setting()
             self.alarm_config.read_Information()
-            for key in self.TT_FP_HighLimit:
-                self.TT_FP_HighLimit[key] = self.alarm_config.high_dic[key]
-            for key in self.TT_BO_HighLimit:
-                self.TT_BO_HighLimit[key] = self.alarm_config.high_dic[key]
-            for key in self.PT_HighLimit:
-                self.PT_HighLimit[key] = self.alarm_config.high_dic[key]
-            for key in self.LEFT_REAL_HighLimit:
-                self.LEFT_REAL_HighLimit[key] = self.alarm_config.high_dic[key]
-
-            for key in self.TT_FP_LowLimit:
-                self.TT_FP_LowLimit[key] = self.alarm_config.low_dic[key]
-            for key in self.TT_BO_LowLimit:
-                self.TT_BO_LowLimit[key] = self.alarm_config.low_dic[key]
-            for key in self.PT_LowLimit:
-                self.PT_LowLimit[key] = self.alarm_config.low_dic[key]
-            for key in self.LEFT_REAL_LowLimit:
-                self.LEFT_REAL_LowLimit[key] = self.alarm_config.low_dic[key]
-
-            for key in self.TT_FP_Activated:
-                self.TT_FP_Activated[key] = self.alarm_config.active_dic[key]
-            for key in self.TT_BO_Activated:
-                self.TT_BO_Activated[key] = self.alarm_config.active_dic[key]
-            for key in self.PT_Activated:
-                self.PT_Activated[key] = self.alarm_config.active_dic[key]
-            for key in self.LEFT_REAL_Activated:
-                self.LEFT_REAL_Activated[key] = self.alarm_config.active_dic[key]
-
-            for key in self.Din_LowLimit:
-                self.Din_LowLimit[key] = self.alarm_config.low_dic[key]
-            for key in self.Din_HighLimit:
-                self.Din_HighLimit[key] = self.alarm_config.high_dic[key]
-            for key in self.Din_Activated:
-                self.Din_Activated[key] = self.alarm_config.active_dic[key]
-
-            for key in self.LOOPPID_LO_LIM:
-                self.LOOPPID_SET_LO_LIM(address=self.LOOPPID_ADR_BASE[key],
-                                        value=self.alarm_config.low_dic[key])
-
-            for key in self.LOOPPID_HI_LIM:
-                self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
-                                        value=self.alarm_config.high_dic[key])
-
-            for key in self.LOOPPID_Activated:
-                self.LOOPPID_Activated = self.alarm_config.active_dic[key]
+            # for key in self.TT_FP_HighLimit:
+            #     self.TT_FP_HighLimit[key] = self.alarm_config.high_dic[key]
+            # for key in self.TT_BO_HighLimit:
+            #     self.TT_BO_HighLimit[key] = self.alarm_config.high_dic[key]
+            # for key in self.PT_HighLimit:
+            #     self.PT_HighLimit[key] = self.alarm_config.high_dic[key]
+            # for key in self.LEFT_REAL_HighLimit:
+            #     self.LEFT_REAL_HighLimit[key] = self.alarm_config.high_dic[key]
+            #
+            # for key in self.TT_FP_LowLimit:
+            #     self.TT_FP_LowLimit[key] = self.alarm_config.low_dic[key]
+            # for key in self.TT_BO_LowLimit:
+            #     self.TT_BO_LowLimit[key] = self.alarm_config.low_dic[key]
+            # for key in self.PT_LowLimit:
+            #     self.PT_LowLimit[key] = self.alarm_config.low_dic[key]
+            # for key in self.LEFT_REAL_LowLimit:
+            #     self.LEFT_REAL_LowLimit[key] = self.alarm_config.low_dic[key]
+            #
+            # for key in self.TT_FP_Activated:
+            #     self.TT_FP_Activated[key] = self.alarm_config.active_dic[key]
+            # for key in self.TT_BO_Activated:
+            #     self.TT_BO_Activated[key] = self.alarm_config.active_dic[key]
+            # for key in self.PT_Activated:
+            #     self.PT_Activated[key] = self.alarm_config.active_dic[key]
+            # for key in self.LEFT_REAL_Activated:
+            #     self.LEFT_REAL_Activated[key] = self.alarm_config.active_dic[key]
+            #
+            # for key in self.Din_LowLimit:
+            #     self.Din_LowLimit[key] = self.alarm_config.low_dic[key]
+            # for key in self.Din_HighLimit:
+            #     self.Din_HighLimit[key] = self.alarm_config.high_dic[key]
+            # for key in self.Din_Activated:
+            #     self.Din_Activated[key] = self.alarm_config.active_dic[key]
+            #
+            # for key in self.LOOPPID_LO_LIM:
+            #     self.LOOPPID_SET_LO_LIM(address=self.LOOPPID_ADR_BASE[key],
+            #                             value=self.alarm_config.low_dic[key])
+            #
+            # for key in self.LOOPPID_HI_LIM:
+            #     self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
+            #                             value=self.alarm_config.high_dic[key])
+            #
+            # for key in self.LOOPPID_Activated:
+            #     self.LOOPPID_Activated = self.alarm_config.active_dic[key]
         else:
             self.PLC_DISCON_SIGNAL.emit()
             # raise Exception('Not connected to PLC')  # will it restart the PLC ?
