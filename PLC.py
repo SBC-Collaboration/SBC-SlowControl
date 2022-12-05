@@ -2114,8 +2114,8 @@ class UpdatePLC(QtCore.QObject):
                     self.check_LEFT_REAL_alarm(keyLEFT_REAL)
                 # for keyDin in self.PLC.Din_dic:
                 #     self.check_Din_alarm(keyDin)
-                # for keyLOOPPID in self.PLC.LOOPPID_OUT:
-                #     self.check_LOOPPID_alarm(keyLOOPPID)
+                for keyLOOPPID in self.PLC.LOOPPID_OUT:
+                    self.check_LOOPPID_alarm(keyLOOPPID)
                 self.or_alarm_signal()
                 time.sleep(self.period)
         except KeyboardInterrupt:
