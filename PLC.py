@@ -478,8 +478,8 @@ class PLC(QtCore.QObject):
             #     self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
             #                             value=self.alarm_config.high_dic[key])
             #
-            # for key in self.LOOPPID_Activated:
-            #     self.LOOPPID_Activated = self.alarm_config.active_dic[key]
+            for key in self.LOOPPID_Activated:
+                self.LOOPPID_Activated = self.alarm_config.active_dic[key]
         else:
             self.PLC_DISCON_SIGNAL.emit()
             # raise Exception('Not connected to PLC')  # will it restart the PLC ?
