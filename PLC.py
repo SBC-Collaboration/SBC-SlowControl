@@ -2939,11 +2939,11 @@ class UpdateServer(QtCore.QObject):
                     elif message[key]["type"] == "Din":
                         if message[key]["server"] == "BO":
                             if message[key]["operation"]["Update"]:
-                                self.PLC.Din_REAL_Activated[key] = message[key]["operation"]["Act"]
-                                self.PLC.Din_REAL_LowLimit[key] = message[key]["operation"]["LowLimit"]
-                                self.PLC.Din_REAL_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                                self.PLC.Din_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.Din_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                                self.PLC.Din_HighLimit[key] = message[key]["operation"]["HighLimit"]
                             else:
-                                self.PLC.Din_REAL_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.Din_Activated[key] = message[key]["operation"]["Act"]
                         else:
                             pass
 
@@ -2957,7 +2957,7 @@ class UpdateServer(QtCore.QObject):
                                                             value=message[key]["operation"]["LO_LIM"])
 
                             else:
-                                self.PLC.Din_REAL_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.LOOPPID_Activated[key] = message[key]["operation"]["Act"]
                         else:
                             pass
 
