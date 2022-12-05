@@ -79,7 +79,7 @@ class PLC(QtCore.QObject):
 
         # wait 1 second to init
         time.sleep(1)
-        self.alarm_config()
+        self.load_alarm_config()
 
 
         self.TT_FP_address = copy.copy(sec.TT_FP_ADDRESS)
