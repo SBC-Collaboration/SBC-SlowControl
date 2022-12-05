@@ -9573,6 +9573,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.AlarmButton.SubWindow.ReassignRTDLEFTOrder()
             self.AlarmButton.SubWindow.ReassignPTOrder()
             self.AlarmButton.SubWindow.ReassignLEFTOrder()
+            self.AlarmButton.SubWindow.ReassignDinOrder()
+            self.AlarmButton.SubWindow.ReassignHTROrder()
+
 
 
         else:
