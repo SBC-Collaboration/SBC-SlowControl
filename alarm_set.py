@@ -41,6 +41,7 @@ class Alarm_Setting():
         self.Din_HighLimit = copy.copy(sec.DIN_HIGHLIMIT)
         self.Din_Activated = copy.copy(sec.DIN_ACTIVATED)
 
+        # lowlimit, high limit and activae share the same keys
         for key in self.TT_FP_LowLimit:
             self.instrument.append(key)
             self.lowlimit.append(self.TT_FP_LowLimit[key])
@@ -91,8 +92,8 @@ class Alarm_Setting():
     # csv file will lose the data type of the record, we need to recover those properties
     def translate_csv(self, type="Low_Limit"):
         df = self.df[["Instrument",type]]
-        dic =  df.set_index('Instrument').T.to_dict('records')[0]
-        print("before",dic)
+        dic = df.set_index('Instrument').T.to_dict('records')[0]
+        # print("before",dic)
         for key in dic:
             try:
                 dic[key] = float(dic[key])
@@ -102,7 +103,7 @@ class Alarm_Setting():
                 elif dic[key] =="TRUE" or "True":
                     dic[key] = True
 
-        print("after",dic)
+        # print("after",dic)
         return dic
 
     def write(self):

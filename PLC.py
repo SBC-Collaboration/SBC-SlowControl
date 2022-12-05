@@ -2244,13 +2244,14 @@ class UpdatePLC(QtCore.QObject):
     def check_LOOPPID_alarm(self, pid):
         if self.PLC.LOOPPID_Activated[pid]:
             if self.PLC.LOOPPID_SATLO[pid] or self.PLC.LOOPPID_SATHI[pid]:
-                self.LOOPPIDalarmmsg(pid)
+                print(pid, " is in normal range")
+                # self.LOOPPIDalarmmsg(pid)
             else:
-                self.resetLOOPPIDalarmmsg(pid)
-                # print(pid, " is in normal range")
+                # self.resetLOOPPIDalarmmsg(pid)
+                print(pid, " is in normal range")
 
         else:
-            self.resetLOOPPIDalarmmsg(pid)
+            # self.resetLOOPPIDalarmmsg(pid)
             pass
 
     def TTFPalarmmsg(self, pid):
