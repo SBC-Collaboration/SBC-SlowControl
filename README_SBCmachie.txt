@@ -72,6 +72,12 @@ This code will be executated by the Gnome after you log into the desktop
 4. If you want the background run without terminal, edit the desktop file with setting Terminal=False
 5. If you don't want to it run when PC reboot just delete it from the Tweak startup application.
 
+11.Alarm Settings
+The alarm csv is saved in /home/hep/.config/sbcconfig/sbc_alarm_config.csv
+Everyone can directly edit it in order to change the configuration of alarms. And background code will load it automatically everytime it reruns.
+I didn't put it in the same directory as code because I still frequenty push and pull from github on both my pc and slowcontrol machine. I want to avoid
+branch conflict as much as possible.
+
 
 
 
