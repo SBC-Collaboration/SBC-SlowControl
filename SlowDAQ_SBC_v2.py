@@ -1047,6 +1047,20 @@ class MainWindow(QtWidgets.QMainWindow):
                                    self.AlarmButton.SubWindow.SERVO3321_IN_REAL, self.AlarmButton.SubWindow.TS1_MASS,
                                    self.AlarmButton.SubWindow.TS2_MASS, self.AlarmButton.SubWindow.TS3_MASS]
 
+        self.DinAlarmMatrix = [self.AlarmButton.SubWindow.LS3338, self.AlarmButton.SubWindow.LS3339,
+                                   self.AlarmButton.SubWindow.ES3347, self.AlarmButton.SubWindow.PUMP3305_CON,
+                                   self.AlarmButton.SubWindow.PUMP3305_OL, self.AlarmButton.SubWindow.PS2352,
+                                   self.AlarmButton.SubWindow.PS1361, self.AlarmButton.SubWindow.PS8302]
+
+        self.LOOPPIDAlarmMatrix = [self.AlarmButton.SubWindow.SERVO3321, self.AlarmButton.SubWindow.HTR6225,
+                                   self.AlarmButton.SubWindow.HTR2123, self.AlarmButton.SubWindow.HTR2124,
+                                   self.AlarmButton.SubWindow.HTR2125, self.AlarmButton.SubWindow.HTR1202,
+                                   self.AlarmButton.SubWindow.HTR2203, self.AlarmButton.SubWindow.HTR6202,
+                                      self.AlarmButton.SubWindow.HTR6206,self.AlarmButton.SubWindow.HTR6210,
+                                      self.AlarmButton.SubWindow.HTR6223,self.AlarmButton.SubWindow.HTR6224,
+                                      self.AlarmButton.SubWindow.HTR6219,self.AlarmButton.SubWindow.HTR6221,
+                                      self.AlarmButton.SubWindow.HTR6214]
+
         self.AlarmMatrix = [self.AlarmButton.SubWindow.TT2101, self.AlarmButton.SubWindow.TT2111,
                             self.AlarmButton.SubWindow.TT2113, self.AlarmButton.SubWindow.TT2118,
                             self.AlarmButton.SubWindow.TT2119, self.AlarmButton.SubWindow.TT4330,
@@ -1096,8 +1110,19 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.AlarmButton.SubWindow.BFM4313, self.AlarmButton.SubWindow.LT3335,
                             self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
                             self.AlarmButton.SubWindow.SERVO3321_IN_REAL, self.AlarmButton.SubWindow.TS1_MASS,
-                            self.AlarmButton.SubWindow.TS2_MASS, self.AlarmButton.SubWindow.TS3_MASS
-                            ]
+                            self.AlarmButton.SubWindow.TS2_MASS, self.AlarmButton.SubWindow.TS3_MASS,
+                            self.AlarmButton.SubWindow.LS3338, self.AlarmButton.SubWindow.LS3339,
+                            self.AlarmButton.SubWindow.ES3347, self.AlarmButton.SubWindow.PUMP3305_CON,
+                            self.AlarmButton.SubWindow.PUMP3305_OL, self.AlarmButton.SubWindow.PS2352,
+                            self.AlarmButton.SubWindow.PS1361, self.AlarmButton.SubWindow.PS8302,
+                            self.AlarmButton.SubWindow.SERVO3321, self.AlarmButton.SubWindow.HTR6225,
+                            self.AlarmButton.SubWindow.HTR2123, self.AlarmButton.SubWindow.HTR2124,
+                            self.AlarmButton.SubWindow.HTR2125, self.AlarmButton.SubWindow.HTR1202,
+                            self.AlarmButton.SubWindow.HTR2203, self.AlarmButton.SubWindow.HTR6202,
+                            self.AlarmButton.SubWindow.HTR6206, self.AlarmButton.SubWindow.HTR6210,
+                            self.AlarmButton.SubWindow.HTR6223, self.AlarmButton.SubWindow.HTR6224,
+                            self.AlarmButton.SubWindow.HTR6219, self.AlarmButton.SubWindow.HTR6221,
+                            self.AlarmButton.SubWindow.HTR6214]
 
 
         self.signal_connection()
@@ -2944,9 +2969,145 @@ class MainWindow(QtWidgets.QMainWindow):
                                        LowLimit=self.AlarmButton.SubWindow.TS3_MASS.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.TS3_MASS.High_Set.Field.text()))
 
+        self.AlarmButton.SubWindow.LS3338.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS3338.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.LS3338.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.LS3338.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.LS3338.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.LS3339.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS3339.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.LS3339.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.LS3339.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.LS3339.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.ES3347.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.ES3347.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.ES3347.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.ES3347.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.ES3347.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PUMP3305_CON.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.PUMP3305_CON.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.PUMP3305_CON.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.PUMP3305_CON.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.PUMP3305_CON.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PUMP3305_OL.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.PUMP3305_OL.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.PUMP3305_OL.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.PUMP3305_OL.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.PUMP3305_OL.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PS2352.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.PS2352.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.PS2352.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.PS2352.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.PS2352.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PS1361.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.PS1361.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.PS1361.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.PS1361.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.PS1361.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PS8302.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.PS8302.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.PS8302.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.PS8302.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.PS8302.High_Set.Field.text()))
 
 
+        #LOOPPID
+        self.AlarmButton.SubWindow.SERVO3321.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.SERVO3321.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.SERVO3321.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.SERVO3321.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.SERVO3321.High_Set.Field.text()))
 
+        self.AlarmButton.SubWindow.HTR6225.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR6225.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR6225.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR6225.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR6225.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR2123.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR2123.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR2123.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR2123.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR2123.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR2124.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR2124.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR2124.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR2124.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR2124.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR2125.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR2125.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR2125.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR2125.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR2125.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR1202.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR1202.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR1202.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR1202.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR1202.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR2203.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR2203.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR2203.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR2203.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR2203.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR6202.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR6202.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR6202.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR6202.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR6202.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR6206.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR6206.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR6206.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR6206.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR6206.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR6210.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR6210.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR6210.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR6210.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR6210.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR6223.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR6223.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR6223.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR6223.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR6223.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR6224.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR6224.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR6224.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR6224.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR6224.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR6219.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR6219.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR6219.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR6219.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR6219.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR6221.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR6221.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR6221.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR6221.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR6221.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.HTR6214.updatebutton.clicked.connect(
+            lambda: self.LOOPPIDBoxUpdate(pid=self.AlarmButton.SubWindow.HTR6214.Label.text(),
+                                          Act=self.AlarmButton.SubWindow.HTR6214.AlarmMode.isChecked(),
+                                          LowLimit=self.AlarmButton.SubWindow.HTR6214.Low_Set.Field.text(),
+                                          HighLimit=self.AlarmButton.SubWindow.HTR6214.High_Set.Field.text()))
 
 
         ##intlck A window
@@ -3770,6 +3931,38 @@ class MainWindow(QtWidgets.QMainWindow):
             print(e)
 
     @QtCore.Slot()
+    def DinBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "Din", "operation": {"Act": Act,
+                                                                                                    "LowLimit": float(
+                                                                                                        LowLimit),
+                                                                                                    "HighLimit": float(
+                                                                                                        HighLimit),
+                                                                                                    "Update": update}}
+            print(pid, Act, LowLimit, HighLimit, "ARE OK?")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def LOOPPIDBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "LOOPPID_alarm", "operation": {"Act": Act,
+                                                                                                   "LowLimit": float(
+                                                                                                       LowLimit),
+                                                                                                   "HighLimit": float(
+                                                                                                       HighLimit),
+                                                                                                   "Update": update}}
+            print(pid, Act, LowLimit, HighLimit, "ARE OK?")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
     def ProcedureClick(self, pid, start, stop, abort):
         try:
             # if self.commands[pid] is not None:
@@ -3901,6 +4094,15 @@ class MainWindow(QtWidgets.QMainWindow):
         for element in self.LEFTVariableMatrix:
             element.AlarmMode.setChecked(dic_c["Active"]["LEFT_REAL"][element.Label.text()])
 
+
+        for element in self.DinAlarmMatrix:
+            element.AlarmMode.setChecked(dic_c["Active"]["Din"][element.Label.text()])
+
+        for element in self.LOOPPIDAlarmMatrix:
+            element.AlarmMode.setChecked(dic_c["Active"]["LOOPPID"][element.Label.text()])
+
+
+
         # if dic_c["Active"]["TT"]["FP"]["fa"]:
         #     self.AlarmWindow.PT2316.AlarmMode.setChecked(True)
         # elif not dic_c["Active"]["TT"]["FP"]["fa"]:
@@ -4002,6 +4204,32 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["data"]["LEFT_REAL"]["low"][element.Label.text()])
             element.High_Read.SetValue(
                 received_dic_c["data"]["LEFT_REAL"]["high"][element.Label.text()])
+
+
+        for element in self.DinAlarmMatrix:
+            # print(element.Label.text())
+
+            element.UpdateAlarm(
+                received_dic_c["Alarm"]["Din"][element.Label.text()])
+            element.Indicator.SetValue(
+                received_dic_c["data"]["Din"]["value"][element.Label.text()])
+            element.Low_Read.SetValue(
+                received_dic_c["data"]["Din"]["low"][element.Label.text()])
+            element.High_Read.SetValue(
+                received_dic_c["data"]["Din"]["high"][element.Label.text()])
+
+
+        for element in self.LOOPPIDAlarmMatrix:
+            # print(element.Label.text())
+
+            element.UpdateAlarm(
+                received_dic_c["Alarm"]["LOOPPID"][element.Label.text()])
+            element.Indicator.SetValue(
+                received_dic_c["data"]["LOOPPID"]["OUT"][element.Label.text()])
+            element.Low_Read.SetValue(
+                received_dic_c["data"]["LOOPPID"]["LO_LIM"][element.Label.text()])
+            element.High_Read.SetValue(
+                received_dic_c["data"]["LOOPPID"]["HI_LIM"][element.Label.text()])
 
 
         #
@@ -10176,90 +10404,100 @@ class UpdateClient(QtCore.QObject):
 
         print("client is connecting to the ZMQ server")
 
-        self.TT_FP_dic_ini = copy.copy(sec.TT_FP_DIC)
-        self.TT_BO_dic_ini = copy.copy(sec.TT_BO_DIC)
-        self.PT_dic_ini = copy.copy(sec.PT_DIC)
-        self.LEFT_REAL_ini = copy.copy(sec.LEFT_REAL_DIC)
-        self.TT_FP_LowLimit_ini = copy.copy(sec.TT_FP_LOWLIMIT)
-        self.TT_FP_HighLimit_ini = copy.copy(sec.TT_FP_HIGHLIMIT)
-        self.TT_BO_LowLimit_ini = copy.copy(sec.TT_BO_LOWLIMIT)
-        self.TT_BO_HighLimit_ini = copy.copy(sec.TT_BO_HIGHLIMIT)
-        self.PT_LowLimit_ini = copy.copy(sec.PT_LOWLIMIT)
-        self.PT_HighLimit_ini = copy.copy(sec.PT_HIGHLIMIT)
-        self.LEFT_REAL_LowLimit_ini = copy.copy(sec.LEFT_REAL_LOWLIMIT)
-        self.LEFT_REAL_HighLimit_ini = copy.copy(sec.LEFT_REAL_HIGHLIMIT)
-        self.TT_FP_Activated_ini = copy.copy(sec.TT_FP_ACTIVATED)
-        self.TT_BO_Activated_ini = copy.copy(sec.TT_BO_ACTIVATED)
-        self.PT_Activated_ini = copy.copy(sec.PT_ACTIVATED)
-        self.TT_FP_Alarm_ini = copy.copy(sec.TT_FP_ALARM)
-        self.TT_BO_Alarm_ini = copy.copy(sec.TT_BO_ALARM)
-        self.PT_Alarm_ini = copy.copy(sec.PT_ALARM)
-        self.LEFT_REAL_Activated_ini = copy.copy(sec.LEFT_REAL_ACTIVATED)
-        self.LEFT_REAL_Alarm_ini = copy.copy(sec.LEFT_REAL_ALARM)
-        self.MainAlarm_ini = copy.copy(sec.MAINALARM)
-        self.Valve_OUT_ini = copy.copy(sec.VALVE_OUT)
-        self.Valve_MAN_ini = copy.copy(sec.VALVE_MAN)
-        self.Valve_INTLKD_ini = copy.copy(sec.VALVE_INTLKD)
-        self.Valve_ERR_ini = copy.copy(sec.VALVE_ERR)
-        self.Valve_Busy = copy.copy(sec.VALVE_BUSY)
-        self.Switch_OUT_ini = copy.copy(sec.SWITCH_OUT)
-        self.Switch_MAN_ini = copy.copy(sec.SWITCH_MAN)
-        self.Switch_INTLKD_ini = copy.copy(sec.SWITCH_INTLKD)
-        self.Switch_ERR_ini = copy.copy(sec.SWITCH_ERR)
-        self.Din_dic_ini = copy.copy(sec.DIN_DIC)
-        self.LOOPPID_MODE0_ini = copy.copy(sec.LOOPPID_MODE0)
-        self.LOOPPID_MODE1_ini = copy.copy(sec.LOOPPID_MODE1)
-        self.LOOPPID_MODE2_ini = copy.copy(sec.LOOPPID_MODE2)
-        self.LOOPPID_MODE3_ini = copy.copy(sec.LOOPPID_MODE3)
-        self.LOOPPID_INTLKD_ini = copy.copy(sec.LOOPPID_INTLKD)
-        self.LOOPPID_MAN_ini = copy.copy(sec.LOOPPID_MAN)
-        self.LOOPPID_ERR_ini = copy.copy(sec.LOOPPID_ERR)
-        self.LOOPPID_SATHI_ini = copy.copy(sec.LOOPPID_SATHI)
-        self.LOOPPID_SATLO_ini = copy.copy(sec.LOOPPID_SATLO)
-        self.LOOPPID_EN_ini = copy.copy(sec.LOOPPID_EN)
-        self.LOOPPID_OUT_ini = copy.copy(sec.LOOPPID_OUT)
-        self.LOOPPID_IN_ini = copy.copy(sec.LOOPPID_IN)
-        self.LOOPPID_HI_LIM_ini = copy.copy(sec.LOOPPID_HI_LIM)
-        self.LOOPPID_LO_LIM_ini = copy.copy(sec.LOOPPID_LO_LIM)
-        self.LOOPPID_SET0_ini = copy.copy(sec.LOOPPID_SET0)
-        self.LOOPPID_SET1_ini = copy.copy(sec.LOOPPID_SET1)
-        self.LOOPPID_SET2_ini = copy.copy(sec.LOOPPID_SET2)
-        self.LOOPPID_SET3_ini = copy.copy(sec.LOOPPID_SET3)
-        self.LOOPPID_Busy_ini = copy.copy(sec.LOOPPID_BUSY)
+        self.TT_FP_dic_ini = sec.TT_FP_DIC
+        self.TT_BO_dic_ini = sec.TT_BO_DIC
+        self.PT_dic_ini = sec.PT_DIC
+        self.LEFT_REAL_ini = sec.LEFT_REAL_DIC
+        self.TT_FP_LowLimit_ini = sec.TT_FP_LOWLIMIT
+        self.TT_FP_HighLimit_ini = sec.TT_FP_HIGHLIMIT
+        self.TT_BO_LowLimit_ini = sec.TT_BO_LOWLIMIT
+        self.TT_BO_HighLimit_ini = sec.TT_BO_HIGHLIMIT
+        self.PT_LowLimit_ini = sec.PT_LOWLIMIT
+        self.PT_HighLimit_ini = sec.PT_HIGHLIMIT
+        self.LEFT_REAL_LowLimit_ini = sec.LEFT_REAL_LOWLIMIT
+        self.LEFT_REAL_HighLimit_ini = sec.LEFT_REAL_HIGHLIMIT
+        self.TT_FP_Activated_ini = sec.TT_FP_ACTIVATED
+        self.TT_BO_Activated_ini = sec.TT_BO_ACTIVATED
+        self.PT_Activated_ini = sec.PT_ACTIVATED
+        self.TT_FP_Alarm_ini = sec.TT_FP_ALARM
+        self.TT_BO_Alarm_ini = sec.TT_BO_ALARM
+        self.PT_Alarm_ini = sec.PT_ALARM
+        self.LEFT_REAL_Activated_ini = sec.LEFT_REAL_ACTIVATED
+        self.LEFT_REAL_Alarm_ini = sec.LEFT_REAL_ALARM
+        self.MainAlarm_ini = sec.MAINALARM
+        self.MAN_SET = sec.MAN_SET
+        self.Valve_OUT_ini = sec.VALVE_OUT
+        self.Valve_MAN_ini = sec.VALVE_MAN
+        self.Valve_INTLKD_ini = sec.VALVE_INTLKD
+        self.Valve_ERR_ini = sec.VALVE_ERR
+        self.Valve_Busy_ini = sec.VALVE_BUSY
+        self.Switch_OUT_ini = sec.SWITCH_OUT
+        self.Switch_MAN_ini = sec.SWITCH_MAN
+        self.Switch_INTLKD_ini = sec.SWITCH_INTLKD
+        self.Switch_ERR_ini = sec.SWITCH_ERR
+        self.Din_dic_ini = sec.DIN_DIC
+        self.Din_HighLimit_ini = sec.DIN_HIGHLIMIT
+        self.Din_LowLimit_ini = sec.DIN_LOWLIMIT
+        self.Din_Activated_ini = sec.DIN_ACTIVATED
+        self.Din_Alarm_ini = sec.DIN_ALARM
 
-        self.LOOP2PT_MODE0_ini = copy.copy(sec.LOOP2PT_MODE0)
-        self.LOOP2PT_MODE1_ini = copy.copy(sec.LOOP2PT_MODE1)
-        self.LOOP2PT_MODE2_ini = copy.copy(sec.LOOP2PT_MODE2)
-        self.LOOP2PT_MODE3_ini = copy.copy(sec.LOOP2PT_MODE3)
-        self.LOOP2PT_INTLKD_ini = copy.copy(sec.LOOP2PT_INTLKD)
-        self.LOOP2PT_MAN_ini = copy.copy(sec.LOOP2PT_MAN)
-        self.LOOP2PT_ERR_ini = copy.copy(sec.LOOP2PT_ERR)
-        self.LOOP2PT_OUT_ini = copy.copy(sec.LOOP2PT_OUT)
-        self.LOOP2PT_SET1_ini = copy.copy(sec.LOOP2PT_SET1)
-        self.LOOP2PT_SET2_ini = copy.copy(sec.LOOP2PT_SET2)
-        self.LOOP2PT_SET3_ini = copy.copy(sec.LOOP2PT_SET3)
-        self.LOOP2PT_Busy_ini = copy.copy(sec.LOOP2PT_BUSY)
+        self.LOOPPID_MODE0_ini = sec.LOOPPID_MODE0
+        self.LOOPPID_MODE1_ini = sec.LOOPPID_MODE1
+        self.LOOPPID_MODE2_ini = sec.LOOPPID_MODE2
+        self.LOOPPID_MODE3_ini = sec.LOOPPID_MODE3
+        self.LOOPPID_INTLKD_ini = sec.LOOPPID_INTLKD
+        self.LOOPPID_MAN_ini = sec.LOOPPID_MAN
+        self.LOOPPID_ERR_ini = sec.LOOPPID_ERR
+        self.LOOPPID_SATHI_ini = sec.LOOPPID_SATHI
+        self.LOOPPID_SATLO_ini = sec.LOOPPID_SATLO
+        self.LOOPPID_EN_ini = sec.LOOPPID_EN
+        self.LOOPPID_OUT_ini = sec.LOOPPID_OUT
+        self.LOOPPID_IN_ini = sec.LOOPPID_IN
+        self.LOOPPID_HI_LIM_ini = sec.LOOPPID_HI_LIM
+        self.LOOPPID_LO_LIM_ini = sec.LOOPPID_LO_LIM
+        self.LOOPPID_SET0_ini = sec.LOOPPID_SET0
+        self.LOOPPID_SET1_ini = sec.LOOPPID_SET1
+        self.LOOPPID_SET2_ini = sec.LOOPPID_SET2
+        self.LOOPPID_SET3_ini = sec.LOOPPID_SET3
+        self.LOOPPID_Busy_ini = sec.LOOPPID_BUSY
+        self.LOOPPID_Alarm_ini = sec.LOOPPID_ALARM
+        self.LOOPPID_Activated_ini = sec.LOOPPID_ACTIVATED
 
-        self.Procedure_running_ini = copy.copy(sec.PROCEDURE_RUNNING)
-        self.Procedure_INTLKD_ini = copy.copy(sec.PROCEDURE_INTLKD)
-        self.Procedure_EXIT_ini = copy.copy(sec.PROCEDURE_EXIT)
+        self.LOOP2PT_MODE0_ini = sec.LOOP2PT_MODE0
+        self.LOOP2PT_MODE1_ini = sec.LOOP2PT_MODE1
+        self.LOOP2PT_MODE2_ini = sec.LOOP2PT_MODE2
+        self.LOOP2PT_MODE3_ini = sec.LOOP2PT_MODE3
+        self.LOOP2PT_INTLKD_ini = sec.LOOP2PT_INTLKD
+        self.LOOP2PT_MAN_ini = sec.LOOP2PT_MAN
+        self.LOOP2PT_ERR_ini = sec.LOOP2PT_ERR
+        self.LOOP2PT_OUT_ini = sec.LOOP2PT_OUT
+        self.LOOP2PT_SET1_ini = sec.LOOP2PT_SET1
+        self.LOOP2PT_SET2_ini = sec.LOOP2PT_SET2
+        self.LOOP2PT_SET3_ini = sec.LOOP2PT_SET3
+        self.LOOP2PT_Busy_ini = sec.LOOP2PT_BUSY
 
-        self.INTLK_D_ADDRESS_ini = copy.copy(sec.INTLK_D_ADDRESS)
-        self.INTLK_D_DIC_ini = copy.copy(sec.INTLK_D_DIC)
-        self.INTLK_D_EN_ini = copy.copy(sec.INTLK_D_EN)
-        self.INTLK_D_COND_ini = copy.copy(sec.INTLK_D_COND)
-        self.INTLK_D_Busy_ini = copy.copy(sec.INTLK_D_BUSY)
-        self.INTLK_A_ADDRESS_ini = copy.copy(sec.INTLK_A_ADDRESS)
-        self.INTLK_A_DIC_ini = copy.copy(sec.INTLK_A_DIC)
-        self.INTLK_A_EN_ini = copy.copy(sec.INTLK_A_EN)
-        self.INTLK_A_COND_ini = copy.copy(sec.INTLK_A_COND)
-        self.INTLK_A_SET_ini = copy.copy(sec.INTLK_A_SET)
-        self.INTLK_A_Busy_ini = copy.copy(sec.INTLK_A_BUSY)
+        self.Procedure_running_ini = sec.PROCEDURE_RUNNING
+        self.Procedure_INTLKD_ini = sec.PROCEDURE_INTLKD
+        self.Procedure_EXIT_ini = sec.PROCEDURE_EXIT
 
-        self.FLAG_ADDRESS_ini = copy.copy(sec.FLAG_ADDRESS)
-        self.FLAG_DIC_ini = copy.copy(sec.FLAG_DIC)
-        self.FLAG_INTLKD_ini = copy.copy(sec.FLAG_INTLKD)
-        self.FLAG_Busy_ini = copy.copy(sec.FLAG_BUSY)
+        self.INTLK_D_ADDRESS_ini = sec.INTLK_D_ADDRESS
+        self.INTLK_D_DIC_ini = sec.INTLK_D_DIC
+        self.INTLK_D_EN_ini = sec.INTLK_D_EN
+        self.INTLK_D_COND_ini = sec.INTLK_D_COND
+        self.INTLK_D_Busy_ini = sec.INTLK_D_BUSY
+        self.INTLK_A_ADDRESS_ini = sec.INTLK_A_ADDRESS
+        self.INTLK_A_DIC_ini = sec.INTLK_A_DIC
+        self.INTLK_A_EN_ini = sec.INTLK_A_EN
+        self.INTLK_A_COND_ini = sec.INTLK_A_COND
+        self.INTLK_A_SET_ini = sec.INTLK_A_SET
+        self.INTLK_A_Busy_ini = sec.INTLK_A_BUSY
+
+        self.FLAG_ADDRESS_ini = sec.FLAG_ADDRESS
+        self.FLAG_DIC_ini = sec.FLAG_DIC
+        self.FLAG_INTLKD_ini = sec.FLAG_INTLKD
+        self.FLAG_Busy_ini = sec.FLAG_BUSY
+
+
         self.MAN_SET = copy.copy(sec.MAN_SET)
 
         self.receive_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
@@ -10270,12 +10508,12 @@ class UpdateClient(QtCore.QObject):
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
                                             "ERR": self.Valve_ERR_ini,
-                                            "Busy":self.Valve_Busy},
+                                            "Busy":self.Valve_Busy_ini},
                                   "Switch": {"OUT": self.Switch_OUT_ini,
                                              "INTLKD": self.Switch_INTLKD_ini,
                                              "MAN": self.Switch_MAN_ini,
                                              "ERR": self.Switch_ERR_ini},
-                                  "Din": {'value': self.Din_dic_ini},
+                                  "Din": {'value': self.Din_dic_ini,"high": self.Din_HighLimit_ini, "low": self.Din_LowLimit_ini},
                                   "LOOPPID": {"MODE0": self.LOOPPID_MODE0_ini,
                                               "MODE1": self.LOOPPID_MODE1_ini,
                                               "MODE2": self.LOOPPID_MODE2_ini,
@@ -10294,7 +10532,8 @@ class UpdateClient(QtCore.QObject):
                                               "SET1": self.LOOPPID_SET1_ini,
                                               "SET2": self.LOOPPID_SET2_ini,
                                               "SET3": self.LOOPPID_SET3_ini,
-                                              "Busy":self.LOOPPID_Busy_ini},
+                                              "Busy":self.LOOPPID_Busy_ini,
+                                              "Alarm":self.LOOPPID_Alarm_ini},
                                   "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
                                               "MODE1": self.LOOP2PT_MODE1_ini,
                                               "MODE2": self.LOOP2PT_MODE2_ini,
@@ -10318,17 +10557,23 @@ class UpdateClient(QtCore.QObject):
                                               "Busy":self.INTLK_A_Busy_ini},
                                   "FLAG": {"value":self.FLAG_DIC_ini,
                                            "INTLKD":self.FLAG_INTLKD_ini,
-                                            "Busy":self.FLAG_Busy_ini},
+                                           "Busy":self.FLAG_Busy_ini},
                                   "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini}},
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
-                                   "LEFT_REAL": self.LEFT_REAL_Alarm_ini},
+                                   "LEFT_REAL": self.LEFT_REAL_Alarm_ini,
+                                   "Din": self.Din_Alarm_ini,
+                                   "LOOPPID": self.LOOPPID_Alarm_ini},
                          "Active": {"TT": {"FP": self.TT_FP_Activated_ini,
                                           "BO": self.TT_BO_Activated_ini},
                                    "PT": self.PT_Activated_ini,
-                                   "LEFT_REAL": self.LEFT_REAL_Activated_ini},
-                         "MainAlarm": self.MainAlarm_ini}
+                                   "LEFT_REAL": self.LEFT_REAL_Activated_ini,
+                                    "Din": self.Din_Activated_ini,
+                                    "LOOPPID": self.LOOPPID_Activated_ini
+                                    },
+                         "MainAlarm": self.MainAlarm_ini
+                         }
         self.commands_package= pickle.dumps({})
 
     @QtCore.Slot()

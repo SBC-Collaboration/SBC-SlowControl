@@ -77,7 +77,10 @@ class PLC(QtCore.QObject):
         self.Connected_BO = self.Client_BO.connect()
         print(" Beckoff connected: " + str(self.Connected_BO))
 
+        # wait 1 second to init
+        time.sleep(1)
         self.alarm_config()
+
 
         self.TT_FP_address = copy.copy(sec.TT_FP_ADDRESS)
 
@@ -149,6 +152,7 @@ class PLC(QtCore.QObject):
         self.Din_LowLimit = copy.copy(sec.DIN_LOWLIMIT)
         self.Din_HighLimit = copy.copy(sec.DIN_HIGHLIMIT)
         self.Din_Activated = copy.copy(sec.DIN_ACTIVATED)
+        self.Din_Alarm = copy.copy(sec.DIN_ALARM)
 
         self.valve_address = copy.copy(sec.VALVE_ADDRESS)
         self.nValve = copy.copy(sec.NVALVE)
@@ -198,6 +202,7 @@ class PLC(QtCore.QObject):
         self.LOOPPID_SET3 = copy.copy(sec.LOOPPID_SET3)
         self.LOOPPID_Busy = copy.copy(sec.LOOPPID_BUSY)
         self.LOOPPID_Activated = copy.copy(sec.LOOPPID_ACTIVATED)
+        self.LOOPPID_Alarm = copy.copy(sec.LOOPPID_ALARM)
         # self.LOOPPID_ADR_BASE = sec.LOOPPID_ADR_BASE
         #
         # self.LOOPPID_MODE0 = sec.LOOPPID_MODE0
@@ -337,6 +342,9 @@ class PLC(QtCore.QObject):
                               "nDin":self.nDin,
                               "Din":self.Din,
                               "Din_dic":self.Din_dic,
+                              "Din_LowLimit":self.Din_LowLimit,
+                              "Din_HighLimit":self.Din_HighLimit,
+                              "Din_Alarm": self.Din_Alarm,
                               "valve_address":self.valve_address,
                               "nValve":self.nValve,
                               "Valve":self.Valve,
@@ -365,6 +373,7 @@ class PLC(QtCore.QObject):
                               "LOOPPID_SET2":self.LOOPPID_SET2,
                               "LOOPPID_SET3":self.LOOPPID_SET3,
                               "LOOPPID_Busy":self.LOOPPID_Busy,
+                              "LOOPPID_Alarm": self.LOOPPID_Alarm,
                               "LOOP2PT_ADR_BASE":self.LOOP2PT_ADR_BASE,
                               "LOOP2PT_MODE0": self.LOOP2PT_MODE0,
                               "LOOP2PT_MODE1": self.LOOP2PT_MODE1,
@@ -421,55 +430,60 @@ class PLC(QtCore.QObject):
         self.Client_BO.close()
 
     def load_alarm_config(self):
-        self.alarm_config = AS.Alarm_Setting()
-        self.alarm_config.read_Information()
-        for key in self.TT_FP_HighLimit:
-            self.TT_FP_HighLimit[key]=self.alarm_config.high_dic[key]
-        for key in self.TT_BO_HighLimit:
-            self.TT_BO_HighLimit[key]=self.alarm_config.high_dic[key]
-        for key in self.PT_HighLimit:
-            self.PT_HighLimit[key]=self.alarm_config.high_dic[key]
-        for key in self.LEFT_REAL_HighLimit:
-            self.LEFT_REAL_HighLimit[key]=self.alarm_config.high_dic[key]
+        self.Connected = self.Client.connect()
+        self.Connected_BO = self.Client_BO.connect()
+        if self.Connected_BO:
+            self.alarm_config = AS.Alarm_Setting()
+            self.alarm_config.read_Information()
+            for key in self.TT_FP_HighLimit:
+                self.TT_FP_HighLimit[key] = self.alarm_config.high_dic[key]
+            for key in self.TT_BO_HighLimit:
+                self.TT_BO_HighLimit[key] = self.alarm_config.high_dic[key]
+            for key in self.PT_HighLimit:
+                self.PT_HighLimit[key] = self.alarm_config.high_dic[key]
+            for key in self.LEFT_REAL_HighLimit:
+                self.LEFT_REAL_HighLimit[key] = self.alarm_config.high_dic[key]
 
-        for key in self.TT_FP_LowLimit:
-            self.TT_FP_LowLimit[key]=self.alarm_config.low_dic[key]
-        for key in self.TT_BO_LowLimit:
-            self.TT_BO_LowLimit[key]=self.alarm_config.low_dic[key]
-        for key in self.PT_LowLimit:
-            self.PT_LowLimit[key]=self.alarm_config.low_dic[key]
-        for key in self.LEFT_REAL_LowLimit:
-            self.LEFT_REAL_LowLimit[key]=self.alarm_config.low_dic[key]
+            for key in self.TT_FP_LowLimit:
+                self.TT_FP_LowLimit[key] = self.alarm_config.low_dic[key]
+            for key in self.TT_BO_LowLimit:
+                self.TT_BO_LowLimit[key] = self.alarm_config.low_dic[key]
+            for key in self.PT_LowLimit:
+                self.PT_LowLimit[key] = self.alarm_config.low_dic[key]
+            for key in self.LEFT_REAL_LowLimit:
+                self.LEFT_REAL_LowLimit[key] = self.alarm_config.low_dic[key]
 
-        for key in self.TT_FP_Activated:
-            self.TT_FP_Activated[key] = self.alarm_config.active_dic[key]
-        for key in self.TT_BO_Activated:
-            self.TT_BO_Activated[key] = self.alarm_config.active_dic[key]
-        for key in self.PT_Activated:
-            self.PT_Activated[key] = self.alarm_config.active_dic[key]
-        for key in self.LEFT_REAL_Activated:
-            self.LEFT_REAL_Activated[key] = self.alarm_config.active_dic[key]
+            for key in self.TT_FP_Activated:
+                self.TT_FP_Activated[key] = self.alarm_config.active_dic[key]
+            for key in self.TT_BO_Activated:
+                self.TT_BO_Activated[key] = self.alarm_config.active_dic[key]
+            for key in self.PT_Activated:
+                self.PT_Activated[key] = self.alarm_config.active_dic[key]
+            for key in self.LEFT_REAL_Activated:
+                self.LEFT_REAL_Activated[key] = self.alarm_config.active_dic[key]
 
-        for key in self.Din_LowLimit:
-            self.Din_LowLimit[key]= self.alarm_config.low_dic[key]
-        for key in self.Din_HighLimit:
-            self.Din_HighLimit[key]= self.alarm_config.high_dic[key]
-        for key in self.Din_Activated:
-            self.Din_Activated[key]= self.alarm_config.active_dic[key]
+            for key in self.Din_LowLimit:
+                self.Din_LowLimit[key] = self.alarm_config.low_dic[key]
+            for key in self.Din_HighLimit:
+                self.Din_HighLimit[key] = self.alarm_config.high_dic[key]
+            for key in self.Din_Activated:
+                self.Din_Activated[key] = self.alarm_config.active_dic[key]
 
+            for key in self.LOOPPID_LO_LIM:
+                self.LOOPPID_SET_LO_LIM(address=self.LOOPPID_ADR_BASE[key],
+                                        value=self.alarm_config.low_dic[key])
 
-        for key in self.LOOPPID_LO_LIM:
-            self.LOOPPID_SET_LO_LIM(address=self.LOOPPID_ADR_BASE[key],
-                                    value=self.alarm_config.low_dic[key])
+            for key in self.LOOPPID_HI_LIM:
+                self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
+                                        value=self.alarm_config.high_dic[key])
 
-        for key in self.LOOPPID_HI_LIM:
-            self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
-                                    value=self.alarm_config.high_dic[key])
+            for key in self.LOOPPID_Activated:
+                self.LOOPPID_Activated = self.alarm_config.active_dic[key]
+        else:
+            self.PLC_DISCON_SIGNAL.emit()
+            # raise Exception('Not connected to PLC')  # will it restart the PLC ?
 
-        for key in self.LOOPPID_Activated:
-            self.LOOPPID_Activated = self.alarm_config.active_dic[key]
-
-
+            return 1
 
     def ReadAll(self):
         # print(self.TT_BO_HighLimit["TT2119"])
@@ -2072,6 +2086,10 @@ class UpdatePLC(QtCore.QObject):
         self.PR_CYCLE_rate = 30
         self.LEFT_REAL_para = 0
         self.LEFT_REAL_rate = 30
+        self.Din_para = 0
+        self.Din_rate = 30
+        self.LOOPPID_para = 0
+        self.LOOPPID_rate = 30
 
     @QtCore.Slot()
     def run(self):
@@ -2093,6 +2111,10 @@ class UpdatePLC(QtCore.QObject):
                     self.check_PT_alarm(keyPT)
                 for keyLEFT_REAL in self.PLC.LEFT_REAL_dic:
                     self.check_LEFT_REAL_alarm(keyLEFT_REAL)
+                for keyDin in self.PLC.Din_dic:
+                    self.check_Din_alarm(keyDin)
+                for keyLOOPPID in self.PLC.LOOPPID_dic:
+                    self.check_LOOPPID_alarm(keyLOOPPID)
                 self.or_alarm_signal()
                 time.sleep(self.period)
         except KeyboardInterrupt:
@@ -2197,6 +2219,39 @@ class UpdatePLC(QtCore.QObject):
             self.resetLEFT_REALalarmmsg(pid)
             pass
 
+    def check_Din_alarm(self, pid):
+
+        if self.PLC.Din_Activated[pid]:
+            if float(self.PLC.Din_LowLimit[pid]) > float(self.PLC.Din_HighLimit[pid]):
+                print("Low limit should be less than high limit!")
+            else:
+                if float(self.PLC.Din_dic[pid]) < float(self.PLC.Din_LowLimit[pid]):
+                    self.Dinalarmmsg(pid)
+
+                    # print(pid , " reading is lower than the low limit")
+                elif float(self.PLC.Din_dic[pid]) > float(self.PLC.Din_HighLimit[pid]):
+                    self.Dinalarmmsg(pid)
+                    # print(pid,  " reading is higher than the high limit")
+                else:
+                    self.resetDinalarmmsg(pid)
+                    # print(pid, " is in normal range")
+
+        else:
+            self.resetDinalarmmsg(pid)
+            pass
+
+    def check_LOOPPID_alarm(self, pid):
+        if self.PLC.LOOPPID_Activated[pid]:
+            if self.PLC.LOOPPID_SATLO[pid] or self.PLC.LOOPPID_SATHI[pid]:
+                self.LOOPPIDalarmmsg(pid)
+            else:
+                self.resetLOOPPIDalarmmsg(pid)
+                # print(pid, " is in normal range")
+
+        else:
+            self.resetLOOPPIDalarmmsg(pid)
+            pass
+
     def TTFPalarmmsg(self, pid):
         self.PLC.TT_FP_Alarm[pid] = True
         # and send email or slack messages
@@ -2271,8 +2326,44 @@ class UpdatePLC(QtCore.QObject):
         # self.LEFT_REAL_para = 0
         # and send email or slack messages
 
+    def Dinalarmmsg(self, pid):
+        self.PLC.Din_Alarm[pid] = True
+        # and send email or slack messages
+        if self.Din_para >= self.Din_rate:
+            msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, HI_LIM: {high}, LO_LIM: {low}".format(pid=pid, current=self.PLC.Din_dic[pid],
+                                                                                                                     high=self.PLC.Din_HighLimit[pid], low=self.PLC.Din_LowLimit[pid])
+
+            # self.message_manager.tencent_alarm(msg)
+            # self.message_manager.slack_alarm(msg)
+            self.AI_slack_alarm.emit(msg)
+            self.Din_para = 0
+        self.Din_para += 1
+
+    def resetDinalarmmsg(self, pid):
+        self.PLC.Din_Alarm[pid] = False
+        # self.Din_para = 0
+        # and send email or slack messages
+
+    def LOOPPIDalarmmsg(self, pid):
+        self.PLC.LOOPPID_Alarm[pid] = True
+        # and send email or slack messages
+        if self.LOOPPID_para >= self.LOOPPID_rate:
+            msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, HI_LIM: {high}, LO_LIM: {low}".format(pid=pid, current=self.PLC.LOOPPID_dic[pid],
+                                                                                                                     high=self.PLC.LOOPPID_HighLimit[pid], low=self.PLC.LOOPPID_LowLimit[pid])
+
+            # self.message_manager.tencent_alarm(msg)
+            # self.message_manager.slack_alarm(msg)
+            self.AI_slack_alarm.emit(msg)
+            self.LOOPPID_para = 0
+        self.LOOPPID_para += 1
+
+    def resetLOOPPIDalarmmsg(self, pid):
+        self.PLC.LOOPPID_Alarm[pid] = False
+        # self.LOOPPID_para = 0
+        # and send email or slack messages
+
     def or_alarm_signal(self):
-        if (True in self.PLC.TT_BO_Alarm) or (True in self.PLC.PT_Alarm) or (True in self.PLC.TT_FP_Alarm) or (True in self.PLC.LEFT_REAL_Alarm):
+        if (True in self.PLC.TT_BO_Alarm) or (True in self.PLC.PT_Alarm) or (True in self.PLC.TT_FP_Alarm) or (True in self.PLC.LEFT_REAL_Alarm) or (True in self.PLC.Din_Alarm) or (True in self.PLC.LOOPPID_Alarm):
             self.PLC.MainAlarm = True
         else:
             self.PLC.MainAlarm = False
@@ -2408,6 +2499,11 @@ class UpdateServer(QtCore.QObject):
         self.Switch_INTLKD_ini = sec.SWITCH_INTLKD
         self.Switch_ERR_ini = sec.SWITCH_ERR
         self.Din_dic_ini = sec.DIN_DIC
+        self.Din_HighLimit_ini = sec.DIN_HIGHLIMIT
+        self.Din_LowLimit_ini = sec.DIN_LOWLIMIT
+        self.Din_Activated_ini = sec.DIN_ACTIVATED
+        self.Din_Alarm_ini = sec.DIN_ALARM
+
         self.LOOPPID_MODE0_ini = sec.LOOPPID_MODE0
         self.LOOPPID_MODE1_ini = sec.LOOPPID_MODE1
         self.LOOPPID_MODE2_ini = sec.LOOPPID_MODE2
@@ -2427,6 +2523,8 @@ class UpdateServer(QtCore.QObject):
         self.LOOPPID_SET2_ini = sec.LOOPPID_SET2
         self.LOOPPID_SET3_ini = sec.LOOPPID_SET3
         self.LOOPPID_Busy_ini = sec.LOOPPID_BUSY
+        self.LOOPPID_Alarm_ini = sec.LOOPPID_ALARM
+        self.LOOPPID_Activated_ini = sec.LOOPPID_ACTIVATED
 
         self.LOOP2PT_MODE0_ini = sec.LOOP2PT_MODE0
         self.LOOP2PT_MODE1_ini = sec.LOOP2PT_MODE1
@@ -2475,7 +2573,7 @@ class UpdateServer(QtCore.QObject):
                                              "INTLKD": self.Switch_INTLKD_ini,
                                              "MAN": self.Switch_MAN_ini,
                                              "ERR": self.Switch_ERR_ini},
-                                  "Din": {'value': self.Din_dic_ini},
+                                  "Din": {'value': self.Din_dic_ini,"high": self.Din_HighLimit_ini, "low": self.Din_LowLimit_ini},
                                   "LOOPPID": {"MODE0": self.LOOPPID_MODE0_ini,
                                               "MODE1": self.LOOPPID_MODE1_ini,
                                               "MODE2": self.LOOPPID_MODE2_ini,
@@ -2494,7 +2592,8 @@ class UpdateServer(QtCore.QObject):
                                               "SET1": self.LOOPPID_SET1_ini,
                                               "SET2": self.LOOPPID_SET2_ini,
                                               "SET3": self.LOOPPID_SET3_ini,
-                                              "Busy":self.LOOPPID_Busy_ini},
+                                              "Busy":self.LOOPPID_Busy_ini,
+                                              "Alarm":self.LOOPPID_Alarm_ini},
                                   "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
                                               "MODE1": self.LOOP2PT_MODE1_ini,
                                               "MODE2": self.LOOP2PT_MODE2_ini,
@@ -2523,11 +2622,16 @@ class UpdateServer(QtCore.QObject):
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
-                                   "LEFT_REAL": self.LEFT_REAL_Alarm_ini},
+                                   "LEFT_REAL": self.LEFT_REAL_Alarm_ini,
+                                   "Din": self.Din_Alarm_ini,
+                                   "LOOPPID": self.LOOPPID_Alarm_ini},
                          "Active": {"TT": {"FP": self.TT_FP_Activated_ini,
                                           "BO": self.TT_BO_Activated_ini},
                                    "PT": self.PT_Activated_ini,
-                                   "LEFT_REAL": self.LEFT_REAL_Activated_ini},
+                                   "LEFT_REAL": self.LEFT_REAL_Activated_ini,
+                                    "Din": self.Din_Activated_ini,
+                                    "LOOPPID": self.LOOPPID_Activated_ini
+                                    },
                          "MainAlarm": self.MainAlarm_ini
                          }
 
@@ -2632,6 +2736,15 @@ class UpdateServer(QtCore.QObject):
             self.Switch_ERR_ini[key] = self.PLC.Switch_ERR[key]
         for key in self.PLC.Din_dic:
             self.Din_dic_ini[key] = self.PLC.Din_dic[key]
+        for key in self.PLC.Din_LowLimit:
+            self.Din_LowLimit_ini[key] = self.PLC.Din_LowLimit[key]
+        for key in self.PLC.Din_HighLimit:
+            self.Din_HighLimit_ini[key] = self.PLC.Din_HighLimit[key]
+        for key in self.PLC.Din_Alarm:
+            self.Din_Alarm_ini[key] = self.PLC.Din_Alarm[key]
+        for key in self.PLC.Din_Activated:
+            self.Din_Activated_ini[key] = self.PLC.Din_Activated[key]
+
 
         for key in self.PLC.TT_FP_Alarm:
             self.TT_FP_Alarm_ini[key] = self.PLC.TT_FP_Alarm[key]
@@ -2679,6 +2792,11 @@ class UpdateServer(QtCore.QObject):
             self.LOOPPID_SET3_ini[key] = self.PLC.LOOPPID_SET3[key]
         for key in self.PLC.LOOPPID_Busy:
             self.LOOPPID_Busy_ini[key] = self.PLC.LOOPPID_Busy[key]
+        for key in self.PLC.LOOPPID_Activated:
+            self.LOOPPID_Activated_ini[key] = self.PLC.LOOPPID_Activated[key]
+        for key in self.PLC.LOOPPID_Alarm:
+            self.LOOPPID_Alarm_ini[key] = self.PLC.LOOPPID_Alarm[key]
+
 
         for key in self.PLC.LOOP2PT_MODE0:
             self.LOOP2PT_MODE0_ini[key] = self.PLC.LOOP2PT_MODE0[key]
@@ -2815,6 +2933,32 @@ class UpdateServer(QtCore.QObject):
                                 self.PLC.LEFT_REAL_Activated[key] = message[key]["operation"]["Act"]
                         else:
                             pass
+
+                    elif message[key]["type"] == "Din":
+                        if message[key]["server"] == "BO":
+                            if message[key]["operation"]["Update"]:
+                                self.PLC.Din_REAL_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.Din_REAL_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                                self.PLC.Din_REAL_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                            else:
+                                self.PLC.Din_REAL_Activated[key] = message[key]["operation"]["Act"]
+                        else:
+                            pass
+
+                    elif message[key]["type"] == "LOOPPID_alarm":
+                        if message[key]["server"] == "BO":
+                            if message[key]["operation"]["Update"]:
+                                self.PLC.LOOPPID_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
+                                                            value=message[key]["operation"]["HI_LIM"])
+                                self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
+                                                            value=message[key]["operation"]["LO_LIM"])
+                                
+                            else:
+                                self.PLC.Din_REAL_Activated[key] = message[key]["operation"]["Act"]
+                        else:
+                            pass
+
                     elif message[key]["type"] == "Procedure":
                         if message[key]["server"] == "BO":
                             if message[key]["operation"]["Start"]:

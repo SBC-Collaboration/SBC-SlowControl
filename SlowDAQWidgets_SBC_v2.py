@@ -611,6 +611,9 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.LEFTVariableTab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.LEFTVariableTab, "LEFT VARIABLEs")
 
+        self.HTRTab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.HTRTab, "HEATER VARIABLEs")
+
         self.MAN_ACT = QtWidgets.QPushButton(self)
         self.MAN_ACT.setObjectName("Label")
         self.MAN_ACT.setText("MAN_ACT")
@@ -695,6 +698,26 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.GroupLEFT.setTitle(" LEFT Variables ")
         self.GroupLEFT.setLayout(self.GLLEFT)
         self.GroupLEFT.move(0 * R, 0 * R)
+
+        self.GLDIN = QtWidgets.QGridLayout()
+        self.GLDIN.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLDIN.setSpacing(20 * R)
+        self.GLDIN.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupDIN = QtWidgets.QGroupBox(self.LEFTVariableTab)
+        self.GroupDIN.setTitle(" DIN Variables ")
+        self.GroupDIN.setLayout(self.GLDIN)
+        self.GroupDIN.move(0 * R, 500 * R)
+
+        self.GLHTR = QtWidgets.QGridLayout()
+        self.GLHTR.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLHTR.setSpacing(20 * R)
+        self.GLHTR.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupHTR = QtWidgets.QGroupBox(self.HTRTab)
+        self.GroupHTR.setTitle(" HTR Variables ")
+        self.GroupHTR.setLayout(self.GLHTR)
+        self.GroupHTR.move(0 * R, 0 * R)
 
         self.TT2111 = AlarmStatusWidget(self.RTDSET1Tab)
         self.TT2111.Label.setText("TT2111")
@@ -1161,6 +1184,163 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.TS3_MASS.Low_Read.SetUnit(" ")
         self.TS3_MASS.High_Read.SetUnit(" ")
 
+        self.PUMP3305_CON = AlarmStatusWidget(self.LEFTVariableTab)
+        self.PUMP3305_CON.Label.setText("PUMP3305_CON")
+        self.PUMP3305_CON.Indicator.SetUnit(" ")
+        self.PUMP3305_CON.Low_Read.SetUnit(" ")
+        self.PUMP3305_CON.High_Read.SetUnit(" ")
+
+
+
+        self.LS3338 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LS3338.Label.setText("LS3338")
+        self.LS3338.Indicator.SetUnit(" ")
+        self.LS3338.Low_Read.SetUnit(" ")
+        self.LS3338.High_Read.SetUnit(" ")
+
+
+        self.LS3339 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LS3339.Label.setText("LS3339")
+        self.LS3339.Indicator.SetUnit(" ")
+        self.LS3339.Low_Read.SetUnit(" ")
+        self.LS3339.High_Read.SetUnit(" ")
+
+
+        self.ES3347 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.ES3347.Label.setText("ES3347")
+        self.ES3347.Indicator.SetUnit(" ")
+        self.ES3347.Low_Read.SetUnit(" ")
+        self.ES3347.High_Read.SetUnit(" ")
+
+
+        self.PUMP3305_OL = AlarmStatusWidget(self.LEFTVariableTab)
+        self.PUMP3305_OL.Label.setText("PUMP3305_OL")
+        self.PUMP3305_OL.Indicator.SetUnit(" ")
+        self.PUMP3305_OL.Low_Read.SetUnit(" ")
+        self.PUMP3305_OL.High_Read.SetUnit(" ")
+
+
+        self.PS2352 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.PS2352.Label.setText("PS2352")
+        self.PS2352.Indicator.SetUnit(" ")
+        self.PS2352.Low_Read.SetUnit(" ")
+        self.PS2352.High_Read.SetUnit(" ")
+
+
+        self.PS1361 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.PS1361.Label.setText("PS1361")
+        self.PS1361.Indicator.SetUnit(" ")
+        self.PS1361.Low_Read.SetUnit(" ")
+        self.PS1361.High_Read.SetUnit(" ")
+
+
+        self.PS8302 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.PS8302.Label.setText("PS8302")
+        self.PS8302.Indicator.SetUnit(" ")
+        self.PS8302.Low_Read.SetUnit(" ")
+        self.PS8302.High_Read.SetUnit(" ")
+
+
+        self.SERVO3321 = AlarmStatusWidget(self.HTRTab)
+        self.SERVO3321.Label.setText("SERVO3321")
+        self.SERVO3321.Indicator.SetUnit(" ")
+        self.SERVO3321.Low_Read.SetUnit(" ")
+        self.SERVO3321.High_Read.SetUnit(" ")
+
+
+        self.HTR6225 = AlarmStatusWidget(self.HTRTab)
+        self.HTR6225.Label.setText("HTR6225")
+        self.HTR6225.Indicator.SetUnit(" ")
+        self.HTR6225.Low_Read.SetUnit(" ")
+        self.HTR6225.High_Read.SetUnit(" ")
+
+
+        self.HTR2123 = AlarmStatusWidget(self.HTRTab)
+        self.HTR2123.Label.setText("HTR2123")
+        self.HTR2123.Indicator.SetUnit(" ")
+        self.HTR2123.Low_Read.SetUnit(" ")
+        self.HTR2123.High_Read.SetUnit(" ")
+
+
+        self.HTR2124 = AlarmStatusWidget(self.HTRTab)
+        self.HTR2124.Label.setText("HTR2124")
+        self.HTR2124.Indicator.SetUnit(" ")
+        self.HTR2124.Low_Read.SetUnit(" ")
+        self.HTR2124.High_Read.SetUnit(" ")
+
+        self.HTR2125 = AlarmStatusWidget(self.HTRTab)
+        self.HTR2125.Label.setText("HTR2125")
+        self.HTR2125.Indicator.SetUnit(" ")
+        self.HTR2125.Low_Read.SetUnit(" ")
+        self.HTR2125.High_Read.SetUnit(" ")
+
+        self.HTR1202 = AlarmStatusWidget(self.HTRTab)
+        self.HTR1202.Label.setText("HTR1202")
+        self.HTR1202.Indicator.SetUnit(" ")
+        self.HTR1202.Low_Read.SetUnit(" ")
+        self.HTR1202.High_Read.SetUnit(" ")
+
+        self.HTR2203 = AlarmStatusWidget(self.HTRTab)
+        self.HTR2203.Label.setText("HTR2203")
+        self.HTR2203.Indicator.SetUnit(" ")
+        self.HTR2203.Low_Read.SetUnit(" ")
+        self.HTR2203.High_Read.SetUnit(" ")
+
+        self.HTR6202 = AlarmStatusWidget(self.HTRTab)
+        self.HTR6202.Label.setText("HTR6202")
+        self.HTR6202.Indicator.SetUnit(" ")
+        self.HTR6202.Low_Read.SetUnit(" ")
+        self.HTR6202.High_Read.SetUnit(" ")
+
+        self.HTR6206 = AlarmStatusWidget(self.HTRTab)
+        self.HTR6206.Label.setText("HTR6206")
+        self.HTR6206.Indicator.SetUnit(" ")
+        self.HTR6206.Low_Read.SetUnit(" ")
+        self.HTR6206.High_Read.SetUnit(" ")
+
+        self.HTR6210 = AlarmStatusWidget(self.HTRTab)
+        self.HTR6210.Label.setText("HTR6210")
+        self.HTR6210.Indicator.SetUnit(" ")
+        self.HTR6210.Low_Read.SetUnit(" ")
+        self.HTR6210.High_Read.SetUnit(" ")
+
+        self.HTR6223 = AlarmStatusWidget(self.HTRTab)
+        self.HTR6223.Label.setText("HTR6223")
+        self.HTR6223.Indicator.SetUnit(" ")
+        self.HTR6223.Low_Read.SetUnit(" ")
+        self.HTR6223.High_Read.SetUnit(" ")
+
+        self.HTR6224 = AlarmStatusWidget(self.HTRTab)
+        self.HTR6224.Label.setText("HTR6224")
+        self.HTR6224.Indicator.SetUnit(" ")
+        self.HTR6224.Low_Read.SetUnit(" ")
+        self.HTR6224.High_Read.SetUnit(" ")
+
+        self.HTR6219 = AlarmStatusWidget(self.HTRTab)
+        self.HTR6219.Label.setText("HTR6219")
+        self.HTR6219.Indicator.SetUnit(" ")
+        self.HTR6219.Low_Read.SetUnit(" ")
+        self.HTR6219.High_Read.SetUnit(" ")
+
+        self.HTR6221 = AlarmStatusWidget(self.HTRTab)
+        self.HTR6221.Label.setText("HTR6221")
+        self.HTR6221.Indicator.SetUnit(" ")
+        self.HTR6221.Low_Read.SetUnit(" ")
+        self.HTR6221.High_Read.SetUnit(" ")
+
+        self.HTR6214 = AlarmStatusWidget(self.HTRTab)
+        self.HTR6214.Label.setText("HTR6214")
+        self.HTR6214.Indicator.SetUnit(" ")
+        self.HTR6214.Low_Read.SetUnit(" ")
+        self.HTR6214.High_Read.SetUnit(" ")
+
+
+
+
+
+        # "LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False, "PS2352": False, "PS1361": False, "PS8302": False}
+        # #
+
         # make a directory for the alarm instrument and assign instrument to certain position
         #IF you change the dimenstion of the following matrixes, don't forget to change TempMatrix in the Reassign function
         self.AlarmRTD1dir = {0: {0: self.TT2111, 1: self.TT2112, 2: self.TT2113, 3: self.TT2114, 4: self.TT2115},
@@ -1200,6 +1380,14 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.AlarmLEFTdir = {0:{0: self.BFM4313, 1: self.LT3335, 2: self.MFC1316_IN, 3: self.CYL3334_FCALC, 4: self.SERVO3321_IN_REAL},
                              1:{0: self.TS1_MASS, 1: self.TS2_MASS, 2: self.TS3_MASS}}
+
+        self.AlarmDindir = {0:{0: self.LS3338, 1: self.LS3339, 2: self.ES3347, 3: self.PUMP3305_CON, 4: self.PUMP3305_OL},
+                             1:{0: self.PS2352, 1: self.PS1361, 2: self.PS8302}}
+
+        self.AlarmHTRdir = {
+            0: {0: self.SERVO3321, 1: self.HTR6225, 2: self.HTR2123, 3: self.HTR2124, 4: self.HTR2125},
+            1: {0: self.HTR1202, 1: self.HTR2203, 2: self.HTR6202, 3: self.HTR6206, 4: self.HTR6210},
+            2: {0: self.HTR6223, 1: self.HTR6224, 2: self.HTR6219, 3: self.HTR6221, 4: self.HTR6214}}
 
         # self.AlarmRTD1dir = {0: {0: "self.TT2111", 1: "self.TT2112", 2: "self.TT2113", 3: "self.TT2114", 4: "self.TT2115"},
         #                      1: {0: "self.TT2116", 1: "self.TT2117", 2: "self.TT2118", 3: "self.TT2119", 4: "self.TT2120"}}
@@ -1251,9 +1439,16 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.i_PT_max = len(self.AlarmPTdir)
         # which is 4
         self.j_PT_max = len(self.AlarmPTdir[0])
-        self.i_LEFT_max = len(self.AlarmPTdir)
+        self.i_LEFT_max = len(self.AlarmLEFTdir)
         # which is 4
-        self.j_LEFT_max = len(self.AlarmPTdir[0])
+        self.j_LEFT_max = len(self.AlarmLEFTdir[0])
+
+        self.i_DIN_max = len(self.AlarmDindir)
+        self.j_DIN_max = len(self.AlarmDindir[0])
+
+        self.i_HTR_max = len(self.AlarmHTRdir)
+        self.j_HTR_max = len(self.AlarmHTRdir[0])
+
         # which is 5
         self.i_RTD1_last = len(self.AlarmRTD1dir) - 1
         # which is 1
@@ -1272,9 +1467,13 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.j_PT_last = len(self.AlarmPTdir[self.i_PT_last]) - 1
 
         self.i_LEFT_last = len(self.AlarmLEFTdir) - 1
-        # which is 3
         self.j_LEFT_last = len(self.AlarmLEFTdir[self.i_LEFT_last]) - 1
-        # which is 1
+
+        self.i_DIN_last = len(self.AlarmDindir) - 1
+        self.j_DIN_last = len(self.AlarmDindir[self.i_DIN_last]) - 1
+
+        self.i_HTR_last = len(self.AlarmHTRdir) - 1
+        self.j_HTR_last = len(self.AlarmHTRdir[self.i_HTR_last]) - 1
         self.ResetOrder()
 
     @QtCore.Slot()
@@ -1349,6 +1548,21 @@ class AlarmWin(QtWidgets.QMainWindow):
             if (i, j) == (self.i_LEFT_last, self.j_LEFT_last):
                 break
 
+        for i in range(0, self.i_DIN_max):
+            for j in range(0, self.j_DIN_max):
+                self.GLDIN.addWidget(self.AlarmDindir[i][j], i, j)
+                if (i, j) == (self.i_DIN_last, self.j_DIN_last):
+                    break
+            if (i, j) == (self.i_DIN_last, self.j_DIN_last):
+                break
+
+        for i in range(0, self.i_HTR_max):
+            for j in range(0, self.j_HTR_max):
+                self.GLHTR.addWidget(self.AlarmHTRdir[i][j], i, j)
+                if (i, j) == (self.i_HTR_last, self.j_HTR_last):
+                    break
+            if (i, j) == (self.i_HTR_last, self.j_HTR_last):
+                break
     @QtCore.Slot()
     def ReassignRTD1Order(self):
         # check the status of the Widget and reassign the diretory
@@ -1907,6 +2121,141 @@ class AlarmWin(QtWidgets.QMainWindow):
                 if (i, j) == (i_LEFT_last, j_LEFT_last):
                     break
             if (i, j) == (i_LEFT_last, j_LEFT_last):
+                break
+
+    @QtCore.Slot()
+    def ReassignDinOrder(self):
+        # check the status of the Widget and reassign the diretory
+        # establish 2 diretory, reorder TempDic to reorder the widgets
+        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+        # i_max, j_max are max row and column number
+        # l max are max column number+1
+        # i_last,j_last are last elements's diretory coordinate
+
+        TempRefDindir = self.AlarmDINdir
+
+        TempDindir = {0: {0: None, 1: None, 2: None, 3: None, 4: None},
+                       1: {0: None, 1: None, 2: None}}
+        # l_RTD1_max is max number of column
+
+        l_DIN = 0
+        k_DIN = 0
+
+        i_DIN_max = len(self.AlarmDindir)
+
+        j_DIN_max = len(self.AlarmDindir[0])
+
+        i_DIN_last = len(self.AlarmDindir) - 1
+
+        j_DIN_last = len(self.AlarmDindir[i_DIN_last]) - 1
+
+        l_DIN_max = j_DIN_max - 1
+
+
+        for i in range(0, i_DIN_max):
+            for j in range(0, j_DIN_max):
+                if TempRefDindir[i][j].Alarm:
+                    TempDindir[k_DIN][l_DIN] = TempRefDindir[i][j]
+                    l_DIN = l_DIN + 1
+                    if l_DIN == l_DIN_max + 1:
+                        l_DIN = 0
+                        k_DIN = k_DIN + 1
+                if (i, j) == (i_DIN_last, j_DIN_last):
+                    break
+            if (i, j) == (i_DIN_last, j_DIN_last):
+                break
+
+        for i in range(0, i_DIN_max):
+            for j in range(0, j_DIN_max):
+                if not TempRefDindir[i][j].Alarm:
+                    TempDindir[k_DIN][l_DIN] = TempRefDindir[i][j]
+                    l_DIN = l_DIN + 1
+                    if l_DIN == l_DIN_max + 1:
+                        l_DIN = 0
+                        k_DIN = k_DIN + 1
+                    if (i, j) == (i_DIN_last, j_DIN_last):
+                        break
+                if (i, j) == (i_DIN_last, j_DIN_last):
+                    break
+
+        # Reassign position
+        # end the position generator when i= last element's row number, j= last element's column number
+
+        # end the position generator when i= last element's row number, j= last element's column number
+        for i in range(0, i_DIN_max):
+            for j in range(0, j_DIN_max):
+                self.GLDIN.addWidget(TempDindir[i][j], i, j)
+                if (i, j) == (i_DIN_last, j_DIN_last):
+                    break
+            if (i, j) == (i_DIN_last, j_DIN_last):
+                break
+
+    @QtCore.Slot()
+    def ReassignHTROrder(self):
+        # check the status of the Widget and reassign the diretory
+        # establish 2 diretory, reorder TempDic to reorder the widgets
+        # k,l are pointers in the TempDic, ij are pointers in TempRefDic
+        # i_max, j_max are max row and column number
+        # l max are max column number+1
+        # i_last,j_last are last elements's diretory coordinate
+
+        TempRefHTRdir = self.AlarmHTRdir
+
+        TempHTRdir = {
+            0: {0: None, 1: None, 2: None, 3: None, 4: None},
+            1: {0: None, 1: None, 2: None, 3: None, 4: None},
+            2: {0: None, 1: None, 2: None, 3: None, 4: None}}
+        # l_RTD1_max is max number of column
+
+        l_HTR = 0
+        k_HTR = 0
+
+        i_HTR_max = len(self.AlarmHTRdir)
+
+        j_HTR_max = len(self.AlarmHTRdir[0])
+
+        i_HTR_last = len(self.AlarmHTRdir) - 1
+
+        j_HTR_last = len(self.AlarmHTRdir[i_HTR_last]) - 1
+
+        l_HTR_max = j_HTR_max - 1
+
+        for i in range(0, i_HTR_max):
+            for j in range(0, j_HTR_max):
+                if TempRefHTRdir[i][j].Alarm:
+                    TempHTRdir[k_HTR][l_HTR] = TempRefHTRdir[i][j]
+                    l_HTR = l_HTR + 1
+                    if l_HTR == l_HTR_max + 1:
+                        l_HTR = 0
+                        k_HTR = k_HTR + 1
+                if (i, j) == (i_HTR_last, j_HTR_last):
+                    break
+            if (i, j) == (i_HTR_last, j_HTR_last):
+                break
+
+        for i in range(0, i_HTR_max):
+            for j in range(0, j_HTR_max):
+                if not TempRefHTRdir[i][j].Alarm:
+                    TempHTRdir[k_HTR][l_HTR] = TempRefHTRdir[i][j]
+                    l_HTR = l_HTR + 1
+                    if l_HTR == l_HTR_max + 1:
+                        l_HTR = 0
+                        k_HTR = k_HTR + 1
+                    if (i, j) == (i_HTR_last, j_HTR_last):
+                        break
+                if (i, j) == (i_HTR_last, j_HTR_last):
+                    break
+
+        # Reassign position
+        # end the position generator when i= last element's row number, j= last element's column number
+
+        # end the position generator when i= last element's row number, j= last element's column number
+        for i in range(0, i_HTR_max):
+            for j in range(0, j_HTR_max):
+                self.GLHTR.addWidget(TempHTRdir[i][j], i, j)
+                if (i, j) == (i_HTR_last, j_HTR_last):
+                    break
+            if (i, j) == (i_HTR_last, j_HTR_last):
                 break
 
 class INTLCK_Win_v2(QtWidgets.QMainWindow):
