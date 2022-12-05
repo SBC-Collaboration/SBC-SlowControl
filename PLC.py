@@ -79,7 +79,7 @@ class PLC(QtCore.QObject):
 
         # wait 1 second to init
         time.sleep(1)
-        self.load_alarm_config()
+
 
 
         self.TT_FP_address = copy.copy(sec.TT_FP_ADDRESS)
@@ -419,6 +419,7 @@ class PLC(QtCore.QObject):
                               "TIME_ADDRESS": self.TIME_ADDRESS,
                               "TIME_DIC": self.TIME_DIC}
 
+        self.load_alarm_config()
 
         self.LiveCounter = 0
         self.NewData_Display = False
