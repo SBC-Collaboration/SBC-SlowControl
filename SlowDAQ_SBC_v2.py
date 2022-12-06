@@ -1033,7 +1033,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414]
 
         self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT1325,
-                              self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2321,
+                              self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2121,
                               self.AlarmButton.SubWindow.PT2330, self.AlarmButton.SubWindow.PT2335,
                               self.AlarmButton.SubWindow.PT3308, self.AlarmButton.SubWindow.PT3309,
                               self.AlarmButton.SubWindow.PT3311,self.AlarmButton.SubWindow.PT3314,
@@ -1100,7 +1100,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.AlarmButton.SubWindow.TT6411, self.AlarmButton.SubWindow.TT6412,
                             self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414,
                             self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT1325,
-                            self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2321,
+                            self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2121,
                             self.AlarmButton.SubWindow.PT2330, self.AlarmButton.SubWindow.PT2335,
                             self.AlarmButton.SubWindow.PT3308, self.AlarmButton.SubWindow.PT3309,
                             self.AlarmButton.SubWindow.PT3311, self.AlarmButton.SubWindow.PT3314,

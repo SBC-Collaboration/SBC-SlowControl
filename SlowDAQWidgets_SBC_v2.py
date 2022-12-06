@@ -1028,11 +1028,11 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PT2316.Low_Read.SetUnit(" bar")
         self.PT2316.High_Read.SetUnit(" bar")
 
-        self.PT2321 = AlarmStatusWidget(self.PressureTab)
-        self.PT2321.Label.setText("PT2321")
-        self.PT2321.Indicator.SetUnit(" bar")
-        self.PT2321.Low_Read.SetUnit(" bar")
-        self.PT2321.High_Read.SetUnit(" bar")
+        self.PT2121 = AlarmStatusWidget(self.PressureTab)
+        self.PT2121.Label.setText("PT2121")
+        self.PT2121.Indicator.SetUnit(" bar")
+        self.PT2121.Low_Read.SetUnit(" bar")
+        self.PT2121.High_Read.SetUnit(" bar")
 
 
         self.PT2330 = AlarmStatusWidget(self.PressureTab)
@@ -1370,7 +1370,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.AlarmRTD4dir = {0: {0: self.TT2101, 1: self.TT2102, 2: self.TT2103, 3: self.TT2104, 4: self.TT2105},
                              1: {0: self.TT2106, 1: self.TT2107, 2: self.TT2108, 3: self.TT2109, 4: self.TT2110}}
 
-        self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT1325, 2: self.PT2316, 3: self.PT2321, 4: self.PT2330},
+        self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT1325, 2: self.PT2316, 3: self.PT2121, 4: self.PT2330},
                            1: {0: self.PT2335, 1: self.PT3308, 2: self.PT3309, 3: self.PT3311, 4: self.PT3314},
                            2: {0: self.PT3320, 1: self.PT3332, 2: self.PT3333, 3: self.PT4306, 4: self.PT4315},
                            3: {0: self.PT4319, 1: self.PT4322, 2: self.PT4325, 3: self.PT5304, 4: self.PT6302}}
@@ -1412,7 +1412,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         # self.AlarmRTD4dir = {0: {0: "self.TT2101", 1: "self.TT2102", 2: "self.TT2103", 3: "self.TT2104", 4: "self.TT2105"},
         #                      1: {0: "self.TT2106", 1: "self.TT2107", 2: "self.TT2108", 3: "self.TT2109", 4: "self.TT2110"}}
         #
-        # self.AlarmPTdir = {0: {0: "self.PT1101", 1: "self.PT2316", 2: "self.PT2321", 3: "self.PT2330", 4: "self.PT2335"},
+        # self.AlarmPTdir = {0: {0: "self.PT1101", 1: "self.PT2316", 2: "self.PT2121", 3: "self.PT2330", 4: "self.PT2335"},
         #                    1: {0: "self.PT3308", 1: "self.PT3309", 2: "self.PT1325", 3: "self.PT3311", 4: "self.PT3314"},
         #                    2: {0: "self.PT3320", 1: "self.PT3333", 2: "self.PT4306", 3: "self.PT4315", 4: "self.PT4319"},
         #                    3: {0: "self.PT4322", 1: "self.PT4325"}}
