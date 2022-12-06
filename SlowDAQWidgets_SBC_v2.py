@@ -4862,7 +4862,7 @@ class Loadfile(QtWidgets.QWidget):
             print("Read " + str(self.FilePath.text()))
             self.fulladdress = str(self.FilePath.text())
 
-            self.df = self.read_Info_n_save()
+            self.read_Info_n_save()
             text = self.df.to_string()
             self.FileContent.setText(text)
         except:
