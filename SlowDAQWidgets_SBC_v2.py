@@ -49,6 +49,8 @@ BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
                " border-color: black;"
 LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Calibri\"; " \
               "font-size: 12px; font-weight: bold;"
+TITLE_STYLE_1 = "background-color: white; border-radius: 3px; font-family: " \
+              "\"Calibri\"; font-size: 14px; font-weight: bold;"
 # TITLE_STYLE = "background-color: rgb(204,204,204); "
 # BORDER_STYLE = " "
 # FONT = " font-size: 14px;"
@@ -4815,7 +4817,7 @@ class Loadfile(QtWidgets.QWidget):
 
         self.FileContent = QtWidgets.QTextEdit(self)
         self.FileContent.setReadOnly(True)
-        self.FileContent.setStyleSheet("QWidget {" + TITLE_STYLE + "}")
+        self.FileContent.setStyleSheet("QWidget {" + TITLE_STYLE_1 + "}")
         self.VL.addWidget(self.FileContent)
 
     def LoadPath(self):
