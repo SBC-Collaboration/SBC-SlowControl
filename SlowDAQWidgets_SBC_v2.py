@@ -4784,7 +4784,7 @@ class Loadfile(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.loaded_dict ={}
-        self.default_dict = copy.copy(sec.DIC_PACK)
+        self.default_dict = copy.deepcopy(sec.DIC_PACK)
 
         self.setObjectName("LoadFile")
         self.setGeometry(QtCore.QRect(0*R, 0*R, 600*R, 1000*R))
@@ -4882,7 +4882,7 @@ class Loadfile(QtWidgets.QWidget):
 
         # value low high they share the same key list
         for key in self.default_dict['data']['TT']['FP']['low']:
-            self.default_dict['data']['TT']['FP']['low'][key]= self.low_dic[key]
+            self.default_dict['data']['TT']['FP']['low'][key] = self.low_dic[key]
             self.default_dict['data']['TT']['FP']['high'][key] = self.high_dic[key]
             self.default_dict['Active']['TT']['FP'][key] = self.active_dic[key]
 
