@@ -5034,7 +5034,7 @@ class CustomSave(QtWidgets.QWidget):
         for key in dic_c['data']['LOOPPID']['LO_LIM']:
             self.instrument.append(key)
             self.lowlimit.append(dic_c['data']['LOOPPID']['LO_LIM'][key])
-            self.highlimit.append(dic_c['data']['LOOPPIDL']['HI_LIM'][key])
+            self.highlimit.append(dic_c['data']['LOOPPID']['HI_LIM'][key])
             self.active.append(dic_c['Active']['LOOPPID'][key])
 
         for key in dic_c['data']['Din']['low']:
