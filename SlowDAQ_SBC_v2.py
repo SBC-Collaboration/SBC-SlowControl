@@ -4236,6 +4236,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot(object)
     def man_activated(self, dic_c):
+        print(dic_c)
         for element in self.BORTDAlarmMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["TT"]["BO"][element.Label.text()]))
 
@@ -4279,7 +4280,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # initialization for all check box
         # if received_dic_c["Active"]["INI_CHECK"]==True and self.CHECKED == False:
         #     self.man_activated(received_dic_c)
-        #     self.CHECKED = True        
+        #     self.CHECKED = True
         #
 
 
