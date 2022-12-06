@@ -4815,6 +4815,7 @@ class Loadfile(QtWidgets.QWidget):
 
         self.FileContent = QtWidgets.QTextEdit(self)
         self.FileContent.setReadOnly(True)
+        self.FileContent.setStyleSheet("QWidget {" + TITLE_STYLE + "}")
         self.VL.addWidget(self.FileContent)
 
     def LoadPath(self):
