@@ -4869,7 +4869,7 @@ class Loadfile(QtWidgets.QWidget):
             print("Error! Please type in a valid path")
 
     def read_Info_n_save(self):
-        self.df = pd.read_csv(self.fulladdress)
+        self.df = pd.read_csv(self.fulladdress, index_col= False)
         # print(self.df.head(5))
         # print(self.df.iloc[0]["High_Limit"],type(self.df.iloc[0]["High_Limit"]))
         self.low_dic = self.translate_csv("Low_Limit")
