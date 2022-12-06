@@ -984,6 +984,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.statustransition={}
 
         self.Valve_buffer = copy.copy(sec.VALVE_OUT)
+        self.CHECKED = False
 
         self.Switch_buffer = copy.copy(sec.SWITCH_OUT)
         self.LOOPPID_EN_buffer = copy.copy(sec.LOOPPID_EN)
@@ -4274,6 +4275,12 @@ class MainWindow(QtWidgets.QMainWindow):
         # print('Display update result for HFSV3331:', received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
 
         # print(received_dic_c["data"]["Procedure"])
+
+        # initialization for all check box
+        if received_dic_c["Active"]["INI_CHECK"]==True and self.CHECKED == False:
+            self.man_activated(received_dic_c)
+            self.CHECKED = True
+
 
         self.TS_ADDREM.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
@@ -10657,7 +10664,7 @@ class UpdateClient(QtCore.QObject):
         self.FLAG_INTLKD_ini = sec.FLAG_INTLKD
         self.FLAG_Busy_ini = sec.FLAG_BUSY
 
-
+        self.Ini_Check_ini = sec.INI_CHECK
         self.MAN_SET = copy.copy(sec.MAN_SET)
 
         self.receive_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
@@ -10730,7 +10737,8 @@ class UpdateClient(QtCore.QObject):
                                    "PT": self.PT_Activated_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Activated_ini,
                                     "Din": self.Din_Activated_ini,
-                                    "LOOPPID": self.LOOPPID_Activated_ini
+                                    "LOOPPID": self.LOOPPID_Activated_ini,
+                                    "INI_CHECK": self.Ini_Check_ini
                                     },
                          "MainAlarm": self.MainAlarm_ini
                          }

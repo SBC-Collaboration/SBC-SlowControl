@@ -443,6 +443,15 @@ PARAM_B_DIC = {'TS1_EMPTY':0,'TS2_EMPTY':0, 'TS3_EMPTY':0}
 
 TIME_ADDRESS = {'PCYCLE_EXPTIME': 16796}
 TIME_DIC = {'PCYCLE_EXPTIME': 0}
+# This is for checkbox initialization when BKG restarts
+# first digit means whether server(BKG) send check_ini request to client(GUI)
+# second digit means whether client(GUI) send check box info to server(BKG)
+# true value table
+#[0,0]
+#[0,1]
+#[1,1]
+#[1,0]
+INI_CHECK= True
 
 DIC_PACK = {"data": {"TT": {"FP": {"value": TT_FP_DIC, "high": TT_FP_HIGHLIMIT, "low": TT_FP_LOWLIMIT},
                                          "BO": {"value": TT_BO_DIC, "high": TT_BO_HIGHLIMIT, "low": TT_BO_LOWLIMIT}},
@@ -514,7 +523,8 @@ DIC_PACK = {"data": {"TT": {"FP": {"value": TT_FP_DIC, "high": TT_FP_HIGHLIMIT, 
                                    "PT": PT_ACTIVATED,
                                    "LEFT_REAL": LEFT_REAL_ACTIVATED,
                                     "Din": DIN_ACTIVATED,
-                                    "LOOPPID": LOOPPID_ACTIVATED
+                                    "LOOPPID": LOOPPID_ACTIVATED,
+                                    "INI_CHECK": INI_CHECK
                                     },
                          "MainAlarm": MAINALARM
                          }

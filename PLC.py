@@ -2562,6 +2562,8 @@ class UpdateServer(QtCore.QObject):
         self.FLAG_INTLKD_ini = sec.FLAG_INTLKD
         self.FLAG_Busy_ini = sec.FLAG_BUSY
 
+        self.Ini_Check_ini = sec.INI_CHECK
+
         self.data_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
@@ -2632,8 +2634,8 @@ class UpdateServer(QtCore.QObject):
                                    "PT": self.PT_Activated_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Activated_ini,
                                     "Din": self.Din_Activated_ini,
-                                    "LOOPPID": self.LOOPPID_Activated_ini
-                                    },
+                                    "LOOPPID": self.LOOPPID_Activated_ini,
+                                    "INI_CHECK": self.Ini_Check_ini},
                          "MainAlarm": self.MainAlarm_ini
                          }
 
