@@ -4925,7 +4925,7 @@ class Loadfile(QtWidgets.QWidget):
         df = self.df[["Instrument",type]]
         dic = df.set_index('Instrument').T.to_dict('records')[0]
 
-        print("before",dic)
+        # print("before",dic)
         for key in dic:
             try:
                 dic[key] = float(dic[key])
@@ -4937,7 +4937,7 @@ class Loadfile(QtWidgets.QWidget):
                 else:
                     pass
 
-        print("after",dic)
+        # print("after",dic)
         return dic
 
 
