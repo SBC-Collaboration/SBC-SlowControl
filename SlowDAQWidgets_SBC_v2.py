@@ -4916,8 +4916,8 @@ class Loadfile(QtWidgets.QWidget):
             self.default_dict['data']['LOOPPID']['HI_LIM'][key] = self.high_dic[key]
             self.default_dict['Active']['LOOPPID'][key] = self.active_dic[key]
 
-        print("Active",self.active_dic)
-        print(self.default_dict["Active"])
+        # print("Active",self.active_dic)
+        # print(self.default_dict["Active"])
 
 
     # csv file will lose the data type of the record, we need to recover those properties
@@ -4934,7 +4934,7 @@ class Loadfile(QtWidgets.QWidget):
                 elif dic[key] =="TRUE" or "True":
                     dic[key] = True
 
-        # print("after",dic)
+        print("after",dic)
         return dic
 
 
