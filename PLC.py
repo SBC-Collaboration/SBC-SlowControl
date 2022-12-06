@@ -3157,6 +3157,14 @@ class UpdateServer(QtCore.QObject):
             for key in message["MAN_SET"]["data"]["LEFT_REAL"]["high"]:
                 self.PLC.LEFT_REAL_HighLimit[key] = message["MAN_SET"]["data"]["LEFT_REAL"]["high"][key]
 
+            for key in message["MAN_SET"]["data"]["Din"]["high"]:
+                self.PLC.Din_HighLimit[key] = message["MAN_SET"]["data"]["Din"]["high"][key]
+
+            for key in message["MAN_SET"]["data"]["LOOPPID"]["HI_LIM"]:
+                self.PLC.LOOPPID_SET_HI_LIM(address=sec.LOOPPID_ADR_BASE[key],
+                                        value=message["MAN_SET"]["data"]["LOOPPID"]["HI_LIM"][key])
+
+
             for key in message["MAN_SET"]["data"]["TT"]["FP"]["low"]:
                 self.PLC.TT_FP_LowLimit[key] = message["MAN_SET"]["data"]["TT"]["FP"]["low"][key]
 
@@ -3169,6 +3177,13 @@ class UpdateServer(QtCore.QObject):
             for key in message["MAN_SET"]["data"]["LEFT_REAL"]["low"]:
                 self.PLC.LEFT_REAL_LowLimit[key] = message["MAN_SET"]["data"]["LEFT_REAL"]["low"][key]
 
+            for key in message["MAN_SET"]["data"]["Din"]["low"]:
+                self.PLC.Din_LowLimit[key] = message["MAN_SET"]["data"]["Din"]["low"][key]
+
+            for key in message["MAN_SET"]["data"]["LOOPPID"]["low"]:
+                self.PLC.LOOPPID_SET_LO_LIM(address=sec.LOOPPID_ADR_BASE[key],
+                                            value=message["MAN_SET"]["data"]["LOOPPID"]["LO_LIM"][key])
+
             for key in message["MAN_SET"]["Active"]["TT"]["FP"]:
                 self.PLC.TT_FP_Activated[key] =message["MAN_SET"]["Active"]["TT"]["FP"][key]
 
@@ -3180,6 +3195,12 @@ class UpdateServer(QtCore.QObject):
 
             for key in message["MAN_SET"]["Active"]["LEFT_REAL"]:
                 self.PLC.LEFT_REAL_Activated[key] = message["MAN_SET"]["Active"]["LEFT_REAL"][key]
+
+            for key in message["MAN_SET"]["Active"]["Din"]:
+                self.PLC.Din_Activated[key] = message["MAN_SET"]["Active"]["Din"][key]
+
+            for key in message["MAN_SET"]["Active"]["LOOPPID"]:
+                self.PLC.LOOPPID_Activated[key] = message["MAN_SET"]["Active"]["LOOPPID"][key]
 
 
         else:

@@ -9,7 +9,9 @@ v1.1 Alarm on state widget 04/03/20 ML
 
 from PySide2 import QtCore, QtWidgets, QtGui
 import time, platform, pickle
-import os
+import os, copy
+import pandas as pd
+import slowcontrol_env_cons as sec
 
 # FONT = "font-family: \"Calibri\"; font-size: 14px;"
 FONT = "font-family: \"Calibri\"; font-size: 8px;"
@@ -4773,12 +4775,13 @@ class CheckButton(QtWidgets.QWidget):
 
 
 class Loadfile(QtWidgets.QWidget):
-    def __init__(self, parent=None):
+    def __init__(self,  parent=None):
         super().__init__(parent)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.loaded_dict ={}
+        self.default_dict = copy.copy(sec.DIC_PACK)
 
         self.setObjectName("LoadFile")
         self.setGeometry(QtCore.QRect(0*R, 0*R, 600*R, 1000*R))
@@ -4798,7 +4801,7 @@ class Loadfile(QtWidgets.QWidget):
         self.HL.addWidget(self.FilePath)
 
         self.LoadPathButton = QtWidgets.QPushButton(self)
-        self.LoadPathButton.clicked.connect(self.LoadPath)
+        self.LoadPathButton.clicked.connect(self.LoadcsvPath)
         self.LoadPathButton.setText("LoadPath")
         self.LoadPathButton.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
         self.LoadPathButton.setFixedSize(100*R, 50*R)
@@ -4847,6 +4850,84 @@ class Loadfile(QtWidgets.QWidget):
         except:
             print("Error! Please type in a valid path")
 
+    def LoadcsvPath(self):
+        # set default path to read
+        # based on linux
+        defaultpath = "/home/hep/.config/sbcconfig/"
+        filterset = "*.csv;;*.*"
+        name = QtWidgets.QFileDialog.getOpenFileName(self, 'Open File', dir=defaultpath, filter=filterset)
+        self.FilePath.setText(name[0])
+
+        try:
+            print("Read " + str(self.FilePath.text()))
+            self.fulladdress = str(self.FilePath.text())
+
+            self.df = self.read_Info_n_save()
+            text = self.df.to_string()
+            self.FileContent.setText(text)
+        except:
+            print("Error! Please type in a valid path")
+
+    def read_Info_n_save(self):
+        self.df = pd.read_csv(self.fulladdress)
+        # print(self.df.head(5))
+        # print(self.df.iloc[0]["High_Limit"],type(self.df.iloc[0]["High_Limit"]))
+        self.low_dic = self.translate_csv("Low_Limit")
+        self.high_dic = self.translate_csv("High_Limit")
+        self.active_dic = self.translate_csv("Active")
+
+        # value low high they share the same key list
+        for key in self.default_dict['data']['TT']['FP']['low']:
+            self.default_dict['data']['TT']['FP']['low'][key]= self.low_dic[key]
+            self.default_dict['data']['TT']['FP']['high'][key] = self.high_dic[key]
+            self.default_dict['Active']['TT']['FP'][key] = self.active_dic[key]
+
+
+        for key in self.default_dict['data']['TT']['BO']['low']:
+            self.default_dict['data']['TT']['BO']['low'][key]= self.low_dic[key]
+            self.default_dict['data']['TT']['BO']['high'][key] = self.high_dic[key]
+            self.default_dict['Active']['TT']['BO'][key] = self.active_dic[key]
+
+        for key in self.default_dict['data']['PT']['low']:
+            self.default_dict['data']['PT']['low'][key]= self.low_dic[key]
+            self.default_dict['data']['PT']['high'][key] = self.high_dic[key]
+            self.default_dict['Active']['PT'][key] = self.active_dic[key]
+
+
+        for key in self.default_dict['data']['LEFT_REAL']['low']:
+            self.default_dict['data']['LEFT_REAL']['low'][key]= self.low_dic[key]
+            self.default_dict['data']['LEFT_REAL']['high'][key] = self.high_dic[key]
+            self.default_dict['Active']['LEFT_REAL'][key] = self.active_dic[key]
+
+
+        for key in self.default_dict['data']['Din']['low']:
+            self.default_dict['data']['Din']['low'][key]= self.low_dic[key]
+            self.default_dict['data']['Din']['high'][key] = self.high_dic[key]
+            self.default_dict['Active']['Din'][key] = self.active_dic[key]
+
+        for key in self.default_dict['data']['LOOPPID']['LO_LIM']:
+            self.default_dict['data']['LOOPPID']['LO_LIM'][key]= self.low_dic[key]
+            self.default_dict['data']['LOOPPID']['HI_LIM'][key] = self.high_dic[key]
+            self.default_dict['Active']['LOOPPID'][key] = self.active_dic[key]
+
+
+    # csv file will lose the data type of the record, we need to recover those properties
+    def translate_csv(self, type="Low_Limit"):
+        df = self.df[["Instrument",type]]
+        dic = df.set_index('Instrument').T.to_dict('records')[0]
+        # print("before",dic)
+        for key in dic:
+            try:
+                dic[key] = float(dic[key])
+            except:
+                if dic[key] == "FALSE" or "False":
+                    dic[key] = False
+                elif dic[key] =="TRUE" or "True":
+                    dic[key] = True
+
+        # print("after",dic)
+        return dic
+
 
 
 class CustomSave(QtWidgets.QWidget):
@@ -4886,11 +4967,17 @@ class CustomSave(QtWidgets.QWidget):
         self.Head = None
         self.Tail = None
 
+        self.instrument = []
+        self.highlimit = []
+        self.lowlimit = []
+        self.active = []
+        self.dtype = []
+
     def LoadPath(self):
         # set default path to save
         # based on linux
         defaultpath = "/home/hep/.config/sbcconfig/"
-        filterset = "*.pkl;;"
+        filterset = "*.csv;;"
         name = QtWidgets.QFileDialog.getSaveFileName(self, 'Save File', dir=defaultpath, filter=filterset)
         self.FilePath.setText(name[0])
         head_tail = os.path.split(name[0])
@@ -4907,8 +4994,60 @@ class CustomSave(QtWidgets.QWidget):
         except:
             print("Error in writing configuration files. Please check it!")
 
+    def SavecsvConfig(self, dic_c):
+
+        self.instrument = []
+        self.highlimit = []
+        self.lowlimit = []
+        self.active = []
+        self.dtype = []
+
+        # lowlimit, high limit and activae share the same keys
+        for key in dic_c['data']['TT']['FP']['low']:
+            self.instrument.append(key)
+            self.lowlimit.append(dic_c['data']['TT']['FP']['low'][key])
+            self.highlimit.append(dic_c['data']['TT']['FP']['high'][key])
+            self.active.append(dic_c['Active']['TT']['FP'][key])
+
+        for key in dic_c['data']['TT']['BO']['low']:
+            self.instrument.append(key)
+            self.lowlimit.append(dic_c['data']['TT']['BO']['low'][key])
+            self.highlimit.append(dic_c['data']['TT']['BO']['high'][key])
+            self.active.append(dic_c['Active']['TT']['BO'][key])
+
+        for key in dic_c['data']['PT']['low']:
+            self.instrument.append(key)
+            self.lowlimit.append(dic_c['data']['PT']['low'][key])
+            self.highlimit.append(dic_c['data']['PT']['high'][key])
+            self.active.append(dic_c['Active']['PT'][key])
 
 
+        for key in dic_c['data']['LEFT_REAL']['low']:
+            self.instrument.append(key)
+            self.lowlimit.append(dic_c['data']['LEFT_REAL']['low'][key])
+            self.highlimit.append(dic_c['data']['LEFT_REAL']['high'][key])
+            self.active.append(dic_c['Active']['LEFT_REAL'][key])
+
+        for key in dic_c['data']['LOOPPID']['LO_LIM']:
+            self.instrument.append(key)
+            self.lowlimit.append(dic_c['data']['LOOPPID']['LO_LIM'][key])
+            self.highlimit.append(dic_c['data']['LOOPPIDL']['HI_LIM'][key])
+            self.active.append(dic_c['Active']['LOOPPID'][key])
+
+        for key in dic_c['data']['Din']['low']:
+            self.instrument.append(key)
+            self.lowlimit.append(dic_c['data']['Din']['low'][key])
+            self.highlimit.append(dic_c['data']['Din']['high'][key])
+            self.active.append(dic_c['Active']['Din'][key])
+
+        self.init_dic = {"Instrument": self.instrument, "Low_Limit": self.lowlimit, "High_Limit": self.highlimit,
+                         "Active": self.active}
+
+        print(type(self.init_dic["Low_Limit"][0]))
+        df = pd.DataFrame(self.init_dic)
+        # df = pd.DataFrame(columns=["Instrument","LowLimit","HighLimit","Active"])
+
+        df.to_csv(str(self.FilePath.text()), index=False)
 
 
 class AlarmStatusWidget(QtWidgets.QWidget):
