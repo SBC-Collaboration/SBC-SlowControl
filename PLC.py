@@ -3180,7 +3180,7 @@ class UpdateServer(QtCore.QObject):
             for key in message["MAN_SET"]["data"]["Din"]["low"]:
                 self.PLC.Din_LowLimit[key] = message["MAN_SET"]["data"]["Din"]["low"][key]
 
-            for key in message["MAN_SET"]["data"]["LOOPPID"]["low"]:
+            for key in message["MAN_SET"]["data"]["LOOPPID"]["LO_LIM"]:
                 self.PLC.LOOPPID_SET_LO_LIM(address=sec.LOOPPID_ADR_BASE[key],
                                             value=message["MAN_SET"]["data"]["LOOPPID"]["LO_LIM"][key])
 
