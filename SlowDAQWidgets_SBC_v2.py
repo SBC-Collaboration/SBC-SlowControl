@@ -4930,10 +4930,12 @@ class Loadfile(QtWidgets.QWidget):
             try:
                 dic[key] = float(dic[key])
             except:
-                if dic[key] == "FALSE" or "False":
+                if dic[key] == "FALSE" or dic[key] == "False":
                     dic[key] = False
-                elif dic[key] =="TRUE" or "True":
+                elif dic[key] == "TRUE" or dic[key] == "True":
                     dic[key] = True
+                else:
+                    pass
 
         print("after",dic)
         return dic
