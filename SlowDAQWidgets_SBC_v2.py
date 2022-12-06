@@ -4869,7 +4869,7 @@ class Loadfile(QtWidgets.QWidget):
             self.read_Info_n_save()
             text = self.df.to_string()
 
-            print(text)
+            # print(text)
             self.FileContent.setText(text)
         except:
             print("Error! Please type in a valid path")
@@ -4916,6 +4916,7 @@ class Loadfile(QtWidgets.QWidget):
             self.default_dict['data']['LOOPPID']['HI_LIM'][key] = self.high_dic[key]
             self.default_dict['Active']['LOOPPID'][key] = self.active_dic[key]
 
+        print("Active",self.active_dic)
         print(self.default_dict["Active"])
 
 
