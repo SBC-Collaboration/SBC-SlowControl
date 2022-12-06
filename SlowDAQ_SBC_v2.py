@@ -4222,27 +4222,27 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot(object)
     def man_activated(self, dic_c):
         for element in self.BORTDAlarmMatrix:
-            element.AlarmMode.setChecked(dic_c["Active"]["TT"]["BO"][element.Label.text()])
+            element.AlarmMode.setChecked(bool(dic_c["Active"]["TT"]["BO"][element.Label.text()]))
 
         # FP TTs
         # update alarmwindow widgets' <alarm> value
 
         for element in self.FPRTDAlarmMatrix:
             # print(element.Label.text())
-            element.AlarmMode.setChecked(dic_c["Active"]["TT"]["FP"][element.Label.text()])
+            element.AlarmMode.setChecked(bool(dic_c["Active"]["TT"]["FP"][element.Label.text()]))
 
         for element in self.PTAlarmMatrix:
-            element.AlarmMode.setChecked(dic_c["Active"]["PT"][element.Label.text()])
+            element.AlarmMode.setChecked(bool(dic_c["Active"]["PT"][element.Label.text()]))
 
         for element in self.LEFTVariableMatrix:
-            element.AlarmMode.setChecked(dic_c["Active"]["LEFT_REAL"][element.Label.text()])
+            element.AlarmMode.setChecked(bool(dic_c["Active"]["LEFT_REAL"][element.Label.text()]))
 
 
         for element in self.DinAlarmMatrix:
-            element.AlarmMode.setChecked(dic_c["Active"]["Din"][element.Label.text()])
+            element.AlarmMode.setChecked(bool(dic_c["Active"]["Din"][element.Label.text()]))
 
         for element in self.LOOPPIDAlarmMatrix:
-            element.AlarmMode.setChecked(dic_c["Active"]["LOOPPID"][element.Label.text()])
+            element.AlarmMode.setChecked(bool(dic_c["Active"]["LOOPPID"][element.Label.text()]))
 
 
 
