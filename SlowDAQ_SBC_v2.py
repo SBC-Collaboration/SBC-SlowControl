@@ -1032,15 +1032,16 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.TT6411, self.AlarmButton.SubWindow.TT6412,
                                  self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414]
 
-        self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2330,
-                              self.AlarmButton.SubWindow.PT2335, self.AlarmButton.SubWindow.PT3308,
-                              self.AlarmButton.SubWindow.PT3309, self.AlarmButton.SubWindow.PT3311,
-                              self.AlarmButton.SubWindow.PT3314, self.AlarmButton.SubWindow.PT3320,
-                              self.AlarmButton.SubWindow.PT3332,self.AlarmButton.SubWindow.PT3333,
-                              self.AlarmButton.SubWindow.PT4306, self.AlarmButton.SubWindow.PT4315,
-                              self.AlarmButton.SubWindow.PT4319, self.AlarmButton.SubWindow.PT4322,
-                              self.AlarmButton.SubWindow.PT4325, self.AlarmButton.SubWindow.PT6302,
-                              self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT5304]
+        self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT1325,
+                              self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2321,
+                              self.AlarmButton.SubWindow.PT2330, self.AlarmButton.SubWindow.PT2335,
+                              self.AlarmButton.SubWindow.PT3308, self.AlarmButton.SubWindow.PT3309,
+                              self.AlarmButton.SubWindow.PT3311,self.AlarmButton.SubWindow.PT3314,
+                              self.AlarmButton.SubWindow.PT3320, self.AlarmButton.SubWindow.PT3332,
+                              self.AlarmButton.SubWindow.PT3333, self.AlarmButton.SubWindow.PT4306,
+                              self.AlarmButton.SubWindow.PT4315, self.AlarmButton.SubWindow.PT4319,
+                              self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325,
+                              self.AlarmButton.SubWindow.PT5304,self.AlarmButton.SubWindow.PT6302]
 
         self.LEFTVariableMatrix = [self.AlarmButton.SubWindow.BFM4313, self.AlarmButton.SubWindow.LT3335,
                                    self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
@@ -1098,15 +1099,16 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.AlarmButton.SubWindow.TT6406, self.AlarmButton.SubWindow.TT6410,
                             self.AlarmButton.SubWindow.TT6411, self.AlarmButton.SubWindow.TT6412,
                             self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414,
-                            self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2330,
-                            self.AlarmButton.SubWindow.PT2335, self.AlarmButton.SubWindow.PT3308,
-                            self.AlarmButton.SubWindow.PT3309, self.AlarmButton.SubWindow.PT3311,
-                            self.AlarmButton.SubWindow.PT3314, self.AlarmButton.SubWindow.PT3320,
-                            self.AlarmButton.SubWindow.PT3332,self.AlarmButton.SubWindow.PT3333,
-                            self.AlarmButton.SubWindow.PT4306, self.AlarmButton.SubWindow.PT4315,
-                            self.AlarmButton.SubWindow.PT4319, self.AlarmButton.SubWindow.PT4322,
-                            self.AlarmButton.SubWindow.PT4325, self.AlarmButton.SubWindow.PT6302,
-                            self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT5304,
+                            self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT1325,
+                            self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2321,
+                            self.AlarmButton.SubWindow.PT2330, self.AlarmButton.SubWindow.PT2335,
+                            self.AlarmButton.SubWindow.PT3308, self.AlarmButton.SubWindow.PT3309,
+                            self.AlarmButton.SubWindow.PT3311, self.AlarmButton.SubWindow.PT3314,
+                            self.AlarmButton.SubWindow.PT3320, self.AlarmButton.SubWindow.PT3332,
+                            self.AlarmButton.SubWindow.PT3333, self.AlarmButton.SubWindow.PT4306,
+                            self.AlarmButton.SubWindow.PT4315, self.AlarmButton.SubWindow.PT4319,
+                            self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325,
+                            self.AlarmButton.SubWindow.PT5304, self.AlarmButton.SubWindow.PT6302,
                             self.AlarmButton.SubWindow.BFM4313, self.AlarmButton.SubWindow.LT3335,
                             self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
                             self.AlarmButton.SubWindow.SERVO3321_IN_REAL, self.AlarmButton.SubWindow.TS1_MASS,
@@ -2860,6 +2862,18 @@ class MainWindow(QtWidgets.QMainWindow):
                                      Act=self.AlarmButton.SubWindow.PT1101.AlarmMode.isChecked(),
                                      LowLimit=self.AlarmButton.SubWindow.PT1101.Low_Set.Field.text(),
                                      HighLimit=self.AlarmButton.SubWindow.PT1101.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PT1325.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1325.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT1325.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT1325.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT1325.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PT1325.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1325.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT1325.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT1325.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT1325.High_Set.Field.text()))
 
         self.AlarmButton.SubWindow.PT5304.AlarmMode.stateChanged.connect(
             lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT5304.Label.text(),
