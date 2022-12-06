@@ -4868,6 +4868,8 @@ class Loadfile(QtWidgets.QWidget):
 
             self.read_Info_n_save()
             text = self.df.to_string()
+
+            print(text)
             self.FileContent.setText(text)
         except:
             print("Error! Please type in a valid path")
