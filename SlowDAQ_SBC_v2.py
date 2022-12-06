@@ -1222,7 +1222,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # Data signal saving and writing
         self.SaveSettings.SaveFileButton.clicked.connect(lambda : self.SaveSettings.SavecsvConfig(self.UpClient.receive_dic))
         # self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.updatedisplay(self.ReadSettings.loaded_dict))
-        self.ReadSettings.LoadFileButton.clicked.connect(lambda: self.man_set(self.ReadSettings.default_dict))
+        self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.man_set(self.ReadSettings.default_dict))
         self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.man_activated(self.ReadSettings.default_dict))
         # self.AlarmButton.SubWindow.MAN_ACT.clicked.connect(lambda: self.man_activated(self.UpClient.receive_dic))
 

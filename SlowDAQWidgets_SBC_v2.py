@@ -4784,7 +4784,7 @@ class Loadfile(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.loaded_dict ={}
-        self.default_dict = copy.deepcopy(sec.DIC_PACK)
+        self.default_dict = copy.copy(sec.DIC_PACK)
 
         self.setObjectName("LoadFile")
         self.setGeometry(QtCore.QRect(0*R, 0*R, 600*R, 1000*R))
@@ -4913,6 +4913,8 @@ class Loadfile(QtWidgets.QWidget):
             self.default_dict['data']['LOOPPID']['LO_LIM'][key]= self.low_dic[key]
             self.default_dict['data']['LOOPPID']['HI_LIM'][key] = self.high_dic[key]
             self.default_dict['Active']['LOOPPID'][key] = self.active_dic[key]
+
+        print(self.default_dict)
 
 
     # csv file will lose the data type of the record, we need to recover those properties
