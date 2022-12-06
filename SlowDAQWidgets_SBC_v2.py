@@ -4924,7 +4924,8 @@ class Loadfile(QtWidgets.QWidget):
     def translate_csv(self, type="Low_Limit"):
         df = self.df[["Instrument",type]]
         dic = df.set_index('Instrument').T.to_dict('records')[0]
-        # print("before",dic)
+
+        print("before",dic)
         for key in dic:
             try:
                 dic[key] = float(dic[key])
