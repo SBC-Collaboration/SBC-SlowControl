@@ -4236,7 +4236,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot(object)
     def man_activated(self, dic_c):
-        print(dic_c)
+        print("Acitve",dic_c["Active"])
         for element in self.BORTDAlarmMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["TT"]["BO"][element.Label.text()]))
 
