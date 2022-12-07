@@ -1224,7 +1224,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.updatedisplay(self.ReadSettings.loaded_dict))
         self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.man_set(self.ReadSettings.default_dict))
         self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.man_activated(self.ReadSettings.default_dict))
-        # self.AlarmButton.SubWindow.MAN_ACT.clicked.connect(lambda: self.man_activated(self.UpClient.receive_dic))
+        self.AlarmButton.SubWindow.MAN_ACT.clicked.connect(lambda: self.man_activated(self.UpClient.receive_dic))
 
 
         # self.PV1344.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1344.Label.text()))
