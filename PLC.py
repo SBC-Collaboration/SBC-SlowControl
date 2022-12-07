@@ -2077,20 +2077,21 @@ class UpdatePLC(QtCore.QObject):
         # self.message_manager = message_manager()
         self.Running = False
         self.period = 1
-        self.TT_FP_para = 0
-        self.TT_FP_rate = 30
-        self.TT_BO_para = 0
-        self.TT_BO_rate = 30
-        self.PT_para = 0
-        self.PT_rate = 30
+        # every pid should have one unique para and rate
+        self.TT_FP_para = sec.TT_FP_PARA
+        self.TT_FP_rate = sec.TT_FP_RATE
+        self.TT_BO_para = sec.TT_BO_PARA
+        self.TT_BO_rate = sec.TT_BO_RATE
+        self.PT_para = sec.PT_PARA
+        self.PT_rate = sec.PT_RATE
         self.PR_CYCLE_para = 0
         self.PR_CYCLE_rate = 30
-        self.LEFT_REAL_para = 0
-        self.LEFT_REAL_rate = 30
-        self.Din_para = 0
-        self.Din_rate = 30
-        self.LOOPPID_para = 0
-        self.LOOPPID_rate = 30
+        self.LEFT_REAL_para = sec.LEFT_REAL_PARA
+        self.LEFT_REAL_rate = sec.LEFT_REAL_RATE
+        self.Din_para = sec.DIN_PARA
+        self.Din_rate = sec.DIN_RATE
+        self.LOOPPID_para = sec.LOOPPID_PARA
+        self.LOOPPID_rate = sec.LOOPPID_RATE
 
     @QtCore.Slot()
     def run(self):
@@ -2258,15 +2259,15 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.TT_FP_Alarm[pid] = True
         # and send email or slack messages
         # every time interval send a alarm message
-        print(self.TT_FP_para)
-        if self.TT_FP_para >= self.TT_FP_rate:
+        print(self.TT_FP_para[pid])
+        if self.TT_FP_para[pid] >= self.TT_FP_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.TT_FP_dic[pid],
                                                                                                                      high=self.PLC.TT_FP_HighLimit[pid], low=self.PLC.TT_FP_LowLimit[pid])
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
             self.AI_slack_alarm.emit(msg)
-            self.TT_FP_para = 0
-        self.TT_FP_para += 1
+            self.TT_FP_para[pid] = 0
+        self.TT_FP_para[pid] += 1
 
     def resetTTFPalarmmsg(self, pid):
         self.PLC.TT_FP_Alarm[pid] = False
@@ -2276,16 +2277,16 @@ class UpdatePLC(QtCore.QObject):
     def TTBOalarmmsg(self, pid):
         self.PLC.TT_BO_Alarm[pid] = True
         # and send email or slack messages
-        print(self.TT_BO_para)
-        if self.TT_BO_para >= self.TT_BO_rate:
+        print(self.TT_BO_para[pid])
+        if self.TT_BO_para[pid] >= self.TT_BO_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.TT_BO_dic[pid],
                                                                                                                      high=self.PLC.TT_BO_HighLimit[pid], low=self.PLC.TT_BO_LowLimit[pid])
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
             self.AI_slack_alarm.emit(msg)
-            self.TT_BO_para = 0
+            self.TT_BO_para[pid] = 0
 
-        self.TT_BO_para += 1
+        self.TT_BO_para[pid] += 1
 
     def resetTTBOalarmmsg(self, pid):
         self.PLC.TT_BO_Alarm[pid] = False
@@ -2295,15 +2296,15 @@ class UpdatePLC(QtCore.QObject):
     def PTalarmmsg(self, pid):
         self.PLC.PT_Alarm[pid] = True
         # and send email or slack messages
-        if self.PT_para >= self.PT_rate:
+        if self.PT_para[pid] >= self.PT_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.PT_dic[pid],
                                                                                                                      high=self.PLC.PT_HighLimit[pid], low=self.PLC.PT_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
             self.AI_slack_alarm.emit(msg)
-            self.PT_para = 0
-        self.PT_para += 1
+            self.PT_para[pid] = 0
+        self.PT_para[pid] += 1
 
     def resetPTalarmmsg(self, pid):
         self.PLC.PT_Alarm[pid] = False
@@ -2313,15 +2314,15 @@ class UpdatePLC(QtCore.QObject):
     def LEFT_REALalarmmsg(self, pid):
         self.PLC.LEFT_REAL_Alarm[pid] = True
         # and send email or slack messages
-        if self.LEFT_REAL_para >= self.LEFT_REAL_rate:
+        if self.LEFT_REAL_para[pid] >= self.LEFT_REAL_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.LEFT_REAL_dic[pid],
                                                                                                                      high=self.PLC.LEFT_REAL_HighLimit[pid], low=self.PLC.LEFT_REAL_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
             self.AI_slack_alarm.emit(msg)
-            self.LEFT_REAL_para = 0
-        self.LEFT_REAL_para += 1
+            self.LEFT_REAL_para[pid] = 0
+        self.LEFT_REAL_para[pid] += 1
 
     def resetLEFT_REALalarmmsg(self, pid):
         self.PLC.LEFT_REAL_Alarm[pid] = False
@@ -2331,15 +2332,15 @@ class UpdatePLC(QtCore.QObject):
     def Dinalarmmsg(self, pid):
         self.PLC.Din_Alarm[pid] = True
         # and send email or slack messages
-        if self.Din_para >= self.Din_rate:
+        if self.Din_para[pid] >= self.Din_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.Din_dic[pid],
                                                                                                                      high=self.PLC.Din_HighLimit[pid], low=self.PLC.Din_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
             self.AI_slack_alarm.emit(msg)
-            self.Din_para = 0
-        self.Din_para += 1
+            self.Din_para[pid] = 0
+        self.Din_para[pid] += 1
 
     def resetDinalarmmsg(self, pid):
         self.PLC.Din_Alarm[pid] = False
@@ -2349,15 +2350,15 @@ class UpdatePLC(QtCore.QObject):
     def LOOPPIDalarmmsg(self, pid):
         self.PLC.LOOPPID_Alarm[pid] = True
         # and send email or slack messages
-        if self.LOOPPID_para >= self.LOOPPID_rate:
+        if self.LOOPPID_para[pid] >= self.LOOPPID_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.LOOPPID_OUT[pid],
                                                                                                                      high=self.PLC.LOOPPID_HI_LIM[pid], low=self.PLC.LOOPPID_LO_LIM[pid])
 
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
             self.AI_slack_alarm.emit(msg)
-            self.LOOPPID_para = 0
-        self.LOOPPID_para += 1
+            self.LOOPPID_para[pid] = 0
+        self.LOOPPID_para[pid] += 1
 
     def resetLOOPPIDalarmmsg(self, pid):
         self.PLC.LOOPPID_Alarm[pid] = False
