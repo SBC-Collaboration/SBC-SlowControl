@@ -3201,7 +3201,7 @@ class UpdateServer(QtCore.QObject):
 
             for key in message["MAN_SET"]["data"]["LOOPPID"]["Alarm_HighLimit"]:
 
-                self.PLC.LOOPPID_Alarm_HighLimit[key] = message[key]["MAN_SET"]["data"]["LOOPPID"]["Alarm_HighLimit"][key]
+                self.PLC.LOOPPID_Alarm_HighLimit[key] = message["MAN_SET"]["data"]["LOOPPID"]["Alarm_HighLimit"][key]
 
 
             for key in message["MAN_SET"]["data"]["TT"]["FP"]["low"]:
@@ -3220,7 +3220,7 @@ class UpdateServer(QtCore.QObject):
                 self.PLC.Din_LowLimit[key] = message["MAN_SET"]["data"]["Din"]["low"][key]
 
             for key in message["MAN_SET"]["data"]["LOOPPID"]["Alarm_LowLimit"]:
-                self.PLC.LOOPPID_Alarm_LowLimit[key] = message[key]["MAN_SET"]["data"]["LOOPPID"]["Alarm_LowLimit"][key]
+                self.PLC.LOOPPID_Alarm_LowLimit[key] = message["MAN_SET"]["data"]["LOOPPID"]["Alarm_LowLimit"][key]
 
             for key in message["MAN_SET"]["Active"]["TT"]["FP"]:
                 self.PLC.TT_FP_Activated[key] =message["MAN_SET"]["Active"]["TT"]["FP"][key]
