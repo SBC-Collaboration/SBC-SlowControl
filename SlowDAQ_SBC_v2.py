@@ -8239,7 +8239,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.RTDset2Win.TT2410.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2410"])
         self.RTDset2Win.TT2405.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2405"])
 
-        self.MFC1316.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6220"])
+        self.HTR6219.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6220"])
+        # self.MFC1316.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT1332"])
         self.HTR6214.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6401"])
         self.HTR6202.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6404"])
         self.HTR6206.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6405"])
