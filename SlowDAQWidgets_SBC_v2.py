@@ -4876,7 +4876,7 @@ class Loadfile(QtWidgets.QWidget):
 
     def read_Info_n_save(self):
         self.df = pd.read_csv(self.fulladdress)
-        # print(self.df.head(5))
+        print(self.df.head(5))
         # print(self.df.iloc[0]["High_Limit"],type(self.df.iloc[0]["High_Limit"]))
         self.low_dic = self.translate_csv("Low_Limit")
         self.high_dic = self.translate_csv("High_Limit")
