@@ -10631,6 +10631,8 @@ class UpdateClient(QtCore.QObject):
         self.LOOPPID_Busy_ini = sec.LOOPPID_BUSY
         self.LOOPPID_Alarm_ini = sec.LOOPPID_ALARM
         self.LOOPPID_Activated_ini = sec.LOOPPID_ACTIVATED
+        self.LOOPPID_Alarm_HighLimit_ini = sec.LOOPPID_ALARM_HI_LIM
+        self.LOOPPID_Alarm_LowLimit_ini = sec.LOOPPID_ALARM_LO_LIM
 
         self.LOOP2PT_MODE0_ini = sec.LOOP2PT_MODE0
         self.LOOP2PT_MODE1_ini = sec.LOOP2PT_MODE1
