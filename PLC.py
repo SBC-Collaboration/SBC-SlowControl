@@ -2250,17 +2250,17 @@ class UpdatePLC(QtCore.QObject):
             pass
 
     def check_LOOPPID_alarm(self, pid):
-        if self.PLC.LOOPPID_Activated[pid]:
-            if self.PLC.LOOPPID_SATLO[pid] or self.PLC.LOOPPID_SATHI[pid]:
-                # print(pid, " is in normal range")
-                self.LOOPPIDalarmmsg(pid)
-            else:
-                self.resetLOOPPIDalarmmsg(pid)
-                # print(pid, " is in normal range")
-
-        else:
-            self.resetLOOPPIDalarmmsg(pid)
-            pass
+        # if self.PLC.LOOPPID_Activated[pid]:
+        #     if self.PLC.LOOPPID_SATLO[pid] or self.PLC.LOOPPID_SATHI[pid]:
+        #         # print(pid, " is in normal range")
+        #         self.LOOPPIDalarmmsg(pid)
+        #     else:
+        #         self.resetLOOPPIDalarmmsg(pid)
+        #         # print(pid, " is in normal range")
+        #
+        # else:
+        #     self.resetLOOPPIDalarmmsg(pid)
+        #     pass
 
         if self.PLC.LOOPPID_Activated[pid]:
             if float(self.PLC.LOOPPID_Alarm_LowLimit[pid]) >= float(self.PLC.LOOPPID_Alarm_HighLimit[pid]):
