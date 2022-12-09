@@ -2627,7 +2627,7 @@ class UpdateServer(QtCore.QObject):
                                               "SET3": self.LOOPPID_SET3_ini,
                                               "Busy":self.LOOPPID_Busy_ini,
                                               "Alarm":self.LOOPPID_Alarm_ini,
-                                              "Alarm_Highlimit":self.LOOPPID_Alarm_HighLimit_ini,
+                                              "Alarm_HighLimit":self.LOOPPID_Alarm_HighLimit_ini,
                                               "Alarm_LowLimit":self.LOOPPID_Alarm_LowLimit_ini},
                                   "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
                                               "MODE1": self.LOOP2PT_MODE1_ini,
@@ -3199,9 +3199,9 @@ class UpdateServer(QtCore.QObject):
             for key in message["MAN_SET"]["data"]["Din"]["high"]:
                 self.PLC.Din_HighLimit[key] = message["MAN_SET"]["data"]["Din"]["high"][key]
 
-            for key in message["MAN_SET"]["data"]["LOOPPID"]["HI_LIM"]:
+            for key in message["MAN_SET"]["data"]["LOOPPID"]["Alarm_HighLimit"]:
 
-                self.PLC.LOOPPID_Alarm_HighLimit[key] = message[key]["MAN_SET"]["data"]["LOOPPID"]["Alarm_high"][key]
+                self.PLC.LOOPPID_Alarm_HighLimit[key] = message[key]["MAN_SET"]["data"]["LOOPPID"]["Alarm_HighLimit"][key]
 
 
             for key in message["MAN_SET"]["data"]["TT"]["FP"]["low"]:
@@ -3219,8 +3219,8 @@ class UpdateServer(QtCore.QObject):
             for key in message["MAN_SET"]["data"]["Din"]["low"]:
                 self.PLC.Din_LowLimit[key] = message["MAN_SET"]["data"]["Din"]["low"][key]
 
-            for key in message["MAN_SET"]["data"]["LOOPPID"]["LO_LIM"]:
-                self.PLC.LOOPPID_Alarm_LowLimit[key] = message[key]["MAN_SET"]["data"]["LOOPPID"]["Alarm_low"][key]
+            for key in message["MAN_SET"]["data"]["LOOPPID"]["Alarm_LowLimit"]:
+                self.PLC.LOOPPID_Alarm_LowLimit[key] = message[key]["MAN_SET"]["data"]["LOOPPID"]["Alarm_LowLimit"][key]
 
             for key in message["MAN_SET"]["Active"]["TT"]["FP"]:
                 self.PLC.TT_FP_Activated[key] =message["MAN_SET"]["Active"]["TT"]["FP"][key]
