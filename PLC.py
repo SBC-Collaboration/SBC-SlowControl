@@ -2263,11 +2263,11 @@ class UpdatePLC(QtCore.QObject):
             if float(self.PLC.LOOPPID_Alarm_LowLimit[pid]) >= float(self.PLC.LOOPPID_Alarm_HighLimit[pid]):
                 print("Low limit should be less than high limit!")
             else:
-                if float(self.PLC.LOOPPID_dic[pid]) <= float(self.PLC.LOOPPID_Alarm_LowLimit[pid]):
+                if float(self.PLC.LOOPPID_OUT[pid]) <= float(self.PLC.LOOPPID_Alarm_LowLimit[pid]):
                     self.LOOPPIDalarmmsg(pid)
 
                     # print(pid , " reaLOOPPIDg is lower than the low limit")
-                elif float(self.PLC.LOOPPID_dic[pid]) >= float(self.PLC.LOOPPID_Alarm_HighLimit[pid]):
+                elif float(self.PLC.LOOPPID_OUT[pid]) >= float(self.PLC.LOOPPID_Alarm_HighLimit[pid]):
                     self.LOOPPIDalarmmsg(pid)
                     # print(pid,  " reaLOOPPIDg is higher than the high limit")
                 else:
