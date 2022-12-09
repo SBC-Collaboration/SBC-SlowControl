@@ -33,8 +33,8 @@ class Alarm_Setting():
         self.PT_Activated = copy.copy(sec.PT_ACTIVATED)
         self.LEFT_REAL_Activated = copy.copy(sec.LEFT_REAL_ACTIVATED)
 
-        self.LOOPPID_HI_LIM = copy.copy(sec.LOOPPID_HI_LIM)
-        self.LOOPPID_LO_LIM = copy.copy(sec.LOOPPID_LO_LIM)
+        self.LOOPPID_HI_LIM = copy.copy(sec.LOOPPID_ALARM_HI_LIM)
+        self.LOOPPID_LO_LIM = copy.copy(sec.LOOPPID_ALARM_LO_LIM)
         self.LOOPPID_Activated = copy.copy(sec.LOOPPID_ACTIVATED)
 
         self.Din_LowLimit = copy.copy(sec.DIN_LOWLIMIT)

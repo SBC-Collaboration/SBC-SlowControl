@@ -4911,9 +4911,9 @@ class Loadfile(QtWidgets.QWidget):
             self.default_dict['data']['Din']['high'][key] = self.high_dic[key]
             self.default_dict['Active']['Din'][key] = self.active_dic[key]
 
-        for key in self.default_dict['data']['LOOPPID']['LO_LIM']:
-            self.default_dict['data']['LOOPPID']['LO_LIM'][key]= self.low_dic[key]
-            self.default_dict['data']['LOOPPID']['HI_LIM'][key] = self.high_dic[key]
+        for key in self.default_dict['data']['LOOPPID']['Alarm_LowLimit']:
+            self.default_dict['data']['LOOPPID']['Alarm_LowLimit'][key]= self.low_dic[key]
+            self.default_dict['data']['LOOPPID']['Alarm_HighLimit'][key] = self.high_dic[key]
             self.default_dict['Active']['LOOPPID'][key] = self.active_dic[key]
 
         # print("Active",self.active_dic)
@@ -5040,10 +5040,10 @@ class CustomSave(QtWidgets.QWidget):
             self.highlimit.append(dic_c['data']['LEFT_REAL']['high'][key])
             self.active.append(dic_c['Active']['LEFT_REAL'][key])
 
-        for key in dic_c['data']['LOOPPID']['LO_LIM']:
+        for key in dic_c['data']['LOOPPID']['Alarm_LowLimit']:
             self.instrument.append(key)
-            self.lowlimit.append(dic_c['data']['LOOPPID']['LO_LIM'][key])
-            self.highlimit.append(dic_c['data']['LOOPPID']['HI_LIM'][key])
+            self.lowlimit.append(dic_c['data']['LOOPPID']['Alarm_LowLimit'][key])
+            self.highlimit.append(dic_c['data']['LOOPPID']['Alarm_HighLimit'][key])
             self.active.append(dic_c['Active']['LOOPPID'][key])
 
         for key in dic_c['data']['Din']['low']:

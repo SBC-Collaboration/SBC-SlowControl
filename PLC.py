@@ -203,6 +203,8 @@ class PLC(QtCore.QObject):
         self.LOOPPID_Busy = copy.copy(sec.LOOPPID_BUSY)
         self.LOOPPID_Activated = copy.copy(sec.LOOPPID_ACTIVATED)
         self.LOOPPID_Alarm = copy.copy(sec.LOOPPID_ALARM)
+        self.LOOPPID_Alarm_HighLimit = copy.copy(sec.LOOPPID_ALARM_HI_LIM)
+        self.LOOPPID_Alarm_LowLimit = copy.copy(sec.LOOPPID_ALARM_LO_LIM)
         # self.LOOPPID_ADR_BASE = sec.LOOPPID_ADR_BASE
         #
         # self.LOOPPID_MODE0 = sec.LOOPPID_MODE0
@@ -374,6 +376,8 @@ class PLC(QtCore.QObject):
                               "LOOPPID_SET3":self.LOOPPID_SET3,
                               "LOOPPID_Busy":self.LOOPPID_Busy,
                               "LOOPPID_Alarm": self.LOOPPID_Alarm,
+                              "LOOPPID_Alarm_HighLimit":self.LOOPPID_Alarm_HighLimit,
+                              "LOOPPID_Alarm_LowLimit":self.LOOPPID_Alarm_LowLimit,
                               "LOOP2PT_ADR_BASE":self.LOOP2PT_ADR_BASE,
                               "LOOP2PT_MODE0": self.LOOP2PT_MODE0,
                               "LOOP2PT_MODE1": self.LOOP2PT_MODE1,
@@ -2255,6 +2259,25 @@ class UpdatePLC(QtCore.QObject):
             self.resetLOOPPIDalarmmsg(pid)
             pass
 
+        if self.PLC.LOOPPID_Activated[pid]:
+            if float(self.PLC.LOOPPID_Alarm_LowLimit[pid]) >= float(self.PLC.LOOPPID_Alarm_HighLimit[pid]):
+                print("Low limit should be less than high limit!")
+            else:
+                if float(self.PLC.LOOPPID_dic[pid]) <= float(self.PLC.LOOPPID_Alarm_LowLimit[pid]):
+                    self.LOOPPIDalarmmsg(pid)
+
+                    # print(pid , " reaLOOPPIDg is lower than the low limit")
+                elif float(self.PLC.LOOPPID_dic[pid]) >= float(self.PLC.LOOPPID_Alarm_HighLimit[pid]):
+                    self.LOOPPIDalarmmsg(pid)
+                    # print(pid,  " reaLOOPPIDg is higher than the high limit")
+                else:
+                    self.resetLOOPPIDalarmmsg(pid)
+                    # print(pid, " is in normal range")
+
+        else:
+            self.resetLOOPPIDalarmmsg(pid)
+            pass
+
     def TTFPalarmmsg(self, pid):
         self.PLC.TT_FP_Alarm[pid] = True
         # and send email or slack messages
@@ -2352,7 +2375,7 @@ class UpdatePLC(QtCore.QObject):
         # and send email or slack messages
         if self.LOOPPID_para[pid] >= self.LOOPPID_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.LOOPPID_OUT[pid],
-                                                                                                                     high=self.PLC.LOOPPID_HI_LIM[pid], low=self.PLC.LOOPPID_LO_LIM[pid])
+                                                                                                                     high=self.PLC.LOOPPID_Alarm_HighLimit[pid], low=self.PLC.LOOPPID_Alarm_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
@@ -2528,6 +2551,8 @@ class UpdateServer(QtCore.QObject):
         self.LOOPPID_Busy_ini = sec.LOOPPID_BUSY
         self.LOOPPID_Alarm_ini = sec.LOOPPID_ALARM
         self.LOOPPID_Activated_ini = sec.LOOPPID_ACTIVATED
+        self.LOOPPID_Alarm_HighLimit_ini = sec.LOOPPID_ALARM_HI_LIM
+        self.LOOPPID_Alarm_LowLimit_ini = sec.LOOPPID_ALARM_LO_LIM
 
         self.LOOP2PT_MODE0_ini = sec.LOOP2PT_MODE0
         self.LOOP2PT_MODE1_ini = sec.LOOP2PT_MODE1
@@ -2598,7 +2623,9 @@ class UpdateServer(QtCore.QObject):
                                               "SET2": self.LOOPPID_SET2_ini,
                                               "SET3": self.LOOPPID_SET3_ini,
                                               "Busy":self.LOOPPID_Busy_ini,
-                                              "Alarm":self.LOOPPID_Alarm_ini},
+                                              "Alarm":self.LOOPPID_Alarm_ini,
+                                              "Alarm_Highlimit":self.LOOPPID_Alarm_HighLimit_ini,
+                                              "Alarm_LowLimit":self.LOOPPID_Alarm_LowLimit_ini},
                                   "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
                                               "MODE1": self.LOOP2PT_MODE1_ini,
                                               "MODE2": self.LOOP2PT_MODE2_ini,
@@ -2749,8 +2776,6 @@ class UpdateServer(QtCore.QObject):
             self.Din_Alarm_ini[key] = self.PLC.Din_Alarm[key]
         for key in self.PLC.Din_Activated:
             self.Din_Activated_ini[key] = self.PLC.Din_Activated[key]
-
-
         for key in self.PLC.TT_FP_Alarm:
             self.TT_FP_Alarm_ini[key] = self.PLC.TT_FP_Alarm[key]
         for key in self.PLC.TT_BO_Alarm:
@@ -2801,6 +2826,12 @@ class UpdateServer(QtCore.QObject):
             self.LOOPPID_Activated_ini[key] = self.PLC.LOOPPID_Activated[key]
         for key in self.PLC.LOOPPID_Alarm:
             self.LOOPPID_Alarm_ini[key] = self.PLC.LOOPPID_Alarm[key]
+        for key in self.PLC.LOOPPID_Alarm_LowLimit:
+            self.LOOPPID_Alarm_LowLimit_ini[key] = self.PLC.LOOPPID_Alarm_LowLimit[key]
+        for key in self.PLC.LOOPPID_Alarm_HighLimit:
+            self.LOOPPID_Alarm_HighLimit_ini[key] = self.PLC.LOOPPID_Alarm_HighLimit[key]
+
+
 
 
         for key in self.PLC.LOOP2PT_MODE0:
@@ -2954,10 +2985,12 @@ class UpdateServer(QtCore.QObject):
                         if message[key]["server"] == "BO":
                             if message[key]["operation"]["Update"]:
                                 self.PLC.LOOPPID_Activated[key] = message[key]["operation"]["Act"]
-                                self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
-                                                            value=message[key]["operation"]["LowLimit"])
-                                self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
-                                                            value=message[key]["operation"]["HighLimit"])
+                                # self.PLC.LOOPPID_SET_LO_LIM(address=message[key]["address"],
+                                #                             value=message[key]["operation"]["LowLimit"])
+                                # self.PLC.LOOPPID_SET_HI_LIM(address=message[key]["address"],
+                                #                             value=message[key]["operation"]["HighLimit"])
+                                self.PLC.LOOPPID_Alarm_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                                self.PLC.LOOPPID_Alarm_LowLimit[key] = message[key]["operation"]["LowLimit"]
 
 
                             else:
@@ -3164,8 +3197,8 @@ class UpdateServer(QtCore.QObject):
                 self.PLC.Din_HighLimit[key] = message["MAN_SET"]["data"]["Din"]["high"][key]
 
             for key in message["MAN_SET"]["data"]["LOOPPID"]["HI_LIM"]:
-                self.PLC.LOOPPID_SET_HI_LIM(address=sec.LOOPPID_ADR_BASE[key],
-                                        value=message["MAN_SET"]["data"]["LOOPPID"]["HI_LIM"][key])
+
+                self.PLC.LOOPPID_Alarm_HighLimit[key] = message[key]["MAN_SET"]["data"]["LOOPPID"]["Alarm_high"][key]
 
 
             for key in message["MAN_SET"]["data"]["TT"]["FP"]["low"]:
@@ -3184,8 +3217,7 @@ class UpdateServer(QtCore.QObject):
                 self.PLC.Din_LowLimit[key] = message["MAN_SET"]["data"]["Din"]["low"][key]
 
             for key in message["MAN_SET"]["data"]["LOOPPID"]["LO_LIM"]:
-                self.PLC.LOOPPID_SET_LO_LIM(address=sec.LOOPPID_ADR_BASE[key],
-                                            value=message["MAN_SET"]["data"]["LOOPPID"]["LO_LIM"][key])
+                self.PLC.LOOPPID_Alarm_LowLimit[key] = message[key]["MAN_SET"]["data"]["LOOPPID"]["Alarm_low"][key]
 
             for key in message["MAN_SET"]["Active"]["TT"]["FP"]:
                 self.PLC.TT_FP_Activated[key] =message["MAN_SET"]["Active"]["TT"]["FP"][key]

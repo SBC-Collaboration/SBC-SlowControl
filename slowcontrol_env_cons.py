@@ -332,6 +332,18 @@ LOOPPID_BUSY = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124
               'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
 
 
+
+LOOPPID_ALARM_HI_LIM = {'SERVO3321': 100, 'HTR6225': 100, 'HTR2123': 100, 'HTR2124': 100,
+                  'HTR2125': 100,
+                  'HTR1202': 100, 'HTR2203': 100, 'HTR6202': 100, 'HTR6206': 100, 'HTR6210': 100,
+                  'HTR6223': 100, 'HTR6224': 100, 'HTR6219': 100, 'HTR6221': 100, 'HTR6214': 100}
+
+LOOPPID_ALARM_LO_LIM = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
+                  'HTR2125': 0,
+                  'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
+                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+
+
 LOOP2PT_ADR_BASE = {'PUMP3305':14688}
 
 LOOP2PT_MODE0 = {'PUMP3305': True}
@@ -548,7 +560,9 @@ DIC_PACK = {"data": {"TT": {"FP": {"value": TT_FP_DIC, "high": TT_FP_HIGHLIMIT, 
                                               "SET2": LOOPPID_SET2,
                                               "SET3": LOOPPID_SET3,
                                               "Busy":LOOPPID_BUSY,
-                                              "Alarm":LOOPPID_ALARM},
+                                              "Alarm":LOOPPID_ALARM,
+                                              "Alarm_high":LOOPPID_ALARM_HI_LIM,
+                                              "Alarm_LowLimit":LOOPPID_ALARM_LO_LIM},
                                   "LOOP2PT": {"MODE0": LOOP2PT_MODE0,
                                               "MODE1": LOOP2PT_MODE1,
                                               "MODE2": LOOP2PT_MODE2,
