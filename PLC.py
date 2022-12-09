@@ -474,13 +474,16 @@ class PLC(QtCore.QObject):
             for key in self.Din_Activated:
                 self.Din_Activated[key] = self.alarm_config.active_dic[key]
 
-            for key in self.LOOPPID_LO_LIM:
-                self.LOOPPID_SET_LO_LIM(address=self.LOOPPID_ADR_BASE[key],
-                                        value=self.alarm_config.low_dic[key])
+            for key in self.LOOPPID_Alarm_LowLimit:
+                # self.LOOPPID_SET_LO_LIM(address=self.LOOPPID_ADR_BASE[key],
+                #                         value=self.alarm_config.low_dic[key])
 
-            for key in self.LOOPPID_HI_LIM:
-                self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
-                                        value=self.alarm_config.high_dic[key])
+                self.LOOPPID_Alarm_LowLimit[key] = self.alarm_config.low_dic[key]
+
+            for key in self.LOOPPID_Alarm_HighLimit:
+                # self.LOOPPID_SET_HI_LIM(address=self.LOOPPID_ADR_BASE[key],
+                #                         value=self.alarm_config.high_dic[key])
+                self.LOOPPID_Alarm_HighLimit[key] = self.alarm_config.high_dic[key]
 
             for key in self.LOOPPID_Activated:
                 self.LOOPPID_Activated[key] = self.alarm_config.active_dic[key]
