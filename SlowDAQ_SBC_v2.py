@@ -4393,9 +4393,9 @@ class MainWindow(QtWidgets.QMainWindow):
             element.Indicator.SetValue(
                 received_dic_c["data"]["LOOPPID"]["OUT"][element.Label.text()])
             element.Low_Read.SetValue(
-                received_dic_c["data"]["LOOPPID"]["Alarm_Lowlimit"][element.Label.text()])
+                received_dic_c["data"]["LOOPPID"]["Alarm_LowLimit"][element.Label.text()])
             element.High_Read.SetValue(
-                received_dic_c["data"]["LOOPPID"]["Alarm_Highlimit"][element.Label.text()])
+                received_dic_c["data"]["LOOPPID"]["Alarm_HighLimit"][element.Label.text()])
 
 
         #
@@ -10705,7 +10705,7 @@ class UpdateClient(QtCore.QObject):
                                               "SET3": self.LOOPPID_SET3_ini,
                                               "Busy":self.LOOPPID_Busy_ini,
                                               "Alarm":self.LOOPPID_Alarm_ini,
-                                              "Alarm_Highlimit":self.LOOPPID_Alarm_HighLimit_ini,
+                                              "Alarm_HighLimit":self.LOOPPID_Alarm_HighLimit_ini,
                                               "Alarm_LowLimit":self.LOOPPID_Alarm_LowLimit_ini},
                                   "LOOP2PT": {"MODE0": self.LOOP2PT_MODE0_ini,
                                               "MODE1": self.LOOP2PT_MODE1_ini,
