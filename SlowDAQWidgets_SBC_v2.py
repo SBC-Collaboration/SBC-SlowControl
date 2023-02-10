@@ -7369,9 +7369,9 @@ class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
         self.RST_FF.setText("RST_FF")
         self.GLWR.addWidget(self.RST_FF)
 
-        self.TS_SEL_WR = SetPoint(self.GroupWR)
-        self.TS_SEL_WR.Label.setText("SEL")
-        self.GLWR.addWidget(self.TS_SEL_WR)
+        self.SEL_WR = SetPoint(self.GroupWR)
+        self.SEL_WR.Label.setText("SEL")
+        self.GLWR.addWidget(self.SEL_WR)
 
         self.ADDREM_MASS_WR = SetPoint(self.GroupWR)
         self.ADDREM_MASS_WR.Label.setText("ADDREM_MASS")
