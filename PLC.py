@@ -1862,24 +1862,24 @@ class UpdateDataBase(QtCore.QObject):
                         self.para_FLAG = 0
 
 
-                    # # FF
-                    # for key in self.FF_DIC:
-                    #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                    #     if self.FF_DIC[key] != self.FF_buffer[key]:
-                    #         self.db.insert_data_into_stack(key, self.early_dt, self.FF_buffer[key])
-                    #         self.db.insert_data_into_stack(key, self.dt, self.FF_DIC[key])
-                    #         self.FF_buffer[key] = self.FF_DIC[key]
-                    #         self.commit_bool = True
-                    #         # print(self.Valve_OUT[key])
-                    #     else:
-                    #         pass
-                    #
-                    # if self.para_FF >= self.rate_FF:
-                    #     for key in self.FF_DIC:
-                    #         self.db.insert_data_into_stack(key, self.dt, self.FF_DIC[key])
-                    #         self.FF_buffer[key] = self.FF_DIC[key]
-                    #         self.commit_bool = True
-                    #     self.para_FF = 0
+                    # FF
+                    for key in self.FF_DIC:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.FF_DIC[key] != self.FF_buffer[key]:
+                            self.db.insert_data_into_stack(key, self.early_dt, self.FF_buffer[key])
+                            self.db.insert_data_into_stack(key, self.dt, self.FF_DIC[key])
+                            self.FF_buffer[key] = self.FF_DIC[key]
+                            self.commit_bool = True
+                            # print(self.Valve_OUT[key])
+                        else:
+                            pass
+
+                    if self.para_FF >= self.rate_FF:
+                        for key in self.FF_DIC:
+                            self.db.insert_data_into_stack(key, self.dt, self.FF_DIC[key])
+                            self.FF_buffer[key] = self.FF_DIC[key]
+                            self.commit_bool = True
+                        self.para_FF = 0
                     #
                     # # PARAM_B
                     # for key in self.PARAM_B_DIC:
