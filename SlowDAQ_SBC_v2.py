@@ -898,6 +898,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TS_ADDREM.move(700*R, 150*R)
         self.TS_ADDREM.Group.setTitle("TS ADDREM")
         self.TS_ADDREM.objectname = "TS_ADDREM"
+        self.TS_ADDREM.expandwindow.MAXTIME_RD.Unit=' s'
+        self.TS_ADDREM.expandwindow.FLOWET.Unit = ' s'
 
         self.TS_EMPTY = ProcedureWidget(self.DatanSignalTab)
         self.TS_EMPTY.move(700 * R, 390 * R)
@@ -923,6 +925,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRESSURE_CYCLE.move(1300 * R, 150 * R)
         self.PRESSURE_CYCLE.Group.setTitle("PRESSURE_CYCLE")
         self.PRESSURE_CYCLE.objectname = "PRESSURE_CYCLE"
+        self.PRESSURE_CYCLE.expandwindow.EXPTIME_RD.Unit = " s"
+        self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_RD.Unit = " s"
+        self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_RD.Unit = " s"
+        self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_RD.Unit = " s"
+        self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_RD.Unit = " s"
 
         self.MAN_TS = Flag(self.DatanSignalTab)
         self.MAN_TS.move(1300 * R, 390 * R)
@@ -4419,11 +4426,11 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.TS_ADDREM.expandwindow.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.expandwindow.FF_RD.Field.setText(bin(received_dic_c["data"]["FF"]["TS_ADDREM_FF"]))
-        self.TS_ADDREM.expandwindow.TS_SEL_RD.SetValue(received_dic_c["data"]["PARA_I"]["TS_SEL"])
+        self.TS_ADDREM.expandwindow.TS_SEL_RD.SetIntValue(received_dic_c["data"]["PARA_I"]["TS_SEL"])
         self.TS_ADDREM.expandwindow.ADDREM_MASS_RD.SetValue(received_dic_c["data"]["PARA_F"]["TS_ADDREM_MASS"])
-        self.TS_ADDREM.expandwindow.MAXTIME_RD.SetValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_MAXTIME"])
+        self.TS_ADDREM.expandwindow.MAXTIME_RD.SetIntValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_MAXTIME"]/1000)
         self.TS_ADDREM.expandwindow.N2MASSTX.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS_ADDREM_N2MASSTX"])
-        self.TS_ADDREM.expandwindow.FLOWET.SetValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_FLOWET"])
+        self.TS_ADDREM.expandwindow.FLOWET.SetIntValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_FLOWET"]/1000)
         self.TS_ADDREM.expandwindow.TS1_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS1_MASS"])
         self.TS_ADDREM.expandwindow.TS2_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS2_MASS"])
         self.TS_ADDREM.expandwindow.TS3_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS3_MASS"])
@@ -4469,18 +4476,18 @@ class MainWindow(QtWidgets.QMainWindow):
             received_dic_c["data"]["PARA_F"]["PCYCLE_PSET"])
         self.PRESSURE_CYCLE.expandwindow.EXPTIME_RD.SetValue(
             received_dic_c["data"]["TIME"]["PCYCLE_EXPTIME"])
-        self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_RD.SetValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEXPTIME"])
-        self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_RD.SetValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEQTIME"])
+        self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_RD.SetIntValue(
+            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEXPTIME"]/1000)
+        self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_RD.SetIntValue(
+            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEQTIME"]/1000)
         self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_MAXEQPDIFF"])
-        self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_RD.SetValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXACCTIME"])
+        self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_RD.SetIntValue(
+            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXACCTIME"]/1000)
         self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_MAXACCDPDT"])
-        self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_RD.SetValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXBLEEDTIME"])
+        self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_RD.SetIntValue(
+            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXBLEEDTIME"]/1000)
         self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_MAXBLEEDDPDT"])
         self.PRESSURE_CYCLE.expandwindow.SLOWCOMP_SET_RD.SetValue(

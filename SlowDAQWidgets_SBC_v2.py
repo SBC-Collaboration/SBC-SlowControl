@@ -4749,8 +4749,13 @@ class SetPoint(QtWidgets.QWidget):
         self.value = value
         self.Field.setText(format(value, '#.2f') + self.Unit)
 
+    def SetIntValue(self, value):
+        self.value = value
+        self.Field.setText(str(int(value)) + self.Unit)
+
     def UpdateValue(self):
         self.value = self.Field.text()
+
 
 
 class CheckButton(QtWidgets.QWidget):
