@@ -3185,17 +3185,17 @@ class UpdateServer(QtCore.QObject):
 
                             if message[key]["operation"]["update"]:
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["PSET"],message[key]["operation"]["PSET"])
-                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["MAXEXPTIME"],message[key]["operation"]["MAXEXPTIME"]*1000)
-                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["MAXEQTIME"],message[key]["operation"]["MAXEXQTIME"]*1000)
+                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["MAXEXPTIME"],round(float(message[key]["operation"]["MAXEXPTIME"])*1000))
+                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["MAXEQTIME"],round(float(message[key]["operation"]["MAXEXQTIME"])*1000))
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["MAXEQPDIFF"],
                                                     message[key]["operation"]["MAXEQPDIFF"])
                                 self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["MAXACCTIME"],
-                                                    message[key]["operation"]["MAXACCTIME"]*1000)
+                                                    round(float(message[key]["operation"]["MAXACCTIME"])*1000))
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["MAXACCDPDT"],
                                                     message[key]["operation"]["MAXACCDPDT"])
 
                                 self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["MAXBLEEDTIME"],
-                                                    message[key]["operation"]["MAXBLEEDTIME"]*1000)
+                                                    round(float(message[key]["operation"]["MAXBLEEDTIME"])*1000))
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["MAXBLEEDDPDT"],
                                                     message[key]["operation"]["MAXBLEEDDPDT"])
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["SLOWCOMP_SET"],
