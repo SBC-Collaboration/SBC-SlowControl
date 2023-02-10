@@ -423,7 +423,7 @@ class PLC(QtCore.QObject):
                               "TIME_ADDRESS": self.TIME_ADDRESS,
                               "TIME_DIC": self.TIME_DIC}
 
-        self.load_alarm_config()
+        # self.load_alarm_config()
 
         self.LiveCounter = 0
         self.NewData_Display = False
