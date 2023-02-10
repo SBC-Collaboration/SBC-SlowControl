@@ -6168,6 +6168,10 @@ class Indicator(QtWidgets.QWidget):
         self.value = value
         self.Field.setText(format(value, '#.2f') + self.Unit)
 
+    def SetIntValue(self, value):
+        self.value = value
+        self.Field.setText(str(int(value)) + self.Unit)
+
     def SetAlarm(self):
         self.Field.Property = True
         self.Field.setProperty("Alarm", self.Field.Property)
@@ -7404,19 +7408,19 @@ class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
         self.EXIT.SetUnit(" ")
         self.GLRD.addWidget(self.EXIT)
 
-        self.FF_RD = SetPoint(self.GroupWR)
+        self.FF_RD = Indicator(self.GroupWR)
         self.FF_RD.Label.setText("FF")
         self.GLRD.addWidget(self.FF_RD)
 
-        self.SEL_RD = SetPoint(self.GroupWR)
+        self.SEL_RD = Indicator(self.GroupWR)
         self.SEL_RD.Label.setText("SEL")
         self.GLRD.addWidget(self.SEL_RD)
 
-        self.ADDREM_MASS_RD = SetPoint(self.GroupWR)
+        self.ADDREM_MASS_RD = Indicator(self.GroupWR)
         self.ADDREM_MASS_RD.Label.setText("ADDREM_MASS")
         self.GLRD.addWidget(self.ADDREM_MASS_RD)
 
-        self.MAXTIME_RD = SetPoint(self.GroupWR)
+        self.MAXTIME_RD = Indicator(self.GroupWR)
         self.MAXTIME_RD.Label.setText("MAXTIME")
         self.GLRD.addWidget(self.MAXTIME_RD)
 
@@ -7667,67 +7671,67 @@ class ProcedureSubWindow_PC(QtWidgets.QMainWindow):
         self.EXIT.SetUnit(" ")
         self.GLRD.addWidget(self.EXIT,0,2)
 
-        self.ABORT_FF_RD = SetPoint(self.GroupWR)
+        self.ABORT_FF_RD = Indicator(self.GroupWR)
         self.ABORT_FF_RD.Label.setText("ABORT_FF")
         self.GLRD.addWidget(self.ABORT_FF_RD,0,3)
 
-        self.FASTCOMP_FF_RD = SetPoint(self.GroupWR)
+        self.FASTCOMP_FF_RD = Indicator(self.GroupWR)
         self.FASTCOMP_FF_RD.Label.setText("FASTCOMP_FF")
         self.GLRD.addWidget(self.FASTCOMP_FF_RD,0,4)
 
-        self.SLOWCOMP_FF_RD = SetPoint(self.GroupWR)
+        self.SLOWCOMP_FF_RD = Indicator(self.GroupWR)
         self.SLOWCOMP_FF_RD.Label.setText("SLOWCOMP_FF")
         self.GLRD.addWidget(self.SLOWCOMP_FF_RD,0,5)
 
-        self.CYLEQ_FF_RD = SetPoint(self.GroupWR)
+        self.CYLEQ_FF_RD = Indicator(self.GroupWR)
         self.CYLEQ_FF_RD.Label.setText("CYLEQ_FF")
         self.GLRD.addWidget(self.CYLEQ_FF_RD,0,6)
 
-        self.ACCHARGE_FF_RD = SetPoint(self.GroupWR)
+        self.ACCHARGE_FF_RD = Indicator(self.GroupWR)
         self.ACCHARGE_FF_RD.Label.setText("ACCHARGE_FF")
         self.GLRD.addWidget(self.ACCHARGE_FF_RD,0,7)
 
-        self.CYLBLEED_FF_RD = SetPoint(self.GroupWR)
+        self.CYLBLEED_FF_RD = Indicator(self.GroupWR)
         self.CYLBLEED_FF_RD.Label.setText("CYLBLEED_FF")
         self.GLRD.addWidget(self.CYLBLEED_FF_RD,0,8)
 
-        self.PSET_RD = SetPoint(self.GroupWR)
+        self.PSET_RD = Indicator(self.GroupWR)
         self.PSET_RD.Label.setText("PSET")
         self.GLRD.addWidget(self.PSET_RD,0,9)
 
-        self.EXPTIME_RD = SetPoint(self.GroupWR)
+        self.EXPTIME_RD = Indicator(self.GroupWR)
         self.EXPTIME_RD.Label.setText("EXPTIME")
         self.GLRD.addWidget(self.EXPTIME_RD,1,0)
 
-        self.MAXEXPTIME_RD = SetPoint(self.GroupWR)
+        self.MAXEXPTIME_RD = Indicator(self.GroupWR)
         self.MAXEXPTIME_RD.Label.setText("MAXEXPTIME")
         self.GLRD.addWidget(self.MAXEXPTIME_RD,1,1)
 
-        self.MAXEQTIME_RD = SetPoint(self.GroupWR)
+        self.MAXEQTIME_RD = Indicator(self.GroupWR)
         self.MAXEQTIME_RD.Label.setText("MAXEQTIME")
         self.GLRD.addWidget(self.MAXEQTIME_RD,1,2)
 
-        self.MAXEQPDIFF_RD = SetPoint(self.GroupWR)
+        self.MAXEQPDIFF_RD = Indicator(self.GroupWR)
         self.MAXEQPDIFF_RD.Label.setText("MAXEQPDIFF")
         self.GLRD.addWidget(self.MAXEQPDIFF_RD,1,3)
 
-        self.MAXACCTIME_RD = SetPoint(self.GroupWR)
+        self.MAXACCTIME_RD = Indicator(self.GroupWR)
         self.MAXACCTIME_RD.Label.setText("MAXACCTIME")
         self.GLRD.addWidget(self.MAXACCTIME_RD,1,4)
 
-        self.MAXACCDPDT_RD = SetPoint(self.GroupWR)
+        self.MAXACCDPDT_RD = Indicator(self.GroupWR)
         self.MAXACCDPDT_RD.Label.setText("MAXACCDPDT")
         self.GLRD.addWidget(self.MAXACCDPDT_RD,1,5)
 
-        self.MAXBLEEDTIME_RD = SetPoint(self.GroupWR)
+        self.MAXBLEEDTIME_RD = Indicator(self.GroupWR)
         self.MAXBLEEDTIME_RD.Label.setText("MAXBLEEDTIME")
         self.GLRD.addWidget(self.MAXBLEEDTIME_RD,1,6)
 
-        self.MAXBLEEDDPDT_RD = SetPoint(self.GroupWR)
+        self.MAXBLEEDDPDT_RD = Indicator(self.GroupWR)
         self.MAXBLEEDDPDT_RD.Label.setText("MAXBLEEDDPDT")
         self.GLRD.addWidget(self.MAXBLEEDDPDT_RD,1,7)
 
-        self.SLOWCOMP_SET_RD = SetPoint(self.GroupWR)
+        self.SLOWCOMP_SET_RD = Indicator(self.GroupWR)
         self.SLOWCOMP_SET_RD.Label.setText("SLOWCOMP_SET")
         self.GLRD.addWidget(self.SLOWCOMP_SET_RD,1,8)
 
