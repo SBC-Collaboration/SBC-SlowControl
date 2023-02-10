@@ -960,6 +960,20 @@ class PLC(QtCore.QObject):
             print("ERROR in float to words")
         return piece1, piece2
 
+    def int_to_2words(self, value):
+        try:
+            it = int(value)
+            x = np.arange(it, it + 1, dtype='<I4')
+            if len(x) == 1:
+                word = x.tobytes()
+                piece1, piece2 = struct.unpack('<HH', word)
+            else:
+                print("ERROR in float to words")
+            return piece1, piece2
+        except:
+            return 0
+
+
     def Write_BO_2(self, address, value):
         word1, word2 = self.float_to_2words(value)
         print('words', word1, word2)
@@ -968,6 +982,25 @@ class PLC(QtCore.QObject):
         Raw2 = self.Client_BO.write_register(address + 1, value=word2, unit=0x01)
 
         print("write result = ", Raw1, Raw2)
+
+
+    def Write_BO_2_int(self, address, value):
+        word1, word2 = self.int_to_2words(value)
+        print('words', word1, word2)
+        # pay attention to endian relationship
+        Raw1 = self.Client_BO.write_register(address, value=word1, unit=0x01)
+        Raw2 = self.Client_BO.write_register(address + 1, value=word2, unit=0x01)
+
+        print("write result = ", Raw1, Raw2)
+
+    # def Write_BO_2(self, address, value):
+    #     word1, word2 = self.float_to_2words(value)
+    #     print('words', word1, word2)
+    #     # pay attention to endian relationship
+    #     Raw1 = self.Client_BO.write_register(address, value=word1, unit=0x01)
+    #     Raw2 = self.Client_BO.write_register(address + 1, value=word2, unit=0x01)
+    #
+    #     print("write result = ", Raw1, Raw2)
 
     def WriteBase2(self, address):
         output_BO = self.Read_BO_1(address)
