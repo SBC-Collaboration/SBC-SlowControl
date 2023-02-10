@@ -1840,28 +1840,28 @@ class UpdateDataBase(QtCore.QObject):
                             self.commit_bool = True
                         self.para_REAL = 0
 
-                    #
-                    # # #FLAGS
-                    # for key in self.FLAG_INTLKD:
-                    #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                    #     if self.FLAG_INTLKD[key] != self.FLAG_INTLKD_buffer[key]:
-                    #         self.db.insert_data_into_stack(key+'_INTLKD', self.early_dt, self.FLAG_INTLKD_buffer[key])
-                    #         self.db.insert_data_into_stack(key+'_INTLKD', self.dt, self.FLAG_INTLKD[key])
-                    #         self.db.insert_data_into_stack(key, self.dt, self.FLAG_DIC[key])
-                    #         self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
-                    #         self.commit_bool = True
-                    #     else:
-                    #         pass
-                    #
-                    # if self.para_FLAG >= self.rate_FLAG:
-                    #     for key in self.FLAG_INTLKD:
-                    #         self.db.insert_data_into_stack(key, self.dt, self.FLAG_DIC[key])
-                    #         self.db.insert_data_into_stack(key+'_INTLKD', self.dt, self.FLAG_INTLKD[key])
-                    #         self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
-                    #         self.commit_bool = True
-                    #     self.para_FLAG = 0
-                    #
-                    #
+
+                    # #FLAGS
+                    for key in self.FLAG_INTLKD:
+                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+                        if self.FLAG_INTLKD[key] != self.FLAG_INTLKD_buffer[key]:
+                            self.db.insert_data_into_stack(key+'_INTLKD', self.early_dt, self.FLAG_INTLKD_buffer[key])
+                            self.db.insert_data_into_stack(key+'_INTLKD', self.dt, self.FLAG_INTLKD[key])
+                            self.db.insert_data_into_stack(key, self.dt, self.FLAG_DIC[key])
+                            self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
+                            self.commit_bool = True
+                        else:
+                            pass
+
+                    if self.para_FLAG >= self.rate_FLAG:
+                        for key in self.FLAG_INTLKD:
+                            self.db.insert_data_into_stack(key, self.dt, self.FLAG_DIC[key])
+                            self.db.insert_data_into_stack(key+'_INTLKD', self.dt, self.FLAG_INTLKD[key])
+                            self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
+                            self.commit_bool = True
+                        self.para_FLAG = 0
+
+
                     # # FF
                     # for key in self.FF_DIC:
                     #     # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
