@@ -960,10 +960,22 @@ class PLC(QtCore.QObject):
             print("ERROR in float to words")
         return piece1, piece2
 
-    def int_to_2words(self, value):
+    def int16_to_word(self, value):
         try:
             it = int(value)
-            x = np.arange(it, it + 1, dtype='<I4')
+            x = np.arange(it, it + 1, dtype='<i2')
+            if len(x) == 1:
+                word = x.tobytes()
+            else:
+                print("ERROR in float to words")
+            return word
+        except:
+            return 0
+
+    def int32_to_2words(self, value):
+        try:
+            it = int(value)
+            x = np.arange(it, it + 1, dtype='<i4')
             if len(x) == 1:
                 word = x.tobytes()
                 piece1, piece2 = struct.unpack('<HH', word)
@@ -983,9 +995,15 @@ class PLC(QtCore.QObject):
 
         print("write result = ", Raw1, Raw2)
 
+    def Write_BO_2_int16(self, address, value):
+        word = self.int16_to_word(value)
+        print('word', word)
+        # pay attention to endian relationship
+        Raw = self.Client_BO.write_register(address, value=word, unit=0x01)
 
-    def Write_BO_2_int(self, address, value):
-        word1, word2 = self.int_to_2words(value)
+        print("write result = ", Raw)
+    def Write_BO_2_int32(self, address, value):
+        word1, word2 = self.int32_to_2words(value)
         print('words', word1, word2)
         # pay attention to endian relationship
         Raw1 = self.Client_BO.write_register(address, value=word1, unit=0x01)
@@ -3141,9 +3159,9 @@ class UpdateServer(QtCore.QObject):
                             if message[key]["operation"]["RST_FF"]:
                                 self.PLC.WriteFF(self.PLC.FF_ADDRESS["TS_ADDREM_FF"])
                             if message[key]["operation"]["update"]:
-                                self.PLC.Write_BO_2(self.PLC.PARAM_I_ADDRESS["TS_SEL"],message[key]["operation"]["SEL"])
+                                self.PLC.Write_BO_2_int16(self.PLC.PARAM_I_ADDRESS["TS_SEL"],message[key]["operation"]["SEL"])
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["TS_ADDREM_MASS"],message[key]["operation"]["ADDREM_MASS"])
-                                self.PLC.Write_BO_2(self.PLC.PARAM_T_ADDRESS["TS_MAXTIME"],message[key]["operation"]["MAXTIME"])
+                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["TS_MAXTIME"],message[key]["operation"]["MAXTIME"])
 
                             else:
                                 pass
@@ -3167,16 +3185,16 @@ class UpdateServer(QtCore.QObject):
 
                             if message[key]["operation"]["update"]:
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["PSET"],message[key]["operation"]["PSET"])
-                                self.PLC.Write_BO_2(self.PLC.PARAM_T_ADDRESS["MAXEXPTIME"],message[key]["operation"]["MAXEXPTIME"])
-                                self.PLC.Write_BO_2(self.PLC.PARAM_T_ADDRESS["MAXEQTIME"],message[key]["operation"]["MAXEXQTIME"])
+                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["MAXEXPTIME"],message[key]["operation"]["MAXEXPTIME"])
+                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["MAXEQTIME"],message[key]["operation"]["MAXEXQTIME"])
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["MAXEQPDIFF"],
                                                     message[key]["operation"]["MAXEQPDIFF"])
-                                self.PLC.Write_BO_2(self.PLC.PARAM_T_ADDRESS["MAXACCTIME"],
+                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["MAXACCTIME"],
                                                     message[key]["operation"]["MAXACCTIME"])
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["MAXACCDPDT"],
                                                     message[key]["operation"]["MAXACCDPDT"])
 
-                                self.PLC.Write_BO_2(self.PLC.PARAM_T_ADDRESS["MAXBLEEDTIME"],
+                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["MAXBLEEDTIME"],
                                                     message[key]["operation"]["MAXBLEEDTIME"])
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["MAXBLEEDDPDT"],
                                                     message[key]["operation"]["MAXBLEEDDPDT"])
