@@ -7080,7 +7080,7 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.EXIT.Label.setText("EXIT")
         self.EXIT.SetUnit(" ")
 
-        self.GL.addWidget(self.Menu, 0, 2,QtCore.Qt.AlignCenter)
+        # self.GL.addWidget(self.Menu, 0, 2,QtCore.Qt.AlignCenter)
 
         self.START = QtWidgets.QPushButton(self)
         self.START.setText("Start")
