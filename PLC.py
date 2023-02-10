@@ -973,6 +973,7 @@ class PLC(QtCore.QObject):
             return 0
 
     def int32_to_2words(self, value):
+        print("begin")
         try:
             it = int(value)
             x = np.arange(it, it + 1, dtype='<i4')
