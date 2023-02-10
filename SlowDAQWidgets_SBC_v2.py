@@ -7190,9 +7190,9 @@ class ProcedureSubWindow(QtWidgets.QMainWindow):
         self.EXIT.SetUnit(" ")
         self.GLRD.addWidget(self.EXIT)
 
-        self.TS_SEL_RD = SetPoint(self.GroupWR)
-        self.TS_SEL_RD.Label.setText("SEL")
-        self.GLRD.addWidget(self.TS_SEL_RD)
+        self.SEL_RD = SetPoint(self.GroupWR)
+        self.SEL_RD.Label.setText("SEL")
+        self.GLRD.addWidget(self.SEL_RD)
 
         self.ADDREM_MASS_RD = SetPoint(self.GroupWR)
         self.ADDREM_MASS_RD.Label.setText("ADDREM_MASS")
@@ -7304,7 +7304,7 @@ class ProcedureWidget_TS(QtWidgets.QWidget):
 
     @QtCore.Slot()
     def InitWindow(self):
-        self.expandwindow.TS_SEL_WR.SetValue(self.expandwindow.TS_SEL_RD.value)
+        self.expandwindow.SEL_WR.SetValue(self.expandwindow.SEL_RD.value)
         self.expandwindow.ADDREM_MASS_WR.SetValue(self.expandwindow.ADDREM_MASS_RD.value)
         self.expandwindow.MAXTIME_WR.SetValue(self.expandwindow.MAXTIME_RD.value)
 
@@ -7403,9 +7403,9 @@ class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
         self.FF_RD.Label.setText("FF")
         self.GLRD.addWidget(self.FF_RD)
 
-        self.TS_SEL_RD = SetPoint(self.GroupWR)
-        self.TS_SEL_RD.Label.setText("SEL")
-        self.GLRD.addWidget(self.TS_SEL_RD)
+        self.SEL_RD = SetPoint(self.GroupWR)
+        self.SEL_RD.Label.setText("SEL")
+        self.GLRD.addWidget(self.SEL_RD)
 
         self.ADDREM_MASS_RD = SetPoint(self.GroupWR)
         self.ADDREM_MASS_RD.Label.setText("ADDREM_MASS")
