@@ -7385,9 +7385,9 @@ class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
         self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
         self.GLWR.addWidget(self.updatebutton)
 
-        self.Interlock = ColoredStatus(self.GroupRD, mode = 1)
-        self.Interlock.Label.setText("INTLCK")
-        self.GLRD.addWidget(self.Interlock)
+        self.INTLKD = ColoredStatus(self.GroupRD, mode = 1)
+        self.INTLKD.Label.setText("INTLCK")
+        self.GLRD.addWidget(self.INTLKD)
 
         self.Running = ColoredStatus(self, mode=4)
         self.Running.Label.setText("Running")
