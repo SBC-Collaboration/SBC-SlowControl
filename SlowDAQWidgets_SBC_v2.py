@@ -7079,6 +7079,7 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.EXIT = Indicator(self)
         self.EXIT.Label.setText("EXIT")
         self.EXIT.SetUnit(" ")
+        self.GL.addWidget(self.EXIT, 0, 2, QtCore.Qt.AlignCenter)
 
         # self.GL.addWidget(self.Menu, 0, 2,QtCore.Qt.AlignCenter)
 
