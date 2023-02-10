@@ -7068,17 +7068,17 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.INTLKD.Label.setText("INTLKD")
         self.GL.addWidget(self.INTLKD,0,1,QtCore.Qt.AlignCenter)
 
-        self.Menu = QtWidgets.QPushButton(self)
-        self.Menu.setText("Menu")
-        self.Menu.setGeometry(QtCore.QRect(0 * R, 0 * R, 20 * R, 20 * R))
-        self.Menu.clicked.connect(self.expand_window)
+        # self.Menu = QtWidgets.QPushButton(self)
+        # self.Menu.setText("Menu")
+        # self.Menu.setGeometry(QtCore.QRect(0 * R, 0 * R, 20 * R, 20 * R))
+        # self.Menu.clicked.connect(self.expand_window)
+        #
+        # self.expandwindow = ProcedureSubWindow()
 
-        self.expandwindow = ProcedureSubWindow()
 
-
-        # self.EXIT = Indicator(self)
-        # self.EXIT.Label.setText("EXIT")
-        # self.EXIT.SetUnit(" ")
+        self.EXIT = Indicator(self)
+        self.EXIT.Label.setText("EXIT")
+        self.EXIT.SetUnit(" ")
 
         self.GL.addWidget(self.Menu, 0, 2,QtCore.Qt.AlignCenter)
 
