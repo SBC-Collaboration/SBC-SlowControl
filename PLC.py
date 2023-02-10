@@ -973,7 +973,6 @@ class PLC(QtCore.QObject):
             return 0
 
     def int32_to_2words(self, value):
-        print("begin")
         try:
             it = int(value)
             x = np.arange(it, it + 1, dtype='<i4')
@@ -3162,7 +3161,7 @@ class UpdateServer(QtCore.QObject):
                             if message[key]["operation"]["update"]:
                                 self.PLC.Write_BO_2_int16(self.PLC.PARAM_I_ADDRESS["TS_SEL"],message[key]["operation"]["SEL"])
                                 self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["TS_ADDREM_MASS"],message[key]["operation"]["ADDREM_MASS"])
-                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["TS_MAXTIME"],round(message[key]["operation"]["MAXTIME"]*1000))
+                                self.PLC.Write_BO_2_int32(self.PLC.PARAM_T_ADDRESS["TS_ADDREM_MAXTIME"],round(message[key]["operation"]["MAXTIME"]*1000))
 
                             else:
                                 pass
