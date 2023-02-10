@@ -7652,9 +7652,9 @@ class ProcedureSubWindow_PC(QtWidgets.QMainWindow):
         self.Running.Label.setText("Running")
         self.GLRD.addWidget(self.Running, 0, 0)
 
-        self.Interlock = ColoredStatus(self.GroupRD, mode = 1)
-        self.Interlock.Label.setText("INTLCK")
-        self.GLRD.addWidget(self.Interlock,0,1)
+        self.INTLKD = ColoredStatus(self.GroupRD, mode = 1)
+        self.INTLKD.Label.setText("INTLCK")
+        self.GLRD.addWidget(self.INTLKD,0,1)
 
         self.EXIT = Indicator(self.GroupRD)
         self.EXIT.Label.setText("EXIT")
