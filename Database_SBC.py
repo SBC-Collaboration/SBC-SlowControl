@@ -253,7 +253,7 @@ class COUPP_database():
 
     def update_status(self, message='AOK'):
         Unixtime = int(tm.time())
-        state = 'OK'
+        state = 'ALARM'
 
         data = (Unixtime, state, message)
         self.mycursor.execute(
