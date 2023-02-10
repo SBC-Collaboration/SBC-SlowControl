@@ -238,7 +238,7 @@ class COUPP_database():
         # self.close_database()
 
 
-    def ssh_alarm(self):
+    def ssh_alarm(self,message="AOK"):
         with SSHTunnelForwarder(
                 (self.ssh_host, self.ssh_port),
                 ssh_username=self.ssh_user,
@@ -247,7 +247,7 @@ class COUPP_database():
 
             self.db = pymysql.connect(host="localhost", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
             self.mycursor = self.db.cursor()
-            self.update_message()
+            self.update_status(message)
             self.close_database()
 
 
