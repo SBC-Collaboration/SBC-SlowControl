@@ -238,6 +238,30 @@ class COUPP_database():
         # self.close_database()
 
 
+    def ssh_alarm(self):
+        with SSHTunnelForwarder(
+                (self.ssh_host, self.ssh_port),
+                ssh_username=self.ssh_user,
+                ssh_password= self.ssh_password,
+                remote_bind_address=(self.sql_hostname, self.sql_port)) as tunnel:
+
+            self.db = pymysql.connect(host="localhost", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
+            self.mycursor = self.db.cursor()
+            self.update_message()
+            self.close_database()
+
+
+    def update_status(self, message='AOK'):
+        Unixtime = int(tm.time())
+        state = 'OK'
+
+        data = (Unixtime, state, message)
+        self.mycursor.execute(
+            "UPDATE sbc_FNAL_alarms SET datime=%s, alarm_state=%s, alarm_message=%s WHERE id=1;", data)
+        self.db.commit()
+        # self.close_database()
+
+
     def close_database(self):
         self.mycursor.close()
         self.db.close()

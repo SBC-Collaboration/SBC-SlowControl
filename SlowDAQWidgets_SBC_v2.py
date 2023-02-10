@@ -7068,11 +7068,19 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.INTLKD.Label.setText("INTLKD")
         self.GL.addWidget(self.INTLKD,0,1,QtCore.Qt.AlignCenter)
 
-        self.EXIT = Indicator(self)
-        self.EXIT.Label.setText("EXIT")
-        self.EXIT.SetUnit(" ")
+        self.Menu = QtWidgets.QPushButton(self)
+        self.Menu.setText("Menu")
+        self.Menu.setGeometry(QtCore.QRect(0 * R, 0 * R, 20 * R, 20 * R))
+        self.Menu.clicked.connect(self.expand_window)
 
-        self.GL.addWidget(self.EXIT, 0, 2,QtCore.Qt.AlignCenter)
+        self.expandwindow = ProcedureSubWindow()
+
+
+        # self.EXIT = Indicator(self)
+        # self.EXIT.Label.setText("EXIT")
+        # self.EXIT.SetUnit(" ")
+
+        self.GL.addWidget(self.Menu, 0, 2,QtCore.Qt.AlignCenter)
 
         self.START = QtWidgets.QPushButton(self)
         self.START.setText("Start")
@@ -7090,6 +7098,629 @@ class ProcedureWidget(QtWidgets.QWidget):
         self.GL.addWidget(self.START, 1, 0, QtCore.Qt.AlignCenter)
         self.GL.addWidget(self.STOP, 1, 1, QtCore.Qt.AlignCenter)
         self.GL.addWidget(self.ABORT,1,2,QtCore.Qt.AlignCenter)
+
+    def expand_window(self):
+        self.expandwindow.show()
+
+
+class ProcedureSubWindow(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.resize(1500*R, 600*R)
+        self.setMinimumSize(1500*R, 600*R)
+        self.setWindowTitle("Detailed Information")
+
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 600*R))
+
+        # Groupboxs for alarm/PT/TT
+
+        self.GLWR = QtWidgets.QHBoxLayout()
+        self.GLWR.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLWR.setSpacing(20 * R)
+        self.GLWR.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupWR = QtWidgets.QGroupBox(self.Widget)
+        self.GroupWR.setTitle("Write")
+        self.GroupWR.setLayout(self.GLWR)
+        self.GroupWR.move(0 * R, 0 * R)
+
+        self.GLRD = QtWidgets.QHBoxLayout()
+        self.GLRD.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLRD.setSpacing(20 * R)
+        self.GLRD.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRD = QtWidgets.QGroupBox(self.Widget)
+        self.GroupRD.setTitle("Read")
+        self.GroupRD.setLayout(self.GLRD)
+        self.GroupRD.move(0 * R, 240 * R)
+
+        self.Label = QtWidgets.QPushButton(self.GroupWR)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Indicator")
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        # self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
+        self.GLWR.addWidget(self.Label)
+
+
+        self.Start = QtWidgets.QPushButton(self.GroupWR)
+        self.Start.setText("Start")
+        self.Start.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Start)
+
+        self.Stop = QtWidgets.QPushButton(self.GroupWR)
+        self.Stop.setText("Stop")
+        self.Stop.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Stop)
+
+        self.Abort = QtWidgets.QPushButton(self.GroupWR)
+        self.Abort.setText("Abort")
+        self.Abort.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Abort)
+
+        self.RST_FF = QtWidgets.QPushButton(self.GroupWR)
+        self.RST_FF.setText("RST_FF")
+        self.GLWR.addWidget(self.RST_FF)
+
+        self.TS_SEL_WR = SetPoint(self.GroupWR)
+        self.TS_SEL_WR.Label.setText("SEL")
+        self.GLWR.addWidget(self.TS_SEL_WR)
+
+        self.ADDREM_MASS_WR = SetPoint(self.GroupWR)
+        self.ADDREM_MASS_WR.Label.setText("ADDREM_MASS")
+        self.GLWR.addWidget(self.ADDREM_MASS_WR)
+
+        self.MAXTIME_WR = SetPoint(self.GroupWR)
+        self.MAXTIME_WR.Label.setText("MAXTIME")
+        self.GLWR.addWidget(self.MAXTIME_WR)
+
+        self.updatebutton = QtWidgets.QPushButton(self.GroupWR)
+        self.updatebutton.setText("Update")
+        self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.updatebutton)
+
+        self.Interlock = ColoredStatus(self.GroupRD, mode = 1)
+        self.Interlock.Label.setText("INTLCK")
+        self.GLRD.addWidget(self.Interlock)
+
+        self.EXIT = Indicator(self.GroupRD)
+        self.EXIT.Label.setText("EXIT")
+        self.EXIT.SetUnit(" ")
+        self.GLRD.addWidget(self.EXIT)
+
+        self.TS_SEL_RD = SetPoint(self.GroupWR)
+        self.TS_SEL_RD.Label.setText("SEL")
+        self.GLRD.addWidget(self.TS_SEL_RD)
+
+        self.ADDREM_MASS_RD = SetPoint(self.GroupWR)
+        self.ADDREM_MASS_RD.Label.setText("ADDREM_MASS")
+        self.GLRD.addWidget(self.ADDREM_MASS_RD)
+
+        self.MAXTIME_RD = SetPoint(self.GroupWR)
+        self.MAXTIME_RD.Label.setText("MAXTIME")
+        self.GLRD.addWidget(self.MAXTIME_RD)
+
+
+        self.N2MASSTX = Indicator(self.GroupRD)
+        self.N2MASSTX.Label.setText("N2MASSTX")
+        self.N2MASSTX.SetUnit(" ")
+        self.GLRD.addWidget(self.N2MASSTX)
+
+        self.FLOWET = Indicator(self.GroupRD)
+        self.FLOWET.Label.setText("FLOWET")
+        self.FLOWET.SetUnit(" ")
+        self.GLRD.addWidget(self.FLOWET)
+
+        self.TS1_MASS = Indicator(self.GroupRD)
+        self.TS1_MASS.Label.setText("TS1_MASS")
+        self.TS1_MASS.SetUnit(" ")
+        self.GLRD.addWidget(self.TS1_MASS)
+
+        self.TS2_MASS = Indicator(self.GroupRD)
+        self.TS2_MASS.Label.setText("TS2_MASS")
+        self.TS2_MASS.SetUnit(" ")
+        self.GLRD.addWidget(self.TS2_MASS)
+
+        self.TS3_MASS = Indicator(self.GroupRD)
+        self.TS3_MASS.Label.setText("TS3_MASS")
+        self.TS3_MASS.SetUnit(" ")
+        self.GLRD.addWidget(self.TS3_MASS)
+
+
+
+class ProcedureWidget_TS(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("ProcedureWidget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 460 * R, 200 * R))
+
+        self.setMinimumSize(460 * R, 20 * R)
+        self.setSizePolicy(sizePolicy)
+        self.objectname = "ProcedureWidget"
+        # self.setStyleSheet("QWidget { background: transparent; }")
+
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GL.setSpacing(3)
+        # self.GL.setColumnStretch(1, 2)
+        # self.GL.setRowStretch(1, 4)
+
+        self.Group = QtWidgets.QGroupBox(self)
+        self.Group.setTitle("ProcedureWidget")
+        self.Group.setLayout(self.GL)
+        self.Group.move(0 * R, 0 * R)
+        self.Group.setStyleSheet("QGroupbox { background: transparent; }")
+
+
+        self.Running = ColoredStatus(self, mode= 4)
+        self.Running.Label.setText("Running")
+        self.GL.addWidget(self.Running,0,0,QtCore.Qt.AlignCenter)
+
+        self.INTLKD = ColoredStatus(self, mode= 1)
+        self.INTLKD.Label.setText("INTLKD")
+        self.GL.addWidget(self.INTLKD,0,1,QtCore.Qt.AlignCenter)
+
+        self.Menu = QtWidgets.QPushButton(self)
+        self.Menu.setText("Menu")
+        self.Menu.setGeometry(QtCore.QRect(0 * R, 0 * R, 20 * R, 20 * R))
+        self.Menu.clicked.connect(self.expand_window)
+
+        self.expandwindow = ProcedureSubWindow_TS()
+
+
+        # self.EXIT = Indicator(self)
+        # self.EXIT.Label.setText("EXIT")
+        # self.EXIT.SetUnit(" ")
+
+        self.GL.addWidget(self.Menu, 0, 2,QtCore.Qt.AlignCenter)
+
+        self.START = QtWidgets.QPushButton(self)
+        self.START.setText("Start")
+        self.START.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 20 * R))
+
+
+        self.STOP = QtWidgets.QPushButton(self)
+        self.STOP.setText("Stop")
+        self.STOP.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 20 * R))
+
+
+        self.ABORT =  QtWidgets.QPushButton(self)
+        self.ABORT.setText("Abort")
+        self.ABORT.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 20 * R))
+        self.GL.addWidget(self.START, 1, 0, QtCore.Qt.AlignCenter)
+        self.GL.addWidget(self.STOP, 1, 1, QtCore.Qt.AlignCenter)
+        self.GL.addWidget(self.ABORT,1,2,QtCore.Qt.AlignCenter)
+
+    def expand_window(self):
+
+        self.expandwindow.show()
+        self.InitWindow()
+
+    @QtCore.Slot()
+    def InitWindow(self):
+        self.expandwindow.TS_SEL_WR.SetValue(self.expandwindow.TS_SEL_RD.value)
+        self.expandwindow.ADDREM_MASS_WR.SetValue(self.expandwindow.ADDREM_MASS_RD.value)
+        self.expandwindow.MAXTIME_WR.SetValue(self.expandwindow.MAXTIME_RD.value)
+
+
+class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.resize(1500*R, 600*R)
+        self.setMinimumSize(1500*R, 600*R)
+        self.setWindowTitle("Detailed Information")
+
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 600*R))
+
+        # Groupboxs for alarm/PT/TT
+
+        self.GLWR = QtWidgets.QHBoxLayout()
+        self.GLWR.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLWR.setSpacing(20 * R)
+        self.GLWR.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupWR = QtWidgets.QGroupBox(self.Widget)
+        self.GroupWR.setTitle("Write")
+        self.GroupWR.setLayout(self.GLWR)
+        self.GroupWR.move(0 * R, 0 * R)
+
+        self.GLRD = QtWidgets.QHBoxLayout()
+        self.GLRD.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLRD.setSpacing(20 * R)
+        self.GLRD.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRD = QtWidgets.QGroupBox(self.Widget)
+        self.GroupRD.setTitle("Read")
+        self.GroupRD.setLayout(self.GLRD)
+        self.GroupRD.move(0 * R, 240 * R)
+
+        self.Label = QtWidgets.QPushButton(self.GroupWR)
+        self.Label.setObjectName("Label")
+        self.Label.setText("TS_ADDREM")
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        # self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
+        self.GLWR.addWidget(self.Label)
+
+
+        self.Start = QtWidgets.QPushButton(self.GroupWR)
+        self.Start.setText("Start")
+        self.Start.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Start)
+
+        self.Stop = QtWidgets.QPushButton(self.GroupWR)
+        self.Stop.setText("Stop")
+        self.Stop.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Stop)
+
+        self.Abort = QtWidgets.QPushButton(self.GroupWR)
+        self.Abort.setText("Abort")
+        self.Abort.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Abort)
+
+        self.RST_FF = QtWidgets.QPushButton(self.GroupWR)
+        self.RST_FF.setText("RST_FF")
+        self.GLWR.addWidget(self.RST_FF)
+
+        self.TS_SEL_WR = SetPoint(self.GroupWR)
+        self.TS_SEL_WR.Label.setText("SEL")
+        self.GLWR.addWidget(self.TS_SEL_WR)
+
+        self.ADDREM_MASS_WR = SetPoint(self.GroupWR)
+        self.ADDREM_MASS_WR.Label.setText("ADDREM_MASS")
+        self.GLWR.addWidget(self.ADDREM_MASS_WR)
+
+        self.MAXTIME_WR = SetPoint(self.GroupWR)
+        self.MAXTIME_WR.Label.setText("MAXTIME")
+        self.GLWR.addWidget(self.MAXTIME_WR)
+
+        self.updatebutton = QtWidgets.QPushButton(self.GroupWR)
+        self.updatebutton.setText("Update")
+        self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.updatebutton)
+
+        self.Interlock = ColoredStatus(self.GroupRD, mode = 1)
+        self.Interlock.Label.setText("INTLCK")
+        self.GLRD.addWidget(self.Interlock)
+
+        self.Running = ColoredStatus(self, mode=4)
+        self.Running.Label.setText("Running")
+        self.GLRD.addWidget(self.Running)
+
+        self.EXIT = Indicator(self.GroupRD)
+        self.EXIT.Label.setText("EXIT")
+        self.EXIT.SetUnit(" ")
+        self.GLRD.addWidget(self.EXIT)
+
+        self.TS_SEL_RD = SetPoint(self.GroupWR)
+        self.TS_SEL_RD.Label.setText("SEL")
+        self.GLRD.addWidget(self.TS_SEL_RD)
+
+        self.ADDREM_MASS_RD = SetPoint(self.GroupWR)
+        self.ADDREM_MASS_RD.Label.setText("ADDREM_MASS")
+        self.GLRD.addWidget(self.ADDREM_MASS_RD)
+
+        self.MAXTIME_RD = SetPoint(self.GroupWR)
+        self.MAXTIME_RD.Label.setText("MAXTIME")
+        self.GLRD.addWidget(self.MAXTIME_RD)
+
+
+        self.N2MASSTX = Indicator(self.GroupRD)
+        self.N2MASSTX.Label.setText("N2MASSTX")
+        self.N2MASSTX.SetUnit(" ")
+        self.GLRD.addWidget(self.N2MASSTX)
+
+        self.FLOWET = Indicator(self.GroupRD)
+        self.FLOWET.Label.setText("FLOWET")
+        self.FLOWET.SetUnit(" ")
+        self.GLRD.addWidget(self.FLOWET)
+
+        self.TS1_MASS = Indicator(self.GroupRD)
+        self.TS1_MASS.Label.setText("TS1_MASS")
+        self.TS1_MASS.SetUnit(" ")
+        self.GLRD.addWidget(self.TS1_MASS)
+
+        self.TS2_MASS = Indicator(self.GroupRD)
+        self.TS2_MASS.Label.setText("TS2_MASS")
+        self.TS2_MASS.SetUnit(" ")
+        self.GLRD.addWidget(self.TS2_MASS)
+
+        self.TS3_MASS = Indicator(self.GroupRD)
+        self.TS3_MASS.Label.setText("TS3_MASS")
+        self.TS3_MASS.SetUnit(" ")
+        self.GLRD.addWidget(self.TS3_MASS)
+
+
+
+
+class ProcedureWidget_PC(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("ProcedureWidget")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 460 * R, 200 * R))
+
+        self.setMinimumSize(460 * R, 20 * R)
+        self.setSizePolicy(sizePolicy)
+        self.objectname = "ProcedureWidget"
+        # self.setStyleSheet("QWidget { background: transparent; }")
+
+
+        self.GL = QtWidgets.QGridLayout(self)
+        self.GL.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GL.setSpacing(3)
+        # self.GL.setColumnStretch(1, 2)
+        # self.GL.setRowStretch(1, 4)
+
+        self.Group = QtWidgets.QGroupBox(self)
+        self.Group.setTitle("ProcedureWidget")
+        self.Group.setLayout(self.GL)
+        self.Group.move(0 * R, 0 * R)
+        self.Group.setStyleSheet("QGroupbox { background: transparent; }")
+
+
+        self.Running = ColoredStatus(self, mode= 4)
+        self.Running.Label.setText("Running")
+        self.GL.addWidget(self.Running,0,0,QtCore.Qt.AlignCenter)
+
+        self.INTLKD = ColoredStatus(self, mode= 1)
+        self.INTLKD.Label.setText("INTLKD")
+        self.GL.addWidget(self.INTLKD,0,1,QtCore.Qt.AlignCenter)
+
+        self.Menu = QtWidgets.QPushButton(self)
+        self.Menu.setText("Menu")
+        self.Menu.setGeometry(QtCore.QRect(0 * R, 0 * R, 20 * R, 20 * R))
+        self.Menu.clicked.connect(self.expand_window)
+
+        self.expandwindow = ProcedureSubWindow_PC()
+
+
+        # self.EXIT = Indicator(self)
+        # self.EXIT.Label.setText("EXIT")
+        # self.EXIT.SetUnit(" ")
+
+        self.GL.addWidget(self.Menu, 0, 2,QtCore.Qt.AlignCenter)
+
+        self.START = QtWidgets.QPushButton(self)
+        self.START.setText("Start")
+        self.START.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 20 * R))
+
+
+        self.STOP = QtWidgets.QPushButton(self)
+        self.STOP.setText("Stop")
+        self.STOP.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 20 * R))
+
+
+        self.ABORT =  QtWidgets.QPushButton(self)
+        self.ABORT.setText("Abort")
+        self.ABORT.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 20 * R))
+        self.GL.addWidget(self.START, 1, 0, QtCore.Qt.AlignCenter)
+        self.GL.addWidget(self.STOP, 1, 1, QtCore.Qt.AlignCenter)
+        self.GL.addWidget(self.ABORT,1,2,QtCore.Qt.AlignCenter)
+
+    def expand_window(self):
+        self.expandwindow.show()
+        self.InitWindow()
+
+    @QtCore.Slot()
+    def InitWindow(self):
+        self.expandwindow.PSET_WR.SetValue(self.expandwindow.PSET_RD.value)
+        self.expandwindow.MAXEXPTIME_WR.SetValue(self.expandwindow.MAXEXPTIME_RD.value)
+        self.expandwindow.MAXEQTIME_WR.SetValue(self.expandwindow.MAXEQTIME_RD.value)
+        self.expandwindow.MAXEQPDIFF_WR.SetValue(self.expandwindow.MAXEQPDIFF_RD.value)
+        self.expandwindow.MAXACCTIME_WR.SetValue(self.expandwindow.MAXACCTIME_RD.value)
+        self.expandwindow.MAXACCDPDT_WR.SetValue(self.expandwindow.MAXACCDPDT_RD.value)
+        self.expandwindow.MAXBLEEDTIME_WR.SetValue(self.expandwindow.MAXBLEEDTIME_RD.value)
+        self.expandwindow.MAXBLEEDDPDT_WR.SetValue(self.expandwindow.MAXBLEEDDPDT_RD.value)
+        self.expandwindow.SLOWCOMP_SET_WR.SetValue(self.expandwindow.SLOWCOMP_SET_RD.value)
+
+
+class ProcedureSubWindow_PC(QtWidgets.QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.resize(1500*R, 600*R)
+        self.setMinimumSize(1500*R, 600*R)
+        self.setWindowTitle("Detailed Information")
+
+        self.Widget = QtWidgets.QWidget(self)
+        self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 600*R))
+
+        # Groupboxs for alarm/PT/TT
+
+        self.GLWR = QtWidgets.QGridLayout()
+        self.GLWR.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLWR.setSpacing(20 * R)
+        self.GLWR.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupWR = QtWidgets.QGroupBox(self.Widget)
+        self.GroupWR.setTitle("Write")
+        self.GroupWR.setLayout(self.GLWR)
+        self.GroupWR.move(0 * R, 0 * R)
+
+        self.GLRD = QtWidgets.QGridLayout()
+        self.GLRD.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLRD.setSpacing(20 * R)
+        self.GLRD.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRD = QtWidgets.QGroupBox(self.Widget)
+        self.GroupRD.setTitle("Read")
+        self.GroupRD.setLayout(self.GLRD)
+        self.GroupRD.move(0 * R, 350 * R)
+        #
+        # self.Label = QtWidgets.QPushButton(self.GroupWR)
+        # self.Label.setObjectName("Label")
+        # self.Label.setText("PCYCLE")
+        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        # # self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
+        # self.GLWR.addWidget(self.Label)
+
+
+        self.Start = QtWidgets.QPushButton(self.GroupWR)
+        self.Start.setText("Start")
+        self.Start.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Start,0,0,QtCore.Qt.AlignCenter)
+
+        self.Stop = QtWidgets.QPushButton(self.GroupWR)
+        self.Stop.setText("Stop")
+        self.Stop.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Stop,0,1,QtCore.Qt.AlignCenter)
+
+        self.Abort = QtWidgets.QPushButton(self.GroupWR)
+        self.Abort.setText("Abort")
+        self.Abort.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Abort,0,2,QtCore.Qt.AlignCenter)
+
+        self.RST_ABORT_FF = QtWidgets.QPushButton(self.GroupWR)
+        self.RST_ABORT_FF.setText("RST_ABORT_FF")
+        self.GLWR.addWidget(self.RST_ABORT_FF,0,3,QtCore.Qt.AlignCenter)
+
+        self.RST_FASTCOMP_FF = QtWidgets.QPushButton(self.GroupWR)
+        self.RST_FASTCOMP_FF.setText("RST_FASTCOMP_FF")
+        self.GLWR.addWidget(self.RST_FASTCOMP_FF,0,4,QtCore.Qt.AlignCenter)
+
+        self.RST_SLOWCOMP_FF = QtWidgets.QPushButton(self.GroupWR)
+        self.RST_SLOWCOMP_FF.setText("RST_SLOWCOMP_FF")
+        self.GLWR.addWidget(self.RST_SLOWCOMP_FF,1,0,QtCore.Qt.AlignCenter)
+
+        self.RST_CYLEQ_FF = QtWidgets.QPushButton(self.GroupWR)
+        self.RST_CYLEQ_FF.setText("RST_CYLEQ_FF")
+        self.GLWR.addWidget(self.RST_CYLEQ_FF,1,1,QtCore.Qt.AlignCenter)
+
+        self.RST_ACCHARGE_FF = QtWidgets.QPushButton(self.GroupWR)
+        self.RST_ACCHARGE_FF.setText("RST_ACCHARGE_FF")
+        self.GLWR.addWidget(self.RST_ACCHARGE_FF,1,2,QtCore.Qt.AlignCenter)
+
+        self.RST_CYLBLEED_FF = QtWidgets.QPushButton(self.GroupWR)
+        self.RST_CYLBLEED_FF.setText("RST_CYLBLEED_FF")
+        self.GLWR.addWidget(self.RST_CYLBLEED_FF,1,3,QtCore.Qt.AlignCenter)
+
+        self.PSET_WR = SetPoint(self.GroupWR)
+        self.PSET_WR.Label.setText("PSET")
+        self.GLWR.addWidget(self.PSET_WR,2,0,QtCore.Qt.AlignCenter)
+
+        self.MAXEXPTIME_WR = SetPoint(self.GroupWR)
+        self.MAXEXPTIME_WR.Label.setText("MAXEXPTIME")
+        self.GLWR.addWidget(self.MAXEXPTIME_WR,2,1,QtCore.Qt.AlignCenter)
+
+        self.MAXEQTIME_WR = SetPoint(self.GroupWR)
+        self.MAXEQTIME_WR.Label.setText("MAXEQTIME")
+        self.GLWR.addWidget(self.MAXEQTIME_WR,2,2,QtCore.Qt.AlignCenter)
+
+        self.MAXEQPDIFF_WR = SetPoint(self.GroupWR)
+        self.MAXEQPDIFF_WR.Label.setText("MAXEQPDIFF")
+        self.GLWR.addWidget(self.MAXEQPDIFF_WR,2,3,QtCore.Qt.AlignCenter)
+
+        self.MAXACCTIME_WR = SetPoint(self.GroupWR)
+        self.MAXACCTIME_WR.Label.setText("MAXACCTIME")
+        self.GLWR.addWidget(self.MAXACCTIME_WR,2,4,QtCore.Qt.AlignCenter)
+
+        self.MAXACCDPDT_WR = SetPoint(self.GroupWR)
+        self.MAXACCDPDT_WR.Label.setText("MAXACCDPDT")
+        self.GLWR.addWidget(self.MAXACCDPDT_WR,3,0,QtCore.Qt.AlignCenter)
+
+        self.MAXBLEEDTIME_WR = SetPoint(self.GroupWR)
+        self.MAXBLEEDTIME_WR.Label.setText("MAXBLEEDTIME")
+        self.GLWR.addWidget(self.MAXBLEEDTIME_WR,3,1,QtCore.Qt.AlignCenter)
+
+        self.MAXBLEEDDPDT_WR = SetPoint(self.GroupWR)
+        self.MAXBLEEDDPDT_WR.Label.setText("MAXBLEEDDPDT")
+        self.GLWR.addWidget(self.MAXBLEEDDPDT_WR,3,2,QtCore.Qt.AlignCenter)
+
+        self.SLOWCOMP_SET_WR = SetPoint(self.GroupWR)
+        self.SLOWCOMP_SET_WR.Label.setText("SLOWCOMP_SET")
+        self.GLWR.addWidget(self.SLOWCOMP_SET_WR,3,3,QtCore.Qt.AlignCenter)
+
+        self.updatebutton = QtWidgets.QPushButton(self.GroupWR)
+        self.updatebutton.setText("Update")
+        self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.updatebutton,3,4,QtCore.Qt.AlignCenter)
+
+        self.Running = ColoredStatus(self.GroupRD, mode=4)
+        self.Running.Label.setText("Running")
+        self.GLRD.addWidget(self.Running, 0, 0)
+
+        self.Interlock = ColoredStatus(self.GroupRD, mode = 1)
+        self.Interlock.Label.setText("INTLCK")
+        self.GLRD.addWidget(self.Interlock,0,1)
+
+        self.EXIT = Indicator(self.GroupRD)
+        self.EXIT.Label.setText("EXIT")
+        self.EXIT.SetUnit(" ")
+        self.GLRD.addWidget(self.EXIT,0,2)
+
+        self.ABORT_FF_RD = SetPoint(self.GroupWR)
+        self.ABORT_FF_RD.Label.setText("ABORT_FF")
+        self.GLRD.addWidget(self.ABORT_FF_RD,0,3)
+
+        self.FASTCOMP_FF_RD = SetPoint(self.GroupWR)
+        self.FASTCOMP_FF_RD.Label.setText("FASTCOMP_FF")
+        self.GLRD.addWidget(self.FASTCOMP_FF_RD,0,4)
+
+        self.SLOWCOMP_FF_RD = SetPoint(self.GroupWR)
+        self.SLOWCOMP_FF_RD.Label.setText("SLOWCOMP_FF")
+        self.GLRD.addWidget(self.SLOWCOMP_FF_RD,0,5)
+
+        self.CYLEQ_FF_RD = SetPoint(self.GroupWR)
+        self.CYLEQ_FF_RD.Label.setText("CYLEQ_FF")
+        self.GLRD.addWidget(self.CYLEQ_FF_RD,0,6)
+
+        self.ACCHARGE_FF_RD = SetPoint(self.GroupWR)
+        self.ACCHARGE_FF_RD.Label.setText("ACCHARGE_FF")
+        self.GLRD.addWidget(self.ACCHARGE_FF_RD,0,7)
+
+        self.CYLBLEED_FF_RD = SetPoint(self.GroupWR)
+        self.CYLBLEED_FF_RD.Label.setText("CYLBLEED_FF")
+        self.GLRD.addWidget(self.CYLBLEED_FF_RD,0,8)
+
+        self.PSET_RD = SetPoint(self.GroupWR)
+        self.PSET_RD.Label.setText("PSET")
+        self.GLRD.addWidget(self.PSET_RD,0,9)
+
+        self.EXPTIME_RD = SetPoint(self.GroupWR)
+        self.EXPTIME_RD.Label.setText("EXPTIME")
+        self.GLRD.addWidget(self.EXPTIME_RD,1,0)
+
+        self.MAXEXPTIME_RD = SetPoint(self.GroupWR)
+        self.MAXEXPTIME_RD.Label.setText("MAXEXPTIME")
+        self.GLRD.addWidget(self.MAXEXPTIME_RD,1,1)
+
+        self.MAXEQTIME_RD = SetPoint(self.GroupWR)
+        self.MAXEQTIME_RD.Label.setText("MAXEQTIME")
+        self.GLRD.addWidget(self.MAXEQTIME_RD,1,2)
+
+        self.MAXEQPDIFF_RD = SetPoint(self.GroupWR)
+        self.MAXEQPDIFF_RD.Label.setText("MAXEQPDIFF")
+        self.GLRD.addWidget(self.MAXEQPDIFF_RD,1,3)
+
+        self.MAXACCTIME_RD = SetPoint(self.GroupWR)
+        self.MAXACCTIME_RD.Label.setText("MAXACCTIME")
+        self.GLRD.addWidget(self.MAXACCTIME_RD,1,4)
+
+        self.MAXACCDPDT_RD = SetPoint(self.GroupWR)
+        self.MAXACCDPDT_RD.Label.setText("MAXACCDPDT")
+        self.GLRD.addWidget(self.MAXACCDPDT_RD,1,5)
+
+        self.MAXBLEEDTIME_RD = SetPoint(self.GroupWR)
+        self.MAXBLEEDTIME_RD.Label.setText("MAXBLEEDTIME")
+        self.GLRD.addWidget(self.MAXBLEEDTIME_RD,1,6)
+
+        self.MAXBLEEDDPDT_RD = SetPoint(self.GroupWR)
+        self.MAXBLEEDDPDT_RD.Label.setText("MAXBLEEDDPDT")
+        self.GLRD.addWidget(self.MAXBLEEDDPDT_RD,1,7)
+
+        self.SLOWCOMP_SET_RD = SetPoint(self.GroupWR)
+        self.SLOWCOMP_SET_RD.Label.setText("SLOWCOMP_SET")
+        self.GLRD.addWidget(self.SLOWCOMP_SET_RD,1,8)
+
 
 
 

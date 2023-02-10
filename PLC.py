@@ -789,7 +789,7 @@ class PLC(QtCore.QObject):
             Raw_FF = {}
             for key in self.FF_ADDRESS:
                 Raw_FF[key] = self.Client_BO.read_holding_registers(self.FF_ADDRESS[key], count=2, unit=0x01)
-                self.FF_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_FF[key].getRegister(1),Raw_FF[key].getRegister(0)))[0]
+                self.FF_DIC[key] = bin(struct.unpack(">I", struct.pack(">HH", Raw_FF[key].getRegister(1),Raw_FF[key].getRegister(0)))[0])
                 
             # print("FF",self.FF_DIC)
 
@@ -944,6 +944,12 @@ class PLC(QtCore.QObject):
         input_BO = struct.unpack("H", output_BO)[0] | 0x0020
         Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
         print("write base32 result=", Raw)
+
+    def WriteFF(self, address):
+        output_BO = self.Read_BO_1(address)
+        input_BO = struct.unpack("H", output_BO)[0] | 0x8000
+        Raw = self.Client_BO.write_register(address, value=input_BO, unit=0x01)
+        print("write FF result=", Raw)
 
     def Reset(self, address):
         Raw = self.Client_BO.write_register(address, value=0x0010, unit=0x01)
@@ -2591,6 +2597,14 @@ class UpdateServer(QtCore.QObject):
         self.FLAG_INTLKD_ini = sec.FLAG_INTLKD
         self.FLAG_Busy_ini = sec.FLAG_BUSY
 
+
+        self.FF_DIC_ini = copy.copy(sec.FF_DIC)
+        self.PARAM_F_DIC_ini = copy.copy(sec.PARAM_F_DIC)
+        self.PARAM_I_DIC_ini = copy.copy(sec.PARAM_I_DIC)
+        self.PARAM_B_DIC_ini = copy.copy(sec.PARAM_B_DIC)
+        self.PARAM_T_DIC_ini = copy.copy(sec.PARAM_T_DIC)
+        self.TIME_DIC_ini = copy.copy(sec.TIME_DIC)
+
         self.Ini_Check_ini = sec.INI_CHECK
 
         self.data_dic = {"data": {"TT": {"FP": {"value": self.TT_FP_dic_ini, "high": self.TT_FP_HighLimit_ini, "low": self.TT_FP_LowLimit_ini},
@@ -2653,7 +2667,13 @@ class UpdateServer(QtCore.QObject):
                                   "FLAG": {"value":self.FLAG_DIC_ini,
                                            "INTLKD":self.FLAG_INTLKD_ini,
                                            "Busy":self.FLAG_Busy_ini},
-                                  "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini}},
+                                  "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini},
+                                  "FF":self.FF_DIC_ini,
+                                  "PARA_I":self.PARAM_I_DIC_ini,
+                                  "PARA_F":self.PARAM_F_DIC_ini,
+                                  "PARA_B":self.PARAM_B_DIC_ini,
+                                  "PARA_T":self.PARAM_T_DIC_ini,
+                                  "TIME":self.TIME_DIC_ini},
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
@@ -2888,6 +2908,21 @@ class UpdateServer(QtCore.QObject):
             self.FLAG_INTLKD_ini[key] = self.PLC.FLAG_INTLKD[key]
         for key in self.PLC.FLAG_Busy:
             self.FLAG_Busy_ini[key] = self.PLC.FLAG_Busy[key]
+        for key in self.PLC.FF_DIC:
+            self.FF_DIC_ini[key] = self.PLC.FF_DIC[key]
+        for key in self.PLC.PARAM_I_DIC:
+            self.PARAM_I_DIC_ini[key] = self.PLC.PARAM_I_DIC[key]
+        for key in self.PLC.PARAM_F_DIC:
+            self.PARAM_F_DIC_ini[key] = self.PLC.PARAM_F_DIC[key]
+        for key in self.PLC.PARAM_B_DIC:
+            self.PARAM_B_DIC_ini[key] = self.PLC.PARAM_B_DIC[key]
+        for key in self.PLC.PARAM_T_DIC:
+            self.PARAM_T_DIC_ini[key] = self.PLC.PARAM_T_DIC[key]
+        for key in self.PLC.TIME_DIC:
+            self.TIME_DIC_ini[key] = self.PLC.TIME_DIC[key]
+
+
+
 
 
 
@@ -3013,6 +3048,60 @@ class UpdateServer(QtCore.QObject):
                                 pass
                         else:
                             pass
+
+                    elif message[key]["type"] == "Procedure_TS":
+                        if message[key]["server"] == "BO":
+                            if message[key]["operation"]["RST_FF"]:
+                                self.PLC.WriteFF(self.PLC.FF_ADDRESS["TS_ADDREM_FF"])
+                            if message[key]["operation"]["update"]:
+                                self.PLC.Write_BO_2(self.PLC.PARAM_I_ADDRESS["TS_SEL"],message[key]["operation"]["SEL"])
+                                self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["TS_ADDREM_MASS"],message[key]["operation"]["ADDREM_MASS"])
+                                self.PLC.Write_BO_2(self.PLC.PARAM_T_ADDRESS["TS_MAXTIME"],message[key]["operation"]["MAXTIME"])
+
+                            else:
+                                pass
+                        else:
+                            pass
+
+                    elif message[key]["type"] == "Procedure_PC":
+                        if message[key]["server"] == "BO":
+                            if message[key]["operation"]["ABORT_FF"]:
+                                self.PLC.WriteFF(self.PLC.FF_ADDRESS["PCYCLE_ABORT_FF"])
+                            if message[key]["operation"]["FASTCOMP_FF"]:
+                                self.PLC.WriteFF(self.PLC.FF_ADDRESS["PCYCLE_FASTCOMP_FF"])
+                            if message[key]["operation"]["SLOWCOMP_FF"]:
+                                self.PLC.WriteFF(self.PLC.FF_ADDRESS["PCYCLE_SLOWCOMP_FF"])
+                            if message[key]["operation"]["CYLEQ_FF"]:
+                                self.PLC.WriteFF(self.PLC.FF_ADDRESS["PCYCLE_CYLEQ_FF"])
+                            if message[key]["operation"]["ACCHARGE_FF"]:
+                                self.PLC.WriteFF(self.PLC.FF_ADDRESS["PCYCLE_ACCHARGE_FF"])
+                            if message[key]["operation"]["CYLBLEED_FF"]:
+                                self.PLC.WriteFF(self.PLC.FF_ADDRESS["PCYCLE_CYLBLEED_FF"])
+
+                            if message[key]["operation"]["update"]:
+                                self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["PSET"],message[key]["operation"]["PSET"])
+                                self.PLC.Write_BO_2(self.PLC.PARAM_T_ADDRESS["MAXEXPTIME"],message[key]["operation"]["MAXEXPTIME"])
+                                self.PLC.Write_BO_2(self.PLC.PARAM_T_ADDRESS["MAXEQTIME"],message[key]["operation"]["MAXEXQTIME"])
+                                self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["MAXEQPDIFF"],
+                                                    message[key]["operation"]["MAXEQPDIFF"])
+                                self.PLC.Write_BO_2(self.PLC.PARAM_T_ADDRESS["MAXACCTIME"],
+                                                    message[key]["operation"]["MAXACCTIME"])
+                                self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["MAXACCDPDT"],
+                                                    message[key]["operation"]["MAXACCDPDT"])
+
+                                self.PLC.Write_BO_2(self.PLC.PARAM_T_ADDRESS["MAXBLEEDTIME"],
+                                                    message[key]["operation"]["MAXBLEEDTIME"])
+                                self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["MAXBLEEDDPDT"],
+                                                    message[key]["operation"]["MAXBLEEDDPDT"])
+                                self.PLC.Write_BO_2(self.PLC.PARAM_F_ADDRESS["SLOWCOMP_SET"],
+                                                    message[key]["operation"]["SLOWCOMP_SET"])
+
+                            else:
+                                pass
+                        else:
+                            pass
+
+
                     elif message[key]["type"] == "heater_power":
                         if message[key]["operation"] == "EN":
                             self.PLC.LOOPPID_OUT_ENA(address=message[key]["address"])
@@ -3354,6 +3443,7 @@ class Update(QtCore.QObject):
 
 
 class message_manager():
+    # add here the other alarm and data base
     def __init__(self):
         # info about tencent mail settings
         self.host_server = "smtp.qq.com"
@@ -3363,6 +3453,10 @@ class message_manager():
         # self.receiver1_mail = "cdahl@northwestern.edu"
         self.receiver1_mail = "runzezhang@foxmail.com"
         self.mail_title = "Alarm from SBC"
+
+
+        # server to pico watchdog
+        self.alarm_db = COUPP_database()
 
         # info about slack settings
         # SLACK_BOT_TOKEN is a linux enviromental variable saved locally on sbcslowcontrol mathine
@@ -3407,6 +3501,7 @@ class message_manager():
                 # You could also use a blocks[] array to send richer content
             )
             # Print result, which includes information about the message (like TS)
+            self.alarm_db.ssh_alarm("message")
             print(result)
 
         except SlackApiError as e:

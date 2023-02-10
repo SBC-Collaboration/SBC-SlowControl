@@ -17,6 +17,6 @@ def read_GVL(filename, beginrow, finalrow):
     return produce_address_dic
 
 if __name__ == "__main__":
-    print(read_GVL("D:\\PythoProjects\\SBCslowcontrol\\SBC-SlowControl\\MB_TcGVL_v1.txt",72,78))
+    print(read_GVL("D:\\PythoProjects\\SBCslowcontrol\\SBC-SlowControl\\MB_TcGVL_v1.txt",201,213))
     # print(read_GVL("D:\\GIthub\\runze\\SBC_linux\\SBC-SlowControl\\MB_TcGVL.txt", 7, 32))
 

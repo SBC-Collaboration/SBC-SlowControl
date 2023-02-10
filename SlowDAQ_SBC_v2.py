@@ -894,7 +894,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #     lambda x: self.Save(directory=self.SaveSettings.Head, project=self.SaveSettings.Tail))
 
 
-        self.TS_ADDREM = ProcedureWidget(self.DatanSignalTab)
+        self.TS_ADDREM = ProcedureWidget_TS(self.DatanSignalTab)
         self.TS_ADDREM.move(700*R, 150*R)
         self.TS_ADDREM.Group.setTitle("TS ADDREM")
         self.TS_ADDREM.objectname = "TS_ADDREM"
@@ -919,7 +919,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.WRITE_SLOWDAQ.Group.setTitle("WRITE SLOWDAQ")
         self.WRITE_SLOWDAQ.objectname = "WRITE_SLOWDAQ"
 
-        self.PRESSURE_CYCLE = ProcedureWidget(self.DatanSignalTab)
+        self.PRESSURE_CYCLE = ProcedureWidget_PC(self.DatanSignalTab)
         self.PRESSURE_CYCLE.move(1300 * R, 150 * R)
         self.PRESSURE_CYCLE.Group.setTitle("PRESSURE_CYCLE")
         self.PRESSURE_CYCLE.objectname = "PRESSURE_CYCLE"
@@ -3556,6 +3556,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TS_ADDREM.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=True, abort=False))
         self.TS_ADDREM.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=False, abort=True))
 
+        self.TS_ADDREM.expandwindow.Start.clicked.connect(
+            lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=True, stop=False, abort=False))
+        self.TS_ADDREM.expandwindow.Stop.clicked.connect(
+            lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=True, abort=False))
+        self.TS_ADDREM.expandwindow.Abort.clicked.connect(
+            lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=False, abort=True))
+        self.TS_ADDREM.expandwindow.RST_FF.clicked.connect(
+            lambda: self.Procedure_TS_update(pid=self.TS_ADDREM.objectname,  RST=True, SEL=self.TS_ADDREM.expandwindow.SEL_WR.Field.text(), ADDREM_MASS=self.TS_ADDREM.expandwindow.ADDREM_MASS_WR.Field.text(), MAXTIME=self.TS_ADDREM.expandwindow.MAXTIME_WR.Field.text(),update=False))
+        self.TS_ADDREM.expandwindow.updatebutton.clicked.connect(
+            lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname,  RST=False, SEL=self.TS_ADDREM.expandwindow.SEL_WR.Field.text(), ADDREM_MASS=self.TS_ADDREM.expandwindow.ADDREM_MASS_WR.Field.text(), MAXTIME=self.TS_ADDREM.expandwindow.MAXTIME_WR.Field.text(),update=True))
+
+
+
         self.TS_EMPTY.START.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=True, stop=False, abort=False))
         self.TS_EMPTY.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=False, stop=True, abort=False))
         self.TS_EMPTY.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=False, stop=False, abort=True))
@@ -3575,6 +3588,95 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRESSURE_CYCLE.START.clicked.connect(lambda: self.ProcedureClick(pid=self.PRESSURE_CYCLE.objectname, start=True, stop=False, abort=False))
         self.PRESSURE_CYCLE.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=True, abort=False))
         self.PRESSURE_CYCLE.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=False, abort=True))
+
+        self.PRESSURE_CYCLE.expandwindow.Start.clicked.connect(
+            lambda: self.ProcedureClick(pid=self.PRESSURE_CYCLE.objectname, start=True, stop=False, abort=False))
+        self.PRESSURE_CYCLE.expandwindow.Stop.clicked.connect(
+            lambda: self.ProcedureClick(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=True, abort=False))
+        self.PRESSURE_CYCLE.expandwindow.Abort.clicked.connect(
+            lambda: self.ProcedureClick(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=False, abort=True))
+
+        self.PRESSURE_CYCLE.expandwindow.RST_ABORT_FF.clicked.connect(
+            lambda: self.Procedure_PC_update(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=False, abort=False,ABORT_FF=True,FASTCOMP_FF=False,PCYCLE_SLOWCOMP_FF=False,PCYCLE_CYLEQ_FF=False,PCYCLE_ACCHARGE_FF=False,PCYCLE_CYLBLEED_FF=False,PSET=self.PRESSURE_CYCLE.expandwindow.PSET_WR.Field.text(),MAXEXPTIME=self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_WR.Field.text(),MAXEQTIME=self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_WR.Field.text(),MAXEQPDIFF=self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_WR.Field.text(),MAXACCTIME=self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_WR.Field.text(),MAXACCDPDT=self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_WR.Field.text(),MAXBLEEDTIME=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_WR.Field.text(),MAXBLEEDDPDT=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_WR.Field.text(),update=False))
+        self.PRESSURE_CYCLE.expandwindow.RST_FASTCOMP_FF.clicked.connect(
+            lambda: self.Procedure_PC_update(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=False, abort=False,
+                                             ABORT_FF=False, FASTCOMP_FF=True, PCYCLE_SLOWCOMP_FF=False,
+                                             PCYCLE_CYLEQ_FF=False, PCYCLE_ACCHARGE_FF=False, PCYCLE_CYLBLEED_FF=False,
+                                             PSET=self.PRESSURE_CYCLE.expandwindow.PSET_WR.Field.text(),
+                                             MAXEXPTIME=self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_WR.Field.text(),
+                                             MAXEQTIME=self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_WR.Field.text(),
+                                             MAXEQPDIFF=self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_WR.Field.text(),
+                                             MAXACCTIME=self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_WR.Field.text(),
+                                             MAXACCDPDT=self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_WR.Field.text(),
+                                             MAXBLEEDTIME=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_WR.Field.text(),
+                                             MAXBLEEDDPDT=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_WR.Field.text(),
+                                             update=False))
+        self.PRESSURE_CYCLE.expandwindow.RST_SLOWCOMP_FF.clicked.connect(
+            lambda: self.Procedure_PC_update(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=False, abort=False,
+                                             ABORT_FF=False, FASTCOMP_FF=False, PCYCLE_SLOWCOMP_FF=True,
+                                             PCYCLE_CYLEQ_FF=False, PCYCLE_ACCHARGE_FF=False, PCYCLE_CYLBLEED_FF=False,
+                                             PSET=self.PRESSURE_CYCLE.expandwindow.PSET_WR.Field.text(),
+                                             MAXEXPTIME=self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_WR.Field.text(),
+                                             MAXEQTIME=self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_WR.Field.text(),
+                                             MAXEQPDIFF=self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_WR.Field.text(),
+                                             MAXACCTIME=self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_WR.Field.text(),
+                                             MAXACCDPDT=self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_WR.Field.text(),
+                                             MAXBLEEDTIME=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_WR.Field.text(),
+                                             MAXBLEEDDPDT=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_WR.Field.text(),
+                                             update=False))
+        self.PRESSURE_CYCLE.expandwindow.RST_CYLEQ_FF.clicked.connect(
+            lambda: self.Procedure_PC_update(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=False, abort=False,
+                                             ABORT_FF=False, FASTCOMP_FF=False, PCYCLE_SLOWCOMP_FF=False,
+                                             PCYCLE_CYLEQ_FF=True, PCYCLE_ACCHARGE_FF=False, PCYCLE_CYLBLEED_FF=False,
+                                             PSET=self.PRESSURE_CYCLE.expandwindow.PSET_WR.Field.text(),
+                                             MAXEXPTIME=self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_WR.Field.text(),
+                                             MAXEQTIME=self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_WR.Field.text(),
+                                             MAXEQPDIFF=self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_WR.Field.text(),
+                                             MAXACCTIME=self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_WR.Field.text(),
+                                             MAXACCDPDT=self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_WR.Field.text(),
+                                             MAXBLEEDTIME=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_WR.Field.text(),
+                                             MAXBLEEDDPDT=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_WR.Field.text(),
+                                             update=False))
+        self.PRESSURE_CYCLE.expandwindow.RST_ACCHARGE_FF.clicked.connect(
+            lambda: self.Procedure_PC_update(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=False, abort=False,
+                                             ABORT_FF=False, FASTCOMP_FF=False, PCYCLE_SLOWCOMP_FF=False,
+                                             PCYCLE_CYLEQ_FF=False, PCYCLE_ACCHARGE_FF=True, PCYCLE_CYLBLEED_FF=False,
+                                             PSET=self.PRESSURE_CYCLE.expandwindow.PSET_WR.Field.text(),
+                                             MAXEXPTIME=self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_WR.Field.text(),
+                                             MAXEQTIME=self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_WR.Field.text(),
+                                             MAXEQPDIFF=self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_WR.Field.text(),
+                                             MAXACCTIME=self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_WR.Field.text(),
+                                             MAXACCDPDT=self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_WR.Field.text(),
+                                             MAXBLEEDTIME=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_WR.Field.text(),
+                                             MAXBLEEDDPDT=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_WR.Field.text(),
+                                             update=False))
+        self.PRESSURE_CYCLE.expandwindow.RST_CYLBLEED_FF.clicked.connect(
+            lambda: self.Procedure_PC_update(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=False, abort=False,
+                                             ABORT_FF=False, FASTCOMP_FF=False, PCYCLE_SLOWCOMP_FF=False,
+                                             PCYCLE_CYLEQ_FF=False, PCYCLE_ACCHARGE_FF=False, PCYCLE_CYLBLEED_FF=True,
+                                             PSET=self.PRESSURE_CYCLE.expandwindow.PSET_WR.Field.text(),
+                                             MAXEXPTIME=self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_WR.Field.text(),
+                                             MAXEQTIME=self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_WR.Field.text(),
+                                             MAXEQPDIFF=self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_WR.Field.text(),
+                                             MAXACCTIME=self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_WR.Field.text(),
+                                             MAXACCDPDT=self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_WR.Field.text(),
+                                             MAXBLEEDTIME=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_WR.Field.text(),
+                                             MAXBLEEDDPDT=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_WR.Field.text(),
+                                             update=False))
+
+        self.PRESSURE_CYCLE.expandwindow.updatebutton.clicked.connect(
+            lambda: self.Procedure_PC_update(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=False, abort=False,
+                                             ABORT_FF=False, FASTCOMP_FF=False, PCYCLE_SLOWCOMP_FF=False,
+                                             PCYCLE_CYLEQ_FF=False, PCYCLE_ACCHARGE_FF=False, PCYCLE_CYLBLEED_FF=False,
+                                             PSET=self.PRESSURE_CYCLE.expandwindow.PSET_WR.Field.text(),
+                                             MAXEXPTIME=self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_WR.Field.text(),
+                                             MAXEQTIME=self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_WR.Field.text(),
+                                             MAXEQPDIFF=self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_WR.Field.text(),
+                                             MAXACCTIME=self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_WR.Field.text(),
+                                             MAXACCDPDT=self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_WR.Field.text(),
+                                             MAXBLEEDTIME=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_WR.Field.text(),
+                                             MAXBLEEDDPDT=self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_WR.Field.text(),
+                                             update=True))
 
 
     @QtCore.Slot()
@@ -4130,6 +4232,33 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception as e:
             print(e)
 
+    @QtCore.Slot()
+    def Procedure_TS_update(self, pid, RST, SEL, ADDREM_MASS, MAXTIME,update):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "Procedure_TS",
+                                  "operation": {"RST_FF":RST, "SEL": SEL, "ADDREM_MASS": ADDREM_MASS, "MAXTIME": MAXTIME,"update":update}}
+            print(pid, RST, SEL, ADDREM_MASS, MAXTIME,update, "ARE OK?")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def Procedure_PC_update(self, pid, start, stop, abort,ABORT_FF,FASTCOMP_FF,PCYCLE_SLOWCOMP_FF,PCYCLE_CYLEQ_FF,PCYCLE_ACCHARGE_FF,PCYCLE_CYLBLEED_FF,PSET,MAXEXPTIME,MAXEQTIME,MAXEQPDIFF,MAXACCTIME,MAXACCDPDT,MAXBLEEDTIME,MAXBLEEDDPDT,update):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "BO", "address": address, "type": "Procedure_PC",
+                                  "operation": {"ABORT_FF":ABORT_FF,"FASTCOMP_FF":FASTCOMP_FF,"PCYCLE_SLOWCOMP_FF":PCYCLE_SLOWCOMP_FF,
+                                                "PCYCLE_CYLEQ_FF":PCYCLE_CYLEQ_FF,"PCYCLE_ACCHARGE_FF":PCYCLE_ACCHARGE_FF,"PCYCLE_CYLBLEED_FF":PCYCLE_CYLBLEED_FF,
+                                                "PSET":PSET,"MAXEXPTIME":MAXEXPTIME,"MAXEQTIME":MAXEQTIME,"MAXEQPDIFF":MAXEQPDIFF,
+                                                "MAXACCTIME":MAXACCTIME,"MAXACCDPDT":MAXACCDPDT,"MAXBLEEDTIME":MAXBLEEDTIME,"MAXBLEEDDPDT":MAXBLEEDDPDT,"update":update}}
+            print(pid, start, stop, abort, "ARE OK?")
+        except Exception as e:
+            print(e)
+
     # Ask if staying in admin mode after timeout
     @QtCore.Slot()
     def Timeout(self):
@@ -4286,7 +4415,17 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.TS_ADDREM.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
-        self.TS_ADDREM.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_ADDREM.objectname])
+        self.TS_ADDREM.expandwindow.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
+        self.TS_ADDREM.expandwindow.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
+        self.TS_ADDREM.expandwindow.TS_SEL_RD.SetValue(received_dic_c["data"]["PARA_I"]["TS_SEL"])
+        self.TS_ADDREM.expandwindow.ADDREM_MASS_RD.SetValue(received_dic_c["data"]["PARA_F"]["ADDREM_MASS"])
+        self.TS_ADDREM.expandwindow.MAXTIME.SetValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_MAXTIME"])
+        self.TS_ADDREM.expandwindow.N2MASSTX.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS_ADDREM_N2MASSTX"])
+        self.TS_ADDREM.expandwindow.FLOWET.SetValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_FLOWET"])
+        self.TS_ADDREM.expandwindow.TS1_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS1_MASS"])
+        self.TS_ADDREM.expandwindow.TS2_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS2_MASS"])
+        self.TS_ADDREM.expandwindow.TS3_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS3_MASS"])
+        self.TS_ADDREM.expandwindow.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_ADDREM.objectname])
 
         self.TS_EMPTY.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTY.objectname])
         self.TS_EMPTY.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTY.objectname])
@@ -4306,7 +4445,50 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PRESSURE_CYCLE.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.PRESSURE_CYCLE.objectname])
         self.PRESSURE_CYCLE.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.PRESSURE_CYCLE.objectname])
-        self.PRESSURE_CYCLE.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.PRESSURE_CYCLE.objectname])
+
+        self.PRESSURE_CYCLE.expandwindow.Running.UpdateColor(
+            received_dic_c["data"]["Procedure"]["Running"][self.PRESSURE_CYCLE.objectname])
+        self.PRESSURE_CYCLE.expandwindow.INTLKD.UpdateColor(
+            received_dic_c["data"]["Procedure"]["INTLKD"][self.PRESSURE_CYCLE.objectname])
+        self.PRESSURE_CYCLE.expandwindow.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.PRESSURE_CYCLE.objectname])
+        self.PRESSURE_CYCLE.expandwindow.ABORT_FF_RD.SetValue(
+            received_dic_c["data"]["FF"]["PCYCLE_ABORT_FF"])
+        self.PRESSURE_CYCLE.expandwindow.FASTCOMP_FF_RD.SetValue(
+            received_dic_c["data"]["FF"]["PCYCLE_FASTCOMP_FF"])
+        self.PRESSURE_CYCLE.expandwindow.SLOWCOMP_FF_RD.SetValue(
+            received_dic_c["data"]["FF"]["PCYCLE_SLOWCOMP_FF"])
+        self.PRESSURE_CYCLE.expandwindow.CYLEQ_FF_RD.SetValue(
+            received_dic_c["data"]["FF"]["PCYCLE_CYLEQ_FF"])
+        self.PRESSURE_CYCLE.expandwindow.ACCHARGE_FF_RD.SetValue(
+            received_dic_c["data"]["FF"]["PCYCLE_ACCHARGE_FF"])
+        self.PRESSURE_CYCLE.expandwindow.CYLBLEED_FF_RD.SetValue(
+            received_dic_c["data"]["FF"]["PCYCLE_CYLBLEED_FF"])
+        self.PRESSURE_CYCLE.expandwindow.PSET_RD.SetValue(
+            received_dic_c["data"]["PARA_F"]["PCYCLE_PSET"])
+        self.PRESSURE_CYCLE.expandwindow.EXPTIME_RD.SetValue(
+            received_dic_c["data"]["TIME"]["PCYCLE_EXPTIME"])
+        self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_RD.SetValue(
+            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEXPTIME"])
+        self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_RD.SetValue(
+            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEQTIME"])
+        self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_RD.SetValue(
+            received_dic_c["data"]["PARA_F"]["PCYCLE_MAXEQPDIFF"])
+        self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_RD.SetValue(
+            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXACCTIME"])
+        self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_RD.SetValue(
+            received_dic_c["data"]["PARA_F"]["PCYCLE_MAXACCDPDT"])
+        self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_RD.SetValue(
+            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXBLEEDTIME"])
+        self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_RD.SetValue(
+            received_dic_c["data"]["PARA_F"]["PCYCLE_MAXBLEEDDPDT"])
+        self.PRESSURE_CYCLE.expandwindow.SLOWCOMP_SET_RD.SetValue(
+            received_dic_c["data"]["PARA_F"]["PCYCLE_SLOWCOMP_SET"])
+
+
+
+
+
+
 
         #Update alarmwindow's widgets' value
 
@@ -10669,6 +10851,14 @@ class UpdateClient(QtCore.QObject):
         self.FLAG_INTLKD_ini = sec.FLAG_INTLKD
         self.FLAG_Busy_ini = sec.FLAG_BUSY
 
+        self.FF_DIC_ini = copy.copy(sec.FF_DIC)
+        self.PARAM_F_DIC_ini = copy.copy(sec.PARAM_F_DIC)
+        self.PARAM_I_DIC_ini = copy.copy(sec.PARAM_I_DIC)
+        self.PARAM_B_DIC_ini = copy.copy(sec.PARAM_B_DIC)
+        self.PARAM_T_DIC_ini = copy.copy(sec.PARAM_T_DIC)
+        self.TIME_DIC_ini = copy.copy(sec.TIME_DIC)
+
+
         self.Ini_Check_ini = sec.INI_CHECK
         self.MAN_SET = copy.copy(sec.MAN_SET)
 
@@ -10732,7 +10922,13 @@ class UpdateClient(QtCore.QObject):
                                   "FLAG": {"value":self.FLAG_DIC_ini,
                                            "INTLKD":self.FLAG_INTLKD_ini,
                                            "Busy":self.FLAG_Busy_ini},
-                                  "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini}},
+                                  "Procedure": {"Running": self.Procedure_running_ini, "INTLKD": self.Procedure_INTLKD_ini, "EXIT": self.Procedure_EXIT_ini},
+                                  "FF": self.FF_DIC_ini,
+                                  "PARA_I":self.PARAM_I_DIC_ini,
+                                  "PARA_F":self.PARAM_F_DIC_ini,
+                                  "PARA_B":self.PARAM_B_DIC_ini,
+                                  "PARA_T":self.PARAM_T_DIC_ini,
+                                  "TIME":self.TIME_DIC_ini},
                          "Alarm": {"TT": {"FP": self.TT_FP_Alarm_ini,
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
