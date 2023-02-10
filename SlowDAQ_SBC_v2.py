@@ -4426,7 +4426,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.TS_ADDREM.expandwindow.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.expandwindow.FF_RD.Field.setText(bin(received_dic_c["data"]["FF"]["TS_ADDREM_FF"]))
-        self.TS_ADDREM.expandwindow.TS_SEL_RD.SetIntValue(received_dic_c["data"]["PARA_I"]["TS_SEL"])
+        self.TS_ADDREM.expandwindow.SEL_RD.SetIntValue(received_dic_c["data"]["PARA_I"]["TS_SEL"])
         self.TS_ADDREM.expandwindow.ADDREM_MASS_RD.SetValue(received_dic_c["data"]["PARA_F"]["TS_ADDREM_MASS"])
         self.TS_ADDREM.expandwindow.MAXTIME_RD.SetIntValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_MAXTIME"]/1000)
         self.TS_ADDREM.expandwindow.N2MASSTX.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS_ADDREM_N2MASSTX"])
