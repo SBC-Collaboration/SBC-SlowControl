@@ -843,7 +843,7 @@ class PLC(QtCore.QObject):
             Raw_FF = {}
             for key in self.FF_ADDRESS:
                 Raw_FF[key] = self.Client_BO.read_holding_registers(self.FF_ADDRESS[key], count=2, unit=0x01)
-                self.FF_DIC[key] = bin(struct.unpack(">I", struct.pack(">HH", Raw_FF[key].getRegister(1),Raw_FF[key].getRegister(0)))[0])
+                self.FF_DIC[key] = struct.unpack(">I", struct.pack(">HH", Raw_FF[key].getRegister(1),Raw_FF[key].getRegister(0)))[0]
                 
             # print("FF",self.FF_DIC)
 

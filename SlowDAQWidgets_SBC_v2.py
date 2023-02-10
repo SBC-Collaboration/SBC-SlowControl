@@ -7398,6 +7398,10 @@ class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
         self.EXIT.SetUnit(" ")
         self.GLRD.addWidget(self.EXIT)
 
+        self.FF_RD = SetPoint(self.GroupWR)
+        self.FF_RD.Label.setText("FF")
+        self.GLRD.addWidget(self.FF_RD)
+
         self.TS_SEL_RD = SetPoint(self.GroupWR)
         self.TS_SEL_RD.Label.setText("SEL")
         self.GLRD.addWidget(self.TS_SEL_RD)
