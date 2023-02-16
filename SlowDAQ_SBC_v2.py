@@ -2895,6 +2895,18 @@ class MainWindow(QtWidgets.QMainWindow):
                                      LowLimit=self.AlarmButton.SubWindow.PT5304.Low_Set.Field.text(),
                                      HighLimit=self.AlarmButton.SubWindow.PT5304.High_Set.Field.text()))
 
+        self.AlarmButton.SubWindow.PT2121.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2121.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT2121.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT2121.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT2121.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PT2121.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2121.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT2121.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT2121.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT2121.High_Set.Field.text()))
+
 
         #LEFT Variables
         self.AlarmButton.SubWindow.LT3335.AlarmMode.stateChanged.connect(

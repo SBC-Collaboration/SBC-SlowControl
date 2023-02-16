@@ -3561,7 +3561,6 @@ class message_manager():
 
 
         # server to pico watchdog
-        self.alarm_db = COUPP_database()
 
         # info about slack settings
         # SLACK_BOT_TOKEN is a linux enviromental variable saved locally on sbcslowcontrol mathine
@@ -3606,7 +3605,7 @@ class message_manager():
                 # You could also use a blocks[] array to send richer content
             )
             # Print result, which includes information about the message (like TS)
-            self.alarm_db.ssh_alarm("message")
+
             print(result)
 
         except SlackApiError as e:
