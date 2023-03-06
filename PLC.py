@@ -1638,72 +1638,72 @@ class UpdateDataBase(QtCore.QObject):
                 print("Database Updating", self.dt)
                 print("earlytime", self.early_dt)
 
-                # if self.PLC.NewData_Database:
-                if self.status:
-                    self.Running_pointer = 0
-                    try:
-                        # print(0)
-                        # print(self.para_alarm)
-                        if self.para_alarm >= self.rate_alarm:
-                            # if the previous state is AOK(either comes from Database BKG or PLC ALARM CHECK BKG), then only updates currrent status to the database
-                            # if the previous state is ALARM, then keeep the alarm status until PLC ALARM clear it up.
-                            state = self.alarm_db.ssh_state_only()
-                            if state=="AOK":
-                                self.COUPP_ERROR = True
-                                self.alarm_db.ssh_write()
-                                # if the ssh write fails, the ERROR will be True
-                                self.COUPP_ERROR = False
-                                self.para_alarm = 0
-                            elif state=="ALARM":
-                                self.COUPP_ERROR = True
-                                self.COUPP_ERROR = False
-                                self.para_alarm = 0
-                            else:
-                                self.COUPP_ERROR = True
-                                self.COUPP_ERROR = False
-                                self.para_alarm = 0
-
-
-                    except:
-                        if self.COUPP_ERROR == True:
-                            self.DB_ERROR_SIG.emit("Failed to update PICO watchdog Database.")
-                            self.COUPP_ERROR = False
-
-
-
-                    try:
-                        self.write_data()
-                    except Exception as e:
-                        print(e)
-                        # self.DB_ERROR_SIG.emit(e)
-
-                        self.DB_ERROR_SIG.emit("There is some ERROR in writing slowcontrol database. Please check it.")
-
-                        time.sleep(self.longsleep)
-
-
-                    self.status = False
-
-                else:
-                    if self.Running_pointer >= self.Running_counts:
-                        self.DB_ERROR_SIG.emit(
-                            "DATA LOST: Mysql hasn't received the data from PLC for ~10 minutes. Please check them.")
-                        raise Exception("")
-                        self.Running_pointer = 0
-                    # print("pointer",self.Running_pointer)
-                    self.Running_pointer += 1
-
-                    print("No new data from PLC")
-                    pass
-
-                time.sleep(self.base_period)
-                # raise Exception("Test breakup")
             except Exception as e:
                 print(e)
                 logging.error(e)
+                print(e)
 
-                continue
+            # if self.PLC.NewData_Database:
+            if self.status:
+                self.Running_pointer = 0
+                try:
+                    # print(0)
+                    # print(self.para_alarm)
+                    if self.para_alarm >= self.rate_alarm:
+                        # if the previous state is AOK(either comes from Database BKG or PLC ALARM CHECK BKG), then only updates currrent status to the database
+                        # if the previous state is ALARM, then keep the alarm status until PLC ALARM clear it up.
+                        state = self.alarm_db.ssh_state_only()
+                        if state == "AOK":
+                            self.COUPP_ERROR = True
+                            self.alarm_db.ssh_write()
+                            # if the ssh write fails, the ERROR will be True
+                            self.COUPP_ERROR = False
+                            self.para_alarm = 0
+                        elif state == "ALARM":
+                            self.COUPP_ERROR = True
+                            self.COUPP_ERROR = False
+                            self.para_alarm = 0
+                        else:
+                            self.COUPP_ERROR = True
+                            self.COUPP_ERROR = False
+                            self.para_alarm = 0
 
+
+                except Exception as e:
+                    if self.COUPP_ERROR == True:
+                        self.DB_ERROR_SIG.emit("Failed to update PICO watchdog Database.")
+                        self.COUPP_ERROR = False
+                    print(e)
+                    logging.error(e)
+
+
+
+                try:
+                    self.write_data()
+                except Exception as e:
+                    # self.DB_ERROR_SIG.emit(e)
+                    print(e)
+                    logging.error(e)
+                    self.DB_ERROR_SIG.emit("There is some ERROR in writing slowcontrol database. Please check it.")
+
+                    time.sleep(self.longsleep)
+
+
+                self.status = False
+
+            else:
+                if self.Running_pointer >= self.Running_counts:
+                    self.DB_ERROR_SIG.emit(
+                        "DATA LOST: Mysql hasn't received the data from PLC for ~10 minutes. Please check them.")
+                    self.Running_pointer = 0
+                # print("pointer",self.Running_pointer)
+                self.Running_pointer += 1
+
+                print("No new data from PLC")
+
+            time.sleep(self.base_period)
+            # raise Exception("Test breakup")
+            
 
 
     @QtCore.Slot()
