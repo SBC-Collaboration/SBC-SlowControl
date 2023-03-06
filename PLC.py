@@ -10,7 +10,7 @@ v1.0 Initial code 25/11/19 ML
 v1.1 Initialize values, flag when values are updated more modbus variables 04/03/20 ML
 """
 
-import struct, time, zmq, sys, pickle, copy
+import struct, time, zmq, sys, pickle, copy, logging
 import numpy as np
 from PySide2 import QtWidgets, QtCore, QtGui
 from Database_SBC import *
@@ -1641,378 +1641,33 @@ class UpdateDataBase(QtCore.QObject):
                 # if self.PLC.NewData_Database:
                 if self.status:
                     self.Running_pointer = 0
-                    # print(0)
-                    # print(self.para_alarm)
-                    if self.para_alarm >= self.rate_alarm:
-                        self.COUPP_ERROR = True
-                        self.alarm_db.ssh_write()
-                        # if the ssh write fails, the ERROR will be True
-                        self.COUPP_ERROR =False
-                        self.para_alarm=0
-
-                    if self.para_TT >= self.rate_TT:
-                        for key in self.TT_FP_dic:
-                            self.db.insert_data_into_stack(key, self.dt, self.TT_FP_dic[key])
-                        for key in self.TT_BO_dic:
-                            self.db.insert_data_into_stack(key, self.dt, self.TT_BO_dic[key])
-                        # print("write RTDS")
-                        self.commit_bool = True
-                        self.para_TT = 0
-                    # print(1)
-                    if self.para_PT >= self.rate_PT:
-                        for key in self.PT_dic:
-                            self.db.insert_data_into_stack(key, self.dt, self.PT_dic[key])
-                        # print("write pressure transducer")
-                        self.commit_bool = True
-                        self.para_PT = 0
-                    # print(2)
-                    for key in self.Valve_OUT:
-                        if key == 'SV3307':
-                            print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.Valve_OUT[key] != self.Valve_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.Valve_buffer[key])
-                            self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Valve_OUT[key])
-                            self.Valve_buffer[key] = self.Valve_OUT[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    if self.para_Valve >= self.rate_Valve:
-                        for key in self.Valve_OUT:
-                            self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Valve_OUT[key])
-                            self.Valve_buffer[key] = self.Valve_OUT[key]
-                            self.commit_bool = True
-                        self.para_Valve = 0
-                    # print(3)
-                    for key in self.Switch_OUT:
-                        # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
-                        if self.Switch_OUT[key] != self.Switch_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.Switch_buffer[key])
-                            self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Switch_OUT[key])
-                            self.Switch_buffer[key] = self.Switch_OUT[key]
-                            self.commit_bool = True
-                            # print(self.Switch_OUT[key])
-                        else:
-                            pass
-
-                    if self.para_Switch >= self.rate_Switch:
-                        for key in self.Switch_OUT:
-                            self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Switch_OUT[key])
-                            self.Switch_buffer[key] = self.Switch_OUT[key]
-                            self.commit_bool = True
-                        self.para_Switch = 0
-                    # print(4)
-                    for key in self.Din_dic:
-                        # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
-                        if self.Din_dic[key] != self.Din_buffer[key]:
-                            self.db.insert_data_into_stack(key, self.early_dt, self.Din_buffer[key])
-                            self.db.insert_data_into_stack(key, self.dt, self.Din_dic[key])
-                            self.Din_buffer[key] = self.Din_dic[key]
-                            self.commit_bool = True
-                        else:
-                            pass
-
-                    if self.para_Din >= self.rate_Din:
-                        for key in self.Din_dic:
-                            self.db.insert_data_into_stack(key, self.dt, self.Din_dic[key])
-                            self.Din_buffer[key] = self.Din_dic[key]
-                        self.commit_bool = True
-                        self.para_Din = 0
-
-                    # if state of bool variable changes, write the data into database
-                    # print(5)
-                    for key in self.LOOPPID_EN:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key])
-                            self.db.insert_data_into_stack(key + '_EN', self.dt, self.LOOPPID_EN[key])
-                            self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOPPID_MODE0:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key])
-                            self.db.insert_data_into_stack(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
-                            self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOPPID_MODE1:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key])
-                            self.db.insert_data_into_stack(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
-                            self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOPPID_MODE2:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key])
-                            self.db.insert_data_into_stack(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
-                            self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOPPID_MODE3:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key])
-                            self.db.insert_data_into_stack(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
-                            self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    # if no changes, write the data every fixed time interval
-                    # print(6)
-                    if self.para_LOOPPID >= self.rate_LOOPPID:
-                        for key in self.LOOPPID_EN:
-                            self.db.insert_data_into_stack(key + '_EN', self.dt, self.LOOPPID_EN[key])
-                            self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
-                        for key in self.LOOPPID_MODE0:
-                            self.db.insert_data_into_stack(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
-                            self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
-                        for key in self.LOOPPID_MODE1:
-                            self.db.insert_data_into_stack(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
-                            self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
-                        for key in self.LOOPPID_MODE2:
-                            self.db.insert_data_into_stack(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
-                            self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
-                        for key in self.LOOPPID_MODE3:
-                            self.db.insert_data_into_stack(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
-                            self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
-                        # write float data.
-                        for key in self.LOOPPID_OUT:
-                            self.db.insert_data_into_stack(key + '_OUT', self.dt, self.LOOPPID_OUT[key])
-                            self.LOOPPID_OUT_buffer[key] = self.LOOPPID_OUT[key]
-                        for key in self.LOOPPID_IN:
-                            self.db.insert_data_into_stack(key + '_IN', self.dt, self.LOOPPID_IN[key])
-                            self.LOOPPID_IN_buffer[key] = self.LOOPPID_IN[key]
-                        self.commit_bool = True
-                        self.para_LOOPPID = 0
-                    # print(7)
-
-                    for key in self.LOOP2PT_OUT:
-                        # print(7)
-                        # print(8)
-                        # print(key, self.LOOP2PT_OUT[key])
-                        if self.LOOP2PT_OUT[key] != self.LOOP2PT_OUT_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.LOOP2PT_OUT_buffer[key])
-                            self.db.insert_data_into_stack(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
-                            self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOP2PT_MODE0:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOP2PT_MODE0[key] != self.LOOP2PT_MODE0_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_MODE0', self.early_dt, self.LOOP2PT_MODE0_buffer[key])
-                            self.db.insert_data_into_stack(key + '_MODE0', self.dt, self.LOOP2PT_MODE0[key])
-                            self.LOOP2PT_MODE0_buffer[key] = self.LOOP2PT_MODE0[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    for key in self.LOOP2PT_MODE1:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOP2PT_MODE1[key] != self.LOOP2PT_MODE1_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_MODE1', self.early_dt, self.LOOP2PT_MODE1_buffer[key])
-                            self.db.insert_data_into_stack(key + '_MODE1', self.dt, self.LOOP2PT_MODE1[key])
-                            self.LOOP2PT_MODE1_buffer[key] = self.LOOP2PT_MODE1[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-                    for key in self.LOOP2PT_MODE2:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOP2PT_MODE2[key] != self.LOOP2PT_MODE2_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_MODE2', self.early_dt, self.LOOP2PT_MODE2_buffer[key])
-                            self.db.insert_data_into_stack(key + '_MODE2', self.dt, self.LOOP2PT_MODE2[key])
-                            self.LOOP2PT_MODE2_buffer[key] = self.LOOP2PT_MODE2[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-                    for key in self.LOOP2PT_MODE3:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.LOOP2PT_MODE3[key] != self.LOOP2PT_MODE3_buffer[key]:
-                            self.db.insert_data_into_stack(key + '_MODE3', self.early_dt, self.LOOP2PT_MODE3_buffer[key])
-                            self.db.insert_data_into_stack(key + '_MODE3', self.dt, self.LOOP2PT_MODE3[key])
-                            self.LOOP2PT_MODE3_buffer[key] = self.LOOP2PT_MODE3[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-                    if self.para_LOOP2PT >= self.rate_LOOP2PT:
-
-                        for key in self.LOOP2PT_MODE0:
-                            self.db.insert_data_into_stack(key + '_MODE0', self.dt, self.LOOP2PT_MODE0[key])
-                            self.LOOP2PT_MODE0_buffer[key] = self.LOOP2PT_MODE0[key]
-                        for key in self.LOOP2PT_MODE1:
-                            self.db.insert_data_into_stack(key + '_MODE1', self.dt, self.LOOP2PT_MODE1[key])
-                            self.LOOP2PT_MODE1_buffer[key] = self.LOOP2PT_MODE1[key]
-                        for key in self.LOOP2PT_MODE2:
-                            self.db.insert_data_into_stack(key + '_MODE2', self.dt, self.LOOP2PT_MODE2[key])
-                            self.LOOP2PT_MODE2_buffer[key] = self.LOOP2PT_MODE2[key]
-                        for key in self.LOOP2PT_MODE3:
-                            self.db.insert_data_into_stack(key + '_MODE3', self.dt, self.LOOP2PT_MODE3[key])
-                            self.LOOP2PT_MODE3_buffer[key] = self.LOOP2PT_MODE3[key]
-                        # write float data.
-                        for key in self.LOOP2PT_OUT:
-                            self.db.insert_data_into_stack(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
-                            self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
-
-                        self.commit_bool = True
-                        self.para_LOOP2PT = 0
+                    try:
+                        # print(0)
+                        # print(self.para_alarm)
+                        if self.para_alarm >= self.rate_alarm:
+                            self.COUPP_ERROR = True
+                            self.alarm_db.ssh_write()
+                            # if the ssh write fails, the ERROR will be True
+                            self.COUPP_ERROR = False
+                            self.para_alarm = 0
+                    except:
+                        if self.COUPP_ERROR == True:
+                            self.DB_ERROR_SIG.emit("Failed to update PICO watchdog Database.")
+                            self.COUPP_ERROR = False
 
 
-                    if self.para_REAL >= self.rate_REAL:
-                        for key in self.LEFT_REAL_address:
-                            # print(key, self.LEFT_REAL_dic[key])
-                            self.db.insert_data_into_stack(key, self.dt, self.LEFT_REAL_dic[key])
-                        # print("write pressure transducer")
-                            self.commit_bool = True
-                        self.para_REAL = 0
+
+                    try:
+                        self.write_data()
+                    except Exception as e:
+                        print(e)
+                        # self.DB_ERROR_SIG.emit(e)
+
+                        self.DB_ERROR_SIG.emit("There is some ERROR in writing slowcontrol database. Please check it.")
+
+                        time.sleep(self.longsleep)
 
 
-                    # #FLAGS
-                    for key in self.FLAG_INTLKD:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.FLAG_INTLKD[key] != self.FLAG_INTLKD_buffer[key]:
-                            self.db.insert_data_into_stack(key+'_INTLKD', self.early_dt, self.FLAG_INTLKD_buffer[key])
-                            self.db.insert_data_into_stack(key+'_INTLKD', self.dt, self.FLAG_INTLKD[key])
-                            self.db.insert_data_into_stack(key, self.dt, self.FLAG_DIC[key])
-                            self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
-                            self.commit_bool = True
-                        else:
-                            pass
-
-                    if self.para_FLAG >= self.rate_FLAG:
-                        for key in self.FLAG_INTLKD:
-                            self.db.insert_data_into_stack(key, self.dt, self.FLAG_DIC[key])
-                            self.db.insert_data_into_stack(key+'_INTLKD', self.dt, self.FLAG_INTLKD[key])
-                            self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
-                            self.commit_bool = True
-                        self.para_FLAG = 0
-
-
-                    # FF
-                    for key in self.FF_DIC:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.FF_DIC[key] != self.FF_buffer[key]:
-                            self.db.insert_data_into_stack(key, self.early_dt, self.FF_buffer[key])
-                            self.db.insert_data_into_stack(key, self.dt, self.FF_DIC[key])
-                            self.FF_buffer[key] = self.FF_DIC[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    if self.para_FF >= self.rate_FF:
-                        for key in self.FF_DIC:
-                            self.db.insert_data_into_stack(key, self.dt, self.FF_DIC[key])
-                            self.FF_buffer[key] = self.FF_DIC[key]
-                            self.commit_bool = True
-                        self.para_FF = 0
-
-                    # PARAM_B
-                    for key in self.PARAM_B_DIC:
-                        # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
-                        if self.PARAM_B_DIC[key] != self.PARAM_B_buffer[key]:
-                            self.db.insert_data_into_stack(key, self.early_dt, self.PARAM_B_buffer[key])
-                            self.db.insert_data_into_stack(key, self.dt, self.PARAM_B_DIC[key])
-                            self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
-                            self.commit_bool = True
-                            # print(self.Valve_OUT[key])
-                        else:
-                            pass
-
-                    if self.para_PARAM_B >= self.rate_PARAM_B:
-                        for key in self.PARAM_B_DIC:
-                            self.db.insert_data_into_stack(key, self.dt, self.PARAM_B_DIC[key])
-                            self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
-                            self.commit_bool = True
-                        self.para_PARAM_B = 0
-
-                    # other parameters I/F/T
-                    if self.para_PARAM_F >= self.rate_PARAM_F:
-                        for key in self.PARAM_F_DIC:
-                            self.db.insert_data_into_stack(key, self.dt, self.PARAM_F_DIC[key])
-
-                            self.commit_bool = True
-                        self.para_PARAM_F = 0
-
-
-                    if self.para_PARAM_I >= self.rate_PARAM_I:
-                        for key in self.PARAM_I_DIC:
-                            self.db.insert_data_into_stack(key, self.dt, self.PARAM_I_DIC[key])
-
-                            self.commit_bool = True
-                        self.para_PARAM_I = 0
-
-
-                    if self.para_PARAM_T >= self.rate_PARAM_T:
-                        for key in self.PARAM_T_DIC:
-                            self.db.insert_data_into_stack(key, self.dt, self.PARAM_T_DIC[key])
-
-                            self.commit_bool = True
-                        self.para_PARAM_T = 0
-
-
-                    if self.para_TIME >= self.rate_TIME:
-                        for key in self.TIME_DIC:
-                            self.db.insert_data_into_stack(key, self.dt, self.TIME_DIC[key])
-
-                            self.commit_bool = True
-                        self.para_TIME = 0
-
-
-                    # print("a",self.para_TT,"b",self.para_PT )
-                    # print(8)
-
-                    #commit the changes at last step only if it is time to write
-                    if self.commit_bool:
-                        # put alll commands into stack which is a pandas dataframe, reorder it by timestamp and then transform them into mysql queries
-                        self.db.sort_stack()
-                        self.db.convert_stack_into_queries()
-                        self.db.drop_stack()
-                        self.db.db.commit()
-                    print("Wrting PLC data to database...")
-                    self.para_alarm += 1
-
-                    self.para_TT += 1
-                    self.para_PT += 1
-                    self.para_Valve += 1
-                    self.para_Switch += 1
-                    self.para_LOOPPID += 1
-                    self.para_LOOP2PT += 1
-                    self.para_REAL += 1
-                    self.para_Din += 1
-                    self.para_FLAG += 1
-                    self.para_FF += 1
-                    self.para_PARAM_T += 1
-                    self.para_PARAM_I += 1
-                    self.para_PARAM_B += 1
-                    self.para_PARAM_F += 1
-                    self.para_TIME += 1
-                    # self.PLC.NewData_Database = False
                     self.status = False
 
                 else:
@@ -2031,13 +1686,8 @@ class UpdateDataBase(QtCore.QObject):
                 # raise Exception("Test breakup")
             except Exception as e:
                 print(e)
-                # self.DB_ERROR_SIG.emit(e)
-                if self.COUPP_ERROR == True:
-                    self.DB_ERROR_SIG.emit("Failed to update PICO watchdog Database.")
-                    self.COUPP_ERROR = False
-                self.DB_ERROR_SIG.emit("There is some ERROR in writing slowcontrol database. Please check it.")
+                logging.error(e)
 
-                time.sleep(self.longsleep)
                 continue
 
 
@@ -2180,6 +1830,364 @@ class UpdateDataBase(QtCore.QObject):
     @QtCore.Slot(bool)
     def update_status(self, status):
         self.status= status
+
+    def write_data(self):
+        if self.para_TT >= self.rate_TT:
+            for key in self.TT_FP_dic:
+                self.db.insert_data_into_stack(key, self.dt, self.TT_FP_dic[key])
+            for key in self.TT_BO_dic:
+                self.db.insert_data_into_stack(key, self.dt, self.TT_BO_dic[key])
+            # print("write RTDS")
+            self.commit_bool = True
+            self.para_TT = 0
+        # print(1)
+        if self.para_PT >= self.rate_PT:
+            for key in self.PT_dic:
+                self.db.insert_data_into_stack(key, self.dt, self.PT_dic[key])
+            # print("write pressure transducer")
+            self.commit_bool = True
+            self.para_PT = 0
+        # print(2)
+        for key in self.Valve_OUT:
+            if key == 'SV3307':
+                print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.Valve_OUT[key] != self.Valve_buffer[key]:
+                self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.Valve_buffer[key])
+                self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Valve_OUT[key])
+                self.Valve_buffer[key] = self.Valve_OUT[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+
+        if self.para_Valve >= self.rate_Valve:
+            for key in self.Valve_OUT:
+                self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Valve_OUT[key])
+                self.Valve_buffer[key] = self.Valve_OUT[key]
+                self.commit_bool = True
+            self.para_Valve = 0
+        # print(3)
+        for key in self.Switch_OUT:
+            # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
+            if self.Switch_OUT[key] != self.Switch_buffer[key]:
+                self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.Switch_buffer[key])
+                self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Switch_OUT[key])
+                self.Switch_buffer[key] = self.Switch_OUT[key]
+                self.commit_bool = True
+                # print(self.Switch_OUT[key])
+            else:
+                pass
+
+        if self.para_Switch >= self.rate_Switch:
+            for key in self.Switch_OUT:
+                self.db.insert_data_into_stack(key + '_OUT', self.dt, self.Switch_OUT[key])
+                self.Switch_buffer[key] = self.Switch_OUT[key]
+                self.commit_bool = True
+            self.para_Switch = 0
+        # print(4)
+        for key in self.Din_dic:
+            # print(key, self.Switch_OUT[key] != self.Switch_buffer[key])
+            if self.Din_dic[key] != self.Din_buffer[key]:
+                self.db.insert_data_into_stack(key, self.early_dt, self.Din_buffer[key])
+                self.db.insert_data_into_stack(key, self.dt, self.Din_dic[key])
+                self.Din_buffer[key] = self.Din_dic[key]
+                self.commit_bool = True
+            else:
+                pass
+
+        if self.para_Din >= self.rate_Din:
+            for key in self.Din_dic:
+                self.db.insert_data_into_stack(key, self.dt, self.Din_dic[key])
+                self.Din_buffer[key] = self.Din_dic[key]
+            self.commit_bool = True
+            self.para_Din = 0
+
+        # if state of bool variable changes, write the data into database
+        # print(5)
+        for key in self.LOOPPID_EN:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.LOOPPID_EN[key] != self.LOOPPID_EN_buffer[key]:
+                self.db.insert_data_into_stack(key + '_EN', self.early_dt, self.LOOPPID_EN_buffer[key])
+                self.db.insert_data_into_stack(key + '_EN', self.dt, self.LOOPPID_EN[key])
+                self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+
+        for key in self.LOOPPID_MODE0:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.LOOPPID_MODE0[key] != self.LOOPPID_MODE0_buffer[key]:
+                self.db.insert_data_into_stack(key + '_MODE0', self.early_dt, self.LOOPPID_MODE0_buffer[key])
+                self.db.insert_data_into_stack(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
+                self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+
+        for key in self.LOOPPID_MODE1:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.LOOPPID_MODE1[key] != self.LOOPPID_MODE1_buffer[key]:
+                self.db.insert_data_into_stack(key + '_MODE1', self.early_dt, self.LOOPPID_MODE1_buffer[key])
+                self.db.insert_data_into_stack(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
+                self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+
+        for key in self.LOOPPID_MODE2:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.LOOPPID_MODE2[key] != self.LOOPPID_MODE2_buffer[key]:
+                self.db.insert_data_into_stack(key + '_MODE2', self.early_dt, self.LOOPPID_MODE2_buffer[key])
+                self.db.insert_data_into_stack(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
+                self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+
+        for key in self.LOOPPID_MODE3:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.LOOPPID_MODE3[key] != self.LOOPPID_MODE3_buffer[key]:
+                self.db.insert_data_into_stack(key + '_MODE3', self.early_dt, self.LOOPPID_MODE3_buffer[key])
+                self.db.insert_data_into_stack(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
+                self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+
+        # if no changes, write the data every fixed time interval
+        # print(6)
+        if self.para_LOOPPID >= self.rate_LOOPPID:
+            for key in self.LOOPPID_EN:
+                self.db.insert_data_into_stack(key + '_EN', self.dt, self.LOOPPID_EN[key])
+                self.LOOPPID_EN_buffer[key] = self.LOOPPID_EN[key]
+            for key in self.LOOPPID_MODE0:
+                self.db.insert_data_into_stack(key + '_MODE0', self.dt, self.LOOPPID_MODE0[key])
+                self.LOOPPID_MODE0_buffer[key] = self.LOOPPID_MODE0[key]
+            for key in self.LOOPPID_MODE1:
+                self.db.insert_data_into_stack(key + '_MODE1', self.dt, self.LOOPPID_MODE1[key])
+                self.LOOPPID_MODE1_buffer[key] = self.LOOPPID_MODE1[key]
+            for key in self.LOOPPID_MODE2:
+                self.db.insert_data_into_stack(key + '_MODE2', self.dt, self.LOOPPID_MODE2[key])
+                self.LOOPPID_MODE2_buffer[key] = self.LOOPPID_MODE2[key]
+            for key in self.LOOPPID_MODE3:
+                self.db.insert_data_into_stack(key + '_MODE3', self.dt, self.LOOPPID_MODE3[key])
+                self.LOOPPID_MODE3_buffer[key] = self.LOOPPID_MODE3[key]
+            # write float data.
+            for key in self.LOOPPID_OUT:
+                self.db.insert_data_into_stack(key + '_OUT', self.dt, self.LOOPPID_OUT[key])
+                self.LOOPPID_OUT_buffer[key] = self.LOOPPID_OUT[key]
+            for key in self.LOOPPID_IN:
+                self.db.insert_data_into_stack(key + '_IN', self.dt, self.LOOPPID_IN[key])
+                self.LOOPPID_IN_buffer[key] = self.LOOPPID_IN[key]
+            self.commit_bool = True
+            self.para_LOOPPID = 0
+        # print(7)
+
+        for key in self.LOOP2PT_OUT:
+            # print(7)
+            # print(8)
+            # print(key, self.LOOP2PT_OUT[key])
+            if self.LOOP2PT_OUT[key] != self.LOOP2PT_OUT_buffer[key]:
+                self.db.insert_data_into_stack(key + '_OUT', self.early_dt, self.LOOP2PT_OUT_buffer[key])
+                self.db.insert_data_into_stack(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
+                self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+
+        for key in self.LOOP2PT_MODE0:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.LOOP2PT_MODE0[key] != self.LOOP2PT_MODE0_buffer[key]:
+                self.db.insert_data_into_stack(key + '_MODE0', self.early_dt, self.LOOP2PT_MODE0_buffer[key])
+                self.db.insert_data_into_stack(key + '_MODE0', self.dt, self.LOOP2PT_MODE0[key])
+                self.LOOP2PT_MODE0_buffer[key] = self.LOOP2PT_MODE0[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+
+        for key in self.LOOP2PT_MODE1:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.LOOP2PT_MODE1[key] != self.LOOP2PT_MODE1_buffer[key]:
+                self.db.insert_data_into_stack(key + '_MODE1', self.early_dt, self.LOOP2PT_MODE1_buffer[key])
+                self.db.insert_data_into_stack(key + '_MODE1', self.dt, self.LOOP2PT_MODE1[key])
+                self.LOOP2PT_MODE1_buffer[key] = self.LOOP2PT_MODE1[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+        for key in self.LOOP2PT_MODE2:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.LOOP2PT_MODE2[key] != self.LOOP2PT_MODE2_buffer[key]:
+                self.db.insert_data_into_stack(key + '_MODE2', self.early_dt, self.LOOP2PT_MODE2_buffer[key])
+                self.db.insert_data_into_stack(key + '_MODE2', self.dt, self.LOOP2PT_MODE2[key])
+                self.LOOP2PT_MODE2_buffer[key] = self.LOOP2PT_MODE2[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+        for key in self.LOOP2PT_MODE3:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.LOOP2PT_MODE3[key] != self.LOOP2PT_MODE3_buffer[key]:
+                self.db.insert_data_into_stack(key + '_MODE3', self.early_dt, self.LOOP2PT_MODE3_buffer[key])
+                self.db.insert_data_into_stack(key + '_MODE3', self.dt, self.LOOP2PT_MODE3[key])
+                self.LOOP2PT_MODE3_buffer[key] = self.LOOP2PT_MODE3[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+        if self.para_LOOP2PT >= self.rate_LOOP2PT:
+
+            for key in self.LOOP2PT_MODE0:
+                self.db.insert_data_into_stack(key + '_MODE0', self.dt, self.LOOP2PT_MODE0[key])
+                self.LOOP2PT_MODE0_buffer[key] = self.LOOP2PT_MODE0[key]
+            for key in self.LOOP2PT_MODE1:
+                self.db.insert_data_into_stack(key + '_MODE1', self.dt, self.LOOP2PT_MODE1[key])
+                self.LOOP2PT_MODE1_buffer[key] = self.LOOP2PT_MODE1[key]
+            for key in self.LOOP2PT_MODE2:
+                self.db.insert_data_into_stack(key + '_MODE2', self.dt, self.LOOP2PT_MODE2[key])
+                self.LOOP2PT_MODE2_buffer[key] = self.LOOP2PT_MODE2[key]
+            for key in self.LOOP2PT_MODE3:
+                self.db.insert_data_into_stack(key + '_MODE3', self.dt, self.LOOP2PT_MODE3[key])
+                self.LOOP2PT_MODE3_buffer[key] = self.LOOP2PT_MODE3[key]
+            # write float data.
+            for key in self.LOOP2PT_OUT:
+                self.db.insert_data_into_stack(key + '_OUT', self.dt, self.LOOP2PT_OUT[key])
+                self.LOOP2PT_OUT_buffer[key] = self.LOOP2PT_OUT[key]
+
+            self.commit_bool = True
+            self.para_LOOP2PT = 0
+
+        if self.para_REAL >= self.rate_REAL:
+            for key in self.LEFT_REAL_address:
+                # print(key, self.LEFT_REAL_dic[key])
+                self.db.insert_data_into_stack(key, self.dt, self.LEFT_REAL_dic[key])
+                # print("write pressure transducer")
+                self.commit_bool = True
+            self.para_REAL = 0
+
+        # #FLAGS
+        for key in self.FLAG_INTLKD:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.FLAG_INTLKD[key] != self.FLAG_INTLKD_buffer[key]:
+                self.db.insert_data_into_stack(key + '_INTLKD', self.early_dt, self.FLAG_INTLKD_buffer[key])
+                self.db.insert_data_into_stack(key + '_INTLKD', self.dt, self.FLAG_INTLKD[key])
+                self.db.insert_data_into_stack(key, self.dt, self.FLAG_DIC[key])
+                self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
+                self.commit_bool = True
+            else:
+                pass
+
+        if self.para_FLAG >= self.rate_FLAG:
+            for key in self.FLAG_INTLKD:
+                self.db.insert_data_into_stack(key, self.dt, self.FLAG_DIC[key])
+                self.db.insert_data_into_stack(key + '_INTLKD', self.dt, self.FLAG_INTLKD[key])
+                self.FLAG_INTLKD_buffer[key] = self.FLAG_INTLKD[key]
+                self.commit_bool = True
+            self.para_FLAG = 0
+
+        # FF
+        for key in self.FF_DIC:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.FF_DIC[key] != self.FF_buffer[key]:
+                self.db.insert_data_into_stack(key, self.early_dt, self.FF_buffer[key])
+                self.db.insert_data_into_stack(key, self.dt, self.FF_DIC[key])
+                self.FF_buffer[key] = self.FF_DIC[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+
+        if self.para_FF >= self.rate_FF:
+            for key in self.FF_DIC:
+                self.db.insert_data_into_stack(key, self.dt, self.FF_DIC[key])
+                self.FF_buffer[key] = self.FF_DIC[key]
+                self.commit_bool = True
+            self.para_FF = 0
+
+        # PARAM_B
+        for key in self.PARAM_B_DIC:
+            # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
+            if self.PARAM_B_DIC[key] != self.PARAM_B_buffer[key]:
+                self.db.insert_data_into_stack(key, self.early_dt, self.PARAM_B_buffer[key])
+                self.db.insert_data_into_stack(key, self.dt, self.PARAM_B_DIC[key])
+                self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
+                self.commit_bool = True
+                # print(self.Valve_OUT[key])
+            else:
+                pass
+
+        if self.para_PARAM_B >= self.rate_PARAM_B:
+            for key in self.PARAM_B_DIC:
+                self.db.insert_data_into_stack(key, self.dt, self.PARAM_B_DIC[key])
+                self.PARAM_B_buffer[key] = self.PARAM_B_DIC[key]
+                self.commit_bool = True
+            self.para_PARAM_B = 0
+
+        # other parameters I/F/T
+        if self.para_PARAM_F >= self.rate_PARAM_F:
+            for key in self.PARAM_F_DIC:
+                self.db.insert_data_into_stack(key, self.dt, self.PARAM_F_DIC[key])
+
+                self.commit_bool = True
+            self.para_PARAM_F = 0
+
+        if self.para_PARAM_I >= self.rate_PARAM_I:
+            for key in self.PARAM_I_DIC:
+                self.db.insert_data_into_stack(key, self.dt, self.PARAM_I_DIC[key])
+
+                self.commit_bool = True
+            self.para_PARAM_I = 0
+
+        if self.para_PARAM_T >= self.rate_PARAM_T:
+            for key in self.PARAM_T_DIC:
+                self.db.insert_data_into_stack(key, self.dt, self.PARAM_T_DIC[key])
+
+                self.commit_bool = True
+            self.para_PARAM_T = 0
+
+        if self.para_TIME >= self.rate_TIME:
+            for key in self.TIME_DIC:
+                self.db.insert_data_into_stack(key, self.dt, self.TIME_DIC[key])
+
+                self.commit_bool = True
+            self.para_TIME = 0
+
+        # print("a",self.para_TT,"b",self.para_PT )
+        # print(8)
+
+        # commit the changes at last step only if it is time to write
+        if self.commit_bool:
+            # put alll commands into stack which is a pandas dataframe, reorder it by timestamp and then transform them into mysql queries
+            self.db.sort_stack()
+            self.db.convert_stack_into_queries()
+            self.db.drop_stack()
+            self.db.db.commit()
+        print("Wrting PLC data to database...")
+        self.para_alarm += 1
+
+        self.para_TT += 1
+        self.para_PT += 1
+        self.para_Valve += 1
+        self.para_Switch += 1
+        self.para_LOOPPID += 1
+        self.para_LOOP2PT += 1
+        self.para_REAL += 1
+        self.para_Din += 1
+        self.para_FLAG += 1
+        self.para_FF += 1
+        self.para_PARAM_T += 1
+        self.para_PARAM_I += 1
+        self.para_PARAM_B += 1
+        self.para_PARAM_F += 1
+        self.para_TIME += 1
+        # self.PLC.NewData_Database = False
 
 
 
