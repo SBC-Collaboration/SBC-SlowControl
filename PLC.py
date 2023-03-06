@@ -1645,11 +1645,25 @@ class UpdateDataBase(QtCore.QObject):
                         # print(0)
                         # print(self.para_alarm)
                         if self.para_alarm >= self.rate_alarm:
-                            self.COUPP_ERROR = True
-                            self.alarm_db.ssh_write()
-                            # if the ssh write fails, the ERROR will be True
-                            self.COUPP_ERROR = False
-                            self.para_alarm = 0
+                            # if the previous state is AOK(either comes from Database BKG or PLC ALARM CHECK BKG), then only updates currrent status to the database
+                            # if the previous state is ALARM, then keeep the alarm status until PLC ALARM clear it up.
+                            state = self.alarm_db.ssh_state_only()
+                            if state=="AOK":
+                                self.COUPP_ERROR = True
+                                self.alarm_db.ssh_write()
+                                # if the ssh write fails, the ERROR will be True
+                                self.COUPP_ERROR = False
+                                self.para_alarm = 0
+                            elif state=="ALARM":
+                                self.COUPP_ERROR = True
+                                self.COUPP_ERROR = False
+                                self.para_alarm = 0
+                            else:
+                                self.COUPP_ERROR = True
+                                self.COUPP_ERROR = False
+                                self.para_alarm = 0
+
+
                     except:
                         if self.COUPP_ERROR == True:
                             self.DB_ERROR_SIG.emit("Failed to update PICO watchdog Database.")
@@ -2200,6 +2214,7 @@ class UpdatePLC(QtCore.QObject):
         super().__init__(parent)
 
         self.PLC = PLC
+        self.alarm_db = COUPP_database()
         # self.message_manager = message_manager()
         self.Running = False
         self.period = 1
@@ -2218,6 +2233,7 @@ class UpdatePLC(QtCore.QObject):
         self.Din_rate = sec.DIN_RATE
         self.LOOPPID_para = sec.LOOPPID_PARA
         self.LOOPPID_rate = sec.LOOPPID_RATE
+        self.alarm_stack=""
 
     @QtCore.Slot()
     def run(self):
@@ -2229,7 +2245,7 @@ class UpdatePLC(QtCore.QObject):
                 self.PLC.ReadAll()
                 # test signal
                 # self.AI_slack_alarm.emit("signal")
-
+                self.alarm_stack = ""
                 # check alarms
                 for keyTT_FP in self.PLC.TT_FP_dic:
                     self.check_TT_FP_alarm(keyTT_FP)
@@ -2244,6 +2260,12 @@ class UpdatePLC(QtCore.QObject):
                 for keyLOOPPID in self.PLC.LOOPPID_OUT:
                     self.check_LOOPPID_alarm(keyLOOPPID)
                 self.or_alarm_signal()
+                # if there is alarm, update the PICO watchdog and report the alarm
+                if self.PLC.MainAlarm:
+                    self.alarm_db.ssh_alarm(message=self.alarm_stack)
+                    self.AI_slack_alarm.emit(self.alarm_stack)
+                else:
+                    self.alarm_db.update_alarm()
                 time.sleep(self.period)
         except KeyboardInterrupt:
             print("PLC is interrupted by keyboard[Ctrl-C]")
@@ -2260,6 +2282,8 @@ class UpdatePLC(QtCore.QObject):
     # def pressure_cycle(self):
     #     if self.PR_CYCLE_para >= self.PR_CYCLE_rate:
     #         self.PLC.
+    def stack_alarm_msg(self, string):
+        self.alarm_stack= self.alarm_stack+"\n" +str(string)
 
     def check_TT_FP_alarm(self, pid):
 
@@ -2410,7 +2434,8 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.TT_FP_HighLimit[pid], low=self.PLC.TT_FP_LowLimit[pid])
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            self.stack_alarm_msg(msg)
+
             self.TT_FP_para[pid] = 0
         self.TT_FP_para[pid] += 1
 
@@ -2428,7 +2453,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.TT_BO_HighLimit[pid], low=self.PLC.TT_BO_LowLimit[pid])
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            self.stack_alarm_msg(msg)
             self.TT_BO_para[pid] = 0
 
         self.TT_BO_para[pid] += 1
@@ -2447,7 +2472,7 @@ class UpdatePLC(QtCore.QObject):
 
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            self.stack_alarm_msg(msg)
             self.PT_para[pid] = 0
         self.PT_para[pid] += 1
 
@@ -2465,7 +2490,7 @@ class UpdatePLC(QtCore.QObject):
 
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            self.stack_alarm_msg(msg)
             self.LEFT_REAL_para[pid] = 0
         self.LEFT_REAL_para[pid] += 1
 
@@ -2483,7 +2508,7 @@ class UpdatePLC(QtCore.QObject):
 
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            self.stack_alarm_msg(msg)
             self.Din_para[pid] = 0
         self.Din_para[pid] += 1
 
@@ -2501,7 +2526,7 @@ class UpdatePLC(QtCore.QObject):
 
             # self.message_manager.tencent_alarm(msg)
             # self.message_manager.slack_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            self.stack_alarm_msg(msg)
             self.LOOPPID_para[pid] = 0
         self.LOOPPID_para[pid] += 1
 

@@ -209,10 +209,10 @@ class COUPP_database():
             print(tunnel.local_bind_port)
             self.db = pymysql.connect(host="127.0.0.1", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
             # self.db = mysql.connector.connect(host="127.0.0.1", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
-            print(1)
             self.mycursor = self.db.cursor()
             self.show_data()
             self.close_database()
+
 
             # conn = pymysql.connect(host='127.0.0.1', user=sql_username,
             #                        passwd=sql_password, db=sql_main_database,
@@ -220,6 +220,21 @@ class COUPP_database():
             # query = '''SELECT VERSION();'''
             # data = pd.read_sql_query(query, conn)
             # conn.close()
+    def ssh_state_only(self):
+        with SSHTunnelForwarder(
+                (self.ssh_host, self.ssh_port),
+                ssh_username=self.ssh_user,
+                ssh_password= self.ssh_password,
+                remote_bind_address=(self.sql_hostname, self.sql_port)) as tunnel:
+            print("pointer 0")
+            print(tunnel.local_bind_port)
+            self.db = pymysql.connect(host="127.0.0.1", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
+            # self.db = mysql.connector.connect(host="127.0.0.1", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
+            self.mycursor = self.db.cursor()
+            state = self.show_status()
+            self.close_database()
+        return state
+
     def show_data(self,start_time=None, end_time=None):
         # if start_time==None or end_time==None:
         print(start_time,end_time)
@@ -227,6 +242,16 @@ class COUPP_database():
         self.mycursor.execute(query)
         for (id,datime,alarm_state, alarm_message) in self.mycursor:
             print(str("Alarm_info"+"| {} | {} | {}".format(datime,alarm_state, alarm_message)))
+
+    def show_status(self,start_time=None, end_time=None):
+        # if start_time==None or end_time==None:
+        print(start_time,end_time)
+        query = "SELECT * FROM sbc_FNAL_alarms"
+        self.mycursor.execute(query)
+        for (id,datime,alarm_state, alarm_message) in self.mycursor:
+            print(str("Alarm_info"+"| {} | {} | {}".format(datime,alarm_state, alarm_message)))
+        return alarm_state
+
     def update_alarm(self):
         Unixtime = int(tm.time())
         state = 'OK'
