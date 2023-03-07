@@ -2265,7 +2265,7 @@ class UpdatePLC(QtCore.QObject):
                     self.alarm_db.ssh_alarm(message=self.alarm_stack)
                     self.AI_slack_alarm.emit(self.alarm_stack)
                 else:
-                    self.alarm_db.update_alarm()
+                    self.alarm_db.ssh_write()
                 time.sleep(self.period)
         except KeyboardInterrupt:
             print("PLC is interrupted by keyboard[Ctrl-C]")
