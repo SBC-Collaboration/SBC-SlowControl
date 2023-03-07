@@ -1433,6 +1433,7 @@ class UpdateDataBase(QtCore.QObject):
         self.base_period = 1
 
         self.COUPP_ERROR = False
+        self.COUPP_ALARM = "k"
 
         self.para_alarm = 0
         self.rate_alarm = 10
@@ -1625,6 +1626,7 @@ class UpdateDataBase(QtCore.QObject):
         self.PARAM_B_buffer = copy.copy(sec.PARAM_B_DIC)
 
 
+
         print("begin updating Database")
 
     @QtCore.Slot()
@@ -1650,23 +1652,34 @@ class UpdateDataBase(QtCore.QObject):
                     # print(0)
                     # print(self.para_alarm)
                     if self.para_alarm >= self.rate_alarm:
-                        # if the previous state is OK(either comes from Database BKG or PLC ALARM CHECK BKG), then only updates currrent status to the database
-                        # if the previous state is ALARM, then keep the alarm status until PLC ALARM clear it up.
-                        state = self.alarm_db.ssh_state_only()
-                        if state == "OK":
+
+                    # if coupp alarm is blank which only comes from the PLC module, then write ok status
+                    # if coupp alarm is "k", which means no new data from PLC module, then keep the previous status: if previous was ok, then update the ok, if it was alarm, then do nothing. waiting for next command from PLC
+                    #if coupp alarm is neither blank nor k, then it should be a alarm from PLC module, so write the alarm to the COUPP database.
+                        if self.COUPP_ALARM == "":
                             self.COUPP_ERROR = True
                             self.alarm_db.ssh_write()
                             # if the ssh write fails, the ERROR will be True
                             self.COUPP_ERROR = False
                             self.para_alarm = 0
-                        elif state == "ALARM":
-                            self.COUPP_ERROR = True
-                            self.COUPP_ERROR = False
-                            self.para_alarm = 0
+                        elif self.COUPP_ALARM == "k":
+                                if self.alarm_db.ssh_state_only()=="OK":
+                                    self.COUPP_ERROR = True
+                                    self.alarm_db.ssh_write()
+                                    # if the ssh write fails, the ERROR will be True
+                                    self.COUPP_ERROR = False
+                                    self.para_alarm = 0
+                                elif self.alarm_db.ssh_state_only()=="ALARM":
+                                    self.COUPP_ERROR = True
+                                    self.COUPP_ERROR = False
+                                    self.para_alarm = 0
+
                         else:
                             self.COUPP_ERROR = True
+                            self.alarm_db.ssh_alarm(message=self.COUPP_ALARM)
                             self.COUPP_ERROR = False
                             self.para_alarm = 0
+                        self.COUPP_ALARM = "k"
 
 
                 except Exception as e:
@@ -1709,6 +1722,10 @@ class UpdateDataBase(QtCore.QObject):
     @QtCore.Slot()
     def stop(self):
         self.Running = False
+
+    @QtCore.Slot()
+    def receive_COUPP_ALARM(self, string):
+        self.COUPP_ALARM = string
 
     @QtCore.Slot(object)
     def update_value(self,dic):
@@ -2209,6 +2226,8 @@ class UpdateDataBase(QtCore.QObject):
 # Class to read PLC value every 2 sec
 class UpdatePLC(QtCore.QObject):
     AI_slack_alarm = QtCore.Signal(str)
+    COUPP_TEXT_alarm = QtCore.Signal(str)
+
 
     def __init__(self, PLC, parent=None):
         super().__init__(parent)
@@ -2271,12 +2290,12 @@ class UpdatePLC(QtCore.QObject):
                 try:
                     if self.PLC.MainAlarm:
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
-                        self.AI_slack_alarm.emit(self.alarm_stack)
+                        self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                     else:
                         pass
                         # self.alarm_db.ssh_write()
                 except:
-                    # self.AI_slack_alarm.emit("failed to ssh to PICO watchdog")
+                    self.AI_slack_alarm.emit("failed to ssh to PICO watchdog in PLCupdate module")
                     pass
 
                 time.sleep(self.period)
@@ -2442,7 +2461,7 @@ class UpdatePLC(QtCore.QObject):
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.TT_FP_dic[pid],
                                                                                                                      high=self.PLC.TT_FP_HighLimit[pid], low=self.PLC.TT_FP_LowLimit[pid])
             # self.message_manager.tencent_alarm(msg)
-            # self.message_manager.slack_alarm(msg)
+            self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
 
             self.TT_FP_para[pid] = 0
@@ -2461,7 +2480,7 @@ class UpdatePLC(QtCore.QObject):
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.TT_BO_dic[pid],
                                                                                                                      high=self.PLC.TT_BO_HighLimit[pid], low=self.PLC.TT_BO_LowLimit[pid])
             # self.message_manager.tencent_alarm(msg)
-            # self.message_manager.slack_alarm(msg)
+            self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.TT_BO_para[pid] = 0
 
@@ -2480,7 +2499,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.PT_HighLimit[pid], low=self.PLC.PT_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
-            # self.message_manager.slack_alarm(msg)
+            self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.PT_para[pid] = 0
         self.PT_para[pid] += 1
@@ -2498,7 +2517,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.LEFT_REAL_HighLimit[pid], low=self.PLC.LEFT_REAL_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
-            # self.message_manager.slack_alarm(msg)
+            self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.LEFT_REAL_para[pid] = 0
         self.LEFT_REAL_para[pid] += 1
@@ -2516,7 +2535,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.Din_HighLimit[pid], low=self.PLC.Din_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
-            # self.message_manager.slack_alarm(msg)
+            self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.Din_para[pid] = 0
         self.Din_para[pid] += 1
@@ -2534,7 +2553,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.LOOPPID_Alarm_HighLimit[pid], low=self.PLC.LOOPPID_Alarm_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
-            # self.message_manager.slack_alarm(msg)
+            self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.LOOPPID_para[pid] = 0
         self.LOOPPID_para[pid] += 1
@@ -3571,10 +3590,13 @@ class Update(QtCore.QObject):
         self.message_manager = message_manager()
         self.UpPLC.AI_slack_alarm.connect(self.printstr)
 
+
         self.UpPLC.AI_slack_alarm.connect(self.message_manager.slack_alarm)
         self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
 
     def connect_signals(self):
+        self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
+
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
         self.PATCH_TO_DATABASE.connect(lambda: self.UpDatabase.update_value(self.data_transfer))

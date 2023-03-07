@@ -4507,10 +4507,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-
-
-
-
         #Update alarmwindow's widgets' value
 
 
