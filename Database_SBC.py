@@ -300,21 +300,21 @@ class COUPP_database():
 
 if __name__ == "__main__":
 
-    db = mydatabase()
-    dt = datetime_in_s()
-    early_dt = early_datetime()
-    # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
-    print(dt)
-    # print(unix_timestamp)
-    # db.insert_data_into_datastorage("test",dt,500.55)
-
-    db.insert_data_into_stack("PV5535", early_dt, 0)
-    db.insert_data_into_stack("PV5535", dt, 1)
-    db.insert_data_into_stack("PV5485", early_dt, 1)
-    db.insert_data_into_stack("PV5485", dt, 0)
-    db.insert_data_into_stack("PV5935", early_dt, 0)
-    db.insert_data_into_stack("PV5595", dt, 1)
-    db.sort_stack()
+    # db = mydatabase()
+    # dt = datetime_in_s()
+    # early_dt = early_datetime()
+    # # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
+    # print(dt)
+    # # print(unix_timestamp)
+    # # db.insert_data_into_datastorage("test",dt,500.55)
+    #
+    # db.insert_data_into_stack("PV5535", early_dt, 0)
+    # db.insert_data_into_stack("PV5535", dt, 1)
+    # db.insert_data_into_stack("PV5485", early_dt, 1)
+    # db.insert_data_into_stack("PV5485", dt, 0)
+    # db.insert_data_into_stack("PV5935", early_dt, 0)
+    # db.insert_data_into_stack("PV5595", dt, 1)
+    # db.sort_stack()
 
     # db.show_data_datastorage()
 
@@ -330,23 +330,25 @@ if __name__ == "__main__":
     # print(datetime_in_1e5micro())
     # print(early_datetime())
 
-##test NW sbc alarm database
+#test NW sbc alarm database
 
-# if __name__ == "__main__":
-    # db = COUPP_database()
-    # dt = datetime_in_s()
-    # # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
-    # print(dt)
-    # # print(unix_timestamp)
-    # # db.insert_data_into_datastorage("test",dt,500.55)
+if __name__ == "__main__":
+    db = COUPP_database()
+    dt = datetime_in_s()
+    # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
+    print(dt)
+    # print(unix_timestamp)
+    # db.insert_data_into_datastorage("test",dt,500.55)
     # db.ssh_select()
     # db.ssh_write()
     # db.ssh_select()
+    print(db.ssh_state_only())
 
 
-    # db.close_database()
 
-    # #test datetime function
-    # print(datetime_in_1e5micro())
-    # print(early_datetime())
+    db.close_database()
+
+    #test datetime function
+    print(datetime_in_1e5micro())
+    print(early_datetime())
 
