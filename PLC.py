@@ -1650,10 +1650,10 @@ class UpdateDataBase(QtCore.QObject):
                     # print(0)
                     # print(self.para_alarm)
                     if self.para_alarm >= self.rate_alarm:
-                        # if the previous state is AOK(either comes from Database BKG or PLC ALARM CHECK BKG), then only updates currrent status to the database
+                        # if the previous state is OK(either comes from Database BKG or PLC ALARM CHECK BKG), then only updates currrent status to the database
                         # if the previous state is ALARM, then keep the alarm status until PLC ALARM clear it up.
                         state = self.alarm_db.ssh_state_only()
-                        if state == "AOK":
+                        if state == "OK":
                             self.COUPP_ERROR = True
                             self.alarm_db.ssh_write()
                             # if the ssh write fails, the ERROR will be True
