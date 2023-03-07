@@ -298,7 +298,7 @@ class COUPP_database():
 
 # test sbcslowcontrol database
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
     # db = mydatabase()
     # dt = datetime_in_s()
