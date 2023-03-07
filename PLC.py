@@ -2268,14 +2268,14 @@ class UpdatePLC(QtCore.QObject):
                     exception_hook(type, value, traceback)
 
                 # if there is alarm, update the PICO watchdog and report the alarm
-                try:
-                    if self.PLC.MainAlarm:
-                        self.alarm_db.ssh_alarm(message=self.alarm_stack)
-                        self.AI_slack_alarm.emit(self.alarm_stack)
-                    else:
-                        self.alarm_db.ssh_write()
-                except:
-                    self.AI_slack_alarm.emit("failed to ssh to PICO watchdog")
+                # try:
+                #     if self.PLC.MainAlarm:
+                #         self.alarm_db.ssh_alarm(message=self.alarm_stack)
+                #         self.AI_slack_alarm.emit(self.alarm_stack)
+                #     else:
+                #         self.alarm_db.ssh_write()
+                # except:
+                #     self.AI_slack_alarm.emit("failed to ssh to PICO watchdog")
 
                 time.sleep(self.period)
 
