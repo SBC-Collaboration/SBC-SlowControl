@@ -2237,43 +2237,50 @@ class UpdatePLC(QtCore.QObject):
 
     @QtCore.Slot()
     def run(self):
-        try:
+
             self.Running = True
 
+
             while self.Running:
-                print("PLC updating", datetime.datetime.now())
-                self.PLC.ReadAll()
-                # test signal
-                # self.AI_slack_alarm.emit("signal")
-                self.alarm_stack = ""
-                # check alarms
-                for keyTT_FP in self.PLC.TT_FP_dic:
-                    self.check_TT_FP_alarm(keyTT_FP)
-                for keyTT_BO in self.PLC.TT_BO_dic:
-                    self.check_TT_BO_alarm(keyTT_BO)
-                for keyPT in self.PLC.PT_dic:
-                    self.check_PT_alarm(keyPT)
-                for keyLEFT_REAL in self.PLC.LEFT_REAL_dic:
-                    self.check_LEFT_REAL_alarm(keyLEFT_REAL)
-                for keyDin in self.PLC.Din_dic:
-                    self.check_Din_alarm(keyDin)
-                for keyLOOPPID in self.PLC.LOOPPID_OUT:
-                    self.check_LOOPPID_alarm(keyLOOPPID)
-                self.or_alarm_signal()
+                try:
+                    print("PLC updating", datetime.datetime.now())
+                    self.PLC.ReadAll()
+                    # test signal
+                    # self.AI_slack_alarm.emit("signal")
+                    self.alarm_stack = ""
+                    # check alarms
+                    for keyTT_FP in self.PLC.TT_FP_dic:
+                        self.check_TT_FP_alarm(keyTT_FP)
+                    for keyTT_BO in self.PLC.TT_BO_dic:
+                        self.check_TT_BO_alarm(keyTT_BO)
+                    for keyPT in self.PLC.PT_dic:
+                        self.check_PT_alarm(keyPT)
+                    for keyLEFT_REAL in self.PLC.LEFT_REAL_dic:
+                        self.check_LEFT_REAL_alarm(keyLEFT_REAL)
+                    for keyDin in self.PLC.Din_dic:
+                        self.check_Din_alarm(keyDin)
+                    for keyLOOPPID in self.PLC.LOOPPID_OUT:
+                        self.check_LOOPPID_alarm(keyLOOPPID)
+                    self.or_alarm_signal()
+                except:
+                    self.PLC.PLC_DISCON_SIGNAL.emit()
+                    (type, value, traceback) = sys.exc_info()
+                    exception_hook(type, value, traceback)
+
                 # if there is alarm, update the PICO watchdog and report the alarm
-                if self.PLC.MainAlarm:
-                    self.alarm_db.ssh_alarm(message=self.alarm_stack)
-                    self.AI_slack_alarm.emit(self.alarm_stack)
-                else:
-                    self.alarm_db.ssh_write()
+                try:
+                    if self.PLC.MainAlarm:
+                        self.alarm_db.ssh_alarm(message=self.alarm_stack)
+                        self.AI_slack_alarm.emit(self.alarm_stack)
+                    else:
+                        self.alarm_db.ssh_write()
+                except:
+                    self.AI_slack_alarm.emit("failed to ssh to PICO watchdog")
+
                 time.sleep(self.period)
-        except KeyboardInterrupt:
-            print("PLC is interrupted by keyboard[Ctrl-C]")
-            self.stop()
-        except:
-            self.PLC.PLC_DISCON_SIGNAL.emit()
-            (type, value, traceback) = sys.exc_info()
-            exception_hook(type, value, traceback)
+
+
+
 
     @QtCore.Slot()
     def stop(self):
