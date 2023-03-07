@@ -2263,7 +2263,7 @@ class UpdatePLC(QtCore.QObject):
                         self.check_LOOPPID_alarm(keyLOOPPID)
                     self.or_alarm_signal()
                 except:
-                    self.PLC.PLC_DISCON_SIGNAL.emit()
+                    # self.PLC.PLC_DISCON_SIGNAL.emit()
                     (type, value, traceback) = sys.exc_info()
                     exception_hook(type, value, traceback)
 
