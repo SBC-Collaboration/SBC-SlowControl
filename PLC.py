@@ -2296,7 +2296,7 @@ class UpdatePLC(QtCore.QObject):
 
                 # if there is alarm, update the PICO watchdog and report the alarm
                 try:
-                    print("stack\n", self.alarm_stack)
+                    print("stack1\n", self.alarm_stack)
                     if self.PLC.MainAlarm:
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
 
@@ -2322,7 +2322,7 @@ class UpdatePLC(QtCore.QObject):
     #         self.PLC.
     def stack_alarm_msg(self, string):
         self.alarm_stack= self.alarm_stack+"\n" +str(string)
-        # print("stack", self.alarm_stack)
+        print("stack2", self.alarm_stack)
 
     def check_TT_FP_alarm(self, pid):
 
