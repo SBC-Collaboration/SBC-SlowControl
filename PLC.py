@@ -2298,6 +2298,7 @@ class UpdatePLC(QtCore.QObject):
                 try:
                     if self.PLC.MainAlarm:
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
+                        print("stack\n", self.alarm_stack)
                         self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                     else:
                         pass
@@ -2320,7 +2321,7 @@ class UpdatePLC(QtCore.QObject):
     #         self.PLC.
     def stack_alarm_msg(self, string):
         self.alarm_stack= self.alarm_stack+"\n" +str(string)
-        print("stack", self.alarm_stack)
+        # print("stack", self.alarm_stack)
 
     def check_TT_FP_alarm(self, pid):
 
