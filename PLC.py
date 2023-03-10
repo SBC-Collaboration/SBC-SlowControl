@@ -1656,6 +1656,7 @@ class UpdateDataBase(QtCore.QObject):
                     # if coupp alarm is blank which only comes from the PLC module, then write ok status
                     # if coupp alarm is "k", which means no new data from PLC module, then keep the previous status: if previous was ok, then update the ok, if it was alarm, then do nothing. waiting for next command from PLC
                     #if coupp alarm is neither blank nor k, then it should be a alarm from PLC module, so write the alarm to the COUPP database.
+                        print("ALARM:\n","\n",self.COUPP_ALARM)
                         if self.COUPP_ALARM == "":
                             self.COUPP_ERROR = True
                             self.alarm_db.ssh_write()
