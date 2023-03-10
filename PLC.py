@@ -2320,6 +2320,7 @@ class UpdatePLC(QtCore.QObject):
     #         self.PLC.
     def stack_alarm_msg(self, string):
         self.alarm_stack= self.alarm_stack+"\n" +str(string)
+        print("stack", self.alarm_stack)
 
     def check_TT_FP_alarm(self, pid):
 
