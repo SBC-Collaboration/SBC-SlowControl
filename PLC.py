@@ -1434,6 +1434,7 @@ class UpdateDataBase(QtCore.QObject):
 
         self.COUPP_ERROR = False
         self.COUPP_ALARM = "k"
+        self.COUPP_HOLD = True
 
         self.para_alarm = 0
         self.rate_alarm = 10
@@ -1651,12 +1652,15 @@ class UpdateDataBase(QtCore.QObject):
                 try:
                     # print(0)
                     # print(self.para_alarm)
+                    print("ALARM:\n", "\n", self.COUPP_ALARM)
                     if self.para_alarm >= self.rate_alarm:
 
                     # if coupp alarm is blank which only comes from the PLC module, then write ok status
                     # if coupp alarm is "k", which means no new data from PLC module, then keep the previous status: if previous was ok, then update the ok, if it was alarm, then do nothing. waiting for next command from PLC
                     #if coupp alarm is neither blank nor k, then it should be a alarm from PLC module, so write the alarm to the COUPP database.
-                        print("ALARM:\n","\n",self.COUPP_ALARM)
+
+
+
                         if self.COUPP_ALARM == "":
                             self.COUPP_ERROR = True
                             self.alarm_db.ssh_write()
@@ -1675,12 +1679,14 @@ class UpdateDataBase(QtCore.QObject):
                                     self.COUPP_ERROR = False
                                     self.para_alarm = 0
 
+
                         else:
                             self.COUPP_ERROR = True
                             self.alarm_db.ssh_alarm(message=self.COUPP_ALARM)
                             self.COUPP_ERROR = False
                             self.para_alarm = 0
-                        # self.COUPP_ALARM = "k"
+                        if not self.COUPP_HOLD:
+                            self.COUPP_ALARM = "k"
 
 
                 except Exception as e:
@@ -1726,6 +1732,7 @@ class UpdateDataBase(QtCore.QObject):
 
     @QtCore.Slot()
     def receive_COUPP_ALARM(self, string):
+        self.COUPP_HOLD = True
         self.COUPP_ALARM = string
 
     @QtCore.Slot(object)
