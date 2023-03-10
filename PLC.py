@@ -1680,7 +1680,7 @@ class UpdateDataBase(QtCore.QObject):
                             self.alarm_db.ssh_alarm(message=self.COUPP_ALARM)
                             self.COUPP_ERROR = False
                             self.para_alarm = 0
-                        self.COUPP_ALARM = "k"
+                        # self.COUPP_ALARM = "k"
 
 
                 except Exception as e:
