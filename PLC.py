@@ -1428,7 +1428,7 @@ class UpdateDataBase(QtCore.QObject):
         # if loop runs with _counts times with New_Database = False(No written Data), then send alarm to slack. Otherwise, the code normally run(reset the pointer)
         self.Running_counts = 600
         self.Running_pointer = 0
-        self.longsleep = 600
+        self.longsleep = 60
 
         self.base_period = 1
 
