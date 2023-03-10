@@ -1652,7 +1652,7 @@ class UpdateDataBase(QtCore.QObject):
                 try:
                     # print(0)
                     # print(self.para_alarm)
-                    print("ALARM:\n", "\n", self.COUPP_ALARM)
+                    # print("ALARM:\n", "\n", self.COUPP_ALARM)
                     if self.para_alarm >= self.rate_alarm:
 
                     # if coupp alarm is blank which only comes from the PLC module, then write ok status
