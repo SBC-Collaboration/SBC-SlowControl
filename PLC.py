@@ -2305,7 +2305,7 @@ class UpdatePLC(QtCore.QObject):
                         pass
                         # self.alarm_db.ssh_write()
                 except:
-                    self.AI_slack_alarm.emit("failed to ssh to PICO watchdog in PLCupdate module")
+                    self.AI_slack_alarm.emit("failed to ssh to PICO watchdog in PLC update module")
                     pass
 
                 time.sleep(self.period)
@@ -2320,6 +2320,7 @@ class UpdatePLC(QtCore.QObject):
     # def pressure_cycle(self):
     #     if self.PR_CYCLE_para >= self.PR_CYCLE_rate:
     #         self.PLC.
+    @QtCore.Slot()
     def stack_alarm_msg(self, string):
         self.alarm_stack= self.alarm_stack+"\n" +str(string)
         print("stack2", self.alarm_stack)
