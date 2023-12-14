@@ -15,7 +15,7 @@ import os, sys, time, platform, datetime, random, pickle, cgitb, traceback, sign
 from PySide2 import QtWidgets, QtCore, QtGui
 
 # from SlowDAQ_SBC_v2 import *
-from PLC import *
+# from PLC import *
 from PICOPW import VerifyPW
 from SlowDAQWidgets_SBC_v2 import *
 import zmq
