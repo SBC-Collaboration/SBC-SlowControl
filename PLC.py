@@ -565,6 +565,8 @@ class PLC(QtCore.QObject):
                     self.TT_FP_dic[key] = 273.15 + read_value
                 else:
                     self.TT_FP_dic[key] = read_value
+                if key=="TT2410":
+                    print("TT2410", "address:",self.TT_FP_address[key],"value",self.TT_FP_dic[key])
                 # print(key,self.TT_FP_address[key], "RTD",self.TT_FP_dic[key])
 
             #################################################################################################
