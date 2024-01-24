@@ -8419,7 +8419,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT7402.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7402"])
         self.TT7403.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7403"])
         self.TT7404.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7404"])
-        self.TT7405.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7405"])
+        self.TT3401.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT3401"])
 
         self.PT2121.SetValue(received_dic_c["data"]["PT"]["value"]["PT2121"])
         self.PT2316.SetValue(received_dic_c["data"]["PT"]["value"]["PT2316"])
