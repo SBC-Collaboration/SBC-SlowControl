@@ -264,8 +264,8 @@ class RTDset2(QtWidgets.QMainWindow):
         self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 2000*R, 1000*R))
 
         # reset the size of the window
-        self.setMinimumSize(1000*R, 500*R)
-        self.resize(1000*R, 500*R)
+        self.setMinimumSize(1500*R, 750*R)
+        self.resize(1500*R, 750*R)
         self.setWindowTitle("RTD SET 2")
         self.Widget.setGeometry(QtCore.QRect(0*R, 0*R, 1500*R, 750*R))
 
