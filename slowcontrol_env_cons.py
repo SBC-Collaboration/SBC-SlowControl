@@ -142,7 +142,7 @@ TT_BO_ACTIVATED = {"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": 
 PT_ACTIVATED = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
                 "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                 "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
-                "PT4322": False, "PT4325": False, "PT6302": False,  "PT1101": False, "PT5304": False
+                "PT4322": False, "PT4325": False, "PT6302": False,  "PT1101": False, "PT5304": False,
                 "PT2343": False}
 LEFT_REAL_ACTIVATED = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False}
 
