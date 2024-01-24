@@ -618,6 +618,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT7402.move(910*R, 530*R)
         self.TT7402.Label.setText("TT7402")
 
+        self.TT7403 = Indicator(self.FluidTab)
+        self.TT7403.move(2100 * R, 250 * R)
+        self.TT7403.Label.setText("TT7403")
+
+        self.TT7404 = Indicator(self.FluidTab)
+        self.TT7404.move(2200 * R, 250 * R)
+        self.TT7404.Label.setText("TT7404")
+
         self.PS8302 = ColoredStatus(self.FluidTab, mode=2)
         self.PS8302.move(2300 * R, 100 * R)
         self.PS8302.Label.setText("PS8302")
@@ -1038,7 +1046,11 @@ class MainWindow(QtWidgets.QMainWindow):
                                  self.AlarmButton.SubWindow.TT6404, self.AlarmButton.SubWindow.TT6405,
                                  self.AlarmButton.SubWindow.TT6406, self.AlarmButton.SubWindow.TT6410,
                                  self.AlarmButton.SubWindow.TT6411, self.AlarmButton.SubWindow.TT6412,
-                                 self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414]
+                                 self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414,
+                                 self.AlarmButton.SubWindow.TT7401, self.AlarmButton.SubWindow.TT7402,
+                                 self.AlarmButton.SubWindow.TT7403, self.AlarmButton.SubWindow.TT7404,
+                                 self.AlarmButton.SubWindow.TT3401]
+
 
         self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT1325,
                               self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2121,
@@ -1107,6 +1119,9 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.AlarmButton.SubWindow.TT6406, self.AlarmButton.SubWindow.TT6410,
                             self.AlarmButton.SubWindow.TT6411, self.AlarmButton.SubWindow.TT6412,
                             self.AlarmButton.SubWindow.TT6413, self.AlarmButton.SubWindow.TT6414,
+                            self.AlarmButton.SubWindow.TT7401, self.AlarmButton.SubWindow.TT7402,
+                            self.AlarmButton.SubWindow.TT7403, self.AlarmButton.SubWindow.TT7404,
+                            self.AlarmButton.SubWindow.TT3401,
                             self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT1325,
                             self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2121,
                             self.AlarmButton.SubWindow.PT2330, self.AlarmButton.SubWindow.PT2335,
@@ -2315,6 +2330,35 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #FP rtd updatebutton
 
+        self.AlarmButton.SubWindow.TT7401.AlarmMode.stateChanged.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT7401.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT7401.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT7401.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT7401.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.TT7402.AlarmMode.stateChanged.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT7402.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT7402.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT7402.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT7402.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.TT7403.AlarmMode.stateChanged.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT7403.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT7403.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT7403.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT7403.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.TT7404.AlarmMode.stateChanged.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT7404.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT7404.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT7404.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT7404.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.TT3401.AlarmMode.stateChanged.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT3401.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT3401.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT3401.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT3401.High_Set.Field.text(), update=False))
         self.AlarmButton.SubWindow.TT2420.updatebutton.clicked.connect(
             lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT2420.Label.text(),
                                        Act=self.AlarmButton.SubWindow.TT2420.AlarmMode.isChecked(),
@@ -2662,6 +2706,36 @@ class MainWindow(QtWidgets.QMainWindow):
                                        Act=self.AlarmButton.SubWindow.TT6414.AlarmMode.isChecked(),
                                        LowLimit=self.AlarmButton.SubWindow.TT6414.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.TT6414.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.TT7401.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT7401.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT7401.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT7401.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT7401.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.TT7402.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT7402.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT7402.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT7402.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT7402.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.TT7403.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT7403.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT7403.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT7403.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT7403.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.TT7404.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT7404.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT7404.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT7404.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT7404.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.TT3401.updatebutton.clicked.connect(
+            lambda: self.FPTTBoxUpdate(pid=self.AlarmButton.SubWindow.TT3401.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.TT3401.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.TT3401.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.TT3401.High_Set.Field.text()))
 
 
         #BO PT updatebutton and activate button
@@ -8341,6 +8415,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # set indicators value
 
+        self.TT7401.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7401"])
+        self.TT7402.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7402"])
+        self.TT7403.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7403"])
+        self.TT7404.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7404"])
+        self.TT7405.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7405"])
+
         self.PT2121.SetValue(received_dic_c["data"]["PT"]["value"]["PT2121"])
         self.PT2316.SetValue(received_dic_c["data"]["PT"]["value"]["PT2316"])
         self.PT2330.SetValue(received_dic_c["data"]["PT"]["value"]["PT2330"])
@@ -8437,6 +8517,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.RTDset3Win.TT2448.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2448"])
         self.RTDset2Win.TT2410.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2410"])
         self.RTDset2Win.TT2405.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2405"])
+
+
 
         self.HTR6219.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6220"])
         # self.MFC1316.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT1332"])
