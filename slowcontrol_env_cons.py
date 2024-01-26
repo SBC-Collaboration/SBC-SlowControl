@@ -20,6 +20,8 @@ TT_FP_ADDRESS = {"TT2420": 31000, "TT2422": 31002, "TT2424": 31004, "TT2425": 31
 
 
 
+
+
 TT_BO_ADDRESS = {"TT2101": 12988, "TT2111": 12990, "TT2113": 12992, "TT2118": 12994, "TT2119": 12996,
                               "TT4330": 12998, "TT6203": 13000, "TT6207": 13002, "TT6211": 13004, "TT6213": 13006,
                               "TT6222": 13008, "TT6407": 13010, "TT6408": 13012, "TT6409": 13014, "TT6415": 13016,
@@ -32,6 +34,7 @@ PT_ADDRESS = {"PT1325": 12794, "PT2121": 12796, "PT2316": 12798, "PT2330": 12800
               "PT2343":12836}
 
 LEFT_REAL_ADDRESS = {'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792, "CYL3334_FCALC": 12832, "SERVO3321_IN_REAL": 12830, "TS1_MASS": 16288, "TS2_MASS": 16290, "TS3_MASS": 16292,  "TS_ADDREM_N2MASSTX": 16818}
+AD_ADDRESS = {"LT3302": 2 , "LT3315": 33333}
 
 TT_FP_DIC = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0,
              "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0,
@@ -61,6 +64,7 @@ PT_DIC = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
           "PT2343": 0}
 
 LEFT_REAL_DIC = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0, "TS_ADDREM_N2MASSTX": 0}
+AD_DIC = {"LT3302": 0 , "LT3315": 0}
 
 TT_FP_LOWLIMIT = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0,
              "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0,
@@ -118,6 +122,10 @@ PT_HIGHLIMIT = {"PT1325": 300, "PT2121": 300, "PT2316": 300, "PT2330": 300, "PT2
 LEFT_REAL_HIGHLIMIT = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0,"TS_ADDREM_N2MASSTX": 0}
 LEFT_REAL_LOWLIMIT = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0 , "TS_ADDREM_N2MASSTX": 0}
 
+
+AD_HIGHLIMIT = {"LT3302": 33333 , "LT3315": 33333}
+AD_LOWLIMIT = {"LT3302": 33333 , "LT3315": 33333}
+
 TT_FP_ACTIVATED = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False,
              "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False,
              "TT2431": False, "TT2414": False, "TT2413": False, "TT2412": False,
@@ -145,6 +153,7 @@ PT_ACTIVATED = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": Fal
                 "PT4322": False, "PT4325": False, "PT6302": False,  "PT1101": False, "PT5304": False,
                 "PT2343": False}
 LEFT_REAL_ACTIVATED = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False}
+AD_ACTIVATED = {"LT3302": False , "LT3315": False}
 
 TT_FP_ALARM = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False,
              "TT2403": False, "TT2418": False, "TT2427": False, "TT2429": False,
@@ -173,12 +182,14 @@ PT_ALARM = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, 
             "PT4322": False, "PT4325": False, "PT6302": False,  "PT1101": False, "PT5304": False,
             "PT2343": False}
 LEFT_REAL_ALARM = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False}
+AD_ALARM = {"LT3302": False , "LT3315": False}
 MAINALARM = False
 MAN_SET = False
 NTT_BO = len(TT_BO_ADDRESS)
 NTT_FP = len(TT_FP_ADDRESS)
 NPT = len(PT_ADDRESS)
 NREAL = len(LEFT_REAL_ADDRESS)
+NAD  = len(AD_ADDRESS)
 
 TT_BO_SETTING = [0.] * NTT_BO
 NTT_BO_ATTRIBUTE = [0.] * NTT_BO
@@ -556,6 +567,8 @@ LEFT_REAL_PARA = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0
 
 LEFT_REAL_RATE = {'BFM4313': 30, 'LT3335': 30, 'MFC1316_IN': 30, "CYL3334_FCALC": 30, "SERVO3321_IN_REAL": 30, "TS1_MASS": 30, "TS2_MASS": 30, "TS3_MASS": 30, "TS_ADDREM_N2MASSTX": 30}
 
+AD_PARA = {"LT3302": 0 , "LT3315": 0}
+AD_RATE = {"LT3302": 30 , "LT3315": 30}
 DIN_PARA = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS1361":False,"PS8302":False}
 
 DIN_RATE = {"LS3338": 30, "LS3339": 30, "ES3347": 30, "PUMP3305_CON": 30, "PUMP3305_OL": 30,"PS2352":30,"PS1361":30,"PS8302":30}
@@ -573,6 +586,7 @@ DIC_PACK = {"data": {"TT": {"FP": {"value": TT_FP_DIC, "high": TT_FP_HIGHLIMIT, 
                                          "BO": {"value": TT_BO_DIC, "high": TT_BO_HIGHLIMIT, "low": TT_BO_LOWLIMIT}},
                                   "PT": {"value": PT_DIC, "high": PT_HIGHLIMIT, "low": PT_LOWLIMIT},
                                   "LEFT_REAL": {"value": LEFT_REAL_DIC, "high": LEFT_REAL_HIGHLIMIT, "low": LEFT_REAL_LOWLIMIT},
+                                  "AD":{"value": AD_DIC, "high": AD_HIGHLIMIT, "low": AD_LOWLIMIT},
                                   "Valve": {"OUT": VALVE_OUT,
                                             "INTLKD": VALVE_INTLKD,
                                             "MAN": VALVE_MAN,
@@ -634,12 +648,14 @@ DIC_PACK = {"data": {"TT": {"FP": {"value": TT_FP_DIC, "high": TT_FP_HIGHLIMIT, 
                                           "BO": TT_BO_ALARM},
                                    "PT": PT_ALARM,
                                    "LEFT_REAL": LEFT_REAL_ALARM,
+                                   "AD":AD_ALARM
                                    "Din": DIN_ALARM,
                                    "LOOPPID": LOOPPID_ALARM},
                          "Active": {"TT": {"FP": TT_FP_ACTIVATED,
                                           "BO": TT_BO_ACTIVATED},
                                    "PT": PT_ACTIVATED,
                                    "LEFT_REAL": LEFT_REAL_ACTIVATED,
+                                    "AD": AD_ACTIVATED,
                                     "Din": DIN_ACTIVATED,
                                     "LOOPPID": LOOPPID_ACTIVATED,
                                     "INI_CHECK": INI_CHECK

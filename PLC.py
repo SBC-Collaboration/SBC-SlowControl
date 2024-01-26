@@ -77,10 +77,14 @@ class PLC(QtCore.QObject):
         self.Connected_BO = self.Client_BO.connect()
         print(" Beckoff connected: " + str(self.Connected_BO))
 
+        IP_AD = "192.168.137.150"
+        PORT_AD = 502
+        self.Client_AD = ModbusTcpClient(IP_AD, port=PORT_AD)
+        self.Connected_AD = self.Client_AD.connect()
+        print(" Ardunio connected: " + str(self.Connected_AD))
+
         # wait 1 second to init
         time.sleep(1)
-
-
 
         self.TT_FP_address = copy.copy(sec.TT_FP_ADDRESS)
 
