@@ -648,7 +648,7 @@ DIC_PACK = {"data": {"TT": {"FP": {"value": TT_FP_DIC, "high": TT_FP_HIGHLIMIT, 
                                           "BO": TT_BO_ALARM},
                                    "PT": PT_ALARM,
                                    "LEFT_REAL": LEFT_REAL_ALARM,
-                                   "AD":AD_ALARM
+                                   "AD":AD_ALARM,
                                    "Din": DIN_ALARM,
                                    "LOOPPID": LOOPPID_ALARM},
                          "Active": {"TT": {"FP": TT_FP_ACTIVATED,
