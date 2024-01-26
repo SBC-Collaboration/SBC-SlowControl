@@ -911,15 +911,19 @@ class PLC(QtCore.QObject):
 
         if self.Connected_AD:
             Raw_AD = {}
-            Raw_AD_digit = {}
+            Raw_inter_AD = {}
             for key in self.AD_address:
                 Raw_AD[key] = self.Client_AD.read_holding_registers(self.AD_address[key], count=2, unit=0x01)
-                self.AD_dic[key] = \
+                Raw_inter_AD[key]= \
                 struct.unpack("<f", struct.pack("<HH", Raw_AD[key].getRegister(1), Raw_AD[key].getRegister(0)))[0]
-                Raw_AD_digit[key]=(Raw_AD[key].getRegister(1),Raw_AD[key].getRegister(0))
+                if Raw_inter_AD[key]!= -1:
+                    self.AD_dic[key] = Raw_inter_AD[key]/(Raw_inter_AD[key]+1)
+                else:
+                    self.AD_dic[key] = -1
+                # Raw_AD_digit[key]=(Raw_AD[key].getRegister(1),Raw_AD[key].getRegister(0))
 
             print(self.AD_dic)
-            print("2nd digit-1st digit",Raw_AD_digit)
+            # print("2nd digit-1st digit",Raw_AD_digit)
 
 
             #########################################################################################################
