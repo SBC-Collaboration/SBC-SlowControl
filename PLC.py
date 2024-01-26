@@ -94,6 +94,8 @@ class PLC(QtCore.QObject):
 
         self.LEFT_REAL_address = copy.copy(sec.LEFT_REAL_ADDRESS)
 
+        self.AD_address = copy.copy(sec.AD_ADDRESS)
+
         self.TT_FP_dic = copy.copy(sec.TT_FP_DIC)
 
         self.TT_BO_dic = copy.copy(sec.TT_BO_DIC)
@@ -101,6 +103,7 @@ class PLC(QtCore.QObject):
         self.PT_dic = copy.copy(sec.PT_DIC)
 
         self.LEFT_REAL_dic = copy.copy(sec.LEFT_REAL_DIC)
+        self.AD_dic = copy.copy(sec.AD_DIC)
 
         self.TT_FP_LowLimit = copy.copy(sec.TT_FP_LOWLIMIT)
 
@@ -116,12 +119,16 @@ class PLC(QtCore.QObject):
         self.LEFT_REAL_HighLimit = copy.copy(sec.LEFT_REAL_HIGHLIMIT)
         self.LEFT_REAL_LowLimit = copy.copy(sec.LEFT_REAL_LOWLIMIT)
 
+        self.AD_HighLimit = copy.copy(sec.AD_HIGHLIMIT)
+        self.AD_LowLimit = copy.copy(sec.AD_LOWLIMIT)
+
         self.TT_FP_Activated = copy.copy(sec.TT_FP_ACTIVATED)
 
         self.TT_BO_Activated = copy.copy(sec.TT_BO_ACTIVATED)
 
         self.PT_Activated = copy.copy(sec.PT_ACTIVATED)
         self.LEFT_REAL_Activated = copy.copy(sec.LEFT_REAL_ACTIVATED)
+        self.AD_Activated = copy.copy(sec.AD_ACTIVATED)
 
         self.TT_FP_Alarm = copy.copy(sec.TT_FP_ALARM)
 
@@ -129,6 +136,7 @@ class PLC(QtCore.QObject):
 
         self.PT_Alarm = copy.copy(sec.PT_ALARM)
         self.LEFT_REAL_Alarm = copy.copy(sec.LEFT_REAL_ALARM)
+        self.AD_Alarm = copy.copy(sec.AD_ALARM)
         self.MainAlarm = copy.copy(sec.MAINALARM)
         self.MAN_SET = copy.copy(sec.MAN_SET)
         self.nTT_BO = copy.copy(sec.NTT_BO)
@@ -307,10 +315,12 @@ class PLC(QtCore.QObject):
                               "TT_BO_address":self.TT_BO_address,
                               "PT_address":self.PT_address,
                               "LEFT_REAL_address":self.LEFT_REAL_address,
+                              "AD_address":self.AD_address,
                               "TT_FP_dic":self.TT_FP_dic,
                               "TT_BO_dic":self.TT_BO_dic,
                               "PT_dic":self.PT_dic,
                               "LEFT_REAL_dic":self.LEFT_REAL_dic,
+                              "AD_dic":self.AD_dic,
                               "TT_FP_LowLimit":self.TT_FP_LowLimit,
                               "TT_FP_HighLimit":self.TT_FP_HighLimit,
                               "TT_BO_LowLimit":self.TT_BO_LowLimit,
@@ -319,14 +329,18 @@ class PLC(QtCore.QObject):
                               "PT_HighLimit":self.PT_HighLimit,
                               "LEFT_REAL_HighLimit": self.LEFT_REAL_HighLimit,
                               "LEFT_REAL_LowLimit":self.LEFT_REAL_LowLimit,
+                              "AD_HighLimit": self.AD_HighLimit,
+                              "AD_LowLimit": self.AD_LowLimit,
                               "TT_FP_Activated":self.TT_FP_Activated,
                               "TT_BO_Activated":self.TT_BO_Activated,
                               "PT_Activated":self.PT_Activated,
                               "LEFT_REAL_Activated":self.LEFT_REAL_Activated,
+                              "AD_Activated": self.AD_Activated,
                               "TT_FP_Alarm":self.TT_FP_Alarm,
                               "TT_BO_Alarm":self.TT_BO_Alarm,
                               "PT_Alarm":self.PT_Alarm,
                               "LEFT_REAL_Alarm":self.LEFT_REAL_Alarm,
+                              "AD_Alarm": self.AD_Alarm,
                               "MainAlarm":self.MainAlarm,
                               "MAN_SET":self.MAN_SET,
                               "nTT_BO":self.nTT_BO,
@@ -556,6 +570,7 @@ class PLC(QtCore.QObject):
         # print(self.TT_BO_Alarm["TT2119"])
         self.Connected = self.Client.connect()
         self.Connected_BO = self.Client_BO.connect()
+        self.Connected_AD = self.Client_AD.connect()
 
         if self.Connected:
             # Reading all the RTDs
@@ -893,7 +908,13 @@ class PLC(QtCore.QObject):
             # print("TIME", self.TIME_DIC)
             
 
-
+        if self.Connected_AD:
+            Raw_AD = {}
+            for key in self.AD_address:
+                Raw_AD[key] = self.Client_AD.read_holding_registers(self.AD_address[key], count=2, unit=0x01)
+                self.AD_dic[key] = \
+                struct.unpack(">I", struct.pack(">HH", Raw_AD[key].getRegister(1), Raw_AD[key].getRegister(0)))[0]
+            print(self.AD_dic)
 
 
             #########################################################################################################
