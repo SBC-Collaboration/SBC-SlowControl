@@ -917,7 +917,7 @@ class PLC(QtCore.QObject):
                 Raw_inter_AD[key]= \
                 struct.unpack("<f", struct.pack("<HH", Raw_AD[key].getRegister(1), Raw_AD[key].getRegister(0)))[0]
                 if Raw_inter_AD[key]!= -1:
-                    self.AD_dic[key] = Raw_inter_AD[key]/(Raw_inter_AD[key]+1)
+                    self.AD_dic[key] = round(Raw_inter_AD[key]/(Raw_inter_AD[key]+1)*100,2)
                 else:
                     self.AD_dic[key] = -1
                 # Raw_AD_digit[key]=(Raw_AD[key].getRegister(1),Raw_AD[key].getRegister(0))
