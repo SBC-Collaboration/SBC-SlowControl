@@ -455,7 +455,8 @@ class PLC(QtCore.QObject):
     def load_alarm_config(self):
         self.Connected = self.Client.connect()
         self.Connected_BO = self.Client_BO.connect()
-        if self.Connected_BO:
+        self.Connected_AD = self.Client_AD.connect()
+        if self.Connected_BO and self.Connected and self.Connected_AD:
             self.alarm_config = AS.Alarm_Setting()
             self.alarm_config.read_Information()
             for key in self.TT_FP_HighLimit:
@@ -913,7 +914,7 @@ class PLC(QtCore.QObject):
             for key in self.AD_address:
                 Raw_AD[key] = self.Client_AD.read_holding_registers(self.AD_address[key], count=2, unit=0x01)
                 self.AD_dic[key] = \
-                struct.unpack(">I", struct.pack(">HH", Raw_AD[key].getRegister(1), Raw_AD[key].getRegister(0)))[0]
+                struct.unpack(">f", struct.pack(">HH", Raw_AD[key].getRegister(1), Raw_AD[key].getRegister(0)))[0]
             print(self.AD_dic)
 
 
