@@ -1564,7 +1564,7 @@ class UpdateDataBase(QtCore.QObject):
         self.TT_BO_Alarm = copy.copy(sec.TT_BO_ALARM)
         self.PT_Alarm = copy.copy(sec.PT_ALARM)
         self.LEFT_REAL_Alarm = copy.copy(sec.LEFT_REAL_ALARM)
-        self.AD_Activated = copy.copy(sec.AD_ACTIVATED)
+        self.AD_Alarm = copy.copy(sec.AD_ALARM)
         self.MainAlarm = copy.copy(sec.MAINALARM)
         self.MAN_SET = copy.copy(sec.MAN_SET)
         self.nTT_BO = copy.copy(sec.NTT_BO)
