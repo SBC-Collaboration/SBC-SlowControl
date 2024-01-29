@@ -543,7 +543,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6225.LOOPPIDWindow.RTD2.Label.setText("TT6412")
 
         self.HTR2123 = LOOPPID_v2(self.ChamberTab)
-        self.HTR2123.move(670*R, 820*R)
+        self.HTR2123.move(400*R, 950*R)
         self.HTR2123.Label.setText("HTR2123")
         self.HTR2123.LOOPPIDWindow.setWindowTitle("HTR2123")
         self.HTR2123.LOOPPIDWindow.Label.setText("HTR2123")
