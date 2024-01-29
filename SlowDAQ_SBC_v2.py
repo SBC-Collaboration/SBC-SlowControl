@@ -1076,7 +1076,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LEFTVariableMatrix = [self.AlarmButton.SubWindow.BFM4313, self.AlarmButton.SubWindow.LT3335,
                                    self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
                                    self.AlarmButton.SubWindow.SERVO3321_IN_REAL, self.AlarmButton.SubWindow.TS1_MASS,
-                                   self.AlarmButton.SubWindow.TS2_MASS, self.AlarmButton.SubWindow.TS3_MASS, self.AlarmButton.SubWindow.LT2122,
+                                   self.AlarmButton.SubWindow.TS2_MASS, self.AlarmButton.SubWindow.TS3_MASS]
+
+        self.ADVariableMatrix = [ self.AlarmButton.SubWindow.LT2122,
                                    self.AlarmButton.SubWindow.LT2130]
 
         self.DinAlarmMatrix = [self.AlarmButton.SubWindow.LS3338, self.AlarmButton.SubWindow.LS3339,
@@ -4535,6 +4537,7 @@ class MainWindow(QtWidgets.QMainWindow):
             element.AlarmMode.setChecked(bool(dic_c["Active"]["AD"][element.Label.text()]))
 
 
+
         for element in self.DinAlarmMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["Din"][element.Label.text()]))
 
@@ -4702,6 +4705,16 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["data"]["LEFT_REAL"]["low"][element.Label.text()])
             element.High_Read.SetValue(
                 received_dic_c["data"]["LEFT_REAL"]["high"][element.Label.text()])
+
+        for element in self.ADVariableMatrix:
+            element.UpdateAlarm(
+                received_dic_c["Alarm"]["AD"][element.Label.text()])
+            element.Indicator.SetValue(
+                received_dic_c["data"]["AD"]["value"][element.Label.text()])
+            element.Low_Read.SetValue(
+                received_dic_c["data"]["AD"]["low"][element.Label.text()])
+            element.High_Read.SetValue(
+                received_dic_c["data"]["AD"]["high"][element.Label.text()])
 
 
         for element in self.DinAlarmMatrix:
