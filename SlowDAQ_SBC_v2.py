@@ -867,12 +867,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LT3339.SetUnit(" in")
 
         self.LT2122 = Indicator(self.HydraulicTab)
-        self.LT2122.move(2200 * R, 1070 * R)
+        self.LT2122.move(2200 * R, 1170 * R)
         self.LT2122.Label.setText("LT2122")
         self.LT2122.SetUnit(" %")
 
         self.LT2130 = Indicator(self.HydraulicTab)
-        self.LT2130.move(2300 * R, 1070 * R)
+        self.LT2130.move(2300 * R, 1170 * R)
         self.LT2130.Label.setText("LT2130")
         self.LT2130.SetUnit(" %")
 
