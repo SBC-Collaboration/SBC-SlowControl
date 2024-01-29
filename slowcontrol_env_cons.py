@@ -1,4 +1,9 @@
 BASE_ADDRESS= 12288
+
+"""add a new virable
+1. if variable existed in a known category:
+2. if variable is a new catogory but similar to previous defined one:
+"""
 # real address  = base+ comparative/2
 # Initialization of Address, Value Matrix
 TT_FP_ADDRESS = {"TT2420": 31000, "TT2422": 31002, "TT2424": 31004, "TT2425": 31006,
