@@ -866,6 +866,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LT3339.Label.setText("LT3339")
         self.LT3339.SetUnit(" in")
 
+        self.LT2122 = Indicator(self.HydraulicTab)
+        self.LT2122.move(2200 * R, 1070 * R)
+        self.LT2122.Label.setText("LT2122")
+        self.LT2122.SetUnit(" %")
+
+        self.LT2130 = Indicator(self.HydraulicTab)
+        self.LT2130.move(2300 * R, 1070 * R)
+        self.LT2130.Label.setText("LT2130")
+        self.LT2130.SetUnit(" %")
+
         self.LS3338 = ColoredStatus(self.HydraulicTab, mode= 2)
         self.LS3338.move(2200*R, 1010*R)
         self.LS3338.Label.setText("LS3338")
@@ -993,7 +1003,7 @@ class MainWindow(QtWidgets.QMainWindow):
         #commands stack
         self.address =sec.merge_dic(sec.TT_FP_ADDRESS,sec.TT_BO_ADDRESS,sec.PT_ADDRESS,sec.LEFT_REAL_ADDRESS,
                                                      sec.DIN_ADDRESS,sec.VALVE_ADDRESS,sec.LOOPPID_ADR_BASE,sec.LOOP2PT_ADR_BASE,sec.PROCEDURE_ADDRESS, sec.INTLK_A_ADDRESS,
-                                    sec.INTLK_D_ADDRESS,sec.FLAG_ADDRESS)
+                                    sec.INTLK_D_ADDRESS,sec.FLAG_ADDRESS, sec.AD_ADDRESS)
         self.commands = {}
         self.command_buffer_waiting= 1
         # self.statustransition={}
@@ -1066,7 +1076,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LEFTVariableMatrix = [self.AlarmButton.SubWindow.BFM4313, self.AlarmButton.SubWindow.LT3335,
                                    self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
                                    self.AlarmButton.SubWindow.SERVO3321_IN_REAL, self.AlarmButton.SubWindow.TS1_MASS,
-                                   self.AlarmButton.SubWindow.TS2_MASS, self.AlarmButton.SubWindow.TS3_MASS]
+                                   self.AlarmButton.SubWindow.TS2_MASS, self.AlarmButton.SubWindow.TS3_MASS, self.AlarmButton.SubWindow.LT2122,
+                                   self.AlarmButton.SubWindow.LT2130]
 
         self.DinAlarmMatrix = [self.AlarmButton.SubWindow.LS3338, self.AlarmButton.SubWindow.LS3339,
                                    self.AlarmButton.SubWindow.ES3347, self.AlarmButton.SubWindow.PUMP3305_CON,
@@ -1136,6 +1147,8 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
                             self.AlarmButton.SubWindow.SERVO3321_IN_REAL, self.AlarmButton.SubWindow.TS1_MASS,
                             self.AlarmButton.SubWindow.TS2_MASS, self.AlarmButton.SubWindow.TS3_MASS,
+                            self.AlarmButton.SubWindow.LT2122,
+                                   self.AlarmButton.SubWindow.LT2130,
                             self.AlarmButton.SubWindow.LS3338, self.AlarmButton.SubWindow.LS3339,
                             self.AlarmButton.SubWindow.ES3347, self.AlarmButton.SubWindow.PUMP3305_CON,
                             self.AlarmButton.SubWindow.PUMP3305_OL, self.AlarmButton.SubWindow.PS2352,
@@ -3079,6 +3092,33 @@ class MainWindow(QtWidgets.QMainWindow):
                                        LowLimit=self.AlarmButton.SubWindow.TS3_MASS.Low_Set.Field.text(),
                                        HighLimit=self.AlarmButton.SubWindow.TS3_MASS.High_Set.Field.text()))
 
+        # AD box
+        self.AlarmButton.SubWindow.LT2122.AlarmMode.stateChanged.connect(
+            lambda: self.ADBoxUpdate(pid=self.AlarmButton.SubWindow.LT2122.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.LT2122.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.LT2122.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.LT2122.High_Set.Field.text(),
+                                       update=False))
+
+        self.AlarmButton.SubWindow.LT2122.updatebutton.clicked.connect(
+            lambda: self.ADBoxUpdate(pid=self.AlarmButton.SubWindow.LT2122.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.LT2122.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.LT2122.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.LT2122.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.LT2130.AlarmMode.stateChanged.connect(
+            lambda: self.ADBoxUpdate(pid=self.AlarmButton.SubWindow.LT2130.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.LT2130.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.LT2130.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.LT2130.High_Set.Field.text(),
+                                       update=False))
+
+        self.AlarmButton.SubWindow.LT2130.updatebutton.clicked.connect(
+            lambda: self.ADBoxUpdate(pid=self.AlarmButton.SubWindow.LT2130.Label.text(),
+                                       Act=self.AlarmButton.SubWindow.LT2130.AlarmMode.isChecked(),
+                                       LowLimit=self.AlarmButton.SubWindow.LT2130.Low_Set.Field.text(),
+                                       HighLimit=self.AlarmButton.SubWindow.LT2130.High_Set.Field.text()))
+
         # Din buttons
         self.AlarmButton.SubWindow.LS3338.updatebutton.clicked.connect(
             lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS3338.Label.text(),
@@ -4283,6 +4323,22 @@ class MainWindow(QtWidgets.QMainWindow):
             print(e)
 
     @QtCore.Slot()
+    def ADBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
+        try:
+            # if self.commands[pid] is not None:
+            #     time.sleep(self.command_buffer_waiting)
+            address = self.address[pid]
+            self.commands[pid] = {"server": "AD", "address": address, "type": "AD", "operation": {"Act": Act,
+                                                                                                    "LowLimit": float(
+                                                                                                        LowLimit),
+                                                                                                    "HighLimit": float(
+                                                                                                        HighLimit),
+                                                                                                    "Update": update}}
+            print(pid, Act, LowLimit, HighLimit, "ARE OK?")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
     def DinBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
         try:
             # if self.commands[pid] is not None:
@@ -4474,6 +4530,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         for element in self.LEFTVariableMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["LEFT_REAL"][element.Label.text()]))
+
+        for element in self.ADVariableMatrix:
+            element.AlarmMode.setChecked(bool(dic_c["Active"]["AD"][element.Label.text()]))
 
 
         for element in self.DinAlarmMatrix:
@@ -8444,9 +8503,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT5304.SetValue(received_dic_c["data"]["PT"]["value"]["PT5304"])
 
         self.LT3335.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LT3335"])
+
         self.BFM4313.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BFM4313"])
         # self.MFC1316.SetValue not given value
         self.CYL3334.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["CYL3334_FCALC"])
+
+        self.LT2122.SetValue(received_dic_c["data"]["AD"]["value"]["LT2122"])
+        self.LT2130.SetValue(received_dic_c["data"]["AD"]["value"]["LT2130"])
 
 
 
@@ -10859,6 +10922,7 @@ class UpdateClient(QtCore.QObject):
         self.TT_BO_dic_ini = sec.TT_BO_DIC
         self.PT_dic_ini = sec.PT_DIC
         self.LEFT_REAL_ini = sec.LEFT_REAL_DIC
+        self.AD_ini = sec.AD_DIC
         self.TT_FP_LowLimit_ini = sec.TT_FP_LOWLIMIT
         self.TT_FP_HighLimit_ini = sec.TT_FP_HIGHLIMIT
         self.TT_BO_LowLimit_ini = sec.TT_BO_LOWLIMIT
@@ -10867,6 +10931,8 @@ class UpdateClient(QtCore.QObject):
         self.PT_HighLimit_ini = sec.PT_HIGHLIMIT
         self.LEFT_REAL_LowLimit_ini = sec.LEFT_REAL_LOWLIMIT
         self.LEFT_REAL_HighLimit_ini = sec.LEFT_REAL_HIGHLIMIT
+        self.AD_LowLimit_ini = sec.AD_LOWLIMIT
+        self.AD_HighLimit_ini = sec.AD_HIGHLIMIT
         self.TT_FP_Activated_ini = sec.TT_FP_ACTIVATED
         self.TT_BO_Activated_ini = sec.TT_BO_ACTIVATED
         self.PT_Activated_ini = sec.PT_ACTIVATED
@@ -10875,6 +10941,8 @@ class UpdateClient(QtCore.QObject):
         self.PT_Alarm_ini = sec.PT_ALARM
         self.LEFT_REAL_Activated_ini = sec.LEFT_REAL_ACTIVATED
         self.LEFT_REAL_Alarm_ini = sec.LEFT_REAL_ALARM
+        self.AD_Activated_ini = sec.AD_ACTIVATED
+        self.AD_Alarm_ini = sec.AD_ALARM
         self.MainAlarm_ini = sec.MAINALARM
         self.MAN_SET = sec.MAN_SET
         self.Valve_OUT_ini = sec.VALVE_OUT
@@ -10965,6 +11033,8 @@ class UpdateClient(QtCore.QObject):
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
                                   "LEFT_REAL": {"value": self.LEFT_REAL_ini, "high": self.LEFT_REAL_HighLimit_ini, "low": self.LEFT_REAL_LowLimit_ini},
+                                     "AD": {"value": self.AD_ini, "high": self.AD_HighLimit_ini,
+                                                   "low": self.AD_LowLimit_ini},
                                   "Valve": {"OUT": self.Valve_OUT_ini,
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
@@ -11032,12 +11102,14 @@ class UpdateClient(QtCore.QObject):
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini,
+                                   "AD": self.AD_Alarm_ini,
                                    "Din": self.Din_Alarm_ini,
                                    "LOOPPID": self.LOOPPID_Alarm_ini},
                          "Active": {"TT": {"FP": self.TT_FP_Activated_ini,
                                           "BO": self.TT_BO_Activated_ini},
                                    "PT": self.PT_Activated_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Activated_ini,
+                                    "AD": self.AD_Activated_ini,
                                     "Din": self.Din_Activated_ini,
                                     "LOOPPID": self.LOOPPID_Activated_ini,
                                     "INI_CHECK": self.Ini_Check_ini},

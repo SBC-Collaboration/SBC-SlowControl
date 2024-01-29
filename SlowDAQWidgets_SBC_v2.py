@@ -1068,6 +1068,8 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.LT3335.Low_Read.SetUnit(" in")
         self.LT3335.High_Read.SetUnit(" in")
 
+
+
         # 'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792, "CYL3334_FCALC": 12832, "SERVO3321_IN_REAL": 12830, "TS1_MASS": 16288, "TS2_MASS": 16290, "TS3_MASS": 16292
 
         self.BFM4313 = AlarmStatusWidget(self.LEFTVariableTab)
@@ -1167,6 +1169,18 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PS8302.Indicator.SetUnit(" ")
         self.PS8302.Low_Read.SetUnit(" ")
         self.PS8302.High_Read.SetUnit(" ")
+
+        self.LT2122 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LT2122.Label.setText("LT2122")
+        self.LT2122.Indicator.SetUnit(" %")
+        self.LT2122.Low_Read.SetUnit(" %")
+        self.LT2122.High_Read.SetUnit(" %")
+
+        self.LT2130 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LT2130.Label.setText("LT2130")
+        self.LT2130.Indicator.SetUnit(" %")
+        self.LT2130.Low_Read.SetUnit(" %")
+        self.LT2130.High_Read.SetUnit(" %")
 
 
         self.SERVO3321 = AlarmStatusWidget(self.HTRTab)
@@ -1304,7 +1318,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                                 5: {0: self.TT6414}}
 
         self.AlarmLEFTdir = {0:{0: self.BFM4313, 1: self.LT3335, 2: self.MFC1316_IN, 3: self.CYL3334_FCALC, 4: self.SERVO3321_IN_REAL},
-                             1:{0: self.TS1_MASS, 1: self.TS2_MASS, 2: self.TS3_MASS}}
+                             1:{0: self.TS1_MASS, 1: self.TS2_MASS, 2: self.TS3_MASS, 3: self.LT2122, 4: self.LT2130}}
 
         self.AlarmDindir = {0:{0: self.LS3338, 1: self.LS3339, 2: self.ES3347, 3: self.PUMP3305_CON, 4: self.PUMP3305_OL},
                              1:{0: self.PS2352, 1: self.PS1361, 2: self.PS8302}}

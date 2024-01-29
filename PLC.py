@@ -479,6 +479,11 @@ class PLC(QtCore.QObject):
                     self.LEFT_REAL_HighLimit[key] = self.alarm_config.high_dic[key]
                 except:
                     pass
+            for key in self.AD_HighLimit:
+                try:
+                    self.AD_HighLimit[key] = self.alarm_config.high_dic[key]
+                except:
+                    pass
 
             for key in self.TT_FP_LowLimit:
                 try:
@@ -498,6 +503,11 @@ class PLC(QtCore.QObject):
             for key in self.LEFT_REAL_LowLimit:
                 try:
                     self.LEFT_REAL_LowLimit[key] = self.alarm_config.low_dic[key]
+                except:
+                    pass
+            for key in self.AD_LowLimit:
+                try:
+                    self.AD_LowLimit[key] = self.alarm_config.low_dic[key]
                 except:
                     pass
 
@@ -520,6 +530,11 @@ class PLC(QtCore.QObject):
             for key in self.LEFT_REAL_Activated:
                 try:
                     self.LEFT_REAL_Activated[key] = self.alarm_config.active_dic[key]
+                except:
+                    pass
+            for key in self.AD_Activated:
+                try:
+                    self.AD_Activated[key] = self.alarm_config.active_dic[key]
                 except:
                     pass
 
@@ -1480,6 +1495,8 @@ class UpdateDataBase(QtCore.QObject):
         self.rate_PT = 3
         self.para_REAL = 0
         self.rate_REAL = 3
+        self.para_AD = 0
+        self.rate_AD = 3
         self.para_Din = 0
         self.rate_Din = 90
         # c is for valve status
@@ -1520,10 +1537,12 @@ class UpdateDataBase(QtCore.QObject):
         self.TT_BO_address = copy.copy(sec.TT_BO_ADDRESS)
         self.PT_address = copy.copy(sec.PT_ADDRESS)
         self.LEFT_REAL_address = copy.copy(sec.LEFT_REAL_ADDRESS)
+        self.AD_address = copy.copy(sec.AD_ADDRESS)
         self.TT_FP_dic = copy.copy(sec.TT_FP_DIC)
         self.TT_BO_dic = copy.copy(sec.TT_BO_DIC)
         self.PT_dic = copy.copy(sec.PT_DIC)
         self.LEFT_REAL_dic = copy.copy(sec.LEFT_REAL_DIC)
+        self.AD_dic = copy.copy(sec.AD_DIC)
         self.TT_FP_LowLimit = copy.copy(sec.TT_FP_LOWLIMIT)
         self.TT_FP_HighLimit = copy.copy(sec.TT_FP_HIGHLIMIT)
         self.TT_BO_LowLimit = copy.copy(sec.TT_BO_LOWLIMIT)
@@ -1533,15 +1552,19 @@ class UpdateDataBase(QtCore.QObject):
         self.PT_HighLimit = copy.copy(sec.PT_HIGHLIMIT)
         self.LEFT_REAL_HighLimit= copy.copy(sec.LEFT_REAL_HIGHLIMIT)
         self.LEFT_REAL_LowLimit = copy.copy(sec.LEFT_REAL_LOWLIMIT)
+        self.AD_HighLimit = copy.copy(sec.AD_HIGHLIMIT)
+        self.AD_LowLimit = copy.copy(sec.AD_LOWLIMIT)
         self.TT_FP_Activated = copy.copy(sec.TT_FP_ACTIVATED)
         self.TT_BO_Activated = copy.copy(sec.TT_BO_ACTIVATED)
         self.PT_Activated = copy.copy(sec.PT_ACTIVATED)
         self.LEFT_REAL_Activated = copy.copy(sec.LEFT_REAL_ACTIVATED)
+        self.AD_Activated = copy.copy(sec.AD_ACTIVATED)
 
         self.TT_FP_Alarm = copy.copy(sec.TT_FP_ALARM)
         self.TT_BO_Alarm = copy.copy(sec.TT_BO_ALARM)
         self.PT_Alarm = copy.copy(sec.PT_ALARM)
         self.LEFT_REAL_Alarm = copy.copy(sec.LEFT_REAL_ALARM)
+        self.AD_Activated = copy.copy(sec.AD_ACTIVATED)
         self.MainAlarm = copy.copy(sec.MAINALARM)
         self.MAN_SET = copy.copy(sec.MAN_SET)
         self.nTT_BO = copy.copy(sec.NTT_BO)
@@ -1791,6 +1814,9 @@ class UpdateDataBase(QtCore.QObject):
             self.PT_HighLimit[key] = dic["PT_HighLimit"][key]
         for key in self.LEFT_REAL_HighLimit:
             self.LEFT_REAL_HighLimit[key] = dic["LEFT_REAL_HighLimit"][key]
+        for key in self.AD_HighLimit:
+            self.AD_HighLimit[key] = dic["AD_HighLimit"][key]
+
 
         for key in self.TT_FP_LowLimit:
             self.TT_FP_LowLimit[key] = dic["TT_FP_LowLimit"][key]
@@ -1803,6 +1829,10 @@ class UpdateDataBase(QtCore.QObject):
             self.LEFT_REAL_LowLimit[key] = dic["LEFT_REAL_LowLimit"][key]
         for key in self.LEFT_REAL_dic:
             self.LEFT_REAL_dic[key] = dic["LEFT_REAL_dic"][key]
+        for key in self.AD_LowLimit:
+            self.AD_LowLimit[key] = dic["AD_LowLimit"][key]
+        for key in self.AD_dic:
+            self.AD_dic[key] = dic["AD_dic"][key]
         for key in self.Valve_OUT:
             self.Valve_OUT[key] = dic["Valve_OUT"][key]
         for key in self.Valve_INTLKD:
@@ -1830,6 +1860,8 @@ class UpdateDataBase(QtCore.QObject):
             self.PT_Alarm[key] = dic["PT_Alarm"][key]
         for key in self.LEFT_REAL_dic:
             self.LEFT_REAL_Alarm[key] = dic["LEFT_REAL_Alarm"][key]
+        for key in self.AD_dic:
+            self.AD_Alarm[key] = dic["AD_Alarm"][key]
         for key in self.LOOPPID_MODE0:
             self.LOOPPID_MODE0[key] = dic["LOOPPID_MODE0"][key]
         for key in self.LOOPPID_MODE1:
@@ -2147,6 +2179,14 @@ class UpdateDataBase(QtCore.QObject):
                 self.commit_bool = True
             self.para_REAL = 0
 
+        if self.para_AD >= self.rate_AD:
+            for key in self.AD_address:
+                # print(key, self.AD_dic[key])
+                self.db.insert_data_into_stack(key, self.dt, self.AD_dic[key])
+                # print("write pressure transducer")
+                self.commit_bool = True
+            self.para_AD = 0
+
         # #FLAGS
         for key in self.FLAG_INTLKD:
             # print(key, self.Valve_OUT[key] != self.Valve_buffer[key])
@@ -2254,6 +2294,7 @@ class UpdateDataBase(QtCore.QObject):
         self.para_LOOPPID += 1
         self.para_LOOP2PT += 1
         self.para_REAL += 1
+        self.para_AD += 1
         self.para_Din += 1
         self.para_FLAG += 1
         self.para_FF += 1
@@ -2292,6 +2333,8 @@ class UpdatePLC(QtCore.QObject):
         self.PR_CYCLE_rate = 30
         self.LEFT_REAL_para = sec.LEFT_REAL_PARA
         self.LEFT_REAL_rate = sec.LEFT_REAL_RATE
+        self.AD_para = sec.AD_PARA
+        self.AD_rate = sec.AD_RATE
         self.Din_para = sec.DIN_PARA
         self.Din_rate = sec.DIN_RATE
         self.LOOPPID_para = sec.LOOPPID_PARA
@@ -2320,6 +2363,8 @@ class UpdatePLC(QtCore.QObject):
                         self.check_PT_alarm(keyPT)
                     for keyLEFT_REAL in self.PLC.LEFT_REAL_dic:
                         self.check_LEFT_REAL_alarm(keyLEFT_REAL)
+                    for keyAD in self.PLC.AD_dic:
+                        self.check_AD_alarm(keyAD)
                     for keyDin in self.PLC.Din_dic:
                         self.check_Din_alarm(keyDin)
                     for keyLOOPPID in self.PLC.LOOPPID_OUT:
@@ -2446,6 +2491,26 @@ class UpdatePLC(QtCore.QObject):
 
         else:
             self.resetLEFT_REALalarmmsg(pid)
+            pass
+    def check_AD_alarm(self, pid):
+
+        if self.PLC.AD_Activated[pid]:
+            if float(self.PLC.AD_LowLimit[pid]) >= float(self.PLC.AD_HighLimit[pid]):
+                print("Low limit should be less than high limit!")
+            else:
+                if float(self.PLC.AD_dic[pid]) <= float(self.PLC.AD_LowLimit[pid]):
+                    self.ADalarmmsg(pid)
+
+                    # print(pid , " reading is lower than the low limit")
+                elif float(self.PLC.AD_dic[pid]) >= float(self.PLC.AD_HighLimit[pid]):
+                    self.ADalarmmsg(pid)
+                    # print(pid,  " reading is higher than the high limit")
+                else:
+                    self.resetADalarmmsg(pid)
+                    # print(pid, " is in normal range")
+
+        else:
+            self.resetADalarmmsg(pid)
             pass
 
     def check_Din_alarm(self, pid):
@@ -2575,6 +2640,23 @@ class UpdatePLC(QtCore.QObject):
         self.PLC.LEFT_REAL_Alarm[pid] = False
         # self.LEFT_REAL_para = 0
         # and send email or slack messages
+    def ADalarmmsg(self, pid):
+        self.PLC.AD_Alarm[pid] = True
+        # and send email or slack messages
+        if self.AD_para[pid] >= self.AD_rate[pid]:
+            msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.AD_dic[pid],
+                                                                                                                     high=self.PLC.AD_HighLimit[pid], low=self.PLC.AD_LowLimit[pid])
+
+            # self.message_manager.tencent_alarm(msg)
+            self.AI_slack_alarm.emit(msg)
+            self.stack_alarm_msg(msg)
+            self.AD_para[pid] = 0
+        self.AD_para[pid] += 1
+
+    def resetADalarmmsg(self, pid):
+        self.PLC.AD_Alarm[pid] = False
+        # self.AD_para = 0
+        # and send email or slack messages
 
     def Dinalarmmsg(self, pid):
         self.PLC.Din_Alarm[pid] = True
@@ -2613,7 +2695,7 @@ class UpdatePLC(QtCore.QObject):
         # and send email or slack messages
 
     def or_alarm_signal(self):
-        if (True in self.PLC.TT_BO_Alarm) or (True in self.PLC.PT_Alarm) or (True in self.PLC.TT_FP_Alarm) or (True in self.PLC.LEFT_REAL_Alarm) or (True in self.PLC.Din_Alarm) or (True in self.PLC.LOOPPID_Alarm):
+        if (True in self.PLC.TT_BO_Alarm) or (True in self.PLC.PT_Alarm) or (True in self.PLC.TT_FP_Alarm) or (True in self.PLC.LEFT_REAL_Alarm) or (True in self.PLC.Din_Alarm) or (True in self.PLC.LOOPPID_Alarm)or (True in self.PLC.AD_Alarm):
             self.PLC.MainAlarm = True
         else:
             self.PLC.MainAlarm = False
@@ -2721,6 +2803,7 @@ class UpdateServer(QtCore.QObject):
         self.TT_BO_dic_ini = sec.TT_BO_DIC
         self.PT_dic_ini = sec.PT_DIC
         self.LEFT_REAL_ini = sec.LEFT_REAL_DIC
+        self.AD_ini = sec.AD_DIC
         self.TT_FP_LowLimit_ini = sec.TT_FP_LOWLIMIT
         self.TT_FP_HighLimit_ini = sec.TT_FP_HIGHLIMIT
         self.TT_BO_LowLimit_ini = sec.TT_BO_LOWLIMIT
@@ -2729,6 +2812,8 @@ class UpdateServer(QtCore.QObject):
         self.PT_HighLimit_ini = sec.PT_HIGHLIMIT
         self.LEFT_REAL_LowLimit_ini = sec.LEFT_REAL_LOWLIMIT
         self.LEFT_REAL_HighLimit_ini = sec.LEFT_REAL_HIGHLIMIT
+        self.AD_LowLimit_ini = sec.AD_LOWLIMIT
+        self.AD_HighLimit_ini = sec.AD_HIGHLIMIT
         self.TT_FP_Activated_ini = sec.TT_FP_ACTIVATED
         self.TT_BO_Activated_ini = sec.TT_BO_ACTIVATED
         self.PT_Activated_ini = sec.PT_ACTIVATED
@@ -2737,6 +2822,8 @@ class UpdateServer(QtCore.QObject):
         self.PT_Alarm_ini = sec.PT_ALARM
         self.LEFT_REAL_Activated_ini = sec.LEFT_REAL_ACTIVATED
         self.LEFT_REAL_Alarm_ini = sec.LEFT_REAL_ALARM
+        self.AD_Activated_ini = sec.AD_ACTIVATED
+        self.AD_Alarm_ini = sec.AD_ALARM
         self.MainAlarm_ini = sec.MAINALARM
         self.MAN_SET = sec.MAN_SET
         self.Valve_OUT_ini = sec.VALVE_OUT
@@ -2826,6 +2913,8 @@ class UpdateServer(QtCore.QObject):
                                          "BO": {"value": self.TT_BO_dic_ini, "high": self.TT_BO_HighLimit_ini, "low": self.TT_BO_LowLimit_ini}},
                                   "PT": {"value": self.PT_dic_ini, "high": self.PT_HighLimit_ini, "low": self.PT_LowLimit_ini},
                                   "LEFT_REAL": {"value": self.LEFT_REAL_ini, "high": self.LEFT_REAL_HighLimit_ini, "low": self.LEFT_REAL_LowLimit_ini},
+                                  "AD": {"value": self.AD_ini, "high": self.AD_HighLimit_ini,
+                                                "low": self.AD_LowLimit_ini},
                                   "Valve": {"OUT": self.Valve_OUT_ini,
                                             "INTLKD": self.Valve_INTLKD_ini,
                                             "MAN": self.Valve_MAN_ini,
@@ -2893,12 +2982,14 @@ class UpdateServer(QtCore.QObject):
                                           "BO": self.TT_BO_Alarm_ini},
                                    "PT": self.PT_Alarm_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Alarm_ini,
+                                   "AD": self.AD_Alarm_ini,
                                    "Din": self.Din_Alarm_ini,
                                    "LOOPPID": self.LOOPPID_Alarm_ini},
                          "Active": {"TT": {"FP": self.TT_FP_Activated_ini,
                                           "BO": self.TT_BO_Activated_ini},
                                    "PT": self.PT_Activated_ini,
                                    "LEFT_REAL": self.LEFT_REAL_Activated_ini,
+                                    "AD": self.AD_Activated_ini,
                                     "Din": self.Din_Activated_ini,
                                     "LOOPPID": self.LOOPPID_Activated_ini,
                                     "INI_CHECK": self.Ini_Check_ini},
@@ -2964,7 +3055,8 @@ class UpdateServer(QtCore.QObject):
             self.PT_HighLimit_ini[key] = self.PLC.PT_HighLimit[key]
         for key in self.PLC.LEFT_REAL_HighLimit:
             self.LEFT_REAL_HighLimit_ini[key] = self.PLC.LEFT_REAL_HighLimit[key]
-
+        for key in self.PLC.AD_HighLimit:
+            self.AD_HighLimit_ini[key] = self.PLC.AD_HighLimit[key]
         for key in self.PLC.TT_FP_LowLimit:
             self.TT_FP_LowLimit_ini[key] = self.PLC.TT_FP_LowLimit[key]
 
@@ -2976,7 +3068,10 @@ class UpdateServer(QtCore.QObject):
             self.LEFT_REAL_LowLimit_ini[key] = self.PLC.LEFT_REAL_LowLimit[key]
         for key in self.PLC.LEFT_REAL_dic:
             self.LEFT_REAL_ini[key] = self.PLC.LEFT_REAL_dic[key]
-
+        for key in self.PLC.AD_LowLimit:
+            self.AD_LowLimit_ini[key] = self.PLC.AD_LowLimit[key]
+        for key in self.PLC.AD_dic:
+            self.AD_ini[key] = self.PLC.AD_dic[key]
         for key in self.PLC.TT_FP_Activated:
             self.TT_FP_Activated_ini[key]= self.PLC.TT_FP_Activated[key]
         for key in self.PLC.TT_BO_Activated:
@@ -2985,7 +3080,8 @@ class UpdateServer(QtCore.QObject):
             self.PT_Activated_ini[key]= self.PLC.PT_Activated[key]
         for key in self.PLC.LEFT_REAL_Activated:
             self.LEFT_REAL_Activated_ini[key]= self.PLC.LEFT_REAL_Activated[key]
-
+        for key in self.PLC.AD_Activated:
+            self.AD_Activated_ini[key]= self.PLC.AD_Activated[key]
         for key in self.PLC.Valve_OUT:
             self.Valve_OUT_ini[key] = self.PLC.Valve_OUT[key]
         for key in self.PLC.Valve_INTLKD:
@@ -3022,6 +3118,8 @@ class UpdateServer(QtCore.QObject):
             self.PT_Alarm_ini[key] = self.PLC.PT_Alarm[key]
         for key in self.PLC.LEFT_REAL_dic:
             self.LEFT_REAL_Alarm_ini[key] = self.PLC.LEFT_REAL_Alarm[key]
+        for key in self.PLC.AD_dic:
+            self.AD_Alarm_ini[key] = self.PLC.AD_Alarm[key]
         for key in self.PLC.LOOPPID_MODE0:
             self.LOOPPID_MODE0_ini[key] = self.PLC.LOOPPID_MODE0[key]
         for key in self.PLC.LOOPPID_MODE1:
@@ -3220,6 +3318,16 @@ class UpdateServer(QtCore.QObject):
                                 self.PLC.LEFT_REAL_HighLimit[key] = message[key]["operation"]["HighLimit"]
                             else:
                                 self.PLC.LEFT_REAL_Activated[key] = message[key]["operation"]["Act"]
+                        else:
+                            pass
+                    elif message[key]["type"] == "AD":
+                        if message[key]["server"] == "AD":
+                            if message[key]["operation"]["Update"]:
+                                self.PLC.AD_Activated[key] = message[key]["operation"]["Act"]
+                                self.PLC.AD_LowLimit[key] = message[key]["operation"]["LowLimit"]
+                                self.PLC.AD_HighLimit[key] = message[key]["operation"]["HighLimit"]
+                            else:
+                                self.PLC.AD_Activated[key] = message[key]["operation"]["Act"]
                         else:
                             pass
 
@@ -3499,6 +3607,8 @@ class UpdateServer(QtCore.QObject):
 
             for key in message["MAN_SET"]["data"]["LEFT_REAL"]["high"]:
                 self.PLC.LEFT_REAL_HighLimit[key] = message["MAN_SET"]["data"]["LEFT_REAL"]["high"][key]
+            for key in message["MAN_SET"]["data"]["AD"]["high"]:
+                self.PLC.AD_HighLimit[key] = message["MAN_SET"]["data"]["AD"]["high"][key]
 
             for key in message["MAN_SET"]["data"]["Din"]["high"]:
                 self.PLC.Din_HighLimit[key] = message["MAN_SET"]["data"]["Din"]["high"][key]
@@ -3519,6 +3629,8 @@ class UpdateServer(QtCore.QObject):
 
             for key in message["MAN_SET"]["data"]["LEFT_REAL"]["low"]:
                 self.PLC.LEFT_REAL_LowLimit[key] = message["MAN_SET"]["data"]["LEFT_REAL"]["low"][key]
+            for key in message["MAN_SET"]["data"]["AD"]["low"]:
+                self.PLC.AD_LowLimit[key] = message["MAN_SET"]["data"]["AD"]["low"][key]
 
             for key in message["MAN_SET"]["data"]["Din"]["low"]:
                 self.PLC.Din_LowLimit[key] = message["MAN_SET"]["data"]["Din"]["low"][key]
@@ -3537,6 +3649,8 @@ class UpdateServer(QtCore.QObject):
 
             for key in message["MAN_SET"]["Active"]["LEFT_REAL"]:
                 self.PLC.LEFT_REAL_Activated[key] = message["MAN_SET"]["Active"]["LEFT_REAL"][key]
+            for key in message["MAN_SET"]["Active"]["AD"]:
+                self.PLC.AD_Activated[key] = message["MAN_SET"]["Active"]["AD"][key]
 
             for key in message["MAN_SET"]["Active"]["Din"]:
                 self.PLC.Din_Activated[key] = message["MAN_SET"]["Active"]["Din"][key]

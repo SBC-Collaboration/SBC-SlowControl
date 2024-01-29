@@ -130,6 +130,6 @@ class Alarm_Setting():
 
 if __name__=="__main__":
     AS= Alarm_Setting()
-    AS.initialize()
-    # AS.write()
+    # AS.initialize()
+    AS.write()
     # AS.read_Information()
