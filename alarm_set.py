@@ -27,11 +27,16 @@ class Alarm_Setting():
 
         self.LEFT_REAL_HighLimit = copy.copy(sec.LEFT_REAL_HIGHLIMIT)
         self.LEFT_REAL_LowLimit = copy.copy(sec.LEFT_REAL_LOWLIMIT)
+        self.LEFT_REAL_Activated = copy.copy(sec.LEFT_REAL_ACTIVATED)
+
+        self.AD_HighLimit = copy.copy(sec.AD_HIGHLIMIT)
+        self.AD_LowLimit = copy.copy(sec.AD_LOWLIMIT)
+        self.AD_Activated = copy.copy(sec.AD_ACTIVATED)
 
         self.TT_FP_Activated = copy.copy(sec.TT_FP_ACTIVATED)
         self.TT_BO_Activated = copy.copy(sec.TT_BO_ACTIVATED)
         self.PT_Activated = copy.copy(sec.PT_ACTIVATED)
-        self.LEFT_REAL_Activated = copy.copy(sec.LEFT_REAL_ACTIVATED)
+
 
         self.LOOPPID_HI_LIM = copy.copy(sec.LOOPPID_ALARM_HI_LIM)
         self.LOOPPID_LO_LIM = copy.copy(sec.LOOPPID_ALARM_LO_LIM)
@@ -66,6 +71,12 @@ class Alarm_Setting():
             self.lowlimit.append(self.LEFT_REAL_LowLimit[key])
             self.highlimit.append(self.LEFT_REAL_HighLimit[key])
             self.active.append(self.LEFT_REAL_Activated[key])
+
+        for key in self.AD_LowLimit:
+            self.instrument.append(key)
+            self.lowlimit.append(self.AD_LowLimit[key])
+            self.highlimit.append(self.AD_HighLimit[key])
+            self.active.append(self.AD_Activated[key])
 
         for key in self.LOOPPID_LO_LIM:
             self.instrument.append(key)
