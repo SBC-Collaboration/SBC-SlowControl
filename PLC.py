@@ -922,7 +922,7 @@ class PLC(QtCore.QObject):
                     self.AD_dic[key] = -1
                 # Raw_AD_digit[key]=(Raw_AD[key].getRegister(1),Raw_AD[key].getRegister(0))
 
-            # print(self.AD_dic)
+            print("\n",self.AD_dic,"\n")
             # print("2nd digit-1st digit",Raw_AD_digit)
 
 
