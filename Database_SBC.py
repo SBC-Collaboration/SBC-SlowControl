@@ -294,31 +294,50 @@ class COUPP_database():
         self.db.close()
 
     def test_gateway(self):
-        hostname = "dm.phys.northwestern.edu"
-        db_config = {
-            'host': hostname,
-            'user': self.sql_username,
-            'password': self.sql_password,
-            'database': "coupp_alarms"
+        ssh_config = {
+            'hostname': self.ssh_host,
+            'port': 22,
+            'username': self.ssh_user,
+            'password': self.ssh_password,
         }
 
-        # Establish a connection
-        connection = mysql.connector.connect(**db_config)
+        # MySQL connection details
+        db_config = {
+            'host': self.sql_hostname,
+            'user': self.sql_username,
+            'password': self.sql_password,
+            'database': self.sql_main_database,
+        }
 
-        # Create a cursor
-        cursor = connection.cursor()
+        # Establish an SSH connection
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-        # Example: Insert data into a table
-        sql_query = "SELECT * FROM sbc_FNAL_alarms"
-        # data_to_insert = ('value1', 'value2')
+        try:
+            ssh_client.connect(**ssh_config)
 
-        cursor.execute(sql_query)
+            # MySQL connection through SSH tunnel
+            with ssh_client.get_transport().open_channel('direct-tcpip', (db_config['host'], 3306),
+                                                         ('localhost', 0)) as tunnel:
+                db_config['host'] = 'localhost'
+                db_config['port'] = tunnel.local_address[1]
 
-        # Commit changes and close connection
-        connection.commit()
-        connection.close()
+                # Establish a connection to the MySQL database
+                connection = mysql.connector.connect(**db_config)
+                # cursor = connection.cursor()
+                #
+                # # Example: Insert data into a table
+                # sql_query = "INSERT INTO your_table_name (column1, column2) VALUES (%s, %s)"
+                # data_to_insert = ('value1', 'value2')
+                #
+                # cursor.execute(sql_query, data_to_insert)
+                #
+                # # Commit changes and close connection
+                # connection.commit()
+                connection.close()
 
-
+        finally:
+            ssh_client.close()
 
 
 
