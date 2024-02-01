@@ -318,8 +318,8 @@ class COUPP_database():
 
             # MySQL connection through SSH tunnel
             with ssh_client.get_transport().open_channel('direct-tcpip', (db_config['host'], 3306),
-                                                         ('localhost', 0)) as tunnel:
-                db_config['host'] = 'localhost'
+                                                         ('127.0.0.1', 0)) as tunnel:
+                db_config['host'] = '127.0.0.1'
                 db_config['port'] = tunnel.local_address[1]
 
                 # Establish a connection to the MySQL database
