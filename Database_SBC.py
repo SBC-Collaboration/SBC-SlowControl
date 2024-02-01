@@ -179,6 +179,7 @@ class COUPP_database():
         self.ssh_user = 'pico'
         self.ssh_port = 22
         self.sql_ip = '1.1.1.1'
+        print(self.ssh_password)
 
     def ssh_write(self):
         with SSHTunnelForwarder(
