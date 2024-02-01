@@ -295,9 +295,9 @@ class COUPP_database():
 
     def test_gateway(self):
         server = SSHTunnelForwarder(
-            self.ssh_host,
-            ssh_username=self.ssh_user,
-            ssh_password=self.ssh_password,
+            "sbcslowcontrol.fnal.gov",
+            ssh_username="hep",
+            ssh_password="hepuser",
             remote_bind_address=('127.0.0.1', 8080)
         )
 
