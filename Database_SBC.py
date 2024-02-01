@@ -388,8 +388,8 @@ if __name__ == "__main__":
     # db.ssh_select()
     # db.ssh_write()
     # db.ssh_select()
-    # print(db.ssh_state_only())
-    db.test_gateway()
+    print(db.ssh_state_only())
+    # db.test_gateway()
 
 
     db.close_database()
