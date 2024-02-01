@@ -1485,7 +1485,7 @@ class UpdateDataBase(QtCore.QObject):
 
         self.COUPP_ERROR = False
         self.COUPP_ALARM = "k"
-        self.COUPP_HOLD = True
+        self.COUPP_HOLD = False
 
         self.para_alarm = 0
         self.rate_alarm = 10
@@ -1744,8 +1744,13 @@ class UpdateDataBase(QtCore.QObject):
                             self.alarm_db.ssh_alarm(message=self.COUPP_ALARM)
                             self.COUPP_ERROR = False
                             self.para_alarm = 0
-                        if not self.COUPP_HOLD:
+                        if self.COUPP_HOLD:
                             self.COUPP_ALARM = "k"
+                        self.COUPP_HOLD = True
+                        # if there is no signal to set HOLD to False before next loop comes, the self.COUPP_HOLD will
+                        # keep in True so that in the loop after next, the COUPP database will keep the current value
+                        # noticing that because we have if statement self.para_alarm >= self.rate_alarm, the time interval
+                        # between two loop is pretty long compared to updatePLC loop
 
 
                 except Exception as e:
@@ -1791,7 +1796,7 @@ class UpdateDataBase(QtCore.QObject):
 
     @QtCore.Slot()
     def receive_COUPP_ALARM(self, string):
-        self.COUPP_HOLD = True
+        self.COUPP_HOLD = False
         self.COUPP_ALARM = string
 
     @QtCore.Slot(object)
@@ -2318,7 +2323,7 @@ class UpdatePLC(QtCore.QObject):
         super().__init__(parent)
 
         self.PLC = PLC
-        self.alarm_db = COUPP_database()
+        # self.alarm_db = COUPP_database()
         # self.message_manager = message_manager()
         self.Running = False
         self.period = 1
@@ -2384,6 +2389,7 @@ class UpdatePLC(QtCore.QObject):
 
                         self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                     else:
+                        self.COUPP_TEXT_alarm.emit("")
                         pass
                         # self.alarm_db.ssh_write()
                 except:
