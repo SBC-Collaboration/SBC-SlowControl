@@ -295,7 +295,7 @@ class COUPP_database():
 
     def test_gateway(self):
         db_config = {
-            'host': self.ssh_host,
+            'host': self.sql_hostname,
             'user': self.sql_username,
             'password': self.sql_password,
             'database': "coupp_alarms"
