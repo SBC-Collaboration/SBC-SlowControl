@@ -293,6 +293,21 @@ class COUPP_database():
         self.mycursor.close()
         self.db.close()
 
+    def test_gateway(self):
+        server = SSHTunnelForwarder(
+            self.ssh_host,
+            ssh_username=self.ssh_user,
+            ssh_password=self.ssh_password,
+            remote_bind_address=('127.0.0.1', 8080)
+        )
+
+        server.start()
+
+        print(server.local_bind_port)  # show assigned local port
+        # work with `SECRET SERVICE` through `server.local_bind_port`.
+
+        server.stop()
+
 
 
 
@@ -344,8 +359,8 @@ if __name__ == "__main__":
     # db.ssh_select()
     # db.ssh_write()
     # db.ssh_select()
-    print(db.ssh_state_only())
-
+    # print(db.ssh_state_only())
+    db.test_gateway()
 
 
     db.close_database()
