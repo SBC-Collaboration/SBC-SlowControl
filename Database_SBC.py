@@ -272,7 +272,9 @@ class COUPP_database():
 
             self.db = pymysql.connect(host="localhost", user=self.sql_username, passwd=self.sql_password, database=self.sql_main_database, port=tunnel.local_bind_port)
             self.mycursor = self.db.cursor()
-            self.update_status(message)
+
+            self.update_status(message[:1024])
+            # limit the max lengh of the string
             self.close_database()
 
 
