@@ -174,8 +174,8 @@ class COUPP_database():
         self.sql_main_database = 'coupp_alarms'
         self.sql_port = 3306
         self.ssh_host = 'dm.phys.northwestern.edu'
-        self.ssh_password = os.environ.get("PEGASUS_SSH_TOKEN")
-        # self.ssh_password = 'UChicago1234!'
+        # self.ssh_password = os.environ.get("PEGASUS_SSH_TOKEN")
+        self.ssh_password = 'UChicago1234!'
         self.ssh_user = 'pico'
         self.ssh_port = 22
         self.sql_ip = '1.1.1.1'
