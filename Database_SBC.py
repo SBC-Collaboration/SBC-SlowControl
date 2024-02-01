@@ -294,19 +294,28 @@ class COUPP_database():
         self.db.close()
 
     def test_gateway(self):
-        server = SSHTunnelForwarder(
-            "sbcslowcontrol.fnal.gov",
-            ssh_username="hep",
-            ssh_password="hepuser",
-            remote_bind_address=('127.0.0.1', 8080)
-        )
+        db_config = {
+            'host': self.ssh_host,
+            'user': self.sql_username,
+            'password': self.sql_password,
+            'database': "coupp_alarms"
+        }
 
-        server.start()
+        # Establish a connection
+        connection = mysql.connector.connect(**db_config)
 
-        print(server.local_bind_port)  # show assigned local port
-        # work with `SECRET SERVICE` through `server.local_bind_port`.
+        # Create a cursor
+        cursor = connection.cursor()
 
-        server.stop()
+        # Example: Insert data into a table
+        sql_query = "SELECT * FROM sbc_FNAL_alarms"
+        # data_to_insert = ('value1', 'value2')
+
+        cursor.execute(sql_query)
+
+        # Commit changes and close connection
+        connection.commit()
+        connection.close()
 
 
 
