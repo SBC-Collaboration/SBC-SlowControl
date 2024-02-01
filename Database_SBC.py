@@ -294,8 +294,9 @@ class COUPP_database():
         self.db.close()
 
     def test_gateway(self):
+        hostname = "dm.phys.northwestern.edu"
         db_config = {
-            'host': self.sql_hostname,
+            'host': hostname,
             'user': self.sql_username,
             'password': self.sql_password,
             'database': "coupp_alarms"
