@@ -2401,8 +2401,8 @@ class UpdatePLC(QtCore.QObject):
                             # if alarm message is empty, skip
                             self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                     else:
-                        # self.COUPP_TEXT_alarm.emit("hi")
-                        self.test_sig.emit("hi")
+                        self.COUPP_TEXT_alarm.emit("hi")
+                        # self.test_sig.emit("hi")
                         print("\n alarm is false \n")
                         pass
                         # self.alarm_db.ssh_write()
@@ -3786,7 +3786,7 @@ class Update(QtCore.QObject):
     def connect_signals(self):
         # print("\nsignal building")
         self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
-        self.UpPLC.test_sig.connect(self.printstr)
+        self.UpPLC.COUPP_TEXT_alarm.connect(self.printstr)
 
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
