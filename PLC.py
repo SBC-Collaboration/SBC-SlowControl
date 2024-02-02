@@ -2398,6 +2398,7 @@ class UpdatePLC(QtCore.QObject):
                         # if there is an alarm, every para time, it trigger a message
                         if self.mainalarm_para>= self.mainalarm_rate:
                             if self.alarm_stack != {}:
+                                print(self.alarm_stack)
                                 temp_msg = self.join_stack_into_message()
                                 self.AI_slack_alarm.emit(temp_msg)
                                 self.COUPP_TEXT_alarm.emit(temp_msg)
