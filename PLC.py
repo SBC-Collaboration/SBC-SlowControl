@@ -2388,9 +2388,12 @@ class UpdatePLC(QtCore.QObject):
                     # print("main alarm",self.PLC.MainAlarm)
                     if self.PLC.MainAlarm:
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
-                        print("\n send alarm sig")
-                        self.AI_slack_alarm.emit(self.alarm_stack)
-                        self.COUPP_TEXT_alarm.emit(self.alarm_stack)
+
+                        if self.alarm_stack != "":
+                            print("\n send alarm sig")
+                            self.AI_slack_alarm.emit(self.alarm_stack)
+                            # if alarm message is empty, skip
+                            self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                     else:
                         self.COUPP_TEXT_alarm.emit("")
                         print("\n alarm is false \n")
