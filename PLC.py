@@ -2367,7 +2367,6 @@ class UpdatePLC(QtCore.QObject):
                     self.PLC.ReadAll()
                     # test signal
                     # self.AI_slack_alarm.emit("signal")
-                    self.alarm_stack = ""
                     # check alarms
                     for keyTT_FP in self.PLC.TT_FP_dic:
                         self.check_TT_FP_alarm(keyTT_FP)
