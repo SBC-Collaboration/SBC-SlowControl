@@ -2351,7 +2351,9 @@ class UpdatePLC(QtCore.QObject):
         self.Din_rate = sec.DIN_RATE
         self.LOOPPID_para = sec.LOOPPID_PARA
         self.LOOPPID_rate = sec.LOOPPID_RATE
-        self.alarm_stack=""
+        self.mainalarm_para = sec.MAINALARM_PARA
+        self.mainalarm_rate = sec.MAINALARM_RATE
+        self.alarm_stack={}
 
     @QtCore.Slot()
     def run(self):
@@ -2393,6 +2395,22 @@ class UpdatePLC(QtCore.QObject):
                     # print(self.alarm_stack == "")
                     # print("main alarm",self.PLC.MainAlarm)
                     if self.PLC.MainAlarm:
+                        # if there is an alarm, every para time, it trigger a message
+                        if self.mainalarm_para>= self.mainalarm_rate:
+                            if self.alarm_stack != "":
+                                temp_msg = self.join_stack_into_message()
+                                self.AI_slack_alarm.emit(temp_msg)
+                                self.COUPP_TEXT_alarm.emit(temp_msg)
+                                print("alarm stack sent")
+                                self.alarm_stack = {}
+                                self.mainalarm_para = 0
+                                # if alarm message is empty, skip
+
+                        self.mainalarm_para+=1
+                    else:
+                        self.mainalarm_para = 0
+                        # self.alarm_db.ssh_write()
+                    if self.PLC.MainAlarm:
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
 
                         if self.alarm_stack != "":
@@ -2401,9 +2419,7 @@ class UpdatePLC(QtCore.QObject):
                             # if alarm message is empty, skip
                             self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                     else:
-                        self.test_sig.emit()
                         self.COUPP_TEXT_alarm.emit("")
-                        # self.test_sig.emit("hi")
                         print("\n alarm is false \n")
                         pass
                         # self.alarm_db.ssh_write()
@@ -2424,9 +2440,16 @@ class UpdatePLC(QtCore.QObject):
     #     if self.PR_CYCLE_para >= self.PR_CYCLE_rate:
     #         self.PLC.
     @QtCore.Slot()
-    def stack_alarm_msg(self, string):
-        self.alarm_stack= self.alarm_stack+"\n" +str(string)
+    def stack_alarm_msg(self, pid, string):
+        self.alarm_stack[pid] = string
         print("stack2", self.alarm_stack)
+
+    def join_stack_into_message(self):
+        message = ""
+        if len(self.alarm_stack)>=1:
+            for key in self.alarm_stack:
+                message=message+"\n"+self.alarm_stack[key]
+        return message
 
     def check_TT_FP_alarm(self, pid):
 
@@ -2597,7 +2620,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.TT_FP_HighLimit[pid], low=self.PLC.TT_FP_LowLimit[pid])
             # self.message_manager.tencent_alarm(msg)
             # self.AI_slack_alarm.emit(msg)
-            self.stack_alarm_msg(msg)
+            self.stack_alarm_msg(pid, msg)
 
             self.TT_FP_para[pid] = 0
         self.TT_FP_para[pid] += 1
@@ -2616,7 +2639,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.TT_BO_HighLimit[pid], low=self.PLC.TT_BO_LowLimit[pid])
             # self.message_manager.tencent_alarm(msg)
             # self.AI_slack_alarm.emit(msg)
-            self.stack_alarm_msg(msg)
+            self.stack_alarm_msg(pid, msg)
             self.TT_BO_para[pid] = 0
 
         self.TT_BO_para[pid] += 1
@@ -2635,7 +2658,7 @@ class UpdatePLC(QtCore.QObject):
 
             # self.message_manager.tencent_alarm(msg)
             # self.AI_slack_alarm.emit(msg)
-            self.stack_alarm_msg(msg)
+            self.stack_alarm_msg(pid, msg)
             self.PT_para[pid] = 0
         self.PT_para[pid] += 1
 
@@ -2653,7 +2676,7 @@ class UpdatePLC(QtCore.QObject):
 
             # self.message_manager.tencent_alarm(msg)
             # self.AI_slack_alarm.emit(msg)
-            self.stack_alarm_msg(msg)
+            self.stack_alarm_msg(pid, msg)
             self.LEFT_REAL_para[pid] = 0
         self.LEFT_REAL_para[pid] += 1
 
@@ -2670,7 +2693,7 @@ class UpdatePLC(QtCore.QObject):
 
             # self.message_manager.tencent_alarm(msg)
             # self.AI_slack_alarm.emit(msg)
-            self.stack_alarm_msg(msg)
+            self.stack_alarm_msg(pid, msg)
             self.AD_para[pid] = 0
         self.AD_para[pid] += 1
 
@@ -2688,7 +2711,7 @@ class UpdatePLC(QtCore.QObject):
 
             # self.message_manager.tencent_alarm(msg)
             # self.AI_slack_alarm.emit(msg)
-            self.stack_alarm_msg(msg)
+            self.stack_alarm_msg(pid, msg)
             self.Din_para[pid] = 0
         self.Din_para[pid] += 1
 
@@ -2706,7 +2729,7 @@ class UpdatePLC(QtCore.QObject):
 
             # self.message_manager.tencent_alarm(msg)
             # self.AI_slack_alarm.emit(msg)
-            self.stack_alarm_msg(msg)
+            self.stack_alarm_msg(pid, msg)
             self.LOOPPID_para[pid] = 0
         self.LOOPPID_para[pid] += 1
 
