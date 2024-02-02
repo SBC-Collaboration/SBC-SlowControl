@@ -3693,6 +3693,7 @@ class UpdateServer(QtCore.QObject):
 class Update(QtCore.QObject):
     PATCH_TO_DATABASE = QtCore.Signal()
     UPDATE_TO_DATABASE = QtCore.Signal()
+    COUPP_ALARM_MSG = QtCore.Signal()
     def __init__(self, parent=None):
         super().__init__(parent)
         App.aboutToQuit.connect(self.StopUpdater)
@@ -3701,6 +3702,7 @@ class Update(QtCore.QObject):
         self.connect_signals()
         self.data_transfer = {}
         self.data_status = False
+        self.coupp_alarm = ""
 
 
 
@@ -3776,6 +3778,13 @@ class Update(QtCore.QObject):
         self.UPDATE_TO_DATABASE.emit()
         print(self.data_status)
 
+    @QtCore.Slot(object)
+    def COUPP_alarm_transfer(self, alarm):
+        self.coupp_alarm = alarm
+        self.COUPP_ALARM_MSG.emit()
+        print(alarm)
+
+
     def slack_signals(self):
         self.message_manager = message_manager()
         self.UpPLC.AI_slack_alarm.connect(self.printstr)
@@ -3786,11 +3795,16 @@ class Update(QtCore.QObject):
 
     def connect_signals(self):
         # print("\nsignal building")
-        self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
-        self.UpPLC.test_sig.connect(self.UpDatabase.do_sth)
+        # self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
+        # self.UpPLC.test_sig.connect(self.UpDatabase.do_sth)
         # self.UpPLC.COUPP_TEXT_alarm.connect(self.printstr)
+        self.UpPLC.COUPP_TEXT_alarm.connect(self.COUPP_alarm_transfer)
+        self.COUPP_ALARM_MSG.connect(lambda: self.UpDatabase.receive_COUPP_ALARM(self.coupp_alarm))
+        # split the signal to Updatedabase to 2 steps, first pass msg to local update and then pass it to updatedatabse
+        # directly pass to database cause failure for some unknown reasons
 
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
+
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
         self.PATCH_TO_DATABASE.connect(lambda: self.UpDatabase.update_value(self.data_transfer))
 
