@@ -2390,6 +2390,7 @@ class UpdatePLC(QtCore.QObject):
                         self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                     else:
                         self.COUPP_TEXT_alarm.emit("")
+                        print("\n alarm is false \n")
                         pass
                         # self.alarm_db.ssh_write()
                 except:
