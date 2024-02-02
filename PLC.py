@@ -3777,7 +3777,7 @@ class Update(QtCore.QObject):
         self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
 
     def connect_signals(self):
-        self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
+        # self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
 
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
