@@ -1796,6 +1796,7 @@ class UpdateDataBase(QtCore.QObject):
 
     @QtCore.Slot()
     def receive_COUPP_ALARM(self, string):
+        print("received coupp alarm", string)
         self.COUPP_HOLD = False
         self.COUPP_ALARM = string
 
@@ -2382,12 +2383,12 @@ class UpdatePLC(QtCore.QObject):
 
                 # if there is alarm, update the PICO watchdog and report the alarm
                 try:
-                    print("stack1"+"\n", "111", str(self.alarm_stack))
-                    print(self.alarm_stack == "")
-                    print("main alarm",self.PLC.MainAlarm)
+                    # print("stack1"+"\n", "111", str(self.alarm_stack))
+                    # print(self.alarm_stack == "")
+                    # print("main alarm",self.PLC.MainAlarm)
                     if self.PLC.MainAlarm:
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
-                        print("send alarm sig")
+                        # print("send alarm sig")
                         self.AI_slack_alarm.emit(self.alarm_stack)
                         self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                     else:
