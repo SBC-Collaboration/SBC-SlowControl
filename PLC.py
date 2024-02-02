@@ -2711,7 +2711,7 @@ class UpdatePLC(QtCore.QObject):
     def true_in_dictionary(self,dictionary):
         result= False
         for key in dictionary:
-            result = result and dictionary[key]
+            result = result or dictionary[key]
         return result
 
 
