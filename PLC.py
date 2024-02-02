@@ -1800,6 +1800,11 @@ class UpdateDataBase(QtCore.QObject):
         self.COUPP_HOLD = False
         self.COUPP_ALARM = string
 
+    @QtCore.Slot()
+    def do_sth(self):
+        print("\ndatabase do something")
+
+
     @QtCore.Slot(object)
     def update_value(self,dic):
         # print("Database received the data from PLC")
@@ -3779,6 +3784,7 @@ class Update(QtCore.QObject):
     def connect_signals(self):
         # print("\nsignal building")
         self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
+        self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.do_sth)
 
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.transfer_station)
