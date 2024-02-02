@@ -2402,7 +2402,7 @@ class UpdatePLC(QtCore.QObject):
                             self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                     else:
                         self.test_sig.emit()
-                        self.COUPP_TEXT_alarm.emit("hi")
+                        self.COUPP_TEXT_alarm.emit("")
                         # self.test_sig.emit("hi")
                         print("\n alarm is false \n")
                         pass
