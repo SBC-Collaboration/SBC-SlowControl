@@ -1794,7 +1794,7 @@ class UpdateDataBase(QtCore.QObject):
     def stop(self):
         self.Running = False
 
-    @QtCore.Slot()
+    @QtCore.Slot(str)
     def receive_COUPP_ALARM(self, string):
         print("received coupp alarm", string)
         self.COUPP_HOLD = False
@@ -3777,7 +3777,7 @@ class Update(QtCore.QObject):
         self.UpDatabase.DB_ERROR_SIG.connect(self.message_manager.slack_alarm)
 
     def connect_signals(self):
-        print("\nsignal building")
+        # print("\nsignal building")
         self.UpPLC.COUPP_TEXT_alarm.connect(self.UpDatabase.receive_COUPP_ALARM)
 
         self.UpPLC.PLC.DATA_UPDATE_SIGNAL.connect(self.UpDatabase.update_value)
@@ -3788,7 +3788,7 @@ class Update(QtCore.QObject):
         self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
 
         self.UpPLC.PLC.PLC_DISCON_SIGNAL.connect(self.StopUpdater)
-        print("\nsignal established")
+        # print("\nsignal established")
 
 
 
