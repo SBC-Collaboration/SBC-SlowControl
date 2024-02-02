@@ -2387,7 +2387,7 @@ class UpdatePLC(QtCore.QObject):
                     print("main alarm",self.PLC.MainAlarm)
                     if self.PLC.MainAlarm:
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
-
+                        self.AI_slack_alarm.emit(self.alarm_stack)
                         self.COUPP_TEXT_alarm.emit(self.alarm_stack)
                     else:
                         self.COUPP_TEXT_alarm.emit("")
@@ -2583,7 +2583,7 @@ class UpdatePLC(QtCore.QObject):
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.TT_FP_dic[pid],
                                                                                                                      high=self.PLC.TT_FP_HighLimit[pid], low=self.PLC.TT_FP_LowLimit[pid])
             # self.message_manager.tencent_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            # self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
 
             self.TT_FP_para[pid] = 0
@@ -2602,7 +2602,7 @@ class UpdatePLC(QtCore.QObject):
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(pid=pid, current=self.PLC.TT_BO_dic[pid],
                                                                                                                      high=self.PLC.TT_BO_HighLimit[pid], low=self.PLC.TT_BO_LowLimit[pid])
             # self.message_manager.tencent_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            # self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.TT_BO_para[pid] = 0
 
@@ -2621,7 +2621,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.PT_HighLimit[pid], low=self.PLC.PT_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            # self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.PT_para[pid] = 0
         self.PT_para[pid] += 1
@@ -2639,7 +2639,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.LEFT_REAL_HighLimit[pid], low=self.PLC.LEFT_REAL_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            # self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.LEFT_REAL_para[pid] = 0
         self.LEFT_REAL_para[pid] += 1
@@ -2656,7 +2656,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.AD_HighLimit[pid], low=self.PLC.AD_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            # self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.AD_para[pid] = 0
         self.AD_para[pid] += 1
@@ -2674,7 +2674,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.Din_HighLimit[pid], low=self.PLC.Din_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            # self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.Din_para[pid] = 0
         self.Din_para[pid] += 1
@@ -2692,7 +2692,7 @@ class UpdatePLC(QtCore.QObject):
                                                                                                                      high=self.PLC.LOOPPID_Alarm_HighLimit[pid], low=self.PLC.LOOPPID_Alarm_LowLimit[pid])
 
             # self.message_manager.tencent_alarm(msg)
-            self.AI_slack_alarm.emit(msg)
+            # self.AI_slack_alarm.emit(msg)
             self.stack_alarm_msg(msg)
             self.LOOPPID_para[pid] = 0
         self.LOOPPID_para[pid] += 1
