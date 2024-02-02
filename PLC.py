@@ -2390,7 +2390,7 @@ class UpdatePLC(QtCore.QObject):
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
 
                         if self.alarm_stack != "":
-                            print("\n send alarm sig")
+
                             self.AI_slack_alarm.emit(self.alarm_stack)
                             # if alarm message is empty, skip
                             self.COUPP_TEXT_alarm.emit(self.alarm_stack)
@@ -3787,7 +3787,7 @@ class Update(QtCore.QObject):
         self.UPDATE_TO_DATABASE.connect(lambda: self.UpDatabase.update_status(self.data_status))
 
         self.UpPLC.PLC.PLC_DISCON_SIGNAL.connect(self.StopUpdater)
-        print("signal established")
+        print("\nsignal established")
 
 
 
