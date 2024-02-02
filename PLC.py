@@ -2384,6 +2384,7 @@ class UpdatePLC(QtCore.QObject):
                 try:
                     print("stack1"+"\n", "111", str(self.alarm_stack))
                     print(self.alarm_stack == "")
+                    print("main alarm",self.PLC.MainAlarm)
                     if self.PLC.MainAlarm:
                         # self.alarm_db.ssh_alarm(message=self.alarm_stack)
 
