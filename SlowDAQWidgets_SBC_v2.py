@@ -4749,18 +4749,21 @@ class Loadfile(QtWidgets.QWidget):
                 text_TT_BO_HI = "TT_BO_HI: " + str(self.loaded_dict["data"]["TT"]["BO"]["high"]) + "\n \n"
                 text_PT_HI = "PT_HI: " + str(self.loaded_dict["data"]["PT"]["high"]) + "\n \n"
                 text_REAL_HI = "REAL_HI: " + str(self.loaded_dict["data"]["LEFT_REAL"]["high"]) + "\n \n"
+                text_AD_HI = "AD_HI: " + str(self.loaded_dict["data"]["AD"]["high"]) + "\n \n"
 
                 text_TT_FP_LO = "TT_FP_LO: " + str(self.loaded_dict["data"]["TT"]["FP"]["low"]) + "\n \n"
                 text_TT_BO_LO = "TT_BO_LO: " + str(self.loaded_dict["data"]["TT"]["BO"]["low"]) + "\n \n"
                 text_PT_LO = "PT_LO: " + str(self.loaded_dict["data"]["PT"]["low"]) + "\n \n"
                 text_REAL_LO = "REAL_LO: " + str(self.loaded_dict["data"]["LEFT_REAL"]["low"]) + "\n \n"
+                text_AD_LO = "AD_LO: " + str(self.loaded_dict["data"]["AD"]["low"]) + "\n \n"
 
                 text_TT_FP_Activated = "TT_FP_Activated: " + str(self.loaded_dict["Active"]["TT"]["FP"]) + "\n \n"
                 text_TT_BO_Activated = "TT_BO_Activated: " + str(self.loaded_dict["Active"]["TT"]["BO"]) + "\n \n"
                 text_PT_Activated_ = "PT_Activated: " + str(self.loaded_dict["Active"]["PT"]) + "\n \n"
                 text_REAL_Activated = "REAL_Activated: " + str(self.loaded_dict["Active"]["LEFT_REAL"]) + "\n \n"
-                text = text_TT_FP_HI+ text_TT_BO_HI+ text_PT_HI+ text_REAL_HI+ text_TT_FP_LO+ text_TT_BO_LO+ text_PT_LO+ \
-                       text_REAL_LO+ text_TT_FP_Activated + text_TT_BO_Activated+ text_PT_Activated_ +text_REAL_Activated
+                text_AD_Activated = "AD_Activated: " + str(self.loaded_dict["Active"]["AD"]) + "\n \n"
+                text = text_TT_FP_HI+ text_TT_BO_HI+ text_PT_HI+ text_REAL_HI+text_AD_HI+ text_TT_FP_LO+ text_TT_BO_LO+ text_PT_LO+ \
+                       text_REAL_LO+text_AD_LO+ text_TT_FP_Activated + text_TT_BO_Activated+ text_PT_Activated_ +text_REAL_Activated+text_AD_Activated
                 self.FileContent.setText(text)
         except:
             print("Error! Please type in a valid path")
@@ -4815,6 +4818,11 @@ class Loadfile(QtWidgets.QWidget):
             self.default_dict['data']['LEFT_REAL']['low'][key]= self.low_dic[key]
             self.default_dict['data']['LEFT_REAL']['high'][key] = self.high_dic[key]
             self.default_dict['Active']['LEFT_REAL'][key] = self.active_dic[key]
+
+        for key in self.default_dict['data']['AD']['low']:
+            self.default_dict['data']['AD']['low'][key]= self.low_dic[key]
+            self.default_dict['data']['AD']['high'][key] = self.high_dic[key]
+            self.default_dict['Active']['AD'][key] = self.active_dic[key]
 
 
         for key in self.default_dict['data']['Din']['low']:
@@ -4950,6 +4958,12 @@ class CustomSave(QtWidgets.QWidget):
             self.lowlimit.append(dic_c['data']['LEFT_REAL']['low'][key])
             self.highlimit.append(dic_c['data']['LEFT_REAL']['high'][key])
             self.active.append(dic_c['Active']['LEFT_REAL'][key])
+
+        for key in dic_c['data']['AD']['low']:
+            self.instrument.append(key)
+            self.lowlimit.append(dic_c['data']['AD']['low'][key])
+            self.highlimit.append(dic_c['data']['AD']['high'][key])
+            self.active.append(dic_c['Active']['AD'][key])
 
         for key in dic_c['data']['LOOPPID']['Alarm_LowLimit']:
             self.instrument.append(key)
