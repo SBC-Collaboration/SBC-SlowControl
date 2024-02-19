@@ -82,4 +82,4 @@ of Heater's DO channel ", "float"), ( "HTR2124_OUT", "output for the AO channel"
 
 # Feb 1st 2024
 INSERT INTO MetaDataStorage VALUES ("LT2122", "position sensor value in percentage ", "float"),("LT2130", "position sensor value in percentage ", "%"),("TT7401", "Thermometer", "K" ),("TT7402", "Thermometer", "K" ),("TT7403", "Thermometer", "K" ),("TT7404", "Thermometer", "K" ),("TT2410", "Thermometer", "K" ),("TT3401", "Thermometer", "K" );
-
+INSERT INTO MetaDataStorage VALUES ("PT1101", "Pressure Transducer", "bara" ),("PT5304", "Pressure Transducer", "bara" ),("PT2343", "Pressure Transducer", "bara" )

@@ -2743,6 +2743,53 @@ class UpdatePLC(QtCore.QObject):
             result = result or dictionary[key]
         return result
 
+class UpdateServerWatcher(QtCore.QObject):
+    # This is a watcher to check if updateserver hold. If it holds bc of zmq package, there will be no error but a stop from either
+    # sending or receiving commands
+    # if that happens in the long term run, we definitely want to restart the code
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.rate= 30
+        self.para = 0
+        self.period = 1
+        self.HOLD = True
+        self.LOCK = True
+        self.lock_para = 0
+        self.lock_rate = 2
+        # if received not hold from server, then lock the self.HOLD for 2 loops and reset the self.para
+        # received signal should be either (HOLD, LOCK) = (False, True) or (True, False)
+
+    @QtCore.Slot()
+    def run(self):
+        self.Running = True
+        while self.Running:
+            print("watch the update server")
+            try:
+                if not self.HOLD:
+                    print(self.para)
+                    self.para = 0
+                else:
+                    self.para += 1
+                if self.para >= self.rate:
+                    # send alarms
+                    self.para = 0
+                if self.LOCK:
+                    if self.lock_para>= self.lock_rate:
+                        self.HOLD= True
+                        self.LOCK= False
+                    # else:
+                    #     self.HOLD
+                    self.para += 1
+                else:
+                    self.HOLD = True
+            except Exception as e:
+                print("Error:", e)
+            time.sleep(self.period)
+
+    @QtCore.Slot()
+    def stop(self):
+        self.Running = False
+
 
 class UpdateServer(QtCore.QObject):
     def __init__(self, PLC, parent=None):
