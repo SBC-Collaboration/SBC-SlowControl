@@ -1761,7 +1761,6 @@ class UpdateDataBase(QtCore.QObject):
                     logging.error(e)
 
 
-
                 try:
                     self.write_data()
                 except Exception as e:
@@ -1771,7 +1770,7 @@ class UpdateDataBase(QtCore.QObject):
                     self.DB_ERROR_SIG.emit("There is some ERROR in writing slowcontrol database. Please check it.")
                     # in long run, if error in writing data, restart the whole code?
 
-                    time.sleep(self.longsleep)
+                    # time.sleep(self.longsleep)
 
 
                 self.status = False
