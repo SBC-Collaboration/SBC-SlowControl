@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/hep/.local/bin:/home/hep/bin
-if [ -n "$(xrandr --listactivemonitors | grep -i connected)" ]; then
+#if [ -n "$(xrandr --listactivemonitors | grep -i connected)" ]; then
     # Launch the application if a display is connected
     source ~/conda_init.sh
     source /home/hep/miniforge3/bin/activate sbcslowcontrol
@@ -15,5 +15,5 @@ if [ -n "$(xrandr --listactivemonitors | grep -i connected)" ]; then
     sleep 2
     done
     echo "quit the loop" > ~/ECHO.txt
-fi
+#fi
 
