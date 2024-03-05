@@ -2093,6 +2093,7 @@ class UpdateDataBase(threading.Thread):
             try:
                 self.update_value(self.plc_data)
                 self.write_data()
+                print("Data has been written into database")
             except Exception as e:
                 print(e)
                 logging.error(e)
