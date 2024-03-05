@@ -2769,7 +2769,7 @@ class Message_Manager(threading.Thread):
 class LocalWatchdog(threading.Thread):
     def __init__(self, db_time, watchdogtime, timelock, alarm_stack, alarm_lock):
         # alarm msg is different from coupp msg
-        threading.Thread.__init__()
+        super().__init__()
         self.db_time = db_time
         self.timelock = timelock
         self.watchdog_time = watchdogtime
