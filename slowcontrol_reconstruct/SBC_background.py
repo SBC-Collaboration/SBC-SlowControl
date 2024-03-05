@@ -562,7 +562,7 @@ class PLC:
             self.PT_dic[key] = round(
                 struct.unpack(">f", struct.pack(">HH", Raw_BO_PT[key].getRegister(0 + 1),
                                                 Raw_BO_PT[key].getRegister(0)))[0], 3)
-        print("PT dic",self.PT_dic)
+        # print("PT dic",self.PT_dic)
 
         Raw_BO_REAL = {}
         for key in self.LEFT_REAL_address:
@@ -1524,6 +1524,7 @@ class UpdatePLC(PLC, threading.Thread):
                     self.plc_time = early_datetime()
                     print("PLC updating", self.plc_time)
                 self.ReadAll()
+                print("plcdata", self.plc_data)
                 with self.command_lock:
                     self.write_data(self.command_data)
                 # test signal
@@ -2114,7 +2115,7 @@ class UpdateDataBase(threading.Thread):
 
     def update_value(self, dic):
         # print("Database received the data from PLC")
-        print(dic["data"]["PT"]["value"])
+        print("PT in database" , dic["data"]["PT"]["value"])
         for key in self.TT_FP_dic:
             self.TT_FP_dic[key] = dic["data"]["TT"]["FP"]["value"][key]
 
