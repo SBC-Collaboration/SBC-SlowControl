@@ -2093,7 +2093,6 @@ class UpdateDataBase(threading.Thread):
             try:
                 self.update_value(self.plc_data)
                 self.write_data()
-                print("Data has been written into database")
             except Exception as e:
                 print(e)
                 logging.error(e)
@@ -2111,7 +2110,7 @@ class UpdateDataBase(threading.Thread):
         self.status = status
 
     def update_value(self, dic):
-        print("Database received the data from PLC")
+        # print("Database received the data from PLC")
         # print(dic)
         for key in self.TT_FP_dic:
             self.TT_FP_dic[key] = dic["data"]["TT"]["FP"]["value"][key]
