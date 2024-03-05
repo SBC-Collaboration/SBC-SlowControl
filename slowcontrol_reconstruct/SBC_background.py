@@ -749,7 +749,7 @@ class PLC:
             self.FLAG_Busy[key] = self.ReadCoil(2 ** 1, self.FLAG_ADDRESS[key]) or self.ReadCoil(
                 2 ** 2, self.FLAG_ADDRESS[key])
 
-        print("PLC FLAG", self.FLAG_DIC, datetime.datetime.now())
+        # print("PLC FLAG", self.FLAG_DIC, datetime.datetime.now())
 
         #######################################################################################################
 
@@ -1693,17 +1693,7 @@ class UpdatePLC(PLC, threading.Thread):
             pass
 
     def check_LOOPPID_alarm(self, pid):
-        # if self.LOOPPID_Activated[pid]:
-        #     if self.LOOPPID_SATLO[pid] or self.LOOPPID_SATHI[pid]:
-        #         # print(pid, " is in normal range")
-        #         self.LOOPPIDalarmmsg(pid)
-        #     else:
-        #         self.resetLOOPPIDalarmmsg(pid)
-        #         # print(pid, " is in normal range")
-        #
-        # else:
-        #     self.resetLOOPPIDalarmmsg(pid)
-        #     pass
+
 
         if self.LOOPPID_Activated[pid]:
             if float(self.LOOPPID_Alarm_LowLimit[pid]) >= float(self.LOOPPID_Alarm_HighLimit[pid]):
@@ -2094,7 +2084,6 @@ class UpdateDataBase(threading.Thread):
                 with self.timelock:
                     self.db_time = self.dt
                 print("Database Updating", self.dt)
-                print("earlytime", self.early_dt)
 
             except Exception as e:
                 print(e)
@@ -2121,7 +2110,7 @@ class UpdateDataBase(threading.Thread):
         self.status = status
 
     def update_value(self, dic):
-        # print("Database received the data from PLC")
+        print("Database received the data from PLC")
         # print(dic)
         for key in self.TT_FP_dic:
             self.TT_FP_dic[key] = dic["data"]["TT"]["FP"]["value"][key]
@@ -2721,19 +2710,19 @@ class Message_Manager(threading.Thread):
                 # because it can detect timeout signal by itself
                 # Other module, we may just consider that the disconnection can happen and they will restart themselves
                 # But good to know time_out and manually restart them
-                if self.clock - self.plc_time > self.plc_timeout:
+                if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
                     alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {self.plc_"
                                                                      "timeout} s"})
-                if self.clock - self.watchdog_time > self.watchdog_timeout:
+                if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
                     alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {self.watchdog_"
                                                                "timeout} s"})
-                if self.clock - self.socketserver_time > self.socket_timeout:
+                if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
                     alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {self.socket_"
                                                              "timeout} s"})
-                if self.clock - self.plc_time > self.plc_timeout:
+                if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
                     alarm_received.update({"PLC TIMEOUT": "PLC hasn't update long than {self.plc_"
                                                           "timeout} s"})
-                if self.clock - self.db_time > self.database_timeout:
+                if (self.clock - self.db_time).total_seconds() > self.database_timeout:
                     alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {self.database_"
                                                                "timeout} s"})
 
