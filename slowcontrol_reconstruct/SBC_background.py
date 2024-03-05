@@ -560,6 +560,7 @@ class PLC:
             self.PT_dic[key] = round(
                 struct.unpack(">f", struct.pack(">HH", Raw_BO_PT[key].getRegister(0 + 1),
                                                 Raw_BO_PT[key].getRegister(0)))[0], 3)
+        print("PT dic",self.PT_dic)
 
         Raw_BO_REAL = {}
         for key in self.LEFT_REAL_address:
@@ -1545,7 +1546,7 @@ class UpdatePLC(PLC, threading.Thread):
                 (type, value, traceback) = sys.exc_info()
                 exception_hook(type, value, traceback)
                 # self run depend on senario, we want to rerun the module by module
-                # self.run()
+                self.run()
 
 
 
