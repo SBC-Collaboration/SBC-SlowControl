@@ -267,7 +267,7 @@ class PLC:
 
         self.Ini_Check = env.INI_CHECK
 
-        self.data_to_send = self.data_dic = {"data": {"TT": {
+        self.data_dic = {"data": {"TT": {
             "FP": {"value": self.TT_FP_dic, "high": self.TT_FP_HighLimit, "low": self.TT_FP_LowLimit},
             "BO": {"value": self.TT_BO_dic, "high": self.TT_BO_HighLimit, "low": self.TT_BO_LowLimit}},
             "PT": {"value": self.PT_dic, "high": self.PT_HighLimit,
@@ -524,6 +524,8 @@ class PLC:
         else:
             self.Read_AD()
             pass
+        with self.plc_lock:
+            self.plc_data = self.data_dic
 
 
 
