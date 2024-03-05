@@ -2095,8 +2095,7 @@ class UpdateDataBase(threading.Thread):
                 print(e)
 
             try:
-                with self.plc_lock:
-                    self.plc_data = plc_data
+                
                 self.update_value(self.plc_data)
                 self.write_data()
             except Exception as e:
