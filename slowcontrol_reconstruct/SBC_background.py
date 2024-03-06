@@ -2129,7 +2129,7 @@ class UpdateDataBase(threading.Thread):
             self.LEFT_REAL_dic[key] = dic["data"]["LEFT_REAL"]["value"][key]
         for key in self.AD_dic:
             self.AD_dic[key] = dic["data"]["AD"]["value"][key]
-        print(1)
+      
         for key in self.TT_FP_HighLimit:
             self.TT_FP_HighLimit[key] = dic["data"]["TT"]["FP"]["high"][key]
         for key in self.TT_BO_HighLimit:
@@ -2140,7 +2140,7 @@ class UpdateDataBase(threading.Thread):
             self.LEFT_REAL_HighLimit[key] = dic["data"]["LEFT_REAL"]["high"][key]
         for key in self.AD_HighLimit:
             self.AD_HighLimit[key] = dic["data"]["AD"]["high"][key]
-        print(2)
+
         for key in self.TT_FP_LowLimit:
             self.TT_FP_LowLimit[key] = dic["data"]["TT"]["FP"]["low"][key]
         for key in self.TT_BO_LowLimit:
@@ -2151,7 +2151,7 @@ class UpdateDataBase(threading.Thread):
             self.LEFT_REAL_LowLimit[key] = dic["data"]["LEFT_REAL"]["low"][key]
         for key in self.AD_LowLimit:
             self.AD_LowLimit[key] = dic["data"]["AD"]["low"][key]
-        print(3)
+
         for key in self.Valve_OUT:
             self.Valve_OUT[key] = dic["data"]["Valve"]["OUT"][key]
         for key in self.Valve_INTLKD:
@@ -2160,7 +2160,7 @@ class UpdateDataBase(threading.Thread):
             self.Valve_MAN[key] = dic["data"]["Valve"]["MAN"][key]
         for key in self.Valve_ERR:
             self.Valve_ERR[key] = dic["data"]["Valve"]["ERR"][key]
-        print(4)
+
         for key in self.Switch_OUT:
             self.Switch_OUT[key] = dic["data"]["Switch"]["OUT"][key]
         for key in self.Switch_INTLKD:
@@ -2169,7 +2169,7 @@ class UpdateDataBase(threading.Thread):
             self.Switch_MAN[key] = dic["data"]["Switch"]["MAN"][key]
         for key in self.Switch_ERR:
             self.Switch_ERR[key] = dic["data"]["Switch"]["ERR"][key]
-        print(5)
+
         for key in self.Din_dic:
             self.Din_dic[key] = dic["data"]["Din"]["value"][key]
 
@@ -2183,7 +2183,7 @@ class UpdateDataBase(threading.Thread):
             self.LEFT_REAL_Alarm[key] = dic["Alarm"]["LEFT_REAL"][key]
         for key in self.AD_dic:
             self.AD_Alarm[key] = dic["Alarm"]["AD"][key]
-        print(6)
+
         for key in self.LOOPPID_MODE0:
             self.LOOPPID_MODE0[key] = dic["data"]["LOOPPID"]["MODE0"][key]
         for key in self.LOOPPID_MODE1:
@@ -2241,7 +2241,7 @@ class UpdateDataBase(threading.Thread):
             self.FLAG_DIC[key] = dic["data"]["FLAG"]["value"][key]
         for key in self.FLAG_INTLKD:
             self.FLAG_INTLKD[key] = dic["data"]["FLAG"]["INTLKD"][key]
-        print(8)
+
         for key in self.FF_DIC:
             self.FF_DIC[key] = dic["data"]["FF"][key]
         print(9)
