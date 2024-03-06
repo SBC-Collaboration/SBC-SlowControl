@@ -119,7 +119,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
-        self.ImagePath = os.path.join(self.Path, "../images")
+        self.ImagePath = os.path.join(self.Path, "images")
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
