@@ -2766,7 +2766,6 @@ class Message_Manager(threading.Thread):
     def __init__(self, clock, db_time, watchdog_time, plc_time, socketserver_time, timelock, alarm_stack, alarm_lock):
         super().__init__()
         self.alarm_init()
-
         self.running = True
         self.clock = clock  # hanging when on hold to slack -> internet connection/slack server
         self.db_time = db_time  # hanging when disconnected from mysql
@@ -2846,6 +2845,7 @@ class Message_Manager(threading.Thread):
         while self.running:
             try:
                 with self.alarm_lock:
+                    print("watchdog", self.alarm_stack)
                     alarm_received = self.alarm_stack
                 with self.time_lock:
                     self.clock = datetime_in_1e5micro()
