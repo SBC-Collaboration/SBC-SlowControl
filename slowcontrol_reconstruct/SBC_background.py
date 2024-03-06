@@ -2097,7 +2097,6 @@ class UpdateDataBase(threading.Thread):
             try:
                 with self.plc_lock:
                     data_received = dict(self.plc_data)
-                    print("PLC lock database",data_received["data"]["PT"]["value"])
                 self.update_value(data_received)
                 self.write_data()
             except Exception as e:
@@ -2117,7 +2116,7 @@ class UpdateDataBase(threading.Thread):
 
     def update_value(self, dic):
         # print("Database received the data from PLC")
-        print("PT in database" , dic["data"]["PT"]["value"])
+        # print("PT in database" , dic["data"]["PT"]["value"])
         for key in self.TT_FP_dic:
             self.TT_FP_dic[key] = dic["data"]["TT"]["FP"]["value"][key]
 
@@ -2257,6 +2256,7 @@ class UpdateDataBase(threading.Thread):
 
         self.MainAlarm = dic["MainAlarm"]
         self.MAN_SET = dic["MAN_SET"]
+        print("PT in database" , dic["data"]["PT"]["value"])
         print("Database received the data from PLC")
 
     def write_data(self):
