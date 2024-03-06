@@ -2129,7 +2129,7 @@ class UpdateDataBase(threading.Thread):
             self.LEFT_REAL_dic[key] = dic["data"]["LEFT_REAL"]["value"][key]
         for key in self.AD_dic:
             self.AD_dic[key] = dic["data"]["AD"]["value"][key]
-      
+
         for key in self.TT_FP_HighLimit:
             self.TT_FP_HighLimit[key] = dic["data"]["TT"]["FP"]["high"][key]
         for key in self.TT_BO_HighLimit:

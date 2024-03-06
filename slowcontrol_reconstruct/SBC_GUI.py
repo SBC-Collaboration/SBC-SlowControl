@@ -10327,7 +10327,7 @@ class UpdateClient(QtCore.QObject):
 
         print("client is connecting to the ZMQ server")
 
-        self.receive_dic = copy.copy(env.DIC_PACK)
+        self.receive_dic = copy.deepcopy(env.DIC_PACK)
         self.commands_package = json.dumps({}).encode('utf-8')
 
     @QtCore.Slot()

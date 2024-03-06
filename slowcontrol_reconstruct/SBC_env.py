@@ -661,7 +661,7 @@ DIC_PACK = {"data": {"TT": {"FP": {"value": TT_FP_DIC, "high": TT_FP_HIGHLIMIT, 
                                   "FLAG": {"value":FLAG_DIC,
                                            "INTLKD":FLAG_INTLKD,
                                            "Busy":FLAG_BUSY},
-                                  "Procedure": {"Running": PROCEDURE_RUNNING, "INTLKD": PROCEDURE_INTLKD, "EXIT": PROCEDURE_EXIT}
+                                  "Procedure": {"Running": PROCEDURE_RUNNING, "INTLKD": PROCEDURE_INTLKD, "EXIT": PROCEDURE_EXIT},
                                   "FF": FF_DIC,
                                   "PARA_I": PARAM_I_DIC,
                                   "PARA_F": PARAM_F_DIC,
