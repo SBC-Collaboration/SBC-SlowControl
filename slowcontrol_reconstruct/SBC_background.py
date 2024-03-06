@@ -2101,8 +2101,8 @@ class UpdateDataBase(threading.Thread):
             except Exception as e:
                 print(e)
                 logging.error(e)
-                (type, value, traceback) = sys.exc_info()
-                exception_hook(type, value, traceback)
+                # (type, value, traceback) = sys.exc_info()
+                # exception_hook(type, value, traceback)
 
 
             time.sleep(self.base_period)
@@ -2129,7 +2129,7 @@ class UpdateDataBase(threading.Thread):
             self.LEFT_REAL_dic[key] = dic["data"]["LEFT_REAL"]["value"][key]
         for key in self.AD_dic:
             self.AD_dic[key] = dic["data"]["AD"]["value"][key]
-
+        print(1)
         for key in self.TT_FP_HighLimit:
             self.TT_FP_HighLimit[key] = dic["data"]["TT"]["FP"]["high"][key]
         for key in self.TT_BO_HighLimit:
@@ -2140,7 +2140,7 @@ class UpdateDataBase(threading.Thread):
             self.LEFT_REAL_HighLimit[key] = dic["data"]["LEFT_REAL"]["high"][key]
         for key in self.AD_HighLimit:
             self.AD_HighLimit[key] = dic["data"]["AD"]["high"][key]
-
+        print(2)
         for key in self.TT_FP_LowLimit:
             self.TT_FP_LowLimit[key] = dic["data"]["TT"]["FP"]["low"][key]
         for key in self.TT_BO_LowLimit:
@@ -2151,7 +2151,7 @@ class UpdateDataBase(threading.Thread):
             self.LEFT_REAL_LowLimit[key] = dic["data"]["LEFT_REAL"]["low"][key]
         for key in self.AD_LowLimit:
             self.AD_LowLimit[key] = dic["data"]["AD"]["low"][key]
-
+        print(3)
         for key in self.Valve_OUT:
             self.Valve_OUT[key] = dic["data"]["Valve"]["OUT"][key]
         for key in self.Valve_INTLKD:
