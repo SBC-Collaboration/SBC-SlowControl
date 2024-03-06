@@ -514,18 +514,18 @@ class PLC:
             self.Read_BO()
             pass
 
-        if not self.Client_AD.is_socket_open():
-            try:
-                self.Client_AD.connect()
-                print("AD Reconnected")
-            except:
-                print("AD Reconnect failed, trying again")
-                # Wait for 5 seconds before retrying
-        else:
-            self.Read_AD()
-            pass
+        # if not self.Client_AD.is_socket_open():
+        #     try:
+        #         self.Client_AD.connect()
+        #         print("AD Reconnected")
+        #     except:
+        #         print("AD Reconnect failed, trying again")
+        #         # Wait for 5 seconds before retrying
+        # else:
+        #     self.Read_AD()
+        #     pass
         with self.plc_lock:
-            self.plc_data = self.data_dic
+            self.plc_data.update(self.data_dic)
 
 
 
