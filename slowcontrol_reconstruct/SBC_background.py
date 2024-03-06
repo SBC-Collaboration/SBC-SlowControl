@@ -2241,7 +2241,7 @@ class UpdateDataBase(threading.Thread):
             self.FLAG_DIC[key] = dic["data"]["FLAG"]["value"][key]
         for key in self.FLAG_INTLKD:
             self.FLAG_INTLKD[key] = dic["data"]["FLAG"]["INTLKD"][key]
-
+        print(8)
         for key in self.FF_DIC:
             self.FF_DIC[key] = dic["data"]["FF"][key]
         for key in self.PARAM_F_DIC:
