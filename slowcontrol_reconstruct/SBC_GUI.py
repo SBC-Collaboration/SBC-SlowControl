@@ -119,7 +119,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
-        self.ImagePath = os.path.join(self.Path, "images")
+        self.ImagePath = os.path.join(self.Path, "../images")
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
@@ -10383,7 +10383,7 @@ class UpdateClient(QtCore.QObject):
             self.client_socket.send(self.commands_package)
             self.client_clear_commands.emit()
         else:
-            self.client_socket.send({})
+            self.client_socket.send(json.dumps({}).encode('utf-8'))
         self.readcommand = True
         print("finished sending commands")
 
