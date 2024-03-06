@@ -2077,7 +2077,7 @@ class UpdateDataBase(threading.Thread):
 
         print("begin updating Database")
 
-    @QtCore.Slot()
+
     def run(self):
 
         self.Running = True
@@ -2097,6 +2097,7 @@ class UpdateDataBase(threading.Thread):
             try:
                 with self.plc_lock:
                     data_received = dict(self.plc_data)
+                    print("PLC lock database",data_received)
                 self.update_value(data_received)
                 self.write_data()
             except Exception as e:
@@ -2107,7 +2108,6 @@ class UpdateDataBase(threading.Thread):
             time.sleep(self.base_period)
             # raise Exception("Test breakup")
 
-    @QtCore.Slot()
     def stop(self):
         self.Running = False
 
