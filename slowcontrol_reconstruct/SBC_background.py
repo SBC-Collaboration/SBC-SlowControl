@@ -498,8 +498,8 @@ class PLC:
             except:
                 print("NI Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
-            finally:
-                self.Read_NI_empty()
+            # finally:
+            #     self.Read_NI_empty()
         else:
             self.Read_NI()
             pass
@@ -513,8 +513,8 @@ class PLC:
             except:
                 print("BO Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
-            finally:
-                self.Read_BO_empty()
+            # finally:
+            #     self.Read_BO_empty()
         else:
             self.Read_BO()
             pass
@@ -526,8 +526,8 @@ class PLC:
             except:
                 print("AD Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
-            finally:
-                self.Read_AD_empty()
+            # finally:
+            #     self.Read_AD_empty()
         else:
             self.Read_AD()
             pass
