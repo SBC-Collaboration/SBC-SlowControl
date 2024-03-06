@@ -2904,15 +2904,25 @@ class MainClass():
     def StartUpdater(self):
 
         # Read PLC value on another thread
-        self.threadPLC = UpdatePLC(self.plc_data,self.plc_lock,self.command_data,self.command_lock,self.plc_time,
-                              self.timelock,self.alarm_stack,self.alarm_lock)
-        self.threadDatabase = UpdateDataBase(self.plc_data, self.plc_lock, self.db_time, self.timelock)
+        self.threadPLC = UpdatePLC(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
+                                   command_lock=self.command_lock, plc_time=self.plc_time, timelock=self.timelock,
+                                   alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
-        self.threadWatchdog = LocalWatchdog(self.db_time, self.watchdog_time, self.timelock,self.alarm_stack,self.alarm_lock)
-        self.threadSocket = UpdateServer(self.plc_data, self.plc_lock, self.command_data, self.command_lock,
-                                    self.socketserver_time, self.timelock)
-        self.threadMessager = Message_Manager(self.clock, self.db_time, self.watchdog_time, self.plc_time,
-                                         self.socketserver_time, self.timelock, self.alarm_stack, self.alarm_lock)
+        self.threadDatabase = UpdateDataBase(plc_data=self.plc_data, plc_lock=self.plc_lock, db_time=self.db_time,
+                                             timelock=self.timelock)
+
+        self.threadWatchdog = LocalWatchdog(db_time=self.db_time, watchdogtime=self.watchdog_time,
+                                            timelock=self.timelock,
+                                            alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
+
+        self.threadSocket = UpdateServer(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
+                                         command_lock=self.command_lock, sockettime=self.socketserver_time,
+                                         timelock=self.timelock)
+
+        self.threadMessager = Message_Manager(clock=self.clock, db_time=self.db_time, watchdog_time=self.watchdog_time,
+                                              plc_time=self.plc_time,
+                                              socketserver_time=self.socketserver_time, timelock=self.timelock,
+                                              alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         # wait for PLC initialization finished
         self.threadPLC.start()
