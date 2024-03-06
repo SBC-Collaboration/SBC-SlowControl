@@ -2118,7 +2118,6 @@ class UpdateDataBase(threading.Thread):
 
     def update_value(self, dic):
         # print("Database received the data from PLC")
-        # print("PT in database" , dic["data"]["PT"]["value"])
         for key in self.TT_FP_dic:
             self.TT_FP_dic[key] = dic["data"]["TT"]["FP"]["value"][key]
 
@@ -2259,7 +2258,6 @@ class UpdateDataBase(threading.Thread):
 
         self.MainAlarm = dic["MainAlarm"]
 
-        print("PT in database", dic["data"]["PT"]["value"])
         print("Database received the data from PLC")
 
     def write_data(self):
