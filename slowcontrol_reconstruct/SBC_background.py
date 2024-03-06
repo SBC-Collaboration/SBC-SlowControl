@@ -2885,7 +2885,7 @@ class UpdateServer(threading.Thread):
 
 class MainClass():
     def __init__(self):
-        self.plc_data = copy.copy(env.DIC_PACK)
+        self.plc_data = copy.deepcopy(env.DIC_PACK)
         self.plc_lock = threading.Lock()
         self.command_data = {}
         self.command_lock = threading.Lock()
