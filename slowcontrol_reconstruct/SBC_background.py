@@ -498,6 +498,8 @@ class PLC:
             except:
                 print("NI Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
+            finally:
+                self.Read_NI_empty()
         else:
             self.Read_NI()
             pass
@@ -511,6 +513,8 @@ class PLC:
             except:
                 print("BO Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
+            finally:
+                self.Read_BO_empty()
         else:
             self.Read_BO()
             pass
@@ -522,6 +526,8 @@ class PLC:
             except:
                 print("AD Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
+            finally:
+                self.Read_AD_empty()
         else:
             self.Read_AD()
             pass
@@ -549,6 +555,10 @@ class PLC:
                 self.TT_FP_dic[key] = 273.15 + read_value
             else:
                 self.TT_FP_dic[key] = read_value
+    def Read_NI_empty(self):
+        for key in self.TT_FP_address:
+            self.TT_FP_dic[key] = 300
+
     def Read_BO(self):
         Raw_BO_TT_BO = {}
         for key in self.TT_BO_address:
@@ -804,6 +814,131 @@ class PLC:
                     0]
         # print("TIME", self.TIME_DIC)
 
+    def Read_BO_empty(self):
+        Raw_RTDs_FP = {}
+        for key in self.TT_FP_address:
+            Raw_RTDs_FP[key] = self.Client_NI.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
+            # also transform C into K if value is not NULL
+            read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1),
+                                                               Raw_RTDs_FP[key].getRegister(0)))[0], 3)
+            if read_value < 849:
+
+                self.TT_FP_dic[key] = 273.15 + read_value
+            else:
+                self.TT_FP_dic[key] = read_value
+
+    def Read_NI_empty(self):
+        for key in self.TT_FP_address:
+            self.TT_FP_dic[key] = 0
+
+    def Read_BO(self):
+        for key in self.TT_BO_address:
+            self.TT_BO_dic[key] = 0
+
+        for key in self.PT_address:
+            self.PT_dic[key] = 0
+
+        for key in self.LEFT_REAL_address:
+            self.LEFT_REAL_dic[key] = 0
+
+            # print(key, "'s' value is", self.PT_dic[key])
+
+
+        for key in self.valve_address:
+
+            self.Valve_OUT[key] = 0
+            self.Valve_Busy[key] = 0
+            self.Valve_INTLKD[key] = 0
+            self.Valve_MAN[key] = 0
+            self.Valve_ERR[key] = 0
+
+        for key in self.Switch_address:
+            self.Switch_OUT[key] = 0
+            self.Switch_INTLKD[key] = 0
+            self.Switch_MAN[key] = 0
+            self.Switch_ERR[key] = 0
+
+        for key in self.Din_address:
+            self.Din_dic[key] = 0
+
+        for key in self.LOOPPID_ADR_BASE:
+            self.LOOPPID_OUT[key] = 0
+            self.LOOPPID_IN[key] = 0
+            self.LOOPPID_HI_LIM[key] = 0
+            self.LOOPPID_LO_LIM[key] = 0
+            self.LOOPPID_SET0[key] = 0
+            self.LOOPPID_SET1[key] = 0
+            self.LOOPPID_SET2[key] = 0
+            self.LOOPPID_SET3[key] = 0
+            self.LOOPPID_Busy[key] = 0
+
+        ##########################################################################################
+
+
+
+        for key in self.LOOP2PT_ADR_BASE:
+            self.LOOP2PT_SET1[key] = 0
+            self.LOOP2PT_SET2[key] = 0
+            self.LOOP2PT_SET3[key] = 0
+            self.LOOP2PT_Busy[key] = 0
+
+        ############################################################################################
+        # procedure
+
+        for key in self.Procedure_address:
+
+            self.Procedure_running[key] = 0
+            self.Procedure_INTLKD[key] = 0
+            self.Procedure_EXIT[key] = 0
+
+        ##################################################################################################
+
+        for key in self.INTLK_A_ADDRESS:
+
+            self.INTLK_A_DIC[key] = 0
+            self.INTLK_A_EN[key] = 0
+            self.INTLK_A_COND[key] = 0
+            self.INTLK_A_Busy[key] = 0
+
+        for key in self.INTLK_D_ADDRESS:
+            self.INTLK_D_DIC[key] = 0
+            self.INTLK_D_EN[key] = 0
+            self.INTLK_D_COND[key] = 0
+            self.INTLK_D_Busy[key] = 0
+
+        ############################################################################################
+        # FLAG
+        for key in self.FLAG_ADDRESS:
+            self.FLAG_DIC[key] = 0
+            self.FLAG_INTLKD[key] = 0
+            self.FLAG_Busy[key] = 0
+
+        # print("PLC FLAG", self.FLAG_DIC, datetime.datetime.now())
+
+        #######################################################################################################
+
+        ##FF
+        for key in self.FF_ADDRESS:
+            self.FF_DIC[key] = 0
+
+        ## PARAMETER
+        Raw_PARAM_F = {}
+        for key in self.PARAM_F_ADDRESS:
+            self.PARAM_F_DIC[key] = 0
+
+        for key in self.PARAM_I_ADDRESS:
+            self.PARAM_I_DIC[key] = 0
+
+        for key in self.PARAM_B_ADDRESS:
+            self.PARAM_B_DIC[key] = 0
+
+        for key in self.PARAM_T_ADDRESS:
+            self.PARAM_T_DIC[key] = 0
+
+        ###TIME
+        for key in self.TIME_ADDRESS:
+            self.TIME_DIC[key] = 0
+
     def Read_AD(self):
         Raw_AD = {}
         Raw_inter_AD = {}
@@ -815,6 +950,10 @@ class PLC:
                 self.AD_dic[key] = round(Raw_inter_AD[key] / (Raw_inter_AD[key] + 1) * 100, 2)
             else:
                 self.AD_dic[key] = -1
+
+    def Read_AD_empty(self):
+        for key in self.AD_address:
+            self.AD_dic[key] = -1
 
     def write_data(self, received_dict):
         message = received_dict
