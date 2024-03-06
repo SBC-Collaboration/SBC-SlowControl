@@ -1524,7 +1524,7 @@ class UpdatePLC(PLC, threading.Thread):
                     self.plc_time = early_datetime()
                     print("PLC updating", self.plc_time)
                 self.ReadAll()
-                print("plcdata in updateplc", self.plc_data["data"]["PT"]["value"])
+                # print("plcdata in updateplc", self.plc_data["data"]["PT"]["value"])
                 with self.command_lock:
                     self.write_data(self.command_data)
                 # test signal
@@ -2092,7 +2092,6 @@ class UpdateDataBase(threading.Thread):
             except Exception as e:
                 print(e)
                 logging.error(e)
-                print(e)
 
             try:
                 with self.plc_lock:
@@ -2102,6 +2101,8 @@ class UpdateDataBase(threading.Thread):
             except Exception as e:
                 print(e)
                 logging.error(e)
+                (type, value, traceback) = sys.exc_info()
+                exception_hook(type, value, traceback)
 
 
             time.sleep(self.base_period)
