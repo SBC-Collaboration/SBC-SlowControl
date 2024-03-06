@@ -498,8 +498,8 @@ class PLC:
             except:
                 print("NI Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
-            # finally:
-            #     self.Read_NI_empty()
+            finally:
+                self.Read_NI_empty()
         else:
             self.Read_NI()
             pass
@@ -513,8 +513,8 @@ class PLC:
             except:
                 print("BO Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
-            # finally:
-            #     self.Read_BO_empty()
+            finally:
+                self.Read_BO_empty()
         else:
             self.Read_BO()
             pass
@@ -526,8 +526,8 @@ class PLC:
             except:
                 print("AD Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
-            # finally:
-            #     self.Read_AD_empty()
+            finally:
+                self.Read_AD_empty()
         else:
             self.Read_AD()
             pass
@@ -1475,7 +1475,7 @@ class PLC:
     def ReadFPAttribute(self, address):
         Raw = self.Client_NI.read_holding_registers(address, count=1, unit=0x01)
         output = struct.pack("H", Raw.getRegister(0))
-        print(Raw.getRegister(0))
+        # print(Raw.getRegister(0))
         return output
 
     def SetFPRTDAttri(self, mode, address):
@@ -1881,7 +1881,7 @@ class UpdatePLC(PLC, threading.Thread):
     def TTBOalarmmsg(self, pid):
         self.TT_BO_Alarm[pid] = True
         # and send email or slack messages
-        print(self.TT_BO_para[pid])
+        # print(self.TT_BO_para[pid])
         if self.TT_BO_para[pid] >= self.TT_BO_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(
                 pid=pid, current=self.TT_BO_dic[pid],
