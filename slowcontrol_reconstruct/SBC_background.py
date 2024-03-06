@@ -265,6 +265,7 @@ class PLC:
         self.TIME_ADDRESS = copy.copy(env.TIME_ADDRESS)
         self.TIME_DIC = copy.copy(env.TIME_DIC)
 
+
         self.Ini_Check = env.INI_CHECK
 
         self.data_dic = {"data": {"TT": {
@@ -2244,7 +2245,6 @@ class UpdateDataBase(threading.Thread):
 
         for key in self.FF_DIC:
             self.FF_DIC[key] = dic["data"]["FF"][key]
-        print(9, dic["data"])
         for key in self.PARAM_F_DIC:
             self.PARAM_F_DIC[key] = dic["data"]["PARA_F"][key]
 
@@ -2258,8 +2258,8 @@ class UpdateDataBase(threading.Thread):
             self.TIME_DIC[key] = dic["data"]["TIME"][key]
 
         self.MainAlarm = dic["MainAlarm"]
-        self.MAN_SET = dic["MAN_SET"]
-        print("PT in database" , dic["data"]["PT"]["value"])
+
+        print("PT in database", dic["data"]["PT"]["value"])
         print("Database received the data from PLC")
 
     def write_data(self):
