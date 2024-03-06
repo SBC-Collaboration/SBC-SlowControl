@@ -2244,9 +2244,10 @@ class UpdateDataBase(threading.Thread):
         print(8)
         for key in self.FF_DIC:
             self.FF_DIC[key] = dic["data"]["FF"][key]
+        print(9)
         for key in self.PARAM_F_DIC:
             self.PARAM_F_DIC[key] = dic["data"]["PARAM_F"][key]
-        print(9)
+
         for key in self.PARAM_I_DIC:
             self.PARAM_I_DIC[key] = dic["data"]["PARAM_I"][key]
         for key in self.PARAM_B_DIC:
