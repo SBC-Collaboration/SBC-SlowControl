@@ -2244,16 +2244,16 @@ class UpdateDataBase(threading.Thread):
 
         for key in self.FF_DIC:
             self.FF_DIC[key] = dic["data"]["FF"][key]
-        print(9)
+        print(9, dic["data"])
         for key in self.PARAM_F_DIC:
-            self.PARAM_F_DIC[key] = dic["data"]["PARAM_F"][key]
+            self.PARAM_F_DIC[key] = dic["data"]["PARA_F"][key]
 
         for key in self.PARAM_I_DIC:
-            self.PARAM_I_DIC[key] = dic["data"]["PARAM_I"][key]
+            self.PARAM_I_DIC[key] = dic["data"]["PARA_I"][key]
         for key in self.PARAM_B_DIC:
-            self.PARAM_B_DIC[key] = dic["data"]["PARAM_B"][key]
+            self.PARAM_B_DIC[key] = dic["data"]["PARA_B"][key]
         for key in self.PARAM_T_DIC:
-            self.PARAM_T_DIC[key] = dic["data"]["PARAM_T"][key]
+            self.PARAM_T_DIC[key] = dic["data"]["PARA_T"][key]
         for key in self.TIME_DIC:
             self.TIME_DIC[key] = dic["data"]["TIME"][key]
 
