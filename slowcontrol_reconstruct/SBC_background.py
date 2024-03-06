@@ -2842,11 +2842,12 @@ class Message_Manager(threading.Thread):
             print(f"Error: {e}")
 
     def run(self):
+        alarm_received = {}
         while self.running:
             try:
                 with self.alarm_lock:
-                    print("watchdog", self.alarm_stack)
-                    alarm_received = self.alarm_stack
+                    alarm_received.update(self.alarm_stack)
+                    print("watchdog", alarm_received)
                 with self.time_lock:
                     self.clock = datetime_in_1e5micro()
                     print("Message Manager running ", self.clock)
@@ -2878,7 +2879,7 @@ class Message_Manager(threading.Thread):
                         self.slack_alarm(msg)
                     # and clear the alarm stack
                     with self.alarm_lock:
-                        self.alarm_stack = {}
+                        self.alarm_stack.clear()
                     self.para_alarm = 0
                 self.para_alarm += 1
                 time.sleep(self.base_period)
