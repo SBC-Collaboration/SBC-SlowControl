@@ -1524,7 +1524,7 @@ class UpdatePLC(PLC, threading.Thread):
                     self.plc_time = early_datetime()
                     print("PLC updating", self.plc_time)
                 self.ReadAll()
-                # print("plcdata", self.plc_data["data"]["PT"]["value"])
+                print("plcdata in updateplc", self.plc_data["data"]["PT"]["value"])
                 with self.command_lock:
                     self.write_data(self.command_data)
                 # test signal
