@@ -1124,7 +1124,7 @@ class MainWindow(QtWidgets.QMainWindow):
         install()
         self.clientthread = UpdateClient(commands=self.commands, command_lock=self.command_lock)
         # when new data comes, update the display
-        self.UpClient.client_data_transport.connect(lambda: self.updatedisplay(self.UpClient.receive_dic))
+        self.clientthread.client_data_transport.connect(lambda: self.updatedisplay(self.clientthread.receive_dic))
         self.clientthread.run()
 
    # Stop all updater threads
