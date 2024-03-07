@@ -9,7 +9,7 @@ v0.1.2 Alarm implemented 07/01/20 ML
 v0.1.3 PLC online detection, poll PLCs only when values are updated, fix Centos window size bug 04/03/20 ML
 """
 
-import os, sys, time, platform, datetime, random, pickle, cgitb, traceback, signal,copy, json, socket
+import os, sys, time, platform, datetime, random, pickle, cgitb, traceback, signal,copy, json, socket, threading
 
 
 from PySide2 import QtWidgets, QtCore, QtGui
@@ -115,6 +115,24 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__(parent)
         self.GUI_design()
         self.Alarm_system()
+        # Set user to guest by default
+        self.User = "Guest"
+        self.UserTimer = QtCore.QTimer(self)
+        self.UserTimer.setSingleShot(True)
+        self.UserTimer.timeout.connect(self.Timeout)
+        self.ActivateControls(False)
+
+        # Initialize PLC live counters
+
+        self.PLCLiveCounter = 0
+
+        self.LoginT.Button.clicked.connect(self.ChangeUser)
+        self.LoginP.Button.clicked.connect(self.ChangeUser)
+
+        App.aboutToQuit.connect(self.StopUpdater)
+        # Start display updater;
+        self.StartUpdater()
+        self.signal_connection()
 
     def GUI_design(self):
         # Get background image path
@@ -1099,67 +1117,20 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.AlarmMatrix = self.BORTDAlarmMatrix + self.FPRTDAlarmMatrix + self.PTAlarmMatrix + self.LEFTVariableMatrix + self.ADVariableMatrix + self.DinAlarmMatrix + self.LOOPPIDAlarmMatrix
 
-        # Set user to guest by default
-        self.User = "Guest"
-        self.UserTimer = QtCore.QTimer(self)
-        self.UserTimer.setSingleShot(True)
-        self.UserTimer.timeout.connect(self.Timeout)
-        self.ActivateControls(False)
 
-        # Initialize PLC live counters
-
-        self.PLCLiveCounter = 0
-
-
-        self.LoginT.Button.clicked.connect(self.ChangeUser)
-        self.LoginP.Button.clicked.connect(self.ChangeUser)
-
-
-        App.aboutToQuit.connect(self.StopUpdater)
-        # Start display updater;
-        self.StartUpdater()
-
-        self.signal_connection()
-
-    # send_command_signal_MW = QtCore.Signal(object)
-    send_command_signal_MW = QtCore.Signal()
 
     def StartUpdater(self):
-
+        self.command_lock = threading.Lock()
         install()
-
-        self.ClientUpdateThread = QtCore.QThread()
-        self.UpClient = UpdateClient()
-        self.UpClient.moveToThread(self.ClientUpdateThread)
-        self.ClientUpdateThread.started.connect(self.UpClient.run)
-
-        # signal receive the signal and send command to client
-        self.UpClient.client_command_fectch.connect(self.sendcommands)
-        # self.send_command_signal_MW.connect(self.UpClient.commands)
-        self.send_command_signal_MW.connect(lambda:self.UpClient.commands(self.commands))
-
-        #signal clear the self.command
-
-        self.UpClient.client_clear_commands.connect(self.clearcommands)
-        # transport read client data into GUI, this makes sure that only when new directory comes, main thread will update the display
-
+        self.clientthread = UpdateClient(commands=self.commands, command_lock=self.command_lock)
+        # when new data comes, update the display
         self.UpClient.client_data_transport.connect(lambda: self.updatedisplay(self.UpClient.receive_dic))
-        self.ClientUpdateThread.start()
+        self.clientthread.run()
 
-
-
-
-
-
-    # Stop all updater threads
+   # Stop all updater threads
     @QtCore.Slot()
     def StopUpdater(self):
-        # self.UpPLC.stop()
-        # self.PLCUpdateThread.quit()
-        # self.PLCUpdateThread.wait()
-        self.UpClient.stop()
-        self.ClientUpdateThread.quit()
-        self.ClientUpdateThread.wait()
+        self.clientthread.join()
 
 
 
@@ -4311,10 +4282,7 @@ class MainWindow(QtWidgets.QMainWindow):
         print(self.commands)
         # print("signal received")
 
-    @QtCore.Slot()
-    def clearcommands(self):
-        self.commands = {}
-
+    
     def FindDistinctTrue(self, v0, v1, v2, v3):
         if v0 == True:
             if True in [v1, v2, v3]:
@@ -8254,11 +8222,9 @@ class MainWindow(QtWidgets.QMainWindow):
         return
 
 
-class UpdateClient(QtCore.QObject):
+class UpdateClient(threading.Thread):
     client_data_transport = QtCore.Signal()
-    client_command_fectch = QtCore.Signal()
-    client_clear_commands = QtCore.Signal()
-    # def __init__(self, MW, parent=None):
+
     def __init__(self, commands, command_lock):
         super().__init__()
 
@@ -8266,7 +8232,6 @@ class UpdateClient(QtCore.QObject):
         self.host = '127.0.0.1'
         self.port = 6666
         self.Running=False
-        self.readcommand = False
         self.period = 1
         self.commands = commands
         self.command_lock = command_lock
@@ -8289,7 +8254,7 @@ class UpdateClient(QtCore.QObject):
 
                 while True:
                     # send commands
-                    self.client_command_fectch.emit()
+                    self.send_commands(self.commands)
                     # Receive JSON data from the server
                     print("client commands sent")
                     json_data = self.client_socket.recv(1024).decode('utf-8')
@@ -8319,19 +8284,14 @@ class UpdateClient(QtCore.QObject):
         self.receive_dic = message
         self.client_data_transport.emit()
 
-    @QtCore.Slot(object)
-    def commands(self, MWcommands):
+
+    def send_commands(self):
         # claim that whether MAN_SET is True or false
-        print("Commands are here", datetime.datetime.now())
-        print("commands", MWcommands)
-        self.commands_package = json.dumps(MWcommands).encode('utf-8')
-        print("commands len", len(MWcommands))
-        if len(MWcommands) != 0:
-            self.client_socket.send(self.commands_package)
-            self.client_clear_commands.emit()
-        else:
-            self.client_socket.send(json.dumps({}).encode('utf-8'))
-        self.readcommand = True
+        print("Commands are here", self.commands,datetime.datetime.now())
+        self.commands_package = json.dumps(self.commands).encode('utf-8')
+        print("commands len", len(self.commands))
+        self.client_socket.send(self.commands_package)
+        self.commands.clear()
         print("finished sending commands")
 
 
