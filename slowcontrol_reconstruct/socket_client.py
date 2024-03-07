@@ -24,6 +24,7 @@ client_socket.send(serialized_data)
 received_data = client_socket.recv(1024).decode('utf-8')
 
 # Deserialize the received JSON data into a dictionary
+print("received data before load",received_data)
 received_dict = json.loads(received_data)
 print("Received data from server:", received_dict)
 
