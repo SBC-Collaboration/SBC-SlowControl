@@ -1124,8 +1124,8 @@ class MainWindow(QtWidgets.QMainWindow):
         install()
         self.clientthread = UpdateClient(commands=self.commands, command_lock=self.command_lock)
         # when new data comes, update the display
-        self.clientthread.client_data_transport.connect(lambda: self.updatedisplay(self.clientthread.receive_dic))
-        self.clientthread.run()
+        self.clientthread.client_data_transport.connect(self.updatedisplay)
+        self.clientthread.start()
 
    # Stop all updater threads
     @QtCore.Slot()
@@ -8222,9 +8222,8 @@ class MainWindow(QtWidgets.QMainWindow):
         return
 
 
-class UpdateClient(threading.Thread):
-    client_data_transport = QtCore.Signal()
-
+class UpdateClient(QtCore.QThread):
+    client_data_transport = QtCore.Signal(object)
     def __init__(self, commands, command_lock):
         super().__init__()
 
@@ -8282,7 +8281,7 @@ class UpdateClient(threading.Thread):
     def update_data(self,message):
         #message mush be a dictionary
         self.receive_dic = message
-        self.client_data_transport.emit()
+        self.client_data_transport.emit(self.receive_dic)
 
 
     def send_commands(self):
@@ -8291,7 +8290,8 @@ class UpdateClient(threading.Thread):
         self.commands_package = json.dumps(self.commands).encode('utf-8')
         print("commands len", len(self.commands))
         self.client_socket.send(self.commands_package)
-        self.commands.clear()
+        with self.command_lock:
+            self.commands.clear()
         print("finished sending commands")
 
 

@@ -1862,7 +1862,6 @@ class UpdatePLC(PLC, threading.Thread):
         self.TT_FP_Alarm[pid] = True
         # and send email or slack messages
         # every time interval send a alarm message
-        print(self.TT_FP_para[pid])
         if self.TT_FP_para[pid] >= self.TT_FP_rate[pid]:
             msg = "SBC alarm: {pid} is out of range: CURRENT VALUE: {current}, LO_LIM: {low}, HI_LIM: {high}".format(
                 pid=pid, current=self.TT_FP_dic[pid],
@@ -2230,7 +2229,7 @@ class UpdateDataBase(threading.Thread):
                 print("Database Updating", self.dt)
 
             except Exception as e:
-                print(e)
+                print("Error",e)
                 logging.error(e)
 
             try:
@@ -2239,7 +2238,7 @@ class UpdateDataBase(threading.Thread):
                 self.update_value(data_received)
                 self.write_data()
             except Exception as e:
-                print(e)
+                print("Error",e)
                 logging.error(e)
                 # (type, value, traceback) = sys.exc_info()
                 # exception_hook(type, value, traceback)
@@ -2824,7 +2823,7 @@ class Message_Manager(threading.Thread):
             print("mail sent successfully")
         except Exception as e:
             print("mail failed to send")
-            print(e)
+            print("Error",e)
 
     def slack_alarm(self, message):
         try:
@@ -2836,7 +2835,7 @@ class Message_Manager(threading.Thread):
             )
             # Print result, which includes information about the message (like TS)
 
-            print(result)
+            print("slackalarm",result)
 
         except SlackApiError as e:
             print(f"Error: {e}")
@@ -2886,7 +2885,7 @@ class Message_Manager(threading.Thread):
 
             except Exception as e:
                 self.slack_alarm("Slack_server crashes.")
-                print(e)
+                print("Error",e)
                 logging.error(e)
                 # restart itself
                 time.sleep(self.base_period*60)
@@ -2940,7 +2939,7 @@ class LocalWatchdog(threading.Thread):
                 with self.alarm_lock:
                     self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
                                                                               "on COUPP server"})
-                    print(e)
+                    print("Error",e)
                     logging.error(e)
                     # restart itself
                     time.sleep(self.base_period * 60)
