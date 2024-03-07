@@ -30,8 +30,8 @@ while True:
     print("Received data from client:", received_dict)
 
     # Create a response dictionary
-    # response_dict = env.DIC_PACK
-    response_dict ={'message': 'Hello from server!', 'status': 'OK'}
+    response_dict = env.DIC_PACK
+    # response_dict ={'message': 'Hello from server!', 'status': 'OK'}
 
     # Serialize the response dictionary into JSON
     response_data = json.dumps(response_dict).encode('utf-8')
