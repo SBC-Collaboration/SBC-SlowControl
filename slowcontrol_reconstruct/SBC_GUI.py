@@ -4567,7 +4567,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.CHECKED = True
 
 
-
         self.TS_ADDREM.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.expandwindow.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
@@ -10346,6 +10345,7 @@ class UpdateClient(QtCore.QObject):
                     # send commands
                     self.client_command_fectch.emit()
                     # Receive JSON data from the server
+                    print("client commands sent")
                     json_data = self.client_socket.recv(1024).decode('utf-8')
 
                     # Deserialize JSON data to a dictionary
