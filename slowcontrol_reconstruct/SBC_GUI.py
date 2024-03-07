@@ -8253,7 +8253,7 @@ class UpdateClient(QtCore.QThread):
 
                 while True:
                     # send commands
-                    self.send_commands(self.commands)
+                    self.send_commands()
                     # Receive JSON data from the server
                     print("client commands sent")
                     json_data = self.client_socket.recv(1024).decode('utf-8')
