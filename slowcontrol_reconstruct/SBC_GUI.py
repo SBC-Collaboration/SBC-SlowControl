@@ -8257,22 +8257,12 @@ class UpdateClient(QtCore.QThread):
                     # self.send_commands()
                     # Receive JSON data from the server
                     # print("client commands sent")
-                    data_length_bytes = self.client_socket.recv(4)
-                    data_length = struct.unpack('!I', data_length_bytes)[0]
+                    received_data = self.receive_packed_data()
 
-                    # Receive the serialized data in chunks
-                    received_data = b''
-                    while len(received_data) < data_length:
-                        chunk = self.client_socket.recv(min(1024, data_length - len(received_data)))
-                        if not chunk:
-                            break
-                        received_data += chunk
-
-                    
                     # Deserialize JSON data to a dictionary
                     data_dict = pickle.loads(received_data)
                     print("data dict", data_dict)
-                    # self.update_data(data_dict)
+                    self.update_data(data_dict)
 
                     # print(f"Received from server: {data_dict}")
 
@@ -8294,6 +8284,18 @@ class UpdateClient(QtCore.QThread):
         #message mush be a dictionary
         self.receive_dic = message
         self.client_data_transport.emit(self.receive_dic)
+    def receive_packed_data(self):
+        data_length_bytes = self.client_socket.recv(4)
+        data_length = struct.unpack('!I', data_length_bytes)[0]
+
+        # Receive the serialized data in chunks
+        received_data = b''
+        while len(received_data) < data_length:
+            chunk = self.client_socket.recv(min(1024, data_length - len(received_data)))
+            if not chunk:
+                break
+            received_data += chunk
+        return received_data
 
 
     def send_commands(self):

@@ -2992,29 +2992,8 @@ class UpdateServer(threading.Thread):
                     # try to receive data
                     with self.timelock:
                         self.sockettime = datetime_in_1e5micro()
-
-                    # received_data = b''
-                    # while True:
-                    #     chunk = conn.recv(1024)
-                    #     if not chunk:
-                    #         break
-                    #     received_data += chunk
-                    # received_dict = pickle.loads(received_data)
-                    # received_dict = pickle.loads(conn.recv(1024))
-                    # print("Received data from client:", received_dict)
-                    # self.update_data_signal(received_dict)
-                    # print("data received")
-                    # Serialize the dictionary to JSON
-                    data_transfer = pickle.dumps(self.plc_data)
-
-                    # Send JSON data to the client
-                    conn.sendall(len(data_transfer).to_bytes(4, byteorder='big'))
-
-                    # Send the serialized data in chunks
-                    for i in range(0, len(data_transfer), 1024):
-                        chunk = data_transfer[i:i + 1024]
-                        conn.sendall(chunk)
-                    print("data sent. original", len(self.plc_data))
+                    self.pack_data(conn)
+                    # print("data sent. original", len(self.plc_data))
                     time.sleep(self.period)  # Sleep for 1 seconds before sending data again
 
             except socket.timeout:
@@ -3036,6 +3015,17 @@ class UpdateServer(threading.Thread):
         with self.command_lock:
             self.command_data.update(received_dict)
         print("command data in server socket", self.command_data)
+    def pack_data(self, conn):
+        data_transfer = pickle.dumps(self.plc_data)
+
+        # Send JSON data to the client
+        conn.sendall(len(data_transfer).to_bytes(4, byteorder='big'))
+
+        # Send the serialized data in chunks
+        for i in range(0, len(data_transfer), 1024):
+            chunk = data_transfer[i:i + 1024]
+            conn.sendall(chunk)
+
 
 class MainClass():
     def __init__(self):
