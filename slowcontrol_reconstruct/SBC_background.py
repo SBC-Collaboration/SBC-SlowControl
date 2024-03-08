@@ -2990,7 +2990,7 @@ class UpdateServer(threading.Thread):
                     # try to receive data
                     with self.timelock:
                         self.sockettime = datetime_in_1e5micro()
-                    received_data = conn.recv(1024).decode('utf-8')
+                    received_data = conn.recv().decode('utf-8')
                     received_dict = json.loads(received_data)
                     print("Received data from client:", received_dict)
                     self.update_data_signal(received_dict)
