@@ -8254,9 +8254,9 @@ class UpdateClient(QtCore.QThread):
 
                 while True:
                     # send commands
-                    self.send_commands()
+                    # self.send_commands()
                     # Receive JSON data from the server
-                    print("client commands sent")
+                    # print("client commands sent")
                     received_data = b''
                     while True:
                         chunk = self.client_socket.recv(1024)
