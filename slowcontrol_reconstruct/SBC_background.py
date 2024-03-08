@@ -2986,10 +2986,6 @@ class UpdateServer(threading.Thread):
 
                 # Set a timeout for socket operations to 10 seconds
                 conn.settimeout(10)
-            except:
-                print("Server connection broken")
-
-            try:
                 while True:
                     with self.timelock:
                         self.sockettime = datetime_in_1e5micro()
@@ -3003,14 +2999,22 @@ class UpdateServer(threading.Thread):
 
             except socket.timeout:
                 print("Connection timed out. Restarting server...")
-                conn.close()
-                self.server_socket.close()
-                self.run()
+                try:
+                    conn.close()
+                except Exception as e:
+                    print(f"Error closing connection: {e}")
+                finally:
+                    self.server_socket.close()
+                    self.run()
             except Exception as e:
-                print("Exception: {e}")
-                conn.close()
-                self.server_socket.close()
-                self.run()
+                print(f"Exception: {e}")
+                try:
+                    conn.close()
+                except Exception as e_close:
+                    print(f"Error closing connection: {e_close}")
+                finally:
+                    self.server_socket.close()
+                    self.run()
 
     def stop(self):
         self.server_socket.close()
