@@ -2850,6 +2850,7 @@ class Message_Manager(threading.Thread):
                 with self.time_lock:
                     self.clock = datetime_in_1e5micro()
                     print("Message Manager running ", self.clock)
+                print("watchdog", alarm_received)
                 # Valid when plc is updating.
                 # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
                 # We only consider time_out may happen in socket connections here and socket module will restart itself
@@ -2874,7 +2875,7 @@ class Message_Manager(threading.Thread):
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
-                        print("watchdog", alarm_received)
+
                         msg = self.join_stack_into_message(alarm_received)
                         self.slack_alarm(msg)
                     # and clear the alarm stack
