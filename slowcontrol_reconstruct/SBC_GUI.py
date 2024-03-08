@@ -8256,7 +8256,7 @@ class UpdateClient(QtCore.QThread):
                     self.send_commands()
                     # Receive JSON data from the server
                     print("client commands sent")
-                    json_data = self.client_socket.recv(g).decode('utf-8')
+                    json_data = self.client_socket.recv().decode('utf-8')
 
                     # Deserialize JSON data to a dictionary
                     data_dict = json.loads(json_data)
