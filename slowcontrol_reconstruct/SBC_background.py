@@ -2846,7 +2846,6 @@ class Message_Manager(threading.Thread):
             try:
                 with self.alarm_lock:
                     alarm_received.update(self.alarm_stack)
-                    print("watchdog", alarm_received)
                 with self.time_lock:
                     self.clock = datetime_in_1e5micro()
                     print("Message Manager running ", self.clock)
@@ -2874,6 +2873,7 @@ class Message_Manager(threading.Thread):
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
+                        print("watchdog", alarm_received)
                         msg = self.join_stack_into_message(alarm_received)
                         self.slack_alarm(msg)
                     # and clear the alarm stack
@@ -3098,7 +3098,6 @@ class MainClass():
         time.sleep(1)
         self.threadMessager.start()
         time.sleep(1)
-
 
 
     def StopUpdater(self):

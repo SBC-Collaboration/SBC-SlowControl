@@ -122,13 +122,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.UserTimer.timeout.connect(self.Timeout)
         self.ActivateControls(False)
 
-        # Initialize PLC live counters
-
-        self.PLCLiveCounter = 0
-
-        self.LoginT.Button.clicked.connect(self.ChangeUser)
-        self.LoginP.Button.clicked.connect(self.ChangeUser)
-
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater;
         self.StartUpdater()
@@ -3648,11 +3641,9 @@ class MainWindow(QtWidgets.QMainWindow):
     def LButtonClicked(self,pid):
         try:
             #if there is alread a command to send to tcp server, wait the new command until last one has been sent
-            # if not self.commands[pid]:
-            #     time.sleep(self.command_buffer_waiting)
             # in case cannot find the pid's address
             address = self.address[pid]
-            self.commands[pid]={"server":"BO","address": address, "type":"valve","operation":"OPEN", "value":1}
+            self.commands.update({pid:{"server":"BO","address": address, "type":"valve","operation":"OPEN", "value":1}})
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
             print(self.commands)
             print(pid,"LButton is clicked")
@@ -3665,11 +3656,9 @@ class MainWindow(QtWidgets.QMainWindow):
     def RButtonClicked(self, pid):
 
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "CLOSE",
-                              "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "valve", "operation": "CLOSE",
+                              "value": 1}})
             print(self.commands)
             print(pid, "R Button is clicked", datetime.datetime.now())
         except Exception as e:
@@ -3678,12 +3667,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def FLAGLButtonClicked(self, pid):
         try:
-            # if there is alread a command to send to tcp server, wait the new command until last one has been sent
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
-            # in case cannot find the pid's address
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "FLAG", "operation": "OPEN", "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "FLAG", "operation": "OPEN", "value": 1}})
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
             print(self.commands)
             print(pid, "LButton is clicked")
@@ -3694,11 +3679,9 @@ class MainWindow(QtWidgets.QMainWindow):
     def FLAGRButtonClicked(self, pid):
 
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "FLAG", "operation": "CLOSE",
-                                  "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "FLAG", "operation": "CLOSE",
+                                  "value": 1}})
             print(self.commands)
             print(pid, "R Button is clicked")
         except Exception as e:
@@ -3707,10 +3690,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def SwitchLButtonClicked(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "switch", "operation": "ON", "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "switch", "operation": "ON", "value": 1}})
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
             print(self.commands)
             print(pid, "LButton is clicked")
@@ -3720,11 +3701,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def SwitchRButtonClicked(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "switch", "operation": "OFF",
-                              "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "switch", "operation": "OFF",
+                              "value": 1}})
             print(self.commands)
             print(pid, "R Button is clicked")
         except Exception as e:
@@ -3733,11 +3712,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_A_LButtonClicked(self, pid):
         try:
-
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "ON", "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "INTLK_A", "operation": "ON", "value": 1}})
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
             print(self.commands)
             print(pid, "LButton is clicked")
@@ -3747,11 +3723,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_A_RButtonClicked(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "OFF",
-                              "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "INTLK_A", "operation": "OFF",
+                              "value": 1}})
             print(self.commands)
             print(pid, "R Button is clicked")
         except Exception as e:
@@ -3760,11 +3734,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_A_RESET(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "RESET",
-                                  "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "INTLK_A", "operation": "RESET",
+                                  "value": 1}})
             print(self.commands)
             print(pid, "RESET")
         except Exception as e:
@@ -3773,11 +3745,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_A_update(self, pid,value):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_A", "operation": "update",
-                                  "value": float(value)}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "INTLK_A", "operation": "update",
+                                  "value": float(value)}})
             print(self.commands)
             print(pid, "update")
         except Exception as e:
@@ -3786,10 +3756,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_D_LButtonClicked(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_D", "operation": "ON", "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "INTLK_D", "operation": "ON", "value": 1}})
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
             print(self.commands)
             print(pid, "LButton is clicked")
@@ -3799,11 +3767,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_D_RButtonClicked(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_D", "operation": "OFF",
-                                  "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "INTLK_D", "operation": "OFF",
+                                  "value": 1}})
             print(self.commands)
             print(pid, "R Button is clicked")
         except Exception as e:
@@ -3812,11 +3778,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def INTLK_D_RESET(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "INTLK_D", "operation": "RESET",
-                                  "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "INTLK_D", "operation": "RESET",
+                                  "value": 1}})
             print(self.commands)
             print(pid, "RESET")
         except Exception as e:
@@ -3825,10 +3789,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTLButtonClicked(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_power", "operation": "OPEN", "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT_power", "operation": "OPEN", "value": 1}})
             # self.statustransition[pid] = {"server": "BO", "address": address, "type": "valve", "operation": "OPEN", "value": 1}
             print(self.commands)
             print(pid, "LButton is clicked")
@@ -3839,11 +3801,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTRButtonClicked(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_power", "operation": "CLOSE",
-                                  "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT_power", "operation": "CLOSE",
+                                  "value": 1}})
             print(self.commands)
             print(pid, "R Button is clicked")
         except Exception as e:
@@ -3852,11 +3812,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTSet(self, pid, value):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value in [0, 1, 2, 3]:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT", "operation": "SETMODE", "value": value}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT", "operation": "SETMODE", "value": value}})
             else:
                 print("value should be 0, 1, 2, 3")
             print(self.commands)
@@ -3867,18 +3825,16 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTSETPOINTSet(self, pid, value1, value2):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value1 == 1:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT",
-                                  "operation": "SET1", "value": value2}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT",
+                                  "operation": "SET1", "value": value2}})
             elif value1 == 2:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT",
-                                  "operation": "SET2", "value": value2}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT",
+                                  "operation": "SET2", "value": value2}})
             elif value1 == 3:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT",
-                                  "operation": "SET3", "value": value2}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT",
+                                  "operation": "SET3", "value": value2}})
             else:
                 print("MODE number should be in 1-3")
 
@@ -3889,21 +3845,19 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTGroupButtonClicked(self, pid, setN):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if setN == 0:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_setmode",
-                                  "operation": "SET0", "value": True}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT_setmode",
+                                  "operation": "SET0", "value": True}})
             elif setN == 1:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_setmode",
-                                  "operation": "SET1", "value": True}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT_setmode",
+                                  "operation": "SET1", "value": True}})
             elif setN == 2:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_setmode",
-                                  "operation": "SET2", "value": True}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT_setmode",
+                                  "operation": "SET2", "value": True}})
             elif setN == 3:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_setmode",
-                                  "operation": "SET3", "value": True}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT_setmode",
+                                  "operation": "SET3", "value": True}})
             else:
                 print("not a valid address")
 
@@ -3914,21 +3868,19 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOP2PTupdate(self, pid, modeN, setpoint):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if modeN == 'MODE0':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_para",
-                                      "operation": "SET0", "value": {"SETPOINT": setpoint}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT_para",
+                                      "operation": "SET0", "value": {"SETPOINT": setpoint}}})
             elif modeN == 'MODE1':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_para",
-                                      "operation": "SET1", "value": {"SETPOINT": setpoint}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT_para",
+                                      "operation": "SET1", "value": {"SETPOINT": setpoint}}})
             elif modeN == 'MODE2':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_para",
-                                      "operation": "SET2", "value": {"SETPOINT": setpoint}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT_para",
+                                      "operation": "SET2", "value": {"SETPOINT": setpoint}}})
             elif modeN == 'MODE3':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "LOOP2PT_para",
-                                      "operation": "SET3", "value": {"SETPOINT": setpoint}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOP2PT_para",
+                                      "operation": "SET3", "value": {"SETPOINT": setpoint}}})
             else:
                 print("MODE number should be in MODE0-3 and is a string")
 
@@ -3939,21 +3891,19 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRupdate(self,pid, modeN, setpoint, HI, LO):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if modeN == 'MODE0':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
-                              "operation": "SET0", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_para",
+                              "operation": "SET0", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}})
             elif modeN == 'MODE1':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
-                                  "operation": "SET1", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_para",
+                                  "operation": "SET1", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}})
             elif modeN == 'MODE2':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
-                                  "operation": "SET2", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_para",
+                                  "operation": "SET2", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}})
             elif modeN == 'MODE3':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
-                                  "operation": "SET3", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_para",
+                                  "operation": "SET3", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}})
             else:
                 print("MODE number should be in MODE0-3 and is a string")
 
@@ -3967,11 +3917,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTLButtonClicked(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "heater_power", "operation": "EN",
-                              "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_power", "operation": "EN",
+                              "value": 1}})
             print(self.commands)
             print(pid, "LButton is clicked")
         except Exception as e:
@@ -3980,11 +3928,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRButtonClicked(self, pid):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "heater_power", "operation": "DISEN",
-                              "value": 1}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_power", "operation": "DISEN",
+                              "value": 1}})
             print(self.commands)
             print(pid, "R Button is clicked")
         except Exception as e:
@@ -3993,12 +3939,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTSwitchSet(self, pid, value):
         try:
-
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value in [0,1,2,3]:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater", "operation": "SETMODE", "value": value}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater", "operation": "SETMODE", "value": value}})
             else:
                 print("value should be 0, 1, 2, 3")
             print(self.commands)
@@ -4008,11 +3951,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTHISet(self, pid, value):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
-                                  "operation": "HI_LIM", "value": value}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "heater",
+                                  "operation": "HI_LIM", "value": value}})
 
             print(self.commands)
         except Exception as e:
@@ -4021,11 +3962,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTLOSet(self, pid, value):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
-                              "operation": "LO_LIM", "value": value}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "heater",
+                              "operation": "LO_LIM", "value": value}})
 
             print(self.commands)
         except Exception as e:
@@ -4034,21 +3973,19 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTSETPOINTSet(self, pid, value1, value2):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if value1 == 0:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
-                                  "operation": "SET0", "value": value2}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater",
+                                  "operation": "SET0", "value": value2}})
             elif value1 == 1:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
-                                  "operation": "SET1", "value": value2}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater",
+                                  "operation": "SET1", "value": value2}})
             elif value1 == 2:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
-                                  "operation": "SET2", "value": value2}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater",
+                                  "operation": "SET2", "value": value2}})
             elif value1 == 3:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater",
-                                  "operation": "SET3", "value": value2}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater",
+                                  "operation": "SET3", "value": value2}})
             else:
                 print("MODE number should be in 0-3")
 
@@ -4059,21 +3996,19 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRGroupButtonClicked(self, pid, setN):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if setN == 0:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_setmode",
-                                  "operation": "SET0", "value": True}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_setmode",
+                                  "operation": "SET0", "value": True}})
             elif setN == 1:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_setmode",
-                                  "operation": "SET1", "value": True}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_setmode",
+                                  "operation": "SET1", "value": True}})
             elif setN == 2:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_setmode",
-                                  "operation": "SET2", "value": True}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_setmode",
+                                  "operation": "SET2", "value": True}})
             elif setN == 3:
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_setmode",
-                                  "operation": "SET3", "value": True}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_setmode",
+                                  "operation": "SET3", "value": True}})
             else:
                 print("not a valid address")
 
@@ -4084,21 +4019,19 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def HTRupdate(self,pid, modeN, setpoint, HI, LO):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
             if modeN == 'MODE0':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
-                              "operation": "SET0", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_para",
+                              "operation": "SET0", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}})
             elif modeN == 'MODE1':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
-                                  "operation": "SET1", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_para",
+                                  "operation": "SET1", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}})
             elif modeN == 'MODE2':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
-                                  "operation": "SET2", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_para",
+                                  "operation": "SET2", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}})
             elif modeN == 'MODE3':
-                self.commands[pid] = {"server": "BO", "address": address, "type": "heater_para",
-                                  "operation": "SET3", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}
+                self.commands.update({pid:{"server": "BO", "address": address, "type": "heater_para",
+                                  "operation": "SET3", "value": {"SETPOINT": setpoint, "HI_LIM": HI, "LO_LIM": LO}}})
             else:
                 print("MODE number should be in MODE0-3 and is a string")
 
@@ -4109,11 +4042,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def BOTTBoxUpdate(self,pid, Act,LowLimit, HighLimit,update=True):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid]={"server": "BO", "address": address, "type": "TT", "operation": {"Act":Act,
-                                "LowLimit":float(LowLimit),"HighLimit":float(HighLimit),"Update":update}}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "TT", "operation": {"Act":Act,
+                                "LowLimit":float(LowLimit),"HighLimit":float(HighLimit),"Update":update}}})
             print(pid,Act,LowLimit,HighLimit,"ARE OK?")
         except Exception as e:
             print(e)
@@ -4121,11 +4052,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def FPTTBoxUpdate(self,pid, Act,LowLimit, HighLimit,update=True):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid]={"server": "FP", "address": address, "type": "TT", "operation": {"Act":Act,
-                                "LowLimit":float(LowLimit),"HighLimit":float(HighLimit),"Update":update}}
+            self.commands.update({pid:{"server": "FP", "address": address, "type": "TT", "operation": {"Act":Act,
+                                "LowLimit":float(LowLimit),"HighLimit":float(HighLimit),"Update":update}}})
             print(pid,Act,LowLimit,HighLimit,"ARE OK?")
         except Exception as e:
             print(e)
@@ -4133,11 +4062,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def PTBoxUpdate(self, pid, Act, LowLimit, HighLimit,update=True):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "PT", "operation": {"Act": Act,
-                                                                                                        "LowLimit": float(LowLimit), "HighLimit": float(HighLimit),"Update":update}}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "PT", "operation": {"Act": Act,
+                                                                                                        "LowLimit": float(LowLimit), "HighLimit": float(HighLimit),"Update":update}}})
             print(pid, Act, LowLimit, HighLimit, "ARE OK?")
         except Exception as e:
             print(e)
@@ -4145,11 +4072,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LEFTBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "LEFT", "operation": {"Act": Act,
-                                                                                                  "LowLimit": float(LowLimit), "HighLimit": float(HighLimit), "Update": update}}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "LEFT", "operation": {"Act": Act,
+                                                                                                  "LowLimit": float(LowLimit), "HighLimit": float(HighLimit), "Update": update}}})
             print(pid, Act, LowLimit, HighLimit, "ARE OK?")
         except Exception as e:
             print(e)
@@ -4157,15 +4082,13 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def ADBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "AD", "address": address, "type": "AD", "operation": {"Act": Act,
+            self.commands.update({pid:{"server": "AD", "address": address, "type": "AD", "operation": {"Act": Act,
                                                                                                     "LowLimit": float(
                                                                                                         LowLimit),
                                                                                                     "HighLimit": float(
                                                                                                         HighLimit),
-                                                                                                    "Update": update}}
+                                                                                                    "Update": update}}})
             print(pid, Act, LowLimit, HighLimit, "ARE OK?")
         except Exception as e:
             print(e)
@@ -4173,15 +4096,13 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def DinBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "Din", "operation": {"Act": Act,
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "Din", "operation": {"Act": Act,
                                                                                                     "LowLimit": float(
                                                                                                         LowLimit),
                                                                                                     "HighLimit": float(
                                                                                                         HighLimit),
-                                                                                                    "Update": update}}
+                                                                                                    "Update": update}}})
             print(pid, Act, LowLimit, HighLimit, "ARE OK?")
         except Exception as e:
             print(e)
@@ -4189,15 +4110,13 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def LOOPPIDBoxUpdate(self, pid, Act, LowLimit, HighLimit, update=True):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "LOOPPID_alarm", "operation": {"Act": Act,
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "LOOPPID_alarm", "operation": {"Act": Act,
                                                                                                    "LowLimit": float(
                                                                                                        LowLimit),
                                                                                                    "HighLimit": float(
                                                                                                        HighLimit),
-                                                                                                   "Update": update}}
+                                                                                                   "Update": update}}})
             print(pid, Act, LowLimit, HighLimit, "ARE OK?")
         except Exception as e:
             print(e)
@@ -4205,10 +4124,8 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def ProcedureClick(self, pid, start, stop, abort):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "Procedure", "operation": {"Start": start, "Stop": stop, "Abort": abort}}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "Procedure", "operation": {"Start": start, "Stop": stop, "Abort": abort}}})
             print(pid, start, stop, abort, "ARE OK?")
         except Exception as e:
             print(e)
@@ -4216,11 +4133,9 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def Procedure_TS_update(self, pid, RST, SEL, ADDREM_MASS, MAXTIME,update):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "Procedure_TS",
-                                  "operation": {"RST_FF":RST, "SEL": SEL, "ADDREM_MASS": ADDREM_MASS, "MAXTIME": MAXTIME,"update":update}}
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "Procedure_TS",
+                                  "operation": {"RST_FF":RST, "SEL": SEL, "ADDREM_MASS": ADDREM_MASS, "MAXTIME": MAXTIME,"update":update}}})
             print(pid, RST, SEL, ADDREM_MASS, MAXTIME,update, "ARE OK?")
         except Exception as e:
             print(e)
@@ -4228,53 +4143,15 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def Procedure_PC_update(self, pid, start, stop, abort,ABORT_FF,FASTCOMP_FF,PCYCLE_SLOWCOMP_FF,PCYCLE_CYLEQ_FF,PCYCLE_ACCHARGE_FF,PCYCLE_CYLBLEED_FF,PSET,MAXEXPTIME,MAXEQTIME,MAXEQPDIFF,MAXACCTIME,MAXACCDPDT,MAXBLEEDTIME,MAXBLEEDDPDT,update):
         try:
-            # if self.commands[pid] is not None:
-            #     time.sleep(self.command_buffer_waiting)
             address = self.address[pid]
-            self.commands[pid] = {"server": "BO", "address": address, "type": "Procedure_PC",
+            self.commands.update({pid:{"server": "BO", "address": address, "type": "Procedure_PC",
                                   "operation": {"ABORT_FF":ABORT_FF,"FASTCOMP_FF":FASTCOMP_FF,"PCYCLE_SLOWCOMP_FF":PCYCLE_SLOWCOMP_FF,
                                                 "PCYCLE_CYLEQ_FF":PCYCLE_CYLEQ_FF,"PCYCLE_ACCHARGE_FF":PCYCLE_ACCHARGE_FF,"PCYCLE_CYLBLEED_FF":PCYCLE_CYLBLEED_FF,
                                                 "PSET":PSET,"MAXEXPTIME":MAXEXPTIME,"MAXEQTIME":MAXEQTIME,"MAXEQPDIFF":MAXEQPDIFF,
-                                                "MAXACCTIME":MAXACCTIME,"MAXACCDPDT":MAXACCDPDT,"MAXBLEEDTIME":MAXBLEEDTIME,"MAXBLEEDDPDT":MAXBLEEDDPDT,"update":update}}
+                                                "MAXACCTIME":MAXACCTIME,"MAXACCDPDT":MAXACCDPDT,"MAXBLEEDTIME":MAXBLEEDTIME,"MAXBLEEDDPDT":MAXBLEEDDPDT,"update":update}}})
             print(pid, start, stop, abort, "ARE OK?")
         except Exception as e:
             print(e)
-
-    # Ask if staying in admin mode after timeout
-    @QtCore.Slot()
-    def Timeout(self):
-        if QtWidgets.QMessageBox.question(self, "Login", "Stay logged in?") == QtWidgets.QMessageBox.StandardButton.Yes:
-            self.UserTimer.start(ADMIN_TIMER)
-        else:
-            self.ChangeUser()
-
-    # Change user and lock/unlock controls
-    @QtCore.Slot()
-    def ChangeUser(self):
-        if self.User == "Guest":
-            Dialog = QtWidgets.QInputDialog()
-            Dialog.setInputMode(QtWidgets.QInputDialog.TextInput)
-            Dialog.setLabelText("Please entre password")
-            Dialog.setModal(True)
-            Dialog.setWindowTitle("Login")
-            Dialog.exec()
-            if Dialog.result():
-                if VerifyPW(ADMIN_PASSWORD, Dialog.textValue()):
-                    self.User = "Admin"
-                    self.LoginT.Button.setText("Admin")
-                    self.LoginP.Button.setText("Admin")
-                    self.LoginW.Button.setText("Admin")
-
-                    self.ActivateControls(True)
-
-                    self.UserTimer.start(ADMIN_TIMER)
-        else:
-            self.User = "Guest"
-            self.LoginT.Button.setText("Guest")
-            self.LoginP.Button.setText("Guest")
-            self.LoginW.Button.setText("Guest")
-
-            self.ActivateControls(False)
 
     @QtCore.Slot()
     def sendcommands(self):
