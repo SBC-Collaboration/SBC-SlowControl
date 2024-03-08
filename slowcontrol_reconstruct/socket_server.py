@@ -33,8 +33,8 @@ while True:
         print("Received data from client:", received_data)
 
         # Create a response dictionary
-        response_dict = env.DIC_PACK
-        # response_dict ={'message': 'Hello from server!', 'status': 'OK'}
+        # response_dict = env.DIC_PACK
+        response_dict ={'message': 'Hello from server!', 'status': 'OK'}
 
         # Serialize the response dictionary into JSON
         response_data = pickle.dumps(response_dict)
