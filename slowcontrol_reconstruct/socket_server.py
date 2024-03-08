@@ -1,6 +1,8 @@
 import pickle
 import socket
 import json
+import time
+
 import SBC_env as env
 
 # Server configuration
@@ -42,5 +44,6 @@ while True:
 
         # Close the connection with the client
         # client_socket.close()
+        time.sleep(1)  
     except Exception as e:
         print("end")
