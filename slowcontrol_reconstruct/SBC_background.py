@@ -2986,7 +2986,10 @@ class UpdateServer(threading.Thread):
 
                 # Set a timeout for socket operations to 10 seconds
                 conn.settimeout(10)
+            except:
+                print("Server connection broken")
 
+            try:
                 while True:
                     with self.timelock:
                         self.sockettime = datetime_in_1e5micro()
