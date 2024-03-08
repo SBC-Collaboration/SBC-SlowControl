@@ -8235,7 +8235,7 @@ class UpdateClient(QtCore.QThread):
         self.commands = commands
         self.command_lock = command_lock
 
-        print("client is connecting to the ZMQ server")
+        print("client is connecting to the socket server")
 
         self.receive_dic = copy.deepcopy(env.DIC_PACK)
         self.commands_package = json.dumps({}).encode('utf-8')
@@ -8257,13 +8257,13 @@ class UpdateClient(QtCore.QThread):
                     # self.send_commands()
                     # Receive JSON data from the server
                     # print("client commands sent")
-                    received_data = b''
-                    while True:
-                        chunk = self.client_socket.recv(1024)
-                        if not chunk:
-                            break
-                        received_data += chunk
-
+                    # received_data = b''
+                    # while True:
+                    #     chunk = self.client_socket.recv(1024)
+                    #     if not chunk:
+                    #         break
+                    #     received_data += chunk
+                    received_data = self.client_socket.recv(1024)
                     # Deserialize JSON data to a dictionary
                     data_dict = pickle.loads(received_data)
                     print("data dict", data_dict)

@@ -3008,7 +3008,7 @@ class UpdateServer(threading.Thread):
                     data_transfer = pickle.dumps(self.plc_data)
 
                     # Send JSON data to the client
-                    conn.send(data_transfer)
+                    conn.sendall(data_transfer)
                     print("data sent. original", self.plc_data)
                     time.sleep(self.period)  # Sleep for 1 seconds before sending data again
 
