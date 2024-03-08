@@ -1347,7 +1347,7 @@ class PLC:
         else:
             print(
                 "Failed to load data from Client. MAN_SET is not either in or not in the received directory. Please check the code")
-        received_dict = {}
+        received_dict.clear()
 
     def Read_BO_1(self, address):
         Raw_BO = self.Client_BO.read_holding_registers(address, count=1, unit=0x01)
