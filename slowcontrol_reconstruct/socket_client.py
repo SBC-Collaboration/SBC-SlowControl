@@ -29,7 +29,7 @@ def run_client():
                 print("Received data from server:", deserialized_data)
 
                 # Sleep for 1 second before receiving data again
-                time.sleep(1)
+                # time.sleep(1)
 
         except ConnectionRefusedError:
             print("Server not available. Retrying...")
