@@ -8244,12 +8244,13 @@ class UpdateClient(QtCore.QThread):
     def run(self):
         self.Running = True
 
-        try:
-            while True:
+
+        while True:
+            try:
                 self.client_socket.connect((self.host, self.port))
 
                 # Set a timeout for socket operations to 10 seconds
-                self.client_socket.settimeout(10)
+                self.client_socket.settimeout(60)
 
                 while True:
                     # send commands
@@ -8270,9 +8271,9 @@ class UpdateClient(QtCore.QThread):
 
                     print(f"Received from server: {data_dict}")
 
-        except socket.timeout:
-            print("Connection timed out. Restarting client...")
-            self.restart()
+            except socket.timeout:
+                print("Connection timed out. Restarting client...")
+                self.restart()
 
     @QtCore.Slot()
     def stop(self):

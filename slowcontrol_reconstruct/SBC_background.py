@@ -2976,8 +2976,10 @@ class UpdateServer(threading.Thread):
 
     def run(self):
         self.Running = True
-        try:
-            while self.Running:
+
+
+        while self.Running:
+            try:
                 conn, addr = self.server_socket.accept()
 
                 print(f"Connection from {addr}")
@@ -2991,13 +2993,14 @@ class UpdateServer(threading.Thread):
                     with self.timelock:
                         self.sockettime = datetime_in_1e5micro()
 
-                    received_data = b''
-                    while True:
-                        chunk = conn.recv(1024)
-                        if not chunk:
-                            break
-                        received_data += chunk
-                    received_dict = pickle.loads(received_data)
+                    # received_data = b''
+                    # while True:
+                    #     chunk = conn.recv(1024)
+                    #     if not chunk:
+                    #         break
+                    #     received_data += chunk
+                    # received_dict = pickle.loads(received_data)
+                    received_dict = pickle.loads(conn.recv(1024))
                     print("Received data from client:", received_dict)
                     self.update_data_signal(received_dict)
                     print("data sent")
@@ -3010,16 +3013,16 @@ class UpdateServer(threading.Thread):
 
                     time.sleep(self.period)  # Sleep for 5 seconds before sending data again
 
-        except socket.timeout:
-            print("Connection timed out. Restarting server...")
-            conn.close()
-            self.server_socket.close()
-            self.run()
-        except Exception as e:
-            print("Exception: {e}")
-            conn.close()
-            self.server_socket.close()
-            self.run()
+            except socket.timeout:
+                print("Connection timed out. Restarting server...")
+                conn.close()
+                self.server_socket.close()
+                self.run()
+            except Exception as e:
+                print("Exception: {e}")
+                conn.close()
+                self.server_socket.close()
+                self.run()
 
     def stop(self):
         self.server_socket.close()
