@@ -8256,10 +8256,10 @@ class UpdateClient(QtCore.QThread):
                     self.send_commands()
                     # Receive JSON data from the server
                     print("client commands sent")
-                    json_data = self.client_socket.recv().decode('utf-8')
+                    data_transfer = self.client_socket.recv(1024)
 
                     # Deserialize JSON data to a dictionary
-                    data_dict = json.loads(json_data)
+                    data_dict = pickle.loads(data_transfer)
                     self.update_data(data_dict)
 
                     print(f"Received from server: {data_dict}")
@@ -8287,7 +8287,7 @@ class UpdateClient(QtCore.QThread):
     def send_commands(self):
         # claim that whether MAN_SET is True or false
         print("Commands are here", self.commands,datetime.datetime.now())
-        self.commands_package = json.dumps(self.commands).encode('utf-8')
+        self.commands_package = pickle.dumps(self.commands)
         print("commands len", len(self.commands))
         self.client_socket.send(self.commands_package)
         with self.command_lock:

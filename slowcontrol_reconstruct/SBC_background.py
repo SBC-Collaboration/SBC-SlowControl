@@ -2990,16 +2990,16 @@ class UpdateServer(threading.Thread):
                     # try to receive data
                     with self.timelock:
                         self.sockettime = datetime_in_1e5micro()
-                    received_data = conn.recv().decode('utf-8')
-                    received_dict = json.loads(received_data)
+                    received_data = conn.recv(1024)
+                    received_dict = pickle.loads(received_data)
                     print("Received data from client:", received_dict)
                     self.update_data_signal(received_dict)
                     print("data sent")
                     # Serialize the dictionary to JSON
-                    json_data = json.dumps(self.plc_data)
+                    data_transfer = pickle.dumps(self.plc_data)
 
                     # Send JSON data to the client
-                    conn.send(json_data.encode('utf-8'))
+                    conn.send(data_transfer)
                     print("data received")
 
                     time.sleep(self.period)  # Sleep for 5 seconds before sending data again
