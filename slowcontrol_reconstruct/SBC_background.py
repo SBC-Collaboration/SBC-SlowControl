@@ -2858,20 +2858,13 @@ class Message_Manager(threading.Thread):
                 # Other module, we may just consider that the disconnection can happen and they will restart themselves
                 # But good to know time_out and manually restart them
                 if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
-                    alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {self.plc_"
-                                                                     "timeout} s"})
+                    alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(time=self.plc_timeout)})
                 if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
-                    alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {self.watchdog_"
-                                                               "timeout} s"})
+                    alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(time=self.watchdog_time)})
                 if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
-                    alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {self.socket_"
-                                                             "timeout} s"})
-                if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
-                    alarm_received.update({"PLC TIMEOUT": "PLC hasn't update long than {self.plc_"
-                                                          "timeout} s"})
+                    alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
                 if (self.clock - self.db_time).total_seconds() > self.database_timeout:
-                    alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {self.database_"
-                                                               "timeout} s"})
+                    alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(time=self.database_timeout)})
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
@@ -2968,7 +2961,7 @@ class UpdateServer(threading.Thread):
         self.port = 6666
         self.server_socket.bind((self.host, self.port))
         self.server_socket.listen(1)
-        print("Server listening on {self.host}:{self.port}")
+        print("Server listening on {host}:{port}".format(host=self.host, port = self.port))
 
         self.plc_data = plc_data
         self.plc_lock = plc_lock
