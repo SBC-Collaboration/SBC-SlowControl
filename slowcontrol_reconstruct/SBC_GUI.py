@@ -8263,17 +8263,16 @@ class UpdateClient(QtCore.QThread):
 
             except socket.timeout:
                 print("Connection timed out. Restarting client...")
-                self.restart()
+                self.client_socket.close()
+                break
+        self.run()
 
     @QtCore.Slot()
     def stop(self):
         self.Running = False
         self.client_socket.close()
 
-    def restart(self):
-        self.Running = False
-        self.client_socket.close()
-        self.run()
+
 
     def update_data(self,message):
         #message mush be a dictionary
