@@ -4382,7 +4382,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # print(received_dic_c["data"]["Procedure"])
 
         # initialization for all check box
-        print(received_dic_c)
+        # print(received_dic_c)
         if received_dic_c["Active"]["INI_CHECK"]==True and self.CHECKED == False:
             self.man_activated(received_dic_c)
             self.CHECKED = True
@@ -8251,10 +8251,6 @@ class UpdateClient(QtCore.QThread):
 
                 # Set a timeout for socket operations to 10 seconds
                 self.client_socket.settimeout(10)
-            except Exception as e:
-                print("client socket broken")
-
-            try:
                 while True:
                     # send commands
                     self.send_commands()
