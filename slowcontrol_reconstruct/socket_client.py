@@ -1,4 +1,4 @@
-import socket
+import socket, time
 import pickle
 
 def run_client():
