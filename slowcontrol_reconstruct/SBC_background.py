@@ -2993,7 +2993,9 @@ class UpdateServer(threading.Thread):
                     received_data = pickle.loads(self.receive_data(conn))
                     print("received data",received_data)
                     #pack data and send out
+
                     self.pack_data(conn)
+
 
                     time.sleep(self.period)  # Sleep for 1 seconds before sending data again
 
@@ -3006,6 +3008,10 @@ class UpdateServer(threading.Thread):
                 finally:
                     self.server_socket.close()
                     # self.run()
+            except BrokenPipeError:
+                print("Client disconnected. Waiting for the next connection...")
+                conn.close()  # Sleep for 1 second before sending data again
+                break
             except Exception as e:
                 print(f"Exception: {e}")
                 try:
