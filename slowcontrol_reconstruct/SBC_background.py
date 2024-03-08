@@ -2990,7 +2990,13 @@ class UpdateServer(threading.Thread):
                     # try to receive data
                     with self.timelock:
                         self.sockettime = datetime_in_1e5micro()
-                    received_data = conn.recv(1024)
+
+                    data_transfer = b''
+                    while True:
+                        chunk = conn.recv(1024)
+                        if not chunk:
+                            break
+                        data_transfer += chunk
                     received_dict = pickle.loads(received_data)
                     print("Received data from client:", received_dict)
                     self.update_data_signal(received_dict)
