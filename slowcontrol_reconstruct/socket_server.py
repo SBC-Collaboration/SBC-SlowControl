@@ -1,49 +1,52 @@
-import pickle
 import socket
-import json
+import pickle
 import time
 
-import SBC_env as env
+def run_server():
+    # Server configuration
+    HOST = '127.0.0.1'
+    PORT = 12345
 
-# Server configuration
-HOST = '127.0.0.1'
-PORT = 12345
+    # Create a socket object
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-# Create a socket object
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # Bind the socket to a specific address and port
+    server_socket.bind((HOST, PORT))
 
-# Bind the socket to a specific address and port
-server_socket.bind((HOST, PORT))
+    # Listen for incoming connections
+    server_socket.listen()
 
-# Listen for incoming connections
-server_socket.listen()
+    print(f"Server listening on {HOST}:{PORT}")
 
-print(f"Server listening on {HOST}:{PORT}")
+    while True:
+        try:
+            # Accept a connection from a client
+            conn, addr = server_socket.accept()
+            print(f"Connection from {addr}")
 
-while True:
-    try:
-        # Accept a connection from a client
-        client_socket, addr = server_socket.accept()
-        print(f"Connected to {addr}")
+            # Set a timeout for socket operations to 10 seconds
+            conn.settimeout(10)
 
-        # Receive data from the client
-        received_data = pickle.loads(client_socket.recv(1024))
+            while True:
+                # Create a sample dictionary to send
+                data_to_send = {'key1': 'value1', 'key2': 'value2', 'key3': 'value3'}
 
-        # Deserialize the received JSON data into a dictionary
-        print("Received data from client:", received_data)
+                # Serialize the dictionary using pickle
+                serialized_data = pickle.dumps(data_to_send)
 
-        # Create a response dictionary
-        # response_dict = env.DIC_PACK
-        response_dict ={'message': 'Hello from server!', 'status': 'OK'}
+                # Send serialized data to the client
+                conn.sendall(serialized_data)
+                print("Data sent to client. Original size:", len(data_to_send))
 
-        # Serialize the response dictionary into JSON
-        response_data = pickle.dumps(response_dict)
+                # Sleep for 1 second before sending data again
+                time.sleep(1)
 
-        # Send the response data back to the client
-        client_socket.send(response_data)
+        except socket.timeout:
+            print("Connection timed out. Waiting for the next connection...")
 
-        # Close the connection with the client
-        # client_socket.close()
-        time.sleep(1)  
-    except Exception as e:
-        print("end")
+        except ConnectionResetError:
+            print("Client disconnected.")
+            conn.close()
+
+if __name__ == "__main__":
+    run_server()

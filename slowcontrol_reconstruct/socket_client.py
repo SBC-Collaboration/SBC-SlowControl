@@ -1,43 +1,44 @@
 import socket
-import json, pickle
+import pickle
 
-# Client configuration
-HOST = '127.0.0.1'
-PORT = 12345
+def run_client():
+    # Client configuration
+    HOST = '127.0.0.1'
+    PORT = 12345
 
-# Create a socket object
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    # Create a socket object
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-# Connect to the server
-client_socket.connect((HOST, PORT))
-
-try:
     while True:
-        # Create a dictionary to send to the server
-        data_to_send = {'key': 'value', 'number': 42}
+        try:
+            # Connect to the server
+            client_socket.connect((HOST, PORT))
 
-        # Serialize the dictionary into JSON
-        serialized_data = pickle.dumps(data_to_send)
+            while True:
+                # Receive serialized data from the server
+                received_data = client_socket.recv(4096)
 
-        # Send the serialized data to the server
-        client_socket.send(serialized_data)
+                # Break the loop if no more data is received
+                if not received_data:
+                    break
 
-        # Receive data from the server
-        # data_transfer = b''
-        # while True:
-        #     chunk = client_socket.recv(1024)
-        #     if not chunk:
-        #         break
-        #     data_transfer += chunk
-        data_transfer=client_socket.recv(1024)
-        received_data = pickle.loads(data_transfer)
+                # Deserialize the data using pickle
+                deserialized_data = pickle.loads(received_data)
 
-        # Deserialize the received JSON data into a dictionary
-        print("received data before load",received_data)
-        # received_dict = json.loads(received_data)
-        # print("Received data from server:", received_dict)
+                # Print the received dictionary
+                print("Received data from server:", deserialized_data)
 
-        # Close the connection with the server
-        # client_socket.close()
-except Exception as e:
-    print("end")
+                # Sleep for 1 second before receiving data again
+                time.sleep(1)
+
+        except ConnectionRefusedError:
+            print("Server not available. Retrying...")
+            time.sleep(1)
+
+        except ConnectionResetError:
+            print("Server disconnected.")
+            client_socket.close()
+            break
+
+if __name__ == "__main__":
+    run_client()
