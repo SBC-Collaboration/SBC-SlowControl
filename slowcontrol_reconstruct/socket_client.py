@@ -21,12 +21,13 @@ try:
     client_socket.send(serialized_data)
 
     # Receive data from the server
-    data_transfer = b''
-    while True:
-        chunk = client_socket.recv(1024)
-        if not chunk:
-            break
-        data_transfer += chunk
+    # data_transfer = b''
+    # while True:
+    #     chunk = client_socket.recv(1024)
+    #     if not chunk:
+    #         break
+    #     data_transfer += chunk
+    data_transfer=client_socket.recv(1024)
     received_data = pickle.loads(data_transfer)
 
     # Deserialize the received JSON data into a dictionary
