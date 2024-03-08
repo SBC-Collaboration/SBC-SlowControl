@@ -2991,7 +2991,7 @@ class UpdateServer(threading.Thread):
                         self.sockettime = datetime_in_1e5micro()
 
                     received_data = pickle.loads(self.receive_data(conn))
-                    print("received data",received_data)
+                    self.update_data_signal(received_data)
                     #pack data and send out
 
                     self.pack_data(conn)
