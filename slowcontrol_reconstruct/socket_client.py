@@ -10,8 +10,9 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Connect to the server
 client_socket.connect((HOST, PORT))
-while True:
-    try:
+
+try:
+    while True:
         # Create a dictionary to send to the server
         data_to_send = {'key': 'value', 'number': 42}
 
@@ -28,16 +29,15 @@ while True:
         #     if not chunk:
         #         break
         #     data_transfer += chunk
-        data_transfer = client_socket.recv(1024)
+        data_transfer=client_socket.recv(1024)
         received_data = pickle.loads(data_transfer)
 
         # Deserialize the received JSON data into a dictionary
-        print("received data before load", received_data)
+        print("received data before load",received_data)
         # received_dict = json.loads(received_data)
         # print("Received data from server:", received_dict)
 
         # Close the connection with the server
         # client_socket.close()
-    except Exception as e:
-        print("end")
-
+except Exception as e:
+    print("end")
