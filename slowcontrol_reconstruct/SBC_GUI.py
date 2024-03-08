@@ -8265,6 +8265,7 @@ class UpdateClient(QtCore.QThread):
 
                     # Deserialize JSON data to a dictionary
                     data_dict = pickle.loads(data_transfer)
+                    print("data dict", data_dict)
                     self.update_data(data_dict)
 
                     print(f"Received from server: {data_dict}")
