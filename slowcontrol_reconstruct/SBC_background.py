@@ -3001,26 +3001,17 @@ class UpdateServer(threading.Thread):
 
             except socket.timeout:
                 print("Connection timed out. Restarting server...")
-                try:
-                    conn.close()
-                except Exception as e:
-                    print(f"Error closing connection: {e}")
-                finally:
-                    self.server_socket.close()
-                    # self.run()
+                conn.close()
             except BrokenPipeError:
                 print("Client disconnected. Waiting for the next connection...")
                 conn.close()  # Sleep for 1 second before sending data again
-                break
             except Exception as e:
                 print(f"Exception: {e}")
-                try:
-                    conn.close()
-                except Exception as e_close:
-                    print(f"Error closing connection: {e_close}")
-                finally:
-                    self.server_socket.close()
-                    # self.run()
+                conn.close()
+            finally:
+                break
+                
+        self.run()
 
     def stop(self):
         self.server_socket.close()

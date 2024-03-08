@@ -8244,7 +8244,6 @@ class UpdateClient(QtCore.QThread):
     def run(self):
         self.Running = True
 
-
         while True:
             try:
                 self.client_socket.connect((self.host, self.port))
