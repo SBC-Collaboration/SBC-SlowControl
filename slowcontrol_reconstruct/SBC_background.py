@@ -2988,12 +2988,14 @@ class UpdateServer(threading.Thread):
                 conn.settimeout(10)
 
                 while True:
-                    # Create a sample dictionary
-                    # try to receive data
                     with self.timelock:
                         self.sockettime = datetime_in_1e5micro()
+
+                    received_data = self.receive_data(conn)
+                    print("received data",received_data)
+                    #pack data and send out
                     self.pack_data(conn)
-                    # print("data sent. original", len(self.plc_data))
+
                     time.sleep(self.period)  # Sleep for 1 seconds before sending data again
 
             except socket.timeout:
@@ -3025,6 +3027,18 @@ class UpdateServer(threading.Thread):
         for i in range(0, len(data_transfer), 1024):
             chunk = data_transfer[i:i + 1024]
             conn.sendall(chunk)
+    def receive_data(self, conn):
+        data_length_bytes = conn.recv(4)
+        data_length = struct.unpack('!I', data_length_bytes)[0]
+
+        # Receive the serialized data in chunks
+        received_data = b''
+        while len(received_data) < data_length:
+            chunk = conn.recv(min(1024, data_length - len(received_data)))
+            if not chunk:
+                break
+            received_data += chunk
+        return received_data
 
 
 class MainClass():

@@ -8254,17 +8254,14 @@ class UpdateClient(QtCore.QThread):
 
                 while True:
                     # send commands
-                    # self.send_commands()
-                    # Receive JSON data from the server
-                    # print("client commands sent")
+                    self.send_commands()
+                    print("client commands sent")
                     received_data = self.receive_packed_data()
 
-                    # Deserialize JSON data to a dictionary
+                    # Deserialize pickle data to a dictionary
                     data_dict = pickle.loads(received_data)
-                    print("data dict", data_dict)
                     self.update_data(data_dict)
 
-                    # print(f"Received from server: {data_dict}")
 
             except socket.timeout:
                 print("Connection timed out. Restarting client...")
@@ -8297,13 +8294,22 @@ class UpdateClient(QtCore.QThread):
             received_data += chunk
         return received_data
 
+    def pack_data(self, conn):
+        data_transfer = pickle.dumps(self.commands)
+
+        # Send JSON data to the client
+        conn.sendall(len(data_transfer).to_bytes(4, byteorder='big'))
+
+        # Send the serialized data in chunks
+        for i in range(0, len(data_transfer), 1024):
+            chunk = data_transfer[i:i + 1024]
+            conn.sendall(chunk)
+
 
     def send_commands(self):
         # claim that whether MAN_SET is True or false
         print("Commands are here", self.commands,datetime.datetime.now())
-        self.commands_package = pickle.dumps(self.commands)
-        print("commands len", len(self.commands))
-        self.client_socket.send(self.commands_package)
+        self.pack_data(self.client_socket)
         with self.command_lock:
             self.commands.clear()
         print("finished sending commands")
