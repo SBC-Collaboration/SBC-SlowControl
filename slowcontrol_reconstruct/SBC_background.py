@@ -957,14 +957,13 @@ class PLC:
 
     def write_data(self, received_dict):
         message = received_dict
-        print(message)
+        # print("write data in plc module",message)
         if not "MAN_SET" in message:
             if message == {}:
                 pass
             else:
                 for key in message:
-                    print(message[key]["type"])
-                    print(message[key]["type"] == "valve")
+                    print("key type",message[key]["type"])
                     if message[key]["type"] == "valve":
                         print("Valve", datetime_in_1e5micro())
                         if message[key]["operation"] == "OPEN":
@@ -991,6 +990,7 @@ class PLC:
                                 self.TT_BO_HighLimit[key] = message[key]["operation"]["HighLimit"]
                             else:
                                 self.TT_BO_Activated[key] = message[key]["operation"]["Act"]
+                                print("check writing", key,self.TT_BO_Activated[key])
 
                         elif message[key]["server"] == "FP":
                             if message[key]["operation"]["Update"]:
@@ -1689,7 +1689,8 @@ class UpdatePLC(PLC, threading.Thread):
                 (type, value, traceback) = sys.exc_info()
                 exception_hook(type, value, traceback)
                 # self run depend on senario, we want to rerun the module by module
-                self.run()
+                break
+        self.run()
 
 
 
@@ -2889,7 +2890,8 @@ class Message_Manager(threading.Thread):
                 logging.error(e)
                 # restart itself
                 time.sleep(self.base_period*60)
-                self.run()
+                break
+        self.run()
 
 
     def join_stack_into_message(self, dic):
@@ -2943,7 +2945,8 @@ class LocalWatchdog(threading.Thread):
                     logging.error(e)
                     # restart itself
                     time.sleep(self.base_period * 60)
-                    self.run()
+                    break
+        self.run()
 
 
     def join_stack_into_message(self, dic):
