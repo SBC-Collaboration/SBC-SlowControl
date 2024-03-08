@@ -19,25 +19,28 @@ server_socket.listen()
 print(f"Server listening on {HOST}:{PORT}")
 
 while True:
-    # Accept a connection from a client
-    client_socket, addr = server_socket.accept()
-    print(f"Connected to {addr}")
+    try:
+        # Accept a connection from a client
+        client_socket, addr = server_socket.accept()
+        print(f"Connected to {addr}")
 
-    # Receive data from the client
-    received_data = pickle.loads(client_socket.recv(1024))
+        # Receive data from the client
+        received_data = pickle.loads(client_socket.recv(1024))
 
-    # Deserialize the received JSON data into a dictionary
-    print("Received data from client:", received_data)
+        # Deserialize the received JSON data into a dictionary
+        print("Received data from client:", received_data)
 
-    # Create a response dictionary
-    response_dict = env.DIC_PACK
-    # response_dict ={'message': 'Hello from server!', 'status': 'OK'}
+        # Create a response dictionary
+        response_dict = env.DIC_PACK
+        # response_dict ={'message': 'Hello from server!', 'status': 'OK'}
 
-    # Serialize the response dictionary into JSON
-    response_data = pickle.dumps(response_dict)
+        # Serialize the response dictionary into JSON
+        response_data = pickle.dumps(response_dict)
 
-    # Send the response data back to the client
-    client_socket.send(response_data)
+        # Send the response data back to the client
+        client_socket.send(response_data)
 
-    # Close the connection with the client
-    client_socket.close()
+        # Close the connection with the client
+        # client_socket.close()
+    except Exception as e:
+        print("end")
