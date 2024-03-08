@@ -35,11 +35,15 @@ def run_server():
                 serialized_data = pickle.dumps(data_to_send)
 
                 # Send serialized data to the client
-                conn.sendall(serialized_data)
-                print("Data sent to client. Original size:", len(data_to_send))
-
-                # Sleep for 1 second before sending data again
+                try:
+                    conn.sendall(serialized_data)
+                    print("Data sent to client. Original size:", len(data_to_send))
+                except BrokenPipeError:
+                    print("Client disconnected. Waiting for the next connection...")
+                    conn.close()  # Sleep for 1 second before sending data again
+                    break
                 time.sleep(1)
+
 
         except socket.timeout:
             print("Connection timed out. Waiting for the next connection...")
