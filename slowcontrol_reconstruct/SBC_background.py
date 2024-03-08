@@ -3010,7 +3010,6 @@ class UpdateServer(threading.Thread):
                     # Send JSON data to the client
                     conn.send(data_transfer)
                     print("data received")
-
                     time.sleep(self.period)  # Sleep for 5 seconds before sending data again
 
             except socket.timeout:
