@@ -8250,7 +8250,7 @@ class UpdateClient(QtCore.QThread):
                 self.client_socket.connect((self.host, self.port))
 
                 # Set a timeout for socket operations to 10 seconds
-                self.client_socket.settimeout(60)
+                self.client_socket.settimeout(10)
 
                 while True:
                     # send commands

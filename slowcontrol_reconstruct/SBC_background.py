@@ -2985,7 +2985,7 @@ class UpdateServer(threading.Thread):
                 print(f"Connection from {addr}")
 
                 # Set a timeout for socket operations to 10 seconds
-                conn.settimeout(60)
+                conn.settimeout(10)
 
                 while True:
                     # Create a sample dictionary
@@ -3003,13 +3003,13 @@ class UpdateServer(threading.Thread):
                     received_dict = pickle.loads(conn.recv(1024))
                     print("Received data from client:", received_dict)
                     self.update_data_signal(received_dict)
-                    print("data sent")
+                    print("data received")
                     # Serialize the dictionary to JSON
                     data_transfer = pickle.dumps(self.plc_data)
 
                     # Send JSON data to the client
                     conn.send(data_transfer)
-                    print("data received")
+                    print("data sent. original", self.plc_data)
                     time.sleep(self.period)  # Sleep for 5 seconds before sending data again
 
             except socket.timeout:
@@ -3030,6 +3030,7 @@ class UpdateServer(threading.Thread):
     def update_data_signal(self, received_dict):
         with self.command_lock:
             self.command_data.update(received_dict)
+        print("cpmmad data in server socket", self.command_data)
 
 class MainClass():
     def __init__(self):
