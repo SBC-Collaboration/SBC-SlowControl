@@ -3008,7 +3008,12 @@ class UpdateServer(threading.Thread):
                     data_transfer = pickle.dumps(self.plc_data)
 
                     # Send JSON data to the client
-                    conn.sendall(data_transfer)
+                    conn.sendall(len(data_transfer).to_bytes(4, byteorder='big'))
+
+                    # Send the serialized data in chunks
+                    for i in range(0, len(data_transfer), 1024):
+                        chunk = data_transfer[i:i + 1024]
+                        conn.sendall(chunk)
                     print("data sent. original", len(self.plc_data))
                     time.sleep(self.period)  # Sleep for 1 seconds before sending data again
 

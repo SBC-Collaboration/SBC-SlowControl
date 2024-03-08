@@ -9,7 +9,7 @@ v0.1.2 Alarm implemented 07/01/20 ML
 v0.1.3 PLC online detection, poll PLCs only when values are updated, fix Centos window size bug 04/03/20 ML
 """
 
-import os, sys, time, platform, datetime, random, pickle, cgitb, traceback, signal,copy, json, socket, threading
+import os, sys, time, platform, datetime, random, pickle, cgitb, traceback, signal,copy, json, socket, threading, struct
 
 
 from PySide2 import QtWidgets, QtCore, QtGui
@@ -8257,13 +8257,18 @@ class UpdateClient(QtCore.QThread):
                     # self.send_commands()
                     # Receive JSON data from the server
                     # print("client commands sent")
+                    data_length_bytes = self.client_socket.recv(4)
+                    data_length = struct.unpack('!I', data_length_bytes)[0]
+
+                    # Receive the serialized data in chunks
                     received_data = b''
-                    while True:
-                        chunk = self.client_socket.recv(1024)
-                        print("chunk")
+                    while len(received_data) < data_length:
+                        chunk = self.client_socket.recv(min(1024, data_length - len(received_data)))
                         if not chunk:
                             break
                         received_data += chunk
+
+                    
                     # Deserialize JSON data to a dictionary
                     data_dict = pickle.loads(received_data)
                     print("data dict", data_dict)
