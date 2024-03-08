@@ -8257,19 +8257,18 @@ class UpdateClient(QtCore.QThread):
                     # self.send_commands()
                     # Receive JSON data from the server
                     # print("client commands sent")
-                    # received_data = b''
-                    # while True:
-                    #     chunk = self.client_socket.recv(1024)
-                    #     if not chunk:
-                    #         break
-                    #     received_data += chunk
-                    received_data = self.client_socket.recv(1024)
+                    received_data = b''
+                    while True:
+                        chunk = self.client_socket.recv(1024)
+                        if not chunk:
+                            break
+                        received_data += chunk
                     # Deserialize JSON data to a dictionary
                     data_dict = pickle.loads(received_data)
                     print("data dict", data_dict)
-                    self.update_data(data_dict)
+                    # self.update_data(data_dict)
 
-                    print(f"Received from server: {data_dict}")
+                    # print(f"Received from server: {data_dict}")
 
             except socket.timeout:
                 print("Connection timed out. Restarting client...")
