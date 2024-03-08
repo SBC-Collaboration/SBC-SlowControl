@@ -8238,7 +8238,7 @@ class UpdateClient(QtCore.QThread):
         print("client is connecting to the socket server")
 
         self.receive_dic = copy.deepcopy(env.DIC_PACK)
-        self.commands_package = json.dumps({}).encode('utf-8')
+        self.commands_package = pickle.dumps({})
 
     @QtCore.Slot()
     def run(self):
@@ -8260,6 +8260,7 @@ class UpdateClient(QtCore.QThread):
                     received_data = b''
                     while True:
                         chunk = self.client_socket.recv(1024)
+                        print("chunk")
                         if not chunk:
                             break
                         received_data += chunk
