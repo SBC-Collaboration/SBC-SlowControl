@@ -2991,7 +2991,7 @@ class UpdateServer(threading.Thread):
                     with self.timelock:
                         self.sockettime = datetime_in_1e5micro()
 
-                    data_transfer = b''
+                    received_data = b''
                     while True:
                         chunk = conn.recv(1024)
                         if not chunk:
