@@ -115,12 +115,6 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__(parent)
         self.GUI_design()
         self.Alarm_system()
-        # Set user to guest by default
-        self.User = "Guest"
-        self.UserTimer = QtCore.QTimer(self)
-        self.UserTimer.setSingleShot(True)
-        self.UserTimer.timeout.connect(self.Timeout)
-        self.ActivateControls(False)
 
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater;
