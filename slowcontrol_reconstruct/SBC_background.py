@@ -2996,7 +2996,7 @@ class UpdateServer(threading.Thread):
                         chunk = conn.recv(1024)
                         if not chunk:
                             break
-                        data_transfer += chunk
+                        received_data += chunk
                     received_dict = pickle.loads(received_data)
                     print("Received data from client:", received_dict)
                     self.update_data_signal(received_dict)

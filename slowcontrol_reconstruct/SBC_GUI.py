@@ -8256,15 +8256,15 @@ class UpdateClient(QtCore.QThread):
                     self.send_commands()
                     # Receive JSON data from the server
                     print("client commands sent")
-                    data_transfer = b''
+                    received_data = b''
                     while True:
                         chunk = self.client_socket.recv(1024)
                         if not chunk:
                             break
-                        data_transfer += chunk
+                        received_data += chunk
 
                     # Deserialize JSON data to a dictionary
-                    data_dict = pickle.loads(data_transfer)
+                    data_dict = pickle.loads(received_data)
                     print("data dict", data_dict)
                     self.update_data(data_dict)
 
