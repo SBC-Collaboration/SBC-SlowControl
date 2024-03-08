@@ -1,3 +1,4 @@
+import pickle
 import socket
 import json
 import SBC_env as env
@@ -23,18 +24,17 @@ while True:
     print(f"Connected to {addr}")
 
     # Receive data from the client
-    received_data = client_socket.recv(1024).decode('utf-8')
+    received_data = pickle.loads(client_socket.recv(1024))
 
     # Deserialize the received JSON data into a dictionary
-    received_dict = json.loads(received_data)
-    print("Received data from client:", received_dict)
+    print("Received data from client:", received_data)
 
     # Create a response dictionary
     response_dict = env.DIC_PACK
     # response_dict ={'message': 'Hello from server!', 'status': 'OK'}
 
     # Serialize the response dictionary into JSON
-    response_data = json.dumps(response_dict).encode('utf-8')
+    response_data = pickle.dumps(response_dict)
 
     # Send the response data back to the client
     client_socket.send(response_data)
