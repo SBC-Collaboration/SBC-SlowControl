@@ -1874,6 +1874,7 @@ class UpdatePLC(PLC, threading.Thread):
 
     def resetTTFPalarmmsg(self, pid):
         self.TT_FP_Alarm[pid] = False
+        self.alarm_stack.pop(pid, None)
         # self.TT_FP_para = 0
         # and send email or slack messages
 
@@ -1893,6 +1894,7 @@ class UpdatePLC(PLC, threading.Thread):
 
     def resetTTBOalarmmsg(self, pid):
         self.TT_BO_Alarm[pid] = False
+        self.alarm_stack.pop(pid, None)
         # self.TT_BO_para = 0
         # and send email or slack messages
 
@@ -1911,6 +1913,7 @@ class UpdatePLC(PLC, threading.Thread):
 
     def resetPTalarmmsg(self, pid):
         self.PT_Alarm[pid] = False
+        self.alarm_stack.pop(pid, None)
         # self.PT_para = 0
         # and send email or slack messages
 
@@ -1929,6 +1932,7 @@ class UpdatePLC(PLC, threading.Thread):
 
     def resetLEFT_REALalarmmsg(self, pid):
         self.LEFT_REAL_Alarm[pid] = False
+        self.alarm_stack.pop(pid, None)
         # self.LEFT_REAL_para = 0
         # and send email or slack messages
 
@@ -1947,6 +1951,7 @@ class UpdatePLC(PLC, threading.Thread):
 
     def resetADalarmmsg(self, pid):
         self.AD_Alarm[pid] = False
+        self.alarm_stack.pop(pid, None)
         # self.AD_para = 0
         # and send email or slack messages
 
@@ -1965,6 +1970,7 @@ class UpdatePLC(PLC, threading.Thread):
 
     def resetDinalarmmsg(self, pid):
         self.Din_Alarm[pid] = False
+        self.alarm_stack.pop(pid, None)
         # self.Din_para = 0
         # and send email or slack messages
 
@@ -1983,6 +1989,7 @@ class UpdatePLC(PLC, threading.Thread):
 
     def resetLOOPPIDalarmmsg(self, pid):
         self.LOOPPID_Alarm[pid] = False
+        self.alarm_stack.pop(pid, None)
         # self.LOOPPID_para = 0
         # and send email or slack messages
 
@@ -2873,7 +2880,8 @@ class Message_Manager(threading.Thread):
                     # and clear the alarm stack
                     with self.alarm_lock:
                         self.alarm_stack.clear()
-                        print("alarm stack cleared", self.alarm_stack)
+                        alarm_received.clear()
+                        print("alarm stack cleared", self.alarm_stack, alarm_received)
                     self.para_alarm = 0
                 self.para_alarm += 1
                 time.sleep(self.base_period)
