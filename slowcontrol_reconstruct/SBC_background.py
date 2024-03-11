@@ -3088,7 +3088,7 @@ class MainClass():
                                          timelock=self.timelock)
 
         self.threadMessager = Message_Manager(clock=self.clock, db_time=self.db_time, watchdog_time=self.watchdog_time,
-                                              plc_time=self.plc_time,
+                                              plc_time_dic=self.plc_time,
                                               socketserver_time=self.socketserver_time, timelock=self.timelock,
                                               alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
