@@ -61,11 +61,13 @@ def FPADS_OUT_AT(outaddress):
 
 
 class PLC:
-    def __init__(self, plc_data, plc_lock, command_data, command_lock):
+    def __init__(self, plc_data, plc_lock, command_data, command_lock, alarm_stack, alarm_lock):
         self.plc_data = plc_data
         self.plc_lock = plc_lock
         self.command_data = command_data
         self.command_lock = command_lock
+        self.alarm_stack =  alarm_stack
+        self.alarm_lock = alarm_lock
         IP_NI = "192.168.137.62"
         PORT_NI = 502
 
@@ -504,6 +506,8 @@ class PLC:
                 # Wait for 5 seconds before retrying
             finally:
                 self.Read_NI_empty()
+                with self.alarm_lock:
+                    self.alarm_stack.update({"NI disconnection alarm":"National Instrument modbus is disconnected. Restarting..."})
         else:
             self.Read_NI()
             pass
@@ -519,6 +523,8 @@ class PLC:
                 # Wait for 5 seconds before retrying
             finally:
                 self.Read_BO_empty()
+                with self.alarm_lock:
+                    self.alarm_stack.update({"AD disconnection alarm":"Ardunio modbus is disconnected. Restarting..."})
         else:
             self.Read_BO()
             pass
@@ -532,6 +538,8 @@ class PLC:
                 # Wait for 5 seconds before retrying
             finally:
                 self.Read_AD_empty()
+                with self.alarm_lock:
+                    self.alarm_stack.update({"BO disconnection alarm":"Beckhoff modbus is disconnected. Restarting..."})
         else:
             self.Read_AD()
             pass
@@ -967,7 +975,7 @@ class PLC:
                 pass
             else:
                 for key in message:
-                    print("key type",message[key]["type"])
+                    # print("key type",message[key]["type"])
                     if message[key]["type"] == "valve":
                         print("Valve", datetime_in_1e5micro())
                         if message[key]["operation"] == "OPEN":
@@ -994,7 +1002,7 @@ class PLC:
                                 self.TT_BO_HighLimit[key] = message[key]["operation"]["HighLimit"]
                             else:
                                 self.TT_BO_Activated[key] = message[key]["operation"]["Act"]
-                                print("check writing", key,self.TT_BO_Activated[key])
+                                # print("check writing", key,self.TT_BO_Activated[key])
 
                         elif message[key]["server"] == "FP":
                             if message[key]["operation"]["Update"]:
@@ -1625,8 +1633,8 @@ class PLC:
 # Class to read PLC value every 2 sec
 class UpdatePLC(PLC, threading.Thread):
 
-    def __init__(self, plc_data, plc_lock, command_data, command_lock, global_time, timelock, alarm_stack, alarm_lock, *args, **kwargs):
-        PLC.__init__(self, plc_data, plc_lock, command_data, command_lock)
+    def __init__(self, plc_data, plc_lock, command_data, command_lock, alarm_stack, alarm_lock,global_time, timelock, *args, **kwargs):
+        PLC.__init__(self, plc_data, plc_lock, command_data, command_lock, alarm_stack, alarm_lock)
         threading.Thread.__init__(self, *args, **kwargs)
         self.Running = False
         self.period = 1
@@ -1686,6 +1694,8 @@ class UpdatePLC(PLC, threading.Thread):
             except:
                 (type, value, traceback) = sys.exc_info()
                 exception_hook(type, value, traceback)
+                with self.alarm_lock:
+                    self.alarm_stack.update({"PLC updating Exception":"PLC updating loop broke. Restarting..."})
                 # self run depend on senario, we want to rerun the module by module
                 break
         self.run()
@@ -2845,6 +2855,8 @@ class Message_Manager(threading.Thread):
             print("slackalarm",result)
 
         except SlackApiError as e:
+            with self.alarm_lock:
+                self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
             print(f"Error: {e}")
 
     def run(self):
@@ -2949,7 +2961,7 @@ class LocalWatchdog(threading.Thread):
             except Exception as e:
                 with self.alarm_lock:
                     self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
-                                                                              "on COUPP server"})
+                                                                              "on COUPP server. Restarting"})
                     print("Error",e)
                     logging.error(e)
                     # restart itself
@@ -2967,7 +2979,7 @@ class LocalWatchdog(threading.Thread):
 
 
 class UpdateServer(threading.Thread):
-    def __init__(self, plc_data, plc_lock, command_data, command_lock, global_time, timelock):
+    def __init__(self, plc_data, plc_lock, command_data, command_lock, global_time, timelock, alarm_lock, alarm_stack):
         super().__init__()
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.global_time = global_time
@@ -2983,6 +2995,8 @@ class UpdateServer(threading.Thread):
         self.plc_lock = plc_lock
         self.command_data = command_data
         self.command_lock = command_lock
+        self.alarm_lock = alarm_lock
+        self.alarm_stack = alarm_stack
         self.period = 1
 
         self.data_package = pickle.dumps(self.plc_data)
@@ -3023,6 +3037,8 @@ class UpdateServer(threading.Thread):
                 print(f"Exception: {e}")
                 conn.close()
             finally:
+                with self.alarm_lock:
+                    self.alarm_stack.update({"Socket Server updating Exception":"Socket Server updating loop broke. Restarting..."})
                 break
 
         self.run()
@@ -3089,7 +3105,7 @@ class MainClass():
 
         self.threadSocket = UpdateServer(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
                                          command_lock=self.command_lock, global_time=self.global_time,
-                                         timelock=self.timelock)
+                                         timelock=self.timelock, alarm_lock=self.alarm_lock, alarm_stack=self.alarm_stack)
 
         self.threadMessager = Message_Manager(global_time=self.global_time, timelock=self.timelock,
                                               alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
