@@ -1692,8 +1692,8 @@ class UpdatePLC(PLC, threading.Thread):
                 self.or_alarm_signal()
                 time.sleep(self.period)
             except:
-                (type, value, traceback) = sys.exc_info()
-                exception_hook(type, value, traceback)
+                # (type, value, traceback) = sys.exc_info()
+                # exception_hook(type, value, traceback)
                 print("Exception in plc raised")
                 with self.alarm_lock:
                     self.alarm_stack.update({"PLC updating Exception":"PLC updating loop broke. Restarting..."})
