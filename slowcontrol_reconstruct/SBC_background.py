@@ -490,8 +490,9 @@ class PLC:
         with self.plc_lock:
             self.Ini_Check = True
             # self.plc_data["Active"].update({"INI_CHECK":True})
+
             self.plc_data.update(self.data_dic)
-        print("CHECK INI", self.plc_data["Active"]["INI_CHECK"])
+        print("CHECK INI", self.data_dic["Active"]["INI_CHECK"],self.plc_data["Active"]["INI_CHECK"])
 
 
     def ReadAll(self):
