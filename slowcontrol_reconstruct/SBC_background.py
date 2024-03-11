@@ -265,7 +265,6 @@ class PLC:
         self.TIME_ADDRESS = copy.copy(env.TIME_ADDRESS)
         self.TIME_DIC = copy.copy(env.TIME_DIC)
 
-
         self.Ini_Check = env.INI_CHECK
 
         self.data_dic = {"data": {"TT": {
@@ -490,8 +489,8 @@ class PLC:
         with self.plc_lock:
             self.Ini_Check = True
             # self.plc_data["Active"].update({"INI_CHECK":True})
-            # self.data_dic["Active"]["INI_CHECK"] = True
-            # self.plc_data.update(self.data_dic)
+            self.data_dic["Active"]["INI_CHECK"] = True
+            self.plc_data.update(self.data_dic)
         print("CHECK INI", self.Ini_Check,self.data_dic["Active"]["INI_CHECK"],self.plc_data["Active"]["INI_CHECK"])
 
 
