@@ -1625,7 +1625,7 @@ class PLC:
 # Class to read PLC value every 2 sec
 class UpdatePLC(PLC, threading.Thread):
 
-    def __init__(self, plc_data, plc_lock, command_data, command_lock, plc_time_dic, timelock, alarm_stack, alarm_lock, *args, **kwargs):
+    def __init__(self, plc_data, plc_lock, command_data, command_lock, global_time, timelock, alarm_stack, alarm_lock, *args, **kwargs):
         PLC.__init__(self, plc_data, plc_lock, command_data, command_lock)
         threading.Thread.__init__(self, *args, **kwargs)
         self.Running = False
@@ -1649,7 +1649,7 @@ class UpdatePLC(PLC, threading.Thread):
         self.LOOPPID_rate = env.LOOPPID_RATE
         self.mainalarm_para = env.MAINALARM_PARA
         self.mainalarm_rate = env.MAINALARM_RATE
-        self.plc_time_dic = plc_time_dic
+        self.global_time = global_time
         self.timelock = timelock
         self.alarm_stack = alarm_stack
         self.alarm_lock = alarm_lock
@@ -1661,9 +1661,8 @@ class UpdatePLC(PLC, threading.Thread):
         while self.Running:
             try:
                 with self.timelock:
-                    self.plc_time_dic.update({"plctime" :early_datetime()})
-                    print("PLC updating", self.plc_time_dic["plctime"])
-                    print("PLC alarm len", len(self.alarm_stack))
+                    self.global_time.update({"plctime" :datetime_in_1e5micro()})
+                    print("PLC updating", self.global_time["plctime"])
                 self.ReadAll()
                 with self.command_lock:
                     self.write_data(self.command_data)
@@ -2013,12 +2012,12 @@ class UpdatePLC(PLC, threading.Thread):
 # Class to update myseeq database
 class UpdateDataBase(threading.Thread):
 
-    def __init__(self, plc_data, plc_lock, db_time, timelock):
+    def __init__(self, plc_data, plc_lock, global_time, timelock):
         # inherit the thread method
         super().__init__()
         self.plc_data = plc_data
         self.plc_lock = plc_lock
-        self.db_time = db_time
+        self.global_time = global_time
         self.timelock = timelock
 
         # self.PLC = PLC
@@ -2232,8 +2231,8 @@ class UpdateDataBase(threading.Thread):
                 self.dt = datetime_in_1e5micro()
                 self.early_dt = early_datetime()
                 with self.timelock:
-                    self.db_time = self.dt
-                print("Database Updating", self.dt)
+                    self.global_time.update({"dbtime":self.dt})
+                print("Database Updating", self.global_time["dbtime"])
 
             except Exception as e:
                 print("Error",e)
@@ -2769,15 +2768,16 @@ class UpdateDataBase(threading.Thread):
 
 class Message_Manager(threading.Thread):
     # add here the other alarm and database
-    def __init__(self, clock, db_time, watchdog_time, plc_time_dic, socketserver_time, timelock, alarm_stack, alarm_lock):
+    def __init__(self, global_time, timelock, alarm_stack, alarm_lock):
         super().__init__()
         self.alarm_init()
         self.running = True
-        self.clock = clock  # hanging when on hold to slack -> internet connection/slack server
-        self.db_time = db_time  # hanging when disconnected from mysql
-        self.watchdog_time = watchdog_time  # hanging when ssh fail or coupp mysql fail
-        self.plc_time_dic = plc_time_dic  # hanging when Beckhoff/NI/Arduino fail
-        self.socketserver_time = socketserver_time  # hanging when socket to GUI fail
+        self.global_time = global_time
+        self.clock = self.global_time["clock"]  # hanging when on hold to slack -> internet connection/slack server
+        self.db_time =  self.global_time["dbtime"] # hanging when disconnected from mysql
+        self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
+        self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
+        self.socketserver_time = self.global_time["sockettime"]  # hanging when socket to GUI fail
         self.time_lock = timelock
         self.database_timeout = env.DATABASE_HOLD
         self.plc_timeout = env.PLC_HOLD
@@ -2854,8 +2854,8 @@ class Message_Manager(threading.Thread):
                 with self.alarm_lock:
                     alarm_received.update(self.alarm_stack)
                 with self.time_lock:
-                    self.clock = datetime_in_1e5micro()
-                    print("Message Manager running ", self.clock, self.plc_time_dic["plctime"])
+                    self.global_time.update({"clock":datetime_in_1e5micro()})
+                    print("Message Manager running ", self.clock, self.plc_time)
                 print("watchdog", alarm_received)
                 # Valid when plc is updating.
                 # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
@@ -2863,8 +2863,8 @@ class Message_Manager(threading.Thread):
                 # because it can detect timeout signal by itself
                 # Other module, we may just consider that the disconnection can happen and they will restart themselves
                 # But good to know time_out and manually restart them
-                # if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
-                #     alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(time=self.plc_timeout)})
+                if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
+                    alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(time=self.plc_timeout)})
                 # if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
                 #     alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(time=self.watchdog_timeout)})
                 # if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
@@ -2906,12 +2906,12 @@ class Message_Manager(threading.Thread):
 
 
 class LocalWatchdog(threading.Thread):
-    def __init__(self, db_time, watchdogtime, timelock, alarm_stack, alarm_lock):
+    def __init__(self, global_time, timelock, alarm_stack, alarm_lock):
         # alarm msg is different from coupp msg
         super().__init__()
-        self.db_time = db_time
+        self.global_time = global_time
         self.timelock = timelock
-        self.watchdog_time = watchdogtime
+        self.watchdog_time = global_time["watchdogtime"]
         self.alarm_db = COUPP_database()
         self.alarm_stack = alarm_stack
         self.alarm_lock = alarm_lock
@@ -2926,7 +2926,7 @@ class LocalWatchdog(threading.Thread):
                 with self.alarm_lock:
                     alarm_received = self.join_stack_into_message(self.alarm_stack)
                 with self.timelock:
-                    self.watchdog_time = datetime_in_1e5micro()
+                    self.global_time.update({"watchdogtime": datetime_in_1e5micro()})
                     print("Local watchdog running", self.watchdog_time)
                 if self.para_alarm >= self.rate_alarm:
 
@@ -2960,10 +2960,11 @@ class LocalWatchdog(threading.Thread):
 
 
 class UpdateServer(threading.Thread):
-    def __init__(self, plc_data, plc_lock, command_data, command_lock, sockettime, timelock):
+    def __init__(self, plc_data, plc_lock, command_data, command_lock, global_time, timelock):
         super().__init__()
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sockettime = sockettime
+        self.global_time = global_time
+        self.sockettime = global_time["sockettime"]
         self.timelock = timelock
         self.host = '127.0.0.1'
         self.port = 6666
@@ -2993,7 +2994,8 @@ class UpdateServer(threading.Thread):
                 conn.settimeout(10)
                 while True:
                     with self.timelock:
-                        self.sockettime = datetime_in_1e5micro()
+                        self.global_time.update({"sockettime":datetime_in_1e5micro()})
+                        print("Socket Server Updating", self.sockettime)
 
                     received_data = pickle.loads(self.receive_data(conn))
                     self.update_data_signal(received_data)
@@ -3053,19 +3055,14 @@ class UpdateServer(threading.Thread):
 class MainClass():
     def __init__(self):
         self.plc_data = copy.deepcopy(env.DIC_PACK)
-        # self.plc_data = {}
+        self.global_time={"plctime":datetime_in_1e5micro(),"dbtime":datetime_in_1e5micro(),"watchdogtime":datetime_in_1e5micro(),"sockettime":datetime_in_1e5micro(),
+                          "clock":datetime_in_1e5micro()}
         self.plc_lock = threading.Lock()
         self.command_data = {}
         self.command_lock = threading.Lock()
         self.alarm_stack  = {}
         self.alarm_lock = threading.Lock()
-        self.db_time = early_datetime()
         self.timelock = threading.Lock()
-        self.clock = early_datetime()
-        self.watchdog_time = early_datetime()
-        self.plc_time = {"plctime": early_datetime()}
-        self.socketserver_time = early_datetime()
-
         self.StartUpdater()
 
 
@@ -3073,23 +3070,21 @@ class MainClass():
 
         # Read PLC value on another thread
         self.threadPLC = UpdatePLC(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
-                                   command_lock=self.command_lock, plc_time_dic=self.plc_time, timelock=self.timelock,
+                                   command_lock=self.command_lock, global_time=self.global_time, timelock=self.timelock,
                                    alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
-        self.threadDatabase = UpdateDataBase(plc_data=self.plc_data, plc_lock=self.plc_lock, db_time=self.db_time,
+        self.threadDatabase = UpdateDataBase(plc_data=self.plc_data, plc_lock=self.plc_lock, global_time=self.global_time,
                                              timelock=self.timelock)
 
-        self.threadWatchdog = LocalWatchdog(db_time=self.db_time, watchdogtime=self.watchdog_time,
+        self.threadWatchdog = LocalWatchdog(global_time=self.global_time,
                                             timelock=self.timelock,
                                             alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         self.threadSocket = UpdateServer(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
-                                         command_lock=self.command_lock, sockettime=self.socketserver_time,
+                                         command_lock=self.command_lock, global_time=self.global_time,
                                          timelock=self.timelock)
 
-        self.threadMessager = Message_Manager(clock=self.clock, db_time=self.db_time, watchdog_time=self.watchdog_time,
-                                              plc_time_dic=self.plc_time,
-                                              socketserver_time=self.socketserver_time, timelock=self.timelock,
+        self.threadMessager = Message_Manager(global_time=self.global_time, timelock=self.timelock,
                                               alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         # wait for PLC initialization finished
