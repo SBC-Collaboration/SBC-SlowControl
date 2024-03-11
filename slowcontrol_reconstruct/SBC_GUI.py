@@ -973,14 +973,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6202_v2.LOOPPIDWindow.RTD1.Label.setText("TT6222")
         self.HTR6202_v2.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
 
-        self.PUMP3305_v2 = LOOP2PT_v2(self.DatanSignalTab)
-        self.PUMP3305_v2.move(1300 * R, 1000 * R)
-        self.PUMP3305_v2.Label.setText("PUMP3305")
-        self.PUMP3305_v2.State.LButton.setText("ON")
-        self.PUMP3305_v2.State.RButton.setText("OFF")
-        self.PUMP3305_v2.LOOP2PTWindow.setWindowTitle("PUMP3305")
-        self.PUMP3305_v2.LOOP2PTWindow.Label.setText("PUMP3305")
-
         self.PCYCLE_AUTOCYCLE = Flag(self.DatanSignalTab)
         self.PCYCLE_AUTOCYCLE.move(1300 * R, 600 * R)
         self.PCYCLE_AUTOCYCLE.Label.setText("PCYCLE_AUTOCYCLE")
@@ -1126,11 +1118,11 @@ class MainWindow(QtWidgets.QMainWindow):
     def signal_connection(self):
 
         # Data signal saving and writing
-        self.SaveSettings.SaveFileButton.clicked.connect(lambda : self.SaveSettings.SavecsvConfig(self.UpClient.receive_dic))
-        # self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.updatedisplay(self.ReadSettings.loaded_dict))
+        self.SaveSettings.SaveFileButton.clicked.connect(lambda : self.SaveSettings.SavecsvConfig(self.clientthread.receive_dic))
+        # man_set update the low/high/active status to bkg code
         self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.man_set(self.ReadSettings.default_dict))
+        # man_activate set the check status in current GUI widgets
         self.ReadSettings.LoadFileButton.clicked.connect(lambda : self.man_activated(self.ReadSettings.default_dict))
-        # self.AlarmButton.SubWindow.MAN_ACT.clicked.connect(lambda: self.man_activated(self.UpClient.receive_dic))
 
         self.PV1344.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV1344.Label.text()))
         self.PV1344.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV1344.Label.text()))
@@ -1185,10 +1177,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
         #
-        # self.PUMP3305_v2.Set.LButton.clicked.connect(lambda x: self.LOOP2PTLButtonClicked(self.PUMP3305.Label.text()))
-        # self.PUMP3305_v2.Set.RButton.clicked.connect(lambda x: self.LOOP2PTRButtonClicked(self.PUMP3305.Label.text()))
-
-
 
         self.SERVO3321.LOOPPIDWindow.Mode.LButton.clicked.connect(
             lambda x: self.HTLButtonClicked(self.SERVO3321.LOOPPIDWindow.Label.text()))
@@ -4234,8 +4222,6 @@ class MainWindow(QtWidgets.QMainWindow):
         for element in self.ADVariableMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["AD"][element.Label.text()]))
 
-
-
         for element in self.DinAlarmMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["Din"][element.Label.text()]))
 
@@ -4243,15 +4229,13 @@ class MainWindow(QtWidgets.QMainWindow):
             element.AlarmMode.setChecked(bool(dic_c["Active"]["LOOPPID"][element.Label.text()]))
 
 
-
-
     @QtCore.Slot(object)
     def updatedisplay(self, received_dic_c):
         print("Display updating", datetime.datetime.now())
+        # update the check states in initilazation
         if received_dic_c["Active"]["INI_CHECK"]==True and self.CHECKED == False:
             self.man_activated(received_dic_c)
             self.CHECKED = True
-
 
         self.TS_ADDREM.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
         self.TS_ADDREM.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])

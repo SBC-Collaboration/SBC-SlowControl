@@ -1276,13 +1276,11 @@ class PLC:
                             self.WriteBase4(address=message[key]["address"])
                         else:
                             pass
-
                     else:
                         pass
 
         elif "MAN_SET" in message:
-            # manuall set the configuration
-
+            # manually set the configuration
             for key in message["MAN_SET"]["data"]["TT"]["FP"]["high"]:
                 self.TT_FP_HighLimit[key] = message["MAN_SET"]["data"]["TT"]["FP"]["high"][key]
 
@@ -1342,8 +1340,6 @@ class PLC:
 
             for key in message["MAN_SET"]["Active"]["LOOPPID"]:
                 self.LOOPPID_Activated[key] = message["MAN_SET"]["Active"]["LOOPPID"][key]
-
-
         else:
             print(
                 "Failed to load data from Client. MAN_SET is not either in or not in the received directory. Please check the code")
@@ -2872,12 +2868,12 @@ class Message_Manager(threading.Thread):
                 # But good to know time_out and manually restart them
                 if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
                     alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(time=self.plc_timeout)})
-                # if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
-                #     alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(time=self.watchdog_timeout)})
-                # if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
-                #     alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
-                # if (self.clock - self.db_time).total_seconds() > self.database_timeout:
-                #     alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(time=self.database_timeout)})
+                if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
+                    alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(time=self.watchdog_timeout)})
+                if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
+                    alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
+                if (self.clock - self.db_time).total_seconds() > self.database_timeout:
+                    alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(time=self.database_timeout)})
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
