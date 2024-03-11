@@ -2855,6 +2855,13 @@ class Message_Manager(threading.Thread):
                     alarm_received.update(self.alarm_stack)
                 with self.time_lock:
                     self.global_time.update({"clock":datetime_in_1e5micro()})
+                    # update all times
+                    self.clock = self.global_time[
+                        "clock"]  # hanging when on hold to slack -> internet connection/slack server
+                    self.db_time = self.global_time["dbtime"]  # hanging when disconnected from mysql
+                    self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
+                    self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
+                    self.socketserver_time = self.global_time["sockettime"]
                     print("Message Manager running ", self.clock, self.plc_time)
                 print("watchdog", alarm_received)
                 # Valid when plc is updating.
@@ -2927,7 +2934,7 @@ class LocalWatchdog(threading.Thread):
                     alarm_received = self.join_stack_into_message(self.alarm_stack)
                 with self.timelock:
                     self.global_time.update({"watchdogtime": datetime_in_1e5micro()})
-                    print("Local watchdog running", self.watchdog_time)
+                    print("Local watchdog running", self.global_time["watchdogtime"])
                 if self.para_alarm >= self.rate_alarm:
 
                     # send alarm msg to database, Otherwise, send text message about alarm
@@ -2995,7 +3002,7 @@ class UpdateServer(threading.Thread):
                 while True:
                     with self.timelock:
                         self.global_time.update({"sockettime":datetime_in_1e5micro()})
-                        print("Socket Server Updating", self.sockettime)
+                        print("Socket Server Updating", self.global_time["sockettime"])
 
                     received_data = pickle.loads(self.receive_data(conn))
                     self.update_data_signal(received_data)
