@@ -2261,7 +2261,6 @@ class UpdateDataBase(threading.Thread):
 
 
             time.sleep(self.base_period)
-            # raise Exception("Test breakup")
 
     def stop(self):
         self.Running = False
@@ -3107,8 +3106,8 @@ class MainClass():
                                          command_lock=self.command_lock, global_time=self.global_time,
                                          timelock=self.timelock, alarm_lock=self.alarm_lock, alarm_stack=self.alarm_stack)
 
-        self.threadMessager = Message_Manager(global_time=self.global_time, timelock=self.timelock,
-                                              alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
+        # self.threadMessager = Message_Manager(global_time=self.global_time, timelock=self.timelock,
+        #                                       alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         # wait for PLC initialization finished
         self.threadPLC.start()
@@ -3118,8 +3117,8 @@ class MainClass():
         self.threadWatchdog.start()
         time.sleep(0.1)
         self.threadSocket.start()
-        time.sleep(0.1)
-        self.threadMessager.start()
+        # time.sleep(0.1)
+        # self.threadMessager.start()
 
 
     def StopUpdater(self):
