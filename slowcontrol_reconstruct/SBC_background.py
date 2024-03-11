@@ -2314,14 +2314,14 @@ class UpdateDataBase(threading.Thread):
         for key in self.Valve_ERR:
             self.Valve_ERR[key] = dic["data"]["Valve"]["ERR"][key]
 
-        for key in self.Switch_OUT:
-            self.Switch_OUT[key] = dic["data"]["Switch"]["OUT"][key]
-        for key in self.Switch_INTLKD:
-            self.Switch_INTLKD[key] = dic["data"]["Switch"]["INTLKD"][key]
-        for key in self.Switch_MAN:
-            self.Switch_MAN[key] = dic["data"]["Switch"]["MAN"][key]
-        for key in self.Switch_ERR:
-            self.Switch_ERR[key] = dic["data"]["Switch"]["ERR"][key]
+        # for key in self.Switch_OUT:
+        #     self.Switch_OUT[key] = dic["data"]["Switch"]["OUT"][key]
+        # for key in self.Switch_INTLKD:
+        #     self.Switch_INTLKD[key] = dic["data"]["Switch"]["INTLKD"][key]
+        # for key in self.Switch_MAN:
+        #     self.Switch_MAN[key] = dic["data"]["Switch"]["MAN"][key]
+        # for key in self.Switch_ERR:
+        #     self.Switch_ERR[key] = dic["data"]["Switch"]["ERR"][key]
 
         for key in self.Din_dic:
             self.Din_dic[key] = dic["data"]["Din"]["value"][key]
