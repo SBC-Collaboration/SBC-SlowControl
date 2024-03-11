@@ -2855,7 +2855,8 @@ class Message_Manager(threading.Thread):
                     alarm_received.update(self.alarm_stack)
                 with self.time_lock:
                     self.clock = datetime_in_1e5micro()
-                    print("Message Manager running ", self.clock, self.plc_time)
+                    local_plc_time = self.plc_time
+                    print("Message Manager running ", self.clock, local_plc_time)
                 print("watchdog", alarm_received)
                 # Valid when plc is updating.
                 # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
@@ -3094,15 +3095,14 @@ class MainClass():
 
         # wait for PLC initialization finished
         self.threadPLC.start()
-        time.sleep(1)
+        time.sleep(0.5)
         self.threadDatabase.start()
-        time.sleep(1)
+        time.sleep(0.1)
         self.threadWatchdog.start()
-        time.sleep(1)
+        time.sleep(0.1)
         self.threadSocket.start()
-        time.sleep(1)
+        time.sleep(0.1)
         self.threadMessager.start()
-        time.sleep(1)
 
 
     def StopUpdater(self):
