@@ -1694,6 +1694,7 @@ class UpdatePLC(PLC, threading.Thread):
             except:
                 (type, value, traceback) = sys.exc_info()
                 exception_hook(type, value, traceback)
+                print("Exception in plc raised")
                 with self.alarm_lock:
                     self.alarm_stack.update({"PLC updating Exception":"PLC updating loop broke. Restarting..."})
                 # self run depend on senario, we want to rerun the module by module
@@ -2411,7 +2412,7 @@ class UpdateDataBase(threading.Thread):
 
         self.MainAlarm = dic["MainAlarm"]
 
-        print("Database received the data from PLC")
+        print("Database received the data")
 
     def write_data(self):
         if self.para_TT >= self.rate_TT:
@@ -2755,7 +2756,7 @@ class UpdateDataBase(threading.Thread):
             self.db.convert_stack_into_queries()
             self.db.drop_stack()
             self.db.db.commit()
-        print("Wrting PLC data to database...")
+        print("Writing data to database...")
 
         self.para_TT += 1
         self.para_PT += 1
