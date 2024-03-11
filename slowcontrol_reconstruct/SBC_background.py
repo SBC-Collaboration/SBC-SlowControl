@@ -1662,7 +1662,7 @@ class UpdatePLC(PLC, threading.Thread):
             try:
                 with self.timelock:
                     self.plc_time_dic.update({"plctime" :early_datetime()})
-                    print("PLC updating", self.plc_time_dic)
+                    print("PLC updating", self.plc_time_dic["plctime"])
                     print("PLC alarm len", len(self.alarm_stack))
                 self.ReadAll()
                 with self.command_lock:
@@ -2855,7 +2855,7 @@ class Message_Manager(threading.Thread):
                     alarm_received.update(self.alarm_stack)
                 with self.time_lock:
                     self.clock = datetime_in_1e5micro()
-                    print("Message Manager running ", self.clock, self.plc_time_dic)
+                    print("Message Manager running ", self.clock, self.plc_time_dic["plctime"])
                 print("watchdog", alarm_received)
                 # Valid when plc is updating.
                 # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
