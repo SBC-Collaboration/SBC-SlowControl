@@ -487,8 +487,9 @@ class PLC:
             except:
                 pass
         # after the initilaztion, set the flag as true so that GUI can start load this config
-        self.Ini_Check = True
-        print("CHECK INI", self.Ini_Check)
+        with self.plc_lock:
+            self.plc_data["Active"].update({"INI_CHECK":True})
+        print("CHECK INI", self.plc_data["Active"]["INI_CHECK"])
 
 
     def ReadAll(self):
