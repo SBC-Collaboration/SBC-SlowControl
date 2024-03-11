@@ -513,7 +513,7 @@ TIME_DIC = {'PCYCLE_EXPTIME': 0}
 #[0,1]
 #[1,1]
 #[1,0]
-INI_CHECK= True
+INI_CHECK= False
 
 TT_FP_PARA = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0,
              "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0,

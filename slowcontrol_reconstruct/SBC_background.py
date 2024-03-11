@@ -486,6 +486,8 @@ class PLC:
                 self.LOOPPID_Activated[key] = self.alarm_config.active_dic[key]
             except:
                 pass
+        # after the initilaztion, set the flag as true so that GUI can start load this config
+        self.Ini_Check = True
 
 
     def ReadAll(self):
