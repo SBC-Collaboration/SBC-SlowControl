@@ -486,11 +486,10 @@ class PLC:
             except:
                 pass
         # after the initilaztion, set the flag as true so that GUI can start load this config
-        self.Ini_Check = True
         with self.plc_lock:
-            # self.data_dic["Active"]["INI_CHECK"] = True
+            self.data_dic["Active"]["INI_CHECK"] = True
             self.plc_data.update(self.data_dic)
-        print("CHECK INI", self.Ini_Check,self.data_dic["Active"]["INI_CHECK"],self.plc_data["Active"]["INI_CHECK"])
+
 
 
     def ReadAll(self):
@@ -3038,7 +3037,6 @@ class UpdateServer(threading.Thread):
         print("command data in server socket", self.command_data)
     def pack_data(self, conn):
         data_transfer = pickle.dumps(self.plc_data)
-        print("INI_check in server", self.plc_data["Active"]["INI_CHECK"])
 
         # Send JSON data to the client
         conn.sendall(len(data_transfer).to_bytes(4, byteorder='big'))
