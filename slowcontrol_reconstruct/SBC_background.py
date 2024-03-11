@@ -1625,7 +1625,7 @@ class PLC:
 # Class to read PLC value every 2 sec
 class UpdatePLC(PLC, threading.Thread):
 
-    def __init__(self, plc_data, plc_lock, command_data, command_lock, plc_time, timelock, alarm_stack, alarm_lock, *args, **kwargs):
+    def __init__(self, plc_data, plc_lock, command_data, command_lock, plc_time_dic, timelock, alarm_stack, alarm_lock, *args, **kwargs):
         PLC.__init__(self, plc_data, plc_lock, command_data, command_lock)
         threading.Thread.__init__(self, *args, **kwargs)
         self.Running = False
@@ -1649,7 +1649,7 @@ class UpdatePLC(PLC, threading.Thread):
         self.LOOPPID_rate = env.LOOPPID_RATE
         self.mainalarm_para = env.MAINALARM_PARA
         self.mainalarm_rate = env.MAINALARM_RATE
-        self.plc_time = plc_time
+        self.plc_time_dic = plc_time_dic
         self.timelock = timelock
         self.alarm_stack = alarm_stack
         self.alarm_lock = alarm_lock
@@ -1661,8 +1661,8 @@ class UpdatePLC(PLC, threading.Thread):
         while self.Running:
             try:
                 with self.timelock:
-                    self.plc_time = early_datetime()
-                    print("PLC updating", self.plc_time)
+                    self.plc_time_dic.update({"plctime" :early_datetime()})
+                    print("PLC updating", self.plc_time_dic)
                     print("PLC alarm len", len(self.alarm_stack))
                 self.ReadAll()
                 with self.command_lock:
@@ -2769,14 +2769,14 @@ class UpdateDataBase(threading.Thread):
 
 class Message_Manager(threading.Thread):
     # add here the other alarm and database
-    def __init__(self, clock, db_time, watchdog_time, plc_time, socketserver_time, timelock, alarm_stack, alarm_lock):
+    def __init__(self, clock, db_time, watchdog_time, plc_time_dic, socketserver_time, timelock, alarm_stack, alarm_lock):
         super().__init__()
         self.alarm_init()
         self.running = True
         self.clock = clock  # hanging when on hold to slack -> internet connection/slack server
         self.db_time = db_time  # hanging when disconnected from mysql
         self.watchdog_time = watchdog_time  # hanging when ssh fail or coupp mysql fail
-        self.plc_time = plc_time  # hanging when Beckhoff/NI/Arduino fail
+        self.plc_time_dic = plc_time_dic  # hanging when Beckhoff/NI/Arduino fail
         self.socketserver_time = socketserver_time  # hanging when socket to GUI fail
         self.time_lock = timelock
         self.database_timeout = env.DATABASE_HOLD
@@ -2855,8 +2855,7 @@ class Message_Manager(threading.Thread):
                     alarm_received.update(self.alarm_stack)
                 with self.time_lock:
                     self.clock = datetime_in_1e5micro()
-                    local_plc_time = self.plc_time
-                    print("Message Manager running ", self.clock, local_plc_time)
+                    print("Message Manager running ", self.clock, self.plc_time_dic)
                 print("watchdog", alarm_received)
                 # Valid when plc is updating.
                 # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
@@ -2864,8 +2863,8 @@ class Message_Manager(threading.Thread):
                 # because it can detect timeout signal by itself
                 # Other module, we may just consider that the disconnection can happen and they will restart themselves
                 # But good to know time_out and manually restart them
-                if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
-                    alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(time=self.plc_timeout)})
+                # if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
+                #     alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(time=self.plc_timeout)})
                 # if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
                 #     alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(time=self.watchdog_timeout)})
                 # if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
@@ -3064,7 +3063,7 @@ class MainClass():
         self.timelock = threading.Lock()
         self.clock = early_datetime()
         self.watchdog_time = early_datetime()
-        self.plc_time = early_datetime()
+        self.plc_time = {"plctime": early_datetime()}
         self.socketserver_time = early_datetime()
 
         self.StartUpdater()
