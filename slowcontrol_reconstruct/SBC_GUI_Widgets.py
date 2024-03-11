@@ -4983,8 +4983,15 @@ class CustomSave(QtWidgets.QWidget):
         print(type(self.init_dic["Low_Limit"][0]))
         df = pd.DataFrame(self.init_dic)
         # df = pd.DataFrame(columns=["Instrument","LowLimit","HighLimit","Active"])
+        filepath = str(self.FilePath.text())
+        try:
+            if filepath.lower().endswith('.csv'):
+                df.to_csv(filepath, index=False)
+            else:
+                df.to_csv(filepath + '.csv', index=False)
+        except Exception as e:
+            print("Exception on save csv file",{e})
 
-        df.to_csv(str(self.FilePath.text()), index=False)
 
 
 class AlarmStatusWidget(QtWidgets.QWidget):
