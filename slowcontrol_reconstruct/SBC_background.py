@@ -486,10 +486,9 @@ class PLC:
             except:
                 pass
         # after the initilaztion, set the flag as true so that GUI can start load this config
+        self.Ini_Check = True
         with self.plc_lock:
-            self.Ini_Check = True
-            # self.plc_data["Active"].update({"INI_CHECK":True})
-            self.data_dic["Active"]["INI_CHECK"] = True
+            # self.data_dic["Active"]["INI_CHECK"] = True
             self.plc_data.update(self.data_dic)
         print("CHECK INI", self.Ini_Check,self.data_dic["Active"]["INI_CHECK"],self.plc_data["Active"]["INI_CHECK"])
 
