@@ -3073,7 +3073,7 @@ class MainClass():
 
         # Read PLC value on another thread
         self.threadPLC = UpdatePLC(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
-                                   command_lock=self.command_lock, plc_time=self.plc_time, timelock=self.timelock,
+                                   command_lock=self.command_lock, plc_time_dic=self.plc_time, timelock=self.timelock,
                                    alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         self.threadDatabase = UpdateDataBase(plc_data=self.plc_data, plc_lock=self.plc_lock, db_time=self.db_time,
