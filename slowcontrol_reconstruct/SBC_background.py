@@ -2254,7 +2254,7 @@ class UpdateDataBase(threading.Thread):
                 self.update_value(data_received)
                 self.write_data()
             except Exception as e:
-                print("Error",e)
+                print("Database Error",e)
                 logging.error(e)
                 # (type, value, traceback) = sys.exc_info()
                 # exception_hook(type, value, traceback)
@@ -2855,7 +2855,7 @@ class Message_Manager(threading.Thread):
 
         except SlackApiError as e:
 
-            print(f"Error: {e}")
+            print("Slack",f"Error: {e}")
 
     def run(self):
         alarm_received = {}
@@ -2906,7 +2906,7 @@ class Message_Manager(threading.Thread):
             except Exception as e:
                 with self.alarm_lock:
                     self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
-                print("Error",e)
+                print("Slack exception Error",e)
                 logging.error(e)
                 # restart itself
                 time.sleep(self.base_period*60)
@@ -2961,7 +2961,7 @@ class LocalWatchdog(threading.Thread):
                 with self.alarm_lock:
                     self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
                                                                               "on COUPP server. Restarting"})
-                    print("Error",e)
+                    print("watchdog Error",e)
                     logging.error(e)
                     # restart itself
                     time.sleep(self.base_period * 60)
