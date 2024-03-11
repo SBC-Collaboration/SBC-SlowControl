@@ -2320,8 +2320,8 @@ class UpdateDataBase(threading.Thread):
             self.Switch_INTLKD[key] = dic["data"]["Switch"]["INTLKD"][key]
         for key in self.Switch_MAN:
             self.Switch_MAN[key] = dic["data"]["Switch"]["MAN"][key]
-        # for key in self.Switch_ERR:
-        #     self.Switch_ERR[key] = dic["data"]["Switch"]["ERR"][key]
+        for key in self.Switch_ERR:
+            self.Switch_ERR[key] = dic["data"]["Switch"]["ERR"][key]
 
         for key in self.Din_dic:
             self.Din_dic[key] = dic["data"]["Din"]["value"][key]
