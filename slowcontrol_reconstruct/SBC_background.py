@@ -2855,7 +2855,7 @@ class Message_Manager(threading.Thread):
                     alarm_received.update(self.alarm_stack)
                 with self.time_lock:
                     self.clock = datetime_in_1e5micro()
-                    print("Message Manager running ", self.clock)
+                    print("Message Manager running ", self.clock, self.plc_time)
                 print("watchdog", alarm_received)
                 # Valid when plc is updating.
                 # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
@@ -2865,12 +2865,12 @@ class Message_Manager(threading.Thread):
                 # But good to know time_out and manually restart them
                 if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
                     alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(time=self.plc_timeout)})
-                if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
-                    alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(time=self.watchdog_time)})
-                if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
-                    alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
-                if (self.clock - self.db_time).total_seconds() > self.database_timeout:
-                    alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(time=self.database_timeout)})
+                # if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
+                #     alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(time=self.watchdog_timeout)})
+                # if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
+                #     alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
+                # if (self.clock - self.db_time).total_seconds() > self.database_timeout:
+                #     alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(time=self.database_timeout)})
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:

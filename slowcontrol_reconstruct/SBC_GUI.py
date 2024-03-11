@@ -4248,12 +4248,6 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot(object)
     def updatedisplay(self, received_dic_c):
         print("Display updating", datetime.datetime.now())
-        # print('Display update result for HFSV3331:', received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
-
-        # print(received_dic_c["data"]["Procedure"])
-
-        # initialization for all check box
-        # print(received_dic_c)
         if received_dic_c["Active"]["INI_CHECK"]==True and self.CHECKED == False:
             self.man_activated(received_dic_c)
             self.CHECKED = True
