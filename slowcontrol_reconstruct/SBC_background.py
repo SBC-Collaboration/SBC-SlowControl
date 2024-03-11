@@ -1663,11 +1663,10 @@ class UpdatePLC(PLC, threading.Thread):
                 with self.timelock:
                     self.plc_time = early_datetime()
                     print("PLC updating", self.plc_time)
+                    print("PLC alarm len", len(self.alarm_stack))
                 self.ReadAll()
-                # print("plcdata in updateplc", self.plc_data["data"]["PT"]["value"])
                 with self.command_lock:
                     self.write_data(self.command_data)
-                # test signal
                 # check alarms
                 for keyTT_FP in self.TT_FP_dic:
                     self.check_TT_FP_alarm(keyTT_FP)
@@ -2874,6 +2873,7 @@ class Message_Manager(threading.Thread):
                     # and clear the alarm stack
                     with self.alarm_lock:
                         self.alarm_stack.clear()
+                        print("alarm stack cleared", self.alarm_stack)
                     self.para_alarm = 0
                 self.para_alarm += 1
                 time.sleep(self.base_period)
