@@ -2275,6 +2275,7 @@ class UpdateDataBase(threading.Thread):
                     print("not defined")
                 else:
                     print("defined")
+                print("Locals:", locals())
                 if self.db.db.is_connected():
 
                     try:
