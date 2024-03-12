@@ -2282,18 +2282,24 @@ class UpdateDataBase(threading.Thread):
                 # if reconnect process failed, then raise the Error as alarm msg
                 if self.db.db.is_connected():
                     self.write_data()
-            except Exception as e:
-                try:
-                    print("Exception 1")
-                    self.db.close_database()
-                    print("Exception 2")
-                    self.db = mydatabase()
-                    print("Exception 3")
-                    self.write_data()
-                    print("Exception 4")
-                except:
-                    with self.alarm_lock:
-                        self.alarm_stack.update({"Database Exception #3": "Local database data saving error- Database is disconnected"})
+            except:
+                (type, value, traceback) = sys.exc_info()
+                exception_hook(type, value, traceback)
+                
+            # except Exception as e:
+            #     try:
+            #         print("Exception 1")
+            #         # self.db.close_database()
+            #         print("Exception 2")
+            #         self.db = mydatabase()
+            #         print("Exception 3")
+            #         self.write_data()
+            #         print("Exception 4")
+            #     except:
+            #         # (type, value, traceback) = sys.exc_info()
+            #         # exception_hook(type, value, traceback)
+            #         with self.alarm_lock:
+            #             self.alarm_stack.update({"Database Exception #3": "Local database data saving error- Database is disconnected"})
             time.sleep(self.base_period)
 
         self.run()
