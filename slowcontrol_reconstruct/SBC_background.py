@@ -2260,6 +2260,8 @@ class UpdateDataBase(threading.Thread):
                 print("Database Updating", self.global_time["dbtime"])
 
             except Exception as e:
+                with self.alarm_lock:
+                    self.alarm_stack.update({"Database Exception": "Local database timestamp error"})
                 print("Error",e)
                 logging.error(e)
 
@@ -2267,15 +2269,27 @@ class UpdateDataBase(threading.Thread):
                 with self.plc_lock:
                     data_received = dict(self.plc_data)
                 self.update_value(data_received)
-                self.write_data()
+
             except Exception as e:
-                print("Database Error",e)
+                with self.alarm_lock:
+                    self.alarm_stack.update({"Database Exception": "Local database data reception error"})
                 logging.error(e)
                 # (type, value, traceback) = sys.exc_info()
                 # exception_hook(type, value, traceback)
 
-
+            try:
+                # if connected, run the write function, else try to reconnect
+                # if reconnect process failed, then raise the Error as alarm msg
+                if self.db.db.is_connected():
+                    self.write_data()
+                else:
+                    self.db = mydatabase()
+            except Exception as e:
+                with self.alarm_lock:
+                    self.alarm_stack.update({"Database Exception": "Local database data saving error- Database is disconnected"})
             time.sleep(self.base_period)
+
+        self.run()
 
     def stop(self):
         self.Running = False
