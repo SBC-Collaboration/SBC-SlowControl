@@ -1671,7 +1671,14 @@ class UpdatePLC(PLC, threading.Thread):
                 with self.timelock:
                     self.global_time.update({"plctime" :datetime_in_1e5micro()})
                     print("PLC updating", self.global_time["plctime"])
-                self.ReadAll()
+            except Exception as e:
+                print("Exception in plc raised")
+                with self.alarm_lock:
+                    self.alarm_stack.update({"PLC updating Exception": "PLC timestamp updates ERROR"})
+                # self run depend on senario, we want to rerun the module by module
+            # it has its own try function so we can skip try function here
+            self.ReadAll()
+            try:
                 with self.command_lock:
                     self.write_data(self.command_data)
                 # check alarms
@@ -1691,12 +1698,12 @@ class UpdatePLC(PLC, threading.Thread):
                     self.check_LOOPPID_alarm(keyLOOPPID)
                 self.or_alarm_signal()
                 time.sleep(self.period)
-            except:
+            except Exception as e:
                 # (type, value, traceback) = sys.exc_info()
                 # exception_hook(type, value, traceback)
                 print("Exception in plc raised")
                 with self.alarm_lock:
-                    self.alarm_stack.update({"PLC updating Exception":"PLC updating loop broke. Restarting..."})
+                    self.alarm_stack.update({"PLC updating Exception":"PLC alarm check. Restarting..."})
                 # self run depend on senario, we want to rerun the module by module
                 break
         self.run()
