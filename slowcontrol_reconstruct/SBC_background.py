@@ -2270,12 +2270,12 @@ class UpdateDataBase(threading.Thread):
                 #     # if connected, run the write function, else try to reconnect
                 #     # if reconnect process failed, then raise the Error as alarm msg depending on whether self.db exists
                 # only when no mysql connections
-                if hasattr(self, 'db') or not self.db.db.is_connected():
-                    self.db = mydatabase()
+                # if hasattr(self, 'db') or not self.db.db.is_connected():
+                if hasattr(self, 'db'):
+                    # self.db = mydatabase()
                     print("not defined")
                 else:
                     print("defined")
-                print("Locals:", locals())
                 if self.db.db.is_connected():
 
                     try:
@@ -2292,12 +2292,15 @@ class UpdateDataBase(threading.Thread):
                             self.alarm_stack.update({"Database Exception #3": "Local database data saving error- Database is disconnected"})
                             print("Database Exception #3: Local database data saving error- Database is disconnected")
 
-            except mysql.connector.Error as e:
+            except mysql.connector.Error as e0:
                 # Handle connection errors (e.g., initial connection failure)
-                print("Error connecting to MySQL database:", e)
+                print("Error connecting to MySQL database:", e0)
                 with self.alarm_lock:
                     self.alarm_stack.update({"Database Exception #4": "Local database data saving error- Database is disconnected"})
                     print("Database Exception #4 Local database data saving error- Database is disconnected")
+
+
+
 
             time.sleep(self.base_period)
 
@@ -3132,34 +3135,34 @@ class MainClass():
     def StartUpdater(self):
 
         # Read PLC value on another thread
-        self.threadPLC = UpdatePLC(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
-                                   command_lock=self.command_lock, global_time=self.global_time, timelock=self.timelock,
-                                   alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
+        # self.threadPLC = UpdatePLC(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
+        #                            command_lock=self.command_lock, global_time=self.global_time, timelock=self.timelock,
+        #                            alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         self.threadDatabase = UpdateDataBase(plc_data=self.plc_data, plc_lock=self.plc_lock, global_time=self.global_time,
                                              timelock=self.timelock, alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
-        self.threadWatchdog = LocalWatchdog(global_time=self.global_time,
-                                            timelock=self.timelock,
-                                            alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
-
-        self.threadSocket = UpdateServer(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
-                                         command_lock=self.command_lock, global_time=self.global_time,
-                                         timelock=self.timelock, alarm_lock=self.alarm_lock, alarm_stack=self.alarm_stack)
-
-        self.threadMessager = Message_Manager(global_time=self.global_time, timelock=self.timelock,
-                                              alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
+        # self.threadWatchdog = LocalWatchdog(global_time=self.global_time,
+        #                                     timelock=self.timelock,
+        #                                     alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
+        #
+        # self.threadSocket = UpdateServer(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
+        #                                  command_lock=self.command_lock, global_time=self.global_time,
+        #                                  timelock=self.timelock, alarm_lock=self.alarm_lock, alarm_stack=self.alarm_stack)
+        #
+        # self.threadMessager = Message_Manager(global_time=self.global_time, timelock=self.timelock,
+        #                                       alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         # wait for PLC initialization finished
-        self.threadPLC.start()
-        time.sleep(0.5)
+        # self.threadPLC.start()
+        # time.sleep(0.5)
         self.threadDatabase.start()
         time.sleep(0.1)
-        self.threadWatchdog.start()
-        time.sleep(0.1)
-        self.threadSocket.start()
-        time.sleep(0.1)
-        self.threadMessager.start()
+        # self.threadWatchdog.start()
+        # time.sleep(0.1)
+        # self.threadSocket.start()
+        # time.sleep(0.1)
+        # self.threadMessager.start()
 
 
     def StopUpdater(self):
