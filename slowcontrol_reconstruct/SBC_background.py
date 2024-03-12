@@ -501,7 +501,7 @@ class PLC:
         #     try:
         #         self.Client_NI.connect()
         #         print("NI Reconnected")
-        #     except:
+        #     except Exception as e:
         #         print("NI Reconnect failed, trying again")
         #         # Wait for 5 seconds before retrying
         #     finally:
@@ -518,7 +518,7 @@ class PLC:
             try:
                 self.Client_BO.connect()
                 print("BO Reconnected")
-            except:
+            except Exception as e:
                 print("BO Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
             finally:
@@ -533,7 +533,7 @@ class PLC:
             try:
                 self.Client_AD.connect()
                 print("AD Reconnected")
-            except:
+            except Exception as e:
                 print("AD Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
             finally:
