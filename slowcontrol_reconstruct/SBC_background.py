@@ -2284,9 +2284,13 @@ class UpdateDataBase(threading.Thread):
                     self.write_data()
             except Exception as e:
                 try:
+                    print("Exception 1")
                     self.db.close_database()
+                    print("Exception 2")
                     self.db = mydatabase()
+                    print("Exception 3")
                     self.write_data()
+                    print("Exception 4")
                 except:
                     with self.alarm_lock:
                         self.alarm_stack.update({"Database Exception #3": "Local database data saving error- Database is disconnected"})
