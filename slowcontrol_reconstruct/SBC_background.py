@@ -497,20 +497,20 @@ class PLC:
     def ReadAll(self):
 
         # and not holding
-        if not self.Client_NI.is_socket_open():
-            try:
-                self.Client_NI.connect()
-                print("NI Reconnected")
-            except:
-                print("NI Reconnect failed, trying again")
-                # Wait for 5 seconds before retrying
-            finally:
-                self.Read_NI_empty()
-                with self.alarm_lock:
-                    self.alarm_stack.update({"NI disconnection alarm":"National Instrument modbus is disconnected. Restarting..."})
-        else:
-            self.Read_NI()
-            pass
+        # if not self.Client_NI.is_socket_open():
+        #     try:
+        #         self.Client_NI.connect()
+        #         print("NI Reconnected")
+        #     except:
+        #         print("NI Reconnect failed, trying again")
+        #         # Wait for 5 seconds before retrying
+        #     finally:
+        #         self.Read_NI_empty()
+        #         with self.alarm_lock:
+        #             self.alarm_stack.update({"NI disconnection alarm":"National Instrument modbus is disconnected. Restarting..."})
+        # else:
+        #     self.Read_NI()
+        #     pass
 
 
         #########################################################################
