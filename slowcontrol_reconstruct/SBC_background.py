@@ -2298,7 +2298,7 @@ class UpdateDataBase(threading.Thread):
                 # this means self.db exits at the begining, but it lost connection later, so we need to first close the connection first
                 try:
                     print("Exception 1")
-                    self.db.db.close()
+                    self.db.close_database()
                     print("Exception 2")
                     self.db = mydatabase()
                     print("Exception 3")
