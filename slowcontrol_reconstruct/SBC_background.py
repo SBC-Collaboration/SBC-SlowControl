@@ -12,6 +12,7 @@ v1.1 Initialize values, flag when values are updated more modbus variables 04/03
 
 import struct, time, zmq, sys, pickle, copy, logging, threading, queue, socket, json
 import numpy as np
+import pymodbus.exceptions
 from PySide2 import QtWidgets, QtCore, QtGui
 from SBC_watchdog_database import *
 from email.mime.text import MIMEText
@@ -518,7 +519,7 @@ class PLC:
             try:
                 self.Client_BO.connect()
                 print("BO Reconnected")
-            except Exception as e:
+            except pymodbus.exceptions.ConnectionException as e:
                 print("BO Reconnect failed, trying again")
                 # Wait for 5 seconds before retrying
             finally:
