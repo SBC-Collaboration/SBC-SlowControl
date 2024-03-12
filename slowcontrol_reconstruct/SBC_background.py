@@ -2272,10 +2272,11 @@ class UpdateDataBase(threading.Thread):
                 # only when no mysql connections
                 # if hasattr(self, 'db') or not self.db.db.is_connected():
                 if hasattr(self, 'db'):
-                    # self.db = mydatabase()
-                    print("not defined")
-                else:
+
                     print("defined")
+                else:
+                    print("not defined")
+                    self.db = mydatabase()
                 if self.db.db.is_connected():
 
                     try:
