@@ -2304,7 +2304,7 @@ class UpdateDataBase(threading.Thread):
                     # (type, value, traceback) = sys.exc_info()
                     # exception_hook(type, value, traceback)
                     with self.alarm_lock:
-                        self.alarm_stack.update({"Database Exception #3": "Local database data saving error- Database is disconnected"})
+                        self.alarm_stack.update({"Database Exception #4": "Local database data saving error- Database is disconnected"})
             time.sleep(self.base_period)
 
         self.run()
