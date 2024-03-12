@@ -351,7 +351,7 @@ def connect_to_database():
             connection = mysql.connector.connect(
                 host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol")
 
-            
+
             if connection.is_connected():
                 print("Connected to MySQL database")
 
