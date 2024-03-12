@@ -2035,7 +2035,9 @@ class UpdateDataBase(threading.Thread):
         self.timelock = timelock
 
         # self.PLC = PLC
+
         self.db = mydatabase()
+
 
         self.Running = False
         # if loop runs with _counts times with New_Database = False(No written Data), then send alarm to slack. Otherwise, the code normally run(reset the pointer)

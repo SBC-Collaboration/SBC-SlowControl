@@ -343,9 +343,9 @@ class COUPP_database():
 
 # test sbcslowcontrol database
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
-    # db = mydatabase()
+    db = mydatabase()
     # dt = datetime_in_s()
     # early_dt = early_datetime()
     # # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
@@ -369,7 +369,7 @@ class COUPP_database():
 
     # db.show_tables()
 
-    # db.close_database()
+    db.close_database()
 
     #test datetime function
     # print(datetime_in_1e5micro())
@@ -377,23 +377,23 @@ class COUPP_database():
 
 #test NW sbc alarm database
 
-if __name__ == "__main__":
-    db = COUPP_database()
-    dt = datetime_in_s()
+# if __name__ == "__main__":
+    # db = COUPP_database()
+    # dt = datetime_in_s()
     # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
-    print(dt)
+    # print(dt)
     # print(unix_timestamp)
     # db.insert_data_into_datastorage("test",dt,500.55)
     # db.ssh_select()
     # db.ssh_write()
     # db.ssh_select()
-    print(db.ssh_state_only())
+    # print(db.ssh_state_only())
     # db.test_gateway()
 
 
-    db.close_database()
+    # db.close_database()
 
     #test datetime function
-    print(datetime_in_1e5micro())
-    print(early_datetime())
+    # print(datetime_in_1e5micro())
+    # print(early_datetime())
 
