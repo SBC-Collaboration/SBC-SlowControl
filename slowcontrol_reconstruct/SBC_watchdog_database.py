@@ -378,8 +378,6 @@ def connect_to_database():
             print("Retrying connection in 5 seconds...")
             time.sleep(5)
 
-# Example usage
-connect_to_database()
 
 
 # test sbcslowcontrol database
