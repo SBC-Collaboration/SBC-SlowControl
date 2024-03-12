@@ -510,8 +510,11 @@ class PLC:
                 with self.alarm_lock:
                     self.alarm_stack.update({"NI disconnection alarm":"National Instrument modbus is disconnected. Restarting..."})
         else:
-            self.Read_NI()
-            pass
+            try:
+                self.Read_NI()
+            except Exception as e:
+                pass
+
 
 
         #########################################################################
@@ -527,8 +530,10 @@ class PLC:
                 with self.alarm_lock:
                     self.alarm_stack.update({"BO disconnection alarm":"Beckhoff modbus is disconnected. Restarting..."})
         else:
-            self.Read_BO()
-            pass
+            try:
+                self.Read_BO()
+            except Exception as e:
+                pass
 
         if not self.Client_AD.is_socket_open():
             try:
@@ -542,8 +547,10 @@ class PLC:
                 with self.alarm_lock:
                     self.alarm_stack.update({"AD disconnection alarm":"Ardunio modbus is disconnected. Restarting..."})
         else:
-            self.Read_AD()
-            pass
+            try:
+                self.Read_AD()
+            except Exception as e:
+                pass
         with self.plc_lock:
             self.plc_data.update(self.data_dic)
 
