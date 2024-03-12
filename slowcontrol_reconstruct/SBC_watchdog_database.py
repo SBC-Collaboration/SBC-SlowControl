@@ -339,6 +339,7 @@ class COUPP_database():
             ssh_client.close()
 
 
+
 import mysql.connector
 from mysql.connector import Error
 import time
@@ -348,26 +349,37 @@ def connect_to_database():
         try:
             # Attempt to establish a connection to the MySQL database
             connection = mysql.connector.connect(
-                host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol"
-            )
+                host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol")
+
+            
             if connection.is_connected():
                 print("Connected to MySQL database")
 
                 # Print a string every 1 second if the connection is established
                 while True:
-                    print("Doing something in the database...")
+                    try:
+                        # Check if the connection is still alive
+                        connection.ping(reconnect=True)
+
+                        # Perform database operation
+                        print("Doing something in the database...")
+
+                    except mysql.connector.Error as e:
+                        # Handle database errors (e.g., connection lost)
+                        print("Database error:", e)
+                        print("Attempting to reconnect...")
+                        break  # Exit the inner loop to attempt reconnection
+
                     time.sleep(1)
 
         except Error as e:
-            # Handle the error (e.g., print error message)
+            # Handle connection errors (e.g., initial connection failure)
             print("Error connecting to MySQL database:", e)
             print("Retrying connection in 5 seconds...")
             time.sleep(5)
 
 # Example usage
 connect_to_database()
-
-# Example usage
 
 
 # test sbcslowcontrol database
