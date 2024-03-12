@@ -3154,7 +3154,7 @@ class MainClass():
         self.threadMessager = Message_Manager(global_time=self.global_time, timelock=self.timelock,
                                               alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
-        wait for PLC initialization finished
+        # wait for PLC initialization finished
         self.threadPLC.start()
         time.sleep(0.5)
         self.threadDatabase.start()
