@@ -2276,30 +2276,31 @@ class UpdateDataBase(threading.Thread):
                 logging.error(e)
                 # (type, value, traceback) = sys.exc_info()
                 # exception_hook(type, value, traceback)
-
             try:
                 # if connected, run the write function, else try to reconnect
-                # if reconnect process failed, then raise the Error as alarm msg
+                # if reconnect process failed, then raise the Error as alarm msg depending on whether self.db exists
                 if self.db.db.is_connected():
                     self.write_data()
-            except:
-                (type, value, traceback) = sys.exc_info()
-                exception_hook(type, value, traceback)
-                
-            # except Exception as e:
-            #     try:
-            #         print("Exception 1")
-            #         # self.db.close_database()
-            #         print("Exception 2")
-            #         self.db = mydatabase()
-            #         print("Exception 3")
-            #         self.write_data()
-            #         print("Exception 4")
-            #     except:
-            #         # (type, value, traceback) = sys.exc_info()
-            #         # exception_hook(type, value, traceback)
-            #         with self.alarm_lock:
-            #             self.alarm_stack.update({"Database Exception #3": "Local database data saving error- Database is disconnected"})
+
+            except AttributeError:
+                # this when no self.db exits, which means initialaztion failed. we need to reconnect
+                try:
+                    self.db = mydatabase()
+                except:
+                    # (type, value, traceback) = sys.exc_info()
+                    # exception_hook(type, value, traceback)
+                    with self.alarm_lock:
+                        self.alarm_stack.update({"Database Exception #3": "Local database data saving error- Database is disconnected"})
+            except Exception as e:
+                # this means self.db exits at the begining, but it lost connection later, so we need to first close the connection first
+                try:
+                    self.db.db.close()
+                    self.db = mydatabase()
+                except:
+                    # (type, value, traceback) = sys.exc_info()
+                    # exception_hook(type, value, traceback)
+                    with self.alarm_lock:
+                        self.alarm_stack.update({"Database Exception #3": "Local database data saving error- Database is disconnected"})
             time.sleep(self.base_period)
 
         self.run()
@@ -3091,7 +3092,7 @@ class UpdateServer(threading.Thread):
     def update_data_signal(self, received_dict):
         with self.command_lock:
             self.command_data.update(received_dict)
-        print("command data in server socket", self.command_data)
+        # print("command data in server socket", self.command_data)
     def pack_data(self, conn):
         data_transfer = pickle.dumps(self.plc_data)
 
