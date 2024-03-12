@@ -339,6 +339,10 @@ class COUPP_database():
             ssh_client.close()
 
 
+import mysql.connector
+from mysql.connector import Error
+import time
+
 def connect_to_database():
     while True:
         try:
@@ -348,13 +352,20 @@ def connect_to_database():
             )
             if connection.is_connected():
                 print("Connected to MySQL database")
-                return connection
 
-        except Exception as e:
+                # Print a string every 1 second if the connection is established
+                while True:
+                    print("Doing something in the database...")
+                    time.sleep(1)
+
+        except Error as e:
             # Handle the error (e.g., print error message)
             print("Error connecting to MySQL database:", e)
             print("Retrying connection in 5 seconds...")
-            tm.sleep(5)
+            time.sleep(5)
+
+# Example usage
+connect_to_database()
 
 # Example usage
 
