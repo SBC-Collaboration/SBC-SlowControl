@@ -2270,7 +2270,7 @@ class UpdateDataBase(threading.Thread):
                 #     # if connected, run the write function, else try to reconnect
                 #     # if reconnect process failed, then raise the Error as alarm msg depending on whether self.db exists
                 # only when no mysql connections
-                if 'db' not in locals() or not self.db.db.is_connected():
+                if hasattr(self, 'db') or not self.db.db.is_connected():
                     self.db = mydatabase()
                     print("not defined")
                 else:
