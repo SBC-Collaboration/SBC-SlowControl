@@ -497,7 +497,7 @@ class PLC:
 
     def ReadAll(self):
 
-        and not holding
+        # and not holding
         if not self.Client_NI.is_socket_open():
             try:
                 self.Client_NI.connect()
