@@ -339,13 +339,32 @@ class COUPP_database():
             ssh_client.close()
 
 
+def connect_to_database():
+    while True:
+        try:
+            # Attempt to establish a connection to the MySQL database
+            connection = mysql.connector.connect(
+                host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol"
+            )
+            if connection.is_connected():
+                print("Connected to MySQL database")
+                return connection
+
+        except Exception as e:
+            # Handle the error (e.g., print error message)
+            print("Error connecting to MySQL database:", e)
+            print("Retrying connection in 5 seconds...")
+            tm.sleep(5)
+
+# Example usage
 
 
 # test sbcslowcontrol database
 
 if __name__ == "__main__":
+    connection = connect_to_database()
 
-    db = mydatabase()
+    # db = mydatabase()
     # dt = datetime_in_s()
     # early_dt = early_datetime()
     # # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
@@ -369,7 +388,7 @@ if __name__ == "__main__":
 
     # db.show_tables()
 
-    db.close_database()
+    # db.close_database()
 
     #test datetime function
     # print(datetime_in_1e5micro())
