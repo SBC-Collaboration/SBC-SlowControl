@@ -2281,6 +2281,7 @@ class UpdateDataBase(threading.Thread):
                 # if reconnect process failed, then raise the Error as alarm msg depending on whether self.db exists
                 if self.db.db.is_connected():
                     self.write_data()
+                    print("finished writing")
 
             except AttributeError:
                 # this when no self.db exits, which means initialaztion failed. we need to reconnect
