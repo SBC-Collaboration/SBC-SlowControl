@@ -52,8 +52,8 @@ class mydatabase():
         # db=mysql.connector.connect()
         self.db = mysql.connector.connect(host="localhost", user="slowcontrol", passwd=os.environ.get("SLOWCONTROL_LOCAL_TOKEN"), database="SBCslowcontrol")
 
-        self.mycursor = self.db.cursor()
-        self.stack= pd.DataFrame(columns=['Instrument', 'Time', 'Value'])
+        # self.mycursor = self.db.cursor()
+        # self.stack= pd.DataFrame(columns=['Instrument', 'Time', 'Value'])
 
     def query(self,statement):
         try:

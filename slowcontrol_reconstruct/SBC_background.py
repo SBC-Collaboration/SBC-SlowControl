@@ -2026,17 +2026,26 @@ class UpdatePLC(PLC, threading.Thread):
 # Class to update myseeq database
 class UpdateDataBase(threading.Thread):
 
-    def __init__(self, plc_data, plc_lock, global_time, timelock):
+    def __init__(self, plc_data, plc_lock, global_time, timelock, alarm_stack, alarm_lock):
         # inherit the thread method
         super().__init__()
         self.plc_data = plc_data
         self.plc_lock = plc_lock
         self.global_time = global_time
         self.timelock = timelock
+        self.alarm_stack = alarm_stack
+        self.alarm_lock = alarm_lock
 
         # self.PLC = PLC
+        try:
+            # the possbility that this is terminated is low except Fermi banned mysql service.
+            self.db = mydatabase()
+        except Exception as e:
+            print("Local Database Disconnected.")
+            with self.alarm_lock:
+                self.alarm_stack.update({"Mysql Local Database Exception": "Disconnection from localhost database"})
 
-        self.db = mydatabase()
+
 
 
         self.Running = False
@@ -3102,7 +3111,7 @@ class MainClass():
                                    alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         self.threadDatabase = UpdateDataBase(plc_data=self.plc_data, plc_lock=self.plc_lock, global_time=self.global_time,
-                                             timelock=self.timelock)
+                                             timelock=self.timelock, alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         self.threadWatchdog = LocalWatchdog(global_time=self.global_time,
                                             timelock=self.timelock,
