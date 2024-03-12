@@ -2271,12 +2271,13 @@ class UpdateDataBase(threading.Thread):
                 #     # if reconnect process failed, then raise the Error as alarm msg depending on whether self.db exists
                 # only when no mysql connections
                 # if hasattr(self, 'db') or not self.db.db.is_connected():
-                if hasattr(self, 'db'):
-
-                    print("defined")
-                else:
-                    print("not defined")
+                if not hasattr(self, 'db'): # if it doesn't exist, try to create it
                     self.db = mydatabase()
+                else:
+                    # connection exist but broken, restart it
+                    if not self.db.db.is_connected():
+                        self.db.db.close()
+                        self.db = mydatabase()
                 if self.db.db.is_connected():
 
                     try:
