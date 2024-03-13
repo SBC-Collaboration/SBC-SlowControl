@@ -2861,12 +2861,17 @@ class Message_Manager(threading.Thread):
         # it can be fetched on slack app page in SBCAlarm app: https://api.slack.com/apps/A035X77RW64/general
         # if not_in_channel error type /invite @SBC_Alarm in channel
         try:
-            self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
-            self.logger = logging.getLogger(__name__)
-            self.channel_id = "C01A549VDHS"
+            self.slack_init()
         except (SlackApiError, Exception) as e:
             with self.alarm_lock:
                 self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
+
+
+    def slack_init(self):
+        self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
+        self.logger = logging.getLogger(__name__)
+        self.channel_id = "C01A549VDHS"
+
 
 
     def tencent_alarm(self, message):
@@ -2911,6 +2916,7 @@ class Message_Manager(threading.Thread):
         result = self.client_fake.chat_postMessage(
             channel=self.channel_id,
             text=str(message)
+
             # You could also use a blocks[] array to send richer content
         )
         # Print result, which includes information about the message (like TS)
@@ -2957,7 +2963,7 @@ class Message_Manager(threading.Thread):
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
-
+                        self.slack_init()
                         msg = self.join_stack_into_message(alarm_received)
                         self.slack_alarm(msg)
                     # and clear the alarm stack
@@ -3002,6 +3008,8 @@ class LocalWatchdog(threading.Thread):
         self.running = True
         self.para_alarm = env.MAINALARM_PARA
         self.rate_alarm = env.MAINALARM_RATE
+        self.para_long_alarm = env.MAINALARM_LONG_PARA
+        self.rate_long_alarm = env.MAINALARM_LONG_RATE
         self.base_period = 1
 
     def run(self):
@@ -3020,7 +3028,15 @@ class LocalWatchdog(threading.Thread):
                     else:
                         self.alarm_db.ssh_alarm(message=alarm_received)
                     self.para_alarm = 0
+                    # loop is active in case slack channel isinactive.
+                    # this is 300s loop, if longer than this, the alarms will be cleared out.
+                    if self.para_long_alarm >= self.rate_long_alarm:
+                        with self.alarm_lock:
+                            alarm_received.clear()
+                            self.alarm_stack.clear()
+                        self.para_long_alarm = 0
                 self.para_alarm += 1
+                self.para_long_alarm += 1
                 time.sleep(self.base_period)
 
             except (sshtunnel.BaseSSHTunnelForwarderError, pymysql.Error,Exception)  as e:
@@ -3030,7 +3046,7 @@ class LocalWatchdog(threading.Thread):
                     print("watchdog Error",e)
                     logging.error(e)
                     # restart itself
-                    time.sleep(self.base_period * 60)
+                    time.sleep(self.base_period * 1)
                     break
         self.run()
 
