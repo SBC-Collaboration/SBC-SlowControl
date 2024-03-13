@@ -2981,7 +2981,7 @@ class Message_Manager(threading.Thread):
                 print("Slack exception Error2",e)
                 logging.error(e)
                 # restart itself
-                time.sleep(self.base_period*60)
+                time.sleep(self.base_period*1)
                 break
         self.run()
 
