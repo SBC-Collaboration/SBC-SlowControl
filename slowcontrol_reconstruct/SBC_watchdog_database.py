@@ -338,8 +338,8 @@ class COUPP_database():
         finally:
             ssh_client.close()
 
-
-
+"""
+good example of how to check mysql connections
 import mysql.connector
 from mysql.connector import Error
 import time
@@ -378,7 +378,7 @@ def connect_to_database():
             print("Retrying connection in 5 seconds...")
             time.sleep(5)
 
-
+"""
 
 # test sbcslowcontrol database
 

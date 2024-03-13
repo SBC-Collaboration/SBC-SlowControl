@@ -13,6 +13,7 @@ v1.1 Initialize values, flag when values are updated more modbus variables 04/03
 import struct, time, zmq, sys, pickle, copy, logging, threading, queue, socket, json
 import numpy as np
 import pymodbus.exceptions
+import sshtunnel
 from PySide2 import QtWidgets, QtCore, QtGui
 from SBC_watchdog_database import *
 from email.mime.text import MIMEText
@@ -2929,8 +2930,9 @@ class Message_Manager(threading.Thread):
                     alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(time=self.plc_timeout)})
                 if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
                     alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(time=self.watchdog_timeout)})
-                if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
-                    alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
+                # because when no client, the server is always on hold
+                # if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
+                #     alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
                 if (self.clock - self.db_time).total_seconds() > self.database_timeout:
                     alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(time=self.database_timeout)})
 
@@ -3001,8 +3003,17 @@ class LocalWatchdog(threading.Thread):
                     self.para_alarm = 0
                 self.para_alarm += 1
                 time.sleep(self.base_period)
+            except pymysql.Error as e:
+                with self.alarm_lock:
+                    self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
+                                                                              "on COUPP server. Restarting"})
+                    print("watchdog Error",e)
+                    logging.error(e)
+                    # restart itself
+                    time.sleep(self.base_period * 60)
+                    break
 
-            except Exception as e:
+            except (sshtunnel.BaseSSHTunnelForwarderError, pymysql.Error,Exception)  as e:
                 with self.alarm_lock:
                     self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
                                                                               "on COUPP server. Restarting"})
