@@ -2857,7 +2857,7 @@ class Message_Manager(threading.Thread):
         # server to pico watchdog
 
         # info about slack settings
-        # SLACK_BOT_TOKEN is a linux enviromental variable saved locally on sbcslowcontrol mathine
+        # SLACK_BOT_TOKEN is a linux enviromental variable saved locally on sbcslowcontrol machine
         # it can be fetched on slack app page in SBCAlarm app: https://api.slack.com/apps/A035X77RW64/general
         # if not_in_channel error type /invite @SBC_Alarm in channel
         self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
@@ -2900,7 +2900,26 @@ class Message_Manager(threading.Thread):
             print("slackalarm",result)
 
         except SlackApiError as e:
+            with self.alarm_lock:
+                self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
+            print("Slack",f"Error: {e}")
 
+    def slack_alarm_fake(self, message):
+        try:
+            self.client_fake = WebClient(token="feauhieai3289")
+            # Call the conversations.list method using the WebClient
+            result = self.client_fake.chat_postMessage(
+                channel=self.channel_id,
+                text=str(message)
+                # You could also use a blocks[] array to send richer content
+            )
+            # Print result, which includes information about the message (like TS)
+
+            print("slackalarm",result)
+
+        except SlackApiError as e:
+            with self.alarm_lock:
+                self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
             print("Slack",f"Error: {e}")
 
     def run(self):
@@ -2940,7 +2959,7 @@ class Message_Manager(threading.Thread):
                     if alarm_received != {}:
 
                         msg = self.join_stack_into_message(alarm_received)
-                        self.slack_alarm(msg)
+                        self.slack_alarm_fake(msg)
                     # and clear the alarm stack
                     with self.alarm_lock:
                         self.alarm_stack.clear()
@@ -2950,7 +2969,7 @@ class Message_Manager(threading.Thread):
                 self.para_alarm += 1
                 time.sleep(self.base_period)
 
-            except Exception as e:
+            except (SlackApiError,Exception) as e:
                 with self.alarm_lock:
                     self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
                 print("Slack exception Error",e)
@@ -3011,7 +3030,7 @@ class LocalWatchdog(threading.Thread):
                     print("watchdog Error",e)
                     logging.error(e)
                     # restart itself
-                    time.sleep(self.base_period * 1)
+                    time.sleep(self.base_period * 60)
                     break
         self.run()
 
