@@ -2920,7 +2920,7 @@ class Message_Manager(threading.Thread):
         except SlackApiError as e:
             with self.alarm_lock:
                 self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
-            print("Slack",f"Error: {e}")
+            print("Slack",f"Error1: {e}", self.alarm_stack)
 
     def run(self):
         alarm_received = {}
@@ -2972,7 +2972,7 @@ class Message_Manager(threading.Thread):
             except (SlackApiError,Exception) as e:
                 with self.alarm_lock:
                     self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
-                print("Slack exception Error",e)
+                print("Slack exception Error2",e)
                 logging.error(e)
                 # restart itself
                 time.sleep(self.base_period*60)
