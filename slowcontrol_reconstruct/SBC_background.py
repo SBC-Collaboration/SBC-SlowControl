@@ -2905,22 +2905,22 @@ class Message_Manager(threading.Thread):
             print("Slack",f"Error: {e}")
 
     def slack_alarm_fake(self, message):
-        try:
-            self.client_fake = WebClient(token="feauhieai3289")
-            # Call the conversations.list method using the WebClient
-            result = self.client_fake.chat_postMessage(
-                channel=self.channel_id,
-                text=str(message)
-                # You could also use a blocks[] array to send richer content
-            )
-            # Print result, which includes information about the message (like TS)
+        # try:
+        self.client_fake = WebClient(token="feauhieai3289")
+        # Call the conversations.list method using the WebClient
+        result = self.client_fake.chat_postMessage(
+            channel=self.channel_id,
+            text=str(message)
+            # You could also use a blocks[] array to send richer content
+        )
+        # Print result, which includes information about the message (like TS)
 
-            print("slackalarm",result)
+        print("slackalarm",result)
 
-        except SlackApiError as e:
-            with self.alarm_lock:
-                self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
-            print("Slack",f"Error1: {e}", self.alarm_stack)
+        # except SlackApiError as e:
+        #     with self.alarm_lock:
+        #         self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
+        #     print("Slack",f"Error1: {e}", self.alarm_stack)
 
     def run(self):
         alarm_received = {}
