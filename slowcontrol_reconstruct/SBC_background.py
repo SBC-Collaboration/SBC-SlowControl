@@ -2253,7 +2253,6 @@ class UpdateDataBase(threading.Thread):
                 with self.alarm_lock:
                     self.alarm_stack.update({"Database Exception #1": "Local database timestamp error"})
                 print("Error",e)
-                logging.error(e)
 
             try:
                 with self.plc_lock:
@@ -2264,7 +2263,6 @@ class UpdateDataBase(threading.Thread):
             except Exception as e:
                 with self.alarm_lock:
                     self.alarm_stack.update({"Database Exception #2": "Local database data reception error"})
-                logging.error(e)
                 # (type, value, traceback) = sys.exc_info()
                 # exception_hook(type, value, traceback)
             try:
@@ -2985,7 +2983,6 @@ class Message_Manager(threading.Thread):
                 with self.alarm_lock:
                     self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
                 print("Slack exception Error2",e)
-                logging.error(e)
                 # restart itself
                 time.sleep(self.base_period*10)
                 break
@@ -3050,7 +3047,6 @@ class LocalWatchdog(threading.Thread):
                     self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
                                                                               "on COUPP server. Restarting"})
                     print("watchdog Error",e)
-                    logging.error(e)
                     # restart itself
                     time.sleep(self.base_period * 10)
                     break
