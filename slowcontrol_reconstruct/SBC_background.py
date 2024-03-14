@@ -2833,14 +2833,7 @@ class Message_Manager(threading.Thread):
         self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
         self.socketserver_time = self.global_time["sockettime"]  # hanging when socket to GUI fail
         self.time_lock = timelock
-        # self.database_timeout = env.DATABASE_HOLD
-        # self.plc_timeout = env.PLC_HOLD
-        # self.socket_timeout = env.SOCKET_HOLD
-        # self.watchdog_timeout = env.WATCHDOG_HOLD
-        self.database_timeout = 20
-        self.plc_timeout = 20
-        self.socket_timeout = 20
-        self.watchdog_timeout = 20
+
         self.alarm_stack = alarm_stack
         self.alarm_lock = alarm_lock
         self.para_alarm = env.MAINALARM_PARA
@@ -2937,34 +2930,9 @@ class Message_Manager(threading.Thread):
             try:
                 with self.alarm_lock:
                     alarm_received.update(self.alarm_stack)
-                with self.time_lock:
-                    self.global_time.update({"clock":datetime_in_1e5micro()})
-                    # update all times
-                    self.clock = self.global_time[
-                        "clock"]  # hanging when on hold to slack -> internet connection/slack server
-                    self.db_time = self.global_time["dbtime"]  # hanging when disconnected from mysql
 
-                    self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
-                    self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
-                    self.socketserver_time = self.global_time["sockettime"]
                 print("watchdog", alarm_received)
                 print("Message Manager running ", self.clock, self.plc_time)
-
-                # Valid when plc is updating.
-                # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
-                # We only consider time_out may happen in socket connections here and socket module will restart itself
-                # because it can detect timeout signal by itself
-                # Other module, we may just consider that the disconnection can happen and they will restart themselves
-                # But good to know time_out and manually restart them
-                if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
-                    alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(time=self.plc_timeout)})
-                if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
-                    alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(time=self.watchdog_timeout)})
-                # because when no client, the server is always on hold
-                # if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
-                #     alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
-                if (self.clock - self.db_time).total_seconds() > self.database_timeout:
-                    alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(time=self.database_timeout)})
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
@@ -3012,27 +2980,75 @@ class LocalWatchdog(threading.Thread):
         self.alarm_stack = alarm_stack
         self.alarm_lock = alarm_lock
         self.running = True
+        # time parameters
+        self.clock = self.global_time["clock"]  # hanging when on hold to slack -> internet connection/slack server
+        self.db_time = self.global_time["dbtime"]  # hanging when disconnected from mysql
+        self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
+        self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
+        self.socketserver_time = self.global_time["sockettime"]  # hanging when socket to GUI fail
         self.para_alarm = env.MAINALARM_PARA
         self.rate_alarm = env.MAINALARM_RATE
         self.para_long_alarm = env.MAINALARM_LONG_PARA
         self.rate_long_alarm = env.MAINALARM_LONG_RATE
+        # self.database_timeout = env.DATABASE_HOLD
+        # self.plc_timeout = env.PLC_HOLD
+        # self.socket_timeout = env.SOCKET_HOLD
+        # self.watchdog_timeout = env.WATCHDOG_HOLD
+        self.database_timeout = 20
+        self.plc_timeout = 20
+        self.socket_timeout = 20
+        self.watchdog_timeout = 20
+
         self.base_period = 1
 
     def run(self):
+        alarm_received = {}
         while self.running:
             try:
                 with self.alarm_lock:
-                    alarm_received = self.join_stack_into_message(self.alarm_stack)
+                    alarm_received.update(self.alarm_stack)
                 with self.timelock:
+                    self.global_time.update({"clock":datetime_in_1e5micro()})
+                    # update all times
+                    self.clock = self.global_time[
+                        "clock"]  # hanging when on hold to slack -> internet connection/slack server
+                    self.db_time = self.global_time["dbtime"]  # hanging when disconnected from mysql
+
+                    self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
+                    self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
+                    self.socketserver_time = self.global_time["sockettime"]
                     self.global_time.update({"watchdogtime": datetime_in_1e5micro()})
-                    print("Local watchdog running", self.global_time["watchdogtime"])
+                print("Local watchdog running", self.global_time["watchdogtime"], self.global_time["plctime"])
+
+                # Valid when plc is updating.
+                # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
+                # We only consider time_out may happen in socket connections here and socket module will restart itself
+                # because it can detect timeout signal by itself
+                # Other module, we may just consider that the disconnection can happen and they will restart themselves
+                # But good to know time_out and manually restart them
+                if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
+                    alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(
+                        time=self.plc_timeout)})
+                # In principle, no need to exist bc if it timeout, COUPP txt message will be sent out
+                if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
+                    alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(
+                        time=self.watchdog_timeout)})
+                # because when no client, the server is always on hold
+                # if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
+                #     alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
+                if (self.clock - self.db_time).total_seconds() > self.database_timeout:
+                    alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(
+                        time=self.database_timeout)})
+                with self.alarm_lock:
+                    alarm_received_txt = self.join_stack_into_message(self.alarm_stack)
+
                 if self.para_alarm >= self.rate_alarm:
 
                     # send alarm msg to database, Otherwise, send text message about alarm
-                    if alarm_received == "":
+                    if alarm_received_txt == "":
                         self.alarm_db.ssh_write()
                     else:
-                        self.alarm_db.ssh_alarm(message=alarm_received)
+                        self.alarm_db.ssh_alarm(message=alarm_received_txt)
                     self.para_alarm = 0
                     # loop is active in case slack channel isinactive.
                     # this is 300s loop, if longer than this, the alarms will be cleared out.
