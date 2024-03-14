@@ -2298,7 +2298,7 @@ class UpdateDataBase(threading.Thread):
                 print("Error connecting to MySQL database:", e0)
                 with self.alarm_lock:
                     self.alarm_stack.update({"Database Exception #4": "Local database data saving error- Database is disconnected"})
-                    print("Database Exception #4 Local database data saving error- Database is disconnected")
+                print("Database Exception #4 Local database data saving error- Database is disconnected")
 
 
 
@@ -2964,7 +2964,7 @@ class Message_Manager(threading.Thread):
                 print("watchdog1para", self.para_alarm)
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
-                        # self.slack_init()
+                        self.slack_init()
                         msg = self.join_stack_into_message(alarm_received)
                         self.slack_alarm(msg)
 
@@ -3046,10 +3046,10 @@ class LocalWatchdog(threading.Thread):
                 with self.alarm_lock:
                     self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
                                                                               "on COUPP server. Restarting"})
-                    print("watchdog Error",e)
-                    # restart itself
-                    time.sleep(self.base_period * 10)
-                    break
+                print("watchdog Error",e)
+                # restart itself
+                time.sleep(self.base_period * 10)
+                break
         self.run()
 
 
@@ -3182,9 +3182,9 @@ class MainClass():
         self.threadDatabase = UpdateDataBase(plc_data=self.plc_data, plc_lock=self.plc_lock, global_time=self.global_time,
                                              timelock=self.timelock, alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
-        # self.threadWatchdog = LocalWatchdog(global_time=self.global_time,
-        #                                     timelock=self.timelock,
-        #                                     alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
+        self.threadWatchdog = LocalWatchdog(global_time=self.global_time,
+                                            timelock=self.timelock,
+                                            alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         self.threadSocket = UpdateServer(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
                                          command_lock=self.command_lock, global_time=self.global_time,
@@ -3198,7 +3198,7 @@ class MainClass():
         time.sleep(0.5)
         self.threadDatabase.start()
         time.sleep(0.1)
-        # self.threadWatchdog.start()
+        self.threadWatchdog.start()
         time.sleep(0.1)
         self.threadSocket.start()
         time.sleep(0.1)
