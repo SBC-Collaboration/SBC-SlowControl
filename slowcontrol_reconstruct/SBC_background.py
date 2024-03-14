@@ -2960,7 +2960,7 @@ class Message_Manager(threading.Thread):
                 #     alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
                 if (self.clock - self.db_time).total_seconds() > self.database_timeout:
                     alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(time=self.database_timeout)})
-
+                print("watchdog1para", self.para_alarm)
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
                         self.slack_init()
@@ -2973,8 +2973,9 @@ class Message_Manager(threading.Thread):
                         alarm_received.clear()
                         print("alarm stack cleared", self.alarm_stack, alarm_received)
                     self.para_alarm = 0
-                self.para_alarm += 1
 
+                self.para_alarm += 1
+                print("watchdog2para", self.para_alarm)
                 time.sleep(self.base_period)
 
             except (SlackApiError,Exception) as e:
@@ -3049,7 +3050,6 @@ class LocalWatchdog(threading.Thread):
                     logging.error(e)
                     # restart itself
                     time.sleep(self.base_period * 10)
-                    print("watchdog may sleep")
                     break
         self.run()
 
