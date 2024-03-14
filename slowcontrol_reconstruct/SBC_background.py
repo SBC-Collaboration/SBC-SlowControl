@@ -2942,7 +2942,8 @@ class Message_Manager(threading.Thread):
                     self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
                     self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
                     self.socketserver_time = self.global_time["sockettime"]
-                    print("Message Manager running ", self.clock, self.plc_time)
+                print("watchdog", alarm_received)
+                print("Message Manager running ", self.clock, self.plc_time)
 
                 # Valid when plc is updating.
                 # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
