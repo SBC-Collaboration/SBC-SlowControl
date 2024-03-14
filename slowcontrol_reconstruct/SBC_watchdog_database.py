@@ -381,9 +381,9 @@ def connect_to_database():
 """
 
 # test sbcslowcontrol database
-
-if __name__ == "__main__":
-    connection = connect_to_database()
+#
+# if __name__ == "__main__":
+#     connection = connect_to_database()
 
     # db = mydatabase()
     # dt = datetime_in_s()
