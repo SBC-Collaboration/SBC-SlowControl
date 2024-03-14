@@ -1596,7 +1596,7 @@ class PLC:
             Dummy = self.Client_NI.write_register(Address + 1, struct.unpack("<HH", struct.pack("<f", value))[0],
                                                unit=0x01)
 
-            time.sleep(1)
+            time.sleep(0.1)
 
             Raw = self.Client_NI.read_holding_registers(Address, count=2, unit=0x01)
             rvalue = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
@@ -1614,7 +1614,7 @@ class PLC:
             Raw.bits[Bit] = value
             Dummy = self.Client_NI.write_coil(Address, Raw, unit=0x01)
 
-            time.sleep(1)
+            time.sleep(0.1)
 
             Raw = self.Client_NI.read_coils(Address, count=Bit, unit=0x01)
             rvalue = Raw.bits[Bit]
@@ -2930,22 +2930,20 @@ class Message_Manager(threading.Thread):
         alarm_received = {}
         while self.running:
             try:
-                print("watchdog1")
                 with self.alarm_lock:
                     alarm_received.update(self.alarm_stack)
-                print("watchdog3")
                 with self.time_lock:
                     self.global_time.update({"clock":datetime_in_1e5micro()})
                     # update all times
                     self.clock = self.global_time[
                         "clock"]  # hanging when on hold to slack -> internet connection/slack server
                     self.db_time = self.global_time["dbtime"]  # hanging when disconnected from mysql
-                    print("watchdog4")
+
                     self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
                     self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
                     self.socketserver_time = self.global_time["sockettime"]
                     print("Message Manager running ", self.clock, self.plc_time)
-                print("watchdog2", alarm_received)
+
                 # Valid when plc is updating.
                 # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
                 # We only consider time_out may happen in socket connections here and socket module will restart itself
@@ -2961,7 +2959,7 @@ class Message_Manager(threading.Thread):
                 #     alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
                 if (self.clock - self.db_time).total_seconds() > self.database_timeout:
                     alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(time=self.database_timeout)})
-                print("watchdog1para", self.para_alarm)
+
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
                         self.slack_init()
@@ -2976,7 +2974,6 @@ class Message_Manager(threading.Thread):
                     self.para_alarm = 0
 
                 self.para_alarm += 1
-                print("watchdog2para", self.para_alarm)
                 time.sleep(self.base_period)
 
             except (SlackApiError,Exception) as e:
