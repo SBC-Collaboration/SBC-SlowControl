@@ -2979,6 +2979,7 @@ class Message_Manager(threading.Thread):
                     self.para_alarm = 0
                 self.para_alarm += 1
                 self.test_para += 1
+                print("test para", self.test_para)
                 time.sleep(self.base_period)
 
             except (SlackApiError,Exception) as e:
