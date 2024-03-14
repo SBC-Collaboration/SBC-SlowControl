@@ -2984,7 +2984,7 @@ class Message_Manager(threading.Thread):
                     self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
                 print("Slack exception Error2",e)
                 # restart itself
-                time.sleep(self.base_period*10)
+                time.sleep(self.base_period*5)
                 break
         self.run()
 
