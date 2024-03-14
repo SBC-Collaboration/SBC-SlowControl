@@ -1675,7 +1675,6 @@ class UpdatePLC(PLC, threading.Thread):
                 # self run depend on senario, we want to rerun the module by module
             # it has its own try function so we can skip try function here
             self.ReadAll()
-            time.sleep(3000)
             try:
                 with self.command_lock:
                     self.write_data(self.command_data)
@@ -2256,6 +2255,7 @@ class UpdateDataBase(threading.Thread):
                 print("Error",e)
 
 
+            time.sleep(3000)
             try:
                 with self.plc_lock:
                     data_received = dict(self.plc_data)
@@ -3042,7 +3042,7 @@ class LocalWatchdog(threading.Thread):
                 with self.alarm_lock:
                     alarm_received.update(self.alarm_stack)
                     alarm_received_txt = self.join_stack_into_message(alarm_received)
-                    
+
                 if self.para_alarm >= self.rate_alarm:
 
                     # send alarm msg to database, Otherwise, send text message about alarm
