@@ -2982,7 +2982,7 @@ class Message_Manager(threading.Thread):
                     self.alarm_stack.update({"Slack Exception": "Slack Connection Error"})
                 print("Slack exception Error2",e)
                 # restart itself
-                time.sleep(self.base_period*5)
+                time.sleep(self.base_period*60)
                 break
         self.run()
 
@@ -3046,7 +3046,7 @@ class LocalWatchdog(threading.Thread):
                                                                               "on COUPP server. Restarting"})
                 print("watchdog Error",e)
                 # restart itself
-                time.sleep(self.base_period * 10)
+                time.sleep(self.base_period * 60)
                 break
         self.run()
 
