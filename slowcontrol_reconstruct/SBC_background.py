@@ -2932,15 +2932,17 @@ class Message_Manager(threading.Thread):
         alarm_received = {}
         while self.running:
             try:
-                print("watchdog1", alarm_received)
+                print("watchdog1")
                 with self.alarm_lock:
                     alarm_received.update(self.alarm_stack)
+                print("watchdog3")
                 with self.time_lock:
                     self.global_time.update({"clock":datetime_in_1e5micro()})
                     # update all times
                     self.clock = self.global_time[
                         "clock"]  # hanging when on hold to slack -> internet connection/slack server
                     self.db_time = self.global_time["dbtime"]  # hanging when disconnected from mysql
+                    print("watchdog4")
                     self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
                     self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
                     self.socketserver_time = self.global_time["sockettime"]
