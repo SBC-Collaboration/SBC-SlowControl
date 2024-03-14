@@ -2932,6 +2932,7 @@ class Message_Manager(threading.Thread):
         alarm_received = {}
         while self.running:
             try:
+                print("watchdog1", alarm_received)
                 with self.alarm_lock:
                     alarm_received.update(self.alarm_stack)
                 with self.time_lock:
@@ -2944,7 +2945,7 @@ class Message_Manager(threading.Thread):
                     self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
                     self.socketserver_time = self.global_time["sockettime"]
                     print("Message Manager running ", self.clock, self.plc_time)
-                print("watchdog", alarm_received)
+                print("watchdog2", alarm_received)
                 # Valid when plc is updating.
                 # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
                 # We only consider time_out may happen in socket connections here and socket module will restart itself
