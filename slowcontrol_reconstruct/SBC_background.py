@@ -3182,9 +3182,9 @@ class MainClass():
         self.threadDatabase = UpdateDataBase(plc_data=self.plc_data, plc_lock=self.plc_lock, global_time=self.global_time,
                                              timelock=self.timelock, alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
-        self.threadWatchdog = LocalWatchdog(global_time=self.global_time,
-                                            timelock=self.timelock,
-                                            alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
+        # self.threadWatchdog = LocalWatchdog(global_time=self.global_time,
+        #                                     timelock=self.timelock,
+        #                                     alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         self.threadSocket = UpdateServer(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
                                          command_lock=self.command_lock, global_time=self.global_time,
@@ -3198,7 +3198,7 @@ class MainClass():
         time.sleep(0.5)
         self.threadDatabase.start()
         time.sleep(0.1)
-        self.threadWatchdog.start()
+        # self.threadWatchdog.start()
         time.sleep(0.1)
         self.threadSocket.start()
         time.sleep(0.1)
