@@ -3049,6 +3049,7 @@ class LocalWatchdog(threading.Thread):
                     logging.error(e)
                     # restart itself
                     time.sleep(self.base_period * 10)
+                    print("watchdog may sleep")
                     break
         self.run()
 
