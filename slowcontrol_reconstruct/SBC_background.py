@@ -2963,7 +2963,7 @@ class Message_Manager(threading.Thread):
                 print("watchdog1para", self.para_alarm)
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
-                        self.slack_init()
+                        # self.slack_init()
                         msg = self.join_stack_into_message(alarm_received)
                         self.slack_alarm(msg)
 
