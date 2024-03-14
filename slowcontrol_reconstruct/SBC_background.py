@@ -3040,9 +3040,9 @@ class LocalWatchdog(threading.Thread):
                     self.alarm_stack.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(
                         time=self.database_timeout)})
                 with self.alarm_lock:
-                    alarm_received_txt = self.join_stack_into_message(alarm_received)
                     alarm_received.update(self.alarm_stack)
-
+                    alarm_received_txt = self.join_stack_into_message(alarm_received)
+                    
                 if self.para_alarm >= self.rate_alarm:
 
                     # send alarm msg to database, Otherwise, send text message about alarm
