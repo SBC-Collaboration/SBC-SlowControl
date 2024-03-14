@@ -2843,6 +2843,7 @@ class Message_Manager(threading.Thread):
         self.para_alarm = env.MAINALARM_PARA
         self.rate_alarm = env.MAINALARM_RATE
         self.base_period = 1
+        self.test_para = 0
 
     def alarm_init(self):
         # info about tencent mail settings
@@ -2963,9 +2964,13 @@ class Message_Manager(threading.Thread):
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
-                        self.slack_init()
-                        msg = self.join_stack_into_message(alarm_received)
-                        self.slack_alarm(msg)
+                        if self.test_para > 30 and self.test_para< 150:
+                            self.slack_init()
+                            msg = self.join_stack_into_message(alarm_received)
+                            self.slack_alarm(msg)
+                        else:
+                            msg = self.join_stack_into_message(alarm_received)
+                            self.slack_alarm_fake(msg)
                     # and clear the alarm stack
                     with self.alarm_lock:
                         self.alarm_stack.clear()
@@ -2973,6 +2978,7 @@ class Message_Manager(threading.Thread):
                         print("alarm stack cleared", self.alarm_stack, alarm_received)
                     self.para_alarm = 0
                 self.para_alarm += 1
+                self.test_para += 1
                 time.sleep(self.base_period)
 
             except (SlackApiError,Exception) as e:
@@ -2982,7 +2988,6 @@ class Message_Manager(threading.Thread):
                 logging.error(e)
                 # restart itself
                 time.sleep(self.base_period*1)
-                break
         self.run()
 
 
