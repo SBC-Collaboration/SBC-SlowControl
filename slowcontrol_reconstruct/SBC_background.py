@@ -3006,8 +3006,7 @@ class LocalWatchdog(threading.Thread):
         alarm_received = {}
         while self.running:
             try:
-                with self.alarm_lock:
-                    alarm_received.update(self.alarm_stack)
+
                 with self.timelock:
                     self.global_time.update({"clock":datetime_in_1e5micro()})
                     # update all times
@@ -3028,20 +3027,21 @@ class LocalWatchdog(threading.Thread):
                 # Other module, we may just consider that the disconnection can happen and they will restart themselves
                 # But good to know time_out and manually restart them
                 if (self.clock - self.plc_time).total_seconds() > self.plc_timeout:
-                    alarm_received.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(
+                    self.alarm_stack.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(
                         time=self.plc_timeout)})
                 # In principle, no need to exist bc if it timeout, COUPP txt message will be sent out
                 if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
-                    alarm_received.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(
+                    self.alarm_stack.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(
                         time=self.watchdog_timeout)})
                 # because when no client, the server is always on hold
                 # if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
                 #     alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
                 if (self.clock - self.db_time).total_seconds() > self.database_timeout:
-                    alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(
+                    self.alarm_stack.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(
                         time=self.database_timeout)})
                 with self.alarm_lock:
                     alarm_received_txt = self.join_stack_into_message(alarm_received)
+                    alarm_received.update(self.alarm_stack)
 
                 if self.para_alarm >= self.rate_alarm:
 
