@@ -2843,7 +2843,6 @@ class Message_Manager(threading.Thread):
         self.para_alarm = env.MAINALARM_PARA
         self.rate_alarm = env.MAINALARM_RATE
         self.base_period = 1
-        self.test_para = 0
 
     def alarm_init(self):
         # info about tencent mail settings
@@ -2964,13 +2963,10 @@ class Message_Manager(threading.Thread):
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
-                        if self.test_para > 30 and self.test_para< 150:
-                            self.slack_init()
-                            msg = self.join_stack_into_message(alarm_received)
-                            self.slack_alarm(msg)
-                        else:
-                            msg = self.join_stack_into_message(alarm_received)
-                            self.slack_alarm_fake(msg)
+                        self.slack_init()
+                        msg = self.join_stack_into_message(alarm_received)
+                        self.slack_alarm(msg)
+
                     # and clear the alarm stack
                     with self.alarm_lock:
                         self.alarm_stack.clear()
@@ -2987,10 +2983,8 @@ class Message_Manager(threading.Thread):
                 print("Slack exception Error2",e)
                 logging.error(e)
                 # restart itself
-                time.sleep(self.base_period*1)
-            finally:
-                self.test_para += 1
-                print("test para", self.test_para)
+                time.sleep(self.base_period*60)
+                break
         self.run()
 
 
@@ -3054,7 +3048,7 @@ class LocalWatchdog(threading.Thread):
                     print("watchdog Error",e)
                     logging.error(e)
                     # restart itself
-                    time.sleep(self.base_period * 1)
+                    time.sleep(self.base_period * 60)
                     break
         self.run()
 
