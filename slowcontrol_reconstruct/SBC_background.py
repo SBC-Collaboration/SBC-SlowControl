@@ -2978,8 +2978,7 @@ class Message_Manager(threading.Thread):
                         print("alarm stack cleared", self.alarm_stack, alarm_received)
                     self.para_alarm = 0
                 self.para_alarm += 1
-                self.test_para += 1
-                print("test para", self.test_para)
+
                 time.sleep(self.base_period)
 
             except (SlackApiError,Exception) as e:
@@ -2989,6 +2988,9 @@ class Message_Manager(threading.Thread):
                 logging.error(e)
                 # restart itself
                 time.sleep(self.base_period*1)
+            finally:
+                self.test_para += 1
+                print("test para", self.test_para)
         self.run()
 
 
