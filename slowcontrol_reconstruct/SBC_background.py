@@ -1675,6 +1675,7 @@ class UpdatePLC(PLC, threading.Thread):
                 # self run depend on senario, we want to rerun the module by module
             # it has its own try function so we can skip try function here
             self.ReadAll()
+            time.sleep(3000)
             try:
                 with self.command_lock:
                     self.write_data(self.command_data)
@@ -2254,7 +2255,7 @@ class UpdateDataBase(threading.Thread):
                     self.alarm_stack.update({"Database Exception #1": "Local database timestamp error"})
                 print("Error",e)
 
-            time.sleep(3000)
+
             try:
                 with self.plc_lock:
                     data_received = dict(self.plc_data)
