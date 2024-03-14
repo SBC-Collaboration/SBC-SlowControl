@@ -2255,7 +2255,6 @@ class UpdateDataBase(threading.Thread):
                 print("Error",e)
 
 
-            time.sleep(3000)
             try:
                 with self.plc_lock:
                     data_received = dict(self.plc_data)
@@ -2950,6 +2949,8 @@ class Message_Manager(threading.Thread):
 
                 self.para_alarm += 1
                 time.sleep(self.base_period)
+
+                time.sleep(3000)
 
             except (SlackApiError,Exception) as e:
                 with self.alarm_lock:
