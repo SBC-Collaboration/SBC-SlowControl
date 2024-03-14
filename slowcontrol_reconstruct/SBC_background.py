@@ -2932,7 +2932,7 @@ class Message_Manager(threading.Thread):
                     alarm_received.update(self.alarm_stack)
 
                 print("watchdog", alarm_received)
-                print("Message Manager running ", self.clock, self.plc_time)
+                print("Message Manager running ", self.clock)
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
@@ -3040,7 +3040,7 @@ class LocalWatchdog(threading.Thread):
                     alarm_received.update({"DATABASE TIMEOUT": "Database hasn't update long than {time} s".format(
                         time=self.database_timeout)})
                 with self.alarm_lock:
-                    alarm_received_txt = self.join_stack_into_message(self.alarm_stack)
+                    alarm_received_txt = self.join_stack_into_message(alarm_received)
 
                 if self.para_alarm >= self.rate_alarm:
 
