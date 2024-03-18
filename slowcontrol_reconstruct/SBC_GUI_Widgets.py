@@ -578,13 +578,6 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.HTRTab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.HTRTab, "HEATER VARIABLEs")
 
-        self.MAN_ACT = QtWidgets.QPushButton(self)
-        self.MAN_ACT.setObjectName("Label")
-        self.MAN_ACT.setText("MAN_ACT")
-        self.MAN_ACT.setGeometry(QtCore.QRect(0 * R, 0 * R, 150 * R, 50 * R))
-        self.MAN_ACT.setStyleSheet("QPushButton {" + TITLE_STYLE + "}")
-        self.MAN_ACT.move(2100*R,1400*R)
-
         # Groupboxs for alarm/PT/TT
 
         self.GLPT = QtWidgets.QGridLayout()
