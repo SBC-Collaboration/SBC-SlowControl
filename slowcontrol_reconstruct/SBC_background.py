@@ -2829,7 +2829,7 @@ class Message_Manager(threading.Thread):
         self.global_time = global_time
         self.clock = self.global_time["clock"]  # hanging when on hold to slack -> internet connection/slack server
         self.db_time =  self.global_time["dbtime"] # hanging when disconnected from mysql
-        self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
+        self.slack_time = self.global_time["slacktime"]  # hanging when slack fail
         self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
         self.socketserver_time = self.global_time["sockettime"]  # hanging when socket to GUI fail
         self.time_lock = timelock
@@ -2930,9 +2930,12 @@ class Message_Manager(threading.Thread):
             try:
                 with self.alarm_lock:
                     alarm_received.update(self.alarm_stack)
+                with self.time_lock:
+                    self.global_time.update({"slacktime": datetime_in_1e5micro()})
 
-                print("watchdog", alarm_received)
-                print("Message Manager running ", self.clock)
+
+                print("slack", alarm_received)
+                print("Message Manager running ", self.global_time["slacktime"])
 
                 if self.para_alarm >= self.rate_alarm:
                     if alarm_received != {}:
@@ -2977,7 +2980,6 @@ class LocalWatchdog(threading.Thread):
         super().__init__()
         self.global_time = global_time
         self.timelock = timelock
-        self.watchdog_time = global_time["watchdogtime"]
         self.alarm_db = COUPP_database()
         self.alarm_stack = alarm_stack
         self.alarm_lock = alarm_lock
@@ -2985,7 +2987,7 @@ class LocalWatchdog(threading.Thread):
         # time parameters
         self.clock = self.global_time["clock"]  # hanging when on hold to slack -> internet connection/slack server
         self.db_time = self.global_time["dbtime"]  # hanging when disconnected from mysql
-        self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
+        self.slack_time = self.global_time["slacktime"]  # hanging when ssh fail or coupp mysql fail
         self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
         self.socketserver_time = self.global_time["sockettime"]  # hanging when socket to GUI fail
         self.para_alarm = env.MAINALARM_PARA
@@ -2999,7 +3001,7 @@ class LocalWatchdog(threading.Thread):
         self.database_timeout = 20
         self.plc_timeout = 20
         self.socket_timeout = 20
-        self.watchdog_timeout = 20
+        self.slack_timeout = 20
 
         self.base_period = 1
 
@@ -3015,11 +3017,11 @@ class LocalWatchdog(threading.Thread):
                         "clock"]  # hanging when on hold to slack -> internet connection/slack server
                     self.db_time = self.global_time["dbtime"]  # hanging when disconnected from mysql
 
-                    self.watchdog_time = self.global_time["watchdogtime"]  # hanging when ssh fail or coupp mysql fail
+                    self.slack_time = self.global_time["slacktime"]  # hanging when ssh fail or coupp mysql fail
                     self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
                     self.socketserver_time = self.global_time["sockettime"]
-                    self.global_time.update({"watchdogtime": datetime_in_1e5micro()})
-                print("Local watchdog running", self.global_time["watchdogtime"], self.global_time["plctime"])
+
+                print("Local watchdog running", self.global_time["clock"], self.global_time["plctime"])
 
                 # Valid when plc is updating.
                 # otherwise alarm the plc is disconnected or on hold, add alarm to alarm stack
@@ -3031,9 +3033,9 @@ class LocalWatchdog(threading.Thread):
                     self.alarm_stack.update({"PLC CONNECTION TIMEOUT": "PLC hasn't update long than {time} s".format(
                         time=self.plc_timeout)})
                 # In principle, no need to exist bc if it timeout, COUPP txt message will be sent out
-                if (self.clock - self.watchdog_time).total_seconds() > self.watchdog_timeout:
-                    self.alarm_stack.update({"WATCHDOG TIMEOUT": "WATCHDOG hasn't update long than {time} s".format(
-                        time=self.watchdog_timeout)})
+                if (self.clock - self.slack_time).total_seconds() > self.slack_timeout:
+                    self.alarm_stack.update({"SLACK TIMEOUT": "slack hasn't update long than {time} s".format(
+                        time=self.slack_timeout)})
                 # because when no client, the server is always on hold
                 # if (self.clock - self.socketserver_time).total_seconds() > self.socket_timeout:
                 #     alarm_received.update({"SOCKET TIMEOUT": "SOCKET TO GUI hasn't update long than {time} s".format(time=self.socket_timeout)})
@@ -3182,7 +3184,7 @@ class UpdateServer(threading.Thread):
 class MainClass():
     def __init__(self):
         self.plc_data = copy.deepcopy(env.DIC_PACK)
-        self.global_time={"plctime":datetime_in_1e5micro(),"dbtime":datetime_in_1e5micro(),"watchdogtime":datetime_in_1e5micro(),"sockettime":datetime_in_1e5micro(),
+        self.global_time={"plctime":datetime_in_1e5micro(),"dbtime":datetime_in_1e5micro(),"slacktime":datetime_in_1e5micro(),"sockettime":datetime_in_1e5micro(),
                           "clock":datetime_in_1e5micro()}
         self.plc_lock = threading.Lock()
         self.command_data = {}
