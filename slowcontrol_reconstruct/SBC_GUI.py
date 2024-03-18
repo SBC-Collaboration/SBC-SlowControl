@@ -117,9 +117,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Alarm_system()
 
         App.aboutToQuit.connect(self.StopUpdater)
-        # Start display updater;
-        self.StartUpdater()
-        self.signal_connection()
+        # Start display updater; comment out to show GUI only
+        # self.StartUpdater()
+        # self.signal_connection()
 
     def GUI_design(self):
         # Get background image path

@@ -1327,7 +1327,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.AlarmHTRdir = {0: {0: self.HTR1202, 1: self.HTR2123, 2: self.HTR2124, 3: self.HTR2125, 4: self.HTR2203},
                             1: {0: self.SERVO3321, 1: self.HTR6202, 2: self.HTR6206, 3: self.HTR6210, 4: self.HTR6214},
                             2: {0: self.HTR6219, 1: self.HTR6221, 2: self.HTR6223, 3: self.HTR6224, 4: self.HTR6225}}
-        
+
 
         # variables usable for building widgets
         # i is row number, j is column number
