@@ -364,13 +364,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRV4326.Label.setText("PRV4326")
         self.PRV4326.move(1150*R, 860*R)
 
-        self.SV4327 = Valve_v2(self.ThermosyphonTab)
-        self.SV4327.Label.setText("SV4327")
-        self.SV4327.move(300*R, 450*R)
-
-        self.SV4327_icon = Valve_image(self.ThermosyphonTab, mode="V")
-        self.SV4327_icon.move(330 * R, 360 * R)
-
         self.SV4328 = Valve_v2(self.ThermosyphonTab)
         self.SV4328.Label.setText("SV4328")
         self.SV4328.move(1360*R, 190*R)
@@ -403,12 +396,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV4332_icon = Valve_image(self.ThermosyphonTab, mode="H")
         self.SV4332_icon.move(1673 * R, 322 * R)
 
-        self.SV4337 = Valve_v2(self.ThermosyphonTab)
-        self.SV4337.Label.setText("SV4337")
-        self.SV4337.move(120*R, 330*R)
-
-        self.SV4337_icon = Valve_image(self.ThermosyphonTab, mode="H")
-        self.SV4337_icon.move(187 * R, 278 * R)
 
         self.PRV4333 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4333.Label.setText("PRV4333")
@@ -1158,8 +1145,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV3325.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3325.Label.text()))
         self.SV3329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3329.Label.text()))
         self.SV3329.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3329.Label.text()))
-        self.SV4327.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4327.Label.text()))
-        self.SV4327.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4327.Label.text()))
         self.SV4328.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4328.Label.text()))
         self.SV4328.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4328.Label.text()))
         self.SV4329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4329.Label.text()))
@@ -1168,8 +1153,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV4331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4331.Label.text()))
         self.SV4332.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4332.Label.text()))
         self.SV4332.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4332.Label.text()))
-        self.SV4337.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4337.Label.text()))
-        self.SV4337.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4337.Label.text()))
         self.HFSV3312.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3312.Label.text()))
         self.HFSV3312.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3312.Label.text()))
         self.HFSV3323.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3323.Label.text()))
@@ -4497,12 +4480,10 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.SV3322.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3322"])
         # self.SV3325.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3325"])
         # self.SV3329.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3329"])
-        # self.SV4327.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4327"])
         # self.SV4328.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4328"])
         # self.SV4329.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4329"])
         # self.SV4331.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4331"])
         # self.SV4332.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4332"])
-        # self.SV4337.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4337"])
         # self.HFSV3312.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"])
         # self.HFSV3323.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3323"])
         # self.HFSV3331.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3331"])
@@ -4523,12 +4504,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV3322.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV3322"])
         self.SV3325.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV3325"])
         self.SV3329.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV3329"])
-        self.SV4327.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4327"])
         self.SV4328.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4328"])
         self.SV4329.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4329"])
         self.SV4331.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4331"])
         self.SV4332.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4332"])
-        self.SV4337.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4337"])
         self.HFSV3312.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"])
         self.HFSV3323.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"])
         self.HFSV3331.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
@@ -4648,12 +4627,6 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.SV3329.ActiveState.UpdateColor(False)
 
-        if received_dic_c["data"]["Valve"]["MAN"]["SV4327"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4327"]:
-
-            self.SV4327.ActiveState.UpdateColor(True)
-        else:
-            self.SV4327.ActiveState.UpdateColor(False)
-
         if received_dic_c["data"]["Valve"]["MAN"]["SV4328"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4328"]:
 
             self.SV4328.ActiveState.UpdateColor(True)
@@ -4677,12 +4650,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.SV4332.ActiveState.UpdateColor(True)
         else:
             self.SV4332.ActiveState.UpdateColor(False)
-
-        if received_dic_c["data"]["Valve"]["MAN"]["SV4337"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4337"]:
-
-            self.SV4337.ActiveState.UpdateColor(True)
-        else:
-            self.SV4337.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3312"]:
 
@@ -4827,13 +4794,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.SV3329.ButtonTransitionState(False)
 
 
-
-        if received_dic_c["data"]["Valve"]["Busy"]["SV4327"] == True:
-            self.SV4327.ButtonTransitionState(False)
-        else:
-            self.SV4327.ButtonTransitionState(False)
-
-
         if received_dic_c["data"]["Valve"]["Busy"]["SV4328"] == True:
             self.SV4328.ButtonTransitionState(False)
 
@@ -4864,13 +4824,6 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.SV4332.ButtonTransitionState(False)
 
-
-
-        if received_dic_c["data"]["Valve"]["Busy"]["SV4337"] == True:
-            self.SV4337.ButtonTransitionState(False)
-
-        else:
-            self.SV4337.ButtonTransitionState(False)
 
 
 
@@ -6025,30 +5978,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 else:
                     pass
 
-        if not received_dic_c["data"]["Valve"]["MAN"]["SV4327"]:
-            if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
-                self.SV4327.Set.ButtonLClicked()
-            else:
-                self.SV4327.Set.ButtonRClicked()
-            self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
-        elif received_dic_c["data"]["Valve"]["MAN"]["SV4327"]:
-            if received_dic_c["data"]["Valve"]["Busy"]["SV4327"]:
-                if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
-                    self.SV4327.Set.ButtonLClicked()
-                else:
-                    self.SV4327.Set.ButtonRClicked()
-                self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
-            elif not received_dic_c["data"]["Valve"]["Busy"]["SV4327"]:
-
-                if received_dic_c["data"]["Valve"]["OUT"]["SV4327"] != self.Valve_buffer["SV4327"]:
-                    if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
-                        self.SV4327.Set.ButtonLClicked()
-                    else:
-                        self.SV4327.Set.ButtonRClicked()
-                    self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
-                else:
-                    pass
-
         if not received_dic_c["data"]["Valve"]["MAN"]["SV4328"]:
             if received_dic_c["data"]["Valve"]["OUT"]["SV4328"]:
                 self.SV4328.Set.ButtonLClicked()
@@ -6142,28 +6071,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 else:
                     pass
 
-        if not received_dic_c["data"]["Valve"]["MAN"]["SV4337"]:
-            if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
-                self.SV4337.Set.ButtonLClicked()
-            else:
-                self.SV4337.Set.ButtonRClicked()
-            self.Valve_buffer["SV4337"] = received_dic_c["data"]["Valve"]["OUT"]["SV4337"]
-        elif received_dic_c["data"]["Valve"]["MAN"]["SV4337"]:
-            if received_dic_c["data"]["Valve"]["Busy"]["SV4337"]:
-                if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
-                    self.SV4337.Set.ButtonLClicked()
-                else:
-                    self.SV4337.Set.ButtonRClicked()
-                self.Valve_buffer["SV4337"] = received_dic_c["data"]["Valve"]["OUT"]["SV4337"]
-            elif not received_dic_c["data"]["Valve"]["Busy"]["SV4337"]:
-                if received_dic_c["data"]["Valve"]["OUT"]["SV4337"] != self.Valve_buffer["SV4337"]:
-                    if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
-                        self.SV4337.Set.ButtonLClicked()
-                    else:
-                        self.SV4337.Set.ButtonRClicked()
-                    self.Valve_buffer["SV4337"] = received_dic_c["data"]["Valve"]["OUT"]["SV4337"]
-                else:
-                    pass
+
 
         if not received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"]:
             if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]:
@@ -6320,11 +6228,6 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.SV3329_icon.Turnoff()
 
-        if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
-            self.SV4327_icon.Turnon()
-        else:
-            self.SV4327_icon.Turnoff()
-
         if received_dic_c["data"]["Valve"]["OUT"]["SV4328"]:
             self.SV4328_icon.Turnon()
         else:
@@ -6344,11 +6247,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.SV4332_icon.Turnon()
         else:
             self.SV4332_icon.Turnoff()
-
-        if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
-            self.SV4337_icon.Turnon()
-        else:
-            self.SV4337_icon.Turnoff()
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]:
             self.HFSV3312_icon.Turnon()
@@ -8052,24 +7950,6 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.AlarmButton.ButtonAlarmResetSignal()
             self.AlarmButton.SubWindow.ResetOrder()
-
-    # Lock/unlock controls
-    def ActivateControls(self, Activate):
-        # self.SV4327.Activate(Activate)
-        # self.SV4328.Activate(Activate)
-        # self.SV4329.Activate(Activate)
-        # self.SV4331.Activate(Activate)
-        # self.SV4332.Activate(Activate)
-        # self.SV3307.Activate(Activate)
-        # self.SV3310.Activate(Activate)
-        # self.HFSV3312.Activate(Activate)
-        # self.SV3322.Activate(Activate)
-        # self.HFSV3323.Activate(Activate)
-        # self.SV3325.Activate(Activate)
-        # self.SV3329.Activate(Activate)
-        # self.HFSV3331.Activate(Activate)
-        return
-
 
 class UpdateClient(QtCore.QThread):
     client_data_transport = QtCore.Signal(object)
