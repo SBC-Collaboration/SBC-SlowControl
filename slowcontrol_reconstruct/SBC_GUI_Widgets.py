@@ -1304,58 +1304,30 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.AlarmRTD4dir = {0: {0: self.TT2101}}
 
         self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT1325, 2: self.PT2316, 3: self.PT2121, 4: self.PT2330},
-                           1: {0: self.PT2335, 1: self.PT3308, 2: self.PT3309, 3: self.PT3311, 4: self.PT3314},
-                           2: {0: self.PT3320, 1: self.PT3332, 2: self.PT3333, 3: self.PT4306, 4: self.PT4315},
-                           3: {0: self.PT4319, 1: self.PT4322, 2: self.PT4325, 3: self.PT5304, 4: self.PT6302},
-                           4: {0: self.PT2343}}
+                           1: {0: self.PT2335, 1: self.PT2343, 2: self.PT3308, 3: self.PT3309, 4: self.PT3311},
+                           2: {0: self.PT3314, 1: self.PT3320, 2: self.PT3332, 3: self.PT3333, 4: self.PT4306},
+                           3: {0: self.PT4315, 1: self.PT4319, 2: self.PT4322, 3: self.PT4325, 4: self.PT5304},
+                           4: {0: self.PT6302}}
 
+        self.AlarmRTDLEFTdir = {0: {0:self.TT3401, 1:self.TT4330, 2:self.TT6203, 3:self.TT6207, 4:self.TT6211},
+                                1: {0:self.TT6213, 1:self.TT6220, 2:self.TT6222, 3:self.TT6401, 4:self.TT6404},
+                                2: {0:self.TT6405, 1:self.TT6406, 2:self.TT6407, 3:self.TT6408, 4:self.TT6409},
+                                3: {0:self.TT6410, 1:self.TT6411, 2:self.TT6412, 3:self.TT6413, 4:self.TT6414},
+                                4: {0:self.TT6415, 1:self.TT6416, 2:self.TT7401, 3:self.TT7402, 4:self.TT7403},
+                                5: {0:self.TT7404}}
 
-        self.AlarmRTDLEFTdir = {0: {0: self.TT4330, 1: self.TT6220, 2: self.TT6213, 3: self.TT6401, 4: self.TT6203},
-                                1: {0: self.TT6404, 1: self.TT6207, 2: self.TT6405, 3: self.TT6211, 4: self.TT6406},
-                                2: {0: self.TT6410, 1: self.TT6408, 2: self.TT6409, 3: self.TT6412, 4: self.TT3401},
-                                3: {0: self.TT7401, 1: self.TT7402, 2: self.TT7403, 3: self.TT7404, 4: self.TT6222},
-                                4: {0: self.TT6407, 1: self.TT6415, 2: self.TT6416, 3: self.TT6411, 4: self.TT6413},
-                                5: {0: self.TT6414}}
 
         self.AlarmLEFTdir = {0:{0: self.BFM4313, 1: self.LT3335, 2: self.MFC1316_IN, 3: self.CYL3334_FCALC, 4: self.SERVO3321_IN_REAL},
                              1:{0: self.TS1_MASS, 1: self.TS2_MASS, 2: self.TS3_MASS, 3: self.LT2122, 4: self.LT2130}}
 
-        self.AlarmDindir = {0:{0: self.LS3338, 1: self.LS3339, 2: self.ES3347, 3: self.PUMP3305_CON, 4: self.PUMP3305_OL},
-                             1:{0: self.PS2352, 1: self.PS1361, 2: self.PS8302}}
+        self.AlarmDindir = {0:{0: self.PS1361, 1: self.PS2352, 2: self.PUMP3305_CON, 3: self.PUMP3305_OL, 4: self.LS3338},
+                             1:{0: self.LS3339, 1: self.ES3347, 2: self.PS8302}}
 
-        self.AlarmHTRdir = {
-            0: {0: self.SERVO3321, 1: self.HTR6225, 2: self.HTR2123, 3: self.HTR2124, 4: self.HTR2125},
-            1: {0: self.HTR1202, 1: self.HTR2203, 2: self.HTR6202, 3: self.HTR6206, 4: self.HTR6210},
-            2: {0: self.HTR6223, 1: self.HTR6224, 2: self.HTR6219, 3: self.HTR6221, 4: self.HTR6214}}
 
-        # self.AlarmRTD1dir = {0: {0: "self.TT2111", 1: "self.TT2112", 2: "self.TT2113", 3: "self.TT2114", 4: "self.TT2115"},
-        #                      1: {0: "self.TT2116", 1: "self.TT2117", 2: "self.TT2118", 3: "self.TT2119", 4: "self.TT2120"}}
-
-        # self.AlarmRTD2dir = {0: {0: "self.TT2401", 1: "self.TT2402", 2: "self.TT2403", 3: "self.TT2404", 4: "self.TT2405"},
-        #                      1: {0: "self.TT2406", 1: "self.TT2407", 2: "self.TT2408", 3: "self.TT2409", 4: "self.TT2410"},
-        #                      2: {0: "self.TT2411", 1: "self.TT2412", 2: "self.TT2413", 3: "self.TT2414", 4: "self.TT2415"},
-        #                      3: {0: "self.TT2416", 1: "self.TT2417", 2: "self.TT2418", 3: "self.TT2419", 4: "self.TT2420"},
-        #                      4: {0: "self.TT2421", 1: "self.TT2422", 2: "self.TT2423", 3: "self.TT2424", 4: "self.TT2425"},
-        #                      5: {0: "self.TT2426", 1: "self.TT2427", 2: "self.TT2428", 3: "self.TT2429", 4: "self.TT2430"},
-        #                      6: {0: "self.TT2431", 1: "self.TT2432"}}
-
-        # self.AlarmRTD3dir = {0: {0: "self.TT2435", 1: "self.TT2436", 2: "self.TT2437", 3: "self.TT2438", 4: "self.TT2439"},
-        #                      1: {0: "self.TT2440", 1: "self.TT2441", 2: "self.TT2442", 3: "self.TT2443", 4: "self.TT2444"},
-        #                      2: {0: "self.TT2445", 1: "self.TT2446", 2: "self.TT2447", 3: "self.TT2448", 4: "self.TT2449"}}
-        #
-        # self.AlarmRTD4dir = {0: {0: "self.TT2101", 1: "self.TT2102", 2: "self.TT2103", 3: "self.TT2104", 4: "self.TT2105"},
-        #                      1: {0: "self.TT2106", 1: "self.TT2107", 2: "self.TT2108", 3: "self.TT2109", 4: "self.TT2110"}}
-        #
-        # self.AlarmPTdir = {0: {0: "self.PT1101", 1: "self.PT2316", 2: "self.PT2121", 3: "self.PT2330", 4: "self.PT2335"},
-        #                    1: {0: "self.PT3308", 1: "self.PT3309", 2: "self.PT1325", 3: "self.PT3311", 4: "self.PT3314"},
-        #                    2: {0: "self.PT3320", 1: "self.PT3333", 2: "self.PT4306", 3: "self.PT4315", 4: "self.PT4319"},
-        #                    3: {0: "self.PT4322", 1: "self.PT4325"}}
-        #
-        # self.AlarmRTDLEFTdir = {0: {0: "self.TT4330", 1: "self.TT6220", 2: "self.TT6213", 3: "self.TT6401", 4: "self.TT6215"},
-        #                         1: {0: "self.TT6402", 1: "self.TT6217", 2: "self.TT6403", 3: "self.TT6203", 4: "self.TT6404"},
-        #                         2: {0: "self.TT6207", 1: "self.TT6405", 2: "self.TT6211", 3: "self.TT6406", 4: "self.TT6223"},
-        #                         3: {0: "self.TT6410", 1: "self.TT6408", 2: "self.TT6409", 3: "self.TT6412", 4: "self.TT7202"},
-        #                         4: {0: "self.TT7401", 1: "self.TT3402", 2: "self.TT3401", 3: "self.TT7403"}}
+        self.AlarmHTRdir = {0: {0: self.HTR1202, 1: self.HTR2123, 2: self.HTR2124, 3: self.HTR2125, 4: self.HTR2203},
+                            1: {0: self.SERVO3321, 1: self.HTR6202, 2: self.HTR6206, 3: self.HTR6210, 4: self.HTR6214},
+                            2: {0: self.HTR6219, 1: self.HTR6221, 2: self.HTR6223, 3: self.HTR6224, 4: self.HTR6225}}
+        
 
         # variables usable for building widgets
         # i is row number, j is column number
