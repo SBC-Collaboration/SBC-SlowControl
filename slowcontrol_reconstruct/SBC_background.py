@@ -1675,7 +1675,6 @@ class UpdatePLC(PLC, threading.Thread):
                 # self run depend on senario, we want to rerun the module by module
             # it has its own try function so we can skip try function here
             self.ReadAll()
-            time.sleep(3000)
             try:
                 with self.command_lock:
                     self.write_data(self.command_data)
@@ -2995,15 +2994,10 @@ class LocalWatchdog(threading.Thread):
         self.rate_alarm = env.MAINALARM_RATE
         self.para_long_alarm = env.MAINALARM_LONG_PARA
         self.rate_long_alarm = env.MAINALARM_LONG_RATE
-        # self.database_timeout = env.DATABASE_HOLD
-        # self.plc_timeout = env.PLC_HOLD
-        # self.socket_timeout = env.SOCKET_HOLD
-        # self.slack_timeout = env.SLACK_HOLD
-        self.database_timeout = 20
-        self.plc_timeout = 20
-        self.socket_timeout = 20
-        self.slack_timeout = 20
-
+        self.database_timeout = env.DATABASE_HOLD
+        self.plc_timeout = env.PLC_HOLD
+        self.socket_timeout = env.SOCKET_HOLD
+        self.slack_timeout = env.SLACK_HOLD
         self.base_period = 1
 
     def run(self):
