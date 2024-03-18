@@ -1675,6 +1675,7 @@ class UpdatePLC(PLC, threading.Thread):
                 # self run depend on senario, we want to rerun the module by module
             # it has its own try function so we can skip try function here
             self.ReadAll()
+            time.sleep(3000)
             try:
                 with self.command_lock:
                     self.write_data(self.command_data)
@@ -2953,7 +2954,7 @@ class Message_Manager(threading.Thread):
                 self.para_alarm += 1
                 time.sleep(self.base_period)
 
-                time.sleep(3000)
+
 
             except (SlackApiError,Exception) as e:
                 with self.alarm_lock:
