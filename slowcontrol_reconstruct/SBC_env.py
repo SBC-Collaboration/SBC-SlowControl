@@ -600,7 +600,7 @@ DATABASE_RATE = {"alarm": 10, "TT": 3, "PT":3 , "REAL":3 , "AD":3, "Din": 90, "V
 DATABASE_HOLD = 300
 PLC_HOLD = 300
 SOCKET_HOLD =300
-WATCHDOG_HOLD = 300
+SLACK_HOLD = 300
 
 DIC_PACK = {"data": {"TT": {"FP": {"value": TT_FP_DIC, "high": TT_FP_HIGHLIMIT, "low": TT_FP_LOWLIMIT},
                                          "BO": {"value": TT_BO_DIC, "high": TT_BO_HIGHLIMIT, "low": TT_BO_LOWLIMIT}},

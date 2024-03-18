@@ -2997,7 +2997,7 @@ class LocalWatchdog(threading.Thread):
         # self.database_timeout = env.DATABASE_HOLD
         # self.plc_timeout = env.PLC_HOLD
         # self.socket_timeout = env.SOCKET_HOLD
-        # self.watchdog_timeout = env.WATCHDOG_HOLD
+        # self.slack_timeout = env.SLACK_HOLD
         self.database_timeout = 20
         self.plc_timeout = 20
         self.socket_timeout = 20
