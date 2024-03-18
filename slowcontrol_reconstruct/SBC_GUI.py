@@ -6901,6 +6901,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT3401.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT3401"])
 
         self.PT2121.SetValue(received_dic_c["data"]["PT"]["value"]["PT2121"])
+        self.PT2121Fluid.SetValue(received_dic_c["data"]["PT"]["value"]["PT2121"])
+        self.PT2121Hy.SetValue(received_dic_c["data"]["PT"]["value"]["PT2121"])
         self.PT2316.SetValue(received_dic_c["data"]["PT"]["value"]["PT2316"])
         self.PT2330.SetValue(received_dic_c["data"]["PT"]["value"]["PT2330"])
         self.PT2335.SetValue(received_dic_c["data"]["PT"]["value"]["PT2335"])
