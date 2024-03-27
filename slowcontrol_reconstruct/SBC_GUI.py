@@ -441,38 +441,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HDPE_switch.Button.setText("HDPE")
         self.HDPE_switch.Button.clicked.connect(lambda:self.set_background(1))
 
-        self.SiPM_switch = TextButton(self.ChamberTab,colorcode =2)
-        self.SiPM_switch.move(10 * R, 1200 * R)
-        self.SiPM_switch.Button.setText("SiPM")
-        self.SiPM_switch.Button.clicked.connect(lambda:self.set_background(2))
-
-
-
-
-        self.RTDset1Win = RTDset1()
-        self.RTDSET1Button = FunctionButton(self.RTDset1Win, self.ChamberTab)
-        # self.RTDSET1.StatusWindow.RTDset1()
-        self.RTDSET1Button.move(300*R, 330*R)
-        self.RTDSET1Button.Button.setText("RTDSET1")
-
-        self.RTDset2Win = RTDset2()
-        self.RTDSET2Button = FunctionButton(self.RTDset2Win, self.ChamberTab)
-        # self.RTDSET2.StatusWindow.RTDset2()
-        self.RTDSET2Button.move(300*R, 510*R)
-        self.RTDSET2Button.Button.setText("RTDSET2")
-
-        self.RTDset3Win = RTDset3()
-        self.RTDSET3Button = FunctionButton(self.RTDset3Win, self.ChamberTab)
-        # self.RTDSET3.StatusWindow.RTDset3()
-        self.RTDSET3Button.move(300*R, 610*R)
-        self.RTDSET3Button.Button.setText("RTDSET3")
-
-        self.RTDset4Win = RTDset4()
-        self.RTDSET4Button = FunctionButton(self.RTDset4Win, self.ChamberTab)
-        # self.RTDSET4.StatusWindow.RTDset4()
-        self.RTDSET4Button.move(1780*R, 1150*R)
-        self.RTDSET4Button.Button.setText("RTDSET4")
-
+        self.IJ_switch = TextButton(self.ChamberTab,colorcode =2)
+        self.IJ_switch.move(10 * R, 1200 * R)
+        self.IJ_switch.Button.setText("Jars")
+        self.IJ_switch.Button.clicked.connect(lambda:self.set_background(2))
 
         self.HTR6219 = LOOPPID_v2(self.ChamberTab)
         self.HTR6219.move(820*R, 120*R)
@@ -573,13 +545,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2125.LOOPPIDWindow.RTD1.Label.setText("2111")
         self.HTR2125.LOOPPIDWindow.RTD2.Label.setText("2111")
 
-        self.PT1101 = Indicator(self.ChamberTab)
-        self.PT1101.move(940*R, 990*R)
+        self.PT1101 = Indicator_v2(self.ChamberTab, colorcode=2)
+        self.PT1101.move(1500*R, 990*R)
         self.PT1101.Label.setText("PT1101")
         self.PT1101.SetUnit(" bar")
 
-        self.PT2121 = Indicator(self.ChamberTab)
-        self.PT2121.move(1210*R, 990*R)
+        self.PT2121 = Indicator_v2(self.ChamberTab, colorcode=2)
+        self.PT2121.move(1810*R, 990*R)
         self.PT2121.Label.setText("PT2121")
         self.PT2121.SetUnit(" bar")
 
@@ -6955,11 +6927,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        self.RTDset4Win.TT2101.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2101"])
-        self.RTDset1Win.TT2111.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2111"])
-        self.RTDset1Win.TT2113.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2113"])
-        self.RTDset1Win.TT2118.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2118"])
-        self.RTDset1Win.TT2119.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2119"])
+
         self.TT4330.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT4330"])
 
         self.HTR6202.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6203"])
@@ -6979,54 +6947,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR1202.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6415"])
         self.HTR2203.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6416"])
 
-        self.RTDset2Win.TT2420.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2420"])
-        self.RTDset2Win.TT2422.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2422"])
-        self.RTDset2Win.TT2424.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2424"])
-        self.RTDset2Win.TT2425.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2425"])
-        self.RTDset3Win.TT2442.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2442"])
-        self.RTDset2Win.TT2403.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2403"])
-        self.RTDset2Win.TT2418.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2418"])
-        self.RTDset2Win.TT2427.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2427"])
-        self.RTDset2Win.TT2429.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2429"])
-        self.RTDset2Win.TT2431.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2431"])
-        self.RTDset3Win.TT2441.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2441"])
-        self.RTDset2Win.TT2414.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2414"])
-        self.RTDset2Win.TT2413.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2413"])
-        self.RTDset2Win.TT2412.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2412"])
-        self.RTDset2Win.TT2415.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2415"])
-        self.RTDset2Win.TT2409.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2409"])
-        self.RTDset3Win.TT2436.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2436"])
-        self.RTDset3Win.TT2438.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2438"])
-        self.RTDset3Win.TT2440.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2440"])
-        self.RTDset2Win.TT2402.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2402"])
-        self.RTDset2Win.TT2411.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2411"])
-        self.RTDset3Win.TT2443.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2443"])
-        self.RTDset2Win.TT2417.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2417"])
-        self.RTDset2Win.TT2404.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2404"])
-        self.RTDset2Win.TT2408.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2408"])
-        self.RTDset2Win.TT2407.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2407"])
-        self.RTDset2Win.TT2406.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2406"])
-        self.RTDset2Win.TT2428.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2428"])
-        self.RTDset2Win.TT2432.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2432"])
-        self.RTDset2Win.TT2421.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2421"])
-        self.RTDset2Win.TT2416.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2416"])
-        self.RTDset3Win.TT2439.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2439"])
-        self.RTDset2Win.TT2419.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2419"])
-        self.RTDset2Win.TT2423.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2423"])
-        self.RTDset2Win.TT2426.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2426"])
-        self.RTDset2Win.TT2430.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2430"])
-        self.RTDset3Win.TT2450.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2450"])
-        self.RTDset2Win.TT2401.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2401"])
-        self.RTDset3Win.TT2449.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2449"])
-        self.RTDset3Win.TT2445.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2445"])
-        self.RTDset3Win.TT2444.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2444"])
-        self.RTDset3Win.TT2435.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2435"])
-        self.RTDset3Win.TT2437.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2437"])
-        self.RTDset3Win.TT2446.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2446"])
-        self.RTDset3Win.TT2447.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2447"])
-        self.RTDset3Win.TT2448.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2448"])
-        self.RTDset2Win.TT2410.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2410"])
-        self.RTDset2Win.TT2405.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2405"])
+
 
 
 
