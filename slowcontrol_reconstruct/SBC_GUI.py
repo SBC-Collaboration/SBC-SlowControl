@@ -162,7 +162,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ChamberTab.Background = QtWidgets.QLabel(self.ChamberTab)
         self.ChamberTab.Background.setScaledContents(True)
         self.ChamberTab.Background.setStyleSheet('background-color:black;')
-        pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "Chamber_simplified.png"))
+        pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "PV_4xpx.png"))
         pixmap_chamber = pixmap_chamber.scaledToWidth(2400*R)
         self.ChamberTab.Background.setPixmap(QtGui.QPixmap(pixmap_chamber))
         self.ChamberTab.Background.move(0*R, 0*R)
@@ -431,10 +431,23 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Chamber tab buttons
 
-        self.LoginP = SingleButton(self.ChamberTab)
-        self.LoginP.move(140*R, 1200*R)
-        self.LoginP.Label.setText("Login")
-        self.LoginP.Button.setText("Guest")
+        self.PV_switch = TextButton(self.ChamberTab, colorcode= 0 )
+        self.PV_switch.move(10*R,1040*R)
+        self.PV_switch.Button.setText("PV")
+        self.PV_switch.Button.clicked.connect(lambda: self.set_background(0))
+
+        self.HDPE_switch = TextButton(self.ChamberTab, colorcode= 1)
+        self.HDPE_switch.move(10 * R, 1120 * R)
+        self.HDPE_switch.Button.setText("HDPE")
+        self.HDPE_switch.Button.clicked.connect(lambda:self.set_background(1))
+
+        self.SiPM_switch = TextButton(self.ChamberTab,colorcode =2)
+        self.SiPM_switch.move(10 * R, 1200 * R)
+        self.SiPM_switch.Button.setText("SiPM")
+        self.SiPM_switch.Button.clicked.connect(lambda:self.set_background(2))
+
+
+
 
         self.RTDset1Win = RTDset1()
         self.RTDSET1Button = FunctionButton(self.RTDset1Win, self.ChamberTab)
@@ -1097,6 +1110,13 @@ class MainWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def StopUpdater(self):
         self.clientthread.join()
+
+    @QtCore.Slot()
+    def set_background(self, num = 0):
+        list = ["PV_4xpx.png","HDPE_4xpx.png","SiPM_2xpx.png"]
+        pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, list[num]))
+        pixmap_chamber = pixmap_chamber.scaledToWidth(2400 * R)
+        self.ChamberTab.Background.setPixmap(QtGui.QPixmap(pixmap_chamber))
 
 
 

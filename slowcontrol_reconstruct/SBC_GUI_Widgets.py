@@ -32,6 +32,7 @@ C_GREEN = "background-color: rgb(0,217,0);"
 C_RED = "background-color: rgb(255,25,25);"
 C_BLUE = "background-color: rgb(34,48,171);"
 C_ORANGE = "background-color: rgb(255,132,27);"
+C_MAROON = "background-color: rgb(128,0,0);"
 
 # if platform.system() == "Linux":
 #     QtGui.QFontDatabase.addApplicationFont("/usr/share/fonts/truetype/vista/calibrib.ttf")
@@ -51,6 +52,8 @@ LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-fami
               "font-size: 12px; font-weight: bold;"
 TITLE_STYLE_1 = "background-color: white; border-radius: 3px; font-family: " \
               "\"Calibri\"; font-size: 14px; font-weight: bold;"
+ROUND_BORDER_STYLE = "border-style: outset; border-width: 2 px; border-radius: 4px; border-color: black; " \
+                     "border-left: 2px solid transparent; "
 # TITLE_STYLE = "background-color: rgb(204,204,204); "
 # BORDER_STYLE = " "
 # FONT = " font-size: 14px;"
@@ -3306,6 +3309,57 @@ class AlarmButton(QtWidgets.QWidget):
             self.Button.Alarm = False
 
 
+class TextButton(QtWidgets.QWidget):
+    def __init__(self, parent=None, colorcode =0):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("TextButton")
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 190*R, 70*R))
+        self.setMinimumSize(70*R, 70*R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Button = QtWidgets.QPushButton(self)
+        self.Button.setObjectName("Button")
+        # self.Button.setText("Button")
+        self.Button.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 70*R))
+
+        self.Button.setStyleSheet(
+            "QPushButton{" + LABEL_STYLE + BORDER_STYLE + BORDER_RADIUS+"} QWidget{ background-color: rgb(204,204,204);}")
+
+        self.Colorband = QtWidgets.QLabel(self)
+        self.Colorband.setObjectName("Colorband")
+        self.Colorband.setGeometry(QtCore.QRect(60 * R, 0 * R, 8 * R, 70 * R))
+        if colorcode == 0:
+            self.Colorband.setStyleSheet("QLabel {" + C_BLUE + ROUND_BORDER_STYLE + "}")
+        elif colorcode == 1:
+            self.Colorband.setStyleSheet("QLabel {" + C_ORANGE + ROUND_BORDER_STYLE + "}")
+        elif colorcode == 2:
+            self.Colorband.setStyleSheet("QLabel {" + C_MAROON + ROUND_BORDER_STYLE + "}")
+        else:
+            self.Colorband.setStyleSheet("QLabel {" + C_BLUE + ROUND_BORDER_STYLE + "}")
+
+        #expand button
+
+
+        if '__file__' in globals():
+            self.Path = os.path.dirname(os.path.realpath(__file__))
+        else:
+            self.Path = os.getcwd()
+        self.ImagePath = os.path.join(self.Path, "images")
+        self.pixmap = QtGui.QPixmap(os.path.join(self.ImagePath, "expand.png"))
+        self.ExpButton = QtWidgets.QPushButton(self)
+        self.ExpButton.setObjectName("ExpButton")
+        self.ExpButton.setGeometry(QtCore.QRect(75 * R, 0 * R, 70 * R, 70 * R))
+        self.ExpButton.setStyleSheet(
+            "QPushButton{" + LABEL_STYLE + BORDER_STYLE + BORDER_RADIUS + "} QWidget{ background-color: rgb(204,204,204);}")
+        self.ExpButton.setIcon(self.pixmap)
+        self.ExpButton.setIconSize(QtCore.QSize(70 * R, 70 * R))
+
+
+
+
 
 # Define an alarm button
 class INTLCKButton(QtWidgets.QWidget):
@@ -3484,7 +3538,7 @@ class Heater(QtWidgets.QWidget):
 
 # Defines a reusable layout containing widgets
 class LOOPPID_v2(QtWidgets.QWidget):
-    def __init__(self, parent=None, title=""):
+    def __init__(self, parent=None, title="", colorcode = 0):
         super().__init__(parent)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -3502,6 +3556,20 @@ class LOOPPID_v2(QtWidgets.QWidget):
         self.Label.setProperty("State", False)
         self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
                                  + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+
+        self.Colorband = QtWidgets.QLabel(self)
+        self.Colorband.setObjectName("Colorband")
+        self.Colorband.setGeometry(QtCore.QRect(244 * R, 7 * R, 10 * R, 35 * R))
+        if colorcode == 0:
+            self.Colorband.setStyleSheet("QLabel {" + C_BLUE + ROUND_BORDER_STYLE + "}")
+        elif colorcode ==1:
+            self.Colorband.setStyleSheet("QLabel {" + C_ORANGE + ROUND_BORDER_STYLE + "}")
+        elif colorcode ==2:
+            self.Colorband.setStyleSheet("QLabel {" + C_MAROON + ROUND_BORDER_STYLE + "}")
+        else:
+            self.Colorband.setStyleSheet("QLabel {" + C_BLUE + ROUND_BORDER_STYLE + "}")
+
+
         # self.HL1.addWidget(self.Label)
 
         self.Power = Control_v2(self)
@@ -7982,6 +8050,95 @@ class SERVO_image(QtWidgets.QWidget):
     def Turnoff(self):
             self.label.setPixmap(self.pixmap_pump_R)
 
+
+
+class Indicator_v2(QtWidgets.QWidget):
+    def __init__(self, parent=None, colorcode = 0):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("Indicator")
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 60*R))
+        self.setMinimumSize(90*R, 60*R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Background = QtWidgets.QLabel(self)
+        self.Background.setObjectName("Background")
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 60*R))
+        self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
+
+        self.Colorband = QtWidgets.QLabel(self)
+        self.Colorband.setObjectName("Colorband")
+        self.Colorband.setGeometry(QtCore.QRect(77 * R, 0 * R, 10 * R, 30 * R))
+        if colorcode == 0:
+            self.Colorband.setStyleSheet("QLabel {" + C_BLUE + ROUND_BORDER_STYLE+"}")
+        elif colorcode == 1:
+            self.Colorband.setStyleSheet("QLabel {" + C_ORANGE + ROUND_BORDER_STYLE + "}")
+        elif colorcode == 2:
+            self.Colorband.setStyleSheet("QLabel {" + C_MAROON + ROUND_BORDER_STYLE + "}")
+        else:
+            self.Colorband.setStyleSheet("QLabel {" + C_BLUE + ROUND_BORDER_STYLE + "}")
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Indicator")
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 25*R))
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setStyleSheet("QLabel {" +FONT+"}")
+
+        self.Field = QtWidgets.QLineEdit(self)
+        self.Field.setObjectName("indicator value")
+        self.Field.setGeometry(QtCore.QRect(0*R, 25*R, 90*R, 35*R))
+        self.Field.setAlignment(QtCore.Qt.AlignCenter)
+        self.Field.setReadOnly(True)
+        self.Field.setStyleSheet(
+            "QLineEdit{" + BORDER_STYLE + C_WHITE + LAG_FONT + "} QLineEdit[Alarm = true]{" + C_ORANGE +
+            "} QLineEdit[Alarm = false]{" + C_MEDIUM_GREY + "}")
+        self.Field.Property = False
+        self.Field.setProperty("Alarm", False)
+
+        self.Unit = " K"
+        self.SetValue(0.)
+
+        self.Field.setVisible(True)
+        self.Label.mousePressEvent = self.toggle_value_visibility
+
+    def toggle_value_visibility(self, event):
+        if self.Field.isVisible():
+            self.Field.setVisible(False)
+            self.Background.setGeometry(QtCore.QRect(0 * R, 0 * R, 90 * R, 25 * R))
+            self.Colorband.setGeometry(QtCore.QRect(77 * R, 0 * R, 10 * R, 25 * R))
+        else:
+            self.Field.setVisible(True)
+            self.Background.setGeometry(QtCore.QRect(0 * R, 0 * R, 90 * R, 60 * R))
+            self.Colorband.setGeometry(QtCore.QRect(77 * R, 0 * R, 10 * R, 30 * R))
+
+    def SetValue(self, value):
+        self.value = value
+        self.Field.setText(format(value, '#.2f') + self.Unit)
+
+    def SetIntValue(self, value):
+        self.value = value
+        self.Field.setText(str(int(value)) + self.Unit)
+
+    def SetAlarm(self):
+        self.Field.Property = True
+        self.Field.setProperty("Alarm", self.Field.Property)
+        self.Field.setStyle(self.Field.style())
+
+    def ResetAlarm(self):
+        self.Field.Property = False
+        self.Field.setProperty("Alarm", self.Field.Property)
+        self.Field.setStyle(self.Field.style())
+
+    def SetUnit(self, unit=" °C"):
+        self.Unit = unit
+        self.Field.setText(format(self.value, '#.2f') + self.Unit)
+
+    # set alarm mode, if the mode is false, then the alarm will not be triggered despite of alarm value
+    def SetAlarmMode(self, Mode):
+        self.AlarmMode = Mode
 
 class ChangeValueSignal(QtCore.QObject):
     fSignal = QtCore.Signal(float)
