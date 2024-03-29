@@ -162,7 +162,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ChamberTab.Background = QtWidgets.QLabel(self.ChamberTab)
         self.ChamberTab.Background.setScaledContents(True)
         self.ChamberTab.Background.setStyleSheet('background-color:black;')
-        pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "PV_4xpx.png"))
+        pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "PV_2xpx.png"))
         self.ChamberTab.Background.setPixmap(pixmap_chamber)
         self.ChamberTab.Background.resize(2400 * R, 1390 * R)
         self.ChamberTab.Background.move(0*R, 0*R)
@@ -576,8 +576,10 @@ class MainWindow(QtWidgets.QMainWindow):
                               self.HTR2124]
         self.IJ_group = [self.PT2121, self.PT1101]
 
-        self.PV_switch.ExpButton.clicked.connect(lambda : self.expand_widgets(layer="PV"))
-        self.IJ_switch.ExpButton.clicked.connect(lambda : self.expand_widgets(layer="IJ"))
+        self.PV_switch.ExpButton.clicked.connect(lambda : self.set_expansion(layer="PV"))
+        self.IJ_switch.ExpButton.clicked.connect(lambda : self.set_expansion(layer="IJ"))
+        self.PV_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="PV"))
+        self.IJ_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="IJ"))
         # Fluid tab buttons
 
         self.PT2316 = Indicator(self.FluidTab)
@@ -1091,20 +1093,36 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def set_background(self, num = 0):
-        list = ["PV_4xpx.png","HDPE_4xpx.png","SiPM_2xpx.png"]
+        list = ["PV_2xpx.png","HDPE_4xpx.png","SiPM_2xpx.png"]
         pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, list[num]))
         pixmap_chamber = pixmap_chamber.scaledToWidth(2400 * R)
         self.ChamberTab.Background.setPixmap(QtGui.QPixmap(pixmap_chamber))
 
     @QtCore.Slot()
-    def expand_widgets(self, layer=None):
+    def set_expansion(self, layer=None):
         if layer=="PV":
             for i in self.Heaters_group:
-                i.on_pressed()
+                i.Tool.animateClick()
         elif layer=="IJ":
-            event = QtGui.QMouseEvent(QtGui.QMouseEvent.Type.MouseButtonPress, QtCore.Qt.LeftButton, QtCore.Qt.LeftButton, QtCore.Qt.NoModifier)
             for i in self.IJ_group:
-                i.mousePressEvent(event)
+                i.toggle_value_visibility()
+        else:
+            pass
+
+    @QtCore.Slot()
+    def set_visibility(self, layer=None):
+        if layer == "PV":
+            for i in self.Heaters_group:
+                if i.isVisible():
+                    i.setVisible(False)
+                else:
+                    i.setVisible(True)
+        elif layer == "IJ":
+            for i in self.IJ_group:
+                if i.isVisible():
+                    i.setVisible(False)
+                else:
+                    i.setVisible(True)
         else:
             pass
 

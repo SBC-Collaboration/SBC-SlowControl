@@ -3319,7 +3319,7 @@ class TextButton(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("TextButton")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 190*R, 70*R))
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 270*R, 70*R))
         self.setMinimumSize(70*R, 70*R)
         self.setSizePolicy(sizePolicy)
 
@@ -3360,8 +3360,14 @@ class TextButton(QtWidgets.QWidget):
         self.ExpButton.setIcon(self.pixmap)
         self.ExpButton.setIconSize(QtCore.QSize(70 * R, 70 * R))
 
-
-
+        self.pixmap2 = QtGui.QPixmap(os.path.join(self.ImagePath, "eye.png"))
+        self.VisButton = QtWidgets.QPushButton(self)
+        self.VisButton.setObjectName("VisButton")
+        self.VisButton.setGeometry(QtCore.QRect(150 * R, 0 * R, 70 * R, 70 * R))
+        self.VisButton.setStyleSheet(
+            "QPushButton{" + LABEL_STYLE + BORDER_STYLE + BORDER_RADIUS + "} QWidget{ background-color: rgb(204,204,204);}")
+        self.VisButton.setIcon(self.pixmap2)
+        self.VisButton.setIconSize(QtCore.QSize(60 * R, 60 * R))
 
 
 # Define an alarm button
@@ -8132,7 +8138,7 @@ class Indicator_v2(QtWidgets.QWidget):
         self.Field.setVisible(True)
         self.Label.mousePressEvent = self.toggle_value_visibility
     
-    def toggle_value_visibility(self, event):
+    def toggle_value_visibility(self, event=None):
         if self.Field.isVisible():
             self.Field.setVisible(False)
             self.Background.setGeometry(QtCore.QRect(0 * R, 0 * R, 90 * R, 25 * R))
