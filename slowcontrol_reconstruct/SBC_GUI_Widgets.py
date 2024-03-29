@@ -25,6 +25,7 @@ BORDER_RADIUS = " "
 
 C_LIGHT_GREY = "background-color: rgb(204,204,204);"
 C_MEDIUM_GREY = "background-color: rgb(167,167,167);"
+C_LIGHT_YELLOW = "background-color: rgb(255, 255, 204);"
 C_BKG_WHITE = "background-color: white;"
 C_WHITE = "color: white;"
 C_BLACK = "color: black;"
@@ -48,6 +49,8 @@ TITLE_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-fami
               "\"Calibri\"; font-size: 14px; font-weight: bold;"
 BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
                " border-color: black;"
+DOTTED_BORDER_STYLE = "border-style: outset; border-width: 2px; border-radius: 4px;" \
+               " border-color: black; border-style: dotted;"
 LABEL_STYLE = "background-color: rgb(204,204,204); border-radius: 3px; font-family: \"Calibri\"; " \
               "font-size: 12px; font-weight: bold;"
 TITLE_STYLE_1 = "background-color: white; border-radius: 3px; font-family: " \
@@ -3538,7 +3541,7 @@ class Heater(QtWidgets.QWidget):
 
 # Defines a reusable layout containing widgets
 class LOOPPID_v2(QtWidgets.QWidget):
-    def __init__(self, parent=None, title="", colorcode = 0):
+    def __init__(self, parent=None, title="", colorcode = 0, bkg_c = 0, dotted = False):
         super().__init__(parent)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -3554,8 +3557,24 @@ class LOOPPID_v2(QtWidgets.QWidget):
         self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 35 * R))
         self.Label.setMinimumSize(QtCore.QSize(150*R, 30*R))
         self.Label.setProperty("State", False)
-        self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+        if bkg_c == 1 and not dotted:
+            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                     + "} QWidget[State = false]{" + C_LIGHT_YELLOW + "}")
+        elif bkg_c == 0 and not dotted:
+            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
                                  + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+
+        elif bkg_c == 1 and dotted:
+            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + DOTTED_BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                     + "} QWidget[State = false]{" + C_LIGHT_YELLOW + "}")
+
+        elif bkg_c == 0 and dotted:
+            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + DOTTED_BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                 + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+        else:
+
+            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                     + "} QWidget[State = false]{" + C_LIGHT_YELLOW + "}")
 
         self.Colorband = QtWidgets.QLabel(self)
         self.Colorband.setObjectName("Colorband")
@@ -8053,7 +8072,7 @@ class SERVO_image(QtWidgets.QWidget):
 
 
 class Indicator_v2(QtWidgets.QWidget):
-    def __init__(self, parent=None, colorcode = 0):
+    def __init__(self, parent=None, colorcode = 0, bkg_c = 0, dotted = False):
         super().__init__(parent)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -8066,7 +8085,16 @@ class Indicator_v2(QtWidgets.QWidget):
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
         self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 60*R))
-        self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
+        if bkg_c == 1 and not dotted:
+            self.Background.setStyleSheet("QLabel {" + C_LIGHT_YELLOW + BORDER_STYLE + "}")
+        elif bkg_c==1 and dotted:
+            self.Background.setStyleSheet("QLabel {" + C_LIGHT_YELLOW + DOTTED_BORDER_STYLE + "}")
+        elif bkg_c == 0 and not dotted:
+            self.Background.setStyleSheet("QLabel {" + C_LIGHT_GREY + BORDER_STYLE + "}")
+        elif bkg_c==0 and dotted:
+            self.Background.setStyleSheet("QLabel {" + C_LIGHT_GREY + DOTTED_BORDER_STYLE + "}")
+        else:
+            self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
 
         self.Colorband = QtWidgets.QLabel(self)
         self.Colorband.setObjectName("Colorband")
@@ -8103,7 +8131,7 @@ class Indicator_v2(QtWidgets.QWidget):
 
         self.Field.setVisible(True)
         self.Label.mousePressEvent = self.toggle_value_visibility
-
+    
     def toggle_value_visibility(self, event):
         if self.Field.isVisible():
             self.Field.setVisible(False)

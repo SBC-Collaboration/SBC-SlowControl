@@ -163,8 +163,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ChamberTab.Background.setScaledContents(True)
         self.ChamberTab.Background.setStyleSheet('background-color:black;')
         pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "PV_4xpx.png"))
-        pixmap_chamber = pixmap_chamber.scaledToWidth(2400*R)
-        self.ChamberTab.Background.setPixmap(QtGui.QPixmap(pixmap_chamber))
+        self.ChamberTab.Background.setPixmap(pixmap_chamber)
+        self.ChamberTab.Background.resize(2400 * R, 1390 * R)
         self.ChamberTab.Background.move(0*R, 0*R)
         self.ChamberTab.Background.setObjectName("ChamberBkg")
 
@@ -446,16 +446,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IJ_switch.Button.setText("Jars")
         self.IJ_switch.Button.clicked.connect(lambda:self.set_background(2))
 
-        self.HTR6219 = LOOPPID_v2(self.ChamberTab)
-        self.HTR6219.move(820*R, 120*R)
+        self.HTR6219 = LOOPPID_v2(self.ChamberTab, bkg_c = 1,dotted= True)
+        self.HTR6219.move(200*R, 120*R)
         self.HTR6219.Label.setText("HTR6219")
         self.HTR6219.LOOPPIDWindow.setWindowTitle("HTR6219")
         self.HTR6219.LOOPPIDWindow.Label.setText("HTR6219")
         self.HTR6219.LOOPPIDWindow.RTD1.Label.setText("TT6220")
         self.HTR6219.LOOPPIDWindow.RTD2.Label.setText("TT6222")
 
-        self.HTR6221 = LOOPPID_v2(self.ChamberTab)
-        self.HTR6221.move(1250*R, 120*R)
+        self.HTR6221 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
+        self.HTR6221.move(700*R, 120*R)
         self.HTR6221.Label.setText("HTR6221")
         self.HTR6221.LOOPPIDWindow.setWindowTitle("HTR6221")
         self.HTR6221.LOOPPIDWindow.Label.setText("HTR6221")
@@ -464,7 +464,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        self.HTR6214 = LOOPPID_v2(self.ChamberTab)
+        self.HTR6214 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR6214.move(1780*R, 145*R)
         self.HTR6214.Label.setText("HTR6214")
         self.HTR6214.LOOPPIDWindow.setWindowTitle("HTR6214")
@@ -472,7 +472,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.LOOPPIDWindow.RTD1.Label.setText("TT6213")
         self.HTR6214.LOOPPIDWindow.RTD2.Label.setText("TT6401")
 
-        self.HTR6202 = LOOPPID_v2(self.ChamberTab)
+        self.HTR6202 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR6202.move(1780*R, 485*R)
         self.HTR6202.Label.setText("HTR6202")
         self.HTR6202.LOOPPIDWindow.setWindowTitle("HTR6202")
@@ -480,7 +480,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6202.LOOPPIDWindow.RTD1.Label.setText("TT6203")
         self.HTR6202.LOOPPIDWindow.RTD2.Label.setText("TT6404")
 
-        self.HTR6206 = LOOPPID_v2(self.ChamberTab)
+        self.HTR6206 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR6206.move(1780*R, 585*R)
         self.HTR6206.Label.setText("HTR6206")
         self.HTR6206.LOOPPIDWindow.setWindowTitle("HTR6206")
@@ -488,7 +488,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6206.LOOPPIDWindow.RTD1.Label.setText("TT6207")
         self.HTR6206.LOOPPIDWindow.RTD2.Label.setText("TT6405")
 
-        self.HTR6210 = LOOPPID_v2(self.ChamberTab)
+        self.HTR6210 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR6210.move(1780*R, 685*R)
         self.HTR6210.Label.setText("HTR6210")
         self.HTR6210.LOOPPIDWindow.setWindowTitle("HTR6210")
@@ -496,7 +496,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6210.LOOPPIDWindow.RTD1.Label.setText("TT6211")
         self.HTR6210.LOOPPIDWindow.RTD2.Label.setText("TT6406")
 
-        self.HTR6223 = LOOPPID_v2(self.ChamberTab)
+        self.HTR6223 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR6223.move(1780*R, 785*R)
         self.HTR6223.Label.setText("HTR6223")
         self.HTR6223.LOOPPIDWindow.setWindowTitle("HTR6223")
@@ -504,7 +504,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6223.LOOPPIDWindow.RTD1.Label.setText("TT6407")
         self.HTR6223.LOOPPIDWindow.RTD2.Label.setText("TT6410")
 
-        self.HTR6224 = LOOPPID_v2(self.ChamberTab)
+        self.HTR6224 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR6224.move(1780*R, 885*R)
         self.HTR6224.Label.setText("HTR6224")
         self.HTR6224.LOOPPIDWindow.setWindowTitle("HTR6224")
@@ -512,7 +512,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6224.LOOPPIDWindow.RTD1.Label.setText("TT6408")
         self.HTR6224.LOOPPIDWindow.RTD2.Label.setText("TT6411")
 
-        self.HTR6225 = LOOPPID_v2(self.ChamberTab)
+        self.HTR6225 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
 
         self.HTR6225.move(1780*R, 985*R)
         self.HTR6225.Label.setText("HTR6225")
@@ -521,7 +521,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6225.LOOPPIDWindow.RTD1.Label.setText("TT6409")
         self.HTR6225.LOOPPIDWindow.RTD2.Label.setText("TT6412")
 
-        self.HTR2123 = LOOPPID_v2(self.ChamberTab)
+        self.HTR2123 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR2123.move(400*R, 950*R)
         self.HTR2123.Label.setText("HTR2123")
         self.HTR2123.LOOPPIDWindow.setWindowTitle("HTR2123")
@@ -529,7 +529,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2123.LOOPPIDWindow.RTD1.Label.setText("TT2101")
         self.HTR2123.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
 
-        self.HTR2124 = LOOPPID_v2(self.ChamberTab)
+        self.HTR2124 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR2124.move(670*R, 820*R)
         self.HTR2124.Label.setText("HTR2124")
         self.HTR2124.LOOPPIDWindow.setWindowTitle("HTR2124")
@@ -537,7 +537,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2124.LOOPPIDWindow.RTD1.Label.setText("TT2113")
         self.HTR2124.LOOPPIDWindow.RTD2.Label.setText("TT2113")
 
-        self.HTR2125 = LOOPPID_v2(self.ChamberTab)
+        self.HTR2125 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR2125.move(1030*R, 730*R)
         self.HTR2125.Label.setText("HTR2125")
         self.HTR2125.LOOPPIDWindow.setWindowTitle("HTR2125")
@@ -545,17 +545,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2125.LOOPPIDWindow.RTD1.Label.setText("2111")
         self.HTR2125.LOOPPIDWindow.RTD2.Label.setText("2111")
 
-        self.PT1101 = Indicator_v2(self.ChamberTab, colorcode=2)
+        self.PT1101 = Indicator_v2(self.ChamberTab, colorcode=2,bkg_c=1)
         self.PT1101.move(1500*R, 990*R)
         self.PT1101.Label.setText("PT1101")
         self.PT1101.SetUnit(" bar")
 
-        self.PT2121 = Indicator_v2(self.ChamberTab, colorcode=2)
-        self.PT2121.move(1810*R, 990*R)
+        self.PT2121 = Indicator_v2(self.ChamberTab, colorcode=2,bkg_c=1)
+        self.PT2121.move(2110*R, 990*R)
         self.PT2121.Label.setText("PT2121")
         self.PT2121.SetUnit(" bar")
 
-        self.HTR1202 = LOOPPID_v2(self.ChamberTab)
+        self.HTR1202 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR1202.move(840*R, 1250*R)
         self.HTR1202.Label.setText("HTR1202")
         self.HTR1202.LOOPPIDWindow.setWindowTitle("HTR1202")
@@ -564,7 +564,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR1202.LOOPPIDWindow.RTD2.Label.setText("TT6415")
 
 
-        self.HTR2203 = LOOPPID_v2(self.ChamberTab)
+        self.HTR2203 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR2203.move(1260*R, 1215*R)
         self.HTR2203.Label.setText("HTR2203")
         self.HTR2203.LOOPPIDWindow.setWindowTitle("HTR2203")
@@ -572,6 +572,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2203.LOOPPIDWindow.RTD1.Label.setText("TT6414")
         self.HTR2203.LOOPPIDWindow.RTD2.Label.setText("TT6416")
 
+        self.Heaters_group = [self.HTR6219, self.HTR6221, self.HTR2203, self.HTR1202, self.HTR2123, self.HTR6225, self.HTR2125,
+                              self.HTR2124]
+        self.IJ_group = [self.PT2121, self.PT1101]
+
+        self.PV_switch.ExpButton.clicked.connect(lambda : self.expand_widgets(layer="PV"))
+        self.IJ_switch.ExpButton.clicked.connect(lambda : self.expand_widgets(layer="IJ"))
         # Fluid tab buttons
 
         self.PT2316 = Indicator(self.FluidTab)
@@ -1089,6 +1095,18 @@ class MainWindow(QtWidgets.QMainWindow):
         pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, list[num]))
         pixmap_chamber = pixmap_chamber.scaledToWidth(2400 * R)
         self.ChamberTab.Background.setPixmap(QtGui.QPixmap(pixmap_chamber))
+
+    @QtCore.Slot()
+    def expand_widgets(self, layer=None):
+        if layer=="PV":
+            for i in self.Heaters_group:
+                i.on_pressed()
+        elif layer=="IJ":
+            event = QtGui.QMouseEvent(QtGui.QMouseEvent.Type.MouseButtonPress, QtCore.Qt.LeftButton, QtCore.Qt.LeftButton, QtCore.Qt.NoModifier)
+            for i in self.IJ_group:
+                i.mousePressEvent(event)
+        else:
+            pass
 
 
 
