@@ -40,13 +40,13 @@ def test_crontab(string):
     with open(file_path, 'w') as file:
         file.write(string + '\n')
 
-def exception_hook(exctype, value, traceback):
-    print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
-    # sys._excepthook(exctype, value, traceback)
-    sys.exit(1)
-
-
-sys.excepthook = exception_hook
+# def exception_hook(exctype, value, traceback):
+#     print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
+#     # sys._excepthook(exctype, value, traceback)
+#     sys.exit(1)
+#
+#
+# sys.excepthook = exception_hook
 
 
 # output address to attribute function in FP ()
