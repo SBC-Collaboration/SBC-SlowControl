@@ -3058,6 +3058,7 @@ class LocalWatchdog(threading.Thread):
                         self.para_long_alarm = 0
                 self.para_alarm += 1
                 self.para_long_alarm += 1
+                self.test_crontab(self.clock)
                 time.sleep(self.base_period)
 
             except (sshtunnel.BaseSSHTunnelForwarderError, pymysql.Error,Exception)  as e:
@@ -3070,7 +3071,10 @@ class LocalWatchdog(threading.Thread):
                 break
         self.run()
 
-
+    def test_crontab(self, time):
+        file_path = '/home/hep/bkglog.txt'
+        with open(file_path, 'w') as file:
+            file.write(str(time) + '\n')
     def join_stack_into_message(self, dic):
         message = ""
         if len(dic) >= 1:

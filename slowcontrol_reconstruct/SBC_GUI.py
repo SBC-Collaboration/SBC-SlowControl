@@ -168,6 +168,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ChamberTab.Background.move(0*R, 0*R)
         self.ChamberTab.Background.setObjectName("ChamberBkg")
 
+        self.IVTab = QtWidgets.QWidget()
+        self.Tab.addTab(self.IVTab, "IV 2D layout")
+
+        self.IVTab.Background = QtWidgets.QLabel(self.IVTab)
+        self.IVTab.Background.setScaledContents(True)
+        self.IVTab.Background.setStyleSheet('background-color:black;')
+        pixmap_IV = QtGui.QPixmap(os.path.join(self.ImagePath, "IV_2d.png"))
+        self.IVTab.Background.setPixmap(pixmap_IV)
+        self.IVTab.Background.resize(2400 * R, 1390 * R)
+        self.IVTab.Background.move(0 * R, 0 * R)
+        self.IVTab.Background.setObjectName("IVBkg")
+
         self.FluidTab = QtWidgets.QWidget()
         self.Tab.addTab(self.FluidTab, "Fluid System")
 
@@ -441,10 +453,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HDPE_switch.Button.setText("HDPE")
         self.HDPE_switch.Button.clicked.connect(lambda:self.set_background(1))
 
-        self.IJ_switch = TextButton(self.ChamberTab,colorcode =2)
-        self.IJ_switch.move(10 * R, 1200 * R)
-        self.IJ_switch.Button.setText("Jars")
-        self.IJ_switch.Button.clicked.connect(lambda:self.set_background(2))
+        self.IV_switch = TextButton(self.ChamberTab,colorcode =2)
+        self.IV_switch.move(10 * R, 1200 * R)
+        self.IV_switch.Button.setText("Jars")
+        self.IV_switch.Button.clicked.connect(lambda:self.set_background(2))
 
         self.HTR6219 = LOOPPID_v2(self.ChamberTab, bkg_c = 1,dotted= True)
         self.HTR6219.move(200*R, 120*R)
@@ -574,12 +586,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.Heaters_group = [self.HTR6219, self.HTR6221, self.HTR2203, self.HTR1202, self.HTR2123, self.HTR6225, self.HTR2125,
                               self.HTR2124]
-        self.IJ_group = [self.PT2121, self.PT1101]
+        self.IV_group = [self.PT2121, self.PT1101]
 
         self.PV_switch.ExpButton.clicked.connect(lambda : self.set_expansion(layer="PV"))
-        self.IJ_switch.ExpButton.clicked.connect(lambda : self.set_expansion(layer="IJ"))
+        self.IV_switch.ExpButton.clicked.connect(lambda : self.set_expansion(layer="IV"))
         self.PV_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="PV"))
-        self.IJ_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="IJ"))
+        self.IV_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="IV"))
         # Fluid tab buttons
 
         self.PT2316 = Indicator(self.FluidTab)
@@ -1103,8 +1115,8 @@ class MainWindow(QtWidgets.QMainWindow):
         if layer=="PV":
             for i in self.Heaters_group:
                 i.Tool.animateClick()
-        elif layer=="IJ":
-            for i in self.IJ_group:
+        elif layer=="IV":
+            for i in self.IV_group:
                 i.toggle_value_visibility()
         else:
             pass
@@ -1117,8 +1129,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     i.setVisible(False)
                 else:
                     i.setVisible(True)
-        elif layer == "IJ":
-            for i in self.IJ_group:
+        elif layer == "IV":
+            for i in self.IV_group:
                 if i.isVisible():
                     i.setVisible(False)
                 else:
