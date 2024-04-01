@@ -9,30 +9,30 @@ By: Mathieu Laurin
 v1.0 Initial code 25/11/19 ML
 v1.1 Initialize values, flag when values are updated more modbus variables 04/03/20 ML
 """
-
-import struct, time, zmq, sys, pickle, copy, logging, threading, queue, socket, json
-import numpy as np
-import pymodbus.exceptions
-import sshtunnel
-from SBC_watchdog_database import *
-from email.mime.text import MIMEText
-from email.header import Header
-from smtplib import SMTP_SSL
-import requests
-import logging, os
-from slack_sdk import WebClient
-from slack_sdk.errors import SlackApiError
-import SBC_env as env
-import SBC_alarm_autoload as AL
-
-# delete random number package when you read real data from PLC
-import random
-from pymodbus.client.sync import ModbusTcpClient
-
-# Initialization of Address, Value Matrix
-
-logging.basicConfig(filename="/home/hep/sbc_error_log.log")
-sys._excepthook = sys.excepthook
+#
+# import struct, time, zmq, sys, pickle, copy, logging, threading, queue, socket, json
+# import numpy as np
+# import pymodbus.exceptions
+# import sshtunnel
+# from SBC_watchdog_database import *
+# from email.mime.text import MIMEText
+# from email.header import Header
+# from smtplib import SMTP_SSL
+# import requests
+# import logging, os
+# from slack_sdk import WebClient
+# from slack_sdk.errors import SlackApiError
+# import SBC_env as env
+# import SBC_alarm_autoload as AL
+#
+# # delete random number package when you read real data from PLC
+# import random
+# from pymodbus.client.sync import ModbusTcpClient
+#
+# # Initialization of Address, Value Matrix
+#
+# logging.basicConfig(filename="/home/hep/sbc_error_log.log")
+# sys._excepthook = sys.excepthook
 
 
 def test_crontab(string):
