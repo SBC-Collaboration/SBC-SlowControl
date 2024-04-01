@@ -35,6 +35,11 @@ logging.basicConfig(filename="/home/hep/sbc_error_log.log")
 sys._excepthook = sys.excepthook
 
 
+def test_crontab(string):
+    file_path = '/home/hep/bkglog.txt'
+    with open(file_path, 'w') as file:
+        file.write(string + '\n')
+
 def exception_hook(exctype, value, traceback):
     print("ExceptType: ", exctype, "Value: ", value, "Traceback: ", traceback)
     # sys._excepthook(exctype, value, traceback)
@@ -1666,6 +1671,7 @@ class UpdatePLC(PLC, threading.Thread):
             try:
                 with self.timelock:
                     self.global_time.update({"plctime" :datetime_in_1e5micro()})
+                    test_crontab(str(self.global_time["plctime"]))
                     print("PLC updating", self.global_time["plctime"])
             except Exception as e:
                 print("Exception in plc raised")
@@ -3068,6 +3074,7 @@ class LocalWatchdog(threading.Thread):
                 break
         self.run()
 
+
     def join_stack_into_message(self, dic):
         message = ""
         if len(dic) >= 1:
@@ -3194,30 +3201,30 @@ class MainClass():
                                    command_lock=self.command_lock, global_time=self.global_time, timelock=self.timelock,
                                    alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
-        self.threadDatabase = UpdateDataBase(plc_data=self.plc_data, plc_lock=self.plc_lock, global_time=self.global_time,
-                                             timelock=self.timelock, alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
-
-        self.threadWatchdog = LocalWatchdog(global_time=self.global_time,
-                                            timelock=self.timelock,
-                                            alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
-
-        self.threadSocket = UpdateServer(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
-                                         command_lock=self.command_lock, global_time=self.global_time,
-                                         timelock=self.timelock, alarm_lock=self.alarm_lock, alarm_stack=self.alarm_stack)
-
-        self.threadMessager = Message_Manager(global_time=self.global_time, timelock=self.timelock,
-                                              alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
+        # self.threadDatabase = UpdateDataBase(plc_data=self.plc_data, plc_lock=self.plc_lock, global_time=self.global_time,
+        #                                      timelock=self.timelock, alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
+        #
+        # self.threadWatchdog = LocalWatchdog(global_time=self.global_time,
+        #                                     timelock=self.timelock,
+        #                                     alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
+        #
+        # self.threadSocket = UpdateServer(plc_data=self.plc_data, plc_lock=self.plc_lock, command_data=self.command_data,
+        #                                  command_lock=self.command_lock, global_time=self.global_time,
+        #                                  timelock=self.timelock, alarm_lock=self.alarm_lock, alarm_stack=self.alarm_stack)
+        #
+        # self.threadMessager = Message_Manager(global_time=self.global_time, timelock=self.timelock,
+        #                                       alarm_stack=self.alarm_stack, alarm_lock=self.alarm_lock)
 
         # wait for PLC initialization finished
         self.threadPLC.start()
-        time.sleep(0.5)
-        self.threadDatabase.start()
-        time.sleep(0.1)
-        self.threadWatchdog.start()
-        time.sleep(0.1)
-        self.threadSocket.start()
-        time.sleep(0.1)
-        self.threadMessager.start()
+        # time.sleep(0.5)
+        # self.threadDatabase.start()
+        # time.sleep(0.1)
+        # self.threadWatchdog.start()
+        # time.sleep(0.1)
+        # self.threadSocket.start()
+        # time.sleep(0.1)
+        # self.threadMessager.start()
 
 
     def StopUpdater(self):
