@@ -3074,7 +3074,7 @@ class LocalWatchdog(threading.Thread):
     def test_crontab(self, time):
         file_path = '/home/hep/bkglog.txt'
         with open(file_path, 'w') as file:
-            file.write(str(time),"\n")
+            file.write(str(time)+'\n')
     def join_stack_into_message(self, dic):
         message = ""
         if len(dic) >= 1:
