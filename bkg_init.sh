@@ -11,6 +11,6 @@ CONDA_PREFIX=/home/hep/anaconda3/envs/sbcslowcontrol
 CONDA_PYTHON_EXE=/home/hep/anaconda3/bin/python
 
 
-#xterm -hold -e "conda init bash;source ~/conda_init.sh ; conda activate sbcslowcontrol; source PLC_init.sh & disown"
+#xterm -hold -e "conda init bash;source ~/conda_init.sh ; conda activate sbcslowcontrol; source BKG_init.sh & disown"
 export DISPLAY=:0 
 xterm -hold -e  "nohup sh PLC_init.sh > /dev/null 2>&1"
