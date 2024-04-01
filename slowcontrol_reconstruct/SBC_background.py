@@ -2309,7 +2309,6 @@ class UpdateDataBase(threading.Thread):
     def stop(self):
         self.Running = False
 
-    @QtCore.Slot(bool)
     def update_status(self, status):
         self.status = status
 
