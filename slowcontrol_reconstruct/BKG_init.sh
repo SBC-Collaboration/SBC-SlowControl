@@ -12,8 +12,8 @@ if [ -n "$(xrandr --listactivemonitors | grep -i connected)" ]; then
     python ./SBC_background.py &
     sleep 2
     #done
-    echo "Python application started."
+    echo "Python application started." > /home/hep/bkgshlog.txt
 else
-    echo "No display connected. Skipping application launch."
+    echo "No display connected. Skipping application launch." > /home/hep/bkgshlog.txt
 fi
 
