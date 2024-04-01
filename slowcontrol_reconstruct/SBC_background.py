@@ -14,7 +14,6 @@ import struct, time, zmq, sys, pickle, copy, logging, threading, queue, socket, 
 import numpy as np
 import pymodbus.exceptions
 import sshtunnel
-from PySide2 import QtWidgets, QtCore, QtGui
 from SBC_watchdog_database import *
 from email.mime.text import MIMEText
 from email.header import Header
