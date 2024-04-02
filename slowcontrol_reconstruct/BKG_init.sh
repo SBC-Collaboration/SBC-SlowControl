@@ -11,7 +11,7 @@ if [ -n "$DISPLAY" ]; then
         which python
         while true; do
         cd /home/hep/PycharmProjects/SBC_slowcontrol_test/slowcontrol_reconstruct
-        python ./SBC_background.py &
+        python ./SBC_background.py
         sleep 2
         done
         echo "Python application started." > /home/hep/bkgshlog.txt
