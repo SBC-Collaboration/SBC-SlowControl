@@ -9,11 +9,11 @@ if [ -n "$DISPLAY" ]; then
         source ~/conda_init.sh
         source /home/hep/miniforge3/bin/activate sbcslowcontrol
         which python
-        #while true; do
+        while true; do
         cd /home/hep/PycharmProjects/SBC_slowcontrol_test/slowcontrol_reconstruct
         python ./SBC_background.py &
         sleep 2
-        #done
+        done
         echo "Python application started." > /home/hep/bkgshlog.txt
     else
         echo "No display connected. Skipping application launch." > /home/hep/bkgshlog.txt
