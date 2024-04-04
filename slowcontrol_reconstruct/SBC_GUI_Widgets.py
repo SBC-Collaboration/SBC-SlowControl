@@ -3313,7 +3313,7 @@ class AlarmButton(QtWidgets.QWidget):
 
 
 class TextButton(QtWidgets.QWidget):
-    def __init__(self, parent=None, colorcode =0):
+    def __init__(self, parent=None, colorcode =0, expanded=False, visibility =False):
         super().__init__(parent)
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -3368,6 +3368,12 @@ class TextButton(QtWidgets.QWidget):
             "QPushButton{" + LABEL_STYLE + BORDER_STYLE + BORDER_RADIUS + "} QWidget{ background-color: rgb(204,204,204);}")
         self.VisButton.setIcon(self.pixmap2)
         self.VisButton.setIconSize(QtCore.QSize(60 * R, 60 * R))
+
+        self.expansion = expanded
+        self.visibility = visibility
+
+    # def update_expand(self):
+        
 
 
 # Define an alarm button

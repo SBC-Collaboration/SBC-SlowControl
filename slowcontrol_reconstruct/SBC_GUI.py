@@ -458,7 +458,268 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IV_switch.Button.setText("Jars")
         self.IV_switch.Button.clicked.connect(lambda:self.set_background(2))
 
-        self.HTR6219 = LOOPPID_v2(self.ChamberTab, bkg_c = 1,dotted= True)
+        self.PT1101 = Indicator_v2(self.ChamberTab, colorcode=0, bkg_c=1)
+        self.PT1101.move(1500 * R, 990 * R)
+        self.PT1101.Label.setText("PT1101")
+        self.PT1101.SetUnit(" bar")
+
+        self.PT2121 = Indicator_v2(self.ChamberTab, colorcode=0, bkg_c=1)
+        self.PT2121.move(2110 * R, 990 * R)
+        self.PT2121.Label.setText("PT2121")
+        self.PT2121.SetUnit(" bar")
+
+        self.TT2118 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2118.move(278 * R, 996 * R)
+        self.TT2118.Label.setText("TT2118")
+        self.TT2118.SetUnit(" K")
+
+        self.TT2119 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2119.move(278 * R, 734 * R)
+        self.TT2119.Label.setText("TT2119")
+        self.TT2119.SetUnit(" K")
+
+        self.TT2401 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2401.move(2033 * R, 780 * R)
+        self.TT2401.Label.setText("TT2401")
+        self.TT2401.SetUnit(" K")
+
+        self.TT2402 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2402.move(1647 * R, 1300 * R)
+        self.TT2402.Label.setText("TT2402")
+        self.TT2402.SetUnit(" K")
+
+        self.TT2403 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2403.move(1495 * R, 560 * R)
+        self.TT2403.Label.setText("TT2403")
+        self.TT2403.SetUnit(" K")
+
+        self.TT2404 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2404.move(1700 * R, 270 * R)
+        self.TT2404.Label.setText("TT2404")
+        self.TT2404.SetUnit(" K")
+
+        self.TT2405 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1, dotted = True)
+        self.TT2405.move(1647 * R, 780 * R)
+        self.TT2405.Label.setText("TT2405")
+        self.TT2405.SetUnit(" K")
+
+        self.TT2406 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2406.move(1742 * R, 780 * R)
+        self.TT2406.Label.setText("TT2406")
+        self.TT2406.SetUnit(" K")
+
+        self.TT2407 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2407.move(1837 * R, 780 * R)
+        self.TT2407.Label.setText("TT2407")
+        self.TT2407.SetUnit(" K")
+
+        self.TT2408 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2408.move(1932 * R, 780 * R)
+        self.TT2408.Label.setText("TT2408")
+        self.TT2408.SetUnit(" K")
+
+        self.TT2409 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2409.move(1552 * R, 850 * R)
+        self.TT2409.Label.setText("TT2409")
+        self.TT2409.SetUnit(" K")
+
+        self.TT2410 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2410.move(1647 * R, 850 * R)
+        self.TT2410.Label.setText("TT2410")
+        self.TT2410.SetUnit(" K")
+
+        self.TT2411 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2411.move(1742 * R, 850 * R)
+        self.TT2411.Label.setText("TT2411")
+        self.TT2411.SetUnit(" K")
+
+        self.TT2412 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2412.move(1590 * R, 670 * R)
+        self.TT2412.Label.setText("TT2412")
+        self.TT2412.SetUnit(" K")
+
+        self.TT2413 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2413.move(1590 * R, 270 * R)
+        self.TT2413.Label.setText("TT2413")
+        self.TT2413.SetUnit(" K")
+
+        self.TT2414 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2414.move(1590 * R, 560 * R)
+        self.TT2414.Label.setText("TT2414")
+        self.TT2414.SetUnit(" K")
+
+        self.TT2415 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2415.move(1495 * R, 270 * R)
+        self.TT2415.Label.setText("TT2415")
+        self.TT2415.SetUnit(" K")
+
+        self.TT2416 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2416.move(1795 * R, 270 * R)
+        self.TT2416.Label.setText("TT2416")
+        self.TT2416.SetUnit(" K")
+
+        self.TT2417 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2417.move(2055 * R, 560 * R)
+        self.TT2417.Label.setText("TT2417")
+        self.TT2417.SetUnit(" K")
+
+        self.TT2418 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2418.move(373 * R, 996 * R)
+        self.TT2418.Label.setText("TT2418")
+        self.TT2418.SetUnit(" K")
+
+        self.TT2419 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2419.move(278 * R, 904 * R)
+        self.TT2419.Label.setText("TT2419")
+        self.TT2419.SetUnit(" K")
+
+        self.TT2420 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2420.move(373 * R, 904 * R)
+        self.TT2420.Label.setText("TT2420")
+        self.TT2420.SetUnit(" K")
+
+        self.TT2421 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2421.move(468 * R, 904 * R)
+        self.TT2421.Label.setText("TT2421")
+        self.TT2421.SetUnit(" K")
+
+        self.TT2422 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2422.move(278 * R, 812 * R)
+        self.TT2422.Label.setText("TT2422")
+        self.TT2422.SetUnit(" K")
+
+        self.TT2423 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2423.move(373 * R, 812 * R)
+        self.TT2423.Label.setText("TT2423")
+        self.TT2423.SetUnit(" K")
+
+        self.TT2424 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2424.move(373 * R, 734 * R)
+        self.TT2424.Label.setText("TT2424")
+        self.TT2424.SetUnit(" K")
+
+        self.TT2425 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2425.move(278 * R, 656 * R)
+        self.TT2425.Label.setText("TT2425")
+        self.TT2425.SetUnit(" K")
+
+        self.TT2426 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2426.move(373 * R, 656 * R)
+        self.TT2426.Label.setText("TT2426")
+        self.TT2426.SetUnit(" K")
+
+        self.TT2427 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2427.move(468 * R, 996 * R)
+        self.TT2427.Label.setText("TT2427")
+        self.TT2427.SetUnit(" K")
+
+        self.TT2428 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2428.move(563 * R, 996 * R)
+        self.TT2428.Label.setText("TT2428")
+        self.TT2428.SetUnit(" K")
+
+        self.TT2429 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2429.move(468 * R, 812 * R)
+        self.TT2429.Label.setText("TT2429")
+        self.TT2429.SetUnit(" K")
+
+        self.TT2430 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2430.move(563 * R, 812 * R)
+        self.TT2430.Label.setText("TT2430")
+        self.TT2430.SetUnit(" K")
+
+        self.TT2431 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2431.move(468 * R, 734 * R)
+        self.TT2431.Label.setText("TT2431")
+        self.TT2431.SetUnit(" K")
+
+        self.TT2432 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2432.move(563 * R, 734 * R)
+        self.TT2432.Label.setText("TT2432")
+        self.TT2432.SetUnit(" K")
+
+
+        self.TT2435 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1, dotted = True)
+        self.TT2435.move(753 * R, 812 * R)
+        self.TT2435.Label.setText("TT2435")
+        self.TT2435.SetUnit(" K")
+
+        self.TT2436 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2436.move(648 * R, 1072 * R)
+        self.TT2436.Label.setText("TT2436")
+        self.TT2436.SetUnit(" K")
+
+        self.TT2437 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2437.move(753 * R, 1072 * R)
+        self.TT2437.Label.setText("TT2437")
+        self.TT2437.SetUnit(" K")
+
+        self.TT2438 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2438.move(753 * R, 904 * R)
+        self.TT2438.Label.setText("TT2438")
+        self.TT2438.SetUnit(" K")
+
+        self.TT2439 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2439.move(753 * R, 904 * R)
+        self.TT2439.Label.setText("TT2439")
+        self.TT2439.SetUnit(" K")
+
+        self.TT2440 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2440.move(468 * R, 656 * R)
+        self.TT2440.Label.setText("TT2440")
+        self.TT2440.SetUnit(" K")
+
+        self.TT2441 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2441.move(753 * R, 734 * R)
+        self.TT2441.Label.setText("TT2441")
+        self.TT2441.SetUnit(" K")
+
+        self.TT2442 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2442.move(278 * R, 544* R)
+        self.TT2442.Label.setText("TT2442")
+        self.TT2442.SetUnit(" K")
+
+        self.TT2443 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2443.move(563* R, 656 * R)
+        self.TT2443.Label.setText("TT2443")
+        self.TT2443.SetUnit(" K")
+
+        self.TT2444 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2444.move(658 * R, 656 * R)
+        self.TT2444.Label.setText("TT2444")
+        self.TT2444.SetUnit(" K")
+
+        self.TT2445 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2445.move(753 * R, 656 * R)
+        self.TT2445.Label.setText("TT2445")
+        self.TT2445.SetUnit(" K")
+
+        self.TT2446 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2446.move(373 * R, 544 * R)
+        self.TT2446.Label.setText("TT2446")
+        self.TT2446.SetUnit(" K")
+
+        self.TT2447 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2447.move(468 * R, 544 * R)
+        self.TT2447.Label.setText("TT2447")
+        self.TT2447.SetUnit(" K")
+
+        self.TT2448 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2448.move(563 * R, 544 * R)
+        self.TT2448.Label.setText("TT2448")
+        self.TT2448.SetUnit(" K")
+
+        self.TT2449 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2449.move(563 * R, 436 * R)
+        self.TT2449.Label.setText("TT2449")
+        self.TT2449.SetUnit(" K")
+
+        self.TT2450 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
+        self.TT2450.move(753 * R, 1180 * R)
+        self.TT2450.Label.setText("TT2450")
+        self.TT2450.SetUnit(" K")
+
+        self.HTR6219 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
         self.HTR6219.move(200*R, 120*R)
         self.HTR6219.Label.setText("HTR6219")
         self.HTR6219.LOOPPIDWindow.setWindowTitle("HTR6219")
@@ -467,7 +728,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6219.LOOPPIDWindow.RTD2.Label.setText("TT6222")
 
         self.HTR6221 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6221.move(700*R, 120*R)
+        self.HTR6221.move(684*R, 120*R)
         self.HTR6221.Label.setText("HTR6221")
         self.HTR6221.LOOPPIDWindow.setWindowTitle("HTR6221")
         self.HTR6221.LOOPPIDWindow.Label.setText("HTR6221")
@@ -477,7 +738,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         self.HTR6214 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6214.move(1780*R, 145*R)
+        self.HTR6214.move(684*R, 281*R)
         self.HTR6214.Label.setText("HTR6214")
         self.HTR6214.LOOPPIDWindow.setWindowTitle("HTR6214")
         self.HTR6214.LOOPPIDWindow.Label.setText("HTR6214")
@@ -485,15 +746,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.LOOPPIDWindow.RTD2.Label.setText("TT6401")
 
         self.HTR6202 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6202.move(1780*R, 485*R)
+        self.HTR6202.move(1278*R, 330*R)
         self.HTR6202.Label.setText("HTR6202")
         self.HTR6202.LOOPPIDWindow.setWindowTitle("HTR6202")
         self.HTR6202.LOOPPIDWindow.Label.setText("HTR6202")
         self.HTR6202.LOOPPIDWindow.RTD1.Label.setText("TT6203")
         self.HTR6202.LOOPPIDWindow.RTD2.Label.setText("TT6404")
 
-        self.HTR6206 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6206.move(1780*R, 585*R)
+        self.HTR6206 = LOOPPID_v2(self.ChamberTab, bkg_c = 1,dotted= True)
+        self.HTR6206.move(1645*R, 330*R)
         self.HTR6206.Label.setText("HTR6206")
         self.HTR6206.LOOPPIDWindow.setWindowTitle("HTR6206")
         self.HTR6206.LOOPPIDWindow.Label.setText("HTR6206")
@@ -501,7 +762,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6206.LOOPPIDWindow.RTD2.Label.setText("TT6405")
 
         self.HTR6210 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6210.move(1780*R, 685*R)
+        self.HTR6210.move(2000*R, 330*R)
         self.HTR6210.Label.setText("HTR6210")
         self.HTR6210.LOOPPIDWindow.setWindowTitle("HTR6210")
         self.HTR6210.LOOPPIDWindow.Label.setText("HTR6210")
@@ -509,15 +770,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6210.LOOPPIDWindow.RTD2.Label.setText("TT6406")
 
         self.HTR6223 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6223.move(1780*R, 785*R)
+        self.HTR6223.move(1278*R, 455*R)
         self.HTR6223.Label.setText("HTR6223")
         self.HTR6223.LOOPPIDWindow.setWindowTitle("HTR6223")
         self.HTR6223.LOOPPIDWindow.Label.setText("HTR6223")
         self.HTR6223.LOOPPIDWindow.RTD1.Label.setText("TT6407")
         self.HTR6223.LOOPPIDWindow.RTD2.Label.setText("TT6410")
 
-        self.HTR6224 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6224.move(1780*R, 885*R)
+        self.HTR6224 = LOOPPID_v2(self.ChamberTab, bkg_c = 1,dotted= True)
+        self.HTR6224.move(1645*R, 455*R)
         self.HTR6224.Label.setText("HTR6224")
         self.HTR6224.LOOPPIDWindow.setWindowTitle("HTR6224")
         self.HTR6224.LOOPPIDWindow.Label.setText("HTR6224")
@@ -525,50 +786,39 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6224.LOOPPIDWindow.RTD2.Label.setText("TT6411")
 
         self.HTR6225 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-
-        self.HTR6225.move(1780*R, 985*R)
+        self.HTR6225.move(2000*R, 455*R)
         self.HTR6225.Label.setText("HTR6225")
         self.HTR6225.LOOPPIDWindow.setWindowTitle("HTR6225")
         self.HTR6225.LOOPPIDWindow.Label.setText("HTR6225")
         self.HTR6225.LOOPPIDWindow.RTD1.Label.setText("TT6409")
         self.HTR6225.LOOPPIDWindow.RTD2.Label.setText("TT6412")
 
-        self.HTR2123 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR2123.move(400*R, 950*R)
+        self.HTR2123 = LOOPPID_v2(self.ChamberTab, colorcode=2,bkg_c = 1)
+        self.HTR2123.move(1916*R, 840*R)
         self.HTR2123.Label.setText("HTR2123")
         self.HTR2123.LOOPPIDWindow.setWindowTitle("HTR2123")
         self.HTR2123.LOOPPIDWindow.Label.setText("HTR2123")
         self.HTR2123.LOOPPIDWindow.RTD1.Label.setText("TT2101")
         self.HTR2123.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
 
-        self.HTR2124 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR2124.move(670*R, 820*R)
+        self.HTR2124 = LOOPPID_v2(self.ChamberTab, colorcode=2,bkg_c = 1)
+        self.HTR2124.move(1339*R, 95*R)
         self.HTR2124.Label.setText("HTR2124")
         self.HTR2124.LOOPPIDWindow.setWindowTitle("HTR2124")
         self.HTR2124.LOOPPIDWindow.Label.setText("HTR2124")
         self.HTR2124.LOOPPIDWindow.RTD1.Label.setText("TT2113")
         self.HTR2124.LOOPPIDWindow.RTD2.Label.setText("TT2113")
 
-        self.HTR2125 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR2125.move(1030*R, 730*R)
+        self.HTR2125 = LOOPPID_v2(self.ChamberTab, colorcode=2,bkg_c = 1)
+        self.HTR2125.move(1685*R, 560*R)
         self.HTR2125.Label.setText("HTR2125")
         self.HTR2125.LOOPPIDWindow.setWindowTitle("HTR2125")
         self.HTR2125.LOOPPIDWindow.Label.setText("HTR2125")
-        self.HTR2125.LOOPPIDWindow.RTD1.Label.setText("2111")
-        self.HTR2125.LOOPPIDWindow.RTD2.Label.setText("2111")
-
-        self.PT1101 = Indicator_v2(self.ChamberTab, colorcode=2,bkg_c=1)
-        self.PT1101.move(1500*R, 990*R)
-        self.PT1101.Label.setText("PT1101")
-        self.PT1101.SetUnit(" bar")
-
-        self.PT2121 = Indicator_v2(self.ChamberTab, colorcode=2,bkg_c=1)
-        self.PT2121.move(2110*R, 990*R)
-        self.PT2121.Label.setText("PT2121")
-        self.PT2121.SetUnit(" bar")
+        self.HTR2125.LOOPPIDWindow.RTD1.Label.setText("TT2111")
+        self.HTR2125.LOOPPIDWindow.RTD2.Label.setText("TT2111")
 
         self.HTR1202 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR1202.move(840*R, 1250*R)
+        self.HTR1202.move(1339*R, 1210*R)
         self.HTR1202.Label.setText("HTR1202")
         self.HTR1202.LOOPPIDWindow.setWindowTitle("HTR1202")
         self.HTR1202.LOOPPIDWindow.Label.setText("HTR1202")
@@ -577,20 +827,33 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         self.HTR2203 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR2203.move(1260*R, 1215*R)
+        self.HTR2203.move(1916*R, 1210*R)
         self.HTR2203.Label.setText("HTR2203")
         self.HTR2203.LOOPPIDWindow.setWindowTitle("HTR2203")
         self.HTR2203.LOOPPIDWindow.Label.setText("HTR2203")
         self.HTR2203.LOOPPIDWindow.RTD1.Label.setText("TT6414")
         self.HTR2203.LOOPPIDWindow.RTD2.Label.setText("TT6416")
+        # 1st is whether the groups are expanded, 2nd is if visible
 
-        self.Heaters_group = [self.HTR6219, self.HTR6221, self.HTR2203, self.HTR1202, self.HTR2123, self.HTR6225, self.HTR2125,
-                              self.HTR2124]
-        self.IV_group = [self.PT2121, self.PT1101]
+        self.PV_group = [True, True, self.HTR6214,self.HTR6219, self.HTR6221, self.HTR2203, self.HTR1202,
+                              self.HTR6202, self.HTR6206, self.HTR6210,
+                              self.HTR6223,self.HTR6224,self.HTR6225,self.PT1101,self.PT2121]
+        self.HDPE_group = [True, True,self.TT2416,self.TT2435,self.TT2436,self.TT2437,self.TT2438,self.TT2439,self.TT2440,self.TT2441,
+                           self.TT2443,self.TT2444,self.TT2445,self.TT2450]
+
+        self.IV_group = [True, True,  self.HTR2123,self.HTR2124, self.HTR2125,self.TT2118,self.TT2119,
+                         self.TT2401, self.TT2402,self.TT2403,self.TT2404,
+                         self.TT2405,self.TT2406,self.TT2407,self.TT2408,self.TT2409,self.TT2410,self.TT2411,self.TT2412,
+                         self.TT2413,self.TT2414,self.TT2415,self.TT2417,self.TT2418,self.TT2419,self.TT2420,self.TT2421,
+                         self.TT2422,self.TT2423,self.TT2424,self.TT2425,self.TT2426,self.TT2427,self.TT2428,self.TT2429,
+                         self.TT2430,self.TT2431,self.TT2432,self.TT2442,self.TT2446,self.TT2447,
+                         self.TT2448,self.TT2449]
 
         self.PV_switch.ExpButton.clicked.connect(lambda : self.set_expansion(layer="PV"))
+        self.HDPE_switch.ExpButton.clicked.connect(lambda: self.set_expansion(layer="HDPE"))
         self.IV_switch.ExpButton.clicked.connect(lambda : self.set_expansion(layer="IV"))
         self.PV_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="PV"))
+        self.HDPE_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="HDPE"))
         self.IV_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="IV"))
         # Fluid tab buttons
 
@@ -1112,29 +1375,133 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def set_expansion(self, layer=None):
-        if layer=="PV":
-            for i in self.Heaters_group:
-                i.Tool.animateClick()
-        elif layer=="IV":
-            for i in self.IV_group:
-                i.toggle_value_visibility()
-        else:
-            pass
+        if layer == "PV":
+            # if PV is set all expanded or all collapsed
+            if self.PV_group[1]:
+                # loop over all widgets
+                for i in self.PV_group[2:]:
+                    # identify which type of widgets, heaters or RTDs/PTs
+                    if isinstance(i,LOOPPID_v2):
+                        #check itis checked or not. Checked -> right arrow-> collapsed
+                        if not i.Tool.isChecked():
+                            i.Tool.animateClick()
+                        else:
+                            pass
+                    elif isinstance(i,Indicator_v2):
+                        if not i.Field.isVisible():
+                            i.toggle_value_visibility()
+                        else:
+                            pass
+                self.PV_group[1] = False
+            else:
+                for i in self.PV_group[2:]:
+                    # identify which type of widgets, heaters or RTDs/PTs
+                    if isinstance(i, LOOPPID_v2):
+                        # check itis checked or not. Checked -> right arrow-> collapsed
+                        if i.Tool.isChecked():
+                            i.Tool.animateClick()
+                        else:
+                            pass
+                    elif isinstance(i, Indicator_v2):
+                        if i.Field.isVisible():
+                            i.toggle_value_visibility()
+                        else:
+                            pass
+                self.PV_group[1] = True
+        elif layer == "IV":
+            if self.IV_group[1]:
+                # loop over all widgets
+                for i in self.IV_group[2:]:
+                    # identify which type of widgets, heaters or RTDs/PTs
+                    if isinstance(i, LOOPPID_v2):
+                        # check itis checked or not. Checked -> right arrow-> collapsed
+                        if not i.Tool.isChecked():
+                            i.Tool.animateClick()
+                        else:
+                            pass
+                    elif isinstance(i, Indicator_v2):
+                        if not i.Field.isVisible():
+                            i.toggle_value_visibility()
+                        else:
+                            pass
+                self.IV_group[1] = False
+            else:
+                for i in self.IV_group[2:]:
+                    # identify which type of widgets, heaters or RTDs/PTs
+                    if isinstance(i, LOOPPID_v2):
+                        # check itis checked or not. Checked -> right arrow-> collapsed
+                        if i.Tool.isChecked():
+                            i.Tool.animateClick()
+                        else:
+                            pass
+                    elif isinstance(i, Indicator_v2):
+                        if i.Field.isVisible():
+                            i.toggle_value_visibility()
+                        else:
+                            pass
+                self.IV_group[1] = True
+        elif layer == "HDPE":
+            if self.HDPE_group[1]:
+                # loop over all widgets
+                for i in self.HDPE_group[2:]:
+                    # identify which type of widgets, heaters or RTDs/PTs
+                    if isinstance(i, LOOPPID_v2):
+                        # check itis checked or not. Checked -> right arrow-> collapsed
+                        if not i.Tool.isChecked():
+                            i.Tool.animateClick()
+                        else:
+                            pass
+                    elif isinstance(i, Indicator_v2):
+                        if not i.Field.isVisible():
+                            i.toggle_value_visibility()
+                        else:
+                            pass
+                self.HDPE_group[1] = False
+            else:
+                for i in self.HDPE_group[2:]:
+                    # identify which type of widgets, heaters or RTDs/PTs
+                    if isinstance(i, LOOPPID_v2):
+                        # check itis checked or not. Checked -> right arrow-> collapsed
+                        if i.Tool.isChecked():
+                            i.Tool.animateClick()
+                        else:
+                            pass
+                    elif isinstance(i, Indicator_v2):
+                        if i.Field.isVisible():
+                            i.toggle_value_visibility()
+                        else:
+                            pass
+                self.HDPE_group[1] = True
 
     @QtCore.Slot()
     def set_visibility(self, layer=None):
         if layer == "PV":
-            for i in self.Heaters_group:
-                if i.isVisible():
+            if self.PV_group[1]:
+                for i in self.PV_group[2:]:
                     i.setVisible(False)
-                else:
+                self.PV_group[1]=False
+            else:
+                for i in self.PV_group[2:]:
                     i.setVisible(True)
+                self.PV_group[1] = True
         elif layer == "IV":
-            for i in self.IV_group:
-                if i.isVisible():
+            if self.IV_group[1]:
+                for i in self.IV_group[2:]:
                     i.setVisible(False)
-                else:
+                self.IV_group[1]=False
+            else:
+                for i in self.IV_group[2:]:
                     i.setVisible(True)
+                self.IV_group[1] = True
+        elif layer == "HDPE":
+            if self.HDPE_group[1]:
+                for i in self.HDPE_group[2:]:
+                    i.setVisible(False)
+                self.HDPE_group[1] = False
+            else:
+                for i in self.HDPE_group[2:]:
+                    i.setVisible(True)
+                self.HDPE_group[1] = True
         else:
             pass
 
