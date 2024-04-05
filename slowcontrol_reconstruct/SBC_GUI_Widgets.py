@@ -3351,29 +3351,42 @@ class TextButton(QtWidgets.QWidget):
         else:
             self.Path = os.getcwd()
         self.ImagePath = os.path.join(self.Path, "images")
-        self.pixmap = QtGui.QPixmap(os.path.join(self.ImagePath, "expand.png"))
+        self.pixmap_expand_T = QtGui.QPixmap(os.path.join(self.ImagePath, "expand.png"))
+        self.pixmap_expand_F = QtGui.QPixmap(os.path.join(self.ImagePath, "expand_false.png"))
         self.ExpButton = QtWidgets.QPushButton(self)
         self.ExpButton.setObjectName("ExpButton")
         self.ExpButton.setGeometry(QtCore.QRect(75 * R, 0 * R, 70 * R, 70 * R))
         self.ExpButton.setStyleSheet(
             "QPushButton{" + LABEL_STYLE + BORDER_STYLE + BORDER_RADIUS + "} QWidget{ background-color: rgb(204,204,204);}")
-        self.ExpButton.setIcon(self.pixmap)
+        self.ExpButton.setIcon(self.pixmap_expand_T)
         self.ExpButton.setIconSize(QtCore.QSize(70 * R, 70 * R))
 
-        self.pixmap2 = QtGui.QPixmap(os.path.join(self.ImagePath, "eye.png"))
+        self.pixmap_visible_T = QtGui.QPixmap(os.path.join(self.ImagePath, "eye.png"))
+        self.pixmap_visible_F = QtGui.QPixmap(os.path.join(self.ImagePath, "eye_false.png"))
         self.VisButton = QtWidgets.QPushButton(self)
         self.VisButton.setObjectName("VisButton")
         self.VisButton.setGeometry(QtCore.QRect(150 * R, 0 * R, 70 * R, 70 * R))
         self.VisButton.setStyleSheet(
             "QPushButton{" + LABEL_STYLE + BORDER_STYLE + BORDER_RADIUS + "} QWidget{ background-color: rgb(204,204,204);}")
-        self.VisButton.setIcon(self.pixmap2)
+        self.VisButton.setIcon(self.pixmap_visible_T)
         self.VisButton.setIconSize(QtCore.QSize(60 * R, 60 * R))
 
-        self.expansion = expanded
-        self.visibility = visibility
+        self.update_expand(expanded)
+        self.update_visible(visibility)
 
-    # def update_expand(self):
-        
+    def update_expand(self,value=False):
+        if value:
+            self.ExpButton.setIcon(self.pixmap_expand_T)
+        else:
+            self.ExpButton.setIcon(self.pixmap_expand_F)
+
+    def update_visible(self,value=False):
+        if not value:
+            self.VisButton.setIcon(self.pixmap_visible_T)
+        else:
+            self.VisButton.setIcon(self.pixmap_visible_F)
+
+
 
 
 # Define an alarm button

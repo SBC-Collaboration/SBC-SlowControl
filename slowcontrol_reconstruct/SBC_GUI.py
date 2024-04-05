@@ -118,8 +118,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater; comment out to show GUI only
-        # self.StartUpdater()
-        # self.signal_connection()
+        self.StartUpdater()
+        self.signal_connection()
 
     def GUI_design(self):
         # Get background image path
@@ -443,20 +443,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Chamber tab buttons
 
-        self.PV_switch = TextButton(self.ChamberTab, colorcode= 0 )
-        self.PV_switch.move(10*R,1040*R)
-        self.PV_switch.Button.setText("PV")
-        self.PV_switch.Button.clicked.connect(lambda: self.set_background(0))
 
-        self.HDPE_switch = TextButton(self.ChamberTab, colorcode= 1)
-        self.HDPE_switch.move(10 * R, 1120 * R)
-        self.HDPE_switch.Button.setText("HDPE")
-        self.HDPE_switch.Button.clicked.connect(lambda:self.set_background(1))
-
-        self.IV_switch = TextButton(self.ChamberTab,colorcode =2)
-        self.IV_switch.move(10 * R, 1200 * R)
-        self.IV_switch.Button.setText("Jars")
-        self.IV_switch.Button.clicked.connect(lambda:self.set_background(2))
 
         self.PT1101 = Indicator_v2(self.ChamberTab, colorcode=0, bkg_c=1)
         self.PT1101.move(1500 * R, 990 * R)
@@ -494,7 +481,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2403.SetUnit(" K")
 
         self.TT2404 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2404.move(1700 * R, 270 * R)
+        self.TT2404.move(278 * R, 1275 * R)
         self.TT2404.Label.setText("TT2404")
         self.TT2404.SetUnit(" K")
 
@@ -539,7 +526,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2412.SetUnit(" K")
 
         self.TT2413 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2413.move(1590 * R, 270 * R)
+        self.TT2413.move(373 * R, 1275 * R)
         self.TT2413.Label.setText("TT2413")
         self.TT2413.SetUnit(" K")
 
@@ -549,12 +536,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2414.SetUnit(" K")
 
         self.TT2415 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2415.move(1495 * R, 270 * R)
+        self.TT2415.move(468 * R, 1275 * R)
         self.TT2415.Label.setText("TT2415")
         self.TT2415.SetUnit(" K")
 
         self.TT2416 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2416.move(1795 * R, 270 * R)
+        self.TT2416.move(563 * R, 1275 * R)
         self.TT2416.Label.setText("TT2416")
         self.TT2416.SetUnit(" K")
 
@@ -835,13 +822,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2203.LOOPPIDWindow.RTD2.Label.setText("TT6416")
         # 1st is whether the groups are expanded, 2nd is if visible
 
-        self.PV_group = [True, True, self.HTR6214,self.HTR6219, self.HTR6221, self.HTR2203, self.HTR1202,
+        self.PV_group = [False, True, self.HTR6214,self.HTR6219, self.HTR6221, self.HTR2203, self.HTR1202,
                               self.HTR6202, self.HTR6206, self.HTR6210,
                               self.HTR6223,self.HTR6224,self.HTR6225,self.PT1101,self.PT2121]
-        self.HDPE_group = [True, True,self.TT2416,self.TT2435,self.TT2436,self.TT2437,self.TT2438,self.TT2439,self.TT2440,self.TT2441,
+        self.HDPE_group = [False, True,self.TT2416,self.TT2435,self.TT2436,self.TT2437,self.TT2438,self.TT2439,self.TT2440,self.TT2441,
                            self.TT2443,self.TT2444,self.TT2445,self.TT2450]
 
-        self.IV_group = [True, True,  self.HTR2123,self.HTR2124, self.HTR2125,self.TT2118,self.TT2119,
+        self.IV_group = [False, True,  self.HTR2123,self.HTR2124, self.HTR2125,self.TT2118,self.TT2119,
                          self.TT2401, self.TT2402,self.TT2403,self.TT2404,
                          self.TT2405,self.TT2406,self.TT2407,self.TT2408,self.TT2409,self.TT2410,self.TT2411,self.TT2412,
                          self.TT2413,self.TT2414,self.TT2415,self.TT2417,self.TT2418,self.TT2419,self.TT2420,self.TT2421,
@@ -849,12 +836,39 @@ class MainWindow(QtWidgets.QMainWindow):
                          self.TT2430,self.TT2431,self.TT2432,self.TT2442,self.TT2446,self.TT2447,
                          self.TT2448,self.TT2449]
 
+        self.PV_switch = TextButton(self.ChamberTab, colorcode=0, expanded= self.PV_group[0], visibility=self.PV_group[1])
+        self.PV_switch.move(10 * R, 1040 * R)
+        self.PV_switch.Button.setText("PV")
+        self.PV_switch.Button.clicked.connect(lambda: self.set_background(0))
+
+
+        self.HDPE_switch = TextButton(self.ChamberTab, colorcode=1,expanded= self.HDPE_group[0], visibility=self.HDPE_group[1])
+        self.HDPE_switch.move(10 * R, 1120 * R)
+        self.HDPE_switch.Button.setText("HDPE")
+        self.HDPE_switch.Button.clicked.connect(lambda: self.set_background(1))
+
+
+        self.IV_switch = TextButton(self.ChamberTab, colorcode=2)
+        self.IV_switch.move(10 * R, 1200 * R)
+        self.IV_switch.Button.setText("Jars")
+        self.IV_switch.Button.clicked.connect(lambda: self.set_background(2))
+
+
+        # expansion button
         self.PV_switch.ExpButton.clicked.connect(lambda : self.set_expansion(layer="PV"))
+        self.PV_switch.ExpButton.clicked.connect(lambda: self.PV_switch.update_expand(self.PV_group[0]))
         self.HDPE_switch.ExpButton.clicked.connect(lambda: self.set_expansion(layer="HDPE"))
+        self.HDPE_switch.ExpButton.clicked.connect(lambda: self.HDPE_switch.update_expand(self.HDPE_group[0]))
         self.IV_switch.ExpButton.clicked.connect(lambda : self.set_expansion(layer="IV"))
+        self.IV_switch.ExpButton.clicked.connect(lambda: self.IV_switch.update_expand(self.IV_group[0]))
+        #visible button
         self.PV_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="PV"))
+        self.PV_switch.VisButton.clicked.connect(lambda: self.PV_switch.update_visible(self.PV_group[1]))
         self.HDPE_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="HDPE"))
+        self.HDPE_switch.VisButton.clicked.connect(lambda: self.HDPE_switch.update_visible(self.HDPE_group[1]))
         self.IV_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="IV"))
+        self.IV_switch.VisButton.clicked.connect(lambda: self.IV_switch.update_visible(self.IV_group[1]))
+
         # Fluid tab buttons
 
         self.PT2316 = Indicator(self.FluidTab)
@@ -1377,7 +1391,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def set_expansion(self, layer=None):
         if layer == "PV":
             # if PV is set all expanded or all collapsed
-            if self.PV_group[1]:
+            if self.PV_group[0]:
                 # loop over all widgets
                 for i in self.PV_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
@@ -1392,7 +1406,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             i.toggle_value_visibility()
                         else:
                             pass
-                self.PV_group[1] = False
+                self.PV_group[0] = False
             else:
                 for i in self.PV_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
@@ -1407,9 +1421,9 @@ class MainWindow(QtWidgets.QMainWindow):
                             i.toggle_value_visibility()
                         else:
                             pass
-                self.PV_group[1] = True
+                self.PV_group[0] = True
         elif layer == "IV":
-            if self.IV_group[1]:
+            if self.IV_group[0]:
                 # loop over all widgets
                 for i in self.IV_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
@@ -1424,7 +1438,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             i.toggle_value_visibility()
                         else:
                             pass
-                self.IV_group[1] = False
+                self.IV_group[0] = False
             else:
                 for i in self.IV_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
@@ -1439,9 +1453,9 @@ class MainWindow(QtWidgets.QMainWindow):
                             i.toggle_value_visibility()
                         else:
                             pass
-                self.IV_group[1] = True
+                self.IV_group[0] = True
         elif layer == "HDPE":
-            if self.HDPE_group[1]:
+            if self.HDPE_group[0]:
                 # loop over all widgets
                 for i in self.HDPE_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
@@ -1456,7 +1470,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             i.toggle_value_visibility()
                         else:
                             pass
-                self.HDPE_group[1] = False
+                self.HDPE_group[0] = False
             else:
                 for i in self.HDPE_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
@@ -1471,7 +1485,7 @@ class MainWindow(QtWidgets.QMainWindow):
                             i.toggle_value_visibility()
                         else:
                             pass
-                self.HDPE_group[1] = True
+                self.HDPE_group[0] = True
 
     @QtCore.Slot()
     def set_visibility(self, layer=None):
@@ -7300,6 +7314,56 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         # set indicators value
+
+        self.TT2401.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2401"])
+        self.TT2402.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2402"])
+        self.TT2403.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2403"])
+        self.TT2404.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2404"])
+        self.TT2405.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2405"])
+        self.TT2406.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2406"])
+        self.TT2407.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2407"])
+        self.TT2408.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2408"])
+        self.TT2409.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2409"])
+        self.TT2410.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2410"])
+        self.TT2411.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2411"])
+        self.TT2412.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2412"])
+        self.TT2413.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2413"])
+        self.TT2414.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2414"])
+        self.TT2415.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2415"])
+        self.TT2416.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2416"])
+        self.TT2417.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2417"])
+        self.TT2418.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2418"])
+        self.TT2419.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2419"])
+        self.TT2420.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2420"])
+        self.TT2421.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2421"])
+        self.TT2422.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2422"])
+        self.TT2423.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2423"])
+        self.TT2424.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2424"])
+        self.TT2425.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2425"])
+        self.TT2426.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2426"])
+        self.TT2427.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2427"])
+        self.TT2428.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2428"])
+        self.TT2429.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2429"])
+        self.TT2430.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2430"])
+        self.TT2431.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2431"])
+        self.TT2432.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2432"])
+
+        self.TT2435.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2435"])
+        self.TT2436.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2436"])
+        self.TT2437.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2437"])
+        self.TT2438.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2438"])
+        self.TT2439.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2439"])
+        self.TT2430.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2430"])
+        self.TT2441.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2441"])
+        self.TT2442.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2442"])
+        self.TT2443.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2443"])
+        self.TT2444.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2444"])
+        self.TT2445.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2445"])
+        self.TT2446.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2446"])
+        self.TT2447.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2447"])
+        self.TT2448.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2448"])
+        self.TT2449.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2449"])
+        self.TT2450.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2450"])
 
         self.TT7401.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7401"])
         self.TT7402.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7402"])
