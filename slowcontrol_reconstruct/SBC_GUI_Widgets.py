@@ -26,6 +26,7 @@ BORDER_RADIUS = " "
 C_LIGHT_GREY = "background-color: rgb(204,204,204);"
 C_MEDIUM_GREY = "background-color: rgb(167,167,167);"
 C_LIGHT_YELLOW = "background-color: rgb(255, 255, 204);"
+C_LIGHT_BLUE = "background-color: rgb(173, 216, 230);"
 C_BKG_WHITE = "background-color: white;"
 C_WHITE = "color: white;"
 C_BLACK = "color: black;"
@@ -8110,16 +8111,33 @@ class Indicator_v2(QtWidgets.QWidget):
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
         self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 60*R))
-        if bkg_c == 1 and not dotted:
-            self.Background.setStyleSheet("QLabel {" + C_LIGHT_YELLOW + BORDER_STYLE + "}")
-        elif bkg_c==1 and dotted:
-            self.Background.setStyleSheet("QLabel {" + C_LIGHT_YELLOW + DOTTED_BORDER_STYLE + "}")
-        elif bkg_c == 0 and not dotted:
-            self.Background.setStyleSheet("QLabel {" + C_LIGHT_GREY + BORDER_STYLE + "}")
-        elif bkg_c==0 and dotted:
-            self.Background.setStyleSheet("QLabel {" + C_LIGHT_GREY + DOTTED_BORDER_STYLE + "}")
+        self.stylesheet = "QLabel {"
+
+        if bkg_c == 1:
+            self.stylesheet += C_LIGHT_YELLOW
+        elif bkg_c == 0:
+            self.stylesheet += C_LIGHT_GREY
+        elif bkg_c == 2:
+            self.stylesheet += C_LIGHT_BLUE
+
+        if dotted:
+            self.stylesheet += DOTTED_BORDER_STYLE
         else:
-            self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
+            self.stylesheet += BORDER_STYLE
+
+        self.stylesheet += " }"
+        self.Background.setStyleSheet(self.stylesheet)
+
+        # if bkg_c == 1 and not dotted:
+        #     self.Background.setStyleSheet("QLabel {" + C_LIGHT_YELLOW + BORDER_STYLE + "}")
+        # elif bkg_c==1 and dotted:
+        #     self.Background.setStyleSheet("QLabel {" + C_LIGHT_YELLOW + DOTTED_BORDER_STYLE + "}")
+        # elif bkg_c == 0 and not dotted:
+        #     self.Background.setStyleSheet("QLabel {" + C_LIGHT_GREY + BORDER_STYLE + "}")
+        # elif bkg_c==0 and dotted:
+        #     self.Background.setStyleSheet("QLabel {" + C_LIGHT_GREY + DOTTED_BORDER_STYLE + "}")
+        # else:
+        #     self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
 
         self.Colorband = QtWidgets.QLabel(self)
         self.Colorband.setObjectName("Colorband")

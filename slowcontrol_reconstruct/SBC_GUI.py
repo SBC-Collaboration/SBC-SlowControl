@@ -118,8 +118,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater; comment out to show GUI only
-        self.StartUpdater()
-        self.signal_connection()
+        # self.StartUpdater()
+        # self.signal_connection()
 
     def GUI_design(self):
         # Get background image path
@@ -470,7 +470,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2401.Label.setText("TT2401")
         self.TT2401.SetUnit(" K")
 
-        self.TT2402 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2402 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
         self.TT2402.move(1647 * R, 1300 * R)
         self.TT2402.Label.setText("TT2402")
         self.TT2402.SetUnit(" K")
@@ -525,7 +525,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2412.Label.setText("TT2412")
         self.TT2412.SetUnit(" K")
 
-        self.TT2413 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2413 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
         self.TT2413.move(373 * R, 1275 * R)
         self.TT2413.Label.setText("TT2413")
         self.TT2413.SetUnit(" K")
@@ -595,17 +595,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2426.Label.setText("TT2426")
         self.TT2426.SetUnit(" K")
 
-        self.TT2427 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2427 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
         self.TT2427.move(468 * R, 996 * R)
         self.TT2427.Label.setText("TT2427")
         self.TT2427.SetUnit(" K")
 
-        self.TT2428 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2428 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
         self.TT2428.move(563 * R, 996 * R)
         self.TT2428.Label.setText("TT2428")
         self.TT2428.SetUnit(" K")
 
-        self.TT2429 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2429 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
         self.TT2429.move(468 * R, 812 * R)
         self.TT2429.Label.setText("TT2429")
         self.TT2429.SetUnit(" K")
@@ -615,18 +615,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2430.Label.setText("TT2430")
         self.TT2430.SetUnit(" K")
 
-        self.TT2431 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2431 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
         self.TT2431.move(468 * R, 734 * R)
         self.TT2431.Label.setText("TT2431")
         self.TT2431.SetUnit(" K")
 
-        self.TT2432 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2432 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
         self.TT2432.move(563 * R, 734 * R)
         self.TT2432.Label.setText("TT2432")
         self.TT2432.SetUnit(" K")
 
 
-        self.TT2435 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1, dotted = True)
+        self.TT2435 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=2, dotted = True)
         self.TT2435.move(753 * R, 812 * R)
         self.TT2435.Label.setText("TT2435")
         self.TT2435.SetUnit(" K")
@@ -696,7 +696,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2448.Label.setText("TT2448")
         self.TT2448.SetUnit(" K")
 
-        self.TT2449 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2449 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
         self.TT2449.move(563 * R, 436 * R)
         self.TT2449.Label.setText("TT2449")
         self.TT2449.SetUnit(" K")
@@ -868,6 +868,200 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HDPE_switch.VisButton.clicked.connect(lambda: self.HDPE_switch.update_visible(self.HDPE_group[1]))
         self.IV_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="IV"))
         self.IV_switch.VisButton.clicked.connect(lambda: self.IV_switch.update_visible(self.IV_group[1]))
+
+
+        # IV -2d
+        self.TT2425_2d = Indicator(self.IVTab)
+        self.TT2425_2d.move(875 * R, 250 * R)
+        self.TT2425_2d.Label.setText("TT2425")
+        self.TT2425_2d.SetUnit(" K")
+
+
+        self.TT2424_2d = Indicator(self.IVTab)
+        self.TT2424_2d.move(875 * R, 320 * R)
+        self.TT2424_2d.Label.setText("TT2424")
+        self.TT2424_2d.SetUnit(" K")
+
+        self.TT2422_2d = Indicator(self.IVTab)
+        self.TT2422_2d.move(875 * R, 390 * R)
+        self.TT2422_2d.Label.setText("TT2422")
+        self.TT2422_2d.SetUnit(" K")
+
+
+        self.TT2420_2d = Indicator(self.IVTab)
+        self.TT2420_2d.move(875 * R, 460 * R)
+        self.TT2420_2d.Label.setText("TT2420")
+        self.TT2420_2d.SetUnit(" K")
+
+
+        self.TT2418_2d = Indicator(self.IVTab)
+        self.TT2418_2d.move(875 * R, 530 * R)
+        self.TT2418_2d.Label.setText("TT2418")
+        self.TT2418_2d.SetUnit(" K")
+
+
+        self.TT2442_2d = Indicator(self.IVTab)
+        self.TT2442_2d.move(757 * R, 719 * R)
+        self.TT2442_2d.Label.setText("TT2442")
+        self.TT2442_2d.SetUnit(" K")
+
+
+        self.TT2431_2d = Indicator(self.IVTab)
+        self.TT2431_2d.move(1250 * R, 330 * R)
+        self.TT2431_2d.Label.setText("TT2431")
+        self.TT2431_2d.SetUnit(" K")
+
+
+        self.TT2429_2d = Indicator(self.IVTab)
+        self.TT2429_2d.move(1250 * R, 410 * R)
+        self.TT2429_2d.Label.setText("TT2429")
+        self.TT2429_2d.SetUnit(" K")
+
+        self.TT2427_2d = Indicator(self.IVTab)
+        self.TT2427_2d.move(1250 * R, 490 * R)
+        self.TT2427_2d.Label.setText("TT2427")
+        self.TT2427_2d.SetUnit(" K")
+
+        self.TT2418_2d = Indicator(self.IVTab)
+        self.TT2418_2d.move(1110 * R, 630 * R)
+        self.TT2418_2d.Label.setText("TT2418")
+        self.TT2418_2d.SetUnit(" K")
+
+
+        self.TT2441_2d = Indicator(self.IVTab)
+        self.TT2441_2d.move(1056 * R, 872 * R)
+        self.TT2441_2d.Label.setText("TT2441")
+        self.TT2441_2d.SetUnit(" K")
+
+
+        self.TT2446_2d = Indicator(self.IVTab)
+        self.TT2446_2d.move(1900 * R, 125 * R)
+        self.TT2446_2d.Label.setText("TT2446")
+        self.TT2446_2d.SetUnit(" K")
+
+
+        self.TT2447_2d = Indicator(self.IVTab)
+        self.TT2447_2d.move(1283 * R, 125 * R)
+        self.TT2447_2d.Label.setText("TT2447")
+        self.TT2447_2d.SetUnit(" K")
+
+
+        self.TT2448_2d = Indicator(self.IVTab)
+        self.TT2448_2d.move(845 * R, 125 * R)
+        self.TT2448_2d.Label.setText("TT2448")
+        self.TT2448_2d.SetUnit(" K")
+
+
+        self.TT2440_2d = Indicator(self.IVTab)
+        self.TT2440_2d.move(1450 * R, 876 * R)
+        self.TT2440_2d.Label.setText("TT2440")
+        self.TT2440_2d.SetUnit(" K")
+
+
+        self.TT2438_2d = Indicator(self.IVTab)
+        self.TT2438_2d.move(1450 * R, 1082 * R)
+        self.TT2438_2d.Label.setText("TT2438")
+        self.TT2438_2d.SetUnit(" K")
+
+
+        self.TT2436_2d = Indicator(self.IVTab)
+        self.TT2436_2d.move(1450 * R, 1247 * R)
+        self.TT2436_2d.Label.setText("TT2436")
+        self.TT2436_2d.SetUnit(" K")
+
+
+        self.TT2443_2d = Indicator(self.IVTab)
+        self.TT2443_2d.move(1203 * R, 716 * R)
+        self.TT2443_2d.Label.setText("TT2443")
+        self.TT2443_2d.SetUnit(" K")
+
+
+        self.TT2419_2d = Indicator(self.IVTab)
+        self.TT2419_2d.move(455 * R, 330 * R)
+        self.TT2419_2d.Label.setText("TT2419")
+        self.TT2419_2d.SetUnit(" K")
+
+
+        self.TT2421_2d = Indicator(self.IVTab)
+        self.TT2421_2d.move(455 * R, 490 * R)
+        self.TT2421_2d.Label.setText("TT2421")
+        self.TT2421_2d.SetUnit(" K")
+
+
+        self.TT2432_2d = Indicator(self.IVTab)
+        self.TT2432_2d.move(750 * R, 382 * R)
+        self.TT2432_2d.Label.setText("TT2432")
+        self.TT2432_2d.SetUnit(" K")
+
+        self.TT2428_2d = Indicator(self.IVTab)
+        self.TT2428_2d.move(750 * R, 605 * R)
+        self.TT2428_2d.Label.setText("TT2428")
+        self.TT2428_2d.SetUnit(" K")
+
+        self.TT2416_2d = Indicator(self.IVTab)
+        self.TT2416_2d.move(640 * R, 1320 * R)
+        self.TT2416_2d.Label.setText("TT2416")
+        self.TT2416_2d.SetUnit(" K")
+
+        self.TT2439_2d = Indicator(self.IVTab)
+        self.TT2439_2d.move(840 * R, 1081 * R)
+        self.TT2439_2d.Label.setText("TT2439")
+        self.TT2439_2d.SetUnit(" K")
+
+        self.TT2423_2d = Indicator(self.IVTab)
+        self.TT2423_2d.move(1721 * R, 356 * R)
+        self.TT2423_2d.Label.setText("TT2423")
+        self.TT2423_2d.SetUnit(" K")
+
+        self.TT2419_2d = Indicator(self.IVTab)
+        self.TT2419_2d.move(1721 * R, 523 * R)
+        self.TT2419_2d.Label.setText("TT2419")
+        self.TT2419_2d.SetUnit(" K")
+
+        self.TT2426_2d = Indicator(self.IVTab)
+        self.TT2426_2d.move(2076 * R, 240 * R)
+        self.TT2426_2d.Label.setText("TT2426")
+        self.TT2426_2d.SetUnit(" K")
+
+        self.TT2430_2d = Indicator(self.IVTab)
+        self.TT2430_2d.move(2076 * R, 410 * R)
+        self.TT2430_2d.Label.setText("TT2430")
+        self.TT2430_2d.SetUnit(" K")
+
+        self.TT2113_2d = Indicator(self.IVTab)
+        self.TT2113_2d.move(224 * R, 634 * R)
+        self.TT2113_2d.Label.setText("TT2113")
+        self.TT2113_2d.SetUnit(" K")
+
+        self.TT2450_2d = Indicator(self.IVTab)
+        self.TT2450_2d.move(223 * R, 1250 * R)
+        self.TT2450_2d.Label.setText("TT2450")
+        self.TT2450_2d.SetUnit(" K")
+
+        self.TT2444_2d = Indicator(self.IVTab)
+        self.TT2444_2d.move(1836 * R, 739 * R)
+        self.TT2444_2d.Label.setText("TT2444")
+        self.TT2444_2d.SetUnit(" K")
+
+        self.TT2445_2d = Indicator(self.IVTab)
+        self.TT2445_2d.move(304 * R, 719 * R)
+        self.TT2445_2d.Label.setText("TT2445")
+        self.TT2445_2d.SetUnit(" K")
+
+        self.TT2437_2d = Indicator(self.IVTab)
+        self.TT2437_2d.move(124 * R, 1228 * R)
+        self.TT2437_2d.Label.setText("TT2437")
+        self.TT2437_2d.SetUnit(" K")
+
+        self.TT2435_2d = Indicator(self.IVTab)
+        self.TT2435_2d.move(2164 * R, 559 * R)
+        self.TT2435_2d.Label.setText("TT2435")
+        self.TT2435_2d.SetUnit(" K")
+
+        self.TT2449_2d = Indicator(self.IVTab)
+        self.TT2449_2d.move(2109 * R, 129 * R)
+        self.TT2449_2d.Label.setText("TT2449")
+        self.TT2449_2d.SetUnit(" K")
 
         # Fluid tab buttons
 
@@ -7443,6 +7637,43 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR1202.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6413"])
         self.HTR2203.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6414"])
 
+
+        #set indicator's value in 2d_tab
+        self.TT2425_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2425"])
+        self.TT2424_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2424"])
+        self.TT2422_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2422"])
+        self.TT2420_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2420"])
+        self.TT2418_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2418"])
+        self.TT2442_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2442"])
+        self.TT2431_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2431"])
+        self.TT2429_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2429"])
+        self.TT2427_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2427"])
+        self.TT2418_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2418"])
+        self.TT2441_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2441"])
+        self.TT2446_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2446"])
+        self.TT2447_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2447"])
+        self.TT2448_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2448"])
+        self.TT2440_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2440"])
+        self.TT2438_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2438"])
+        self.TT2436_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2436"])
+        self.TT2443_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2443"])
+        self.TT2419_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2419"])
+        self.TT2421_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2421"])
+        self.TT2432_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2432"])
+        self.TT2428_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2428"])
+        self.TT2416_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2416"])
+        self.TT2439_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2439"])
+        self.TT2423_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2423"])
+        self.TT2419_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2419"])
+        self.TT2426_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2426"])
+        self.TT2430_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2430"])
+        self.TT2113_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2113"])
+        self.TT2450_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2450"])
+        self.TT2444_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2444"])
+        self.TT2445_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2445"])
+        self.TT2437_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2437"])
+        self.TT2435_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2435"])
+        self.TT2449_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2449"])
 
 
 
