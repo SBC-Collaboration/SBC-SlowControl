@@ -162,7 +162,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ChamberTab.Background = QtWidgets.QLabel(self.ChamberTab)
         self.ChamberTab.Background.setScaledContents(True)
         self.ChamberTab.Background.setStyleSheet('background-color:black;')
-        pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "PV_2xpx.png"))
+        pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "PV_4xpx.png"))
         self.ChamberTab.Background.setPixmap(pixmap_chamber)
         self.ChamberTab.Background.resize(2400 * R, 1390 * R)
         self.ChamberTab.Background.move(0*R, 0*R)
@@ -661,7 +661,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2441.Label.setText("TT2441")
         self.TT2441.SetUnit(" K")
 
-        self.TT2442 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2442 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
         self.TT2442.move(278 * R, 544* R)
         self.TT2442.Label.setText("TT2442")
         self.TT2442.SetUnit(" K")
@@ -825,6 +825,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV_group = [False, True, self.HTR6214,self.HTR6219, self.HTR6221, self.HTR2203, self.HTR1202,
                               self.HTR6202, self.HTR6206, self.HTR6210,
                               self.HTR6223,self.HTR6224,self.HTR6225,self.PT1101,self.PT2121]
+
         self.HDPE_group = [False, True,self.TT2416,self.TT2435,self.TT2436,self.TT2437,self.TT2438,self.TT2439,self.TT2440,self.TT2441,
                            self.TT2443,self.TT2444,self.TT2445,self.TT2450]
 
@@ -840,18 +841,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PV_switch.move(10 * R, 1040 * R)
         self.PV_switch.Button.setText("PV")
         self.PV_switch.Button.clicked.connect(lambda: self.set_background(0))
+        self.PV_switch.Button.clicked.connect(lambda: self.set_visibility_true_only(layer="PV"))
 
 
         self.HDPE_switch = TextButton(self.ChamberTab, colorcode=1,expanded= self.HDPE_group[0], visibility=self.HDPE_group[1])
         self.HDPE_switch.move(10 * R, 1120 * R)
         self.HDPE_switch.Button.setText("HDPE")
         self.HDPE_switch.Button.clicked.connect(lambda: self.set_background(1))
+        self.HDPE_switch.Button.clicked.connect(lambda: self.set_visibility_true_only(layer="HDPE"))
 
 
-        self.IV_switch = TextButton(self.ChamberTab, colorcode=2)
+        self.IV_switch = TextButton(self.ChamberTab, colorcode=2,expanded= self.IV_group[0], visibility=self.IV_group[1])
         self.IV_switch.move(10 * R, 1200 * R)
         self.IV_switch.Button.setText("Jars")
         self.IV_switch.Button.clicked.connect(lambda: self.set_background(2))
+        self.IV_switch.Button.clicked.connect(lambda: self.set_visibility_true_only(layer="IV"))
 
 
         # expansion button
@@ -862,11 +866,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IV_switch.ExpButton.clicked.connect(lambda : self.set_expansion(layer="IV"))
         self.IV_switch.ExpButton.clicked.connect(lambda: self.IV_switch.update_expand(self.IV_group[0]))
         #visible button
-        self.PV_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="PV"))
+        self.PV_switch.VisButton.clicked.connect(lambda: self.switch_visibility(layer="PV"))
         self.PV_switch.VisButton.clicked.connect(lambda: self.PV_switch.update_visible(self.PV_group[1]))
-        self.HDPE_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="HDPE"))
+        self.HDPE_switch.VisButton.clicked.connect(lambda: self.switch_visibility(layer="HDPE"))
         self.HDPE_switch.VisButton.clicked.connect(lambda: self.HDPE_switch.update_visible(self.HDPE_group[1]))
-        self.IV_switch.VisButton.clicked.connect(lambda: self.set_visibility(layer="IV"))
+        self.IV_switch.VisButton.clicked.connect(lambda: self.switch_visibility(layer="IV"))
         self.IV_switch.VisButton.clicked.connect(lambda: self.IV_switch.update_visible(self.IV_group[1]))
 
 
@@ -1576,7 +1580,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def set_background(self, num = 0):
-        list = ["PV_2xpx.png","HDPE_4xpx.png","SiPM_2xpx.png"]
+        list = ["PV_4xpx.png","HDPE_4xpx.png","SiPM_2xpx.png"]
         pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, list[num]))
         pixmap_chamber = pixmap_chamber.scaledToWidth(2400 * R)
         self.ChamberTab.Background.setPixmap(QtGui.QPixmap(pixmap_chamber))
@@ -1682,7 +1686,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.HDPE_group[0] = True
 
     @QtCore.Slot()
-    def set_visibility(self, layer=None):
+    def switch_visibility(self, layer=None):
         if layer == "PV":
             if self.PV_group[1]:
                 for i in self.PV_group[2:]:
@@ -1713,6 +1717,38 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
+    @QtCore.Slot()
+    def set_visibility_true_only(self, layer=None):
+        if layer=="PV":
+            if not self.PV_group[1]:
+                self.switch_visibility(layer="PV")
+                self.PV_switch.update_visible(self.PV_group[1])
+            if self.HDPE_group[1]:
+                self.switch_visibility(layer="HDPE")
+                self.HDPE_switch.update_visible(self.HDPE_group[1])
+            if self.IV_group[1]:
+                self.switch_visibility(layer="IV")
+                self.IV_switch.update_visible(self.IV_group[1])
+        if layer == "HDPE":
+            if not self.HDPE_group[1]:
+                self.switch_visibility(layer="HDPE")
+                self.HDPE_switch.update_visible(self.HDPE_group[1])
+            if self.PV_group[1]:
+                self.switch_visibility(layer="PV")
+                self.PV_switch.update_visible(self.PV_group[1])
+            if self.IV_group[1]:
+                self.switch_visibility(layer="IV")
+                self.IV_switch.update_visible(self.IV_group[1])
+        if layer == "IV":
+            if not self.IV_group[1]:
+                self.switch_visibility(layer="IV")
+                self.IV_switch.update_visible(self.IV_group[1])
+            if self.HDPE_group[1]:
+                self.switch_visibility(layer="HDPE")
+                self.HDPE_switch.update_visible(self.HDPE_group[1])
+            if self.PV_group[1]:
+                self.switch_visibility(layer="PV")
+                self.PV_switch.update_visible(self.PV_group[1])
 
 
     # signal connections to write settings to PLC codes
@@ -7501,10 +7537,6 @@ class MainWindow(QtWidgets.QMainWindow):
                     pass
 
         self.PUMP3305.ColorLabel(received_dic_c["data"]["LOOP2PT"]["OUT"]["PUMP3305"])
-
-
-
-
 
 
         # set indicators value
