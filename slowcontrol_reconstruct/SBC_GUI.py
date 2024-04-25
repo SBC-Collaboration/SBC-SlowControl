@@ -162,7 +162,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ChamberTab.Background = QtWidgets.QLabel(self.ChamberTab)
         self.ChamberTab.Background.setScaledContents(True)
         self.ChamberTab.Background.setStyleSheet('background-color:black;')
-        pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "PV_4xpx.png"))
+        pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, "PV_v2.png"))
         self.ChamberTab.Background.setPixmap(pixmap_chamber)
         self.ChamberTab.Background.resize(2400 * R, 1390 * R)
         self.ChamberTab.Background.move(0*R, 0*R)
@@ -456,57 +456,57 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121.SetUnit(" bar")
 
         self.TT2118 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2118.move(278 * R, 996 * R)
+        self.TT2118.move(483* R, 970 * R)
         self.TT2118.Label.setText("TT2118")
         self.TT2118.SetUnit(" K")
 
-        self.TT2119 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2119.move(278 * R, 734 * R)
+        self.TT2119 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1,dotted= True)
+        self.TT2119.move(268 * R, 780 * R)
         self.TT2119.Label.setText("TT2119")
         self.TT2119.SetUnit(" K")
 
         self.TT2401 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2401.move(2033 * R, 780 * R)
+        self.TT2401.move(2047 * R, 850 * R)
         self.TT2401.Label.setText("TT2401")
         self.TT2401.SetUnit(" K")
 
         self.TT2402 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
-        self.TT2402.move(1647 * R, 1300 * R)
+        self.TT2402.move(1830 * R, 1300 * R)
         self.TT2402.Label.setText("TT2402")
         self.TT2402.SetUnit(" K")
 
         self.TT2403 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2403.move(1495 * R, 560 * R)
+        self.TT2403.move(1832 * R, 516 * R)
         self.TT2403.Label.setText("TT2403")
         self.TT2403.SetUnit(" K")
 
         self.TT2404 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2404.move(278 * R, 1275 * R)
+        self.TT2404.move(495 * R, 1295 * R)
         self.TT2404.Label.setText("TT2404")
         self.TT2404.SetUnit(" K")
 
         self.TT2405 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1, dotted = True)
-        self.TT2405.move(1647 * R, 780 * R)
+        self.TT2405.move(1552 * R, 850 * R)
         self.TT2405.Label.setText("TT2405")
         self.TT2405.SetUnit(" K")
 
         self.TT2406 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2406.move(1742 * R, 780 * R)
+        self.TT2406.move(1580 * R, 636 * R)
         self.TT2406.Label.setText("TT2406")
         self.TT2406.SetUnit(" K")
 
         self.TT2407 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2407.move(1837 * R, 780 * R)
+        self.TT2407.move(1776 * R, 636 * R)
         self.TT2407.Label.setText("TT2407")
         self.TT2407.SetUnit(" K")
 
         self.TT2408 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2408.move(1932 * R, 780 * R)
+        self.TT2408.move(1966 * R, 636 * R)
         self.TT2408.Label.setText("TT2408")
         self.TT2408.SetUnit(" K")
 
         self.TT2409 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2409.move(1552 * R, 850 * R)
+        self.TT2409.move(1863 * R, 850 * R)
         self.TT2409.Label.setText("TT2409")
         self.TT2409.SetUnit(" K")
 
@@ -516,198 +516,198 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2410.SetUnit(" K")
 
         self.TT2411 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2411.move(1742 * R, 850 * R)
+        self.TT2411.move(1958 * R, 850 * R)
         self.TT2411.Label.setText("TT2411")
         self.TT2411.SetUnit(" K")
 
         self.TT2412 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2412.move(1590 * R, 670 * R)
+        self.TT2412.move(780 * R, 1200 * R)
         self.TT2412.Label.setText("TT2412")
         self.TT2412.SetUnit(" K")
 
-        self.TT2413 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
-        self.TT2413.move(373 * R, 1275 * R)
+        self.TT2413 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
+        self.TT2413.move(800 * R, 1300 * R)
         self.TT2413.Label.setText("TT2413")
         self.TT2413.SetUnit(" K")
 
         self.TT2414 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2414.move(1590 * R, 560 * R)
+        self.TT2414.move(1940 * R, 452 * R)
         self.TT2414.Label.setText("TT2414")
         self.TT2414.SetUnit(" K")
 
         self.TT2415 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2415.move(468 * R, 1275 * R)
+        self.TT2415.move(690 * R, 1200 * R)
         self.TT2415.Label.setText("TT2415")
         self.TT2415.SetUnit(" K")
 
-        self.TT2416 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2416.move(563 * R, 1275 * R)
+        self.TT2416 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1,dotted= True)
+        self.TT2416.move(400 * R, 1295 * R)
         self.TT2416.Label.setText("TT2416")
         self.TT2416.SetUnit(" K")
 
         self.TT2417 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2417.move(2055 * R, 560 * R)
+        self.TT2417.move(1892 * R, 92 * R)
         self.TT2417.Label.setText("TT2417")
         self.TT2417.SetUnit(" K")
 
         self.TT2418 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2418.move(373 * R, 996 * R)
+        self.TT2418.move(570 * R, 1003 * R)
         self.TT2418.Label.setText("TT2418")
         self.TT2418.SetUnit(" K")
 
-        self.TT2419 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2419.move(278 * R, 904 * R)
+        self.TT2419 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1,dotted= True)
+        self.TT2419.move(930 * R, 987 * R)
         self.TT2419.Label.setText("TT2419")
         self.TT2419.SetUnit(" K")
 
         self.TT2420 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2420.move(373 * R, 904 * R)
+        self.TT2420.move(483 * R, 894 * R)
         self.TT2420.Label.setText("TT2420")
         self.TT2420.SetUnit(" K")
 
-        self.TT2421 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2421.move(468 * R, 904 * R)
+        self.TT2421 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1,dotted= True)
+        self.TT2421.move(268 * R, 920 * R)
         self.TT2421.Label.setText("TT2421")
         self.TT2421.SetUnit(" K")
 
         self.TT2422 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2422.move(278 * R, 812 * R)
+        self.TT2422.move(483 * R, 820 * R)
         self.TT2422.Label.setText("TT2422")
         self.TT2422.SetUnit(" K")
 
-        self.TT2423 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2423.move(373 * R, 812 * R)
+        self.TT2423 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1,dotted= True)
+        self.TT2423.move(930 * R, 784 * R)
         self.TT2423.Label.setText("TT2423")
         self.TT2423.SetUnit(" K")
 
         self.TT2424 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2424.move(373 * R, 734 * R)
+        self.TT2424.move(483 * R, 742 * R)
         self.TT2424.Label.setText("TT2424")
         self.TT2424.SetUnit(" K")
 
         self.TT2425 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2425.move(278 * R, 656 * R)
+        self.TT2425.move(483 * R, 670 * R)
         self.TT2425.Label.setText("TT2425")
         self.TT2425.SetUnit(" K")
 
-        self.TT2426 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2426.move(373 * R, 656 * R)
+        self.TT2426 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2,dotted= True)
+        self.TT2426.move(930 * R, 667 * R)
         self.TT2426.Label.setText("TT2426")
         self.TT2426.SetUnit(" K")
 
         self.TT2427 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
-        self.TT2427.move(468 * R, 996 * R)
+        self.TT2427.move(612 * R, 934 * R)
         self.TT2427.Label.setText("TT2427")
         self.TT2427.SetUnit(" K")
 
-        self.TT2428 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
-        self.TT2428.move(563 * R, 996 * R)
+        self.TT2428 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2,dotted= True)
+        self.TT2428.move(268 * R, 975 * R)
         self.TT2428.Label.setText("TT2428")
         self.TT2428.SetUnit(" K")
 
         self.TT2429 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
-        self.TT2429.move(468 * R, 812 * R)
+        self.TT2429.move(612 * R, 844 * R)
         self.TT2429.Label.setText("TT2429")
         self.TT2429.SetUnit(" K")
 
-        self.TT2430 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2430.move(563 * R, 812 * R)
+        self.TT2430 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2,dotted= True)
+        self.TT2430.move(930 * R, 858 * R)
         self.TT2430.Label.setText("TT2430")
         self.TT2430.SetUnit(" K")
 
         self.TT2431 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
-        self.TT2431.move(468 * R, 734 * R)
+        self.TT2431.move(612 * R, 770 * R)
         self.TT2431.Label.setText("TT2431")
         self.TT2431.SetUnit(" K")
 
-        self.TT2432 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
-        self.TT2432.move(563 * R, 734 * R)
+        self.TT2432 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2,dotted= True)
+        self.TT2432.move(268 * R, 717 * R)
         self.TT2432.Label.setText("TT2432")
         self.TT2432.SetUnit(" K")
 
 
         self.TT2435 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=2, dotted = True)
-        self.TT2435.move(753 * R, 812 * R)
+        self.TT2435.move(820 * R, 1020 * R)
         self.TT2435.Label.setText("TT2435")
         self.TT2435.SetUnit(" K")
 
         self.TT2436 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2436.move(648 * R, 1072 * R)
+        self.TT2436.move(875 * R, 1144 * R)
         self.TT2436.Label.setText("TT2436")
         self.TT2436.SetUnit(" K")
 
-        self.TT2437 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2437.move(753 * R, 1072 * R)
+        self.TT2437 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1,dotted= True)
+        self.TT2437.move(705 * R, 1092 * R)
         self.TT2437.Label.setText("TT2437")
         self.TT2437.SetUnit(" K")
 
         self.TT2438 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2438.move(753 * R, 904 * R)
+        self.TT2438.move(875 * R, 920 * R)
         self.TT2438.Label.setText("TT2438")
         self.TT2438.SetUnit(" K")
 
-        self.TT2439 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2439.move(753 * R, 904 * R)
+        self.TT2439 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1,dotted= True)
+        self.TT2439.move(145 * R, 966 * R)
         self.TT2439.Label.setText("TT2439")
         self.TT2439.SetUnit(" K")
 
         self.TT2440 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2440.move(468 * R, 656 * R)
+        self.TT2440.move(875 * R, 730 * R)
         self.TT2440.Label.setText("TT2440")
         self.TT2440.SetUnit(" K")
 
         self.TT2441 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2441.move(753 * R, 734 * R)
+        self.TT2441.move(145 * R, 770 * R)
         self.TT2441.Label.setText("TT2441")
         self.TT2441.SetUnit(" K")
 
         self.TT2442 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2442.move(278 * R, 544* R)
+        self.TT2442.move(360 * R, 646* R)
         self.TT2442.Label.setText("TT2442")
         self.TT2442.SetUnit(" K")
 
         self.TT2443 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2443.move(563* R, 656 * R)
+        self.TT2443.move(658 * R, 646 * R)
         self.TT2443.Label.setText("TT2443")
         self.TT2443.SetUnit(" K")
 
-        self.TT2444 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2444.move(658 * R, 656 * R)
+        self.TT2444 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1,dotted= True)
+        self.TT2444.move(753* R, 646 * R)
         self.TT2444.Label.setText("TT2444")
         self.TT2444.SetUnit(" K")
 
-        self.TT2445 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2445.move(753 * R, 656 * R)
+        self.TT2445 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1,dotted= True)
+        self.TT2445.move(468 * R, 566 * R)
         self.TT2445.Label.setText("TT2445")
         self.TT2445.SetUnit(" K")
 
-        self.TT2446 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2446.move(373 * R, 544 * R)
+        self.TT2446 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1,dotted= True)
+        self.TT2446.move(752 * R, 564 * R)
         self.TT2446.Label.setText("TT2446")
         self.TT2446.SetUnit(" K")
 
         self.TT2447 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2447.move(468 * R, 544 * R)
+        self.TT2447.move(637 * R, 564 * R)
         self.TT2447.Label.setText("TT2447")
         self.TT2447.SetUnit(" K")
 
         self.TT2448 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2448.move(563 * R, 544 * R)
+        self.TT2448.move(352 * R, 564 * R)
         self.TT2448.Label.setText("TT2448")
         self.TT2448.SetUnit(" K")
 
-        self.TT2449 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=2)
-        self.TT2449.move(563 * R, 436 * R)
+        self.TT2449 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=2)
+        self.TT2449.move(563 * R, 426 * R)
         self.TT2449.Label.setText("TT2449")
         self.TT2449.SetUnit(" K")
 
-        self.TT2450 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1)
-        self.TT2450.move(753 * R, 1180 * R)
+        self.TT2450 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=1,dotted= True)
+        self.TT2450.move(600 * R, 1180 * R)
         self.TT2450.Label.setText("TT2450")
         self.TT2450.SetUnit(" K")
 
         self.HTR6219 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6219.move(200*R, 120*R)
+        self.HTR6219.move(180*R, 150*R)
         self.HTR6219.Label.setText("HTR6219")
         self.HTR6219.LOOPPIDWindow.setWindowTitle("HTR6219")
         self.HTR6219.LOOPPIDWindow.Label.setText("HTR6219")
@@ -715,17 +715,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6219.LOOPPIDWindow.RTD2.Label.setText("TT6222")
 
         self.HTR6221 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6221.move(684*R, 120*R)
+        self.HTR6221.move(684*R, 150*R)
         self.HTR6221.Label.setText("HTR6221")
         self.HTR6221.LOOPPIDWindow.setWindowTitle("HTR6221")
         self.HTR6221.LOOPPIDWindow.Label.setText("HTR6221")
         self.HTR6221.LOOPPIDWindow.RTD1.Label.setText("TT6222")
         self.HTR6221.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
 
-
-
         self.HTR6214 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6214.move(684*R, 281*R)
+        self.HTR6214.move(671*R, 335*R)
         self.HTR6214.Label.setText("HTR6214")
         self.HTR6214.LOOPPIDWindow.setWindowTitle("HTR6214")
         self.HTR6214.LOOPPIDWindow.Label.setText("HTR6214")
@@ -733,7 +731,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.LOOPPIDWindow.RTD2.Label.setText("TT6401")
 
         self.HTR6202 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6202.move(1278*R, 330*R)
+        self.HTR6202.move(1298*R, 180*R)
         self.HTR6202.Label.setText("HTR6202")
         self.HTR6202.LOOPPIDWindow.setWindowTitle("HTR6202")
         self.HTR6202.LOOPPIDWindow.Label.setText("HTR6202")
@@ -741,7 +739,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6202.LOOPPIDWindow.RTD2.Label.setText("TT6404")
 
         self.HTR6206 = LOOPPID_v2(self.ChamberTab, bkg_c = 1,dotted= True)
-        self.HTR6206.move(1645*R, 330*R)
+        self.HTR6206.move(1665*R, 180*R)
         self.HTR6206.Label.setText("HTR6206")
         self.HTR6206.LOOPPIDWindow.setWindowTitle("HTR6206")
         self.HTR6206.LOOPPIDWindow.Label.setText("HTR6206")
@@ -749,7 +747,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6206.LOOPPIDWindow.RTD2.Label.setText("TT6405")
 
         self.HTR6210 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6210.move(2000*R, 330*R)
+        self.HTR6210.move(2020*R, 180*R)
         self.HTR6210.Label.setText("HTR6210")
         self.HTR6210.LOOPPIDWindow.setWindowTitle("HTR6210")
         self.HTR6210.LOOPPIDWindow.Label.setText("HTR6210")
@@ -757,7 +755,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6210.LOOPPIDWindow.RTD2.Label.setText("TT6406")
 
         self.HTR6223 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6223.move(1278*R, 455*R)
+        self.HTR6223.move(1278*R, 350*R)
         self.HTR6223.Label.setText("HTR6223")
         self.HTR6223.LOOPPIDWindow.setWindowTitle("HTR6223")
         self.HTR6223.LOOPPIDWindow.Label.setText("HTR6223")
@@ -765,7 +763,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6223.LOOPPIDWindow.RTD2.Label.setText("TT6410")
 
         self.HTR6224 = LOOPPID_v2(self.ChamberTab, bkg_c = 1,dotted= True)
-        self.HTR6224.move(1645*R, 455*R)
+        self.HTR6224.move(1645*R, 350*R)
         self.HTR6224.Label.setText("HTR6224")
         self.HTR6224.LOOPPIDWindow.setWindowTitle("HTR6224")
         self.HTR6224.LOOPPIDWindow.Label.setText("HTR6224")
@@ -773,7 +771,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6224.LOOPPIDWindow.RTD2.Label.setText("TT6411")
 
         self.HTR6225 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
-        self.HTR6225.move(2000*R, 455*R)
+        self.HTR6225.move(2000*R, 350*R)
         self.HTR6225.Label.setText("HTR6225")
         self.HTR6225.LOOPPIDWindow.setWindowTitle("HTR6225")
         self.HTR6225.LOOPPIDWindow.Label.setText("HTR6225")
@@ -781,7 +779,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6225.LOOPPIDWindow.RTD2.Label.setText("TT6412")
 
         self.HTR2123 = LOOPPID_v2(self.ChamberTab, colorcode=2,bkg_c = 1)
-        self.HTR2123.move(1916*R, 840*R)
+        self.HTR2123.move(1220*R, 755*R)
         self.HTR2123.Label.setText("HTR2123")
         self.HTR2123.LOOPPIDWindow.setWindowTitle("HTR2123")
         self.HTR2123.LOOPPIDWindow.Label.setText("HTR2123")
@@ -789,7 +787,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2123.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
 
         self.HTR2124 = LOOPPID_v2(self.ChamberTab, colorcode=2,bkg_c = 1)
-        self.HTR2124.move(1339*R, 95*R)
+        self.HTR2124.move(2030*R, 30*R)
         self.HTR2124.Label.setText("HTR2124")
         self.HTR2124.LOOPPIDWindow.setWindowTitle("HTR2124")
         self.HTR2124.LOOPPIDWindow.Label.setText("HTR2124")
@@ -797,7 +795,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2124.LOOPPIDWindow.RTD2.Label.setText("TT2113")
 
         self.HTR2125 = LOOPPID_v2(self.ChamberTab, colorcode=2,bkg_c = 1)
-        self.HTR2125.move(1685*R, 560*R)
+        self.HTR2125.move(1310*R, 60*R)
         self.HTR2125.Label.setText("HTR2125")
         self.HTR2125.LOOPPIDWindow.setWindowTitle("HTR2125")
         self.HTR2125.LOOPPIDWindow.Label.setText("HTR2125")
@@ -827,15 +825,15 @@ class MainWindow(QtWidgets.QMainWindow):
                               self.HTR6223,self.HTR6224,self.HTR6225,self.PT1101,self.PT2121]
 
         self.HDPE_group = [False, True,self.TT2416,self.TT2435,self.TT2436,self.TT2437,self.TT2438,self.TT2439,self.TT2440,self.TT2441,
-                           self.TT2443,self.TT2444,self.TT2445,self.TT2450]
+                           self.TT2442,self.TT2443,self.TT2444,self.TT2445,self.TT2450,self.TT2449]
 
         self.IV_group = [False, True,  self.HTR2123,self.HTR2124, self.HTR2125,self.TT2118,self.TT2119,
                          self.TT2401, self.TT2402,self.TT2403,self.TT2404,
                          self.TT2405,self.TT2406,self.TT2407,self.TT2408,self.TT2409,self.TT2410,self.TT2411,self.TT2412,
                          self.TT2413,self.TT2414,self.TT2415,self.TT2417,self.TT2418,self.TT2419,self.TT2420,self.TT2421,
                          self.TT2422,self.TT2423,self.TT2424,self.TT2425,self.TT2426,self.TT2427,self.TT2428,self.TT2429,
-                         self.TT2430,self.TT2431,self.TT2432,self.TT2442,self.TT2446,self.TT2447,
-                         self.TT2448,self.TT2449]
+                         self.TT2430,self.TT2431,self.TT2432,self.TT2446,self.TT2447,
+                         self.TT2448]
 
         self.PV_switch = TextButton(self.ChamberTab, colorcode=0, expanded= self.PV_group[0], visibility=self.PV_group[1])
         self.PV_switch.move(10 * R, 1040 * R)
@@ -1580,7 +1578,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def set_background(self, num = 0):
-        list = ["PV_4xpx.png","HDPE_4xpx.png","SiPM_2xpx.png"]
+        list = ["PV_v2.png","HDPE_v2.png","IV_v2.png"]
         pixmap_chamber = QtGui.QPixmap(os.path.join(self.ImagePath, list[num]))
         pixmap_chamber = pixmap_chamber.scaledToWidth(2400 * R)
         self.ChamberTab.Background.setPixmap(QtGui.QPixmap(pixmap_chamber))
