@@ -1088,10 +1088,10 @@ class PLC:
                             if message[key]["operation"]["update"]:
                                 self.Write_BO_2_int16(self.PARAM_I_ADDRESS["TS_SEL"],
                                                           message[key]["operation"]["SEL"])
-                                self.Write_BO_2(self.PARAM_F_ADDRESS["TS_ADDREM_MASS"],
-                                                    message[key]["operation"]["ADDREM_MASS"])
-                                self.Write_BO_2_int32(self.PARAM_T_ADDRESS["TS_ADDREM_MAXTIME"],
-                                                          round(float(message[key]["operation"]["MAXTIME"]) * 1000))
+                                # self.Write_BO_2(self.PARAM_F_ADDRESS["TS_ADDREM_MASS"],
+                                #                     message[key]["operation"]["ADDREM_MASS"])
+                                # self.Write_BO_2_int32(self.PARAM_T_ADDRESS["TS_ADDREM_MAXTIME"],
+                                #                           round(float(message[key]["operation"]["MAXTIME"]) * 1000))
 
                             else:
                                 pass
