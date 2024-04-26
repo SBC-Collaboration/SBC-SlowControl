@@ -1411,10 +1411,11 @@ class PLC:
         print("write result = ", Raw1, Raw2)
 
     def Write_BO_2_int16(self, address, value):
-        word = self.int16_to_word(value)
-        print('word', word)
+        # just write integer
+        # word = self.int16_to_word(value)
+        # print('word', word)
         # pay attention to endian relationship
-        Raw = self.Client_BO.write_register(address, value=word, unit=0x01)
+        Raw = self.Client_BO.write_register(address, value=int(value), unit=0x01)
 
         print("write result = ", Raw)
 
