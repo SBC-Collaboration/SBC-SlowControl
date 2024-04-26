@@ -7697,7 +7697,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2419_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2419"])
         self.TT2426_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2426"])
         self.TT2430_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2430"])
-        self.TT2113_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2113"])
+        self.TT2113_2d.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2113"])
         self.TT2450_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2450"])
         self.TT2444_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2444"])
         self.TT2445_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2445"])
