@@ -93,7 +93,7 @@ class PLC:
         self.Client_AD = ModbusTcpClient(IP_AD, port=PORT_AD)
         try:
             self.Connected_AD = self.Client_AD.connect()
-            print(" Ardunio connected: " + str(self.Connected_AD))
+            print(" Arduino connected: " + str(self.Connected_AD))
         except Exception as e:
             print("AD connection exceptions")
 
@@ -545,7 +545,7 @@ class PLC:
             finally:
                 self.Read_AD_empty()
                 # with self.alarm_lock:
-                #     self.alarm_stack.update({"AD disconnection alarm":"Ardunio modbus is disconnected. Restarting..."})
+                #     self.alarm_stack.update({"AD disconnection alarm":"Arduino modbus is disconnected. Restarting..."})
         else:
             try:
                 self.Read_AD()
@@ -1698,8 +1698,8 @@ class UpdatePLC(PLC, threading.Thread):
                 # (type, value, traceback) = sys.exc_info()
                 # exception_hook(type, value, traceback)
                 print("Exception in plc raised")
-                with self.alarm_lock:
-                    self.alarm_stack.update({"PLC updating Exception":"PLC alarm check. Restarting..."})
+                # with self.alarm_lock:
+                #     self.alarm_stack.update({"PLC updating Exception":"PLC alarm check. Restarting..."})
                 # self run depend on senario, we want to rerun the module by module
                 break
         self.run()
