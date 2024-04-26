@@ -382,10 +382,10 @@ def connect_to_database():
 
 # test sbcslowcontrol database
 #
-# if __name__ == "__main__":
+if __name__ == "__main__":
 #     connection = connect_to_database()
 
-    # db = mydatabase()
+    db = mydatabase()
     # dt = datetime_in_s()
     # early_dt = early_datetime()
     # # unix_timestamp = int(dt.replace(tzinfo=datetime.timezone.utc).timestamp())
