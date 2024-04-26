@@ -1697,9 +1697,9 @@ class UpdatePLC(PLC, threading.Thread):
             except Exception as e:
                 # (type, value, traceback) = sys.exc_info()
                 # exception_hook(type, value, traceback)
-                print("Exception in plc raised")
-                # with self.alarm_lock:
-                #     self.alarm_stack.update({"PLC updating Exception":"PLC alarm check. Restarting..."})
+                print("Exception in plc raised",e)
+                with self.alarm_lock:
+                    self.alarm_stack.update({"PLC updating Exception":"PLC alarm check. Restarting..."})
                 # self run depend on senario, we want to rerun the module by module
                 break
         self.run()
