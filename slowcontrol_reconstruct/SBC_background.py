@@ -544,8 +544,8 @@ class PLC:
                 # Wait for 5 seconds before retrying
             finally:
                 self.Read_AD_empty()
-                with self.alarm_lock:
-                    self.alarm_stack.update({"AD disconnection alarm":"Ardunio modbus is disconnected. Restarting..."})
+                # with self.alarm_lock:
+                #     self.alarm_stack.update({"AD disconnection alarm":"Ardunio modbus is disconnected. Restarting..."})
         else:
             try:
                 self.Read_AD()
