@@ -118,8 +118,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater; comment out to show GUI only
-        # self.StartUpdater()
-        # self.signal_connection()
+        self.StartUpdater()
+        self.signal_connection()
 
     def GUI_design(self):
         # Get background image path
@@ -722,7 +722,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6221.LOOPPIDWindow.RTD1.Label.setText("TT6222")
         self.HTR6221.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
 
-        self.HTR6214 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
+        self.HTR6214 = LOOPPID_v3(self.ChamberTab, bkg_c = 1)
         self.HTR6214.move(671*R, 335*R)
         self.HTR6214.Label.setText("HTR6214")
         self.HTR6214.LOOPPIDWindow.setWindowTitle("HTR6214")

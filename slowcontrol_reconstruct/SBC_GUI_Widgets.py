@@ -3772,6 +3772,233 @@ class LOOPPID_v2(QtWidgets.QWidget):
 
 
 # Defines a reusable layout containing widgets
+class LOOPPID_v3(QtWidgets.QWidget):
+    def __init__(self, parent=None, title="", colorcode = 0, bkg_c = 0, dotted = False):
+        super().__init__(parent)
+
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 50 * R))
+        self.setSizePolicy(sizePolicy)
+        # self.setStyleSheet("QWidget { background: red; }")
+
+
+        # self.HL1 = QtWidgets.QHBoxLayout()
+        # self.HL1.setContentsMargins(0 * R, 0 * R, 0 * R, 0 * R)
+
+        self.Label = QtWidgets.QPushButton(self)
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 35 * R))
+        self.Label.setMinimumSize(QtCore.QSize(150*R, 30*R))
+        self.Label.setProperty("State", False)
+        if bkg_c == 1 and not dotted:
+            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                     + "} QWidget[State = false]{" + C_LIGHT_YELLOW + "}")
+        elif bkg_c == 0 and not dotted:
+            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                 + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+
+        elif bkg_c == 1 and dotted:
+            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + DOTTED_BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                     + "} QWidget[State = false]{" + C_LIGHT_YELLOW + "}")
+
+        elif bkg_c == 0 and dotted:
+            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + DOTTED_BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                 + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+        else:
+
+            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
+                                     + "} QWidget[State = false]{" + C_LIGHT_YELLOW + "}")
+
+        self.Colorband = QtWidgets.QLabel(self)
+        self.Colorband.setObjectName("Colorband")
+        self.Colorband.setGeometry(QtCore.QRect(244 * R, 7 * R, 10 * R, 35 * R))
+        if colorcode == 0:
+            self.Colorband.setStyleSheet("QLabel {" + C_BLUE + ROUND_BORDER_STYLE + "}")
+        elif colorcode ==1:
+            self.Colorband.setStyleSheet("QLabel {" + C_ORANGE + ROUND_BORDER_STYLE + "}")
+        elif colorcode ==2:
+            self.Colorband.setStyleSheet("QLabel {" + C_MAROON + ROUND_BORDER_STYLE + "}")
+        else:
+            self.Colorband.setStyleSheet("QLabel {" + C_BLUE + ROUND_BORDER_STYLE + "}")
+
+
+        # self.HL1.addWidget(self.Label)
+
+        self.Power = Control_v2(self)
+        self.Power.Label.setText("Power")
+        self.Power.SetUnit(" %")
+        self.Power.Max = 100.
+        self.Power.Min = 0.
+        self.Power.Step = 0.1
+        self.Power.Decimals = 1
+
+        self.Tool = QtWidgets.QToolButton(
+            text=title, checkable=True, checked=False
+        )
+        self.Tool.setGeometry(QtCore.QRect(0 * R, 0 * R, 30 * R, 30 * R))
+        self.Tool.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
+        self.Tool.setArrowType(QtCore.Qt.RightArrow)
+
+
+        self.Tool.setMinimumSize(QtCore.QSize(30 * R, 30 * R))
+        self.Tool.setProperty("State", False)
+        self.Tool.setStyleSheet("QToolButton { background: transparent}")
+        self.Tool.setText("Label")
+
+        self.Tool.setSizePolicy(sizePolicy)
+        self.Tool.pressed.connect(self.on_pressed)
+        # self.HL1.addWidget(self.Tool)
+
+        # Add a Sub window popped out when click the name
+        self.LOOPPIDWindow = LOOPPIDSubWindow(self)
+        self.Label.clicked.connect(self.PushButton)
+
+        self.toggle_animation = QtCore.QParallelAnimationGroup(self)
+
+        self.content_area = QtWidgets.QScrollArea(
+            maximumHeight=0, minimumHeight=0
+        )
+        # self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 40 * R))
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 70 * R))
+        # self.content_area.setMinimumSize()
+        # self.content_area.setSizePolicy(
+        #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
+        # )
+        self.content_area.setSizePolicy(sizePolicy)
+        self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.content_area.setStyleSheet("QWidget { background: transparent; }")
+        # self.content_area.setStyleSheet("QWidget { background: grey; }")
+
+        lay = QtWidgets.QGridLayout(self)
+        lay.setSpacing(0)
+        lay.setContentsMargins(0, 0, 0, 0)
+        lay.addWidget(self.Label, 0,0,1,4)
+        lay.addWidget(self.Power,0,4,1,1)
+        lay.addWidget(self.Tool,0,5,1,1)
+        # lay.addWidget(self.Tool)
+        lay.addWidget(self.content_area,1,0,1,5)
+
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"minimumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self, b"maximumHeight")
+        )
+        self.toggle_animation.addAnimation(
+            QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
+        )
+
+        self.lay = QtWidgets.QHBoxLayout()
+        # self.lay = QtWidgets.QGridLayout()
+        # self.lay.setSpacing(0)
+        # self.lay.setContentsMargins(0, 0, 0, 0)
+        # self.lay.addWidget(self.Label, 0, 0, 1, 3)
+        # self.lay.addWidget(self.Power, 0, 3, 1, 1)
+        # self.lay.addWidget(self.Tool, 0, 4, 1, 1)
+
+        # lay.addWidget(self.Tool)
+        # selflay.addWidget(self.content_area, 1, 0, 1, 5)
+
+
+        self.State = DoubleButton_s(self)
+        self.State.Label.setText("State")
+        self.State.LButton.setText("On")
+        self.State.RButton.setText("Off")
+
+        self.RTD1 = Indicator(self)
+        self.RTD1.SetUnit(" K")
+
+        # self.RTD2 = Indicator(self)
+        # self.RTD2.SetUnit(" K")
+
+
+
+        self.StatusTransition = ColoredStatus(self, mode=3)
+        self.StatusTransition.setObjectName("StatusTransition")
+        self.StatusTransition.Label.setText("Busy")
+
+        self.lay.addWidget(self.State)
+        self.lay.addWidget(self.StatusTransition)
+        self.lay.addWidget(self.RTD1)
+        # self.lay.addWidget(self.RTD2)
+
+        self.setContentLayout(self.lay)
+
+    @QtCore.Slot()
+    def on_pressed(self):
+        checked = self.Tool.isChecked()
+        self.Tool.setArrowType(
+            QtCore.Qt.DownArrow if not checked else QtCore.Qt.RightArrow
+        )
+        self.toggle_animation.setDirection(
+            QtCore.QAbstractAnimation.Forward
+            if not checked
+            else QtCore.QAbstractAnimation.Backward
+        )
+        self.toggle_animation.start()
+
+    def setContentLayout(self, layout):
+        lay = self.content_area.layout()
+        del lay
+        self.content_area.setLayout(layout)
+        # But the -8 make the whole thing work
+        collapsed_height = (
+                self.sizeHint().height() - self.content_area.maximumHeight()
+        )
+        # print("height",collapsed_height, self.sizeHint().height(),self.content_area.maximumHeight())
+        content_height = layout.sizeHint().height()
+        for i in range(self.toggle_animation.animationCount()):
+            animation = self.toggle_animation.animationAt(i)
+            animation.setDuration(500)
+            animation.setStartValue(collapsed_height)
+            animation.setEndValue(collapsed_height + content_height)
+
+        content_animation = self.toggle_animation.animationAt(
+            self.toggle_animation.animationCount() - 1
+        )
+        content_animation.setDuration(500)
+        content_animation.setStartValue(0)
+        content_animation.setEndValue(content_height)
+
+    # Neutral means that the button shouldn't show any color
+
+    @QtCore.Slot()
+    def ButtonLTransitionState(self, bool):
+        if self.StateLState == self.StateInactiveName and self.StateRState == self.StateActiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonRTransitionState(self, bool):
+        if self.StateLState == self.StateActiveName and self.StateRState == self.StateInactiveName:
+            self.StatusTransition.UpdateColor(bool)
+        else:
+            pass
+
+    @QtCore.Slot()
+    def ButtonTransitionState(self, bool):
+        self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def ColorLabel(self, bool):
+        self.Label.setProperty("State", bool)
+        self.Label.setStyle(self.Tool.style())
+
+    @QtCore.Slot()
+    def PushButton(self):
+        self.LOOPPIDWindow.show()
+        self.InitWindow()
+
+    @QtCore.Slot()
+    def InitWindow(self):
+        self.LOOPPIDWindow.SP.SetValue(self.LOOPPIDWindow.SETSP.value)
+        self.LOOPPIDWindow.LOSP.SetValue(self.LOOPPIDWindow.LOW.value)
+        self.LOOPPIDWindow.HISP.SetValue(self.LOOPPIDWindow.HIGH.value)
+
+
+
+# Defines a reusable layout containing widgets
 class LOOP2PT_v2(QtWidgets.QWidget):
     def __init__(self, parent=None, title=""):
         super().__init__(parent)
