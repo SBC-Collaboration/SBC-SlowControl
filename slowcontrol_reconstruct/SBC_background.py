@@ -31,7 +31,7 @@ from pymodbus.client.sync import ModbusTcpClient
 
 # Initialization of Address, Value Matrix
 
-logging.basicConfig(filename="/home/hep/sbc_error_log.log")
+# logging.basicConfig(filename="/home/hep/sbc_error_log.log")
 sys._excepthook = sys.excepthook
 
 
