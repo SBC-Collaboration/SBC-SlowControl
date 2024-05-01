@@ -118,8 +118,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater; comment out to show GUI only
-        self.StartUpdater()
-        self.signal_connection()
+        # self.StartUpdater()
+        # self.signal_connection()
 
     def GUI_design(self):
         # Get background image path
@@ -706,21 +706,23 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2450.Label.setText("TT2450")
         self.TT2450.SetUnit(" K")
 
-        self.HTR6219 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
+        self.HTR6219 = LOOPPID_v3(self.ChamberTab, bkg_c = 1)
         self.HTR6219.move(180*R, 150*R)
         self.HTR6219.Label.setText("HTR6219")
         self.HTR6219.LOOPPIDWindow.setWindowTitle("HTR6219")
         self.HTR6219.LOOPPIDWindow.Label.setText("HTR6219")
-        self.HTR6219.LOOPPIDWindow.RTD1.Label.setText("TT6220")
-        self.HTR6219.LOOPPIDWindow.RTD2.Label.setText("TT6222")
+        self.HTR6219.LOOPPIDWindow.RTD1.Label.setText("TT6222")
+        self.HTR6219.LOOPPIDWindow.RTD2.Label.setText("TT6220")
+        self.HTR6219.RTD1.Label.setText("TT6222")
 
-        self.HTR6221 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
+        self.HTR6221 = LOOPPID_v3(self.ChamberTab, bkg_c = 1)
         self.HTR6221.move(684*R, 150*R)
         self.HTR6221.Label.setText("HTR6221")
         self.HTR6221.LOOPPIDWindow.setWindowTitle("HTR6221")
         self.HTR6221.LOOPPIDWindow.Label.setText("HTR6221")
         self.HTR6221.LOOPPIDWindow.RTD1.Label.setText("TT6222")
         self.HTR6221.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
+        self.HTR6221.RTD1.Label.setText("TT6222")
 
         self.HTR6214 = LOOPPID_v3(self.ChamberTab, bkg_c = 1)
         self.HTR6214.move(671*R, 335*R)
@@ -729,95 +731,107 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6214.LOOPPIDWindow.Label.setText("HTR6214")
         self.HTR6214.LOOPPIDWindow.RTD1.Label.setText("TT6213")
         self.HTR6214.LOOPPIDWindow.RTD2.Label.setText("TT6401")
+        self.HTR6214.RTD1.Label.setText("TT6213")
 
-        self.HTR6202 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
+        self.HTR6202 = LOOPPID_v3(self.ChamberTab, bkg_c = 1)
         self.HTR6202.move(1298*R, 180*R)
         self.HTR6202.Label.setText("HTR6202")
         self.HTR6202.LOOPPIDWindow.setWindowTitle("HTR6202")
         self.HTR6202.LOOPPIDWindow.Label.setText("HTR6202")
         self.HTR6202.LOOPPIDWindow.RTD1.Label.setText("TT6203")
         self.HTR6202.LOOPPIDWindow.RTD2.Label.setText("TT6404")
+        self.HTR6202.RTD1.Label.setText("TT6203")
 
-        self.HTR6206 = LOOPPID_v2(self.ChamberTab, bkg_c = 1,dotted= True)
+        self.HTR6206 = LOOPPID_v3(self.ChamberTab, bkg_c = 1,dotted= True)
         self.HTR6206.move(1665*R, 180*R)
         self.HTR6206.Label.setText("HTR6206")
         self.HTR6206.LOOPPIDWindow.setWindowTitle("HTR6206")
         self.HTR6206.LOOPPIDWindow.Label.setText("HTR6206")
         self.HTR6206.LOOPPIDWindow.RTD1.Label.setText("TT6207")
         self.HTR6206.LOOPPIDWindow.RTD2.Label.setText("TT6405")
+        self.HTR6206.RTD1.Label.setText("TT6207")
 
-        self.HTR6210 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
+        self.HTR6210 = LOOPPID_v3(self.ChamberTab, bkg_c = 1)
         self.HTR6210.move(2020*R, 180*R)
         self.HTR6210.Label.setText("HTR6210")
         self.HTR6210.LOOPPIDWindow.setWindowTitle("HTR6210")
         self.HTR6210.LOOPPIDWindow.Label.setText("HTR6210")
         self.HTR6210.LOOPPIDWindow.RTD1.Label.setText("TT6211")
         self.HTR6210.LOOPPIDWindow.RTD2.Label.setText("TT6406")
+        self.HTR6210.RTD1.Label.setText("TT6211")
 
-        self.HTR6223 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
+        self.HTR6223 = LOOPPID_v3(self.ChamberTab, bkg_c = 1)
         self.HTR6223.move(1278*R, 350*R)
         self.HTR6223.Label.setText("HTR6223")
         self.HTR6223.LOOPPIDWindow.setWindowTitle("HTR6223")
         self.HTR6223.LOOPPIDWindow.Label.setText("HTR6223")
         self.HTR6223.LOOPPIDWindow.RTD1.Label.setText("TT6407")
         self.HTR6223.LOOPPIDWindow.RTD2.Label.setText("TT6410")
+        self.HTR6223.RTD1.Label.setText("TT6407")
 
-        self.HTR6224 = LOOPPID_v2(self.ChamberTab, bkg_c = 1,dotted= True)
+        self.HTR6224 = LOOPPID_v3(self.ChamberTab, bkg_c = 1,dotted= True)
         self.HTR6224.move(1645*R, 350*R)
         self.HTR6224.Label.setText("HTR6224")
         self.HTR6224.LOOPPIDWindow.setWindowTitle("HTR6224")
         self.HTR6224.LOOPPIDWindow.Label.setText("HTR6224")
         self.HTR6224.LOOPPIDWindow.RTD1.Label.setText("TT6408")
         self.HTR6224.LOOPPIDWindow.RTD2.Label.setText("TT6411")
+        self.HTR6224.RTD1.Label.setText("TT6408")
 
-        self.HTR6225 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
+        self.HTR6225 = LOOPPID_v3(self.ChamberTab, bkg_c = 1)
         self.HTR6225.move(2000*R, 350*R)
         self.HTR6225.Label.setText("HTR6225")
         self.HTR6225.LOOPPIDWindow.setWindowTitle("HTR6225")
         self.HTR6225.LOOPPIDWindow.Label.setText("HTR6225")
         self.HTR6225.LOOPPIDWindow.RTD1.Label.setText("TT6409")
         self.HTR6225.LOOPPIDWindow.RTD2.Label.setText("TT6412")
+        self.HTR6225.RTD1.Label.setText("TT6409")
 
-        self.HTR2123 = LOOPPID_v2(self.ChamberTab, colorcode=2,bkg_c = 1)
+        self.HTR2123 = LOOPPID_v3(self.ChamberTab, colorcode=2,bkg_c = 1)
         self.HTR2123.move(1220*R, 755*R)
         self.HTR2123.Label.setText("HTR2123")
         self.HTR2123.LOOPPIDWindow.setWindowTitle("HTR2123")
         self.HTR2123.LOOPPIDWindow.Label.setText("HTR2123")
         self.HTR2123.LOOPPIDWindow.RTD1.Label.setText("TT2101")
         self.HTR2123.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
+        self.HTR2123.RTD1.Label.setText("TT2101")
 
-        self.HTR2124 = LOOPPID_v2(self.ChamberTab, colorcode=2,bkg_c = 1)
+        self.HTR2124 = LOOPPID_v3(self.ChamberTab, colorcode=2,bkg_c = 1)
         self.HTR2124.move(2030*R, 30*R)
         self.HTR2124.Label.setText("HTR2124")
         self.HTR2124.LOOPPIDWindow.setWindowTitle("HTR2124")
         self.HTR2124.LOOPPIDWindow.Label.setText("HTR2124")
         self.HTR2124.LOOPPIDWindow.RTD1.Label.setText("TT2113")
         self.HTR2124.LOOPPIDWindow.RTD2.Label.setText("TT2113")
+        self.HTR2124.RTD1.Label.setText("TT2113")
 
-        self.HTR2125 = LOOPPID_v2(self.ChamberTab, colorcode=2,bkg_c = 1)
+        self.HTR2125 = LOOPPID_v3(self.ChamberTab, colorcode=2,bkg_c = 1)
         self.HTR2125.move(1310*R, 60*R)
         self.HTR2125.Label.setText("HTR2125")
         self.HTR2125.LOOPPIDWindow.setWindowTitle("HTR2125")
         self.HTR2125.LOOPPIDWindow.Label.setText("HTR2125")
         self.HTR2125.LOOPPIDWindow.RTD1.Label.setText("TT2111")
         self.HTR2125.LOOPPIDWindow.RTD2.Label.setText("TT2111")
+        self.HTR2125.RTD1.Label.setText("TT2111")
 
-        self.HTR1202 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
+
+        self.HTR1202 = LOOPPID_v3(self.ChamberTab, bkg_c = 1)
         self.HTR1202.move(1339*R, 1210*R)
         self.HTR1202.Label.setText("HTR1202")
         self.HTR1202.LOOPPIDWindow.setWindowTitle("HTR1202")
         self.HTR1202.LOOPPIDWindow.Label.setText("HTR1202")
-        self.HTR1202.LOOPPIDWindow.RTD1.Label.setText("TT6413")
-        self.HTR1202.LOOPPIDWindow.RTD2.Label.setText("TT6415")
+        self.HTR1202.LOOPPIDWindow.RTD1.Label.setText("TT6415")
+        self.HTR1202.LOOPPIDWindow.RTD2.Label.setText("TT6413")
+        self.HTR1202.RTD1.Label.setText("TT6415")
 
-
-        self.HTR2203 = LOOPPID_v2(self.ChamberTab, bkg_c = 1)
+        self.HTR2203 = LOOPPID_v3(self.ChamberTab, bkg_c = 1)
         self.HTR2203.move(1916*R, 1210*R)
         self.HTR2203.Label.setText("HTR2203")
         self.HTR2203.LOOPPIDWindow.setWindowTitle("HTR2203")
         self.HTR2203.LOOPPIDWindow.Label.setText("HTR2203")
-        self.HTR2203.LOOPPIDWindow.RTD1.Label.setText("TT6414")
-        self.HTR2203.LOOPPIDWindow.RTD2.Label.setText("TT6416")
+        self.HTR2203.LOOPPIDWindow.RTD1.Label.setText("TT6416")
+        self.HTR2203.LOOPPIDWindow.RTD2.Label.setText("TT6414")
+        self.HTR2203.RTD1.Label.setText("TT6416")
         # 1st is whether the groups are expanded, 2nd is if visible
 
         self.PV_group = [False, True, self.HTR6214,self.HTR6219, self.HTR6221, self.HTR2203, self.HTR1202,
@@ -1430,13 +1444,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MAN_HYD.move(1300 * R, 500 * R)
         self.MAN_HYD.Label.setText("MAN_HYD")
 
-        self.HTR6202_v2 = LOOPPID_v2(self.DatanSignalTab)
-        self.HTR6202_v2.move(1300 * R, 900 * R)
-        self.HTR6202_v2.Label.setText("HTR6202")
-        self.HTR6202_v2.LOOPPIDWindow.setWindowTitle("HTR6202")
-        self.HTR6202_v2.LOOPPIDWindow.Label.setText("HTR6202")
-        self.HTR6202_v2.LOOPPIDWindow.RTD1.Label.setText("TT6222")
-        self.HTR6202_v2.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
 
         self.PCYCLE_AUTOCYCLE = Flag(self.DatanSignalTab)
         self.PCYCLE_AUTOCYCLE.move(1300 * R, 600 * R)
@@ -1591,7 +1598,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 # loop over all widgets
                 for i in self.PV_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
-                    if isinstance(i,LOOPPID_v2):
+                    if isinstance(i,LOOPPID_v3):
                         #check itis checked or not. Checked -> right arrow-> collapsed
                         if not i.Tool.isChecked():
                             i.Tool.animateClick()
@@ -1606,7 +1613,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 for i in self.PV_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
-                    if isinstance(i, LOOPPID_v2):
+                    if isinstance(i,LOOPPID_v3):
                         # check itis checked or not. Checked -> right arrow-> collapsed
                         if i.Tool.isChecked():
                             i.Tool.animateClick()
@@ -1623,7 +1630,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 # loop over all widgets
                 for i in self.IV_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
-                    if isinstance(i, LOOPPID_v2):
+                    if isinstance(i, LOOPPID_v3):
                         # check itis checked or not. Checked -> right arrow-> collapsed
                         if not i.Tool.isChecked():
                             i.Tool.animateClick()
@@ -1638,7 +1645,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 for i in self.IV_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
-                    if isinstance(i, LOOPPID_v2):
+                    if isinstance(i, LOOPPID_v3):
                         # check itis checked or not. Checked -> right arrow-> collapsed
                         if i.Tool.isChecked():
                             i.Tool.animateClick()
@@ -1655,7 +1662,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 # loop over all widgets
                 for i in self.HDPE_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
-                    if isinstance(i, LOOPPID_v2):
+                    if isinstance(i, LOOPPID_v3):
                         # check itis checked or not. Checked -> right arrow-> collapsed
                         if not i.Tool.isChecked():
                             i.Tool.animateClick()
@@ -1670,7 +1677,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 for i in self.HDPE_group[2:]:
                     # identify which type of widgets, heaters or RTDs/PTs
-                    if isinstance(i, LOOPPID_v2):
+                    if isinstance(i, LOOPPID_v3):
                         # check itis checked or not. Checked -> right arrow-> collapsed
                         if i.Tool.isChecked():
                             i.Tool.animateClick()
@@ -2188,29 +2195,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        self.HTR6202_v2.LOOPPIDWindow.Mode.LButton.clicked.connect(
-            lambda x: self.HTLButtonClicked(self.HTR6202_v2.LOOPPIDWindow.Label.text()))
-        self.HTR6202_v2.LOOPPIDWindow.Mode.RButton.clicked.connect(
-            lambda x: self.HTRButtonClicked(self.HTR6202_v2.LOOPPIDWindow.Label.text()))
-        self.HTR6202_v2.State.LButton.clicked.connect(
-            lambda x: self.HTLButtonClicked(self.HTR6202_v2.LOOPPIDWindow.Label.text()))
-        self.HTR6202_v2.State.RButton.clicked.connect(
-            lambda x: self.HTRButtonClicked(self.HTR6202_v2.LOOPPIDWindow.Label.text()))
-        self.HTR6202_v2.LOOPPIDWindow.ButtonGroup.Button0.clicked.connect(
-            lambda x: self.HTRGroupButtonClicked(self.HTR6202_v2.LOOPPIDWindow.Label.text(), 0))
-        self.HTR6202_v2.LOOPPIDWindow.ButtonGroup.Button1.clicked.connect(
-            lambda x: self.HTRGroupButtonClicked(self.HTR6202_v2.LOOPPIDWindow.Label.text(), 1))
-        self.HTR6202_v2.LOOPPIDWindow.ButtonGroup.Button2.clicked.connect(
-            lambda x: self.HTRGroupButtonClicked(self.HTR6202_v2.LOOPPIDWindow.Label.text(), 2))
-        self.HTR6202_v2.LOOPPIDWindow.ButtonGroup.Button3.clicked.connect(
-            lambda x: self.HTRGroupButtonClicked(self.HTR6202_v2.LOOPPIDWindow.Label.text(), 3))
-
-        self.HTR6202_v2.LOOPPIDWindow.updatebutton.clicked.connect(
-            lambda x: self.HTRupdate(self.HTR6202_v2.LOOPPIDWindow.Label.text(),
-                                     self.HTR6202_v2.LOOPPIDWindow.ModeREAD.Field.text(),
-                                     float(self.HTR6202_v2.LOOPPIDWindow.SP.Field.text()),
-                                     float(self.HTR6202_v2.LOOPPIDWindow.HISP.Field.text()),
-                                     float(self.HTR6202_v2.LOOPPIDWindow.LOSP.Field.text())))
 
         #LOOP2PT
 
@@ -5708,14 +5692,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6202"]:
-            self.HTR6202_v2.ButtonTransitionState(True)
-            self.HTR6202_v2.LOOPPIDWindow.ButtonTransitionState(True)
-        elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6202"]:
-            self.HTR6202_v2.ButtonTransitionState(False)
-            self.HTR6202_v2.LOOPPIDWindow.ButtonTransitionState(False)
-        else:
-            pass
+
 
 
 
@@ -7468,41 +7445,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-        if not received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6202"]:
-            if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]:
-                self.HTR6202_v2.LOOPPIDWindow.Mode.ButtonLClicked()
-                self.HTR6202_v2.State.ButtonLClicked()
-            else:
-                self.HTR6202_v2.LOOPPIDWindow.Mode.ButtonRClicked()
-                self.HTR6202_v2.State.ButtonRClicked()
-            self.LOOPPID_EN_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
-        elif received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6202"]:
-            if received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6202"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]:
-                    self.HTR6202_v2.LOOPPIDWindow.Mode.ButtonLClicked()
-                    self.HTR6202_v2.State.ButtonLClicked()
-                else:
-                    self.HTR6202_v2.LOOPPIDWindow.Mode.ButtonRClicked()
-                    self.HTR6202_v2.State.ButtonRClicked()
-                self.LOOPPID_EN_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
-            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["HTR6202"]:
-                if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"] != self.LOOPPID_EN_buffer["HTR6202"]:
-                    if received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]:
-                        self.HTR6202_v2.LOOPPIDWindow.Mode.ButtonLClicked()
-                        self.HTR6202_v2.State.ButtonLClicked()
-                    else:
-                        self.HTR6202_v2.LOOPPIDWindow.Mode.ButtonRClicked()
-                        self.HTR6202_v2.State.ButtonRClicked()
-                    self.LOOPPID_EN_buffer["HTR6202"] = received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"]
-                else:
-                    pass
-
-        self.HTR6202_v2.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"])
-        self.HTR6202_v2.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"])
-
-
-
-
 
 
         if not received_dic_c["data"]["LOOP2PT"]["MAN"]["PUMP3305"]:
@@ -7633,29 +7575,51 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.TT4330.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT4330"])
 
+        self.HTR6219.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6222"])
+        self.HTR6219.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6222"])
+
         self.HTR6202.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6203"])
+        self.HTR6202.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6203"])
+
         self.HTR6206.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6207"])
+        self.HTR6206.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6207"])
+
         self.HTR6210.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6211"])
+        self.HTR6210.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6211"])
+
         self.HTR6214.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6213"])
+        self.HTR6214.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6213"])
+
         self.HTR6221.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6222"])
-        self.HTR6202_v2.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6222"])
+        self.HTR6221.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6222"])
+
         self.HTR6223.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6407"])
+        self.HTR6223.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6407"])
+
         self.HTR6224.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6408"])
+        self.HTR6224.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6408"])
+
         self.HTR6225.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6409"])
+        self.HTR6225.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6409"])
+
         self.HTR2123.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2101"])
+        self.HTR2123.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2101"])
+
         self.HTR2124.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2113"])
         self.HTR2124.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2113"])
+        self.HTR2124.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2113"])
+
         self.HTR2125.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2111"])
         self.HTR2125.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2111"])
-        self.HTR1202.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6415"])
-        self.HTR2203.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6416"])
+        self.HTR2125.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2111"])
 
+        self.HTR1202.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6415"])
+        self.HTR1202.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6415"])
 
+        self.HTR2203.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6416"])
+        self.HTR2203.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6416"])
 
-
-
-        self.HTR6219.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6220"])
-        self.HTR6219.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6222"])
+        self.HTR6219.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6220"])
         # self.MFC1316.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT1332"])
         self.HTR6214.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6401"])
         self.HTR6202.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6404"])
@@ -7664,9 +7628,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR6223.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6410"])
         self.HTR6224.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6411"])
         self.HTR6225.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6412"])
-        self.HTR1202.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6413"])
-        self.HTR2203.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6414"])
-
+        self.HTR1202.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6413"])
+        self.HTR2203.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6414"])
 
         #set indicator's value in 2d_tab
         self.TT2425_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2425"])
@@ -7704,7 +7667,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2437_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2437"])
         self.TT2435_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2435"])
         self.TT2449_2d.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2449"])
-
 
 
         self.SERVO3321.LOOPPIDWindow.Interlock.UpdateColor(
@@ -7785,8 +7747,6 @@ class MainWindow(QtWidgets.QMainWindow):
                                received_dic_c["data"]["LOOPPID"]["SET3"]["HTR6225"]))
         self.HTR6225.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6225"])
-
-
 
 
         self.HTR2123.LOOPPIDWindow.Interlock.UpdateColor(
@@ -8308,46 +8268,6 @@ class MainWindow(QtWidgets.QMainWindow):
             received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6214"])
 
 
-
-
-
-        self.HTR6202_v2.LOOPPIDWindow.Interlock.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["INTLKD"]["HTR6202"])
-        self.HTR6202_v2.LOOPPIDWindow.Error.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["ERR"]["HTR6202"])
-        self.HTR6202_v2.LOOPPIDWindow.MANSP.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["MAN"]["HTR6202"])
-        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["HTR6202"],
-                    received_dic_c["data"]["LOOPPID"]["SATLO"]["HTR6202"]]:
-
-            self.HTR6202_v2.LOOPPIDWindow.SAT.UpdateColor(True)
-        else:
-            self.HTR6202_v2.LOOPPIDWindow.SAT.UpdateColor(False)
-        self.HTR6202_v2.LOOPPIDWindow.ModeREAD.Field.setText(
-
-            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR6202"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR6202"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR6202"],
-                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR6202"]))
-        self.HTR6202_v2.LOOPPIDWindow.EN.UpdateColor(
-            received_dic_c["data"]["LOOPPID"]["EN"]["HTR6202"])
-        self.HTR6202_v2.LOOPPIDWindow.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6202"])
-        self.HTR6202_v2.LOOPPIDWindow.HIGH.SetValue(
-            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["HTR6202"])
-        self.HTR6202_v2.LOOPPIDWindow.LOW.SetValue(
-            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["HTR6202"])
-        self.HTR6202_v2.LOOPPIDWindow.SETSP.SetValue(
-            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["HTR6202"],
-                               received_dic_c["data"]["LOOPPID"]["MODE1"]["HTR6202"],
-                               received_dic_c["data"]["LOOPPID"]["MODE2"]["HTR6202"],
-                               received_dic_c["data"]["LOOPPID"]["MODE3"]["HTR6202"],
-                               received_dic_c["data"]["LOOPPID"]["SET0"]["HTR6202"],
-                               received_dic_c["data"]["LOOPPID"]["SET1"]["HTR6202"],
-                               received_dic_c["data"]["LOOPPID"]["SET2"]["HTR6202"],
-                               received_dic_c["data"]["LOOPPID"]["SET3"]["HTR6202"]))
-        self.HTR6202_v2.Power.SetValue(
-            received_dic_c["data"]["LOOPPID"]["OUT"]["HTR6202"])
 
 
         #LOOP2PT

@@ -1701,6 +1701,9 @@ class UpdatePLC(PLC, threading.Thread):
                 print("Exception in plc raised",e)
                 with self.alarm_lock:
                     self.alarm_stack.update({"PLC updating Exception":"PLC alarm check. Restarting..."})
+                # if errors, clear the commands error, otherwise, the error will be constantly looping over
+                with self.command_lock:
+                    self.command_data.clear()
                 # self run depend on senario, we want to rerun the module by module
                 break
         self.run()
@@ -2864,9 +2867,8 @@ class Message_Manager(threading.Thread):
 
     def slack_init(self):
         self.client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
-        self.logger = logging.getLogger(__name__)
+        # self.logger = logging.getLogger(__name__)
         self.channel_id = "C01A549VDHS"
-
 
 
     def tencent_alarm(self, message):

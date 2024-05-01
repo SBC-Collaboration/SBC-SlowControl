@@ -3778,7 +3778,7 @@ class LOOPPID_v3(QtWidgets.QWidget):
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 50 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 360 * R, 50 * R))
         self.setSizePolicy(sizePolicy)
         # self.setStyleSheet("QWidget { background: red; }")
 
@@ -3790,28 +3790,24 @@ class LOOPPID_v3(QtWidgets.QWidget):
         self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 250 * R, 35 * R))
         self.Label.setMinimumSize(QtCore.QSize(150*R, 30*R))
         self.Label.setProperty("State", False)
-        if bkg_c == 1 and not dotted:
-            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
-                                     + "} QWidget[State = false]{" + C_LIGHT_YELLOW + "}")
-        elif bkg_c == 0 and not dotted:
-            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
-                                 + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
-
-        elif bkg_c == 1 and dotted:
-            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + DOTTED_BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
-                                     + "} QWidget[State = false]{" + C_LIGHT_YELLOW + "}")
-
-        elif bkg_c == 0 and dotted:
-            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + DOTTED_BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
-                                 + "} QWidget[State = false]{" + C_MEDIUM_GREY + "}")
+        style_text= "QPushButton {" + TITLE_STYLE
+        if dotted:
+            style_text += DOTTED_BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN + "} QWidget[State = false]{"
         else:
+            style_text += BORDER_STYLE+ "} QWidget[State = true]{" + C_GREEN + "} QWidget[State = false]{"
 
-            self.Label.setStyleSheet("QPushButton {" + TITLE_STYLE + BORDER_STYLE + "} QWidget[State = true]{" + C_GREEN
-                                     + "} QWidget[State = false]{" + C_LIGHT_YELLOW + "}")
+        if bkg_c==0:
+            style_text +=C_MEDIUM_GREY+ "}"
+        elif bkg_c == 1 :
+            style_text += C_LIGHT_YELLOW + "}"
+        else:
+            style_text += C_MEDIUM_GREY + "}"
+        self.Label.setStyleSheet(style_text)
+
 
         self.Colorband = QtWidgets.QLabel(self)
         self.Colorband.setObjectName("Colorband")
-        self.Colorband.setGeometry(QtCore.QRect(244 * R, 7 * R, 10 * R, 35 * R))
+        self.Colorband.setGeometry(QtCore.QRect(254 * R, 7 * R, 10 * R, 35 * R))
         if colorcode == 0:
             self.Colorband.setStyleSheet("QLabel {" + C_BLUE + ROUND_BORDER_STYLE + "}")
         elif colorcode ==1:
@@ -3858,8 +3854,8 @@ class LOOPPID_v3(QtWidgets.QWidget):
         self.content_area = QtWidgets.QScrollArea(
             maximumHeight=0, minimumHeight=0
         )
-        # self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 40 * R))
-        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 350 * R, 70 * R))
+
+        self.content_area.setGeometry(QtCore.QRect(0 * R, 0 * R, 360 * R, 70 * R))
         # self.content_area.setMinimumSize()
         # self.content_area.setSizePolicy(
         #     QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed
@@ -3867,7 +3863,6 @@ class LOOPPID_v3(QtWidgets.QWidget):
         self.content_area.setSizePolicy(sizePolicy)
         self.content_area.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.content_area.setStyleSheet("QWidget { background: transparent; }")
-        # self.content_area.setStyleSheet("QWidget { background: grey; }")
 
         lay = QtWidgets.QGridLayout(self)
         lay.setSpacing(0)
@@ -3875,7 +3870,6 @@ class LOOPPID_v3(QtWidgets.QWidget):
         lay.addWidget(self.Label, 0,0,1,4)
         lay.addWidget(self.Power,0,4,1,1)
         lay.addWidget(self.Tool,0,5,1,1)
-        # lay.addWidget(self.Tool)
         lay.addWidget(self.content_area,1,0,1,5)
 
         self.toggle_animation.addAnimation(
@@ -3888,16 +3882,8 @@ class LOOPPID_v3(QtWidgets.QWidget):
             QtCore.QPropertyAnimation(self.content_area, b"maximumHeight")
         )
 
-        self.lay = QtWidgets.QHBoxLayout()
-        # self.lay = QtWidgets.QGridLayout()
-        # self.lay.setSpacing(0)
-        # self.lay.setContentsMargins(0, 0, 0, 0)
-        # self.lay.addWidget(self.Label, 0, 0, 1, 3)
-        # self.lay.addWidget(self.Power, 0, 3, 1, 1)
-        # self.lay.addWidget(self.Tool, 0, 4, 1, 1)
-
-        # lay.addWidget(self.Tool)
-        # selflay.addWidget(self.content_area, 1, 0, 1, 5)
+        self.lay = QtWidgets.QGridLayout()
+        self.lay.setContentsMargins(0, 0, 0, 0)
 
 
         self.State = DoubleButton_s(self)
@@ -3908,19 +3894,13 @@ class LOOPPID_v3(QtWidgets.QWidget):
         self.RTD1 = Indicator(self)
         self.RTD1.SetUnit(" K")
 
-        # self.RTD2 = Indicator(self)
-        # self.RTD2.SetUnit(" K")
-
-
-
         self.StatusTransition = ColoredStatus(self, mode=3)
         self.StatusTransition.setObjectName("StatusTransition")
         self.StatusTransition.Label.setText("Busy")
 
-        self.lay.addWidget(self.State)
-        self.lay.addWidget(self.StatusTransition)
-        self.lay.addWidget(self.RTD1)
-        # self.lay.addWidget(self.RTD2)
+        self.lay.addWidget(self.State,0,0,1,2)
+        self.lay.addWidget(self.StatusTransition,0,2,1,1)
+        self.lay.addWidget(self.RTD1,0,3,1,1)
 
         self.setContentLayout(self.lay)
 
