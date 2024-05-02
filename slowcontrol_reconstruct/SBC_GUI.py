@@ -118,6 +118,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         App.aboutToQuit.connect(self.StopUpdater)
         # Start display updater; comment out to show GUI only
+        print("start updater...")
         # self.StartUpdater()
         # self.signal_connection()
 
