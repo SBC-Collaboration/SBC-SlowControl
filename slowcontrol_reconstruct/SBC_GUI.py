@@ -547,7 +547,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2416.SetUnit(" K")
 
         self.TT2417 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
-        self.TT2417.move(1892 * R, 92 * R)
+        self.TT2417.move(615 * R, 1092 * R)
         self.TT2417.Label.setText("TT2417")
         self.TT2417.SetUnit(" K")
 
@@ -628,7 +628,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         self.TT2435 = Indicator_v2(self.ChamberTab, colorcode=1, bkg_c=2, dotted = True)
-        self.TT2435.move(820 * R, 1020 * R)
+        self.TT2435.move(835 * R, 1020 * R)
         self.TT2435.Label.setText("TT2435")
         self.TT2435.SetUnit(" K")
 
@@ -798,7 +798,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2123.RTD1.Label.setText("TT2101")
 
         self.HTR2124 = LOOPPID_v3(self.ChamberTab, colorcode=2,bkg_c = 1)
-        self.HTR2124.move(2030*R, 30*R)
+        self.HTR2124.move(950*R, 1047*R)
         self.HTR2124.Label.setText("HTR2124")
         self.HTR2124.LOOPPIDWindow.setWindowTitle("HTR2124")
         self.HTR2124.LOOPPIDWindow.Label.setText("HTR2124")
@@ -807,7 +807,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2124.RTD1.Label.setText("TT2113")
 
         self.HTR2125 = LOOPPID_v3(self.ChamberTab, colorcode=2,bkg_c = 1)
-        self.HTR2125.move(1310*R, 60*R)
+        self.HTR2125.move(250*R, 1090*R)
         self.HTR2125.Label.setText("HTR2125")
         self.HTR2125.LOOPPIDWindow.setWindowTitle("HTR2125")
         self.HTR2125.LOOPPIDWindow.Label.setText("HTR2125")
