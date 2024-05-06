@@ -7594,8 +7594,12 @@ class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
         self.SEL_WR.Label.setText("SEL")
         self.GLWR.addWidget(self.SEL_WR)
 
+        self.SEL_WR_v2= Selection(self.GroupWR)
+        self.SEL_WR_v2.Label.setText("SEL")
+        self.GLWR.addWidget(self.SEL_WR_v2)
+
         self.ADDREM_MASS_WR = SetPoint(self.GroupWR)
-        self.ADDREM_MASS_WR.Label.setText("ADDREM_MASS")
+        self.ADDREM_MASS_WR.Label.setText("MASS")
         self.GLWR.addWidget(self.ADDREM_MASS_WR)
 
         self.MAXTIME_WR = SetPoint(self.GroupWR)
@@ -7628,8 +7632,9 @@ class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
         self.SEL_RD.Label.setText("SEL")
         self.GLRD.addWidget(self.SEL_RD)
 
+
         self.ADDREM_MASS_RD = Indicator(self.GroupWR)
-        self.ADDREM_MASS_RD.Label.setText("ADDREM_MASS")
+        self.ADDREM_MASS_RD.Label.setText("MASS")
         self.GLRD.addWidget(self.ADDREM_MASS_RD)
 
         self.MAXTIME_RD = Indicator(self.GroupWR)
@@ -7663,7 +7668,37 @@ class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
         self.GLRD.addWidget(self.TS3_MASS)
 
 
+class Selection(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("Selection box")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 40 * R))
+        self.setMinimumSize(70 * R, 40 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.Background = QtWidgets.QLabel(self)
+        self.Background.setObjectName("Background")
+        self.Background.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 40 * R))
+        self.Background.setStyleSheet("QLabel {" + C_LIGHT_GREY + BORDER_STYLE + "}")
+
+        self.Label = QtWidgets.QLabel(self)
+        self.Label.setObjectName("Label")
+        self.Label.setText("Selection Box")
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 20 * R))
+        self.Label.setAlignment(QtCore.Qt.AlignCenter)
+        self.Label.setStyleSheet("QLabel {" + FONT + "}")
+
+        self.Field = QtWidgets.QComboBox(self)
+        self.Field.setObjectName("Combobox value")
+        self.Field.setGeometry(QtCore.QRect(0 * R, 20 * R, 70 * R, 20 * R))
+        self.Field.setStyleSheet(
+            "QComboBox{" + BORDER_STYLE + LAG_FONT + C_BKG_WHITE + "}")
+        self.Field.addItems(['0', '1', '2'])
+
+        self.Field.Property = False
 
 class ProcedureWidget_PC(QtWidgets.QWidget):
     def __init__(self, parent=None):
