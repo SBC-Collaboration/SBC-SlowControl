@@ -4909,19 +4909,19 @@ class SetPoint(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("SetPoint")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
-        self.setMinimumSize(70*R, 40*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 60*R))
+        self.setMinimumSize(90*R, 60*R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 40*R))
+        self.Background.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 60*R))
         self.Background.setStyleSheet("QLabel {" +C_LIGHT_GREY + BORDER_STYLE+"}")
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("SetPoint")
-        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 70*R, 20*R))
+        self.Label.setGeometry(QtCore.QRect(0*R, 0*R, 90*R, 25*R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet("QLabel {" +FONT+"}")
 
@@ -4929,8 +4929,8 @@ class SetPoint(QtWidgets.QWidget):
         self.Field.setValidator(QtGui.QDoubleValidator(-1000,1000,2))
         self.Field.setAlignment(QtCore.Qt.AlignCenter)
         self.Field.setObjectName("setpoint value")
-        self.Field.setGeometry(QtCore.QRect(0*R, 20*R, 70*R, 20*R))
-        self.Field.setStyleSheet("QLineEdit {"+BORDER_STYLE + C_BLACK + FONT+"}")
+        self.Field.setGeometry(QtCore.QRect(0*R, 25*R, 90*R, 35*R))
+        self.Field.setStyleSheet("QLineEdit {"+BORDER_STYLE + C_BLACK + LAG_FONT+"}")
         self.Field.editingFinished.connect(self.UpdateValue)
         self.value = 0
         self.Field.setText(str(self.value))
@@ -5306,18 +5306,18 @@ class AlarmStatusWidget(QtWidgets.QWidget):
         self.Indicator = Indicator(self)
         self.Indicator.Label.setText("Indicator")
 
-        self.GL.addWidget(self.Indicator,1,0,QtCore.Qt.AlignCenter)
+        self.GL.addWidget(self.Indicator,1,2,QtCore.Qt.AlignCenter)
 
 
         self.Low_Read = Indicator(self)
         self.Low_Read.Label.setText("Low")
 
-        self.GL.addWidget(self.Low_Read,1,1,QtCore.Qt.AlignCenter)
+        self.GL.addWidget(self.Low_Read,1,0,QtCore.Qt.AlignCenter)
 
         self.High_Read = Indicator(self)
         self.High_Read.Label.setText("High")
 
-        self.GL.addWidget(self.High_Read, 1, 2,QtCore.Qt.AlignCenter)
+        self.GL.addWidget(self.High_Read, 1, 1,QtCore.Qt.AlignCenter)
 
         self.Low_Set = SetPoint(self)
         self.Low_Set.Label.setText("L SET")
@@ -7675,25 +7675,25 @@ class Selection(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("Selection box")
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 40 * R))
-        self.setMinimumSize(70 * R, 40 * R)
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 90 * R, 60 * R))
+        self.setMinimumSize(90 * R, 60 * R)
         self.setSizePolicy(sizePolicy)
 
         self.Background = QtWidgets.QLabel(self)
         self.Background.setObjectName("Background")
-        self.Background.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 40 * R))
+        self.Background.setGeometry(QtCore.QRect(0 * R, 0 * R, 90 * R, 60 * R))
         self.Background.setStyleSheet("QLabel {" + C_LIGHT_GREY + BORDER_STYLE + "}")
 
         self.Label = QtWidgets.QLabel(self)
         self.Label.setObjectName("Label")
         self.Label.setText("Selection Box")
-        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 20 * R))
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 90 * R, 25 * R))
         self.Label.setAlignment(QtCore.Qt.AlignCenter)
         self.Label.setStyleSheet("QLabel {" + FONT + "}")
 
         self.Field = QtWidgets.QComboBox(self)
         self.Field.setObjectName("Combobox value")
-        self.Field.setGeometry(QtCore.QRect(0 * R, 20 * R, 70 * R, 20 * R))
+        self.Field.setGeometry(QtCore.QRect(0 * R, 22 * R, 90 * R, 35 * R))
         self.Field.setStyleSheet(
             "QComboBox{" + BORDER_STYLE + LAG_FONT + C_BKG_WHITE + "}")
         self.Field.addItems(['0', '1', '2'])
