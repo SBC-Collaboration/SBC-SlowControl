@@ -4786,12 +4786,18 @@ class MainWindow(QtWidgets.QMainWindow):
         try:
             if pname=="ADDREM":
                 pid = "TS_ADDREM"
+            elif pname == "EMPTY":
+                pid = "TS_EMPTY"
+            elif pname == "EMPTY_ALL":
+                pid = "TS_EMPTYALL"
+            else:
+                raise Exception("Procedure no correct name!")
 
-                address = self.address[pid]
-                self.commands.update({pid: {"server": "BO", "address": address, "type": "Procedure_TS",
+            address = self.address[pid]
+            self.commands.update({pid: {"server": "BO", "address": address, "type": "Procedure_TS",
                                         "operation": {"RST_FF": RST, "SEL": SEL, "ADDREM_MASS": ADDREM_MASS,
                                                       "MAXTIME": MAXTIME, "update": update}}})
-                print(pid, RST, SEL, ADDREM_MASS, MAXTIME, update, "ARE OK?")
+            print(pid, RST, SEL, ADDREM_MASS, MAXTIME, update, "ARE OK?")
         except Exception as e:
             print(e)
 

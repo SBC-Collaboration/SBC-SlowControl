@@ -7817,7 +7817,7 @@ class ProcedureTS_v2(QtWidgets.QWidget):
         self.TS3_MASS.SetUnit(" ")
         self.GLRD.addWidget(self.TS3_MASS)
 
-        self.Label.currentIndexChanged.connect(self.write_lock)
+        # self.Label.currentIndexChanged.connect(self.write_lock)
     def write_lock(self):
         if self.Label.currentText() =="ADDREM":
             self.SEL_WR.set_writable(True)
