@@ -4946,7 +4946,13 @@ class SetPoint(QtWidgets.QWidget):
 
     def UpdateValue(self):
         self.value = self.Field.text()
-
+    def set_writable(self, bool):
+        if bool:
+            self.Field.setReadOnly(False)
+            self.Field.setStyleSheet("QLineEdit {"+BORDER_STYLE + C_BLACK + LAG_FONT +C_BKG_WHITE+"}")
+        else:
+            self.Field.setReadOnly(True)
+            self.Field.setStyleSheet("QLineEdit {"+BORDER_STYLE + C_BLACK + LAG_FONT+C_LIGHT_GREY+"}")
 
 
 class CheckButton(QtWidgets.QWidget):
@@ -4983,8 +4989,8 @@ class Loadfile(QtWidgets.QWidget):
         self.default_dict = copy.copy(sec.DIC_PACK)
 
         self.setObjectName("LoadFile")
-        self.setGeometry(QtCore.QRect(0*R, 0*R, 600*R, 1000*R))
-        self.setMinimumSize(600*R, 1000*R)
+        self.setGeometry(QtCore.QRect(0*R, 0*R, 600*R, 900*R))
+        self.setMinimumSize(600*R, 900*R)
         self.setSizePolicy(sizePolicy)
 
         self.VL = QtWidgets.QVBoxLayout(self)
@@ -7260,9 +7266,9 @@ class ProcedureWidget(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("ProcedureWidget")
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 460 * R, 200 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 520 * R, 200 * R))
 
-        self.setMinimumSize(460 * R, 20 * R)
+        self.setMinimumSize(520 * R, 20 * R)
         self.setSizePolicy(sizePolicy)
         self.objectname = "ProcedureWidget"
         # self.setStyleSheet("QWidget { background: transparent; }")
@@ -7458,9 +7464,9 @@ class ProcedureWidget_TS(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("ProcedureWidget")
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 460 * R, 200 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 520 * R, 200 * R))
 
-        self.setMinimumSize(460 * R, 20 * R)
+        self.setMinimumSize( 520* R, 20 * R)
         self.setSizePolicy(sizePolicy)
         self.objectname = "ProcedureWidget"
         # self.setStyleSheet("QWidget { background: transparent; }")
@@ -7561,7 +7567,7 @@ class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
         self.GroupRD = QtWidgets.QGroupBox(self.Widget)
         self.GroupRD.setTitle("Read")
         self.GroupRD.setLayout(self.GLRD)
-        self.GroupRD.move(0 * R, 240 * R)
+        self.GroupRD.move(0 * R, 150 * R)
 
         self.Label = QtWidgets.QPushButton(self.GroupWR)
         self.Label.setObjectName("Label")
@@ -7667,6 +7673,164 @@ class ProcedureSubWindow_TS(QtWidgets.QMainWindow):
         self.TS3_MASS.SetUnit(" ")
         self.GLRD.addWidget(self.TS3_MASS)
 
+class ProcedureTS_v2(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+
+        self.setObjectName("ProcedureWidgetTS")
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 1500 * R, 600 * R))
+
+        self.setMinimumSize(1500 * R, 600 * R)
+        self.setSizePolicy(sizePolicy)
+
+        self.resize(1500*R, 600*R)
+
+
+        # Groupboxs for alarm/PT/TT
+
+        self.GLWR = QtWidgets.QHBoxLayout()
+        self.GLWR.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLWR.setSpacing(20 * R)
+
+        self.GLWR.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupWR = QtWidgets.QGroupBox(self)
+        self.GroupWR.setTitle("TS Write")
+        self.GroupWR.setLayout(self.GLWR)
+        self.GroupWR.setStyleSheet("QGroupBox:title { color: white; }")
+        self.GroupWR.move(0 * R, 0 * R)
+
+        self.GLRD = QtWidgets.QHBoxLayout()
+        self.GLRD.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.GLRD.setSpacing(20 * R)
+        self.GLRD.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupRD = QtWidgets.QGroupBox(self)
+        self.GroupRD.setStyleSheet("QGroupBox:title { color: white; }")
+        self.GroupRD.setTitle("TS Read")
+        self.GroupRD.setLayout(self.GLRD)
+        self.GroupRD.move(0 * R, 150 * R)
+
+        # self.Label = QtWidgets.QPushButton(self.GroupWR)
+        # self.Label.setObjectName("Label")
+        # self.Label.setText("TS_ADDREM")
+        # self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        # self.GLWR.addWidget(self.Label)
+
+        self.Label = QtWidgets.QComboBox(self.GroupWR)
+        self.Label.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.Label.addItems(['ADDREM', 'EMPTY', 'EMPTY_ALL'])
+        self.Label.setCurrentIndex(0)
+        self.Label.setEditable(False)
+        self.GLWR.addWidget(self.Label)
+
+        self.Start = QtWidgets.QPushButton(self.GroupWR)
+        self.Start.setText("Start")
+        self.Start.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Start)
+
+        self.Stop = QtWidgets.QPushButton(self.GroupWR)
+        self.Stop.setText("Stop")
+        self.Stop.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Stop)
+
+        self.Abort = QtWidgets.QPushButton(self.GroupWR)
+        self.Abort.setText("Abort")
+        self.Abort.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.Abort)
+
+        self.RST_FF = QtWidgets.QPushButton(self.GroupWR)
+        self.RST_FF.setText("RST_FF")
+        self.GLWR.addWidget(self.RST_FF)
+
+        self.SEL_WR= Selection(self.GroupWR)
+        self.SEL_WR.Label.setText("SEL")
+        self.GLWR.addWidget(self.SEL_WR)
+
+        self.ADDREM_MASS_WR = SetPoint(self.GroupWR)
+        self.ADDREM_MASS_WR.Label.setText("MASS")
+        self.GLWR.addWidget(self.ADDREM_MASS_WR)
+
+        self.MAXTIME_WR = SetPoint(self.GroupWR)
+        self.MAXTIME_WR.Label.setText("MAXTIME")
+        self.GLWR.addWidget(self.MAXTIME_WR)
+
+        self.updatebutton = QtWidgets.QPushButton(self.GroupWR)
+        self.updatebutton.setText("Update")
+        self.updatebutton.setGeometry(QtCore.QRect(0 * R, 0 * R, 40 * R, 70 * R))
+        self.GLWR.addWidget(self.updatebutton)
+
+        self.INTLKD = ColoredStatus(self.GroupRD, mode = 1)
+        self.INTLKD.Label.setText("INTLCK")
+        self.GLRD.addWidget(self.INTLKD)
+
+        self.Running = ColoredStatus(self, mode=4)
+        self.Running.Label.setText("Running")
+        self.GLRD.addWidget(self.Running)
+
+        self.EXIT = Indicator(self.GroupRD)
+        self.EXIT.Label.setText("EXIT")
+        self.EXIT.SetUnit(" ")
+        self.GLRD.addWidget(self.EXIT)
+
+        self.FF_RD = Indicator(self.GroupWR)
+        self.FF_RD.Label.setText("FF")
+        self.GLRD.addWidget(self.FF_RD)
+
+        self.SEL_RD = Indicator(self.GroupWR)
+        self.SEL_RD.Label.setText("SEL")
+        self.GLRD.addWidget(self.SEL_RD)
+
+
+        self.ADDREM_MASS_RD = Indicator(self.GroupWR)
+        self.ADDREM_MASS_RD.Label.setText("MASS")
+        self.GLRD.addWidget(self.ADDREM_MASS_RD)
+
+        self.MAXTIME_RD = Indicator(self.GroupWR)
+        self.MAXTIME_RD.Label.setText("MAXTIME")
+        self.GLRD.addWidget(self.MAXTIME_RD)
+
+
+        self.N2MASSTX = Indicator(self.GroupRD)
+        self.N2MASSTX.Label.setText("N2MASSTX")
+        self.N2MASSTX.SetUnit(" ")
+        self.GLRD.addWidget(self.N2MASSTX)
+
+        self.FLOWET = Indicator(self.GroupRD)
+        self.FLOWET.Label.setText("FLOWET")
+        self.FLOWET.SetUnit(" ")
+        self.GLRD.addWidget(self.FLOWET)
+
+        self.TS1_MASS = Indicator(self.GroupRD)
+        self.TS1_MASS.Label.setText("TS1_MASS")
+        self.TS1_MASS.SetUnit(" ")
+        self.GLRD.addWidget(self.TS1_MASS)
+
+        self.TS2_MASS = Indicator(self.GroupRD)
+        self.TS2_MASS.Label.setText("TS2_MASS")
+        self.TS2_MASS.SetUnit(" ")
+        self.GLRD.addWidget(self.TS2_MASS)
+
+        self.TS3_MASS = Indicator(self.GroupRD)
+        self.TS3_MASS.Label.setText("TS3_MASS")
+        self.TS3_MASS.SetUnit(" ")
+        self.GLRD.addWidget(self.TS3_MASS)
+
+        self.Label.currentIndexChanged.connect(self.write_lock)
+    def write_lock(self):
+        if self.Label.currentText() =="ADDREM":
+            self.SEL_WR.set_writable(True)
+            self.ADDREM_MASS_WR.set_writable(True)
+            self.MAXTIME_WR.set_writable(True)
+        elif self.Label.currentText() =="EMPTY":
+            self.SEL_WR.set_writable(True)
+            self.ADDREM_MASS_WR.set_writable(False)
+            self.MAXTIME_WR.set_writable(False)
+        elif self.Label.currentText() == "EMPTY_ALL":
+            self.SEL_WR.set_writable(False)
+            self.ADDREM_MASS_WR.set_writable(False)
+            self.MAXTIME_WR.set_writable(False)
 
 class Selection(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -7697,8 +7861,20 @@ class Selection(QtWidgets.QWidget):
         self.Field.setStyleSheet(
             "QComboBox{" + BORDER_STYLE + LAG_FONT + C_BKG_WHITE + "}")
         self.Field.addItems(['0', '1', '2'])
+        self.Field.setEditable(False)
 
         self.Field.Property = False
+    def set_writable(self, bool):
+        if bool:
+
+            self.Field.setEnabled(True)
+            self.Field.setStyleSheet(
+                "QComboBox{" + BORDER_STYLE + LAG_FONT + C_BKG_WHITE + "}")
+        else:
+            self.Field.setEnabled(False)
+            self.Field.setStyleSheet(
+                "QComboBox{" + BORDER_STYLE + LAG_FONT + C_LIGHT_GREY + "}")
+
 
 class ProcedureWidget_PC(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -7707,9 +7883,9 @@ class ProcedureWidget_PC(QtWidgets.QWidget):
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
         self.setObjectName("ProcedureWidget")
-        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 460 * R, 200 * R))
+        self.setGeometry(QtCore.QRect(0 * R, 0 * R, 520 * R, 200 * R))
 
-        self.setMinimumSize(460 * R, 20 * R)
+        self.setMinimumSize(520 * R, 20 * R)
         self.setSizePolicy(sizePolicy)
         self.objectname = "ProcedureWidget"
         # self.setStyleSheet("QWidget { background: transparent; }")

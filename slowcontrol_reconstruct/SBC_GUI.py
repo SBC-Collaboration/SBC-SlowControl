@@ -1398,36 +1398,40 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.SaveSettings.SaveFileButton.clicked.connect(
         #     lambda x: self.Save(directory=self.SaveSettings.Head, project=self.SaveSettings.Tail))
 
+        self.TS_PRO = ProcedureTS_v2(self.DatanSignalTab)
+        self.TS_PRO.move(50 * R, 950 * R)
+        self.TS_PRO.MAXTIME_RD.MAXTIME_RD.Unit=' s'
+        self.TS_PRO.MAXTIME_RD.FLOWET.Unit = ' s'
 
-        self.TS_ADDREM = ProcedureWidget_TS(self.DatanSignalTab)
-        self.TS_ADDREM.move(700*R, 150*R)
-        self.TS_ADDREM.Group.setTitle("TS ADDREM")
-        self.TS_ADDREM.objectname = "TS_ADDREM"
-        self.TS_ADDREM.expandwindow.MAXTIME_RD.Unit=' s'
-        self.TS_ADDREM.expandwindow.FLOWET.Unit = ' s'
+        # self.TS_ADDREM = ProcedureWidget_TS(self.DatanSignalTab)
+        # self.TS_ADDREM.move(1800*R, 150*R)
+        # self.TS_ADDREM.Group.setTitle("TS ADDREM")
+        # self.TS_ADDREM.objectname = "TS_ADDREM"
+        # self.TS_ADDREM.expandwindow.MAXTIME_RD.Unit=' s'
+        # self.TS_ADDREM.expandwindow.FLOWET.Unit = ' s'
 
-        self.TS_EMPTY = ProcedureWidget(self.DatanSignalTab)
-        self.TS_EMPTY.move(700 * R, 390 * R)
-        self.TS_EMPTY.Group.setTitle("TS EMPTY")
-        self.TS_EMPTY.objectname = "TS_EMPTY"
-
-        self.TS_EMPTYALL = ProcedureWidget(self.DatanSignalTab)
-        self.TS_EMPTYALL.move(700 * R, 630 * R)
-        self.TS_EMPTYALL.Group.setTitle("TS EMPTY ALL")
-        self.TS_EMPTYALL.objectname = "TS_EMPTYALL"
+        # self.TS_EMPTY = ProcedureWidget(self.DatanSignalTab)
+        # self.TS_EMPTY.move(1800 * R, 390 * R)
+        # self.TS_EMPTY.Group.setTitle("TS EMPTY")
+        # self.TS_EMPTY.objectname = "TS_EMPTY"
+        #
+        # self.TS_EMPTYALL = ProcedureWidget(self.DatanSignalTab)
+        # self.TS_EMPTYALL.move(1800 * R, 630 * R)
+        # self.TS_EMPTYALL.Group.setTitle("TS EMPTY ALL")
+        # self.TS_EMPTYALL.objectname = "TS_EMPTYALL"
 
         self.PU_PRIME = ProcedureWidget(self.DatanSignalTab)
-        self.PU_PRIME.move(700 * R, 870 * R)
+        self.PU_PRIME.move(1800 * R, 870 * R)
         self.PU_PRIME.Group.setTitle("PU PRIME")
         self.PU_PRIME.objectname = "PU_PRIME"
 
         self.WRITE_SLOWDAQ = ProcedureWidget(self.DatanSignalTab)
-        self.WRITE_SLOWDAQ.move(700 * R, 1110 * R)
+        self.WRITE_SLOWDAQ.move(1800 * R, 1110 * R)
         self.WRITE_SLOWDAQ.Group.setTitle("WRITE SLOWDAQ")
         self.WRITE_SLOWDAQ.objectname = "WRITE_SLOWDAQ"
 
         self.PRESSURE_CYCLE = ProcedureWidget_PC(self.DatanSignalTab)
-        self.PRESSURE_CYCLE.move(1300 * R, 150 * R)
+        self.PRESSURE_CYCLE.move(1250 * R, 150 * R)
         self.PRESSURE_CYCLE.Group.setTitle("PRESSURE_CYCLE")
         self.PRESSURE_CYCLE.objectname = "PRESSURE_CYCLE"
         self.PRESSURE_CYCLE.expandwindow.EXPTIME_RD.Unit = " s"
@@ -4109,30 +4113,50 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         #Procedure widgets
-        self.TS_ADDREM.START.clicked.connect(lambda: self.ProcedureClick(pid = self.TS_ADDREM.objectname, start = True, stop = False, abort = False))
-        self.TS_ADDREM.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=True, abort=False))
-        self.TS_ADDREM.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=False, abort=True))
+        self.TS_PRO.START.clicked.connect(
+            lambda: self.ProcedureClick_TSv2(pname=self.TS_PRO.Label.currentText(), start=True, stop=False, abort=False))
+        self.TS_PRO.STOP.clicked.connect(
+            lambda: self.ProcedureClick_TSv2(pname=self.TS_PRO.Label.currentText(), start=False, stop=True, abort=False))
+        self.TS_PRO.ABORT.clicked.connect(
+            lambda: self.ProcedureClick_TSv2(pname=self.TS_PRO.Label.currentText(), start=False, stop=False, abort=True))
 
-        self.TS_ADDREM.expandwindow.Start.clicked.connect(
-            lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=True, stop=False, abort=False))
-        self.TS_ADDREM.expandwindow.Stop.clicked.connect(
-            lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=True, abort=False))
-        self.TS_ADDREM.expandwindow.Abort.clicked.connect(
-            lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=False, abort=True))
-        self.TS_ADDREM.expandwindow.RST_FF.clicked.connect(
-            lambda: self.Procedure_TS_update(pid=self.TS_ADDREM.objectname,  RST=True, SEL=self.TS_ADDREM.expandwindow.SEL_WR.Field.text(), ADDREM_MASS=self.TS_ADDREM.expandwindow.ADDREM_MASS_WR.Field.text(), MAXTIME=self.TS_ADDREM.expandwindow.MAXTIME_WR.Field.text(),update=False))
-        self.TS_ADDREM.expandwindow.updatebutton.clicked.connect(
-            lambda: self.Procedure_TS_update(pid=self.TS_ADDREM.objectname,  RST=False, SEL=self.TS_ADDREM.expandwindow.SEL_WR.Field.text(), ADDREM_MASS=self.TS_ADDREM.expandwindow.ADDREM_MASS_WR.Field.text(), MAXTIME=self.TS_ADDREM.expandwindow.MAXTIME_WR.Field.text(),update=True))
+        self.TS_PRO.RST_FF.clicked.connect(
+            lambda: self.Procedure_TS_updatev2(pname=self.TS_PRO.Label.currentText(), RST=True,
+                                               SEL=self.TS_PRO.SEL_WR.Field.text(),
+                                               ADDREM_MASS=self.TS_PRO.ADDREM_MASS_WR.Field.text(),
+                                               MAXTIME=self.TS_PRO.MAXTIME_WR.Field.text(),
+                                               update=False))
+        self.TS_PRO.updatebutton.clicked.connect(
+            lambda: self.Procedure_TS_updatev2(pname=self.TS_PRO.Label.currentText(), RST=False,
+                                               SEL=self.TS_PRO.SEL_WR.Field.text(),
+                                               ADDREM_MASS=self.TS_PRO.ADDREM_MASS_WR.Field.text(),
+                                               MAXTIME=self.TS_PRO.MAXTIME_WR.Field.text(),
+                                               update=True))
+
+        # self.TS_ADDREM.START.clicked.connect(lambda: self.ProcedureClick(pid = self.TS_ADDREM.objectname, start = True, stop = False, abort = False))
+        # self.TS_ADDREM.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=True, abort=False))
+        # self.TS_ADDREM.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=False, abort=True))
+        #
+        # self.TS_ADDREM.expandwindow.Start.clicked.connect(
+        #     lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=True, stop=False, abort=False))
+        # self.TS_ADDREM.expandwindow.Stop.clicked.connect(
+        #     lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=True, abort=False))
+        # self.TS_ADDREM.expandwindow.Abort.clicked.connect(
+        #     lambda: self.ProcedureClick(pid=self.TS_ADDREM.objectname, start=False, stop=False, abort=True))
+        # self.TS_ADDREM.expandwindow.RST_FF.clicked.connect(
+        #     lambda: self.Procedure_TS_update(pname=self.TS_ADDREM.objectname,  RST=True, SEL=self.TS_ADDREM.expandwindow.SEL_WR.Field.text(), ADDREM_MASS=self.TS_ADDREM.expandwindow.ADDREM_MASS_WR.Field.text(), MAXTIME=self.TS_ADDREM.expandwindow.MAXTIME_WR.Field.text(),update=False))
+        # self.TS_ADDREM.expandwindow.updatebutton.clicked.connect(
+        #     lambda: self.Procedure_TS_update(pname=self.TS_ADDREM.objectname,  RST=False, SEL=self.TS_ADDREM.expandwindow.SEL_WR.Field.text(), ADDREM_MASS=self.TS_ADDREM.expandwindow.ADDREM_MASS_WR.Field.text(), MAXTIME=self.TS_ADDREM.expandwindow.MAXTIME_WR.Field.text(),update=True))
 
 
 
-        self.TS_EMPTY.START.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=True, stop=False, abort=False))
-        self.TS_EMPTY.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=False, stop=True, abort=False))
-        self.TS_EMPTY.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=False, stop=False, abort=True))
-
-        self.TS_EMPTYALL.START.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTYALL.objectname, start=True, stop=False, abort=False))
-        self.TS_EMPTYALL.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTYALL.objectname, start=False, stop=True, abort=False))
-        self.TS_EMPTYALL.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTYALL.objectname, start=False, stop=False, abort=True))
+        # self.TS_EMPTY.START.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=True, stop=False, abort=False))
+        # self.TS_EMPTY.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=False, stop=True, abort=False))
+        # self.TS_EMPTY.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTY.objectname, start=False, stop=False, abort=True))
+        #
+        # self.TS_EMPTYALL.START.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTYALL.objectname, start=True, stop=False, abort=False))
+        # self.TS_EMPTYALL.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTYALL.objectname, start=False, stop=True, abort=False))
+        # self.TS_EMPTYALL.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.TS_EMPTYALL.objectname, start=False, stop=False, abort=True))
 
         self.PU_PRIME.START.clicked.connect(lambda: self.ProcedureClick(pid=self.PU_PRIME.objectname, start=True, stop=False, abort=False))
         self.PU_PRIME.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.PU_PRIME.objectname, start=False, stop=True, abort=False))
@@ -4730,12 +4754,44 @@ class MainWindow(QtWidgets.QMainWindow):
             print(e)
 
     @QtCore.Slot()
+    def ProcedureClick_TSv2(self, pname, start, stop, abort):
+        try:
+            if pname=="ADDREM":
+                pid = "TS_ADDREM"
+            elif pname=="EMPTY":
+                pid = "TS_EMPTY"
+            elif pname=="EMPTY_ALL":
+                pid = "TS_EMPTYALL"
+            else:
+                raise Exception("Procedure no correct name!")
+            address = self.address[pid]
+            self.commands.update({pid: {"server": "BO", "address": address, "type": "Procedure",
+                                        "operation": {"Start": start, "Stop": stop, "Abort": abort}}})
+            print(pid, start, stop, abort, "ARE OK?")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
     def Procedure_TS_update(self, pid, RST, SEL, ADDREM_MASS, MAXTIME,update):
         try:
             address = self.address[pid]
             self.commands.update({pid:{"server": "BO", "address": address, "type": "Procedure_TS",
                                   "operation": {"RST_FF":RST, "SEL": SEL, "ADDREM_MASS": ADDREM_MASS, "MAXTIME": MAXTIME,"update":update}}})
             print(pid, RST, SEL, ADDREM_MASS, MAXTIME,update, "ARE OK?")
+        except Exception as e:
+            print(e)
+
+    @QtCore.Slot()
+    def Procedure_TS_updatev2(self, pname, RST, SEL, ADDREM_MASS, MAXTIME, update):
+        try:
+            if pname=="ADDREM":
+                pid = "TS_ADDREM"
+
+                address = self.address[pid]
+                self.commands.update({pid: {"server": "BO", "address": address, "type": "Procedure_TS",
+                                        "operation": {"RST_FF": RST, "SEL": SEL, "ADDREM_MASS": ADDREM_MASS,
+                                                      "MAXTIME": MAXTIME, "update": update}}})
+                print(pid, RST, SEL, ADDREM_MASS, MAXTIME, update, "ARE OK?")
         except Exception as e:
             print(e)
 
@@ -4854,29 +4910,70 @@ class MainWindow(QtWidgets.QMainWindow):
             self.man_activated(received_dic_c)
             self.CHECKED = True
 
-        self.TS_ADDREM.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
-        self.TS_ADDREM.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
-        self.TS_ADDREM.expandwindow.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
 
-        self.TS_ADDREM.expandwindow.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
-        self.TS_ADDREM.expandwindow.FF_RD.Field.setText(bin(received_dic_c["data"]["FF"]["TS_ADDREM_FF"]))
-        self.TS_ADDREM.expandwindow.SEL_RD.SetIntValue(received_dic_c["data"]["PARA_I"]["TS_SEL"])
-        self.TS_ADDREM.expandwindow.ADDREM_MASS_RD.SetValue(received_dic_c["data"]["PARA_F"]["TS_ADDREM_MASS"])
-        self.TS_ADDREM.expandwindow.MAXTIME_RD.SetIntValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_MAXTIME"]/1000)
-        self.TS_ADDREM.expandwindow.N2MASSTX.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS_ADDREM_N2MASSTX"])
-        self.TS_ADDREM.expandwindow.FLOWET.SetIntValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_FLOWET"]/1000)
-        self.TS_ADDREM.expandwindow.TS1_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS1_MASS"])
-        self.TS_ADDREM.expandwindow.TS2_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS2_MASS"])
-        self.TS_ADDREM.expandwindow.TS3_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS3_MASS"])
-        self.TS_ADDREM.expandwindow.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_ADDREM.objectname])
 
-        self.TS_EMPTY.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTY.objectname])
-        self.TS_EMPTY.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTY.objectname])
-        self.TS_EMPTY.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_EMPTY.objectname])
 
-        self.TS_EMPTYALL.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTYALL.objectname])
-        self.TS_EMPTYALL.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTYALL.objectname])
-        self.TS_EMPTYALL.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_EMPTYALL.objectname])
+
+
+        if self.TS_PRO.Label.currentText()=="ADDREM":
+            self.TS_PRO.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"]["TS_ADDREM"])
+            self.TS_PRO.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"]["TS_ADDREM"])
+            self.TS_PRO.EXIT.SetValue(
+            received_dic_c["data"]["Procedure"]["EXIT"]["TS_ADDREM"])
+        elif self.TS_PRO.Label.currentText()=="EMPTY":
+            self.TS_PRO.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"]["TS_EMPTY"])
+            self.TS_PRO.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"]["TS_EMPTY"])
+            self.TS_PRO.EXIT.SetValue(
+                received_dic_c["data"]["Procedure"]["EXIT"]["TS_EMPTY"])
+        elif self.TS_PRO.Label.currentText()=="EMPTY_ALL":
+            self.TS_PRO.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"]["TS_EMPTYALL"])
+            self.TS_PRO.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"]["TS_EMPTYALL"])
+            self.TS_PRO.EXIT.SetValue(
+                received_dic_c["data"]["Procedure"]["EXIT"]["TS_EMPTYALL"])
+        self.TS_PRO.FF_RD.Field.setText(bin(received_dic_c["data"]["FF"]["TS_ADDREM_FF"]))
+        self.TS_PRO.SEL_RD.SetIntValue(received_dic_c["data"]["PARA_I"]["TS_SEL"])
+        self.TS_PRO.ADDREM_MASS_RD.SetValue(received_dic_c["data"]["PARA_F"]["TS_ADDREM_MASS"])
+        self.TS_PRO.MAXTIME_RD.SetIntValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_MAXTIME"] / 1000)
+        self.TS_PRO.N2MASSTX.SetValue(
+            received_dic_c["data"]["LEFT_REAL"]["value"]["TS_ADDREM_N2MASSTX"])
+        self.TS_PRO.FLOWET.SetIntValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_FLOWET"] / 1000)
+        self.TS_PRO.TS1_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS1_MASS"])
+        self.TS_PRO.TS2_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS2_MASS"])
+        self.TS_PRO.TS3_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS3_MASS"])
+
+        # self.TS_PRO.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_PRO.objectname])
+        # self.TS_PRO.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_PRO.objectname])
+        # self.TS_PRO.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_PRO.objectname])
+        #
+        # self.TS_PRO.Running.UpdateColor(
+        #     received_dic_c["data"]["Procedure"]["Running"][self.TS_PRO.objectname])
+        # self.TS_PRO.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_PRO.objectname])
+        # self.TS_PRO.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_PRO.objectname])
+        #
+
+        # self.TS_ADDREM.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
+        # self.TS_ADDREM.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
+        # self.TS_ADDREM.expandwindow.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_ADDREM.objectname])
+        #
+        # self.TS_ADDREM.expandwindow.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_ADDREM.objectname])
+        # self.TS_ADDREM.expandwindow.FF_RD.Field.setText(bin(received_dic_c["data"]["FF"]["TS_ADDREM_FF"]))
+        # self.TS_ADDREM.expandwindow.SEL_RD.SetIntValue(received_dic_c["data"]["PARA_I"]["TS_SEL"])
+        # self.TS_ADDREM.expandwindow.ADDREM_MASS_RD.SetValue(received_dic_c["data"]["PARA_F"]["TS_ADDREM_MASS"])
+        # self.TS_ADDREM.expandwindow.MAXTIME_RD.SetIntValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_MAXTIME"]/1000)
+        # self.TS_ADDREM.expandwindow.N2MASSTX.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS_ADDREM_N2MASSTX"])
+        # self.TS_ADDREM.expandwindow.FLOWET.SetIntValue(received_dic_c["data"]["PARA_T"]["TS_ADDREM_FLOWET"]/1000)
+        # self.TS_ADDREM.expandwindow.TS1_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS1_MASS"])
+        # self.TS_ADDREM.expandwindow.TS2_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS2_MASS"])
+        # self.TS_ADDREM.expandwindow.TS3_MASS.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["TS3_MASS"])
+        # self.TS_ADDREM.expandwindow.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_ADDREM.objectname])
+        #
+        # self.TS_EMPTY.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTY.objectname])
+        # self.TS_EMPTY.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTY.objectname])
+        # self.TS_EMPTY.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_EMPTY.objectname])
+        #
+        # self.TS_EMPTYALL.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.TS_EMPTYALL.objectname])
+        # self.TS_EMPTYALL.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.TS_EMPTYALL.objectname])
+        # self.TS_EMPTYALL.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.TS_EMPTYALL.objectname])
 
         self.PU_PRIME.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.PU_PRIME.objectname])
         self.PU_PRIME.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.PU_PRIME.objectname])
