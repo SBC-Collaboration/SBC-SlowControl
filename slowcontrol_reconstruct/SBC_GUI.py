@@ -1400,8 +1400,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.TS_PRO = ProcedureTS_v2(self.DatanSignalTab)
         self.TS_PRO.move(50 * R, 950 * R)
-        self.TS_PRO.MAXTIME_RD.MAXTIME_RD.Unit=' s'
-        self.TS_PRO.MAXTIME_RD.FLOWET.Unit = ' s'
+        self.TS_PRO.MAXTIME_RD.Unit=' s'
+        self.TS_PRO.FLOWET.Unit = ' s'
 
         # self.TS_ADDREM = ProcedureWidget_TS(self.DatanSignalTab)
         # self.TS_ADDREM.move(1800*R, 150*R)
