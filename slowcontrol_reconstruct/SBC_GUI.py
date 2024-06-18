@@ -1400,8 +1400,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.TS_PRO = ProcedureTS_v2(self.DatanSignalTab)
         self.TS_PRO.move(50 * R, 950 * R)
-        self.TS_PRO.MAXTIME_RD.Unit=' s'
-        self.TS_PRO.FLOWET.Unit = ' s'
 
         # self.TS_ADDREM = ProcedureWidget_TS(self.DatanSignalTab)
         # self.TS_ADDREM.move(1800*R, 150*R)
@@ -1421,17 +1419,17 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.TS_EMPTYALL.objectname = "TS_EMPTYALL"
 
         self.PU_PRIME = ProcedureWidget(self.DatanSignalTab)
-        self.PU_PRIME.move(1800 * R, 870 * R)
+        self.PU_PRIME.move(700 * R, 390 * R)
         self.PU_PRIME.Group.setTitle("PU PRIME")
         self.PU_PRIME.objectname = "PU_PRIME"
 
         self.WRITE_SLOWDAQ = ProcedureWidget(self.DatanSignalTab)
-        self.WRITE_SLOWDAQ.move(1800 * R, 1110 * R)
+        self.WRITE_SLOWDAQ.move(700 * R, 650 * R)
         self.WRITE_SLOWDAQ.Group.setTitle("WRITE SLOWDAQ")
         self.WRITE_SLOWDAQ.objectname = "WRITE_SLOWDAQ"
 
         self.PRESSURE_CYCLE = ProcedureWidget_PC(self.DatanSignalTab)
-        self.PRESSURE_CYCLE.move(1250 * R, 150 * R)
+        self.PRESSURE_CYCLE.move(700 * R, 150 * R)
         self.PRESSURE_CYCLE.Group.setTitle("PRESSURE_CYCLE")
         self.PRESSURE_CYCLE.objectname = "PRESSURE_CYCLE"
         self.PRESSURE_CYCLE.expandwindow.EXPTIME_RD.Unit = " s"
@@ -1441,17 +1439,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_RD.Unit = " s"
 
         self.MAN_TS = Flag(self.DatanSignalTab)
-        self.MAN_TS.move(1300 * R, 390 * R)
+        self.MAN_TS.move(1300 * R, 150 * R)
         self.MAN_TS.Label.setText("MAN_TS")
 
 
         self.MAN_HYD = Flag(self.DatanSignalTab)
-        self.MAN_HYD.move(1300 * R, 500 * R)
+        self.MAN_HYD.move(1300 * R, 260 * R)
         self.MAN_HYD.Label.setText("MAN_HYD")
 
 
         self.PCYCLE_AUTOCYCLE = Flag(self.DatanSignalTab)
-        self.PCYCLE_AUTOCYCLE.move(1300 * R, 600 * R)
+        self.PCYCLE_AUTOCYCLE.move(1300 * R, 370 * R)
         self.PCYCLE_AUTOCYCLE.Label.setText("PCYCLE_AUTOCYCLE")
 
 
@@ -7002,7 +7000,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 
-#      FLAGs
+        #FLAGs
         if received_dic_c["data"]["FLAG"]["Busy"]["MAN_TS"]:
             if received_dic_c["data"]["FLAG"]["value"]["MAN_TS"]:
                 self.MAN_TS.Set.ButtonLClicked()
