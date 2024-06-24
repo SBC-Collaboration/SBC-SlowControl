@@ -10,21 +10,9 @@ v1.0 Initial code 25/11/19 ML
 v1.1 Initialize values, flag when values are updated more modbus variables 04/03/20 ML
 """
 
-import struct, time, zmq, sys, pickle
-import numpy as np
-from PySide2 import QtWidgets, QtCore, QtGui
 from Database_SBC_daemon import *
-from email.mime.text import MIMEText
-from email.header import Header
-from smtplib import SMTP_SSL
-import requests
-import logging,os
-from slack_sdk import WebClient
-from slack_sdk.errors import SlackApiError
 
-import daemon, os, sys, psutil
 import PLC_daemon
-import time
 # from PLC_damemon import *
 from PLC import *
 PORT_N=5555
@@ -34,7 +22,6 @@ import slowcontrol_env_cons as sec
 
 
 # delete random number package when you read real data from PLC
-import random
 from pymodbus.client.sync import ModbusTcpClient
 
 BASE_ADDRESS= 12288

@@ -3289,7 +3289,7 @@ class AlarmButton(QtWidgets.QWidget):
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
-        self.ImagePath = os.path.join(self.Path, "images")
+        self.ImagePath = os.path.join(self.Path, "../images")
         self.pixmap = QtGui.QPixmap(os.path.join(self.ImagePath, "alarm_button.png"))
         self.pixmap = self.pixmap.scaledToHeight(70 * R)
 
@@ -3363,7 +3363,7 @@ class INTLCKButton(QtWidgets.QWidget):
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
-        self.ImagePath = os.path.join(self.Path, "images")
+        self.ImagePath = os.path.join(self.Path, "../images")
         self.pixmap = QtGui.QPixmap(os.path.join(self.ImagePath, "lock_button.png"))
         self.pixmap = self.pixmap.scaledToHeight(70 * R)
 
@@ -7828,7 +7828,7 @@ class Valve_image(QtWidgets.QWidget):
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
-        self.ImagePath = os.path.join(self.Path, "images")
+        self.ImagePath = os.path.join(self.Path, "../images")
         self.setObjectName("Valve_image")
         self.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 70 * R))
         self.setStyleSheet("QWidget { background: transparent; }")
@@ -7930,7 +7930,7 @@ class Pump_image(QtWidgets.QWidget):
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
-        self.ImagePath = os.path.join(self.Path, "images")
+        self.ImagePath = os.path.join(self.Path, "../images")
         self.setObjectName("Pump_image")
         self.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 70 * R))
         # self.setStyleSheet("QWidget { background: transparent; }")
@@ -7977,7 +7977,7 @@ class SERVO_image(QtWidgets.QWidget):
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
-        self.ImagePath = os.path.join(self.Path, "images")
+        self.ImagePath = os.path.join(self.Path, "../images")
         self.setObjectName("SERVO_image")
         self.setGeometry(QtCore.QRect(0 * R, 0 * R, 70 * R, 70 * R))
         self.setStyleSheet("QWidget { background: transparent; }")

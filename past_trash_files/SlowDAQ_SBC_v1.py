@@ -68,7 +68,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.Path = os.path.dirname(os.path.realpath(__file__))
         else:
             self.Path = os.getcwd()
-        self.ImagePath = os.path.join(self.Path, "images")
+        self.ImagePath = os.path.join(self.Path, "../images")
 
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
 
@@ -150,7 +150,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Data saving and recovery
         # Data setting form is ended with .ini and directory is https://doc.qt.io/archives/qtforpython-5.12/PySide2/QtCore/QSettings.html depending on the System
-        self.settings = QtCore.QSettings("$HOME/.config//SBC/SlowControl.ini", QtCore.QSettings.IniFormat)
+        self.settings = QtCore.QSettings("../$HOME/.config/SBC/SlowControl.ini", QtCore.QSettings.IniFormat)
 
         # Temperature tab buttons
 
