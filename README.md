@@ -7,8 +7,10 @@ This is a help files to specify some detais on how to operate GUI on sbcslowcont
        "source ~/conda_init.sh"
        "conda activate sbcslowcontrol"
        if you want to see conda env list, run "conda env list"
-   0.c cd **_~/Downloads/sbc_slowcontrol/SBC_slowcontrol/slowcontrol_reconstruct
-       this is  the code directory_**
+
+###    0.c cd ~/Downloads/sbc_slowcontrol/SBC_slowcontrol/slowcontrol_reconstruct
+
+       this is  the code directory
    0.d run the background code "source BKG_init.sh"
    0.e add another tab or terminal, activate conda environment again and run "SBC_GUI.py"-this is GUI
 
