@@ -3066,12 +3066,12 @@ class LocalWatchdog(threading.Thread):
                 time.sleep(self.base_period)
 
             except (sshtunnel.BaseSSHTunnelForwarderError, pymysql.Error,Exception)  as e:
-                if self.para_coupp <= self.mid_coupp:
-                    with self.alarm_lock:
-                        self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
-                                                                              "on COUPP server. Restarting"})
-                elif  self.para_coupp >= self.rate_coupp:
-                    self.para_coupp = 0
+                # if self.para_coupp <= self.mid_coupp:
+                #     with self.alarm_lock:
+                #         self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
+                #                                                               "on COUPP server. Restarting"})
+                # elif  self.para_coupp >= self.rate_coupp:
+                #     self.para_coupp = 0
                 self.para_coupp += 1 # now the COUPP connection message will trigger twice per hour:
                 print("watchdog Error",e)
                 # restart itself
