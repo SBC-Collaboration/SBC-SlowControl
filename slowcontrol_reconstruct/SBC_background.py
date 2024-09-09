@@ -3062,9 +3062,9 @@ class LocalWatchdog(threading.Thread):
                 time.sleep(self.base_period)
 
             except (sshtunnel.BaseSSHTunnelForwarderError, pymysql.Error,Exception)  as e:
-                with self.alarm_lock:
-                    self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
-                                                                              "on COUPP server. Restarting"})
+                # with self.alarm_lock:
+                #     self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
+                #                                                               "on COUPP server. Restarting"})
                 print("watchdog Error",e)
                 # restart itself
                 time.sleep(self.base_period * 60)
