@@ -3062,6 +3062,7 @@ class LocalWatchdog(threading.Thread):
                         self.para_long_alarm = 0
                 self.para_alarm += 1
                 self.para_long_alarm += 1
+                self.para_coupp = 0
                 time.sleep(self.base_period)
 
             except (sshtunnel.BaseSSHTunnelForwarderError, pymysql.Error,Exception)  as e:
