@@ -4,6 +4,8 @@ BASE_ADDRESS= 12288
 1. if variable existed in a known category:
 2. if variable is a new catogory but similar to previous defined one:
 """
+
+
 # real address  = base+ comparative/2
 # Initialization of Address, Value Matrix
 TT_FP_ADDRESS = {"TT2420": 31000, "TT2422": 31002, "TT2424": 31004, "TT2425": 31006,
@@ -188,6 +190,9 @@ PT_ALARM = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, 
             "PT2343": False}
 LEFT_REAL_ALARM = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False}
 AD_ALARM = {"LT2122": False , "LT2130": False}
+COUPP_trigger_PARA = 0 # 1 hours the unit is different from other parameters because during every loop it will sleep 1 minutes
+COUPP_trigger_RATE =60
+COUPP_trigger_MID = 2
 MAINALARM = False
 MAINALARM_PARA = 0
 MAINALARM_RATE = 30
