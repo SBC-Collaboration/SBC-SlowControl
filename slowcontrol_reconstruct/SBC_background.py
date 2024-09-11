@@ -267,7 +267,6 @@ class PLC:
 
         self.TIME_ADDRESS = copy.copy(env.TIME_ADDRESS)
         self.TIME_DIC = copy.copy(env.TIME_DIC)
-
         self.Ini_Check = env.INI_CHECK
 
         self.data_dic = {"data": {"TT": {
@@ -2991,6 +2990,9 @@ class LocalWatchdog(threading.Thread):
         self.slack_time = self.global_time["slacktime"]  # hanging when ssh fail or coupp mysql fail
         self.plc_time = self.global_time["plctime"]  # hanging when Beckhoff/NI/Arduino fail
         self.socketserver_time = self.global_time["sockettime"]  # hanging when socket to GUI fail
+        self.para_coupp = env.COUPP_trigger_PARA
+        self.rate_coupp = env.COUPP_trigger_RATE
+        self.mid_coupp = env.COUPP_trigger_MID
         self.para_alarm = env.MAINALARM_PARA
         self.rate_alarm = env.MAINALARM_RATE
         self.para_long_alarm = env.MAINALARM_LONG_PARA
@@ -3059,12 +3061,17 @@ class LocalWatchdog(threading.Thread):
                         self.para_long_alarm = 0
                 self.para_alarm += 1
                 self.para_long_alarm += 1
+                self.para_coupp = 0
                 time.sleep(self.base_period)
 
             except (sshtunnel.BaseSSHTunnelForwarderError, pymysql.Error,Exception)  as e:
-                # with self.alarm_lock:
-                #     self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
-                #                                                               "on COUPP server. Restarting"})
+                if self.para_coupp <= self.mid_coupp:
+                    with self.alarm_lock:
+                        self.alarm_stack.update({"COUPP_server_connection_error": "Failed to connected to watchdog machine "
+                                                                              "on COUPP server. Restarting"})
+                elif  self.para_coupp >= self.rate_coupp:
+                    self.para_coupp = 0
+                self.para_coupp += 1 # now the COUPP connection message will trigger twice per hour:
                 print("watchdog Error",e)
                 # restart itself
                 time.sleep(self.base_period * 60)
