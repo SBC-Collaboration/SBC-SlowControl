@@ -1,37 +1,68 @@
 # SBC-SlowControl
-SBC Slow Control server and related code
-1.TCP conection:
-if you force the PLC.py code to stop i.e. ctrl+Z, the tcp connection won't be closed and the port is still be occupied. Please source the clear_tcp.sh before you rerun the PLC.py
-2. Some protocol between PLC and GUI:
+SBC Slow Control server and related code 
+This is a help files to specify some detais on how to operate GUI on sbcslowcontrol machine
+0. Tutorial:
+   0.a open a terminal on sbcslowonctrol machine. Menu-> Applications -> System Tools -> Xfce Terminal
+   0.b activate conda environment.
+       "source ~/conda_init.sh"
+       "conda activate sbcslowcontrol"
+       if you want to see conda env list, run "conda env list"
 
-2.a from PLC(background code) the data form is
+###    0.c cd ~/Downloads/sbc_slowcontrol/SBC_slowcontrol/slowcontrol_reconstruct
 
-{$"data"$:{"type":{pid:value},...},$"Alarm"$:{type: value,...}, "MainAlarm":value}
-$$ means it is a constant value.
-example:
-{"data":{"TT":{"TT2101": 0, "TT2111": 0, "TT2113": 0, "TT2118": 0, "TT2119": 0, "TT4330": 0,
-                                     "TT6203": 0, "TT6207": 0, "TT6211": 0, "TT6213": 0, "TT6222": 0,
-                                     "TT6407": 0, "TT6408": 0, "TT6409": 0, "TT6415": 0, "TT6416": 0}
-                               "PT":{"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
-                                     "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
-                                     "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, " PT4319": 0,
-                                     "PT4322": 0, "PT4325": 0, "PT6302": 0}},
-                       "Alarm":{"TT":{"TT2101": False, "TT2111": False, "TT2113": False, "TT2118": False, "TT2119": False,
-                                      "TT4330": False,
-                                      "TT6203": False, "TT6207": False, "TT6211": False, "TT6213": False, "TT6222": False,
-                                      "TT6407": False, "TT6408": False, "TT6409": False, "TT6415": False, "TT6416": False}
-                                "PT":{"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, "PT2335": False,
-                                      "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
-                                      "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, " PT4319": False,
-                                      "PT4322": False, "PT4325": False, "PT6302": False}},
-                       "MainAlarm":False}
-
-Reason why I choose this form: it is easier to direcly catch all alarm status
-an alternative way to manage the information flow is transpose the matrix and the outest index is pid(PTXXXX).
-If this introduce some trouble in the future, we may change it. But for now, it at least works...0
+       this is  the code directory
+   0.d run the background code "source BKG_init.sh"
+   0.e add another tab or terminal, activate conda environment again and run "SBC_GUI.py"-this is GUI
 
 
-2.b from GUI to PLC
-{pid:{$"server"$:modbus server name,$"address"$: address in modbus,$"type"$:pid's instrument type $"operation"$:write true or else, $"value"$: True, false or float}}
+1.Python 3.7 is istalled in /usr/src.
 
-we may need to create another file to describe the two info flows in more detailed.
+2.Python 3.6 as default of python 3, is installed in usr/bin
+ANaconda3 is installed in /home/hep/Anaconda3 by default settings.
+conda environment is called sbcslowcontrol, type"conda activate sbcslowcontrol"
+you can run "conda env list" to list all conda environments. 
+
+3.sudo tar xzf pycharm-*.tar.gz -C /opt/
+pycharm directory is in /opt/ by default
+/opt/pycharm/bin/sh pycharm.sh to run the pycahrm
+or directly run pycharm
+
+4.mysql 
+usr: root pwd: SBCr0ck5!
+usr:MyseeQ 
+usr:slowcontrol 
+
+5.git local directory sbc_slowcontrol\SBC-Slowcontrol
+branch main
+
+6.remote repository git@github.com:SBC-Collaboration/SBC-SlowControl.git
+alias sbcslowcontrol
+
+7.iptable settings:
+INPUT accept localhost SEEQ(131.225.108.49 )and drop other connection
+install iptables-services
+service iptables save will save the updated settings permanantly.
+
+8.SBC database structure
+SBCslowcontrol
+tables:
+DataStorage
+MetaDataStorage
+
+
+9.BKG settings
+background code:
+go to $ SBC_reconstruct$
+$chmod +x BKG_init.sh$
+$crontab -e$ and uncomment the BKG_init.sh part
+
+10.Alarm Settings
+The alarm csv is saved in /home/hep/.config/sbcconfig/sbc_alarm_config.csv
+Everyone can directly edit it in order to change the configuration of alarms. And background code will load it automatically everytime it reruns.
+I didn't put it in the same directory as code because I still frequenty push and pull from github on both my pc and slowcontrol machine. I want to avoid
+branch conflict as much as possible.
+
+
+
+
+

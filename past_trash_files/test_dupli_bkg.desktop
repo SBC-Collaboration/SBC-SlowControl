@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=test_dupli
+Comment=Description of the application
+Terminal=true
+Exec=/path/to/dupli_bkg.sh
+Icon=/path/to/icon.png
+Type=Application
+Categories=Category1;Category2;

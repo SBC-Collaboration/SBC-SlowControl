@@ -1,0 +1,113 @@
+This is a simple tutorial using SBC mysql database and SeeQ:
+To be clear,
+sentence in $$ means that this a command
+words in <> means these are variables which can be replaced.
+
+PART A: mysql tutorial
+
+    1. Log into Database:
+        run the command in terminal:
+        $mysql -u <username> -p$
+        replace the <username> with one of the username list in SBC google drive and log in with corresponding password
+
+    2. Show all databases:
+        run the command:
+        $show databases;$
+        (Don't forget the semicolon), in mysql language, commands or queries always end with semicolon.
+        and this will show you all databases on local machine
+
+    3. choose database:
+        $use <Database name>;$
+        this will allow you into one of the databases; You should run 'use SBCslowcontrol;'
+
+    4. show the tables:
+        $show tables;$
+        this will show all tables in current database.
+        in SBC slowcontrol database, there are 2 tables: DataStorage and MetaDataStorage.
+        DataStorage is where we store all tags while MetaDataStorage store all tags' description.
+        MetaDataStorage has another function -- pass tags into SeeQ, which we will talk about in SeeQ part.
+
+    5.Check table's configuration
+        $describe <table name>;$
+        this will show the table's configuration and columns' names.
+
+    6.Queries
+        6.1 INSERT query
+            $INSERT INTO <table name> VALUES (<value1>, <value2>, <value3>....<valuen>)$
+            insert a row into certain table with table name <table name>
+            <value1> to <valuen> are values in the row. n is the column number in the table
+            for example:
+            $INSERT INTO MetaDataStorage VALUES ("SERVO3321_EN", "Current state of Servo Valve's DO channel ", "BOOL");$
+            also, you can insert multiple rows separated by comma:
+            $INSERT INTO MetaDataStorage VALUES ("SERVO3321_EN", "Current state of Servo Valve's DO channel ", "BOOL"), ( "HTR6225_EN", "Current state of Heater's DO channel ", "BOOL");$
+            this would be useful when you need to add tags into MetaDataStorage
+
+        6.2 SELECT query
+            6.2.1 SELECT with conditions
+                $SELECT * FROM <table name> WHERE <column name>=<some column name>;$
+                this will show all rows/tags with certain condition
+                for example:
+                SELECT * FROM DataStorage WHERE Instrument = "PV5305_OUT";
+                this shows All output of PV5305.
+                Table DataStorage has one column named Instrument and in this column, some tags' value are "PV5305_OUT"
+            6.2.2 SELECT ALL
+                if you want to show all data in the table, you can delete the parts after WHERE:
+                $SELECT * from <table name>;$
+            6.2.3 SELECT Last N numbers:
+                $SELECT * FROM <TableName> ORDER BY <Key> DESC LIMIT <N>;$
+                Show last N rows in the table with name <TableName>
+                <Key> is the Primary key of the table. In DataStorage <Key>=ID.
+                for example:
+                $SELECT * FROM DataStorage ORDER BY ID DESC LIMIT 10;$
+        6.3 Else
+            There are other queries like DELETE, DROP and so on. But They are less frequently used. You can refer to them in official mysql tutorial
+            https://dev.mysql.com/doc/refman/8.0/en/examples.html
+
+
+    7. Table Structure
+        Except from the result you could get from DESCRIBE commands, there are also some other configurations in our mysql Databases;
+
+        7.1 For simple output, like PT, TT
+            Their value in "Instrument" column in DataStorage table will be their PID like TT2111
+        7.2 For multiple output like PV, HTR, SERVO
+            They have multiple output which should be stored in DataStorage;
+            Their value in "Instrument" column in DataStoarge table will in same form of PLC flags:
+            https://docs.google.com/spreadsheets/d/1gMw5QIB-sNxmFlgcZvzEb_f5HN54hNN7TmSJeOfYYUk/edit#gid=0
+            for example, the status of pneumatic valve is PVXXXX_OUT like PV5309_OUT
+            the output status of PIDLOOP could be HTR1202_EN.
+
+
+
+Part B SeeQ tutorial:
+    1.log in
+        To obtain the permission log into SeeQ, ask Eric Dahl and Mark A Knapp to give you the permission.
+        Once you've done that. Log in on SBC slowcontrol machine
+        http://ppd-webspace:34216/5BF9FA4D-40DB-466E-833A-6102D4B4C812/folder/
+        Directory is Active Directory Fermilab
+        email is your id@services.fnal.gov
+        password should be same as your Fermilab services password
+    2. Queries
+        2.1 click "NEW" and select "WorkBench Analysis" on the topleft
+        2.2 click "data"-> Types: Signal and Datasources: SBC Slow Control and search on the topleft
+        2.3 On the bottomleft, there will be some tags appears. You can select one and plot them
+    3. Configurations
+        3.1 General Description
+            SeeQ requires a configuration file to import data from mysql into SeeQ. Fortunately, we've passed the json file to Mark.
+            The principle of the the configuration file is this: It will read all tags in MetaDataStorage and treat them as readable BOTH in DataStorage and MetaStorage.
+            In other words, if you want to plot a signal in DataStorage table, a tag with same name must also appear in MetaDataStorage.
+            For example,
+            in DataStorage:
+            |ID     | Instrument   | Timestamp           | Value|
+            +-------+--------------+---------------------+------+
+            |490853 | PV4324_OUT   | 2021-12-08 15:36:48 |     1|
+
+            to import this row(and all rows containing PV4324_OUT), MetaDataStorage must contain:
+            | Instrument | Description            | Unit |
+            +------------+------------------------+------+
+            | PV4324_OUT | Pneumatic Valve output | BOOL |
+
+            and after add the tag in the MetaDataStorage, you should be able to plot PV4324_OUT in SeeQ
+
+        3.2 Methods to add tags in MetaDataStorage:
+            Refer to PART A 6.1
+

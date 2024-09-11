@@ -1,6 +1,0 @@
-run crontab -e
-which python
-@reboot export PATH= && python /dir
-
-
-@reboot XAUTHORITY=/home/hep/.Xauthority DISPLAY=:0.0 /home/hep/miniforge3/envs/slowcontrol/bin/python /home/hep/PycharmProjects/pythonProject/SBC-SlowControl/PLC_daemon.py
