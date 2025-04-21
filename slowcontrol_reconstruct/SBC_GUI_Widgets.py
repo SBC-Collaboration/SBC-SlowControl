@@ -1043,9 +1043,15 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.PT6302 = AlarmStatusWidget(self.PressureTab)
         self.PT6302.Label.setText("PT6302")
-        self.PT6302.Indicator.SetUnit(" bar")
-        self.PT6302.Low_Read.SetUnit(" bar")
-        self.PT6302.High_Read.SetUnit(" bar")
+        self.PT6302.Indicator.SetUnit(" torr")
+        self.PT6302.Low_Read.SetUnit(" torr")
+        self.PT6302.High_Read.SetUnit(" torr")
+
+        self.PT6306 = AlarmStatusWidget(self.PressureTab)
+        self.PT6306.Label.setText("PT6306")
+        self.PT6306.Indicator.SetUnit(" torr")
+        self.PT6306.Low_Read.SetUnit(" torr")
+        self.PT6306.High_Read.SetUnit(" torr")
 
         self.PT5304 = AlarmStatusWidget(self.PressureTab)
         self.PT5304.Label.setText("PT5304")
@@ -1307,7 +1313,7 @@ class AlarmWin(QtWidgets.QMainWindow):
                            1: {0: self.PT2335, 1: self.PT2343, 2: self.PT3308, 3: self.PT3309, 4: self.PT3311},
                            2: {0: self.PT3314, 1: self.PT3320, 2: self.PT3332, 3: self.PT3333, 4: self.PT4306},
                            3: {0: self.PT4315, 1: self.PT4319, 2: self.PT4322, 3: self.PT4325, 4: self.PT5304},
-                           4: {0: self.PT6302}}
+                           4: {0: self.PT6302, 1: self.PT6306}}
 
         self.AlarmRTDLEFTdir = {0: {0:self.TT3401, 1:self.TT4330, 2:self.TT6203, 3:self.TT6207, 4:self.TT6211},
                                 1: {0:self.TT6213, 1:self.TT6220, 2:self.TT6222, 3:self.TT6401, 4:self.TT6404},
@@ -6385,6 +6391,9 @@ class Indicator(QtWidgets.QWidget):
     def SetValue(self, value):
         self.value = value
         self.Field.setText(format(value, '#.2f') + self.Unit)
+    def SetExpValue(self, value):
+        self.value = value
+        self.Field.setText(format(value, '.1e') + self.Unit)
 
     def SetIntValue(self, value):
         self.value = value

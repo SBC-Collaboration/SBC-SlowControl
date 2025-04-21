@@ -417,7 +417,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT6302 = Indicator(self.ThermosyphonTab)
         self.PT6302.Label.setText("PT6302")
         self.PT6302.move(2030*R, 690*R)
-        self.PT6302.SetUnit(" bar")
+        self.PT6302.SetUnit(" torr")
 
         self.PRV6303 = PnID_Alone(self.ThermosyphonTab)
         self.PRV6303.Label.setText("PRV6303")
@@ -430,6 +430,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HE6201 = PnID_Alone(self.ThermosyphonTab)
         self.HE6201.Label.setText("HE6201")
         self.HE6201.move(1410*R, 1100*R)
+
+        self.PT6306 = Indicator(self.ThermosyphonTab)
+        self.PT6306.Label.setText("PT6306")
+        self.PT6306.move(1410*R, 1200*R)
+        self.PT6306.SetUnit(" torr")
 
         self.EV6204 = PnID_Alone(self.ThermosyphonTab)
         self.EV6204.Label.setText("EV6204")
@@ -1545,7 +1550,8 @@ class MainWindow(QtWidgets.QMainWindow):
                               self.AlarmButton.SubWindow.PT3333, self.AlarmButton.SubWindow.PT4306,
                               self.AlarmButton.SubWindow.PT4315, self.AlarmButton.SubWindow.PT4319,
                               self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325,
-                              self.AlarmButton.SubWindow.PT5304,self.AlarmButton.SubWindow.PT6302]
+                              self.AlarmButton.SubWindow.PT5304,self.AlarmButton.SubWindow.PT6302,
+                              self.AlarmButton.SubWindow.PT6306]
 
         self.LEFTVariableMatrix = [self.AlarmButton.SubWindow.BFM4313, self.AlarmButton.SubWindow.LT3335,
                                    self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
@@ -3372,6 +3378,18 @@ class MainWindow(QtWidgets.QMainWindow):
                                      LowLimit=self.AlarmButton.SubWindow.PT6302.Low_Set.Field.text(),
                                      HighLimit=self.AlarmButton.SubWindow.PT6302.High_Set.Field.text()))
 
+        self.AlarmButton.SubWindow.PT6306.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT6306.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT6306.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT6306.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT6306.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PT6306.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT6306.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT6306.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT6306.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT6306.High_Set.Field.text()))
+
         self.AlarmButton.SubWindow.PT1101.AlarmMode.stateChanged.connect(
             lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1101.Label.text(),
                                      Act=self.AlarmButton.SubWindow.PT1101.AlarmMode.isChecked(),
@@ -5010,19 +5028,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRESSURE_CYCLE.expandwindow.PSET_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_PSET"])
         self.PRESSURE_CYCLE.expandwindow.EXPTIME_RD.SetValue(
-            received_dic_c["data"]["TIME"]["PCYCLE_EXPTIME"])
+            round(received_dic_c["data"]["TIME"]["PCYCLE_EXPTIME"]))
         self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_RD.SetIntValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEXPTIME"]/1000)
+            round(received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEXPTIME"]/1000))
         self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_RD.SetIntValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEQTIME"]/1000)
+            round(received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEQTIME"]/1000))
         self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_MAXEQPDIFF"])
         self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_RD.SetIntValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXACCTIME"]/1000)
+            round(received_dic_c["data"]["PARA_T"]["PCYCLE_MAXACCTIME"]/1000))
         self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_MAXACCDPDT"])
         self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_RD.SetIntValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXBLEEDTIME"]/1000)
+            round(received_dic_c["data"]["PARA_T"]["PCYCLE_MAXBLEEDTIME"]/1000))
         self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_MAXBLEEDDPDT"])
         self.PRESSURE_CYCLE.expandwindow.SLOWCOMP_SET_RD.SetValue(
@@ -7582,7 +7600,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         # set indicators value
-
+        self.TT2118.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2118"])
+        self.TT2119.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2119"])
+        self.TT2440.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2440"])
         self.TT2401.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2401"])
         self.TT2402.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2402"])
         self.TT2403.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2403"])
@@ -7657,7 +7677,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4319.SetValue(received_dic_c["data"]["PT"]["value"]["PT4319"])
         self.PT4322.SetValue(received_dic_c["data"]["PT"]["value"]["PT4322"])
         self.PT4325.SetValue(received_dic_c["data"]["PT"]["value"]["PT4325"])
-        self.PT6302.SetValue(received_dic_c["data"]["PT"]["value"]["PT6302"])
+        self.PT6302.SetExpValue(received_dic_c["data"]["PT"]["value"]["PT6302"])
+        self.PT6306.SetExpValue(received_dic_c["data"]["PT"]["value"]["PT6306"])
         self.PT1101.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
         self.PT1101Fluid.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
         self.PT1101Hy.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])

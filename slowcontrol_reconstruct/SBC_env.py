@@ -38,7 +38,7 @@ PT_ADDRESS = {"PT1325": 12794, "PT2121": 12796, "PT2316": 12798, "PT2330": 12800
               "PT3308": 12804, "PT3309": 12806, "PT3311": 12808, "PT3314": 12810, "PT3320": 12812,
               "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820, "PT4319": 12822,
               "PT4322": 12824, "PT4325": 12826, "PT6302": 12828, 'PT1101': 12830, 'PT5304': 12834,
-              "PT2343":12836}
+              "PT2343":12836, "PT6306": 12838}
 
 LEFT_REAL_ADDRESS = {'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792, "CYL3334_FCALC": 12832, "SERVO3321_IN_REAL": 12830, "TS1_MASS": 16288, "TS2_MASS": 16290, "TS3_MASS": 16292,  "TS_ADDREM_N2MASSTX": 16818}
 AD_ADDRESS = {"LT2122": 2 , "LT2130": 10}
@@ -68,7 +68,7 @@ PT_DIC = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
           "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
           "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
           "PT4322": 0, "PT4325": 0, "PT6302": 0, "PT1101": 0, "PT5304": 0,
-          "PT2343": 0}
+          "PT2343": 0, "PT6306": 0}
 
 LEFT_REAL_DIC = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0, "TS_ADDREM_N2MASSTX": 0}
 AD_DIC = {"LT2122": 0 , "LT2130": 0}
@@ -119,12 +119,12 @@ PT_LOWLIMIT = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                "PT4322": 0, "PT4325": 0, "PT6302": 0,  "PT1101": 0, "PT5304": 0,
-               "PT2343": 0}
+               "PT2343": 0, "PT6306": 0}
 PT_HIGHLIMIT = {"PT1325": 300, "PT2121": 300, "PT2316": 300, "PT2330": 300, "PT2335": 300,
                 "PT3308": 300, "PT3309": 300, "PT3311": 300, "PT3314": 300, "PT3320": 300,
                 "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
                 "PT4322": 300, "PT4325": 300, "PT6302": 300,  "PT1101": 300, "PT5304": 300,
-                "PT2343": 300}
+                "PT2343": 300, "PT6306": 300}
 
 LEFT_REAL_HIGHLIMIT = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0,"TS_ADDREM_N2MASSTX": 0}
 LEFT_REAL_LOWLIMIT = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0 , "TS_ADDREM_N2MASSTX": 0}
@@ -158,7 +158,7 @@ PT_ACTIVATED = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": Fal
                 "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                 "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
                 "PT4322": False, "PT4325": False, "PT6302": False,  "PT1101": False, "PT5304": False,
-                "PT2343": False}
+                "PT2343": False, "PT6306": False}
 LEFT_REAL_ACTIVATED = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False}
 AD_ACTIVATED = {"LT2122": False , "LT2130": False}
 
@@ -187,7 +187,7 @@ PT_ALARM = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, 
             "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
             "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
             "PT4322": False, "PT4325": False, "PT6302": False,  "PT1101": False, "PT5304": False,
-            "PT2343": False}
+            "PT2343": False, "PT6306": False}
 LEFT_REAL_ALARM = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False}
 AD_ALARM = {"LT2122": False , "LT2130": False}
 COUPP_trigger_PARA = 0 # 1 hours the unit is different from other parameters because during every loop it will sleep 1 minutes
@@ -568,13 +568,13 @@ PT_PARA = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                "PT4322": 0, "PT4325": 0, "PT6302": 0,  "PT1101": 0, "PT5304": 0,
-           "PT2343": 0}
+           "PT2343": 0, "PT6306": 0}
 
 PT_RATE = {"PT1325": 30, "PT2121": 30, "PT2316": 30, "PT2330": 30, "PT2335": 30,
                 "PT3308": 30, "PT3309": 30, "PT3311": 30, "PT3314": 30, "PT3320": 30,
                 "PT3332": 30, "PT3333": 30, "PT4306": 30, "PT4315": 30, "PT4319": 30,
                 "PT4322": 30, "PT4325": 30, "PT6302": 30,  "PT1101": 30, "PT5304": 30,
-           "PT2343": 0}
+           "PT2343": 0, "PT6306": 30}
 
 LEFT_REAL_PARA = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0, "TS_ADDREM_N2MASSTX": 0}
 
