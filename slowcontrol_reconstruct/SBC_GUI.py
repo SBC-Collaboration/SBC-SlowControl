@@ -417,7 +417,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT6302 = Indicator(self.ThermosyphonTab)
         self.PT6302.Label.setText("PT6302")
         self.PT6302.move(2030*R, 690*R)
-        self.PT6302.SetUnit(" torr")
+        self.PT6302.SetUnit(" tr")
 
         self.PRV6303 = PnID_Alone(self.ThermosyphonTab)
         self.PRV6303.Label.setText("PRV6303")
@@ -434,7 +434,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT6306 = Indicator(self.ThermosyphonTab)
         self.PT6306.Label.setText("PT6306")
         self.PT6306.move(1410*R, 1200*R)
-        self.PT6306.SetUnit(" torr")
+        self.PT6306.SetUnit(" tr")
 
         self.EV6204 = PnID_Alone(self.ThermosyphonTab)
         self.EV6204.Label.setText("EV6204")
