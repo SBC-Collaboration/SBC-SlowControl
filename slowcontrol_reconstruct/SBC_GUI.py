@@ -7600,8 +7600,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         # set indicators value
-        self.TT2118.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2118"])
-        self.TT2119.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2119"])
+        self.TT2118.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2118"])
+        self.TT2119.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2119"])
         self.TT2440.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2440"])
         self.TT2401.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2401"])
         self.TT2402.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2402"])
