@@ -1043,15 +1043,15 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.PT6302 = AlarmStatusWidget(self.PressureTab)
         self.PT6302.Label.setText("PT6302")
-        self.PT6302.Indicator.SetUnit(" torr")
-        self.PT6302.Low_Read.SetUnit(" torr")
-        self.PT6302.High_Read.SetUnit(" torr")
+        self.PT6302.Indicator.SetUnit(" tr")
+        self.PT6302.Low_Read.SetUnit(" tr")
+        self.PT6302.High_Read.SetUnit(" tr")
 
         self.PT6306 = AlarmStatusWidget(self.PressureTab)
         self.PT6306.Label.setText("PT6306")
-        self.PT6306.Indicator.SetUnit(" torr")
-        self.PT6306.Low_Read.SetUnit(" torr")
-        self.PT6306.High_Read.SetUnit(" torr")
+        self.PT6306.Indicator.SetUnit(" tr")
+        self.PT6306.Low_Read.SetUnit(" tr")
+        self.PT6306.High_Read.SetUnit(" tr")
 
         self.PT5304 = AlarmStatusWidget(self.PressureTab)
         self.PT5304.Label.setText("PT5304")

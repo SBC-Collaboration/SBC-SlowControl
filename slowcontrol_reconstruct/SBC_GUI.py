@@ -1553,6 +1553,9 @@ class MainWindow(QtWidgets.QMainWindow):
                               self.AlarmButton.SubWindow.PT5304,self.AlarmButton.SubWindow.PT6302,
                               self.AlarmButton.SubWindow.PT6306]
 
+        self.expPTAlarmMatrix = [self.AlarmButton.SubWindow.PT6302,
+                              self.AlarmButton.SubWindow.PT6306]
+
         self.LEFTVariableMatrix = [self.AlarmButton.SubWindow.BFM4313, self.AlarmButton.SubWindow.LT3335,
                                    self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
                                    self.AlarmButton.SubWindow.SERVO3321_IN_REAL, self.AlarmButton.SubWindow.TS1_MASS,
@@ -5096,6 +5099,19 @@ class MainWindow(QtWidgets.QMainWindow):
             element.Low_Read.SetValue(
                 received_dic_c["data"]["PT"]["low"][element.Label.text()])
             element.High_Read.SetValue(
+                received_dic_c["data"]["PT"]["high"][element.Label.text()])
+
+        # 2PTs that should be displayed at expotentially
+        for element in self.expPTAlarmMatrix:
+            # print(element.Label.text())
+
+            element.UpdateAlarm(
+                received_dic_c["Alarm"]["PT"][element.Label.text()])
+            element.Indicator.SetExpValue(
+                received_dic_c["data"]["PT"]["value"][element.Label.text()])
+            element.Low_Read.SetExpValue(
+                received_dic_c["data"]["PT"]["low"][element.Label.text()])
+            element.High_Read.SetExpValue(
                 received_dic_c["data"]["PT"]["high"][element.Label.text()])
 
 
