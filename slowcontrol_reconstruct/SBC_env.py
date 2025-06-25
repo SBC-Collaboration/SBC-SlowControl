@@ -41,7 +41,7 @@ PT_ADDRESS = {"PT1325": 12794, "PT2121": 12796, "PT2316": 12798, "PT2330": 12800
               "PT2343":12836, "PT6306": 12838}
 
 LEFT_REAL_ADDRESS = {'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792, "CYL3334_FCALC": 12832, "SERVO3321_IN_REAL": 12830, "TS1_MASS": 16288, "TS2_MASS": 16290, "TS3_MASS": 16292,  "TS_ADDREM_N2MASSTX": 16818}
-AD_ADDRESS = {"LT2122": 2 , "LT2130": 10}
+AD_ADDRESS = {"LT2122": 10 , "LT2130": 2}
 
 TT_FP_DIC = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0,
              "TT2403": 0, "TT2418": 0, "TT2427": 0, "TT2429": 0,
@@ -219,61 +219,67 @@ SWITCH_INTLKD = {"PUMP3305": False}
 SWITCH_ERR = {"PUMP3305": False}
 
 DIN_ADDRESS = {"LS3338": (12778, 0), "LS3339": (12778, 1), "ES3347": (12778, 2), "PUMP3305_CON": (12778, 3),
-               "PUMP3305_OL": (12778, 4),"PS2352":(12778, 5),"PS1361":(12778, 6),"PS8302":(12778, 7)}
+               "PUMP3305_OL": (12778, 4),"PS2352":(12778, 5),"PS8302":(12778, 7),"UPS_ON_BATT":(12778,6),
+               "UPS_LOW_BATT":(12778,7), "LS2126": (12778,7),"LS2127": (12778,7),"LS2128": (12778,7),"LS2129": (12778,7)}
 NDIN = len(DIN_ADDRESS)
 DIN = {}
-DIN_DIC = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS1361":False,"PS8302":False}
+DIN_DIC = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS8302":False,
+           "UPS_ON_BATT": False,"UPS_LOW_BATT": False,"LS2126": False,"LS2127": False,"LS2128": False,"LS2129": False}
 
-DIN_LOWLIMIT = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS1361":False,"PS8302":False}
+DIN_LOWLIMIT = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS8302":False,
+                "UPS_ON_BATT": False,"UPS_LOW_BATT": False,"LS2126": False,"LS2127": False,"LS2128": False,"LS2129": False}
 
-DIN_HIGHLIMIT = {"LS3338": True, "LS3339": True, "ES3347": True, "PUMP3305_CON": True, "PUMP3305_OL": True,"PS2352":True,"PS1361":True,"PS8302":True}
+DIN_HIGHLIMIT = {"LS3338": True, "LS3339": True, "ES3347": True, "PUMP3305_CON": True, "PUMP3305_OL": True,"PS2352":True,"PS8302":True,
+                 "UPS_ON_BATT": False,"UPS_LOW_BATT": False,"LS2126": False,"LS2127": False,"LS2128": False,"LS2129": False}
 
-DIN_ACTIVATED = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS1361":False,"PS8302":False}
+DIN_ACTIVATED = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS8302":False,
+                 "UPS_ON_BATT": False,"UPS_LOW_BATT": False,"LS2126": False,"LS2127": False,"LS2128": False,"LS2129": False}
 
-DIN_ALARM = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS1361":False,"PS8302":False}
+DIN_ALARM = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS8302":False,
+             "UPS_ON_BATT": False,"UPS_LOW_BATT": False,"LS2126": False,"LS2127": False,"LS2128": False,"LS2129": False}
 
 VALVE_ADDRESS = {"PV1344": 12288, "PV4307": 12289, "PV4308": 12290, "PV4317": 12291, "PV4318": 12292, "PV4321": 12293,
                  "PV4324": 12294, "PV5305": 12295, "PV5306": 12296,
                  "PV5307": 12297, "PV5309": 12298, "SV3307": 12299, "SV3310": 12300, "SV3322": 12301,
-                 "SV3325": 12302, "SV3329": 12304, "SV4328": 12306, "SV4329": 12307, "SV4331": 12308,
-                 "SV4332": 12309, "HFSV3312": 12311, "HFSV3323": 12312, "HFSV3331": 12313}
+                 "SV3325": 12302, "SV3329": 12304, "SV4327": 12305,"SV4328": 12306, "SV4329": 12307, "SV4331": 12308,
+                 "SV4332": 12309, "SV4337":12310, "HFSV3312": 12311, "HFSV3323": 12312, "HFSV3331": 12313}
 NVALVE = len(VALVE_ADDRESS)
 VALVE = {}
 VALVE_OUT = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
              "PV4324": 0, "PV5305": 0, "PV5306": 0,
              "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
-             "SV3325": 0, "SV3329": 0,
-              "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,
+             "SV3325": 0, "SV3329": 0, "SV4327": 0,
+              "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,"SV4337": 0,
               "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0}
 VALVE_MAN = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
-             "PV4324": False, "PV5305": True, "PV5306": True,
+             "PV4324": True, "PV5305": True, "PV5306": True,
              "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
-             "SV3325": True, "SV3329": True,
-              "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+             "SV3325": True, "SV3329": True, "SV4327": True,
+              "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,"SV4337": False,
               "HFSV3312": True, "HFSV3323": True, "HFSV3331": True}
 VALVE_INTLKD = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
                 "PV4324": False, "PV5305": False, "PV5306": False,
                 "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-                "SV3325": False, "SV3329": False,
-                 "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+                "SV3325": False, "SV3329": False, "SV4327": False,
+                 "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,"SV4337": False,
                  "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
 VALVE_ERR = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
              "PV4324": False, "PV5305": False, "PV5306": False,
              "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-             "SV3325": False, "SV3329": False,
-              "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+             "SV3325": False, "SV3329": False, "SV4327": False,
+              "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False, "SV4337": False,
               "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
 VALVE_COMMAND_CACHE = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
              "PV4324": False, "PV5305": False, "PV5306": False,
              "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-             "SV3325": False, "SV3329": False,
-              "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+             "SV3325": False, "SV3329": False, "SV4327": False,
+              "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False, "SV4337": False,
               "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
 VALVE_BUSY = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
              "PV4324": False, "PV5305": False, "PV5306": False,
              "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
-             "SV3325": False, "SV3329": False,
-              "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,
+             "SV3325": False, "SV3329": False, "SV4327": False,
+              "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False, "SV4337": False,
               "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
 LOOPPID_ADR_BASE = {'SERVO3321': 14288, 'HTR6225': 14306, 'HTR2123': 14324, 'HTR2124': 14342, 'HTR2125': 14360,
                     'HTR1202': 14378, 'HTR2203': 14396, 'HTR6202': 14414, 'HTR6206': 14432, 'HTR6210': 14450,
@@ -582,9 +588,11 @@ LEFT_REAL_RATE = {'BFM4313': 30, 'LT3335': 30, 'MFC1316_IN': 30, "CYL3334_FCALC"
 
 AD_PARA = {"LT2122": 0 , "LT2130": 0}
 AD_RATE = {"LT2122": 30 , "LT2130": 30}
-DIN_PARA = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS1361":False,"PS8302":False}
+DIN_PARA = {"LS3338": 0, "LS3339": 0, "ES3347": 0, "PUMP3305_CON": 0, "PUMP3305_OL": 0,"PS2352":0,"PS8302":0,
+            "UPS_ON_BATT": 0,"UPS_LOW_BATT": 0,"LS2126": 0,"LS2127": 0,"LS2128": 0,"LS2129": 0}
 
-DIN_RATE = {"LS3338": 30, "LS3339": 30, "ES3347": 30, "PUMP3305_CON": 30, "PUMP3305_OL": 30,"PS2352":30,"PS1361":30,"PS8302":30}
+DIN_RATE = {"LS3338": 30, "LS3339": 30, "ES3347": 30, "PUMP3305_CON": 30, "PUMP3305_OL": 30,"PS2352":30,"PS8302":30,
+            "UPS_ON_BATT": 30,"UPS_LOW_BATT": 30,"LS2126": 30,"LS2127": 30,"LS2128": 30,"LS2129": 30}
 
 LOOPPID_PARA = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                   'HTR2125': 0,
