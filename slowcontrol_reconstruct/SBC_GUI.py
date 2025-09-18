@@ -9658,25 +9658,25 @@ class MainWindow(QtWidgets.QMainWindow):
         self.INTLCKWindow.PU_PRIME_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PU_PRIME_INTLK"])
 
         #UPS_UTILITY_INTLK, UPS_BATTERY_INTLK, LS2126_INTLK, LS2127_INTLK
-        self.INTLCKWindow.UPS_UTILITY_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["UPS_UTILITY_INTLK"])
+        self.INTLCKWindow.UPS_UTILITY_INTLK.ColorLabel(received_dic_c["data"]["INTLK_A"]["value"]["UPS_UTILITY_INTLK"])
         self.INTLCKWindow.UPS_UTILITY_INTLK.Indicator.UpdateColor(
-            received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"])
-        self.INTLCKWindow.UPS_UTILITY_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["UPS_UTILITY_INTLK"])
+            received_dic_c["data"]["INTLK_A"]["EN"]["UPS_UTILITY_INTLK"])
+        self.INTLCKWindow.UPS_UTILITY_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["UPS_UTILITY_INTLK"])
 
-        self.INTLCKWindow.UPS_BATTERY_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["UPS_BATTERY_INTLK"])
+        self.INTLCKWindow.UPS_BATTERY_INTLK.ColorLabel(received_dic_c["data"]["INTLK_A"]["value"]["UPS_BATTERY_INTLK"])
         self.INTLCKWindow.UPS_BATTERY_INTLK.Indicator.UpdateColor(
-            received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"])
-        self.INTLCKWindow.UPS_BATTERY_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["UPS_BATTERY_INTLK"])
+            received_dic_c["data"]["INTLK_A"]["EN"]["UPS_BATTERY_INTLK"])
+        self.INTLCKWindow.UPS_BATTERY_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["UPS_BATTERY_INTLK"])
 
-        self.INTLCKWindow.LS2126_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["LS2126_INTLK"])
+        self.INTLCKWindow.LS2126_INTLK.ColorLabel(received_dic_c["data"]["INTLK_A"]["value"]["LS2126_INTLK"])
         self.INTLCKWindow.LS2126_INTLK.Indicator.UpdateColor(
-            received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"])
-        self.INTLCKWindow.LS2126_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["LS2126_INTLK"])
+            received_dic_c["data"]["INTLK_A"]["EN"]["LS2126_INTLK"])
+        self.INTLCKWindow.LS2126_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["LS2126_INTLK"])
 
-        self.INTLCKWindow.LS2127_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["LS2127_INTLK"])
+        self.INTLCKWindow.LS2127_INTLK.ColorLabel(received_dic_c["data"]["INTLK_A"]["value"]["LS2127_INTLK"])
         self.INTLCKWindow.LS2127_INTLK.Indicator.UpdateColor(
-            received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"])
-        self.INTLCKWindow.LS2127_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["LS2127_INTLK"])
+            received_dic_c["data"]["INTLK_A"]["EN"]["LS2127_INTLK"])
+        self.INTLCKWindow.LS2127_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["LS2127_INTLK"])
         #
 
 
