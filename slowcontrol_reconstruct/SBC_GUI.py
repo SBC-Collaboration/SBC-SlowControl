@@ -3926,16 +3926,16 @@ class MainWindow(QtWidgets.QMainWindow):
                                       Act=self.AlarmButton.SubWindow.PS8302.AlarmMode.isChecked(),
                                       LowLimit=self.AlarmButton.SubWindow.PS8302.Low_Set.Field.text(),
                                       HighLimit=self.AlarmButton.SubWindow.PS8302.High_Set.Field.text()))
-        self.AlarmButton.SubWindow.UPS_ON_BATT.updatebutton.clicked.connect(
-            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_ON_BATT.Label.text(),
-                                      Act=self.AlarmButton.SubWindow.UPS_ON_BATT.AlarmMode.isChecked(),
-                                      LowLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.Low_Set.Field.text(),
-                                      HighLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.High_Set.Field.text()))
-        self.AlarmButton.SubWindow.UPS_LOW_BATT.updatebutton.clicked.connect(
-            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_LOW_BATT.Label.text(),
-                                      Act=self.AlarmButton.SubWindow.UPS_LOW_BATT.AlarmMode.isChecked(),
-                                      LowLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.Low_Set.Field.text(),
-                                      HighLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.High_Set.Field.text()))
+        # self.AlarmButton.SubWindow.UPS_ON_BATT.updatebutton.clicked.connect(
+        #     lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_ON_BATT.Label.text(),
+        #                               Act=self.AlarmButton.SubWindow.UPS_ON_BATT.AlarmMode.isChecked(),
+        #                               LowLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.Low_Set.Field.text(),
+        #                               HighLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.High_Set.Field.text()))
+        # self.AlarmButton.SubWindow.UPS_LOW_BATT.updatebutton.clicked.connect(
+        #     lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_LOW_BATT.Label.text(),
+        #                               Act=self.AlarmButton.SubWindow.UPS_LOW_BATT.AlarmMode.isChecked(),
+        #                               LowLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.Low_Set.Field.text(),
+        #                               HighLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.High_Set.Field.text()))
 
         self.AlarmButton.SubWindow.LS2126.updatebutton.clicked.connect(
             lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS2126.Label.text(),
@@ -4024,17 +4024,17 @@ class MainWindow(QtWidgets.QMainWindow):
                                       LowLimit=self.AlarmButton.SubWindow.PS8302.Low_Set.Field.text(),
                                       HighLimit=self.AlarmButton.SubWindow.PS8302.High_Set.Field.text(), update= False))
 
-        self.AlarmButton.SubWindow.UPS_ON_BATT.AlarmMode.stateChanged.connect(
-            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_ON_BATT.Label.text(),
-                                      Act=self.AlarmButton.SubWindow.UPS_ON_BATT.AlarmMode.isChecked(),
-                                      LowLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.Low_Set.Field.text(),
-                                      HighLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.High_Set.Field.text(), update=False))
-
-        self.AlarmButton.SubWindow.UPS_LOW_BATT.AlarmMode.stateChanged.connect(
-            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_LOW_BATT.Label.text(),
-                                      Act=self.AlarmButton.SubWindow.UPS_LOW_BATT.AlarmMode.isChecked(),
-                                      LowLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.Low_Set.Field.text(),
-                                      HighLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.High_Set.Field.text(), update=False))
+        # self.AlarmButton.SubWindow.UPS_ON_BATT.AlarmMode.stateChanged.connect(
+        #     lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_ON_BATT.Label.text(),
+        #                               Act=self.AlarmButton.SubWindow.UPS_ON_BATT.AlarmMode.isChecked(),
+        #                               LowLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.Low_Set.Field.text(),
+        #                               HighLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.High_Set.Field.text(), update=False))
+        #
+        # self.AlarmButton.SubWindow.UPS_LOW_BATT.AlarmMode.stateChanged.connect(
+        #     lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_LOW_BATT.Label.text(),
+        #                               Act=self.AlarmButton.SubWindow.UPS_LOW_BATT.AlarmMode.isChecked(),
+        #                               LowLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.Low_Set.Field.text(),
+        #                               HighLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.High_Set.Field.text(), update=False))
 
         self.AlarmButton.SubWindow.LS2126.AlarmMode.stateChanged.connect(
             lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS2126.Label.text(),
