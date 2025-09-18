@@ -1227,17 +1227,17 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PS8302.Low_Read.SetUnit(" ")
         self.PS8302.High_Read.SetUnit(" ")
 
-        self.UPS_ON_BATT = AlarmStatusWidget(self.LEFTVariableTab)
-        self.UPS_ON_BATT.Label.setText("UPS_BAT_ON")
-        self.UPS_ON_BATT.Indicator.SetUnit(" ")
-        self.UPS_ON_BATT.Low_Read.SetUnit(" ")
-        self.UPS_ON_BATT.High_Read.SetUnit(" ")
-
-        self.UPS_LOW_BATT = AlarmStatusWidget(self.LEFTVariableTab)
-        self.UPS_LOW_BATT.Label.setText("UPS_BAT_LOW")
-        self.UPS_LOW_BATT.Indicator.SetUnit(" ")
-        self.UPS_LOW_BATT.Low_Read.SetUnit(" ")
-        self.UPS_LOW_BATT.High_Read.SetUnit(" ")
+        # self.UPS_ON_BATT = AlarmStatusWidget(self.LEFTVariableTab)
+        # self.UPS_ON_BATT.Label.setText("UPS_BAT_ON")
+        # self.UPS_ON_BATT.Indicator.SetUnit(" ")
+        # self.UPS_ON_BATT.Low_Read.SetUnit(" ")
+        # self.UPS_ON_BATT.High_Read.SetUnit(" ")
+        #
+        # self.UPS_LOW_BATT = AlarmStatusWidget(self.LEFTVariableTab)
+        # self.UPS_LOW_BATT.Label.setText("UPS_BAT_LOW")
+        # self.UPS_LOW_BATT.Indicator.SetUnit(" ")
+        # self.UPS_LOW_BATT.Low_Read.SetUnit(" ")
+        # self.UPS_LOW_BATT.High_Read.SetUnit(" ")
 
         self.UPS_UTILITY_OK = AlarmStatusWidget(self.LEFTVariableTab)
         self.UPS_UTILITY_OK.Label.setText("UPS_UTI_OK")
@@ -1472,8 +1472,8 @@ class AlarmWin(QtWidgets.QMainWindow):
                              2:{  0: self.LED1_OUT, 1: self.LED2_OUT, 2:self.LED3_OUT, 3:self.LED_MAX}}
 
 
-        self.AlarmDindir = {0:{ 0: self.PS2352, 1: self.PUMP3305_CON, 2: self.PUMP3305_OL, 3: self.LS3338, 4:self.LS3339,5:self.CC9313_POWER},
-                             1:{0: self.ES3347, 1: self.PS8302, 2: self.UPS_ON_BATT, 3: self.UPS_LOW_BATT, 4:self.UPS_UTILITY_OK, 5:self.UPS_BATTERY_OK},
+        self.AlarmDindir = {0:{ 0: self.PS2352, 1: self.PUMP3305_CON, 2: self.PUMP3305_OL, 3: self.LS3338, 4:self.LS3339},
+                             1:{0: self.ES3347, 1: self.PS8302, 2: self.UPS_UTILITY_OK, 3: self.UPS_BATTERY_OK, 4:self.CC9313_POWER},
                              2: { 0: self.LS2126, 1: self.LS2127, 2:self.LS2128 , 3:self.LS2129 }}
 
 

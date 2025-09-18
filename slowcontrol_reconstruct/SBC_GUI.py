@@ -1563,15 +1563,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.VLUPS.addWidget(self.UPS_BATTERY_OK)
         self.UPS_BATTERY_OK.Label.setText("BATT_OK")
 
-        self.UPS_ON_BATT = ColoredStatus(self.RackTab, mode=2)
-        # self.UPS_ON_BATT.move(1900 * R, 470 * R)
-        self.VLUPS.addWidget(self.UPS_ON_BATT)
-        self.UPS_ON_BATT.Label.setText("ON_BATT")
+        # self.UPS_ON_BATT = ColoredStatus(self.RackTab, mode=2)
+        # # self.UPS_ON_BATT.move(1900 * R, 470 * R)
+        # self.VLUPS.addWidget(self.UPS_ON_BATT)
+        # self.UPS_ON_BATT.Label.setText("ON_BATT")
 
-        self.UPS_LOW_BATT = ColoredStatus(self.RackTab, mode=1)
-        # self.UPS_LOW_BATT.move(1900 * R, 470 * R)
-        self.VLUPS.addWidget(self.UPS_LOW_BATT)
-        self.UPS_LOW_BATT.Label.setText("LOW_BATT")
+        # self.UPS_LOW_BATT = ColoredStatus(self.RackTab, mode=1)
+        # # self.UPS_LOW_BATT.move(1900 * R, 470 * R)
+        # self.VLUPS.addWidget(self.UPS_LOW_BATT)
+        # self.UPS_LOW_BATT.Label.setText("LOW_BATT")
 
         # Data and Signal Tab
         self.ReadSettings = Loadfile(self.DatanSignalTab)
@@ -1772,7 +1772,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
                                self.AlarmButton.SubWindow.LS2126, self.AlarmButton.SubWindow.LS2127,
                                self.AlarmButton.SubWindow.LS2128, self.AlarmButton.SubWindow.LS2129,
-                               self.AlarmButton.SubWindow.CC9313_POWER,self.AlarmButton.SubWindow.UPS_ON_BATT, self.AlarmButton.SubWindow.UPS_LOW_BATT, self.AlarmButton.SubWindow.UPS_UTILITY_OK,
+                               self.AlarmButton.SubWindow.CC9313_POWER, self.AlarmButton.SubWindow.UPS_UTILITY_OK,
                                self.AlarmButton.SubWindow.UPS_BATTERY_OK]
 
 
@@ -5737,8 +5737,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LS3339.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS3339"])
         self.PS2352.UpdateColor(received_dic_c["data"]["Din"]["value"]["PS2352"])
         self.PS8302.UpdateColor(received_dic_c["data"]["Din"]["value"]["PS8302"])
-        self.UPS_ON_BATT.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_ON_BATT"])
-        self.UPS_LOW_BATT.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_LOW_BATT"])
+        # self.UPS_ON_BATT.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_ON_BATT"])
+        # self.UPS_LOW_BATT.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_LOW_BATT"])
         self.LS2126.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2126"])
         self.LS2127.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2127"])
         self.LS2128.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2128"])
