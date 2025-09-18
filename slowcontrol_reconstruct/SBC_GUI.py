@@ -5426,8 +5426,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         for element in self.PTDIFFAlarmMatrix:
             temp_text = element.Label.text()
-            print(temp_text)
-            temp_text  = temp_text.replace("\u0394P", "PDIFF")
+            temp_text= temp_text.replace("\u0394P_2121/1101", "PDIFF_PT2121PT1101")
+            temp_text = temp_text.replace("\u0394P_2121/1325", "PDIFF_PT2121PT1325")
+            temp_text = temp_text.replace("\u0394P_CYL/LT/CF4", "CYL3334_LT3335_CF4PRESSCALC")
 
             element.AlarmMode.setChecked(bool(dic_c["Active"]["PT"][temp_text]))
             del temp_text
