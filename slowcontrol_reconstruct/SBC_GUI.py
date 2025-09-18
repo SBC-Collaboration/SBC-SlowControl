@@ -7000,68 +7000,68 @@ class MainWindow(QtWidgets.QMainWindow):
                 pass
 
         #UPS_UTILITY_INTLK, UPS_BATTERY_INTLK, LS2126_INTLK, LS2127_INTLK
-        if received_dic_c["data"]["INTLK_D"]["Busy"]["UPS_UTILITY_INTLK"]:
-            if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"]:
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["UPS_UTILITY_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["UPS_UTILITY_INTLK"]:
                 self.INTLCKWindow.UPS_UTILITY_INTLK.EN.ButtonLClicked()
             else:
                 self.INTLCKWindow.UPS_UTILITY_INTLK.EN.ButtonRClicked()
-            self.INTLK_D_DIC_buffer["UPS_UTILITY_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"]
-        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["UPS_UTILITY_INTLK"]:
-            if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"] != self.INTLK_D_DIC_buffer["UPS_UTILITY_INTLK"]:
-                if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"]:
+            self.INTLK_D_DIC_buffer["UPS_UTILITY_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["UPS_UTILITY_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["UPS_UTILITY_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["UPS_UTILITY_INTLK"] != self.INTLK_D_DIC_buffer["UPS_UTILITY_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["UPS_UTILITY_INTLK"]:
                     self.INTLCKWindow.UPS_UTILITY_INTLK.EN.ButtonLClicked()
                 else:
                     self.INTLCKWindow.UPS_UTILITY_INTLK.EN.ButtonRClicked()
-                self.INTLK_D_DIC_buffer["UPS_UTILITY_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"]
+                self.INTLK_D_DIC_buffer["UPS_UTILITY_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["UPS_UTILITY_INTLK"]
             else:
                 pass
 
 
-        if received_dic_c["data"]["INTLK_D"]["Busy"]["UPS_BATTERY_INTLK"]:
-            if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"]:
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["UPS_BATTERY_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["UPS_BATTERY_INTLK"]:
                 self.INTLCKWindow.UPS_BATTERY_INTLK.EN.ButtonLClicked()
             else:
                 self.INTLCKWindow.UPS_BATTERY_INTLK.EN.ButtonRClicked()
-            self.INTLK_D_DIC_buffer["UPS_BATTERY_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"]
-        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["UPS_BATTERY_INTLK"]:
-            if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"] != self.INTLK_D_DIC_buffer["UPS_BATTERY_INTLK"]:
-                if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"]:
+            self.INTLK_D_DIC_buffer["UPS_BATTERY_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["UPS_BATTERY_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["UPS_BATTERY_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["UPS_BATTERY_INTLK"] != self.INTLK_D_DIC_buffer["UPS_BATTERY_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["UPS_BATTERY_INTLK"]:
                     self.INTLCKWindow.UPS_BATTERY_INTLK.EN.ButtonLClicked()
                 else:
                     self.INTLCKWindow.UPS_BATTERY_INTLK.EN.ButtonRClicked()
-                self.INTLK_D_DIC_buffer["UPS_BATTERY_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"]
+                self.INTLK_D_DIC_buffer["UPS_BATTERY_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["UPS_BATTERY_INTLK"]
             else:
                 pass
 
-        if received_dic_c["data"]["INTLK_D"]["Busy"]["LS2126_INTLK"]:
-            if received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"]:
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["LS2126_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["LS2126_INTLK"]:
                 self.INTLCKWindow.LS2126_INTLK.EN.ButtonLClicked()
             else:
                 self.INTLCKWindow.LS2126_INTLK.EN.ButtonRClicked()
-            self.INTLK_D_DIC_buffer["LS2126_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"]
-        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["LS2126_INTLK"]:
-            if received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"] != self.INTLK_D_DIC_buffer["LS2126_INTLK"]:
-                if received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"]:
+            self.INTLK_D_DIC_buffer["LS2126_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["LS2126_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["LS2126_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["LS2126_INTLK"] != self.INTLK_D_DIC_buffer["LS2126_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["LS2126_INTLK"]:
                     self.INTLCKWindow.LS2126_INTLK.EN.ButtonLClicked()
                 else:
                     self.INTLCKWindow.LS2126_INTLK.EN.ButtonRClicked()
-                self.INTLK_D_DIC_buffer["LS2126_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"]
+                self.INTLK_D_DIC_buffer["LS2126_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["LS2126_INTLK"]
             else:
                 pass
 
-        if received_dic_c["data"]["INTLK_D"]["Busy"]["LS2127_INTLK"]:
-            if received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"]:
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["LS2127_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["LS2127_INTLK"]:
                 self.INTLCKWindow.LS2127_INTLK.EN.ButtonLClicked()
             else:
                 self.INTLCKWindow.LS2127_INTLK.EN.ButtonRClicked()
-            self.INTLK_D_DIC_buffer["LS2127_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"]
-        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["LS2127_INTLK"]:
-            if received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"] != self.INTLK_D_DIC_buffer["LS2127_INTLK"]:
-                if received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"]:
+            self.INTLK_D_DIC_buffer["LS2127_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["LS2127_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["LS2127_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["LS2127_INTLK"] != self.INTLK_D_DIC_buffer["LS2127_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["LS2127_INTLK"]:
                     self.INTLCKWindow.LS2127_INTLK.EN.ButtonLClicked()
                 else:
                     self.INTLCKWindow.LS2127_INTLK.EN.ButtonRClicked()
-                self.INTLK_D_DIC_buffer["LS2127_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"]
+                self.INTLK_D_DIC_buffer["LS2127_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["LS2127_INTLK"]
             else:
                 pass
         #
