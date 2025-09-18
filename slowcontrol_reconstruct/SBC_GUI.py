@@ -1786,7 +1786,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                       self.AlarmButton.SubWindow.HTR6219,self.AlarmButton.SubWindow.HTR6221,
                                       self.AlarmButton.SubWindow.HTR6214, self.AlarmButton.SubWindow.MFC1316]
 
-        self.AlarmMatrix = self.BORTDAlarmMatrix + self.FPRTDAlarmMatrix + self.PTAlarmMatrix + self.PTDIFFAlarmMatrix +self.LEFTVariableMatrix + self.ADVariableMatrix +self.UPSAlarmMatrix+ self.LOOPPIDAlarmMatrix
+        self.AlarmMatrix = self.BORTDAlarmMatrix + self.FPRTDAlarmMatrix + self.PTAlarmMatrix + self.PTDIFFAlarmMatrix +self.LEFTVariableMatrix + self.ADVariableMatrix +self.LOOPPIDAlarmMatrix
 
 
 
