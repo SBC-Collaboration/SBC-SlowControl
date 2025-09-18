@@ -5417,7 +5417,11 @@ class MainWindow(QtWidgets.QMainWindow):
             element.AlarmMode.setChecked(bool(dic_c["Active"]["TT"]["FP"][element.Label.text()]))
 
         for element in self.PTAlarmMatrix:
-            element.AlarmMode.setChecked(bool(dic_c["Active"]["PT"][element.Label.text()]))
+            try:
+                element.AlarmMode.setChecked(bool(dic_c["Active"]["PT"][element.Label.text()]))
+            except:
+                continue
+
 
         for element in self.LEFTVariableMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["LEFT_REAL"][element.Label.text()]))
