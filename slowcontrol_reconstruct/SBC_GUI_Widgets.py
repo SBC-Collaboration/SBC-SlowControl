@@ -2504,6 +2504,30 @@ class INTLCK_Win_v2(QtWidgets.QMainWindow): # v1 is not compatible with collape 
         self.PU_PRIME_INTLK.setObjectName("PU_PRIME")
         self.PU_PRIME_INTLK.move(0*R, 250*R)
 
+        #UPS_UTILITY_INTLK, UPS_BATTERY_INTLK, LS2126_INTLK, LS2127_INTLK
+        self.UPS_UTILITY_INTLK = INTLK_LD_Widget_v2(self.OTHERTab)
+        self.UPS_UTILITY_INTLK.Label.setText("UPS_UTILITY")
+        self.UPS_UTILITY_INTLK.setObjectName("UPS_UTILITY")
+        self.UPS_UTILITY_INTLK.move(450 * R, 250 * R)
+
+        self.UPS_BATTERY_INTLK = INTLK_LD_Widget_v2(self.OTHERTab)
+        self.UPS_BATTERY_INTLK.Label.setText("UPS_BATTERY")
+        self.UPS_BATTERY_INTLK.setObjectName("UPS_BATTERY")
+        self.UPS_BATTERY_INTLK.move(900 * R, 250 * R)
+
+        self.LS2126_INTLK = INTLK_LD_Widget_v2(self.OTHERTab)
+        self.LS2126_INTLK.Label.setText("LS2126")
+        self.LS2126_INTLK.setObjectName("LS2126")
+        self.LS2126_INTLK.move(1350 * R, 250 * R)
+
+        self.LS2127_INTLK = INTLK_LD_Widget_v2(self.OTHERTab)
+        self.LS2127_INTLK.Label.setText("LS2127")
+        self.LS2127_INTLK.setObjectName("LS2127")
+        self.LS2127_INTLK.move(1800 * R, 250 * R)
+        #
+
+
+
         #
 
         self.TT2118_HI_INTLK = INTLK_LA_Widget_v2(self.RTDSET1Tab)
