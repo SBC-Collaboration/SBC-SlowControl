@@ -1302,27 +1302,27 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.LED1_OUT = AlarmStatusWidget(self.LEFTVariableTab)
         self.LED1_OUT.Label.setText("LED1")
-        self.LED1_OUT.Indicator.SetUnit(" %")
-        self.LED1_OUT.Low_Read.SetUnit(" %")
-        self.LED1_OUT.High_Read.SetUnit(" %")
+        self.LED1_OUT.Indicator.SetUnit(" ")
+        self.LED1_OUT.Low_Read.SetUnit(" ")
+        self.LED1_OUT.High_Read.SetUnit(" ")
 
         self.LED2_OUT = AlarmStatusWidget(self.LEFTVariableTab)
         self.LED2_OUT.Label.setText("LED2")
-        self.LED2_OUT.Indicator.SetUnit(" %")
-        self.LED2_OUT.Low_Read.SetUnit(" %")
-        self.LED2_OUT.High_Read.SetUnit(" %")
+        self.LED2_OUT.Indicator.SetUnit(" ")
+        self.LED2_OUT.Low_Read.SetUnit(" ")
+        self.LED2_OUT.High_Read.SetUnit(" ")
 
         self.LED3_OUT = AlarmStatusWidget(self.LEFTVariableTab)
         self.LED3_OUT.Label.setText("LED3")
-        self.LED3_OUT.Indicator.SetUnit(" %")
-        self.LED3_OUT.Low_Read.SetUnit(" %")
-        self.LED3_OUT.High_Read.SetUnit(" %")
+        self.LED3_OUT.Indicator.SetUnit(" ")
+        self.LED3_OUT.Low_Read.SetUnit(" ")
+        self.LED3_OUT.High_Read.SetUnit(" ")
 
         self.LED_MAX = AlarmStatusWidget(self.LEFTVariableTab)
         self.LED_MAX.Label.setText("LED_MAX")
-        self.LED_MAX.Indicator.SetUnit(" %")
-        self.LED_MAX.Low_Read.SetUnit(" %")
-        self.LED_MAX.High_Read.SetUnit(" %")
+        self.LED_MAX.Indicator.SetUnit(" ")
+        self.LED_MAX.Low_Read.SetUnit(" ")
+        self.LED_MAX.High_Read.SetUnit(" ")
 
 
 
