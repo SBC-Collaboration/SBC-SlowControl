@@ -1281,7 +1281,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV2201_STATE = Indicator(self.FluidTab)
         self.PV2201_STATE.move(1260*R, 1090*R)
-        self.PV2201_STATE.Label.setText("PV1201_STAT")
+        self.PV2201_STATE.Label.setText("PV2201_STAT")
         self.PV2201_STATE.SetUnit("")
 
         self.PT1101_AVG = Indicator(self.FluidTab)
