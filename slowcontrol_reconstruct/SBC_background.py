@@ -594,6 +594,7 @@ class PLC:
 
         Raw_BO_REAL = {}
         for key in self.LEFT_REAL_address:
+
             Raw_BO_REAL[key] = self.Client_BO.read_holding_registers(self.LEFT_REAL_address[key], count=2,
                                                                      unit=0x01)
             self.LEFT_REAL_dic[key] = struct.unpack(">f", struct.pack(">HH", Raw_BO_REAL[key].getRegister(0 + 1),
