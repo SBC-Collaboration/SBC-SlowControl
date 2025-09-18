@@ -942,6 +942,7 @@ class PLC:
                 self.AD_dic[key] = Raw_inter_AD[key] / (Raw_inter_AD[key] + 1) * 100
             else:
                 self.AD_dic[key] = -1
+            print("AD", self.AD_dic)
 
     def Read_AD_empty(self):
         for key in self.AD_address:
