@@ -8612,10 +8612,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LED3_OUT.SetValue(received_dic_c["data"]["PARA_F"]["LED3_OUT"])
         self.LED_MAX.SetValue(received_dic_c["data"]["PARA_F"]["LED_MAX"])
 
-        self.LED1_OUT_2d.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED1_OUT"])
-        self.LED2_OUT_2d.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED2_OUT"])
-        self.LED3_OUT_2d.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED3_OUT"])
-        self.LED_MAX_2d.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED_MAX"])
+        self.LED1_OUT_2d.SetValue(received_dic_c["data"]["PARA_F"]["LED1_OUT"])
+        self.LED2_OUT_2d.SetValue(received_dic_c["data"]["PARA_F"]["LED2_OUT"])
+        self.LED3_OUT_2d.SetValue(received_dic_c["data"]["PARA_F"]["LED3_OUT"])
+        self.LED_MAX_2d.SetValue(received_dic_c["data"]["PARA_F"]["LED_MAX"])
 
         self.LT2122.SetValue(received_dic_c["data"]["AD"]["value"]["LT2122"])
         self.LT2130.SetValue(received_dic_c["data"]["AD"]["value"]["LT2130"])
