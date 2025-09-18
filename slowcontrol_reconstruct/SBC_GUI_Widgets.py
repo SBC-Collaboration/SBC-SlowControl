@@ -1301,19 +1301,19 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.LT2130.High_Read.SetUnit(" %")
 
         self.LED1_OUT = AlarmStatusWidget(self.LEFTVariableTab)
-        self.LED1_OUT.Label.setText("LED1")
+        self.LED1_OUT.Label.setText("LED_OUT")
         self.LED1_OUT.Indicator.SetUnit(" ")
         self.LED1_OUT.Low_Read.SetUnit(" ")
         self.LED1_OUT.High_Read.SetUnit(" ")
 
         self.LED2_OUT = AlarmStatusWidget(self.LEFTVariableTab)
-        self.LED2_OUT.Label.setText("LED2")
+        self.LED2_OUT.Label.setText("LED2_OUT")
         self.LED2_OUT.Indicator.SetUnit(" ")
         self.LED2_OUT.Low_Read.SetUnit(" ")
         self.LED2_OUT.High_Read.SetUnit(" ")
 
         self.LED3_OUT = AlarmStatusWidget(self.LEFTVariableTab)
-        self.LED3_OUT.Label.setText("LED3")
+        self.LED3_OUT.Label.setText("LED3_OUT")
         self.LED3_OUT.Indicator.SetUnit(" ")
         self.LED3_OUT.Low_Read.SetUnit(" ")
         self.LED3_OUT.High_Read.SetUnit(" ")
