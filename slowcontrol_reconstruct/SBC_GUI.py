@@ -5743,9 +5743,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LS2127.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2127"])
         self.LS2128.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2128"])
         self.LS2129.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2129"])
-        self.CC9313_POWER.UpdateColor(received_dic_c["data"]["Din"]["value"]["CC9313_POWER"])
-        self.UPS_UTILITY_OK.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_UTILITY_OK"])
-        self.UPS_BATTERY_OK.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_BATTERY_OK"])
+        self.CC9313_POWER.UpdateColor(received_dic_c["data"]["Din"]["value"]["CC9313_POW"])
+        self.UPS_UTILITY_OK.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_UTI_OK"])
+        self.UPS_BATTERY_OK.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_BAT_OK"])
 
         # show whether the widgets status are normal: manully controlled and no error signal
 
