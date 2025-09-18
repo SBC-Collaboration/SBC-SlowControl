@@ -4727,13 +4727,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.TS_PRO.RST_FF.clicked.connect(
             lambda: self.Procedure_TS_updatev2(pname=self.TS_PRO.Label.currentText(), RST=True,
-                                               SEL=self.TS_PRO.SEL_WR.Field.text(),
+                                               SEL=self.TS_PRO.SEL_WR.Field.currentText(),
                                                ADDREM_MASS=self.TS_PRO.ADDREM_MASS_WR.Field.text(),
                                                MAXTIME=self.TS_PRO.MAXTIME_WR.Field.text(),
                                                update=False))
         self.TS_PRO.updatebutton.clicked.connect(
             lambda: self.Procedure_TS_updatev2(pname=self.TS_PRO.Label.currentText(), RST=False,
-                                               SEL=self.TS_PRO.SEL_WR.Field.text(),
+                                               SEL=self.TS_PRO.SEL_WR.Field.currentText(),
                                                ADDREM_MASS=self.TS_PRO.ADDREM_MASS_WR.Field.text(),
                                                MAXTIME=self.TS_PRO.MAXTIME_WR.Field.text(),
                                                update=True))
