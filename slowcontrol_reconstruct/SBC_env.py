@@ -227,28 +227,28 @@ SWITCH_ERR = {"PUMP3305": False}
 DIN_ADDRESS = {"LS3338": (12778, 0), "LS3339": (12778, 1), "ES3347": (12778, 2), "PUMP3305_CON": (12778, 3),
                "PUMP3305_OL": (12778, 4),"PS2352":(12778, 5),'CC9313_POWER': (12778,6),"PS8302":(12778, 7),
                'PCYCLE_SLOWCOMP': (12778, 8), 'PCYCLE_FASTCOMP': (12778, 9), 'LS2126': (12778, 10), 'LS2128': (12778, 11),
-               'UPS_UTILITY_OK': (12778, 12), 'UPS_BATTERY_OK': (12778, 13), 'LS2127': (12778, 14), 'LS2129': (12778, 15)}
+               'UPS_UTI_OK': (12778, 12), 'UPS_BAT_OK': (12778, 13), 'LS2127': (12778, 14), 'LS2129': (12778, 15)}
 NDIN = len(DIN_ADDRESS)
 DIN = {}
 DIN_DIC = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,'CC9313_POWER': False,"PS8302":False,
                'PCYCLE_SLOWCOMP': False, 'PCYCLE_FASTCOMP': False, 'LS2126': False, 'LS2128': False,
-               'UPS_UTILITY_OK': False, 'UPS_BATTERY_OK': False, 'LS2127': False, 'LS2129': False}
+               'UPS_UTI_OK': False, 'UPS_BAT_OK': False, 'LS2127': False, 'LS2129': False}
 
 DIN_LOWLIMIT = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,'CC9313_POWER': False,"PS8302":False,
                'PCYCLE_SLOWCOMP': False, 'PCYCLE_FASTCOMP': False, 'LS2126': False, 'LS2128': False,
-               'UPS_UTILITY_OK': False, 'UPS_BATTERY_OK': False, 'LS2127': False, 'LS2129': False}
+               'UPS_UTI_OK': False, 'UPS_BAT_OK': False, 'LS2127': False, 'LS2129': False}
 
 DIN_HIGHLIMIT = {"LS3338": True, "LS3339": True, "ES3347": True, "PUMP3305_CON": True, "PUMP3305_OL": True,"PS2352":True,'CC9313_POWER': True,"PS8302":True,
                'PCYCLE_SLOWCOMP': True, 'PCYCLE_FASTCOMP': True, 'LS2126': True, 'LS2128': True,
-               'UPS_UTILITY_OK': True, 'UPS_BATTERY_OK': True, 'LS2127': True, 'LS2129': True}
+               'UPS_UTI_OK': True, 'UPS_BAT_OK': True, 'LS2127': True, 'LS2129': True}
 
 DIN_ACTIVATED = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,'CC9313_POWER': False,"PS8302":False,
                'PCYCLE_SLOWCOMP': False, 'PCYCLE_FASTCOMP': False, 'LS2126': False, 'LS2128': False,
-               'UPS_UTILITY_OK': False, 'UPS_BATTERY_OK': False, 'LS2127': False, 'LS2129': False}
+               'UPS_UTI_OK': False, 'UPS_BAT_OK': False, 'LS2127': False, 'LS2129': False}
 
 DIN_ALARM = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,'CC9313_POWER': False,"PS8302":False,
                'PCYCLE_SLOWCOMP': False, 'PCYCLE_FASTCOMP': False, 'LS2126': False, 'LS2128': False,
-               'UPS_UTILITY_OK': False, 'UPS_BATTERY_OK': False, 'LS2127': False, 'LS2129': False}
+               'UPS_UTI_OK': False, 'UPS_BAT_OK': False, 'LS2127': False, 'LS2129': False}
 
 VALVE_ADDRESS = {"PV1344": 12288, "PV4307": 12289, "PV4308": 12290, "PV4317": 12291, "PV4318": 12292, "PV4321": 12293,
                  "PV4324": 12294, "PV5305": 12295, "PV5306": 12296,
@@ -607,14 +607,14 @@ LEFT_REAL_RATE = {'BFM4313': 30, 'LT3335': 30, 'MFC1316_IN': 30, "CYL3334_FCALC"
 AD_PARA = {"LT2122": 0 , "LT2130": 0}
 AD_RATE = {"LT2122": 30 , "LT2130": 30}
 DIN_PARA = {"LS3338": 0, "LS3339": 0, "ES3347": 0, "PUMP3305_CON": 0, "PUMP3305_OL": 0,"PS2352":0,"PS8302":0,
-            "UPS_ON_BATT": 0,"UPS_LOW_BATT": 0,"LS2126": 0,"LS2127": 0,"LS2128": 0,"LS2129": 0, "PS2352":0,'CC9313_POWER': 0,"PS8302":0,
-               'PCYCLE_SLOWCOMP': 0, 'PCYCLE_FASTCOMP': 0, 'LS2126': 0, 'LS2128': 0,
-               'UPS_UTILITY_OK': 0, 'UPS_BATTERY_OK': 0, 'LS2127': 0, 'LS2129': 0}
+            "LS2126": 0,"LS2127": 0,"LS2128": 0,"LS2129": 0, "PS2352":0,'CC9313_POWER': 0,"PS8302":0,
+               'PCYCLE_SLOWCOMP': 0, 'PCYCLE_FASTCOMP': 0,
+               'UPS_UTI_OK': 0, 'UPS_BAT_OK': 0}
 
 DIN_RATE = {"LS3338": 30, "LS3339": 30, "ES3347": 30, "PUMP3305_CON": 30, "PUMP3305_OL": 30,"PS2352":30,"PS8302":30,
-            "UPS_ON_BATT": 30,"UPS_LOW_BATT": 30,"LS2126": 30,"LS2127": 30,"LS2128": 30,"LS2129": 30,"PS2352":30,'CC9313_POWER': 30,"PS8302":30,
-               'PCYCLE_SLOWCOMP': 30, 'PCYCLE_FASTCOMP': 30, 'LS2126': 30, 'LS2128': 30,
-               'UPS_UTILITY_OK': 30, 'UPS_BATTERY_OK': 30, 'LS2127': 30, 'LS2129': 30}
+            "LS2126": 30,"LS2127": 30,"LS2128": 30,"LS2129": 30,"PS2352":30,'CC9313_POWER': 30,"PS8302":30,
+               'PCYCLE_SLOWCOMP': 30, 'PCYCLE_FASTCOMP': 30,
+               'UPS_UTI_OK': 30, 'UPS_BAT_OK': 30}
 
 LOOPPID_PARA = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                   'HTR2125': 0,

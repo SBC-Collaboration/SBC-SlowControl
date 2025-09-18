@@ -1749,7 +1749,9 @@ class MainWindow(QtWidgets.QMainWindow):
                               self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325,
                               self.AlarmButton.SubWindow.PT5304,self.AlarmButton.SubWindow.PT6302,
                               self.AlarmButton.SubWindow.PT6306,self.AlarmButton.SubWindow.PT1101_AVG,
-                              self.AlarmButton.SubWindow.PT2121_AVG,self.AlarmButton.SubWindow.PDIFF_PT2121PT1101,
+                              self.AlarmButton.SubWindow.PT2121_AVG]
+
+        self.PTDIFFAlarmMatrix =[self.AlarmButton.SubWindow.PDIFF_PT2121PT1101,
                               self.AlarmButton.SubWindow.PDIFF_PT2121PT1325,self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC]
 
         self.expPTAlarmMatrix = [self.AlarmButton.SubWindow.PT6302,
@@ -1767,11 +1769,13 @@ class MainWindow(QtWidgets.QMainWindow):
                                    self.AlarmButton.SubWindow.ES3347, self.AlarmButton.SubWindow.PUMP3305_CON,
                                    self.AlarmButton.SubWindow.PUMP3305_OL, self.AlarmButton.SubWindow.PS2352,
                                self.AlarmButton.SubWindow.PS8302,
-                               self.AlarmButton.SubWindow.UPS_ON_BATT, self.AlarmButton.SubWindow.UPS_LOW_BATT,
+
                                self.AlarmButton.SubWindow.LS2126, self.AlarmButton.SubWindow.LS2127,
                                self.AlarmButton.SubWindow.LS2128, self.AlarmButton.SubWindow.LS2129,
-                               self.AlarmButton.SubWindow.CC9313_POWER, self.AlarmButton.SubWindow.UPS_UTILITY_OK,
+                               self.AlarmButton.SubWindow.CC9313_POWER,self.AlarmButton.SubWindow.UPS_ON_BATT, self.AlarmButton.SubWindow.UPS_LOW_BATT, self.AlarmButton.SubWindow.UPS_UTILITY_OK,
                                self.AlarmButton.SubWindow.UPS_BATTERY_OK]
+
+
 
         self.LOOPPIDAlarmMatrix = [self.AlarmButton.SubWindow.SERVO3321, self.AlarmButton.SubWindow.HTR6225,
                                    self.AlarmButton.SubWindow.HTR2123, self.AlarmButton.SubWindow.HTR2124,
@@ -1782,7 +1786,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                       self.AlarmButton.SubWindow.HTR6219,self.AlarmButton.SubWindow.HTR6221,
                                       self.AlarmButton.SubWindow.HTR6214, self.AlarmButton.SubWindow.MFC1316]
 
-        self.AlarmMatrix = self.BORTDAlarmMatrix + self.FPRTDAlarmMatrix + self.PTAlarmMatrix + self.LEFTVariableMatrix + self.ADVariableMatrix + self.DinAlarmMatrix + self.LOOPPIDAlarmMatrix
+        self.AlarmMatrix = self.BORTDAlarmMatrix + self.FPRTDAlarmMatrix + self.PTAlarmMatrix + self.PTDIFFAlarmMatrix +self.LEFTVariableMatrix + self.ADVariableMatrix +self.UPSAlarmMatrix+ self.LOOPPIDAlarmMatrix
 
 
 
@@ -5417,10 +5421,15 @@ class MainWindow(QtWidgets.QMainWindow):
             element.AlarmMode.setChecked(bool(dic_c["Active"]["TT"]["FP"][element.Label.text()]))
 
         for element in self.PTAlarmMatrix:
-            try:
-                element.AlarmMode.setChecked(bool(dic_c["Active"]["PT"][element.Label.text()]))
-            except:
-                continue
+            element.AlarmMode.setChecked(bool(dic_c["Active"]["PT"][element.Label.text()]))
+
+
+        for element in self.PTDIFFAlarmMatrix:
+            temp_text = element.Label.text()
+            temp_text  = temp_text.replace("\u0394P", "PDIFF")
+
+            element.AlarmMode.setChecked(bool(dic_c["Active"]["PT"][temp_text]))
+            del temp_text
 
 
         for element in self.LEFTVariableMatrix:
@@ -5431,6 +5440,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         for element in self.DinAlarmMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["Din"][element.Label.text()]))
+
 
         for element in self.LOOPPIDAlarmMatrix:
             element.AlarmMode.setChecked(bool(dic_c["Active"]["LOOPPID"][element.Label.text()]))
