@@ -675,7 +675,7 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.GroupDIN = QtWidgets.QGroupBox(self.LEFTVariableTab)
         self.GroupDIN.setTitle(" DIN Variables ")
         self.GroupDIN.setLayout(self.GLDIN)
-        self.GroupDIN.move(0 * R, 500 * R)
+        self.GroupDIN.move(0 * R, 750 * R)
 
         self.GLHTR = QtWidgets.QGridLayout()
         self.GLHTR.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
@@ -1075,6 +1075,40 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PT2343.Low_Read.SetUnit(" bar")
         self.PT2343.High_Read.SetUnit(" bar")
 
+        self.PT1101_AVG = AlarmStatusWidget(self.PressureTab)
+        self.PT1101_AVG.Label.setText("PT1101_AVG")
+        self.PT1101_AVG.Indicator.SetUnit(" bar")
+        self.PT1101_AVG.Low_Read.SetUnit(" bar")
+        self.PT1101_AVG.High_Read.SetUnit(" bar")
+
+        self.PT2121_AVG = AlarmStatusWidget(self.PressureTab)
+        self.PT2121_AVG.Label.setText("PT2121_AVG")
+        self.PT2121_AVG.Indicator.SetUnit(" bar")
+        self.PT2121_AVG.Low_Read.SetUnit(" bar")
+        self.PT2121_AVG.High_Read.SetUnit(" bar")
+
+        self.PDIFF_PT2121PT1101 = AlarmStatusWidget(self.PressureTab)
+        self.PDIFF_PT2121PT1101.Label.setText('\u0394' + "P_2121/1101")
+        self.PDIFF_PT2121PT1101.Indicator.SetUnit(" bar")
+        self.PDIFF_PT2121PT1101.Low_Read.SetUnit(" bar")
+        self.PDIFF_PT2121PT1101.High_Read.SetUnit(" bar")
+
+
+        self.PDIFF_PT2121PT1325 = AlarmStatusWidget(self.PressureTab)
+        self.PDIFF_PT2121PT1325.Label.setText('\u0394'+"P_2121/1325")
+        self.PDIFF_PT2121PT1325.Indicator.SetUnit(" bar")
+        self.PDIFF_PT2121PT1325.Low_Read.SetUnit(" bar")
+        self.PDIFF_PT2121PT1325.High_Read.SetUnit(" bar")
+
+        self.CYL3334_LT3335_CF4PRESSCALC = AlarmStatusWidget(self.PressureTab)
+        self.CYL3334_LT3335_CF4PRESSCALC.Label.setText('\u0394'+"P_CYL/LT/CF4")
+        self.CYL3334_LT3335_CF4PRESSCALC.Indicator.SetUnit(" bar")
+        self.CYL3334_LT3335_CF4PRESSCALC.Low_Read.SetUnit(" bar")
+        self.CYL3334_LT3335_CF4PRESSCALC.High_Read.SetUnit(" bar")
+
+
+
+
 
 
         #left variable part
@@ -1130,6 +1164,19 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.TS3_MASS.Low_Read.SetUnit(" ")
         self.TS3_MASS.High_Read.SetUnit(" ")
 
+        self.PV1201_STATE = AlarmStatusWidget(self.LEFTVariableTab)
+        self.PV1201_STATE.Label.setText("PV1201_STATE")
+        self.PV1201_STATE.Indicator.SetUnit(" ")
+        self.PV1201_STATE.Low_Read.SetUnit(" ")
+        self.PV1201_STATE.High_Read.SetUnit(" ")
+
+        self.PV2201_STATE = AlarmStatusWidget(self.LEFTVariableTab)
+        self.PV2201_STATE.Label.setText("PV2201_STATE")
+        self.PV2201_STATE.Indicator.SetUnit(" ")
+        self.PV2201_STATE.Low_Read.SetUnit(" ")
+        self.PV2201_STATE.High_Read.SetUnit(" ")
+
+
         self.PUMP3305_CON = AlarmStatusWidget(self.LEFTVariableTab)
         self.PUMP3305_CON.Label.setText("PUMP3305_CON")
         self.PUMP3305_CON.Indicator.SetUnit(" ")
@@ -1181,16 +1228,30 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PS8302.High_Read.SetUnit(" ")
 
         self.UPS_ON_BATT = AlarmStatusWidget(self.LEFTVariableTab)
-        self.UPS_ON_BATT.Label.setText("UPS_ON")
+        self.UPS_ON_BATT.Label.setText("UPS_BAT_ON")
         self.UPS_ON_BATT.Indicator.SetUnit(" ")
         self.UPS_ON_BATT.Low_Read.SetUnit(" ")
         self.UPS_ON_BATT.High_Read.SetUnit(" ")
 
         self.UPS_LOW_BATT = AlarmStatusWidget(self.LEFTVariableTab)
-        self.UPS_LOW_BATT.Label.setText("UPS_LOW")
+        self.UPS_LOW_BATT.Label.setText("UPS_BAT_LOW")
         self.UPS_LOW_BATT.Indicator.SetUnit(" ")
         self.UPS_LOW_BATT.Low_Read.SetUnit(" ")
         self.UPS_LOW_BATT.High_Read.SetUnit(" ")
+
+        self.UPS_UTILITY_OK = AlarmStatusWidget(self.LEFTVariableTab)
+        self.UPS_UTILITY_OK.Label.setText("UPS_UTI_OK")
+        self.UPS_UTILITY_OK.Indicator.SetUnit(" ")
+        self.UPS_UTILITY_OK.Low_Read.SetUnit(" ")
+        self.UPS_UTILITY_OK.High_Read.SetUnit(" ")
+
+        self.UPS_BATTERY_OK = AlarmStatusWidget(self.LEFTVariableTab)
+        self.UPS_BATTERY_OK.Label.setText("UPS_BAT_OK")
+        self.UPS_BATTERY_OK.Indicator.SetUnit(" ")
+        self.UPS_BATTERY_OK.Low_Read.SetUnit(" ")
+        self.UPS_BATTERY_OK.High_Read.SetUnit(" ")
+
+
 
         self.LS2126 = AlarmStatusWidget(self.LEFTVariableTab)
         self.LS2126.Label.setText("LS2126")
@@ -1217,6 +1278,15 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.LS2129.High_Read.SetUnit(" ")
 
 
+        self.CC9313_POWER  = AlarmStatusWidget(self.LEFTVariableTab)
+        self.CC9313_POWER .Label.setText("CC9313_POW")
+        self.CC9313_POWER .Indicator.SetUnit(" ")
+        self.CC9313_POWER .Low_Read.SetUnit(" ")
+        self.CC9313_POWER .High_Read.SetUnit(" ")
+
+
+
+
 
         self.LT2122 = AlarmStatusWidget(self.LEFTVariableTab)
         self.LT2122.Label.setText("LT2122")
@@ -1229,6 +1299,32 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.LT2130.Indicator.SetUnit(" %")
         self.LT2130.Low_Read.SetUnit(" %")
         self.LT2130.High_Read.SetUnit(" %")
+
+        self.LED1_OUT = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LED1_OUT.Label.setText("LED1")
+        self.LED1_OUT.Indicator.SetUnit(" %")
+        self.LED1_OUT.Low_Read.SetUnit(" %")
+        self.LED1_OUT.High_Read.SetUnit(" %")
+
+        self.LED2_OUT = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LED2_OUT.Label.setText("LED2")
+        self.LED2_OUT.Indicator.SetUnit(" %")
+        self.LED2_OUT.Low_Read.SetUnit(" %")
+        self.LED2_OUT.High_Read.SetUnit(" %")
+
+        self.LED3_OUT = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LED3_OUT.Label.setText("LED3")
+        self.LED3_OUT.Indicator.SetUnit(" %")
+        self.LED3_OUT.Low_Read.SetUnit(" %")
+        self.LED3_OUT.High_Read.SetUnit(" %")
+
+        self.LED_MAX = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LED_MAX.Label.setText("LED_MAX")
+        self.LED_MAX.Indicator.SetUnit(" %")
+        self.LED_MAX.Low_Read.SetUnit(" %")
+        self.LED_MAX.High_Read.SetUnit(" %")
+
+
 
 
         self.SERVO3321 = AlarmStatusWidget(self.HTRTab)
@@ -1324,6 +1420,11 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.HTR6214.Low_Read.SetUnit(" ")
         self.HTR6214.High_Read.SetUnit(" ")
 
+        self.MFC1316 = AlarmStatusWidget(self.HTRTab)
+        self.MFC1316.Label.setText("MFC1316")
+        self.MFC1316.Indicator.SetUnit(" ")
+        self.MFC1316.Low_Read.SetUnit(" ")
+        self.MFC1316.High_Read.SetUnit(" ")
 
 
 
@@ -1355,7 +1456,8 @@ class AlarmWin(QtWidgets.QMainWindow):
                            1: {0: self.PT2330, 1: self.PT2335, 2: self.PT2343, 3: self.PT3308, 4: self.PT3309},
                            2: {0: self.PT3311, 1: self.PT3314, 2: self.PT3320, 3: self.PT3332, 4: self.PT3333},
                            3: {0: self.PT4315, 1: self.PT4319, 2: self.PT4322, 3: self.PT4325, 4: self.PT5304},
-                           4: {0: self.PT4306, 1: self.PT6302, 2: self.PT6306}}
+                           4: {0: self.PT4306, 1: self.PT6302, 2: self.PT6306, 3: self.PDIFF_PT2121PT1101, 4: self.PDIFF_PT2121PT1325},
+                           5: {0: self.CYL3334_LT3335_CF4PRESSCALC, 1: self.PT1101_AVG, 2: self.PT2121_AVG}}
 
         self.AlarmRTDLEFTdir = {0: {0:self.TT3401, 1:self.TT4330, 2:self.TT6203, 3:self.TT6207, 4:self.TT6211},
                                 1: {0:self.TT6213, 1:self.TT6220, 2:self.TT6222, 3:self.TT6401, 4:self.TT6404},
@@ -1365,17 +1467,20 @@ class AlarmWin(QtWidgets.QMainWindow):
                                 5: {0:self.TT7404}}
 
 
-        self.AlarmLEFTdir = {0:{0: self.BFM4313, 1: self.LT3335, 2: self.MFC1316_IN, 3: self.CYL3334_FCALC, 4: self.SERVO3321_IN_REAL},
-                             1:{0: self.TS1_MASS, 1: self.TS2_MASS, 2: self.TS3_MASS, 3: self.LT2122, 4: self.LT2130}}
+        self.AlarmLEFTdir = {0:{0: self.BFM4313, 1: self.LT3335, 2: self.MFC1316_IN, 3: self.CYL3334_FCALC, 4: self.SERVO3321_IN_REAL,5:self.PV1201_STATE},
+                             1:{0: self.TS1_MASS, 1: self.TS2_MASS, 2: self.TS3_MASS, 3: self.LT2122, 4: self.LT2130, 5:self.PV2201_STATE},
+                             2:{  0: self.LED1_OUT, 1: self.LED2_OUT, 2:self.LED3_OUT, 3:self.LED_MAX}}
 
-        self.AlarmDindir = {0:{ 0: self.PS2352, 1: self.PUMP3305_CON, 2: self.PUMP3305_OL, 3: self.LS3338, 4:self.LS3339},
-                             1:{0: self.ES3347, 1: self.PS8302, 2: self.UPS_ON_BATT, 3: self.UPS_LOW_BATT, 4:self.LS2126},
-                             2: {0:self.LS2127, 1: self.LS2128, 2: self.LS2129}}
+
+        self.AlarmDindir = {0:{ 0: self.PS2352, 1: self.PUMP3305_CON, 2: self.PUMP3305_OL, 3: self.LS3338, 4:self.LS3339,5:self.CC9313_POWER},
+                             1:{0: self.ES3347, 1: self.PS8302, 2: self.UPS_ON_BATT, 3: self.UPS_LOW_BATT, 4:self.UPS_UTILITY_OK, 5:self.UPS_BATTERY_OK},
+                             2: { 0: self.LS2126, 1: self.LS2127, 2:self.LS2128 , 3:self.LS2129 }}
 
 
         self.AlarmHTRdir = {0: {0: self.HTR1202, 1: self.HTR2123, 2: self.HTR2124, 3: self.HTR2125, 4: self.HTR2203},
                             1: {0: self.SERVO3321, 1: self.HTR6202, 2: self.HTR6206, 3: self.HTR6210, 4: self.HTR6214},
-                            2: {0: self.HTR6219, 1: self.HTR6221, 2: self.HTR6223, 3: self.HTR6224, 4: self.HTR6225}}
+                            2: {0: self.HTR6219, 1: self.HTR6221, 2: self.HTR6223, 3: self.HTR6224, 4: self.HTR6225},
+                            3: {0: self.MFC1316}}
 
 
         # variables usable for building widgets
@@ -2190,7 +2295,7 @@ class AlarmWin(QtWidgets.QMainWindow):
             if (i, j) == (i_HTR_last, j_HTR_last):
                 break
 
-class INTLCK_Win_v2(QtWidgets.QMainWindow):
+class INTLCK_Win_v2(QtWidgets.QMainWindow): # v1 is not compatible with collape widgets
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -2214,6 +2319,9 @@ class INTLCK_Win_v2(QtWidgets.QMainWindow):
 
         self.RTDSET1Tab = QtWidgets.QTabWidget(self.Tab)
         self.Tab.addTab(self.RTDSET1Tab, "RTD INTLCK")
+
+        self.OTHERTab = QtWidgets.QTabWidget(self.Tab)
+        self.Tab.addTab(self.OTHERTab, "OTHER INTLCK")
 
 
         # self.GLPTLO = QtWidgets.QGridLayout()
@@ -2240,7 +2348,7 @@ class INTLCK_Win_v2(QtWidgets.QMainWindow):
         self.GroupPTHI.setTitle("PT HI INTLCK")
         # self.GroupPTHI.setLayout(self.GLPTHI)
         self.GroupPTHI.move(0*R, 300*R)
-        self.GroupPTHI.setMinimumSize(2200 * R, 250 * R)
+        self.GroupPTHI.setMinimumSize(2200 * R, 500 * R)
         #
         #
         #
@@ -2253,7 +2361,7 @@ class INTLCK_Win_v2(QtWidgets.QMainWindow):
         self.GroupPTHIHI = QtWidgets.QGroupBox(self.PressureTab)
         self.GroupPTHIHI.setTitle("PT HIHI INTLCK")
         # self.GroupPTHIHI.setLayout(self.GLPTHIHI)
-        self.GroupPTHIHI.move(0*R, 600*R)
+        self.GroupPTHIHI.move(0*R, 1000*R)
         self.GroupPTHIHI.setMinimumSize(2200 * R, 250 * R)
         #
         #
@@ -2262,10 +2370,10 @@ class INTLCK_Win_v2(QtWidgets.QMainWindow):
         # self.GLOTHER.setSpacing(20 * R)
         # self.GLOTHER.setAlignment(QtCore.Qt.AlignCenter)
         #
-        self.GroupOTHER = QtWidgets.QGroupBox(self.PressureTab)
+        self.GroupOTHER = QtWidgets.QGroupBox(self.OTHERTab)
         self.GroupOTHER.setTitle("OTHER")
         # self.GroupOTHER.setLayout(self.GLOTHER)
-        self.GroupOTHER.move(0 * R, 900 * R)
+        self.GroupOTHER.move(0 * R, 0 * R)
         self.GroupOTHER.setMinimumSize(2200 * R, 500 * R)
         #
         # self.GLTTLO = QtWidgets.QGridLayout()
@@ -2308,6 +2416,12 @@ class INTLCK_Win_v2(QtWidgets.QMainWindow):
         self.PT4306_LO_INTLK.setObjectName("PT4306_LO_INTLK")
         self.PT4306_LO_INTLK.move(0*R,50*R)
 
+        self.PT5304_LO_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT5304_LO_INTLK.Label.setText("PT5304_LO")
+        self.PT5304_LO_INTLK.setObjectName("PT5304_LO_INTLK")
+        self.PT5304_LO_INTLK.move(450 * R, 50 * R)
+
+
         self.PT4306_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
         self.PT4306_HI_INTLK.Label.setText("PT4306_HI")
         self.PT4306_HI_INTLK.setObjectName("PT4306_HI_INTLK")
@@ -2321,7 +2435,7 @@ class INTLCK_Win_v2(QtWidgets.QMainWindow):
         self.PT4322_HIHI_INTLK = INTLK_LA_Widget_v2(self.PressureTab)
         self.PT4322_HIHI_INTLK.Label.setText("PT4322_HIHI")
         self.PT4322_HIHI_INTLK.setObjectName("PT4322_HIHI_INTLK")
-        self.PT4322_HIHI_INTLK.move(0*R, 650*R)
+        self.PT4322_HIHI_INTLK.move(0*R, 1050*R)
 
         self.PT4319_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
         self.PT4319_HI_INTLK.Label.setText("PT4319_HI")
@@ -2331,47 +2445,64 @@ class INTLCK_Win_v2(QtWidgets.QMainWindow):
         self.PT4319_HIHI_INTLK = INTLK_LA_Widget_v2(self.PressureTab)
         self.PT4319_HIHI_INTLK.Label.setText("PT4319_HIHI")
         self.PT4319_HIHI_INTLK.setObjectName("PT4319_HIHI_INTLK")
-        self.PT4319_HIHI_INTLK.move(450*R, 650*R)
+        self.PT4319_HIHI_INTLK.move(450*R, 1050*R)
 
         self.PT4325_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
         self.PT4325_HI_INTLK.Label.setText("PT4325_HI")
         self.PT4325_HI_INTLK.setObjectName("PT4325_HI_INTLK")
         self.PT4325_HI_INTLK.move(1350*R, 350*R)
 
+        
+        self.PT6302_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT6302_HI_INTLK.Label.setText("PT6302_HI")
+        self.PT6302_HI_INTLK.setObjectName("PT6302_HI_INTLK")
+        self.PT6302_HI_INTLK.move(1800 * R, 350 * R)
+
+        self.PT6306_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT6306_HI_INTLK.Label.setText("PT6306_HI")
+        self.PT6306_HI_INTLK.setObjectName("PT6306_HI_INTLK")
+        self.PT6306_HI_INTLK.move(0 * R, 650 * R)
+
+        self.PT2121_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT2121_HI_INTLK.Label.setText("PT2121_HI")
+        self.PT2121_HI_INTLK.setObjectName("PT2121_HI_INTLK")
+        self.PT2121_HI_INTLK.move(450 * R, 650 * R)
+
+
         self.PT4325_HIHI_INTLK = INTLK_LA_Widget_v2(self.PressureTab)
         self.PT4325_HIHI_INTLK.Label.setText("PT4325_HIHI")
         self.PT4325_HIHI_INTLK.setObjectName("PT4325_HIHI_INTLK")
-        self.PT4325_HIHI_INTLK.move(900*R,650*R)
+        self.PT4325_HIHI_INTLK.move(900*R,1050*R)
 
-        self.TS1_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.TS1_INTLK = INTLK_LD_Widget_v2(self.OTHERTab)
         self.TS1_INTLK.Label.setText("TS1")
         self.TS1_INTLK.setObjectName("TS1")
-        self.TS1_INTLK.move(0*R,950*R)
+        self.TS1_INTLK.move(0*R,50*R)
 
-        self.ES3347_INTLK = INTLK_RD_Widget_v2(self.PressureTab)
+        self.ES3347_INTLK = INTLK_RD_Widget_v2(self.OTHERTab)
         self.ES3347_INTLK.Label.setText("ES3347")
         self.ES3347_INTLK.setObjectName("ES3347")
-        self.ES3347_INTLK.move(1350*R, 950*R)
+        self.ES3347_INTLK.move(1350*R, 50*R)
 
-        self.PUMP3305_OL_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.PUMP3305_OL_INTLK = INTLK_LD_Widget_v2(self.OTHERTab)
         self.PUMP3305_OL_INTLK.Label.setText("PUMP3305_OL")
         self.PUMP3305_OL_INTLK.setObjectName("PUMP3305_OL")
-        self.PUMP3305_OL_INTLK.move(1800*R, 950*R)
+        self.PUMP3305_OL_INTLK.move(1800*R, 50*R)
 
-        self.TS2_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.TS2_INTLK = INTLK_LD_Widget_v2(self.OTHERTab)
         self.TS2_INTLK.Label.setText("TS2")
         self.TS2_INTLK.setObjectName("TS2")
-        self.TS2_INTLK.move(450*R, 950*R)
+        self.TS2_INTLK.move(450*R, 50*R)
 
-        self.TS3_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.TS3_INTLK = INTLK_LD_Widget_v2(self.OTHERTab)
         self.TS3_INTLK.Label.setText("TS3")
         self.TS3_INTLK.setObjectName("TS3")
-        self.TS3_INTLK.move(900*R, 950*R)
+        self.TS3_INTLK.move(900*R, 50*R)
 
-        self.PU_PRIME_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.PU_PRIME_INTLK = INTLK_LD_Widget_v2(self.OTHERTab)
         self.PU_PRIME_INTLK.Label.setText("PU_PRIME")
         self.PU_PRIME_INTLK.setObjectName("PU_PRIME")
-        self.PU_PRIME_INTLK.move(0*R, 1150*R)
+        self.PU_PRIME_INTLK.move(0*R, 250*R)
 
         #
 
@@ -2559,6 +2690,11 @@ class INTLCK_Win(QtWidgets.QMainWindow):
         self.PT4306_LO_INTLK.Label.setText("PT4306_LO")
         self.PT4306_LO_INTLK.setObjectName("PT4306_LO_INTLK")
 
+        self.PT5304_LO_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT5304_LO_INTLK.Label.setText("PT5304_LO")
+        self.PT5304_LO_INTLK.setObjectName("PT5304_LO_INTLK")
+
+
         self.PT4306_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
         self.PT4306_HI_INTLK.Label.setText("PT4306_HI")
         self.PT4306_HI_INTLK.setObjectName("PT4306_HI_INTLK")
@@ -2582,6 +2718,21 @@ class INTLCK_Win(QtWidgets.QMainWindow):
         self.PT4325_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
         self.PT4325_HI_INTLK.Label.setText("PT4325_HI")
         self.PT4325_HI_INTLK.setObjectName("PT4325_HI_INTLK")
+
+        self.PT6302_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT6302_HI_INTLK.Label.setText("PT6302_HI")
+        self.PT6302_HI_INTLK.setObjectName("PT6302_HI_INTLK")
+
+        self.PT6306_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT6306_HI_INTLK.Label.setText("PT6306_HI")
+        self.PT6306_HI_INTLK.setObjectName("PT6306_HI_INTLK")
+
+        self.PT2121_HI_INTLK = INTLK_RA_Widget_v2(self.PressureTab)
+        self.PT2121_HI_INTLK.Label.setText("PT2121_HI")
+        self.PT2121_HI_INTLK.setObjectName("PT2121_HI_INTLK")
+
+
+
 
         self.PT4325_HIHI_INTLK = INTLK_LA_Widget_v2(self.PressureTab)
         self.PT4325_HIHI_INTLK.Label.setText("PT4325_HIHI")
@@ -2610,6 +2761,23 @@ class INTLCK_Win(QtWidgets.QMainWindow):
         self.PU_PRIME_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
         self.PU_PRIME_INTLK.Label.setText("PU_PRIME")
         self.PU_PRIME_INTLK.setObjectName("PU_PRIME")
+
+        self.UPS_UTILITY_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.UPS_UTILITY_INTLK.Label.setText("UPS_UTILITY")
+        self.UPS_UTILITY_INTLK.setObjectName("UPS_UTILITY_INTLK")
+
+        self.UPS_BATTERY_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.UPS_BATTERY_INTLK.Label.setText("UPS_BATTERY")
+        self.UPS_BATTERY_INTLK.setObjectName("UPS_BATTERY_INTLK")
+
+        self.LS2126_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.LS2126_INTLK.Label.setText("LS2126")
+        self.LS2126_INTLK.setObjectName("LS2126_INTLK")
+
+        self.LS2127_INTLK = INTLK_LD_Widget_v2(self.PressureTab)
+        self.LS2127_INTLK.Label.setText("LS2127")
+        self.LS2127_INTLK.setObjectName("LS2127_INTLK")
+
 
         #
 
@@ -2671,15 +2839,16 @@ class INTLCK_Win(QtWidgets.QMainWindow):
 
         # make a directory for the alarm instrument and assign instrument to certain position
         #IF you change the dimenstion of the following matrixes, don't forget to change TempMatrix in the Reassign function
-        self.PTLOdir = {0: {0: self.PT4306_LO_INTLK}}
+        self.PTLOdir = {0: {0: self.PT4306_LO_INTLK, 1: self.PT5304_LO_INTLK}}
 
-        self.PTHIdir = {0: {0: self.PT4306_HI_INTLK, 1: self.PT4322_HI_INTLK, 2: self.PT4319_HI_INTLK, 3: self.PT4325_HI_INTLK}}
+        self.PTHIdir = {0: {0: self.PT4306_HI_INTLK, 1: self.PT4322_HI_INTLK, 2: self.PT4319_HI_INTLK, 3: self.PT4325_HI_INTLK, 4: self.PT6302_HI_INTLK},
+                        1: {0:self.PT6306_HI_INTLK, 1: self.PT2121_HI_INTLK}}
 
         self.PTHIHIdir = {
             0: {0: self.PT4322_HIHI_INTLK, 1: self.PT4319_HIHI_INTLK, 2: self.PT4325_HIHI_INTLK}}
 
         self.OTHERdir = {0: {0: self.TS1_INTLK, 1: self.TS2_INTLK, 2: self.TS3_INTLK, 3: self.ES3347_INTLK, 4: self.PUMP3305_OL_INTLK},
-                           1: {0: self.PU_PRIME_INTLK}}
+                           1: {0: self.PU_PRIME_INTLK, 1: self.UPS_UTILITY_INTLK, 2: self.UPS_BATTERY_INTLK, 3: self.LS2126_INTLK, 4: self.LS2127_INTLK}}
 
         self.TTLOdir = {0: {0: self.TT2118_LO_INTLK}}
 

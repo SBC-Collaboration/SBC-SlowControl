@@ -151,7 +151,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ThermosyphonTab.Background = QtWidgets.QLabel(self.ThermosyphonTab)
         self.ThermosyphonTab.Background.setScaledContents(True)
         self.ThermosyphonTab.Background.setStyleSheet('background-color:black;')
-        pixmap_thermalsyphon = QtGui.QPixmap(os.path.join(self.ImagePath, "Thermosyphon_v2.png"))
+        pixmap_thermalsyphon = QtGui.QPixmap(os.path.join(self.ImagePath, "Thermosyphon_v3.png"))
         pixmap_thermalsyphon = pixmap_thermalsyphon.scaledToWidth(2400*R)
         self.ThermosyphonTab.Background.setPixmap(QtGui.QPixmap(pixmap_thermalsyphon))
         self.ThermosyphonTab.Background.move(0*R, 0*R)
@@ -207,6 +207,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HydraulicTab.Background.setAlignment(QtCore.Qt.AlignCenter)
         self.HydraulicTab.Background.setObjectName("HydraulicBkg")
 
+        self.RackTab = QtWidgets.QWidget()
+        self.Tab.addTab(self.RackTab, "Rack Electronics")
+
+        self.RackTab.Background = QtWidgets.QLabel(self.RackTab)
+        self.RackTab.Background.setScaledContents(True)
+        self.RackTab.Background.setStyleSheet('background-color:black;')
+        pixmap_Rack = QtGui.QPixmap(os.path.join(self.ImagePath, "Default_Background.png"))
+        pixmap_Rack = pixmap_Rack.scaledToWidth(2400 * R)
+        self.RackTab.Background.setPixmap(QtGui.QPixmap(pixmap_Rack))
+        self.RackTab.Background.move(0 * R, 0 * R)
+        self.RackTab.Background.setAlignment(QtCore.Qt.AlignCenter)
+        self.RackTab.Background.setObjectName("RackBkg")
 
 
         self.DatanSignalTab = QtWidgets.QWidget()
@@ -460,6 +472,22 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PLCOnline.Field.setText("Offline")
         self.PLCOnline.SetAlarm()
 
+        self.CC9313_CONT = Valve_v2(self.ThermosyphonTab)
+        self.CC9313_CONT.Label.setText("CC9313_CONT")
+        self.CC9313_CONT.move(1150 * R, 50 * R)
+
+        self.CC9313_POWER = ColoredStatus(self.ThermosyphonTab, mode=2)
+        self.CC9313_POWER.move(1350 * R, 50 * R)
+        self.CC9313_POWER.Label.setText("CC9313_POW")
+
+
+
+        self.PV4345 = Valve_v2(self.ThermosyphonTab)
+        self.PV4345.Label.setText("PV4345")
+        self.PV4345.move(2100 * R, 300 * R)
+
+
+
 
         # Chamber tab buttons
 
@@ -474,6 +502,26 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121.move(2110 * R, 990 * R)
         self.PT2121.Label.setText("PT2121")
         self.PT2121.SetUnit(" bar")
+
+        self.LED1_OUT = Indicator_v2(self.ChamberTab, colorcode=0, bkg_c=1)
+        self.LED1_OUT.move(763 * R, 426 * R)
+        self.LED1_OUT.Label.setText("LED1")
+        self.LED1_OUT.SetUnit("")
+
+        self.LED2_OUT = Indicator_v2(self.ChamberTab, colorcode=0, bkg_c=1)
+        self.LED2_OUT.move(463 * R, 426 * R)
+        self.LED2_OUT.Label.setText("LED2")
+        self.LED2_OUT.SetUnit("")
+
+        self.LED3_OUT = Indicator_v2(self.ChamberTab, colorcode=0, bkg_c=1)
+        self.LED3_OUT.move(363 * R, 426 * R)
+        self.LED3_OUT.Label.setText("LED3")
+        self.LED3_OUT.SetUnit("")
+
+        self.LED_MAX = Indicator_v2(self.ChamberTab, colorcode=0, bkg_c=1)
+        self.LED_MAX.move(263 * R, 426 * R)
+        self.LED_MAX.Label.setText("LED_MAX")
+        self.LED_MAX.SetUnit("")
 
         self.TT2118 = Indicator_v2(self.ChamberTab, colorcode=2, bkg_c=1)
         self.TT2118.move(483* R, 970 * R)
@@ -856,7 +904,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.PV_group = [False, True, self.HTR6214,self.HTR6219, self.HTR6221, self.HTR2203, self.HTR1202,
                               self.HTR6202, self.HTR6206, self.HTR6210,
-                              self.HTR6223,self.HTR6224,self.HTR6225,self.PT1101,self.PT2121]
+                              self.HTR6223,self.HTR6224,self.HTR6225,self.PT1101,self.PT2121, self.LED1_OUT, self.LED2_OUT, self.LED3_OUT,
+                         self.LED_MAX]
 
         self.HDPE_group = [False, True,self.TT2416,self.TT2435,self.TT2436,self.TT2437,self.TT2438,self.TT2439,self.TT2440,self.TT2441,
                            self.TT2442,self.TT2443,self.TT2444,self.TT2445,self.TT2450,self.TT2449]
@@ -888,6 +937,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.IV_switch.Button.setText("Jars")
         self.IV_switch.Button.clicked.connect(lambda: self.set_background(2))
         self.IV_switch.Button.clicked.connect(lambda: self.set_visibility_true_only(layer="IV"))
+
+
 
 
         # expansion button
@@ -1099,6 +1150,26 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT2449_2d.Label.setText("TT2449")
         self.TT2449_2d.SetUnit(" K")
 
+        self.LED1_OUT_2d = Indicator(self.IVTab)
+        self.LED1_OUT_2d.move(1750 * R, 90 * R)
+        self.LED1_OUT_2d.Label.setText("LED1")
+        self.LED1_OUT_2d.SetUnit("")
+
+        self.LED2_OUT_2d = Indicator(self.IVTab)
+        self.LED2_OUT_2d.move(1130 * R, 90 * R)
+        self.LED2_OUT_2d.Label.setText("LED2")
+        self.LED2_OUT_2d.SetUnit("")
+
+        self.LED3_OUT_2d = Indicator(self.IVTab)
+        self.LED3_OUT_2d.move(700 * R, 90 * R)
+        self.LED3_OUT_2d.Label.setText("LED3")
+        self.LED3_OUT_2d.SetUnit("")
+
+        self.LED_MAX_2d = Indicator(self.IVTab)
+        self.LED_MAX_2d.move(550 * R, 90 * R)
+        self.LED_MAX_2d.Label.setText("LED_MAX")
+        self.LED_MAX_2d.SetUnit("")
+
         # Fluid tab buttons
 
         self.PT2316 = Indicator(self.FluidTab)
@@ -1116,27 +1187,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2335.Label.setText("PT2335")
         self.PT2335.SetUnit(" bar")
 
-        self.TT7401 = Indicator(self.FluidTab)
-        self.TT7401.move(1985*R, 250*R)
-        self.TT7401.Label.setText("TT7401")
-
-        self.TT7402 = Indicator(self.FluidTab)
-        self.TT7402.move(910*R, 530*R)
-        self.TT7402.Label.setText("TT7402")
-
-        self.TT7403 = Indicator(self.FluidTab)
-        self.TT7403.move(2100 * R, 250 * R)
-        self.TT7403.Label.setText("TT7403")
-
-        self.TT7404 = Indicator(self.FluidTab)
-        self.TT7404.move(2200 * R, 250 * R)
-        self.TT7404.Label.setText("TT7404")
 
         self.PS8302 = ColoredStatus(self.FluidTab, mode=2)
         self.PS8302.move(1300 * R, 300 * R)
         self.PS8302.Label.setText("PS8302")
-
-
 
         self.PS2352 = ColoredStatus(self.FluidTab, mode=2)
         self.PS2352.move(950 * R, 240 * R)
@@ -1215,6 +1269,47 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT5304.move(1420*R, 250*R)
         self.PT5304.Label.setText("PT5304")
         self.PT5304.SetUnit(" bar")
+
+        self.PT_EN6306 = Valve_v2(self.FluidTab)
+        self.PT_EN6306.Label.setText("PG6306")
+        self.PT_EN6306.move(60 * R, 60 * R)
+
+        self.PV1201_STATE = Indicator(self.FluidTab)
+        self.PV1201_STATE.move(1030*R, 1090*R)
+        self.PV1201_STATE.Label.setText("PV1201_STAT")
+        self.PV1201_STATE.SetUnit("")
+
+        self.PV2201_STATE = Indicator(self.FluidTab)
+        self.PV2201_STATE.move(1260*R, 1090*R)
+        self.PV2201_STATE.Label.setText("PV1201_STAT")
+        self.PV2201_STATE.SetUnit("")
+
+        self.PT1101_AVG = Indicator(self.FluidTab)
+        self.PT1101_AVG.move(1030 * R, 1150 * R)
+        self.PT1101_AVG.Label.setText("PT1101_AVG")
+        self.PT1101_AVG.SetUnit("")
+
+        self.PT2121_AVG = Indicator(self.FluidTab)
+        self.PT2121_AVG.move(1260 * R, 1150 * R)
+        self.PT2121_AVG.Label.setText("PT2121_AVG")
+        self.PT2121_AVG.SetUnit("")
+
+        self.PDIFF_PT2121PT1101 = Indicator(self.FluidTab)
+        self.PDIFF_PT2121PT1101.move(1400 * R, 1300 * R)
+        self.PDIFF_PT2121PT1101.Label.setText('\u0394'+"P_2121/1101")
+        self.PDIFF_PT2121PT1101.SetUnit(" bar")
+
+        self.PDIFF_PT2121PT1325 = Indicator(self.FluidTab)
+        self.PDIFF_PT2121PT1325.move(1520 * R, 1300 * R)
+        self.PDIFF_PT2121PT1325.Label.setText('\u0394'+"P_2121/1325")
+        self.PDIFF_PT2121PT1325.SetUnit(" bar")
+
+
+
+
+
+
+
 
         # Hydraulic buttons
 
@@ -1377,12 +1472,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LT3339.SetUnit(" in")
 
         self.LT2122 = Indicator(self.HydraulicTab)
-        self.LT2122.move(2200 * R, 1170 * R)
+        self.LT2122.move(2200 * R, 1160 * R)
         self.LT2122.Label.setText("LT2122")
         self.LT2122.SetUnit(" %")
 
         self.LT2130 = Indicator(self.HydraulicTab)
-        self.LT2130.move(2300 * R, 1170 * R)
+        self.LT2130.move(2300 * R, 1160 * R)
         self.LT2130.Label.setText("LT2130")
         self.LT2130.SetUnit(" %")
 
@@ -1425,6 +1520,58 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT2121Hy.move(2100*R, 800*R)
         self.PT2121Hy.Label.setText("PT2121")
         self.PT2121Hy.SetUnit(" bar")
+
+        self.CYL3334_LT3335_CF4PRESSCALC = Indicator(self.HydraulicTab)
+        self.CYL3334_LT3335_CF4PRESSCALC.move(2100 * R, 1300 * R)
+        self.CYL3334_LT3335_CF4PRESSCALC.Label.setText('\u0394'+"P_CYL/LT/CF4")
+        self.CYL3334_LT3335_CF4PRESSCALC.SetUnit(" bar")
+
+        # Rack
+        self.TT7401 = Indicator(self.RackTab)
+        self.TT7401.move(100 * R, 50 * R)
+        self.TT7401.Label.setText("TT7401")
+
+        self.TT7402 = Indicator(self.RackTab)
+        self.TT7402.move(200 * R, 50 * R)
+        self.TT7402.Label.setText("TT7402")
+
+        self.TT7403 = Indicator(self.RackTab)
+        self.TT7403.move(300 * R, 50 * R)
+        self.TT7403.Label.setText("TT7403")
+
+        self.TT7404 = Indicator(self.RackTab)
+        self.TT7404.move(400 * R, 50 * R)
+        self.TT7404.Label.setText("TT7404")
+
+        self.VLUPS = QtWidgets.QHBoxLayout(self.RackTab)
+        self.VLUPS.setContentsMargins(20 * R, 20 * R, 20 * R, 20 * R)
+        self.VLUPS.setSpacing(20 * R)
+        self.VLUPS.setAlignment(QtCore.Qt.AlignCenter)
+
+        self.GroupUPS = QtWidgets.QGroupBox(self.RackTab)
+        self.GroupUPS.setTitle("UPS")
+        self.GroupUPS.setLayout(self.VLUPS)
+        self.GroupUPS.move(100 * R, 150 * R)
+
+        self.UPS_UTILITY_OK = ColoredStatus(self.RackTab, mode=2)
+        # self.UPS_UTILITY_OK.move(100 * R, 150 * R)
+        self.VLUPS.addWidget(self.UPS_UTILITY_OK)
+        self.UPS_UTILITY_OK.Label.setText("UTI_OK")
+
+        self.UPS_BATTERY_OK = ColoredStatus(self.RackTab, mode=2)
+        # self.UPS_UTILITY_OK.move(200 * R, 150 * R)
+        self.VLUPS.addWidget(self.UPS_BATTERY_OK)
+        self.UPS_BATTERY_OK.Label.setText("BATT_OK")
+
+        self.UPS_ON_BATT = ColoredStatus(self.RackTab, mode=2)
+        # self.UPS_ON_BATT.move(1900 * R, 470 * R)
+        self.VLUPS.addWidget(self.UPS_ON_BATT)
+        self.UPS_ON_BATT.Label.setText("ON_BATT")
+
+        self.UPS_LOW_BATT = ColoredStatus(self.RackTab, mode=1)
+        # self.UPS_LOW_BATT.move(1900 * R, 470 * R)
+        self.VLUPS.addWidget(self.UPS_LOW_BATT)
+        self.UPS_LOW_BATT.Label.setText("LOW_BATT")
 
         # Data and Signal Tab
         self.ReadSettings = Loadfile(self.DatanSignalTab)
@@ -1477,26 +1624,35 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_RD.Unit = " s"
         self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_RD.Unit = " s"
 
+        self.CRYOVALVE_CONTROL = ProcedureWidget(self.DatanSignalTab)
+        self.CRYOVALVE_CONTROL.move(1300 * R, 150 * R)
+        self.CRYOVALVE_CONTROL.Group.setTitle("CRYOVALVE_CONTROL")
+        self.CRYOVALVE_CONTROL.objectname = "CRYOVALVE_CONTROL"
+        
+
         self.MAN_TS = Flag(self.DatanSignalTab)
-        self.MAN_TS.move(1300 * R, 150 * R)
+        self.MAN_TS.move(1900 * R, 150 * R)
         self.MAN_TS.Label.setText("MAN_TS")
 
         self.MAN_HYD = Flag(self.DatanSignalTab)
-        self.MAN_HYD.move(1300 * R, 260 * R)
+        self.MAN_HYD.move(1900 * R, 260 * R)
         self.MAN_HYD.Label.setText("MAN_HYD")
 
         self.PCYCLE_AUTOCYCLE = Flag(self.DatanSignalTab)
-        self.PCYCLE_AUTOCYCLE.move(1300 * R, 370 * R)
-        self.PCYCLE_AUTOCYCLE.Label.setText("PCYCLE_AUTOCYCLE")
+        self.PCYCLE_AUTOCYCLE.move(1900 * R, 370 * R)
+        self.PCYCLE_AUTOCYCLE.Label.setText("PCYCLE_AUTO")
 
-        self.UPS_ON_BATT = ColoredStatus(self.DatanSignalTab, mode=2)
-        self.UPS_ON_BATT.move(1300 * R, 470 * R)
-        self.UPS_ON_BATT.Label.setText("UPS_ON")
+        self.CRYOVALVE_OPENCLOSE = Flag(self.DatanSignalTab)
+        self.CRYOVALVE_OPENCLOSE.move(1900 * R, 480 * R)
+        self.CRYOVALVE_OPENCLOSE.Label.setText("CRYO_OP/CLS")
 
-        self.UPS_LOW_BATT = ColoredStatus(self.DatanSignalTab, mode=1)
-        self.UPS_LOW_BATT.move(1400 * R, 470 * R)
-        self.UPS_LOW_BATT.Label.setText("UPS_LOW")
+        self.CRYOVALVE_PV1201ACT = Flag(self.DatanSignalTab)
+        self.CRYOVALVE_PV1201ACT.move(1900 * R, 590 * R)
+        self.CRYOVALVE_PV1201ACT.Label.setText("CRYO_PV1201")
 
+        self.CRYOVALVE_PV2201ACT = Flag(self.DatanSignalTab)
+        self.CRYOVALVE_PV2201ACT.move(1900 * R, 700 * R)
+        self.CRYOVALVE_PV2201ACT.Label.setText("CRYO_PV2201")
 
         # INTLCK button
         self.INTLCKWindow = INTLCK_Win_v2()
@@ -1592,7 +1748,9 @@ class MainWindow(QtWidgets.QMainWindow):
                               self.AlarmButton.SubWindow.PT4315, self.AlarmButton.SubWindow.PT4319,
                               self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325,
                               self.AlarmButton.SubWindow.PT5304,self.AlarmButton.SubWindow.PT6302,
-                              self.AlarmButton.SubWindow.PT6306,]
+                              self.AlarmButton.SubWindow.PT6306,self.AlarmButton.SubWindow.PT1101_AVG,
+                              self.AlarmButton.SubWindow.PT2121_AVG,self.AlarmButton.SubWindow.PDIFF_PT2121PT1101,
+                              self.AlarmButton.SubWindow.PDIFF_PT2121PT1325,self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC]
 
         self.expPTAlarmMatrix = [self.AlarmButton.SubWindow.PT6302,
                               self.AlarmButton.SubWindow.PT6306]
@@ -1611,7 +1769,9 @@ class MainWindow(QtWidgets.QMainWindow):
                                self.AlarmButton.SubWindow.PS8302,
                                self.AlarmButton.SubWindow.UPS_ON_BATT, self.AlarmButton.SubWindow.UPS_LOW_BATT,
                                self.AlarmButton.SubWindow.LS2126, self.AlarmButton.SubWindow.LS2127,
-                               self.AlarmButton.SubWindow.LS2128, self.AlarmButton.SubWindow.LS2129]
+                               self.AlarmButton.SubWindow.LS2128, self.AlarmButton.SubWindow.LS2129,
+                               self.AlarmButton.SubWindow.CC9313_POWER, self.AlarmButton.SubWindow.UPS_UTILITY_OK,
+                               self.AlarmButton.SubWindow.UPS_BATTERY_OK]
 
         self.LOOPPIDAlarmMatrix = [self.AlarmButton.SubWindow.SERVO3321, self.AlarmButton.SubWindow.HTR6225,
                                    self.AlarmButton.SubWindow.HTR2123, self.AlarmButton.SubWindow.HTR2124,
@@ -1620,7 +1780,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                       self.AlarmButton.SubWindow.HTR6206,self.AlarmButton.SubWindow.HTR6210,
                                       self.AlarmButton.SubWindow.HTR6223,self.AlarmButton.SubWindow.HTR6224,
                                       self.AlarmButton.SubWindow.HTR6219,self.AlarmButton.SubWindow.HTR6221,
-                                      self.AlarmButton.SubWindow.HTR6214]
+                                      self.AlarmButton.SubWindow.HTR6214, self.AlarmButton.SubWindow.MFC1316]
 
         self.AlarmMatrix = self.BORTDAlarmMatrix + self.FPRTDAlarmMatrix + self.PTAlarmMatrix + self.LEFTVariableMatrix + self.ADVariableMatrix + self.DinAlarmMatrix + self.LOOPPIDAlarmMatrix
 
@@ -1875,6 +2035,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3323.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3323.Label.text()))
         self.HFSV3331.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3331.Label.text()))
         self.HFSV3331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3331.Label.text()))
+
+        self.CC9313_CONT.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.CC9313_CONT.Label.text()))
+        self.CC9313_CONT.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.CC9313_CONT.Label.text()))
+        self.PT_EN6306.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PT_EN6306.Label.text()))
+        self.PT_EN6306.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PT_EN6306.Label.text()))
+        self.PV4345.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.PV4345.Label.text()))
+        self.PV4345.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.PV4345.Label.text()))
         #
 
         self.SERVO3321.LOOPPIDWindow.Mode.LButton.clicked.connect(
@@ -1900,6 +2067,30 @@ class MainWindow(QtWidgets.QMainWindow):
                                      float(self.SERVO3321.LOOPPIDWindow.SP.Field.text()),
                                      float(self.SERVO3321.LOOPPIDWindow.HISP.Field.text()),
                                      float(self.SERVO3321.LOOPPIDWindow.LOSP.Field.text())))
+
+        self.MFC1316.LOOPPIDWindow.Mode.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.MFC1316.LOOPPIDWindow.Label.text()))
+        self.MFC1316.LOOPPIDWindow.Mode.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.MFC1316.LOOPPIDWindow.Label.text()))
+        self.MFC1316.State.LButton.clicked.connect(
+            lambda x: self.HTLButtonClicked(self.MFC1316.LOOPPIDWindow.Label.text()))
+        self.MFC1316.State.RButton.clicked.connect(
+            lambda x: self.HTRButtonClicked(self.MFC1316.LOOPPIDWindow.Label.text()))
+        self.MFC1316.LOOPPIDWindow.ButtonGroup.Button0.clicked.connect(
+            lambda x: self.HTRGroupButtonClicked(self.MFC1316.LOOPPIDWindow.Label.text(), 0))
+        self.MFC1316.LOOPPIDWindow.ButtonGroup.Button1.clicked.connect(
+            lambda x: self.HTRGroupButtonClicked(self.MFC1316.LOOPPIDWindow.Label.text(), 1))
+        self.MFC1316.LOOPPIDWindow.ButtonGroup.Button2.clicked.connect(
+            lambda x: self.HTRGroupButtonClicked(self.MFC1316.LOOPPIDWindow.Label.text(), 2))
+        self.MFC1316.LOOPPIDWindow.ButtonGroup.Button3.clicked.connect(
+            lambda x: self.HTRGroupButtonClicked(self.MFC1316.LOOPPIDWindow.Label.text(), 3))
+
+        self.MFC1316.LOOPPIDWindow.updatebutton.clicked.connect(
+            lambda x: self.HTRupdate(self.MFC1316.LOOPPIDWindow.Label.text(),
+                                     self.MFC1316.LOOPPIDWindow.ModeREAD.Field.text(),
+                                     float(self.MFC1316.LOOPPIDWindow.SP.Field.text()),
+                                     float(self.MFC1316.LOOPPIDWindow.HISP.Field.text()),
+                                     float(self.MFC1316.LOOPPIDWindow.LOSP.Field.text())))
 
 
 
@@ -3453,6 +3644,68 @@ class MainWindow(QtWidgets.QMainWindow):
                                      LowLimit=self.AlarmButton.SubWindow.PT6306.Low_Set.Field.text(),
                                      HighLimit=self.AlarmButton.SubWindow.PT6306.High_Set.Field.text()))
 
+        #
+        self.AlarmButton.SubWindow.PT1101_AVG.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1101_AVG.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT1101_AVG.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT1101_AVG.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT1101_AVG.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PT1101_AVG.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1101_AVG.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT1101_AVG.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT1101_AVG.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT1101_AVG.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PT2121_AVG.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2121_AVG.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT2121_AVG.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT2121_AVG.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT2121_AVG.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PT2121_AVG.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2121_AVG.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT2121_AVG.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT2121_AVG.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT2121_AVG.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PT2121_AVG.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PDIFF_PT2121PT1101.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PDIFF_PT2121PT1101.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PDIFF_PT2121PT1101.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PDIFF_PT2121PT1101.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PDIFF_PT2121PT1101.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PDIFF_PT2121PT1101.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PDIFF_PT2121PT1101.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PDIFF_PT2121PT1101.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PDIFF_PT2121PT1101.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PDIFF_PT2121PT1325.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PDIFF_PT2121PT1325.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PDIFF_PT2121PT1325.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PDIFF_PT2121PT1325.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PDIFF_PT2121PT1325.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PDIFF_PT2121PT1325.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PDIFF_PT2121PT1325.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PDIFF_PT2121PT1325.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PDIFF_PT2121PT1325.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PDIFF_PT2121PT1325.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.CYL3334_LT3335_CF4PRESSCALC.High_Set.Field.text()))
+        #
+
         self.AlarmButton.SubWindow.PT1101.AlarmMode.stateChanged.connect(
             lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1101.Label.text(),
                                      Act=self.AlarmButton.SubWindow.PT1101.AlarmMode.isChecked(),
@@ -3704,6 +3957,24 @@ class MainWindow(QtWidgets.QMainWindow):
                                       LowLimit=self.AlarmButton.SubWindow.LS2129.Low_Set.Field.text(),
                                       HighLimit=self.AlarmButton.SubWindow.LS2129.High_Set.Field.text()))
 
+        self.AlarmButton.SubWindow.CC9313_POWER.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.CC9313_POWER.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.CC9313_POWER.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.CC9313_POWER.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.CC9313_POWER.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.UPS_UTILITY_OK.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_UTILITY_OK.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.UPS_UTILITY_OK.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.UPS_UTILITY_OK.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.UPS_UTILITY_OK.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.UPS_BATTERY_OK.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_BATTERY_OK.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.UPS_BATTERY_OK.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.UPS_BATTERY_OK.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.UPS_BATTERY_OK.High_Set.Field.text()))
+
 
         # checkbox
         self.AlarmButton.SubWindow.LS3338.AlarmMode.stateChanged.connect(
@@ -3787,6 +4058,27 @@ class MainWindow(QtWidgets.QMainWindow):
                                       Act=self.AlarmButton.SubWindow.LS2129.AlarmMode.isChecked(),
                                       LowLimit=self.AlarmButton.SubWindow.LS2129.Low_Set.Field.text(),
                                       HighLimit=self.AlarmButton.SubWindow.LS2129.High_Set.Field.text(),
+                                      update=False))
+
+        self.AlarmButton.SubWindow.CC9313_POWER.AlarmMode.stateChanged.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.CC9313_POWER.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.CC9313_POWER.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.CC9313_POWER.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.CC9313_POWER.High_Set.Field.text(),
+                                      update=False))
+
+        self.AlarmButton.SubWindow.UPS_UTILITY_OK.AlarmMode.stateChanged.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_UTILITY_OK.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.UPS_UTILITY_OK.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.UPS_UTILITY_OK.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.UPS_UTILITY_OK.High_Set.Field.text(),
+                                      update=False))
+
+        self.AlarmButton.SubWindow.UPS_BATTERY_OK.AlarmMode.stateChanged.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_BATTERY_OK.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.UPS_BATTERY_OK.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.UPS_BATTERY_OK.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.UPS_BATTERY_OK.High_Set.Field.text(),
                                       update=False))
 
         #LOOPPID updatebutton
@@ -3999,6 +4291,14 @@ class MainWindow(QtWidgets.QMainWindow):
             lambda x: self.INTLK_A_update(self.INTLCKWindow.PT4306_LO_INTLK.Label.text() + "_INTLK",
                                           self.INTLCKWindow.PT4306_LO_INTLK.SET_W.Field.text()))
 
+        self.INTLCKWindow.PT5304_LO_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT5304_LO_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT5304_LO_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT5304_LO_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT5304_LO_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT5304_LO_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT5304_LO_INTLK.SET_W.Field.text()))
+
         self.INTLCKWindow.PT4306_HI_INTLK.EN.LButton.clicked.connect(
             lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT4306_HI_INTLK.Label.text() + "_INTLK"))
         self.INTLCKWindow.PT4306_HI_INTLK.EN.RButton.clicked.connect(
@@ -4007,6 +4307,32 @@ class MainWindow(QtWidgets.QMainWindow):
             lambda x: self.INTLK_A_update(self.INTLCKWindow.PT4306_HI_INTLK.Label.text() + "_INTLK",
                                           self.INTLCKWindow.PT4306_HI_INTLK.SET_W.Field.text()))
 
+
+        #
+        self.INTLCKWindow.PT6302_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT6302_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT6302_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT6302_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT6302_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT6302_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT6302_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.PT6306_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT6306_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT6306_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT6306_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT6306_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT6306_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT6306_HI_INTLK.SET_W.Field.text()))
+
+        self.INTLCKWindow.PT2121_HI_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT2121_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT2121_HI_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_A_RButtonClicked(self.INTLCKWindow.PT2121_HI_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.PT2121_HI_INTLK.updatebutton.clicked.connect(
+            lambda x: self.INTLK_A_update(self.INTLCKWindow.PT2121_HI_INTLK.Label.text() + "_INTLK",
+                                          self.INTLCKWindow.PT2121_HI_INTLK.SET_W.Field.text()))
+        #
         self.INTLCKWindow.PT4322_HI_INTLK.EN.LButton.clicked.connect(
             lambda x: self.INTLK_A_LButtonClicked(self.INTLCKWindow.PT4322_HI_INTLK.Label.text() + "_INTLK"))
         self.INTLCKWindow.PT4322_HI_INTLK.EN.RButton.clicked.connect(
@@ -4237,6 +4563,37 @@ class MainWindow(QtWidgets.QMainWindow):
         self.INTLCKWindow.PU_PRIME_INTLK.RST.clicked.connect(
             lambda x: self.INTLK_D_RESET(self.INTLCKWindow.PU_PRIME_INTLK.Label.text() + "_INTLK"))
 
+
+        #UPS_UTILITY_INTLK, UPS_BATTERY_INTLK, LS2126_INTLK, LS2127_INTLK
+        self.INTLCKWindow.UPS_UTILITY_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.INTLCKWindow.UPS_UTILITY_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.UPS_UTILITY_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.INTLCKWindow.UPS_UTILITY_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.UPS_UTILITY_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.INTLCKWindow.UPS_UTILITY_INTLK.Label.text() + "_INTLK"))
+
+        self.INTLCKWindow.UPS_BATTERY_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.INTLCKWindow.UPS_BATTERY_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.UPS_BATTERY_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.INTLCKWindow.UPS_BATTERY_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.UPS_BATTERY_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.INTLCKWindow.UPS_BATTERY_INTLK.Label.text() + "_INTLK"))
+
+        self.INTLCKWindow.LS2126_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.INTLCKWindow.LS2126_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.LS2126_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.INTLCKWindow.LS2126_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.LS2126_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.INTLCKWindow.LS2126_INTLK.Label.text() + "_INTLK"))
+
+        self.INTLCKWindow.LS2127_INTLK.EN.LButton.clicked.connect(
+            lambda x: self.INTLK_D_LButtonClicked(self.INTLCKWindow.LS2127_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.LS2127_INTLK.EN.RButton.clicked.connect(
+            lambda x: self.INTLK_D_RButtonClicked(self.INTLCKWindow.LS2127_INTLK.Label.text() + "_INTLK"))
+        self.INTLCKWindow.LS2127_INTLK.RST.clicked.connect(
+            lambda x: self.INTLK_D_RESET(self.INTLCKWindow.LS2127_INTLK.Label.text() + "_INTLK"))
+        #
+
         #FLAG
         self.MAN_TS.Set.LButton.clicked.connect(
             lambda x: self.FLAGLButtonClicked(self.MAN_TS.Label.text()))
@@ -4253,6 +4610,21 @@ class MainWindow(QtWidgets.QMainWindow):
             lambda x: self.FLAGLButtonClicked(self.PCYCLE_AUTOCYCLE.Label.text()))
         self.PCYCLE_AUTOCYCLE.Set.RButton.clicked.connect(
             lambda x: self.FLAGRButtonClicked(self.PCYCLE_AUTOCYCLE.Label.text()))
+
+        self.CRYOVALVE_OPENCLOSE.Set.LButton.clicked.connect(
+            lambda x: self.FLAGLButtonClicked(self.CRYOVALVE_OPENCLOSE.Label.text()))
+        self.CRYOVALVE_OPENCLOSE.Set.RButton.clicked.connect(
+            lambda x: self.FLAGRButtonClicked(self.CRYOVALVE_OPENCLOSE.Label.text()))
+
+        self.CRYOVALVE_PV1201ACT.Set.LButton.clicked.connect(
+            lambda x: self.FLAGLButtonClicked(self.CRYOVALVE_PV1201ACT.Label.text()))
+        self.CRYOVALVE_PV1201ACT.Set.RButton.clicked.connect(
+            lambda x: self.FLAGRButtonClicked(self.CRYOVALVE_PV1201ACT.Label.text()))
+
+        self.CRYOVALVE_PV2201ACT.Set.LButton.clicked.connect(
+            lambda x: self.FLAGLButtonClicked(self.CRYOVALVE_PV2201ACT.Label.text()))
+        self.CRYOVALVE_PV2201ACT.Set.RButton.clicked.connect(
+            lambda x: self.FLAGRButtonClicked(self.CRYOVALVE_PV2201ACT.Label.text()))
 
 
 
@@ -4313,6 +4685,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRESSURE_CYCLE.START.clicked.connect(lambda: self.ProcedureClick(pid=self.PRESSURE_CYCLE.objectname, start=True, stop=False, abort=False))
         self.PRESSURE_CYCLE.STOP.clicked.connect(lambda: self.ProcedureClick(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=True, abort=False))
         self.PRESSURE_CYCLE.ABORT.clicked.connect(lambda: self.ProcedureClick(pid=self.PRESSURE_CYCLE.objectname, start=False, stop=False, abort=True))
+
+        self.CRYOVALVE_CONTROL.START.clicked.connect(
+            lambda: self.ProcedureClick(pid=self.CRYOVALVE_CONTROL.objectname, start=True, stop=False, abort=False))
+        self.CRYOVALVE_CONTROL.STOP.clicked.connect(
+            lambda: self.ProcedureClick(pid=self.CRYOVALVE_CONTROL.objectname, start=False, stop=True, abort=False))
+        self.CRYOVALVE_CONTROL.ABORT.clicked.connect(
+            lambda: self.ProcedureClick(pid=self.CRYOVALVE_CONTROL.objectname, start=False, stop=False, abort=True))
+
 
         self.PRESSURE_CYCLE.expandwindow.Start.clicked.connect(
             lambda: self.ProcedureClick(pid=self.PRESSURE_CYCLE.objectname, start=True, stop=False, abort=False))
@@ -5133,6 +5513,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.WRITE_SLOWDAQ.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.WRITE_SLOWDAQ.objectname])
         self.WRITE_SLOWDAQ.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.WRITE_SLOWDAQ.objectname])
 
+        self.CRYOVALVE_CONTROL.Running.UpdateColor(
+            received_dic_c["data"]["Procedure"]["Running"][self.CRYOVALVE_CONTROL.objectname])
+        self.CRYOVALVE_CONTROL.INTLKD.UpdateColor(
+            received_dic_c["data"]["Procedure"]["INTLKD"][self.CRYOVALVE_CONTROL.objectname])
+        self.CRYOVALVE_CONTROL.EXIT.SetValue(received_dic_c["data"]["Procedure"]["EXIT"][self.CRYOVALVE_CONTROL.objectname])
+
         self.PRESSURE_CYCLE.Running.UpdateColor(received_dic_c["data"]["Procedure"]["Running"][self.PRESSURE_CYCLE.objectname])
         self.PRESSURE_CYCLE.INTLKD.UpdateColor(received_dic_c["data"]["Procedure"]["INTLKD"][self.PRESSURE_CYCLE.objectname])
 
@@ -5319,6 +5705,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HFSV3312.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"])
         self.HFSV3323.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"])
         self.HFSV3331.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
+        self.CC9313_CONT.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["CC9313_CONT"])
+        self.PT_EN6306.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PT_EN6306"])
+        self.PV4345.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4345"])
+
 
 
 
@@ -5337,6 +5727,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LS2127.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2127"])
         self.LS2128.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2128"])
         self.LS2129.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2129"])
+        self.CC9313_POWER.UpdateColor(received_dic_c["data"]["Din"]["value"]["CC9313_POWER"])
+        self.UPS_UTILITY_OK.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_UTILITY_OK"])
+        self.UPS_BATTERY_OK.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_BATTERY_OK"])
 
         # show whether the widgets status are normal: manully controlled and no error signal
 
@@ -5493,6 +5886,25 @@ class MainWindow(QtWidgets.QMainWindow):
             self.HFSV3331.ActiveState.UpdateColor(True)
         else:
             self.HFSV3331.ActiveState.UpdateColor(False)
+
+
+        if received_dic_c["data"]["Valve"]["MAN"]["CC9313_CONT"] and not received_dic_c["data"]["Valve"]["ERR"]["CC9313_CONT"]:
+
+            self.CC9313_CONT.ActiveState.UpdateColor(True)
+        else:
+            self.CC9313_CONT.ActiveState.UpdateColor(False)
+
+        if received_dic_c["data"]["Valve"]["MAN"]["PT_EN6306"] and not received_dic_c["data"]["Valve"]["ERR"]["PT_EN6306"]:
+
+            self.PT_EN6306.ActiveState.UpdateColor(True)
+        else:
+            self.PT_EN6306.ActiveState.UpdateColor(False)
+
+        if received_dic_c["data"]["Valve"]["MAN"]["PV4345"] and not received_dic_c["data"]["Valve"]["ERR"]["PV4345"]:
+
+            self.PV4345.ActiveState.UpdateColor(True)
+        else:
+            self.PV4345.ActiveState.UpdateColor(False)
 
 
 
@@ -5683,6 +6095,25 @@ class MainWindow(QtWidgets.QMainWindow):
             self.HFSV3331.ButtonTransitionState(False)
 
 
+        if received_dic_c["data"]["Valve"]["Busy"]["CC9313_CONT"] == True:
+            self.CC9313_CONT.ButtonTransitionState(False)
+
+        else:
+            self.CC9313_CONT.ButtonTransitionState(False)
+
+        if received_dic_c["data"]["Valve"]["Busy"]["PT_EN6306"] == True:
+            self.PT_EN6306.ButtonTransitionState(False)
+
+        else:
+            self.PT_EN6306.ButtonTransitionState(False)
+
+        if received_dic_c["data"]["Valve"]["Busy"]["PV4345"] == True:
+            self.PV4345.ButtonTransitionState(False)
+
+        else:
+            self.PV4345.ButtonTransitionState(False)
+
+
 
 
         # FLAG
@@ -5746,6 +6177,64 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
+        #
+        if received_dic_c["data"]["FLAG"]["INTLKD"]["CRYOVALVE_OPENCLOSE"]:
+
+            self.CRYOVALVE_OPENCLOSE.INTLK.UpdateColor(True)
+        else:
+            self.CRYOVALVE_OPENCLOSE.INTLK.UpdateColor(False)
+
+        # if received_dic_c["data"]["FLAG"]["value"]["CRYOVALVE_OPENCLOSE"] != self.FLAG_buffer["CRYOVALVE_OPENCLOSE"]:
+        #     self.CRYOVALVE_OPENCLOSE.Set.ButtonTransitionState(False)
+        #     self.FLAG_buffer["CRYOVALVE_OPENCLOSE"] = received_dic_c["data"]["FLAG"]["value"]["CRYOVALVE_OPENCLOSE"]
+        # else:
+        #     pass
+        if received_dic_c["data"]["FLAG"]["Busy"]["CRYOVALVE_OPENCLOSE"] == True:
+            self.CRYOVALVE_OPENCLOSE.Set.ButtonTransitionState(False)
+
+        elif received_dic_c["data"]["FLAG"]["Busy"]["CRYOVALVE_OPENCLOSE"] == False:
+            self.CRYOVALVE_OPENCLOSE.Set.ButtonTransitionState(False)
+        else:
+            pass
+
+        if received_dic_c["data"]["FLAG"]["INTLKD"]["CRYOVALVE_PV1201ACT"]:
+
+            self.CRYOVALVE_PV1201ACT.INTLK.UpdateColor(True)
+        else:
+            self.CRYOVALVE_PV1201ACT.INTLK.UpdateColor(False)
+
+        # if received_dic_c["data"]["FLAG"]["value"]["CRYOVALVE_PV1201ACT"] != self.FLAG_buffer["CRYOVALVE_PV1201ACT"]:
+        #     self.CRYOVALVE_PV1201ACT.Set.ButtonTransitionState(False)
+        #     self.FLAG_buffer["CRYOVALVE_PV1201ACT"] = received_dic_c["data"]["FLAG"]["value"]["CRYOVALVE_PV1201ACT"]
+        # else:
+        #     pass
+        if received_dic_c["data"]["FLAG"]["Busy"]["CRYOVALVE_PV1201ACT"] == True:
+            self.CRYOVALVE_PV1201ACT.Set.ButtonTransitionState(False)
+
+        elif received_dic_c["data"]["FLAG"]["Busy"]["CRYOVALVE_PV1201ACT"] == False:
+            self.CRYOVALVE_PV1201ACT.Set.ButtonTransitionState(False)
+        else:
+            pass
+
+        if received_dic_c["data"]["FLAG"]["INTLKD"]["CRYOVALVE_PV2201ACT"]:
+
+            self.CRYOVALVE_PV2201ACT.INTLK.UpdateColor(True)
+        else:
+            self.CRYOVALVE_PV2201ACT.INTLK.UpdateColor(False)
+
+        # if received_dic_c["data"]["FLAG"]["value"]["CRYOVALVE_PV2201ACT"] != self.FLAG_buffer["CRYOVALVE_PV2201ACT"]:
+        #     self.CRYOVALVE_PV2201ACT.Set.ButtonTransitionState(False)
+        #     self.FLAG_buffer["CRYOVALVE_PV2201ACT"] = received_dic_c["data"]["FLAG"]["value"]["CRYOVALVE_PV2201ACT"]
+        # else:
+        #     pass
+        if received_dic_c["data"]["FLAG"]["Busy"]["CRYOVALVE_PV2201ACT"] == True:
+            self.CRYOVALVE_PV2201ACT.Set.ButtonTransitionState(False)
+
+        elif received_dic_c["data"]["FLAG"]["Busy"]["CRYOVALVE_PV2201ACT"] == False:
+            self.CRYOVALVE_PV2201ACT.Set.ButtonTransitionState(False)
+        else:
+            pass
+
         # if received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"] != self.Switch_buffer["PUMP3305"]:
         #     self.PUMP3305.ButtonTransitionState(False)
         #     self.Switch_buffer["PUMP3305"] = received_dic_c["data"]["Switch"]["OUT"]["PUMP3305"]
@@ -5760,6 +6249,15 @@ class MainWindow(QtWidgets.QMainWindow):
         elif not received_dic_c["data"]["LOOPPID"]["Busy"]["SERVO3321"]:
             self.SERVO3321.ButtonTransitionState(False)
             self.SERVO3321.LOOPPIDWindow.ButtonTransitionState(False)
+        else:
+            pass
+
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["SERVO3321"]:
+            self.MFC1316.ButtonTransitionState(True)
+            self.MFC1316.LOOPPIDWindow.ButtonTransitionState(True)
+        elif not received_dic_c["data"]["LOOPPID"]["Busy"]["SERVO3321"]:
+            self.MFC1316.ButtonTransitionState(False)
+            self.MFC1316.LOOPPIDWindow.ButtonTransitionState(False)
         else:
             pass
 
@@ -5949,6 +6447,22 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 pass
 
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT5304_LO_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT5304_LO_INTLK"]:
+                self.INTLCKWindow.PT5304_LO_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT5304_LO_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["PT5304_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT5304_LO_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT5304_LO_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT5304_LO_INTLK"] != self.INTLK_A_DIC_buffer["PT5304_LO_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT5304_LO_INTLK"]:
+                    self.INTLCKWindow.PT5304_LO_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT5304_LO_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT5304_LO_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT5304_LO_INTLK"]
+            else:
+                pass
+
         if received_dic_c["data"]["INTLK_A"]["Busy"]["PT4306_HI_INTLK"]:
             if received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]:
                 self.INTLCKWindow.PT4306_HI_INTLK.EN.ButtonLClicked()
@@ -5964,6 +6478,58 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.INTLK_A_DIC_buffer["PT4306_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT4306_HI_INTLK"]
             else:
                 pass
+
+        #
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT6302_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT6302_HI_INTLK"]:
+                self.INTLCKWindow.PT6302_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT6302_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["PT6302_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT6302_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT6302_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT6302_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT6302_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT6302_HI_INTLK"]:
+                    self.INTLCKWindow.PT6302_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT6302_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT6302_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT6302_HI_INTLK"]
+            else:
+                pass
+
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT6306_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT6306_HI_INTLK"]:
+                self.INTLCKWindow.PT6306_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT6306_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["PT6306_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT6306_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT6306_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT6306_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT6306_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT6306_HI_INTLK"]:
+                    self.INTLCKWindow.PT6306_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT6306_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT6306_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT6306_HI_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_A"]["Busy"]["PT2121_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT2121_HI_INTLK"]:
+                self.INTLCKWindow.PT2121_HI_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.PT2121_HI_INTLK.EN.ButtonRClicked()
+            self.INTLK_A_DIC_buffer["PT2121_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT2121_HI_INTLK"]
+        elif not received_dic_c["data"]["INTLK_A"]["Busy"]["PT2121_HI_INTLK"]:
+            if received_dic_c["data"]["INTLK_A"]["EN"]["PT2121_HI_INTLK"] != self.INTLK_A_DIC_buffer["PT2121_HI_INTLK"]:
+                if received_dic_c["data"]["INTLK_A"]["EN"]["PT2121_HI_INTLK"]:
+                    self.INTLCKWindow.PT2121_HI_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.PT2121_HI_INTLK.EN.ButtonRClicked()
+                self.INTLK_A_DIC_buffer["PT2121_HI_INTLK"] = received_dic_c["data"]["INTLK_A"]["EN"]["PT2121_HI_INTLK"]
+            else:
+                pass
+        #
 
 
         if received_dic_c["data"]["INTLK_A"]["Busy"]["PT4322_HI_INTLK"]:
@@ -6416,6 +6982,73 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.INTLK_D_DIC_buffer["PU_PRIME_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"]
             else:
                 pass
+
+        #UPS_UTILITY_INTLK, UPS_BATTERY_INTLK, LS2126_INTLK, LS2127_INTLK
+        if received_dic_c["data"]["INTLK_D"]["Busy"]["UPS_UTILITY_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"]:
+                self.INTLCKWindow.UPS_UTILITY_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.UPS_UTILITY_INTLK.EN.ButtonRClicked()
+            self.INTLK_D_DIC_buffer["UPS_UTILITY_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"]
+        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["UPS_UTILITY_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"] != self.INTLK_D_DIC_buffer["UPS_UTILITY_INTLK"]:
+                if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"]:
+                    self.INTLCKWindow.UPS_UTILITY_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.UPS_UTILITY_INTLK.EN.ButtonRClicked()
+                self.INTLK_D_DIC_buffer["UPS_UTILITY_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"]
+            else:
+                pass
+
+
+        if received_dic_c["data"]["INTLK_D"]["Busy"]["UPS_BATTERY_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"]:
+                self.INTLCKWindow.UPS_BATTERY_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.UPS_BATTERY_INTLK.EN.ButtonRClicked()
+            self.INTLK_D_DIC_buffer["UPS_BATTERY_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"]
+        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["UPS_BATTERY_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"] != self.INTLK_D_DIC_buffer["UPS_BATTERY_INTLK"]:
+                if received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"]:
+                    self.INTLCKWindow.UPS_BATTERY_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.UPS_BATTERY_INTLK.EN.ButtonRClicked()
+                self.INTLK_D_DIC_buffer["UPS_BATTERY_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_D"]["Busy"]["LS2126_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"]:
+                self.INTLCKWindow.LS2126_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.LS2126_INTLK.EN.ButtonRClicked()
+            self.INTLK_D_DIC_buffer["LS2126_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"]
+        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["LS2126_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"] != self.INTLK_D_DIC_buffer["LS2126_INTLK"]:
+                if received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"]:
+                    self.INTLCKWindow.LS2126_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.LS2126_INTLK.EN.ButtonRClicked()
+                self.INTLK_D_DIC_buffer["LS2126_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"]
+            else:
+                pass
+
+        if received_dic_c["data"]["INTLK_D"]["Busy"]["LS2127_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"]:
+                self.INTLCKWindow.LS2127_INTLK.EN.ButtonLClicked()
+            else:
+                self.INTLCKWindow.LS2127_INTLK.EN.ButtonRClicked()
+            self.INTLK_D_DIC_buffer["LS2127_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"]
+        elif not received_dic_c["data"]["INTLK_D"]["Busy"]["LS2127_INTLK"]:
+            if received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"] != self.INTLK_D_DIC_buffer["LS2127_INTLK"]:
+                if received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"]:
+                    self.INTLCKWindow.LS2127_INTLK.EN.ButtonLClicked()
+                else:
+                    self.INTLCKWindow.LS2127_INTLK.EN.ButtonRClicked()
+                self.INTLK_D_DIC_buffer["LS2127_INTLK"] = received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"]
+            else:
+                pass
+        #
 
 
 
@@ -7017,6 +7650,78 @@ class MainWindow(QtWidgets.QMainWindow):
                     pass
 
 
+
+        #
+        if not received_dic_c["data"]["Valve"]["MAN"]["CC9313_CONT"]:
+            if received_dic_c["data"]["Valve"]["OUT"]["CC9313_CONT"]:
+                self.CC9313_CONT.Set.ButtonLClicked()
+            else:
+                self.CC9313_CONT.Set.ButtonRClicked()
+            self.Valve_buffer["CC9313_CONT"] = received_dic_c["data"]["Valve"]["OUT"]["CC9313_CONT"]
+        elif received_dic_c["data"]["Valve"]["MAN"]["CC9313_CONT"]:
+            if received_dic_c["data"]["Valve"]["Busy"]["CC9313_CONT"]:
+                if received_dic_c["data"]["Valve"]["OUT"]["CC9313_CONT"]:
+                    self.CC9313_CONT.Set.ButtonLClicked()
+                else:
+                    self.CC9313_CONT.Set.ButtonRClicked()
+                self.Valve_buffer["CC9313_CONT"] = received_dic_c["data"]["Valve"]["OUT"]["CC9313_CONT"]
+            elif not received_dic_c["data"]["Valve"]["Busy"]["CC9313_CONT"]:
+                if received_dic_c["data"]["Valve"]["OUT"]["CC9313_CONT"] != self.Valve_buffer["CC9313_CONT"]:
+                    if received_dic_c["data"]["Valve"]["OUT"]["CC9313_CONT"]:
+                        self.CC9313_CONT.Set.ButtonLClicked()
+                    else:
+                        self.CC9313_CONT.Set.ButtonRClicked()
+                    self.Valve_buffer["CC9313_CONT"] = received_dic_c["data"]["Valve"]["OUT"]["CC9313_CONT"]
+                else:
+                    pass
+
+        if not received_dic_c["data"]["Valve"]["MAN"]["PT_EN6306"]:
+            if received_dic_c["data"]["Valve"]["OUT"]["PT_EN6306"]:
+                self.PT_EN6306.Set.ButtonLClicked()
+            else:
+                self.PT_EN6306.Set.ButtonRClicked()
+            self.Valve_buffer["PT_EN6306"] = received_dic_c["data"]["Valve"]["OUT"]["PT_EN6306"]
+        elif received_dic_c["data"]["Valve"]["MAN"]["PT_EN6306"]:
+            if received_dic_c["data"]["Valve"]["Busy"]["PT_EN6306"]:
+                if received_dic_c["data"]["Valve"]["OUT"]["PT_EN6306"]:
+                    self.PT_EN6306.Set.ButtonLClicked()
+                else:
+                    self.PT_EN6306.Set.ButtonRClicked()
+                self.Valve_buffer["PT_EN6306"] = received_dic_c["data"]["Valve"]["OUT"]["PT_EN6306"]
+            elif not received_dic_c["data"]["Valve"]["Busy"]["PT_EN6306"]:
+                if received_dic_c["data"]["Valve"]["OUT"]["PT_EN6306"] != self.Valve_buffer["PT_EN6306"]:
+                    if received_dic_c["data"]["Valve"]["OUT"]["PT_EN6306"]:
+                        self.PT_EN6306.Set.ButtonLClicked()
+                    else:
+                        self.PT_EN6306.Set.ButtonRClicked()
+                    self.Valve_buffer["PT_EN6306"] = received_dic_c["data"]["Valve"]["OUT"]["PT_EN6306"]
+                else:
+                    pass
+
+        if not received_dic_c["data"]["Valve"]["MAN"]["PV4345"]:
+            if received_dic_c["data"]["Valve"]["OUT"]["PV4345"]:
+                self.PV4345.Set.ButtonLClicked()
+            else:
+                self.PV4345.Set.ButtonRClicked()
+            self.Valve_buffer["PV4345"] = received_dic_c["data"]["Valve"]["OUT"]["PV4345"]
+        elif received_dic_c["data"]["Valve"]["MAN"]["PV4345"]:
+            if received_dic_c["data"]["Valve"]["Busy"]["PV4345"]:
+                if received_dic_c["data"]["Valve"]["OUT"]["PV4345"]:
+                    self.PV4345.Set.ButtonLClicked()
+                else:
+                    self.PV4345.Set.ButtonRClicked()
+                self.Valve_buffer["PV4345"] = received_dic_c["data"]["Valve"]["OUT"]["PV4345"]
+            elif not received_dic_c["data"]["Valve"]["Busy"]["PV4345"]:
+                if received_dic_c["data"]["Valve"]["OUT"]["PV4345"] != self.Valve_buffer["PV4345"]:
+                    if received_dic_c["data"]["Valve"]["OUT"]["PV4345"]:
+                        self.PV4345.Set.ButtonLClicked()
+                    else:
+                        self.PV4345.Set.ButtonRClicked()
+                    self.Valve_buffer["PV4345"] = received_dic_c["data"]["Valve"]["OUT"]["PV4345"]
+                else:
+                    pass
+
+
         # Valve icons
         if received_dic_c["data"]["Valve"]["OUT"]["PV1344"]:
             self.PV1344_icon.Turnon()
@@ -7199,6 +7904,22 @@ class MainWindow(QtWidgets.QMainWindow):
             self.PCYCLE_AUTOCYCLE.Set.ButtonLClicked()
         else:
             self.PCYCLE_AUTOCYCLE.Set.ButtonRClicked()
+
+        #
+        if received_dic_c["data"]["FLAG"]["value"]["CRYOVALVE_OPENCLOSE"]:
+            self.CRYOVALVE_OPENCLOSE.Set.ButtonLClicked()
+        else:
+            self.CRYOVALVE_OPENCLOSE.Set.ButtonRClicked()
+
+        if received_dic_c["data"]["FLAG"]["value"]["CRYOVALVE_PV1201ACT"]:
+            self.CRYOVALVE_PV1201ACT.Set.ButtonLClicked()
+        else:
+            self.CRYOVALVE_PV1201ACT.Set.ButtonRClicked()
+
+        if received_dic_c["data"]["FLAG"]["value"]["CRYOVALVE_PV2201ACT"]:
+            self.CRYOVALVE_PV2201ACT.Set.ButtonLClicked()
+        else:
+            self.CRYOVALVE_PV2201ACT.Set.ButtonRClicked()
         # set LOOPPID double button status ON/OFF also the status in the subwindow
 
 
@@ -7234,6 +7955,39 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.SERVO3321.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["SERVO3321"])
         self.SERVO3321.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["SERVO3321"])
+
+
+        if not received_dic_c["data"]["LOOPPID"]["MAN"]["MFC1316"]:
+            if received_dic_c["data"]["LOOPPID"]["EN"]["MFC1316"]:
+                self.MFC1316.LOOPPIDWindow.Mode.ButtonLClicked()
+                self.MFC1316.State.ButtonLClicked()
+            else:
+                self.MFC1316.LOOPPIDWindow.Mode.ButtonRClicked()
+                self.MFC1316.State.ButtonRClicked()
+            self.LOOPPID_EN_buffer["MFC1316"] = received_dic_c["data"]["LOOPPID"]["EN"]["MFC1316"]
+        elif received_dic_c["data"]["LOOPPID"]["MAN"]["MFC1316"]:
+            if received_dic_c["data"]["LOOPPID"]["Busy"]["MFC1316"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["MFC1316"]:
+                    self.MFC1316.LOOPPIDWindow.Mode.ButtonLClicked()
+                    self.MFC1316.State.ButtonLClicked()
+                else:
+                    self.MFC1316.LOOPPIDWindow.Mode.ButtonRClicked()
+                    self.MFC1316.State.ButtonRClicked()
+                self.LOOPPID_EN_buffer["MFC1316"] = received_dic_c["data"]["LOOPPID"]["EN"]["MFC1316"]
+            elif not received_dic_c["data"]["LOOPPID"]["Busy"]["MFC1316"]:
+                if received_dic_c["data"]["LOOPPID"]["EN"]["MFC1316"] != self.LOOPPID_EN_buffer["MFC1316"]:
+                    if received_dic_c["data"]["LOOPPID"]["EN"]["MFC1316"]:
+                        self.MFC1316.LOOPPIDWindow.Mode.ButtonLClicked()
+                        self.MFC1316.State.ButtonLClicked()
+                    else:
+                        self.MFC1316.LOOPPIDWindow.Mode.ButtonRClicked()
+                        self.MFC1316.State.ButtonRClicked()
+                    self.LOOPPID_EN_buffer["MFC1316"] = received_dic_c["data"]["LOOPPID"]["EN"]["MFC1316"]
+                else:
+                    pass
+
+        self.MFC1316.ColorLabel(received_dic_c["data"]["LOOPPID"]["EN"]["MFC1316"])
+        self.MFC1316.Power.ColorButton(received_dic_c["data"]["LOOPPID"]["EN"]["MFC1316"])
 
 
 
@@ -7815,10 +8569,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4325.SetValue(received_dic_c["data"]["PT"]["value"]["PT4325"])
         self.PT6302.SetExpValue(received_dic_c["data"]["PT"]["value"]["PT6302"])
         self.PT6306.SetExpValue(received_dic_c["data"]["PT"]["value"]["PT6306"])
+        #
+        self.PT1101_AVG.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101_AVG"])
+        self.PT2121_AVG.SetValue(received_dic_c["data"]["PT"]["value"]["PT2121_AVG"])
+        self.PDIFF_PT2121PT1101.SetValue(received_dic_c["data"]["PT"]["value"]["PDIFF_PT2121PT1101"])
+        self.PDIFF_PT2121PT1325.SetValue(received_dic_c["data"]["PT"]["value"]["PDIFF_PT2121PT1325"])
+        self.CYL3334_LT3335_CF4PRESSCALC.SetValue(received_dic_c["data"]["PT"]["value"]["CYL3334_LT3335_CF4PRESSCALC"])
+        #
         self.PT1101.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
         self.PT1101Fluid.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
         self.PT1101Hy.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
         self.PT5304.SetValue(received_dic_c["data"]["PT"]["value"]["PT5304"])
+
 
         self.LT3335.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LT3335"])
 
@@ -7826,6 +8588,18 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.MFC1316.SetValue not given value
         self.MFC1316.LOOPPIDWindow.IN.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["MFC1316_IN"])
         self.CYL3334.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["CYL3334_FCALC"])
+
+        self.PV1201_STATE.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["PV1201_STATE"])
+        self.PV2201_STATE.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["PV2201_STATE"])
+        self.LED1_OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED1_OUT"])
+        self.LED2_OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED2_OUT"])
+        self.LED3_OUT.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED3_OUT"])
+        self.LED_MAX.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED_MAX"])
+
+        self.LED1_OUT_2d.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED1_OUT"])
+        self.LED2_OUT_2d.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED2_OUT"])
+        self.LED3_OUT_2d.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED3_OUT"])
+        self.LED_MAX_2d.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["LED_MAX"])
 
         self.LT2122.SetValue(received_dic_c["data"]["AD"]["value"]["LT2122"])
         self.LT2130.SetValue(received_dic_c["data"]["AD"]["value"]["LT2130"])
@@ -7967,7 +8741,44 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SERVO3321.Power.SetValue(
             received_dic_c["data"]["LOOPPID"]["OUT"]["SERVO3321"])
 
+        #
+        self.MFC1316.LOOPPIDWindow.Interlock.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["INTLKD"]["MFC1316"])
+        self.MFC1316.LOOPPIDWindow.Error.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["ERR"]["MFC1316"])
+        self.MFC1316.LOOPPIDWindow.MANSP.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["MAN"]["MFC1316"])
+        if True in [received_dic_c["data"]["LOOPPID"]["SATHI"]["MFC1316"],
+                    received_dic_c["data"]["LOOPPID"]["SATLO"]["MFC1316"]]:
 
+            self.MFC1316.LOOPPIDWindow.SAT.UpdateColor(True)
+        else:
+            self.MFC1316.LOOPPIDWindow.SAT.UpdateColor(False)
+        self.MFC1316.LOOPPIDWindow.ModeREAD.Field.setText(
+
+            self.FindDistinctTrue(received_dic_c["data"]["LOOPPID"]["MODE0"]["MFC1316"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE1"]["MFC1316"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE2"]["MFC1316"],
+                                  received_dic_c["data"]["LOOPPID"]["MODE3"]["MFC1316"]))
+        self.MFC1316.LOOPPIDWindow.EN.UpdateColor(
+            received_dic_c["data"]["LOOPPID"]["EN"]["MFC1316"])
+        self.MFC1316.LOOPPIDWindow.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["MFC1316"])
+        self.MFC1316.LOOPPIDWindow.HIGH.SetValue(
+            received_dic_c["data"]["LOOPPID"]["HI_LIM"]["MFC1316"])
+        self.MFC1316.LOOPPIDWindow.LOW.SetValue(
+            received_dic_c["data"]["LOOPPID"]["LO_LIM"]["MFC1316"])
+        self.MFC1316.LOOPPIDWindow.SETSP.SetValue(
+            self.FetchSetPoint(received_dic_c["data"]["LOOPPID"]["MODE0"]["MFC1316"],
+                               received_dic_c["data"]["LOOPPID"]["MODE1"]["MFC1316"],
+                               received_dic_c["data"]["LOOPPID"]["MODE2"]["MFC1316"],
+                               received_dic_c["data"]["LOOPPID"]["MODE3"]["MFC1316"],
+                               received_dic_c["data"]["LOOPPID"]["SET0"]["MFC1316"],
+                               received_dic_c["data"]["LOOPPID"]["SET1"]["MFC1316"],
+                               received_dic_c["data"]["LOOPPID"]["SET2"]["MFC1316"],
+                               received_dic_c["data"]["LOOPPID"]["SET3"]["MFC1316"]))
+        self.MFC1316.Power.SetValue(
+            received_dic_c["data"]["LOOPPID"]["OUT"]["MFC1316"])
 
 
         self.HTR6225.LOOPPIDWindow.Interlock.UpdateColor(
@@ -8584,6 +9395,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.INTLCKWindow.PT4306_LO_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["PT4306_LO_INTLK"])
 
+        self.INTLCKWindow.PT5304_LO_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT5304_LO_INTLK"])
+        self.INTLCKWindow.PT5304_LO_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT5304_LO_INTLK"])
+        self.INTLCKWindow.PT5304_LO_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT5304_LO_INTLK"])
+        self.INTLCKWindow.PT5304_LO_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT5304_LO_INTLK"])
+
+
         self.INTLCKWindow.PT4306_HI_INTLK.ColorLabel(
             received_dic_c["data"]["INTLK_A"]["value"]["PT4306_HI_INTLK"])
         self.INTLCKWindow.PT4306_HI_INTLK.Indicator.UpdateColor(
@@ -8591,6 +9411,32 @@ class MainWindow(QtWidgets.QMainWindow):
         self.INTLCKWindow.PT4306_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT4306_HI_INTLK"])
         self.INTLCKWindow.PT4306_HI_INTLK.SET_R.SetValue(
             received_dic_c["data"]["INTLK_A"]["SET"]["PT4306_HI_INTLK"])
+
+        #PT6302_HI_INTLK, PT6306_HI_INTLK, PT2121_HI_INTLK
+        self.INTLCKWindow.PT6302_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT6302_HI_INTLK"])
+        self.INTLCKWindow.PT6302_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT6302_HI_INTLK"])
+        self.INTLCKWindow.PT6302_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT6302_HI_INTLK"])
+        self.INTLCKWindow.PT6302_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT6302_HI_INTLK"])
+
+        self.INTLCKWindow.PT6306_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT6306_HI_INTLK"])
+        self.INTLCKWindow.PT6306_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT6306_HI_INTLK"])
+        self.INTLCKWindow.PT6306_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT6306_HI_INTLK"])
+        self.INTLCKWindow.PT6306_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT6306_HI_INTLK"])
+
+        self.INTLCKWindow.PT2121_HI_INTLK.ColorLabel(
+            received_dic_c["data"]["INTLK_A"]["value"]["PT2121_HI_INTLK"])
+        self.INTLCKWindow.PT2121_HI_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_A"]["EN"]["PT2121_HI_INTLK"])
+        self.INTLCKWindow.PT2121_HI_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_A"]["COND"]["PT2121_HI_INTLK"])
+        self.INTLCKWindow.PT2121_HI_INTLK.SET_R.SetValue(
+            received_dic_c["data"]["INTLK_A"]["SET"]["PT2121_HI_INTLK"])
+        #
 
         self.INTLCKWindow.PT4322_HI_INTLK.ColorLabel(
             received_dic_c["data"]["INTLK_A"]["value"]["PT4322_HI_INTLK"])
@@ -8794,6 +9640,28 @@ class MainWindow(QtWidgets.QMainWindow):
         self.INTLCKWindow.PU_PRIME_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["PU_PRIME_INTLK"])
         self.INTLCKWindow.PU_PRIME_INTLK.Indicator.UpdateColor(received_dic_c["data"]["INTLK_D"]["EN"]["PU_PRIME_INTLK"])
         self.INTLCKWindow.PU_PRIME_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["PU_PRIME_INTLK"])
+
+        #UPS_UTILITY_INTLK, UPS_BATTERY_INTLK, LS2126_INTLK, LS2127_INTLK
+        self.INTLCKWindow.UPS_UTILITY_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["UPS_UTILITY_INTLK"])
+        self.INTLCKWindow.UPS_UTILITY_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_D"]["EN"]["UPS_UTILITY_INTLK"])
+        self.INTLCKWindow.UPS_UTILITY_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["UPS_UTILITY_INTLK"])
+
+        self.INTLCKWindow.UPS_BATTERY_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["UPS_BATTERY_INTLK"])
+        self.INTLCKWindow.UPS_BATTERY_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_D"]["EN"]["UPS_BATTERY_INTLK"])
+        self.INTLCKWindow.UPS_BATTERY_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["UPS_BATTERY_INTLK"])
+
+        self.INTLCKWindow.LS2126_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["LS2126_INTLK"])
+        self.INTLCKWindow.LS2126_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_D"]["EN"]["LS2126_INTLK"])
+        self.INTLCKWindow.LS2126_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["LS2126_INTLK"])
+
+        self.INTLCKWindow.LS2127_INTLK.ColorLabel(received_dic_c["data"]["INTLK_D"]["value"]["LS2127_INTLK"])
+        self.INTLCKWindow.LS2127_INTLK.Indicator.UpdateColor(
+            received_dic_c["data"]["INTLK_D"]["EN"]["LS2127_INTLK"])
+        self.INTLCKWindow.LS2127_INTLK.COND.UpdateColor(received_dic_c["data"]["INTLK_D"]["COND"]["LS2127_INTLK"])
+        #
 
 
     @QtCore.Slot(object)

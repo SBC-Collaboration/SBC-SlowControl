@@ -38,9 +38,10 @@ PT_ADDRESS = {"PT1325": 12794, "PT2121": 12796, "PT2316": 12798, "PT2330": 12800
               "PT3308": 12804, "PT3309": 12806, "PT3311": 12808, "PT3314": 12810, "PT3320": 12812,
               "PT3332": 12814, "PT3333": 12816, "PT4306": 12818, "PT4315": 12820, "PT4319": 12822,
               "PT4322": 12824, "PT4325": 12826, "PT6302": 12828, 'PT1101': 12830, 'PT5304': 12834,
-              "PT2343":12836, "PT6306": 12838}
+              "PT2343":12836, "PT6306": 12838, "PT1361":13020,"PT1101_AVG":13022,"PT2121_AVG":13024,
+              "PDIFF_PT2121PT1101":13026,"PDIFF_PT2121PT1325":13028,"CYL3334_LT3335_CF4PRESSCALC":13030}
 
-LEFT_REAL_ADDRESS = {'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792, "CYL3334_FCALC": 12832, "SERVO3321_IN_REAL": 12830, "TS1_MASS": 16288, "TS2_MASS": 16290, "TS3_MASS": 16292,  "TS_ADDREM_N2MASSTX": 16818}
+LEFT_REAL_ADDRESS = {'BFM4313': 12788, 'LT3335': 12790, 'MFC1316_IN': 12792, "CYL3334_FCALC": 12832, "SERVO3321_IN_REAL": 12830, "TS1_MASS": 16288, "TS2_MASS": 16290, "TS3_MASS": 16292,  "TS_ADDREM_N2MASSTX": 16818,'PV1201_STATE': 16294, 'PV2201_STATE': 16295}
 AD_ADDRESS = {"LT2122": 10 , "LT2130": 2}
 
 TT_FP_DIC = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0,
@@ -68,9 +69,10 @@ PT_DIC = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
           "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
           "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
           "PT4322": 0, "PT4325": 0, "PT6302": 0, "PT1101": 0, "PT5304": 0,
-          "PT2343": 0, "PT6306": 0}
+          "PT2343": 0, "PT6306": 0, "PT1361": 0, "PT1101_AVG":0,"PT2121_AVG":0,
+          "PDIFF_PT2121PT1101":0,"PDIFF_PT2121PT1325":0,"CYL3334_LT3335_CF4PRESSCALC":0}
 
-LEFT_REAL_DIC = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0, "TS_ADDREM_N2MASSTX": 0}
+LEFT_REAL_DIC = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0, "TS_ADDREM_N2MASSTX": 0,'PV1201_STATE': 0, 'PV2201_STATE': 0}
 AD_DIC = {"LT2122": 0 , "LT2130": 0}
 
 TT_FP_LOWLIMIT = {"TT2420": 0, "TT2422": 0, "TT2424": 0, "TT2425": 0,
@@ -119,15 +121,17 @@ PT_LOWLIMIT = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                "PT4322": 0, "PT4325": 0, "PT6302": 0,  "PT1101": 0, "PT5304": 0,
-               "PT2343": 0, "PT6306": 0}
+               "PT2343": 0, "PT6306": 0, "PT1361": 0, "PT1101_AVG":0,"PT2121_AVG":0,
+               "PDIFF_PT2121PT1101":0,"PDIFF_PT2121PT1325":0,"CYL3334_LT3335_CF4PRESSCALC":0}
 PT_HIGHLIMIT = {"PT1325": 300, "PT2121": 300, "PT2316": 300, "PT2330": 300, "PT2335": 300,
                 "PT3308": 300, "PT3309": 300, "PT3311": 300, "PT3314": 300, "PT3320": 300,
                 "PT3332": 300, "PT3333": 300, "PT4306": 300, "PT4315": 300, "PT4319": 300,
                 "PT4322": 300, "PT4325": 300, "PT6302": 300,  "PT1101": 300, "PT5304": 300,
-                "PT2343": 300, "PT6306": 300}
+                "PT2343": 300, "PT6306": 300, "PT1361": 300, "PT1101_AVG":300,"PT2121_AVG":300,
+                "PDIFF_PT2121PT1101":300,"PDIFF_PT2121PT1325":300,"CYL3334_LT3335_CF4PRESSCALC":300}
 
-LEFT_REAL_HIGHLIMIT = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0,"TS_ADDREM_N2MASSTX": 0}
-LEFT_REAL_LOWLIMIT = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0 , "TS_ADDREM_N2MASSTX": 0}
+LEFT_REAL_HIGHLIMIT = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0,"TS_ADDREM_N2MASSTX": 0,'PV1201_STATE': 0, 'PV2201_STATE': 0}
+LEFT_REAL_LOWLIMIT = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0 , "TS_ADDREM_N2MASSTX": 0,'PV1201_STATE': 0, 'PV2201_STATE': 0}
 
 
 AD_HIGHLIMIT = {"LT2122": 100 , "LT2130": 100}
@@ -158,8 +162,9 @@ PT_ACTIVATED = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": Fal
                 "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
                 "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
                 "PT4322": False, "PT4325": False, "PT6302": False,  "PT1101": False, "PT5304": False,
-                "PT2343": False, "PT6306": False}
-LEFT_REAL_ACTIVATED = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False}
+                "PT2343": False, "PT6306": False, "PT1361": False, "PT1101_AVG":False,"PT2121_AVG":False,
+                "PDIFF_PT2121PT1101":False,"PDIFF_PT2121PT1325":False,"CYL3334_LT3335_CF4PRESSCALC":False}
+LEFT_REAL_ACTIVATED = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False,'PV1201_STATE': False, 'PV2201_STATE': False}
 AD_ACTIVATED = {"LT2122": False , "LT2130": False}
 
 TT_FP_ALARM = {"TT2420": False, "TT2422": False, "TT2424": False, "TT2425": False,
@@ -187,8 +192,9 @@ PT_ALARM = {"PT1325": False, "PT2121": False, "PT2316": False, "PT2330": False, 
             "PT3308": False, "PT3309": False, "PT3311": False, "PT3314": False, "PT3320": False,
             "PT3332": False, "PT3333": False, "PT4306": False, "PT4315": False, "PT4319": False,
             "PT4322": False, "PT4325": False, "PT6302": False,  "PT1101": False, "PT5304": False,
-            "PT2343": False, "PT6306": False}
-LEFT_REAL_ALARM = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False}
+            "PT2343": False, "PT6306": False, "PT1361": False, "PT1101_AVG":False,"PT2121_AVG":False,
+            "PDIFF_PT2121PT1101":False,"PDIFF_PT2121PT1325":False,"CYL3334_LT3335_CF4PRESSCALC":False}
+LEFT_REAL_ALARM = {'BFM4313': False, 'LT3335': False, 'MFC1316_IN': False, "CYL3334_FCALC": False, "SERVO3321_IN_REAL": False, "TS1_MASS": False, "TS2_MASS": False, "TS3_MASS": False, "TS_ADDREM_N2MASSTX": False,'PV1201_STATE': False, 'PV2201_STATE': False}
 AD_ALARM = {"LT2122": False , "LT2130": False}
 COUPP_trigger_PARA = 0 # 1 hours the unit is different from other parameters because during every loop it will sleep 1 minutes
 COUPP_trigger_RATE =60
@@ -219,30 +225,36 @@ SWITCH_INTLKD = {"PUMP3305": False}
 SWITCH_ERR = {"PUMP3305": False}
 
 DIN_ADDRESS = {"LS3338": (12778, 0), "LS3339": (12778, 1), "ES3347": (12778, 2), "PUMP3305_CON": (12778, 3),
-               "PUMP3305_OL": (12778, 4),"PS2352":(12778, 5),"PS8302":(12778, 7),"UPS_ON_BATT":(12778,6),
-               "UPS_LOW_BATT":(12778,7), "LS2126": (12778,7),"LS2127": (12778,7),"LS2128": (12778,7),"LS2129": (12778,7)}
+               "PUMP3305_OL": (12778, 4),"PS2352":(12778, 5),'CC9313_POWER': (12778,6),"PS8302":(12778, 7),
+               'PCYCLE_SLOWCOMP': (12778, 8), 'PCYCLE_FASTCOMP': (12778, 9), 'LS2126': (12778, 10), 'LS2128': (12778, 11),
+               'UPS_UTILITY_OK': (12778, 12), 'UPS_BATTERY_OK': (12778, 13), 'LS2127': (12778, 14), 'LS2129': (12778, 15)}
 NDIN = len(DIN_ADDRESS)
 DIN = {}
-DIN_DIC = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS8302":False,
-           "UPS_ON_BATT": False,"UPS_LOW_BATT": False,"LS2126": False,"LS2127": False,"LS2128": False,"LS2129": False}
+DIN_DIC = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,'CC9313_POWER': False,"PS8302":False,
+               'PCYCLE_SLOWCOMP': False, 'PCYCLE_FASTCOMP': False, 'LS2126': False, 'LS2128': False,
+               'UPS_UTILITY_OK': False, 'UPS_BATTERY_OK': False, 'LS2127': False, 'LS2129': False}
 
-DIN_LOWLIMIT = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS8302":False,
-                "UPS_ON_BATT": False,"UPS_LOW_BATT": False,"LS2126": False,"LS2127": False,"LS2128": False,"LS2129": False}
+DIN_LOWLIMIT = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,'CC9313_POWER': False,"PS8302":False,
+               'PCYCLE_SLOWCOMP': False, 'PCYCLE_FASTCOMP': False, 'LS2126': False, 'LS2128': False,
+               'UPS_UTILITY_OK': False, 'UPS_BATTERY_OK': False, 'LS2127': False, 'LS2129': False}
 
-DIN_HIGHLIMIT = {"LS3338": True, "LS3339": True, "ES3347": True, "PUMP3305_CON": True, "PUMP3305_OL": True,"PS2352":True,"PS8302":True,
-                 "UPS_ON_BATT": False,"UPS_LOW_BATT": False,"LS2126": False,"LS2127": False,"LS2128": False,"LS2129": False}
+DIN_HIGHLIMIT = {"LS3338": True, "LS3339": True, "ES3347": True, "PUMP3305_CON": True, "PUMP3305_OL": True,"PS2352":True,'CC9313_POWER': True,"PS8302":True,
+               'PCYCLE_SLOWCOMP': True, 'PCYCLE_FASTCOMP': True, 'LS2126': True, 'LS2128': True,
+               'UPS_UTILITY_OK': True, 'UPS_BATTERY_OK': True, 'LS2127': True, 'LS2129': True}
 
-DIN_ACTIVATED = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS8302":False,
-                 "UPS_ON_BATT": False,"UPS_LOW_BATT": False,"LS2126": False,"LS2127": False,"LS2128": False,"LS2129": False}
+DIN_ACTIVATED = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,'CC9313_POWER': False,"PS8302":False,
+               'PCYCLE_SLOWCOMP': False, 'PCYCLE_FASTCOMP': False, 'LS2126': False, 'LS2128': False,
+               'UPS_UTILITY_OK': False, 'UPS_BATTERY_OK': False, 'LS2127': False, 'LS2129': False}
 
-DIN_ALARM = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,"PS8302":False,
-             "UPS_ON_BATT": False,"UPS_LOW_BATT": False,"LS2126": False,"LS2127": False,"LS2128": False,"LS2129": False}
+DIN_ALARM = {"LS3338": False, "LS3339": False, "ES3347": False, "PUMP3305_CON": False, "PUMP3305_OL": False,"PS2352":False,'CC9313_POWER': False,"PS8302":False,
+               'PCYCLE_SLOWCOMP': False, 'PCYCLE_FASTCOMP': False, 'LS2126': False, 'LS2128': False,
+               'UPS_UTILITY_OK': False, 'UPS_BATTERY_OK': False, 'LS2127': False, 'LS2129': False}
 
 VALVE_ADDRESS = {"PV1344": 12288, "PV4307": 12289, "PV4308": 12290, "PV4317": 12291, "PV4318": 12292, "PV4321": 12293,
                  "PV4324": 12294, "PV5305": 12295, "PV5306": 12296,
                  "PV5307": 12297, "PV5309": 12298, "SV3307": 12299, "SV3310": 12300, "SV3322": 12301,
                  "SV3325": 12302, "SV3329": 12304, "SV4327": 12305,"SV4328": 12306, "SV4329": 12307, "SV4331": 12308,
-                 "SV4332": 12309, "SV4337":12310, "HFSV3312": 12311, "HFSV3323": 12312, "HFSV3331": 12313}
+                 "SV4332": 12309, "SV4337":12310, "HFSV3312": 12311, "HFSV3323": 12312, "HFSV3331": 12313,'CC9313_CONT': 12314, 'PT_EN6306': 12315, 'PV4345': 12316}
 NVALVE = len(VALVE_ADDRESS)
 VALVE = {}
 VALVE_OUT = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "PV4321": 0,
@@ -250,160 +262,160 @@ VALVE_OUT = {"PV1344": 0, "PV4307": 0, "PV4308": 0, "PV4317": 0, "PV4318": 0, "P
              "PV5307": 0, "PV5309": 0, "SV3307": 0, "SV3310": 0, "SV3322": 0,
              "SV3325": 0, "SV3329": 0, "SV4327": 0,
               "SV4328": 0, "SV4329": 0, "SV4331": 0, "SV4332": 0,"SV4337": 0,
-              "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0}
+              "HFSV3312": 0, "HFSV3323": 0, "HFSV3331": 0,'CC9313_CONT': 0, 'PT_EN6306': 0, 'PV4345': 0}
 VALVE_MAN = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
              "PV4324": True, "PV5305": True, "PV5306": True,
              "PV5307": True, "PV5309": True, "SV3307": True, "SV3310": True, "SV3322": True,
              "SV3325": True, "SV3329": True, "SV4327": True,
               "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,"SV4337": False,
-              "HFSV3312": True, "HFSV3323": True, "HFSV3331": True}
+              "HFSV3312": True, "HFSV3323": True, "HFSV3331": True, 'CC9313_CONT': True, 'PT_EN6306': True, 'PV4345': True}
 VALVE_INTLKD = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
                 "PV4324": False, "PV5305": False, "PV5306": False,
                 "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
                 "SV3325": False, "SV3329": False, "SV4327": False,
                  "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False,"SV4337": False,
-                 "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
+                 "HFSV3312": False, "HFSV3323": False, "HFSV3331": False, 'CC9313_CONT': False, 'PT_EN6306': False, 'PV4345': False}
 VALVE_ERR = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
              "PV4324": False, "PV5305": False, "PV5306": False,
              "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
              "SV3325": False, "SV3329": False, "SV4327": False,
               "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False, "SV4337": False,
-              "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
+              "HFSV3312": False, "HFSV3323": False, "HFSV3331": False, 'CC9313_CONT': False, 'PT_EN6306': False, 'PV4345': False}
 VALVE_COMMAND_CACHE = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
              "PV4324": False, "PV5305": False, "PV5306": False,
              "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
              "SV3325": False, "SV3329": False, "SV4327": False,
               "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False, "SV4337": False,
-              "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
+              "HFSV3312": False, "HFSV3323": False, "HFSV3331": False, 'CC9313_CONT': False, 'PT_EN6306': False, 'PV4345': False}
 VALVE_BUSY = {"PV1344": False, "PV4307": False, "PV4308": False, "PV4317": False, "PV4318": False, "PV4321": False,
              "PV4324": False, "PV5305": False, "PV5306": False,
              "PV5307": False, "PV5309": False, "SV3307": False, "SV3310": False, "SV3322": False,
              "SV3325": False, "SV3329": False, "SV4327": False,
               "SV4328": False, "SV4329": False, "SV4331": False, "SV4332": False, "SV4337": False,
-              "HFSV3312": False, "HFSV3323": False, "HFSV3331": False}
+              "HFSV3312": False, "HFSV3323": False, "HFSV3331": False, 'CC9313_CONT': False, 'PT_EN6306': False, 'PV4345': False}
 LOOPPID_ADR_BASE = {'SERVO3321': 14288, 'HTR6225': 14306, 'HTR2123': 14324, 'HTR2124': 14342, 'HTR2125': 14360,
                     'HTR1202': 14378, 'HTR2203': 14396, 'HTR6202': 14414, 'HTR6206': 14432, 'HTR6210': 14450,
-                    'HTR6223': 14468, 'HTR6224': 14486, 'HTR6219': 14504, 'HTR6221': 14522, 'HTR6214': 14540}
+                    'HTR6223': 14468, 'HTR6224': 14486, 'HTR6219': 14504, 'HTR6221': 14522, 'HTR6214': 14540, "MFC1316":14558}
 
 LOOPPID_MODE0 = {'SERVO3321': True, 'HTR6225': True, 'HTR2123': True, 'HTR2124': True, 'HTR2125': True,
                  'HTR1202': True, 'HTR2203': True, 'HTR6202': True, 'HTR6206': True, 'HTR6210': True,
-                 'HTR6223': True, 'HTR6224': True, 'HTR6219': True, 'HTR6221': True, 'HTR6214': True}
+                 'HTR6223': True, 'HTR6224': True, 'HTR6219': True, 'HTR6221': True, 'HTR6214': True, "MFC1316":True}
 
 LOOPPID_MODE1 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316":False}
 
 LOOPPID_MODE2 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316":False}
 
 LOOPPID_MODE3 = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False, 'HTR2125': False,
                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316":False}
 
 LOOPPID_INTLKD = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                   'HTR2125': False,
                   'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316":False}
 
 LOOPPID_MAN = {'SERVO3321': True, 'HTR6225': True, 'HTR2123': True, 'HTR2124': True,
                'HTR2125': True,
                'HTR1202': True, 'HTR2203': True, 'HTR6202': True, 'HTR6206': True, 'HTR6210': True,
-               'HTR6223': True, 'HTR6224': True, 'HTR6219': True, 'HTR6221': True, 'HTR6214': True}
+               'HTR6223': True, 'HTR6224': True, 'HTR6219': True, 'HTR6221': True, 'HTR6214': True, "MFC1316":False}
 
 LOOPPID_ERR = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                'HTR2125': False,
                'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-               'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+               'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316":False}
 
 LOOPPID_SATHI = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                  'HTR2125': False,
                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316":False}
 
 LOOPPID_SATLO = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                  'HTR2125': False,
                  'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+                 'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316":False}
 
 LOOPPID_EN = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
               'HTR2125': False,
               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316":False}
 
 LOOPPID_ALARM = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
               'HTR2125': False,
               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316":False}
 
 LOOPPID_OUT = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                'HTR2125': 0,
                'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-               'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+               'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0, "MFC1316": 0}
 
 LOOPPID_IN = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
               'HTR2125': 0,
               'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-              'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+              'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0, "MFC1316": 0}
 
 LOOPPID_HI_LIM = {'SERVO3321': 100, 'HTR6225': 100, 'HTR2123': 100, 'HTR2124': 100,
                   'HTR2125': 100,
                   'HTR1202': 100, 'HTR2203': 100, 'HTR6202': 100, 'HTR6206': 100, 'HTR6210': 100,
-                  'HTR6223': 100, 'HTR6224': 100, 'HTR6219': 100, 'HTR6221': 100, 'HTR6214': 100}
+                  'HTR6223': 100, 'HTR6224': 100, 'HTR6219': 100, 'HTR6221': 100, 'HTR6214': 100, "MFC1316": 100}
 
 LOOPPID_LO_LIM = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                   'HTR2125': 0,
                   'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0, "MFC1316": 0}
 
 LOOPPID_SET0 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                 'HTR2125': 0,
                 'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0, "MFC1316": 0}
 
 LOOPPID_SET1 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                 'HTR2125': 0,
                 'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0, "MFC1316": 0}
 
 LOOPPID_SET2 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                 'HTR2125': 0,
                 'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0, "MFC1316": 0}
 
 LOOPPID_SET3 = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                 'HTR2125': 0,
                 'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+                'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0, "MFC1316": 0}
 
 LOOPPID_ACTIVATED = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
                   'HTR2125': False,
                   'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+                  'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316": False}
 
 
 LOOPPID_COMMAND_CACHE = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
               'HTR2125': False,
               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316": False}
 
 
 LOOPPID_BUSY = {'SERVO3321': False, 'HTR6225': False, 'HTR2123': False, 'HTR2124': False,
               'HTR2125': False,
               'HTR1202': False, 'HTR2203': False, 'HTR6202': False, 'HTR6206': False, 'HTR6210': False,
-              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False}
+              'HTR6223': False, 'HTR6224': False, 'HTR6219': False, 'HTR6221': False, 'HTR6214': False, "MFC1316": False}
 
 
 
 LOOPPID_ALARM_HI_LIM = {'SERVO3321': 100, 'HTR6225': 100, 'HTR2123': 100, 'HTR2124': 100,
                   'HTR2125': 100,
                   'HTR1202': 100, 'HTR2203': 100, 'HTR6202': 100, 'HTR6206': 100, 'HTR6210': 100,
-                  'HTR6223': 100, 'HTR6224': 100, 'HTR6219': 100, 'HTR6221': 100, 'HTR6214': 100}
+                  'HTR6223': 100, 'HTR6224': 100, 'HTR6219': 100, 'HTR6221': 100, 'HTR6214': 100, "MFC1316": 100}
 
 LOOPPID_ALARM_LO_LIM = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                   'HTR2125': 0,
                   'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0, "MFC1316": 0}
 
 
 LOOP2PT_ADR_BASE = {'PUMP3305':14688}
@@ -434,15 +446,15 @@ LOOP2PT_COMMAND_CACHE = {'PUMP3305': False}
 
 LOOP2PT_BUSY = {'PUMP3305': False}
 
-PROCEDURE_ADDRESS = {'TS_ADDREM': 15288, 'TS_EMPTY': 15290, 'TS_EMPTYALL': 15292, 'PU_PRIME': 15294, 'WRITE_SLOWDAQ': 15296, 'PRESSURE_CYCLE':15298}
-PROCEDURE_RUNNING = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False, 'PRESSURE_CYCLE':False}
-PROCEDURE_INTLKD = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False, 'PRESSURE_CYCLE':False}
-PROCEDURE_EXIT = {'TS_ADDREM': 0, 'TS_EMPTY': 0, 'TS_EMPTYALL': 0, 'PU_PRIME': 0, 'WRITE_SLOWDAQ': 0, 'PRESSURE_CYCLE':0}
+PROCEDURE_ADDRESS = {'TS_ADDREM': 15288, 'TS_EMPTY': 15290, 'TS_EMPTYALL': 15292, 'PU_PRIME': 15294, 'WRITE_SLOWDAQ': 15296, 'PRESSURE_CYCLE':15298,'CRYOVALVE_CONTROL': 15300}
+PROCEDURE_RUNNING = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False, 'PRESSURE_CYCLE':False,'CRYOVALVE_CONTROL': False}
+PROCEDURE_INTLKD = {'TS_ADDREM': False, 'TS_EMPTY': False, 'TS_EMPTYALL': False, 'PU_PRIME': False, 'WRITE_SLOWDAQ': False, 'PRESSURE_CYCLE':False,'CRYOVALVE_CONTROL': False}
+PROCEDURE_EXIT = {'TS_ADDREM': 0, 'TS_EMPTY': 0, 'TS_EMPTYALL': 0, 'PU_PRIME': 0, 'WRITE_SLOWDAQ': 0, 'PRESSURE_CYCLE':0,'CRYOVALVE_CONTROL': 0}
 
-FLAG_ADDRESS={'MAN_TS':13288,'MAN_HYD':13289,"PCYCLE_AUTOCYCLE":13290}
-FLAG_DIC = {'MAN_TS':False,'MAN_HYD':False,"PCYCLE_AUTOCYCLE":False}
-FLAG_INTLKD={'MAN_TS':False,'MAN_HYD':False,"PCYCLE_AUTOCYCLE":False}
-FLAG_BUSY={'MAN_TS':False,'MAN_HYD':False,"PCYCLE_AUTOCYCLE":False}
+FLAG_ADDRESS={'MAN_TS':13288,'MAN_HYD':13289,"PCYCLE_AUTOCYCLE":13290,'CRYOVALVE_OPENCLOSE': 16832, 'CRYOVALVE_PV1201ACT': 16833, 'CRYOVALVE_PV2201ACT': 16834}
+FLAG_DIC = {'MAN_TS':False,'MAN_HYD':False,"PCYCLE_AUTOCYCLE":False,'CRYOVALVE_OPENCLOSE': False, 'CRYOVALVE_PV1201ACT': False, 'CRYOVALVE_PV2201ACT': False}
+FLAG_INTLKD={'MAN_TS':False,'MAN_HYD':False,"PCYCLE_AUTOCYCLE":False,'CRYOVALVE_OPENCLOSE': False, 'CRYOVALVE_PV1201ACT': False, 'CRYOVALVE_PV2201ACT': False}
+FLAG_BUSY={'MAN_TS':False,'MAN_HYD':False,"PCYCLE_AUTOCYCLE":False,'CRYOVALVE_OPENCLOSE': False, 'CRYOVALVE_PV1201ACT': False, 'CRYOVALVE_PV2201ACT': False}
 
 INTLK_D_ADDRESS={'TS1_INTLK': 13828, 'ES3347_INTLK': 13829, 'PUMP3305_OL_INTLK': 13830, 'TS2_INTLK': 13832, 'TS3_INTLK': 13836, 'PU_PRIME_INTLK': 13840}
 INTLK_D_DIC={'TS1_INTLK': True, 'ES3347_INTLK': True, 'PUMP3305_OL_INTLK': True, 'TS2_INTLK': True, 'TS3_INTLK': True, 'PU_PRIME_INTLK': True}
@@ -455,7 +467,8 @@ INTLK_A_ADDRESS={'TT2118_HI_INTLK': 13788, 'TT2118_LO_INTLK': 13792, 'PT4306_LO_
 'TT6203_HI_INTLK': 13844, 'TT6207_HI_INTLK': 13848, 'TT6211_HI_INTLK': 13852, 'TT6213_HI_INTLK': 13856, 'TT6222_HI_INTLK': 13860,
 'TT6407_HI_INTLK': 13864, 'TT6408_HI_INTLK': 13868, 'TT6409_HI_INTLK': 13872, 'TT6203_HIHI_INTLK': 13876, 'TT6207_HIHI_INTLK': 13880,
 'TT6211_HIHI_INTLK': 13884, 'TT6213_HIHI_INTLK': 13888, 'TT6222_HIHI_INTLK': 13892, 'TT6407_HIHI_INTLK': 13896, 'TT6408_HIHI_INTLK': 13900,
-'TT6409_HIHI_INTLK': 13904}
+'TT6409_HIHI_INTLK': 13904, 'LT3335_HI_INTLK': 13908, 'LT3335_LO_INTLK': 13912, 'PT2121_HI_INTLK': 13916, 'PT6306_HI_INTLK': 13920, 'PT6302_HI_INTLK': 13924, 'PT5304_LO_INTLK': 13928,
+                 "UPS_UTILITY_INTLK":13928, "UPS_BATTERY_INTLK":13928, "LS2126_INTLK":13928, "LS2127_INTLK":13928}
 INTLK_A_DIC={'TT2118_HI_INTLK': True, 'TT2118_LO_INTLK': True, 'PT4306_LO_INTLK': True, 'PT4306_HI_INTLK': True, 'PT4322_HI_INTLK': True, 'PT4322_HIHI_INTLK': True, 'PT4319_HI_INTLK': True, 'PT4319_HIHI_INTLK': True, 'PT4325_HI_INTLK': True, 'PT4325_HIHI_INTLK': True,
              'TT6203_HI_INTLK': True, 'TT6207_HI_INTLK': True, 'TT6211_HI_INTLK': True, 'TT6213_HI_INTLK': True,
              'TT6222_HI_INTLK': True,
@@ -463,7 +476,8 @@ INTLK_A_DIC={'TT2118_HI_INTLK': True, 'TT2118_LO_INTLK': True, 'PT4306_LO_INTLK'
              'TT6207_HIHI_INTLK': True,
              'TT6211_HIHI_INTLK': True, 'TT6213_HIHI_INTLK': True, 'TT6222_HIHI_INTLK': True,
              'TT6407_HIHI_INTLK': True, 'TT6408_HIHI_INTLK': True,
-             'TT6409_HIHI_INTLK': True}
+             'TT6409_HIHI_INTLK': True,'LT3335_HI_INTLK': True, 'LT3335_LO_INTLK': True, 'PT2121_HI_INTLK': True, 'PT6306_HI_INTLK': True, 'PT6302_HI_INTLK': True, 'PT5304_LO_INTLK': True,
+             "UPS_UTILITY_INTLK":True, "UPS_BATTERY_INTLK":True, "LS2126_INTLK":True, "LS2127_INTLK":True}
 INTLK_A_EN={'TT2118_HI_INTLK': True, 'TT2118_LO_INTLK': True, 'PT4306_LO_INTLK': True, 'PT4306_HI_INTLK': True, 'PT4322_HI_INTLK': True, 'PT4322_HIHI_INTLK': True, 'PT4319_HI_INTLK': True, 'PT4319_HIHI_INTLK': True, 'PT4325_HI_INTLK': True, 'PT4325_HIHI_INTLK': True,
             'TT6203_HI_INTLK': True, 'TT6207_HI_INTLK': True, 'TT6211_HI_INTLK': True, 'TT6213_HI_INTLK': True,
             'TT6222_HI_INTLK': True,
@@ -471,7 +485,8 @@ INTLK_A_EN={'TT2118_HI_INTLK': True, 'TT2118_LO_INTLK': True, 'PT4306_LO_INTLK':
             'TT6207_HIHI_INTLK': True,
             'TT6211_HIHI_INTLK': True, 'TT6213_HIHI_INTLK': True, 'TT6222_HIHI_INTLK': True,
             'TT6407_HIHI_INTLK': True, 'TT6408_HIHI_INTLK': True,
-            'TT6409_HIHI_INTLK': True
+            'TT6409_HIHI_INTLK': True,'LT3335_HI_INTLK': True, 'LT3335_LO_INTLK': True, 'PT2121_HI_INTLK': True, 'PT6306_HI_INTLK': True, 'PT6302_HI_INTLK': True, 'PT5304_LO_INTLK': True,
+"UPS_UTILITY_INTLK":True, "UPS_BATTERY_INTLK":True, "LS2126_INTLK":True, "LS2127_INTLK":True
             }
 INTLK_A_COND={'TT2118_HI_INTLK': True, 'TT2118_LO_INTLK': True, 'PT4306_LO_INTLK': True, 'PT4306_HI_INTLK': True, 'PT4322_HI_INTLK': True, 'PT4322_HIHI_INTLK': True, 'PT4319_HI_INTLK': True, 'PT4319_HIHI_INTLK': True, 'PT4325_HI_INTLK': True, 'PT4325_HIHI_INTLK': True,
               'TT6203_HI_INTLK': True, 'TT6207_HI_INTLK': True, 'TT6211_HI_INTLK': True, 'TT6213_HI_INTLK': True,
@@ -480,7 +495,8 @@ INTLK_A_COND={'TT2118_HI_INTLK': True, 'TT2118_LO_INTLK': True, 'PT4306_LO_INTLK
               'TT6207_HIHI_INTLK': True,
               'TT6211_HIHI_INTLK': True, 'TT6213_HIHI_INTLK': True, 'TT6222_HIHI_INTLK': True,
               'TT6407_HIHI_INTLK': True, 'TT6408_HIHI_INTLK': True,
-              'TT6409_HIHI_INTLK': True
+              'TT6409_HIHI_INTLK': True, 'LT3335_HI_INTLK': True, 'LT3335_LO_INTLK': True, 'PT2121_HI_INTLK': True, 'PT6306_HI_INTLK': True, 'PT6302_HI_INTLK': True, 'PT5304_LO_INTLK': True,
+            "UPS_UTILITY_INTLK":True, "UPS_BATTERY_INTLK":True, "LS2126_INTLK":True, "LS2127_INTLK":True
               }
 INTLK_A_SET={'TT2118_HI_INTLK': 0, 'TT2118_LO_INTLK': 0, 'PT4306_LO_INTLK': 0, 'PT4306_HI_INTLK': 0, 'PT4322_HI_INTLK': 0, 'PT4322_HIHI_INTLK': 0, 'PT4319_HI_INTLK': 0, 'PT4319_HIHI_INTLK': 0, 'PT4325_HI_INTLK': 0, 'PT4325_HIHI_INTLK': 0,
              'TT6203_HI_INTLK': 0, 'TT6207_HI_INTLK': 0, 'TT6211_HI_INTLK': 0, 'TT6213_HI_INTLK': 0,
@@ -489,7 +505,7 @@ INTLK_A_SET={'TT2118_HI_INTLK': 0, 'TT2118_LO_INTLK': 0, 'PT4306_LO_INTLK': 0, '
              'TT6207_HIHI_INTLK': 0,
              'TT6211_HIHI_INTLK': 0, 'TT6213_HIHI_INTLK': 0, 'TT6222_HIHI_INTLK': 0,
              'TT6407_HIHI_INTLK': 0, 'TT6408_HIHI_INTLK': 0,
-             'TT6409_HIHI_INTLK': 0 }
+             'TT6409_HIHI_INTLK': 0 ,'LT3335_HI_INTLK': 0, 'LT3335_LO_INTLK': 0, 'PT2121_HI_INTLK': 0, 'PT6306_HI_INTLK': 0, 'PT6302_HI_INTLK': 0, 'PT5304_LO_INTLK': 0, "UPS_UTILITY_INTLK":0, "UPS_BATTERY_INTLK":0, "LS2126_INTLK":0, "LS2127_INTLK":0}
 
 INTLK_A_BUSY={'TT2118_HI_INTLK': 0, 'TT2118_LO_INTLK': 0, 'PT4306_LO_INTLK': 0, 'PT4306_HI_INTLK': 0, 'PT4322_HI_INTLK': 0, 'PT4322_HIHI_INTLK': 0, 'PT4319_HI_INTLK': 0, 'PT4319_HIHI_INTLK': 0, 'PT4325_HI_INTLK': 0, 'PT4325_HIHI_INTLK': 0,
              'TT6203_HI_INTLK': 0, 'TT6207_HI_INTLK': 0, 'TT6211_HI_INTLK': 0, 'TT6213_HI_INTLK': 0,
@@ -498,13 +514,13 @@ INTLK_A_BUSY={'TT2118_HI_INTLK': 0, 'TT2118_LO_INTLK': 0, 'PT4306_LO_INTLK': 0, 
              'TT6207_HIHI_INTLK': 0,
              'TT6211_HIHI_INTLK': 0, 'TT6213_HIHI_INTLK': 0, 'TT6222_HIHI_INTLK': 0,
              'TT6407_HIHI_INTLK': 0, 'TT6408_HIHI_INTLK': 0,
-             'TT6409_HIHI_INTLK': 0 }
+             'TT6409_HIHI_INTLK': 0,'LT3335_HI_INTLK': 0, 'LT3335_LO_INTLK': 0, 'PT2121_HI_INTLK': 0, 'PT6306_HI_INTLK': 0, 'PT6302_HI_INTLK': 0, 'PT5304_LO_INTLK': 0, "UPS_UTILITY_INTLK":0, "UPS_BATTERY_INTLK":0, "LS2126_INTLK":0, "LS2127_INTLK":0 }
 
 FF_ADDRESS={'TS_ADDREM_FF': 14788, 'TS_EMPTY_FF': 14789, 'TS_EMPTYALL_FF': 14790, 'SLOWDAQ_FF': 14791, 'PCYCLE_ABORT_FF': 14792, 'PCYCLE_FASTCOMP_FF': 14793, 'PCYCLE_SLOWCOMP_FF': 14794, 'PCYCLE_CYLEQ_FF': 14795, 'PCYCLE_CYLBLEED_FF': 14796, 'PCYCLE_ACCHARGE_FF': 14797}
 FF_DIC={'TS_ADDREM_FF': 0, 'TS_EMPTY_FF': 0, 'TS_EMPTYALL_FF': 0, 'SLOWDAQ_FF': 0, 'PCYCLE_ABORT_FF': 0, 'PCYCLE_FASTCOMP_FF': 0, 'PCYCLE_SLOWCOMP_FF': 0, 'PCYCLE_CYLEQ_FF': 0, 'PCYCLE_CYLBLEED_FF': 0, 'PCYCLE_ACCHARGE_FF': 0}
 
-PARAM_F_ADDRESS ={'TS_ADDREM_MASS': 16790,'PCYCLE_PSET': 16794,'PCYCLE_MAXEQPDIFF': 16802,'PCYCLE_MAXACCDPDT': 16806,'PCYCLE_MAXBLEEDDPDT': 16810, 'PCYCLE_SLOWCOMP_SET': 16812}
-PARAM_F_DIC ={'TS_ADDREM_MASS': 0,'PCYCLE_PSET': 0,'PCYCLE_MAXEQPDIFF': 0,'PCYCLE_MAXACCDPDT': 0,'PCYCLE_MAXBLEEDDPDT':0, 'PCYCLE_SLOWCOMP_SET': 0}
+PARAM_F_ADDRESS ={'TS_ADDREM_MASS': 16790,'PCYCLE_PSET': 16794,'PCYCLE_MAXEQPDIFF': 16802,'PCYCLE_MAXACCDPDT': 16806,'PCYCLE_MAXBLEEDDPDT': 16810, 'PCYCLE_SLOWCOMP_SET': 16812,'LED1_OUT': 16824, 'LED2_OUT': 16826, 'LED3_OUT': 16828, 'LED_MAX': 16830}
+PARAM_F_DIC ={'TS_ADDREM_MASS': 0,'PCYCLE_PSET': 0,'PCYCLE_MAXEQPDIFF': 0,'PCYCLE_MAXACCDPDT': 0,'PCYCLE_MAXBLEEDDPDT':0, 'PCYCLE_SLOWCOMP_SET': 0,'LED1_OUT': 0, 'LED2_OUT': 0, 'LED3_OUT': 0, 'LED_MAX': 0}
 
 PARAM_T_ADDRESS = {'PCYCLE_MAXEXPTIME': 16798, 'PCYCLE_MAXEQTIME': 16800,'PCYCLE_MAXACCTIME': 16804,'PCYCLE_MAXBLEEDTIME': 16808,"TS_ADDREM_MAXTIME":16814, "TS_ADDREM_FLOWET":16816}
 PARAM_T_DIC = {'PCYCLE_MAXEXPTIME': 0, 'PCYCLE_MAXEQTIME': 0,'PCYCLE_MAXACCTIME': 0,'PCYCLE_MAXBLEEDTIME': 0,"TS_ADDREM_MAXTIME":0, "TS_ADDREM_FLOWET":0}
@@ -574,34 +590,40 @@ PT_PARA = {"PT1325": 0, "PT2121": 0, "PT2316": 0, "PT2330": 0, "PT2335": 0,
                "PT3308": 0, "PT3309": 0, "PT3311": 0, "PT3314": 0, "PT3320": 0,
                "PT3332": 0, "PT3333": 0, "PT4306": 0, "PT4315": 0, "PT4319": 0,
                "PT4322": 0, "PT4325": 0, "PT6302": 0,  "PT1101": 0, "PT5304": 0,
-           "PT2343": 0, "PT6306": 0}
+           "PT2343": 0, "PT6306": 0, "PT1361": 0, "PT1101_AVG":0,"PT2121_AVG":0,
+           "PDIFF_PT2121PT1101":0,"PDIFF_PT2121PT1325":0,"CYL3334_LT3335_CF4PRESSCALC":0}
 
 PT_RATE = {"PT1325": 30, "PT2121": 30, "PT2316": 30, "PT2330": 30, "PT2335": 30,
                 "PT3308": 30, "PT3309": 30, "PT3311": 30, "PT3314": 30, "PT3320": 30,
                 "PT3332": 30, "PT3333": 30, "PT4306": 30, "PT4315": 30, "PT4319": 30,
                 "PT4322": 30, "PT4325": 30, "PT6302": 30,  "PT1101": 30, "PT5304": 30,
-           "PT2343": 0, "PT6306": 30}
+           "PT2343": 0, "PT6306": 30, "PT1361": 30, "PT1101_AVG":30,"PT2121_AVG":30,
+           "PDIFF_PT2121PT1101":30,"PDIFF_PT2121PT1325":30,"CYL3334_LT3335_CF4PRESSCALC":30}
 
-LEFT_REAL_PARA = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0, "TS_ADDREM_N2MASSTX": 0}
+LEFT_REAL_PARA = {'BFM4313': 0, 'LT3335': 0, 'MFC1316_IN': 0, "CYL3334_FCALC": 0, "SERVO3321_IN_REAL": 0, "TS1_MASS": 0, "TS2_MASS": 0, "TS3_MASS": 0, "TS_ADDREM_N2MASSTX": 0,'PV1201_STATE': 0, 'PV2201_STATE': 0}
 
-LEFT_REAL_RATE = {'BFM4313': 30, 'LT3335': 30, 'MFC1316_IN': 30, "CYL3334_FCALC": 30, "SERVO3321_IN_REAL": 30, "TS1_MASS": 30, "TS2_MASS": 30, "TS3_MASS": 30, "TS_ADDREM_N2MASSTX": 30}
+LEFT_REAL_RATE = {'BFM4313': 30, 'LT3335': 30, 'MFC1316_IN': 30, "CYL3334_FCALC": 30, "SERVO3321_IN_REAL": 30, "TS1_MASS": 30, "TS2_MASS": 30, "TS3_MASS": 30, "TS_ADDREM_N2MASSTX": 30,'PV1201_STATE': 30, 'PV2201_STATE': 30}
 
 AD_PARA = {"LT2122": 0 , "LT2130": 0}
 AD_RATE = {"LT2122": 30 , "LT2130": 30}
 DIN_PARA = {"LS3338": 0, "LS3339": 0, "ES3347": 0, "PUMP3305_CON": 0, "PUMP3305_OL": 0,"PS2352":0,"PS8302":0,
-            "UPS_ON_BATT": 0,"UPS_LOW_BATT": 0,"LS2126": 0,"LS2127": 0,"LS2128": 0,"LS2129": 0}
+            "UPS_ON_BATT": 0,"UPS_LOW_BATT": 0,"LS2126": 0,"LS2127": 0,"LS2128": 0,"LS2129": 0, "PS2352":0,'CC9313_POWER': 0,"PS8302":0,
+               'PCYCLE_SLOWCOMP': 0, 'PCYCLE_FASTCOMP': 0, 'LS2126': 0, 'LS2128': 0,
+               'UPS_UTILITY_OK': 0, 'UPS_BATTERY_OK': 0, 'LS2127': 0, 'LS2129': 0}
 
 DIN_RATE = {"LS3338": 30, "LS3339": 30, "ES3347": 30, "PUMP3305_CON": 30, "PUMP3305_OL": 30,"PS2352":30,"PS8302":30,
-            "UPS_ON_BATT": 30,"UPS_LOW_BATT": 30,"LS2126": 30,"LS2127": 30,"LS2128": 30,"LS2129": 30}
+            "UPS_ON_BATT": 30,"UPS_LOW_BATT": 30,"LS2126": 30,"LS2127": 30,"LS2128": 30,"LS2129": 30,"PS2352":30,'CC9313_POWER': 30,"PS8302":30,
+               'PCYCLE_SLOWCOMP': 30, 'PCYCLE_FASTCOMP': 30, 'LS2126': 30, 'LS2128': 30,
+               'UPS_UTILITY_OK': 30, 'UPS_BATTERY_OK': 30, 'LS2127': 30, 'LS2129': 30}
 
 LOOPPID_PARA = {'SERVO3321': 0, 'HTR6225': 0, 'HTR2123': 0, 'HTR2124': 0,
                   'HTR2125': 0,
                   'HTR1202': 0, 'HTR2203': 0, 'HTR6202': 0, 'HTR6206': 0, 'HTR6210': 0,
-                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0}
+                  'HTR6223': 0, 'HTR6224': 0, 'HTR6219': 0, 'HTR6221': 0, 'HTR6214': 0,  "MFC1316": 0}
 LOOPPID_RATE = {'SERVO3321': 30, 'HTR6225': 30, 'HTR2123': 30, 'HTR2124': 30,
                   'HTR2125': 30,
                   'HTR1202': 30, 'HTR2203': 30, 'HTR6202': 30, 'HTR6206': 30, 'HTR6210': 30,
-                  'HTR6223': 30, 'HTR6224': 30, 'HTR6219': 30, 'HTR6221': 30, 'HTR6214': 30}
+                  'HTR6223': 30, 'HTR6224': 30, 'HTR6219': 30, 'HTR6221': 30, 'HTR6214': 30,  "MFC1316": 30}
 
 DATABASE_PARA = {"alarm": 0, "TT": 0, "PT":0 , "REAL":0 , "AD":0, "Din": 0, "Valve": 0, "Switch": 0, "LOOPPID": 0,
                  "LOOP2PT":0 , "FLAG": 0, "INTLK_A":0, "INTLK_D":0, "FF": 0, "PARAM_F":0, "PARAM_I": 0, "PARAM_B":0,
