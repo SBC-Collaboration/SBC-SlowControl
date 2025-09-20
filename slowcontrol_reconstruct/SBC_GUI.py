@@ -1215,9 +1215,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC1316.Label.setText("MFC1316")
         self.MFC1316.LOOPPIDWindow.setWindowTitle("MFC1316")
         self.MFC1316.LOOPPIDWindow.Label.setText("MFC1316")
-        self.MFC1316.LOOPPIDWindow.RTD1.Label.setText("TT1332")
+        self.MFC1316.LOOPPIDWindow.RTD1.Label.setText("PT1325")
         self.MFC1316.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
-        self.MFC1316.LOOPPIDWindow.SetGroupUnit(" ")
+        self.MFC1316.LOOPPIDWindow.SetGroupUnit(" bar")
 
 
         self.PT1361 = Indicator(self.FluidTab)
@@ -6353,10 +6353,10 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             pass
 
-        if received_dic_c["data"]["LOOPPID"]["Busy"]["SERVO3321"]:
+        if received_dic_c["data"]["LOOPPID"]["Busy"]["MFC1316"]:
             self.MFC1316.ButtonTransitionState(True)
             self.MFC1316.LOOPPIDWindow.ButtonTransitionState(True)
-        elif not received_dic_c["data"]["LOOPPID"]["Busy"]["SERVO3321"]:
+        elif not received_dic_c["data"]["LOOPPID"]["Busy"]["MFC1316"]:
             self.MFC1316.ButtonTransitionState(False)
             self.MFC1316.LOOPPIDWindow.ButtonTransitionState(False)
         else:
@@ -8755,7 +8755,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HTR2203.RTD1.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT6416"])
 
         self.HTR6219.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6220"])
-        # self.MFC1316.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT1332"])
+        self.MFC1316.LOOPPIDWindow.RTD1.SetValue(received_dic_c["data"]["PT"]["value"]["PT1325"])
         self.HTR6214.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6401"])
         self.HTR6202.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6404"])
         self.HTR6206.LOOPPIDWindow.RTD2.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT6405"])
