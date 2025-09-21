@@ -200,7 +200,7 @@ class ThermosyphonWindow(QtWidgets.QMainWindow):
         self.GL.addWidget(self.SV4327, 1, 0)
 
         self.SV4328 = MultiStatusIndicator(self)
-        self.SV4328.Label.setText("SV4328.")
+        self.SV4328.Label.setText("SV4328")
         self.GL.addWidget(self.SV4328, 1, 1)
 
         self.SV4329 = MultiStatusIndicator(self)
@@ -214,6 +214,10 @@ class ThermosyphonWindow(QtWidgets.QMainWindow):
         self.SV4332 = MultiStatusIndicator(self)
         self.SV4332.Label.setText("SV4332")
         self.GL.addWidget(self.SV4332, 1, 4)
+
+        self.SV4337 = MultiStatusIndicator(self)
+        self.SV4337.Label.setText("SV4337")
+        self.GL.addWidget(self.SV4337, 1, 5)
 
 
 class RTDset1(QtWidgets.QMainWindow):
@@ -981,6 +985,12 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PT1325.Low_Read.SetUnit(" bar")
         self.PT1325.High_Read.SetUnit(" bar")
 
+        self.PT1361 = AlarmStatusWidget(self.PressureTab)
+        self.PT1361.Label.setText("PT1361")
+        self.PT1361.Indicator.SetUnit(" bar")
+        self.PT1361.Low_Read.SetUnit(" bar")
+        self.PT1361.High_Read.SetUnit(" bar")
+
         self.PT3311 = AlarmStatusWidget(self.PressureTab)
         self.PT3311.Label.setText("PT3311")
         self.PT3311.Indicator.SetUnit(" bar")
@@ -1043,9 +1053,15 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.PT6302 = AlarmStatusWidget(self.PressureTab)
         self.PT6302.Label.setText("PT6302")
-        self.PT6302.Indicator.SetUnit(" bar")
-        self.PT6302.Low_Read.SetUnit(" bar")
-        self.PT6302.High_Read.SetUnit(" bar")
+        self.PT6302.Indicator.SetUnit(" tr")
+        self.PT6302.Low_Read.SetUnit(" tr")
+        self.PT6302.High_Read.SetUnit(" tr")
+
+        self.PT6306 = AlarmStatusWidget(self.PressureTab)
+        self.PT6306.Label.setText("PT6306")
+        self.PT6306.Indicator.SetUnit(" tr")
+        self.PT6306.Low_Read.SetUnit(" tr")
+        self.PT6306.High_Read.SetUnit(" tr")
 
         self.PT5304 = AlarmStatusWidget(self.PressureTab)
         self.PT5304.Label.setText("PT5304")
@@ -1157,18 +1173,50 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.PS2352.High_Read.SetUnit(" ")
 
 
-        self.PS1361 = AlarmStatusWidget(self.LEFTVariableTab)
-        self.PS1361.Label.setText("PS1361")
-        self.PS1361.Indicator.SetUnit(" ")
-        self.PS1361.Low_Read.SetUnit(" ")
-        self.PS1361.High_Read.SetUnit(" ")
-
 
         self.PS8302 = AlarmStatusWidget(self.LEFTVariableTab)
         self.PS8302.Label.setText("PS8302")
         self.PS8302.Indicator.SetUnit(" ")
         self.PS8302.Low_Read.SetUnit(" ")
         self.PS8302.High_Read.SetUnit(" ")
+
+        self.UPS_ON_BATT = AlarmStatusWidget(self.LEFTVariableTab)
+        self.UPS_ON_BATT.Label.setText("UPS_ON")
+        self.UPS_ON_BATT.Indicator.SetUnit(" ")
+        self.UPS_ON_BATT.Low_Read.SetUnit(" ")
+        self.UPS_ON_BATT.High_Read.SetUnit(" ")
+
+        self.UPS_LOW_BATT = AlarmStatusWidget(self.LEFTVariableTab)
+        self.UPS_LOW_BATT.Label.setText("UPS_LOW")
+        self.UPS_LOW_BATT.Indicator.SetUnit(" ")
+        self.UPS_LOW_BATT.Low_Read.SetUnit(" ")
+        self.UPS_LOW_BATT.High_Read.SetUnit(" ")
+
+        self.LS2126 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LS2126.Label.setText("LS2126")
+        self.LS2126.Indicator.SetUnit(" ")
+        self.LS2126.Low_Read.SetUnit(" ")
+        self.LS2126.High_Read.SetUnit(" ")
+
+        self.LS2127 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LS2127.Label.setText("LS2127")
+        self.LS2127.Indicator.SetUnit(" ")
+        self.LS2127.Low_Read.SetUnit(" ")
+        self.LS2127.High_Read.SetUnit(" ")
+
+        self.LS2128 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LS2128.Label.setText("LS2128")
+        self.LS2128.Indicator.SetUnit(" ")
+        self.LS2128.Low_Read.SetUnit(" ")
+        self.LS2128.High_Read.SetUnit(" ")
+
+        self.LS2129 = AlarmStatusWidget(self.LEFTVariableTab)
+        self.LS2129.Label.setText("LS2129")
+        self.LS2129.Indicator.SetUnit(" ")
+        self.LS2129.Low_Read.SetUnit(" ")
+        self.LS2129.High_Read.SetUnit(" ")
+
+
 
         self.LT2122 = AlarmStatusWidget(self.LEFTVariableTab)
         self.LT2122.Label.setText("LT2122")
@@ -1303,11 +1351,11 @@ class AlarmWin(QtWidgets.QMainWindow):
 
         self.AlarmRTD4dir = {0: {0: self.TT2101}}
 
-        self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT1325, 2: self.PT2316, 3: self.PT2121, 4: self.PT2330},
-                           1: {0: self.PT2335, 1: self.PT2343, 2: self.PT3308, 3: self.PT3309, 4: self.PT3311},
-                           2: {0: self.PT3314, 1: self.PT3320, 2: self.PT3332, 3: self.PT3333, 4: self.PT4306},
+        self.AlarmPTdir = {0: {0: self.PT1101, 1: self.PT1325, 2: self.PT1361, 3: self.PT2316, 4: self.PT2121},
+                           1: {0: self.PT2330, 1: self.PT2335, 2: self.PT2343, 3: self.PT3308, 4: self.PT3309},
+                           2: {0: self.PT3311, 1: self.PT3314, 2: self.PT3320, 3: self.PT3332, 4: self.PT3333},
                            3: {0: self.PT4315, 1: self.PT4319, 2: self.PT4322, 3: self.PT4325, 4: self.PT5304},
-                           4: {0: self.PT6302}}
+                           4: {0: self.PT4306, 1: self.PT6302, 2: self.PT6306}}
 
         self.AlarmRTDLEFTdir = {0: {0:self.TT3401, 1:self.TT4330, 2:self.TT6203, 3:self.TT6207, 4:self.TT6211},
                                 1: {0:self.TT6213, 1:self.TT6220, 2:self.TT6222, 3:self.TT6401, 4:self.TT6404},
@@ -1320,8 +1368,9 @@ class AlarmWin(QtWidgets.QMainWindow):
         self.AlarmLEFTdir = {0:{0: self.BFM4313, 1: self.LT3335, 2: self.MFC1316_IN, 3: self.CYL3334_FCALC, 4: self.SERVO3321_IN_REAL},
                              1:{0: self.TS1_MASS, 1: self.TS2_MASS, 2: self.TS3_MASS, 3: self.LT2122, 4: self.LT2130}}
 
-        self.AlarmDindir = {0:{0: self.PS1361, 1: self.PS2352, 2: self.PUMP3305_CON, 3: self.PUMP3305_OL, 4: self.LS3338},
-                             1:{0: self.LS3339, 1: self.ES3347, 2: self.PS8302}}
+        self.AlarmDindir = {0:{ 0: self.PS2352, 1: self.PUMP3305_CON, 2: self.PUMP3305_OL, 3: self.LS3338, 4:self.LS3339},
+                             1:{0: self.ES3347, 1: self.PS8302, 2: self.UPS_ON_BATT, 3: self.UPS_LOW_BATT, 4:self.LS2126},
+                             2: {0:self.LS2127, 1: self.LS2128, 2: self.LS2129}}
 
 
         self.AlarmHTRdir = {0: {0: self.HTR1202, 1: self.HTR2123, 2: self.HTR2124, 3: self.HTR2125, 4: self.HTR2203},
@@ -3196,6 +3245,16 @@ class LOOPPIDSubWindow(QtWidgets.QMainWindow):
     @QtCore.Slot()
     def ButtonTransitionState(self, bool):
         self.StatusTransition.UpdateColor(bool)
+
+    @QtCore.Slot()
+    def SetGroupUnit(self, Unit):
+        self.IN.SetUnit(Unit)
+        self.LOW.SetUnit(Unit)
+        self.HIGH.SetUnit(Unit)
+        self.SETSP.SetUnit(Unit)
+        self.RTD1.SetUnit(Unit)
+        self.RTD2.SetUnit(Unit)
+
 
 
 # Define a function tab that shows the status of the widgets
@@ -6385,6 +6444,9 @@ class Indicator(QtWidgets.QWidget):
     def SetValue(self, value):
         self.value = value
         self.Field.setText(format(value, '#.2f') + self.Unit)
+    def SetExpValue(self, value):
+        self.value = value
+        self.Field.setText(format(value, '.1e') + self.Unit)
 
     def SetIntValue(self, value):
         self.value = value
@@ -6587,7 +6649,7 @@ class Control_v2(QtWidgets.QWidget):
 
     def SetValue(self, value):
         self.value = value
-        self.Button.setText(str(value) + self.Unit)
+        self.Button.setText(format(self.value, '#.2f') + self.Unit)
 
     def SetUnit(self, unit=" °C"):
         self.Unit = unit

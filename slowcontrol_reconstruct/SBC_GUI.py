@@ -377,6 +377,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRV4326.Label.setText("PRV4326")
         self.PRV4326.move(1150*R, 860*R)
 
+        self.SV4327 = Valve_v2(self.ThermosyphonTab)
+        self.SV4327.Label.setText("SV4327")
+        self.SV4327.move(280 * R, 400 * R)
+
+        self.SV4327_icon = Valve_image(self.ThermosyphonTab, mode="V")
+        self.SV4327_icon.move(335 * R, 330 * R)
+
         self.SV4328 = Valve_v2(self.ThermosyphonTab)
         self.SV4328.Label.setText("SV4328")
         self.SV4328.move(1360*R, 190*R)
@@ -409,6 +416,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV4332_icon = Valve_image(self.ThermosyphonTab, mode="H")
         self.SV4332_icon.move(1673 * R, 322 * R)
 
+        self.SV4337 = Valve_v2(self.ThermosyphonTab)
+        self.SV4337.Label.setText("SV4337")
+        self.SV4337.move(115 * R, 320 * R)
+
+        self.SV4337_icon = Valve_image(self.ThermosyphonTab, mode="H")
+        self.SV4337_icon.move(170 * R, 280 * R)
+
 
         self.PRV4333 = PnID_Alone(self.ThermosyphonTab)
         self.PRV4333.Label.setText("PRV4333")
@@ -417,7 +431,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT6302 = Indicator(self.ThermosyphonTab)
         self.PT6302.Label.setText("PT6302")
         self.PT6302.move(2030*R, 690*R)
-        self.PT6302.SetUnit(" bar")
+        self.PT6302.SetUnit(" tr")
 
         self.PRV6303 = PnID_Alone(self.ThermosyphonTab)
         self.PRV6303.Label.setText("PRV6303")
@@ -430,6 +444,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.HE6201 = PnID_Alone(self.ThermosyphonTab)
         self.HE6201.Label.setText("HE6201")
         self.HE6201.move(1410*R, 1100*R)
+
+        self.PT6306 = Indicator(self.ThermosyphonTab)
+        self.PT6306.Label.setText("PT6306")
+        self.PT6306.move(1410*R, 1200*R)
+        self.PT6306.SetUnit(" tr")
 
         self.EV6204 = PnID_Alone(self.ThermosyphonTab)
         self.EV6204.Label.setText("EV6204")
@@ -1114,8 +1133,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT7404.Label.setText("TT7404")
 
         self.PS8302 = ColoredStatus(self.FluidTab, mode=2)
-        self.PS8302.move(2300 * R, 100 * R)
+        self.PS8302.move(1300 * R, 300 * R)
         self.PS8302.Label.setText("PS8302")
+
+
 
         self.PS2352 = ColoredStatus(self.FluidTab, mode=2)
         self.PS2352.move(950 * R, 240 * R)
@@ -1142,16 +1163,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MFC1316.LOOPPIDWindow.Label.setText("MFC1316")
         self.MFC1316.LOOPPIDWindow.RTD1.Label.setText("TT1332")
         self.MFC1316.LOOPPIDWindow.RTD2.Label.setText("EMPTY")
-
-        self.PS1361 = ColoredStatus(self.FluidTab, mode=2)
-        self.PS1361.move(810 * R, 870* R)
-        self.PS1361.Label.setText("PS1361")
+        self.MFC1316.LOOPPIDWindow.SetGroupUnit(" ")
 
 
-        self.PT1332 = Indicator(self.FluidTab)
-        self.PT1332.move(630*R, 900*R)
-        self.PT1332.Label.setText("PT1332")
-        self.PT1332.SetUnit(" bar")
+        self.PT1361 = Indicator(self.FluidTab)
+        self.PT1361.move(810 * R, 870 * R)
+        self.PT1361.Label.setText("PT1361")
+        self.PT1361.SetUnit(" bar")
+
+        self.PT1325 = Indicator(self.FluidTab)
+        self.PT1325.move(630*R, 900*R)
+        self.PT1325.Label.setText("PT1325")
+        self.PT1325.SetUnit(" bar")
 
         self.PV1344=Valve_v2(self.FluidTab)
         self.PV1344.Label.setText("PV1344")
@@ -1363,6 +1386,22 @@ class MainWindow(QtWidgets.QMainWindow):
         self.LT2130.Label.setText("LT2130")
         self.LT2130.SetUnit(" %")
 
+        self.LS2126= ColoredStatus(self.HydraulicTab, mode= 2)
+        self.LS2126.move(1900*R, 650*R)
+        self.LS2126.Label.setText("LS2126")
+
+        self.LS2127 = ColoredStatus(self.HydraulicTab, mode=2)
+        self.LS2127.move(1900 * R, 700 * R)
+        self.LS2127.Label.setText("LS2127")
+
+        self.LS2128 = ColoredStatus(self.HydraulicTab, mode=2)
+        self.LS2128.move(2100 * R, 650 * R)
+        self.LS2128.Label.setText("LS2128")
+
+        self.LS2129 = ColoredStatus(self.HydraulicTab, mode=2)
+        self.LS2129.move(2100 * R, 700 * R)
+        self.LS2129.Label.setText("LS2129")
+
         self.LS3338 = ColoredStatus(self.HydraulicTab, mode= 2)
         self.LS3338.move(2200*R, 1010*R)
         self.LS3338.Label.setText("LS3338")
@@ -1442,15 +1481,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.MAN_TS.move(1300 * R, 150 * R)
         self.MAN_TS.Label.setText("MAN_TS")
 
-
         self.MAN_HYD = Flag(self.DatanSignalTab)
         self.MAN_HYD.move(1300 * R, 260 * R)
         self.MAN_HYD.Label.setText("MAN_HYD")
 
-
         self.PCYCLE_AUTOCYCLE = Flag(self.DatanSignalTab)
         self.PCYCLE_AUTOCYCLE.move(1300 * R, 370 * R)
         self.PCYCLE_AUTOCYCLE.Label.setText("PCYCLE_AUTOCYCLE")
+
+        self.UPS_ON_BATT = ColoredStatus(self.DatanSignalTab, mode=2)
+        self.UPS_ON_BATT.move(1300 * R, 470 * R)
+        self.UPS_ON_BATT.Label.setText("UPS_ON")
+
+        self.UPS_LOW_BATT = ColoredStatus(self.DatanSignalTab, mode=1)
+        self.UPS_LOW_BATT.move(1400 * R, 470 * R)
+        self.UPS_LOW_BATT.Label.setText("UPS_LOW")
 
 
         # INTLCK button
@@ -1537,6 +1582,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         self.PTAlarmMatrix = [self.AlarmButton.SubWindow.PT1101, self.AlarmButton.SubWindow.PT1325,
+                              self.AlarmButton.SubWindow.PT1361,
                               self.AlarmButton.SubWindow.PT2316, self.AlarmButton.SubWindow.PT2121,
                               self.AlarmButton.SubWindow.PT2330, self.AlarmButton.SubWindow.PT2335,
                               self.AlarmButton.SubWindow.PT3308, self.AlarmButton.SubWindow.PT3309,
@@ -1545,7 +1591,11 @@ class MainWindow(QtWidgets.QMainWindow):
                               self.AlarmButton.SubWindow.PT3333, self.AlarmButton.SubWindow.PT4306,
                               self.AlarmButton.SubWindow.PT4315, self.AlarmButton.SubWindow.PT4319,
                               self.AlarmButton.SubWindow.PT4322, self.AlarmButton.SubWindow.PT4325,
-                              self.AlarmButton.SubWindow.PT5304,self.AlarmButton.SubWindow.PT6302]
+                              self.AlarmButton.SubWindow.PT5304,self.AlarmButton.SubWindow.PT6302,
+                              self.AlarmButton.SubWindow.PT6306,]
+
+        self.expPTAlarmMatrix = [self.AlarmButton.SubWindow.PT6302,
+                              self.AlarmButton.SubWindow.PT6306]
 
         self.LEFTVariableMatrix = [self.AlarmButton.SubWindow.BFM4313, self.AlarmButton.SubWindow.LT3335,
                                    self.AlarmButton.SubWindow.MFC1316_IN, self.AlarmButton.SubWindow.CYL3334_FCALC,
@@ -1558,7 +1608,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.DinAlarmMatrix = [self.AlarmButton.SubWindow.LS3338, self.AlarmButton.SubWindow.LS3339,
                                    self.AlarmButton.SubWindow.ES3347, self.AlarmButton.SubWindow.PUMP3305_CON,
                                    self.AlarmButton.SubWindow.PUMP3305_OL, self.AlarmButton.SubWindow.PS2352,
-                                   self.AlarmButton.SubWindow.PS1361, self.AlarmButton.SubWindow.PS8302]
+                               self.AlarmButton.SubWindow.PS8302,
+                               self.AlarmButton.SubWindow.UPS_ON_BATT, self.AlarmButton.SubWindow.UPS_LOW_BATT,
+                               self.AlarmButton.SubWindow.LS2126, self.AlarmButton.SubWindow.LS2127,
+                               self.AlarmButton.SubWindow.LS2128, self.AlarmButton.SubWindow.LS2129]
 
         self.LOOPPIDAlarmMatrix = [self.AlarmButton.SubWindow.SERVO3321, self.AlarmButton.SubWindow.HTR6225,
                                    self.AlarmButton.SubWindow.HTR2123, self.AlarmButton.SubWindow.HTR2124,
@@ -1804,6 +1857,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV3325.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3325.Label.text()))
         self.SV3329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV3329.Label.text()))
         self.SV3329.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV3329.Label.text()))
+        self.SV4327.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4327.Label.text()))
+        self.SV4327.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4327.Label.text()))
         self.SV4328.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4328.Label.text()))
         self.SV4328.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4328.Label.text()))
         self.SV4329.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4329.Label.text()))
@@ -1812,6 +1867,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV4331.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4331.Label.text()))
         self.SV4332.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4332.Label.text()))
         self.SV4332.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4332.Label.text()))
+        self.SV4337.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.SV4337.Label.text()))
+        self.SV4337.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.SV4337.Label.text()))
         self.HFSV3312.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3312.Label.text()))
         self.HFSV3312.Set.RButton.clicked.connect(lambda x: self.RButtonClicked(self.HFSV3312.Label.text()))
         self.HFSV3323.Set.LButton.clicked.connect(lambda x: self.LButtonClicked(self.HFSV3323.Label.text()))
@@ -3179,6 +3236,18 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #BO PT updatebutton and activate button
 
+        self.AlarmButton.SubWindow.PT1361.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1361.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT1361.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT1361.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT1361.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PT1361.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1361.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT1361.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT1361.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT1361.High_Set.Field.text()))
+
         self.AlarmButton.SubWindow.PT2316.AlarmMode.stateChanged.connect(
             lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT2316.Label.text(),
                                        Act=self.AlarmButton.SubWindow.PT2316.AlarmMode.isChecked(),
@@ -3371,6 +3440,18 @@ class MainWindow(QtWidgets.QMainWindow):
                                      Act=self.AlarmButton.SubWindow.PT6302.AlarmMode.isChecked(),
                                      LowLimit=self.AlarmButton.SubWindow.PT6302.Low_Set.Field.text(),
                                      HighLimit=self.AlarmButton.SubWindow.PT6302.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.PT6306.AlarmMode.stateChanged.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT6306.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT6306.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT6306.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT6306.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.PT6306.updatebutton.clicked.connect(
+            lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT6306.Label.text(),
+                                     Act=self.AlarmButton.SubWindow.PT6306.AlarmMode.isChecked(),
+                                     LowLimit=self.AlarmButton.SubWindow.PT6306.Low_Set.Field.text(),
+                                     HighLimit=self.AlarmButton.SubWindow.PT6306.High_Set.Field.text()))
 
         self.AlarmButton.SubWindow.PT1101.AlarmMode.stateChanged.connect(
             lambda: self.PTBoxUpdate(pid=self.AlarmButton.SubWindow.PT1101.Label.text(),
@@ -3582,17 +3663,48 @@ class MainWindow(QtWidgets.QMainWindow):
                                       LowLimit=self.AlarmButton.SubWindow.PS2352.Low_Set.Field.text(),
                                       HighLimit=self.AlarmButton.SubWindow.PS2352.High_Set.Field.text()))
 
-        self.AlarmButton.SubWindow.PS1361.updatebutton.clicked.connect(
-            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.PS1361.Label.text(),
-                                      Act=self.AlarmButton.SubWindow.PS1361.AlarmMode.isChecked(),
-                                      LowLimit=self.AlarmButton.SubWindow.PS1361.Low_Set.Field.text(),
-                                      HighLimit=self.AlarmButton.SubWindow.PS1361.High_Set.Field.text()))
 
         self.AlarmButton.SubWindow.PS8302.updatebutton.clicked.connect(
             lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.PS8302.Label.text(),
                                       Act=self.AlarmButton.SubWindow.PS8302.AlarmMode.isChecked(),
                                       LowLimit=self.AlarmButton.SubWindow.PS8302.Low_Set.Field.text(),
                                       HighLimit=self.AlarmButton.SubWindow.PS8302.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.UPS_ON_BATT.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_ON_BATT.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.UPS_ON_BATT.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.High_Set.Field.text()))
+        self.AlarmButton.SubWindow.UPS_LOW_BATT.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_LOW_BATT.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.UPS_LOW_BATT.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.LS2126.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS2126.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.LS2126.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.LS2126.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.LS2126.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.LS2127.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS2127.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.LS2127.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.LS2127.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.LS2127.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.LS2128.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS2128.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.LS2128.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.LS2128.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.LS2128.High_Set.Field.text()))
+
+        self.AlarmButton.SubWindow.LS2129.updatebutton.clicked.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS2129.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.LS2129.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.LS2129.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.LS2129.High_Set.Field.text()))
+
+
         # checkbox
         self.AlarmButton.SubWindow.LS3338.AlarmMode.stateChanged.connect(
             lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS3338.Label.text(),
@@ -3630,11 +3742,6 @@ class MainWindow(QtWidgets.QMainWindow):
                                       LowLimit=self.AlarmButton.SubWindow.PS2352.Low_Set.Field.text(),
                                       HighLimit=self.AlarmButton.SubWindow.PS2352.High_Set.Field.text(), update= False))
 
-        self.AlarmButton.SubWindow.PS1361.AlarmMode.stateChanged.connect(
-            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.PS1361.Label.text(),
-                                      Act=self.AlarmButton.SubWindow.PS1361.AlarmMode.isChecked(),
-                                      LowLimit=self.AlarmButton.SubWindow.PS1361.Low_Set.Field.text(),
-                                      HighLimit=self.AlarmButton.SubWindow.PS1361.High_Set.Field.text(), update= False))
 
         self.AlarmButton.SubWindow.PS8302.AlarmMode.stateChanged.connect(
             lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.PS8302.Label.text(),
@@ -3642,6 +3749,45 @@ class MainWindow(QtWidgets.QMainWindow):
                                       LowLimit=self.AlarmButton.SubWindow.PS8302.Low_Set.Field.text(),
                                       HighLimit=self.AlarmButton.SubWindow.PS8302.High_Set.Field.text(), update= False))
 
+        self.AlarmButton.SubWindow.UPS_ON_BATT.AlarmMode.stateChanged.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_ON_BATT.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.UPS_ON_BATT.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.UPS_ON_BATT.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.UPS_LOW_BATT.AlarmMode.stateChanged.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.UPS_LOW_BATT.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.UPS_LOW_BATT.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.UPS_LOW_BATT.High_Set.Field.text(), update=False))
+
+        self.AlarmButton.SubWindow.LS2126.AlarmMode.stateChanged.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS2126.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.LS2126.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.LS2126.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.LS2126.High_Set.Field.text(),
+                                      update=False))
+
+        self.AlarmButton.SubWindow.LS2127.AlarmMode.stateChanged.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS2127.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.LS2127.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.LS2127.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.LS2127.High_Set.Field.text(),
+                                      update=False))
+
+        self.AlarmButton.SubWindow.LS2128.AlarmMode.stateChanged.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS2128.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.LS2128.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.LS2128.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.LS2128.High_Set.Field.text(),
+                                      update=False))
+
+        self.AlarmButton.SubWindow.LS2129.AlarmMode.stateChanged.connect(
+            lambda: self.DinBoxUpdate(pid=self.AlarmButton.SubWindow.LS2129.Label.text(),
+                                      Act=self.AlarmButton.SubWindow.LS2129.AlarmMode.isChecked(),
+                                      LowLimit=self.AlarmButton.SubWindow.LS2129.Low_Set.Field.text(),
+                                      HighLimit=self.AlarmButton.SubWindow.LS2129.High_Set.Field.text(),
+                                      update=False))
 
         #LOOPPID updatebutton
         self.AlarmButton.SubWindow.SERVO3321.updatebutton.clicked.connect(
@@ -5010,19 +5156,19 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PRESSURE_CYCLE.expandwindow.PSET_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_PSET"])
         self.PRESSURE_CYCLE.expandwindow.EXPTIME_RD.SetValue(
-            received_dic_c["data"]["TIME"]["PCYCLE_EXPTIME"])
+            round(received_dic_c["data"]["TIME"]["PCYCLE_EXPTIME"]))
         self.PRESSURE_CYCLE.expandwindow.MAXEXPTIME_RD.SetIntValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEXPTIME"]/1000)
+            round(received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEXPTIME"]/1000))
         self.PRESSURE_CYCLE.expandwindow.MAXEQTIME_RD.SetIntValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEQTIME"]/1000)
+            round(received_dic_c["data"]["PARA_T"]["PCYCLE_MAXEQTIME"]/1000))
         self.PRESSURE_CYCLE.expandwindow.MAXEQPDIFF_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_MAXEQPDIFF"])
         self.PRESSURE_CYCLE.expandwindow.MAXACCTIME_RD.SetIntValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXACCTIME"]/1000)
+            round(received_dic_c["data"]["PARA_T"]["PCYCLE_MAXACCTIME"]/1000))
         self.PRESSURE_CYCLE.expandwindow.MAXACCDPDT_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_MAXACCDPDT"])
         self.PRESSURE_CYCLE.expandwindow.MAXBLEEDTIME_RD.SetIntValue(
-            received_dic_c["data"]["PARA_T"]["PCYCLE_MAXBLEEDTIME"]/1000)
+            round(received_dic_c["data"]["PARA_T"]["PCYCLE_MAXBLEEDTIME"]/1000))
         self.PRESSURE_CYCLE.expandwindow.MAXBLEEDDPDT_RD.SetValue(
             received_dic_c["data"]["PARA_F"]["PCYCLE_MAXBLEEDDPDT"])
         self.PRESSURE_CYCLE.expandwindow.SLOWCOMP_SET_RD.SetValue(
@@ -5080,6 +5226,19 @@ class MainWindow(QtWidgets.QMainWindow):
             element.High_Read.SetValue(
                 received_dic_c["data"]["PT"]["high"][element.Label.text()])
 
+        # 2PTs that should be displayed at expotentially
+        for element in self.expPTAlarmMatrix:
+            # print(element.Label.text())
+
+            element.UpdateAlarm(
+                received_dic_c["Alarm"]["PT"][element.Label.text()])
+            element.Indicator.SetExpValue(
+                received_dic_c["data"]["PT"]["value"][element.Label.text()])
+            element.Low_Read.SetExpValue(
+                received_dic_c["data"]["PT"]["low"][element.Label.text()])
+            element.High_Read.SetExpValue(
+                received_dic_c["data"]["PT"]["high"][element.Label.text()])
+
 
         #LEFT Variables: because the receive_dic's dimension is different from the dimension in self.GLLEFT, I have to set widgets' value in self.GLLEFT mannually
 
@@ -5130,98 +5289,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 received_dic_c["data"]["LOOPPID"]["Alarm_HighLimit"][element.Label.text()])
 
 
-        #
-        #
-        # self.AlarmButton.SubWindow.LT3335.UpdateAlarm(
-        #     received_dic_c["Alarm"]["LEFT_REAL"][self.AlarmButton.SubWindow.LT3335.Label.text()])
-        # self.AlarmButton.SubWindow.LT3335.Indicator.SetValue(
-        #     received_dic_c["data"]["LEFT_REAL"]["value"][self.AlarmButton.SubWindow.LT3335.Label.text()])
-        # self.AlarmButton.SubWindow.LT3335.Low_Read.SetValue(
-        #     received_dic_c["data"]["LEFT_REAL"]["low"][self.AlarmButton.SubWindow.LT3335.Label.text()])
-        # self.AlarmButton.SubWindow.LT3335.High_Read.SetValue(
-        #     received_dic_c["data"]["LEFT_REAL"]["high"][self.AlarmButton.SubWindow.LT3335.Label.text()])
-
-
-
-
-        # update value in a Matrix
-
-        # AlarmMatrix = [self.AlarmButton.SubWindow.TT2101.Alarm, self.AlarmButton.SubWindow.TT2111.Alarm, self.AlarmButton.SubWindow.TT2113.Alarm, self.AlarmButton.SubWindow.TT2118.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2119.Alarm,
-        #                          self.AlarmButton.SubWindow.TT4330.Alarm, self.AlarmButton.SubWindow.TT6203.Alarm, self.AlarmButton.SubWindow.TT6207.Alarm, self.AlarmButton.SubWindow.TT6211.Alarm,
-        #                          self.AlarmButton.SubWindow.TT6213.Alarm,
-        #                          self.AlarmButton.SubWindow.TT6222.Alarm, self.AlarmButton.SubWindow.TT6407.Alarm, self.AlarmButton.SubWindow.TT6408.Alarm, self.AlarmButton.SubWindow.TT6409.Alarm,
-        #                          self.AlarmButton.SubWindow.TT6415.Alarm,
-        #                          self.AlarmButton.SubWindow.TT6416.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2420.Alarm, self.AlarmButton.SubWindow.TT2422.Alarm, self.AlarmButton.SubWindow.TT2424.Alarm, self.AlarmButton.SubWindow.TT2425.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2442.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2403.Alarm, self.AlarmButton.SubWindow.TT2418.Alarm, self.AlarmButton.SubWindow.TT2427.Alarm, self.AlarmButton.SubWindow.TT2429.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2431.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2441.Alarm, self.AlarmButton.SubWindow.TT2414.Alarm, self.AlarmButton.SubWindow.TT2413.Alarm, self.AlarmButton.SubWindow.TT2412.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2415.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2409.Alarm, self.AlarmButton.SubWindow.TT2436.Alarm, self.AlarmButton.SubWindow.TT2438.Alarm, self.AlarmButton.SubWindow.TT2440.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2402.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2411.Alarm, self.AlarmButton.SubWindow.TT2443.Alarm, self.AlarmButton.SubWindow.TT2417.Alarm, self.AlarmButton.SubWindow.TT2404.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2408.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2407.Alarm, self.AlarmButton.SubWindow.TT2406.Alarm, self.AlarmButton.SubWindow.TT2428.Alarm, self.AlarmButton.SubWindow.TT2432.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2421.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2416.Alarm, self.AlarmButton.SubWindow.TT2439.Alarm, self.AlarmButton.SubWindow.TT2419.Alarm, self.AlarmButton.SubWindow.TT2423.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2426.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2430.Alarm, self.AlarmButton.SubWindow.TT2450.Alarm, self.AlarmButton.SubWindow.TT2401.Alarm, self.AlarmButton.SubWindow.TT2449.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2445.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2444.Alarm, self.AlarmButton.SubWindow.TT2435.Alarm, self.AlarmButton.SubWindow.TT2437.Alarm, self.AlarmButton.SubWindow.TT2446.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2447.Alarm,
-        #                          self.AlarmButton.SubWindow.TT2448.Alarm, self.AlarmButton.SubWindow.TT2410.Alarm, self.AlarmButton.SubWindow.TT2405.Alarm, self.AlarmButton.SubWindow.TT6220.Alarm,
-        #                          self.AlarmButton.SubWindow.TT6401.Alarm,
-        #                          self.AlarmButton.SubWindow.TT6404.Alarm, self.AlarmButton.SubWindow.TT6405.Alarm, self.AlarmButton.SubWindow.TT6406.Alarm, self.AlarmButton.SubWindow.TT6410.Alarm,
-        #                          self.AlarmButton.SubWindow.TT6411.Alarm,
-        #                          self.AlarmButton.SubWindow.TT6412.Alarm, self.AlarmButton.SubWindow.TT6413.Alarm, self.AlarmButton.SubWindow.TT6414.Alarm,
-        #                          self.AlarmButton.SubWindow.PT2316.Alarm, self.AlarmButton.SubWindow.PT2330.Alarm, self.AlarmButton.SubWindow.PT2335.Alarm,
-        #                          self.AlarmButton.SubWindow.PT3308.Alarm, self.AlarmButton.SubWindow.PT3309.Alarm, self.AlarmButton.SubWindow.PT3311.Alarm, self.AlarmButton.SubWindow.PT3314.Alarm,
-        #                          self.AlarmButton.SubWindow.PT3320.Alarm, self.AlarmButton.SubWindow.PT3332.Alarm, self.AlarmButton.SubWindow.PT3333.Alarm, self.AlarmButton.SubWindow.PT4306.Alarm, self.AlarmButton.SubWindow.PT4315.Alarm,
-        #                          self.AlarmButton.SubWindow.PT4319.Alarm,
-        #                          self.AlarmButton.SubWindow.PT4322.Alarm, self.AlarmButton.SubWindow.PT4325.Alarm, self.AlarmButton.SubWindow.LT3335.Alarm]
-
         AlarmMatrix= []
         for element in self.AlarmMatrix:
             AlarmMatrix.append(element.Alarm)
         self.update_alarmwindow(AlarmMatrix)
-
-
-
-        # print("PV4307_OUT", received_dic_c["data"]["Valve"]["OUT"]["PV4307"])
-        # print("PV4307_MAN", received_dic_c["data"]["Valve"]["MAN"]["PV4307"])
-        # print("PV5305_OUT", received_dic_c["data"]["Valve"]["OUT"]["PV5305"])
-        # print("PV5305_MAN", received_dic_c["data"]["Valve"]["MAN"]["PV5305"])
-        # print("SV3307_OUT", received_dic_c["data"]["Valve"]["OUT"]["SV3307"])
-        # print("SV3307_MAN", received_dic_c["data"]["Valve"]["MAN"]["SV3307"])
-        # print(received_dic_c["data"]["Valve"]["MAN"]["PV1344"])
-
-        # set whether Valves are manually active or not
-
-        # self.PV1344.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV1344"])
-        # self.PV4307.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4307"])
-        # self.PV4308.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4308"])
-        # self.PV4317.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4317"])
-        # self.PV4318.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4318"])
-        # self.PV4321.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4321"])
-        # self.PV4324.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV4324"])
-        # self.PV5305.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5305"])
-        # self.PV5306.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5306"])
-        # self.PV5307.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5307"])
-        # self.PV5309.Activate(received_dic_c["data"]["Valve"]["MAN"]["PV5309"])
-        # self.SV3307.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3307"])
-        # self.SV3310.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3310"])
-        # self.SV3322.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3322"])
-        # self.SV3325.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3325"])
-        # self.SV3329.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV3329"])
-        # self.SV4328.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4328"])
-        # self.SV4329.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4329"])
-        # self.SV4331.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4331"])
-        # self.SV4332.Activate(received_dic_c["data"]["Valve"]["MAN"]["SV4332"])
-        # self.HFSV3312.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"])
-        # self.HFSV3323.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3323"])
-        # self.HFSV3331.Activate(received_dic_c["data"]["Valve"]["MAN"]["HFSV3331"])
 
         self.PV1344.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV1344"])
         self.PV4307.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["PV4307"])
@@ -5239,10 +5310,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.SV3322.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV3322"])
         self.SV3325.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV3325"])
         self.SV3329.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV3329"])
+        self.SV4327.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4327"])
         self.SV4328.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4328"])
         self.SV4329.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4329"])
         self.SV4331.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4331"])
         self.SV4332.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4332"])
+        self.SV4337.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["SV4337"])
         self.HFSV3312.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"])
         self.HFSV3323.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["HFSV3323"])
         self.HFSV3331.ColorLabel(received_dic_c["data"]["Valve"]["OUT"]["HFSV3331"])
@@ -5256,9 +5329,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ES3347.UpdateColor(received_dic_c["data"]["Din"]["value"]["ES3347"])
         self.LS3338.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS3338"])
         self.LS3339.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS3339"])
-        self.PS1361.UpdateColor(received_dic_c["data"]["Din"]["value"]["PS1361"])
         self.PS2352.UpdateColor(received_dic_c["data"]["Din"]["value"]["PS2352"])
         self.PS8302.UpdateColor(received_dic_c["data"]["Din"]["value"]["PS8302"])
+        self.UPS_ON_BATT.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_ON_BATT"])
+        self.UPS_LOW_BATT.UpdateColor(received_dic_c["data"]["Din"]["value"]["UPS_LOW_BATT"])
+        self.LS2126.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2126"])
+        self.LS2127.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2127"])
+        self.LS2128.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2128"])
+        self.LS2129.UpdateColor(received_dic_c["data"]["Din"]["value"]["LS2129"])
 
         # show whether the widgets status are normal: manully controlled and no error signal
 
@@ -5362,6 +5440,12 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.SV3329.ActiveState.UpdateColor(False)
 
+        if received_dic_c["data"]["Valve"]["MAN"]["SV4327"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4327"]:
+
+            self.SV4327.ActiveState.UpdateColor(True)
+        else:
+            self.SV4327.ActiveState.UpdateColor(False)
+
         if received_dic_c["data"]["Valve"]["MAN"]["SV4328"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4328"]:
 
             self.SV4328.ActiveState.UpdateColor(True)
@@ -5385,6 +5469,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.SV4332.ActiveState.UpdateColor(True)
         else:
             self.SV4332.ActiveState.UpdateColor(False)
+
+        if received_dic_c["data"]["Valve"]["MAN"]["SV4337"] and not received_dic_c["data"]["Valve"]["ERR"]["SV4337"]:
+
+            self.SV4337.ActiveState.UpdateColor(True)
+        else:
+            self.SV4337.ActiveState.UpdateColor(False)
 
         if received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"] and not received_dic_c["data"]["Valve"]["ERR"]["HFSV3312"]:
 
@@ -5528,6 +5618,11 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.SV3329.ButtonTransitionState(False)
 
+        if received_dic_c["data"]["Valve"]["Busy"]["SV4327"] == True:
+            self.SV4327.ButtonTransitionState(False)
+
+        else:
+            self.SV4327.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["SV4328"] == True:
             self.SV4328.ButtonTransitionState(False)
@@ -5559,8 +5654,11 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.SV4332.ButtonTransitionState(False)
 
+        if received_dic_c["data"]["Valve"]["Busy"]["SV4337"] == True:
+            self.SV4337.ButtonTransitionState(False)
 
-
+        else:
+            self.SV4337.ButtonTransitionState(False)
 
         if received_dic_c["data"]["Valve"]["Busy"]["HFSV3312"] == True:
             self.HFSV3312.ButtonTransitionState(False)
@@ -6706,6 +6804,29 @@ class MainWindow(QtWidgets.QMainWindow):
                 else:
                     pass
 
+        if not received_dic_c["data"]["Valve"]["MAN"]["SV4327"]:
+            if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
+                self.SV4327.Set.ButtonLClicked()
+            else:
+                self.SV4327.Set.ButtonRClicked()
+            self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
+        elif received_dic_c["data"]["Valve"]["MAN"]["SV4327"]:
+            if received_dic_c["data"]["Valve"]["Busy"]["SV4327"]:
+                if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
+                    self.SV4327.Set.ButtonLClicked()
+                else:
+                    self.SV4327.Set.ButtonRClicked()
+                self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
+            elif not received_dic_c["data"]["Valve"]["Busy"]["SV4327"]:
+                if received_dic_c["data"]["Valve"]["OUT"]["SV4327"] != self.Valve_buffer["SV4327"]:
+                    if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
+                        self.SV4327.Set.ButtonLClicked()
+                    else:
+                        self.SV4327.Set.ButtonRClicked()
+                    self.Valve_buffer["SV4327"] = received_dic_c["data"]["Valve"]["OUT"]["SV4327"]
+                else:
+                    pass
+
         if not received_dic_c["data"]["Valve"]["MAN"]["SV4328"]:
             if received_dic_c["data"]["Valve"]["OUT"]["SV4328"]:
                 self.SV4328.Set.ButtonLClicked()
@@ -6799,7 +6920,28 @@ class MainWindow(QtWidgets.QMainWindow):
                 else:
                     pass
 
-
+        if not received_dic_c["data"]["Valve"]["MAN"]["SV4337"]:
+            if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
+                self.SV4337.Set.ButtonLClicked()
+            else:
+                self.SV4337.Set.ButtonRClicked()
+            self.Valve_buffer["SV4337"] = received_dic_c["data"]["Valve"]["OUT"]["SV4337"]
+        elif received_dic_c["data"]["Valve"]["MAN"]["SV4337"]:
+            if received_dic_c["data"]["Valve"]["Busy"]["SV4337"]:
+                if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
+                    self.SV4337.Set.ButtonLClicked()
+                else:
+                    self.SV4337.Set.ButtonRClicked()
+                self.Valve_buffer["SV4337"] = received_dic_c["data"]["Valve"]["OUT"]["SV4337"]
+            elif not received_dic_c["data"]["Valve"]["Busy"]["SV4337"]:
+                if received_dic_c["data"]["Valve"]["OUT"]["SV4337"] != self.Valve_buffer["SV4337"]:
+                    if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
+                        self.SV4337.Set.ButtonLClicked()
+                    else:
+                        self.SV4337.Set.ButtonRClicked()
+                    self.Valve_buffer["SV4337"] = received_dic_c["data"]["Valve"]["OUT"]["SV4337"]
+                else:
+                    pass
 
         if not received_dic_c["data"]["Valve"]["MAN"]["HFSV3312"]:
             if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]:
@@ -6956,6 +7098,11 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.SV3329_icon.Turnoff()
 
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4327"]:
+            self.SV4327_icon.Turnon()
+        else:
+            self.SV4327_icon.Turnoff()
+
         if received_dic_c["data"]["Valve"]["OUT"]["SV4328"]:
             self.SV4328_icon.Turnon()
         else:
@@ -6975,6 +7122,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.SV4332_icon.Turnon()
         else:
             self.SV4332_icon.Turnoff()
+
+        if received_dic_c["data"]["Valve"]["OUT"]["SV4337"]:
+            self.SV4337_icon.Turnon()
+        else:
+            self.SV4337_icon.Turnoff()
 
         if received_dic_c["data"]["Valve"]["OUT"]["HFSV3312"]:
             self.HFSV3312_icon.Turnon()
@@ -7582,7 +7734,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
         # set indicators value
-
+        self.TT2118.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2118"])
+        self.TT2119.SetValue(received_dic_c["data"]["TT"]["BO"]["value"]["TT2119"])
+        self.TT2440.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2440"])
         self.TT2401.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2401"])
         self.TT2402.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2402"])
         self.TT2403.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT2403"])
@@ -7639,6 +7793,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TT7404.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT7404"])
         self.TT3401.SetValue(received_dic_c["data"]["TT"]["FP"]["value"]["TT3401"])
 
+        self.PT1325.SetValue(received_dic_c["data"]["PT"]["value"]["PT1325"])
+        self.PT1361.SetValue(received_dic_c["data"]["PT"]["value"]["PT1361"])
         self.PT2121.SetValue(received_dic_c["data"]["PT"]["value"]["PT2121"])
         self.PT2121Fluid.SetValue(received_dic_c["data"]["PT"]["value"]["PT2121"])
         self.PT2121Hy.SetValue(received_dic_c["data"]["PT"]["value"]["PT2121"])
@@ -7657,7 +7813,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.PT4319.SetValue(received_dic_c["data"]["PT"]["value"]["PT4319"])
         self.PT4322.SetValue(received_dic_c["data"]["PT"]["value"]["PT4322"])
         self.PT4325.SetValue(received_dic_c["data"]["PT"]["value"]["PT4325"])
-        self.PT6302.SetValue(received_dic_c["data"]["PT"]["value"]["PT6302"])
+        self.PT6302.SetExpValue(received_dic_c["data"]["PT"]["value"]["PT6302"])
+        self.PT6306.SetExpValue(received_dic_c["data"]["PT"]["value"]["PT6306"])
         self.PT1101.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
         self.PT1101Fluid.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
         self.PT1101Hy.SetValue(received_dic_c["data"]["PT"]["value"]["PT1101"])
@@ -7667,6 +7824,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.BFM4313.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["BFM4313"])
         # self.MFC1316.SetValue not given value
+        self.MFC1316.LOOPPIDWindow.IN.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["MFC1316_IN"])
         self.CYL3334.SetValue(received_dic_c["data"]["LEFT_REAL"]["value"]["CYL3334_FCALC"])
 
         self.LT2122.SetValue(received_dic_c["data"]["AD"]["value"]["LT2122"])

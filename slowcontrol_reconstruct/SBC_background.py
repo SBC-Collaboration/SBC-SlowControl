@@ -567,8 +567,8 @@ class PLC:
         for key in self.TT_FP_address:
             Raw_RTDs_FP[key] = self.Client_NI.read_holding_registers(self.TT_FP_address[key], count=2, unit=0x01)
             # also transform C into K if value is not NULL
-            read_value = round(struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1),
-                                                               Raw_RTDs_FP[key].getRegister(0)))[0], 3)
+            read_value = struct.unpack("<f", struct.pack("<HH", Raw_RTDs_FP[key].getRegister(1),
+                                                               Raw_RTDs_FP[key].getRegister(0)))[0]
             if read_value < 849:
 
                 self.TT_FP_dic[key] = 273.15 + read_value
@@ -582,25 +582,22 @@ class PLC:
         Raw_BO_TT_BO = {}
         for key in self.TT_BO_address:
             Raw_BO_TT_BO[key] = self.Client_BO.read_holding_registers(self.TT_BO_address[key], count=2, unit=0x01)
-            self.TT_BO_dic[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1),
-                                                Raw_BO_TT_BO[key].getRegister(0)))[0], 3)
+            self.TT_BO_dic[key] = struct.unpack(">f", struct.pack(">HH", Raw_BO_TT_BO[key].getRegister(1),
+                                                Raw_BO_TT_BO[key].getRegister(0)))[0]
 
         Raw_BO_PT = {}
         for key in self.PT_address:
             Raw_BO_PT[key] = self.Client_BO.read_holding_registers(self.PT_address[key], count=2, unit=0x01)
-            self.PT_dic[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_BO_PT[key].getRegister(0 + 1),
-                                                Raw_BO_PT[key].getRegister(0)))[0], 3)
+            self.PT_dic[key] = struct.unpack(">f", struct.pack(">HH", Raw_BO_PT[key].getRegister(0 + 1),
+                                                Raw_BO_PT[key].getRegister(0)))[0]
         # print("PT dic",self.PT_dic)
 
         Raw_BO_REAL = {}
         for key in self.LEFT_REAL_address:
             Raw_BO_REAL[key] = self.Client_BO.read_holding_registers(self.LEFT_REAL_address[key], count=2,
                                                                      unit=0x01)
-            self.LEFT_REAL_dic[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_BO_REAL[key].getRegister(0 + 1),
-                                                Raw_BO_REAL[key].getRegister(0)))[0], 3)
+            self.LEFT_REAL_dic[key] = struct.unpack(">f", struct.pack(">HH", Raw_BO_REAL[key].getRegister(0 + 1),
+                                                Raw_BO_REAL[key].getRegister(0)))[0]
 
             # print(key, "'s' value is", self.PT_dic[key])
 
@@ -674,31 +671,23 @@ class PLC:
             Raw_LOOPPID_16[key] = self.Client_BO.read_holding_registers(self.LOOPPID_ADR_BASE[key] + 16, count=2,
                                                                         unit=0x01)
 
-            self.LOOPPID_OUT[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_2[key].getRegister(1),
-                                                Raw_LOOPPID_2[key].getRegister(0)))[0], 3)
+            self.LOOPPID_OUT[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_2[key].getRegister(1),
+                                                Raw_LOOPPID_2[key].getRegister(0)))[0]
 
-            self.LOOPPID_IN[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
-                                                Raw_LOOPPID_4[key].getRegister(0)))[0], 3)
-            self.LOOPPID_HI_LIM[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_6[key].getRegister(0 + 1),
-                                                Raw_LOOPPID_6[key].getRegister(0)))[0], 3)
-            self.LOOPPID_LO_LIM[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_8[key].getRegister(0 + 1),
-                                                Raw_LOOPPID_8[key].getRegister(0)))[0], 3)
-            self.LOOPPID_SET0[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_10[key].getRegister(0 + 1),
-                                                Raw_LOOPPID_10[key].getRegister(0)))[0], 3)
-            self.LOOPPID_SET1[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_12[key].getRegister(0 + 1),
-                                                Raw_LOOPPID_12[key].getRegister(0)))[0], 3)
-            self.LOOPPID_SET2[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
-                                                Raw_LOOPPID_14[key].getRegister(0)))[0], 3)
-            self.LOOPPID_SET3[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
-                                                Raw_LOOPPID_16[key].getRegister(0)))[0], 3)
+            self.LOOPPID_IN[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_4[key].getRegister(0 + 1),
+                                                Raw_LOOPPID_4[key].getRegister(0)))[0]
+            self.LOOPPID_HI_LIM[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_6[key].getRegister(0 + 1),
+                                                Raw_LOOPPID_6[key].getRegister(0)))[0]
+            self.LOOPPID_LO_LIM[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_8[key].getRegister(0 + 1),
+                                                Raw_LOOPPID_8[key].getRegister(0)))[0]
+            self.LOOPPID_SET0[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_10[key].getRegister(0 + 1),
+                                                Raw_LOOPPID_10[key].getRegister(0)))[0]
+            self.LOOPPID_SET1[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_12[key].getRegister(0 + 1),
+                                                Raw_LOOPPID_12[key].getRegister(0)))[0]
+            self.LOOPPID_SET2[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_14[key].getRegister(0 + 1),
+                                                Raw_LOOPPID_14[key].getRegister(0)))[0]
+            self.LOOPPID_SET3[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOPPID_16[key].getRegister(0 + 1),
+                                                Raw_LOOPPID_16[key].getRegister(0)))[0]
 
             self.LOOPPID_Busy[key] = self.ReadCoil(2 ** 13, self.LOOPPID_ADR_BASE[key]) or self.ReadCoil(2 ** 14,
                                                                                                          self.LOOPPID_ADR_BASE[
@@ -727,16 +716,13 @@ class PLC:
             Raw_LOOP2PT_6[key] = self.Client_BO.read_holding_registers(self.LOOP2PT_ADR_BASE[key] + 6, count=2,
                                                                        unit=0x01)
 
-            self.LOOP2PT_SET1[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOP2PT_2[key].getRegister(1),
-                                                Raw_LOOP2PT_2[key].getRegister(0)))[0], 3)
+            self.LOOP2PT_SET1[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOP2PT_2[key].getRegister(1),
+                                                Raw_LOOP2PT_2[key].getRegister(0)))[0]
 
-            self.LOOP2PT_SET2[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOP2PT_4[key].getRegister(0 + 1),
-                                                Raw_LOOP2PT_4[key].getRegister(0)))[0], 3)
-            self.LOOP2PT_SET3[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_LOOP2PT_6[key].getRegister(0 + 1),
-                                                Raw_LOOP2PT_6[key].getRegister(0)))[0], 3)
+            self.LOOP2PT_SET2[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOP2PT_4[key].getRegister(0 + 1),
+                                                Raw_LOOP2PT_4[key].getRegister(0)))[0]
+            self.LOOP2PT_SET3[key] = struct.unpack(">f", struct.pack(">HH", Raw_LOOP2PT_6[key].getRegister(0 + 1),
+                                                Raw_LOOP2PT_6[key].getRegister(0)))[0]
             self.LOOP2PT_Busy[key] = self.ReadCoil(2 ** 1, self.LOOP2PT_ADR_BASE[key]) or self.ReadCoil(
                 2 ** 2, self.LOOP2PT_ADR_BASE[key])
 
@@ -757,9 +743,8 @@ class PLC:
         for key in self.INTLK_A_ADDRESS:
             Raw_INTLK_A[key] = self.Client_BO.read_holding_registers(self.INTLK_A_ADDRESS[key] + 2, count=2,
                                                                      unit=0x01)
-            self.INTLK_A_SET[key] = round(
-                struct.unpack(">f", struct.pack(">HH", Raw_INTLK_A[key].getRegister(1),
-                                                Raw_INTLK_A[key].getRegister(0)))[0], 3)
+            self.INTLK_A_SET[key] = struct.unpack(">f", struct.pack(">HH", Raw_INTLK_A[key].getRegister(1),
+                                                Raw_INTLK_A[key].getRegister(0)))[0]
             self.INTLK_A_DIC[key] = self.ReadCoil(1, self.INTLK_A_ADDRESS[key])
             self.INTLK_A_EN[key] = self.ReadCoil(2 ** 1, self.INTLK_A_ADDRESS[key])
             self.INTLK_A_COND[key] = self.ReadCoil(2 ** 2, self.INTLK_A_ADDRESS[key])
@@ -954,7 +939,7 @@ class PLC:
             Raw_inter_AD[key] = \
                 struct.unpack("<f", struct.pack("<HH", Raw_AD[key].getRegister(1), Raw_AD[key].getRegister(0)))[0]
             if Raw_inter_AD[key] != -1:
-                self.AD_dic[key] = round(Raw_inter_AD[key] / (Raw_inter_AD[key] + 1) * 100, 2)
+                self.AD_dic[key] = Raw_inter_AD[key] / (Raw_inter_AD[key] + 1) * 100
             else:
                 self.AD_dic[key] = -1
 
@@ -1090,7 +1075,7 @@ class PLC:
                                 self.Write_BO_2(self.PARAM_F_ADDRESS["TS_ADDREM_MASS"],
                                                     message[key]["operation"]["ADDREM_MASS"])
                                 self.Write_BO_2_int32(self.PARAM_T_ADDRESS["TS_ADDREM_MAXTIME"],
-                                                          round(float(message[key]["operation"]["MAXTIME"]) * 1000))
+                                                          float(message[key]["operation"]["MAXTIME"]) * 1000)
 
                             else:
                                 pass
@@ -1115,19 +1100,18 @@ class PLC:
                             if message[key]["operation"]["update"]:
                                 self.Write_BO_2(self.PARAM_F_ADDRESS["PSET"], message[key]["operation"]["PSET"])
                                 self.Write_BO_2_int32(self.PARAM_T_ADDRESS["MAXEXPTIME"],
-                                                          round(float(message[key]["operation"]["MAXEXPTIME"]) * 1000))
+                                                          float(message[key]["operation"]["MAXEXPTIME"]) * 1000)
                                 self.Write_BO_2_int32(self.PARAM_T_ADDRESS["MAXEQTIME"],
-                                                          round(float(message[key]["operation"]["MAXEXQTIME"]) * 1000))
+                                                          float(message[key]["operation"]["MAXEXQTIME"]) * 1000)
                                 self.Write_BO_2(self.PARAM_F_ADDRESS["MAXEQPDIFF"],
                                                     message[key]["operation"]["MAXEQPDIFF"])
                                 self.Write_BO_2_int32(self.PARAM_T_ADDRESS["MAXACCTIME"],
-                                                          round(float(message[key]["operation"]["MAXACCTIME"]) * 1000))
+                                                          float(message[key]["operation"]["MAXACCTIME"]) * 1000)
                                 self.Write_BO_2(self.PARAM_F_ADDRESS["MAXACCDPDT"],
                                                     message[key]["operation"]["MAXACCDPDT"])
 
                                 self.Write_BO_2_int32(self.PARAM_T_ADDRESS["MAXBLEEDTIME"],
-                                                          round(
-                                                              float(message[key]["operation"]["MAXBLEEDTIME"]) * 1000))
+                                                          float(message[key]["operation"]["MAXBLEEDTIME"]) * 1000)
                                 self.Write_BO_2(self.PARAM_F_ADDRESS["MAXBLEEDDPDT"],
                                                     message[key]["operation"]["MAXBLEEDDPDT"])
                                 self.Write_BO_2(self.PARAM_F_ADDRESS["SLOWCOMP_SET"],
@@ -1360,8 +1344,8 @@ class PLC:
 
     def Read_BO_2(self, address):
         Raw_BO = self.Client_BO.read_holding_registers(address, count=2, unit=0x01)
-        output_BO = round(struct.unpack(">f", struct.pack(">HH", Raw_BO.getRegister(1), Raw_BO.getRegister(0)))[
-                              0], 3)
+        output_BO = struct.unpack(">f", struct.pack(">HH", Raw_BO.getRegister(1), Raw_BO.getRegister(0)))[
+                              0]
         # print("valve value is", output_BO)
         return output_BO
 
@@ -1590,7 +1574,7 @@ class PLC:
 
     def WriteFloat(self, Address, value):
         if self.Connected_NI:
-            value = round(value, 3)
+            value = value
             Dummy = self.Client_NI.write_register(Address, struct.unpack("<HH", struct.pack("<f", value))[1], unit=0x01)
             Dummy = self.Client_NI.write_register(Address + 1, struct.unpack("<HH", struct.pack("<f", value))[0],
                                                unit=0x01)
@@ -1598,7 +1582,7 @@ class PLC:
             time.sleep(0.1)
 
             Raw = self.Client_NI.read_holding_registers(Address, count=2, unit=0x01)
-            rvalue = round(struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0], 3)
+            rvalue = struct.unpack("<f", struct.pack("<HH", Raw.getRegister(1), Raw.getRegister(0)))[0]
 
             if value == rvalue:
                 return 0
